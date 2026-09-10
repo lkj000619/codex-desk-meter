@@ -1,0 +1,24 @@
+# ESP-IDF generated output
+build/
+build-*/
+sdkconfig.old
+sdkconfig
+
+# Firmware and tool output
+*.bin
+*.elf
+*.map
+*.log
+
+# Local credentials and agent session data
+.env
+.env.*
+!.env.example
+.gemini/
+.codex/
+__pycache__/
+*.py[cod]
+
+# Local experiment scratch output (reviewed results remain under results/)
+logs/
+artifacts/
