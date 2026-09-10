@@ -3,7 +3,8 @@
 이 프로토콜은 동일한 Version 2 과제를 여러 AI 에이전트에 실행하여 구현 품질,
 실행 시간, 도구 사용과 토큰 사용을 비교하기 위한 운영 규칙이다. 제품 요구사항은
 [Version 2 제품 계약](../PRODUCT_CONTRACT.md), 하드웨어 자율 기능 선택은
-[하드웨어 자율 기능 실험](hardware-feature-discovery.md)을 따른다.
+[하드웨어 자율 기능 실험](hardware-feature-discovery.md)을 따른다. 실제 CLI·IDE
+실행 예시는 [에이전트 실행 명령 템플릿](agent-run-commands.md)을 따른다.
 
 ## 1. 실험 단위와 비교군
 

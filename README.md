@@ -48,6 +48,7 @@ idf.py --version
 - [Version 2 하드웨어 기능 카탈로그](docs/hardware/version-2-capabilities.md)
 - [제조사 예제 및 bring-up 기록](docs/hardware/waveshare-manufacturer-example.md)
 - [에이전트 실험 프로토콜](docs/experiments/agent-experiment-protocol.md)
+- [에이전트 실행 명령 템플릿](docs/experiments/agent-run-commands.md)
 - [하드웨어 자율 기능 실험](docs/experiments/hardware-feature-discovery.md)
 - [Version 2 공통 에이전트 프롬프트](experiments/prompts/version-2-agent-task.md)
 - [실험 기준 설정](experiments/config/version-2-baseline.yaml)
