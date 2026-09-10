@@ -6,6 +6,11 @@ ESP32-S3 Super Mini 조립형 장치는 Version 2 검증 뒤 이식합니다.
 
 ## 현재 단계
 
+현재는 benchmark 운영 설계 보완 단계입니다. 합의한 agent/model 브랜치와
+날짜 기반 run ID는 [브랜치·결과 관리 기준](docs/experiments/benchmark-management.md)을
+따릅니다. 스크립트·스키마 전환은 미완료이며, 아래 명령은 기존 도구 참고용입니다.
+문서 보완 후 자동으로 실험을 실행하지 않습니다.
+
 이 기준 브랜치는 제품 구현을 생성하기 위한 요구사항, 하드웨어 자료, 실험 기준과
 재현 도구를 보관합니다. 에이전트가 작성한 펌웨어와 원본 실행 로그는 각 실험
 브랜치에서 관리하고, 검증된 요약만 기준 브랜치에 반영합니다.
@@ -37,7 +42,7 @@ idf.py --version
 명시적으로 요청합니다.
 
 ```powershell
-. .\scripts\check-experiment-preflight.ps1 -RequireHardware -Port COM3
+.\scripts\check-experiment-preflight.ps1 -RequireHardware -Port COM3
 ```
 
 ## 문서 안내
@@ -48,6 +53,7 @@ idf.py --version
 - [Version 2 하드웨어 기능 카탈로그](docs/hardware/version-2-capabilities.md)
 - [제조사 예제 및 bring-up 기록](docs/hardware/waveshare-manufacturer-example.md)
 - [에이전트 실험 프로토콜](docs/experiments/agent-experiment-protocol.md)
+- [브랜치·반복 실행·결과 게시 및 전환 항목](docs/experiments/benchmark-management.md)
 - [에이전트 실행 명령 템플릿](docs/experiments/agent-run-commands.md)
 - [하드웨어 자율 기능 실험](docs/experiments/hardware-feature-discovery.md)
 - [Version 2 공통 에이전트 프롬프트](experiments/prompts/version-2-agent-task.md)
@@ -79,7 +85,7 @@ docs/agent-runs/<run-id>/             사람이 읽는 선택·검증 기록
 results/<run-id>/                     구조화된 실행 결과
 ```
 
-에이전트 비교에서는 OpenAI를 “Codex CLI”, Google을 “Gemini CLI”, Antigravity를
+에이전트 비교에는 Codex CLI, Gemini CLI, Antigravity, OpenCode를 대상으로 하며
 사용한 제품/CLI/IDE 표면까지 정확히 기록합니다. 일반 ChatGPT 웹 대화는 로컬
 저장소·COM3·토큰 계측 조건이 달라 기본 비교군에 포함하지 않습니다.
 
@@ -89,7 +95,7 @@ results/<run-id>/                     구조화된 실행 결과
 python scripts\validate-experiment-result.py
 ```
 
-새 실행을 시작할 때는 실제 에이전트·모델·표면·네트워크 조건을 입력한다.
+아래는 이전 실행 생성 방식입니다. 새 run ID 규칙 전환 전에는 실험 준비용으로 사용하지 않습니다.
 
 ```powershell
 .\scripts\new-experiment-run.ps1 `

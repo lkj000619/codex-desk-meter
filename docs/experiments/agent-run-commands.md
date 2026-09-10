@@ -1,5 +1,9 @@
 # 에이전트 실행 명령 템플릿
 
+> 현재 명령은 이전 시간 포함 run ID와 run별 브랜치를 사용하는 참고 예시다.
+> [새 운영 기준](benchmark-management.md)의 명명·격리·계측 전환이 완료되기 전에는
+> 이 문서를 따라 실험을 시작하지 않는다. 아래 코드 블록은 새 표준의 실행 절차가 아니다.
+
 이 문서는 [AI 에이전트 비교 실험 프로토콜](agent-experiment-protocol.md)의
 실행면을 실제 명령으로 옮긴 예시다. `<...>` 값은 run manifest에 기록한 값으로
 치환한다. 실행 전에는 `new-experiment-run.ps1`로 결과 디렉터리와 해시를 먼저
@@ -78,6 +82,14 @@ help에서 확인한 뒤, 지원되는 동일 worktree 명령을 사용한다. I
 터미널 승인과 provider token telemetry를 동일하게 제공하지 않기 때문이다.
 사용할 경우 `interface: web`인 별도 탐색군으로 기록하고, 로컬 파일을 실제로
 수정·빌드한 시간과 웹 대화 시간을 합치지 않는다.
+
+## OpenCode
+
+대상 브랜치는 `experiment/opencode/cli/<model>`이다. 결과는
+`results/YYYYMMDD-opencode-cli-<model>-rNN/`에 보관한다.
+정확한 설치 버전의 비대화형 입력·사용량 출력·승인·sandbox 지원을 확인한 뒤
+실행 어댑터를 작성해야 한다. 모델 제공자와 실제 모델 ID, 라우팅·fallback 정책을
+별도로 기록한다. 현재 문서에는 검증된 OpenCode 실행 명령이 없다.
 
 ## 종료 기록
 
