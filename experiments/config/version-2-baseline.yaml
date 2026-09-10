@@ -1,0 +1,95 @@
+schema_version: 1
+experiment_id: version-2-hardware-autonomy-v1
+
+target:
+  board: waveshare-esp32-s3-lcd-3.16
+  framework: esp-idf
+  framework_version: 5.3.2
+  hardware_profile: docs/hardware/version-2-capabilities.md
+
+inputs:
+  purpose: docs/PROJECT_PURPOSE.md
+  environment: docs/DEVELOPMENT_ENVIRONMENT.md
+  protocol: docs/experiments/hardware-feature-discovery.md
+  prompt: experiments/prompts/version-2-agent-task.md
+
+run_policy:
+  same_base_commit: true
+  isolated_branch_or_worktree: true
+  preserve_full_prompt_and_followups: true
+  preserve_failed_runs: true
+  public_reference_access: fixed_by_run
+  credentialed_private_data_access: forbidden
+  pilot_runs_per_surface: 1
+  repetitions_per_agent_model: 3
+  randomized_run_order: true
+  hard_timeout_seconds: 7200
+  hardware_runs_are_serial: true
+  agent_flash_erase_allowed: false
+
+comparison_surfaces:
+  - provider: openai
+    product: codex-cli
+    interface: cli
+    included: true
+  - provider: google
+    product: gemini-cli
+    interface: cli
+    included: true
+  - provider: google
+    product: antigravity-cli
+    interface: cli
+    included: conditional
+  - provider: google
+    product: antigravity-ide
+    interface: ide
+    included: separate_interactive_group
+  - provider: openai
+    product: chatgpt-web
+    interface: web
+    included: false
+
+data_sources:
+  personal_usage: experiments/fixtures/personal-usage.json
+  codex_reset_forecast: experiments/fixtures/codex-reset-forecast.json
+  codex_resets_history: experiments/fixtures/codex-resets-history.json
+  live_api_allowed_after_fixture: true
+  live_api_requires_source_url_and_response_hash: true
+
+core_requirements:
+  contract: docs/PRODUCT_CONTRACT.md
+  required_ids: [C1, C2, C3, C4, C5, C6, C7, C8]
+  all_must_pass_for_product_pass: true
+
+autonomous_hardware_feature:
+  enabled: true
+  candidate_count: 3
+  implementation_count: 1
+  selection_owner: agent
+  external_hardware_allowed: false
+  may_replace_core_requirements: false
+  user_choice_required: false
+  record_rejected_candidates: true
+  require_build_verification: true
+  require_hardware_test_plan: true
+  score_separately_from_core: true
+
+measurement:
+  wall_clock_time: required
+  tool_and_command_count: required
+  failed_command_count: required
+  user_intervention_count: required
+  token_usage: components_when_available
+  hardware_discovery_phase_metrics: when_available
+  provider_reported_tokens_are_not_cross_provider_ranked: true
+  report_median_and_range: true
+
+outputs:
+  manifest: results/<run-id>/run-manifest.json
+  selection_document: docs/agent-runs/<run-id>/hardware-feature-selection.md
+  structured_result: results/<run-id>/hardware-feature.json
+  command_log: results/<run-id>/commands.jsonl
+
+validation:
+  command: python scripts/validate-experiment-result.py --manifest <manifest> --result <result>
+  example_command: python scripts/validate-experiment-result.py

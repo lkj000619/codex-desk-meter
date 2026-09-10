@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "run_id": "20260911T000000Z-example",
+  "experiment_id": "version-2-hardware-autonomy-v1",
+  "agent": {
+    "provider": "example",
+    "product": "example-cli",
+    "interface": "cli",
+    "agent_version": "0.0.0",
+    "model": "example-model",
+    "reasoning": "fixed",
+    "configuration_sha256": null
+  },
+  "execution": {
+    "started_at": "2026-09-11T00:00:00Z",
+    "ended_at": "2026-09-11T00:10:00Z",
+    "timeout_seconds": 7200,
+    "base_commit": "8063876c6590383c1b40e12e4d118d2b263c705d",
+    "prompt_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "config_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "fixture_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "network_mode": "offline-fixture",
+    "sandbox_policy": "workspace-write",
+    "approval_policy": "operator-approved-flash",
+    "branch": "experiment/example",
+    "worktree": "C:/src/codex-desk-meter-example",
+    "host": "example-host"
+  },
+  "hardware": {
+    "board": "waveshare-esp32-s3-lcd-3.16",
+    "port": null,
+    "board_revision": null,
+    "tf_card_present": false,
+    "hardware_slot": "none",
+    "baseline_image_sha256": null,
+    "baseline_restored": false
+  },
+  "measurement": {
+    "wall_clock_seconds": 600,
+    "tool_calls": 0,
+    "failed_commands": 0,
+    "user_interventions": 0,
+    "tokens": {
+      "input": null,
+      "output": null,
+      "cached": null,
+      "reasoning": null,
+      "total": null,
+      "availability_note": "Example only; no provider usage was recorded."
+    }
+  },
+  "outputs": {
+    "selection_document": "docs/agent-runs/20260911T000000Z-example/hardware-feature-selection.md",
+    "structured_result": "results/20260911T000000Z-example/hardware-feature.json",
+    "implementation_commit": null,
+    "build_status": "not_run",
+    "automated_test_status": "not_run",
+    "hardware_verification_status": "not_run"
+  }
+}

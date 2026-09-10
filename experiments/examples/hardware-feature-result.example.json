@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "run_id": "20260911T000000Z-example",
+  "experiment_id": "version-2-hardware-autonomy-v1",
+  "candidate_features": [
+    {
+      "id": "imu-tilt-pages",
+      "name": "IMU 자세 기반 페이지 전환",
+      "hardware_resource": "QMI8658 IMU",
+      "user_value": "손으로 장치를 기울여 페이지를 바꿀 수 있다.",
+      "implementation_cost": "중간: IMU 초기화와 debounce가 필요하다.",
+      "risk": "오동작과 센서 노이즈가 화면을 반복 전환할 수 있다.",
+      "verification_plan": "정지·기울임 로그와 실제 화면 전환을 확인한다."
+    },
+    {
+      "id": "rtc-offline-age",
+      "name": "RTC 오프라인 데이터 경과 표시",
+      "hardware_resource": "PCF85063 RTC",
+      "user_value": "네트워크 단절 중 데이터가 얼마나 오래됐는지 알 수 있다.",
+      "implementation_cost": "낮음: RTC 읽기와 stale 계산을 연결한다.",
+      "risk": "RTC 초기 시각이 틀리면 경과 시간이 잘못된다.",
+      "verification_plan": "네트워크 차단 후 시간 경과와 stale 화면을 확인한다."
+    },
+    {
+      "id": "battery-warning",
+      "name": "배터리 잔량 경고",
+      "hardware_resource": "배터리 ADC",
+      "user_value": "휴대 사용 중 전원 부족을 미리 알 수 있다.",
+      "implementation_cost": "중간: ADC 보정과 임계값 UI가 필요하다.",
+      "risk": "배터리 미장착·충전 중 전압을 잔량으로 오해할 수 있다.",
+      "verification_plan": "ADC 입력 상태별 로그와 경고 화면을 확인한다."
+    }
+  ],
+  "selected_feature_id": "rtc-offline-age",
+  "selection_rationale": "추가 부품 없이 장애 상황의 신뢰성을 개선하고 검증하기 쉽다.",
+  "rejected_feature_ids": ["imu-tilt-pages", "battery-warning"],
+  "implementation": {
+    "files": [],
+    "commit": null,
+    "build": {
+      "status": "not_run",
+      "command": "idf.py build",
+      "notes": "Example only."
+    },
+    "automated_tests": {
+      "status": "not_run",
+      "commands": [],
+      "notes": "Example only."
+    },
+    "hardware_test_plan": "네트워크를 차단하고 RTC 기반 stale 화면을 확인한다.",
+    "hardware_result": "not_run"
+  },
+  "core_requirements": {
+    "C1": { "status": "not_run", "evidence": "Example only." },
+    "C2": { "status": "not_run", "evidence": "Example only." },
+    "C3": { "status": "not_run", "evidence": "Fixture not run." },
+    "C4": { "status": "not_run", "evidence": "Fixture not run." },
+    "C5": { "status": "not_run", "evidence": "Fixture not run." },
+    "C6": { "status": "not_run", "evidence": "Fixture not run." },
+    "C7": { "status": "not_run", "evidence": "Fixture not run." },
+    "C8": { "status": "not_run", "evidence": "Example only." }
+  },
+  "metrics": {
+    "discovery_started_at": "2026-09-11T00:00:00Z",
+    "discovery_ended_at": "2026-09-11T00:02:00Z",
+    "tokens": {
+      "input": null,
+      "output": null,
+      "cached": null,
+      "reasoning": null,
+      "total": null
+    },
+    "notes": "Example only."
+  },
+  "failures": [],
+  "unresolved_risks": ["Example result is not an implementation result."]
+}

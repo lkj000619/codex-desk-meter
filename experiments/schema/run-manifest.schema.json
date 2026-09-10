@@ -1,0 +1,139 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://codex-desk-meter.local/schema/run-manifest.schema.json",
+  "title": "Codex Desk Meter experiment run manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "experiment_id",
+    "agent",
+    "execution",
+    "hardware",
+    "measurement",
+    "outputs"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[0-9]{8}T[0-9]{6}Z-[a-z0-9-]+$"
+    },
+    "experiment_id": {
+      "type": "string",
+      "const": "version-2-hardware-autonomy-v1"
+    },
+    "agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider", "product", "interface", "agent_version", "model", "reasoning"],
+      "properties": {
+        "provider": { "type": "string", "minLength": 1 },
+        "product": { "type": "string", "minLength": 1 },
+        "interface": { "enum": ["cli", "ide", "web", "api"] },
+        "agent_version": { "type": "string", "minLength": 1 },
+        "model": { "type": "string", "minLength": 1 },
+        "reasoning": { "type": "string", "minLength": 1 },
+        "configuration_sha256": { "type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{64}$" }
+      }
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "started_at",
+        "ended_at",
+        "timeout_seconds",
+        "base_commit",
+        "prompt_sha256",
+        "config_sha256",
+        "fixture_sha256",
+        "network_mode",
+        "sandbox_policy",
+        "approval_policy",
+        "branch",
+        "worktree"
+      ],
+      "properties": {
+        "started_at": { "type": "string", "format": "date-time" },
+        "ended_at": { "type": ["string", "null"], "format": "date-time" },
+        "timeout_seconds": { "type": "integer", "minimum": 1 },
+        "base_commit": { "type": "string", "pattern": "^[A-Fa-f0-9]{7,64}$" },
+        "prompt_sha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+        "config_sha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+        "fixture_sha256": { "type": "string", "pattern": "^[A-Fa-f0-9]{64}$" },
+        "network_mode": { "enum": ["offline-fixture", "public-read", "live-integration"] },
+        "sandbox_policy": { "type": "string", "minLength": 1 },
+        "approval_policy": { "type": "string", "minLength": 1 },
+        "branch": { "type": "string", "minLength": 1 },
+        "worktree": { "type": "string", "minLength": 1 },
+        "host": { "type": "string" }
+      }
+    },
+    "hardware": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["board", "port", "board_revision", "tf_card_present", "hardware_slot"],
+      "properties": {
+        "board": { "const": "waveshare-esp32-s3-lcd-3.16" },
+        "port": { "type": ["string", "null"] },
+        "board_revision": { "type": ["string", "null"] },
+        "tf_card_present": { "type": ["boolean", "null"] },
+        "hardware_slot": { "type": ["string", "null"] },
+        "baseline_image_sha256": { "type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{64}$" },
+        "baseline_restored": { "type": "boolean" }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "wall_clock_seconds",
+        "tool_calls",
+        "failed_commands",
+        "user_interventions",
+        "tokens"
+      ],
+      "properties": {
+        "wall_clock_seconds": { "type": ["number", "null"], "minimum": 0 },
+        "tool_calls": { "type": "integer", "minimum": 0 },
+        "failed_commands": { "type": "integer", "minimum": 0 },
+        "user_interventions": { "type": "integer", "minimum": 0 },
+        "tokens": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["input", "output", "cached", "reasoning", "total", "availability_note"],
+          "properties": {
+            "input": { "type": ["integer", "null"], "minimum": 0 },
+            "output": { "type": ["integer", "null"], "minimum": 0 },
+            "cached": { "type": ["integer", "null"], "minimum": 0 },
+            "reasoning": { "type": ["integer", "null"], "minimum": 0 },
+            "total": { "type": ["integer", "null"], "minimum": 0 },
+            "availability_note": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selection_document",
+        "structured_result",
+        "implementation_commit",
+        "build_status",
+        "automated_test_status",
+        "hardware_verification_status"
+      ],
+      "properties": {
+        "selection_document": { "type": "string", "minLength": 1 },
+        "structured_result": { "type": "string", "minLength": 1 },
+        "implementation_commit": { "type": ["string", "null"], "pattern": "^[A-Fa-f0-9]{7,64}$" },
+        "build_status": { "enum": ["pass", "fail", "not_run", "timeout"] },
+        "automated_test_status": { "enum": ["pass", "partial", "fail", "not_run", "timeout"] },
+        "hardware_verification_status": { "enum": ["pass", "partial", "fail", "not_run", "blocked"] }
+      }
+    }
+  }
+}
