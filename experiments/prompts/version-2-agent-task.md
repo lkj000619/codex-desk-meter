@@ -1,5 +1,8 @@
 # Version 2 에이전트 공통 프롬프트
 
+> 운영자: 이 템플릿은 현재 문서 개정 중이다. `docs/experiments/benchmark-management.md`의
+> 구현 전환 항목과 새 baseline 확정 전에는 실행하지 않는다.
+
 당신은 Codex Desk Meter Version 2의 기준 구현을 담당한다. 작업 결과는
 `docs/PRODUCT_CONTRACT.md`의 C1~C8을 만족해야 하며, 대상 보드는 Waveshare
 ESP32-S3-LCD-3.16, 프레임워크는 ESP-IDF v5.3.2다.
@@ -17,6 +20,7 @@ ESP32-S3-LCD-3.16, 프레임워크는 ESP-IDF v5.3.2다.
 6. `docs/experiments/hardware-feature-discovery.md`
 7. `experiments/config/version-2-baseline.yaml`
 8. `experiments/fixtures/`의 모든 파일
+9. `docs/experiments/benchmark-management.md`
 
 공통 프롬프트의 `<run-id>`는 실제 실행 manifest의 ID로 치환하라. 계정 쿠키,
 Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 요청하거나 커밋하지 말라.
@@ -60,7 +64,9 @@ Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 요청하거나 �
 `erase_flash`는 실행하지 말라. 실제 보드 검증을 할 수 없으면 `blocked` 또는
 `not_run`과 구체적인 이유를 기록하라.
 
-다음 파일을 반드시 남겨라.
+다음 선택 문서와 구조화 결과를 남겨라. manifest의 실행 식별·계측 필드와
+commands.jsonl은 운영 실행기가 관리한다. 실행 중 원본 로그를 읽거나 덮어쓰지 말라.
+시간·토큰을 추정해 채우지 말고 미측정 값은 null과 사유로 남겨라.
 
 ```text
 docs/agent-runs/<run-id>/hardware-feature-selection.md
@@ -79,6 +85,10 @@ results/<run-id>/commands.jsonl
 - 도구 호출·실패 명령·사용자 개입 수
 - input/output/cached/reasoning/total 토큰(제공되는 경우)
 - 빌드·자동 시험·실물 시험과 실패·미해결 위험
+
+자체 시험 결과는 운영자의 공통 평가와 구분하라. 최종 제품 합격과 자율 기능
+점수는 운영자가 증거를 검토해 확정한다. 실제 전송 계층 오류와 주입 시험 결과를
+구분하고, 판정 기준 시각은 제품 계약을 따르라.
 
 토큰 수와 시간만으로 결과를 판단하지 말라. 핵심 기능의 정확성, 장치 안정성,
 오류 처리와 선택 기능의 실제 가치를 함께 검증하라.
