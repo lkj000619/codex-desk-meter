@@ -6,10 +6,10 @@ ESP32-S3 Super Mini 조립형 장치는 Version 2 검증 뒤 이식합니다.
 
 ## 현재 단계
 
-현재는 benchmark 운영 설계 보완 단계입니다. 합의한 agent/model 브랜치와
+현재는 benchmark 운영 도구 구현·검증 단계입니다. 합의한 agent/model 브랜치와
 날짜 기반 run ID는 [브랜치·결과 관리 기준](docs/experiments/benchmark-management.md)을
-따릅니다. 스크립트·스키마 전환은 미완료이며, 아래 명령은 기존 도구 참고용입니다.
-문서 보완 후 자동으로 실험을 실행하지 않습니다.
+따릅니다. schema v2와 실행기는 구현되었고, 도구별 모델·sandbox 검증 및 새 baseline
+확정이 남아 있습니다. [실행 가이드](docs/experiments/agent-run-commands.md)의 gate를 통과한 뒤 pilot을 실행합니다.
 
 이 기준 브랜치는 제품 구현을 생성하기 위한 요구사항, 하드웨어 자료, 실험 기준과
 재현 도구를 보관합니다. 에이전트가 작성한 펌웨어와 원본 실행 로그는 각 실험
@@ -34,6 +34,7 @@ eim install -p C:\Espressif -i v5.3.2 -t esp32s3 -n true -a true `
 
 . .\scripts\activate-idf.ps1
 idf.py --version
+python -m pip install -r scripts/requirements-benchmark.txt
 .\scripts\check-experiment-preflight.ps1
 ```
 
@@ -95,17 +96,16 @@ results/<run-id>/                     구조화된 실행 결과
 python scripts\validate-experiment-result.py
 ```
 
-아래는 이전 실행 생성 방식입니다. 새 run ID 규칙 전환 전에는 실험 준비용으로 사용하지 않습니다.
+확정된 실행 profile과 baseline을 준비한 뒤 다음 명령으로 pilot 디렉터리를 생성합니다.
 
 ```powershell
 .\scripts\new-experiment-run.ps1 `
-  -Provider openai -Product codex-cli -AgentVersion 0.153.2 -Model <model-id> `
-  -Reasoning medium -Interface cli -NetworkMode offline-fixture `
-  -Port COM3 -HardwareSlot desk-meter-1
+  -Baseline <baseline-tag> -Profile <profile.json> `
+  -RunRoot C:\Espressif\benchmark-runs -Seed 20260911 -Phase pilot
 ```
 
-이 명령은 기준 commit과 입력 해시를 기록한 manifest·결과 디렉터리만 만들며,
-에이전트를 실행하거나 보드에 플래시하지 않는다.
+이 명령은 새 독립 checkout과 운영 manifest를 생성합니다. 에이전트 실행은
+별도 `benchmark.py run` 명령이며 도구별 sandbox 검증 receipt가 필요합니다.
 
 ## 데이터 출처 주의
 

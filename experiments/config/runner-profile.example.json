@@ -1,0 +1,26 @@
+{
+  "provider": "openai",
+  "product": "codex-cli",
+  "interface": "cli",
+  "agent_version": "codex-cli 0.153.2",
+  "model": "<confirmed-model-id>",
+  "model_slug": "confirmed-model-slug",
+  "reasoning": "medium",
+  "branch_owner": "openai",
+  "branch_product": "codex-cli",
+  "cohort": "windows-idf532-offline-pilot",
+  "adapter": "codex",
+  "argv": ["codex.exe", "exec", "--ignore-user-config", "--ephemeral", "-C", "{checkout}", "-m", "{model}", "-c", "model_reasoning_effort=\"medium\"", "-s", "workspace-write", "--json", "-"],
+  "version_argv": ["codex.exe", "--version"],
+  "sandbox_policy": "workspace-write; external read isolation still requires receipt",
+  "approval_policy": "noninteractive; flash requires operator",
+  "network_mode": "offline-fixture",
+  "settings_inventory": {
+    "skills": "pending inventory",
+    "mcp": "pending inventory",
+    "memory": "ephemeral; other memory sources require inspection",
+    "user_instructions": "pending inventory",
+    "cache": "pending cache policy",
+    "routing": "fixed model; no fallback"
+  }
+}

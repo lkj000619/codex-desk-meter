@@ -1,4 +1,4 @@
-schema_version: 1
+schema_version: 2
 experiment_id: version-2-hardware-autonomy-v1
 
 target:
@@ -28,6 +28,10 @@ run_policy:
   agent_flash_erase_allowed: false
 
 comparison_surfaces:
+  - provider: recorded_in_profile
+    product: opencode-cli
+    interface: cli
+    included: conditional
   - provider: openai
     product: codex-cli
     interface: cli

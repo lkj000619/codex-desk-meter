@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "run_id": "20260911T000000Z-example",
+  "schema_version": 2,
+  "run_id": "20260911-example-cli-example-model-r01",
   "experiment_id": "version-2-hardware-autonomy-v1",
   "candidate_features": [
     {
@@ -33,7 +33,10 @@
   ],
   "selected_feature_id": "rtc-offline-age",
   "selection_rationale": "추가 부품 없이 장애 상황의 신뢰성을 개선하고 검증하기 쉽다.",
-  "rejected_feature_ids": ["imu-tilt-pages", "battery-warning"],
+  "rejected_feature_ids": [
+    "imu-tilt-pages",
+    "battery-warning"
+  ],
   "implementation": {
     "files": [],
     "commit": null,
@@ -51,14 +54,38 @@
     "hardware_result": "not_run"
   },
   "core_requirements": {
-    "C1": { "status": "not_run", "evidence": "Example only." },
-    "C2": { "status": "not_run", "evidence": "Example only." },
-    "C3": { "status": "not_run", "evidence": "Fixture not run." },
-    "C4": { "status": "not_run", "evidence": "Fixture not run." },
-    "C5": { "status": "not_run", "evidence": "Fixture not run." },
-    "C6": { "status": "not_run", "evidence": "Fixture not run." },
-    "C7": { "status": "not_run", "evidence": "Fixture not run." },
-    "C8": { "status": "not_run", "evidence": "Example only." }
+    "C1": {
+      "status": "not_run",
+      "evidence": "Example only."
+    },
+    "C2": {
+      "status": "not_run",
+      "evidence": "Example only."
+    },
+    "C3": {
+      "status": "not_run",
+      "evidence": "Fixture not run."
+    },
+    "C4": {
+      "status": "not_run",
+      "evidence": "Fixture not run."
+    },
+    "C5": {
+      "status": "not_run",
+      "evidence": "Fixture not run."
+    },
+    "C6": {
+      "status": "not_run",
+      "evidence": "Fixture not run."
+    },
+    "C7": {
+      "status": "not_run",
+      "evidence": "Fixture not run."
+    },
+    "C8": {
+      "status": "not_run",
+      "evidence": "Example only."
+    }
   },
   "metrics": {
     "discovery_started_at": "2026-09-11T00:00:00Z",
@@ -73,5 +100,7 @@
     "notes": "Example only."
   },
   "failures": [],
-  "unresolved_risks": ["Example result is not an implementation result."]
+  "unresolved_risks": [
+    "Example result is not an implementation result."
+  ]
 }

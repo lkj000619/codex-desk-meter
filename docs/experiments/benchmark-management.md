@@ -2,8 +2,8 @@
 
 ## 상태
 
-이 문서는 합의된 운영 설계다. 현재 스크립트·스키마는 이전 시간 포함 run ID를
-사용한다. 아래 구현 전환 항목을 완료하고 검토하기 전까지 실험을 실행하지 않는다.
+이 문서는 합의된 운영 설계다. schema v2, 격리 checkout 생성, 실행기와 공통 평가
+도구가 구현되었다. 도구별 설정·모델 및 sandbox 검증을 완료하기 전까지 pilot을 실행하지 않는다.
 기존 baseline 태그는 보존하고, 전환 완료 후 새로운 baseline을 만든다.
 
 ## 브랜치와 run ID
@@ -100,14 +100,19 @@ cached/reasoning이 input/output의 부분집합인지 명시하고 중복 합�
 시간·토큰과 측정 한계, 실물 검증 여부, 구현·결과의 고정 commit 링크를 포함한다.
 원본 대용량 로그·영상은 별도 artifact로 보관하고 위치·SHA-256·보존 정책을 기록한다.
 
-## 구현 전환 항목 — 아직 미완료
+## 구현 및 검증 상태
 
-- 생성 스크립트·두 스키마·validator·예시의 date-only ID 전환과 OpenCode 설정 추가
-- baseline 격리 checkout 준비 및 agent/model 브랜치 보존 절차 구현
-- 실행기 시작/종료·timeout·중단·telemetry 수집 및 실행 상태 스키마 구현
-- 스키마 실제 적용과 추가 교차 검증: 시각 순서·경과 시간·ID·상태 일치·증거 존재
-- sandbox 내 preflight 강화: 버전 불일치·오염된 입력·도구 실패는 실행 차단
-- 공통 펌웨어 평가, 오류 주입, 기준 시각, 실물 채점표 구현
-- main 결과 인덱스·요약 형식과 게시 절차 구현
+- 구현: date-only ID, schema v2, JSON Schema 실제 적용, manifest-only 실패 보존
+- 구현: 새 저장소 baseline snapshot, 로컬 bundle 및 agent/model 보관 브랜치
+- 구현: 실행 시작/종료, 단조 시간, timeout/중단, 외부 로그, Codex usage 이벤트 수집
+- 구현: 시각·경과 시간·ID·상태 교차 검사, 증거 경로·SHA-256 검사
+- 구현: host preflight 실패 차단, profile/baseline에 묶인 sandbox 증거 receipt gate
+- 구현: 실제 제품 host 어댑터 평가, 오류 주입, 0/299/300초 기준, 실물 채점표
+- 구현: main 결과 인덱스와 요약 초안 생성기. 최종 판정과 게시는 운영자 검토
+- 미완료: 도구별 정확한 모델/설정 확정, 실제 sandbox receipt, Gemini/OpenCode/Antigravity telemetry 어댑터 검증
+- 미완료: 새 baseline 확정 및 각 도구의 제품 pilot, COM 포트와 실물 검증
+
+운영 도구 자동 시험과 제품 pilot은 별개다. synthetic subprocess 시험을 제품 pilot으로
+기록하지 않는다. schema v1 과거 자료는 보존하며 새 validator로 덮어쓰거나 자동 이관하지 않는다.
 
 이 목록은 향후 구현 작업이며, 문서 보완 자체가 실험 실행 승인을 뜻하지 않는다.

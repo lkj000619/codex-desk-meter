@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "run_id": "20260911T000000Z-example",
+  "schema_version": 2,
+  "run_id": "20260911-example-cli-example-model-r01",
   "experiment_id": "version-2-hardware-autonomy-v1",
   "agent": {
     "provider": "example",
@@ -22,7 +22,7 @@
     "network_mode": "offline-fixture",
     "sandbox_policy": "workspace-write",
     "approval_policy": "operator-approved-flash",
-    "branch": "experiment/example",
+    "branch": "experiment/example/example-cli/example-model",
     "worktree": "C:/src/codex-desk-meter-example",
     "host": "example-host"
   },
@@ -50,11 +50,23 @@
     }
   },
   "outputs": {
-    "selection_document": "docs/agent-runs/20260911T000000Z-example/hardware-feature-selection.md",
-    "structured_result": "results/20260911T000000Z-example/hardware-feature.json",
+    "selection_document": "docs/agent-runs/20260911-example-cli-example-model-r01/hardware-feature-selection.md",
+    "structured_result": "results/20260911-example-cli-example-model-r01/hardware-feature.json",
     "implementation_commit": null,
     "build_status": "not_run",
     "automated_test_status": "not_run",
     "hardware_verification_status": "not_run"
+  },
+  "operator": {
+    "phase": "pilot",
+    "status": "completed",
+    "reason": null,
+    "repetition": 1,
+    "cohort": "example",
+    "seed": 1,
+    "exit_code": 0,
+    "delivered_prompt_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "local_base_commit": "0000000000000000000000000000000000000000",
+    "evidence": {}
   }
 }
