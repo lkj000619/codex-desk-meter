@@ -1,0 +1,10 @@
+idf_component_register(
+    SRCS
+        "src/imu_detector.c"
+        "src/imu_gesture.c"
+    INCLUDE_DIRS
+        "include"
+    REQUIRES
+        driver
+        esp_timer
+)

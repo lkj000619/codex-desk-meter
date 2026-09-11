@@ -22,3 +22,14 @@ __pycache__/
 # Local experiment scratch output (reviewed results remain under results/)
 logs/
 artifacts/
+
+# ESP-IDF Component Manager dependencies
+managed_components/
+
+# Host evaluation runtime outputs and local paths
+adapter-config.json
+evaluation-report.json
+link-evidence.txt
+
+# Host test binaries
+tests/*.exe

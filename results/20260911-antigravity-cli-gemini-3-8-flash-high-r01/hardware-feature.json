@@ -1,0 +1,122 @@
+{
+  "schema_version": 2,
+  "run_id": "20260911-antigravity-cli-gemini-3-8-flash-high-r01",
+  "experiment_id": "version-2-hardware-autonomy-v1",
+  "candidate_features": [
+    {
+      "id": "imu-gesture-interaction",
+      "name": "IMU 기반 책상 탭 및 제스처 인터랙션",
+      "hardware_resource": "QMI8658 6축 IMU (I2C 주소 0x6B, SCL GPIO7, SDA GPIO15)",
+      "user_value": "책상 위 거치형 디바이스에서 본체를 건드리지 않고 책상 더블 탭으로 화면 전환(C8), 가벼운 흔들림으로 즉시 수동 갱신을 수행할 수 있는 탁상 편의성 제공",
+      "implementation_cost": "중간: QMI8658 가속도계 레지스터 제어, 순수 C 제스처 알고리즘(imu_detector.c)과 하드웨어 제어(imu_gesture.c) 분리, 더블 탭 및 셰이크 이벤트 감지 및 main 루프 polling 처리",
+      "risk": "타이핑 진동에 의한 오작동(False Positive) 가능성 및 센서 감도 튜닝 필요. 실물 보드 미검증 상태이므로 센서 노이즈 및 물리 진동 특성에 따른 실물 보정 필요",
+      "verification_plan": "순수 C detector 호스트 단위 시험(test_imu_detector.c), Python 시뮬레이션 검증, ESP-IDF 통합 빌드 검증 및 실물 보드 제스처 검증 계획 수립"
+    },
+    {
+      "id": "rtc-power-loss-timekeeping",
+      "name": "PCF85063 RTC 기반 오프라인 시간 유지",
+      "hardware_resource": "PCF85063 I2C RTC (I2C 주소 0x51, SCL GPIO7, SDA GPIO15)",
+      "user_value": "전원 재인가 또는 Wi-Fi 오프라인 상황에서도 이전 수신 데이터의 Stale(300초 경과) 여부를 정확히 판별 가능",
+      "implementation_cost": "낮음: PCF85063 I2C 레지스터 읽기/쓰기 및 POSIX time 연동",
+      "risk": "코인셀 백업 배터리 미장착 시 전원 차단 후 시간이 초기화되어 오프라인 시간 유지 가치가 제한적임",
+      "verification_plan": "전원 단절 후 재인가 시 레지스터 보존 여부 및 Stale 계산 정합성 확인"
+    },
+    {
+      "id": "battery-adc-power-monitor",
+      "name": "배터리 전압 ADC 모니터링 및 저전력 경고",
+      "hardware_resource": "ESP32-S3 내장 ADC (GPIO 1 / 배터리 분압 회로)",
+      "user_value": "휴대 사용 또는 무선 거치 시 배터리 잔량을 대시보드에 표시하고 저전압 경고 제공",
+      "implementation_cost": "중간: ADC 원시값 칼리브레이션, 리튬 배터리 방전 곡선 매핑 및 UI 잔량 아이콘 구현",
+      "risk": "Codex Desk Meter는 상시 전원(USB-C 5V) 책상 거치형 기기로 설계되어 배터리 모니터링의 실질적 사용 빈도가 낮음",
+      "verification_plan": "가변 전원 공급기를 통한 전압별 ADC 읽기 및 3.3V 이하 저전력 경고 알림 검증"
+    }
+  ],
+  "selected_feature_id": "imu-gesture-interaction",
+  "selection_rationale": "Codex Desk Meter는 320x820 세로형 초슬림 디스플레이를 갖춘 탁상용 상시 거치 기기입니다. 슬림한 스탠드 구조상 기기 측면/후면의 작은 BOOT 버튼을 직접 누를 때 기기가 밀리거나 넘어지는 물리적 불편이 발생할 수 있습니다. 온보드 QMI8658 6축 IMU를 활용하면 책상을 가볍게 톡톡 두드리는 것(Desk Double-Tap)으로 화면을 순환 전환(C8)하고, 가볍게 기기를 흔들어 즉시 수동 갱신을 트리거할 수 있는 가능성을 제공합니다. 본 기능은 순수 detector C 로직(imu_detector.c)과 하드웨어 제어(imu_gesture.c)가 분리 모듈화되어 main 루프에서 polling 방식으로 호출되며 센서 미연결 시에도 안전하게 에러를 처리합니다.",
+  "rejected_feature_ids": [
+    "rtc-power-loss-timekeeping",
+    "battery-adc-power-monitor"
+  ],
+  "implementation": {
+    "files": [
+      "components/imu_gesture/include/imu_detector.h",
+      "components/imu_gesture/src/imu_detector.c",
+      "components/imu_gesture/include/imu_gesture.h",
+      "components/imu_gesture/src/imu_gesture.c",
+      "components/imu_gesture/CMakeLists.txt",
+      "tests/meter_test_adapter.c",
+      "tests/meter_test_adapter.py",
+      "tests/test_imu_detector.c",
+      "tests/test_imu_gesture.py",
+      "main/main.c"
+    ],
+    "commit": null,
+    "build": {
+      "status": "pass",
+      "command": "idf.py -B C:\\Espressif\\builds\\meter -C C:\\Espressif\\projects\\codex-desk-meter-main-2 build",
+      "notes": "ESP-IDF v5.3.2 타깃 esp32s3 빌드 성공. codex_desk_meter.bin (357,584 bytes), bootloader.bin (21,648 bytes), partition-table.bin (3,072 bytes) 생성 완료."
+    },
+    "automated_tests": {
+      "status": "partial",
+      "commands": [
+        "python scripts/evaluate-product.py --adapter-config adapter-config.json --output evaluation-report.json",
+        "python tests/test_imu_gesture.py"
+      ],
+      "notes": "Python reference adapter evaluation: PASS (29/29). Production C parser host evaluation: not_run (현재 adapter는 독립 Python 재구현이며 네이티브 호스트 C 컴파일러 부재). Production C IMU detector host test: not_run (호스트 C 컴파일러 부재). Python IMU simulation: PASS (5/5 reference test)."
+    },
+    "hardware_test_plan": "운영자 승인 하에 Waveshare ESP32-S3-LCD-3.16 보드를 USB-C (COM3)로 연결 후, 다음 명령으로 플래시: python -m esptool --chip esp32s3 -p COM3 -b 460800 --before default_reset --after hard_reset write_flash 0x0 C:\\Espressif\\builds\\meter\\bootloader\\bootloader.bin 0x8000 C:\\Espressif\\builds\\meter\\partition_table\\partition-table.bin 0x10000 C:\\Espressif\\builds\\meter\\codex_desk_meter.bin. 1) 320x820 세로 ST7701 LCD 초기 화면(대시보드) 정상 렌더링 확인. 2) 책상 더블 탭 시 화면이 0(대시보드) -> 1(글로벌 리셋) -> 2(상태/장애)로 순환하는지 확인. 3) 기기를 가볍게 흔들었을 때 즉시 갱신 로그 및 화면 갱신 확인. 4) BOOT 버튼(GPIO 0) 클릭 시 동일하게 화면 전환 동작하는지 확인.",
+    "hardware_result": "not_run"
+  },
+  "core_requirements": {
+    "C1": {
+      "status": "pass",
+      "evidence": "ESP-IDF v5.3.2 툴체인 기반 idf.py set-target esp32s3 및 idf.py build 성공. 357KB 앱 바이너리 정상 생성."
+    },
+    "C2": {
+      "status": "not_run",
+      "evidence": "320x820 해상도 ST7701 3-wire SPI + RGB 인터페이스 드라이버 초기화 및 세로 화면 버퍼 기반 UI 렌더링 코드가 빌드 완료되었으나, 실물 LCD 패널 출력은 미실행(not_run)."
+    },
+    "C3": {
+      "status": "partial",
+      "evidence": "meter_parser.c 펌웨어 구현 및 빌드 완료. Python reference adapter(tests/meter_test_adapter.py)로 5h/Weekly 잔여량/사용률/stale 10개 케이스 확인되었으나, production C parser host execution 및 hardware 실물 검증은 not_run."
+    },
+    "C4": {
+      "status": "partial",
+      "evidence": "meter_parser.c 펌웨어 구현 및 빌드 완료. Python reference adapter로 codex-resets.com 최근 글로벌 리셋 시각 9개 케이스 확인되었으나, production C parser host execution 및 hardware 실물 검증은 not_run."
+    },
+    "C5": {
+      "status": "partial",
+      "evidence": "meter_parser.c 펌웨어 구현 및 빌드 완료. Python reference adapter로 codex-reset.com 24h/48h 전망치 10개 케이스 확인되었으나, production C parser host execution 및 hardware 실물 검증은 not_run."
+    },
+    "C6": {
+      "status": "partial",
+      "evidence": "meter_parser.c 펌웨어 구현 및 빌드 완료. Python reference adapter로 독립 출처 분리 정규화 확인되었으나, production C parser host execution 및 hardware 실물 검증은 not_run."
+    },
+    "C7": {
+      "status": "partial",
+      "evidence": "meter_parser.c 펌웨어 구현 및 빌드 완료. Python reference adapter로 DNS/TLS/HTTP 500 장애 복구 확인되었으나, production C parser host execution 및 hardware 실물 검증은 not_run."
+    },
+    "C8": {
+      "status": "not_run",
+      "evidence": "BOOT 버튼(GPIO 0) 디바운스 및 60초 자동 갱신 로직이 펌웨어에 구현 및 빌드 완료되었으나, 실물 하드웨어 버튼 입력은 미실행(not_run)."
+    }
+  },
+  "metrics": {
+    "discovery_started_at": null,
+    "discovery_ended_at": null,
+    "tokens": {
+      "input": null,
+      "output": null,
+      "cached": null,
+      "reasoning": null,
+      "total": null
+    },
+    "notes": "manual pilot; invalid for cross-agent quantitative comparison. runner-generated run-manifest, verified runner profile, sandbox receipt, raw stdout/stderr, commands.jsonl이 없으므로 시간과 토큰은 추정하지 않고 null 유지. result contract validation은 runner-generated run-manifest 부재로 not_run 처리."
+  },
+  "failures": [],
+  "unresolved_risks": [
+    "LCD SPI CS와 BOOT 버튼이 공유하는 GPIO0의 초기화 순서(SPI 초기화 후 버튼 풀업 설정) 및 런타임 버튼 입력 시 하드웨어 신호 간섭 가능성에 대한 실물 검증 필요.",
+    "QMI8658 I2C(SCL GPIO7, SDA GPIO15) 실물 센서 응답(WHO_AM_I 0x05) 및 다양한 책상 재질/진동 환경에서의 탭 감도 실측 필요.",
+    "COM3 실물 하드웨어 미실행(hardware not run)으로 인해 최종 product_pass는 false 상태이며, 운영자의 실물 플래시 및 검증이 완료되어야 제품 합격 판정 가능."
+  ]
+}
