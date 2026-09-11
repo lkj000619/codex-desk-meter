@@ -1,9 +1,8 @@
 """Validate the minimum contract for an experiment manifest and result.
 
-The script deliberately uses only Python's standard library so a fresh clone can
-run it before installing optional JSON Schema tooling. The JSON Schema files are
-the machine-readable contract; this validator adds cross-file and cross-field
-checks that JSON Schema cannot express conveniently.
+Install scripts/requirements-benchmark.txt first. JSON Schema is applied before
+cross-file and cross-field validation. Manifest-only validation preserves failures
+that terminated before a hardware feature result could be written.
 """
 
 from __future__ import annotations
@@ -19,7 +18,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = ROOT / "experiments" / "examples"
-RUN_ID_RE = re.compile(r"^[0-9]{8}T[0-9]{6}Z-[a-z0-9-]+$")
+RUN_ID_RE = re.compile(r"^[0-9]{8}-[a-z0-9]+(?:-[a-z0-9]+)*-r[0-9]{2}$")
 SHA_RE = re.compile(r"^[A-Fa-f0-9]{64}$")
 COMMIT_RE = re.compile(r"^[A-Fa-f0-9]{7,64}$")
 STATUSES = {"pass", "partial", "fail", "not_run", "timeout", "blocked"}
@@ -82,15 +81,18 @@ def nonnegative_int(value: Any, where: str, nullable: bool = False) -> None:
 
 
 def validate_manifest(manifest: dict[str, Any]) -> None:
+    from benchmark_support import validate_schema, validate_operator
+    validate_schema(manifest, "run-manifest.schema.json")
+    validate_operator(manifest)
     required(
         manifest,
         ["schema_version", "run_id", "experiment_id", "agent", "execution", "hardware", "measurement", "outputs"],
         "manifest",
     )
-    if manifest["schema_version"] != 1:
-        raise ValidationError("manifest.schema_version must be 1")
+    if manifest["schema_version"] != 2:
+        raise ValidationError("manifest.schema_version must be 2")
     if not isinstance(manifest["run_id"], str) or not RUN_ID_RE.fullmatch(manifest["run_id"]):
-        raise ValidationError("manifest.run_id does not match YYYYMMDDTHHMMSSZ-slug")
+        raise ValidationError("manifest.run_id does not match YYYYMMDD-product-model-rNN")
     if manifest["experiment_id"] != "version-2-hardware-autonomy-v1":
         raise ValidationError("manifest.experiment_id is not the Version 2 baseline")
 
@@ -124,7 +126,7 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
         ],
         "manifest.execution",
     )
-    timestamp(execution["started_at"], "manifest.execution.started_at")
+    timestamp(execution["started_at"], "manifest.execution.started_at", nullable=True)
     timestamp(execution["ended_at"], "manifest.execution.ended_at", nullable=True)
     nonnegative_int(execution["timeout_seconds"], "manifest.execution.timeout_seconds")
     if execution["timeout_seconds"] < 1:
@@ -154,7 +156,7 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
     if wall_clock is not None and (not isinstance(wall_clock, (int, float)) or isinstance(wall_clock, bool) or wall_clock < 0):
         raise ValidationError("manifest.measurement.wall_clock_seconds must be non-negative or null")
     for key in ("tool_calls", "failed_commands", "user_interventions"):
-        nonnegative_int(measurement[key], f"manifest.measurement.{key}")
+        nonnegative_int(measurement[key], f"manifest.measurement.{key}", nullable=True)
     tokens = measurement["tokens"]
     if not isinstance(tokens, dict):
         raise ValidationError("manifest.measurement.tokens must be an object")
@@ -182,6 +184,8 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
 
 
 def validate_result(result: dict[str, Any], manifest: dict[str, Any]) -> None:
+    from benchmark_support import validate_schema
+    validate_schema(result, "hardware-feature-result.schema.json")
     required(
         result,
         [
@@ -200,8 +204,8 @@ def validate_result(result: dict[str, Any], manifest: dict[str, Any]) -> None:
         ],
         "result",
     )
-    if result["schema_version"] != 1:
-        raise ValidationError("result.schema_version must be 1")
+    if result["schema_version"] != 2:
+        raise ValidationError("result.schema_version must be 2")
     if result["run_id"] != manifest["run_id"]:
         raise ValidationError("result.run_id must equal manifest.run_id")
     if result["experiment_id"] != manifest["experiment_id"]:
@@ -281,18 +285,25 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, help="run-manifest.json path")
     parser.add_argument("--result", type=Path, help="hardware-feature.json path")
+    parser.add_argument("--evidence-root", type=Path, help="verify evidence paths and hashes below this directory")
     args = parser.parse_args()
     manifest_path, result_path = args.manifest, args.result
-    if (manifest_path is None) != (result_path is None):
-        parser.error("--manifest and --result must be provided together")
+    if manifest_path is None and result_path is not None:
+        parser.error("--result requires --manifest")
     if manifest_path is None:
         manifest_path, result_path = default_paths()
     try:
         manifest = load_json(manifest_path)
-        result = load_json(result_path)
         validate_manifest(manifest)
-        validate_result(result, manifest)
-    except ValidationError as exc:
+        if args.evidence_root is not None:
+            from benchmark_support import verify_evidence
+            verify_evidence(manifest, args.evidence_root)
+        if result_path is not None:
+            result = load_json(result_path)
+            validate_result(result, manifest)
+            from benchmark_support import validate_pair
+            validate_pair(manifest, result)
+    except (ValidationError, ValueError) as exc:
         print(f"INVALID: {exc}", file=sys.stderr)
         return 1
     print(f"VALID: {manifest_path} + {result_path}")

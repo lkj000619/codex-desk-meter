@@ -68,11 +68,11 @@ if (-not $SkipIdf) {
                 $idfReady = $true
             }
             else {
-                Check-Warn "ESP-IDF found but version is not v5.3.2: $idfVersion"
+                Check-Fail "ESP-IDF found but version is not v5.3.2: $idfVersion"
             }
         }
         catch {
-            Check-Warn "ESP-IDF is not available in this shell: $($_.Exception.Message)"
+            Check-Fail "ESP-IDF is not available in this shell: $($_.Exception.Message)"
         }
     }
 }
@@ -125,7 +125,7 @@ if ($gitStatus.Count -eq 0) {
     Check-Ok 'Working tree is clean'
 }
 else {
-    Check-Warn "Working tree has $($gitStatus.Count) change(s); commit before baseline tagging"
+    Check-Fail "Working tree has $($gitStatus.Count) change(s); commit before baseline tagging"
 }
 
 Write-Host ''

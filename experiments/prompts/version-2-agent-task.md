@@ -1,7 +1,7 @@
 # Version 2 에이전트 공통 프롬프트
 
-> 운영자: 이 템플릿은 현재 문서 개정 중이다. `docs/experiments/benchmark-management.md`의
-> 구현 전환 항목과 새 baseline 확정 전에는 실행하지 않는다.
+> 운영자: `docs/experiments/agent-run-commands.md`의 실행 gate를 통과하고
+> 모델·설정·새 baseline을 확정한 뒤 운영 실행기로 전달한다.
 
 당신은 Codex Desk Meter Version 2의 기준 구현을 담당한다. 작업 결과는
 `docs/PRODUCT_CONTRACT.md`의 C1~C8을 만족해야 하며, 대상 보드는 Waveshare
@@ -9,8 +9,8 @@ ESP32-S3-LCD-3.16, 프레임워크는 ESP-IDF v5.3.2다.
 
 ## 시작 전 고정 입력
 
-다음 파일을 모두 읽고, 기준 commit과 prompt·config·fixture bundle SHA-256을
-결과 manifest에 기록하라.
+다음 파일을 모두 읽어라. 기준 commit과 prompt·config·fixture bundle SHA-256 및
+실행 manifest는 운영 실행기가 기록한다. 에이전트는 manifest를 생성하거나 수정하지 않는다.
 
 1. `docs/PROJECT_PURPOSE.md`
 2. `docs/PRODUCT_CONTRACT.md`
@@ -21,8 +21,9 @@ ESP32-S3-LCD-3.16, 프레임워크는 ESP-IDF v5.3.2다.
 7. `experiments/config/version-2-baseline.yaml`
 8. `experiments/fixtures/`의 모든 파일
 9. `docs/experiments/benchmark-management.md`
+10. `docs/experiments/evaluation-contract.md`
 
-공통 프롬프트의 `<run-id>`는 실제 실행 manifest의 ID로 치환하라. 계정 쿠키,
+공통 프롬프트의 `<run-id>`는 운영 실행기가 치환해 전달한다. 계정 쿠키,
 Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 요청하거나 커밋하지 말라.
 개인 사용량은 fixture로 먼저 구현·검증하고, 실제 계정 통합이 불가능하면 그
 사유를 기록하라.
@@ -57,6 +58,7 @@ Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 요청하거나 �
 변경 뒤 가능한 범위에서 다음을 실행하고 결과를 명령 로그에 남겨라.
 
 1. 파서 및 fixture 단위 시험
+   - `docs/experiments/evaluation-contract.md`에 따라 실제 제품 모듈을 호출하는 host 어댑터 제공
 2. `idf.py build`
 3. 선택 기능 자동 시험
 4. 운영자 승인 뒤 COM3에 플래시하는 실물 시험 계획
@@ -70,14 +72,12 @@ commands.jsonl은 운영 실행기가 관리한다. 실행 중 원본 로그를 
 
 ```text
 docs/agent-runs/<run-id>/hardware-feature-selection.md
-results/<run-id>/run-manifest.json
 results/<run-id>/hardware-feature.json
-results/<run-id>/commands.jsonl
 ```
 
-`run-manifest.json`은 `experiments/schema/run-manifest.schema.json`,
-`hardware-feature.json`은 `experiments/schema/hardware-feature-result.schema.json`
-계약을 지켜라. 마지막에 다음을 포함하라.
+`hardware-feature.json`은 schema_version 2와
+`experiments/schema/hardware-feature-result.schema.json` 계약을 지켜라.
+운영 기록에만 있는 시각·해시·계측값을 추정하지 말라. 최종 보고에 확인 가능한 다음을 포함하라.
 
 - agent / product / interface / version / model / reasoning
 - 기준 commit, prompt/config/fixture SHA-256
