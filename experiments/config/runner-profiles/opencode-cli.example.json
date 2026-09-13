@@ -1,24 +1,30 @@
 {
   "provider": "opencode",
-  "product": "cli",
+  "product": "opencode-cli",
   "interface": "cli",
-  "agent_version": "operator-check-required",
-  "model": "operator-check-required",
-  "model_slug": "operator-check-required",
-  "reasoning": "operator-check-required",
+  "agent_version": "1.18.30",
+  "model": "opencode/muse-spark-1.3-contributor-free",
+  "model_slug": "muse-spark-1-3-contributor-free",
+  "reasoning": "provider-default-no-variant-selected",
   "branch_owner": "opencode",
   "branch_product": "cli",
-  "cohort": "historical-prep-firmware-offline-fixture-hardware-autonomy",
+  "cohort": "version-2-end-to-end-v1",
   "adapter": "opencode",
   "argv": [
-    "operator-check-required"
+    "<verified-opencode-executable>",
+    "run",
+    "--pure",
+    "--format",
+    "json",
+    "--model",
+    "{model}"
   ],
   "version_argv": [
-    "operator-check-required",
+    "<verified-opencode-executable>",
     "--version"
   ],
-  "sandbox_policy": "operator-check-required",
-  "approval_policy": "operator-check-required",
+  "sandbox_policy": "os-read-isolation-not-verified",
+  "approval_policy": "explicit-policy-required-before-run",
   "network_mode": "offline-fixture",
   "settings_inventory": {
     "skills": "operator-check-required",

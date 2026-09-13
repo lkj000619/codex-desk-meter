@@ -110,6 +110,19 @@ class ContractTests(unittest.TestCase):
 
 
 class RunnerTests(unittest.TestCase):
+    def test_opencode_provider_total_and_reasoning_preserved(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "stdout.jsonl"
+            event = {"type": "step_finish", "part": {"tokens": {
+                "total": 2065, "input": 2005, "output": 15,
+                "reasoning": 45, "cache": {"read": 0, "write": 0}}}}
+            path.write_text(json.dumps(event) + "\n" + json.dumps(event), encoding="utf-8")
+            measured = telemetry(path, "opencode")
+            self.assertEqual(measured["total"], 4130)
+            self.assertEqual(measured["input"], 4010)
+            self.assertEqual(measured["reasoning"], 90)
+            self.assertEqual(measured["cached"], 0)
+
     def test_utf8_input_and_nonzero_exit(self):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder)

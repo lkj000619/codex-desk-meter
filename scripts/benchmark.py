@@ -90,6 +90,8 @@ def prepare(a):
     (directory / "prompt.txt").write_bytes(prompt)
     save(directory / "profile.json", profile)
     m = read(checkout / "experiments/examples/run-manifest.example.json")
+    if profile["cohort"] == "version-2-end-to-end-v1":
+        m["experiment_id"] = "version-2-end-to-end-v1"
     m["run_id"] = run_id
     m["agent"].update({k: profile[k] for k in ("provider", "product", "interface", "agent_version", "model", "reasoning")})
     m["agent"]["configuration_sha256"] = digest((directory / "profile.json").read_bytes())
@@ -112,6 +114,8 @@ def prepare(a):
     m["measurement"]["tokens"]["availability_note"] = "Not yet executed."
     m["outputs"].update(selection_document=f"docs/agent-runs/{run_id}/hardware-feature-selection.md",
                          structured_result=f"results/{run_id}/hardware-feature.json")
+    if m["experiment_id"] == "version-2-end-to-end-v1":
+        m["outputs"]["structured_result"] = f"results/{run_id}/end-to-end-result.json"
     validate_schema(m, "run-manifest.schema.json")
     validate_operator(m)
     save(directory / "run-manifest.json", m)
@@ -173,6 +177,25 @@ def telemetry(path, adapter):
             if tokens["input"] is not None and tokens["output"] is not None:
                 tokens["total"] = tokens["input"] + tokens["output"]
             tokens["availability_note"] = "Codex turn.completed usage; cached is included in input; reasoning unavailable."
+    if adapter == "opencode":
+        # step_finish contains per-step provider usage; cache read/write are separate.
+        usages = [e["part"]["tokens"] for e in events
+                  if e.get("type") == "step_finish"
+                  and isinstance(e.get("part"), dict)
+                  and isinstance(e["part"].get("tokens"), dict)]
+        if usages:
+            for target in ("input", "output", "reasoning", "total"):
+                values = [u.get(target) for u in usages]
+                if all(type(v) is int and v >= 0 for v in values):
+                    tokens[target] = sum(values)
+            values = [u.get("cache", {}).get("read") for u in usages
+                      if isinstance(u.get("cache", {}), dict)]
+            if len(values) == len(usages) and all(type(v) is int and v >= 0 for v in values):
+                tokens["cached"] = sum(values)
+            tokens["availability_note"] = (
+                "OpenCode step_finish provider usage; total is provider-reported, "
+                "reasoning and cache must not be added to total again; cache write retained in raw logs."
+            )
     return tokens
 
 

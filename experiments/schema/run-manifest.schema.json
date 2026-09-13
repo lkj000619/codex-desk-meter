@@ -25,7 +25,7 @@
     },
     "experiment_id": {
       "type": "string",
-      "const": "version-2-hardware-autonomy-v1"
+      "enum": ["version-2-hardware-autonomy-v1", "version-2-end-to-end-v1"]
     },
     "agent": {
       "type": "object",
