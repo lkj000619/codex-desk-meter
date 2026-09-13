@@ -1,0 +1,237 @@
+{
+  "schema_version": 1,
+  "result_id": "20260911-e2e-contract-example-r01",
+  "run_id": "20260911-e2e-contract-example-r01",
+  "manifest_id": "20260911-e2e-contract-example-r01",
+  "baseline_id": "benchmark-v2-baseline-20260911",
+  "experiment_id": "version-2-end-to-end-v1",
+  "manifest": {
+    "id": "20260911-e2e-contract-example-r01",
+    "experiment_id": "version-2-end-to-end-v1",
+    "baseline_id": "benchmark-v2-baseline-20260911",
+    "path": "experiments/examples/end-to-end-manifest.example.json"
+  },
+  "baseline": {
+    "id": "benchmark-v2-baseline-20260911",
+    "experiment_id": "version-2-end-to-end-v1",
+    "commit": "34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f"
+  },
+  "feature_results": {
+    "F1": {
+      "status": "pass",
+      "scope": "host fixture collector registry",
+      "evidence": ["scripts/tests/test_host_device_pipeline.py", "experiments/fixtures/providers/README.md", "experiments/examples/host-device-pipeline-evidence.example.json"],
+      "reason": null
+    },
+    "F2": {
+      "status": "pass",
+      "scope": "host normalization and UsageSnapshot schema validation",
+      "evidence": ["scripts/tests/test_host_device_pipeline.py", "experiments/schema/usage-snapshot.schema.json", "experiments/examples/host-device-pipeline-evidence.example.json"],
+      "reason": null
+    },
+    "F3": {
+      "status": "partial",
+      "scope": "host_simulated serial framing and loopback",
+      "evidence": ["scripts/tests/test_host_device_pipeline.py", "docs/experiments/host-device-pipeline-contract.md", "experiments/examples/host-device-pipeline-evidence.example.json"],
+      "reason": "Only deterministic host framing and fake/loopback writes are covered; no device receipt is claimed."
+    },
+    "F4": {
+      "status": "partial",
+      "scope": "reference_model_only receiver and state",
+      "evidence": ["scripts/tests/test_host_device_pipeline.py", "docs/experiments/host-device-pipeline-contract.md", "experiments/examples/host-device-pipeline-evidence.example.json"],
+      "reason": "The host conformance model is tested; ESP32 receiver and LCD behavior remain untested."
+    },
+    "F5": {
+      "status": "not_run",
+      "scope": "LCD GUI",
+      "evidence": [],
+      "reason": "No visual or hardware evidence is claimed by this example."
+    },
+    "F6": {
+      "status": "not_run",
+      "scope": "input and refresh",
+      "evidence": [],
+      "reason": "Input behavior is outside the schema-only example scope."
+    },
+    "F7": {
+      "status": "not_run",
+      "scope": "global reset sources",
+      "evidence": [],
+      "reason": "Global reset source execution is not included in this fixture-only example."
+    },
+    "F8": {
+      "status": "not_run",
+      "scope": "build and observability",
+      "evidence": [],
+      "reason": "No firmware build is claimed by this example."
+    },
+    "F9": {
+      "status": "not_run",
+      "scope": "autonomous hardware feature",
+      "evidence": [],
+      "reason": "Autonomous hardware behavior is outside the contract-only example."
+    }
+  },
+  "integration_results": {
+    "I1": {
+      "status": "pass",
+      "scope": "credential-free provider fixture collection",
+      "evidence": ["scripts/tests/test_host_device_pipeline.py", "experiments/fixtures/providers/README.md", "experiments/examples/host-device-pipeline-evidence.example.json"],
+      "reason": null
+    },
+    "I2": {
+      "status": "pass",
+      "scope": "normalization and source identity",
+      "evidence": ["scripts/tests/test_host_device_pipeline.py", "docs/PRODUCT_CONTRACT.md", "experiments/examples/host-device-pipeline-evidence.example.json"],
+      "reason": null
+    },
+    "I3": {
+      "status": "not_run",
+      "scope": "versioned transport",
+      "evidence": [],
+      "reason": "Transport is not selected or exercised in this implementation task."
+    },
+    "I4": {
+      "status": "not_run",
+      "scope": "receiver, cache, and stale state",
+      "evidence": [],
+      "reason": "Hardware receiver execution is intentionally not run."
+    }
+  },
+  "gui_scores": {
+    "G1": {"score": null, "evidence": [], "reason": "No GUI capture."},
+    "G2": {"score": null, "evidence": [], "reason": "No GUI capture."},
+    "G3": {"score": null, "evidence": [], "reason": "No GUI capture."},
+    "G4": {"score": null, "evidence": [], "reason": "No GUI capture."},
+    "G5": {"score": null, "evidence": [], "reason": "No GUI capture."},
+    "G6": {"score": null, "evidence": [], "reason": "No hardware display capture."}
+  },
+  "provider_matrix": [
+    {
+      "provider_id": "openai",
+      "agent_id": "codex-cli",
+      "host_id": "terminal",
+      "model_id": "codex-demo",
+      "account_profile_id": "acct-demo-openai",
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "codex-percent-window",
+      "window_ids": ["five-hour"],
+      "capabilities": {
+        "quota_windows": true,
+        "absolute_tokens": false,
+        "credits": false,
+        "reset_time": true,
+        "session_telemetry": false
+      },
+      "status": "available",
+      "snapshot_paths": ["experiments/fixtures/providers/codex-percent-window.json"],
+      "evidence": ["experiments/fixtures/providers/codex-percent-window.json"],
+      "reason": null
+    },
+    {
+      "provider_id": "anthropic",
+      "agent_id": "claude-code",
+      "host_id": "terminal",
+      "model_id": "claude-sonnet-demo",
+      "account_profile_id": "acct-demo-anthropic",
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "claude-code-windows",
+      "window_ids": ["five-hour", "weekly", "model-sub-limit"],
+      "capabilities": {
+        "quota_windows": true,
+        "absolute_tokens": false,
+        "credits": false,
+        "reset_time": true,
+        "session_telemetry": false
+      },
+      "status": "available",
+      "snapshot_paths": ["experiments/fixtures/providers/claude-code-windows.json"],
+      "evidence": ["experiments/fixtures/providers/claude-code-windows.json"],
+      "reason": null
+    },
+    {
+      "provider_id": "anthropic",
+      "agent_id": "claude-code",
+      "host_id": "orca",
+      "model_id": "claude-sonnet-demo",
+      "account_profile_id": "acct-demo-anthropic",
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "orca-host-claude-code",
+      "window_ids": ["five-hour"],
+      "capabilities": {
+        "quota_windows": true,
+        "absolute_tokens": false,
+        "credits": false,
+        "reset_time": true,
+        "session_telemetry": false
+      },
+      "status": "available",
+      "snapshot_paths": ["experiments/fixtures/providers/orca-host-claude-code.json"],
+      "evidence": ["experiments/fixtures/providers/orca-host-claude-code.json"],
+      "reason": null
+    },
+    {
+      "provider_id": "google",
+      "agent_id": "gemini-cli",
+      "host_id": "terminal",
+      "model_id": "gemini-demo",
+      "account_profile_id": null,
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "gemini-cli-unsupported",
+      "window_ids": [],
+      "capabilities": {
+        "quota_windows": false,
+        "absolute_tokens": false,
+        "credits": false,
+        "reset_time": false,
+        "session_telemetry": false
+      },
+      "status": "unsupported",
+      "snapshot_paths": ["experiments/fixtures/providers/gemini-cli-unsupported.json"],
+      "evidence": ["experiments/fixtures/providers/gemini-cli-unsupported.json"],
+      "reason": "The synthetic Gemini CLI surface exposes no quota source."
+    }
+  ],
+  "build": {
+    "status": "not_run",
+    "target": "esp32s3",
+    "evidence": [],
+    "reason": "Firmware build is outside the schema and validator implementation scope."
+  },
+  "host": {
+    "status": "pass",
+    "host_id": "terminal",
+    "evidence": ["docs/experiments/integration-contract.md"],
+    "reason": null
+  },
+  "transport": {
+    "status": "not_run",
+    "choice": null,
+    "evidence": [],
+    "reason": "No transport is selected by this implementation plan."
+  },
+  "hardware": {
+    "status": "not_run",
+    "board": "waveshare-esp32-s3-lcd-3.16",
+    "evidence": [],
+    "reason": "COM3 and physical hardware are explicitly out of scope."
+  },
+  "telemetry": {
+    "wall_clock_seconds": null,
+    "agent_tokens": {
+      "input": null,
+      "output": null,
+      "cached": null,
+      "reasoning": null,
+      "total": null
+    },
+    "token_total_definition": "input_plus_output_excludes_cached_and_reasoning",
+    "availability_reason": "Synthetic contract validation does not expose runner or agent token telemetry.",
+    "evidence": []
+  },
+  "product_pass": false
+}

@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://codex-desk-meter.local/schema/end-to-end-manifest.schema.json",
+  "title": "Codex Desk Meter external end-to-end experiment manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "run_id",
+    "experiment_id",
+    "baseline_id",
+    "execution"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "manifest_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "run_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "result_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "result_reference": {
+      "$ref": "#/$defs/identifier"
+    },
+    "experiment_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "baseline_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "base_commit"
+      ],
+      "properties": {
+        "base_commit": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{7,64}$"
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {
+      "required": [
+        "result_id"
+      ]
+    },
+    {
+      "required": [
+        "result_reference"
+      ]
+    }
+  ],
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    }
+  }
+}

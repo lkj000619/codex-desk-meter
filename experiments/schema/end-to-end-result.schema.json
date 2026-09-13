@@ -1,0 +1,571 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://codex-desk-meter.local/schema/end-to-end-result.schema.json",
+  "title": "Codex Desk Meter end-to-end experiment result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result_id",
+    "run_id",
+    "manifest_id",
+    "baseline_id",
+    "experiment_id",
+    "manifest",
+    "baseline",
+    "feature_results",
+    "integration_results",
+    "gui_scores",
+    "provider_matrix",
+    "build",
+    "host",
+    "transport",
+    "hardware",
+    "telemetry",
+    "product_pass"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "result_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "run_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "manifest_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "baseline_id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "experiment_id": {
+      "const": "version-2-end-to-end-v1"
+    },
+    "manifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "experiment_id",
+        "baseline_id",
+        "path"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "experiment_id": {
+          "const": "version-2-end-to-end-v1"
+        },
+        "baseline_id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "path": {
+          "$ref": "#/$defs/path"
+        }
+      }
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "experiment_id",
+        "commit"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "experiment_id": {
+          "const": "version-2-end-to-end-v1"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{7,64}$"
+        }
+      }
+    },
+    "feature_results": {
+      "$ref": "#/$defs/featureResults"
+    },
+    "integration_results": {
+      "$ref": "#/$defs/integrationResults"
+    },
+    "gui_scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "G1",
+        "G2",
+        "G3",
+        "G4",
+        "G5",
+        "G6"
+      ],
+      "properties": {
+        "G1": {
+          "$ref": "#/$defs/guiScore"
+        },
+        "G2": {
+          "$ref": "#/$defs/guiScore"
+        },
+        "G3": {
+          "$ref": "#/$defs/guiScore"
+        },
+        "G4": {
+          "$ref": "#/$defs/guiScore"
+        },
+        "G5": {
+          "$ref": "#/$defs/guiScore"
+        },
+        "G6": {
+          "$ref": "#/$defs/guiScore"
+        }
+      }
+    },
+    "provider_matrix": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/providerResult"
+      }
+    },
+    "build": {
+      "unevaluatedProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/$defs/validationBlock"
+        },
+        {
+          "type": "object",
+          "required": [
+            "target"
+          ],
+          "properties": {
+            "target": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      ]
+    },
+    "host": {
+      "unevaluatedProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/$defs/validationBlock"
+        },
+        {
+          "type": "object",
+          "required": [
+            "host_id"
+          ],
+          "properties": {
+            "host_id": {
+              "$ref": "#/$defs/identity"
+            }
+          }
+        }
+      ]
+    },
+    "transport": {
+      "unevaluatedProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/$defs/validationBlock"
+        },
+        {
+          "type": "object",
+          "required": [
+            "choice"
+          ],
+          "properties": {
+            "choice": {
+              "enum": [
+                "usb-serial",
+                "local-wifi",
+                null
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "hardware": {
+      "unevaluatedProperties": false,
+      "allOf": [
+        {
+          "$ref": "#/$defs/validationBlock"
+        },
+        {
+          "type": "object",
+          "required": [
+            "board"
+          ],
+          "properties": {
+            "board": {
+              "const": "waveshare-esp32-s3-lcd-3.16"
+            }
+          }
+        }
+      ]
+    },
+    "telemetry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "wall_clock_seconds",
+        "agent_tokens",
+        "token_total_definition",
+        "availability_reason",
+        "evidence"
+      ],
+      "properties": {
+        "wall_clock_seconds": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "agent_tokens": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "input",
+            "output",
+            "cached",
+            "reasoning",
+            "total"
+          ],
+          "properties": {
+            "input": {
+              "$ref": "#/$defs/nonnegativeIntegerOrNull"
+            },
+            "output": {
+              "$ref": "#/$defs/nonnegativeIntegerOrNull"
+            },
+            "cached": {
+              "$ref": "#/$defs/nonnegativeIntegerOrNull"
+            },
+            "reasoning": {
+              "$ref": "#/$defs/nonnegativeIntegerOrNull"
+            },
+            "total": {
+              "$ref": "#/$defs/nonnegativeIntegerOrNull"
+            }
+          }
+        },
+        "availability_reason": {
+          "type": "string",
+          "minLength": 1
+        },
+        "token_total_definition": {
+          "const": "input_plus_output_excludes_cached_and_reasoning"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        }
+      }
+    },
+    "product_pass": {
+      "type": "boolean"
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "identity": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "identityOrNull": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?![A-Za-z]:)[^\\\\]+$"
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/path"
+      }
+    },
+    "status": {
+      "enum": [
+        "pass",
+        "partial",
+        "fail",
+        "not_run",
+        "blocked",
+        "timeout"
+      ]
+    },
+    "resultEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "scope",
+        "evidence",
+        "reason"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      }
+    },
+    "featureResults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7",
+        "F8",
+        "F9"
+      ],
+      "patternProperties": {
+        "^F[1-9]$": {
+          "$ref": "#/$defs/resultEntry"
+        }
+      },
+      "minProperties": 9,
+      "maxProperties": 9
+    },
+    "integrationResults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "I1",
+        "I2",
+        "I3",
+        "I4"
+      ],
+      "patternProperties": {
+        "^I[1-4]$": {
+          "$ref": "#/$defs/resultEntry"
+        }
+      },
+      "minProperties": 4,
+      "maxProperties": 4
+    },
+    "guiScore": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "score",
+        "evidence",
+        "reason"
+      ],
+      "properties": {
+        "score": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 3
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      }
+    },
+    "providerResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider_id",
+        "agent_id",
+        "host_id",
+        "model_id",
+        "account_profile_id",
+        "metric_kind",
+        "source_kind",
+        "source_id",
+        "window_ids",
+        "capabilities",
+        "status",
+        "snapshot_paths",
+        "evidence",
+        "reason"
+      ],
+      "properties": {
+        "provider_id": {
+          "$ref": "#/$defs/identity"
+        },
+        "agent_id": {
+          "$ref": "#/$defs/identityOrNull"
+        },
+        "host_id": {
+          "$ref": "#/$defs/identityOrNull"
+        },
+        "model_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        },
+        "account_profile_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "metric_kind": {
+          "enum": [
+            "quota_window",
+            "token_balance",
+            "credits",
+            "session_telemetry"
+          ]
+        },
+        "source_kind": {
+          "enum": [
+            "fixture",
+            "local_runtime",
+            "provider_api",
+            "ide_telemetry",
+            "unknown"
+          ]
+        },
+        "source_id": {
+          "$ref": "#/$defs/identity"
+        },
+        "window_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "#/$defs/identity"
+          }
+        },
+        "capabilities": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "quota_windows",
+            "absolute_tokens",
+            "credits",
+            "reset_time",
+            "session_telemetry"
+          ],
+          "properties": {
+            "quota_windows": {
+              "type": "boolean"
+            },
+            "absolute_tokens": {
+              "type": "boolean"
+            },
+            "credits": {
+              "type": "boolean"
+            },
+            "reset_time": {
+              "type": "boolean"
+            },
+            "session_telemetry": {
+              "type": "boolean"
+            }
+          }
+        },
+        "status": {
+          "enum": [
+            "available",
+            "unavailable",
+            "unsupported",
+            "unauthorized",
+            "error",
+            "stale"
+          ]
+        },
+        "snapshot_paths": {
+          "$ref": "#/$defs/evidence"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      }
+    },
+    "validationBlock": {
+      "type": "object",
+      "required": [
+        "status",
+        "evidence",
+        "reason"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/status"
+        },
+        "evidence": {
+          "$ref": "#/$defs/evidence"
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "minLength": 1
+        }
+      }
+    },
+    "nonnegativeIntegerOrNull": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    }
+  }
+}

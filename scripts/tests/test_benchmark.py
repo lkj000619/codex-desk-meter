@@ -1,6 +1,7 @@
 import copy
 import importlib.util
 import json
+import os
 import sys
 import tempfile
 import shutil
@@ -26,6 +27,18 @@ def load(name, filename):
 
 validator = load("validator", "validate-experiment-result.py")
 evaluation = load("evaluation", "evaluate-product.py")
+
+
+def ascii_temp_dir():
+    """Use an ASCII-only test root so production path policy is exercised honestly."""
+
+    if os.name == "nt":
+        candidate = Path(os.environ.get("SystemRoot", r"C:\Windows")) / "Temp"
+    else:
+        candidate = Path("/tmp")
+    if not candidate.is_dir() or not str(candidate).isascii():
+        raise RuntimeError(f"ASCII test temp directory is unavailable: {candidate}")
+    return candidate
 
 
 class ContractTests(unittest.TestCase):
@@ -135,6 +148,20 @@ class RunnerTests(unittest.TestCase):
             path.write_text("invalid event\n", encoding="utf-8")
             self.assertIsNone(telemetry(path, "gemini")["total"])
 
+    def test_command_metrics_ignores_malformed_items(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "events.jsonl"
+            path.write_text(
+                json.dumps({"type": "thread.started"})
+                + "\n"
+                + json.dumps({"type": "item.completed", "item": None})
+                + "\n"
+                + json.dumps({"type": "item.completed", "item": {"type": "command_execution"}})
+                + "\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(benchmark.command_metrics(path, "codex"), {"tool_calls": 0, "failed_commands": 0})
+
 
 class EvaluatorTests(unittest.TestCase):
     def test_wrong_stale_is_detected(self):
@@ -156,7 +183,7 @@ class EvaluatorTests(unittest.TestCase):
 
 class IsolationTests(unittest.TestCase):
     def test_prepare_reserves_ids_and_excludes_parent_history(self):
-        with tempfile.TemporaryDirectory(prefix="meter-test-") as folder:
+        with tempfile.TemporaryDirectory(prefix="meter-test-", dir=ascii_temp_dir()) as folder:
             root = Path(folder)
             repo = root / "repo"
             repo.mkdir()
@@ -181,6 +208,11 @@ class IsolationTests(unittest.TestCase):
             with patch.object(benchmark, "ROOT", repo), patch.object(benchmark, "git", test_git):
                 benchmark.prepare(args)
                 benchmark.prepare(args)
+                bad_profile = dict(profile, model="operator-check-required")
+                bad_profile_path = root / "bad-profile.json"
+                bad_profile_path.write_text(json.dumps(bad_profile), encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    benchmark.prepare(SimpleNamespace(**{**vars(args), "profile": str(bad_profile_path)}))
             runs = sorted((root / "runs").iterdir())
             self.assertTrue(runs[0].name.endswith("r01"))
             self.assertTrue(runs[1].name.endswith("r02"))
@@ -191,6 +223,12 @@ class IsolationTests(unittest.TestCase):
                 self.assertNotIn(b"<run-id>", (run / "prompt.txt").read_bytes())
             for index, run in enumerate(runs):
                 m = read(run / "run-manifest.json")
+                fixture_lines = [
+                    f"{benchmark.digest(path.read_bytes())}  {path.relative_to(run / 'checkout').as_posix()}"
+                    for path in sorted((run / "checkout" / "experiments" / "fixtures").rglob("*.json"))
+                ]
+                expected_fixture_hash = benchmark.digest(("\n".join(fixture_lines) + "\n").encode())
+                self.assertEqual(m["execution"]["fixture_sha256"], expected_fixture_hash)
                 m["execution"].update(started_at=benchmark.now(), ended_at=benchmark.now())
                 m["measurement"]["wall_clock_seconds"] = 0
                 m["operator"].update(status="aborted", reason="synthetic archive test")

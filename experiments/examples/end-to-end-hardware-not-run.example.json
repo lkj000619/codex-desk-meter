@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "result_id": "20260911-e2e-contract-hardware-not-run-r01",
+  "run_id": "20260911-e2e-contract-hardware-not-run-r01",
+  "manifest_id": "20260911-e2e-contract-hardware-not-run-r01",
+  "baseline_id": "benchmark-v2-baseline-20260911",
+  "experiment_id": "version-2-end-to-end-v1",
+  "manifest": {
+    "id": "20260911-e2e-contract-hardware-not-run-r01",
+    "experiment_id": "version-2-end-to-end-v1",
+    "baseline_id": "benchmark-v2-baseline-20260911",
+    "path": "experiments/examples/end-to-end-hardware-not-run-manifest.example.json"
+  },
+  "baseline": {
+    "id": "benchmark-v2-baseline-20260911",
+    "experiment_id": "version-2-end-to-end-v1",
+    "commit": "34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f"
+  },
+  "feature_results": {
+    "F1": {"status": "not_run", "scope": "provider collector", "evidence": [], "reason": "Hardware-not-run example."},
+    "F2": {"status": "not_run", "scope": "normalization", "evidence": [], "reason": "Hardware-not-run example."},
+    "F3": {"status": "not_run", "scope": "transport", "evidence": [], "reason": "No transport selected."},
+    "F4": {"status": "not_run", "scope": "receiver and state", "evidence": [], "reason": "No receiver execution."},
+    "F5": {"status": "not_run", "scope": "LCD GUI", "evidence": [], "reason": "No display execution."},
+    "F6": {"status": "not_run", "scope": "input and refresh", "evidence": [], "reason": "No device execution."},
+    "F7": {"status": "not_run", "scope": "global reset", "evidence": [], "reason": "No source execution."},
+    "F8": {"status": "not_run", "scope": "build and observability", "evidence": [], "reason": "No firmware build."},
+    "F9": {"status": "not_run", "scope": "autonomous hardware", "evidence": [], "reason": "No hardware execution."}
+  },
+  "integration_results": {
+    "I1": {"status": "not_run", "scope": "PC collector", "evidence": [], "reason": "No collector execution."},
+    "I2": {"status": "not_run", "scope": "normalization adapter", "evidence": [], "reason": "No adapter execution."},
+    "I3": {"status": "not_run", "scope": "transport adapter", "evidence": [], "reason": "No transport selected."},
+    "I4": {"status": "not_run", "scope": "ESP32 receiver", "evidence": [], "reason": "No receiver execution."}
+  },
+  "gui_scores": {
+    "G1": {"score": null, "evidence": [], "reason": "No GUI evidence."},
+    "G2": {"score": null, "evidence": [], "reason": "No GUI evidence."},
+    "G3": {"score": null, "evidence": [], "reason": "No GUI evidence."},
+    "G4": {"score": null, "evidence": [], "reason": "No GUI evidence."},
+    "G5": {"score": null, "evidence": [], "reason": "No GUI evidence."},
+    "G6": {"score": null, "evidence": [], "reason": "No hardware display evidence."}
+  },
+  "provider_matrix": [
+    {
+      "provider_id": "google",
+      "agent_id": "gemini-cli",
+      "host_id": "terminal",
+      "model_id": "gemini-demo",
+      "account_profile_id": null,
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "gemini-cli-unsupported",
+      "window_ids": [],
+      "capabilities": {
+        "quota_windows": false,
+        "absolute_tokens": false,
+        "credits": false,
+        "reset_time": false,
+        "session_telemetry": false
+      },
+      "status": "unsupported",
+      "snapshot_paths": ["experiments/fixtures/providers/gemini-cli-unsupported.json"],
+      "evidence": ["experiments/fixtures/providers/gemini-cli-unsupported.json"],
+      "reason": "No provider source is claimed."
+    }
+  ],
+  "build": {
+    "status": "not_run",
+    "target": "esp32s3",
+    "evidence": [],
+    "reason": "Firmware build is outside this example."
+  },
+  "host": {
+    "status": "not_run",
+    "host_id": "terminal",
+    "evidence": [],
+    "reason": "Host integration is not exercised."
+  },
+  "transport": {
+    "status": "not_run",
+    "choice": null,
+    "evidence": [],
+    "reason": "Transport choice is intentionally unset."
+  },
+  "hardware": {
+    "status": "not_run",
+    "board": "waveshare-esp32-s3-lcd-3.16",
+    "evidence": [],
+    "reason": "Physical hardware and COM3 are out of scope."
+  },
+  "telemetry": {
+    "wall_clock_seconds": null,
+    "agent_tokens": {"input": null, "output": null, "cached": null, "reasoning": null, "total": null},
+    "token_total_definition": "input_plus_output_excludes_cached_and_reasoning",
+    "availability_reason": "No runner telemetry is available in this synthetic example.",
+    "evidence": []
+  },
+  "product_pass": false
+}

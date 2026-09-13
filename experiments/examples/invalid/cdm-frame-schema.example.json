@@ -1,0 +1,9 @@
+{
+  "integrity": {
+    "algorithm": "crc32",
+    "value": "00000000"
+  },
+  "protocol": "cdm/1",
+  "sent_at": "2026-09-10T00:00:00Z",
+  "sequence": 1
+}

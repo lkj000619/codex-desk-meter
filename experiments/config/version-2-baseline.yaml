@@ -1,6 +1,28 @@
 schema_version: 2
 experiment_id: version-2-hardware-autonomy-v1
 
+# This file describes the planned cohort. It is not an execution authorization.
+readiness:
+  status: planning
+  execution_authorized: false
+  authorization_owner: user
+  require_explicit_run_approval: true
+  prompt_delivery: runner_only
+  manual_prompt_paste_allowed: false
+  external_feedback_during_run: forbidden
+  evaluator_writes_during_run: forbidden
+  remediation_separate_from_original: true
+
+scope:
+  cohort: historical-prep-firmware-offline-fixture-hardware-autonomy
+  included_features: [F2, F4, F5, F6, F7, F8, F9]
+  out_of_cohort_features: [F1, F3]
+  out_of_cohort_status: "not_run; out of cohort"
+  planned_product_cohort: version-2-end-to-end-v1
+  future_live_cohort: version-2-live-integration-v1
+  transport_choice: pending_product_baseline_decision
+  product_data_path: "PC collector -> normalized snapshots -> transport -> ESP32 receiver/cache/stale -> LCD GUI"
+
 target:
   board: waveshare-esp32-s3-lcd-3.16
   framework: esp-idf
@@ -12,11 +34,19 @@ inputs:
   environment: docs/DEVELOPMENT_ENVIRONMENT.md
   protocol: docs/experiments/hardware-feature-discovery.md
   prompt: experiments/prompts/version-2-agent-task.md
+  readiness: docs/experiments/benchmark-readiness.md
+  feature_comparison: docs/experiments/feature-comparison.md
+  evaluation_contract: docs/experiments/evaluation-contract.md
+  integration_contract: docs/experiments/integration-contract.md
 
 run_policy:
   same_base_commit: true
   isolated_branch_or_worktree: true
-  preserve_full_prompt_and_followups: true
+  preserve_prompt_and_attempted_followups_as_evidence: true
+  one_shot_primary_cohort: true
+  followups_allowed: false
+  external_feedback_allowed: false
+  evaluator_read_only: true
   preserve_failed_runs: true
   public_reference_access: fixed_by_run
   credentialed_private_data_access: forbidden
@@ -59,10 +89,21 @@ data_sources:
   codex_resets_history: experiments/fixtures/codex-resets-history.json
   live_api_allowed_after_fixture: true
   live_api_requires_source_url_and_response_hash: true
+  pc_collector: not_in_this_cohort
+  transport: not_in_this_cohort
+  receiver: firmware_scope_only
 
 core_requirements:
   contract: docs/PRODUCT_CONTRACT.md
   required_ids: [C1, C2, C3, C4, C5, C6, C7, C8]
+  c3_scope: firmware_fixture_display_only
+  cohort_product_pass_eligible: false
+  all_must_pass_for_prep_completion: true
+
+planned_product_integration_requirements:
+  contract: docs/PRODUCT_CONTRACT.md
+  required_ids: [I1, I2, I3, I4]
+  applies_to: version-2-end-to-end-v1
   all_must_pass_for_product_pass: true
 
 autonomous_hardware_feature:
@@ -97,3 +138,5 @@ outputs:
 validation:
   command: python scripts/validate-experiment-result.py --manifest <manifest> --result <result>
   example_command: python scripts/validate-experiment-result.py
+  feature_and_gui_fields_required_before_new_baseline: true
+  integration_fields_required_before_product_benchmark: true

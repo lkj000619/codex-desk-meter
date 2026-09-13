@@ -1,5 +1,8 @@
 # 하드웨어 기반 자율 기능 실험
 
+> 이 문서는 실행 전 기능 설계·평가 기준이다. [readiness gate](benchmark-readiness.md)의
+> 승인 없이 agent에게 prompt를 전달하거나 보드에 업로드하지 않는다.
+
 ## 목적
 
 동일한 핵심 과제를 받은 각 AI 에이전트가 대상 보드의 하드웨어 사양을 어떻게
@@ -19,6 +22,8 @@
 - `docs/DEVELOPMENT_ENVIRONMENT.md`
 - `experiments/config/version-2-baseline.yaml`
 - `experiments/prompts/version-2-agent-task.md`
+- `docs/experiments/feature-comparison.md`
+- `docs/experiments/benchmark-readiness.md`
 
 공식 제조사 문서를 추가로 조회할 수 있지만, 인터넷 접근 허용 여부는 동일
 비교군의 모든 실행에서 같아야 한다. 에이전트별로 다른 힌트나 기능 예시를
@@ -26,13 +31,19 @@
 
 ## 기본 실행 규칙
 
-1. 에이전트는 핵심 요구사항과 전체 하드웨어 카탈로그를 먼저 읽는다.
+1. R0~R10 readiness gate와 사용자 승인 후, 에이전트는 핵심 요구사항과 전체
+   하드웨어 카탈로그를 먼저 읽는다.
 2. 하드웨어를 활용한 기능 후보를 정확히 3개 작성한다.
 3. 각 후보에 사용자 가치, 사용 자원, 구현 비용, 위험과 검증 방법을 기록한다.
 4. 에이전트가 사용자에게 선택을 넘기지 않고 후보 1개를 스스로 선택한다.
 5. 선택 기능을 핵심 기능과 분리된 모듈 또는 선택 가능한 설정으로 구현한다.
 6. 자동 검증과 실제 보드 검증 절차를 함께 작성한다.
 7. 선택하지 않은 후보와 탈락 이유도 결과에 보존한다.
+
+기본 정량 비교군에서는 공통 prompt를 runner가 한 번만 전달한다. 실행 중
+maintainer/evaluator의 추가 질문·힌트·코드 수정은 허용하지 않으며, 발생하면
+원본 결과를 `invalid_for_comparison`으로 보존한다. 문서 보완과 실행 승인을
+혼동하지 않는다.
 
 안전, 인증 정보 또는 외부 서비스 변경처럼 새로운 권한이 필요한 경우에는
 자율 선택보다 해당 제한이 우선한다.
@@ -45,6 +56,12 @@
 - 제조사 예제 코드를 그대로 노출하는 기능: 추가 기능으로 불인정
 - 핵심 요구사항 제거 또는 축소: 금지
 - Version 2 전용 기능의 Version 1 필수화: 금지
+
+과거 hardware-autonomy cohort는 fixture 기반 firmware·LCD·입력·자율 기능만
+확인한 준비용 자료다. 정식 `version-2-end-to-end-v1` 비교에서는 PC agent/provider
+collector와 PC→ESP32 transport/receiver를 포함한 F1~F9 전체를 다룬다. 준비용
+자료에서 해당 기능을 다루지 않았으면 F1/F3을 `not_run; out of cohort`로
+기록하지만, 정식 제품 합격이나 agent 순위로 승격하지 않는다.
 
 후보 수와 구현 수를 바꾸려면 비교 실행을 시작하기 전에 구성 파일을 변경하고,
 같은 비교군 전체에 동일하게 적용한다.
@@ -66,6 +83,7 @@ hardware verification result
 hardware discovery phase start/end time
 input/output/cache/total tokens when available
 user intervention count
+feature results F1~F9 and GUI rubric G1~G6 with scope
 failures and unresolved risks
 ```
 

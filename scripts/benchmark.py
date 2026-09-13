@@ -20,6 +20,9 @@ from pathlib import Path
 from benchmark_support import ROOT, KST, digest, read, save, validate_operator, validate_schema
 
 
+UNRESOLVED_PROFILE_VALUES = {"operator-check-required", "pending", "unverified"}
+
+
 def git(*args, cwd=ROOT):
     return subprocess.check_output(["git", *args], cwd=cwd, encoding="utf-8").strip()
 
@@ -43,8 +46,14 @@ def prepare(a):
     profile_path = Path(a.profile).resolve()
     profile = read(profile_path)
     validate_schema(profile, "runner-profile.schema.json")
-    if any("<" in profile[k] or ">" in profile[k] for k in ("model", "agent_version", "reasoning")):
-        raise ValueError("replace profile placeholders with verified values")
+    profile_values = [profile[k] for k in ("model", "agent_version", "reasoning", "model_slug")]
+    profile_values.extend(profile["argv"])
+    profile_values.extend(profile["version_argv"])
+    if any(
+        "<" in value or ">" in value or value.strip().lower() in UNRESOLVED_PROFILE_VALUES
+        for value in profile_values
+    ):
+        raise ValueError("replace profile placeholders with operator-verified values")
     model_slug = slug(profile["model_slug"])
     product = slug(profile["product"])
     root = Path(a.root).resolve()
@@ -85,7 +94,7 @@ def prepare(a):
     m["agent"].update({k: profile[k] for k in ("provider", "product", "interface", "agent_version", "model", "reasoning")})
     m["agent"]["configuration_sha256"] = digest((directory / "profile.json").read_bytes())
     fixture_lines = []
-    for p in sorted((checkout / "experiments/fixtures").glob("*.json")):
+    for p in sorted((checkout / "experiments/fixtures").rglob("*.json")):
         fixture_lines.append(f"{digest(p.read_bytes())}  {p.relative_to(checkout).as_posix()}")
     e = m["execution"]
     e.update(started_at=None, ended_at=None, base_commit=base,
@@ -181,8 +190,12 @@ def command_metrics(path, adapter):
             continue
         valid_stream |= e.get("type") == "thread.started"
         item = e.get("item", {})
+        if not isinstance(item, dict):
+            continue
         if e.get("type") == "item.completed" and item.get("type") in {"command_execution", "mcp_tool_call", "web_search", "file_change"}:
-            items[item["id"]] = item
+            item_id = item.get("id")
+            if isinstance(item_id, str) and item_id:
+                items[item_id] = item
     if not valid_stream:
         return dict(tool_calls=None, failed_commands=None)
     commands = [i for i in items.values() if i["type"] == "command_execution"]

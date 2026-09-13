@@ -1,0 +1,31 @@
+{
+  "provider": "google",
+  "product": "gemini-cli",
+  "interface": "cli",
+  "agent_version": "operator-check-required",
+  "model": "operator-check-required",
+  "model_slug": "operator-check-required",
+  "reasoning": "operator-check-required",
+  "branch_owner": "google",
+  "branch_product": "gemini-cli",
+  "cohort": "historical-prep-firmware-offline-fixture-hardware-autonomy",
+  "adapter": "gemini",
+  "argv": [
+    "operator-check-required"
+  ],
+  "version_argv": [
+    "operator-check-required",
+    "--version"
+  ],
+  "sandbox_policy": "operator-check-required",
+  "approval_policy": "operator-check-required",
+  "network_mode": "offline-fixture",
+  "settings_inventory": {
+    "skills": "operator-check-required",
+    "mcp": "operator-check-required",
+    "memory": "operator-check-required",
+    "user_instructions": "operator-check-required",
+    "cache": "operator-check-required",
+    "routing": "operator-check-required"
+  }
+}

@@ -6,10 +6,17 @@ ESP32-S3 Super Mini 조립형 장치는 Version 2 검증 뒤 이식합니다.
 
 ## 현재 단계
 
-현재는 benchmark 운영 도구 구현·검증 단계입니다. 합의한 agent/model 브랜치와
-날짜 기반 run ID는 [브랜치·결과 관리 기준](docs/experiments/benchmark-management.md)을
-따릅니다. schema v2와 실행기는 구현되었고, 도구별 모델·sandbox 검증 및 새 baseline
-확정이 남아 있습니다. [실행 가이드](docs/experiments/agent-run-commands.md)의 gate를 통과한 뒤 pilot을 실행합니다.
+현재는 **에이전트 실험 실행 전 계획·readiness 문서 보완 단계**입니다. 아직 어떤
+에이전트에게 공통 prompt를 전달하거나 COM3에 펌웨어를 올릴 단계가 아닙니다. 실행
+가능 여부는 [실행 전 gate](docs/experiments/benchmark-readiness.md)의 R0~R10으로
+판정하며, `AUTHORIZED`가 되기 전에는 `benchmark.py run`과 수동 prompt 입력을
+실행하지 않습니다.
+
+정식 기준은 `main`의 검토된 commit/tag입니다. 날짜 기반 run ID와
+agent/model 브랜치 규칙은 [브랜치·결과 관리 기준](docs/experiments/benchmark-management.md)을
+따릅니다. schema·runner의 일부 도구가 존재하더라도 그것은 제품 실험 승인을
+의미하지 않으며, 기능별 결과·LCD GUI 기준과 PC integration 범위를 먼저 고정해야
+합니다.
 
 이 기준 브랜치는 제품 구현을 생성하기 위한 요구사항, 하드웨어 자료, 실험 기준과
 재현 도구를 보관합니다. 에이전트가 작성한 펌웨어와 원본 실행 로그는 각 실험
@@ -35,6 +42,10 @@ eim install -p C:\Espressif -i v5.3.2 -t esp32s3 -n true -a true `
 . .\scripts\activate-idf.ps1
 idf.py --version
 python -m pip install -r scripts/requirements-benchmark.txt
+python -m unittest discover -s scripts/tests -p "test_*.py" -v
+python scripts/validate-end-to-end-result.py
+python scripts/validate-end-to-end-result.py --matrix experiments/fixtures/provider-fixture-matrix.json
+python scripts/validate-experiment-result.py
 .\scripts\check-experiment-preflight.ps1
 ```
 
@@ -54,7 +65,10 @@ python -m pip install -r scripts/requirements-benchmark.txt
 - [Version 2 하드웨어 기능 카탈로그](docs/hardware/version-2-capabilities.md)
 - [제조사 예제 및 bring-up 기록](docs/hardware/waveshare-manufacturer-example.md)
 - [에이전트 실험 프로토콜](docs/experiments/agent-experiment-protocol.md)
+- [실험 실행 전 readiness gate](docs/experiments/benchmark-readiness.md)
 - [브랜치·반복 실행·결과 게시 및 전환 항목](docs/experiments/benchmark-management.md)
+- [Version 2 기능·LCD GUI 비교 기준](docs/experiments/feature-comparison.md)
+- [PC 수집기·ESP32 통합 계약 초안](docs/experiments/integration-contract.md)
 - [에이전트 실행 명령 템플릿](docs/experiments/agent-run-commands.md)
 - [하드웨어 자율 기능 실험](docs/experiments/hardware-feature-discovery.md)
 - [Version 2 공통 에이전트 프롬프트](experiments/prompts/version-2-agent-task.md)
@@ -75,7 +89,13 @@ python -m pip install -r scripts/requirements-benchmark.txt
 
 ## 에이전트 실험
 
-실험을 시작하기 전에 기준 커밋을 태그하고, 각 실행마다 독립 worktree를 만듭니다.
+아래 내용은 실행 절차의 개요일 뿐이며, [readiness gate](docs/experiments/benchmark-readiness.md)의
+모든 조건과 사용자 승인이 있기 전에는 실행하지 않습니다. 공통 prompt는 사람이
+복사해 CLI에 붙여넣지 않고, 검증된 runner가 실제 run manifest와 함께 정확히 한 번
+전달합니다. 실행 중 maintainer/evaluator가 구현 방향을 알려주거나 코드를 고치면
+해당 run은 정량 비교에서 제외합니다.
+
+승인된 실험은 기준 커밋을 태그하고, 각 실행마다 독립 worktree를 만듭니다.
 공통 프롬프트의 `<run-id>`는 실행 manifest의 실제 ID로 치환합니다.
 
 ```text
@@ -96,7 +116,8 @@ results/<run-id>/                     구조화된 실행 결과
 python scripts\validate-experiment-result.py
 ```
 
-확정된 실행 profile과 baseline을 준비한 뒤 다음 명령으로 pilot 디렉터리를 생성합니다.
+확정된 실행 profile과 baseline을 준비한 뒤, 모든 readiness gate가 통과하고 사용자가
+특정 pilot 실행을 승인한 경우에만 다음 명령으로 pilot 디렉터리를 생성합니다.
 
 ```powershell
 .\scripts\new-experiment-run.ps1 `
@@ -104,8 +125,15 @@ python scripts\validate-experiment-result.py
   -RunRoot C:\Espressif\benchmark-runs -Seed 20260911 -Phase pilot
 ```
 
+Non-executable profile templates and the read-only preflight input inventory are
+kept in [`experiments/config/runner-profiles/`](experiments/config/runner-profiles/)
+and [`experiments/config/preflight-inputs.example.json`](experiments/config/preflight-inputs.example.json).
+They intentionally leave model, version, executable, and telemetry availability as
+operator checks; they do not authorize a run.
+
 이 명령은 새 독립 checkout과 운영 manifest를 생성합니다. 에이전트 실행은
-별도 `benchmark.py run` 명령이며 도구별 sandbox 검증 receipt가 필요합니다.
+별도 `benchmark.py run` 명령이며 도구별 sandbox 검증 receipt가 필요합니다. 이
+README의 명령을 실행했다고 해서 제품 구현·하드웨어 검증이 완료되는 것은 아닙니다.
 
 ## 데이터 출처 주의
 
@@ -113,6 +141,20 @@ python scripts\validate-experiment-result.py
 사용량은 공개 리셋 서비스가 제공하지 않으므로 실험에서는 fixture를 사용하고,
 실제 계정 연동은 소유자가 별도로 통합 시험합니다. 리셋 예측은 일정 보장이 아닌
 공개 신호·이력 기반 확률로 표시합니다.
+
+제품의 실제 데이터 경로는 `PC provider collectors → 정규화 snapshot → USB serial
+(COM3) 또는 local Wi‑Fi transport → ESP32 receiver/cache/stale → LCD GUI`입니다.
+historical firmware-only 자료는 이 경로 중 fixture·firmware·GUI만 다룹니다.
+정식 end-to-end benchmark는 PC collector와 transport/receiver까지 포함해야 하며,
+이를 구현·검증하지 않은 상태에서 “실시간 계정 사용량 표시 완료”라고 주장하지
+않습니다. 범위와 기능별 비교는
+[기능·LCD GUI 비교 기준](docs/experiments/feature-comparison.md)을 따릅니다.
+
+제품 이름은 현재 `Codex Meter`이지만 collector와 화면 모델은 Codex 전용으로
+고정하지 않습니다. Codex CLI, Claude Code, Gemini CLI, Orca/IDE 등은 독립 provider
+adapter로 연결하며, source가 실제로 제공하는 quota window·percent·token·credit만
+표시합니다. 공개되지 않은 “남은 토큰량”을 임의로 추정하거나 서로 다른 metric을
+합산하지 않습니다.
 
 ## 라이선스와 비밀정보
 

@@ -2,14 +2,23 @@
 
 ## 상태
 
-이 문서는 합의된 운영 설계다. schema v2, 격리 checkout 생성, 실행기와 공통 평가
-도구가 구현되었다. 도구별 설정·모델 및 sandbox 검증을 완료하기 전까지 pilot을 실행하지 않는다.
-기존 baseline 태그는 보존하고, 전환 완료 후 새로운 baseline을 만든다.
+이 문서는 합의된 운영 설계다. 현재 상태는 **`PLANNING / NOT_AUTHORIZED`**다.
+schema v2·격리 checkout·실행기 일부가 존재한다는 사실은 제품 pilot 승인을
+뜻하지 않는다. 도구별 설정·모델, sandbox receipt, 기능·GUI 결과 계약과 새
+baseline 검증을 완료하기 전까지 pilot을 실행하지 않는다. 실행 gate의 단일
+진실은 [benchmark 실행 전 readiness gate](benchmark-readiness.md)다.
+기존 baseline 태그는 보존하고, 모든 gate 통과와 사용자 승인 후에만 새로운
+baseline을 만든다.
 
 ## 브랜치와 run ID
 
 `main`은 실행 가이드, 고정 입력, 평가 도구, 검증된 결과 요약과 비교표를 보관한다.
 agent/model 브랜치는 구현 코드와 각 반복의 원본 결과를 보관한다.
+
+정식 기준 branch는 `main`이다. `main-2`는 과거 runner tooling을 추가한 중간
+개발 branch이며 새 실험의 기준으로 사용하지 않는다. 현재 동결된 Antigravity
+수동 파일럿은 별도 결과로 보존하되, 정량 비교 baseline이나 main의 제품 합격으로
+승격하지 않는다.
 
 ```text
 experiment/openai/codex-cli/gpt-5-6-luna
@@ -97,22 +106,25 @@ cached/reasoning이 input/output의 부분집합인지 명시하고 중복 합�
 
 운영자가 검증한 요약과 비교표만 main에 반영한다. 실험 브랜치 전체를 main에
 머지하지 않는다. 요약에는 run ID, 비교군·baseline, 상태, C1~C8, 자율 기능 점수,
-시간·토큰과 측정 한계, 실물 검증 여부, 구현·결과의 고정 commit 링크를 포함한다.
+F1~F9 기능 범위, G1~G6 GUI 점수, 시간·토큰과 측정 한계, 실물 검증 여부,
+구현·결과의 고정 commit 링크를 포함한다. F1/F3이 `not_run`인 firmware-only
+결과를 실시간 개인 계정 연동 완료로 요약하지 않는다.
 원본 대용량 로그·영상은 별도 artifact로 보관하고 위치·SHA-256·보존 정책을 기록한다.
 
 ## 구현 및 검증 상태
 
-- 구현: date-only ID, schema v2, JSON Schema 실제 적용, manifest-only 실패 보존
-- 구현: 새 저장소 baseline snapshot, 로컬 bundle 및 agent/model 보관 브랜치
-- 구현: 실행 시작/종료, 단조 시간, timeout/중단, 외부 로그, Codex usage 이벤트 수집
-- 구현: 시각·경과 시간·ID·상태 교차 검사, 증거 경로·SHA-256 검사
-- 구현: host preflight 실패 차단, profile/baseline에 묶인 sandbox 증거 receipt gate
-- 구현: 실제 제품 host 어댑터 평가, 오류 주입, 0/299/300초 기준, 실물 채점표
-- 구현: main 결과 인덱스와 요약 초안 생성기. 최종 판정과 게시는 운영자 검토
+- scaffold/검토 대상: date-only ID, schema v2 초안, 격리 checkout과 manifest 생성 도구
+- scaffold/검토 대상: 시간·timeout·외부 로그·Codex usage 이벤트 수집 경로
+- scaffold/검토 대상: 증거 경로·SHA-256 검사와 host preflight 차단
+- 별도 공통 평가 도구: fixture 오류 주입·0/299/300초 기준과 실물 채점표
+- 미완료: 정식 E2E의 F1~F9/I1~I4와 G1~G6를 기록하는 result schema·validator·example 확장
 - 미완료: 도구별 정확한 모델/설정 확정, 실제 sandbox receipt, Gemini/OpenCode/Antigravity telemetry 어댑터 검증
-- 미완료: 새 baseline 확정 및 각 도구의 제품 pilot, COM 포트와 실물 검증
+- 미완료: one-shot 경계 검증, 새 baseline 확정, 각 도구의 제품 pilot, COM 포트와 실물 검증
 
 운영 도구 자동 시험과 제품 pilot은 별개다. synthetic subprocess 시험을 제품 pilot으로
 기록하지 않는다. schema v1 과거 자료는 보존하며 새 validator로 덮어쓰거나 자동 이관하지 않는다.
 
-이 목록은 향후 구현 작업이며, 문서 보완 자체가 실험 실행 승인을 뜻하지 않는다.
+이 목록은 향후 readiness 작업이며, 문서 보완 자체가 실험 실행 승인을 뜻하지
+않는다. prompt를 직접 복사해 실행하면 manual pilot으로만 기록하고 정량 비교에서
+제외한다. maintainer/evaluator의 실행 중 수정·피드백도 동일하게 원본 run을
+무효화한다.

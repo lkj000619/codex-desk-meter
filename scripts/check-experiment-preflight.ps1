@@ -43,6 +43,15 @@ $requiredFiles = @(
     'experiments/prompts/version-2-agent-task.md',
     'experiments/schema/run-manifest.schema.json',
     'experiments/schema/hardware-feature-result.schema.json',
+    'experiments/schema/usage-snapshot.schema.json',
+    'experiments/schema/cdm-frame.schema.json',
+    'experiments/schema/end-to-end-manifest.schema.json',
+    'experiments/schema/end-to-end-result.schema.json',
+    'experiments/schema/provider-fixture-matrix.schema.json',
+    'experiments/fixtures/provider-fixture-matrix.json',
+    'scripts/host_device_pipeline.py',
+    'scripts/run-host-device-pipeline.py',
+    'scripts/validate-end-to-end-result.py',
     'scripts/validate-experiment-result.py',
     'scripts/new-experiment-run.ps1'
 )
@@ -95,17 +104,38 @@ if ($null -eq $python) {
     Check-Fail 'python was not found on PATH'
 }
 else {
-    if ($python.Name -eq 'py.exe') {
-        & $python.Source '-3' $validator
-    }
-    else {
-        & $python.Source $validator
-    }
+    $pythonPrefix = @()
+    if ($python.Name -eq 'py.exe') { $pythonPrefix = @('-3') }
+    & $python.Source @($pythonPrefix + $validator)
     if ($LASTEXITCODE -eq 0) {
         Check-Ok 'Example manifest/result validation'
     }
     else {
         Check-Fail 'Example manifest/result validation'
+    }
+
+    & $python.Source @($pythonPrefix + @('-m', 'unittest', 'discover', '-s', 'scripts/tests', '-p', 'test_*.py'))
+    if ($LASTEXITCODE -eq 0) {
+        Check-Ok 'Offline unit and runner tests'
+    }
+    else {
+        Check-Fail 'Offline unit and runner tests'
+    }
+
+    & $python.Source @($pythonPrefix + 'scripts/validate-end-to-end-result.py')
+    if ($LASTEXITCODE -eq 0) {
+        Check-Ok 'E2E result validation'
+    }
+    else {
+        Check-Fail 'E2E result validation'
+    }
+
+    & $python.Source @($pythonPrefix + @('scripts/validate-end-to-end-result.py', '--matrix', 'experiments/fixtures/provider-fixture-matrix.json'))
+    if ($LASTEXITCODE -eq 0) {
+        Check-Ok 'Provider fixture matrix validation'
+    }
+    else {
+        Check-Fail 'Provider fixture matrix validation'
     }
 }
 

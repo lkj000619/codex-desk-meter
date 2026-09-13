@@ -1,0 +1,38 @@
+{
+  "status": "operator_check_required",
+  "branch": "main",
+  "current_head": "34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f",
+  "current_tag": "benchmark-v2-baseline-20260911",
+  "proposed_baseline_id": "benchmark-v2-baseline-20260913",
+  "proposed_baseline_tag": "benchmark-v2-baseline-20260913",
+  "post_commit_values": {
+    "commit": "finalize_after_user_approved_commit",
+    "prompt_sha256": "finalize_after_user_approved_commit",
+    "config_sha256": "finalize_after_user_approved_commit",
+    "fixture_bundle_sha256": "finalize_after_user_approved_commit"
+  },
+  "planned_profile_order": [
+    "experiments/config/runner-profiles/gemini-cli.example.json",
+    "experiments/config/runner-profiles/antigravity-cli.example.json",
+    "experiments/config/runner-profiles/opencode-cli.example.json",
+    "experiments/config/runner-profiles/codex-cli.example.json"
+  ],
+  "planned_transport": {
+    "choice": "usb-serial",
+    "status": "not_run",
+    "port": "operator-supplied only; no port opened by this preparation"
+  },
+  "offline_commands": [
+    "python -m pip install -r scripts/requirements-benchmark.txt",
+    "python -m unittest discover -s scripts/tests -p test_*.py -v",
+    "python scripts/validate-end-to-end-result.py",
+    "python scripts/validate-end-to-end-result.py --matrix experiments/fixtures/provider-fixture-matrix.json",
+    "python scripts/validate-experiment-result.py",
+    "python scripts/run-host-device-pipeline.py --dry-run"
+  ],
+  "approval_gates": {
+    "r10": "not_authorized",
+    "candidate_agent_execution": "requires_explicit_user_approval",
+    "hardware_or_com3": "requires_explicit_hardware_operator_approval"
+  }
+}

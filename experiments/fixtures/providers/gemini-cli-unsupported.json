@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "fixture-gemini-cli-unsupported",
+  "provider_id": "google",
+  "agent_id": "gemini-cli",
+  "host_id": "terminal",
+  "model_id": "gemini-demo",
+  "account_profile_id": null,
+  "source_kind": "local_runtime",
+  "metric_kind": "quota_window",
+  "unit": "unknown",
+  "status": "unsupported",
+  "observed_at": "2026-09-10T00:00:00Z",
+  "windows": [],
+  "stale": false,
+  "last_good_at": null,
+  "error_code": "UNSUPPORTED_USAGE_SOURCE",
+  "error_reason": "The synthetic CLI surface exposes no quota source."
+}

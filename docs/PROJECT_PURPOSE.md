@@ -72,6 +72,41 @@ Codex Desk Meter는 이 두 문제를 하나의 실제 임베디드 프로젝트
 - 데이터 제공처가 중단되거나 형식을 변경해도 장치 전체가 동작 불능이 되지
   않도록 수집 계층을 분리한다.
 
+### 3.4 제품 데이터 경로와 실험 범위
+
+제품명과 현재 1차 화면은 `Codex Meter`를 유지하지만, 내부 데이터 계약은 Codex에
+종속시키지 않는다. 장기 목표는 Codex CLI, Claude Code, Gemini CLI와 Orca 같은
+IDE/agent host가 실제로 공개하거나 로컬에서 허용한 사용량 정보를 동일한 provider
+adapter 경계로 수집해 한 장치에서 선택·순환 표시하는 것이다. 특정 provider가
+절대 token 잔량을 제공한다고 가정하지 않으며, rate-limit 사용률만 제공하면
+percent로, 데이터가 없으면 `unavailable`/`unknown`으로 보존한다.
+
+실제 제품의 사용량 데이터 경로는 다음 module과 seam으로 분리한다. 각 계층의
+구현·시험 결과를 하나의 “LCD 동작”으로 합쳐 판정하지 않는다.
+
+```text
+PC provider collectors
+        ↓  UsageSnapshot / GlobalResetSnapshot
+정규화·출처 분리 adapter
+        ↓  versioned frame
+USB serial(COM3) 또는 local Wi‑Fi transport
+        ↓
+ESP32 receiver → validation / last-good cache / stale state → LCD GUI
+```
+
+- **PC collector:** 허용된 PC 로컬 source에서 개인 사용량을 읽고 조회 시각·단위·출처를 보존한다.
+- **정규화 adapter:** 개인 사용량, `codex-reset.com`, `codex-resets.com`을 같은 계약의 별도 source로 변환한다.
+- **transport/receiver:** frame version, 길이, 무결성, 재연결과 잘못된 입력을 처리하고 ESP32 상태로 반영한다.
+- **LCD GUI:** 상태·출처·오류·stale·미확인을 사용자가 오해하지 않도록 표시한다.
+
+과거 Version 2 hardware-autonomy 실험은 자격증명 없는 fixture를 사용해
+firmware·GUI·입력·보드 자율 기능만 비교한 준비용 자료다. 정식 제품 비교의
+목표는 표준 fixture collector와 transport까지 포함한 Version 2 end-to-end
+단계이며, 실제 계정 source 전환은 owner-only live integration으로 분리한다.
+어느 단계에서도 fixture를 LCD에 그린 결과를 실시간 개인 계정 연동의 증거로
+해석하지 않는다. 계층·frame·재연결 계약 초안은
+[PC 수집기·ESP32 통합 계약](experiments/integration-contract.md)에서 관리한다.
+
 ## 4. 하드웨어 목표
 
 동일한 정보 모델과 핵심 기능을 두 가지 하드웨어 구성으로 구현한다.
@@ -162,6 +197,13 @@ Zephyr RTOS를 비롯한 다른 프레임워크의 포팅은 기준 구현이 �
 - 코드 품질, 재사용성 및 문서 완성도
 - 사용자 개입 및 추가 질문 횟수
 
+기능 구현 비교는 [Version 2 기능·LCD GUI 비교 기준](experiments/feature-comparison.md)의
+F1~F9를 사용한다. LCD 표현 품질은 C2 합격과 별도로 G1~G6 rubric(각 0~3점)으로
+기록하며, GUI 점수나 agent 토큰 수만으로 제품 합격·실시간 연동 완료를 선언하지
+않는다. runner가 수집하는 agent input/output/cached/reasoning/total token과
+장치에 표시할 Codex 잔여 사용량은 서로 다른 데이터이며 동일 순위에 합산하지
+않는다.
+
 토큰이나 시간이 적다는 사실만으로 좋은 결과로 평가하지 않는다. 기능과
 안정성을 우선 평가하고 비용과 시간은 별도의 효율 지표로 함께 제시한다.
 
@@ -205,6 +247,11 @@ Version 1의 필수 기능으로 자동 승격하지 않는다. 추가 하드웨
 - 결과 데이터 형식과 검증된 집계 자료
 - clone 후 실험을 준비할 수 있는 최소 도구
 
+정식 기준은 `main` branch의 검토된 commit/tag다. 기준 저장소의 문서·prompt·schema·
+평가 도구를 수정하는 일과 agent에게 prompt를 전달해 제품을 구현하는 일은 서로
+다른 단계다. readiness gate가 `AUTHORIZED`가 되기 전에는 기준 저장소에서
+benchmark runner나 agent process를 시작하지 않는다.
+
 개별 에이전트가 작성한 제품 구현, 원본 로그와 해당 실행의 상세 결과는 별도
 실험 브랜치에서 관리한다. 검증된 요약 통계는 출처가 되는 브랜치와 커밋을
 명시한 뒤 기준 브랜치에 반영할 수 있다.
@@ -223,6 +270,12 @@ Version 1의 필수 기능으로 자동 승격하지 않는다. 추가 하드웨
 7. 측정 결과에서 구현 품질과 실행 효율을 근거를 들어 비교할 수 있다.
 8. 각 에이전트의 하드웨어 기반 추가 기능 후보·선택·구현 결과를 핵심 기능과
    분리해 비교할 수 있다.
+9. PC collector, transport, ESP32 receiver/cache, LCD GUI가 각각 독립된 기능
+   결과와 증거로 평가되고, 미구현 계층은 `not_run`으로 남는다.
+10. 동일 fixture와 상태 전이에서 기능(F1~F9)·GUI(G1~G6)·C1~C8의 결과와
+   agent 실행 계측을 재현할 수 있다.
+11. 정식 end-to-end 제품 판정에서는 I1~I4(collector·정규화·transport·receiver)가
+    모두 검증되고, firmware-only 준비용 결과와 섞이지 않는다.
 
 전체 프로젝트의 성공 기준은 두 버전을 포함하지만, 초기 단계의 완료 기준은
 버전 2의 빌드, 업로드 및 실제 하드웨어 동작 검증으로 한정한다. 버전 1은 회로

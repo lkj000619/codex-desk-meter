@@ -2,9 +2,32 @@
 
 ## 상태
 
-운영 도구는 schema v2 기준으로 구현되었다. 도구별 모델과 sandbox 검증은 아직
-완료되지 않았다. 아래 명령은 단계별 gate를 통과한 뒤 사용한다.
-운영 도구 시험은 제품 pilot 결과가 아니다.
+**현재 상태: `PLANNING / NOT_AUTHORIZED`**
+
+운영 도구의 일부 scaffold가 있어도 도구별 모델·sandbox·기능 결과 schema 검증이
+끝난 것은 아니다. 아래 명령은 [readiness gate](benchmark-readiness.md)의 R0~R9
+사전조건이 통과하고 R10 사용자 명시 승인이 기록된 뒤에만 실행한다. 이 문서를
+읽거나 보완하는 것, 명령을 검토하는 것은 agent process를 시작하는 행위가 아니다.
+
+공통 prompt는 사람이 CLI에 직접 붙여넣지 않는다. runner가 생성한 `prompt.txt`를
+정확히 한 번 전달하고, 실행 중 follow-up·구현 피드백·코드 수정이 발생하면 해당
+run을 정량 비교에서 제외한다. 아래의 환경·validator 명령을 실행했다고 해서
+제품 구현이나 COM3 검증이 완료되었다고 해석하지 않는다.
+
+## 0. 실행 승인 gate
+
+실행 직전에 다음 사실을 모두 증거로 확인한다.
+
+1. `main`의 승인된 baseline tag/SHA와 prompt/config/fixture/schema hash가 고정됨
+2. 정식 E2E scope의 F1~F9·I1~I4 기능 범위와 G1~G6 LCD GUI rubric이 결과
+   schema·validator·example에 반영됨
+3. 선택한 agent/product/interface/model/reasoning profile과 실제 실행 파일이 검증됨
+4. 도구별 sandbox receipt, raw stdout/stderr, 명령 로그, token telemetry 수집이 준비됨
+5. one-shot(공통 prompt 1회, 외부 feedback 0회)와 독립 evaluator 경계가 검증됨
+6. COM3를 사용할 경우 제조사 예제/현재 보드 상태 백업과 운영자 checklist가 준비됨
+7. 사용자가 baseline·profile·surface·반복 번호·pilot/benchmark를 명시적으로 승인함
+
+하나라도 빠지면 다음 명령을 실행하지 말고 `not_ready` 사유만 문서화한다.
 
 ## 1. 환경과 도구 검증
 
@@ -12,6 +35,8 @@
 . .\scripts\activate-idf.ps1
 python -m pip install -r scripts/requirements-benchmark.txt
 python -m unittest discover -s scripts/tests -v
+python scripts/validate-end-to-end-result.py
+python scripts/validate-end-to-end-result.py --matrix experiments/fixtures/provider-fixture-matrix.json
 python scripts/validate-experiment-result.py
 .\scripts\check-experiment-preflight.ps1
 ```
@@ -48,6 +73,8 @@ Codex tool_calls는 완료된 command_execution/mcp_tool_call/web_search/file_ch
 ## 3. 새 baseline 고정
 
 공통 문서·스키마·평가 도구 변경을 커밋하고 운영 도구 검증과 profile 검토를 완료한다.
+기능·GUI 결과 필드가 schema와 validator에 반영되기 전에는 새 baseline을 만들지
+않는다. 이 단계는 readiness 작업이지 agent 실행이 아니다.
 기존 `version-2-baseline-20260911` 태그를 옮기지 않는다. 새 이름의 태그와 전체 SHA를
 기록한다. 아직 새 baseline이 확정되었다고 간주하지 않는다.
 
@@ -107,6 +134,10 @@ evidence 경로는 receipt 폴더 기준이다. 모든 파일 존재와 해시�
 
 ## 6. 실행과 평가
 
+이 절의 `benchmark.py run`은 R0~R10 승인 이후에만 허용된다. runner가 아닌
+사람이 prompt를 전달하거나 evaluator가 실행 중 코드를 수정하면 run은
+`manual pilot; invalid for cross-agent quantitative comparison`으로 기록한다.
+
 ```powershell
 python scripts/benchmark.py run C:\Espressif\benchmark-runs\<run-id> `
   --receipt <sandbox-receipt.json>
@@ -138,6 +169,17 @@ manifest/result 상태와 구현 SHA는 운영자가 원본 증거와 대조해 
 python scripts/benchmark.py archive <run-directory> `
   --archive C:\Espressif\benchmark-archive.git
 ```
+
+## Current operator-check boundary
+
+The version strings and command examples in the historical profile notes above are
+not evidence for this readiness review. The repository does not assert a verified
+model ID, CLI version, executable name, or telemetry surface for Codex, Gemini,
+OpenCode, or Antigravity. Before any future run, the operator must perform
+read-only `--version` and `--help` checks for the selected surface, record an
+unavailable or ambiguous result as an operator check, and replace every
+`operator-check-required` sentinel in the profile. `benchmark.py prepare` rejects
+those sentinels; no profile in this planning state is executable.
 
 전용 bare archive에 agent/model 브랜치를 만들고 구현 commit과 bundle을 보존한다.
 다음 실행의 소스는 항상 baseline에서 시작한다. 이전 results와 agent-runs 기록은

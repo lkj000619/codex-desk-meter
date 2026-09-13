@@ -56,8 +56,12 @@ ESP-IDF v5.3.2 Windows 도구와 EIM에 포함된 ccache 4.10.2는 한글이 포
 
 ```text
 C:\Espressif\projects\codex-desk-meter-main-2
-  -> C:\Users\<사용자>\orca\workspaces\codex-desk-meter\main-2
+  -> C:\path\to\workspaces\codex-desk-meter\main-2
 ```
+
+위 junction은 historical `main-2`/실험 worktree용이다. 정식 문서와 새 baseline의
+기준은 별도 `main` worktree이며, worktree 경로와 Git branch 이름을 혼동하지
+않는다. 실행 전 gate가 열리기 전에는 이 경로에 agent를 시작하지 않는다.
 
 새 clone이나 worktree는 처음부터 `C:\src\codex-desk-meter`처럼 ASCII 경로에
 두는 방법을 권장한다. 현재 작업공간에서 빌드할 때는 위 junction 경로로
@@ -78,7 +82,8 @@ C:\Espressif\projects\codex-desk-meter-main-2
 
 ## 일상 명령
 
-펌웨어 프로젝트가 추가된 뒤 다음 흐름을 사용한다.
+펌웨어 프로젝트가 승인된 실험 checkout에 추가된 뒤 다음 흐름을 사용한다.
+현재 `main`의 계획 단계에서는 아래 `flash monitor`를 실행하지 않는다.
 
 ```powershell
 . .\scripts\activate-idf.ps1
@@ -89,7 +94,8 @@ idf.py -p COM3 flash monitor
 ```
 
 마지막 `flash monitor`는 펌웨어를 실제로 덮어쓴다. 출고 펌웨어 백업 정책과
-업로드 대상 이미지를 확정하기 전에는 실행하지 않는다.
+업로드 대상 이미지를 확정하기 전에는 실행하지 않는다. COM3는 한 번에 한
+운영자만 점유하며, agent가 임의로 flash하지 않는다.
 
 ## Waveshare 제조사 예제
 
@@ -117,5 +123,5 @@ idf.py -p COM3 flash monitor
 
 현재 저장소에는 제품 펌웨어 프로젝트가 없으므로 `idf.py build`를 실행하려면
 먼저 기준 에이전트가 `CMakeLists.txt`와 `main/`을 생성해야 한다. 구현·실험
-준비는 [제품 계약](PRODUCT_CONTRACT.md)과
+준비는 [제품 계약](PRODUCT_CONTRACT.md), [readiness gate](experiments/benchmark-readiness.md)와
 [에이전트 실험 프로토콜](experiments/agent-experiment-protocol.md)을 따른다.
