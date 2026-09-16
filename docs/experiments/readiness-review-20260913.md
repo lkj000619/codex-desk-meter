@@ -326,3 +326,41 @@ R10 requires explicit user approval of the frozen baseline, exact profile,
 one-shot prompt boundary, and pilot/benchmark scope. Hardware remains a
 separate operator approval: only then may a future owner run hardware-specific
 preflight/firmware/COM3 actions. This review stops before all such actions.
+
+## Access policy update (2026-09-14)
+
+Current policy verification: 58 deterministic tests passed (exit 0), including
+7 new receipt-policy regressions. E2E default validator, provider matrix,
+historical validator and host pipeline dry-run each exited 0; dry-run reported
+`device_accessed: false`. Five runner profiles passed schema validation and
+two changed Python files passed AST parsing (exit 0); git diff --check exited 0.
+The current change inventory includes README, isolation-policy, management,
+readiness, protocol, run commands, common task prompt, profile/preflight templates,
+benchmark.py and its tests, and policy annotations in this report, OpenCode
+preflight/stdin reports, tooling-readiness and E2E readiness proposal.
+These are maintenance checks, not a candidate run or product/hardware pass.
+
+| Current verification command | Exit | Result |
+|---|---:|---|
+| python -m unittest discover -s scripts/tests -p 'test_*.py' -v | 0 | 58 tests, including 7 policy tests; final rerun after profile inventory changes |
+| python scripts/validate-end-to-end-result.py | 0 | Default E2E example |
+| python scripts/validate-end-to-end-result.py --matrix experiments/fixtures/provider-fixture-matrix.json | 0 | Provider matrix |
+| python scripts/validate-experiment-result.py | 0 | Historical examples |
+| python scripts/run-host-device-pipeline.py --dry-run | 0 | No device accessed |
+| no-write profile/schema/JSON/AST/local-link checks | 0 | 5 profiles, preflight input, receipt JSON, 2 Python files, no missing local links |
+| git diff --check | 0 | No whitespace errors |
+
+A redundant test rerun without -v encountered a restricted-environment error
+and stalled; it was interrupted (exit 1). The final -v run in the permitted
+test environment passed all 58 tests. A shell-quoting error in the first
+local-link check (exit 1) was corrected; the corrected check exited 0.
+
+This report preserves the checks and evidence recorded at review time.
+Its mandatory OS-sandbox/read-isolation gate is superseded by
+[isolation-policy.md](isolation-policy.md): `prompt-and-log` is the default;
+Docker/VM is optional. Host toolchain checks plus prompt scope, activity logging,
+network/settings evidence can satisfy the revised R5 preflight requirement.
+OS read isolation is `not_enforced` in the default mode. Lack of a Docker/sandbox
+receipt alone does not exclude a run from quantitative comparison.
+No preflight pass, candidate authorization or hardware evidence is granted by
+this policy update. Prior measured results and historical limitations are unchanged.

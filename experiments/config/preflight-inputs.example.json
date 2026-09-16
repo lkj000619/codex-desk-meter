@@ -34,5 +34,18 @@
     "r10": "not_authorized",
     "candidate_agent_execution": "requires_explicit_user_approval",
     "hardware_or_com3": "requires_explicit_hardware_operator_approval"
+  },
+  "access_policy": "prompt-and-log",
+  "os_read_isolation": "not_enforced",
+  "extension_policy": {
+    "condition": "builtin-only-v1",
+    "custom_skills": "disabled",
+    "external_plugins": "disabled",
+    "mcp_servers": "disabled",
+    "built_in_features": "retained_and_inventoried",
+    "enforcement_status": "operator_check_required",
+    "configuration_record": "names_versions_sources_settings_hashes_and_enforcement_evidence",
+    "usage_record": "actual_calls_counts_and_raw_log_references; unknown values null with reasons",
+    "extension_experiment": "ponytail_and_other_extensions_separate_later_comparison"
   }
 }

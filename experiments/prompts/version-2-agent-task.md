@@ -3,7 +3,7 @@
 > 운영자 전용: 이 prompt는 `benchmark-readiness.md`의 R0~R9 사전조건이 통과되고
 > R10에서 사용자가 특정 pilot/benchmark 실행을 명시적으로 승인한 경우에만 runner가
 > 전달한다. 사람이 직접 복사·붙여넣어 실행하지 않는다. runner가 만든 manifest,
-> profile, sandbox receipt가 없으면 agent는 작업을 시작하지 말고 `not_authorized`
+> profile, preflight receipt가 없으면 agent는 작업을 시작하지 말고 `not_authorized`
 > 사유만 남긴다.
 
 > 정량 비교 cohort는 공통 prompt 1회, 후속 질문 0회, 실행 중 외부 구현 피드백
@@ -44,6 +44,19 @@ receiver나 loopback 성공은 실제 firmware receiver 또는 실물 전송의 
 Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 요청하거나 커밋하지 말라.
 개인 사용량은 fixture로 먼저 구현·검증하고, 실제 계정 통합이 불가능하면 그
 사유를 기록하라.
+
+## 참조 범위와 실행 접근 정책
+
+현재 main에서 제공된 지정 checkout의 현재 문서·파일과 운영자가 명시적으로
+제공한 자료만 사용하라. `docs/experiments/isolation-policy.md`를 읽어라.
+다른 branch/worktree, 과거 agent의 구현·결과·로그·대화를 조회하지 말라.
+`git log`, `git show`, 다른 ref 조회, branch 전환 또는 외부 저장소 검색으로
+이전 구현을 탐색하지 말라. 자체 변경 확인용 `git status`, `git diff`는 허용한다.
+허용된 toolchain·의존성 경로는 사용할 수 있으나 사용자 파일·credential을 탐색하지 말라.
+사용한 명령·도구·참고 자료를 기록하고 로그의 관측 한계도 보고하라.
+기본 접근 정책은 `prompt-and-log`이며 Docker/VM은 선택 사항이다.
+제품 입력은 offline fixture를 사용한다. 모델 호출용 네트워크와 웹 검색·MCP
+권한은 profile의 사전 선언 조건을 따르고 임의로 확대하지 말라.
 
 ## 구현 요구
 

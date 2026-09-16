@@ -4,7 +4,7 @@
 
 이 문서는 합의된 운영 설계다. 현재 상태는 **`PLANNING / NOT_AUTHORIZED`**다.
 schema v2·격리 checkout·실행기 일부가 존재한다는 사실은 제품 pilot 승인을
-뜻하지 않는다. 도구별 설정·모델, sandbox receipt, 기능·GUI 결과 계약과 새
+뜻하지 않는다. 도구별 설정·모델, preflight receipt, 기능·GUI 결과 계약과 새
 baseline 검증을 완료하기 전까지 pilot을 실행하지 않는다. 실행 gate의 단일
 진실은 [benchmark 실행 전 readiness gate](benchmark-readiness.md)다.
 기존 baseline 태그는 보존하고, 모든 gate 통과와 사용자 승인 후에만 새로운
@@ -30,6 +30,10 @@ results/20260911-codex-cli-gpt-5-6-luna-r01/
 results/20260911-codex-cli-gpt-5-6-luna-r02/
 results/20260911-codex-cli-gpt-5-6-luna-r03/
 ```
+
+기본 정책은 [isolation-policy.md](isolation-policy.md)의 `prompt-and-log`다.
+현재 main의 고정 입력과 전용 checkout, 프롬프트 참조 제한, 명령·자료 로그를 사용한다.
+Docker/VM은 선택 사항이며 미사용 자체는 정량 비교 제외 사유가 아니다.
 
 run ID는 `YYYYMMDD-<product>-<model-slug>-rNN`이다. 날짜는 실행 시작의
 Asia/Seoul 날짜이며 자정을 지나도 ID는 유지한다. 같은 날짜·product·model의
@@ -64,10 +68,11 @@ Git 이력으로 이전 결과를 읽는 것을 피하려면 baseline 파일만 
 
 동일 비교군은 OS·하드웨어·ESP-IDF·제조사 ZIP 해시·의존성 버전·캐시 초기 상태를
 고정한다. 필요한 패키지는 사전 확보한다. offline 모드에서는 다운로드를 요구하지 않는다.
-각 도구의 sandbox 안에서 compiler·Ninja·Git·임시 폴더 쓰기와 최소 빌드를
-사전 검증한다. 호스트 셸의 성공만으로 대체하지 않는다.
+기본 모드는 host에서 compiler·Ninja·Git·임시 폴더 쓰기와 최소 빌드를 검증하고
+prompt scope·activity logging 준비를 기록한다. external-sandbox 선택 시에는
+같은 검증과 실제 읽기 차단을 sandbox 내부에서 수행한다.
 
-skills, MCP, 사용자 지침, 자동 메모리, 검색 권한, 승인 정책, reasoning 설정과
+skills, plugins, MCP, 사용자 지침, 자동 메모리, 검색 권한, 승인 정책, reasoning 설정과
 설정 해시를 기록한다. 도구마다 동일 권한을 제공할 수 없으면 별도 비교군으로 둔다.
 측정 대상은 agent+model+설정의 조합이며 도구 차이를 모델 능력 차이로 단정하지 않는다.
 
@@ -118,7 +123,7 @@ F1~F9 기능 범위, G1~G6 GUI 점수, 시간·토큰과 측정 한계, 실물 �
 - scaffold/검토 대상: 증거 경로·SHA-256 검사와 host preflight 차단
 - 별도 공통 평가 도구: fixture 오류 주입·0/299/300초 기준과 실물 채점표
 - 미완료: 정식 E2E의 F1~F9/I1~I4와 G1~G6를 기록하는 result schema·validator·example 확장
-- 미완료: 도구별 정확한 모델/설정 확정, 실제 sandbox receipt, Gemini/OpenCode/Antigravity telemetry 어댑터 검증
+- 미완료: 도구별 정확한 모델/설정 확정, 실제 preflight receipt, Gemini/OpenCode/Antigravity telemetry 어댑터 검증
 - 미완료: one-shot 경계 검증, 새 baseline 확정, 각 도구의 제품 pilot, COM 포트와 실물 검증
 
 운영 도구 자동 시험과 제품 pilot은 별개다. synthetic subprocess 시험을 제품 pilot으로

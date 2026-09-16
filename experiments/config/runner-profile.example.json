@@ -10,17 +10,27 @@
   "branch_product": "codex-cli",
   "cohort": "windows-idf532-offline-pilot",
   "adapter": "codex",
-  "argv": ["operator-check-required"],
-  "version_argv": ["operator-check-required", "--version"],
-  "sandbox_policy": "operator-check-required; external read isolation requires receipt",
+  "argv": [
+    "operator-check-required"
+  ],
+  "version_argv": [
+    "operator-check-required",
+    "--version"
+  ],
+  "sandbox_policy": "prompt-and-log",
   "approval_policy": "operator-check-required; flash requires operator",
   "network_mode": "offline-fixture",
   "settings_inventory": {
-    "skills": "pending inventory",
-    "mcp": "pending inventory",
+    "skills": "custom/user-installed disabled by policy; built-in inventory and enforcement operator-check-required",
+    "mcp": "MCP servers disabled by policy; enforcement operator-check-required",
     "memory": "ephemeral; other memory sources require inspection",
     "user_instructions": "pending inventory",
     "cache": "pending cache policy",
-    "routing": "fixed model; no fallback"
+    "routing": "fixed model; no fallback",
+    "plugins": "external plugins disabled by policy; built-in inventory and enforcement operator-check-required",
+    "permissions": "operator-check-required",
+    "model_network": "operator-check-required",
+    "extension_condition": "builtin-only-v1; adopted policy; enforcement operator-check-required",
+    "usage_recording": "record actual skills/plugins/MCP usage with raw-log references; unavailable values null with reason"
   }
 }
