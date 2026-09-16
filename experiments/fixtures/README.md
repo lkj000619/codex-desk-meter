@@ -3,6 +3,9 @@
 이 디렉터리의 파일은 에이전트 비교를 재현하기 위한 공개·합성 입력이다.
 
 - `personal-usage.json`은 개인 계정 데이터를 포함하지 않는 합성 사용량이다.
+  PC 파트의 기준 창은 5시간 세션 창(`five-hour`)과 주간 세션 창(`weekly`)이며,
+  각 창의 `percent_used`/`percent_remaining`·`resets_at`을 C3 표시 입력으로
+  사용한다. source가 창 하나만 제공하면 있는 창만 사용한다.
 - `codex-reset-forecast.json`은 `codex-reset.com` forecast 응답의 필요한 필드만
   고정한 스냅샷이다.
 - `codex-resets-history.json`은 `codex-resets.com`의 이력 출처를 별도로 표현한다.

@@ -77,8 +77,10 @@ R3 결과 계약과 R1/R3의 transport 설계에는 Waveshare 공식
 
 R1~R3을 확정할 때에는 다중 provider fixture matrix도 고정한다. 최소 대상은 Codex,
 Claude Code, Gemini CLI, Orca/IDE host와 unsupported provider이며, source가 제공하지
-않는 절대 token 잔량을 추정하지 않는 계약을 포함한다. 현재 E2E baseline은 이
-matrix와 provider adapter 결과 schema가 없으므로 계속 `not_ready`다.
+않는 절대 token 잔량을 추정하지 않는 계약을 포함한다. matrix 본문
+(`experiments/fixtures/provider-fixture-matrix.json`)과 provider adapter 결과
+schema·validator·example은 존재하며, 남은 작업은 baseline commit·hash 동결과
+검토 기록이다. 동결 전이므로 R1/R3은 계속 `not_ready`다.
 
 ### Gate 종료 산출물과 책임자
 
@@ -124,10 +126,15 @@ fixture를 직접 내장하는 것은 historical preparation 자료로만 인정
 ```text
 PC provider collectors
         ↓ normalized UsageSnapshot / GlobalResetSnapshot
-USB serial(COM3) 또는 local Wi‑Fi transport adapter
+USB serial(COM3) `cdm/1` transport adapter (E2E baseline 고정)
         ↓ framed data
 ESP32 receiver → validation/cache/stale → common state → LCD GUI
 ```
+
+local Wi-Fi 운용은 별도 cohort에서 비교하며, E2E baseline의 transport 선택을
+대체하지 않는다. baseline(`experiments/config/version-2-baseline.yaml`)의
+`transport_choice: usb-serial-cdm-1`이 단일 진실이며, 본문의 “또는 local Wi-Fi”
+표현은 선택지가 아닌 후속 cohort 항목으로 읽는다.
 
 `UsageSnapshot`은 백분율과 함께 source가 제공하는 경우에만 used/remaining/limit
 token 및 단위를 운반한다. source가 절대 quota를 공개하지 않으면 null과
