@@ -122,7 +122,7 @@ F1~F9 기능 범위, G1~G6 GUI 점수, 시간·토큰과 측정 한계, 실물 �
 - scaffold/검토 대상: 시간·timeout·외부 로그·Codex usage 이벤트 수집 경로
 - scaffold/검토 대상: 증거 경로·SHA-256 검사와 host preflight 차단
 - 별도 공통 평가 도구: fixture 오류 주입·0/299/300초 기준과 실물 채점표
-- 미완료: 정식 E2E의 F1~F9/I1~I4와 G1~G6를 기록하는 result schema·validator·example 확장
+- 미완료: historical prep용 result schema의 F1~F9/I1~I4·G1~G6 기록 확장(E2E 결과 계약은 해당 필드 보유). 동결·승인 전이므로 새 baseline 확정 금지
 - 미완료: 도구별 정확한 모델/설정 확정, 실제 preflight receipt, Gemini/OpenCode/Antigravity telemetry 어댑터 검증
 - 미완료: one-shot 경계 검증, 새 baseline 확정, 각 도구의 제품 pilot, COM 포트와 실물 검증
 

@@ -95,9 +95,11 @@ GUI 총점은 제품 합격률로 환산하지 않는다. C2가 `not_run` 또는
 - agent 자체 시험, 공통 host 시험, 운영자 하드웨어 시험을 별도 열로 구분한다.
 - 구현자가 실행 후 코드를 고친 경우 원본 run 점수에는 반영하지 않고
   `remediation/...` 결과로 분리한다.
-- 현재 schema v2에는 F1~F9와 G1~G6 구조가 아직 없다. 정식 E2E baseline을
-  만들기 전에 result schema·validator·example을 이 기준에 맞게 확장하고, F1/F3
-  fixture collector·transport 시험을 포함한 검증을 먼저 통과해야 한다.
+- E2E 결과 계약(`end-to-end-result.schema.json`)은 F1~F9·I1~I4·G1~G6 필드를 보유한다.
+  확장 대상은 historical hardware-autonomy용 `hardware-feature-result.schema.json`
+  (C1~C8만 기록)이며, 이를 E2E 기준으로 오독하지 않는다. 정식 E2E baseline을
+  만들기 전에 F1/F3 fixture collector·transport 시험을 포함한 검증을 먼저
+  통과해야 한다.
 - schema·validator·example과 F3 transport를 설계할 때 Waveshare 공식
   [`waveshareteam/codex-meter`](https://github.com/waveshareteam/codex-meter)의 host,
   device payload 및 Wi-Fi/BLE transport 구현을 참고할 수 있다. 단, 우리 결과

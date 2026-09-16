@@ -141,8 +141,8 @@ token 및 단위를 운반한다. source가 절대 quota를 공개하지 않으�
 `unit: percent|unknown`을 유지하며, agent나 runner가 임의의 token 총량을 추정하지
 않는다.
 
-transport 방식은 USB serial(COM3) 또는 local Wi‑Fi 중 하나를 baseline에서
-고정한다. 실제 계정 source로의 전환은 별도의 owner-only live integration이다.
+E2E baseline transport는 USB serial(COM3) `cdm/1`로 고정済み다. local Wi-Fi 운용은
+별도 cohort에서 비교한다. 실제 계정 source로의 전환은 별도의 owner-only live integration이다.
 collector·transport·receiver를 구현·검증하기 전에는 “실시간 Codex 사용량 표시
 완료”라고 보고하지 않는다. 계층별 frame·재연결·무결성 시험의 설계는
 [통합 계약 초안](integration-contract.md)을 참고한다.
@@ -166,14 +166,15 @@ collector·transport·receiver를 구현·검증하기 전에는 “실시간 Co
 현재 저장소의 prompt와 실행 명령을 읽거나 시험할 수는 있지만 agent process를
 시작하지 않는다.
 
-## Current review addendum (2026-09-13)
+## Current review addendum (2026-09-13 snapshot)
 
 The offline readiness review is recorded in
-[`readiness-review-20260913.md`](readiness-review-20260913.md). The current
-R0-R10 statuses are authoritative for this review: R0 `in_review`, R1
+[`readiness-review-20260913.md`](readiness-review-20260913.md). The R0-R10 statuses
+below are that review's snapshot, not the current norm: R0 `in_review`, R1
 `in_review`, R2 `in_review`, R3 `in_review`, R4 `not_ready`, R5 `not_ready`,
 R6 `partial`, R7 `not_ready`, R8 `partial`, R9 `not_ready`, and R10
-`not_authorized`.
+`not_authorized`. The gate table above (§필수 gate) is authoritative for the
+current status.
 
 Current policy (2026-09-14): [isolation-policy.md](isolation-policy.md) defines
 `prompt-and-log` as the default: current main inputs in a dedicated checkout,

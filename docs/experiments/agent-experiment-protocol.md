@@ -54,9 +54,10 @@ manifest에 명시한다. 모델 이름만 같게 하고 실행 표면이 다른
 않는다. 개인 사용량은 고정 fixture로 먼저 시험하고, 소유자만 실제 계정 통합
 시험을 별도로 수행한다.
 
-첫 hardware-autonomy cohort의 제품 범위는 fixture 기반 firmware·LCD·입력·자율
+historical hardware-autonomy cohort(r01 설명용)에 한해, 첫 cohort의 제품 범위는 fixture 기반 firmware·LCD·입력·자율
 기능이다. PC agent/provider collector와 PC→ESP32 transport/receiver 통합은 후속
-integration cohort다. 범위 밖 계층은 구현하지 않았다는 사실을 실패로 감추지
+integration cohort다. 현행 planned target `version-2-end-to-end-v1`은 F1~F9·I1~I4
+전부다. 범위 밖 계층은 구현하지 않았다는 사실을 실패로 감추지
 말고 `not_run; out of cohort`와 필요한 seam/interface를 결과에 남긴다.
 
 ## 3. 실행 전 preflight

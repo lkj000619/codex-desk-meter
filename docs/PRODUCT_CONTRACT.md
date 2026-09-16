@@ -12,7 +12,7 @@
 | 프레임워크 | ESP-IDF v5.3.2 |
 | 디스플레이 | ST7701, 320 × 820, 세로 방향 기준 |
 | 입력 | 보드 BOOT 버튼, RST 버튼은 시스템 리셋 전용 |
-| 통신 | Wi-Fi 우선, 네트워크 장애 시 마지막 정상 데이터 유지 |
+| 통신 | E2E baseline은 USB serial(COM3) `cdm/1` 고정. local Wi-Fi 운용은 별도 cohort에서 비교. 네트워크 장애 시 마지막 정상 데이터 유지 |
 | 펌웨어 시작 상태 | 이 저장소의 기준 커밋에서 에이전트가 ESP-IDF 프로젝트 생성 |
 
 Version 1의 ST7735S, ESP32-S3 Super Mini, 스위치와 저항은 이 계약의 합격
@@ -81,7 +81,7 @@ cohort는 C1~C8 준비 상태를 모두 기록할 수 있지만 구조적으로 
 |---|---|---|
 | C1 | ESP-IDF 프로젝트 | `idf.py set-target esp32s3`와 `idf.py build` 성공 |
 | C2 | LCD 출력 | 부팅 후 화면이 켜지고 320 × 820 세로 UI가 잘리지 않음 |
-| C3 | 개인 사용량 | PC가 전달한 사용량 창(window) 목록을 표시. source가 제공하는 경우 5시간 세션 창(`five-hour`)과 주간 세션 창(`weekly`)을 모두 표시하고, 각 창의 사용률 또는 잔여율·조회 시각·`resets_at`을 표시. 창이 하나만 제공되면 있는 창만 표시하고 없는 창을 임의로 만들지 않음 |
+| C3 | 개인 사용량 | PC가 전달한 사용량 창(window) 목록을 표시. source가 제공하는 window를 모두 표시하고(예: Codex의 5시간 세션 창 `five-hour`와 주간 세션 창 `weekly`), 각 창의 사용률 또는 잔여율·조회 시각·`resets_at`을 표시. 제공되지 않은 창을 임의로 만들지 않음 |
 | C4 | 최근 글로벌 리셋 | 출처별 최근 리셋 시각을 표시하고 출처를 구분 |
 | C5 | 다음 리셋 전망 | 24시간·48시간 공개 전망 확률을 퍼센트로 표시하며 일정 보장으로 표현하지 않음 |
 | C6 | 데이터 출처 | `codex-reset.com`과 `codex-resets.com`의 값을 하나의 사실로 합치지 않음 |
@@ -148,6 +148,10 @@ GlobalResetSnapshot {
 
 Contract clarifications for the synthetic E2E validator:
 
+- Legacy fixture key mapping: `codex-reset-forecast.json`의 `last_reset_at`과
+  `codex-resets-history.json`의 `latest_reset_at`은 모두 `GlobalResetSnapshot`의
+  `latest_reset_at`으로 정규화한다. fixture 키 자체는 변경하지 않는다.
+
 - A source-provided absolute window must satisfy `used_units + remaining_units =
   limit_units` within an absolute tolerance of `0.01`; percentages are checked
   separately and are never used to invent absolute token totals.
@@ -205,7 +209,9 @@ BOOT는 짧은 입력으로 위 화면을 순환시키거나 에이전트가 제
 모드 진입은 애플리케이션 제어 대상이 아니다. RST는 제품 기능 입력으로 사용하지 않는다.
 
 기본 자동 갱신 주기는 60초 이하로 하고, 마지막 정상 데이터가 5분 이상
-오래되면 `stale` 상태를 표시한다. 기본 비교군은 이 값을 고정한다. 값을 바꾼
+오래되면 `stale` 상태를 표시한다. snapshot stale(`observed_at`→`reference_time`
+300초 이상)과 LCD stale(`last_good_at`→현재 5분 이상)은 duration은 같으나 기준
+시계가 다르다. 기본 비교군은 이 값을 고정한다. 값을 바꾼
 실행은 이유와 시험 결과를 기록하고 별도 비교군으로 분류한다.
 
 LCD GUI의 설계 품질은 C2의 전원·출력 gate와 별도로 G1~G6 rubric으로 기록한다.
