@@ -67,6 +67,24 @@ C:\Espressif\projects\codex-desk-meter-main-2
 두는 방법을 권장한다. 현재 작업공간에서 빌드할 때는 위 junction 경로로
 이동해서 `idf.py`를 실행한다.
 
+## ASCII junction 도구 경로 (2026-09-18 수리)
+
+EIM 프로필(`Microsoft.v5.3.2.PowerShell_profile.ps1`)이 한글 사용자명 경로에서
+파싱 오류를 내고, Rust 기반 xtensa wrapper가 한글 경로에서 패닉한다. 수리 내용:
+
+1. `idf_tools.py install` + `install-python-env`로 부족분을 사용자
+   `.espressif`에 보완 (UTF-8·ASCII TEMP 필수).
+2. ASCII junction 생성: `C:\Espressif\user-tools` →
+   사용자 `.espressif`. 모든 경로 문자열이 ASCII가 되어 wrapper 패닉 해소.
+3. 환경 변수: `IDF_PATH=C:\Espressif\v5.3.2\esp-idf`,
+   `IDF_TOOLS_PATH=C:\Espressif\user-tools`, `IDF_CCACHE_ENABLE=0`,
+   `PYTHONUTF8=1`, `TEMP/TMP=C:\Espressif\tmp`.
+4. `idf_tools.py export` 출력을 파일 경유(UTF-8)로 읽어 PATH에 반영한다.
+   콘솔 직접 파이프는 한글 경로에서 불안정하다.
+5. 위 순서로 `idf.py --version` → `ESP-IDF v5.3.2`,
+   `hello-world` 전체 빌드 성공을 실측했다 (산출물: `hello_world.bin`,
+   `bootloader.bin`).
+
 ## 검증 결과
 
 다음 항목을 실제로 확인했다.

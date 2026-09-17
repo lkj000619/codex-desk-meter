@@ -23,16 +23,18 @@ baseline 태그 전에는 `git status --porcelain`이 비어야 한다. `.agents
 스킬 등), `.claude/`, `skills-lock.json`은 로컬 tooling 잔재로, `.gitignore`
 추가 또는 정리 후 재확인한다.
 
-## FAIL 2: ESP-IDF 활성화
+## FAIL 2: ESP-IDF 활성화 → 수리 완료 (2026-09-18)
 
-- `activate-idf.ps1` → EIM 프로필
-  `C:\Espressif\tools\Microsoft.v5.3.2.PowerShell_profile.ps1:87`에서 파싱 오류.
-  WinGet 설치 경로 문자열이 깨져 있으며 `chcp 65001`로도 해소되지 않는다.
-- 대체 경로 `esp-idf\export.ps1`은 `xtensa-esp-elf-gdb` 미설치로 중단된다.
-- 수리 없이 `idf.py` 빌드 게이트를 통과할 수 없다. 후보 조치:
-  1. EIM CLI 재설치로 프로필 재생성, 또는
-  2. `idf_tools.py install`로 gdb 포함 전체 도구 설치 후 export 경로 사용.
-- 환경 변경이므로 사용자 승인 후 수행한다. 본 기록 시점에는 미수리.
+- 원인: EIM 프로필 파싱 오류 + Rust xtensa wrapper의 한글 경로 패닉 +
+  `xtensa-esp-elf-gdb` 등 일부 도구 미설치.
+- 수리: `idf_tools.py install`·`install-python-env`로 사용자 `.espressif` 보완,
+  ASCII junction `C:\Espressif\user-tools` 생성, 수동 환경 구성
+  (`DEVELOPMENT_ENVIRONMENT.md` ASCII junction 절 참조).
+- 검증: `idf.py --version` → `ESP-IDF v5.3.2`,
+  `hello-world` esp32s3 전체 빌드 성공 (`hello_world.bin`,
+  `bootloader.bin`). 플래시 쓰기는 수행하지 않았다.
+- 남은 과제: `activate-idf.ps1`가 여전히 깨진 EIM 프로필에 의존하므로,
+  스크립트 수준의 수리(수동 환경 구성 반영)는 별도 작업으로 남는다.
 
 ## 입력 bundle SHA-256 (R1 보조, 동결 아님)
 
@@ -45,6 +47,19 @@ baseline 태그 전에는 `git status --porcelain`이 비어야 한다. `.agents
 
 전체 bundle 목록은 `check-experiment-preflight.ps1`의 requiredFiles와 동일하다.
 동결은 별도 baseline 태그 시점에 전체 SHA로 기록한다.
+
+## R10 조건부 승인 기록 (2026-09-18 사용자 승인)
+
+사용자가 환경 수리(A안)와 pilot 실행을 승인했다. 단, 본 승인은 아래 전제조건이
+모두 충족될 때 발효되는 조건부 승인이다. 미충족 상태에서 runner를 실행하지 않는다.
+
+- 환경 수리 완료 (본 기록으로 확인)
+- 표면별 model 확정 (codex sol/luna, muse-spark 재확인, antigravity 3종)
+- `benchmark.py prepare` 통과 + 새 baseline 태그·bundle hash 동결
+- COM3 단독 점유 확인 (pilot 직전)
+
+발효 시 pilot 범위: 위 모델 엔트리별 1회 (codex×2 + opencode×1 + antigravity×3).
+발효 전까지 R10은 `not_authorized`를 유지한다.
 
 ## Settings inventory (읽기 전용 확인)
 
