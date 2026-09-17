@@ -14,6 +14,9 @@
 - `codex-reset-forecast.json`은 `codex-reset.com` forecast 응답의 필요한 필드만
   고정한 스냅샷이다.
 - `codex-resets-history.json`은 `codex-resets.com`의 이력 출처를 별도로 표현한다.
+  C4/C5 표시 계층의 기준 입력이다.
+- `codex-reset-forecast.json`은 과거 `codex-reset.com` 전망 스냅샷으로, 파서 호환용으로
+  보관한다. E2E 표시 범위(C4~C6)에서는 사용하지 않는다.
 
 실험 중 live API를 사용할 때도 fixture 실행을 먼저 끝내고, 조회 URL·시각·HTTP
 상태·응답 해시를 함께 기록한다. fixture의 날짜가 지나도 자동으로 갱신하지 않는다.

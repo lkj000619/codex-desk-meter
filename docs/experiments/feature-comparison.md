@@ -42,7 +42,7 @@ end-to-end cohort에서는 F1/F3이 필수다.
 | F4 | ESP32 receiver·state | 수신/입력 데이터를 검증하고 last-good, stale, 오류 해제·복구를 상태 모델에 반영하는가? | 상태 전이 host test, 오류 주입, 시리얼 로그 | fixture 직접 입력으로 부분 평가 |
 | F5 | LCD GUI | 정보 우선순위, 레이아웃, 가독성, 상태·출처·오류 표현, 320×820 최적화가 적절한가? | 동일 fixture의 화면 사진/영상, 구현 근거 | 필수 비교 |
 | F6 | 입력·갱신 | BOOT·자율 기능으로 화면 전환과 수동/자동 갱신이 예측 가능하고 피드백이 명확한가? | 입력 전후 영상, 시리얼 로그, debounce 값 | 필수 비교 |
-| F7 | 글로벌 리셋 표시 | 최근 리셋과 24h/48h 전망을 독립적으로 표시하고 예측을 일정으로 오해하게 하지 않는가? | 두 source fixture, 화면별 캡처, parser test | 필수 비교 |
+| F7 | 글로벌 리셋 표시 | `codex-resets.com` 최근 리셋·경과 시간을 표시하고, 기록이 없으면 경과 시간 또는 default 화면으로 표시하는가? | resets fixture, 화면별 캡처, parser test | 필수 비교 |
 | F8 | 빌드·배포·관측 | ESP-IDF 빌드, artifact hash, 로그, manifest와 결과 schema가 재현 가능한가? | build log, binary hash, manifest, validator | 필수 비교 |
 | F9 | 자율 하드웨어 기능 | 후보 3개·선택 근거·구현 완성도·핵심 기능과의 분리가 설득력 있는가? | 선택 문서, 테스트, 하드웨어 증거 | 필수 비교 |
 

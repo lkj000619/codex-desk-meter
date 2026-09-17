@@ -65,8 +65,9 @@ Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 요청하거나 �
 - C1~C8을 모두 구현하라. 핵심 요구사항을 제거하거나 축소하지 말라.
 - C3는 PC에서 제공한 fixture가 전송·수신되어 firmware 상태와 LCD까지 반영되는
   데이터 경로를 포함한다. firmware에 고정 fixture를 내장하는 것으로 대체하지 말라.
-- 개인 사용량, `codex-reset.com`, `codex-resets.com`을 공통 데이터 모델로
-  정규화하되 출처와 시각을 보존하라.
+- 개인 사용량과 `codex-resets.com` 리셋 기록을 공통 데이터 모델로
+  정규화하되 출처와 시각을 보존하라. 표시 계층은 `codex-resets.com`을 사용하고,
+  기록이 없으면 경과 시간 또는 default 화면을 표시하라.
 - PC collector·정규화 adapter·USB serial transport·실제 ESP32 receiver를 구현하고
   I1~I4별 raw input/output, frame version·길이·CRC, 재연결·오류·stale·복구
   시험을 제공하라. 기존 maintainer host 도구를 활용할 수 있으나 실제 제품 모듈을
@@ -77,9 +78,9 @@ Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 요청하거나 �
   model, host, account profile과 metric 단위를 분리하라. source가 절대 token
   잔량을 제공하지 않으면 percent/unknown과 `unsupported`/`unavailable` 상태를
   보존하고 임의로 token 수를 계산하지 말라.
-- 두 공개 출처의 값을 하나의 공식 리셋 일정으로 합치지 말라.
+- 글로벌 화면은 `codex-resets.com` 단일 출처를 사용하고, 경과 시간을 확정 일정처럼 표현하지 말라.
 - 네트워크·TLS·HTTP·JSON 오류와 오래된 데이터에서도 화면을 중단시키지 말라.
-- 320 × 820 세로 LCD에서 대시보드, 글로벌 리셋, 상태/오류 화면을 제공하라.
+- 820 × 320 가로 LCD를 기본으로 대시보드, 글로벌 리셋, 상태/오류 화면을 제공하라.
 - BOOT 입력 동작과 자동·수동 갱신 주기를 문서화하고 시험하라. RST는 시스템
   리셋 전용으로 유지하라.
 - 추가 하드웨어를 사용하지 말라. Version 1 전용 하드웨어를 요구하지 말라.
