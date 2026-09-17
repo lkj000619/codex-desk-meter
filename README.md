@@ -70,6 +70,7 @@ python scripts/validate-experiment-result.py
 - [Version 2 기능·LCD GUI 비교 기준](docs/experiments/feature-comparison.md)
 - [PC 수집기·ESP32 통합 계약 초안](docs/experiments/integration-contract.md)
 - [에이전트 실행 명령 템플릿](docs/experiments/agent-run-commands.md)
+- [에이전트 사용법·계측·권한 옵션](docs/experiments/agent-usage-and-permissions.md)
 - [하드웨어 자율 기능 실험](docs/experiments/hardware-feature-discovery.md)
 - [Version 2 공통 에이전트 프롬프트](experiments/prompts/version-2-agent-task.md)
 - [실험 기준 설정](experiments/config/version-2-baseline.yaml)
