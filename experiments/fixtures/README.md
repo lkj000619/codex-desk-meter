@@ -8,9 +8,9 @@
   사용한다. 이 파일은 adapter 입력용이며 `usage-snapshot.schema.json` 직접 검증
   대상이 아니다. 스키마 검증은 `providers/*.json`으로 수행한다. 타 provider는
   각자 제공하는 window 목록을 그대로 사용한다.
-- `codex-reset-forecast.json`의 `confidence`는 fixture-only 주석이며
-  `GlobalResetSnapshot` 스키마 필드가 아니다. C5 판정은 24h/48h 퍼센트와
-  `forecast_is_schedule: false`로만 수행한다.
+- `codex-reset-forecast.json`은 과거 `codex-reset.com` 전망 스냅샷으로, 파서 호환·회귀용으로만
+  보관한다. `confidence`·`forecast_*`는 표시 입력이 아니며, C4~C6 표시·판정에 사용하지 않는다.
+  C5는 경과 시간 또는 default 화면으로만 판정한다.
 - `codex-reset-forecast.json`은 `codex-reset.com` forecast 응답의 필요한 필드만
   고정한 스냅샷이다.
 - `codex-resets-history.json`은 `codex-resets.com`의 이력 출처를 별도로 표현한다.

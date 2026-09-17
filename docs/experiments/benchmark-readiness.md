@@ -76,7 +76,9 @@ R3 결과 계약과 R1/R3의 transport 설계에는 Waveshare 공식
 따른다. 참고했다는 사실만으로 gate 상태를 `pass`로 바꾸지 않는다.
 
 R1~R3을 확정할 때에는 다중 provider fixture matrix도 고정한다. 최소 대상은 Codex,
-Claude Code, Gemini CLI, Orca/IDE host와 unsupported provider이며, source가 제공하지
+Claude Code, Antigravity CLI(Google 기본), Orca/IDE host와 unsupported
+provider이며 (`gemini-cli`는 Enterprise/API 키 conditional),
+source가 제공하지
 않는 절대 token 잔량을 추정하지 않는 계약을 포함한다. matrix 본문
 (`experiments/fixtures/provider-fixture-matrix.json`)과 provider adapter 결과
 schema·validator·example은 존재하며, 남은 작업은 baseline commit·hash 동결과
@@ -88,7 +90,7 @@ schema·validator·example은 존재하며, 남은 작업은 baseline commit·ha
 |---|---|---|---|
 | R0 | 목적·cohort·C/F/G/I 범위 diff | maintainer | historical prep와 E2E 제품 합격 조건에 모순 없음 |
 | R1 | hash가 고정된 prompt/config/fixture bundle과 transport ADR | maintainer | 모든 agent가 동일 입력·transport를 사용 |
-| R2 | 다중-provider capability/fixture matrix와 GUI rubric | maintainer | Codex·Claude·Gemini·Orca host·unsupported 사례 포함 |
+| R2 | 다중-provider capability/fixture matrix와 GUI rubric | maintainer | Codex·Claude·Antigravity·Orca host·unsupported 사례 포함 |
 | R3 | E2E schema, validator, valid/invalid examples와 CI log | maintainer | F1~F9·I1~I4·G1~G6 및 provider/host identity를 기계 검증 |
 | R4 | surface별 profile 파일 | maintainer | product/interface/model/reasoning/version/argv 확정 |
 | R5 | preflight receipt example과 preflight log | runner maintainer | 경로·도구·네트워크·쓰기 범위 재현 가능 |

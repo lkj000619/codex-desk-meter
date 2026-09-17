@@ -74,7 +74,8 @@ Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 요청하거나 �
   호출하는 시험과 새로 구현한 부분을 명확히 기록하라.
 - collector와 공통 상태는 Codex 전용 필드에 하드코딩하지 말고 provider adapter
   registry와 동적 quota window 목록을 수용하도록 설계하라. 향후 Codex CLI,
-  Claude Code, Gemini CLI, Orca/IDE host를 연결할 수 있어야 하며 provider, agent,
+  Claude Code, Antigravity CLI(Google 기본; gemini-cli는 Enterprise/API 키
+  conditional), Orca/IDE host를 연결할 수 있어야 하며 provider, agent,
   model, host, account profile과 metric 단위를 분리하라. source가 절대 token
   잔량을 제공하지 않으면 percent/unknown과 `unsupported`/`unavailable` 상태를
   보존하고 임의로 token 수를 계산하지 말라.

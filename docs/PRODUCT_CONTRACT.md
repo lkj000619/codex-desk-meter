@@ -58,7 +58,7 @@ PC 수집기·전송 frame·수신 계층의 상세 초안은
 | ID | 계층 | 합격 조건 |
 |---|---|---|
 | I1 | PC collector | 허용된 fixture/live source를 읽고 조회 시각·단위·source·오류를 보존하며 자격증명을 노출하지 않음 |
-| I2 | 정규화 adapter | UsageSnapshot/GlobalResetSnapshot으로 변환하고 두 글로벌 source를 병합하지 않음 |
+| I2 | 정규화 adapter | UsageSnapshot/GlobalResetSnapshot으로 변환하고 두 글로벌 source를 운반 계층에서 분리 보관함 (표시 계층은 resets 단일. 이중 표시 요구가 아님) |
 | I3 | transport | versioned frame, 길이·무결성, 재연결·오류 응답을 검증하고 raw 송수신 log를 남김 |
 | I4 | ESP32 receiver/state | frame을 검증해 last-good cache·stale·복구·LCD 상태로 반영함 |
 
@@ -252,15 +252,16 @@ HTTP 오류, 빈/잘못된 JSON을 주입한다. 실제 USB 통신 단절 시험
 실물 검증은 운영자가 증거로 확인하며, 아래 항목은 전체 합격 기준이다.
 
 - 핵심 파서 단위 시험: 정상, 누락, 범위 오류, 잘못된 시간, 빈 응답, HTTP 오류
-- fixture 회귀 시험: 개인 사용량, `codex-reset.com` forecast, 두 서비스의 최근 리셋
+- fixture 회귀 시험: 개인 사용량, `codex-resets.com` 최근 리셋 표시 회귀,
+  파서 호환 회귀(`codex-reset.com` forecast 파싱. 표시 판정 아님)
 - ESP-IDF 빌드 시험: 대상 `esp32s3`, 경고와 오류 로그 보존
 - 결과 문서 시험: manifest와 structured result validator 통과
 
 기능 비교에서는 PC collector(F1), 정규화·출처(F2), transport(F3), receiver/state(F4),
 LCD GUI(F5), 입력·갱신(F6), 글로벌 리셋(F7), 빌드·관측(F8), 자율 기능(F9)을
 각각 `pass / partial / fail / not_run / blocked / timeout` 중 하나로 기록한다.
-현재 결과 schema v2에 이 기능·GUI 필드를 추가하기 전에는 새 정식 baseline을
-고정하지 않는다.
+E2E 결과 계약은 해당 필드를 보유하며, historical prep용 schema 확장과 새 정식
+baseline 동결은 별도 종료 조건이다.
 
 ### 실물 시험
 
@@ -268,7 +269,8 @@ LCD GUI(F5), 입력·갱신(F6), 글로벌 리셋(F7), 빌드·관측(F8), 자�
 - 모든 화면에서 글자·막대·퍼센트가 화면 밖으로 잘리지 않음
 - BOOT 입력으로 화면 전환, RST 후 자동 재부팅
 - 정상·오류·오래된 fixture가 각각 식별 가능한 상태로 표시
-- Wi-Fi를 끊어도 마지막 값과 오류 상태가 유지되고 watchdog reset이 없음
+- USB 통신을 끊어도 마지막 값과 오류 상태가 유지되고 watchdog reset이 없음
+  (Wi-Fi cohort에서는 Wi-Fi 단절로 시험)
 
 실물 시험은 사진·영상 또는 시리얼 로그의 파일명, 시각, 판정자를 결과에
 기록한다. USB 포트는 한 실행에서 한 에이전트만 점유한다.
