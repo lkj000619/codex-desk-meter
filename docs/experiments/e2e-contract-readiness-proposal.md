@@ -22,7 +22,7 @@ a transport, access a provider, flash hardware, or change the existing baseline.
 
 | Gate | Current meaning | Proposed status after maintainer review |
 |---|---|---|
-| R1 inputs | schema, fixture, baseline, and transport inputs | `in_review`: schemas and fixtures are present; transport remains unset |
+| R1 inputs | schema, fixture, baseline, and transport inputs | `in_review`: schemas, fixtures, and transport choice (`usb-serial-cdm-1`) are present; baseline commit/hash freeze pending |
 | R2 rubric | F1-F9, I1-I4, and G1-G6 recording contract | `in_review`: result schema and examples record every required ID |
 | R3 result tooling | E2E schema, validator, valid/invalid examples | `in_review`: local schema and semantic checks are available |
 | R8 host integration | collector, normalizer, transport, receiver tests | `not_ready`: no transport or hardware execution was performed |

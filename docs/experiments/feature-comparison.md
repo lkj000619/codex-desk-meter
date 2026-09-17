@@ -38,7 +38,7 @@ end-to-end cohort에서는 F1/F3이 필수다.
 |---|---|---|---|---|
 | F1 | PC agent/provider 사용량 collector | PC의 허용된 provider source에서 사용량 창·잔여율·조회 시각을 안전하게 수집하고 provider와 host context를 분리하는가? 절대 token quota를 제공할 때만 단위·used/remaining/limit를 보존하고, 없으면 임의로 계산하지 않는가? | collector 실행 로그, 입력·출력 hash, capability matrix, 자격증명 비노출 확인 | 준비용: `not_run`; E2E: 필수 |
 | F2 | 정규화·출처 분리 | 개인 사용량과 `codex-reset.com`, `codex-resets.com`을 공통 모델로 변환하고 임의 병합하지 않는가? | production parser host test, fixture 오류 시험, source 필드 | fixture parser 범위에서 평가 |
-| F3 | PC→ESP32 transport | USB serial(COM3) 또는 로컬 Wi‑Fi에서 frame 버전·길이·무결성·재연결·오류 응답을 보장하는가? | protocol 문서, 송수신 raw log, checksum/재연결 시험 | 준비용: `not_run`; E2E: 필수 |
+| F3 | PC→ESP32 transport | E2E baseline 고정인 USB serial(COM3) `cdm/1`에서 frame 버전·길이·무결성·재연결·오류 응답을 보장하는가? (local Wi-Fi는 별도 cohort) | protocol 문서, 송수신 raw log, checksum/재연결 시험 | 준비용: `not_run`; E2E: 필수 |
 | F4 | ESP32 receiver·state | 수신/입력 데이터를 검증하고 last-good, stale, 오류 해제·복구를 상태 모델에 반영하는가? | 상태 전이 host test, 오류 주입, 시리얼 로그 | fixture 직접 입력으로 부분 평가 |
 | F5 | LCD GUI | 정보 우선순위, 레이아웃, 가독성, 상태·출처·오류 표현, 320×820 최적화가 적절한가? | 동일 fixture의 화면 사진/영상, 구현 근거 | 필수 비교 |
 | F6 | 입력·갱신 | BOOT·자율 기능으로 화면 전환과 수동/자동 갱신이 예측 가능하고 피드백이 명확한가? | 입력 전후 영상, 시리얼 로그, debounce 값 | 필수 비교 |

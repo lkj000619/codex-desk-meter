@@ -134,7 +134,8 @@ ESP32 receiver → validation/cache/stale → common state → LCD GUI
 local Wi-Fi 운용은 별도 cohort에서 비교하며, E2E baseline의 transport 선택을
 대체하지 않는다. baseline(`experiments/config/version-2-baseline.yaml`)의
 `transport_choice: usb-serial-cdm-1`이 단일 진실이며, 본문의 “또는 local Wi-Fi”
-표현은 선택지가 아닌 후속 cohort 항목으로 읽는다.
+표현은 선택지가 아닌 후속 cohort 항목으로 읽는다. transport 결정의 근거는
+[ADR-0005](../decisions/0005-transport-usb-serial-baseline.md)를 따른다.
 
 `UsageSnapshot`은 백분율과 함께 source가 제공하는 경우에만 used/remaining/limit
 token 및 단위를 운반한다. source가 절대 quota를 공개하지 않으면 null과
