@@ -181,7 +181,7 @@ checksum 범위, sequence 재생·순서 뒤바뀜 처리, ACK/재전송 여부�
 
 ## 정식 고정 전 checklist
 
-- [x] transport 선택(USB serial `cdm/1`) 고정 (baseline commit/hash 동결 대기)
+- [x] transport 선택(USB serial `cdm/1`) 고정 선언 (ADR-0005 승인 + baseline commit/hash 동결 대기)
 - [ ] canonical JSON/CRC 또는 대체 무결성 규칙 승인
 - [ ] fixture collector와 owner-only live adapter의 경계 승인
 - [ ] F1~F4/I1~I4 결과 schema·validator·example 반영

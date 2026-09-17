@@ -96,6 +96,6 @@ window 중복, 단위와 값의 일관성을 검사한다. 기존 historical sch
 
 - benchmark agent나 제품 실험을 실행하지 않는다.
 - COM3, ESP32 flash, 실제 provider endpoint와 실제 계정 파일에 접근하지 않는다.
-- transport 방식을 임의로 확정하지 않는다.
+- 본 작업 범위에서 transport 방식을 임의로 확정하지 않는다. transport 결정은 ADR-0005를 따르며, 본 작업은 그 결정을 바꾸지 않는다.
 - commit, push, tag, merge, stage를 수행하지 않는다.
 - 기존 사용자의 uncommitted 변경을 되돌리거나 덮어쓰지 않는다.
