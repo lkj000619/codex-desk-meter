@@ -51,7 +51,8 @@ end-to-end cohort에서는 F1/F3이 필수다.
 F1~F5 평가는 Codex 한 종류의 고정 JSON에만 맞춘 구현을 완전한 것으로 보지 않는다.
 최소 fixture matrix는 Codex, Claude Code, Antigravity CLI(Google 기본),
 Orca/IDE host 및 unsupported provider를 포함한다. (`gemini-cli`는
-Enterprise/API 키 conditional이며 기본 matrix가 아니다.) 각 fixture는 서로 다른 window 수, 누락된 absolute token,
+Enterprise/API 키 conditional이며 기본 matrix가 아니다. 기존
+`gemini-cli-unsupported.json`은 unsupported adapter 예시로 유지한다.) 각 fixture는 서로 다른 window 수, 누락된 absolute token,
 reset 미제공, stale/error와 복수 model을 포함해야 한다. 실제 source를 사용할 수
 없는 provider도 adapter capability와 `unsupported`/`not_run` 상태를 정직하게
 표현하면 되며, 임의의 잔여량을 만들어서는 안 된다.

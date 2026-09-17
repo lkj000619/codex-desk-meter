@@ -52,11 +52,15 @@ reasoning, 설치 버전, argv, skills/plugins/MCP/메모리/사용자 지침/�
 비밀번호·토큰을 profile에 넣지 않는다. 예제의 placeholder는 실행 준비 단계에서 거부된다.
 반복마다 동일 profile을 사용한다. 순수 모델 비교가 아닌 agent+model+설정 비교다.
 
-현재 로컬에서 확인한 실행 표면은 Codex CLI 0.153.2, Gemini CLI 0.35.0,
-OpenCode 1.18.30 및 agy CLI다. 설치 확인은 로그인·모델 접근·sandbox 합격을 뜻하지 않는다.
+현재 로컬에서 확인한 실행 표면은 Codex CLI 0.153.2, OpenCode 1.18.31 및 agy CLI
+1.2.4다 (2026-09-18 재실측. 아래 2026-09-11 기록의 Gemini CLI 0.35.0과
+OpenCode 1.18.30은 구 스냅샷이며, Gemini CLI는 비교군에서 제외됐다.
+`r4-profile-resolution.md`를 따른다). 설치 확인은 로그인·모델 접근·sandbox 합격을 뜻하지 않는다.
 
 - Codex: stdin `-`, `exec --json` 사용. turn.completed usage를 합산하고 cache는 input에 중복 가산하지 않는다.
-- Gemini: `--prompt`와 `--output-format stream-json` 사용. stdin을 prompt에 덧붙이는 동작을 설치 버전에서 검증한다.
+- Gemini: 아래 절차는 역사 기록으로만 보관한다. Gemini CLI는 2026-06-18 Google
+  전환으로 개인 계정 실행이 불가하며, 기본 비교군은 Antigravity CLI다.
+  `--prompt`와 `--output-format stream-json` 사용. stdin을 prompt에 덧붙이는 동작을 설치 버전에서 검증한다.
 - OpenCode: `run --format json --model provider/model` 사용. stdin 전달과 승인 정책을 pilot 전에 검증한다.
 - Antigravity: 실제 실행 파일은 `agy`. print/stream-json/sandbox를 지원하는 로컬 help를 확인했으며 정확한 입력·timeout·버전 확인은 남아 있다.
 

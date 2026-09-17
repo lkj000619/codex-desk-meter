@@ -92,7 +92,8 @@ PC provider collectors
         ↓  UsageSnapshot / GlobalResetSnapshot
 정규화·출처 분리 adapter
         ↓  versioned frame
-USB serial(COM3) 또는 local Wi‑Fi transport
+USB serial(COM3) transport (E2E baseline 고정. local Wi-Fi 운용은 별도 cohort.
+ADR-0005를 따른다.)
         ↓
 ESP32 receiver → validation / last-good cache / stale state → LCD GUI
 ```

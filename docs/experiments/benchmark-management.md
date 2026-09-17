@@ -21,8 +21,8 @@ agent/model 브랜치는 구현 코드와 각 반복의 원본 결과를 보관�
 승격하지 않는다.
 
 ```text
-experiment/openai/codex-cli/gpt-5-6-luna
-experiment/google/gemini-cli/<model>
+experiment/openai/codex-cli/sol
+experiment/openai/codex-cli/luna
 experiment/antigravity/cli/<model>
 experiment/opencode/cli/<model>
 
@@ -30,6 +30,10 @@ results/20260911-codex-cli-gpt-5-6-luna-r01/
 results/20260911-codex-cli-gpt-5-6-luna-r02/
 results/20260911-codex-cli-gpt-5-6-luna-r03/
 ```
+
+`experiment/google/gemini-cli/<model>` 경로 예시는 폐기한다. Google 기본
+표면은 `experiment/antigravity/cli/<model>`이며, `gemini-cli`는
+Enterprise/API 키 conditional에서만 별도 경로를 사용한다.
 
 기본 정책은 [isolation-policy.md](isolation-policy.md)의 `prompt-and-log`다.
 현재 main의 고정 입력과 전용 checkout, 프롬프트 참조 제한, 명령·자료 로그를 사용한다.

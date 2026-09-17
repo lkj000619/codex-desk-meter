@@ -130,8 +130,9 @@ E2E baseline은 USB serial(COM3) `cdm/1`로 고정한다. local Wi-Fi 운용은 
 | local Wi‑Fi | 케이블 없이 책상에서 운용 가능 | AP/주소/재연결·네트워크 변동을 통제해야 함 |
 
 권장 순서는 benchmark에서 USB serial을 먼저 고정하고, 제품 운용성은 별도의
-local Wi‑Fi cohort에서 비교하는 것이다. 사용자가 다른 선택을 승인하면 모든
-agent에 같은 선택·프로토콜·timeout을 제공한다.
+local Wi‑Fi cohort에서 비교하는 것이다. E2E baseline의 transport 변경은 새
+cohort 정의와 사용자 승인을 통해서만 가능하며, 실행 중 선택 변경은 허용하지
+않는다. 어떤 선택을 하든 모든 agent에 같은 선택·프로토콜·timeout을 제공한다.
 
 ### I4 — ESP32 receiver/state
 

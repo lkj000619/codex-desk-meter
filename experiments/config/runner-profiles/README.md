@@ -13,8 +13,10 @@ guessed model/version values. Every file intentionally uses
 sentinels until the operator records read-only version/help checks and fills a
 profile for the exact approved tool.
 
-The documented CLI order is Gemini CLI, Antigravity CLI, OpenCode CLI, then
-GPT/Codex (the codex-cli profile). The Antigravity IDE surface is not representable by the current noninteractive
+The documented CLI order is Antigravity CLI, OpenCode CLI, then GPT/Codex
+(the codex-cli profile). The `gemini-cli.example.json` is retained for
+Enterprise/API-key conditional use only and is not part of the default cohort.
+The Antigravity IDE surface is not representable by the current noninteractive
 CLI runner and remains an operator design check; it is not silently converted to a
 CLI profile.
 

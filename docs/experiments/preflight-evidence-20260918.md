@@ -8,12 +8,12 @@
 
 | 항목 | 결과 |
 |---|---|
-| 필수 파일 21종 존재 | 전부 OK |
+| 필수 파일 20종 존재 | 전부 OK |
 | README UTF-16 검사 | OK |
 | example manifest/result validator | OK (exit 0) |
 | unittest 58개 | OK (exit 0, `PYTHONUTF8=1` 필요) |
 | E2E validator + matrix validator | OK (exit 0) |
-| COM3 | 존재, 상태 OK (보드 연결됨) |
+| COM3 | 포트 존재·상태 OK 탐지. 보드 모델·독점 점유는 pilot 직전 별도 확인 |
 | 작업 트리 clean | **FAIL** — untracked 3건 (`.agents/`, `.claude/`, `skills-lock.json`) |
 | ESP-IDF v5.3.2 활성화 | **FAIL** (아래) |
 
@@ -53,7 +53,8 @@ baseline 태그 전에는 `git status --porcelain`이 비어야 한다. `.agents
 사용자가 환경 수리(A안)와 pilot 실행을 승인했다. 단, 본 승인은 아래 전제조건이
 모두 충족될 때 발효되는 조건부 승인이다. 미충족 상태에서 runner를 실행하지 않는다.
 
-- 환경 수리 완료 (본 기록으로 확인)
+- 환경 수리 완료 (본 기록으로 확인. 단, `activate-idf.ps1`의 스크립트 수준 반영은
+  잔여 작업으로 남는다. toolchain 동작 확인済み이나 스크립트 미수리 상태다.)
 - 표면별 model 확정 (codex sol/luna, muse-spark 재확인, antigravity 3종)
 - `benchmark.py prepare` 통과 + 새 baseline 태그·bundle hash 동결
 - COM3 단독 점유 확인 (pilot 직전)

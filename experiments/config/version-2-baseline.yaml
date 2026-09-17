@@ -68,6 +68,10 @@ comparison_surfaces:
     included: true
   # gemini-cli: Google이 2026-06-18부터 개인 계정 요청을 중단하고 Antigravity CLI로
   # 전환. Enterprise/API 키 조건에서만 실행 가능하므로 conditional. 기본 비교군은 antigravity-cli.
+  # pilot 매핑(R10 기록): codex-sol, codex-luna, opencode-muse-spark,
+  # antigravity 3종(gemini-3.8-flash, gemini-3.1-pro, claude-opus-4.6 계열.
+  # effort 변형 포함 정확한 ID 확정 대기)으로 모델당 1회.
+  # surface 분할은 baseline 동결 시점에 반영한다.
   - provider: google
     product: gemini-cli
     interface: cli

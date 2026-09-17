@@ -28,8 +28,10 @@ runner argv에 해당 플래그를 넣을 경우 실제 파싱 검증을 pilot �
 - 측정된 실행 파일·버전·argv 골격은 기입, `{model}`은 사용자 선택 자리 표시자다.
 - `model`·`reasoning`은 사용자가 표면마다 확정해야 한다. codex는 `sol`·`luna`
   2종을 별도 모델 엔트리로 테스트한다 (동일 surface, 모델만 다름. pilot는
-  모델당 1회). opencode는 기존 기록
-  `opencode/muse-spark-1.3-contributor-free`가 후보이나 재확인이 필요하다.
+  모델당 1회). opencode `opencode/muse-spark-1.3-contributor-free`는 1.18.31에서
+  재확인됐다 (`evidence/opencode-models-20260918.log`).
+- antigravity 모델 목록 원본은 `evidence/agy-models-20260918.log`에 보존했다.
+  pilot 3종 ID는 사용자 확정 대기 중이다.
 - `settings_inventory`의 skills/MCP/memory 등은 사용자 확인 전이라
   `operator-check-required`를 유지한다. `benchmark.py prepare`는 그대로 거부한다.
 - gemini-cli는 draft를 작성하지 않았다. Google이 2026-05-19에 Gemini CLI →
