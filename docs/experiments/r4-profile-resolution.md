@@ -8,7 +8,7 @@ settings inventory 사용자 확인이 끝나야 R4가 닫힌다.
 
 | 표면 | 실행 파일 | 버전 | 비고 |
 |---|---|---|---|
-| codex-cli | `C:\Users\이광진\AppData\Local\Programs\OpenAI\Codex\bin\codex.exe` (native) | 0.153.2 | `exec --json`, stdin `-` 또는 뒤첨부, `-m/--model` 지원 확인 |
+| codex-cli | `C:\Users\이광진\AppData\Local\Programs\OpenAI\Codex\bin\codex.exe` (native) | 0.153.2 | `exec --json`, stdin `-` 또는 뒤첨부, `-m/--model` 지원 확인. **모델 2종(`sol`, `luna`)을 별도 엔트리로 테스트** |
 | gemini-cli | 설치 파손 + 서비스 전환 (아래 참조) | **비교군 제외**. 개인 계정은 2026-06-18 이후 요청 중단. 후속 표면은 antigravity-cli |
 | antigravity-cli | `C:\Users\이광진\AppData\Local\agy\bin\agy.exe` | 1.2.4 | `--print`·`--input-format stream-json`·`--output-format stream-json`·`--model`·`--sandbox`·`--print-timeout` 확인 |
 | opencode-cli | `C:\Users\이광진\AppData\Roaming\npm\node_modules\opencode-ai\bin\opencode.exe` (native) | 1.18.31 (기존 profile 1.18.30에서 변경) | `run --pure --format json --model` + stdin 전달 probe 통과済み |
@@ -26,7 +26,9 @@ runner argv에 해당 플래그를 넣을 경우 실제 파싱 검증을 pilot �
 공통 규칙:
 
 - 측정된 실행 파일·버전·argv 골격은 기입, `{model}`은 사용자 선택 자리 표시자다.
-- `model`·`reasoning`은 사용자가 표면마다 확정해야 한다. opencode는 기존 기록
+- `model`·`reasoning`은 사용자가 표면마다 확정해야 한다. codex는 `sol`·`luna`
+  2종을 별도 모델 엔트리로 테스트한다 (동일 surface, 모델만 다름. pilot는
+  모델당 1회). opencode는 기존 기록
   `opencode/muse-spark-1.3-contributor-free`가 후보이나 재확인이 필요하다.
 - `settings_inventory`의 skills/MCP/memory 등은 사용자 확인 전이라
   `operator-check-required`를 유지한다. `benchmark.py prepare`는 그대로 거부한다.
