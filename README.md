@@ -131,8 +131,13 @@ and [`experiments/config/preflight-inputs.example.json`](experiments/config/pref
 They intentionally leave model, version, executable, and telemetry availability as
 operator checks; they do not authorize a run.
 
+기본 실행은 현재 main의 고정 문서·입력을 전용 branch/worktree에 제공하고,
+프롬프트로 다른 branch·이전 결과 참조를 제한하며 명령·자료를 기록합니다.
+Docker/VM은 선택 사항이며, 동일 조건과 충분한 증거를 갖춘 기본 모드 실행도
+정량 비교에 사용할 수 있습니다. [실행 환경 정책](docs/experiments/isolation-policy.md)을 따릅니다.
+
 이 명령은 새 독립 checkout과 운영 manifest를 생성합니다. 에이전트 실행은
-별도 `benchmark.py run` 명령이며 도구별 sandbox 검증 receipt가 필요합니다. 이
+별도 `benchmark.py run` 명령이며 선택한 접근 정책의 preflight receipt가 필요합니다. 이
 README의 명령을 실행했다고 해서 제품 구현·하드웨어 검증이 완료되는 것은 아닙니다.
 
 ## 데이터 출처 주의

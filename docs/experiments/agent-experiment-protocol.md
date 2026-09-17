@@ -12,7 +12,7 @@
 
 브랜치·run ID·반복 격리·계측과 main 게시의 상세 기준은
 [benchmark 관리 기준](benchmark-management.md)을 따른다. schema v2 운영 도구와
-도구별 sandbox receipt, 모델 확정 및 새 baseline이 준비된 뒤 pilot을 시작한다.
+도구별 preflight receipt, 모델 확정 및 새 baseline이 준비된 뒤 pilot을 시작한다.
 
 한 번의 실험(run)은 사용자가 승인한 뒤 하나의 에이전트가 하나의 깨끗한 worktree에서
 기준 커밋을 출발점으로 제품을 구현하고 자동·실물 시험을 시도하는 과정이다.
@@ -48,15 +48,16 @@ manifest에 명시한다. 모델 이름만 같게 하고 실행 표면이 다른
 외부 피드백 0회**로 고정한다. 사용자가 중간에 답변하거나 구현 방향을 수정하면
 원본 run을 즉시 `invalid_for_comparison`으로 보존한다. 대화형 후속 질문을
 시험하려면 `interactive` 별도 비교군과 별도 protocol을 미리 선언한다.
-인터넷, 검색, MCP, 파일·터미널 권한, 승인 정책과 sandbox 수준도 고정한다.
+모델 호출 네트워크, 인터넷 검색, skills/plugins, MCP, 파일·터미널 권한, 승인 정책과 sandbox 수준도 고정한다.
 
 실험에는 계정 쿠키, Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 입력하지
 않는다. 개인 사용량은 고정 fixture로 먼저 시험하고, 소유자만 실제 계정 통합
 시험을 별도로 수행한다.
 
-첫 hardware-autonomy cohort의 제품 범위는 fixture 기반 firmware·LCD·입력·자율
+historical hardware-autonomy cohort(r01 설명용)에 한해, 첫 cohort의 제품 범위는 fixture 기반 firmware·LCD·입력·자율
 기능이다. PC agent/provider collector와 PC→ESP32 transport/receiver 통합은 후속
-integration cohort다. 범위 밖 계층은 구현하지 않았다는 사실을 실패로 감추지
+integration cohort다. 현행 planned target `version-2-end-to-end-v1`은 F1~F9·I1~I4
+전부다. 범위 밖 계층은 구현하지 않았다는 사실을 실패로 감추지
 말고 `not_run; out of cohort`와 필요한 seam/interface를 결과에 남긴다.
 
 ## 3. 실행 전 preflight
@@ -132,6 +133,10 @@ LCD·BOOT·RST·오류·네트워크 시험
 
 ### Pilot
 
+[실행 환경 정책](isolation-policy.md)의 기본 모드 `prompt-and-log`로 진행할 수 있다.
+Docker/VM은 선택 사항이며 OS sandbox 미사용 자체는 정량 비교 제외 사유가 아니다.
+선택한 접근 정책의 profile-bound preflight receipt와 R10 승인을 확인한다.
+
 R0~R9 gate가 모두 통과하고 R10 사용자 승인이 남은 뒤 각 실행 표면에서 1회씩
 수행한다. 목적은 프롬프트, 권한, validator, fixture,
 보드 슬롯과 로그 수집이 실제로 작동하는지 확인하는 것이다. pilot 결과는 순위
@@ -204,3 +209,11 @@ OpenAI 공식 문서의 eval 개념처럼 데이터 입력 스키마와 testing 
 정의하고 같은 기준을 여러 모델에 적용한다. 이 저장소의 JSON Schema와 C1~C8
 채점표가 하드웨어 실험의 고정 기준이며, 특정 제공자의 eval 서비스 사용 여부와
 무관하게 로컬 결과를 재현할 수 있어야 한다.
+
+## 채택된 확장 비교 조건
+
+첫 비교군은 [실행 환경 정책](isolation-policy.md)의 `builtin-only-v1` 조건을 따른다.
+사용자 설치 스킬·외부 플러그인·MCP는 비활성화하고 도구 내장 기능은 유지한다.
+실행 전 활성 설정·버전·해시·비활성화 증거와 실행 후 실제 호출 내역을 함께 기록한다.
+이 조건은 agent + model + 고정 설정의 비교이며 내장 기능 차이는 보고서에 명시한다.
+ponytail 등 확장 적용 효과는 같은 agent/model의 별도 후속 비교군에서 검증한다.

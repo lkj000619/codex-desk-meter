@@ -22,7 +22,7 @@ run을 정량 비교에서 제외한다. 아래의 환경·validator 명령을 �
 2. 정식 E2E scope의 F1~F9·I1~I4 기능 범위와 G1~G6 LCD GUI rubric이 결과
    schema·validator·example에 반영됨
 3. 선택한 agent/product/interface/model/reasoning profile과 실제 실행 파일이 검증됨
-4. 도구별 sandbox receipt, raw stdout/stderr, 명령 로그, token telemetry 수집이 준비됨
+4. 도구별 preflight receipt, raw stdout/stderr, 명령 로그, token telemetry 수집이 준비됨
 5. one-shot(공통 prompt 1회, 외부 feedback 0회)와 독립 evaluator 경계가 검증됨
 6. COM3를 사용할 경우 제조사 예제/현재 보드 상태 백업과 운영자 checklist가 준비됨
 7. 사용자가 baseline·profile·surface·반복 번호·pilot/benchmark를 명시적으로 승인함
@@ -43,12 +43,12 @@ python scripts/validate-experiment-result.py
 
 실물 시험에는 `-RequireHardware -Port COM3`를 추가한다. COM 포트 탐지만으로
 보드 모델이나 포트 독점 사용 가능 여부를 확정하지 않는다. 빌드 작업 경로와 TEMP는
-ASCII 경로를 사용한다. 도구별 sandbox 안에서의 최소 빌드는 별도 확인한다.
+ASCII 경로를 사용한다. 기본 모드는 host 최소 빌드를 확인하고 external-sandbox 선택 시 그 내부에서 확인한다.
 
 ## 2. Profile 확정
 
 `experiments/config/runner-profile.example.json`을 복사하고 실제 모델 ID, slug,
-reasoning, 설치 버전, argv, skills/MCP/메모리/사용자 지침/캐시/라우팅을 확정한다.
+reasoning, 설치 버전, argv, skills/plugins/MCP/메모리/사용자 지침/캐시/라우팅을 확정한다.
 비밀번호·토큰을 profile에 넣지 않는다. 예제의 placeholder는 실행 준비 단계에서 거부된다.
 반복마다 동일 profile을 사용한다. 순수 모델 비교가 아닌 agent+model+설정 비교다.
 
@@ -102,17 +102,17 @@ C:/Espressif/benchmark-runs/<run-id>/
 원본 baseline SHA와 로컬 snapshot SHA를 구분한다. mkdir로 번호를 예약하고
 실패한 준비도 번호를 재사용하지 않는다. 시작 날짜가 바뀌면 새 run을 준비한다.
 
-## 5. 실제 sandbox 검증 receipt
+## 5. 실행 환경·참조 범위 preflight receipt
 
-checkout 분리는 읽기 접근 차단이 아니다. 도구별 실제 sandbox에서 compiler,
-Ninja, Git, TEMP 쓰기, ESP-IDF 최소 빌드, 네트워크 정책, 이전 결과/원본 로그
-접근 제한과 설정 목록을 검증한다. 증거 파일과 hash를 운영자가 확인한 뒤
-다음 receipt를 작성한다. 통과하지 않은 항목을 pass로 채워 실행 gate를 우회하지 않는다.
+기본 모드는 [실행 환경 정책](isolation-policy.md)의 `prompt-and-log`다.
+host toolchain·TEMP·네트워크·설정과 prompt scope·activity logging 준비를 확인한다.
+Docker/VM은 필수가 아니다. 통과하지 않은 항목을 pass로 채우지 않는다.
 
 ```json
 {
   "base_commit": "<original-baseline-SHA>",
   "profile_sha256": "<prepared-profile.json-SHA256>",
+  "access_policy": "prompt-and-log",
   "checks": {
     "idf_build": "pass",
     "compiler": "pass",
@@ -120,16 +120,21 @@ Ninja, Git, TEMP 쓰기, ESP-IDF 최소 빌드, 네트워크 정책, 이전 결�
     "git": "pass",
     "temp_write": "pass",
     "network_policy": "pass",
-    "read_isolation": "pass",
-    "settings_inventory": "pass"
+    "read_isolation": "not_enforced",
+    "settings_inventory": "pass",
+    "prompt_scope": "pass",
+    "activity_logging": "pass"
   },
-  "evidence": {"sandbox-probe.txt": "<SHA256>"},
+  "evidence": {"preflight-probe.txt": "<SHA256>"},
   "pilot_pass": false
 }
 ```
 
-evidence 경로는 receipt 폴더 기준이다. 모든 파일 존재와 해시를 검사한다.
-호스트 셸의 preflight 결과를 sandbox 증거로 대체하지 않는다.
+profile의 기존 `sandbox_policy` 필드에도 같은 `prompt-and-log`를 기록한다.
+evidence 경로는 receipt 폴더 기준이며 존재와 SHA-256을 검사한다.
+제품 fixture 입력과 모델 호출 네트워크를 구분해 기록한다.
+external-sandbox 선택 시 profile과 receipt를 `external-sandbox`로 맞추고 실제
+sandbox 내부 검증과 `read_isolation: pass` 증거를 확보한다.
 본 실험에는 같은 조건의 검토된 pilot 합격이 추가로 필요하다.
 
 ## 6. 실행과 평가
@@ -140,7 +145,7 @@ evidence 경로는 receipt 폴더 기준이다. 모든 파일 존재와 해시�
 
 ```powershell
 python scripts/benchmark.py run C:\Espressif\benchmark-runs\<run-id> `
-  --receipt <sandbox-receipt.json>
+  --receipt <preflight-receipt.json>
 ```
 
 120분 제한을 적용하며 Ctrl+C 중단과 timeout은 자식 프로세스까지 종료한다.
@@ -188,3 +193,15 @@ those sentinels; no profile in this planning state is executable.
 
 `scripts/summarize-benchmark.py`로 main 요약 초안을 만들고 평가·증거·고정 링크를
 추가해 검토한다. 실험 브랜치 전체를 main에 merge하지 않는다.
+
+## 확장 설정 목록과 실제 사용 기록
+
+첫 비교군은 `builtin-only-v1`로 고정한다. 사용자 설치 스킬·외부 플러그인·MCP를
+실제로 비활성화했는지 확인한 뒤 settings_inventory 증거에 기록한다.
+profile 템플릿의 정책 문자열 자체를 검증 증거로 사용하지 않는다.
+도구 내장 기능 목록, 이름·버전·출처·설정·해시와 확인 방법을 함께 남긴다.
+실행 후 실제 사용 기능·호출 횟수·raw log 위치를 별도 운영 기록에 추가한다.
+수집 불가능한 항목은 null과 사유를 사용한다. 명령/도구 로그가 일부만 제공되면
+그 범위를 명시하고 관측되지 않은 호출을 미사용으로 간주하지 않는다.
+기록을 profile/receipt 증거 파일과 연결하며 원본 로그와 함께 보존한다.
+ponytail 적용 실행은 기본 비교군에 합치지 않고 별도 확장 비교군으로 표기한다.

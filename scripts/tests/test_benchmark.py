@@ -176,6 +176,71 @@ class RunnerTests(unittest.TestCase):
             self.assertEqual(benchmark.command_metrics(path, "codex"), {"tool_calls": 0, "failed_commands": 0})
 
 
+class PreflightPolicyTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        (self.root / "probe.txt").write_bytes(b"offline preflight")
+        self.manifest = read(ROOT / "experiments/examples/run-manifest.example.json")
+        self.profile = {"sandbox_policy": "prompt-and-log"}
+        self.receipt = {
+            "access_policy": "prompt-and-log",
+            "base_commit": self.manifest["execution"]["base_commit"],
+            "profile_sha256": self.manifest["agent"]["configuration_sha256"],
+            "checks": dict.fromkeys(
+                ["idf_build", "compiler", "ninja", "git", "temp_write",
+                 "network_policy", "settings_inventory", "prompt_scope", "activity_logging"], "pass"),
+            "evidence": {"probe.txt": benchmark.digest(b"offline preflight")},
+        }
+        self.receipt["checks"]["read_isolation"] = "not_enforced"
+
+    def validate(self):
+        benchmark.validate_preflight_receipt(self.receipt, self.manifest, self.profile, self.root)
+
+    def test_prompt_and_log_accepts_no_os_isolation(self):
+        self.validate()
+
+    def test_prompt_scope_and_logging_required(self):
+        for key in ("prompt_scope", "activity_logging"):
+            with self.subTest(key=key):
+                self.receipt["checks"][key] = "not_run"
+                with self.assertRaises(ValueError):
+                    self.validate()
+                self.receipt["checks"][key] = "pass"
+
+    def test_prompt_mode_cannot_claim_os_isolation(self):
+        self.receipt["checks"]["read_isolation"] = "pass"
+        with self.assertRaises(ValueError):
+            self.validate()
+
+    def test_external_sandbox_requires_real_isolation(self):
+        self.receipt["access_policy"] = self.profile["sandbox_policy"] = "external-sandbox"
+        with self.assertRaises(ValueError):
+            self.validate()
+        self.receipt["checks"]["read_isolation"] = "pass"
+        self.validate()
+
+    def test_policy_and_baseline_profile_binding(self):
+        for key in ("access_policy", "base_commit", "profile_sha256"):
+            with self.subTest(key=key):
+                original = self.receipt[key]
+                self.receipt[key] = "wrong"
+                with self.assertRaises(ValueError):
+                    self.validate()
+                self.receipt[key] = original
+
+    def test_policy_must_match_profile(self):
+        self.profile["sandbox_policy"] = "external-sandbox"
+        with self.assertRaises(ValueError):
+            self.validate()
+
+    def test_evidence_hash_is_verified(self):
+        (self.root / "probe.txt").write_bytes(b"changed evidence")
+        with self.assertRaises(ValueError):
+            self.validate()
+
+
 class EvaluatorTests(unittest.TestCase):
     def test_wrong_stale_is_detected(self):
         _, _, _, expected, body, mode = next(evaluation.cases())

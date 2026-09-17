@@ -72,10 +72,10 @@ adapter가 지원되지 않거나 IDE가 사용량 정보를 노출하지 않으
 동작하도록 배열/목록으로 받고, LCD는 사용 가능한 provider만 순환하며 source,
 stale, reset과 단위를 함께 표시한다.
 
-이 문서는 PC에서 Codex 사용량을 읽어 ESP32 LCD에 전달하는 제품 계층을
-구체화하기 위한 설계 초안이다. 아직 transport 선택과 schema 확정이 끝나지
-않았으므로, 이 문서만으로 agent 실행·COM3 전송·실제 계정 조회를 시작하지 않는다.
-정식 E2E baseline을 만들 때 이 문서의 선택값과 hash를 고정한다.
+이 문서는 PC에서 허용된 provider source의 사용량을 읽어 ESP32 LCD에 전달하는
+제품 계층을 구체화하기 위한 설계 초안이다. E2E baseline transport는 USB
+serial(COM3) `cdm/1`로 고정되었으나, 최종 baseline commit·hash 동결과 R10 사용자
+승인 전이므로 이 문서만으로 agent 실행·COM3 전송·실제 계정 조회를 시작하지 않는다.
 
 ## 목표와 경계
 
@@ -121,7 +121,8 @@ capability(`quota_windows`, `absolute_tokens`, `credits`, `reset_time`,
 
 ### I3 — transport adapter
 
-정식 baseline에서 **한 가지**를 선택한다.
+E2E baseline은 USB serial(COM3) `cdm/1`로 고정한다. local Wi-Fi 운용은 별도
+비교 cohort에서 다룬다.
 
 | 후보 | benchmark 적합성 | 제약 |
 |---|---|---|
@@ -141,7 +142,7 @@ agent에 같은 선택·프로토콜·timeout을 제공한다.
 
 ## 제안 frame envelope
 
-아래는 후보 형식이며, `transport_choice`와 함께 정식 baseline에서 고정한다.
+아래는 E2E baseline으로 고정된 `cdm/1` 형식이며, baseline commit 동결 시 최종 확정된다.
 
 ```json
 {
@@ -180,7 +181,7 @@ checksum 범위, sequence 재생·순서 뒤바뀜 처리, ACK/재전송 여부�
 
 ## 정식 고정 전 checklist
 
-- [ ] transport 선택과 protocol version 승인
+- [x] transport 선택(USB serial `cdm/1`) 고정 선언 (ADR-0005 승인 + baseline commit/hash 동결 대기)
 - [ ] canonical JSON/CRC 또는 대체 무결성 규칙 승인
 - [ ] fixture collector와 owner-only live adapter의 경계 승인
 - [ ] F1~F4/I1~I4 결과 schema·validator·example 반영

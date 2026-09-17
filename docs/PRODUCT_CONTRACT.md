@@ -10,9 +10,9 @@
 |---|---|
 | 보드 | Waveshare ESP32-S3-LCD-3.16 |
 | 프레임워크 | ESP-IDF v5.3.2 |
-| 디스플레이 | ST7701, 320 × 820, 세로 방향 기준 |
+| 디스플레이 | ST7701, 320 × 820 패널을 가로 방향(820 × 320)으로 사용. 가로가 기본 화면이며 IMU 기반 자동 회전을 허용한다 |
 | 입력 | 보드 BOOT 버튼, RST 버튼은 시스템 리셋 전용 |
-| 통신 | Wi-Fi 우선, 네트워크 장애 시 마지막 정상 데이터 유지 |
+| 통신 | E2E baseline은 USB serial(COM3) `cdm/1` 고정. local Wi-Fi 운용은 별도 cohort에서 비교. 네트워크 장애 시 마지막 정상 데이터 유지 |
 | 펌웨어 시작 상태 | 이 저장소의 기준 커밋에서 에이전트가 ESP-IDF 프로젝트 생성 |
 
 Version 1의 ST7735S, ESP32-S3 Super Mini, 스위치와 저항은 이 계약의 합격
@@ -80,11 +80,11 @@ cohort는 C1~C8 준비 상태를 모두 기록할 수 있지만 구조적으로 
 | ID | 요구사항 | 합격 조건 |
 |---|---|---|
 | C1 | ESP-IDF 프로젝트 | `idf.py set-target esp32s3`와 `idf.py build` 성공 |
-| C2 | LCD 출력 | 부팅 후 화면이 켜지고 320 × 820 세로 UI가 잘리지 않음 |
-| C3 | 개인 사용량 | 개인 사용량의 창(window), 사용률 또는 잔여율, 조회 시각을 표시 |
-| C4 | 최근 글로벌 리셋 | 출처별 최근 리셋 시각을 표시하고 출처를 구분 |
-| C5 | 다음 리셋 전망 | 24시간·48시간 공개 전망 확률을 퍼센트로 표시하며 일정 보장으로 표현하지 않음 |
-| C6 | 데이터 출처 | `codex-reset.com`과 `codex-resets.com`의 값을 하나의 사실로 합치지 않음 |
+| C2 | LCD 출력 | 부팅 후 화면이 켜지고 820 × 320 가로 UI가 잘리지 않음 |
+| C3 | 개인 사용량 | PC가 전달한 사용량 창(window) 목록을 표시. source가 제공하는 window를 모두 표시하고(예: Codex의 5시간 세션 창 `five-hour`와 주간 세션 창 `weekly`), 각 창의 사용률 또는 잔여율·조회 시각·`resets_at`을 표시. 제공되지 않은 창을 임의로 만들지 않음 |
+| C4 | 최근 글로벌 리셋 | `codex-resets.com` 기준 최근 리셋 시각과 그로부터의 경과 시간을 표시 |
+| C5 | 리셋 정보 없음 | 리셋 기록이 없으면 마지막 리셋으로부터의 경과 시간 또는 기본(default) 화면을 표시. 경과 시간을 알 수 없으면 default 화면을 표시 |
+| C6 | 데이터 출처 | 화면에 `codex-resets.com` 출처와 조회 시각을 명시. 출처를 표시하지 않은 값을 확정 정보처럼 보이지 않게 함 |
 | C7 | 장애 처리 | DNS/TLS/HTTP/JSON 오류, 빈 응답과 오래된 데이터가 장치 중단으로 이어지지 않음 |
 | C8 | 입력과 갱신 | BOOT 입력으로 화면 또는 진단 상태를 전환하고, 자동 갱신 주기·수동 갱신 동작을 문서화 |
 
@@ -148,6 +148,13 @@ GlobalResetSnapshot {
 
 Contract clarifications for the synthetic E2E validator:
 
+- Legacy fixture key mapping: `codex-reset-forecast.json`의 `last_reset_at`과
+  `codex-resets-history.json`의 `latest_reset_at`은 모두 `GlobalResetSnapshot`의
+  `latest_reset_at`으로 정규화한다. fixture 키 자체는 변경하지 않는다.
+- 표시 계층은 `codex-resets.com` snapshot을 사용한다. `forecast_*` 필드와
+  `codex-reset.com` 입력은 본 E2E 표시 범위 밖이며, 수집·정규화 파서의 호환을
+  위해 스키마와 fixture에 남는다.
+
 - A source-provided absolute window must satisfy `used_units + remaining_units =
   limit_units` within an absolute tolerance of `0.01`; percentages are checked
   separately and are never used to invent absolute token totals.
@@ -185,7 +192,7 @@ PC source가 절대 token quota를 제공하지 않으면 `unit: "percent"` 또�
 transport가 실제로 구현된 정식 E2E 결과에서 검증한다.
 `observed_at`과 `last_good_at`이 기준 시각보다 미래이면 오류로 처리한다.
 개인 창의 미래 `resets_at`은 예약된 리셋으로 허용하고, 과거 `resets_at`은
-만료/재조회 상태로 표시한다. 확률을 확정 리셋 시각으로 변환하지 않는다.
+만료/재조회 상태로 표시한다. 경과 시간을 확정 리셋 일정으로 표현하지 않는다.
 
 ## 4. 화면과 상호작용
 
@@ -193,9 +200,9 @@ transport가 실제로 구현된 정식 E2E 결과에서 검증한다.
 
 1. **대시보드:** 개인 사용량 창과 잔여율을 가장 크게 표시하고 최근 조회 시각을
    함께 표시한다.
-2. **글로벌 리셋:** 두 공개 출처의 최근 리셋 시각을 구분하고, 전망을 제공하는 출처의
-   `24h`, `48h` 퍼센트만 표시한다. 전망이 없는 출처는 미제공으로 표시한다.
-   “예측” 또는 “확률”임을 표시한다.
+2. **글로벌 리셋:** `codex-resets.com`의 최근 리셋 시각과 그로부터의 경과 시간을
+   표시한다. 리셋 기록이 없으면 경과 시간 또는 기본(default) 화면을 표시하고,
+   빈 화면이나 0 시각으로 두지 않는다. 출처와 조회 시각을 함께 표시한다.
 3. **상태/오류:** 네트워크 단절, 오래된 값, 파싱 오류, 마지막 정상 갱신 시각과
    재시도 상태를 표시한다. 정상 데이터가 없을 때도 화면은 켜져 있어야 한다.
 
@@ -205,19 +212,26 @@ BOOT는 짧은 입력으로 위 화면을 순환시키거나 에이전트가 제
 모드 진입은 애플리케이션 제어 대상이 아니다. RST는 제품 기능 입력으로 사용하지 않는다.
 
 기본 자동 갱신 주기는 60초 이하로 하고, 마지막 정상 데이터가 5분 이상
-오래되면 `stale` 상태를 표시한다. 기본 비교군은 이 값을 고정한다. 값을 바꾼
+오래되면 `stale` 상태를 표시한다. snapshot stale(`observed_at`→`reference_time`
+300초 이상)과 LCD stale(`last_good_at`→현재 5분 이상)은 duration은 같으나 기준
+시계가 다르다. 기본 비교군은 이 값을 고정한다. 값을 바꾼
 실행은 이유와 시험 결과를 기록하고 별도 비교군으로 분류한다.
+
+기본 화면 방향은 가로(820 × 320)다. IMU(QMI8658) 기반 자동 회전을 구현할 수
+있으며, 회전해도 세 화면의 정보가 잘리거나 손실되지 않아야 한다. 회전 미구현은
+핵심 불합격이 아니며, 구현한 경우 회전 조건·debounce·복귀 동작을 문서화한다.
 
 LCD GUI의 설계 품질은 C2의 전원·출력 gate와 별도로 G1~G6 rubric으로 기록한다.
 레이아웃, 가독성, 출처/상태 구분, 오류·stale·null 표현, 상호작용 피드백과
-320×820 보드 최적화를 사진·영상과 구현 근거로 평가한다. GUI 점수는 C2
+820×320 가로 보드 최적화를 사진·영상과 구현 근거로 평가한다. GUI 점수는 C2
 `not_run`/`fail`을 상쇄하지 않는다.
 
 ## 5. 데이터 출처 정책
 
 - `codex-reset.com`은 공개 신호와 이력을 바탕으로 한 독립 전망 서비스다.
-- `codex-resets.com`은 별도의 리셋 이력 서비스다.
-- 두 서비스의 시각·분류·예측을 합쳐 하나의 공식 일정으로 만들지 않는다.
+  파서 호환용으로 수집할 수 있으나 E2E 표시 범위 밖이다.
+- `codex-resets.com`은 별도의 리셋 이력 서비스다. 글로벌 화면의 기준 출처다.
+- 표시 계층에서 두 서비스의 값을 하나의 공식 일정으로 합치지 않는다.
 - 공개 서비스는 개인 OpenAI 계정의 실제 quota를 볼 수 없으므로, 개인 사용량은
   소유자 제공 데이터 또는 실험 fixture만 사용한다.
 - API 응답은 조회 시각, HTTP 상태, 파서 버전과 함께 로그에 남기되 계정 쿠키와
@@ -230,7 +244,7 @@ LCD GUI의 설계 품질은 C2의 전원·출력 gate와 별도로 G1~G6 rubric�
 공통 평가에는 고정 기준 시각을 주입한다. 각 fixture의 조회 시각 기준 0초·299초·
 300초 후를 시험해 300초 이상에서 stale임을 확인한다. PC 현재 시각으로 기대값을
 바꾸지 않는다. offline-fixture에서는 교체 가능한 전송 계층으로 DNS/TLS 실패,
-HTTP 오류, 빈/잘못된 JSON을 주입한다. 실제 Wi-Fi 단절 시험은 운영자 실물 평가로 구분한다.
+HTTP 오류, 빈/잘못된 JSON을 주입한다. 실제 USB 통신 단절 시험(Wi-Fi cohort에서는 Wi-Fi 단절)은 운영자 실물 평가로 구분한다.
 공통 테스트는 실제 제품 파서·상태 전이를 호출해야 하며 별도 모방 파서로 대체하지 않는다.
 오류 후 마지막 정상 값 유지와 정상 응답 후 오류 해제·갱신 복구를 모두 검사한다.
 공통 평가 도구는 `scripts/evaluate-product.py`이며

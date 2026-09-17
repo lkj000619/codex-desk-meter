@@ -36,9 +36,9 @@
 ```text
 P0 목적·범위·계약 고정
         ↓
-P1 runner/profile/sandbox/schema 준비 및 독립 검증
+P1 runner/profile/access-policy/schema 준비 및 독립 검증
         ↓
-P2 도구별 preflight와 sandbox receipt 검토
+P2 도구별 preflight와 preflight receipt 검토
         ↓
 P3 사용자 승인 후 pilot 1회
         ↓
@@ -62,7 +62,7 @@ P0~P2 중 하나라도 완료되지 않으면 P3 이후로 진행하지 않는�
 | R2 비교 항목 | F1~F9·I1~I4 기능표와 LCD G1~G6 rubric 확정 | `in_review` |
 | R3 결과 계약 | feature_results·GUI 평가를 기록하도록 schema/validator/example 갱신 | `not_ready` |
 | R4 profile | agent/product/interface/model/reasoning/버전/argv 확정 | `not_ready` |
-| R5 sandbox receipt | compiler·Ninja·Git·TEMP·ASCII 경로·읽기 격리·네트워크 정책 증거 | `not_ready` |
+| R5 preflight receipt | compiler·Ninja·Git·TEMP·ASCII 경로·참조 제한·활동 로그·네트워크·설정 증거; OS 격리 선택 | `not_ready` |
 | R6 runner telemetry | 시작·종료·단조 시간·명령·실패·사용자 개입·raw log·token 원본 | `partial` |
 | R7 one-shot 경계 | prompt 1회, 실행 중 외부 피드백 0회, evaluator read-only | `not_ready` |
 | R8 host 평가 | production parser/state와 fixture collector·transport의 오류·stale·복구 시험 | `not_ready` |
@@ -77,8 +77,10 @@ R3 결과 계약과 R1/R3의 transport 설계에는 Waveshare 공식
 
 R1~R3을 확정할 때에는 다중 provider fixture matrix도 고정한다. 최소 대상은 Codex,
 Claude Code, Gemini CLI, Orca/IDE host와 unsupported provider이며, source가 제공하지
-않는 절대 token 잔량을 추정하지 않는 계약을 포함한다. 현재 E2E baseline은 이
-matrix와 provider adapter 결과 schema가 없으므로 계속 `not_ready`다.
+않는 절대 token 잔량을 추정하지 않는 계약을 포함한다. matrix 본문
+(`experiments/fixtures/provider-fixture-matrix.json`)과 provider adapter 결과
+schema·validator·example은 존재하며, 남은 작업은 baseline commit·hash 동결과
+검토 기록이다. 동결 전이므로 R1/R3은 계속 `not_ready`다.
 
 ### Gate 종료 산출물과 책임자
 
@@ -89,7 +91,7 @@ matrix와 provider adapter 결과 schema가 없으므로 계속 `not_ready`다.
 | R2 | 다중-provider capability/fixture matrix와 GUI rubric | maintainer | Codex·Claude·Gemini·Orca host·unsupported 사례 포함 |
 | R3 | E2E schema, validator, valid/invalid examples와 CI log | maintainer | F1~F9·I1~I4·G1~G6 및 provider/host identity를 기계 검증 |
 | R4 | surface별 profile 파일 | maintainer | product/interface/model/reasoning/version/argv 확정 |
-| R5 | sandbox receipt example과 preflight log | runner maintainer | 경로·도구·네트워크·쓰기 범위 재현 가능 |
+| R5 | preflight receipt example과 preflight log | runner maintainer | 경로·도구·네트워크·쓰기 범위 재현 가능 |
 | R6 | raw log·시간·명령·token telemetry example | runner maintainer | 미제공 값은 null과 사유로 보존 |
 | R7 | one-shot 위반 감지 시험 | runner maintainer | prompt 1회, 시도된 follow-up은 위반 증거로만 보존 |
 | R8 | collector·normalizer·transport·receiver host/integration test log | evaluator maintainer | 오류·stale·복구·provider 격리 통과 |
@@ -124,18 +126,24 @@ fixture를 직접 내장하는 것은 historical preparation 자료로만 인정
 ```text
 PC provider collectors
         ↓ normalized UsageSnapshot / GlobalResetSnapshot
-USB serial(COM3) 또는 local Wi‑Fi transport adapter
+USB serial(COM3) `cdm/1` transport adapter (E2E baseline 고정)
         ↓ framed data
 ESP32 receiver → validation/cache/stale → common state → LCD GUI
 ```
+
+local Wi-Fi 운용은 별도 cohort에서 비교하며, E2E baseline의 transport 선택을
+대체하지 않는다. baseline(`experiments/config/version-2-baseline.yaml`)의
+`transport_choice: usb-serial-cdm-1`이 단일 진실이며, 본문의 “또는 local Wi-Fi”
+표현은 선택지가 아닌 후속 cohort 항목으로 읽는다. transport 결정의 근거는
+[ADR-0005](../decisions/0005-transport-usb-serial-baseline.md)를 따른다.
 
 `UsageSnapshot`은 백분율과 함께 source가 제공하는 경우에만 used/remaining/limit
 token 및 단위를 운반한다. source가 절대 quota를 공개하지 않으면 null과
 `unit: percent|unknown`을 유지하며, agent나 runner가 임의의 token 총량을 추정하지
 않는다.
 
-transport 방식은 USB serial(COM3) 또는 local Wi‑Fi 중 하나를 baseline에서
-고정한다. 실제 계정 source로의 전환은 별도의 owner-only live integration이다.
+E2E baseline transport는 USB serial(COM3) `cdm/1`로 고정済み다. local Wi-Fi 운용은
+별도 cohort에서 비교한다. 실제 계정 source로의 전환은 별도의 owner-only live integration이다.
 collector·transport·receiver를 구현·검증하기 전에는 “실시간 Codex 사용량 표시
 완료”라고 보고하지 않는다. 계층별 frame·재연결·무결성 시험의 설계는
 [통합 계약 초안](integration-contract.md)을 참고한다.
@@ -146,7 +154,7 @@ collector·transport·receiver를 구현·검증하기 전에는 “실시간 Co
 
 - 기준 commit이 아닌 branch에서 시작
 - prompt가 1회 초과 전달되거나 실행 중 구현 피드백·수정 지시가 제공됨
-- runner manifest·sandbox receipt·raw log·원본 token telemetry가 없음
+- runner manifest·preflight receipt·raw log·원본 token telemetry가 없음
 - 실행 후 사람이 같은 branch의 코드를 수정하고 원본과 구분하지 않음
 - fixture/reference test를 production C 또는 hardware 합격으로 주장
 - COM3 artifact·보드·flash hash를 확인하지 않고 hardware pass를 기록
@@ -159,14 +167,24 @@ collector·transport·receiver를 구현·검증하기 전에는 “실시간 Co
 현재 저장소의 prompt와 실행 명령을 읽거나 시험할 수는 있지만 agent process를
 시작하지 않는다.
 
-## Current review addendum (2026-09-13)
+## Current review addendum (2026-09-13 snapshot)
 
 The offline readiness review is recorded in
-[`readiness-review-20260913.md`](readiness-review-20260913.md). The current
-R0-R10 statuses are authoritative for this review: R0 `in_review`, R1
+[`readiness-review-20260913.md`](readiness-review-20260913.md). The R0-R10 statuses
+below are that review's snapshot, not the current norm: R0 `in_review`, R1
 `in_review`, R2 `in_review`, R3 `in_review`, R4 `not_ready`, R5 `not_ready`,
 R6 `partial`, R7 `not_ready`, R8 `partial`, R9 `not_ready`, and R10
-`not_authorized`.
+`not_authorized`. The gate table above (§필수 gate) is authoritative for the
+current status.
+
+Current policy (2026-09-14): [isolation-policy.md](isolation-policy.md) defines
+`prompt-and-log` as the default: current main inputs in a dedicated checkout,
+prompt restrictions against other branches/prior results, and activity/reference logs.
+Docker/VM is optional. Quantitative comparison is allowed with the same declared
+conditions and adequate evidence. OS read isolation is recorded as `not_enforced`.
+R5 remains `not_ready` pending a reviewed policy-bound preflight receipt;
+R10 remains `not_authorized`. Actual reference violations and incomplete manual
+delivery/evidence remain comparison exclusions.
 
 All checks in this review are read-only/offline. A host simulation is not I3/I4
 or a hardware pass, and no candidate-agent run, provider access, serial open,

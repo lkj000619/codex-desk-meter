@@ -38,11 +38,11 @@ end-to-end cohort에서는 F1/F3이 필수다.
 |---|---|---|---|---|
 | F1 | PC agent/provider 사용량 collector | PC의 허용된 provider source에서 사용량 창·잔여율·조회 시각을 안전하게 수집하고 provider와 host context를 분리하는가? 절대 token quota를 제공할 때만 단위·used/remaining/limit를 보존하고, 없으면 임의로 계산하지 않는가? | collector 실행 로그, 입력·출력 hash, capability matrix, 자격증명 비노출 확인 | 준비용: `not_run`; E2E: 필수 |
 | F2 | 정규화·출처 분리 | 개인 사용량과 `codex-reset.com`, `codex-resets.com`을 공통 모델로 변환하고 임의 병합하지 않는가? | production parser host test, fixture 오류 시험, source 필드 | fixture parser 범위에서 평가 |
-| F3 | PC→ESP32 transport | USB serial(COM3) 또는 로컬 Wi‑Fi에서 frame 버전·길이·무결성·재연결·오류 응답을 보장하는가? | protocol 문서, 송수신 raw log, checksum/재연결 시험 | 준비용: `not_run`; E2E: 필수 |
+| F3 | PC→ESP32 transport | E2E baseline 고정인 USB serial(COM3) `cdm/1`에서 frame 버전·길이·무결성·재연결·오류 응답을 보장하는가? (local Wi-Fi는 별도 cohort) | protocol 문서, 송수신 raw log, checksum/재연결 시험 | 준비용: `not_run`; E2E: 필수 |
 | F4 | ESP32 receiver·state | 수신/입력 데이터를 검증하고 last-good, stale, 오류 해제·복구를 상태 모델에 반영하는가? | 상태 전이 host test, 오류 주입, 시리얼 로그 | fixture 직접 입력으로 부분 평가 |
 | F5 | LCD GUI | 정보 우선순위, 레이아웃, 가독성, 상태·출처·오류 표현, 320×820 최적화가 적절한가? | 동일 fixture의 화면 사진/영상, 구현 근거 | 필수 비교 |
 | F6 | 입력·갱신 | BOOT·자율 기능으로 화면 전환과 수동/자동 갱신이 예측 가능하고 피드백이 명확한가? | 입력 전후 영상, 시리얼 로그, debounce 값 | 필수 비교 |
-| F7 | 글로벌 리셋 표시 | 최근 리셋과 24h/48h 전망을 독립적으로 표시하고 예측을 일정으로 오해하게 하지 않는가? | 두 source fixture, 화면별 캡처, parser test | 필수 비교 |
+| F7 | 글로벌 리셋 표시 | `codex-resets.com` 최근 리셋·경과 시간을 표시하고, 기록이 없으면 경과 시간 또는 default 화면으로 표시하는가? | resets fixture, 화면별 캡처, parser test | 필수 비교 |
 | F8 | 빌드·배포·관측 | ESP-IDF 빌드, artifact hash, 로그, manifest와 결과 schema가 재현 가능한가? | build log, binary hash, manifest, validator | 필수 비교 |
 | F9 | 자율 하드웨어 기능 | 후보 3개·선택 근거·구현 완성도·핵심 기능과의 분리가 설득력 있는가? | 선택 문서, 테스트, 하드웨어 증거 | 필수 비교 |
 
@@ -95,9 +95,11 @@ GUI 총점은 제품 합격률로 환산하지 않는다. C2가 `not_run` 또는
 - agent 자체 시험, 공통 host 시험, 운영자 하드웨어 시험을 별도 열로 구분한다.
 - 구현자가 실행 후 코드를 고친 경우 원본 run 점수에는 반영하지 않고
   `remediation/...` 결과로 분리한다.
-- 현재 schema v2에는 F1~F9와 G1~G6 구조가 아직 없다. 정식 E2E baseline을
-  만들기 전에 result schema·validator·example을 이 기준에 맞게 확장하고, F1/F3
-  fixture collector·transport 시험을 포함한 검증을 먼저 통과해야 한다.
+- E2E 결과 계약(`end-to-end-result.schema.json`)은 F1~F9·I1~I4·G1~G6 필드를 보유한다.
+  확장 대상은 historical hardware-autonomy용 `hardware-feature-result.schema.json`
+  (C1~C8만 기록)이며, 이를 E2E 기준으로 오독하지 않는다. 정식 E2E baseline을
+  만들기 전에 F1/F3 fixture collector·transport 시험을 포함한 검증을 먼저
+  통과해야 한다.
 - schema·validator·example과 F3 transport를 설계할 때 Waveshare 공식
   [`waveshareteam/codex-meter`](https://github.com/waveshareteam/codex-meter)의 host,
   device payload 및 Wi-Fi/BLE transport 구현을 참고할 수 있다. 단, 우리 결과

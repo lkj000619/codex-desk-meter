@@ -3,7 +3,7 @@
 > 운영자 전용: 이 prompt는 `benchmark-readiness.md`의 R0~R9 사전조건이 통과되고
 > R10에서 사용자가 특정 pilot/benchmark 실행을 명시적으로 승인한 경우에만 runner가
 > 전달한다. 사람이 직접 복사·붙여넣어 실행하지 않는다. runner가 만든 manifest,
-> profile, sandbox receipt가 없으면 agent는 작업을 시작하지 말고 `not_authorized`
+> profile, preflight receipt가 없으면 agent는 작업을 시작하지 말고 `not_authorized`
 > 사유만 남긴다.
 
 > 정량 비교 cohort는 공통 prompt 1회, 후속 질문 0회, 실행 중 외부 구현 피드백
@@ -45,6 +45,19 @@ Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 요청하거나 �
 개인 사용량은 fixture로 먼저 구현·검증하고, 실제 계정 통합이 불가능하면 그
 사유를 기록하라.
 
+## 참조 범위와 실행 접근 정책
+
+현재 main에서 제공된 지정 checkout의 현재 문서·파일과 운영자가 명시적으로
+제공한 자료만 사용하라. `docs/experiments/isolation-policy.md`를 읽어라.
+다른 branch/worktree, 과거 agent의 구현·결과·로그·대화를 조회하지 말라.
+`git log`, `git show`, 다른 ref 조회, branch 전환 또는 외부 저장소 검색으로
+이전 구현을 탐색하지 말라. 자체 변경 확인용 `git status`, `git diff`는 허용한다.
+허용된 toolchain·의존성 경로는 사용할 수 있으나 사용자 파일·credential을 탐색하지 말라.
+사용한 명령·도구·참고 자료를 기록하고 로그의 관측 한계도 보고하라.
+기본 접근 정책은 `prompt-and-log`이며 Docker/VM은 선택 사항이다.
+제품 입력은 offline fixture를 사용한다. 모델 호출용 네트워크와 웹 검색·MCP
+권한은 profile의 사전 선언 조건을 따르고 임의로 확대하지 말라.
+
 ## 구현 요구
 
 - 기준 커밋에서 ESP-IDF 프로젝트를 생성하고 `idf.py set-target esp32s3`와
@@ -52,8 +65,9 @@ Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 요청하거나 �
 - C1~C8을 모두 구현하라. 핵심 요구사항을 제거하거나 축소하지 말라.
 - C3는 PC에서 제공한 fixture가 전송·수신되어 firmware 상태와 LCD까지 반영되는
   데이터 경로를 포함한다. firmware에 고정 fixture를 내장하는 것으로 대체하지 말라.
-- 개인 사용량, `codex-reset.com`, `codex-resets.com`을 공통 데이터 모델로
-  정규화하되 출처와 시각을 보존하라.
+- 개인 사용량과 `codex-resets.com` 리셋 기록을 공통 데이터 모델로
+  정규화하되 출처와 시각을 보존하라. 표시 계층은 `codex-resets.com`을 사용하고,
+  기록이 없으면 경과 시간 또는 default 화면을 표시하라.
 - PC collector·정규화 adapter·USB serial transport·실제 ESP32 receiver를 구현하고
   I1~I4별 raw input/output, frame version·길이·CRC, 재연결·오류·stale·복구
   시험을 제공하라. 기존 maintainer host 도구를 활용할 수 있으나 실제 제품 모듈을
@@ -64,9 +78,9 @@ Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 요청하거나 �
   model, host, account profile과 metric 단위를 분리하라. source가 절대 token
   잔량을 제공하지 않으면 percent/unknown과 `unsupported`/`unavailable` 상태를
   보존하고 임의로 token 수를 계산하지 말라.
-- 두 공개 출처의 값을 하나의 공식 리셋 일정으로 합치지 말라.
+- 글로벌 화면은 `codex-resets.com` 단일 출처를 사용하고, 경과 시간을 확정 일정처럼 표현하지 말라.
 - 네트워크·TLS·HTTP·JSON 오류와 오래된 데이터에서도 화면을 중단시키지 말라.
-- 320 × 820 세로 LCD에서 대시보드, 글로벌 리셋, 상태/오류 화면을 제공하라.
+- 820 × 320 가로 LCD를 기본으로 대시보드, 글로벌 리셋, 상태/오류 화면을 제공하라.
 - BOOT 입력 동작과 자동·수동 갱신 주기를 문서화하고 시험하라. RST는 시스템
   리셋 전용으로 유지하라.
 - 추가 하드웨어를 사용하지 말라. Version 1 전용 하드웨어를 요구하지 말라.

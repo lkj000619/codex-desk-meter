@@ -84,6 +84,8 @@ comparison_surfaces:
     included: false
 
 data_sources:
+  # Multi-provider fixture matrix (fixed input candidate; hash freeze pending):
+  # experiments/fixtures/provider-fixture-matrix.json
   personal_usage: experiments/fixtures/personal-usage.json
   codex_reset_forecast: experiments/fixtures/codex-reset-forecast.json
   codex_resets_history: experiments/fixtures/codex-resets-history.json

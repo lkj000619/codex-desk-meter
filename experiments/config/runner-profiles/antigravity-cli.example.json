@@ -17,15 +17,20 @@
     "operator-check-required",
     "--version"
   ],
-  "sandbox_policy": "operator-check-required",
+  "sandbox_policy": "prompt-and-log",
   "approval_policy": "operator-check-required",
   "network_mode": "offline-fixture",
   "settings_inventory": {
-    "skills": "operator-check-required",
-    "mcp": "operator-check-required",
+    "skills": "custom/user-installed disabled by policy; built-in inventory and enforcement operator-check-required",
+    "mcp": "MCP servers disabled by policy; enforcement operator-check-required",
     "memory": "operator-check-required",
     "user_instructions": "operator-check-required",
     "cache": "operator-check-required",
-    "routing": "operator-check-required"
+    "routing": "operator-check-required",
+    "plugins": "external plugins disabled by policy; built-in inventory and enforcement operator-check-required",
+    "permissions": "operator-check-required",
+    "model_network": "operator-check-required",
+    "extension_condition": "builtin-only-v1; adopted policy; enforcement operator-check-required",
+    "usage_recording": "record actual skills/plugins/MCP usage with raw-log references; unavailable values null with reason"
   }
 }

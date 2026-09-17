@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Codex Desk Meter 문서 지도</title>
+<style>
+body{font-family:"Malgun Gothic",sans-serif;max-width:960px;margin:2em auto;padding:0 1em;line-height:1.6;color:#222}
+h1{border-bottom:3px solid #333;padding-bottom:.3em}
+h2{margin-top:2em;border-bottom:1px solid #ccc;padding-bottom:.2em}
+.card{border:1px solid #ddd;border-radius:8px;padding:.8em 1em;margin:.6em 0;background:#fafafa}
+.card b{display:block;font-size:1.05em}
+.path{font-family:Consolas,monospace;font-size:.85em;color:#555}
+.tag{display:inline-block;font-size:.75em;border-radius:4px;padding:0 .5em;margin-right:.4em;color:#fff}
+.read{background:#2a7}.gate{background:#c62}.run{background:#36c}.hw{background:#a5a}.rep{background:#777}
+a{color:#06c}
+.status{margin:1em 0;padding:.8em 1em;background:#fff8e1;border:1px solid #e6c200;border-radius:8px}
+</style>
+</head>
+<body>
+<h1>Codex Desk Meter 문서 지도</h1>
+<p>PC(5시간/주간 잔량 수집) → USB cdm/1 → ESP32 LCD(사용량+resets 기준 리셋·경과) 데스크 디바이스와 AI 에이전트 벤치마크 프로젝트의 문서 구조도입니다. 다이어그램: <a href="pipeline.html">데이터 파이프라인</a> · <a href="gates.html">실행 게이트 P0-P6</a> · <a href="cohorts.html">Cohort별 기능 범위</a>.</p>
+<div class="status"><b>현재 상태: PLANNING / NOT_AUTHORIZED</b> — R10 승인 전에는 <code>benchmark.py run</code>과 수동 prompt 전달을 실행하지 않습니다. 이 지도는 검증 브랜치(<code>docs/verification-20260916</code>) 기준이며, 정식 기준은 <code>main</code>의 검토된 commit/tag입니다.</div>
+
+<h2>1. 목적·계약 (먼저 읽기)</h2>
+<div class="card"><b>프로젝트 목적 <span class="tag read">필독</span></b><span class="path">docs/PROJECT_PURPOSE.md</span><br>왜 만드는지, PC 파트/ESP 파트 분할, provider-agnostic 원칙, 성공 기준 11개.</div>
+<div class="card"><b>Version 2 제품 계약 <span class="tag read">필독</span></b><span class="path">docs/PRODUCT_CONTRACT.md</span><br>C1~C8 핵심 요구사항, I1~I4 통합 조건, 데이터 모델, C3 두 창(five-hour/weekly), C4 resets 단일·경과, 가로 820×320 기본.</div>
+<div class="card"><b>Windows 개발 환경</b><span class="path">docs/DEVELOPMENT_ENVIRONMENT.md</span><br>ESP-IDF v5.3.2, ASCII 경로, COM3, bring-up 검증 기록.</div>
+<div class="card"><b>결정 기록(ADR)</b><span class="path">docs/decisions/0001~0005</span><br>ESP-IDF 선정→V2 우선→v5.3.2 고정→USB transport 고정(0005).</div>
+
+<h2>2. 실험 게이트·운영</h2>
+<div class="card"><b>실행 전 readiness gate <span class="tag gate">게이트</span></b><span class="path">docs/experiments/benchmark-readiness.md</span><br>R0~R10 상태표가 규범. R1 hash 미동결, R10 미승인.</div>
+<div class="card"><b>실험 프로토콜</b><span class="path">docs/experiments/agent-experiment-protocol.md</span><br>비교군, one-shot 1회 전달, 역할 경계(maintainer/agent/evaluator/operator).</div>
+<div class="card"><b>브랜치·결과 관리</b><span class="path">docs/experiments/benchmark-management.md</span><br>run ID 규칙, 독립 반복, main 게시 규칙.</div>
+<div class="card"><b>실행 명령 템플릿</b><span class="path">docs/experiments/agent-run-commands.md</span><br>표면별 argv·telemetry 메모. 승인 전 실행 금지.</div>
+<div class="card"><b>참조 범위·격리 정책</b><span class="path">docs/experiments/isolation-policy.md</span><br>기본 <code>prompt-and-log</code>(read_isolation 미적용), builtin-only-v1.</div>
+
+<h2>3. 데이터·평가 계약</h2>
+<div class="card"><b>PC→ESP32 통합 계약</b><span class="path">docs/experiments/integration-contract.md</span><br>I1 collector / I2 정규화 / I3 USB cdm/1 / I4 receiver, frame envelope.</div>
+<div class="card"><b>기능·GUI 비교 기준</b><span class="path">docs/experiments/feature-comparison.md</span><br>F1~F9 기능표, G1~G6 루브릭(18점).</div>
+<div class="card"><b>평가 인터페이스</b><span class="path">docs/experiments/evaluation-contract.md</span><br>host 어댑터 계약, 0/299/300초 stale, 실물 채점표.</div>
+<div class="card"><b>자율 기능 실험</b><span class="path">docs/experiments/hardware-feature-discovery.md</span><br>후보 3개→1개 선택, 30점 별도 채점.</div>
+
+<h2>4. 하드웨어</h2>
+<div class="card"><b>V2 기능 카탈로그 <span class="tag hw">HW</span></b><span class="path">docs/hardware/version-2-capabilities.md</span><br>ST7701 320×820, IMU/RTC/배터리/TF, BOOT 입력 규칙.</div>
+<div class="card"><b>bring-up 기록</b><span class="path">docs/hardware/version-2-bring-up.md</span><br>COM3 통신, 백업 SHA, LCD·BOOT 확인 결과.</div>
+<div class="card"><b>제조사 예제</b><span class="path">docs/hardware/waveshare-manufacturer-example.md</span><br>Demo ZIP 빌드·플래시 검증 기록.</div>
+
+<h2>5. 실행 입력 (hash 동결 대상)</h2>
+<div class="card"><b>공통 에이전트 프롬프트 <span class="tag run">실행</span></b><span class="path">experiments/prompts/version-2-agent-task.md</span><br>runner만 전달. F1~F9·I1~I4 전부 범위.</div>
+<div class="card"><b>기준 설정</b><span class="path">experiments/config/version-2-baseline.yaml</span><br>cohort, transport=usb-serial-cdm-1, surface 목록.</div>
+<div class="card"><b>runner profiles</b><span class="path">experiments/config/runner-profiles/</span><br>codex/gemini/antigravity=sentinel 미확정, opencode만 기입.</div>
+<div class="card"><b>fixtures</b><span class="path">experiments/fixtures/</span><br>5h/weekly, forecast 24/48h, provider matrix.</div>
+
+<h2>6. 검증 보고서</h2>
+<div class="card"><b>1차 리뷰</b><span class="path">docs/experiments/readiness-review-20260913.md</span><br>오프라인 readiness 점검(스냅샷).</div>
+<div class="card"><b>2차 검증 보고서 <span class="tag rep">최신</span></b><span class="path">docs/experiments/verification-report-2nd.md</span><br>4 PASS + 5건 지적, 3차 반영 완료(<code>2bf5972</code>).</div>
+</body>
+</html>

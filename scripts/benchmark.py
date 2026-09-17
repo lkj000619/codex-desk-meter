@@ -1,7 +1,7 @@
 """Prepare isolated baseline snapshots and capture operator-owned execution records.
 
-No shell interpolation. Logs stay outside the agent checkout. An external sandbox
-must enforce read isolation; a separate folder alone is not a security boundary.
+No shell interpolation. Logs stay outside the agent checkout. Default access policy
+uses prompt restrictions and activity logs; OS sandbox read isolation is optional.
 """
 import argparse
 import io
@@ -226,6 +226,37 @@ def command_metrics(path, adapter):
     return dict(tool_calls=len(items), failed_commands=failed)
 
 
+def validate_preflight_receipt(receipt, manifest, profile, evidence_root):
+    """Validate the selected access policy; prompt restrictions are not OS isolation."""
+    mode = receipt.get("access_policy")
+    if mode not in {"prompt-and-log", "external-sandbox"}:
+        raise ValueError("preflight requires an explicit supported access_policy")
+    if profile["sandbox_policy"] != mode:
+        raise ValueError("preflight access policy does not match profile")
+    for key, expected in (("base_commit", manifest["execution"]["base_commit"]),
+                          ("profile_sha256", manifest["agent"]["configuration_sha256"])):
+        if receipt.get(key) != expected:
+            raise ValueError(f"preflight receipt mismatch: {key}")
+    checks = receipt.get("checks")
+    if not isinstance(checks, dict):
+        raise ValueError("preflight checks must be an object")
+    required = ["idf_build", "compiler", "ninja", "git", "temp_write",
+                "network_policy", "settings_inventory"]
+    if mode == "prompt-and-log":
+        required += ["prompt_scope", "activity_logging"]
+        if checks.get("read_isolation") != "not_enforced":
+            raise ValueError("prompt-and-log must record read_isolation as not_enforced")
+    else:
+        required += ["read_isolation"]
+    for check in required:
+        if checks.get(check) != "pass":
+            raise ValueError(f"preflight has not passed: {check}")
+    if not receipt.get("evidence"):
+        raise ValueError("preflight receipt needs evidence file hashes")
+    from benchmark_support import verify_evidence
+    verify_evidence({"operator": {"evidence": receipt["evidence"]}}, evidence_root)
+
+
 def execute(a):
     directory = Path(a.directory).resolve()
     m = read(directory / "run-manifest.json")
@@ -248,17 +279,7 @@ def execute(a):
     receipt = read(a.receipt)
     if m["operator"]["phase"] == "benchmark" and receipt.get("pilot_pass") is not True:
         raise ValueError("benchmark requires reviewed pilot pass in the receipt")
-    # A reviewed receipt is evidence, not a bypass flag. It is tied to this profile/baseline.
-    for key, expected in (("base_commit", m["execution"]["base_commit"]), ("profile_sha256", m["agent"]["configuration_sha256"])):
-        if receipt.get(key) != expected:
-            raise ValueError(f"sandbox preflight receipt mismatch: {key}")
-    for check in ("idf_build", "compiler", "ninja", "git", "temp_write", "network_policy", "read_isolation", "settings_inventory"):
-        if receipt.get("checks", {}).get(check) != "pass":
-            raise ValueError(f"sandbox preflight has not passed: {check}")
-    if not receipt.get("evidence"):
-        raise ValueError("sandbox receipt needs evidence file hashes")
-    from benchmark_support import verify_evidence
-    verify_evidence({"operator": {"evidence": receipt["evidence"]}}, Path(a.receipt).resolve().parent)
+    validate_preflight_receipt(receipt, m, profile, Path(a.receipt).resolve().parent)
     argv = [s.replace("{checkout}", str(checkout)).replace("{model}", profile["model"]) for s in profile["argv"]]
     actual_version = subprocess.check_output(profile["version_argv"], encoding="utf-8", timeout=30).strip()
     if actual_version != profile["agent_version"]:

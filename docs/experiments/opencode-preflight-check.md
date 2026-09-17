@@ -78,3 +78,15 @@ Stdin delivery for the full candidate task remains unverified: the access probe
 used a positional message. It must be checked separately before runner execution.
 
 Reference: https://opencode.ai/docs/permissions/
+
+## Access policy update (2026-09-14)
+
+This report preserves the checks and evidence recorded at review time.
+Its mandatory OS-sandbox/read-isolation gate is superseded by
+[isolation-policy.md](isolation-policy.md): `prompt-and-log` is the default;
+Docker/VM is optional. Host toolchain checks plus prompt scope, activity logging,
+network/settings evidence can satisfy the revised R5 preflight requirement.
+OS read isolation is `not_enforced` in the default mode. Lack of a Docker/sandbox
+receipt alone does not exclude a run from quantitative comparison.
+No preflight pass, candidate authorization or hardware evidence is granted by
+this policy update. Prior measured results and historical limitations are unchanged.
