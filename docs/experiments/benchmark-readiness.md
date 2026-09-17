@@ -4,6 +4,11 @@
 
 **상태: `PLANNING / NOT_AUTHORIZED`**
 
+2026-09-18 설계 검토 후속 변경과 최신 host 검증은
+[design-remediation-20260918.md](design-remediation-20260918.md)에 기록한다.
+계약·fixture·IDF 활성화 보완과 host 시험 통과는 개별 실행 profile/receipt 확정이나
+실물 합격을 뜻하지 않는다. R4/R5/R10의 미충족 조건은 해당 기록을 함께 확인한다.
+
 이 문서는 에이전트 제품 구현을 실행하는 지침이 아니라, 실행해도 되는지 판단하는
 운영 gate다. 현재 이 gate가 `AUTHORIZED`로 바뀌지 않았으므로 agent prompt를
 수동으로 붙여넣거나 `benchmark.py run`을 실행하지 않는다. 문서 보완·schema·runner

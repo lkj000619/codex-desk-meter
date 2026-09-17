@@ -85,6 +85,12 @@ EIM 프로필(`Microsoft.v5.3.2.PowerShell_profile.ps1`)이 한글 사용자명 
    `hello-world` 전체 빌드 성공을 실측했다 (산출물: `hello_world.bin`,
    `bootloader.bin`).
 
+`scripts/activate-idf.ps1`은 이제 `C:\Espressif\user-tools`가 있으면 해당
+설치의 Python 환경과 `idf_tools.py export --format key-value`를 사용한다.
+환경 값을 key/value로 적용하며 EIM 프로필을 실행하지 않는다. `-ToolsRoot`로
+동일 구조의 다른 설치를 지정할 수 있다. 해당 경로가 없으면 기존 EIM 활성화를
+사용하며, 어느 경로든 Python 의존성 및 실제 IDF 버전 확인이 실패하면 중단한다.
+
 ## 검증 결과
 
 다음 항목을 실제로 확인했다.

@@ -151,7 +151,7 @@ cohort 정의와 사용자 승인을 통해서만 가능하며, 실행 중 선�
   "sequence": 42,
   "sent_at": "2026-09-11T00:00:00Z",
   "payload": {
-    "usage": {},
+    "usage": [],
     "global_resets": []
   },
   "integrity": {
@@ -161,9 +161,23 @@ cohort 정의와 사용자 승인을 통해서만 가능하며, 실행 중 선�
 }
 ```
 
-정식 형식에서는 canonical serialization, 최대 frame 크기, line/length framing,
-checksum 범위, sequence 재생·순서 뒤바뀜 처리, ACK/재전송 여부와 timeout을
-명시한다. 후보 envelope를 구현했다고 해서 아직 I3 합격으로 기록하지 않는다.
+위 예시는 구조 설명용이다. CRC까지 유효한 입력은
+`experiments/examples/cdm-frame.example.json`을 사용한다. wire 형식은
+`experiments/schema/cdm-frame.schema.json`, byte·순번·복구 규칙은
+[host-device-pipeline-contract.md](host-device-pipeline-contract.md)가 기준이다.
+`payload.usage`와 `payload.global_resets`는 항상 배열이다. 제품의 논리 모델과
+wire 모델의 필드 변환은 아래와 같으며 암묵적인 별칭으로 처리하지 않는다.
+
+| 논리 GlobalResetSnapshot | cdm/1 wire | 규칙 |
+|---|---|---|
+| `provider` | `source` | 출처 문자열 보존 |
+| `fetched_at` | `captured_at` | 조회 시각 보존; null이면 정상 wire snapshot을 만들지 않고 수집 오류로 기록 |
+| 나머지 공통 필드 | 같은 이름 | null·오류·stale 및 값 보존 |
+| 해당 없음 | `schema_version: 1` | wire adapter가 부여 |
+
+legacy fixture의 `last_reset_at`은 `latest_reset_at`으로만 변환한다.
+host 평가 adapter의 출력은 제품 논리 모델을 따르고 serial 출력은 wire 모델을
+따른다. 같은 입력에 대한 양쪽 값의 일치도 시험한다.
 
 ## 공통 통합 시험
 
@@ -174,6 +188,8 @@ checksum 범위, sequence 재생·순서 뒤바뀜 처리, ACK/재전송 여부�
 | truncation/빈 frame | parser crash 없이 timeout/stale 처리 |
 | 중복·역순 sequence | 정책에 따라 무시 또는 명시적 오류, 상태 오염 없음 |
 | PC/USB 단절·COM 재열거 | receiver가 watchdog 없이 유지·재연결 후 복구 |
+| PC collector만 재시작 | 장치의 순번 상태를 유지한 채 영속화한 다음 순번으로 복구; 1로 초기화하지 않음 |
+| 순번 저장소 유실·손상 | 자동 초기화·전송 금지, 명시적 운영자 복구; last-good 유지 |
 | source 필드 누락/미래 시각 | normalization 오류와 null 표시, 임의 대체 금지 |
 | absolute token 미제공 | percent/unknown만 전송, token 수 추정 금지 |
 

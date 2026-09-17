@@ -6,6 +6,9 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+$env:PYTHONUTF8 = '1'
+$env:PYTHONIOENCODING = 'utf-8'
+$env:PYTHONDONTWRITEBYTECODE = '1'
 $script:Failures = 0
 $script:Warnings = 0
 $repoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path

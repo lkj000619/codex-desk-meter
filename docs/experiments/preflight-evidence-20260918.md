@@ -1,5 +1,10 @@
 # Preflight 증거 기록 (2026-09-18, pilot 준비)
 
+후속 갱신: `activate-idf.ps1` 스크립트 수리, IDF Python benchmark 의존성 설치,
+63개 회귀 시험·새 ESP32-S3 빌드 결과는
+[설계 검토 후속 기록](design-remediation-20260918.md)을 따른다. 아래 수리 미반영
+문구와 58개 시험 수는 초기 검사 당시의 기록이다.
+
 `check-experiment-preflight.ps1` 실행 + 읽기 전용 실측. 본 기록은 통과 선언이
 아니다. R5는 검토된 policy-bound receipt가 있어야 닫히며, R10은 `not_authorized`
 유지다.

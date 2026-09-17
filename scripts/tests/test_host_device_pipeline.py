@@ -78,6 +78,9 @@ class HostDevicePipelineTests(unittest.TestCase):
             {"openai", "anthropic", "google"},
         )
         self.assertIn("orca", {snapshot["host_id"] for snapshot in collected.snapshots})
+        antigravity = next(s for s in collected.snapshots if s["agent_id"] == "antigravity-cli")
+        self.assertEqual(antigravity["status"], "unsupported")
+        self.assertEqual(antigravity["windows"], [])
         self.assertEqual(
             {reset["source"] for reset in collected.global_resets},
             {"codex-reset.com", "codex-resets.com"},
@@ -122,6 +125,33 @@ class HostDevicePipelineTests(unittest.TestCase):
         self.assertEqual(collected.failures, [])
         self.assertTrue(any(item["unit"] == "token" for item in collected.snapshots))
         self.assertTrue(any(window["resets_at"] is None for item in collected.snapshots for window in item["windows"]))
+
+    def test_logical_and_wire_global_reset_mapping_preserves_nulls_and_rejects_conflicts(self):
+        raw = read_json("experiments/fixtures/codex-resets-history.json")
+        wire = pipeline._normalize_global_reset(raw)
+        logical = pipeline.global_reset_to_logical(wire)
+        self.assertEqual(logical["provider"], raw["source"])
+        self.assertEqual(logical["fetched_at"], raw["captured_at"])
+        self.assertIsNone(logical["forecast_24h_percent"])
+        self.assertEqual(pipeline._normalize_global_reset(logical), wire)
+        conflicting = dict(logical, source="codex-reset.com")
+        with self.assertRaises(pipeline.PipelineError) as caught:
+            pipeline._normalize_global_reset(conflicting)
+        self.assertEqual(caught.exception.code, "GLOBAL_RESET_ALIAS_CONFLICT")
+
+    def test_pc_restart_requires_successor_without_resetting_live_receiver(self):
+        receiver = pipeline.ReferenceReceiver()
+        def send(sequence, seconds):
+            stamp = f"2026-09-10T00:00:{seconds:02d}Z"
+            frame = pipeline.build_frame(sample_payload(), sequence=sequence, sent_at=stamp)
+            return receiver.receive(pipeline.encode_frame(frame), stamp)
+        self.assertTrue(send(7, 0).accepted)
+        # A restarted sender's newer timestamp does not authorize sequence reset.
+        self.assertEqual(send(1, 1).code, "OUT_OF_ORDER_SEQUENCE")
+        self.assertEqual(receiver.state.sequence, 7)
+        self.assertTrue(send(8, 2).accepted)
+        self.assertEqual(receiver.state.sequence, 8)
+        self.assertFalse(send(7, 3).accepted)
 
     def test_unavailable_is_a_nonfatal_snapshot_status(self):
         unavailable = read_json("experiments/fixtures/providers/gemini-cli-unsupported.json")

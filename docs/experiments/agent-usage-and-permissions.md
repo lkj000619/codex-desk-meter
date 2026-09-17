@@ -59,19 +59,21 @@ codex exec --json -m <model> - < prompt.txt
 - 근거: 로컬 `opencode run --help` 실측, `opencode-preflight-check.md`,
   `opencode-stdin-probe-20260914.md`.
 
-### antigravity-cli (agy 1.2.4)
+### antigravity-cli (agy 1.2.5, 후속 실측)
 
 ```powershell
-agy --print --input-format stream-json --output-format stream-json --model <model-id> < prompt.txt
+agy --print --input-format text --output-format stream-json --print-timeout 120m --model <model-id>
 ```
 
 - `--print` (alias `-p`, `--prompt`): 단일 프롬프트 비대화형 실행.
-- `--input-format stream-json` + `--output-format stream-json`: stdin NDJSON 한 줄당
-  한 turn 실행. runner 입력 전달 형식과 일치한다.
+- runner는 prompt.txt를 일반 UTF-8 bytes로 stdin에 전달하므로 입력은 `text`다.
+  출력만 `stream-json`으로 지정한다. `stream-json` 입력은 NDJSON 메시지가
+  필요하므로 현재 runner와 호환되지 않는다. 위 명령의 stdin 전달은 runner가 담당한다.
 - `--model`: `agy models`의 ID 그대로 사용 (예: `gemini-3.8-flash-high`).
 - `--effort low|medium|high`: 모델 ID에 effort가 포함된 경우 중복 지정 금지.
   ID(`gemini-3.8-flash-high`)와 플래그(`--effort`) 중 하나를 비교군에 고정한다.
-- `--print-timeout`: 기본 5m0s. runner hard timeout(120분)와 별개로 기록한다.
+- `--print-timeout`: 기본 5m0s 대신 pilot draft는 `120m`으로 고정한다.
+  runner도 7200초 hard timeout을 적용하며 먼저 종료된 사유를 기록한다.
 - `--sandbox`: 터미널 제한 sandbox 실행. prompt-and-log 기본모드에서는 설정값으로만
   기록하고, external-sandbox 선택 시 내부 검증을 수행한다.
 - 근거: 로컬 `agy --help`·`agy models` 실측 (2026-09-18).

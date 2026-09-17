@@ -29,8 +29,8 @@ runner argv에 해당 플래그를 넣을 경우 실제 파싱 검증을 pilot �
 - `model`·`reasoning`은 사용자가 표면마다 확정해야 한다. codex는 `sol`·`luna`
   2종을 별도 모델 엔트리로 테스트한다 (동일 surface, 모델만 다름. pilot는
   모델당 1회). opencode `opencode/muse-spark-1.3-contributor-free`는 1.18.31에서
-  재확인됐다 (`evidence/opencode-models-20260918.log`).
-- antigravity 모델 목록 원본은 `evidence/agy-models-20260918.log`에 보존했다.
+  재확인됐다 (`evidence/opencode-models-20260918.txt`).
+- antigravity 모델 목록 원본은 `evidence/agy-models-20260918.txt`에 보존했다.
   pilot 3종 ID는 사용자 확정 대기 중이다.
 - `settings_inventory`의 skills/MCP/memory 등은 사용자 확인 전이라
   `operator-check-required`를 유지한다. `benchmark.py prepare`는 그대로 거부한다.
@@ -42,6 +42,18 @@ runner argv에 해당 플래그를 넣을 경우 실제 파싱 검증을 pilot �
   https://developers.googleblog.com/en/an-important-update-transitioning-gemini-cli-to-antigravity-cli/
 
 ## R4 종료 조건 (잔여)
+
+2026-09-18 후속 실측: `agy --version`은 **1.2.5**로 변경되었다. 위 초기
+표는 당시 기록이며 새 draft는 1.2.5를 사용한다. Codex의 실제 출력은
+`codex-cli 0.153.2`이므로 runner의 정확한 문자열 비교를 위해 접두사도 보존한다.
+OpenCode는 1.18.31로 재확인했다. Antigravity의 `--input-format`은 runner의
+일반 UTF-8 stdin과 일치하는 `text`로 수정했고 출력만 `stream-json`으로 유지한다.
+미확정 model/reasoning뿐 아니라 settings inventory 안에 남은 sentinel도
+`prepare` 및 실행 직전 검사에서 거부한다.
+
+현재 조회된 Antigravity 후보 ID는 `gemini-3.8-flash-high/medium/low`,
+`gemini-3.1-pro-high/low`, `claude-opus-4-6-thinking`이다. 문자열 `CLI default`만으로
+Gemini의 effort 변형을 선택할 수 없으므로 최종 profile에는 정확한 ID를 기록한다.
 
 1. 표면별 model/reasoning 사용자 확정 (codex `-m` 값 포함)
 2. settings inventory 실측 기록 (builtin-only-v1 증거)

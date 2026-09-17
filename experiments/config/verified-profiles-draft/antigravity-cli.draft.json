@@ -2,7 +2,7 @@
   "provider": "google",
   "product": "antigravity-cli",
   "interface": "cli",
-  "agent_version": "1.2.4",
+  "agent_version": "1.2.5",
   "model": "user-confirm-required",
   "model_slug": "user-confirm-required",
   "reasoning": "user-confirm-required",
@@ -14,9 +14,11 @@
     "C:\\Users\\이광진\\AppData\\Local\\agy\\bin\\agy.exe",
     "--print",
     "--input-format",
-    "stream-json",
+    "text",
     "--output-format",
     "stream-json",
+    "--print-timeout",
+    "120m",
     "--model",
     "{model}"
   ],
@@ -40,5 +42,5 @@
     "extension_condition": "builtin-only-v1; adopted policy; enforcement operator-check-required",
     "usage_recording": "record actual skills/plugins/MCP usage with raw-log references; unavailable values null with reason"
   },
-  "measurement_notes": "DRAFT 2026-09-18. Version and print/stream-json/model flags measured read-only via --help. No telemetry adapter in benchmark.py yet: token totals will be null with reason unless implemented. --dangerously-skip-permissions exists in agy --help; Orca launcher quoting failure observed 2026-09-16, verify parsing separately before pilot if used."
+  "measurement_notes": "DRAFT 2026-09-18 follow-up. Version remeasured as 1.2.5. Plain text stdin matches benchmark.py; output remains stream-json. No telemetry adapter in benchmark.py yet: token totals remain null with reason. Model, effort and settings inventory are unresolved; this profile does not authorize execution."
 }

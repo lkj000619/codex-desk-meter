@@ -19,6 +19,7 @@ window IDs.
 | `codex-percent-window.json` | Codex percent-only 5h window | valid |
 | `claude-code-windows.json` | Claude Code 5h, weekly, and model sub-limit windows | valid |
 | `gemini-cli-unsupported.json` | Gemini CLI capability unavailable | valid, `UNSUPPORTED_USAGE_SOURCE` |
+| `antigravity-cli-unsupported.json` | Synthetic Antigravity identity with unavailable quota, without asserting live capability | valid, `UNSUPPORTED_USAGE_SOURCE` |
 | `orca-host-claude-code.json` | Claude provider on the Orca host | valid |
 | `multi-provider-healthy.json` | One input containing healthy OpenAI Codex, Anthropic Claude Code, and Google Gemini snapshots | valid |
 | `provider-stale.json` | One provider retains a last-good stale value | valid, `SOURCE_TIMEOUT` |

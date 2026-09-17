@@ -151,9 +151,13 @@ def _validate_snapshot(snapshot: dict[str, Any]) -> None:
 def _normalize_global_reset(value: dict[str, Any]) -> dict[str, Any]:
     if not isinstance(value, dict):
         _fail("GLOBAL_RESET_INVALID", "global reset input must be an object")
+    for wire, logical in (("source", "provider"), ("captured_at", "fetched_at"),
+                          ("latest_reset_at", "last_reset_at")):
+        if wire in value and logical in value and value[wire] != value[logical]:
+            _fail("GLOBAL_RESET_ALIAS_CONFLICT", f"{wire} and {logical} disagree")
     normalized = {
         "schema_version": 1,
-        "source": value.get("source"),
+        "source": value.get("source", value.get("provider")),
         "captured_at": value.get("captured_at", value.get("fetched_at")),
         "latest_reset_at": value.get("latest_reset_at", value.get("last_reset_at")),
         "forecast_24h_percent": value.get("forecast_24h_percent"),
@@ -163,6 +167,16 @@ def _normalize_global_reset(value: dict[str, Any]) -> dict[str, Any]:
         "error_code": value.get("error_code"),
     }
     return normalized
+
+
+def global_reset_to_logical(value: dict[str, Any]) -> dict[str, Any]:
+    """Convert a validated cdm/1 reset to the product/host-evaluator model."""
+    _validate_global_reset(value)
+    logical = copy.deepcopy(value)
+    logical.pop("schema_version")
+    logical["provider"] = logical.pop("source")
+    logical["fetched_at"] = logical.pop("captured_at")
+    return logical
 
 
 def _validate_global_reset(value: dict[str, Any]) -> None:
@@ -282,6 +296,7 @@ class FixtureRegistry:
             FixtureFileAdapter("codex", provider_root / "codex-percent-window.json", provider_root),
             FixtureFileAdapter("claude-code", provider_root / "claude-code-windows.json", provider_root),
             FixtureFileAdapter("gemini-cli", provider_root / "gemini-cli-unsupported.json", provider_root),
+            FixtureFileAdapter("antigravity-cli", provider_root / "antigravity-cli-unsupported.json", provider_root),
             FixtureFileAdapter("orca-claude-code", provider_root / "orca-host-claude-code.json", provider_root),
         ]
         reset_root = root / "experiments" / "fixtures"

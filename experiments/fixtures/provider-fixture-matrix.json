@@ -4,6 +4,7 @@
   "fixtures": [
     {"path": "providers/codex-percent-window.json", "expected": "valid", "error_code": null},
     {"path": "providers/claude-code-windows.json", "expected": "valid", "error_code": null},
+    {"path": "providers/antigravity-cli-unsupported.json", "expected": "valid", "error_code": "UNSUPPORTED_USAGE_SOURCE"},
     {"path": "providers/gemini-cli-unsupported.json", "expected": "valid", "error_code": "UNSUPPORTED_USAGE_SOURCE"},
     {"path": "providers/orca-host-claude-code.json", "expected": "valid", "error_code": null},
     {"path": "providers/multi-provider-healthy.json", "expected": "valid", "error_code": null},

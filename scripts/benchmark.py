@@ -20,7 +20,27 @@ from pathlib import Path
 from benchmark_support import ROOT, KST, digest, read, save, validate_operator, validate_schema
 
 
-UNRESOLVED_PROFILE_VALUES = {"operator-check-required", "pending", "unverified"}
+UNRESOLVED_PROFILE_VALUES = {
+    "operator-check-required", "user-confirm-required", "pending", "unverified",
+    "explicit-policy-required-before-run",
+}
+
+
+def validate_resolved_profile(profile):
+    """Reject unresolved execution settings before reserving a run or launching it."""
+    validate_schema(profile, "runner-profile.schema.json")
+    values = [profile[k] for k in ("model", "agent_version", "reasoning", "model_slug",
+                                   "sandbox_policy", "approval_policy")]
+    values.extend(profile["argv"])
+    values.extend(profile["version_argv"])
+    values.extend(profile["settings_inventory"].values())
+    for value in values:
+        if "<" in value or ">" in value or any(marker in value.lower() for marker in UNRESOLVED_PROFILE_VALUES):
+            raise ValueError("replace profile placeholders and unresolved settings with operator-verified values")
+    argv = profile["argv"]
+    if profile["adapter"] == "antigravity" and "stream-json" in argv:
+        if "--input-format" in argv and argv[argv.index("--input-format") + 1:][:1] == ["stream-json"]:
+            raise ValueError("runner delivers plain UTF-8 stdin; Antigravity requires --input-format text")
 
 
 def git(*args, cwd=ROOT):
@@ -45,15 +65,7 @@ def prepare(a):
         raise ValueError("run prepare from the selected baseline checkout")
     profile_path = Path(a.profile).resolve()
     profile = read(profile_path)
-    validate_schema(profile, "runner-profile.schema.json")
-    profile_values = [profile[k] for k in ("model", "agent_version", "reasoning", "model_slug")]
-    profile_values.extend(profile["argv"])
-    profile_values.extend(profile["version_argv"])
-    if any(
-        "<" in value or ">" in value or value.strip().lower() in UNRESOLVED_PROFILE_VALUES
-        for value in profile_values
-    ):
-        raise ValueError("replace profile placeholders with operator-verified values")
+    validate_resolved_profile(profile)
     model_slug = slug(profile["model_slug"])
     product = slug(profile["product"])
     root = Path(a.root).resolve()
@@ -262,7 +274,7 @@ def execute(a):
     m = read(directory / "run-manifest.json")
     profile = read(directory / "profile.json")
     validate_schema(m, "run-manifest.schema.json")
-    validate_schema(profile, "runner-profile.schema.json")
+    validate_resolved_profile(profile)
     validate_operator(m)
     if m["operator"]["status"] != "prepared":
         raise ValueError("run can only execute once")

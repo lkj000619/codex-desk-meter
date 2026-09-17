@@ -208,6 +208,11 @@ transport가 실제로 구현된 정식 E2E 결과에서 검증한다.
 
 BOOT는 짧은 입력으로 위 화면을 순환시키거나 에이전트가 제안한 동등한 화면
 전환을 제공해야 한다. debounce 기준과 입력 시간은 결과 문서에 기록한다.
+E2E의 수동 갱신은 PC collector의 명시적 재수집·전송 명령이다. BOOT는 화면
+전환 전용이며 PC 재수집 요청으로 해석하지 않는다. debounce 후 300ms 이내에
+전환을 표시하고, PC 수동 갱신은 5초 이내 전송·수신 후 2초 이내 LCD 반영으로
+검증한다. 명령, 실패 시 last-good 유지와 자동 주기 독립성은
+`experiments/host-device-pipeline-contract.md`의 Manual refresh 절을 따른다.
 정상 부팅 후 BOOT 입력을 검증한다. BOOT를 누른 채 reset하는 ROM 다운로드
 모드 진입은 애플리케이션 제어 대상이 아니다. RST는 제품 기능 입력으로 사용하지 않는다.
 

@@ -16,6 +16,9 @@ sdkconfig
 !.env.example
 .gemini/
 .codex/
+.agents/
+.claude/
+skills-lock.json
 __pycache__/
 *.py[cod]
 

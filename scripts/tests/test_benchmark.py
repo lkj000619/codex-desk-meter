@@ -259,6 +259,42 @@ class EvaluatorTests(unittest.TestCase):
             evaluation.check(values, [False]*3, body, "recovery")
 
 
+class ResolvedProfileTests(unittest.TestCase):
+    def setUp(self):
+        self.profile = read(ROOT / "experiments/config/runner-profile.example.json")
+        self.profile.update(agent_version="test", model="example-model", model_slug="example-model",
+                            reasoning="fixed", argv=[sys.executable], version_argv=[sys.executable, "--version"],
+                            approval_policy="workspace-write", settings_inventory=dict(
+                                skills="disabled", mcp="disabled", memory="none", user_instructions="none",
+                                cache="cold", routing="fixed"))
+
+    def test_unresolved_model_and_embedded_settings_are_rejected(self):
+        benchmark.validate_resolved_profile(self.profile)
+        for marker in ("user-confirm-required", "operator-check-required", "pending"):
+            profile = copy.deepcopy(self.profile)
+            profile["settings_inventory"]["skills"] = f"disabled by policy; {marker}"
+            with self.assertRaisesRegex(ValueError, "unresolved settings"):
+                benchmark.validate_resolved_profile(profile)
+        self.profile["model"] = "user-confirm-required"
+        with self.assertRaises(ValueError):
+            benchmark.validate_resolved_profile(self.profile)
+
+    def test_antigravity_input_must_match_plain_stdin_delivery(self):
+        self.profile.update(adapter="antigravity", argv=["agy.exe", "--print", "--input-format",
+                                                       "stream-json", "--output-format", "stream-json"])
+        with self.assertRaisesRegex(ValueError, "plain UTF-8"):
+            benchmark.validate_resolved_profile(self.profile)
+        self.profile["argv"][3] = "text"
+        benchmark.validate_resolved_profile(self.profile)
+
+    def test_draft_profiles_are_schema_valid_but_not_executable(self):
+        for path in (ROOT / "experiments/config/verified-profiles-draft").glob("*.json"):
+            profile = read(path)
+            validate_schema(profile, "runner-profile.schema.json")
+            with self.assertRaises(ValueError):
+                benchmark.validate_resolved_profile(profile)
+
+
 class IsolationTests(unittest.TestCase):
     def test_prepare_reserves_ids_and_excludes_parent_history(self):
         with tempfile.TemporaryDirectory(prefix="meter-test-", dir=ascii_temp_dir()) as folder:
