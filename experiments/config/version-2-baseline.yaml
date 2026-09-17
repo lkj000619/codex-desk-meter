@@ -66,10 +66,12 @@ comparison_surfaces:
     product: codex-cli
     interface: cli
     included: true
+  # gemini-cli: Google이 2026-06-18부터 개인 계정 요청을 중단하고 Antigravity CLI로
+  # 전환. Enterprise/API 키 조건에서만 실행 가능하므로 conditional. 기본 비교군은 antigravity-cli.
   - provider: google
     product: gemini-cli
     interface: cli
-    included: true
+    included: conditional
   - provider: google
     product: antigravity-cli
     interface: cli

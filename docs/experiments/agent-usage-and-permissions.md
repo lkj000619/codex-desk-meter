@@ -4,6 +4,13 @@
 문서를 근거로 하며, 미확인 항목은 `미확인`으로 표기한다. 본 문서를 읽는 것은
 실행이 아니며, R10 승인 전에는 어떤 에이전트도 실행하지 않는다.
 
+> **gemini-cli 비교군 제외.** Google이 2026-05-19에 Gemini CLI → Antigravity CLI
+> 전환을 발표했고, 2026-06-18부터 개인(Pro/Ultra/무료) 계정의 Gemini CLI 요청이
+> 중단됐다. 로컬 설치 파손(`dist/src`만 잔류)은 이 전환기의 잔재로 보인다.
+> Enterprise/API 키 계정이 아니면 실행 불가하므로 기본 비교군은 antigravity-cli로
+> 일원화한다. 근거:
+> https://developers.googleblog.com/en/an-important-update-transitioning-gemini-cli-to-antigravity-cli/
+
 ## 1. 대상 모델 (사용자 지정)
 
 | 표면 | 모델 | 확인 상태 |
