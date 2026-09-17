@@ -1,0 +1,44 @@
+{
+  "provider": "google",
+  "product": "antigravity-cli",
+  "interface": "cli",
+  "agent_version": "1.2.4",
+  "model": "user-confirm-required",
+  "model_slug": "user-confirm-required",
+  "reasoning": "user-confirm-required",
+  "branch_owner": "antigravity",
+  "branch_product": "cli",
+  "cohort": "version-2-end-to-end-v1",
+  "adapter": "antigravity",
+  "argv": [
+    "C:\\Users\\이광진\\AppData\\Local\\agy\\bin\\agy.exe",
+    "--print",
+    "--input-format",
+    "stream-json",
+    "--output-format",
+    "stream-json",
+    "--model",
+    "{model}"
+  ],
+  "version_argv": [
+    "C:\\Users\\이광진\\AppData\\Local\\agy\\bin\\agy.exe",
+    "--version"
+  ],
+  "sandbox_policy": "prompt-and-log",
+  "approval_policy": "operator-check-required",
+  "network_mode": "offline-fixture",
+  "settings_inventory": {
+    "skills": "custom/user-installed disabled by policy; built-in inventory and enforcement operator-check-required",
+    "mcp": "MCP servers disabled by policy; enforcement operator-check-required",
+    "memory": "operator-check-required",
+    "user_instructions": "operator-check-required",
+    "cache": "operator-check-required",
+    "routing": "operator-check-required",
+    "plugins": "external plugins disabled by policy; built-in inventory and enforcement operator-check-required",
+    "permissions": "operator-check-required",
+    "model_network": "operator-check-required",
+    "extension_condition": "builtin-only-v1; adopted policy; enforcement operator-check-required",
+    "usage_recording": "record actual skills/plugins/MCP usage with raw-log references; unavailable values null with reason"
+  },
+  "measurement_notes": "DRAFT 2026-09-18. Version and print/stream-json/model flags measured read-only via --help. No telemetry adapter in benchmark.py yet: token totals will be null with reason unless implemented. --dangerously-skip-permissions exists in agy --help; Orca launcher quoting failure observed 2026-09-16, verify parsing separately before pilot if used."
+}

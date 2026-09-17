@@ -1,0 +1,42 @@
+{
+  "provider": "openai",
+  "product": "codex-cli",
+  "interface": "cli",
+  "agent_version": "0.153.2",
+  "model": "user-confirm-required",
+  "model_slug": "user-confirm-required",
+  "reasoning": "user-confirm-required",
+  "branch_owner": "openai",
+  "branch_product": "codex-cli",
+  "cohort": "version-2-end-to-end-v1",
+  "adapter": "codex",
+  "argv": [
+    "C:\\Users\\이광진\\AppData\\Local\\Programs\\OpenAI\\Codex\\bin\\codex.exe",
+    "exec",
+    "--json",
+    "-m",
+    "{model}",
+    "-"
+  ],
+  "version_argv": [
+    "C:\\Users\\이광진\\AppData\\Local\\Programs\\OpenAI\\Codex\\bin\\codex.exe",
+    "--version"
+  ],
+  "sandbox_policy": "prompt-and-log",
+  "approval_policy": "operator-check-required",
+  "network_mode": "offline-fixture",
+  "settings_inventory": {
+    "skills": "custom/user-installed disabled by policy; built-in inventory and enforcement operator-check-required",
+    "mcp": "MCP servers disabled by policy; enforcement operator-check-required",
+    "memory": "operator-check-required",
+    "user_instructions": "operator-check-required",
+    "cache": "operator-check-required",
+    "routing": "operator-check-required",
+    "plugins": "external plugins disabled by policy; built-in inventory and enforcement operator-check-required",
+    "permissions": "operator-check-required",
+    "model_network": "operator-check-required",
+    "extension_condition": "builtin-only-v1; adopted policy; enforcement operator-check-required",
+    "usage_recording": "record actual skills/plugins/MCP usage with raw-log references; unavailable values null with reason"
+  },
+  "measurement_notes": "DRAFT 2026-09-18. Version measured read-only. model/reasoning require user confirmation. Telemetry: turn.completed input/output/cached/total; reasoning unavailable by design."
+}
