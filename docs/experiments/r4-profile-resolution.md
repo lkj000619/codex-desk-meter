@@ -57,4 +57,14 @@ Gemini의 effort 변형을 선택할 수 없으므로 최종 profile에는 정�
 
 1. 표면별 model/reasoning 사용자 확정 (codex `-m` 값 포함)
 2. settings inventory 실측 기록 (builtin-only-v1 증거)
-3. 위 2건 반영된 profile의 `prepare` 통과 + bundle hash 동결 (R1과 연계)
+3. 위 2건 반영된 profile의 `check` 통과 (run ID를 만들지 않는 입력 검사)
+4. R1에서 baseline과 입력 hash를 동결하고 profile-bound receipt를 검토한 뒤,
+   적용되는 승인 기록(기존 조건부 승인 포함)을 확인한다.
+5. profile의 `prepare` 통과와 최종 check hash 일치를 확인한다.
+6. 원래 조건부 승인에 남은 조건을 충족했는지 확인해 R10을 발효한 뒤 run한다.
+
+`prepare`는 R4를 선행 검증하는 실행 직전 재검사이며 R4의 증거 자체가 아니다.
+R4는 준비된 run ID를 요구하지 않는다. 승인 기록 확인과 R10 발효를 구분해
+prepare 성공을 요구하는 과거 조건부 승인과의 순환도 방지한다. 현재 sentinel과
+사용자 모델 선택이 남아 있으므로 R4와
+R10은 닫히지 않았다.

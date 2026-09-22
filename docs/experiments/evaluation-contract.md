@@ -20,8 +20,28 @@ live integration에서 송수신 frame, 재연결, 무결성, 승인 절차를 �
 ```
 
 `body`는 fixtures의 원본 객체, 잘못된 JSON 문자열 또는 null이다. `error`는
-null, dns, tls, http_500 중 하나다. 출력 필드는 PRODUCT_CONTRACT.md의
-UsageSnapshot/GlobalResetSnapshot을 따른다. 로그는 stderr로 출력한다.
+null, dns, tls, http_500 중 하나다. 로그는 stderr로 출력한다.
+
+### 현재 evaluator의 legacy 회귀 출력
+
+`scripts/evaluate-product.py`는 최상위 legacy fixture 3종을 사용하는 회귀
+interface다. 현재 `check()`가 요구하는 출력은 최신 UsageSnapshot 전체와 다르다.
+
+| 입력 source | event별 출력의 필수 검사 필드 |
+|---|---|
+| `fixture` (`personal-usage.json`) | `source: fixture`, 원본 `windows` 배열 그대로(`id` 키 포함), `observed_at: captured_at`, `stale`, `error_code` |
+| `codex-reset.com` / `codex-resets.com` | `provider`, `fetched_at`, 정규화한 `latest_reset_at`, nullable `forecast_24h_percent`·`forecast_48h_percent`, `forecast_is_schedule: false`, `stale`, `error_code` |
+
+각 호출에서 세 event에 대응하는 snapshot 세 개를 배열로 반환한다. 오류 event는
+마지막 정상 값·조회 시각을 유지하고 `error_code`를 채우며, 정상 복구 후 해제한다.
+forecast 필드는 파서 호환 검사이며 현재 C5 화면 표시 판정이 아니다.
+
+이 legacy interface의 `source`/window `id`를 E2E wire 필드로 그대로 보내지 않는다.
+E2E의 UsageSnapshot은 `usage-snapshot.schema.json`의 identity, `source_kind`,
+window `window_id` 등을 사용하며, global wire 매핑은
+[통합 계약](integration-contract.md)을 따른다. host 어댑터가 legacy 출력으로
+변환하더라도 실제 제품 파서·상태 모듈 호출 증거가 필요하다. 최신 E2E provider
+계약 전체를 이 evaluator 하나로 검사할 수 있다는 의미는 아니다.
 
 운영자는 다음 adapter config를 실제 경로/해시로 채운다. 명령은 argv 배열이며
 셸 문자열을 사용하지 않는다. 실행 파일은 절대 경로로 지정한다.
@@ -41,6 +61,10 @@ UsageSnapshot/GlobalResetSnapshot을 따른다. 로그는 stderr로 출력한다
 정상값·null 보존, 0/299/300초 stale, 시간/필드/범위 오류, DNS/TLS/HTTP 실패,
 마지막 정상값 보존 및 복구를 검사한다. 이는 C3~C7 자동 검사 범위의 회귀 시험이다.
 C1 빌드와 C2/C8 실물 동작은 별도로 확인하며 이 도구가 제품 합격을 선언하지 않는다.
+
+E2E result validator 또한 C1~C8 개별 판정을 직접 검사하지 않는다. C별 판정은
+아래 평가 기록과 증거로 남기고, 구조화 연결은 [문서 검토 D10](../DOCUMENTATION_REVIEW.md)의
+후속 구현 항목으로 관리한다.
 
 ## 기능·GUI 결과 분리
 
@@ -83,3 +107,21 @@ I3/I4 복구 시험은 USB 재연결과 PC collector 프로세스 재시작을 �
 후자는 보드를 켜 둔 상태에서 수행하고, 영속 순번의 연속성·정상 화면 복구를
 확인한다. 순번 저장소 유실은 자동 복구 성공으로 채점하지 않고, 전송 차단과
 운영자 복구 절차를 검증한다. 상세 기준은 host-device-pipeline-contract.md를 따른다.
+### Machine-enforced E2E scoring and joins
+
+The E2E contract requires top-level `core_results.C1` through `C8` in every
+result. F9 details are scoped to `feature_results.F9`; F1-F8 reject that field.
+When F9 is assessed, its three candidates record user value,
+resource/implementation cost, risk, verification method, selection state, and
+selection/rejection rationale or a selection-document evidence reference.
+The canonical F9 rubric is a 30-point sum:
+`hardware_understanding=5`, `user_value=5`, `selection_logic=5`,
+`implementation_completeness=10`, `separation_portability=5`. `total` must
+equal the sum.
+
+The normalized token total is always `input + output`; nullable
+`provider_total` preserves the provider-reported raw value under its required
+definition field. Archive accepts a normalized E2E result only after schema,
+semantic, evaluation-manifest, and evidence-join validation, including a
+second validation after path normalization. Failed validation retains the raw
+snapshot only.

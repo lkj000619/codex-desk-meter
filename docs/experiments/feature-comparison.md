@@ -41,7 +41,7 @@ end-to-end cohort에서는 F1/F3이 필수다.
 | F3 | PC→ESP32 transport | E2E baseline 고정인 USB serial(COM3) `cdm/1`에서 frame 버전·길이·무결성·재연결·오류 응답을 보장하는가? (local Wi-Fi는 별도 cohort) | protocol 문서, 송수신 raw log, checksum/재연결 시험 | 준비용: `not_run`; E2E: 필수 |
 | F4 | ESP32 receiver·state | 수신/입력 데이터를 검증하고 last-good, stale, 오류 해제·복구를 상태 모델에 반영하는가? | 상태 전이 host test, 오류 주입, 시리얼 로그 | fixture 직접 입력으로 부분 평가 |
 | F5 | LCD GUI | 정보 우선순위, 레이아웃, 가독성, 상태·출처·오류 표현, 820×320 가로 최적화(회전 시 정보 손실 없음)가 적절한가? | 동일 fixture의 화면 사진/영상, 구현 근거 | 필수 비교 |
-| F6 | 입력·갱신 | BOOT·자율 기능으로 화면 전환과 수동/자동 갱신이 예측 가능하고 피드백이 명확한가? | 입력 전후 영상, 시리얼 로그, debounce 값 | 필수 비교 |
+| F6 | 입력·갱신 | BOOT 화면 전환, PC collector 수동 재수집·전송과 자동 갱신이 예측 가능하고 피드백이 명확한가? | 입력 전후 영상, PC 갱신 명령·시리얼 로그, debounce 값 | 필수 비교 |
 | F7 | 글로벌 리셋 표시 | `codex-resets.com` 최근 리셋·경과 시간을 표시하고, 기록이 없으면 경과 시간 또는 default 화면으로 표시하는가? | resets fixture, 화면별 캡처, parser test | 필수 비교 |
 | F8 | 빌드·배포·관측 | ESP-IDF 빌드, artifact hash, 로그, manifest와 결과 schema가 재현 가능한가? | build log, binary hash, manifest, validator | 필수 비교 |
 | F9 | 자율 하드웨어 기능 | 후보 3개·선택 근거·구현 완성도·핵심 기능과의 분리가 설득력 있는가? | 선택 문서, 테스트, 하드웨어 증거 | 필수 비교 |
@@ -123,3 +123,19 @@ GUI 총점은 제품 합격률로 환산하지 않는다. C2가 `not_run` 또는
   device payload 및 Wi-Fi/BLE transport 구현을 참고할 수 있다. 단, 우리 결과
   schema와 ESP32-S3-LCD-3.16 실물 검증을 대신하지 않으며, 사용한 upstream commit
   SHA·확인 날짜·라이선스를 결과 provenance에 기록한다.
+### Machine contract for E2E result fields
+
+The E2E schema requires `core_results.C1` through `C8` at the top level for
+every result. Only `feature_results.F9` may contain `details`; F1-F8 reject
+that field. Assessed F9 details contain exactly three structured candidates:
+user value, resource/implementation cost, risk, verification method,
+selection/rejection rationale or a selection-document evidence reference, and
+candidate evidence. The F9 score is the canonical 30-point sum of
+`hardware_understanding` (5), `user_value` (5), `selection_logic` (5),
+`implementation_completeness` (10), and `separation_portability` (5).
+
+`benchmark.py archive` performs schema validation, semantic validation, and
+the evaluation-manifest/evidence join before adding a normalized E2E result;
+it validates again after archive-path mutation. Failed results retain only the
+raw source snapshot. `automated_test_status` is derived from integration-test
+entries and their evidence, never from `product_pass`.

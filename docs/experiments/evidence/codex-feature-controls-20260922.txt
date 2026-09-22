@@ -1,0 +1,54 @@
+Codex feature-control evidence — 2026-09-22 (Asia/Seoul)
+==============================================================
+
+Scope: local help, feature-state metadata, and a no-model prompt-input behavior
+probe. No model/provider call, login, credential read, global configuration change,
+serial access, flash, or benchmark run was performed.
+
+Feature-control help and effective state
+----------------------------------------
+Command: codex --help
+Exit: 0
+Relevant output: --enable <FEATURE> and --disable <FEATURE>, each equivalent to
+features.<name>=true|false.
+
+Command: codex exec --help
+Exit: 0
+Relevant output: exec accepts --enable <FEATURE> and --disable <FEATURE>, in addition
+to --ignore-user-config and --ignore-rules.
+
+Command: codex features list --enable skip_host_skill_discovery --disable plugins
+         --disable skill_search --disable enable_mcp_apps
+Exit: 0
+Effective non-secret rows:
+  enable_mcp_apps=false; plugins=false; skill_search=false;
+  skip_host_skill_discovery=true
+
+No-model prompt-input behavior probe
+-------------------------------------
+All probes exited 0. Only aggregate serialized-output lengths and source-reference
+counts were retained; prompt text was not displayed or saved.
+
+  case                              chars  SKILL.md  AGENTS.md  .rules  MCP
+  baseline                          32644        33          3       0    0
+  --disable plugins                 25201        16          2       0    0
+  --disable skill_search            32647        33          3       0    0
+  --disable enable_mcp_apps         32645        33          3       0    0
+  --enable skip_host_skill_discovery
+                                    32645        33          3       0    0
+  combined three disables           25203        16          2       0    0
+
+Interpretation: --disable plugins changes the current model-visible context, while
+the other tested overrides add no observable reduction. Residual skill references
+remain, so this is not builtin-only proof. The debug renderer is not an exact
+substitute for a future isolated exec receipt.
+
+Candidate argv proposal (pending profile/receipt review)
+--------------------------------------------------------
+codex.exe --ask-for-approval never exec --json --disable plugins
+  --disable skill_search --disable enable_mcp_apps --ignore-user-config
+  --ignore-rules --ephemeral --sandbox workspace-write
+  -c model_reasoning_effort="<max-or-medium>" -m <approved-model-id> -
+
+The candidate JSON files were not changed. The next proof must record the effective
+feature overrides and sanitized source inventory in the profile-bound receipt.

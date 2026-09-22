@@ -6,7 +6,7 @@
   "baseline_id": "benchmark-v2-baseline-20260911",
   "experiment_id": "version-2-end-to-end-v1",
   "manifest": {"id": "20260911-invalid-pass-evidence-r01", "experiment_id": "version-2-end-to-end-v1", "baseline_id": "benchmark-v2-baseline-20260911", "path": "experiments/examples/invalid-pass-without-evidence-manifest.example.json"},
-  "baseline": {"id": "benchmark-v2-baseline-20260911", "experiment_id": "version-2-end-to-end-v1", "commit": "34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f"},
+  "baseline": {"id": "benchmark-v2-baseline-20260911", "experiment_id": "version-2-end-to-end-v1", "commit": "34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f", "ref": "benchmark-v2-baseline-20260911"},
   "feature_results": {
     "F1": {"status": "pass", "scope": "collector", "evidence": [], "reason": null},
     "F2": {"status": "not_run", "scope": "normalization", "evidence": [], "reason": "not tested"},
@@ -18,6 +18,7 @@
     "F8": {"status": "not_run", "scope": "build", "evidence": [], "reason": "not tested"},
     "F9": {"status": "not_run", "scope": "autonomy", "evidence": [], "reason": "not tested"}
   },
+  "core_results": {"C1": {"status": "not_run", "scope": "core", "evidence": [], "reason": "not tested"}, "C2": {"status": "not_run", "scope": "core", "evidence": [], "reason": "not tested"}, "C3": {"status": "not_run", "scope": "core", "evidence": [], "reason": "not tested"}, "C4": {"status": "not_run", "scope": "core", "evidence": [], "reason": "not tested"}, "C5": {"status": "not_run", "scope": "core", "evidence": [], "reason": "not tested"}, "C6": {"status": "not_run", "scope": "core", "evidence": [], "reason": "not tested"}, "C7": {"status": "not_run", "scope": "core", "evidence": [], "reason": "not tested"}, "C8": {"status": "not_run", "scope": "core", "evidence": [], "reason": "not tested"}},
   "integration_results": {
     "I1": {"status": "not_run", "scope": "collector", "evidence": [], "reason": "not tested"},
     "I2": {"status": "not_run", "scope": "normalization", "evidence": [], "reason": "not tested"},
@@ -32,6 +33,6 @@
   "host": {"status": "not_run", "host_id": "terminal", "evidence": [], "reason": "not tested"},
   "transport": {"status": "not_run", "choice": null, "evidence": [], "reason": "not selected"},
   "hardware": {"status": "not_run", "board": "waveshare-esp32-s3-lcd-3.16", "evidence": [], "reason": "not tested"},
-  "telemetry": {"wall_clock_seconds": null, "agent_tokens": {"input": null, "output": null, "cached": null, "reasoning": null, "total": null}, "token_total_definition": "input_plus_output_excludes_cached_and_reasoning", "availability_reason": "not available", "evidence": []},
+  "telemetry": {"wall_clock_seconds": null, "agent_tokens": {"input": null, "output": null, "cached": null, "reasoning": null, "provider_total": null, "total": null}, "token_total_definition": "input_plus_output_excludes_cached_and_reasoning", "provider_total_definition": "provider_reported_total_preserved_without_recomputation", "availability_reason": "not available", "evidence": []},
   "product_pass": false
 }

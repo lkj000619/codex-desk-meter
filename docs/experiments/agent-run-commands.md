@@ -5,8 +5,9 @@
 **현재 상태: `PLANNING / NOT_AUTHORIZED`**
 
 운영 도구의 일부 scaffold가 있어도 도구별 모델·sandbox·기능 결과 schema 검증이
-끝난 것은 아니다. 아래 명령은 [readiness gate](benchmark-readiness.md)의 R0~R9
-사전조건이 통과하고 R10 사용자 명시 승인이 기록된 뒤에만 실행한다. 이 문서를
+끝난 것은 아니다. run 준비·실행·보존 명령은 [readiness gate](benchmark-readiness.md)의
+조건과 해당 작업 승인을 확인한 뒤 수행한다. §1의 host 검사와 §2~3의 문서·설정
+검토는 gate 충족을 준비하는 작업이며 agent 실행 승인을 요구하지 않는다. 이 문서를
 읽거나 보완하는 것, 명령을 검토하는 것은 agent process를 시작하는 행위가 아니다.
 
 공통 prompt는 사람이 CLI에 직접 붙여넣지 않는다. runner가 생성한 `prompt.txt`를
@@ -27,7 +28,9 @@ run을 정량 비교에서 제외한다. 아래의 환경·validator 명령을 �
 6. COM3를 사용할 경우 제조사 예제/현재 보드 상태 백업과 운영자 checklist가 준비됨
 7. 사용자가 baseline·profile·surface·반복 번호·pilot/benchmark를 명시적으로 승인함
 
-하나라도 빠지면 다음 명령을 실행하지 말고 `not_ready` 사유만 문서화한다.
+하나라도 빠지면 prompt 전달을 진행하지 않고 `not_ready` 사유를 기록한다.
+로컬 run 생성은 아래 준비 절차를 따른다. 승인 기록 확인과 실행 승인 발효를 구분한다.
+누락 조건을 확인·보완하는 offline 검사는 계속할 수 있다.
 
 ## 1. 환경과 도구 검증
 
@@ -52,22 +55,24 @@ reasoning, 설치 버전, argv, skills/plugins/MCP/메모리/사용자 지침/�
 비밀번호·토큰을 profile에 넣지 않는다. 예제의 placeholder는 실행 준비 단계에서 거부된다.
 반복마다 동일 profile을 사용한다. 순수 모델 비교가 아닌 agent+model+설정 비교다.
 
-현재 로컬에서 확인한 실행 표면은 Codex CLI 0.153.2, OpenCode 1.18.31 및 agy CLI
-1.2.4다 (2026-09-18 재실측. 아래 2026-09-11 기록의 Gemini CLI 0.35.0과
-OpenCode 1.18.30은 구 스냅샷이며, Gemini CLI는 비교군에서 제외됐다.
-`r4-profile-resolution.md`를 따른다). 설치 확인은 로그인·모델 접근·sandbox 합격을 뜻하지 않는다.
+버전·실행 파일의 시점별 실측과 남은 설정은
+[R4 profile 검토 기록](r4-profile-resolution.md)을 따른다. 해당 기록의 버전을
+현재 설치본이나 실행 가능한 profile의 증거로 간주하지 않는다. 설치 확인은
+로그인·모델 접근·sandbox 합격을 뜻하지 않는다.
 
 - Codex: stdin `-`, `exec --json` 사용. turn.completed usage를 합산하고 cache는 input에 중복 가산하지 않는다.
-- Gemini: 아래 절차는 역사 기록으로만 보관한다. Gemini CLI는 2026-06-18 Google
-  전환으로 개인 계정 실행이 불가하며, 기본 비교군은 Antigravity CLI다.
-  `--prompt`와 `--output-format stream-json` 사용. stdin을 prompt에 덧붙이는 동작을 설치 버전에서 검증한다.
+- Gemini: 현재 기본 비교군에서 제외하고 Enterprise/API 키 조건에서만 별도 검토한다.
+  보존된 profile 템플릿은 실행 가능 증거가 아니다.
 - OpenCode: `run --format json --model provider/model` 사용. stdin 전달과 승인 정책을 pilot 전에 검증한다.
-- Antigravity: 실제 실행 파일은 `agy`. print/stream-json/sandbox를 지원하는 로컬 help를 확인했으며 정확한 입력·timeout·버전 확인은 남아 있다.
+- Antigravity: R4 후속 기록의 일반 text stdin·stream-json 출력·timeout 설정을
+  확정 profile에서 검증한다. model/reasoning과 settings inventory는 아직 미확정이다.
 
 Windows npm의 .ps1/.cmd 파일을 shell 문자열로 조합하지 않는다. profile argv에는
 실제 node.exe와 CLI JavaScript 진입점 또는 검증된 실행 파일을 지정한다.
 실행기는 stdin UTF-8 bytes를 전달하므로 각 CLI가 추가하는 wrapper 문구까지 입력 조건으로 기록한다.
-현재 Codex 이외의 usage 정규화는 미검증이며 null로 남는다. 원본 이벤트는 보존한다.
+현재 runner는 Codex와 OpenCode 모두 `total`을 `input + output`으로 정규화한다.
+cached/reasoning은 다시 더하지 않고, 제공자의 원본 합계는 `provider_total`에
+별도로 보존한다. 미제공 값은 null과 사유로 기록하고 원본 이벤트도 보존한다.
 Codex tool_calls는 완료된 command_execution/mcp_tool_call/web_search/file_change item 수이며
 다른 도구의 호출 정의와 직접 동일시하지 않는다. 명령 내부의 실패는 원본 로그로 별도 검토한다.
 
@@ -79,34 +84,26 @@ Codex tool_calls는 완료된 command_execution/mcp_tool_call/web_search/file_ch
 공통 문서·스키마·평가 도구 변경을 커밋하고 운영 도구 검증과 profile 검토를 완료한다.
 기능·GUI 결과 필드가 schema와 validator에 반영되기 전에는 새 baseline을 만들지
 않는다. 이 단계는 readiness 작업이지 agent 실행이 아니다.
-기존 `version-2-baseline-20260911` 태그를 옮기지 않는다. 새 이름의 태그와 전체 SHA를
-기록한다. 아직 새 baseline이 확정되었다고 간주하지 않는다.
+기존 baseline 태그는 모두 보존한다. `version-2-baseline-20260911`,
+`benchmark-v2-baseline-20260911`, `benchmark-v2-baseline-20260914`는 서로 다른
+commit을 가리킨다. 날짜나 이름만으로 현재 계약과 일치한다고 판단하지 않는다.
+새 기준을 동결할 때 새 이름의 태그와 전체 SHA를 기록한다.
 
-## 4. 실행 준비
-
-항상 선택한 baseline 자체의 깨끗한 checkout에서 준비 명령을 실행한다.
-run root는 운영자가 관리하는 단일 ASCII 경로를 사용한다. root를 바꾸면 반복 번호의
-전역 유일성을 자동 보장할 수 없으므로 기존 예약 목록을 먼저 확인한다.
+확정 profile로 후보 commit을 검사하고, 최종 tag가 정해지면 다시 검사한다.
+`check`는 Git commit을 읽으므로 미커밋 변경을 포함하지 않는다. ref 이름도
+bundle hash에 포함되므로 최종 tag의 출력값을 보존한다.
 
 ```powershell
-.\scripts\new-experiment-run.ps1 -Baseline <new-baseline-tag> `
-  -Profile <verified-profile.json> -RunRoot C:\Espressif\benchmark-runs `
-  -Seed 20260911 -Phase pilot
+python scripts/benchmark.py check --baseline <candidate-commit> --profile <verified-profile.json>
+# 기준선 확정 후 실행
+python scripts/benchmark.py check --baseline <new-baseline-tag> --profile <verified-profile.json>
 ```
 
-결과:
-```text
-C:/Espressif/benchmark-runs/<run-id>/
-  checkout/          이력 한 개와 remote 없는 baseline 사본
-  profile.json       확정된 실행 조건
-  prompt.txt         run ID가 치환된 실제 UTF-8 입력
-  run-manifest.json  운영 기록, 초기 상태 prepared
-```
+receipt의 `base_commit`에는 최종 출력의 `baseline_commit`, `profile_sha256`에는
+동일 이름의 출력값을 사용한다. `input_bundle_sha256`과 구성 hash도 보존한다.
+receipt 작성에 prepared manifest나 run ID는 필요하지 않다.
 
-원본 baseline SHA와 로컬 snapshot SHA를 구분한다. mkdir로 번호를 예약하고
-실패한 준비도 번호를 재사용하지 않는다. 시작 날짜가 바뀌면 새 run을 준비한다.
-
-## 5. 실행 환경·참조 범위 preflight receipt
+## 4. 실행 환경·참조 범위 preflight receipt
 
 기본 모드는 [실행 환경 정책](isolation-policy.md)의 `prompt-and-log`다.
 host toolchain·TEMP·네트워크·설정과 prompt scope·activity logging 준비를 확인한다.
@@ -115,7 +112,7 @@ Docker/VM은 필수가 아니다. 통과하지 않은 항목을 pass로 채우�
 ```json
 {
   "base_commit": "<original-baseline-SHA>",
-  "profile_sha256": "<prepared-profile.json-SHA256>",
+  "profile_sha256": "<check 출력의 profile_sha256>",
   "access_policy": "prompt-and-log",
   "checks": {
     "idf_build": "pass",
@@ -141,6 +138,41 @@ external-sandbox 선택 시 profile과 receipt를 `external-sandbox`로 맞추�
 sandbox 내부 검증과 `read_isolation: pass` 증거를 확보한다.
 본 실험에는 같은 조건의 검토된 pilot 합격이 추가로 필요하다.
 
+## 5. 승인 기록 확인과 로컬 실행 준비
+
+먼저 §4 receipt를 작성한다. R0~R9의 증거와 대상 baseline/profile/phase/횟수에
+적용되는 승인 기록을 확인한 뒤 아래 명령을 실행한다. 기존 조건부 승인이
+prepare 성공을 요구하면 로컬 준비 후 그 조건을 확인한다. `prepare`는 모델을
+호출하지 않으며 R10 실행 승인 발효를 의미하지 않는다. 대상·조건이 일치하는
+기존 승인에 대해 동일 승인을 다시 요청하지 않는다.
+
+항상 선택한 baseline 자체의 깨끗한 checkout에서 준비 명령을 실행한다.
+run root는 운영자가 관리하는 단일 ASCII 경로를 사용한다. root를 바꾸면 반복 번호의
+전역 유일성을 자동 보장할 수 없으므로 기존 예약 목록을 먼저 확인한다.
+
+```powershell
+.\scripts\new-experiment-run.ps1 -Baseline <new-baseline-tag> `
+  -Profile <verified-profile.json> -RunRoot C:\Espressif\benchmark-runs `
+  -Seed 20260911 -Phase pilot
+```
+
+결과:
+```text
+C:/Espressif/benchmark-runs/<run-id>/
+  checkout/          이력 한 개와 remote 없는 baseline 사본
+  profile.json       확정된 실행 조건
+  prompt.txt         run ID가 치환된 실제 UTF-8 입력
+  run-manifest.json  운영 기록, 초기 상태 prepared
+  e2e-evaluation-manifest.json  E2E 평가 manifest
+```
+
+원본 baseline SHA와 로컬 snapshot SHA를 구분한다. mkdir로 번호를 예약하고
+실패한 준비도 번호를 재사용하지 않는다. 시작 날짜가 바뀌면 새 run을 준비한다.
+
+준비 후 manifest의 `execution.base_commit`과 `execution.profile_sha256`이 receipt와
+일치하는지 확인한다. prepare 성공·COM3 확인 등 원래 승인 조건을 모두 충족하고
+R10 발효 근거를 기록한 뒤 §6으로 진행한다. 미충족이면 prepared 상태에서 멈춘다.
+
 ## 6. 실행과 평가
 
 이 절의 `benchmark.py run`은 R0~R10 승인 이후에만 허용된다. runner가 아닌
@@ -165,12 +197,29 @@ python scripts/evaluate-product.py --adapter-config <reviewed-adapter.json> `
   --output <new-evaluation.json>
 ```
 
-결과가 작성된 경우 `--result <hardware-feature.json>`를 추가한다.
+historical 결과만 위 validator에 `--result <hardware-feature.json>`를 추가한다.
+E2E 결과에는 별도의 평가 manifest와 validator를 사용한다.
+
+```powershell
+python scripts/validate-end-to-end-result.py --result <end-to-end-result.json> `
+  --manifest <e2e-evaluation-manifest.json> --evidence-root <evidence-root>
+```
+
+runner의 `run-manifest.json`은 운영 기록(schema v2)이며 위 평가 manifest(schema v1)의
+대체물이 아니다. `prepare`가 run ID·baseline에 연결된 평가 manifest를 생성하고,
+archive가 이를 E2E result와 함께 보존한다. agent에게 운영 시각·해시·토큰을 추정해
+채우게 하지 않는다. archive 후 result의 manifest path는 보관 위치로 정규화한다.
+
 manifest/result 상태와 구현 SHA는 운영자가 원본 증거와 대조해 정리한다.
 에이전트의 원본 결과는 코드 snapshot에 그대로 보존한다.
 공통 평가와 실물 기록은 [평가 인터페이스](evaluation-contract.md)를 따른다.
 
 ## 7. 보존 및 게시
+
+`archive`는 historical 결과에는 `hardware-feature-result.schema.json`을 사용하고,
+E2E cohort에는 `end-to-end-result.schema.json`과 생성된 평가 manifest를 사용한다.
+E2E 결과의 manifest path는 archive 위치로 정규화되며, raw logs는 여전히 별도
+운영 증거다. 이 명령의 성공은 제품 합격이나 실물 검증을 뜻하지 않는다.
 
 코드의 자격증명·개인정보 여부를 확인한 뒤 다음 명령으로 로컬 보관한다.
 
@@ -182,13 +231,49 @@ python scripts/benchmark.py archive <run-directory> `
 ## Current operator-check boundary
 
 The version strings and command examples in the historical profile notes above are
-not evidence for this readiness review. The repository does not assert a verified
-model ID, CLI version, executable name, or telemetry surface for Codex, Gemini,
-OpenCode, or Antigravity. Before any future run, the operator must perform
+not evidence for this readiness review. The repository records dated observations,
+not a currently executable profile or verified model entitlement.
+Before any future run, the operator must perform
 read-only `--version` and `--help` checks for the selected surface, record an
 unavailable or ambiguous result as an operator check, and replace every
 `operator-check-required` sentinel in the profile. `benchmark.py prepare` rejects
 those sentinels; no profile in this planning state is executable.
+
+The non-cyclic order is: `benchmark.py check` (no run ID) → freeze the baseline
+and record its hashes → obtain a profile-bound receipt → verify the applicable
+approval record → `benchmark.py prepare` → verify remaining approval conditions
+and record R10 activation → `benchmark.py run`. The first command is a
+maintainer input check; it is not a readiness approval and it does not replace
+the receipt or R10 decision.
+
+`benchmark.py check` materializes the selected baseline into a temporary read-only
+snapshot before hashing it. The shared `input_bundle_sha256` covers the baseline
+ref/commit, semantic profile hash, prompt, config, recursive fixtures, schemas, and
+evaluation criteria; `prepare` writes the same component hashes into
+`run-manifest.execution`. The check does not reserve a run ID, create a worktree,
+or modify the repository.
+
+Telemetry policy: `provider_total` is the provider-reported raw total when the
+adapter supplies one. E2E `agent_tokens.total` is always the normalized
+`input + output` total, excluding cached and reasoning tokens; the raw value is
+retained separately and is never added again. Missing telemetry remains null
+with an availability reason.
+
+Every E2E result requires `core_results.C1` through `C8`; `product_pass` requires
+all eight individual entries to be `pass`. F9 is the only feature whose result
+entry may contain `details`. A passing or partial F9 requires exactly three
+candidate records with user value, resource/implementation cost, risk,
+verification method, selection/rejection rationale or selection-document
+evidence, and the canonical 30-point rubric
+(`hardware_understanding:5`, `user_value:5`, `selection_logic:5`,
+`implementation_completeness:10`, `separation_portability:5`). The validator
+requires the declared F9 total to equal the sum of those five fields.
+The runner creates the E2E evaluation manifest during `prepare`; archive stores
+that manifest and the normalized result together only after schema, semantic,
+and evidence-join validation. A failed result keeps only the raw snapshot;
+summary excludes pilot/invalid results and reports valid-group repetitions,
+success ratio, median, and range without inferring automated-test status from
+`product_pass`.
 
 전용 bare archive에 agent/model 브랜치를 만들고 구현 commit과 bundle을 보존한다.
 다음 실행의 소스는 항상 baseline에서 시작한다. 이전 results와 agent-runs 기록은

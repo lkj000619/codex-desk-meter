@@ -86,7 +86,7 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
     validate_operator(manifest)
     required(
         manifest,
-        ["schema_version", "run_id", "experiment_id", "agent", "execution", "hardware", "measurement", "outputs"],
+        ["schema_version", "run_id", "experiment_id", "baseline_id", "baseline_ref", "agent", "execution", "hardware", "measurement", "outputs"],
         "manifest",
     )
     if manifest["schema_version"] != 2:
@@ -95,6 +95,9 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
         raise ValidationError("manifest.run_id does not match YYYYMMDD-product-model-rNN")
     if manifest["experiment_id"] != "version-2-hardware-autonomy-v1":
         raise ValidationError("manifest.experiment_id is not the Version 2 baseline")
+    for key in ("baseline_id", "baseline_ref"):
+        if not isinstance(manifest[key], str) or not manifest[key].strip():
+            raise ValidationError(f"manifest.{key} is required")
 
     agent = manifest["agent"]
     if not isinstance(agent, dict):
@@ -118,6 +121,10 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
             "prompt_sha256",
             "config_sha256",
             "fixture_sha256",
+            "schema_sha256",
+            "evaluation_criteria_sha256",
+            "profile_sha256",
+            "input_bundle_sha256",
             "network_mode",
             "sandbox_policy",
             "approval_policy",
@@ -132,7 +139,7 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
     if execution["timeout_seconds"] < 1:
         raise ValidationError("manifest.execution.timeout_seconds must be positive")
     commit(execution["base_commit"], "manifest.execution.base_commit")
-    for key in ("prompt_sha256", "config_sha256", "fixture_sha256"):
+    for key in ("prompt_sha256", "config_sha256", "fixture_sha256", "schema_sha256", "evaluation_criteria_sha256", "profile_sha256", "input_bundle_sha256"):
         sha(execution[key], f"manifest.execution.{key}")
     if execution["network_mode"] not in {"offline-fixture", "public-read", "live-integration"}:
         raise ValidationError("manifest.execution.network_mode is invalid")
@@ -160,9 +167,11 @@ def validate_manifest(manifest: dict[str, Any]) -> None:
     tokens = measurement["tokens"]
     if not isinstance(tokens, dict):
         raise ValidationError("manifest.measurement.tokens must be an object")
-    required(tokens, ["input", "output", "cached", "reasoning", "total", "availability_note"], "manifest.measurement.tokens")
-    for key in ("input", "output", "cached", "reasoning", "total"):
+    required(tokens, ["input", "output", "cached", "reasoning", "provider_total", "total", "provider_total_definition", "availability_note"], "manifest.measurement.tokens")
+    for key in ("input", "output", "cached", "reasoning", "provider_total", "total"):
         nonnegative_int(tokens[key], f"manifest.measurement.tokens.{key}", nullable=True)
+    if tokens["provider_total_definition"] != "provider_reported_total_preserved_without_recomputation":
+        raise ValidationError("manifest.measurement.tokens.provider_total_definition is invalid")
     if not isinstance(tokens["availability_note"], str) or not tokens["availability_note"].strip():
         raise ValidationError("manifest.measurement.tokens.availability_note is required")
 
@@ -282,6 +291,9 @@ def default_paths() -> tuple[Path, Path]:
 
 
 def main() -> int:
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, help="run-manifest.json path")
     parser.add_argument("--result", type=Path, help="hardware-feature.json path")

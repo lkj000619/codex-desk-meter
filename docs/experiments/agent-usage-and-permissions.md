@@ -15,22 +15,25 @@
 
 | 표면 | 모델 | 확인 상태 |
 |---|---|---|
-| codex-cli | `sol`, `luna` | 계정 측 모델 ID. `-m` 값으로 전달, entitlement는 prepare 시 확인 |
+| codex-cli | `sol`, `luna` | 기록된 모델 후보. 정확한 ID·설정을 profile에 확정하고 entitlement는 승인된 pilot에서 확인 |
 | opencode-cli | `opencode/muse-spark-1.3-contributor-free` | `opencode models`에 존재 확인済み (2026-09-14 probe) |
 | antigravity-cli | `gemini-3.8-flash-high/medium/low`, `gemini-3.1-pro-high/low`, `claude-opus-4-6-thinking` | `agy models` 실측 확인 (2026-09-18). effort 변형은 모델 ID에 포함됨 |
 
 `sol`/`luna`는 OpenAI 내부 코드네임 계열로, `-m sol` 형태로 전달한다. 계정에
-해당 모델 권한이 없으면 실행기가 아니라 모델 측에서 거부하므로, prepare 단계에서
-짧은 `--help` 수준이 아닌 실제 권한 확인이 필요하다. 권한 확인용 가벼운 호출도
+해당 모델 권한이 없으면 모델 측에서 거부할 수 있다. `prepare`와 읽기 전용
+`--help` 검사는 실제 모델 권한을 확인하지 않는다. 권한 확인용 가벼운 호출도
 토큰을 쓰므로 사용자 승인 후 pilot에서 수행한다.
 
 ## 2. 비대화형 사용법
 
 ### codex-cli (0.153.2)
 
-```powershell
-codex exec --json -m <model> - < prompt.txt
+```text
+codex exec --json -m <model> -
 ```
+
+위는 runner argv의 설명이다. `prompt.txt`의 UTF-8 bytes는 runner가 stdin으로
+전달한다. PowerShell의 `< prompt.txt` 리다이렉션이나 수동 prompt 전달 예시가 아니다.
 
 - `exec`: 비대화형 실행. 진행 상황은 stderr, 최종 메시지는 stdout, `--json`이면
   stdout이 JSONL 이벤트 스트림이 된다. runner는 이 스트림을 raw로 보존한다.
@@ -46,9 +49,11 @@ codex exec --json -m <model> - < prompt.txt
 
 ### opencode-cli (1.18.31)
 
-```powershell
-& "<native-exe>" run --pure --format json --model <provider/model> < prompt.txt
+```text
+<native-exe> run --pure --format json --model <provider/model>
 ```
+
+위 argv에 대한 UTF-8 stdin 전달은 runner가 담당한다.
 
 - `run [message..]`: positional message는 비워두고 stdin 파이프만 제공한다.
   stdin이 메시지로 전달됨을 probe로 확인했다 (`METER_STDIN_PROBE_OK`).
@@ -105,7 +110,10 @@ runner(`scripts/benchmark.py run`)가 기록한다. 에이전트 자체 보고�
 - 근거: `scripts/benchmark.py` `telemetry()`·`command_metrics()`,
   `test_benchmark.py` (gemini total null 단언 포함).
 
-## 5. 승인 없이 실행하기 위한 권한 옵션
+## 5. 실행 중 도구 승인 대기 설정
+
+이 절은 R10 실행 승인을 생략하는 방법이 아니다. 승인된 run 안에서 도구 호출의
+대기·허용 조건을 고정하기 위한 기록이다.
 
 실험 정책(`builtin-only-v1`, `prompt-and-log`)과 별개로, 각 도구가 중간에
 멈추지 않으려면 아래 승인을 사전에 고정하고 profile·receipt에 기록한다.

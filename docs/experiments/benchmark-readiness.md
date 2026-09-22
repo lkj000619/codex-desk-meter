@@ -17,14 +17,25 @@
 ## 기준 저장소
 
 - 정식 기준 브랜치: `main`
-- 현재 기준 tag: `benchmark-v2-baseline-20260911`
-- 기준 commit: `34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f`
-- 현재 문서 보완은 이 기준 commit 위의 미커밋 작업이다. 이 변경을 검토·commit·
-  tag하기 전에는 새 baseline으로 사용하지 않는다.
+- 보존 중인 historical baseline tag: `benchmark-v2-baseline-20260911`
+- 해당 tag의 commit: `34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f`
+- 이후 main에 반영된 변경과 작업 트리의 문서 보완은 새 E2E baseline 후보다.
+  현재 HEAD·변경 여부는 `git rev-parse HEAD`와 `git status`로 확인한다.
+  검토·승인·commit/tag 및 입력 hash 동결 전에는 새 baseline으로 사용하지 않는다.
 - `main-2`는 runner tooling을 추가한 중간 개발 브랜치이며, 앞으로의 기준은
   검토·승인된 `main` commit과 tag로만 정한다.
 - `experiment/...` 브랜치는 한 agent의 동결 결과를 보관한다. 다음 run의 시작점으로
   사용하지 않는다.
+
+2026-09-20 로컬 ref 확인에서는 `version-2-baseline-20260911`과
+`benchmark-v2-baseline-20260914`도 존재한다. 위 태그와 서로 다른 commit이며,
+태그 존재만으로 현재 E2E 계약의 동결·승인 증거가 되지 않는다. ref별 commit은
+[문서 검토 기록](../DOCUMENTATION_REVIEW.md)에 보존한다.
+
+입력 검사와 run 준비를 분리해 순환 의존을 해소했다. 현재 순서는 마지막 절과
+[실행 가이드](agent-run-commands.md) §1~6을 따른다. 기존 조건부 승인 기록을
+확인하고 로컬 prepare를 수행한 뒤, 준비 성공을 포함한 원래 조건이 모두
+충족됐는지 확인해 R10을 발효한다. 문서 정비만으로 gate를 통과시키지 않는다.
 
 ## 역할 분리
 
@@ -89,6 +100,22 @@ source가 제공하지
 schema·validator·example은 존재하며, 남은 작업은 baseline commit·hash 동결과
 검토 기록이다. 동결 전이므로 R1/R3은 계속 `not_ready`다.
 
+### 현재 검증 증거와 남은 조건 (2026-09-21)
+
+위 gate 상태는 실행 준비 판정이며 코드 구현 여부와 구분한다.
+최신 검증 기록은 [진행 체크리스트](../DOCUMENTATION_REVIEW_CHECKLIST.md)에 있다.
+
+| Gate | 확보한 증거 | 남은 조건 |
+|---|---|---|
+| R0/R2 | 목적·C/F/G/I 계약과 비교 항목 정비 | 최종 범위·ADR 검토 기록 |
+| R1 | check/prepare 공통 hash 시험 | 최신 변경을 포함한 commit/tag·최종 hash 동결 |
+| R3 | E2E·historical·fixture matrix validator 통과 | 동결 기준선 재검증·검토 기록, CI 증거는 별도 |
+| R4/R5 | draft 3종의 sentinel 거부 확인 | 실제 model/reasoning/버전/settings 확정·profile-bound receipt |
+| R6/R7 | 토큰·timeout·runner 오프라인 시험 | 선택 CLI의 로그·telemetry·one-shot 전달 증거 |
+| R8 | 전체 81개 시험, host dry-run 3961 bytes, device_accessed=false | 동결 기준선·환경 확인; 실물/production 합격으로 대체 불가 |
+| R9 | 운영 checklist 문서 | 보드·백업 hash·COM3 단독 점유 실측 |
+| R10 | 2026-09-18 조건부 승인 기록 보존 | 대상 일치 및 prepare 성공 등 원래 조건 충족 확인 |
+
 ### Gate 종료 산출물과 책임자
 
 | Gate | 종료 산출물 | 책임자 | 완료 판정 |
@@ -105,7 +132,9 @@ schema·validator·example은 존재하며, 남은 작업은 baseline commit·ha
 | R9 | artifact/flash/COM3 운영 checklist | hardware operator | hash·단독 점유·비파괴 절차 확인 |
 | R10 | 대상 baseline/profile/run 수가 적힌 사용자 승인 기록 | user | 명시 승인 전 실행 불가 |
 
-모든 gate가 `pass`가 되기 전까지 run ID를 예약하거나 prompt를 전달하지 않는다.
+R0~R9 증거와 해당 baseline/profile에 적용되는 승인 기록을 확인한 뒤 로컬
+`prepare`로 ID를 예약할 수 있다. 조건부 승인의 prepare 성공 등 잔여 조건을
+모두 확인해 R10을 발효하기 전에는 prompt를 전달하지 않는다.
 `not_run`, `partial`, `blocked`를 `pass`로 바꾸어 gate를 통과시키지 않는다.
 
 ## 한 번의 정식 run 규칙
@@ -149,7 +178,8 @@ token 및 단위를 운반한다. source가 절대 quota를 공개하지 않으�
 `unit: percent|unknown`을 유지하며, agent나 runner가 임의의 token 총량을 추정하지
 않는다.
 
-E2E baseline transport는 USB serial(COM3) `cdm/1`로 고정済み다. local Wi-Fi 운용은
+검토 중인 E2E 계약의 transport 선택값은 USB serial(COM3) `cdm/1`이다.
+ADR-0005 승인과 baseline 동결은 아직 남아 있다. local Wi-Fi 운용은
 별도 cohort에서 비교한다. 실제 계정 source로의 전환은 별도의 owner-only live integration이다.
 collector·transport·receiver를 구현·검증하기 전에는 “실시간 Codex 사용량 표시
 완료”라고 보고하지 않는다. 계층별 frame·재연결·무결성 시험의 설계는
@@ -168,6 +198,10 @@ collector·transport·receiver를 구현·검증하기 전에는 “실시간 Co
 - 범위 밖 PC integration을 구현하지 않았는데 제품 전체 pass로 표시
 
 ## 승인 방법
+
+2026-09-18의 [조건부 pilot 승인 기록](preflight-evidence-20260918.md)은 보존한다.
+아직 충족되지 않은 모델·설정·동결·receipt 조건과 R10 발효를 구분하며, 문서 정비로
+승인을 새로 부여하거나 기존 조건부 승인을 취소하지 않는다.
 
 승인은 모든 R0~R9를 증거와 함께 검토한 뒤 사용자가 특정 baseline, profile, 실행
 표면, 반복 번호와 pilot/benchmark 여부를 명시하는 방식으로 남긴다. 승인 전에는
@@ -198,3 +232,15 @@ or a hardware pass, and no candidate-agent run, provider access, serial open,
 ESP32 operation, or firmware/LCD implementation was performed. Profiles remain
 operator-check-only sentinels; final baseline hashes and any commit/tag require
 explicit user approval.
+
+## Linear preparation order (N1)
+
+The gate order is intentionally acyclic: run the runner's input/profile `check`
+without reserving a run ID; freeze and hash the selected baseline; obtain a
+profile-bound preflight receipt; verify the applicable approval record; run
+`benchmark.py prepare`; verify all remaining conditional-approval requirements
+and record R10 activation; only then run `benchmark.py run`. `prepare` repeats the
+baseline/profile checks immediately before reserving an ID. A readiness gate
+must not require a prepared run as its own evidence, and a prepared run is not
+an authorization. R4 remains `not_ready`, R5 remains `not_ready`, and R10
+remains `not_authorized` until the operator supplies the missing evidence.

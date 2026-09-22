@@ -198,6 +198,11 @@ host 평가 adapter의 출력은 제품 논리 모델을 따르고 serial 출력
 
 ## 정식 고정 전 checklist
 
+아래 미완료 체크는 승인·동결된 제품 기준의 완료 여부다. host 도구·schema·example의
+존재와 offline 검증은 [2026-09-18 기록](design-remediation-20260918.md) 및
+[문서 검토](../DOCUMENTATION_REVIEW.md)에서 별도로 확인한다. host simulation은
+실제 ESP32 통합 증거를 대신하지 않는다.
+
 - [x] transport 선택(USB serial `cdm/1`) 고정 선언 (ADR-0005 승인 + baseline commit/hash 동결 대기)
 - [ ] canonical JSON/CRC 또는 대체 무결성 규칙 승인
 - [ ] fixture collector와 owner-only live adapter의 경계 승인

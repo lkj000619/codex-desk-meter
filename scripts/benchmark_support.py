@@ -70,8 +70,13 @@ def validate_operator(m):
             raise ValueError("invalid start/end ordering")
         if elapsed is None or abs((utc(end) - utc(start)).total_seconds() - elapsed) > 5:
             raise ValueError("UTC/monotonic elapsed mismatch; investigate clock adjustment")
+    expected_result = (
+        f"results/{m['run_id']}/end-to-end-result.json"
+        if m["experiment_id"] == "version-2-end-to-end-v1"
+        else f"results/{m['run_id']}/hardware-feature.json"
+    )
     for key, expected in (("selection_document", f"docs/agent-runs/{m['run_id']}/hardware-feature-selection.md"),
-                          ("structured_result", f"results/{m['run_id']}/hardware-feature.json")):
+                          ("structured_result", expected_result)):
         if m["outputs"][key] != expected:
             raise ValueError(f"{key} does not match run ID")
 

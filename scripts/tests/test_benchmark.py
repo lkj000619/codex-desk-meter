@@ -1,4 +1,6 @@
 import copy
+import contextlib
+import io
 import importlib.util
 import json
 import os
@@ -118,7 +120,8 @@ class RunnerTests(unittest.TestCase):
                 "reasoning": 45, "cache": {"read": 0, "write": 0}}}}
             path.write_text(json.dumps(event) + "\n" + json.dumps(event), encoding="utf-8")
             measured = telemetry(path, "opencode")
-            self.assertEqual(measured["total"], 4130)
+            self.assertEqual(measured["provider_total"], 4130)
+            self.assertEqual(measured["total"], 4040)
             self.assertEqual(measured["input"], 4010)
             self.assertEqual(measured["reasoning"], 90)
             self.assertEqual(measured["cached"], 0)
@@ -153,6 +156,7 @@ class RunnerTests(unittest.TestCase):
             tokens = telemetry(path, "codex")
             self.assertEqual(tokens["total"], 120)
             self.assertEqual(tokens["cached"], 80)
+            self.assertIsNone(tokens["provider_total"])
             self.assertIsNone(tokens["reasoning"])
 
     def test_missing_telemetry_is_null(self):
@@ -187,7 +191,7 @@ class PreflightPolicyTests(unittest.TestCase):
         self.receipt = {
             "access_policy": "prompt-and-log",
             "base_commit": self.manifest["execution"]["base_commit"],
-            "profile_sha256": self.manifest["agent"]["configuration_sha256"],
+            "profile_sha256": self.manifest["execution"]["profile_sha256"],
             "checks": dict.fromkeys(
                 ["idf_build", "compiler", "ninja", "git", "temp_write",
                  "network_policy", "settings_inventory", "prompt_scope", "activity_logging"], "pass"),
@@ -229,6 +233,21 @@ class PreflightPolicyTests(unittest.TestCase):
                 with self.assertRaises(ValueError):
                     self.validate()
                 self.receipt[key] = original
+
+    def test_receipt_binds_semantic_execution_profile_hash(self):
+        semantic_hash = benchmark.profile_digest(self.profile)
+        reformatted = json.loads(json.dumps(self.profile, indent=4))
+        self.assertEqual(semantic_hash, benchmark.profile_digest(reformatted))
+        self.manifest["execution"]["profile_sha256"] = semantic_hash
+        self.receipt["profile_sha256"] = semantic_hash
+        # Deliberately make the saved JSON byte hash different. Receipt
+        # validation must use execution.profile_sha256, not this field.
+        self.manifest["agent"]["configuration_sha256"] = "f" * 64
+        self.validate()
+
+        self.manifest["execution"]["profile_sha256"] = "e" * 64
+        with self.assertRaisesRegex(ValueError, "preflight receipt mismatch: profile_sha256"):
+            self.validate()
 
     def test_policy_must_match_profile(self):
         self.profile["sandbox_policy"] = "external-sandbox"
@@ -295,6 +314,56 @@ class ResolvedProfileTests(unittest.TestCase):
                 benchmark.validate_resolved_profile(profile)
 
 
+class InputBundleCheckTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(prefix="meter-check-", dir=ascii_temp_dir())
+        self.addCleanup(self.temp.cleanup)
+        self.profile = read(ROOT / "experiments/config/runner-profile.example.json")
+        self.profile.update(
+            agent_version="test",
+            model="example-model",
+            model_slug="example-model",
+            reasoning="fixed",
+            argv=[sys.executable],
+            version_argv=[sys.executable, "--version"],
+            approval_policy="workspace-write",
+            settings_inventory=dict(
+                skills="disabled", mcp="disabled", memory="none", user_instructions="none",
+                cache="cold", routing="fixed",
+            ),
+        )
+        self.profile_path = Path(self.temp.name) / "profile.json"
+        self.profile_path.write_text(json.dumps(self.profile), encoding="utf-8")
+
+    def args(self, baseline="HEAD"):
+        return SimpleNamespace(baseline=baseline, profile=str(self.profile_path))
+
+    def test_check_hashes_full_bundle_without_reserving_or_mutating(self):
+        before = sorted(path.name for path in ROOT.iterdir())
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            benchmark.check_inputs(self.args())
+        after = sorted(path.name for path in ROOT.iterdir())
+        self.assertEqual(before, after)
+        record = json.loads(output.getvalue())
+        self.assertFalse(record["run_id_reserved"])
+        self.assertFalse(record["worktree_touched"])
+        for key in ("prompt_sha256", "config_sha256", "fixture_sha256", "schema_sha256", "evaluation_criteria_sha256", "profile_sha256", "input_bundle_sha256"):
+            self.assertRegex(record[key], r"^[a-f0-9]{64}$")
+        self.assertEqual(record["profile_sha256"], benchmark.profile_digest(self.profile))
+
+    def test_check_rejects_invalid_profile(self):
+        invalid = copy.deepcopy(self.profile)
+        invalid["model"] = "operator-check-required"
+        self.profile_path.write_text(json.dumps(invalid), encoding="utf-8")
+        with self.assertRaisesRegex(ValueError, "unresolved settings"):
+            benchmark.check_inputs(self.args())
+
+    def test_check_rejects_invalid_baseline(self):
+        with self.assertRaises(subprocess.CalledProcessError):
+            benchmark.check_inputs(self.args("not-a-real-baseline-ref"))
+
+
 class IsolationTests(unittest.TestCase):
     def test_prepare_reserves_ids_and_excludes_parent_history(self):
         with tempfile.TemporaryDirectory(prefix="meter-test-", dir=ascii_temp_dir()) as folder:
@@ -302,6 +371,7 @@ class IsolationTests(unittest.TestCase):
             repo = root / "repo"
             repo.mkdir()
             shutil.copytree(ROOT / "experiments", repo / "experiments")
+            shutil.copytree(ROOT / "docs", repo / "docs")
             subprocess.run(["git", "init", str(repo)], check=True, capture_output=True)
             subprocess.run(["git", "-C", str(repo), "add", "."], check=True, capture_output=True)
             subprocess.run(["git", "-C", str(repo), "-c", "user.name=Test", "-c", "user.email=test@localhost", "commit", "-m", "baseline"], check=True, capture_output=True)
@@ -320,6 +390,10 @@ class IsolationTests(unittest.TestCase):
             def test_git(*args, cwd=None):
                 return original_git(*args, cwd=repo if cwd is None else cwd)
             with patch.object(benchmark, "ROOT", repo), patch.object(benchmark, "git", test_git):
+                check_output = io.StringIO()
+                with contextlib.redirect_stdout(check_output):
+                    benchmark.check_inputs(SimpleNamespace(baseline="HEAD", profile=str(profile_path)))
+                checked = json.loads(check_output.getvalue())
                 benchmark.prepare(args)
                 benchmark.prepare(args)
                 bad_profile = dict(profile, model="operator-check-required")
@@ -343,6 +417,15 @@ class IsolationTests(unittest.TestCase):
                 ]
                 expected_fixture_hash = benchmark.digest(("\n".join(fixture_lines) + "\n").encode())
                 self.assertEqual(m["execution"]["fixture_sha256"], expected_fixture_hash)
+                hashes = benchmark.input_bundle_hashes(
+                    run / "checkout", run / "profile.json", m["baseline_ref"], m["execution"]["base_commit"]
+                )
+                for key, expected in hashes.items():
+                    self.assertEqual(m["execution"][key], expected)
+                if index == 0:
+                    for key in hashes:
+                        self.assertEqual(checked[key], m["execution"][key])
+                    self.assertEqual(checked["baseline_commit"], m["execution"]["base_commit"])
                 m["execution"].update(started_at=benchmark.now(), ended_at=benchmark.now())
                 m["measurement"]["wall_clock_seconds"] = 0
                 m["operator"].update(status="aborted", reason="synthetic archive test")
@@ -355,6 +438,31 @@ class IsolationTests(unittest.TestCase):
             self.assertIn(f"results/{runs[1].name}/run-manifest.json", files)
             self.assertIn("implementation-1.txt", files)
             self.assertNotIn("implementation-0.txt", files)
+
+
+class E2EArchiveContractTests(unittest.TestCase):
+    def test_archive_semantic_join_and_final_mutation_validation(self):
+        result = read(ROOT / "experiments/examples/end-to-end-result.example.json")
+        evaluation_manifest = read(ROOT / "experiments/examples/end-to-end-manifest.example.json")
+        run_manifest = {
+            "run_id": result["run_id"],
+            "experiment_id": result["experiment_id"],
+            "baseline_id": result["baseline_id"],
+            "baseline_ref": result["baseline"]["ref"],
+            "execution": {"base_commit": result["baseline"]["commit"]},
+            "outputs": {"evaluation_manifest": f"results/{result['run_id']}/e2e-evaluation-manifest.json"},
+        }
+        with tempfile.TemporaryDirectory(prefix="meter-e2e-archive-", dir=ascii_temp_dir()) as folder:
+            directory = Path(folder)
+            (directory / "e2e-evaluation-manifest.json").write_text(json.dumps(evaluation_manifest), encoding="utf-8")
+            benchmark._check_e2e_manifest_join(evaluation_manifest, run_manifest, result)
+            benchmark._validate_final_e2e_candidate(result, evaluation_manifest, run_manifest, ROOT, directory)
+            self.assertEqual(result["manifest"]["path"], run_manifest["outputs"]["evaluation_manifest"])
+
+    def test_archive_uses_integration_evidence_not_product_pass_for_test_status(self):
+        result = read(ROOT / "experiments/examples/end-to-end-result.example.json")
+        result["product_pass"] = True
+        self.assertEqual(benchmark.derive_e2e_automated_test_status(result), "partial")
 
 
 if __name__ == "__main__":

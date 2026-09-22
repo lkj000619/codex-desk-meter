@@ -14,7 +14,8 @@
   "baseline": {
     "id": "benchmark-v2-baseline-20260911",
     "experiment_id": "version-2-end-to-end-v1",
-    "commit": "34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f"
+    "commit": "34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f",
+    "ref": "benchmark-v2-baseline-20260911"
   },
   "feature_results": {
     "F1": {
@@ -71,6 +72,16 @@
       "evidence": [],
       "reason": "Autonomous hardware behavior is outside the contract-only example."
     }
+  },
+  "core_results": {
+    "C1": {"status": "not_run", "scope": "firmware build", "evidence": [], "reason": "No firmware build is claimed by this example."},
+    "C2": {"status": "not_run", "scope": "LCD boot and layout", "evidence": [], "reason": "No hardware display evidence is claimed."},
+    "C3": {"status": "pass", "scope": "fixture usage windows", "evidence": ["experiments/fixtures/providers/codex-percent-window.json"], "reason": null},
+    "C4": {"status": "pass", "scope": "source identity", "evidence": ["experiments/fixtures/providers/codex-percent-window.json"], "reason": null},
+    "C5": {"status": "not_run", "scope": "global reset display", "evidence": [], "reason": "Global reset display is outside this example."},
+    "C6": {"status": "not_run", "scope": "unknown and error display", "evidence": [], "reason": "Device display is outside this example."},
+    "C7": {"status": "not_run", "scope": "error and recovery", "evidence": [], "reason": "Runtime recovery is outside this example."},
+    "C8": {"status": "not_run", "scope": "refresh and reset", "evidence": [], "reason": "Runtime refresh is outside this example."}
   },
   "integration_results": {
     "I1": {
@@ -227,9 +238,11 @@
       "output": null,
       "cached": null,
       "reasoning": null,
+      "provider_total": null,
       "total": null
     },
     "token_total_definition": "input_plus_output_excludes_cached_and_reasoning",
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
     "availability_reason": "Synthetic contract validation does not expose runner or agent token telemetry.",
     "evidence": []
   },

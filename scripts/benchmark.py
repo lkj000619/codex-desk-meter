@@ -4,6 +4,7 @@ No shell interpolation. Logs stay outside the agent checkout. Default access pol
 uses prompt restrictions and activity logs; OS sandbox read isolation is optional.
 """
 import argparse
+import importlib.util
 import io
 import json
 import os
@@ -25,6 +26,76 @@ UNRESOLVED_PROFILE_VALUES = {
     "explicit-policy-required-before-run",
 }
 
+EVALUATION_CRITERIA_PATHS = (
+    "docs/PRODUCT_CONTRACT.md",
+    "docs/experiments/evaluation-contract.md",
+    "docs/experiments/feature-comparison.md",
+    "docs/experiments/hardware-feature-discovery.md",
+)
+
+
+def _hash_group(root, paths):
+    root = Path(root).resolve()
+    lines = []
+    for relative in sorted(paths):
+        path = root / relative
+        if not path.is_file():
+            raise ValueError(f"required R1 input is missing: {relative}")
+        lines.append(f"{digest(path.read_bytes())}  {relative}")
+    return digest(("\n".join(lines) + "\n").encode())
+
+
+def profile_digest(profile):
+    """Hash profile meaning, not incidental JSON whitespace or key order."""
+    canonical = json.dumps(profile, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return digest(canonical.encode("utf-8"))
+
+
+def _extract_archive(destination, base):
+    destination = Path(destination).resolve()
+    archive = subprocess.check_output(["git", "archive", "--format=zip", base], cwd=ROOT)
+    with zipfile.ZipFile(io.BytesIO(archive)) as z:
+        for entry in z.infolist():
+            if not (destination / entry.filename).resolve().is_relative_to(destination):
+                raise ValueError("unsafe archive entry")
+        z.extractall(destination)
+
+
+def input_bundle_hashes(root, profile_path, baseline_ref, baseline_commit):
+    """Hash the complete R1 bundle with the same content basis for check/prepare."""
+    root = Path(root).resolve()
+    profile = read(profile_path)
+    fixture_paths = sorted(
+        path.relative_to(root).as_posix()
+        for path in (root / "experiments/fixtures").rglob("*.json")
+    )
+    schema_paths = sorted(
+        path.relative_to(root).as_posix()
+        for path in (root / "experiments/schema").rglob("*.json")
+    )
+    evaluation_paths = list(EVALUATION_CRITERIA_PATHS)
+    values = {
+        "prompt_sha256": digest((root / "experiments/prompts/version-2-agent-task.md").read_bytes()),
+        "config_sha256": digest((root / "experiments/config/version-2-baseline.yaml").read_bytes()),
+        "fixture_sha256": _hash_group(root, fixture_paths),
+        "schema_sha256": _hash_group(root, schema_paths),
+        "evaluation_criteria_sha256": _hash_group(root, evaluation_paths),
+        "profile_sha256": profile_digest(profile),
+    }
+    bundle_lines = [
+        f"baseline_ref={baseline_ref}",
+        f"baseline_commit={baseline_commit}",
+    ] + [f"{key}={values[key]}" for key in (
+        "prompt_sha256",
+        "config_sha256",
+        "fixture_sha256",
+        "schema_sha256",
+        "evaluation_criteria_sha256",
+        "profile_sha256",
+    )]
+    values["input_bundle_sha256"] = digest(("\n".join(bundle_lines) + "\n").encode())
+    return values
+
 
 def validate_resolved_profile(profile):
     """Reject unresolved execution settings before reserving a run or launching it."""
@@ -41,6 +112,36 @@ def validate_resolved_profile(profile):
     if profile["adapter"] == "antigravity" and "stream-json" in argv:
         if "--input-format" in argv and argv[argv.index("--input-format") + 1:][:1] == ["stream-json"]:
             raise ValueError("runner delivers plain UTF-8 stdin; Antigravity requires --input-format text")
+
+
+def check_inputs(a):
+    """Validate future-run inputs without reserving a run ID or touching a checkout."""
+    baseline = git("rev-parse", "--verify", a.baseline + "^{commit}")
+    profile_path = Path(a.profile).resolve()
+    profile = read(profile_path)
+    validate_resolved_profile(profile)
+    model_slug = slug(profile["model_slug"])
+    product = slug(profile["product"])
+    # Hash the selected baseline snapshot, not the possibly dirty current
+    # checkout. The temporary extraction is read-only with respect to the
+    # repository and does not reserve a run ID or create a worktree.
+    with tempfile.TemporaryDirectory(prefix="meter-input-check-") as temp:
+        snapshot = Path(temp) / "checkout"
+        snapshot.mkdir()
+        _extract_archive(snapshot, baseline)
+        hashes = input_bundle_hashes(snapshot, profile_path, a.baseline, baseline)
+    print(json.dumps({
+        "status": "inputs_valid",
+        "run_id_reserved": False,
+        "worktree_touched": False,
+        "baseline_ref": a.baseline,
+        "baseline_commit": baseline,
+        "profile": str(profile_path),
+        "product": product,
+        "model_slug": model_slug,
+        **hashes,
+        "next": "freeze baseline, obtain profile-bound receipt and explicit approval, then run prepare",
+    }, ensure_ascii=False, indent=2))
 
 
 def git(*args, cwd=ROOT):
@@ -87,12 +188,7 @@ def prepare(a):
         raise ValueError("daily repetition slots exhausted")
     checkout = directory / "checkout"
     checkout.mkdir()
-    archive = subprocess.check_output(["git", "archive", "--format=zip", base], cwd=ROOT)
-    with zipfile.ZipFile(io.BytesIO(archive)) as z:
-        for entry in z.infolist():
-            if not (checkout / entry.filename).resolve().is_relative_to(checkout):
-                raise ValueError("unsafe archive entry")
-        z.extractall(checkout)
+    _extract_archive(checkout, base)
     git("init", cwd=checkout)
     git("add", ".", cwd=checkout)
     git("-c", "user.name=Benchmark", "-c", "user.email=benchmark@localhost", "commit", "-m", "Isolated baseline snapshot", cwd=checkout)
@@ -105,15 +201,13 @@ def prepare(a):
     if profile["cohort"] == "version-2-end-to-end-v1":
         m["experiment_id"] = "version-2-end-to-end-v1"
     m["run_id"] = run_id
+    m["baseline_id"] = a.baseline
+    m["baseline_ref"] = a.baseline
     m["agent"].update({k: profile[k] for k in ("provider", "product", "interface", "agent_version", "model", "reasoning")})
     m["agent"]["configuration_sha256"] = digest((directory / "profile.json").read_bytes())
-    fixture_lines = []
-    for p in sorted((checkout / "experiments/fixtures").rglob("*.json")):
-        fixture_lines.append(f"{digest(p.read_bytes())}  {p.relative_to(checkout).as_posix()}")
+    hashes = input_bundle_hashes(checkout, directory / "profile.json", a.baseline, base)
     e = m["execution"]
-    e.update(started_at=None, ended_at=None, base_commit=base,
-             prompt_sha256=digest(template), config_sha256=digest((checkout / "experiments/config/version-2-baseline.yaml").read_bytes()),
-             fixture_sha256=digest(("\n".join(fixture_lines) + "\n").encode()),
+    e.update(started_at=None, ended_at=None, base_commit=base, **hashes,
              branch=f"experiment/{slug(profile['branch_owner'])}/{slug(profile['branch_product'])}/{model_slug}",
              worktree=str(checkout), host=os.environ.get("COMPUTERNAME", "unknown"),
              sandbox_policy=profile["sandbox_policy"], approval_policy=profile["approval_policy"],
@@ -124,10 +218,23 @@ def prepare(a):
     m["hardware"]["port"] = a.port
     m["measurement"].update(wall_clock_seconds=None, tool_calls=None, failed_commands=None, user_interventions=None)
     m["measurement"]["tokens"]["availability_note"] = "Not yet executed."
+    m["measurement"]["tokens"]["provider_total"] = None
+    m["measurement"]["tokens"]["provider_total_definition"] = "provider_reported_total_preserved_without_recomputation"
     m["outputs"].update(selection_document=f"docs/agent-runs/{run_id}/hardware-feature-selection.md",
                          structured_result=f"results/{run_id}/hardware-feature.json")
     if m["experiment_id"] == "version-2-end-to-end-v1":
         m["outputs"]["structured_result"] = f"results/{run_id}/end-to-end-result.json"
+        m["outputs"]["evaluation_manifest"] = f"results/{run_id}/e2e-evaluation-manifest.json"
+        save(directory / "e2e-evaluation-manifest.json", {
+            "schema_version": 1,
+            "manifest_id": run_id,
+            "run_id": run_id,
+            "result_reference": run_id,
+            "baseline_id": a.baseline,
+            "baseline_ref": a.baseline,
+            "experiment_id": m["experiment_id"],
+            "execution": {"base_commit": base},
+        })
     validate_schema(m, "run-manifest.schema.json")
     validate_operator(m)
     save(directory / "run-manifest.json", m)
@@ -168,7 +275,8 @@ def capture(argv, cwd, prompt, directory, timeout):
 
 
 def telemetry(path, adapter):
-    tokens = dict(input=None, output=None, cached=None, reasoning=None, total=None,
+    tokens = dict(input=None, output=None, cached=None, reasoning=None, provider_total=None, total=None,
+                  provider_total_definition="provider_reported_total_preserved_without_recomputation",
                   availability_note="No supported usage event; see raw stdout.")
     events = []
     for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
@@ -186,6 +294,9 @@ def telemetry(path, adapter):
                 values = [u.get(source) for u in usages]
                 if all(type(v) is int and v >= 0 for v in values):
                     tokens[target] = sum(values)
+            provider_totals = [u.get("total_tokens", u.get("total")) for u in usages]
+            if all(type(v) is int and v >= 0 for v in provider_totals):
+                tokens["provider_total"] = sum(provider_totals)
             if tokens["input"] is not None and tokens["output"] is not None:
                 tokens["total"] = tokens["input"] + tokens["output"]
             tokens["availability_note"] = "Codex turn.completed usage; cached is included in input; reasoning unavailable."
@@ -196,17 +307,23 @@ def telemetry(path, adapter):
                   and isinstance(e.get("part"), dict)
                   and isinstance(e["part"].get("tokens"), dict)]
         if usages:
-            for target in ("input", "output", "reasoning", "total"):
+            for target in ("input", "output", "reasoning"):
                 values = [u.get(target) for u in usages]
                 if all(type(v) is int and v >= 0 for v in values):
                     tokens[target] = sum(values)
+            values = [u.get("total") for u in usages]
+            if all(type(v) is int and v >= 0 for v in values):
+                tokens["provider_total"] = sum(values)
+            if all(type(u.get("input")) is int and type(u.get("output")) is int
+                   and u.get("input") >= 0 and u.get("output") >= 0 for u in usages):
+                tokens["total"] = sum(u["input"] + u["output"] for u in usages)
             values = [u.get("cache", {}).get("read") for u in usages
                       if isinstance(u.get("cache", {}), dict)]
             if len(values) == len(usages) and all(type(v) is int and v >= 0 for v in values):
                 tokens["cached"] = sum(values)
             tokens["availability_note"] = (
-                "OpenCode step_finish provider usage; total is provider-reported, "
-                "reasoning and cache must not be added to total again; cache write retained in raw logs."
+                "OpenCode step_finish provider usage; provider_total preserves the raw total, "
+                "total is normalized input+output and excludes cache/reasoning; cache write is raw-log-only."
             )
     return tokens
 
@@ -245,8 +362,11 @@ def validate_preflight_receipt(receipt, manifest, profile, evidence_root):
         raise ValueError("preflight requires an explicit supported access_policy")
     if profile["sandbox_policy"] != mode:
         raise ValueError("preflight access policy does not match profile")
+    # The receipt binds to the semantic profile hash used by check/prepare.
+    # agent.configuration_sha256 remains a separate byte-integrity guard for
+    # the saved profile file and is checked by execute().
     for key, expected in (("base_commit", manifest["execution"]["base_commit"]),
-                          ("profile_sha256", manifest["agent"]["configuration_sha256"])):
+                          ("profile_sha256", manifest["execution"]["profile_sha256"])):
         if receipt.get(key) != expected:
             raise ValueError(f"preflight receipt mismatch: {key}")
     checks = receipt.get("checks")
@@ -313,6 +433,79 @@ def execute(a):
     return 0 if r["status"] == "completed" else 1
 
 
+def _load_e2e_validator():
+    path = Path(__file__).with_name("validate-end-to-end-result.py")
+    spec = importlib.util.spec_from_file_location("benchmark_e2e_validator", path)
+    module = importlib.util.module_from_spec(spec)
+    if spec.loader is None:
+        raise ValueError("cannot load end-to-end semantic validator")
+    spec.loader.exec_module(module)
+    return module
+
+
+def _check_e2e_manifest_join(manifest, run_manifest, candidate):
+    result_reference = manifest.get("result_id", manifest.get("result_reference"))
+    if (
+        manifest["run_id"] != run_manifest["run_id"]
+        or manifest["manifest_id"] != run_manifest["run_id"]
+        or manifest["experiment_id"] != run_manifest["experiment_id"]
+        or manifest["baseline_id"] != run_manifest["baseline_id"]
+        or manifest["baseline_ref"] != run_manifest["baseline_ref"]
+        or manifest["baseline_id"] != candidate["baseline_id"]
+        or manifest["baseline_ref"] != candidate["baseline"]["ref"]
+        or manifest["execution"]["base_commit"] != run_manifest["execution"]["base_commit"]
+        or manifest["execution"]["base_commit"] != candidate["baseline"]["commit"]
+        or result_reference != candidate["result_id"]
+        or candidate["run_id"] != run_manifest["run_id"]
+        or candidate["experiment_id"] != run_manifest["experiment_id"]
+        or candidate["manifest_id"] != manifest["manifest_id"]
+        or candidate["manifest"]["id"] != candidate["manifest_id"]
+        or candidate["manifest"]["experiment_id"] != manifest["experiment_id"]
+        or candidate["manifest"]["baseline_id"] != manifest["baseline_id"]
+    ):
+        raise ValueError("E2E result/manifest identity mismatch")
+
+
+def _validate_final_e2e_candidate(candidate, evaluation_manifest, run_manifest, checkout, directory):
+    validator = _load_e2e_validator()
+    candidate["manifest"]["path"] = "e2e-evaluation-manifest.json"
+    validator.validate_result(
+        candidate,
+        manifest=evaluation_manifest,
+        evidence_root=checkout,
+        manifest_root=directory,
+    )
+    # Validate the exact post-mutation archive path before it is written to the
+    # bare archive index. The source result remains untouched throughout.
+    candidate["manifest"]["path"] = run_manifest["outputs"]["evaluation_manifest"]
+    with tempfile.TemporaryDirectory(prefix="meter-e2e-final-") as temp:
+        final_root = Path(temp)
+        final_manifest = final_root / run_manifest["outputs"]["evaluation_manifest"]
+        final_manifest.parent.mkdir(parents=True, exist_ok=True)
+        save(final_manifest, evaluation_manifest)
+        validator.validate_result(
+            candidate,
+            manifest=evaluation_manifest,
+            evidence_root=checkout,
+            manifest_root=final_root,
+        )
+
+
+def derive_e2e_automated_test_status(candidate):
+    """Derive test status from integration test entries and their evidence only."""
+    entries = list(candidate.get("integration_results", {}).values())
+    if not entries or all(entry["status"] == "not_run" for entry in entries):
+        return "not_run"
+    statuses = {entry["status"] for entry in entries}
+    if "timeout" in statuses:
+        return "timeout"
+    if "fail" in statuses:
+        return "fail"
+    if all(entry["status"] == "pass" and entry["evidence"] for entry in entries):
+        return "pass"
+    return "partial"
+
+
 def archive_run(a):
     """Create a local bundle plus a stable branch in a dedicated bare archive.
 
@@ -339,17 +532,39 @@ def archive_run(a):
     m["operator"]["evidence"]["implementation.bundle"] = digest(bundle.read_bytes())
     result_path = checkout / m["outputs"]["structured_result"]
     normalized_result = None
+    evaluation_manifest = None
+    if m["experiment_id"] == "version-2-end-to-end-v1":
+        evaluation_path = directory / "e2e-evaluation-manifest.json"
+        if not evaluation_path.is_file():
+            raise ValueError("E2E archive requires the generated evaluation manifest")
+        evaluation_manifest = read(evaluation_path)
+        validate_schema(evaluation_manifest, "end-to-end-manifest.schema.json")
+        if (evaluation_manifest["run_id"] != m["run_id"]
+                or evaluation_manifest["experiment_id"] != m["experiment_id"]
+                or evaluation_manifest["execution"]["base_commit"] != m["execution"]["base_commit"]):
+            raise ValueError("E2E evaluation manifest identity mismatch")
     if result_path.is_file():
         candidate = read(result_path)
         try:
-            validate_schema(candidate, "hardware-feature-result.schema.json")
-            if candidate["run_id"] != m["run_id"] or candidate["experiment_id"] != m["experiment_id"]:
+            schema_name = ("end-to-end-result.schema.json" if m["experiment_id"] == "version-2-end-to-end-v1"
+                           else "hardware-feature-result.schema.json")
+            validate_schema(candidate, schema_name)
+            if candidate.get("run_id") != m["run_id"] or candidate.get("experiment_id") != m["experiment_id"]:
                 raise ValueError("result ID mismatch")
-            candidate["implementation"]["commit"] = implementation
+            if evaluation_manifest is not None:
+                _check_e2e_manifest_join(evaluation_manifest, m, candidate)
+                _validate_final_e2e_candidate(candidate, evaluation_manifest, m, checkout, directory)
+            else:
+                candidate["implementation"]["commit"] = implementation
             normalized_result = candidate
-            m["outputs"].update(build_status=candidate["implementation"]["build"]["status"],
-                                 automated_test_status=candidate["implementation"]["automated_tests"]["status"],
-                                 hardware_verification_status=candidate["implementation"]["hardware_result"])
+            if evaluation_manifest is None:
+                m["outputs"].update(build_status=candidate["implementation"]["build"]["status"],
+                                     automated_test_status=candidate["implementation"]["automated_tests"]["status"],
+                                     hardware_verification_status=candidate["implementation"]["hardware_result"])
+            else:
+                m["outputs"].update(build_status=candidate["build"]["status"],
+                                     automated_test_status=derive_e2e_automated_test_status(candidate),
+                                     hardware_verification_status=candidate["hardware"]["status"])
         except ValueError as exc:
             print(f"Result needs operator review; raw source snapshot preserved: {exc}")
     save(directory / "run-manifest.json", m)
@@ -386,6 +601,9 @@ def archive_run(a):
         if normalized_result is not None:
             blob = indexed("hash-object", "-w", "--stdin", data=(json.dumps(normalized_result, ensure_ascii=False, indent=2) + "\n").encode()).decode().strip()
             indexed("update-index", "--add", "--cacheinfo", f"100644,{blob},{m['outputs']['structured_result']}")
+        if evaluation_manifest is not None:
+            blob = indexed("hash-object", "-w", "--stdin", data=(json.dumps(evaluation_manifest, ensure_ascii=False, indent=2) + "\n").encode()).decode().strip()
+            indexed("update-index", "--add", "--cacheinfo", f"100644,{blob},{m['outputs']['evaluation_manifest']}")
         tree = indexed("write-tree").decode().strip()
     record = git("-c", "user.name=Benchmark", "-c", "user.email=benchmark@localhost", "commit-tree", tree,
                  *parents, "-m", f"Preserve {m['run_id']}; implementation {implementation}", cwd=archive)
@@ -397,6 +615,9 @@ def archive_run(a):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     sub = p.add_subparsers(dest="command", required=True)
+    check = sub.add_parser("check", help="validate future-run inputs without reserving a run ID")
+    check.add_argument("--baseline", required=True)
+    check.add_argument("--profile", required=True)
     prep = sub.add_parser("prepare")
     prep.add_argument("--baseline", required=True)
     prep.add_argument("--profile", required=True)
@@ -413,6 +634,8 @@ def main():
     archive.add_argument("--archive", required=True)
     a = p.parse_args()
     try:
+        if a.command == "check":
+            return check_inputs(a)
         if a.command == "prepare":
             return prepare(a)
         if a.command == "archive":

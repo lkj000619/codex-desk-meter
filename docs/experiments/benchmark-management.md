@@ -7,8 +7,11 @@ schema v2·격리 checkout·실행기 일부가 존재한다는 사실은 제품
 뜻하지 않는다. 도구별 설정·모델, preflight receipt, 기능·GUI 결과 계약과 새
 baseline 검증을 완료하기 전까지 pilot을 실행하지 않는다. 실행 gate의 단일
 진실은 [benchmark 실행 전 readiness gate](benchmark-readiness.md)다.
-기존 baseline 태그는 보존하고, 모든 gate 통과와 사용자 승인 후에만 새로운
-baseline을 만든다.
+기존 baseline 태그는 보존한다. 새 baseline은 maintainer가 `check`로 입력/profile을
+검사한 뒤 R1에서 hash를 동결하는 기준점이며, receipt·R10 승인이나 pilot 실행의
+증거가 아니다. 동결 뒤 profile-bound receipt와 적용되는 승인 기록을 확인하고
+`prepare`를 호출한다. 조건부 승인의 준비 성공 등 잔여 조건을 확인해 R10을
+발효한 뒤에만 `run`을 호출한다.
 
 ## 브랜치와 run ID
 
@@ -129,6 +132,15 @@ F1~F9 기능 범위, G1~G6 GUI 점수, 시간·토큰과 측정 한계, 실물 �
 - 미완료: historical prep용 result schema의 F1~F9/I1~I4·G1~G6 기록 확장(E2E 결과 계약은 해당 필드 보유). 동결·승인 전이므로 새 baseline 확정 금지
 - 미완료: 도구별 정확한 모델/설정 확정, 실제 preflight receipt, Gemini/OpenCode/Antigravity telemetry 어댑터 검증
 - 미완료: one-shot 경계 검증, 새 baseline 확정, 각 도구의 제품 pilot, COM 포트와 실물 검증
+- 완료(offline tooling): E2E 평가 manifest는 `prepare`에서 생성되고 archive가
+  E2E result와 함께 identity를 정규화해 보존한다. summary는 조건별 유효 반복 수,
+  성공률, 시간·정규화 token 중앙값/범위와 build/hardware 상태를 집계한다.
+  C/F/G 상세 점수와 provider 원본 token은 결과·telemetry를 별도로 검토한다.
+- 완료(offline tooling): provider 원본 token total과 E2E 정규화 total 계약을
+  schema·runner·validator·회귀 테스트에 연결했다. 실제 provider telemetry는 여전히
+  실행 전 확인 대상이다.
+- 미완료: 도구별 정확한 모델/설정 확정, 실제 preflight receipt, Gemini/OpenCode/Antigravity telemetry
+  live 어댑터 검증, 제품 pilot·COM 포트·실물 검증.
 
 운영 도구 자동 시험과 제품 pilot은 별개다. synthetic subprocess 시험을 제품 pilot으로
 기록하지 않는다. schema v1 과거 자료는 보존하며 새 validator로 덮어쓰거나 자동 이관하지 않는다.

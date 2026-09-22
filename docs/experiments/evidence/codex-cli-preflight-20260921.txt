@@ -1,0 +1,202 @@
+Codex CLI preparation evidence — 2026-09-21 (Asia/Seoul)
+===========================================================
+
+Scope: read-only version/help/config metadata only. No model/provider call, login,
+agent session, serial access, flash, or benchmark run was performed.
+
+Executable discovery
+--------------------
+Command: Get-Command codex
+Exit: 0
+Observed Source/Definition:
+C:\Users\이광진\AppData\Local\Programs\OpenAI\Codex\bin\codex.exe
+
+Command: & 'C:\Users\이광진\AppData\Local\Programs\OpenAI\Codex\bin\codex.exe' --version
+Exit: 0
+Stdout:
+codex-cli 0.153.2
+
+Command: & 'C:\Users\이광진\AppData\Local\Programs\OpenAI\Codex\bin\codex.exe' --help
+Exit: 0
+Relevant stdout (exact lines from the installed executable):
+  exec              Run Codex non-interactively [aliases: e]
+  -c, --config <key=value>
+                    Override a configuration value that would otherwise be loaded from
+                    ~/.codex/config.toml.
+  -m, --model <MODEL>
+                    Model the agent should use
+  -s, --sandbox <SANDBOX_MODE>
+                    Select the sandbox policy to use when executing model-generated shell commands
+                    [possible values: read-only, workspace-write, danger-full-access]
+  --approve-for-me  Route approval requests through automatic review using the workspace-write sandbox
+  --dangerously-bypass-approvals-and-sandbox
+                    Skip all confirmation prompts and execute commands without sandboxing.
+  -a, --ask-for-approval <APPROVAL_POLICY>
+                    Configure when the model requires human approval before executing a command
+                    Possible values: on-request, never
+  -h, --help        Print help (see a summary with '-h')
+  -V, --version     Print version
+
+Command: & 'C:\Users\이광진\AppData\Local\Programs\OpenAI\Codex\bin\codex.exe' exec --help
+Exit: 0
+Relevant stdout (exact lines from the installed executable):
+  Usage: codex exec [OPTIONS] [PROMPT]
+  If stdin is piped and a prompt is also provided, stdin is appended as a <stdin> block
+  -c, --config <key=value>
+  -m, --model <MODEL>
+  -p, --profile <CONFIG_PROFILE_V2>
+  -s, --sandbox <SANDBOX_MODE>
+                    [possible values: read-only, workspace-write, danger-full-access]
+  --ignore-user-config
+                    Do not load $CODEX_HOME/config.toml; auth still uses CODEX_HOME
+  --ignore-rules    Do not load user or project execpolicy .rules files
+  --ephemeral       Run without persisting session files to disk
+  --json            Print events to stdout as JSONL
+  -o, --output-last-message <FILE>
+  -V, --version     Print version
+
+Configuration/environment inventory (names and non-secret metadata only)
+------------------------------------------------------------------------
+CODEX_HOME environment: set
+Effective runtime home: an Orca-managed runtime home (full path withheld here)
+Runtime home directory names observed: config.toml, plugins (link), skills (link),
+rules, sessions, cache, auth/session stores, and runtime state files.
+Config metadata observed: sandbox_mode=read-only; model and reasoning defaults are
+present; plugin/skill source entries and enabled flags are present; the file contains
+path and runtime metadata. Secret-bearing auth/session/cache contents were not read.
+Project .codex directory at repository capture: absent.
+
+Interpretation: the host inventory is not proof that builtin-only-v1 is enforced. The
+candidate argv explicitly uses --ignore-user-config and --ignore-rules, but the exact
+effective plugin/skill/MCP loading behavior still requires an operator profile-bound
+receipt. No settings value was changed.
+
+Local model metadata excerpt (read-only, non-secret fields only)
+---------------------------------------------------------------
+Source: CODEX_HOME runtime models_cache.json; auth/session/cache payloads were not
+copied. This cache is local routing metadata, not account entitlement proof.
+gpt-5.6-luna: default reasoning=medium; supported reasoning=low, medium, high,
+xhigh, max.
+gpt-5.6-sol: default reasoning=low; supported reasoning=low, medium, high, xhigh,
+max, ultra.
+Observed candidate mapping: Luna -> gpt-5.6-luna/max; Sol -> gpt-5.6-sol/medium.
+No model call or entitlement check was made.
+
+Command: codex.exe debug models
+Exit: 0
+Filtered non-secret fields:
+  MODEL=gpt-5.6-sol DEFAULT=low SUPPORTED=low,medium,high,xhigh,max,ultra
+  MODEL=gpt-5.6-luna DEFAULT=medium SUPPORTED=low,medium,high,xhigh,max
+This confirms the exact IDs and cached effort metadata exposed by this installation.
+It does not confirm account entitlement or a successful noninteractive request.
+
+ESP-IDF and offline smoke-build evidence
+-----------------------------------------
+Command: . .\scripts\activate-idf.ps1
+Exit: 0
+Observed: ESP-IDF v5.3.2; IDF_PATH=C:\Espressif\v5.3.2\esp-idf;
+IDF_TOOLS_PATH=C:\Espressif\user-tools; IDF_CCACHE_ENABLE=0;
+TEMP/TMP=C:\Espressif\tmp; Python requirements satisfied.
+
+Commands and exits after activation:
+  idf.py --version -> 0; ESP-IDF v5.3.2
+  git --version -> 0; git version 2.55.0.windows.3
+  python --version -> 0; Python 3.11.15
+  ninja --version -> 0; 1.12.1
+  cmake --version -> 0; cmake version 3.30.2
+
+Command: idf.py -B build-readiness-20260921 build
+Working directory: C:\Espressif\smoke-tests\hello-world-v5.3.2
+Exit: 0 (the invoking PowerShell completed after the build; no model or hardware
+access was involved)
+Outputs:
+  hello_world.bin 207776 bytes, SHA256 B4AC66871E1C998E4FB6F4282FE47BEE666563E6212FD9FC69EBA8B9E58A82F7
+  bootloader.bin 21648 bytes, SHA256 3A3DF2041C7BB1789455179E1B901156ACC4D7C69AEE4C930E49CFE8B5DB4E92
+  partition-table.bin 3072 bytes, SHA256 7F00B6C042A89B15B0CAC534F82ED988CAF29278FF5700B0C511EB1B5BB7C820
+This validates the installed ESP-IDF/toolchain on the hello-world smoke project. It
+does not validate the repository's absent product firmware, COM3, or a flash.
+
+Repository preflight command
+----------------------------
+Command: .\scripts\check-experiment-preflight.ps1
+Exit: 1
+Observed successes: required files, ESP-IDF v5.3.2, README encoding, example
+manifest/result validation, 81 offline tests, E2E validator, fixture matrix, and
+COM3 presence detection.
+Observed failure: working tree has 53 changes; the script requires a clean tree before
+baseline tagging. This is retained as a real blocker. COM3 was detected but not opened.
+
+Candidate invocation flags validated by the installed help:
+  --ask-for-approval never exec --json --ignore-user-config --ignore-rules
+  --ephemeral --sandbox workspace-write
+  -c model_reasoning_effort="<max-or-medium>" -m <gpt-5.6-luna-or-gpt-5.6-sol> -
+
+The placeholders above are documentation notation only. The candidate JSON files use
+concrete gpt-5.6-luna/max and gpt-5.6-sol/medium values and are still pending
+cohort/entitlement and settings verification; they are not an execution authorization.
+
+Exact candidate argv help probes (no model call)
+-------------------------------------------------
+Command: codex.exe --ask-for-approval never exec --json --ignore-user-config
+         --ignore-rules --ephemeral --sandbox workspace-write
+         -c model_reasoning_effort="max" -m gpt-5.6-luna --help
+Exit: 0
+Command: codex.exe --ask-for-approval never exec --json --ignore-user-config
+         --ignore-rules --ephemeral --sandbox workspace-write
+         -c model_reasoning_effort="medium" -m gpt-5.6-sol --help
+Exit: 0
+Important parser finding: --ask-for-approval is a top-level option in this installed
+CLI and must precede exec. Placing it after exec exits 2 with "unexpected argument";
+the candidate profiles use the verified top-level ordering. Help-mode acceptance does
+not prove model access or effort execution.
+
+Official configuration boundary
+--------------------------------
+The current official configuration reference documents
+model_reasoning_effort values minimal, low, medium, high, and xhigh. The local
+debug-models catalog reports max for gpt-5.6-luna and gpt-5.6-sol. This is recorded
+as local client metadata; the generic online enum is not used to substitute another
+effort or create a separate design gate. Account entitlement and request-time
+acceptance remain untested.
+
+Candidate input checks
+----------------------
+First attempt without UTF-8 output environment: exit 1 (`charmap` could not encode
+the Korean workspace path). This was a process-environment issue, not a profile or
+baseline result.
+With PYTHONUTF8=1 and PYTHONIOENCODING=utf-8:
+  benchmark.py check --baseline HEAD --profile codex-cli-luna-max.candidate.json -> 0
+  benchmark.py check --baseline HEAD --profile codex-cli-sol-medium.candidate.json -> 0
+Both reported run_id_reserved=false and worktree_touched=false.
+Luna profile_sha256=63fa2d7422cd2f40a5082009606619b65340ac105d77329b56bf2d521ac9617b
+Luna input_bundle_sha256=3684b6de3957bf527a4580c58b31b699e65cf46929b6c52a09c807c317011ee5
+Sol profile_sha256=3074d641549ada29c5dd9e42ad3ca96f7c417079ebe0a0e3d916705ffcaa6ea4
+Sol input_bundle_sha256=84302797e74e7c5ca7efc879e1dbcdce10d501b1354e811b5c0e961d0eaefac0
+The checks used committed HEAD only; dirty working-tree changes were not included.
+
+Follow-up prompt-context inspection — 2026-09-22
+-------------------------------------------------
+Command: codex.exe debug prompt-input --help
+Exit: 0
+Command: codex.exe debug prompt-input
+Exit: 0
+Sanitized shape only: 4 messages, 7 content blocks, 29474 text characters. Raw JSON
+was held in memory; no prompt text was emitted or saved. Current-session pattern counts
+were 33 SKILL.md references and 3 AGENTS.md references. These counts describe this
+Codex session, not an isolated future benchmark checkout.
+
+Command: codex.exe debug prompt-input --ignore-user-config --help
+Exit: 2 (unexpected argument)
+Command: codex.exe debug prompt-input --ignore-rules --help
+Exit: 2 (unexpected argument)
+Command: codex.exe --ignore-user-config debug prompt-input --help
+Exit: 2 (unexpected argument)
+The debug renderer cannot emulate the candidate exec isolation flags.
+
+Current CODEX_HOME inventory by entry type only: skills=Junction present,
+plugins=Junction present, rules=directory with 1 .rules file, config.toml=present;
+repository .codex=absent. No contents were copied. Candidate exec help documents
+--ignore-user-config (skip config.toml) and --ignore-rules (skip user/project .rules),
+but no skills/plugins/MCP disable switch. Disposition: config/rule exclusion is
+configured; builtin-only enforcement remains blocked until a profile/receipt can bind
+an isolated effective environment. No environment was reassigned or changed here.

@@ -14,7 +14,8 @@
   "baseline": {
     "id": "benchmark-v2-baseline-20260911",
     "experiment_id": "version-2-end-to-end-v1",
-    "commit": "34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f"
+    "commit": "34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f",
+    "ref": "benchmark-v2-baseline-20260911"
   },
   "feature_results": {
     "F1": {"status": "not_run", "scope": "provider collector", "evidence": [], "reason": "Hardware-not-run example."},
@@ -26,6 +27,16 @@
     "F7": {"status": "not_run", "scope": "global reset", "evidence": [], "reason": "No source execution."},
     "F8": {"status": "not_run", "scope": "build and observability", "evidence": [], "reason": "No firmware build."},
     "F9": {"status": "not_run", "scope": "autonomous hardware", "evidence": [], "reason": "No hardware execution."}
+  },
+  "core_results": {
+    "C1": {"status": "not_run", "scope": "firmware build", "evidence": [], "reason": "No firmware build."},
+    "C2": {"status": "not_run", "scope": "LCD boot and layout", "evidence": [], "reason": "No display execution."},
+    "C3": {"status": "not_run", "scope": "usage display", "evidence": [], "reason": "No device execution."},
+    "C4": {"status": "not_run", "scope": "source display", "evidence": [], "reason": "No device execution."},
+    "C5": {"status": "not_run", "scope": "global reset", "evidence": [], "reason": "No source execution."},
+    "C6": {"status": "not_run", "scope": "unknown and error display", "evidence": [], "reason": "No device execution."},
+    "C7": {"status": "not_run", "scope": "recovery", "evidence": [], "reason": "No runtime execution."},
+    "C8": {"status": "not_run", "scope": "refresh and reset", "evidence": [], "reason": "No runtime execution."}
   },
   "integration_results": {
     "I1": {"status": "not_run", "scope": "PC collector", "evidence": [], "reason": "No collector execution."},
@@ -91,8 +102,9 @@
   },
   "telemetry": {
     "wall_clock_seconds": null,
-    "agent_tokens": {"input": null, "output": null, "cached": null, "reasoning": null, "total": null},
+    "agent_tokens": {"input": null, "output": null, "cached": null, "reasoning": null, "provider_total": null, "total": null},
     "token_total_definition": "input_plus_output_excludes_cached_and_reasoning",
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
     "availability_reason": "No runner telemetry is available in this synthetic example.",
     "evidence": []
   },

@@ -22,15 +22,21 @@ CLI profile.
 
 | Order | Profile | Planned identity | Unresolved operator checks |
 |---|---|---|---|
-| 1 | `gemini-cli.example.json` | provider `google`, product `gemini-cli`, adapter `gemini` | executable, exact version, model ID/slug, stream format, token telemetry |
-| 2 | `antigravity-cli.example.json` | provider `google`, product `antigravity-cli`, adapter `antigravity` | executable, exact version, model ID/slug, noninteractive mode, telemetry |
-| 3 | `opencode-cli.example.json` | provider `opencode`, product `cli`, adapter `opencode` | executable, exact version, endpoint/model naming, noninteractive mode, telemetry |
-| 4 | `codex-cli.example.json` | provider `openai`, product `codex-cli` (GPT/Codex), adapter `codex` | executable, exact version, model ID/slug, reasoning flag, JSON/usage event shape |
+| 1 | `antigravity-cli.example.json` | provider `google`, product `antigravity-cli`, adapter `antigravity` | executable, exact version, model ID/slug, noninteractive mode, telemetry |
+| 2 | `opencode-cli.example.json` | provider `opencode`, product `cli`, adapter `opencode` | executable, exact version, endpoint/model naming, noninteractive mode, telemetry |
+| 3 | `codex-cli.example.json` | provider `openai`, product `codex-cli` (GPT/Codex), adapter `codex` | executable, exact version, model ID/slug, reasoning flag, JSON/usage event shape |
+| Conditional | `gemini-cli.example.json` | provider `google`, product `gemini-cli`, adapter `gemini` | eligibility, executable, exact version, model ID/slug, stream format, token telemetry |
 
-The planned historical cohort is fixture-only and not authorized. A future operator
+This is a profile inventory order, not the randomized benchmark execution order.
+`../preflight-inputs.example.json` preserves the older Gemini-first inventory and
+historical baseline identifiers; it is not the current run schedule or HEAD.
+Replace those values when preparing reviewed inputs, without treating the example
+as an authorization receipt.
+
+The planned E2E cohort uses synthetic fixtures and is not authorized. A future operator
 must also confirm the proposed baseline, prompt/config/fixture hashes, access-policy preflight
 receipt, one-shot boundary, and explicit R10 approval before invoking any runner
-command.
+prepare/run command. Offline tooling checks can be performed while preparing gates.
 
 ## Adopted extension condition
 

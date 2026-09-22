@@ -59,6 +59,8 @@ python scripts/validate-experiment-result.py
 
 ## 문서 안내
 
+- [문서 역할·상태와 읽는 순서](docs/DOCUMENTATION_MAP.md)
+- [문서 검토 결과](docs/DOCUMENTATION_REVIEW.md) · [진행·재개 체크리스트](docs/DOCUMENTATION_REVIEW_CHECKLIST.md)
 - [프로젝트 목적](docs/PROJECT_PURPOSE.md)
 - [Version 2 제품 계약과 합격 기준](docs/PRODUCT_CONTRACT.md)
 - [Windows 개발 환경](docs/DEVELOPMENT_ENVIRONMENT.md)
@@ -107,7 +109,9 @@ docs/agent-runs/<run-id>/             사람이 읽는 선택·검증 기록
 results/<run-id>/                     구조화된 실행 결과
 ```
 
-에이전트 비교에는 Codex CLI, Gemini CLI, Antigravity, OpenCode를 대상으로 하며
+현재 계획의 기본 비교 후보는 Codex CLI, Antigravity CLI, OpenCode CLI이며,
+Gemini CLI는 Enterprise/API 키 조건의 별도 후보입니다. 최종 모델·설정은
+[profile 검토 기록](docs/experiments/r4-profile-resolution.md)에 따라 확정합니다.
 사용한 제품/CLI/IDE 표면까지 정확히 기록합니다. 일반 ChatGPT 웹 대화는 로컬
 저장소·COM3·토큰 계측 조건이 달라 기본 비교군에 포함하지 않습니다.
 
@@ -145,11 +149,14 @@ README의 명령을 실행했다고 해서 제품 구현·하드웨어 검증이
 
 `codex-reset.com`과 `codex-resets.com`은 서로 다른 독립 서비스입니다. 개인 계정
 사용량은 공개 리셋 서비스가 제공하지 않으므로 실험에서는 fixture를 사용하고,
-실제 계정 연동은 소유자가 별도로 통합 시험합니다. 리셋 예측은 일정 보장이 아닌
-공개 신호·이력 기반 확률로 표시합니다.
+실제 계정 연동은 소유자가 별도로 통합 시험합니다. 현재 검토 중인 E2E 계약은
+`codex-resets.com`의 최근 리셋과 경과 시간을 표시합니다. `codex-reset.com`의
+예측은 파서 호환용으로 보존하며 화면에는 표시하지 않습니다.
 
 제품의 실제 데이터 경로는 `PC provider collectors → 정규화 snapshot → USB serial
-(COM3) 또는 local Wi‑Fi transport → ESP32 receiver/cache/stale → LCD GUI`입니다.
+(COM3) cdm/1 transport → ESP32 receiver/cache/stale → LCD GUI`입니다.
+local Wi-Fi는 후속 별도 cohort입니다. USB·화면 계약의 선택값과 ADR 승인·baseline
+동결 상태는 [문서 안내](docs/DOCUMENTATION_MAP.md)에서 구분합니다.
 historical firmware-only 자료는 이 경로 중 fixture·firmware·GUI만 다룹니다.
 정식 end-to-end benchmark는 PC collector와 transport/receiver까지 포함해야 하며,
 이를 구현·검증하지 않은 상태에서 “실시간 계정 사용량 표시 완료”라고 주장하지

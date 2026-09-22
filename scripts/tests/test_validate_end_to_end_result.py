@@ -1,6 +1,7 @@
 import importlib.util
 import copy
 import json
+import os
 import sys
 import unittest
 from pathlib import Path
@@ -42,7 +43,7 @@ class EndToEndResultTests(unittest.TestCase):
             "pass-without-evidence.example.json": "EVIDENCE_REQUIRED",
             "missing-identity.example.json": "IDENTITY_REQUIRED",
             "fabricated-token.example.json": "TOKEN_TELEMETRY_UNAVAILABLE",
-            "invalid-product-pass.example.json": "PRODUCT_PASS_REQUIRES_INTEGRATION",
+            "invalid-product-pass.example.json": "PRODUCT_PASS_REQUIRES_CORE_RESULTS",
         }
         for filename, code in expected.items():
             result = read_json(f"experiments/examples/invalid/{filename}")
@@ -107,6 +108,7 @@ class EndToEndResultTests(unittest.TestCase):
             ("result_id", "RESULT_ID_MISMATCH"),
             ("experiment_id", "EXPERIMENT_ID_MISMATCH"),
             ("baseline_id", "BASELINE_MISMATCH"),
+            ("baseline_ref", "BASELINE_REF_MISMATCH"),
         )
         for field, code in mutations:
             mutated = copy.deepcopy(manifest)
@@ -213,6 +215,7 @@ class EndToEndResultTests(unittest.TestCase):
             "output": 20,
             "cached": 80,
             "reasoning": 5,
+            "provider_total": None,
             "total": 120,
         }
         result["telemetry"]["token_total_definition"] = "input_plus_output_excludes_cached_and_reasoning"
@@ -223,6 +226,90 @@ class EndToEndResultTests(unittest.TestCase):
         with self.assertRaises(validator.ValidationError) as context:
             validator.validate_result(result, evidence_root=ROOT)
         self.assertEqual(context.exception.code, "TOKEN_TOTAL_MISMATCH")
+
+    def test_provider_total_is_preserved_separately_from_normalized_total(self):
+        result = read_json("experiments/examples/end-to-end-result.example.json")
+        result["telemetry"]["agent_tokens"] = {
+            "input": 2005,
+            "output": 15,
+            "cached": 0,
+            "reasoning": 45,
+            "provider_total": 2065,
+            "total": 2020,
+        }
+        result["telemetry"]["provider_total_definition"] = "provider_reported_total_preserved_without_recomputation"
+        result["telemetry"]["evidence"] = ["experiments/examples/README.md"]
+        validator.validate_result(result, evidence_root=ROOT)
+
+        missing = read_json("experiments/examples/end-to-end-result.example.json")
+        missing["telemetry"]["agent_tokens"].pop("provider_total")
+        with self.assertRaises(validator.ValidationError) as context:
+            validator.validate_result(missing, evidence_root=ROOT)
+        self.assertEqual(context.exception.code, "SCHEMA_INVALID")
+
+    def test_product_pass_requires_individual_core_results(self):
+        result = read_json("experiments/examples/end-to-end-result.example.json")
+        result["product_pass"] = True
+        result.pop("core_results")
+        with self.assertRaises(validator.ValidationError) as context:
+            validator.validate_result(result, evidence_root=ROOT)
+        self.assertEqual(context.exception.code, "SCHEMA_INVALID")
+
+    def test_core_results_are_required_for_non_passing_results(self):
+        result = read_json("experiments/examples/end-to-end-result.example.json")
+        result.pop("core_results")
+        with self.assertRaises(validator.ValidationError) as context:
+            validator.validate_result(result, evidence_root=ROOT)
+        self.assertEqual(context.exception.code, "SCHEMA_INVALID")
+
+    def test_f9_details_require_three_evidenced_candidates(self):
+        result = read_json("experiments/examples/end-to-end-result.example.json")
+        evidence = ["experiments/examples/README.md"]
+        result["feature_results"]["F9"]["details"] = {
+            "candidate_count": 3,
+            "candidates": [
+                {"id": "imu", "name": "IMU", "user_value": "value", "implementation_cost": "cost", "risk": "risk", "verification_method": "method", "selection_status": "rejected", "selection_reason": "less useful", "evidence": evidence},
+                {"id": "rtc", "name": "RTC", "user_value": "value", "implementation_cost": "cost", "risk": "risk", "verification_method": "method", "selection_status": "rejected", "selection_reason": "higher risk", "evidence": evidence},
+                {"id": "battery", "name": "Battery", "user_value": "value", "implementation_cost": "cost", "risk": "risk", "verification_method": "method", "selection_status": "rejected", "selection_reason": "not portable", "evidence": evidence},
+            ],
+            "selected_candidate": None,
+            "score_breakdown": {"hardware_understanding": 0, "user_value": 0, "selection_logic": 0, "implementation_completeness": 0, "separation_portability": 0, "total": 0},
+        }
+        validator.validate_result(result, evidence_root=ROOT)
+
+    def test_f9_score_total_is_the_canonical_sum(self):
+        result = read_json("experiments/examples/end-to-end-result.example.json")
+        evidence = ["experiments/examples/README.md"]
+        result["feature_results"]["F9"] = {
+            "status": "partial", "scope": "autonomy", "evidence": evidence,
+            "reason": "candidate assessment only", "details": {
+                "candidate_count": 3,
+                "candidates": [
+                    {"id": "a", "name": "A", "user_value": "value", "implementation_cost": "cost", "risk": "risk", "verification_method": "method", "selection_status": "rejected", "selection_reason": "not selected", "evidence": evidence},
+                    {"id": "b", "name": "B", "user_value": "value", "implementation_cost": "cost", "risk": "risk", "verification_method": "method", "selection_status": "rejected", "selection_reason": "not selected", "evidence": evidence},
+                    {"id": "c", "name": "C", "user_value": "value", "implementation_cost": "cost", "risk": "risk", "verification_method": "method", "selection_status": "rejected", "selection_reason": "not selected", "evidence": evidence},
+                ],
+                "selected_candidate": None,
+                "score_breakdown": {"hardware_understanding": 5, "user_value": 5, "selection_logic": 5, "implementation_completeness": 10, "separation_portability": 5, "total": 29},
+            }
+        }
+        with self.assertRaises(validator.ValidationError) as context:
+            validator.validate_result(result, evidence_root=ROOT)
+        self.assertEqual(context.exception.code, "F9_SCORE_TOTAL_MISMATCH")
+        result["feature_results"]["F9"]["details"]["score_breakdown"]["total"] = 30
+        validator.validate_result(result, evidence_root=ROOT)
+
+    def test_f9_details_are_forbidden_on_f1_to_f8(self):
+        result = read_json("experiments/examples/end-to-end-result.example.json")
+        result["feature_results"]["F1"]["details"] = {
+            "candidate_count": 3,
+            "candidates": [],
+            "selected_candidate": None,
+            "score_breakdown": {"hardware_understanding": 0, "user_value": 0, "selection_logic": 0, "implementation_completeness": 0, "separation_portability": 0, "total": 0},
+        }
+        with self.assertRaises(validator.ValidationError) as context:
+            validator.validate_result(result, evidence_root=ROOT)
+        self.assertEqual(context.exception.code, "SCHEMA_INVALID")
 
     def test_fixture_evidence_must_match_provider_identity_and_windows(self):
         result = read_json("experiments/examples/end-to-end-result.example.json")
@@ -241,6 +328,20 @@ class EndToEndResultTests(unittest.TestCase):
         for key in ("build", "host", "transport", "hardware"):
             result[key].update(status="pass", evidence=[evidence], reason=None)
         result["transport"]["choice"] = "usb-serial"
+        result["core_results"] = {
+            f"C{i}": {"status": "pass", "scope": "core", "evidence": [evidence], "reason": None}
+            for i in range(1, 9)
+        }
+        result["feature_results"]["F9"]["details"] = {
+            "candidate_count": 3,
+            "candidates": [
+                {"id": "a", "name": "A", "user_value": "value", "implementation_cost": "cost", "risk": "risk", "verification_method": "method", "selection_status": "selected", "selection_reason": "best", "evidence": [evidence]},
+                {"id": "b", "name": "B", "user_value": "value", "implementation_cost": "cost", "risk": "risk", "verification_method": "method", "selection_status": "rejected", "selection_reason": "less useful", "evidence": [evidence]},
+                {"id": "c", "name": "C", "user_value": "value", "implementation_cost": "cost", "risk": "risk", "verification_method": "method", "selection_status": "rejected", "selection_reason": "higher risk", "evidence": [evidence]},
+            ],
+            "selected_candidate": "a",
+            "score_breakdown": {"hardware_understanding": 5, "user_value": 5, "selection_logic": 5, "implementation_completeness": 10, "separation_portability": 5, "total": 30},
+        }
         result["product_pass"] = True
         with self.assertRaises(validator.ValidationError) as context:
             validator.validate_result(result, evidence_root=ROOT)
@@ -253,6 +354,9 @@ class EndToEndResultTests(unittest.TestCase):
             cwd=ROOT,
             capture_output=True,
             text=True,
+            encoding="utf-8",
+            errors="replace",
+            env={**os.environ, "PYTHONIOENCODING": "utf-8"},
         )
         self.assertEqual(completed.returncode, 0, completed.stderr)
 

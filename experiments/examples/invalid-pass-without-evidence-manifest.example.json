@@ -4,6 +4,7 @@
   "run_id": "20260911-invalid-pass-evidence-r01",
   "result_id": "20260911-invalid-pass-evidence-r01",
   "baseline_id": "benchmark-v2-baseline-20260911",
+  "baseline_ref": "benchmark-v2-baseline-20260911",
   "experiment_id": "version-2-end-to-end-v1",
   "execution": {
     "base_commit": "34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f"

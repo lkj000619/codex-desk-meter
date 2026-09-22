@@ -67,6 +67,16 @@ baseline 태그 전에는 `git status --porcelain`이 비어야 한다. `.agents
 발효 시 pilot 범위: 위 모델 엔트리별 1회 (codex×2 + opencode×1 + antigravity×3).
 발효 전까지 R10은 `not_authorized`를 유지한다.
 
+## 과거 승인 조건과 현재 절차 (2026-09-21)
+
+위 R10 절은 당시 승인 내용을 보존한다. 현재 절차에서는 baseline/profile,
+receipt와 적용되는 조건부 승인 기록을 확인한 뒤 모델 호출 없는 `prepare`를
+수행한다. 이후 prepare 성공과 COM3 등 원래 조건을 모두 확인해야 R10이 발효된다.
+승인 기록 확인을 조건 충족이나 즉시 실행 허가로 취급하지 않는다. 대상과 조건이
+일치하는 기존 승인에 대해 동일 승인을 다시 요청하지 않는다.
+receipt hash는 `benchmark.py check` 출력에서 얻는다. 최신 환경 수리 상태는
+이 문서 상단의 후속 기록, 실행 순서는 [실행 가이드](agent-run-commands.md)를 따른다.
+
 ## Settings inventory (읽기 전용 확인)
 
 - codex 0.153.2 / opencode 1.18.31 / agy 1.2.4 실행 파일 경로 확인済み.

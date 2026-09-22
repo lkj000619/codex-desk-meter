@@ -4,6 +4,12 @@
 데이터 계약, 화면 상태와 시험 방법을 고정한다. 에이전트가 선택하는 하드웨어
 기반 추가 기능은 이 문서의 핵심 요구사항과 별도로 평가한다.
 
+상태: **검토 중인 E2E 계약 / 실행 미승인**. USB `cdm/1`, 가로 기본 화면과
+글로벌 단일 출처는 ADR-0005/0006의 제안을 반영한 선택값이다. 승인된 ADR과
+동결 baseline으로의 전환은 [readiness gate](experiments/benchmark-readiness.md)의
+R1에서 확인한다. 본문에서 "고정"은 동일 비교군에 적용할 계약값을 뜻하며,
+승인·입력 hash 동결이 끝났다는 뜻은 아니다.
+
 ## 1. 대상
 
 | 항목 | 고정값 |
@@ -102,6 +108,10 @@ fixture를 firmware에 직접 내장해 그린 것만으로는 PC collector에�
 ## 3. 공통 데이터 모델
 
 제품 로직과 보드별 UI를 분리하고, 아래의 논리 필드를 공통으로 유지한다.
+`UsageSnapshot`의 기계 검증 기준은
+[usage-snapshot.schema.json](../experiments/schema/usage-snapshot.schema.json)이다.
+아래 모델의 snapshot-level 단위·마지막 정상 시각·오류 사유도 필수 키이며,
+null 허용 범위와 window별 선택 필드는 스키마를 따른다.
 
 ```text
 UsageSnapshot {
@@ -114,6 +124,7 @@ UsageSnapshot {
   account_profile_id: string | null
   source_kind: "fixture" | "local_runtime" | "provider_api" | "ide_telemetry" | "unknown"
   metric_kind: "quota_window" | "token_balance" | "credits" | "session_telemetry"
+  unit: "token" | "percent" | "credit" | "unknown"
   status: "available" | "unavailable" | "unsupported" | "unauthorized" | "error" | "stale"
   observed_at: RFC3339 timestamp | null
   windows: [
@@ -131,7 +142,9 @@ UsageSnapshot {
     }
   ]
   stale: boolean
+  last_good_at: RFC3339 timestamp | null
   error_code: string | null
+  error_reason: string | null
 }
 
 GlobalResetSnapshot {
@@ -167,10 +180,14 @@ Contract clarifications for the synthetic E2E validator:
 - `agent_id` and `host_id` may be null for unsupported, unauthorized, or error
   sources that cannot expose execution context. Available snapshots require
   both identities.
-- Agent token telemetry defines `total = input + output`. `cached` and
+- The E2E result schema defines normalized agent telemetry as `total = input + output`. `cached` and
   `reasoning` are annotations and are excluded from `total`, so they cannot be
   double-counted. This definition is represented by the schema value
   `input_plus_output_excludes_cached_and_reasoning`.
+  Runner 원본 telemetry의 total 정의는 제공자별로 다를 수 있다. 특히 OpenCode의
+  provider-reported total을 E2E total로 그대로 복사하면 validator에서 거부될 수
+  있다. 원본 보존과 정규화 변환 정책은 [검토 보고서](DOCUMENTATION_REVIEW.md)의
+  D09 미해결 항목이며, 값을 맞추기 위해 원본을 덮어쓰지 않는다.
 
 `GlobalResetSnapshot`은 현재 Codex 관련 공개 서비스에만 적용되는 보조 데이터다.
 Claude Code, Gemini 또는 Orca/IDE의 quota reset으로 재사용하거나 provider 사이에서
@@ -267,6 +284,12 @@ LCD GUI(F5), 입력·갱신(F6), 글로벌 리셋(F7), 빌드·관측(F8), 자�
 각각 `pass / partial / fail / not_run / blocked / timeout` 중 하나로 기록한다.
 E2E 결과 계약은 해당 필드를 보유하며, historical prep용 schema 확장과 새 정식
 baseline 동결은 별도 종료 조건이다.
+
+현재 E2E 결과 스키마는 F/I/G와 build/host/transport/hardware 상태를 검사하지만
+C1~C8의 개별 판정 필드는 없다. 따라서 validator 통과가 C1~C8 전부의 합격
+증거는 아니다. 운영자는 [실물 채점 기록](experiments/evaluation-contract.md)의
+C별 판정·근거를 별도로 보존한다. 구조화 연결의 미완료 범위는
+[문서 검토 D10](DOCUMENTATION_REVIEW.md)에 기록한다.
 
 ### 실물 시험
 

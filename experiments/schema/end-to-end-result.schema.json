@@ -14,6 +14,7 @@
     "manifest",
     "baseline",
     "feature_results",
+    "core_results",
     "integration_results",
     "gui_scores",
     "provider_matrix",
@@ -73,7 +74,8 @@
       "required": [
         "id",
         "experiment_id",
-        "commit"
+        "commit",
+        "ref"
       ],
       "properties": {
         "id": {
@@ -85,11 +87,17 @@
         "commit": {
           "type": "string",
           "pattern": "^[A-Fa-f0-9]{7,64}$"
+        },
+        "ref": {
+          "$ref": "#/$defs/identifier"
         }
       }
     },
     "feature_results": {
       "$ref": "#/$defs/featureResults"
+    },
+    "core_results": {
+      "$ref": "#/$defs/coreResults"
     },
     "integration_results": {
       "$ref": "#/$defs/integrationResults"
@@ -221,6 +229,7 @@
         "wall_clock_seconds",
         "agent_tokens",
         "token_total_definition",
+        "provider_total_definition",
         "availability_reason",
         "evidence"
       ],
@@ -240,6 +249,7 @@
             "output",
             "cached",
             "reasoning",
+            "provider_total",
             "total"
           ],
           "properties": {
@@ -255,6 +265,9 @@
             "reasoning": {
               "$ref": "#/$defs/nonnegativeIntegerOrNull"
             },
+            "provider_total": {
+              "$ref": "#/$defs/nonnegativeIntegerOrNull"
+            },
             "total": {
               "$ref": "#/$defs/nonnegativeIntegerOrNull"
             }
@@ -266,6 +279,9 @@
         },
         "token_total_definition": {
           "const": "input_plus_output_excludes_cached_and_reasoning"
+        },
+        "provider_total_definition": {
+          "const": "provider_reported_total_preserved_without_recomputation"
         },
         "evidence": {
           "$ref": "#/$defs/evidence"
@@ -345,6 +361,100 @@
         }
       }
     },
+    "coreResults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"],
+      "patternProperties": {
+        "^C[1-8]$": {
+          "$ref": "#/$defs/resultEntry"
+        }
+      },
+      "minProperties": 8,
+      "maxProperties": 8
+    },
+    "f9ResultEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "scope", "evidence", "reason", "details"],
+      "properties": {
+        "status": {"$ref": "#/$defs/status"},
+        "scope": {"type": "string", "minLength": 1},
+        "evidence": {"$ref": "#/$defs/evidence"},
+        "reason": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "details": {"$ref": "#/$defs/f9Details"}
+      }
+    },
+    "f9Details": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_count", "candidates", "selected_candidate", "score_breakdown"],
+      "properties": {
+        "candidate_count": {"const": 3},
+        "candidates": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "name",
+              "user_value",
+              "implementation_cost",
+              "risk",
+              "verification_method",
+              "selection_status",
+              "selection_reason",
+              "evidence"
+            ],
+            "properties": {
+              "id": {"$ref": "#/$defs/identifier"},
+              "name": {"type": "string", "minLength": 1},
+              "user_value": {"type": "string", "minLength": 1},
+              "implementation_cost": {"type": "string", "minLength": 1},
+              "risk": {"type": "string", "minLength": 1},
+              "verification_method": {"type": "string", "minLength": 1},
+              "selection_status": {"enum": ["selected", "rejected"]},
+              "selection_reason": {
+                "type": ["string", "null"],
+                "minLength": 1
+              },
+              "selection_document": {"$ref": "#/$defs/path"},
+              "evidence": {"$ref": "#/$defs/evidence"}
+            }
+          }
+        },
+        "selected_candidate": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "score_breakdown": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "hardware_understanding",
+            "user_value",
+            "selection_logic",
+            "implementation_completeness",
+            "separation_portability",
+            "total"
+          ],
+          "properties": {
+            "hardware_understanding": {"type": "integer", "minimum": 0, "maximum": 5},
+            "user_value": {"type": "integer", "minimum": 0, "maximum": 5},
+            "selection_logic": {"type": "integer", "minimum": 0, "maximum": 5},
+            "implementation_completeness": {"type": "integer", "minimum": 0, "maximum": 10},
+            "separation_portability": {"type": "integer", "minimum": 0, "maximum": 5},
+            "total": {"type": "integer", "minimum": 0, "maximum": 30}
+          }
+        }
+      }
+    },
     "featureResults": {
       "type": "object",
       "additionalProperties": false,
@@ -359,9 +469,20 @@
         "F8",
         "F9"
       ],
-      "patternProperties": {
-        "^F[1-9]$": {
-          "$ref": "#/$defs/resultEntry"
+      "properties": {
+        "F1": {"$ref": "#/$defs/resultEntry"},
+        "F2": {"$ref": "#/$defs/resultEntry"},
+        "F3": {"$ref": "#/$defs/resultEntry"},
+        "F4": {"$ref": "#/$defs/resultEntry"},
+        "F5": {"$ref": "#/$defs/resultEntry"},
+        "F6": {"$ref": "#/$defs/resultEntry"},
+        "F7": {"$ref": "#/$defs/resultEntry"},
+        "F8": {"$ref": "#/$defs/resultEntry"},
+        "F9": {
+          "oneOf": [
+            {"$ref": "#/$defs/resultEntry"},
+            {"$ref": "#/$defs/f9ResultEntry"}
+          ]
         }
       },
       "minProperties": 9,

@@ -1,0 +1,51 @@
+{
+  "provider": "openai",
+  "product": "codex-cli",
+  "interface": "cli",
+  "agent_version": "codex-cli 0.153.2",
+  "model": "gpt-5.6-luna",
+  "model_slug": "gpt-5-6-luna",
+  "reasoning": "max",
+  "branch_owner": "openai",
+  "branch_product": "codex-cli",
+  "cohort": "version-2-end-to-end-v1",
+  "adapter": "codex",
+  "argv": [
+    "C:\\Users\\이광진\\AppData\\Local\\Programs\\OpenAI\\Codex\\bin\\codex.exe",
+    "--ask-for-approval",
+    "never",
+    "exec",
+    "--json",
+    "--ignore-user-config",
+    "--ignore-rules",
+    "--ephemeral",
+    "--sandbox",
+    "workspace-write",
+    "-c",
+    "model_reasoning_effort=\"max\"",
+    "-m",
+    "{model}",
+    "-"
+  ],
+  "version_argv": [
+    "C:\\Users\\이광진\\AppData\\Local\\Programs\\OpenAI\\Codex\\bin\\codex.exe",
+    "--version"
+  ],
+  "sandbox_policy": "prompt-and-log",
+  "approval_policy": "cli --ask-for-approval never; external R10 approval required",
+  "network_mode": "offline-fixture",
+  "settings_inventory": {
+    "skills": "exec excludes user config with --ignore-user-config; host skills link observed; builtin-only enforcement requires operator receipt",
+    "mcp": "exec excludes user config with --ignore-user-config; no project .codex directory observed; effective MCP loading requires operator receipt",
+    "memory": "exec uses --ephemeral; no session persistence is requested; runtime account state is not copied",
+    "user_instructions": "user config is excluded with --ignore-user-config; prompt-and-log scope remains an external policy",
+    "cache": "exec uses --ephemeral; cache contents were not read or copied",
+    "routing": "model is explicit via -m gpt-5.6-luna and reasoning is explicit via -c model_reasoning_effort=\"max\"; entitlement is untested",
+    "plugins": "user config is excluded with --ignore-user-config; host plugin link observed; builtin-only enforcement requires operator receipt",
+    "permissions": "exec uses --sandbox workspace-write and --ask-for-approval never; this is an invocation setting, not R10 approval",
+    "model_network": "network behavior and model access were not probed; offline-fixture describes product inputs only",
+    "extension_condition": "builtin-only-v1 candidate; explicit exclusion flags recorded; enforcement remains an open operator check",
+    "usage_recording": "runner preserves Codex JSONL events; actual skills/plugins/MCP use must be recorded after an authorized run"
+  },
+  "measurement_notes": "Candidate only, 2026-09-21. Local model metadata lists gpt-5.6-luna with max support; executable/help evidence: docs/experiments/evidence/codex-cli-preflight-20260921.txt. Q1 cohort choice, account entitlement, reasoning acceptance, and builtin-only enforcement remain open; do not use for prepare/run until independently resolved."
+}

@@ -87,14 +87,20 @@ feature results F1~F9 and GUI rubric G1~G6 with scope
 failures and unresolved risks
 ```
 
-실행 manifest는 `experiments/schema/run-manifest.schema.json`, 구조화 결과는
-`experiments/schema/hardware-feature-result.schema.json`을 따른다. 권장 결과
-경로는 다음과 같다.
+runner 운영 manifest는 `experiments/schema/run-manifest.schema.json`을 따른다.
+현재 E2E 과제의 구조화 결과는 `experiments/schema/end-to-end-result.schema.json`,
+별도 평가 manifest는 `experiments/schema/end-to-end-manifest.schema.json`을 따른다.
+결과 경로는 다음과 같다.
 
 ```text
 docs/agent-runs/<run-id>/hardware-feature-selection.md
-results/<run-id>/hardware-feature.json
+results/<run-id>/end-to-end-result.json
 ```
+
+후보 3개·선택 근거·자율 기능 30점의 항목별 증거는 선택 문서에 보존하고 E2E
+결과의 F9 증거에서 참조한다. 현재 E2E schema는 historical schema의 후보·점수
+구조를 직접 포함하지 않는다. `hardware-feature-result.schema.json`과
+`hardware-feature.json`은 과거 hardware-autonomy 자료용으로 보존한다.
 
 ## 평가
 

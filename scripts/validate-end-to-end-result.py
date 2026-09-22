@@ -285,6 +285,8 @@ def _check_join(result: dict[str, Any], manifest: dict[str, Any] | None) -> None
         fail("BASELINE_MISMATCH", "manifest baseline_id does not match result")
     if result["baseline"]["id"] != result["baseline_id"]:
         fail("BASELINE_MISMATCH", "baseline.id does not match result")
+    if not nonempty(result["baseline"].get("ref")):
+        fail("BASELINE_REF_REQUIRED", "baseline.ref is required for reproducible joins")
     if result["baseline"]["experiment_id"] != result["experiment_id"]:
         fail("EXPERIMENT_ID_MISMATCH", "baseline experiment_id does not match result")
     if manifest is None:
@@ -297,6 +299,8 @@ def _check_join(result: dict[str, Any], manifest: dict[str, Any] | None) -> None
         fail("EXPERIMENT_ID_MISMATCH", "external manifest experiment does not match result")
     if manifest["baseline_id"] != result["baseline_id"]:
         fail("BASELINE_MISMATCH", "external manifest baseline does not match result")
+    if manifest["baseline_ref"] != result["baseline"]["ref"]:
+        fail("BASELINE_REF_MISMATCH", "external manifest baseline_ref does not match result baseline.ref")
     result_reference = manifest.get("result_id", manifest.get("result_reference"))
     if result_reference != result["result_id"]:
         fail("RESULT_ID_MISMATCH", "external manifest result reference does not match result")
@@ -383,17 +387,20 @@ def _check_telemetry(result: dict[str, Any], evidence_root: Path) -> None:
     telemetry = result["telemetry"]
     tokens = telemetry["agent_tokens"]
     check_evidence(telemetry["evidence"], "telemetry.evidence", evidence_root)
-    values = [tokens[key] for key in ("input", "output", "cached", "reasoning", "total")]
+    values = [tokens.get(key) for key in ("input", "output", "cached", "reasoning", "provider_total", "total")]
+    if telemetry["token_total_definition"] != "input_plus_output_excludes_cached_and_reasoning":
+        fail("TOKEN_TOTAL_DEFINITION_INVALID", "agent token total definition is not the declared contract")
+    if telemetry["provider_total_definition"] != "provider_reported_total_preserved_without_recomputation":
+        fail("PROVIDER_TOTAL_DEFINITION_INVALID", "provider_total definition is not the declared contract")
     if any(value is not None for value in values) and not telemetry["evidence"]:
         fail("TOKEN_TELEMETRY_UNAVAILABLE", "agent token values require telemetry evidence")
     if any(value is None for value in values) and not nonempty(telemetry["availability_reason"]):
         fail("TOKEN_TELEMETRY_REASON_REQUIRED", "null token values require availability_reason")
     if any(value is not None for value in values):
-        if telemetry["token_total_definition"] != "input_plus_output_excludes_cached_and_reasoning":
-            fail("TOKEN_TOTAL_DEFINITION_INVALID", "agent token total definition is not the declared contract")
-        if tokens["input"] is None or tokens["output"] is None or tokens["total"] is None:
-            fail("TOKEN_TOTAL_INCOMPLETE", "input, output, and total are required when token telemetry is present")
-        if tokens["total"] != tokens["input"] + tokens["output"]:
+        normalized = (tokens.get("input"), tokens.get("output"), tokens.get("total"))
+        if any(value is not None for value in normalized) and any(value is None for value in normalized):
+            fail("TOKEN_TOTAL_INCOMPLETE", "input, output, and normalized total are required together")
+        if all(value is not None for value in normalized) and tokens["total"] != tokens["input"] + tokens["output"]:
             fail("TOKEN_TOTAL_MISMATCH", "agent token total must equal input plus output")
     if telemetry["wall_clock_seconds"] is not None and not telemetry["evidence"]:
         fail("TELEMETRY_EVIDENCE_REQUIRED", "wall-clock telemetry requires evidence")
@@ -415,10 +422,73 @@ def _check_product_pass(result: dict[str, Any]) -> None:
         fail("PRODUCT_PASS_REQUIRES_GUI", "product_pass requires scored GUI rubric items with evidence")
 
 
+def _check_core_results(result: dict[str, Any], evidence_root: Path) -> None:
+    core = result["core_results"]
+    expected = {f"C{i}" for i in range(1, 9)}
+    if set(core) != expected:
+        fail("CORE_RESULTS_INCOMPLETE", "core_results must contain exactly C1-C8")
+    for key, entry in core.items():
+        check_status_entry(entry, f"core_results.{key}", evidence_root)
+    if result["product_pass"] and any(core[key]["status"] != "pass" for key in sorted(core)):
+        fail("PRODUCT_PASS_REQUIRES_CORE_RESULTS", "product_pass requires C1-C8 to pass")
+
+
+def _check_f9_details(result: dict[str, Any], evidence_root: Path) -> None:
+    f9 = result["feature_results"]["F9"]
+    details = f9.get("details")
+    if details is None:
+        if f9["status"] in {"pass", "partial"} or result["product_pass"]:
+            fail("F9_DETAILS_REQUIRED", "a passing F9 requires candidate and score evidence")
+        return
+    if details.get("candidate_count") != 3 or not isinstance(details.get("candidates"), list) or len(details["candidates"]) != 3:
+        fail("F9_CANDIDATES_INVALID", "F9 details must contain exactly three candidates")
+    ids = []
+    for index, candidate in enumerate(details["candidates"]):
+        required_text = ("id", "name", "user_value", "implementation_cost", "risk", "verification_method")
+        if not isinstance(candidate, dict) or any(not nonempty(candidate.get(key)) for key in required_text):
+            fail("F9_CANDIDATE_INVALID", f"F9 candidate {index} needs structured value, cost, risk, and verification fields")
+        if candidate["id"] in ids:
+            fail("F9_CANDIDATE_DUPLICATE", f"duplicate F9 candidate {candidate['id']}")
+        ids.append(candidate["id"])
+        if candidate.get("selection_status") not in {"selected", "rejected"}:
+            fail("F9_SELECTION_INVALID", f"F9 candidate {candidate['id']} has an invalid selection_status")
+        if not nonempty(candidate.get("selection_reason")) and not nonempty(candidate.get("selection_document")):
+            fail("F9_SELECTION_EVIDENCE_REQUIRED", f"F9 candidate {candidate['id']} needs a selection/rejection reason or document reference")
+        if nonempty(candidate.get("selection_document")):
+            check_evidence(
+                [candidate["selection_document"]],
+                f"feature_results.F9.details.candidates[{index}].selection_document",
+                evidence_root,
+            )
+        check_evidence(candidate.get("evidence", []), f"feature_results.F9.details.candidates[{index}].evidence", evidence_root)
+        if not candidate.get("evidence"):
+            fail("F9_EVIDENCE_REQUIRED", f"F9 candidate {candidate['id']} has no evidence")
+    selected = details.get("selected_candidate")
+    if selected is not None and selected not in ids:
+        fail("F9_SELECTION_INVALID", "selected F9 candidate must reference one candidate")
+    selected_by_status = [candidate["id"] for candidate in details["candidates"] if candidate["selection_status"] == "selected"]
+    if len(selected_by_status) > 1:
+        fail("F9_SELECTION_INVALID", "F9 details may select at most one candidate")
+    if selected is not None and selected_by_status != [selected]:
+        fail("F9_SELECTION_INVALID", "selected_candidate must agree with candidate selection_status")
+    if selected is None and selected_by_status:
+        fail("F9_SELECTION_INVALID", "candidate selection_status must agree with selected_candidate")
+    if f9["status"] == "pass" and (selected is None or selected_by_status != [selected]):
+        fail("F9_SELECTION_REQUIRED", "passing F9 requires one selected candidate")
+    breakdown = details.get("score_breakdown")
+    score_fields = ("hardware_understanding", "user_value", "selection_logic", "implementation_completeness", "separation_portability")
+    if not isinstance(breakdown, dict) or any(field not in breakdown for field in (*score_fields, "total")):
+        fail("F9_SCORE_INVALID", "F9 details require the canonical five-part score breakdown and total")
+    expected_total = sum(breakdown[field] for field in score_fields)
+    if breakdown["total"] != expected_total:
+        fail("F9_SCORE_TOTAL_MISMATCH", "F9 score_breakdown.total must equal the five rubric scores")
+
+
 def validate_result(
     result: dict[str, Any],
     manifest: dict[str, Any] | Path | str | None = None,
     evidence_root: Path | str | None = None,
+    manifest_root: Path | str | None = None,
 ) -> None:
     """Validate one end-to-end result and all of its semantic joins."""
 
@@ -426,12 +496,13 @@ def validate_result(
         fail("RESULT_INVALID", "top-level result must be an object")
     schema_validate(result, "end-to-end-result.schema.json")
     root = Path(evidence_root or ROOT).resolve()
+    manifest_evidence_root = Path(manifest_root or root).resolve()
     external_manifest = _load_manifest(manifest)
     if external_manifest is None:
-        manifest_path = root / relative_path(result["manifest"]["path"], "manifest.path")
+        manifest_path = manifest_evidence_root / relative_path(result["manifest"]["path"], "manifest.path")
         external_manifest = _load_manifest(manifest_path)
     _check_join(result, external_manifest)
-    check_evidence([result["manifest"]["path"]], "manifest.path", root)
+    check_evidence([result["manifest"]["path"]], "manifest.path", manifest_evidence_root)
     for group_name, group in (("feature_results", result["feature_results"]), ("integration_results", result["integration_results"])):
         for key, entry in group.items():
             check_status_entry(entry, f"{group_name}.{key}", root)
@@ -447,6 +518,8 @@ def validate_result(
     if result["transport"]["status"] == "not_run" and result["transport"]["choice"] is not None:
         fail("TRANSPORT_CHOICE_WITHOUT_VALIDATION", "not_run transport must not select a transport")
     _check_telemetry(result, root)
+    _check_core_results(result, root)
+    _check_f9_details(result, root)
     _check_product_pass(result)
 
 
@@ -507,6 +580,9 @@ def validate_fixture_matrix(matrix_path: Path | str | None = None) -> None:
 
 
 def main() -> int:
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--result", type=Path, default=EXAMPLES / "end-to-end-result.example.json")
     parser.add_argument("--manifest", type=Path, help="external manifest identity JSON (defaults to result.manifest.path)")

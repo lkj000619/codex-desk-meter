@@ -64,8 +64,9 @@ C:\Espressif\projects\codex-desk-meter-main-2
 않는다. 실행 전 gate가 열리기 전에는 이 경로에 agent를 시작하지 않는다.
 
 새 clone이나 worktree는 처음부터 `C:\src\codex-desk-meter`처럼 ASCII 경로에
-두는 방법을 권장한다. 현재 작업공간에서 빌드할 때는 위 junction 경로로
-이동해서 `idf.py`를 실행한다.
+두는 방법을 권장한다. 기존 작업공간에 junction을 사용할 때는 대상이 실제로
+승인된 해당 run의 checkout인지 확인한다. 위 historical 경로를 새 실행의
+작업 경로로 재사용하지 않는다.
 
 ## ASCII junction 도구 경로 (2026-09-18 수리)
 
@@ -111,7 +112,7 @@ EIM 프로필(`Microsoft.v5.3.2.PowerShell_profile.ps1`)이 한글 사용자명 
 
 ```powershell
 . .\scripts\activate-idf.ps1
-Set-Location C:\Espressif\projects\codex-desk-meter-main-2
+Set-Location 'C:\Espressif\benchmark-runs\<run-id>\checkout'
 idf.py set-target esp32s3
 idf.py build
 idf.py -p COM3 flash monitor

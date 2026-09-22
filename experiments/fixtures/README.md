@@ -11,12 +11,11 @@
 - `codex-reset-forecast.json`은 과거 `codex-reset.com` 전망 스냅샷으로, 파서 호환·회귀용으로만
   보관한다. `confidence`·`forecast_*`는 표시 입력이 아니며, C4~C6 표시·판정에 사용하지 않는다.
   C5는 경과 시간 또는 default 화면으로만 판정한다.
-- `codex-reset-forecast.json`은 `codex-reset.com` forecast 응답의 필요한 필드만
-  고정한 스냅샷이다.
 - `codex-resets-history.json`은 `codex-resets.com`의 이력 출처를 별도로 표현한다.
   C4/C5 표시 계층의 기준 입력이다.
-- `codex-reset-forecast.json`은 과거 `codex-reset.com` 전망 스냅샷으로, 파서 호환용으로
-  보관한다. E2E 표시 범위(C4~C6)에서는 사용하지 않는다.
 
-실험 중 live API를 사용할 때도 fixture 실행을 먼저 끝내고, 조회 URL·시각·HTTP
-상태·응답 해시를 함께 기록한다. fixture의 날짜가 지나도 자동으로 갱신하지 않는다.
+정식 E2E benchmark의 제품 입력은 고정 fixture다. 이 cohort에서는 live API를
+허용하지 않으며, live API는 owner 승인 후속 cohort
+`version-2-live-integration-v1`에서만 별도로 사용한다. baseline YAML의
+`live_api_allowed_after_fixture: false`와 이 문서의 fixture-only 경계가 일치한다.
+fixture가 있어도 live 조회나 자격증명 사용을 자동 승인하지 않는다.

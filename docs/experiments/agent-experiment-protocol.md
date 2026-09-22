@@ -23,8 +23,8 @@
 | provider | 실행 표면 | 기본 비교 여부 |
 |---|---|---|
 | OpenAI | Codex CLI 비대화형 실행 | 포함 |
-| Google | Gemini CLI 비대화형 실행 | 포함 |
-| Google | Antigravity CLI | 포함 가능. 버전과 계측을 확인한 뒤 고정 |
+| Google | Gemini CLI 비대화형 실행 | 기본 비교군 제외; Enterprise/API 키 조건에서 별도 검토 |
+| Google | Antigravity CLI | Google 기본 후보. 모델·설정·계측을 확인한 뒤 고정 |
 | Google | Antigravity IDE | 별도 interactive 군. 승인·화면 조작을 기록 |
 | 별도 기록 | OpenCode CLI | 대상에 포함. 모델 제공자·정확한 모델 ID·계측 조건 고정 필요 |
 | OpenAI | 일반 ChatGPT 웹 대화 | 기본 비교 제외. 로컬 저장소·COM3·토큰 계측 조건이 다름 |
@@ -63,8 +63,10 @@ integration cohort다. 현행 planned target `version-2-end-to-end-v1`은 F1~F9�
 ## 3. 실행 전 preflight
 
 운영자는 [readiness gate](benchmark-readiness.md)의 R0~R10을 먼저 확인하고,
-모든 gate가 통과하며 사용자가 특정 run을 승인한 경우에만 아래를 수행한다.
-아래 명령은 준비·검사 명령이지 자동 실행 승인이 아니다.
+문서·schema·host 도구의 사전 검사는 R0~R9를 준비하는 작업으로 수행할 수 있다.
+run checkout 생성·ID 예약은 R0~R9 증거와 적용되는 승인 기록 확인 후 수행한다.
+조건부 승인의 prepare 성공 등 잔여 조건을 확인해 R10을 발효한 뒤 prompt를
+전달한다. 아래 항목의 확인 자체는 자동 실행 승인이 아니다.
 
 1. 기준 브랜치에 미커밋 변경이 없고 baseline tag와 commit SHA를 기록한다.
 2. 매 run의 실행 checkout을 동일 baseline에서 새로 만들고 이전 결과 접근을 차단한다.
@@ -94,14 +96,16 @@ preflight가 실패하면 본 실험을 시작하지 않고 pilot 준비 상태�
 ## 4. 시간과 명령 측정
 
 - `started_at`은 공통 프롬프트를 에이전트에게 전달한 UTC 시각이다.
-- `ended_at`은 에이전트가 종료 메시지와 결과 파일을 남긴 UTC 시각이다.
+- `ended_at`은 실행기가 에이전트 프로세스 종료를 관측한 UTC 시각이다.
+  실패·중단으로 결과 파일이 없어도 기록한다.
 - 시각과 경과 시간은 운영 실행기가 기록한다. 준비 시간·종료 후 운영자 실물 평가는
   별도로 기록한다. 중단 시에도 실행 종료 시각과 부분 결과를 보존한다.
 - 경과 시간은 단조 시계로 측정하고 UTC 시각 차이와 교차 검사한다. 대기·승인·다운로드 시간도 제외하지 않는다.
 - 기본 hard timeout은 120분이다. timeout 뒤의 작업은 같은 run에 이어 붙이지 않는다.
 - 모든 터미널 명령, 도구 호출, 실패 명령, 사용자 개입과 중단 사유를 보존한다.
-- 에이전트가 실행한 플래시 명령은 명령문과 대상 포트를 기록한다. `erase_flash`는
-  에이전트에게 허용하지 않고, 기준 이미지 복원은 운영자가 별도 기록으로 수행한다.
+- 플래시는 동결된 artifact에 대해 운영자가 수행하고 명령문과 대상 포트를 기록한다.
+  agent는 serial port를 열거나 flash하지 않는다. 위반 시도도 로그에 보존한다.
+  `erase_flash`는 허용하지 않고, 기준 이미지 복원은 운영자가 별도 기록으로 수행한다.
 
 에이전트가 제공하는 토큰 사용량은 `input`, `output`, `cached`, `reasoning`,
 `total`을 가능한 만큼 각각 기록한다. 제공자가 토큰을 공개하지 않으면 `null`과
@@ -194,10 +198,16 @@ fixture-only firmware cohort에서 자동으로 합격 처리하지 않으며, �
 ```text
 docs/agent-runs/<run-id>/hardware-feature-selection.md
 results/<run-id>/run-manifest.json
-results/<run-id>/hardware-feature.json
+results/<run-id>/end-to-end-result.json
 results/<run-id>/commands.jsonl
 results/<run-id>/logs/
 ```
+
+`run-manifest.json`은 runner 운영 기록이며 E2E 평가 manifest와 다르다.
+E2E 결과 검증에는 `end-to-end-manifest.schema.json`을 따르는 별도 평가 manifest가
+필요하다. 현재 자동 생성·archive 연결의 미완료 범위는
+[실행 가이드](agent-run-commands.md)의 §6~7을 따른다.
+historical hardware-autonomy 자료만 `hardware-feature.json` 형식을 사용한다.
 
 구조화 결과는 `experiments/schema/`를 통과해야 한다. 원본 로그에 Authorization,
 Cookie, Wi-Fi 자격증명, 개인 계정 식별자와 민감한 프롬프트가 들어가면 저장 전에

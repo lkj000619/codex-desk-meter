@@ -96,7 +96,10 @@ data_sources:
   # codex_reset_forecast: parser-compat-only, not_for_display (ADR-0006)
   codex_reset_forecast: experiments/fixtures/codex-reset-forecast.json
   codex_resets_history: experiments/fixtures/codex-resets-history.json
-  live_api_allowed_after_fixture: true
+  # The comparison cohort is fixture-only. Live access belongs to the separate
+  # owner-approved version-2-live-integration-v1 cohort.
+  live_api_allowed_after_fixture: false
+  live_api_cohort: version-2-live-integration-v1
   live_api_requires_source_url_and_response_hash: true
   pc_collector: fixture-provider-registry
   transport: usb-serial-cdm-1
