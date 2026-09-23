@@ -1,6 +1,6 @@
 {
   "base_commit": "9ef945efd9d6c2c4b4eedca75eccc9f280b3aced",
-  "profile_sha256": "3e9f5f20141b1193eb259df248478a4d573036f1931824d993e03aab412ff5b8",
+  "profile_sha256": "953a19406af0860636aea22874323ea17d919f38e674062f974343826bbc3124",
   "access_policy": "prompt-and-log",
   "checks": {
     "idf_build": "pass",
