@@ -1,0 +1,21 @@
+{
+  "base_commit": "9ef945efd9d6c2c4b4eedca75eccc9f280b3aced",
+  "profile_sha256": "3e9f5f20141b1193eb259df248478a4d573036f1931824d993e03aab412ff5b8",
+  "access_policy": "prompt-and-log",
+  "checks": {
+    "idf_build": "pass",
+    "compiler": "pass",
+    "ninja": "pass",
+    "git": "pass",
+    "temp_write": "pass",
+    "network_policy": "pass",
+    "read_isolation": "not_enforced",
+    "settings_inventory": "pass",
+    "prompt_scope": "pass",
+    "activity_logging": "pass"
+  },
+  "evidence": {
+    "agy-preflight-20260924.txt": "a_valid_evidence_hash_here"
+  },
+  "pilot_pass": false
+}

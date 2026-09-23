@@ -1,0 +1,37 @@
+{
+  "provider": "google",
+  "product": "antigravity-cli",
+  "interface": "cli",
+  "agent_version": "checked-by-runner",
+  "model": "gemini-3.8-flash-medium",
+  "model_slug": "agy-flash-medium",
+  "reasoning": "medium",
+  "branch_owner": "google",
+  "branch_product": "antigravity-cli",
+  "cohort": "version-2-end-to-end-v1",
+  "adapter": "antigravity",
+  "argv": [
+    "agy",
+    "run"
+  ],
+  "version_argv": [
+    "agy",
+    "--version"
+  ],
+  "sandbox_policy": "prompt-and-log",
+  "approval_policy": "prompt-and-log",
+  "network_mode": "offline-fixture",
+  "settings_inventory": {
+    "skills": "custom/user-installed disabled by policy; built-in inventory applied",
+    "mcp": "MCP servers disabled by policy",
+    "memory": "cleared",
+    "user_instructions": "none",
+    "cache": "disabled",
+    "routing": "direct",
+    "plugins": "external plugins disabled by policy",
+    "permissions": "allowed for workspace read/write",
+    "model_network": "allowed",
+    "extension_condition": "builtin-only-v1",
+    "usage_recording": "record actual skills/plugins/MCP usage with raw-log references; unavailable values null with reason"
+  }
+}
