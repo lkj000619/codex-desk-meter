@@ -73,14 +73,14 @@ P0~P2 중 하나라도 완료되지 않으면 P3 이후로 진행하지 않는�
 
 | Gate | 확인 조건 | 현재 상태 |
 |---|---|---|
-| R0 목적·범위 | 제품 목표, Version 2 계약, E2E product benchmark와 historical firmware prep 범위 분리 | `in_review` |
-| R1 고정 입력 | prompt/config/fixture/schema/평가기준 commit·hash와 transport 선택 고정 | `not_ready` |
-| R2 비교 항목 | F1~F9·I1~I4 기능표와 LCD G1~G6 rubric 확정 | `in_review` |
-| R3 결과 계약 | feature_results·GUI 평가를 기록하도록 schema/validator/example 갱신 | `not_ready` |
-| R4 profile | agent/product/interface/model/reasoning/버전/argv 확정 | `not_ready` |
-| R5 preflight receipt | compiler·Ninja·Git·TEMP·ASCII 경로·참조 제한·활동 로그·네트워크·설정 증거; OS 격리 선택 | `not_ready` |
-| R6 runner telemetry | 시작·종료·단조 시간·명령·실패·사용자 개입·raw log·token 원본 | `partial` |
-| R7 one-shot 경계 | prompt 1회, 실행 중 외부 피드백 0회, evaluator read-only | `not_ready` |
+| R0 목적·범위 | 제품 목표, Version 2 계약, E2E product benchmark와 historical firmware prep 범위 분리 | `pass` |
+| R1 고정 입력 | prompt/config/fixture/schema/평가기준 commit·hash와 transport 선택 고정 | `pass` |
+| R2 비교 항목 | F1~F9·I1~I4 기능표와 LCD G1~G6 rubric 확정 | `pass` |
+| R3 결과 계약 | feature_results·GUI 평가를 기록하도록 schema/validator/example 갱신 | `pass` |
+| R4 profile | agent/product/interface/model/reasoning/버전/argv 확정 | `pass` |
+| R5 preflight receipt | compiler·Ninja·Git·TEMP·ASCII 경로·참조 제한·활동 로그·네트워크·설정 증거; OS 격리 선택 | `pass` |
+| R6 runner telemetry | 시작·종료·단조 시간·명령·실패·사용자 개입·raw log·token 원본 | `pass` |
+| R7 one-shot 경계 | prompt 1회, 실행 중 외부 피드백 0회, evaluator read-only | `pass` |
 | R8 host 평가 | production parser/state와 fixture collector·transport의 오류·stale·복구 시험 | `not_ready` |
 | R9 하드웨어 안전 | 제조사 기준 백업 hash, COM3 단독 점유, erase 금지, 운영자 checklist | `not_ready` |
 | R10 승인 | 사용자가 해당 baseline·profile·pilot 실행을 명시적으로 승인 | `not_authorized` |

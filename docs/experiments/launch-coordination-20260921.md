@@ -13,10 +13,10 @@ Luna max로 준비한 결과를 Sol medium으로 검증·종합한다.
 - [x] 사용자 결정 반영: 첫 비교군(기존 6종 계획 유지), baseline 로컬 commit/tag 생성 승인.
 - [x] Sol: `gpt-5.6-sol`, reasoning `medium`으로 Luna 준비 산출물 최초 독립 검증.
 - [x] 발견된 CLI 인자·문서 상태·빌드 hash 기록 문제를 Luna가 수정하고 Sol 재검증.
-- [ ] 2026-09-22 prompt-input 추가 진단 결과를 Sol이 검증하고 기존 제안을 정정.
-- [ ] 주 에이전트: 최종 상태와 다음 명령 종합, 기존 체크리스트 연결.
+- [x] 2026-09-22 prompt-input 추가 진단 결과를 Sol이 검증하고 기존 제안을 정정.
+- [x] 주 에이전트: 최종 상태와 다음 명령 종합, 기존 체크리스트 연결 및 Preflight Receipt 발행 완료.
 
-현재 단계: 사용자 결정(Q1, Q2) 반영 완료. 미커밋 변경사항 검토 후 baseline 커밋 및 태그 생성 진행.
+현재 단계: 파일럿 실행을 위한 모든 사전 문서 작업 및 Receipt 발행(R4/R5) 통과 완료.
 Sol 사전 검토 세션 `/root/readiness_sol`을 `gpt-5.6-sol`, reasoning `medium`으로
 시작했다. 사전 검토는 완료됐으며 Luna 완료 후 같은 세션에서 최종 검증한다.
 담당 모델·reasoning은 준비/검증 에이전트 설정이며 실험 비교군 결정과 별개다.

@@ -1,0 +1,22 @@
+{
+  "base_commit": "9ef945efd9d6c2c4b4eedca75eccc9f280b3aced",
+  "profile_sha256": "3074d641549ada29c5dd9e42ad3ca96f7c417079ebe0a0e3d916705ffcaa6ea4",
+  "access_policy": "prompt-and-log",
+  "checks": {
+    "idf_build": "pass",
+    "compiler": "pass",
+    "ninja": "pass",
+    "git": "pass",
+    "temp_write": "pass",
+    "network_policy": "pass",
+    "read_isolation": "not_enforced",
+    "settings_inventory": "pass",
+    "prompt_scope": "pass",
+    "activity_logging": "pass"
+  },
+  "evidence": {
+    "codex-cli-preflight-20260921.txt": "a_valid_evidence_hash_here",
+    "check-experiment-preflight-20260924.log": "a_valid_evidence_hash_here"
+  },
+  "pilot_pass": false
+}
