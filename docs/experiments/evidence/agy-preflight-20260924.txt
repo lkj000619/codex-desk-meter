@@ -1,23 +1,15 @@
 === Antigravity CLI (agy) Preflight Evidence ===
-Date: 2026-09-24T00:54:00+09:00
+Date: 2026-09-24T01:05:00+09:00
 
 > agy --version
-Antigravity CLI v1.2.5
+1.2.9
 
 > agy mcp list
-No MCP servers active or connected. MCP servers disabled by policy.
+No MCP servers configured.
 
 > agy plugin list
-No external plugins loaded. Extension condition builtin-only-v1 enforced.
+No imported plugins.
 
-> agy config show --filter skills
-skills.custom_allowed = false
-skills.memory = cleared
-skills.cache = disabled
-
-> agy config show --filter routing
-routing.mode = direct
-routing.model_network = allowed
-
-System network isolated according to `offline-fixture` mode.
-Access policy `prompt-and-log` is fully enforced and verified.
+> skills / memory / cache / routing inspection
+Note: CLI internal settings for memory, cache, and routing are not directly observable via CLI commands.
+Enforcement relies on the declared `builtin-only-v1` and `prompt-and-log` policies as required by isolation-policy.md.

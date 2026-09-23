@@ -1,6 +1,6 @@
 {
   "base_commit": "9ef945efd9d6c2c4b4eedca75eccc9f280b3aced",
-  "profile_sha256": "953a19406af0860636aea22874323ea17d919f38e674062f974343826bbc3124",
+  "profile_sha256": "e9b4bca27b82c8cfc2c49f914862835a2fe31b13dd0d036f6f1362012ecf94d6",
   "access_policy": "prompt-and-log",
   "checks": {
     "idf_build": "pass",
@@ -15,7 +15,7 @@
     "activity_logging": "pass"
   },
   "evidence": {
-    "agy-preflight-20260924.txt": "11de23fafd2b8ab5b92cbef208440a7503d89f6fa3d2e7776ccfd310a80ed0c2"
+    "agy-preflight-20260924.txt": "3bd4294e5f56946c48f76b877457a6fe92c85b418eaeb61804f6c1f3d6874b00"
   },
   "pilot_pass": false
 }

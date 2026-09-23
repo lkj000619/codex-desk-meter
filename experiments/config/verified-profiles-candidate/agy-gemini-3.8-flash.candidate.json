@@ -2,7 +2,7 @@
   "provider": "google",
   "product": "antigravity-cli",
   "interface": "cli",
-  "agent_version": "1.2.5",
+  "agent_version": "1.2.9",
   "model": "gemini-3.8-flash-medium",
   "model_slug": "agy-flash-medium",
   "reasoning": "medium",
