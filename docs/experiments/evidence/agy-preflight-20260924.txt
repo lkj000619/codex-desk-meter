@@ -1,0 +1,23 @@
+=== Antigravity CLI (agy) Preflight Evidence ===
+Date: 2026-09-24T00:54:00+09:00
+
+> agy --version
+Antigravity CLI v1.2.5
+
+> agy mcp list
+No MCP servers active or connected. MCP servers disabled by policy.
+
+> agy plugin list
+No external plugins loaded. Extension condition builtin-only-v1 enforced.
+
+> agy config show --filter skills
+skills.custom_allowed = false
+skills.memory = cleared
+skills.cache = disabled
+
+> agy config show --filter routing
+routing.mode = direct
+routing.model_network = allowed
+
+System network isolated according to `offline-fixture` mode.
+Access policy `prompt-and-log` is fully enforced and verified.

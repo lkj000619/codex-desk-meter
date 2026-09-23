@@ -15,7 +15,7 @@
     "activity_logging": "pass"
   },
   "evidence": {
-    "agy-preflight-20260924.txt": "a_valid_evidence_hash_here"
+    "agy-preflight-20260924.txt": "11de23fafd2b8ab5b92cbef208440a7503d89f6fa3d2e7776ccfd310a80ed0c2"
   },
   "pilot_pass": false
 }

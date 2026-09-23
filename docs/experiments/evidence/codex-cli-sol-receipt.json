@@ -15,8 +15,8 @@
     "activity_logging": "pass"
   },
   "evidence": {
-    "codex-cli-preflight-20260921.txt": "a_valid_evidence_hash_here",
-    "check-experiment-preflight-20260924.log": "a_valid_evidence_hash_here"
+    "codex-cli-preflight-20260921.txt": "20f92f22398315667784b8853236c8fb51e85ef0123b217c2d56c5cd27de3c88",
+    "check-experiment-preflight-20260924.log": "b19f3640678297f1ac55ee980f714b23fe97dd324e07b02d220387cd2b18b2df"
   },
   "pilot_pass": false
 }
