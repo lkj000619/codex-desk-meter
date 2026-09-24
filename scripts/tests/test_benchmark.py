@@ -165,6 +165,33 @@ class RunnerTests(unittest.TestCase):
             path.write_text("invalid event\n", encoding="utf-8")
             self.assertIsNone(telemetry(path, "gemini")["total"])
 
+    def test_antigravity_mock_stream_preserves_one_shot_prompt_and_unknown_metrics(self):
+        prompt = "AGY one-shot 한글 prompt".encode("utf-8")
+        mock = (
+            "import hashlib,json,sys; "
+            "body=sys.stdin.buffer.read(); "
+            "print(json.dumps({'type':'mock.completed','input_bytes':len(body),"
+            "'prompt_sha256':hashlib.sha256(body).hexdigest()}))"
+        )
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder)
+            result = capture([sys.executable, "-c", mock], path, prompt, path, 5)
+            self.assertEqual(result["status"], "completed")
+            events = (path / "stdout.jsonl").read_text(encoding="utf-8").splitlines()
+            self.assertEqual(len(events), 1)
+            event = json.loads(events[0])
+            self.assertEqual(event["input_bytes"], len(prompt))
+            self.assertEqual(event["prompt_sha256"], benchmark.digest(prompt))
+
+            tokens = telemetry(path / "stdout.jsonl", "antigravity")
+            self.assertTrue(all(tokens[key] is None for key in (
+                "input", "output", "cached", "reasoning", "provider_total", "total"
+            )))
+            self.assertEqual(
+                benchmark.command_metrics(path / "stdout.jsonl", "antigravity"),
+                {"tool_calls": None, "failed_commands": None},
+            )
+
     def test_command_metrics_ignores_malformed_items(self):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "events.jsonl"

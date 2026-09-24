@@ -1,0 +1,58 @@
+=== Antigravity CLI (agy) identity/help evidence ===
+Observed: 2026-09-25T01:46:47+09:00
+Scope: executable identity, version, help, and local MCP/plugin inventory only; no model/provider invocation, prompt execution, serial access, or flash.
+
+Path: C:\Users\이광진\AppData\Local\agy\bin\agy.exe
+Binary SHA-256: 6efbd9828df5d0f44d56cb5fd770d87387f40eb364360b06bfbeba7c76f89bec
+
+> agy --version
+1.2.9
+
+> agy --help
+Usage of agy.exe:
+  --add-dir                       Add a directory to the workspace (repeatable) (default [])
+  --agent                         Agent for the current CLI session
+  -c                              Short alias for --continue
+  --continue                      Continue the most recent conversation
+  --conversation                  Resume a previous conversation by ID
+  --dangerously-skip-permissions  Auto-approve all tool permission requests without prompting
+  --disable-slash-commands        Disable slash commands and skill expansion in print mode
+  --effort                        Reasoning effort for the current CLI session (low|medium|high)
+  -i                              Short alias for --prompt-interactive
+  --input-format                  Input format for print mode (text, stream-json). stream-json reads one NDJSON message per line from stdin and runs a turn for each; it requires --output-format stream-json (default text)
+  --json-schema                   Optional JSON schema string or path to a schema file to enforce structured output (for stream-json, only applicable to the final result)
+  --log-file                      Override CLI log file path
+  --mode                          Set the agent execution mode for this session (accept-edits, plan)
+  --model                         Model for the current CLI session
+  --new-project                   Create a new project for this session
+  --output-format                 Output format for print mode (text, json, stream-json) (default text)
+  -p                              Short alias for --print
+  --print                         Run a single prompt non-interactively and print the response
+  --print-timeout                 Optional time limit for print mode; 0 waits until the turn completes (default 0s)
+  --project                       Project ID or project name for the current CLI session
+  --prompt                        Alias for --print
+  --prompt-interactive            Run an initial prompt interactively and continue the session
+  --remote-control                Create a remote connection for the CLI session on start up
+  --sandbox                       Run in a sandbox with terminal restrictions enabled
+
+Available subcommands:
+  agent           List available agents
+  agents          List available agents
+  changelog       Show changelog and release notes
+  help            Show help for subcommands
+  install         Configure environment paths and shell settings
+  mcp             Manage MCP servers (add, remove, list, enable, disable)
+  mic-serve       Serve this machine's microphone to a CLI on another host
+  models          List available models
+  plugin          Manage plugins (install, uninstall, list, enable, disable)
+  plugins         Alias for plugin
+  remote-control  Manage the remote-control background daemon (start, status, stop)
+  update          Update CLI
+
+> agy mcp list
+No MCP servers configured.
+
+> agy plugin list
+No imported plugins.
+
+Interpretation: version 1.2.9 and the listed CLI flags were observed. The help output does not establish model entitlement, effective memory/cache/routing/user-instruction settings, builtin-only enforcement, approval behavior, network policy, or run telemetry. Empty local MCP/plugin inventories do not prove that those extensions are disabled for a future run.

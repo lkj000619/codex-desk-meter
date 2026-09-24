@@ -27,19 +27,20 @@
     "--version"
   ],
   "sandbox_policy": "prompt-and-log",
-  "approval_policy": "cli --ask-for-approval never; external R10 approval required",
+  "approval_policy": "unverified: agy --help exposes no --ask-for-approval equivalent; external R10 approval required",
   "network_mode": "offline-fixture",
   "settings_inventory": {
-    "skills": "custom/user-installed disabled by policy; builtin-only enforcement verified in agy-preflight-20260924.txt",
-    "mcp": "MCP servers disabled by policy; enforcement verified in agy-preflight-20260924.txt",
-    "memory": "cleared for run isolation",
-    "user_instructions": "cleared for baseline enforcement",
-    "cache": "disabled by CLI flag or configuration",
-    "routing": "direct model access configured",
-    "plugins": "external plugins disabled by policy; enforcement verified in agy-preflight-20260924.txt",
-    "permissions": "workspace read/write allowed per isolation policy",
-    "model_network": "allowed for remote model invocation",
-    "extension_condition": "builtin-only-v1 adopted; enforcement verified in agy-preflight-20260924.txt",
+    "skills": "unverified: no effective builtin/custom skills inventory was observed; --disable-slash-commands exists but would disable all skill expansion and is not equivalent to builtin-only-v1",
+    "mcp": "unverified: agy-preflight-20260924.txt and agy-cli-20260925.txt observed no configured servers; disabled enforcement was not established",
+    "memory": "unverified: agy-preflight-20260924.txt states that memory is not directly observable",
+    "user_instructions": "unverified: no effective user-instruction inventory or clearing evidence was captured",
+    "cache": "unverified: agy-preflight-20260924.txt states that cache is not directly observable",
+    "routing": "unverified: agy-preflight-20260924.txt states that routing is not directly observable",
+    "plugins": "unverified: agy-preflight-20260924.txt and agy-cli-20260925.txt observed no imported plugins; disabled enforcement was not established",
+    "permissions": "unverified: prompt-and-log is a policy declaration; effective AGY permission behavior was not observed",
+    "model_network": "unverified: no model/provider invocation or network enforcement evidence was captured; offline-fixture describes product inputs",
+    "extension_condition": "unverified: builtin-only-v1 requires built-ins retained and custom extensions disabled; effective enforcement was not observed",
     "usage_recording": "record actual skills/plugins/MCP usage with raw-log references; unavailable values null with reason"
-  }
+  },
+  "measurement_notes": "Candidate correction 2026-09-25. agy 1.2.9, --help, and empty local MCP/plugin inventories are captured in docs/experiments/evidence/agy-cli-20260925.txt. The model ID embeds the medium effort variant; no separate --effort flag is used. The help-only --disable-slash-commands flag is not adopted because it disables all skill expansion and is stricter than builtin-only-v1. No model/provider execution occurred. The previous Codex-specific --ask-for-approval claim was removed; AGY approval behavior, model entitlement, effective settings, network policy, and run telemetry remain unverified. Do not prepare or run until an operator replaces unverified values with evidence-backed settings and issues a fresh receipt."
 }

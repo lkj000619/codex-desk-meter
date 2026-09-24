@@ -1,21 +1,24 @@
 {
   "base_commit": "9ef945efd9d6c2c4b4eedca75eccc9f280b3aced",
-  "profile_sha256": "e9b4bca27b82c8cfc2c49f914862835a2fe31b13dd0d036f6f1362012ecf94d6",
+  "profile_sha256": "075f23c4ebb10c87b0d5bd54c86c9c03dd4ed1e21de44283b1cd65eb7c8caa84",
   "access_policy": "prompt-and-log",
   "checks": {
-    "idf_build": "pass",
-    "compiler": "pass",
-    "ninja": "pass",
-    "git": "pass",
-    "temp_write": "pass",
-    "network_policy": "pass",
+    "idf_build": "not_observed",
+    "compiler": "not_observed",
+    "ninja": "not_observed",
+    "git": "not_observed",
+    "temp_write": "not_observed",
+    "network_policy": "not_observed",
     "read_isolation": "not_enforced",
-    "settings_inventory": "pass",
-    "prompt_scope": "pass",
-    "activity_logging": "pass"
+    "settings_inventory": "blocked",
+    "prompt_scope": "not_observed",
+    "activity_logging": "not_observed"
   },
   "evidence": {
-    "agy-preflight-20260924.txt": "3bd4294e5f56946c48f76b877457a6fe92c85b418eaeb61804f6c1f3d6874b00"
+    "agy-preflight-20260924.txt": "3bd4294e5f56946c48f76b877457a6fe92c85b418eaeb61804f6c1f3d6874b00",
+    "agy-cli-20260925.txt": "cc5a85106dda4bf90e4f5b7f1d5ac2c3b676c4a7cd353f552da8755d93b4a6ff"
   },
-  "pilot_pass": false
+  "pilot_pass": false,
+  "review_status": "blocked",
+  "review_reason": "The 2026-09-24 transcript observes only agy version 1.2.9 plus empty local MCP/plugin inventories and explicitly says memory, cache, and routing are not directly observable. The 2026-09-25 help capture confirms the CLI surface but does not establish effective settings, AGY approval behavior, network policy, host toolchain checks, prompt scope, activity logging, model entitlement, or telemetry. No check is marked pass without corresponding evidence."
 }

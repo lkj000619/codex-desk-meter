@@ -17,11 +17,14 @@
 ## 기준 저장소
 
 - 정식 기준 브랜치: `main`
+- 선택된 AGY pilot baseline tag: `benchmark-v2-baseline-20260923`
+- 선택된 baseline commit: `9ef945efd9d6c2c4b4eedca75eccc9f280b3aced`
+- 감사 시작 시점 HEAD: `a36747ab2f7ac50676343b3b53517c8491d54b03` (baseline 이후 5 commits).
+  candidate/profile/evidence 보완은 이 baseline snapshot에 자동으로 들어가지 않는다.
+  현재 HEAD·변경 여부는 `git rev-parse HEAD`와 `git status`로 확인하며, 새 입력을
+  사용하려면 해당 입력의 hash를 다시 check하고 별도 commit/tag로 동결한다.
 - 보존 중인 historical baseline tag: `benchmark-v2-baseline-20260911`
-- 해당 tag의 commit: `34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f`
-- 이후 main에 반영된 변경과 작업 트리의 문서 보완은 새 E2E baseline 후보다.
-  현재 HEAD·변경 여부는 `git rev-parse HEAD`와 `git status`로 확인한다.
-  검토·승인·commit/tag 및 입력 hash 동결 전에는 새 baseline으로 사용하지 않는다.
+- 해당 historical tag의 commit: `34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f`
 - `main-2`는 runner tooling을 추가한 중간 개발 브랜치이며, 앞으로의 기준은
   검토·승인된 `main` commit과 tag로만 정한다.
 - `experiment/...` 브랜치는 한 agent의 동결 결과를 보관한다. 다음 run의 시작점으로
@@ -74,13 +77,13 @@ P0~P2 중 하나라도 완료되지 않으면 P3 이후로 진행하지 않는�
 | Gate | 확인 조건 | 현재 상태 |
 |---|---|---|
 | R0 목적·범위 | 제품 목표, Version 2 계약, E2E product benchmark와 historical firmware prep 범위 분리 | `pass` |
-| R1 고정 입력 | prompt/config/fixture/schema/평가기준 commit·hash와 transport 선택 고정 | `pass` |
+| R1 고정 입력 | prompt/config/fixture/schema/평가기준 commit·hash와 transport 선택 고정 | `not_ready` |
 | R2 비교 항목 | F1~F9·I1~I4 기능표와 LCD G1~G6 rubric 확정 | `pass` |
 | R3 결과 계약 | feature_results·GUI 평가를 기록하도록 schema/validator/example 갱신 | `pass` |
-| R4 profile | agent/product/interface/model/reasoning/버전/argv 확정 | `pass` |
-| R5 preflight receipt | compiler·Ninja·Git·TEMP·ASCII 경로·참조 제한·활동 로그·네트워크·설정 증거; OS 격리 선택 | `pass` |
-| R6 runner telemetry | 시작·종료·단조 시간·명령·실패·사용자 개입·raw log·token 원본 | `pass` |
-| R7 one-shot 경계 | prompt 1회, 실행 중 외부 피드백 0회, evaluator read-only | `pass` |
+| R4 profile | agent/product/interface/model/reasoning/버전/argv 확정 | `not_ready` |
+| R5 preflight receipt | compiler·Ninja·Git·TEMP·ASCII 경로·참조 제한·활동 로그·네트워크·설정 증거; OS 격리 선택 | `blocked` |
+| R6 runner telemetry | 시작·종료·단조 시간·명령·실패·사용자 개입·raw log·token 원본 | `not_ready` |
+| R7 one-shot 경계 | prompt 1회, 실행 중 외부 피드백 0회, evaluator read-only | `not_ready` |
 | R8 host 평가 | production parser/state와 fixture collector·transport의 오류·stale·복구 시험 | `not_ready` |
 | R9 하드웨어 안전 | 제조사 기준 백업 hash, COM3 단독 점유, erase 금지, 운영자 checklist | `not_ready` |
 | R10 승인 | 사용자가 해당 baseline·profile·pilot 실행을 명시적으로 승인 | `not_authorized` |
@@ -97,8 +100,9 @@ provider이며 (`gemini-cli`는 Enterprise/API 키 conditional),
 source가 제공하지
 않는 절대 token 잔량을 추정하지 않는 계약을 포함한다. matrix 본문
 (`experiments/fixtures/provider-fixture-matrix.json`)과 provider adapter 결과
-schema·validator·example은 존재하며, 남은 작업은 baseline commit·hash 동결과
-검토 기록이다. 동결 전이므로 R1/R3은 계속 `not_ready`다.
+schema·validator·example은 존재한다. 선택 baseline tag는 존재하지만, 2026-09-25
+candidate 수정 뒤 profile이 unresolved 상태여서 R1의 최종 check/bundle hash는
+아직 닫히지 않았다. R3 결과 계약은 오프라인 validator 범위에서 유지된다.
 
 ### 현재 검증 증거와 남은 조건 (2026-09-21)
 
@@ -108,13 +112,66 @@ schema·validator·example은 존재하며, 남은 작업은 baseline commit·ha
 | Gate | 확보한 증거 | 남은 조건 |
 |---|---|---|
 | R0/R2 | 목적·C/F/G/I 계약과 비교 항목 정비 | 최종 범위·ADR 검토 기록 |
-| R1 | check/prepare 공통 hash 시험 | 최신 변경을 포함한 commit/tag·최종 hash 동결 |
+| R1 | 선택 tag와 check/prepare 공통 hash 설계 | AGY candidate 정정 후 `check` 재통과와 bundle hash 기록 |
 | R3 | E2E·historical·fixture matrix validator 통과 | 동결 기준선 재검증·검토 기록, CI 증거는 별도 |
-| R4/R5 | draft 3종의 sentinel 거부 확인 | 실제 model/reasoning/버전/settings 확정·profile-bound receipt |
-| R6/R7 | 토큰·timeout·runner 오프라인 시험 | 선택 CLI의 로그·telemetry·one-shot 전달 증거 |
-| R8 | 전체 81개 시험, host dry-run 3961 bytes, device_accessed=false | 동결 기준선·환경 확인; 실물/production 합격으로 대체 불가 |
+| R4/R5 | AGY 1.2.9 `--version`/`--help`와 raw preflight·receipt audit | effective settings·approval·network·host checks·prompt/activity 증거와 valid profile-bound receipt |
+| R6/R7 | 공통 runner 시험과 AGY-shaped mock-stream으로 exact prompt 1회·raw JSONL·unsupported metric null 처리 확인 | 실제 AGY stream 호환성·user intervention 계측·evaluator read-only 증거; 실제 run telemetry는 post-run 기록 |
+| R8 | 전체 82개 시험, host dry-run 3961 bytes, device_accessed=false | pre-pilot evaluator-harness 완료 기준을 명시·검토; candidate production 결과는 post-run으로 분리 |
 | R9 | 운영 checklist 문서 | 보드·백업 hash·COM3 단독 점유 실측 |
 | R10 | 2026-09-18 조건부 승인 기록 보존 | 대상 일치 및 prepare 성공 등 원래 조건 충족 확인 |
+
+### AGY 감사 결과 (2026-09-25)
+
+첫 pilot target은 사용자 Q3 결정대로 `antigravity-cli / gemini-3.8-flash-medium`이며
+hardware 옵션 A 결정도 보존한다. 이 결정은 R10 발효가 아니다. 선택 baseline tag는
+`benchmark-v2-baseline-20260923`이고 commit은
+`9ef945efd9d6c2c4b4eedca75eccc9f280b3aced`이다. 감사 시작 HEAD는
+`a36747ab2f7ac50676343b3b53517c8491d54b03`였으며 baseline 뒤 5 commits다.
+
+`agy --version`은 `1.2.9`로 관측됐고, `--help`는 `--disable-slash-commands`,
+`--effort`, `--model`, `--input-format text`, `--output-format stream-json`을
+노출한다. 원문과 실행 파일 SHA-256은
+[`agy-cli-20260925.txt`](evidence/agy-cli-20260925.txt)에 보존했다. 이 명령들은
+model/provider 호출을 하지 않았다.
+
+기존 [`agy-preflight-20260924.txt`](evidence/agy-preflight-20260924.txt)는 version,
+MCP 서버 없음, imported plugin 없음만 관측한다. 해당 기록은 memory/cache/routing이
+CLI에서 직접 관측되지 않는다고 명시하며, host toolchain·network·prompt scope·activity
+logging·effective permissions·model entitlement·telemetry를 입증하지 않는다. 따라서
+candidate의 `cleared`, `disabled`, `direct`, `builtin-only enforcement verified` 및
+Codex 전용 `--ask-for-approval` 문구를 제거·미검증으로 고쳤다. help에
+`--disable-slash-commands`와 `--effort`가 보이지만, 전자는 모든 skill expansion을
+차단해 built-in 기능을 유지하는 `builtin-only-v1`과 다르고, 후자는 model ID에 effort가
+포함된 경우 중복 지정하면 안 된다. 따라서 candidate argv에는 둘 다 넣지 않았고,
+effective enforcement는 입증하지 않았다.
+
+AGY receipt는 profile semantic SHA-256
+`075f23c4ebb10c87b0d5bd54c86c9c03dd4ed1e21de44283b1cd65eb7c8caa84`와 evidence
+SHA-256을 갱신했다. receipt의 `idf_build`, `compiler`, `ninja`, `git`, `temp_write`,
+`network_policy`, `prompt_scope`, `activity_logging`은 `not_observed`,
+`settings_inventory`는 `blocked`, `read_isolation`은 `not_enforced`, `pilot_pass`는
+`false`다. receipt 자체는 실행 receipt로 통과하지 않으며, 상세 chain은
+[`agy-launch-review-20260925.md`](agy-launch-review-20260925.md)에 기록한다.
+
+수정된 profile은 `runner-profile.schema.json`에 맞지만 unresolved marker 때문에
+`benchmark.py check`와 `validate_resolved_profile`이 의도대로 차단한다. 예시 operator는
+`operator.schema.json`을 통과한다. 이 상태에서 profile을 실행 가능하다고 표시하거나
+receipt를 `pass`로 올리지 않는다.
+
+보존된 `C:\Espressif\benchmark-runs\20260924-antigravity-cli-agy-flash-medium-r01`
+은 `prepared` 상태지만 2026-09-25에 `benchmark.py execute`의 날짜 검사에 걸리고,
+이 감사에서 바뀐 profile/receipt SHA와도 맞지 않는다. 예약된 ID와 checkout은 보존하고
+재사용하지 않는다. 새 `prepare`는 effective settings와 receipt가 해결되고 R10 조건을
+검토한 뒤에만 수행한다. 과거 16MiB 백업 artifact와 SHA-256
+`AA51BA15B975EC2E564506E609729F36D85DA23D8892023396A700846955A1E6`은 문서와 파일로
+확인되지만, 현재 보드/artifact 연계·COM3 단독 점유·운영자 checklist는 미완료다. COM3
+장치 존재는 USB serial status `OK`로 읽었지만 포트를 열거나 flash하지 않았다.
+
+R8의 candidate production 결과는 pilot이 만든 artifact를 평가한 뒤에만 생길 수 있으므로
+첫 pilot의 선행조건으로 사용할 수 없다. pre-pilot R8은 evaluator harness 자체의 준비
+조건으로 별도 정의해야 하며, 현재 문서에는 그 완료 기준과 승인 기록이 없다. 따라서
+R8은 `not_ready`를 유지하고 R10을 차단한다. fixture/reference-model 통과를 production
+pass로 승격하거나, 반대로 pilot 결과를 pilot의 선행조건으로 요구하지 않는다.
 
 ### Gate 종료 산출물과 책임자
 

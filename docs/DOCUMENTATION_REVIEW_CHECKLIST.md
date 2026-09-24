@@ -6,10 +6,23 @@
 - 시작일: 2026-09-20 (Asia/Seoul).
 - 시작 HEAD: `47b720d7f29185dd63a0d72737897966a4ea335f`.
 - 시작 상태: `main`, `origin/main`보다 1 commit 앞섬, 작업 트리 깨끗함.
-- 현재 단계: **N1~N5 후속 구현 완료, N6~N8 실행 경계 대기**. 기존 MD 19개와 신규 문서 3개는 사용자 변경으로 보존한다.
-- 다음 행동: 실제 모델/profile 확정과 baseline 동결 승인 전에는 N6~N8을 실행하지 않는다. 재개 시 아래 오프라인 검증 명령을 먼저 실행한다.
-- 범위: 문서 수정 및 관련 기존 검증. 제품 구현·benchmark·flash·commit·push는 수행하지 않는다.
+- 현재 단계 (2026-09-25): **N1~N5 완료, AGY pilot `BLOCKED / NOT_AUTHORIZED`**.
+  Q1/Q2/Q3 결정과 baseline tag는 보존되어 있으며, 수정된 profile과 receipt는
+  근거가 부족한 설정에서 의도대로 실행을 차단한다.
+- 다음 행동: [AGY Luna 감사](experiments/agy-launch-review-20260925.md)와
+  [Sol 독립 검증](experiments/agy-launch-sol-review-20260925.md)을 먼저 읽는다.
+  effective settings와 preflight 증거, pre-pilot R8 완료 기준, R9 하드웨어 확인을
+  해결한 뒤 새 profile/bundle hash와 receipt를 발행한다. 날짜가 지난
+  `20260924-antigravity-cli-agy-flash-medium-r01`은 재사용하지 않는다.
+- 이번 감사 범위: 문서·profile·receipt 정정과 오프라인 검증. 모델 실행·COM3 open·
+  flash·새 prepare는 수행하지 않았다.
 - 문서 정비는 ADR 승인, baseline 동결, 실행 gate 통과를 뜻하지 않는다.
+- 2026-09-25 AGY 감사: Q1/Q2/Q3 결정은 보존했다. 선택 baseline
+  `benchmark-v2-baseline-20260923` → `9ef945efd9d6c2c4b4eedca75eccc9f280b3aced`와
+  AGY target `gemini-3.8-flash-medium`을 확인했지만, effective settings·approval·
+  network·host preflight 근거가 없어 R4=`not_ready`, R5=`blocked`, R6/R7=`not_ready`,
+  R8/R9=`not_ready`, R10=`not_authorized`다. 상세 기록은
+  [`agy-launch-review-20260925.md`](experiments/agy-launch-review-20260925.md)다.
 
 ## 체크리스트
 
@@ -41,6 +54,14 @@
 - 2026-09-20: N3 완료. provider 원본 total과 E2E 정규화 total을 schema/runner/validator/test에 연결했다.
   N4 완료. C1~C8 및 F9 세부 증거를 E2E 결과 계약에 연결했다. N5 완료. E2E evaluation manifest,
   archive 정규화, summary 집계를 연결했다. offline unittest 77개와 validators exit 0.
+- 2026-09-25: AGY `1.2.9`의 실제 `--version`/`--help`와 빈 MCP/plugin 목록을
+  [`agy-cli-20260925.txt`](experiments/evidence/agy-cli-20260925.txt)에 보존했다.
+  기존 raw preflight가 memory/cache/routing 비관측을 명시하므로 candidate의 false
+  builtin-only/cleared/disabled/direct 및 Codex 전용 approval 주장을 제거하고,
+  receipt의 근거 없는 pass를 `not_observed`/`blocked`로 정정했다. profile semantic
+  SHA는 `075f23c4ebb10c87b0d5bd54c86c9c03dd4ed1e21de44283b1cd65eb7c8caa84`다.
+  help의 `--disable-slash-commands`는 모든 skill expansion을 차단해 builtin-only-v1과
+  다르고, model ID에 effort가 포함되므로 `--effort medium`은 candidate argv에 넣지 않았다.
 
 ## 후속 backlog — 이번 문서 작업의 미완료 단계와 구분
 
@@ -61,7 +82,8 @@
   선행: N3/N4 계약 확정. 완료: run/baseline identity 연결, 원본·실패 결과 보존,
   E2E round-trip 및 historical 회귀 통과. summary의 자동 집계 범위를 문서와 일치시킴.
 - [ ] N6 — 모델·reasoning·builtin-only 설정 증거 및 profile-bound receipt 확정.
-  완료: sentinel 없음, 실제 적용·관측 증거 있음. 미확정 모델 선택은 추정하지 않음.
+  AGY 1.2.9/argv는 help로 확인했지만 effective settings와 approval policy는
+  미검증이다. candidate에는 `unverified` marker를 남겼고 receipt는 blocked다.
 - [ ] N7 — ADR-0005/0006 검토, 입력·baseline 동결과 조건부 승인 발효 확인.
   선행: 관련 계약/준비 조건 충족. 이번 문서 정비나 tag 존재만으로 완료 처리하지 않음.
 - [ ] N8 — 승인된 pilot 및 운영자 실물 평가.
@@ -105,9 +127,23 @@
 | `python scripts/validate-experiment-result.py` | 0 | historical regression passed |
 | `git diff --check` | 0 | whitespace check passed |
 
-N6~N8은 실제 model/reasoning/settings, baseline freeze, pilot/COM3/flash가 필요하므로
-이번 turn에서 체크하지 않는다. `R4 not_ready`, `R5 not_ready`, `R10 not_authorized`와
-실행·하드웨어 조건부 승인 경계는 유지한다.
+AGY audit validation (2026-09-25):
+
+| 명령 | exit | 결과 |
+|---|---:|---|
+| `agy --version` / `agy --help` / `agy mcp list` / `agy plugin list` | 0 | version `1.2.9`; help surface and empty local MCP/plugin inventories captured; no model/provider call |
+| `python scripts/benchmark.py check --baseline benchmark-v2-baseline-20260923 --profile experiments/config/verified-profiles-candidate/agy-gemini-3.8-flash.candidate.json` | 1 | expected `BLOCKED`: unresolved profile settings |
+| runner-profile schema + `validate_resolved_profile` | 0 | schema valid; resolver expected blocked on `unverified` marker |
+| preserved AGY run manifest schema + operator validation | 0 | old prepared manifest is structurally valid; date/profile/receipt gates still block it |
+| operator schema validation on example manifest | 0 | example operator object valid |
+| corrected AGY receipt validation | 0 | expected blocked on `idf_build` because receipt now records `not_observed` |
+
+The current 82 offline tests, E2E validators, and fixture matrix remain offline checks;
+they do not close AGY R4/R5/R6/R7 or prove a product, provider, serial, or hardware result.
+
+N6~N8은 실제 model/reasoning/settings, baseline hash 재검증, pilot/COM3/flash가 필요하므로
+이번 turn에서 닫지 않는다. 현재 `R4 not_ready`, `R5 blocked`, `R6/R7 not_ready`,
+`R8/R9 not_ready`, `R10 not_authorized`와 실행·하드웨어 조건부 승인 경계를 유지한다.
    중단 시 `현재 단계`와 `다음 행동`을 실제 상태로 남긴다.
 
 재개 요청 예시:
@@ -283,12 +319,16 @@ profile·입력 hash와 빌드 파일 hash를 재현했다. 발견된 빌드 has
 - [x] 로컬 prompt-input 진단의 검증 범위 확인: 현재 세션 렌더러이며 후보 exec
   옵션의 실제 적용 증거로 대체할 수 없다. builtin-only 자체는 여전히 미검증.
 - [x] 추가 prompt-input 진단 결과를 동일 Sol 세션에서 검토하고 잘못된 검증 제안 정정.
-- [ ] Q1 첫 비교군·Q2 baseline 로컬 commit/tag 결정 반영 후 최종 동결·receipt.
+- [x] Q1 기존 6종 계획 유지, Q2 baseline commit/tag 승인, Q3 AGY
+  `gemini-3.8-flash-medium` 및 옵션 A 결정은
+  [`launch-coordination-20260921.md`](experiments/launch-coordination-20260921.md)에 기록했다.
+  최종 AGY profile/settings evidence·receipt gate·R10 발효는 미완료다.
 
 Luna의 추가 진단은 사용량 제한으로 중단됐고, 2026-09-22 사용자 재개 요청으로
 동일 세션에 재전달했다. 완료된 환경 빌드·시험을 처음부터 반복하지 않는다.
-첫 비교군 및 baseline commit/tag 문항은 미응답이다. 계속 진행 요청만으로 그
-구체적 선택을 확정하지 않는다. 실제 모델 실행·serial open·flash는 하지 않았다.
+첫 비교군 및 baseline commit/tag 문항에 대한 이전 미응답 문구는 2026-09-22
+historical snapshot이다. 이후 사용자 Q1/Q2/Q3 결정은 coordination record에 반영됐고,
+현재 AGY gate만 후속 검증한다. 실제 모델 실행·serial open·flash는 하지 않았다.
 
 후속 feature 진단: [로컬 기능 제어 증거](experiments/evidence/codex-feature-controls-20260922.txt).
 plugins/skill_search/enable_mcp_apps 비활성 값과 skip_host_skill_discovery 활성 값은

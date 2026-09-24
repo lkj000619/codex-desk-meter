@@ -14,11 +14,22 @@ Luna max로 준비한 결과를 Sol medium으로 검증·종합한다.
 - [x] Sol: `gpt-5.6-sol`, reasoning `medium`으로 Luna 준비 산출물 최초 독립 검증.
 - [x] 발견된 CLI 인자·문서 상태·빌드 hash 기록 문제를 Luna가 수정하고 Sol 재검증.
 - [x] 2026-09-22 prompt-input 추가 진단 결과를 Sol이 검증하고 기존 제안을 정정.
-- [x] 주 에이전트: 최종 상태와 다음 명령 종합, 기존 체크리스트 연결 및 Preflight Receipt 발행 완료.
+- [x] 주 에이전트: 최종 상태와 다음 명령 종합, 기존 체크리스트 연결 및 Preflight Receipt 발행.
+  2026-09-25 AGY 감사에서 근거 공백과 잘못 복사된 approval 정책을 확인해 receipt를
+  `blocked`로 정정했다.
 
-현재 단계: 파일럿 실행을 위한 모든 사전 문서 작업 및 Receipt 발행(R4/R5) 통과 완료.
-Sol 사전 검토 세션 `/root/readiness_sol`을 `gpt-5.6-sol`, reasoning `medium`으로
-시작했다. 사전 검토는 완료됐으며 Luna 완료 후 같은 세션에서 최종 검증한다.
+현재 단계: AGY 파일럿은 시작 불가하다. 2026-09-25 감사에서 R4는 `not_ready`,
+R5 receipt는 `blocked`, R6/R7은 AGY-shaped offline mock으로 exact one-shot stdin·raw
+JSONL·unsupported metric null 처리를 확인했지만 real AGY stream·user intervention·
+evaluator read-only 증거가 없어 `not_ready`(실제 raw log/telemetry는 post-run 기록),
+R8은 pre-pilot evaluator-harness와 post-run production 평가의 경계가 미확정이라
+`not_ready`, R9는 과거 16MiB
+백업 hash는 확인됐지만 현재 보드/artifact 연계·COM3 단독 점유·운영자 checklist가
+없어 `not_ready`, R10은 `not_authorized`로 확인했다. 새 prepare/run과 COM3/flash는
+수행하지 않는다.
+과거 Sol 사전 검토 세션 `/root/readiness_sol`은 `gpt-5.6-sol`, reasoning `medium`으로
+시작했다. 이번 2026-09-25 수정은 `/root/agy_readiness_luna`가 수행했고
+`/root/agy_readiness_sol`이 [독립 재검증](agy-launch-sol-review-20260925.md)을 완료했다.
 담당 모델·reasoning은 준비/검증 에이전트 설정이며 실험 비교군 결정과 별개다.
 중단 후 이 문서와 Luna 산출물을 먼저 읽고 완료 항목을 반복하지 않는다.
 
@@ -77,8 +88,36 @@ Sol 사전 검토 세션 `/root/readiness_sol`을 `gpt-5.6-sol`, reasoning `medi
 - Sol은 두 후보의 argv 도움말, profile/component/bundle hash 및 빌드 파일 hash를
   독립 확인했다. hello-world hash 기록 오타는 Luna가 수정했다.
 
-현재 실험 시작 불가: Q1/Q2 미응답, 최신 baseline 미동결, 설정 적용/모델 접근
-증거 및 실제 receipt 미완료. 모델 metadata/help는 실행 성공 증거가 아니다.
+현재 실험 시작 불가: Q1/Q2/Q3 결정은 보존되어 있지만, AGY effective settings·approval
+정책·network·prompt/activity·host preflight evidence가 부족하고 receipt가 blocked다.
+모델 metadata/help는 실행 성공 증거가 아니다. 선택 baseline tag는
+`benchmark-v2-baseline-20260923` → `9ef945efd9d6c2c4b4eedca75eccc9f280b3aced`이며,
+감사 시작 시점 HEAD `a36747ab2f7ac50676343b3b53517c8491d54b03`와 5 commits 차이가 난다.
+새 문서/profile/receipt는 선택 baseline commit/tag에 반영하지 않았다. 감사 작성 시 작업
+트리는 dirty였으며, 이후 상태는 `git status`로 확인한다.
+
+## AGY 현재 감사 연결 (2026-09-25)
+
+상세 판정과 다음 작업은 [AGY launch review](agy-launch-review-20260925.md)에 기록하며,
+수정 후 독립 재검증은 [AGY Sol review](agy-launch-sol-review-20260925.md)에 기록한다.
+Q1의 기존 6종 계획 유지, Q2의 baseline commit/tag 승인, Q3의
+`antigravity-cli / gemini-3.8-flash-medium` 파일럿 및 옵션 A(COM3/실물 평가) 결정은
+변경하지 않는다. Q3는 R10 발효가 아니다.
+
+- 실제 `agy --version`은 `1.2.9`이고, `agy --help` 및 MCP/plugin 목록은
+  [2026-09-25 evidence](evidence/agy-cli-20260925.txt)에 원문과 SHA-256으로 보존했다.
+- 2026-09-24 raw preflight는 version과 빈 MCP/plugin 목록만 관측하며
+  memory/cache/routing이 CLI에서 직접 관측되지 않는다고 명시한다. 기존 candidate의
+  builtin-only·cleared/disabled/direct 주장은 제거하고 `unverified`로 표시했다.
+- AGY에 없는 `--ask-for-approval` 정책 문자열을 제거했다. help의
+  `--disable-slash-commands`는 모든 skill expansion을 차단해 builtin-only-v1과 다른
+  조건이고, `--effort`는 model ID에 effort가 포함된 경우 중복 지정하지 않으므로
+  candidate argv에는 넣지 않았다.
+- receipt는 base commit/profile semantic hash/evidence SHA를 새 입력으로 갱신했지만,
+  관측되지 않은 checks는 `not_observed`, settings inventory는 `blocked`로 남겼다.
+  `pilot_pass`는 `false`다.
+- 보존된 `20260924-antigravity-cli-agy-flash-medium-r01`은 날짜가 지났고 수정된
+  profile/receipt hash와도 맞지 않는다. 예약 ID와 산출물은 보존하며 재사용하지 않는다.
 
 ## 추가 진단 재개 결과 (2026-09-22)
 
