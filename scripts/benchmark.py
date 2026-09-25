@@ -502,6 +502,9 @@ def execute(a):
     argv = [s.replace("{checkout}", str(checkout)).replace("{model}", profile["model"]) for s in profile["argv"]]
     agent_env = os.environ.copy()
     if profile["adapter"] == "antigravity":
+        from agy_pilot_environment import verify_scoped_environment
+        policy_path = ROOT / "experiments/config/agy-pilot-permissions.json"
+        verify_scoped_environment(Path.home() / ".gemini", policy_path)
         agent_env["AGY_CLI_DISABLE_AUTO_UPDATE"] = "true"
     actual_version = subprocess.check_output(profile["version_argv"], encoding="utf-8", timeout=30,
                                              env=agent_env).strip()

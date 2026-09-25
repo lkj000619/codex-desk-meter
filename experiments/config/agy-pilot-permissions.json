@@ -1,0 +1,10 @@
+{
+  "policy_version": 1,
+  "allow": [
+    "command(git status)",
+    "command(git diff)",
+    "command(idf.py set-target esp32s3)",
+    "command(idf.py build)",
+    "command(regex:^python(?:\\.exe)? -m unittest(?: .*)?$)"
+  ]
+}

@@ -254,7 +254,9 @@ R10 발효 근거를 기록한 뒤 §6으로 진행한다. 미충족이면 prepa
 `manual pilot; invalid for cross-agent quantitative comparison`으로 기록한다.
 
 ```powershell
-python scripts/benchmark.py run C:\Espressif\benchmark-runs\<run-id> `
+python scripts/agy_pilot_environment.py `
+  --backup-dir C:\Espressif\benchmark-runs\<run-id>-agy-config run -- `
+  python scripts/benchmark.py run C:\Espressif\benchmark-runs\<run-id> `
   --receipt <preflight-receipt.json>
 ```
 

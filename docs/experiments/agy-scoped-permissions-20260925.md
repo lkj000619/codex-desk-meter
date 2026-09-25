@@ -53,6 +53,29 @@ R4/R5 통과 판정은 아니다.
    거부도 있을 수 있으므로 원본 로그를 별도로 검토한다. 필요한 정책 변경은 다음 날짜의 새
    profile·receipt·run에서 검토한다.
 
-현재 정확한 명령 허용 목록과 effective 정책은 아직 정해지지 않았다. 따라서 이
-문서는 적용 계획이며 R4=`not_ready`, R5=`blocked`를 유지한다. 기존 전역 설정은
-이 문서 작성으로 변경되지 않았다.
+## 현재 구현과 사용 순서
+
+[pilot allow 정책](../../experiments/config/agy-pilot-permissions.json)은 Git 상태·diff,
+ESP-IDF target/build, Python unittest 명령만 허용한다. [설정 wrapper](../../scripts/agy_pilot_environment.py)는
+다른 AGY 프로세스가 없고 custom skill/MCP가 없는지 확인한 뒤, 전역 설정·공통 지침·hook을
+로컬 backup directory에 보존한다. 한 명령을 제한된 설정으로 실행하고 원본 바이트를 복원한다.
+AGY가 파일에서 문서화된 기본값을 생략하는 경우만 허용하며, 허용 목록 등 다른 변경이
+발생하면 자동 복원을 멈추고 수동 점검을 요구한다. runner도 활성 정책을 검사하므로
+wrapper 없이 AGY pilot을 시작할 수 없다. [실측 기록](evidence/agy-pilot-environment-20260925.md)에
+metadata 명령과 복원 검증을 남겼다.
+
+```powershell
+python scripts/agy_pilot_environment.py --backup-dir C:\Espressif\benchmark-runs\<run-id>-agy-config run -- `
+  python scripts/benchmark.py run C:\Espressif\benchmark-runs\<run-id> --receipt <receipt.json>
+```
+
+hard interruption으로 `active.json`이 남으면 AGY 자식 프로세스가 종료됐는지 확인하고
+변경된 설정을 검토한 뒤 아래 명령으로 원본을 복원한다. 검토 없이 `--force`를 쓰지 않는다.
+
+```powershell
+python scripts/agy_pilot_environment.py --backup-dir C:\Espressif\benchmark-runs\<run-id>-agy-config restore
+```
+
+이 정책은 pilot 진입 설정을 고정한다. 실제 Windows 명령 매칭·model entitlement·soft-denial은
+첫 pilot의 원본 로그로 판단한다. AGY의 기본 설정 파일은 현재 복원되어 있으며 pilot
+밖에서 전역 제한 정책을 계속 적용하지 않는다.

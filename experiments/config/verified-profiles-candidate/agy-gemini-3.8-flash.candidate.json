@@ -27,20 +27,20 @@
     "--version"
   ],
   "sandbox_policy": "prompt-and-log",
-  "approval_policy": "unverified: agy --help exposes no --ask-for-approval equivalent; external R10 approval required",
+  "approval_policy": "request-review default plus a046cfa637e99ca27a6b7f2f6da22e60d9192af3105441f73a7d6b6af4db9384 scoped command policy; benchmark verifies active scope before launch; raw init and stderr require pilot review",
   "network_mode": "offline-fixture",
   "settings_inventory": {
-    "skills": "unverified: no effective builtin/custom skills inventory was observed; --disable-slash-commands exists but would disable all skill expansion and is not equivalent to builtin-only-v1",
-    "mcp": "unverified: agy-cli-20260925-v1211.txt observed no configured servers; disabled enforcement for a future run was not established",
-    "memory": "unverified: agy-preflight-20260924.txt states that memory is not directly observable",
-    "user_instructions": "unverified: a nonempty global GEMINI.md exists; effective instruction scope and clearing were not established",
-    "cache": "unverified: agy-preflight-20260924.txt states that cache is not directly observable",
-    "routing": "unverified: agy-preflight-20260924.txt states that routing is not directly observable",
-    "plugins": "unverified: agy-cli-20260925-v1211.txt observed no imported plugins; disabled enforcement for a future run was not established",
-    "permissions": "unverified: scoped command allow is selected but the current global allow list is broader; effective AGY permission behavior was not observed",
-    "model_network": "unverified: no model/provider invocation or network enforcement evidence was captured; offline-fixture describes product inputs",
-    "extension_condition": "unverified: builtin-only-v1 requires built-ins retained and custom extensions disabled; effective enforcement was not observed",
+    "skills": "no custom global skill directories were present at 2026-09-25 inventory; wrapper rejects newly populated directories; built-in slash expansion remains enabled and actual invocation is reviewed after pilot",
+    "mcp": "global mcp_config.json had zero servers and agy mcp list was empty; wrapper rejects newly configured global servers",
+    "memory": "fresh headless process without resume; wrapper removes global GEMINI.md during execution; no provider memory isolation is claimed",
+    "user_instructions": "wrapper removes global GEMINI.md and hooks during execution; fixed prompt.txt is delivered once and raw activity is reviewed after pilot",
+    "cache": "provider cache is neither disabled nor assumed isolated; terminal usage and provider cache fields are preserved for review",
+    "routing": "argv pins gemini-3.8-flash-medium; raw init.model must match in the first pilot and a mismatch invalidates the run",
+    "plugins": "agy plugin list and agy agents returned empty inventories on 2026-09-25; raw activity requires post-pilot review",
+    "permissions": "scoped allow policy a046cfa637e99ca27a6b7f2f6da22e60d9192af3105441f73a7d6b6af4db9384; wrapper replaces broad global rules and benchmark refuses launch without the active scope; raw tool decisions require post-pilot review",
+    "model_network": "product input uses offline fixtures; agy models fetched the selected ID under scoped settings; model inference connectivity and entitlement are first-pilot observations",
+    "extension_condition": "global custom skills absent, MCP empty, plugins and custom agents listed empty, global hooks removed by wrapper; built-in expansion remains enabled; actual use is judged from raw pilot activity",
     "usage_recording": "record actual skills/plugins/MCP usage with raw-log references; unavailable values null with reason"
   },
-  "measurement_notes": "Candidate correction 2026-09-25 after AGY auto-updated from 1.2.9 to 1.2.11. Version, --help, and empty local MCP/plugin inventories are captured in docs/experiments/evidence/agy-cli-20260925-v1211.txt; the selected model appears in agy-models-20260925-v1211.txt. AGY_CLI_DISABLE_AUTO_UPDATE=true was set for these inventory commands and should be set in the future run environment, but this alone does not prevent another process from changing the binary. The model ID embeds the medium effort variant; no separate --effort flag is used. The help-only --disable-slash-commands flag is not adopted because it disables all skill expansion and is stricter than builtin-only-v1. No model inference occurred. AGY approval behavior, model entitlement, effective settings, network policy, and run telemetry remain unverified. Do not prepare or run until an operator replaces unverified values with evidence-backed settings and issues a fresh receipt."
+  "measurement_notes": "2026-09-25 pilot-entry profile. AGY 1.2.11 and model-list evidence are captured; a dedicated wrapper backs up global settings/instructions/hooks, applies the scoped policy, runs one child, and restores original bytes. AGY may sparsely omit documented default settings, so semantic defaults are accepted while a changed allow list is rejected. Runner checks that scope before launch and disables auto-update for AGY child processes. No model inference occurred in preflight; entitlement, actual command matching, init permission mode, usage and soft-denial are first-pilot observations, not preflight pass claims. Run only through the wrapper after receipt and R10 conditions are met."
 }
