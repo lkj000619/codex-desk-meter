@@ -2,6 +2,24 @@
 
 ## 재개 지점
 
+> **현재 작업 상태 (2026-09-25):** AGY pilot `PILOT_ENTRY_READY / PREPARE_PENDING`.
+> 아래의 9월 20~25일 BLOCKED 기록은 당시 감사 스냅샷이다. 현재 기준은
+> [readiness gate](experiments/benchmark-readiness.md)와
+> [실행 가이드](experiments/agent-run-commands.md)를 따른다.
+>
+> 선택 baseline `benchmark-v2-baseline-20260925` →
+> `eef278013428a79c29d6b9456018049af149ca61`, profile SHA256
+> `843a2cce0310b710e166de60cd3a4b5b651d88e06550f88f2f4552c6f6474f5e`,
+> bundle SHA256 `f7cfc546acac458c7691c10ccb776c20f5078ca141d353f1086fb808fe810948`.
+> 깨끗한 baseline에서 92개 시험·R8 원본 ledger·host hardware preflight 0 failure/0 warning을
+> 확인했다. R9는 현재 COM3의 ESP32-S3 식별, 현재 flash 전체 백업, 사용자 보드 모델 육안 확인을
+> 마쳤다. AGY 1.2.11 제한 정책의 metadata smoke와 전역 파일 원본 복원도 확인했다.
+>
+> **남은 실행 순서:** 문서·증빙 commit → tag의 깨끗한 별도 checkout에서 새 run `prepare` →
+> manifest·receipt·hash 재검증 → 실행 직전 COM3 단독 점유 재확인 → 기존 조건부 승인 충족
+> 기록(R10) → 첫 pilot. 첫 pilot의 모델 entitlement·실제 tool permission·usage·제품 동작은
+> 실행 후 판정한다. 크레딧 소진 시 이 순서의 미완료 항목부터 재개한다.
+
 - 작업: main 문서의 목적·범위·정합성 검토, 근거 있는 수정, 재검증과 종합.
 - 시작일: 2026-09-20 (Asia/Seoul).
 - 시작 HEAD: `47b720d7f29185dd63a0d72737897966a4ea335f`.

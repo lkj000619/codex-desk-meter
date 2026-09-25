@@ -44,8 +44,12 @@ must be reviewed before `pilot_pass=true`.
 - `check-experiment-preflight.ps1 -RequireHardware -Port COM3` ran on a clean
   `804a3001069c47eb744e091ea60a6b352beb3b96` checkout: 0 failures, 0
   warnings, ESP-IDF v5.3.2, 88 offline tests, valid example and matrix, COM3
-  USB serial status OK. This was before the new wrapper files were added; the
-  final baseline needs the same check again.
+  USB serial status OK. This was before the new wrapper files were added.
+- The same full preflight ran again on clean final baseline
+  `eef278013428a79c29d6b9456018049af149ca61`: 0 failures, 0 warnings,
+  92 offline tests, valid example and matrix, ESP-IDF v5.3.2, COM3 status OK.
+  The [R8 ledger](r8-baseline-20260925/ledger.json) records the separate frozen
+  offline harness commands, UTC times, output hashes, and maintainer review.
 - Git 2.55.0.windows.3, Ninja 1.12.1 in the activated IDF environment, and
   xtensa-esp32s3-elf-gcc 13.2.0 were observed. TEMP write/read passed.
 - Manufacturer `09_FactoryProgram` ESP-IDF project `build` exited 0 on the

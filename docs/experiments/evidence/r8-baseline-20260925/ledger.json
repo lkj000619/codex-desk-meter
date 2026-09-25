@@ -1,0 +1,108 @@
+{
+  "head": "eef278013428a79c29d6b9456018049af149ca61",
+  "clean_at_start": true,
+  "all_exit_codes_expected": true,
+  "negative_code_present": true,
+  "host_device_accessed": false,
+  "host_collection_failures": [],
+  "host_frame_sha256": "02724a9eff07e5667cdd3b0056ffe301e6be85d66ed130cf34d2e6a7ca24feec",
+  "host_report_sha256": "eb5e1ed3cb52ab358ac8c84ac2b242c5557d0ecffbf529f56eae1d6b40631c48",
+  "records": [
+    {
+      "name": "unit_tests",
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "started_utc": "2026-09-25T13:14:06.164175+00:00",
+      "ended_utc": "2026-09-25T13:14:23.673016+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout_sha256": "1fea7765f09cf003f77d06ae84b32fc850d56919013ec1159f83dc19f92a6458",
+      "stderr_sha256": "2e143be7c150554cbd8ba71df50bdfef991bed432bab7d458765c16a28f445d4"
+    },
+    {
+      "name": "valid",
+      "argv": [
+        "python",
+        "scripts/validate-end-to-end-result.py"
+      ],
+      "started_utc": "2026-09-25T13:14:23.687271+00:00",
+      "ended_utc": "2026-09-25T13:14:24.000155+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout_sha256": "a7b6c7377268074db9124a15d9cb7a8f939458a8e32d21127032b8a2aeb1325f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "matrix",
+      "argv": [
+        "python",
+        "scripts/validate-end-to-end-result.py",
+        "--matrix",
+        "experiments/fixtures/provider-fixture-matrix.json"
+      ],
+      "started_utc": "2026-09-25T13:14:24.002189+00:00",
+      "ended_utc": "2026-09-25T13:14:24.552151+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout_sha256": "a7b6c7377268074db9124a15d9cb7a8f939458a8e32d21127032b8a2aeb1325f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "negative",
+      "argv": [
+        "python",
+        "scripts/validate-end-to-end-result.py",
+        "--result",
+        "experiments/examples/invalid/invalid-product-pass.example.json"
+      ],
+      "started_utc": "2026-09-25T13:14:24.554150+00:00",
+      "ended_utc": "2026-09-25T13:14:24.850571+00:00",
+      "exit_code": 1,
+      "expected_exit": 1,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "7157607d69ebc1a0db22e4c0617d6496c8eb9036e7f650363ff8f974961cc1ad"
+    },
+    {
+      "name": "host_dry_run",
+      "argv": [
+        "python",
+        "scripts/run-host-device-pipeline.py",
+        "--dry-run",
+        "--output",
+        "C:\\Windows\\Temp\\cdm-r8-20260925-eef2780\\capture\\host-frame.jsonl",
+        "--report-output",
+        "C:\\Windows\\Temp\\cdm-r8-20260925-eef2780\\capture\\host-report.json"
+      ],
+      "started_utc": "2026-09-25T13:14:24.852575+00:00",
+      "ended_utc": "2026-09-25T13:14:25.517844+00:00",
+      "exit_code": 0,
+      "expected_exit": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "eb5e1ed3cb52ab358ac8c84ac2b242c5557d0ecffbf529f56eae1d6b40631c48"
+    }
+  ],
+  "baseline_tag": "benchmark-v2-baseline-20260925",
+  "input_sha256": {
+    "experiments/prompts/version-2-agent-task.md": "f99d708ca9f3bdfc2134942c44e30b6c14bb7a098fe36f75ad5472c8210f4a77",
+    "experiments/config/version-2-baseline.yaml": "f80d88b527c36f4ca591926be3842983fd61afa6ace517e6c31cf0ab197b337f",
+    "experiments/fixtures/provider-fixture-matrix.json": "646957ab364b64942d6e5bacb4868a7574e44e110d238146759ca717d0b773ad",
+    "experiments/examples/invalid/invalid-product-pass.example.json": "699e77ab1f6be43f5db183af06cad7765dc173dd864e31f0579d0847f8eafab8",
+    "scripts/benchmark.py": "627233895272a267949a6e481ca4b084ce609b6523a13e30ab161c8faa7803f4",
+    "scripts/validate-end-to-end-result.py": "9723c557fe5b32ea62dbc7669b02e5d2ee1d0cde7f11823cb20f6835e8170731",
+    "scripts/run-host-device-pipeline.py": "fbb23f1f62a4f9858d8555572a4a6e8ca2b8ab7629caabbdc226142c7c1f262c"
+  },
+  "review": {
+    "date_kst": "2026-09-25",
+    "reviewer": "Codex maintainer",
+    "decision": "R8 pilot-entry pass for frozen offline harness; production and hardware results remain post-pilot"
+  }
+}

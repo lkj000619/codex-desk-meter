@@ -2,7 +2,7 @@
 
 ## 상태
 
-**현재 상태: `PLANNING / NOT_AUTHORIZED`**
+**현재 상태: `PILOT_ENTRY_READY / PREPARE_PENDING`** (2026-09-25 KST)
 
 운영 도구의 일부 scaffold가 있어도 도구별 모델·sandbox·기능 결과 schema 검증이
 끝난 것은 아니다. run 준비·실행·보존 명령은 [readiness gate](benchmark-readiness.md)의
@@ -158,16 +158,14 @@ sandbox 내부 검증과 `read_isolation: pass` 증거를 확보한다.
 다음 순서는 준비 작업의 판단 기준이다. 모든 선행 조건과 적용 가능한 조건부 승인
 조항을 충족하고 R10이 발효되기 전에는 마지막 `run` 단계로 진행하지 않는다.
 
-1. 선택 baseline `benchmark-v2-baseline-20260923`와 외부 candidate
+1. 선택 baseline `benchmark-v2-baseline-20260925`와 검증된 candidate
    `experiments/config/verified-profiles-candidate/agy-gemini-3.8-flash.candidate.json`을
-   확인한다. baseline commit은 `9ef945efd9d6c2c4b4eedca75eccc9f280b3aced`다.
-2. candidate의 `unverified` 설정을 실제 근거로 해소한다. 선택한 정책에 따라 현재 global
-   permission 규칙의 범위를 검토하고, 승인된 checkout에서 필요한 명령만 확인해 profile에
-   고정한다([권한 계획](agy-scoped-permissions-20260925.md)). `--dangerously-skip-permissions`를
-   사용하지 않는다. 아래 check로 profile과 고정 입력의 출력 hash를 보존하며 `BLOCKED`이면
-   receipt/prepare로 넘어가지 않는다.
-3. 관측 증거와 hash에 근거한 profile-bound preflight receipt를 만든다. 추정값을 `pass`로
-   채우지 않는다. 기존 2026-09-24 receipt는 현재 profile과 증거를 대신하지 않는다.
+   확인한다. baseline commit은 `eef278013428a79c29d6b9456018049af149ca61`이다.
+2. [제한 정책](agy-scoped-permissions-20260925.md)과 wrapper가 기존 전역 허용 규칙·
+   공통 지침·hook을 일시 분리하는지 확인한다. `--dangerously-skip-permissions`는 사용하지
+   않는다. 아래 check가 `inputs_valid`를 반환하는지 확인한다.
+3. [profile-bound receipt](evidence/agy-gemini-3.8-flash-receipt.json)의 evidence SHA와
+   pilot 전 check를 검증한다. `pilot_pass=false`는 첫 pilot 전의 정상 상태다.
 4. 현재 [R0~R9 gate](benchmark-readiness.md#필수-gate)에서 각 gate의 pilot-entry 조건과
    첫 pilot 후 판정 항목을 구분하고, 대상에 적용되는 조건부 승인 기록을 대조한다. 특히
    R4·R6·R7의 사전 조건, R8 evaluator harness, R9 보드·백업·COM3 안전 증거를 확인한다.
@@ -193,21 +191,24 @@ profile/receipt hash가 현재 준비와 맞지 않으므로 보존만 하고 �
 
 ```powershell
 python scripts/benchmark.py check `
-  --baseline benchmark-v2-baseline-20260923 `
+  --baseline benchmark-v2-baseline-20260925 `
   --profile experiments/config/verified-profiles-candidate/agy-gemini-3.8-flash.candidate.json
 ```
 
 check 성공만으로 준비·승인이 완료되지 않는다. receipt와 R0~R9의 pilot-entry 증거가
 검토되고 조건부 승인 조항을 적용할 수 있을 때 아래 명령을 사용한다. R4·R6·R7의
 첫 pilot 후 판정 항목은 이 준비 단계의 선행조건이 아니다. 오늘 날짜를 seed로 쓰고,
-hardware 옵션 A인 COM3를 명시한다.
+hardware 옵션 A인 COM3를 명시한다. `prepare`는 선택 태그와 HEAD가 같은 깨끗한
+checkout에서만 실행되므로 먼저 별도 ASCII 경로의 baseline worktree로 이동한다.
 
 ```powershell
+git worktree add --detach C:\Espressif\benchmark-baseline-20260925 benchmark-v2-baseline-20260925
+Set-Location C:\Espressif\benchmark-baseline-20260925
 .\scripts\new-experiment-run.ps1 `
-  -Baseline benchmark-v2-baseline-20260923 `
-  -Profile <verified-profile.json> `
+  -Baseline benchmark-v2-baseline-20260925 `
+  -Profile experiments/config/verified-profiles-candidate/agy-gemini-3.8-flash.candidate.json `
   -RunRoot C:\Espressif\benchmark-runs `
-  -Seed <YYYYMMDD> -Phase pilot -Port COM3
+  -Seed 20260925 -Phase pilot -Port COM3
 ```
 
 COM3 준비 조건이 확인되지 않았거나 적용되는 승인 기록이 prepare 전 실행을 금지하면

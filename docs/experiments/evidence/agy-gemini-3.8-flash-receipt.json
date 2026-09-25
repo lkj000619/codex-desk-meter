@@ -1,26 +1,28 @@
 {
-  "base_commit": "9ef945efd9d6c2c4b4eedca75eccc9f280b3aced",
-  "profile_sha256": "16452599165c2d3536134fa1962ebe2cf52eacede245f1aa472d7d9b2592065a",
+  "base_commit": "eef278013428a79c29d6b9456018049af149ca61",
+  "profile_sha256": "843a2cce0310b710e166de60cd3a4b5b651d88e06550f88f2f4552c6f6474f5e",
   "access_policy": "prompt-and-log",
   "checks": {
-    "idf_build": "not_observed",
-    "compiler": "not_observed",
-    "ninja": "not_observed",
-    "git": "not_observed",
-    "temp_write": "not_observed",
-    "network_policy": "not_observed",
+    "idf_build": "pass",
+    "compiler": "pass",
+    "ninja": "pass",
+    "git": "pass",
+    "temp_write": "pass",
+    "network_policy": "pass",
     "read_isolation": "not_enforced",
-    "settings_inventory": "blocked",
-    "prompt_scope": "not_observed",
-    "activity_logging": "not_observed"
+    "settings_inventory": "pass",
+    "prompt_scope": "pass",
+    "activity_logging": "pass"
   },
   "evidence": {
-    "agy-preflight-20260924.txt": "3bd4294e5f56946c48f76b877457a6fe92c85b418eaeb61804f6c1f3d6874b00",
-    "agy-cli-20260925.txt": "cc5a85106dda4bf90e4f5b7f1d5ac2c3b676c4a7cd353f552da8755d93b4a6ff",
+    "agy-pilot-environment-20260925.md": "b8dd7664c31483b44922c0bc19e60129ac85e0af747e76304ee2b10e98bdacb1",
+    "agy-r9-board-readiness-20260925.md": "862737c6c7faca372d7562d55af5249557206a953e167d2b2bfb3f4ecf0559b1",
+    "agy-idf-build-20260925.stdout.gz": "f2b56a6c256a26609615bab1af231b674064270625134a394fd56a24e4bbff2a",
+    "r8-baseline-20260925/ledger.json": "8eb4c7bae2857930a6202af9a055f6bad026b4da269ad067b26f47e6bbacee0c",
     "agy-cli-20260925-v1211.txt": "95496b2718cf445a8bf9559ba54ba895acd2dc49fd00bc66f9edc25cfb323d07",
     "agy-models-20260925-v1211.txt": "714de458bff1a50beed3bcb04644578102f398f5396ae81f686c7d7eef582dda"
   },
   "pilot_pass": false,
-  "review_status": "blocked",
-  "review_reason": "AGY auto-updated from 1.2.9 to 1.2.11 on 2026-09-25. The current-version CLI and model-list captures confirm only executable identity, help flags, the advertised model, and empty local MCP/plugin inventories. They do not establish effective settings, scoped permission enforcement, host toolchain checks, network policy, prompt scope, activity logging, model entitlement, or telemetry. No check is marked pass without corresponding evidence."
+  "review_status": "pilot_entry_ready",
+  "review_reason": "Clean eef2780 baseline passed full host preflight and frozen R8 harness; scoped AGY metadata commands restored original global files; current-board backup and user board identification are recorded. Checks establish pilot-entry preparation only. Model entitlement, actual command matching, soft-denial, telemetry, and firmware behavior require first-pilot and post-pilot review."
 }

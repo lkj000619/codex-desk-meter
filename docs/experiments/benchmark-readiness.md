@@ -2,7 +2,16 @@
 
 ## 현재 상태
 
-**상태: `PLANNING / NOT_AUTHORIZED`**
+**상태: `PILOT_ENTRY_READY / PREPARE_PENDING`** (2026-09-25 KST)
+
+AGY 1.2.11 제한 정책, profile 입력 검사, host preflight, R8 평가 harness와 현재 보드
+백업을 검증했다. [AGY 환경 증거](evidence/agy-pilot-environment-20260925.md),
+[R8 ledger](evidence/r8-baseline-20260925/ledger.json),
+[R9 보드 점검](evidence/agy-r9-board-readiness-20260925.md),
+[preflight receipt](evidence/agy-gemini-3.8-flash-receipt.json)가 최신 근거다.
+R0~R9의 첫 pilot 진입 조건은 준비됐고, 기존 조건부 승인의 잔여 조건인 새 run
+`prepare` 및 실행 직전 COM3 재확인을 마친 뒤 R10 발효를 기록한다. 첫 pilot의
+model entitlement·실제 도구 권한 동작·usage와 실물 제품 성능은 사후 관측이다.
 
 2026-09-18 설계 검토 후속 변경과 최신 host 검증은
 [design-remediation-20260918.md](design-remediation-20260918.md)에 기록한다.
@@ -17,12 +26,11 @@
 ## 기준 저장소
 
 - 정식 기준 브랜치: `main`
-- 선택된 AGY pilot baseline tag: `benchmark-v2-baseline-20260923`
-- 선택된 baseline commit: `9ef945efd9d6c2c4b4eedca75eccc9f280b3aced`
-- 감사 시작 시점 HEAD: `a36747ab2f7ac50676343b3b53517c8491d54b03` (baseline 이후 5 commits).
-  candidate/profile/evidence 보완은 이 baseline snapshot에 자동으로 들어가지 않는다.
-  현재 HEAD·변경 여부는 `git rev-parse HEAD`와 `git status`로 확인하며, 새 입력을
-  사용하려면 해당 입력의 hash를 다시 check하고 별도 commit/tag로 동결한다.
+- 선택된 AGY pilot baseline tag: `benchmark-v2-baseline-20260925`
+- 선택된 baseline commit: `eef278013428a79c29d6b9456018049af149ca61`
+- 이전 baseline `benchmark-v2-baseline-20260923` →
+  `9ef945efd9d6c2c4b4eedca75eccc9f280b3aced`는 이력으로 보존한다.
+  새 입력 bundle과 profile SHA는 2026-09-25 태그의 `benchmark.py check` 출력에 고정했다.
 - 보존 중인 historical baseline tag: `benchmark-v2-baseline-20260911`
 - 해당 historical tag의 commit: `34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f`
 - `main-2`는 runner tooling을 추가한 중간 개발 브랜치이며, 앞으로의 기준은
@@ -71,8 +79,8 @@ P6 필요 시 remediation 별도 실험
 P0~P2의 pilot-entry 조건이 완료되지 않으면 P3 이후로 진행하지 않는다. R4·R6·R7은
 pilot 전 준비와 첫 pilot 후 관측을 나누어 기록한다. 첫 pilot 후에만 생길 수 있는
 entitlement·실제 stream/usage·soft-denial·operator intervention 증거는 해당 pilot의
-선행조건이 아니다. 현재 P3는 R4 profile 설정이 unresolved이고 R5/R8/R9와 R10 조건도
-미완료라 여전히 진행할 수 없다. pilot은 운영 인프라를 검증하는 단계이지 제품 구현을
+선행조건이 아니다. 현재 R0~R9의 pilot-entry 조건은 통과했으며 새 run prepare와 실행
+직전 COM3 재확인, 기존 조건부 승인 발효 기록이 남았다. pilot은 운영 인프라를 검증하는 단계이지 제품 구현을
 개선하는 단계가 아니며, 순위 통계에서 제외한다.
 
 ## 필수 gate
@@ -80,15 +88,15 @@ entitlement·실제 stream/usage·soft-denial·operator intervention 증거는 �
 | Gate | 확인 조건 | 현재 상태 |
 |---|---|---|
 | R0 목적·범위 | 제품 목표, Version 2 계약, E2E product benchmark와 historical firmware prep 범위 분리 | `pass` |
-| R1 고정 입력 | prompt/config/fixture/schema/평가기준 commit·hash와 transport 선택 고정 | `not_ready` |
+| R1 고정 입력 | prompt/config/fixture/schema/평가기준 commit·hash와 transport 선택 고정 | `pass` |
 | R2 비교 항목 | F1~F9·I1~I4 기능표와 LCD G1~G6 rubric 확정 | `pass` |
 | R3 결과 계약 | feature_results·GUI 평가를 기록하도록 schema/validator/example 갱신 | `pass` |
 | R4 profile | pilot 전: 모델 목록 노출, argv/profile/settings 및 필요한 명령만 허용하는 permission policy 확인. 첫 pilot 후: 실제 entitlement와 반환 stream 기록 | `not_ready` |
-| R5 preflight receipt | compiler·Ninja·Git·TEMP·ASCII 경로·참조 제한·활동 로그·네트워크·도구 권한 증거; 전역 permission 범위 및 OS 격리 선택 | `blocked` |
+| R5 preflight receipt | compiler·Ninja·Git·TEMP·ASCII 경로·참조 제한·활동 로그·네트워크·도구 권한 증거; 전역 permission 범위 및 OS 격리 선택 | `pass` (pilot-entry) |
 | R6 runner telemetry | pilot 전: synthetic parser 사례와 null/failure 보존 규칙 검증. 첫 pilot 후: 실제 AGY usage·soft-denial 결과 판정 | `not_ready` |
 | R7 one-shot 경계 | pilot 전: mock prompt 1회·후속 개입 차단 시험과 evaluator read-only 절차 확인. 첫 pilot 후: 실제 개입 기록 판정 | `not_ready` |
-| R8 pilot 전 평가 harness | 동결된 fixture/reference 입력, evaluator 도구, positive/negative validator 사례와 산출물·maintainer 검토 | `not_ready` |
-| R9 하드웨어 안전 | 제조사 기준 백업 hash, COM3 단독 점유, erase 금지, 운영자 checklist | `not_ready` |
+| R8 pilot 전 평가 harness | 동결된 fixture/reference 입력, evaluator 도구, positive/negative validator 사례와 산출물·maintainer 검토 | `pass` |
+| R9 하드웨어 안전 | 제조사 기준 백업 hash, COM3 단독 점유, erase 금지, 운영자 checklist | `pass` (실행 직전 COM3 재확인) |
 | R10 승인 | 사용자가 해당 baseline·profile·pilot 실행을 명시적으로 승인 | `not_authorized` |
 
 위 `현재 상태`는 pilot 이후까지 포함한 종합 상태다. 첫 pilot의 진입 여부는 아래
@@ -98,12 +106,12 @@ R0~R9의 `pilot_entry=pass`와 대상에 적용되는 R10 승인 조건이 충�
 
 | Gate | `pilot_entry` | `post_pilot` | 판정 경계 |
 |---|---|---|---|
-| R4 | `not_ready` | `pending` | 고정된 CLI·profile·설정·필요 명령 권한 정책 확인 후 진입; 실제 entitlement·stream은 사후 확인 |
-| R6 | `not_ready` | `pending` | 합성 telemetry·실패 보존 검증 후 진입; 실제 usage와 soft-denial은 사후 확인 |
-| R7 | `not_ready` | `pending` | mock one-shot 차단·평가자 read-only 절차 확인 후 진입; 실제 개입 여부는 사후 확인 |
+| R4 | `pass` | `pending` | 고정된 CLI·profile·설정·필요 명령 권한 정책 확인 후 진입; 실제 entitlement·stream은 사후 확인 |
+| R6 | `pass` | `pending` | 합성 telemetry·실패 보존 검증 후 진입; 실제 usage와 soft-denial은 사후 확인 |
+| R7 | `pass` | `pending` | mock one-shot 차단·평가자 read-only 절차 확인 후 진입; 실제 개입 여부는 사후 확인 |
 
-다른 R0~R9 gate의 `pilot_entry`는 위 표의 `현재 상태`를 따른다. R5의 `blocked`와
-R1/R8/R9의 `not_ready`가 남아 있으므로 현재 첫 pilot은 시작할 수 없다. 첫 pilot
+다른 R0~R9 gate의 `pilot_entry`는 위 표의 `현재 상태`를 따른다. 현재 남은 단계는
+선택 태그의 새 run `prepare`, 실행 직전 COM3 재확인과 조건부 승인 발효 기록이다. 첫 pilot
 완료 후 raw stdout/stderr를 함께 검토하고 도구 거부·개입 여부와 근거 hash를 기록하기
 전에는 `post_pilot=pass` 또는 receipt의 `pilot_pass=true`로 승격하지 않는다.
 
@@ -139,10 +147,10 @@ candidate 수정 뒤 profile이 unresolved 상태여서 R1의 최종 check/bundl
 | R9 | 운영 checklist 문서 | 보드·백업 hash·COM3 단독 점유 실측 |
 | R10 | 2026-09-18 조건부 승인 기록 보존 | 대상 일치 및 prepare 성공 등 원래 조건 충족 확인 |
 
-### AGY 감사 결과 (2026-09-25)
+### AGY 초기 감사 기록 (2026-09-25, 당시 snapshot)
 
 첫 pilot target은 사용자 Q3 결정대로 `antigravity-cli / gemini-3.8-flash-medium`이며
-hardware 옵션 A 결정도 보존한다. 이 결정은 R10 발효가 아니다. 선택 baseline tag는
+hardware 옵션 A 결정도 보존한다. 아래 문단은 초기 감사 당시의 기록이다. 당시 선택 baseline tag는
 `benchmark-v2-baseline-20260923`이고 commit은
 `9ef945efd9d6c2c4b4eedca75eccc9f280b3aced`이다. 감사 시작 HEAD는
 `a36747ab2f7ac50676343b3b53517c8491d54b03`였으며 baseline 뒤 5 commits다.
@@ -187,7 +195,7 @@ Codex 전용 `--ask-for-approval` 문구를 제거·미검증으로 고쳤다. h
 포함된 경우 중복 지정하면 안 된다. 따라서 candidate argv에는 둘 다 넣지 않았고,
 effective enforcement는 입증하지 않았다.
 
-AGY receipt는 현재 profile semantic SHA-256
+초기 AGY receipt는 당시 profile semantic SHA-256
 `16452599165c2d3536134fa1962ebe2cf52eacede245f1aa472d7d9b2592065a`와 evidence
 SHA-256을 갱신했다. receipt의 `idf_build`, `compiler`, `ninja`, `git`, `temp_write`,
 `network_policy`, `prompt_scope`, `activity_logging`은 `not_observed`,
@@ -195,7 +203,7 @@ SHA-256을 갱신했다. receipt의 `idf_build`, `compiler`, `ninja`, `git`, `te
 `false`다. receipt 자체는 실행 receipt로 통과하지 않으며, 상세 chain은
 [`agy-launch-review-20260925.md`](agy-launch-review-20260925.md)에 기록한다.
 
-수정된 profile은 `runner-profile.schema.json`에 맞지만 unresolved marker 때문에
+당시 수정된 profile은 `runner-profile.schema.json`에 맞지만 unresolved marker 때문에
 `benchmark.py check`와 `validate_resolved_profile`이 의도대로 차단한다. 예시 operator는
 `operator.schema.json`을 통과한다. 이 상태에서 profile을 실행 가능하다고 표시하거나
 receipt를 `pass`로 올리지 않는다.
@@ -210,13 +218,20 @@ receipt를 `pass`로 올리지 않는다.
 Candidate artifact/hash는 pilot 후 flash 전에 확인한다. COM3
 장치 존재는 USB serial status `OK`로 읽었지만 포트를 열거나 flash하지 않았다.
 
+2026-09-25 최종 baseline에서는 새 profile SHA
+`843a2cce0310b710e166de60cd3a4b5b651d88e06550f88f2f4552c6f6474f5e`와
+receipt의 모든 pilot 전 필수 check `pass`를 독립 검증했다. 현재 보드의 새 16MiB 복구
+이미지는 과거 factory backup과 SHA가 다르며, 사용자 육안 확인으로 보드 모델을
+확인했다. 실제 flash/제품 평가는 첫 pilot 이후다.
+
 R8은 첫 pilot의 산출물을 요구하는 production 결과와 pilot 전 evaluator-harness 준비를
 구분한다. pilot 전 R8의 통과 증거는 아래 고정 명령의 재현 가능한 출력, exit code와
 입력·출력 hash를 모은 evidence ledger, 그리고 maintainer/date가 적힌 검토 기록이다.
 이 gate는 harness가 pilot 결과를 수집·검증할 준비가 됐는지를 판정한다. 검토자가
 `python` 명령이 저장소 루트에서 실행되고 현재 frozen candidate를 대상으로 하는지
-확인한다. 현재 offline suite 통과만으로 R8이 충족되지 않으며 ledger와 maintainer review가
-완료되지 않아 R8은 `not_ready`다.
+확인한다. 최종 baseline `eef2780`의
+[ledger](evidence/r8-baseline-20260925/ledger.json)와 maintainer/date 검토가
+완료돼 pilot 전 R8은 `pass`다.
 
 ### R8 pilot 전 완료 기준
 
@@ -237,12 +252,12 @@ machine-readable host frame은 `--output`이 기록하고 JSON report는 `--repo
 기록한다. report의 `device_accessed: false`, 빈 `collection_failures`를 확인하고 두
 machine-readable 파일을 모두 보존·해시한다. 명령의 실행일에 맞춰 TEMP 파일명을 고유하게 바꾼다.
 
-현재 dirty HEAD에서 얻은 offline test 결과는 개발 검증 기록이다. runner와 문서 변경을
-최종 baseline commit에 동결한 뒤, 깨끗한 baseline checkout에서 위 명령 전체를 다시 실행해
-R8 evidence ledger를 완성한다. maintainer는 최종 checkout의 HEAD, 각 출력·파일 hash와
-검토 일자·이름을 대조해 기록한다. 이 단계들은 오프라인 평가 harness 검증이며 provider
-실행이나 실물 합격 증거가 아니다. final checkout의 ledger와 검토 기록이 완료될 때까지
-R8은 `not_ready`다.
+최종 baseline `eef2780`을 깨끗한 checkout에서 재실행해 위 다섯 명령의 UTC 시각,
+종료 코드, stdout/stderr·frame·report SHA와 maintainer/date 검토를
+[R8 evidence ledger](evidence/r8-baseline-20260925/ledger.json)에 남겼다.
+92개 시험, 세 정상 검증 exit 0, 부정 예제 exit 1과 지정 오류 코드, host dry-run
+exit 0 및 `device_accessed=false`·빈 `collection_failures`를 확인했다.
+이것은 오프라인 평가 harness 준비 증거이며 provider 실행이나 실물 합격 증거가 아니다.
 
 candidate production parser/receiver의 실제 제품 artifact 평가, fixture collector와
 실제 transport의 동작, serial 수신, LCD 표시, I3/I4 실물 합격은 pilot이 만든 결과물을

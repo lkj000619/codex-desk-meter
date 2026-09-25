@@ -2,10 +2,11 @@
 
 ## 상태
 
-이 문서는 합의된 운영 설계다. 현재 상태는 **`PLANNING / NOT_AUTHORIZED`**다.
-schema v2·격리 checkout·실행기 일부가 존재한다는 사실은 제품 pilot 승인을
-뜻하지 않는다. 도구별 설정·모델, preflight receipt, 기능·GUI 결과 계약과 새
-baseline 검증을 완료하기 전까지 pilot을 실행하지 않는다. 실행 gate의 단일
+이 문서는 합의된 운영 설계다. AGY 첫 pilot의 현재 상태는
+**`PILOT_ENTRY_READY / PREPARE_PENDING`**이다. 동결된
+`benchmark-v2-baseline-20260925`와 profile-bound receipt의 pilot 전 검증이
+완료됐으며, 새 run prepare와 실행 직전 COM3 재확인·조건부 승인 발효 전에는
+pilot을 실행하지 않는다. 실행 gate의 단일
 진실은 [benchmark 실행 전 readiness gate](benchmark-readiness.md)다.
 기존 baseline 태그는 보존한다. 새 baseline은 maintainer가 `check`로 입력/profile을
 검사한 뒤 R1에서 hash를 동결하는 기준점이며, receipt·R10 승인이나 pilot 실행의

@@ -94,8 +94,12 @@
 2026-09-25 AGY pilot 준비에 대한 최신 독립 기록은
 [AGY launch review](experiments/agy-launch-review-20260925.md)와
 [독립 검토](experiments/agy-launch-sol-review-20260925.md)다. 둘 다 해당 날짜의
-관측 기록이며, 현재 설정·실행 승인 또는 실물 검증을 보증하지 않는다. 현재 gate와
-새 실행의 선행 조건은 [benchmark readiness](experiments/benchmark-readiness.md)에서 확인한다.
+관측 기록이며, 현재 설정·실행 승인 또는 실물 검증을 보증하지 않는다. 최신 준비 실측은
+[AGY pilot 환경 증거](experiments/evidence/agy-pilot-environment-20260925.md),
+[R8 ledger](experiments/evidence/r8-baseline-20260925/ledger.json),
+[R9 보드 점검](experiments/evidence/agy-r9-board-readiness-20260925.md)에 있다.
+현재 gate와 새 실행의 선행 조건은
+[benchmark readiness](experiments/benchmark-readiness.md)에서 확인한다.
 
 문서 정비 결과와 미해결 결정은 [검토 보고서](DOCUMENTATION_REVIEW.md), 중단 후
 작업 재개는 [체크리스트](DOCUMENTATION_REVIEW_CHECKLIST.md)를 따른다.
