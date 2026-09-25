@@ -1,8 +1,26 @@
 # Benchmark 실행 전 준비 gate
 
+> 2026-09-26 보완: 권한·계측 수정과 94개 시험 검증을 완료했다.
+> [보완 기록](evidence/agy-remediation-20260926.md) 참조. 새 baseline 동결과
+> 새 receipt 발행 전에는 과거 baseline으로 재실행하지 않는다.
+
+> ?? ??: **PILOT_NOT_PASSED / PERMISSION_POLICY_BLOCKED**. r03? ???? ?? ? ? ??? ?? ???? ????. runner? completed/0 tool ??? ?? ???? ????? ????. [?? ?????](evidence/agy-pilot-retry-result-20260926.md)? ????. ?? ? ????? ??? ????. ?? ?? ? ?? ??? ERROR/denied_actions ?? ??? ????.
+
 ## 현재 상태
 
-**상태: `PILOT_PREPARED / LAUNCH_RECHECK_REQUIRED`** (2026-09-26 KST)
+**상태: `ENVIRONMENT_FAILED / PILOT_NOT_PASSED`** (2026-09-26 KST)
+
+첫 AGY pilot `20260926-antigravity-cli-agy-flash-medium-r01`은 승인 발효 후 한 번
+실행됐으나 CLI의 `--print` 인자 파싱 오류로 exit 2 종료됐다.
+[실행·사후 검증](evidence/agy-pilot-result-20260926.md)이 현재 판정이다.
+해당 run과 승인은 소진됐으며 재실행하지 않는다. R4의 실제 argv 호환성은 실패,
+R6/R7의 모델 stream 관측은 미수행이다. 아래 준비 통과 기록은 실행 이전 증거다.
+다음 실행은 profile·receipt 재검증과 새 run 준비가 필요하다.
+
+### 실행 이전 준비 기록
+
+다음 준비 서술은 첫 run 시작 이전 상태다. 현재 실행 결과는 위 판정과 갱신된
+gate 표를 우선한다. 첫 run의 R10은 실행 직전 발효됐고 실행 종료로 소진됐다.
 
 AGY 1.2.11 제한 정책, profile 입력 검사, host preflight, R8 평가 harness와 현재 보드
 백업을 검증했다. [AGY 환경 증거](evidence/agy-pilot-environment-20260925.md),
@@ -10,17 +28,22 @@ AGY 1.2.11 제한 정책, profile 입력 검사, host preflight, R8 평가 harne
 [R9 보드 점검](evidence/agy-r9-board-readiness-20260925.md),
 [preflight receipt](evidence/agy-gemini-3.8-flash-receipt.json)가 최신 근거다.
 R0~R9의 첫 pilot 진입 조건을 확인하고 새 run
-`20260925-antigravity-cli-agy-flash-medium-r01`의 `prepare`도 통과했다.
-[준비 완료 검증](evidence/agy-pilot-prepared-20260926.md)에 manifest·receipt·COM3
+`20260926-antigravity-cli-agy-flash-medium-r01`의 `prepare`도 통과했다.
+[최신 준비 검증](evidence/agy-pilot-readiness-20260926.md)에 manifest·receipt·COM3
 재검사 근거를 기록했다. 기존 조건부 승인과 Q3 결정은 이 AGY 첫 pilot에 적용된다.
 실제 `run` 직전에는 시간에 민감한 COM3 단독 점유를 다시 확인하고 R10 발효 시점을
 기록한다. 첫 pilot의
 model entitlement·실제 도구 권한 동작·usage와 실물 제품 성능은 사후 관측이다.
 
+run ID의 날짜는 실행일(KST)과 같아야 한다. 9월 25일 준비 run은 이력으로 보존하며
+실행하지 않는다. 다시 날짜가 바뀌면 새 run을 준비하고 receipt와 날짜를 재검증한다.
+ADR-0005/0006은 선택된 pilot 범위로 채택 상태를 정리했다. 이 운영 상태 정정은
+동결 baseline 입력을 변경하지 않는다. 최신 운영 기록은 checkout 밖에서 관리한다.
+
 2026-09-18 설계 검토 후속 변경과 최신 host 검증은
 [design-remediation-20260918.md](design-remediation-20260918.md)에 기록한다.
 계약·fixture·IDF 활성화 보완과 host 시험 통과는 개별 실행 profile/receipt 확정이나
-실물 합격을 뜻하지 않는다. R4/R5/R10의 미충족 조건은 해당 기록을 함께 확인한다.
+실물 합격을 뜻하지 않는다. 과거 기록의 미충족 상태는 아래 최신 pilot-entry 표와 구분한다.
 
 이 문서는 에이전트 제품 구현을 실행하는 지침이 아니라, 실행해도 되는지 판단하는
 운영 gate다. 현재 이 gate가 `AUTHORIZED`로 바뀌지 않았으므로 agent prompt를
@@ -101,7 +124,7 @@ entitlement·실제 stream/usage·soft-denial·operator intervention 증거는 �
 | R7 one-shot 경계 | pilot 전: mock prompt 1회·후속 개입 차단 시험과 evaluator read-only 절차 확인. 첫 pilot 후: 실제 개입 기록 판정 | `not_ready` |
 | R8 pilot 전 평가 harness | 동결된 fixture/reference 입력, evaluator 도구, positive/negative validator 사례와 산출물·maintainer 검토 | `pass` |
 | R9 하드웨어 안전 | 제조사 기준 백업 hash, COM3 단독 점유, erase 금지, 운영자 checklist | `pass` (실행 직전 COM3 재확인) |
-| R10 승인 | 사용자가 해당 baseline·profile·pilot 실행을 명시적으로 승인 | `not_authorized` |
+| R10 승인 | 사용자가 해당 baseline·profile·pilot 실행을 명시적으로 승인 | 첫 run 발효·실행 종료; 후속 run 미발효 |
 
 위 `현재 상태`는 pilot 이후까지 포함한 종합 상태다. 첫 pilot의 진입 여부는 아래
 `pilot_entry`만으로 판정하고, pilot에서 처음 얻는 증거는 `post_pilot`에 기록한다.
@@ -110,9 +133,9 @@ R0~R9의 `pilot_entry=pass`와 대상에 적용되는 R10 승인 조건이 충�
 
 | Gate | `pilot_entry` | `post_pilot` | 판정 경계 |
 |---|---|---|---|
-| R4 | `pass` | `pending` | 고정된 CLI·profile·설정·필요 명령 권한 정책 확인 후 진입; 실제 entitlement·stream은 사후 확인 |
-| R6 | `pass` | `pending` | 합성 telemetry·실패 보존 검증 후 진입; 실제 usage와 soft-denial은 사후 확인 |
-| R7 | `pass` | `pending` | mock one-shot 차단·평가자 read-only 절차 확인 후 진입; 실제 개입 여부는 사후 확인 |
+| R4 | `blocked` (후속 실행) | `fail` (CLI argv); entitlement 미관측 | 첫 pilot이 CLI 인자 오류로 종료; 수정 profile 검증 필요 |
+| R6 | `pass` (합성 검증) | `not_run` | 실제 usage 없음; null과 원본 실패 로그 보존 |
+| R7 | `pass` (사전 경계) | `partial` | runner 1회·후속 개입 없음; 모델의 실제 stream 없음 |
 
 다른 R0~R9 gate의 `pilot_entry`는 위 표의 `현재 상태`를 따른다. 새 run `prepare`는
 완료됐으며 현재 남은 단계는 실행 직전 COM3 재확인과 조건부 승인 발효 기록이다. 첫 pilot
@@ -344,7 +367,7 @@ token 및 단위를 운반한다. source가 절대 quota를 공개하지 않으�
 않는다.
 
 검토 중인 E2E 계약의 transport 선택값은 USB serial(COM3) `cdm/1`이다.
-ADR-0005 승인과 baseline 동결은 아직 남아 있다. local Wi-Fi 운용은
+선택된 AGY pilot의 ADR-0005 채택과 baseline 동결은 완료됐다. local Wi-Fi 운용은
 별도 cohort에서 비교한다. 실제 계정 source로의 전환은 별도의 owner-only live integration이다.
 collector·transport·receiver를 구현·검증하기 전에는 “실시간 Codex 사용량 표시
 완료”라고 보고하지 않는다. 계층별 frame·재연결·무결성 시험의 설계는
@@ -365,7 +388,7 @@ collector·transport·receiver를 구현·검증하기 전에는 “실시간 Co
 ## 승인 방법
 
 2026-09-18의 [조건부 pilot 승인 기록](preflight-evidence-20260918.md)은 보존한다.
-아직 충족되지 않은 모델·설정·동결·receipt 조건과 R10 발효를 구분하며, 문서 정비로
+당시의 모델·설정·동결·receipt 조건과 현재 R10 발효를 구분하며, 문서 정비로
 승인을 새로 부여하거나 기존 조건부 승인을 취소하지 않는다.
 
 승인은 모든 R0~R9의 pilot-entry 증거와 사후 판정 계획을 검토한 뒤 사용자가 특정 baseline, profile, 실행
@@ -383,7 +406,7 @@ R6 `partial`, R7 `not_ready`, R8 `partial`, R9 `not_ready`, and R10
 `not_authorized`. The gate table above (§필수 gate) is authoritative for the
 current status.
 
-Current policy (2026-09-14): [isolation-policy.md](isolation-policy.md) defines
+Historical policy/status snapshot (2026-09-14; current gates are above): [isolation-policy.md](isolation-policy.md) defines
 `prompt-and-log` as the default: current main inputs in a dedicated checkout,
 prompt restrictions against other branches/prior results, and activity/reference logs.
 Docker/VM is optional. Quantitative comparison is allowed with the same declared
@@ -407,6 +430,8 @@ profile-bound preflight receipt; verify the applicable approval record; run
 and record R10 activation; only then run `benchmark.py run`. `prepare` repeats the
 baseline/profile checks immediately before reserving an ID. A readiness gate
 must not require a prepared run as its own evidence, and a prepared run is not
-an authorization. R4 remains `not_ready`, R5 remains `blocked`, R6/R7 remain
-`not_ready`, and R10 remains `not_authorized` until the applicable pre-pilot evidence
-and approval conditions are met. Their first-pilot observations are assessed afterward.
+an authorization. The current R4/R6/R7 pilot-entry checks and R5 pass are recorded
+in the gate table above. R10 remains `not_authorized` until the launch-time
+checks and conditional-approval activation are recorded. First-pilot observations
+are assessed afterward. The run ID must match the launch date in KST; preserve
+earlier reservations and prepare a new run if the date changes.

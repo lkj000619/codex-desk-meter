@@ -1,6 +1,10 @@
 {
   "policy_version": 1,
   "allow": [
+    "command(dir)",
+    "command(pwd)",
+    "command(Get-ChildItem)",
+    "command(Get-Location)",
     "command(git status)",
     "command(git diff)",
     "command(idf.py set-target esp32s3)",

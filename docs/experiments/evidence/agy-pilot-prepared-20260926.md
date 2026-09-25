@@ -1,5 +1,11 @@
 # AGY first-pilot prepared-run verification — 2026-09-26 KST
 
+> Historical preparation observation, superseded for launch by
+> [the corrected readiness record](agy-pilot-readiness-20260926.md).
+> The `20260925-...` reservation below cannot execute on 2026-09-26: the runner
+> requires the run ID date to match the launch date in KST. Preserve it and use
+> a newly prepared date-valid run. The earlier statement below omitted this check.
+
 ## Result
 
 The first AGY pilot is prepared. The run is

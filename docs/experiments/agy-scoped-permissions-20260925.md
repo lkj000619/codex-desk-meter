@@ -56,7 +56,10 @@ R4/R5 통과 판정은 아니다.
 ## 현재 구현과 사용 순서
 
 [pilot allow 정책](../../experiments/config/agy-pilot-permissions.json)은 Git 상태·diff,
-ESP-IDF target/build, Python unittest 명령만 허용한다. [설정 wrapper](../../scripts/agy_pilot_environment.py)는
+ESP-IDF target/build, Python unittest와 인자 없는 현재 폴더 목록·위치 확인
+(`dir`, `pwd`, `Get-ChildItem`, `Get-Location`)을 허용한다.
+2026-09-26 [권한·계측 보완](evidence/agy-remediation-20260926.md)은 새 baseline/receipt
+동결 전의 개발 상태다. [설정 wrapper](../../scripts/agy_pilot_environment.py)는
 다른 AGY 프로세스가 없고 custom skill/MCP가 없는지 확인한 뒤, 전역 설정·공통 지침·hook을
 로컬 backup directory에 보존한다. 한 명령을 제한된 설정으로 실행하고 원본 바이트를 복원한다.
 AGY가 파일에서 문서화된 기본값을 생략하는 경우만 허용하며, 허용 목록 등 다른 변경이

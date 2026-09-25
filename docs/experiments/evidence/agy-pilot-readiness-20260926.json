@@ -1,0 +1,12 @@
+{
+  "checked_at": "2026-09-25T17:58:20.478Z",
+  "run_id": "20260926-antigravity-cli-agy-flash-medium-r01",
+  "status": "prepared",
+  "checks": "schema, resolved profile, receipt evidence, KST date, clean checkout, local HEAD, profile bytes, delivered prompt, complete bundle, COM3 manifest, CLI version, extension inventory, original global settings hashes: PASS",
+  "base_commit": "eef278013428a79c29d6b9456018049af149ca61",
+  "profile_sha256": "843a2cce0310b710e166de60cd3a4b5b651d88e06550f88f2f4552c6f6474f5e",
+  "input_bundle_sha256": "f7cfc546acac458c7691c10ccb776c20f5078ca141d353f1086fb808fe810948",
+  "manifest_sha256": "c9bf31fdcd1adf573b2d728eaa2b43fe359bef659faf56fff0014ff5fa24aa0d",
+  "model_executed": false,
+  "r10": "not_authorized; launch-time recheck and activation required"
+}

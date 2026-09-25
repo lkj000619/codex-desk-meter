@@ -1,0 +1,91 @@
+{
+  "checked_at": "2026-09-25T18:20:33.108Z",
+  "pilot_pass": false,
+  "ranking_eligible": false,
+  "runs": [
+    {
+      "run_id": "20260926-antigravity-cli-agy-flash-medium-r02",
+      "runner_status": "environment_failed",
+      "review": {
+        "reviewed_at": "2026-09-25T18:19:20.801Z",
+        "run_id": "20260926-antigravity-cli-agy-flash-medium-r02",
+        "pilot_pass": false,
+        "adjudicated_status": "environment_failed",
+        "reason": "Explicit empty print argument did not consume nonempty text stdin; no model turn",
+        "ranking_eligible": false
+      },
+      "measurement": {
+        "wall_clock_seconds": 0.7660000000614673,
+        "tool_calls": null,
+        "failed_commands": null,
+        "user_interventions": null,
+        "tokens": {
+          "input": null,
+          "output": null,
+          "cached": null,
+          "reasoning": null,
+          "provider_total": null,
+          "total": null,
+          "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+          "availability_note": "No supported usage event; see raw stdout."
+        }
+      },
+      "hashes": {
+        "run-manifest.json": "466463a777b48374bcb1686da13192da213ae88185d2ffdd312b556bc04788b3",
+        "run-manifest.before-review.json": "63b37c8ce5d7b67bd20b0277cc845f8f51bc7642e972df1a1918a99dc9ca0b2a",
+        "stdout.jsonl": "034e6440d02f282365da588c84150a2b62e6ac9967ae658687db78074b6dec4c",
+        "stderr.txt": "9a7183591ed900543c9a5ddd9e6203edfff596b138511826b860ecefdc1780cb",
+        "profile.json": "562b70d705acd4fcdd30e96402270ef422b336d61e61cc2b25881c516417bbb2",
+        "prompt.txt": "29742cffe014aeaaf1e7d8181d7e7fe0e5675679e6a996ad3524bd7fd8c5932b",
+        "operator-review.json": "4d7b78de377ba74d65cbfc0c3009069905ff2bc617e8fd07c3acf5ed56663a14",
+        "launch-authorization.json": "10f25c7486143a3e5a55509001c0e6e923a8af1cbdee7ac08c49276f3dbd9e26",
+        "implementation.bundle": "9a242c9b2953256d010186ee0ba506bd1cfa8f28e815c2288cb3174ee58abfb4"
+      }
+    },
+    {
+      "run_id": "20260926-antigravity-cli-agy-flash-medium-r03",
+      "runner_status": "completed",
+      "review": {
+        "reviewed_at": "2026-09-25T18:19:20.877Z",
+        "run_id": "20260926-antigravity-cli-agy-flash-medium-r03",
+        "pilot_pass": false,
+        "adjudicated_status": "environment_failed",
+        "reason": "Headless permission denial for dir; terminal SUCCESS is not product or pilot pass.",
+        "runner_status": "completed",
+        "runner_metrics_issue": "Parser counts only DONE tools and ignores ERROR and terminal denied_actions; original 0 tool/failed counts are not suitable for comparisons.",
+        "observed_tool_attempts": 1,
+        "observed_denied_commands": 1,
+        "external_implementation_feedback": 0,
+        "product_result": "not_run; no implementation",
+        "ranking_eligible": false
+      },
+      "measurement": {
+        "wall_clock_seconds": 11.125,
+        "tool_calls": 0,
+        "failed_commands": 0,
+        "user_interventions": null,
+        "tokens": {
+          "input": 21400,
+          "output": 792,
+          "cached": 0,
+          "reasoning": 702,
+          "provider_total": 22192,
+          "total": 22192,
+          "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+          "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+        }
+      },
+      "hashes": {
+        "run-manifest.json": "4502d8d1c2532b5b0bf01ed991298bbdb9e66b7fb84ef63b81de2c8f4c5ff670",
+        "run-manifest.before-review.json": "d8baf467019fd046e73f9b4ff3904390ae6d1bdf5e92e5db2627d7eae3b4d787",
+        "stdout.jsonl": "031033b1f357b7f778c2e2a2c6f5a11687f676f6139e51fc07f47aff6e47dfb8",
+        "stderr.txt": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713",
+        "profile.json": "abf240a5074d4be414a4126dfcb4c2e850d67bc05bfb2130cd4debad11dd451e",
+        "prompt.txt": "62e36b5dca9921dd2e6060f2154d15ebc9655a172d120ecfbb41d0d41ae40288",
+        "operator-review.json": "9fb3917cff2e5d6cfcbbf4637cddcd32ed489b4caf5549846a9e524183628ff7",
+        "launch-authorization.json": "4ebc2f0dac4c3a2583e9ff567d0dddc5bb03241e8ebdcf47ea98672931c7bf94",
+        "implementation.bundle": "9341780ef4516ab9af8706a265325d1a99cc78315854c8985255e6a8a339a748"
+      }
+    }
+  ]
+}

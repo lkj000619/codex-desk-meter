@@ -1,0 +1,47 @@
+{
+  "provider": "google",
+  "product": "antigravity-cli",
+  "interface": "cli",
+  "agent_version": "1.2.11",
+  "model": "gemini-3.8-flash-medium",
+  "model_slug": "agy-flash-medium",
+  "reasoning": "medium",
+  "branch_owner": "antigravity",
+  "branch_product": "antigravity-cli",
+  "cohort": "version-2-end-to-end-v1",
+  "adapter": "antigravity",
+  "argv": [
+    "python",
+    "-c",
+    "import subprocess,sys; prompt=sys.stdin.buffer.read().decode(\"utf-8\"); sys.exit(subprocess.call([\"agy\", *sys.argv[1:], \"--print=\"+prompt], stdin=subprocess.DEVNULL))",
+    "--input-format",
+    "text",
+    "--output-format",
+    "stream-json",
+    "--print-timeout",
+    "120m",
+    "--model",
+    "gemini-3.8-flash-medium"
+  ],
+  "version_argv": [
+    "agy",
+    "--version"
+  ],
+  "sandbox_policy": "prompt-and-log",
+  "approval_policy": "request-review",
+  "network_mode": "offline-fixture",
+  "settings_inventory": {
+    "skills": "no custom global skill directories were present at 2026-09-25 inventory; wrapper rejects newly populated directories; built-in slash expansion remains enabled and actual invocation is reviewed after pilot",
+    "mcp": "global mcp_config.json had zero servers and agy mcp list was empty; wrapper rejects newly configured global servers",
+    "memory": "fresh headless process without resume; wrapper removes global GEMINI.md during execution; no provider memory isolation is claimed",
+    "user_instructions": "wrapper removes global GEMINI.md and hooks during execution; fixed prompt.txt is delivered once and raw activity is reviewed after pilot",
+    "cache": "provider cache is neither disabled nor assumed isolated; terminal usage and provider cache fields are preserved for review",
+    "routing": "argv pins gemini-3.8-flash-medium; raw init.model must match in the first pilot and a mismatch invalidates the run",
+    "plugins": "agy plugin list and agy agents returned empty inventories on 2026-09-25; raw activity requires post-pilot review",
+    "permissions": "scoped allow policy a046cfa637e99ca27a6b7f2f6da22e60d9192af3105441f73a7d6b6af4db9384; wrapper replaces broad global rules and benchmark refuses launch without the active scope; raw tool decisions require post-pilot review",
+    "model_network": "product input uses offline fixtures; agy models fetched the selected ID under scoped settings; model inference connectivity and entitlement are first-pilot observations",
+    "extension_condition": "global custom skills absent, MCP empty, plugins and custom agents listed empty, global hooks removed by wrapper; built-in expansion remains enabled; actual use is judged from raw pilot activity",
+    "usage_recording": "record actual skills/plugins/MCP usage with raw-log references; unavailable values null with reason"
+  },
+  "measurement_notes": "2026-09-26 r03 preparation: r01 argument parse failure and r02 empty-prompt failure preserved. Text-mode stdin is not read by this CLI. Inline adapter reads exact runner prompt bytes once, decodes UTF-8, passes one --print=VALUE argument without shell, and closes child stdin to prevent duplication. Offline real-subprocess test verified exact full product prompt, Unicode/newlines/quotes, empty child stdin and exit propagation. Profile hash binds adapter code. Actual provider/tool behavior remains pilot observation. Scoped policy and fixed model/baseline unchanged. Prior 1ms diagnostic with literal dash is disclosed in argv review; no provider cache isolation claimed. Fresh process, no resume. Pilot excluded from rankings."
+}

@@ -11,7 +11,7 @@
    [운영 관리](experiments/benchmark-management.md),
    [접근 정책](experiments/isolation-policy.md): 동일 조건·역할·증거 보존.
 5. [readiness gate](experiments/benchmark-readiness.md): 현재 실행 가능 여부와 잔여 조건.
-   첫 AGY pilot의 실제 준비 상태는 [2026-09-26 검증](experiments/evidence/agy-pilot-prepared-20260926.md)에 기록한다.
+   첫 AGY pilot의 최신 상태는 [2026-09-26 실행·사후 검증](experiments/evidence/agy-pilot-retry-result-20260926.md)에 기록한다.
 6. 승인된 실행의 [공통 prompt](../experiments/prompts/version-2-agent-task.md)와
    [실행 가이드](experiments/agent-run-commands.md).
 
@@ -21,8 +21,9 @@
 요구사항을 낮추거나 문서만으로 구현 완료를 선언하지 않는다.
 
 - **승인 ADR:** 승인된 결정과 그 적용 범위를 기록한다. ADR-0002는 대체된 기록이다.
-- **검토 중 계약:** 현재 main의 E2E 작업 기준. USB·가로·단일 출처 선택값이 반영되어
-  있지만 ADR-0005/0006은 제안 상태이며 R1 승인·baseline 동결 대기다.
+- **pilot 적용 계약:** 선택된 AGY 첫 pilot은 `benchmark-v2-baseline-20260925`의
+  USB·가로·단일 출처 계약을 사용한다. ADR-0005/0006의 적용 상태는 2026-09-26에
+  정리했다. 동결 checkout의 과거 운영 상태는 최신 준비 기록으로 보완하며 입력은 수정하지 않는다.
 - **계획·제안:** 작업 순서나 변경안을 설명한다. 현재 구현·gate 상태를 보장하지 않는다.
 - **시점별 증거:** 명시된 날짜·commit·대상에서 관측한 결과다. 당시 `현재`·`미커밋`·
   `남은 작업`을 오늘의 상태로 읽지 않는다. 과거 실물 사진·로그는 새 artifact의 증거가 아니다.
@@ -46,8 +47,8 @@
 | [ADR-0002](decisions/0002-version-1-first.md) | 대체됨: Version 1 우선 개발 당시 기록 |
 | [ADR-0003](decisions/0003-version-2-first.md) | 승인: Version 2 우선; 화면 변경 제안은 ADR-0006 참조 |
 | [ADR-0004](decisions/0004-pin-esp-idf-5.3.2.md) | 승인: Version 2 ESP-IDF v5.3.2 |
-| [ADR-0005](decisions/0005-transport-usb-serial-baseline.md) | 제안: USB serial 선택; R1 승인·동결 대기 |
-| [ADR-0006](decisions/0006-resets-single-landscape-default.md) | 제안: 단일 출처·가로 기본; R1 승인·동결 대기 |
+| [ADR-0005](decisions/0005-transport-usb-serial-baseline.md) | 채택: 선택된 AGY pilot의 USB serial 기준 |
+| [ADR-0006](decisions/0006-resets-single-landscape-default.md) | 채택: 선택된 AGY pilot의 단일 출처·가로 기준 |
 | [하드웨어 기능 카탈로그](hardware/version-2-capabilities.md) | 고정 입력 후보, 제조사·과거 관측 근거 |
 | [bring-up 기록](hardware/version-2-bring-up.md) | 2026-09-11 보드 관측; 현재 제품 합격 아님 |
 | [제조사 예제](hardware/waveshare-manufacturer-example.md) | 재현 절차와 2026-09-11 증거 |

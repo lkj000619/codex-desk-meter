@@ -1,12 +1,21 @@
 # 에이전트 실행 가이드
 
+> 2026-09-26 개발 보완 완료: [권한·계측 수정](evidence/agy-remediation-20260926.md).
+> 다음 실행에는 이 수정이 포함된 새 baseline과 remediation profile에 연결된 새 receipt가 필요하다.
+
+> ?? ??: **PILOT_NOT_PASSED / PERMISSION_POLICY_BLOCKED**. r03? ???? ?? ? ? ??? ?? ???? ????. runner? completed/0 tool ??? ?? ???? ????? ????. [?? ?????](evidence/agy-pilot-retry-result-20260926.md)? ????. ?? ? ????? ??? ????. ?? ?? ? ?? ??? ERROR/denied_actions ?? ??? ????.
+
 ## 상태
 
-**현재 상태: `PILOT_PREPARED / LAUNCH_RECHECK_REQUIRED`** (2026-09-26 KST).
+**현재 상태: `ENVIRONMENT_FAILED / PILOT_NOT_PASSED`** (2026-09-26 KST).
+[첫 실행 결과](evidence/agy-pilot-result-20260926.md): 아래 run은 CLI 인자 오류로
+종료됐으므로 재실행하지 않는다. 다음 실행에는 수정 profile 검증·새 receipt·새 run이 필요하다.
+아래 준비 안내는 첫 실행 이전 절차 기록이다.
 첫 AGY pilot의 준비 run은
-`C:\Espressif\benchmark-runs\20260925-antigravity-cli-agy-flash-medium-r01`이다.
-[준비 완료 검증](evidence/agy-pilot-prepared-20260926.md)을 확인하고 실행 직전 COM3를
-다시 점검해 R10 발효를 기록한다. 이 run을 다시 `prepare`하지 않는다.
+`C:\Espressif\benchmark-runs\20260926-antigravity-cli-agy-flash-medium-r01`이다.
+[최신 준비 검증](evidence/agy-pilot-readiness-20260926.md)을 확인하고 실행 직전 COM3를
+다시 점검해 R10 발효를 기록한다. run ID 날짜가 실행일(KST)과 같고 상태가 `prepared`인
+경우에만 사용한다. 날짜가 바뀌면 이전 예약을 보존하고 새 ID로 `prepare`한다.
 
 운영 도구의 일부 scaffold가 있어도 도구별 모델·sandbox·기능 결과 schema 검증이
 끝난 것은 아니다. run 준비·실행·보존 명령은 [readiness gate](benchmark-readiness.md)의
@@ -187,8 +196,8 @@ sandbox 내부 검증과 `read_isolation: pass` 증거를 확보한다.
    stdout과 stderr의 hash·검토 결론을 남기기 전에는 receipt의 `pilot_pass`를 `true`로
    바꾸지 않는다. stderr에만 남는 거부 통지도 검토한다.
 
-2026-09-24에 예약된 `20260924-antigravity-cli-agy-flash-medium-r01`은 날짜와
-profile/receipt hash가 현재 준비와 맞지 않으므로 보존만 하고 재사용하지 않는다.
+2026-09-24 및 2026-09-25에 예약된 run은 날짜가 현재 준비와 맞지 않으므로
+보존만 하고 재사용하지 않는다. 9월 24일 run은 profile/receipt hash도 대체됐다.
 
 먼저 profile과 baseline 입력을 검사한다. 이 검사는 모델을 호출하지 않고 run ID를
 예약하지 않는다.
@@ -206,13 +215,15 @@ hardware 옵션 A인 COM3를 명시한다. `prepare`는 선택 태그와 HEAD가
 checkout에서만 실행되므로 먼저 별도 ASCII 경로의 baseline worktree로 이동한다.
 
 ```powershell
+# baseline worktree가 없을 때만 생성한다. 이미 있으면 아래 Set-Location부터 수행한다.
 git worktree add --detach C:\Espressif\benchmark-baseline-20260925 benchmark-v2-baseline-20260925
 Set-Location C:\Espressif\benchmark-baseline-20260925
+$pilotSeed = [int][TimeZoneInfo]::ConvertTimeBySystemTimeZoneId([DateTimeOffset]::UtcNow, 'Korea Standard Time').ToString('yyyyMMdd')
 .\scripts\new-experiment-run.ps1 `
   -Baseline benchmark-v2-baseline-20260925 `
   -Profile experiments/config/verified-profiles-candidate/agy-gemini-3.8-flash.candidate.json `
   -RunRoot C:\Espressif\benchmark-runs `
-  -Seed 20260925 -Phase pilot -Port COM3
+  -Seed $pilotSeed -Phase pilot -Port COM3
 ```
 
 COM3 준비 조건이 확인되지 않았거나 적용되는 승인 기록이 prepare 전 실행을 금지하면

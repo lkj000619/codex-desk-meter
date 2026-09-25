@@ -309,19 +309,31 @@ def inspect_antigravity_stream(path, expected_permission_mode=None, expected_mod
         raise ValueError("AGY terminal result is not SUCCESS")
     if result.get("num_turns") != 1:
         raise ValueError("AGY one-shot run must report exactly one turn")
+    if reject_permission_errors and result.get("denied_actions"):
+        raise ValueError("AGY tool permission denied; inspect terminal denied_actions")
     for event in events:
         step = event.get("step_update")
         if event.get("event") != "step_update" or not isinstance(step, dict):
             continue
-        if step.get("state") != "DONE" or step.get("step_type") != "tool":
+        if step.get("state") not in {"DONE", "ERROR"} or step.get("step_type") != "tool":
             continue
         tool_info = step.get("tool_info")
         error = tool_info.get("error") if isinstance(tool_info, dict) else None
         error_type = error.get("type", "") if isinstance(error, dict) else ""
-        if reject_permission_errors and isinstance(error_type, str) and any(
-                marker in error_type.lower() for marker in ("permission", "approval", "accessdenied")):
+        error_message = error.get("message", "") if isinstance(error, dict) else ""
+        if reject_permission_errors and (
+                any(marker in str(error_type).lower() for marker in ("permission", "approval", "accessdenied"))
+                or any(marker in str(error_message).lower() for marker in (
+                    "permission check failed", "denied permission", "auto-denied", "requires approval"))):
             raise ValueError("AGY tool permission denied; inspect raw evidence")
     return result
+
+
+def check_antigravity_stderr(path):
+    diagnostic = path.read_text(encoding="utf-8", errors="replace").lower()
+    if any(marker in diagnostic for marker in (
+            "auto-denied", "headless mode cannot prompt", "permission check failed")):
+        raise ValueError("AGY tool permission denied; inspect stderr evidence")
 
 
 def telemetry(path, adapter):
@@ -408,10 +420,11 @@ def command_metrics(path, adapter):
             step = event.get("step_update")
             if event.get("event") != "step_update" or not isinstance(step, dict):
                 continue
-            if step.get("state") == "DONE" and step.get("step_type") == "tool" and type(step.get("step_index")) is int:
+            if step.get("state") in {"DONE", "ERROR"} and step.get("step_type") == "tool" and type(step.get("step_index")) is int:
                 tools[step["step_index"]] = step
         failed = sum(
-            isinstance(step.get("tool_info"), dict) and bool(step["tool_info"].get("error"))
+            step.get("state") == "ERROR" or (
+                isinstance(step.get("tool_info"), dict) and bool(step["tool_info"].get("error")))
             for step in tools.values()
             if step.get("tool_name") == "run_command"
         )
@@ -516,6 +529,7 @@ def execute(a):
     r = capture(argv, checkout, prompt, directory, m["execution"]["timeout_seconds"], env=agent_env)
     if profile["adapter"] == "antigravity" and r["status"] == "completed":
         try:
+            check_antigravity_stderr(directory / "stderr.txt")
             inspect_antigravity_stream(
                 directory / "stdout.jsonl", expected_permission_mode=profile["approval_policy"],
                 expected_model=profile["model"]
