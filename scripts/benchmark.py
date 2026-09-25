@@ -141,7 +141,7 @@ def check_inputs(a):
         "model_slug": model_slug,
         **hashes,
         "next": "freeze baseline, obtain profile-bound receipt and explicit approval, then run prepare",
-    }, ensure_ascii=False, indent=2))
+    }, ensure_ascii=True, indent=2))
 
 
 def git(*args, cwd=ROOT):
