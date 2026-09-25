@@ -17,12 +17,14 @@
 |---|---|---|
 | codex-cli | `sol`, `luna` | 기록된 모델 후보. 정확한 ID·설정을 profile에 확정하고 entitlement는 승인된 pilot에서 확인 |
 | opencode-cli | `opencode/muse-spark-1.3-contributor-free` | `opencode models`에 존재 확인済み (2026-09-14 probe) |
-| antigravity-cli | `gemini-3.8-flash-high/medium/low`, `gemini-3.1-pro-high/low`, `claude-opus-4-6-thinking` | `agy models` 실측 확인 (2026-09-18). effort 변형은 모델 ID에 포함됨 |
+| antigravity-cli | `gemini-3.8-flash-high/medium/low`, `gemini-3.1-pro-high/low`, `claude-opus-4-6-thinking` | `agy models` 목록 노출 관측; 계정 entitlement 확인 아님. effort 변형은 모델 ID에 포함됨 |
 
 `sol`/`luna`는 OpenAI 내부 코드네임 계열로, `-m sol` 형태로 전달한다. 계정에
-해당 모델 권한이 없으면 모델 측에서 거부할 수 있다. `prepare`와 읽기 전용
-`--help` 검사는 실제 모델 권한을 확인하지 않는다. 권한 확인용 가벼운 호출도
-토큰을 쓰므로 사용자 승인 후 pilot에서 수행한다.
+해당 모델 권한이 없으면 모델 측에서 거부할 수 있다. R4 pilot 전에는 모델 목록 노출과
+slug/profile 설정을 확인하고, 실제 entitlement는 승인된 첫 pilot 결과로 판정한다.
+`prepare`와 읽기 전용 `--help` 검사는 실제 모델 권한을 확인하지 않으므로 entitlement를
+pilot-entry 조건으로 요구하지 않는다. 권한 확인용 가벼운 호출도 토큰을 쓰므로 별도 호출은
+하지 않고 첫 pilot에서 결과를 관측한다.
 
 ## 2. 비대화형 사용법
 
@@ -64,7 +66,11 @@ codex exec --json -m <model> -
 - 근거: 로컬 `opencode run --help` 실측, `opencode-preflight-check.md`,
   `opencode-stdin-probe-20260914.md`.
 
-### antigravity-cli (agy 1.2.5, 후속 실측)
+### antigravity-cli (agy 1.2.11 관측; 현재 profile 검증은 별도)
+
+AGY 자식 프로세스에는 `AGY_CLI_DISABLE_AUTO_UPDATE=true`를 전달하고 실행 직전 버전과
+바이너리 hash를 다시 확인한다. 2026-09-25 `agy models` 호출 중 1.2.9에서 1.2.11로
+자동 갱신된 사례가 있어, 다른 AGY 프로세스의 갱신 여부도 확인해야 한다.
 
 ```powershell
 agy --print --input-format text --output-format stream-json --print-timeout 120m --model <model-id>
@@ -81,7 +87,11 @@ agy --print --input-format text --output-format stream-json --print-timeout 120m
   runner도 7200초 hard timeout을 적용하며 먼저 종료된 사유를 기록한다.
 - `--sandbox`: 터미널 제한 sandbox 실행. prompt-and-log 기본모드에서는 설정값으로만
   기록하고, external-sandbox 선택 시 내부 검증을 수행한다.
-- 근거: 로컬 `agy --help`·`agy models` 실측 (2026-09-18).
+- 근거: 로컬 `agy --version`·`agy --help` 실측
+  ([2026-09-25 CLI 기록](evidence/agy-cli-20260925-v1211.txt))과 `agy models` 출력
+  ([2026-09-25 inventory](evidence/agy-local-inventory-20260925.md)). 이 목록은 모델 가용성
+  확인이며 계정 entitlement 증거는 아니다. protocol 의미는
+  [Google Antigravity headless mode 문서](https://www.antigravity.google/docs/cli/headless/)를 따른다.
 
 ## 3. 작업 소요시간 확인
 
@@ -102,13 +112,28 @@ runner(`scripts/benchmark.py run`)가 기록한다. 에이전트 자체 보고�
 |---|---|---|---|
 | codex-cli | `turn.completed`의 `usage` | input/output/cached 합산, total=input+output (cached 중복 제외) | reasoning |
 | opencode-cli | `step_finish`의 `part.tokens` | input/output/reasoning/total 합산, cache.read 별도 | tool 호출 수 (null) |
-| antigravity-cli | 미구현 | 전부 null + 사유 | input/output/total 전부 |
+| antigravity-cli | terminal `result` event의 `usage` | input/output; `total=input+output`; `cached=cache_read_tokens`, `reasoning=thinking_tokens`, `provider_total=total_tokens` 보존 | terminal result 또는 해당 usage 필드가 없으면 해당 값을 null + 사유 |
 | gemini-cli | 미구현 | 전부 null + 사유 | input/output/total 전부 |
 
-- `command_metrics`(도구 호출·실패 수)는 codex만 지원. 나머지는 null이다.
+- AGY 출력은 `init` 1개, `step_update` 0개 이상, 마지막 `result` 1개다. token usage는
+  누적값이므로 step별 usage를 더하지 않고 terminal `result.usage`만 사용한다.
+- 현재 parser 지원은 synthetic stream 사례로 검증하는 사전 계측이다. 실제 AGY usage와
+  permission soft-denial 결과는 첫 pilot의 raw stream/stderr를 통해 사후 판정하며, 그 결과를
+  해당 pilot의 선행조건으로 삼지 않는다. 누락·실패 데이터는 0으로 꾸미지 않고 null과 사유,
+  원본 로그로 보존한다.
+- terminal `SUCCESS`라도 완료된 tool step의 `tool_info.error.type`이 permission/approval
+  거부를 나타내면 runner는 `environment_failed`로 기록한다. 이 경우에도 terminal usage와
+  실패 도구 수를 원본에서 추출한다. CLI가 stderr에만 거부를 알리거나 다른 오류 유형을
+  사용하는 경우까지 자동 검출했다고 주장하지 않으며, pilot 후 stdout/stderr를 검토한다.
+- AGY `tool_calls`는 완료된(`DONE`) 도구 step 수이며, `failed_commands`는 그중
+  `run_command` step의 명시적 `tool_info.error` 수다. 이는 모든 도구 승인 거부나 사용자
+  개입을 완전하게 세는 계측으로 검증된 것이 아니다.
+- OpenCode의 `command_metrics`는 아직 null이다. Codex와 AGY는 각자의 event 정의로
+  계측하며 호출 수를 표면 간 직접 비교하지 않는다.
 - 미측정 값을 0으로 대체하지 않는다. `null` + 사유로 기록한다.
-- 근거: `scripts/benchmark.py` `telemetry()`·`command_metrics()`,
-  `test_benchmark.py` (gemini total null 단언 포함).
+- 근거: `scripts/benchmark.py` `inspect_antigravity_stream()`·`telemetry()`·
+  `command_metrics()`, synthetic stream cases in `scripts/tests/test_benchmark.py`.
+  테스트 통과는 실제 provider 실행 증거가 아니다.
 
 ## 5. 실행 중 도구 승인 대기 설정
 
@@ -144,11 +169,29 @@ runner(`scripts/benchmark.py run`)가 기록한다. 에이전트 자체 보고�
 
 ### antigravity-cli
 
-- `--dangerously-skip-permissions`: 전 도구 승인 자동 통과. runner argv 사용 시
-  실제 파싱 검증을 pilot 전에 별도 수행한다 (2026-09-16 Orca launcher 인자
-  전달 실패 사례가 있어, agy 자체 문제가 아닌 전달 경로 문제도 의심한다).
+- Google 문서상 headless 기본 permission mode는 `request-review`다. terminal/도구
+  승인을 요청할 수 없는 환경에서는 해당 도구가 soft-deny되어도 실행이 계속되고 exit
+  code가 0일 수 있다. 성공 exit code만으로 요청된 도구 작업이 수행됐다고 판정하지 않는다.
+- 실행 전에는 선택 model, mode와 permission policy를 settings/profile 근거로 고정한다.
+  runner는 execute 중 AGY stream의 `init.model`과 `init.permission_mode`가 각각 profile의
+  `model`, `approval_policy`와 일치해야 결과를 수락하며, 값 누락·불일치는 process exit 0이어도
+  거부한다. 실제 stream 값과 soft-denial 결과는 첫 pilot에서 판정한다.
+- 첫 pilot은 필요한 명령만 사전 허용하는 정책을 사용한다. 현재 global
+  [`settings.json` inventory](evidence/agy-local-inventory-20260925.md)에는 14개의 `command`와
+  100개의 `unsandboxed` allow rule이 관측되었으나, 이는 실제 적용 범위나 미래 실행의 effective
+  policy를 증명하지 않는다. 승인된 checkout에서 필요한 명령을 실제로 확인해 exact rule을
+  고정하고 기존 global rule의 범위·영향을 재검토한다. 구체 허용 목록은 추정으로 쓰지 않는다.
+- 공식 [CLI permissions 문서](https://antigravity.google/docs/permissions?tab=cli)는
+  `permissions.allow` 설정과 Deny > Ask > Allow 우선순위를 정의한다. Windows PowerShell은
+  명령을 단어로 안전하게 나눌 수 없는 경우 full-line 또는 `regex:` 매칭이 필요할 수 있다.
+- `--dangerously-skip-permissions`는 문서상 모든 도구를 자동 승인한다. 비교군에 사용할
+  경우 profile에 이를 명시하고 격리 조건 및 전체 허용의 위험을 검토해야 한다. 첫 pilot의
+  선택 정책에서는 이 flag를 candidate argv에 넣지 않는다. 현재 candidate의 유효 권한
+  설정이나 실제 실행 동작은 검증되지 않았다.
 - `--mode accept-edits|plan`: 실행 모드 고정. 비교군에 기록한다.
 - MCP·plugin은 `agy mcp`·`agy plugin`으로 비활성화하고 목록 증거를 남긴다.
+- 공식 근거: [Permissions in headless mode](https://www.antigravity.google/docs/cli/headless/).
+  문서 설명은 실제 설치본의 effective settings 또는 permission 결과를 입증하지 않는다.
 
 ### 공통 주의
 

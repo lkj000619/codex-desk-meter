@@ -22,15 +22,26 @@ run을 정량 비교에서 제외한다. 아래의 환경·validator 명령을 �
 1. `main`의 승인된 baseline tag/SHA와 prompt/config/fixture/schema hash가 고정됨
 2. 정식 E2E scope의 F1~F9·I1~I4 기능 범위와 G1~G6 LCD GUI rubric이 결과
    schema·validator·example에 반영됨
-3. 선택한 agent/product/interface/model/reasoning profile과 실제 실행 파일이 검증됨
+3. 선택한 표면에서 대상 모델이 목록에 노출되는지 확인하고 agent/product/interface/model/reasoning,
+   argv/profile/settings/permission policy와 실제 실행 파일을 고정함. AGY는 필요한 명령만
+   사전 허용하며, 목록 노출은 entitlement 확인이 아님
 4. 도구별 preflight receipt, raw stdout/stderr, 명령 로그, token telemetry 수집이 준비됨
-5. one-shot(공통 prompt 1회, 외부 feedback 0회)와 독립 evaluator 경계가 검증됨
+5. synthetic stream parser의 null/failure 보존과 one-shot mock의 prompt 1회·후속 개입 차단,
+   evaluator read-only 절차를 검증함
 6. COM3를 사용할 경우 제조사 예제/현재 보드 상태 백업과 운영자 checklist가 준비됨
 7. 사용자가 baseline·profile·surface·반복 번호·pilot/benchmark를 명시적으로 승인함
 
 하나라도 빠지면 prompt 전달을 진행하지 않고 `not_ready` 사유를 기록한다.
 로컬 run 생성은 아래 준비 절차를 따른다. 승인 기록 확인과 실행 승인 발효를 구분한다.
 누락 조건을 확인·보완하는 offline 검사는 계속할 수 있다.
+
+R4·R6·R7은 pilot-entry 조건과 pilot 후 판정을 나누어 기록한다. 실제 model entitlement,
+AGY stream/usage 및 soft-denial, 실제 operator intervention은 첫 pilot에서 관측·판정한다.
+그 관측값을 그 pilot의 선행조건으로 요구하지 않는다. 실행 전에 위에 적힌 model-list/profile,
+synthetic parser, one-shot mock, telemetry preservation, evaluator read-only 조건은 충족해야 한다.
+AGY 명령 권한의 선택과 설정 검토 순서는
+[scoped permission 계획](agy-scoped-permissions-20260925.md)에 따른다. 필요한 명령은 승인된
+checkout에서 확인해 고정하며, `--dangerously-skip-permissions`는 후보 argv에 넣지 않는다.
 
 ## 1. 환경과 도구 검증
 
@@ -64,8 +75,10 @@ reasoning, 설치 버전, argv, skills/plugins/MCP/메모리/사용자 지침/�
 - Gemini: 현재 기본 비교군에서 제외하고 Enterprise/API 키 조건에서만 별도 검토한다.
   보존된 profile 템플릿은 실행 가능 증거가 아니다.
 - OpenCode: `run --format json --model provider/model` 사용. stdin 전달과 승인 정책을 pilot 전에 검증한다.
-- Antigravity: R4 후속 기록의 일반 text stdin·stream-json 출력·timeout 설정을
-  확정 profile에서 검증한다. model/reasoning과 settings inventory는 아직 미확정이다.
+- Antigravity: runner는 일반 text stdin, stream-json 출력과 고정 timeout을 사용한다.
+  model-list 노출은 기록됐지만 계정 entitlement 확인은 아니다. pilot 전 선택
+  model/reasoning, argv/profile/settings와 permission policy를 근거로 고정한다. 실제
+  entitlement와 returned stream은 첫 pilot 후 판정한다.
 
 Windows npm의 .ps1/.cmd 파일을 shell 문자열로 조합하지 않는다. profile argv에는
 실제 node.exe와 CLI JavaScript 진입점 또는 검증된 실행 파일을 지정한다.
@@ -140,7 +153,67 @@ sandbox 내부 검증과 `read_isolation: pass` 증거를 확보한다.
 
 ## 5. 승인 기록 확인과 로컬 실행 준비
 
-먼저 §4 receipt를 작성한다. R0~R9의 증거와 대상 baseline/profile/phase/횟수에
+### AGY 첫 pilot의 실행 순서
+
+다음 순서는 준비 작업의 판단 기준이다. 모든 선행 조건과 적용 가능한 조건부 승인
+조항을 충족하고 R10이 발효되기 전에는 마지막 `run` 단계로 진행하지 않는다.
+
+1. 선택 baseline `benchmark-v2-baseline-20260923`와 외부 candidate
+   `experiments/config/verified-profiles-candidate/agy-gemini-3.8-flash.candidate.json`을
+   확인한다. baseline commit은 `9ef945efd9d6c2c4b4eedca75eccc9f280b3aced`다.
+2. candidate의 `unverified` 설정을 실제 근거로 해소한다. 선택한 정책에 따라 현재 global
+   permission 규칙의 범위를 검토하고, 승인된 checkout에서 필요한 명령만 확인해 profile에
+   고정한다([권한 계획](agy-scoped-permissions-20260925.md)). `--dangerously-skip-permissions`를
+   사용하지 않는다. 아래 check로 profile과 고정 입력의 출력 hash를 보존하며 `BLOCKED`이면
+   receipt/prepare로 넘어가지 않는다.
+3. 관측 증거와 hash에 근거한 profile-bound preflight receipt를 만든다. 추정값을 `pass`로
+   채우지 않는다. 기존 2026-09-24 receipt는 현재 profile과 증거를 대신하지 않는다.
+4. 현재 [R0~R9 gate](benchmark-readiness.md#필수-gate)에서 각 gate의 pilot-entry 조건과
+   첫 pilot 후 판정 항목을 구분하고, 대상에 적용되는 조건부 승인 기록을 대조한다. 특히
+   R4·R6·R7의 사전 조건, R8 evaluator harness, R9 보드·백업·COM3 안전 증거를 확인한다.
+5. 모든 prepare 전 조건이 충족된 경우에만 현재 날짜의 새 run을 준비한다. hardware 옵션 A의
+   COM3를 쓰는 명령에는 `-Port COM3`를 지정한다. 포트 단독 점유, 보드 식별·제조사 기준
+   백업 hash와 비파괴 checklist가 확인되지 않으면 prepare를 진행하지 않는다. agent가 생성할
+   candidate artifact와 flash hash는 pilot 산출물로 기록하고 하드웨어 flash 직전에 대조한다.
+   아직 생성되지 않은 candidate artifact를 pilot 준비 조건으로 요구하지 않는다.
+6. 새 manifest의 baseline/profile hash와 receipt를 대조하고, 기존 조건부 승인에서 남은 조건을
+   확인해 R10 발효 근거를 기록한다. 이 기록 전에는 agent를 실행하지 않는다.
+7. R0~R10의 pilot-entry 조건이 충족되고 승인이 발효된 경우에만 새 run ID로
+   `benchmark.py run`을 수행한다.
+8. 첫 pilot 종료 후 model entitlement와 실제 stream/usage·soft-denial, user/operator
+   intervention 기록을 검토해 R4·R6·R7의 `post_pilot` 판정을 별도로 갱신한다. raw
+   stdout과 stderr의 hash·검토 결론을 남기기 전에는 receipt의 `pilot_pass`를 `true`로
+   바꾸지 않는다. stderr에만 남는 거부 통지도 검토한다.
+
+2026-09-24에 예약된 `20260924-antigravity-cli-agy-flash-medium-r01`은 날짜와
+profile/receipt hash가 현재 준비와 맞지 않으므로 보존만 하고 재사용하지 않는다.
+
+먼저 profile과 baseline 입력을 검사한다. 이 검사는 모델을 호출하지 않고 run ID를
+예약하지 않는다.
+
+```powershell
+python scripts/benchmark.py check `
+  --baseline benchmark-v2-baseline-20260923 `
+  --profile experiments/config/verified-profiles-candidate/agy-gemini-3.8-flash.candidate.json
+```
+
+check 성공만으로 준비·승인이 완료되지 않는다. receipt와 R0~R9의 pilot-entry 증거가
+검토되고 조건부 승인 조항을 적용할 수 있을 때 아래 명령을 사용한다. R4·R6·R7의
+첫 pilot 후 판정 항목은 이 준비 단계의 선행조건이 아니다. 오늘 날짜를 seed로 쓰고,
+hardware 옵션 A인 COM3를 명시한다.
+
+```powershell
+.\scripts\new-experiment-run.ps1 `
+  -Baseline benchmark-v2-baseline-20260923 `
+  -Profile <verified-profile.json> `
+  -RunRoot C:\Espressif\benchmark-runs `
+  -Seed <YYYYMMDD> -Phase pilot -Port COM3
+```
+
+COM3 준비 조건이 확인되지 않았거나 적용되는 승인 기록이 prepare 전 실행을 금지하면
+명령을 실행하지 않고 해당 gate를 미완료로 둔다.
+
+먼저 §4 receipt를 작성한다. R0~R9의 pilot-entry 증거와 대상 baseline/profile/phase/횟수에
 적용되는 승인 기록을 확인한 뒤 아래 명령을 실행한다. 기존 조건부 승인이
 prepare 성공을 요구하면 로컬 준비 후 그 조건을 확인한다. `prepare`는 모델을
 호출하지 않으며 R10 실행 승인 발효를 의미하지 않는다. 대상·조건이 일치하는
@@ -175,7 +248,8 @@ R10 발효 근거를 기록한 뒤 §6으로 진행한다. 미충족이면 prepa
 
 ## 6. 실행과 평가
 
-이 절의 `benchmark.py run`은 R0~R10 승인 이후에만 허용된다. runner가 아닌
+이 절의 `benchmark.py run`은 R0~R9의 pilot-entry 조건을 확인하고 R10 승인이 발효된 뒤에만
+허용된다. R4·R6·R7의 post-pilot 판정은 run 후 실제 evidence를 검토해 갱신한다. runner가 아닌
 사람이 prompt를 전달하거나 evaluator가 실행 중 코드를 수정하면 run은
 `manual pilot; invalid for cross-agent quantitative comparison`으로 기록한다.
 

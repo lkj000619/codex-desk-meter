@@ -9,10 +9,28 @@
 - 현재 단계 (2026-09-25): **N1~N5 완료, AGY pilot `BLOCKED / NOT_AUTHORIZED`**.
   Q1/Q2/Q3 결정과 baseline tag는 보존되어 있으며, 수정된 profile과 receipt는
   근거가 부족한 설정에서 의도대로 실행을 차단한다.
+- 2026-09-25 후속 준비: R8의 pilot 전 harness 기준과 pilot 후 제품 평가를
+  [readiness gate](experiments/benchmark-readiness.md#r8-pilot-전-완료-기준)에서 분리했다.
+  AGY `stream-json` 결과·token·tool event의 오프라인 parser와 host report 파일 출력을
+  구현해 현재 개발 checkout에서 85개 시험을 통과했다. 이 검사는
+  [R8 개발 증거](experiments/evidence/r8-harness-development-20260925.md)이며 최종
+  baseline의 R8 pass는 아니다. [로컬 AGY inventory](experiments/evidence/agy-local-inventory-20260925.md)는
+  모델 목록·설정 파일 존재를 확인했지만 effective permission과 모델 실행 권한은 입증하지 않는다.
+- 2026-09-25 추가 검증: `SUCCESS`와 함께 온 구조화된 권한 거부를 runner가 실패로
+  처리하고 원본 usage·도구 실패 수는 보존하도록 보완했다. 현재 dirty-tree offline suite는
+  87개 통과했다. stderr만의 soft-denial은 첫 pilot 후 원본 로그 검토가 필요하다.
+- 2026-09-25 재검증: AGY가 `1.2.11`로 자동 갱신된 것을 확인하고 현 버전의 CLI·모델
+  목록을 새 hash 증거로 보존했다. 후보 profile/receipt의 semantic SHA는
+  `16452599165c2d3536134fa1962ebe2cf52eacede245f1aa472d7d9b2592065a`로
+  일치한다. runner의 AGY 버전 검사와 실행 자식 프로세스에 자동 갱신 비활성화 환경을
+  전달하도록 수정했으며 offline suite 88개가 통과했다. R4·R6·R7은
+  `pilot_entry`와 `post_pilot`을 분리했고, R9의 candidate artifact 검사는 pilot 이후로
+  옮겼다. 현재 상태는 여전히 `BLOCKED / NOT_AUTHORIZED`다.
 - 다음 행동: [AGY Luna 감사](experiments/agy-launch-review-20260925.md)와
   [Sol 독립 검증](experiments/agy-launch-sol-review-20260925.md)을 먼저 읽는다.
-  effective settings와 preflight 증거, pre-pilot R8 완료 기준, R9 하드웨어 확인을
-  해결한 뒤 새 profile/bundle hash와 receipt를 발행한다. 날짜가 지난
+  AGY 권한·전역 지침·확장 조건을 실측하고 실행 정책을 확정한다. R8은 새 runner가
+  포함된 깨끗한 최종 baseline에서 재검증하고, R9 보드·백업·COM3 확인을 마친 뒤
+  새 profile/bundle hash와 receipt를 발행한다. 날짜가 지난
   `20260924-antigravity-cli-agy-flash-medium-r01`은 재사용하지 않는다.
 - 이번 감사 범위: 문서·profile·receipt 정정과 오프라인 검증. 모델 실행·COM3 open·
   flash·새 prepare는 수행하지 않았다.
@@ -59,7 +77,7 @@
   기존 raw preflight가 memory/cache/routing 비관측을 명시하므로 candidate의 false
   builtin-only/cleared/disabled/direct 및 Codex 전용 approval 주장을 제거하고,
   receipt의 근거 없는 pass를 `not_observed`/`blocked`로 정정했다. profile semantic
-  SHA는 `075f23c4ebb10c87b0d5bd54c86c9c03dd4ed1e21de44283b1cd65eb7c8caa84`다.
+  당시 SHA는 `075f23c4ebb10c87b0d5bd54c86c9c03dd4ed1e21de44283b1cd65eb7c8caa84`다.
   help의 `--disable-slash-commands`는 모든 skill expansion을 차단해 builtin-only-v1과
   다르고, model ID에 effort가 포함되므로 `--effort medium`은 candidate argv에 넣지 않았다.
 

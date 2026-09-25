@@ -7,3 +7,5 @@
 *.py text
 *.bin binary
 *.elf binary
+docs/experiments/evidence/agy-cli-20260925-v1211.txt binary
+docs/experiments/evidence/agy-models-20260925-v1211.txt binary

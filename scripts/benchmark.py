@@ -249,14 +249,14 @@ def stop_tree(process):
     process.wait(timeout=15)
 
 
-def capture(argv, cwd, prompt, directory, timeout):
+def capture(argv, cwd, prompt, directory, timeout, env=None):
     start = now()
     tick = time.monotonic()
     state, reason, code = "completed", None, None
     with (directory / "stdout.jsonl").open("xb") as out, (directory / "stderr.txt").open("xb") as err:
         p = None
         try:
-            p = subprocess.Popen(argv, cwd=cwd, stdin=subprocess.PIPE, stdout=out, stderr=err,
+            p = subprocess.Popen(argv, cwd=cwd, env=env, stdin=subprocess.PIPE, stdout=out, stderr=err,
                                  start_new_session=os.name != "nt")
             p.communicate(prompt, timeout=timeout)
             code = p.returncode
@@ -272,6 +272,56 @@ def capture(argv, cwd, prompt, directory, timeout):
         except OSError as exc:
             state, reason = "environment_failed", str(exc)
     return dict(start=start, end=now(), elapsed=time.monotonic() - tick, status=state, reason=reason, code=code)
+
+
+def _antigravity_events(path):
+    """Read AGY's documented headless NDJSON without treating diagnostics as events."""
+    events = []
+    for line in path.read_text(encoding="utf-8", errors="strict").splitlines():
+        try:
+            event = json.loads(line)
+        except ValueError as exc:
+            raise ValueError("AGY stdout contains a non-JSON event") from exc
+        if not isinstance(event, dict):
+            raise ValueError("AGY stdout event is not an object")
+        events.append(event)
+    return events
+
+
+def inspect_antigravity_stream(path, expected_permission_mode=None, expected_model=None,
+                               reject_permission_errors=True):
+    """Require the init and one successful terminal result of a one-shot AGY run."""
+    events = _antigravity_events(path)
+    if len(events) < 2 or events[0].get("event") != "init" or events[-1].get("event") != "result":
+        raise ValueError("AGY stream needs an init and terminal result")
+    if sum(event.get("event") == "init" for event in events) != 1 or sum(
+            event.get("event") == "result" for event in events) != 1:
+        raise ValueError("AGY stream must contain exactly one init and one result")
+    init = events[0].get("init")
+    if not isinstance(init, dict) or not isinstance(init.get("permission_mode"), str):
+        raise ValueError("AGY init lacks an effective permission mode")
+    if expected_permission_mode is not None and init["permission_mode"] != expected_permission_mode:
+        raise ValueError("AGY effective permission mode does not match profile")
+    if expected_model is not None and init.get("model") != expected_model:
+        raise ValueError("AGY effective model does not match profile")
+    result = events[-1].get("result")
+    if not isinstance(result, dict) or result.get("status") != "SUCCESS":
+        raise ValueError("AGY terminal result is not SUCCESS")
+    if result.get("num_turns") != 1:
+        raise ValueError("AGY one-shot run must report exactly one turn")
+    for event in events:
+        step = event.get("step_update")
+        if event.get("event") != "step_update" or not isinstance(step, dict):
+            continue
+        if step.get("state") != "DONE" or step.get("step_type") != "tool":
+            continue
+        tool_info = step.get("tool_info")
+        error = tool_info.get("error") if isinstance(tool_info, dict) else None
+        error_type = error.get("type", "") if isinstance(error, dict) else ""
+        if reject_permission_errors and isinstance(error_type, str) and any(
+                marker in error_type.lower() for marker in ("permission", "approval", "accessdenied")):
+            raise ValueError("AGY tool permission denied; inspect raw evidence")
+    return result
 
 
 def telemetry(path, adapter):
@@ -325,10 +375,47 @@ def telemetry(path, adapter):
                 "OpenCode step_finish provider usage; provider_total preserves the raw total, "
                 "total is normalized input+output and excludes cache/reasoning; cache write is raw-log-only."
             )
+    if adapter == "antigravity":
+        try:
+            usage = inspect_antigravity_stream(path, reject_permission_errors=False).get("usage")
+        except (UnicodeError, ValueError):
+            usage = None
+        if isinstance(usage, dict):
+            for target, source in (("input", "input_tokens"), ("output", "output_tokens"),
+                                   ("cached", "cache_read_tokens"), ("reasoning", "thinking_tokens"),
+                                   ("provider_total", "total_tokens")):
+                value = usage.get(source)
+                if type(value) is int and value >= 0:
+                    tokens[target] = value
+            if tokens["input"] is not None and tokens["output"] is not None:
+                tokens["total"] = tokens["input"] + tokens["output"]
+            tokens["availability_note"] = (
+                "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; "
+                "total is normalized input+output; cache_read and thinking are annotations."
+            )
     return tokens
 
 
 def command_metrics(path, adapter):
+    if adapter == "antigravity":
+        try:
+            inspect_antigravity_stream(path, reject_permission_errors=False)
+            events = _antigravity_events(path)
+        except (UnicodeError, ValueError):
+            return dict(tool_calls=None, failed_commands=None)
+        tools = {}
+        for event in events:
+            step = event.get("step_update")
+            if event.get("event") != "step_update" or not isinstance(step, dict):
+                continue
+            if step.get("state") == "DONE" and step.get("step_type") == "tool" and type(step.get("step_index")) is int:
+                tools[step["step_index"]] = step
+        failed = sum(
+            isinstance(step.get("tool_info"), dict) and bool(step["tool_info"].get("error"))
+            for step in tools.values()
+            if step.get("tool_name") == "run_command"
+        )
+        return dict(tool_calls=len(tools), failed_commands=failed)
     if adapter != "codex":
         return dict(tool_calls=None, failed_commands=None)
     items = {}
@@ -413,13 +500,25 @@ def execute(a):
         raise ValueError("benchmark requires reviewed pilot pass in the receipt")
     validate_preflight_receipt(receipt, m, profile, Path(a.receipt).resolve().parent)
     argv = [s.replace("{checkout}", str(checkout)).replace("{model}", profile["model"]) for s in profile["argv"]]
-    actual_version = subprocess.check_output(profile["version_argv"], encoding="utf-8", timeout=30).strip()
+    agent_env = os.environ.copy()
+    if profile["adapter"] == "antigravity":
+        agent_env["AGY_CLI_DISABLE_AUTO_UPDATE"] = "true"
+    actual_version = subprocess.check_output(profile["version_argv"], encoding="utf-8", timeout=30,
+                                             env=agent_env).strip()
     if actual_version != profile["agent_version"]:
         raise ValueError(f"CLI version mismatch: {actual_version}")
     m["operator"]["status"] = "running"
     m["execution"]["started_at"] = now()
     save(directory / "run-manifest.json", m)
-    r = capture(argv, checkout, prompt, directory, m["execution"]["timeout_seconds"])
+    r = capture(argv, checkout, prompt, directory, m["execution"]["timeout_seconds"], env=agent_env)
+    if profile["adapter"] == "antigravity" and r["status"] == "completed":
+        try:
+            inspect_antigravity_stream(
+                directory / "stdout.jsonl", expected_permission_mode=profile["approval_policy"],
+                expected_model=profile["model"]
+            )
+        except (UnicodeError, ValueError) as exc:
+            r["status"], r["reason"] = "environment_failed", str(exc)
     m["execution"].update(started_at=r["start"], ended_at=r["end"])
     m["operator"].update(status=r["status"], reason=r["reason"], exit_code=r["code"])
     m["measurement"]["wall_clock_seconds"] = r["elapsed"]

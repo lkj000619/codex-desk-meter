@@ -4,6 +4,7 @@ import importlib.util
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -365,6 +366,22 @@ class HostDevicePipelineTests(unittest.TestCase):
         )
         self.assertEqual(rejected.returncode, 1)
         self.assertIn("PORT_REQUIRES_SEND", rejected.stderr)
+
+    def test_cli_writes_machine_readable_preflight_report_file(self):
+        with tempfile.TemporaryDirectory() as folder:
+            frame_path = Path(folder) / "frame.jsonl"
+            report_path = Path(folder) / "report.json"
+            completed = subprocess.run(
+                [sys.executable, str(SCRIPTS / "run-host-device-pipeline.py"),
+                 "--dry-run", "--output", str(frame_path), "--report-output", str(report_path)],
+                cwd=ROOT, capture_output=True, text=True,
+            )
+            self.assertEqual(completed.returncode, 0, completed.stderr)
+            self.assertEqual(completed.stdout, "")
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+            self.assertEqual(report["status"], "rendered")
+            self.assertFalse(report["device_accessed"])
+            self.assertEqual(report["frame_sha256"], pipeline.sha256(frame_path.read_bytes()))
 
     def test_evidence_hashes_and_classification_are_reproducible(self):
         evidence = read_json("experiments/examples/host-device-pipeline-evidence.example.json")

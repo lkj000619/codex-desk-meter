@@ -84,12 +84,18 @@
 
 | 주제 | 문서 | 기계 계약·구현 | 검증 경계 |
 |---|---|---|---|
-| 현재 E2E 범위 | 제품·실험 계약 | [baseline YAML](../experiments/config/version-2-baseline.yaml), 공통 prompt | 계획값이며 승인 receipt 아님; live 플래그 불일치 D11 |
+| 현재 E2E 범위 | 제품·실험 계약 | [baseline YAML](../experiments/config/version-2-baseline.yaml), 공통 prompt | fixture-only E2E 범위이며 `live_api_allowed_after_fixture: false`; N2 완료. 계획값은 승인 receipt가 아님 |
 | provider/window 모델 | 제품 §3 | [UsageSnapshot schema](../experiments/schema/usage-snapshot.schema.json), [fixture matrix](../experiments/fixtures/provider-fixture-matrix.json) | 합성 입력의 구조·의미 검증 |
 | transport | 통합·host-device 계약 | [frame schema](../experiments/schema/cdm-frame.schema.json), [host oracle](../scripts/host_device_pipeline.py) | host 성공이 I3/I4 실물 pass 아님 |
 | 운영 기록 | 실험 프로토콜 | [run manifest schema](../experiments/schema/run-manifest.schema.json), [runner](../scripts/benchmark.py) | 실행 계측; E2E 평가 manifest와 다름 |
-| E2E 평가 | 제품·기능·평가 계약 | [평가 manifest](../experiments/schema/end-to-end-manifest.schema.json), [result schema](../experiments/schema/end-to-end-result.schema.json), [validator](../scripts/validate-end-to-end-result.py) | C별 판정·token 변환·archive 연결 미완료 |
+| E2E 평가 | 제품·기능·평가 계약 | [평가 manifest](../experiments/schema/end-to-end-manifest.schema.json), [result schema](../experiments/schema/end-to-end-result.schema.json), [validator](../scripts/validate-end-to-end-result.py) | 오프라인 범위에서 C1~C8 판정·token 정규화·manifest/archive/summary 연결 완료 (N3~N5); 실물 제품 합격은 별도 |
 | historical 결과 | 과거 cohort 자료 | [historical schema](../experiments/schema/hardware-feature-result.schema.json), [validator](../scripts/validate-experiment-result.py) | E2E 결과의 대체물 아님 |
+
+2026-09-25 AGY pilot 준비에 대한 최신 독립 기록은
+[AGY launch review](experiments/agy-launch-review-20260925.md)와
+[독립 검토](experiments/agy-launch-sol-review-20260925.md)다. 둘 다 해당 날짜의
+관측 기록이며, 현재 설정·실행 승인 또는 실물 검증을 보증하지 않는다. 현재 gate와
+새 실행의 선행 조건은 [benchmark readiness](experiments/benchmark-readiness.md)에서 확인한다.
 
 문서 정비 결과와 미해결 결정은 [검토 보고서](DOCUMENTATION_REVIEW.md), 중단 후
 작업 재개는 [체크리스트](DOCUMENTATION_REVIEW_CHECKLIST.md)를 따른다.

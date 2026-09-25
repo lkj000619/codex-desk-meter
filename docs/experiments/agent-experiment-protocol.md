@@ -141,7 +141,7 @@ LCD·BOOT·RST·오류·네트워크 시험
 Docker/VM은 선택 사항이며 OS sandbox 미사용 자체는 정량 비교 제외 사유가 아니다.
 선택한 접근 정책의 profile-bound preflight receipt와 R10 승인을 확인한다.
 
-R0~R9 gate가 모두 통과하고 R10 사용자 승인이 남은 뒤 각 실행 표면에서 1회씩
+R0~R9의 `pilot_entry`가 모두 통과하고 R10 사용자 승인이 남은 뒤 각 실행 표면에서 1회씩
 수행한다. 목적은 프롬프트, 권한, validator, fixture,
 보드 슬롯과 로그 수집이 실제로 작동하는지 확인하는 것이다. pilot 결과는 순위
 통계에 포함하지 않는다.

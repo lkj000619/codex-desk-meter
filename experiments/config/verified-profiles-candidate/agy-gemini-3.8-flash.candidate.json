@@ -2,7 +2,7 @@
   "provider": "google",
   "product": "antigravity-cli",
   "interface": "cli",
-  "agent_version": "1.2.9",
+  "agent_version": "1.2.11",
   "model": "gemini-3.8-flash-medium",
   "model_slug": "agy-flash-medium",
   "reasoning": "medium",
@@ -31,16 +31,16 @@
   "network_mode": "offline-fixture",
   "settings_inventory": {
     "skills": "unverified: no effective builtin/custom skills inventory was observed; --disable-slash-commands exists but would disable all skill expansion and is not equivalent to builtin-only-v1",
-    "mcp": "unverified: agy-preflight-20260924.txt and agy-cli-20260925.txt observed no configured servers; disabled enforcement was not established",
+    "mcp": "unverified: agy-cli-20260925-v1211.txt observed no configured servers; disabled enforcement for a future run was not established",
     "memory": "unverified: agy-preflight-20260924.txt states that memory is not directly observable",
-    "user_instructions": "unverified: no effective user-instruction inventory or clearing evidence was captured",
+    "user_instructions": "unverified: a nonempty global GEMINI.md exists; effective instruction scope and clearing were not established",
     "cache": "unverified: agy-preflight-20260924.txt states that cache is not directly observable",
     "routing": "unverified: agy-preflight-20260924.txt states that routing is not directly observable",
-    "plugins": "unverified: agy-preflight-20260924.txt and agy-cli-20260925.txt observed no imported plugins; disabled enforcement was not established",
-    "permissions": "unverified: prompt-and-log is a policy declaration; effective AGY permission behavior was not observed",
+    "plugins": "unverified: agy-cli-20260925-v1211.txt observed no imported plugins; disabled enforcement for a future run was not established",
+    "permissions": "unverified: scoped command allow is selected but the current global allow list is broader; effective AGY permission behavior was not observed",
     "model_network": "unverified: no model/provider invocation or network enforcement evidence was captured; offline-fixture describes product inputs",
     "extension_condition": "unverified: builtin-only-v1 requires built-ins retained and custom extensions disabled; effective enforcement was not observed",
     "usage_recording": "record actual skills/plugins/MCP usage with raw-log references; unavailable values null with reason"
   },
-  "measurement_notes": "Candidate correction 2026-09-25. agy 1.2.9, --help, and empty local MCP/plugin inventories are captured in docs/experiments/evidence/agy-cli-20260925.txt. The model ID embeds the medium effort variant; no separate --effort flag is used. The help-only --disable-slash-commands flag is not adopted because it disables all skill expansion and is stricter than builtin-only-v1. No model/provider execution occurred. The previous Codex-specific --ask-for-approval claim was removed; AGY approval behavior, model entitlement, effective settings, network policy, and run telemetry remain unverified. Do not prepare or run until an operator replaces unverified values with evidence-backed settings and issues a fresh receipt."
+  "measurement_notes": "Candidate correction 2026-09-25 after AGY auto-updated from 1.2.9 to 1.2.11. Version, --help, and empty local MCP/plugin inventories are captured in docs/experiments/evidence/agy-cli-20260925-v1211.txt; the selected model appears in agy-models-20260925-v1211.txt. AGY_CLI_DISABLE_AUTO_UPDATE=true was set for these inventory commands and should be set in the future run environment, but this alone does not prevent another process from changing the binary. The model ID embeds the medium effort variant; no separate --effort flag is used. The help-only --disable-slash-commands flag is not adopted because it disables all skill expansion and is stricter than builtin-only-v1. No model inference occurred. AGY approval behavior, model entitlement, effective settings, network policy, and run telemetry remain unverified. Do not prepare or run until an operator replaces unverified values with evidence-backed settings and issues a fresh receipt."
 }

@@ -44,6 +44,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--sent-at", default=DEFAULT_SENT_AT)
     parser.add_argument("--sequence", type=int, default=1)
     parser.add_argument("--output", type=Path, help="write the newline-delimited frame to this file")
+    parser.add_argument("--report-output", type=Path, help="write the machine-readable outcome JSON to this file")
     parser.add_argument("--dry-run", action="store_true", help="render only; this is the default boundary")
     parser.add_argument("--send", action="store_true", help="request a real serial send; requires --port")
     parser.add_argument("--port", help="explicit serial port required with --send")
@@ -81,10 +82,16 @@ def main(argv: list[str] | None = None) -> int:
             "output_path": outcome.output_path,
             "collection_failures": collected.failures,
         }
-        print(json.dumps(report, ensure_ascii=False, sort_keys=True), file=sys.stderr)
+        report_line = json.dumps(report, ensure_ascii=False, sort_keys=True)
+        if args.report_output is not None:
+            args.report_output.write_text(report_line + "\n", encoding="utf-8")
+        print(report_line, file=sys.stderr)
         return 0
     except PipelineError as error:
-        print(json.dumps({"status": "rejected", "error_code": error.code, "message": error.message}), file=sys.stderr)
+        report_line = json.dumps({"status": "rejected", "error_code": error.code, "message": error.message})
+        if args.report_output is not None:
+            args.report_output.write_text(report_line + "\n", encoding="utf-8")
+        print(report_line, file=sys.stderr)
         return 1
 
 

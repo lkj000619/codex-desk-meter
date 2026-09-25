@@ -135,6 +135,17 @@ class RunnerTests(unittest.TestCase):
             self.assertEqual(result["status"], "environment_failed")
             self.assertEqual((path / "stdout.jsonl").read_bytes(), "한글 입력".encode())
 
+    def test_capture_passes_explicit_child_environment(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder)
+            child_env = os.environ.copy()
+            child_env["AGY_CLI_DISABLE_AUTO_UPDATE"] = "true"
+            result = capture([sys.executable, "-c",
+                              "import os; print(os.environ['AGY_CLI_DISABLE_AUTO_UPDATE'])"],
+                             path, b"", path, 5, env=child_env)
+            self.assertEqual(result["status"], "completed")
+            self.assertEqual((path / "stdout.jsonl").read_text().strip(), "true")
+
     def test_timeout(self):
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder)
@@ -191,6 +202,77 @@ class RunnerTests(unittest.TestCase):
                 benchmark.command_metrics(path / "stdout.jsonl", "antigravity"),
                 {"tool_calls": None, "failed_commands": None},
             )
+
+    def test_antigravity_stream_uses_terminal_usage_without_double_counting_steps(self):
+        events = [
+            {"event": "init", "init": {"permission_mode": "request-review", "model": "gemini-3.8-flash-medium"}},
+            {"event": "step_update", "step_update": {"step_index": 1, "state": "ACTIVE", "step_type": "tool"}},
+            {"event": "step_update", "step_update": {"step_index": 1, "state": "DONE", "step_type": "tool", "tool_name": "run_command", "tool_info": {"name": "run_command"}}},
+            {"event": "step_update", "step_update": {"step_index": 2, "state": "DONE", "step_type": "tool", "tool_name": "run_command", "tool_info": {"name": "run_command", "error": {"type": "CommandFailed", "message": "exit 1"}}}},
+            {"event": "step_update", "step_update": {"step_index": 3, "state": "DONE", "step_type": "agent_response", "usage": {"input_tokens": 9, "output_tokens": 2}}},
+            {"event": "result", "result": {"status": "SUCCESS", "num_turns": 1, "usage": {"input_tokens": 100, "output_tokens": 20, "thinking_tokens": 10, "cache_read_tokens": 60, "total_tokens": 120}}},
+        ]
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "stdout.jsonl"
+            path.write_text("\n".join(json.dumps(e) for e in events) + "\n", encoding="utf-8")
+            self.assertEqual(benchmark.inspect_antigravity_stream(path)["status"], "SUCCESS")
+            benchmark.inspect_antigravity_stream(
+                path, expected_permission_mode="request-review", expected_model="gemini-3.8-flash-medium"
+            )
+            with self.assertRaisesRegex(ValueError, "permission mode"):
+                benchmark.inspect_antigravity_stream(path, expected_permission_mode="always-proceed")
+            with self.assertRaisesRegex(ValueError, "model"):
+                benchmark.inspect_antigravity_stream(path, expected_model="different-model")
+            tokens = telemetry(path, "antigravity")
+            self.assertEqual((tokens["input"], tokens["output"], tokens["total"]), (100, 20, 120))
+            self.assertEqual((tokens["cached"], tokens["reasoning"], tokens["provider_total"]), (60, 10, 120))
+            self.assertEqual(benchmark.command_metrics(path, "antigravity"), {"tool_calls": 2, "failed_commands": 1})
+
+    def test_antigravity_stream_requires_one_successful_turn(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "stdout.jsonl"
+            for events in (
+                [{"event": "init", "init": {}}, {"event": "result", "result": {"status": "ERROR", "num_turns": 1}}],
+                [{"event": "init", "init": {}}, {"event": "result", "result": {"status": "SUCCESS", "num_turns": 2}}],
+                [{"event": "init", "init": {}}],
+            ):
+                path.write_text("\n".join(json.dumps(e) for e in events) + "\n", encoding="utf-8")
+                with self.assertRaises(ValueError):
+                    benchmark.inspect_antigravity_stream(path)
+
+    def test_antigravity_success_result_rejects_permission_denial(self):
+        events = [
+            {"event": "init", "init": {"permission_mode": "request-review", "model": "gemini-3.8-flash-medium"}},
+            {"event": "step_update", "step_update": {
+                "step_index": 1, "state": "DONE", "step_type": "tool", "tool_name": "run_command",
+                "tool_info": {"name": "run_command", "error": {
+                    "type": "PermissionDenied", "message": "approval required for command"
+                }},
+            }},
+            {"event": "result", "result": {"status": "SUCCESS", "num_turns": 1}},
+        ]
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "stdout.jsonl"
+            path.write_text("\n".join(json.dumps(e) for e in events) + "\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "permission"):
+                benchmark.inspect_antigravity_stream(path)
+
+    def test_antigravity_denied_run_keeps_reported_usage_and_failed_tool_count(self):
+        events = [
+            {"event": "init", "init": {"permission_mode": "request-review", "model": "gemini-3.8-flash-medium"}},
+            {"event": "step_update", "step_update": {
+                "step_index": 1, "state": "DONE", "step_type": "tool", "tool_name": "run_command",
+                "tool_info": {"name": "run_command", "error": {"type": "PermissionDenied", "message": "approval required"}},
+            }},
+            {"event": "result", "result": {"status": "SUCCESS", "num_turns": 1,
+                                           "usage": {"input_tokens": 10, "output_tokens": 2, "total_tokens": 12}}},
+        ]
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "stdout.jsonl"
+            path.write_text("\n".join(json.dumps(e) for e in events) + "\n", encoding="utf-8")
+            self.assertEqual(telemetry(path, "antigravity")["provider_total"], 12)
+            self.assertEqual(benchmark.command_metrics(path, "antigravity"),
+                             {"tool_calls": 1, "failed_commands": 1})
 
     def test_command_metrics_ignores_malformed_items(self):
         with tempfile.TemporaryDirectory() as folder:
