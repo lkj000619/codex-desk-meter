@@ -2,7 +2,11 @@
 
 ## 상태
 
-**현재 상태: `PILOT_ENTRY_READY / PREPARE_PENDING`** (2026-09-25 KST)
+**현재 상태: `PILOT_PREPARED / LAUNCH_RECHECK_REQUIRED`** (2026-09-26 KST).
+첫 AGY pilot의 준비 run은
+`C:\Espressif\benchmark-runs\20260925-antigravity-cli-agy-flash-medium-r01`이다.
+[준비 완료 검증](evidence/agy-pilot-prepared-20260926.md)을 확인하고 실행 직전 COM3를
+다시 점검해 R10 발효를 기록한다. 이 run을 다시 `prepare`하지 않는다.
 
 운영 도구의 일부 scaffold가 있어도 도구별 모델·sandbox·기능 결과 schema 검증이
 끝난 것은 아니다. run 준비·실행·보존 명령은 [readiness gate](benchmark-readiness.md)의

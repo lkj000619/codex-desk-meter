@@ -2,15 +2,19 @@
 
 ## 현재 상태
 
-**상태: `PILOT_ENTRY_READY / PREPARE_PENDING`** (2026-09-25 KST)
+**상태: `PILOT_PREPARED / LAUNCH_RECHECK_REQUIRED`** (2026-09-26 KST)
 
 AGY 1.2.11 제한 정책, profile 입력 검사, host preflight, R8 평가 harness와 현재 보드
 백업을 검증했다. [AGY 환경 증거](evidence/agy-pilot-environment-20260925.md),
 [R8 ledger](evidence/r8-baseline-20260925/ledger.json),
 [R9 보드 점검](evidence/agy-r9-board-readiness-20260925.md),
 [preflight receipt](evidence/agy-gemini-3.8-flash-receipt.json)가 최신 근거다.
-R0~R9의 첫 pilot 진입 조건은 준비됐고, 기존 조건부 승인의 잔여 조건인 새 run
-`prepare` 및 실행 직전 COM3 재확인을 마친 뒤 R10 발효를 기록한다. 첫 pilot의
+R0~R9의 첫 pilot 진입 조건을 확인하고 새 run
+`20260925-antigravity-cli-agy-flash-medium-r01`의 `prepare`도 통과했다.
+[준비 완료 검증](evidence/agy-pilot-prepared-20260926.md)에 manifest·receipt·COM3
+재검사 근거를 기록했다. 기존 조건부 승인과 Q3 결정은 이 AGY 첫 pilot에 적용된다.
+실제 `run` 직전에는 시간에 민감한 COM3 단독 점유를 다시 확인하고 R10 발효 시점을
+기록한다. 첫 pilot의
 model entitlement·실제 도구 권한 동작·usage와 실물 제품 성능은 사후 관측이다.
 
 2026-09-18 설계 검토 후속 변경과 최신 host 검증은
@@ -79,8 +83,8 @@ P6 필요 시 remediation 별도 실험
 P0~P2의 pilot-entry 조건이 완료되지 않으면 P3 이후로 진행하지 않는다. R4·R6·R7은
 pilot 전 준비와 첫 pilot 후 관측을 나누어 기록한다. 첫 pilot 후에만 생길 수 있는
 entitlement·실제 stream/usage·soft-denial·operator intervention 증거는 해당 pilot의
-선행조건이 아니다. 현재 R0~R9의 pilot-entry 조건은 통과했으며 새 run prepare와 실행
-직전 COM3 재확인, 기존 조건부 승인 발효 기록이 남았다. pilot은 운영 인프라를 검증하는 단계이지 제품 구현을
+선행조건이 아니다. 현재 R0~R9의 pilot-entry 조건과 새 run prepare는 통과했으며 실행
+직전 COM3 재확인과 기존 조건부 승인 발효 기록이 남았다. pilot은 운영 인프라를 검증하는 단계이지 제품 구현을
 개선하는 단계가 아니며, 순위 통계에서 제외한다.
 
 ## 필수 gate
@@ -110,8 +114,8 @@ R0~R9의 `pilot_entry=pass`와 대상에 적용되는 R10 승인 조건이 충�
 | R6 | `pass` | `pending` | 합성 telemetry·실패 보존 검증 후 진입; 실제 usage와 soft-denial은 사후 확인 |
 | R7 | `pass` | `pending` | mock one-shot 차단·평가자 read-only 절차 확인 후 진입; 실제 개입 여부는 사후 확인 |
 
-다른 R0~R9 gate의 `pilot_entry`는 위 표의 `현재 상태`를 따른다. 현재 남은 단계는
-선택 태그의 새 run `prepare`, 실행 직전 COM3 재확인과 조건부 승인 발효 기록이다. 첫 pilot
+다른 R0~R9 gate의 `pilot_entry`는 위 표의 `현재 상태`를 따른다. 새 run `prepare`는
+완료됐으며 현재 남은 단계는 실행 직전 COM3 재확인과 조건부 승인 발효 기록이다. 첫 pilot
 완료 후 raw stdout/stderr를 함께 검토하고 도구 거부·개입 여부와 근거 hash를 기록하기
 전에는 `post_pilot=pass` 또는 receipt의 `pilot_pass=true`로 승격하지 않는다.
 
@@ -127,14 +131,15 @@ provider이며 (`gemini-cli`는 Enterprise/API 키 conditional),
 source가 제공하지
 않는 절대 token 잔량을 추정하지 않는 계약을 포함한다. matrix 본문
 (`experiments/fixtures/provider-fixture-matrix.json`)과 provider adapter 결과
-schema·validator·example은 존재한다. 선택 baseline tag는 존재하지만, 2026-09-25
-candidate 수정 뒤 profile이 unresolved 상태여서 R1의 최종 check/bundle hash는
-아직 닫히지 않았다. R3 결과 계약은 오프라인 validator 범위에서 유지된다.
+schema·validator·example은 존재한다. 선택 baseline tag와 profile의 최종
+`check`는 통과했고 입력 bundle SHA-256은
+`f7cfc546acac458c7691c10ccb776c20f5078ca141d353f1086fb808fe810948`이다.
+R3 결과 계약은 오프라인 validator 범위에서 유지된다.
 
-### 현재 검증 증거와 남은 조건 (2026-09-21)
+### 2026-09-21 검증 증거와 당시 남은 조건 (historical snapshot)
 
-위 gate 상태는 실행 준비 판정이며 코드 구현 여부와 구분한다.
-최신 검증 기록은 [진행 체크리스트](../DOCUMENTATION_REVIEW_CHECKLIST.md)에 있다.
+아래 표는 2026-09-21 당시 감사 내용이다. 현재 판정은 상단 상태와
+[준비 완료 검증](evidence/agy-pilot-prepared-20260926.md)을 따른다.
 
 | Gate | 확보한 증거 | 남은 조건 |
 |---|---|---|

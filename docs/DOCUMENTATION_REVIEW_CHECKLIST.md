@@ -2,7 +2,7 @@
 
 ## 재개 지점
 
-> **현재 작업 상태 (2026-09-25):** AGY pilot `PILOT_ENTRY_READY / PREPARE_PENDING`.
+> **현재 작업 상태 (2026-09-26):** AGY pilot `PILOT_PREPARED / LAUNCH_RECHECK_REQUIRED`.
 > 아래의 9월 20~25일 BLOCKED 기록은 당시 감사 스냅샷이다. 현재 기준은
 > [readiness gate](experiments/benchmark-readiness.md)와
 > [실행 가이드](experiments/agent-run-commands.md)를 따른다.
@@ -15,10 +15,13 @@
 > 확인했다. R9는 현재 COM3의 ESP32-S3 식별, 현재 flash 전체 백업, 사용자 보드 모델 육안 확인을
 > 마쳤다. AGY 1.2.11 제한 정책의 metadata smoke와 전역 파일 원본 복원도 확인했다.
 >
-> **남은 실행 순서:** 문서·증빙 commit → tag의 깨끗한 별도 checkout에서 새 run `prepare` →
-> manifest·receipt·hash 재검증 → 실행 직전 COM3 단독 점유 재확인 → 기존 조건부 승인 충족
-> 기록(R10) → 첫 pilot. 첫 pilot의 모델 entitlement·실제 tool permission·usage·제품 동작은
-> 실행 후 판정한다. 크레딧 소진 시 이 순서의 미완료 항목부터 재개한다.
+> **완료:** 문서·증빙 commit → tag의 깨끗한 별도 checkout에서
+> `20260925-antigravity-cli-agy-flash-medium-r01` 준비 → manifest·receipt·hash 검증 →
+> 2026-09-26 COM3 비파괴 재확인 → 92개 시험 및 hardware preflight 0/0 재통과.
+> 세부 근거는 [준비 완료 검증](experiments/evidence/agy-pilot-prepared-20260926.md)에 있다.
+> **남은 순서:** 실제 실행 직전 COM3 단독 점유 확인 → 조건부 승인 발효 시점(R10) 기록 →
+> 첫 pilot. 첫 pilot의 모델 entitlement·실제 tool permission·usage·제품 동작은 실행 후 판정한다.
+> 크레딧 소진 시 이 순서의 미완료 항목부터 재개한다. 준비된 run을 다시 만들지 않는다.
 
 - 작업: main 문서의 목적·범위·정합성 검토, 근거 있는 수정, 재검증과 종합.
 - 시작일: 2026-09-20 (Asia/Seoul).

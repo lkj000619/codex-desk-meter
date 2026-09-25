@@ -11,6 +11,7 @@
    [운영 관리](experiments/benchmark-management.md),
    [접근 정책](experiments/isolation-policy.md): 동일 조건·역할·증거 보존.
 5. [readiness gate](experiments/benchmark-readiness.md): 현재 실행 가능 여부와 잔여 조건.
+   첫 AGY pilot의 실제 준비 상태는 [2026-09-26 검증](experiments/evidence/agy-pilot-prepared-20260926.md)에 기록한다.
 6. 승인된 실행의 [공통 prompt](../experiments/prompts/version-2-agent-task.md)와
    [실행 가이드](experiments/agent-run-commands.md).
 

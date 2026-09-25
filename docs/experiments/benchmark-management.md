@@ -3,9 +3,10 @@
 ## 상태
 
 이 문서는 합의된 운영 설계다. AGY 첫 pilot의 현재 상태는
-**`PILOT_ENTRY_READY / PREPARE_PENDING`**이다. 동결된
+**`PILOT_PREPARED / LAUNCH_RECHECK_REQUIRED`**이다. 동결된
 `benchmark-v2-baseline-20260925`와 profile-bound receipt의 pilot 전 검증이
-완료됐으며, 새 run prepare와 실행 직전 COM3 재확인·조건부 승인 발효 전에는
+완료됐으며, 새 run prepare는
+`20260925-antigravity-cli-agy-flash-medium-r01`에서 통과했다. 실행 직전 COM3 재확인·조건부 승인 발효 전에는
 pilot을 실행하지 않는다. 실행 gate의 단일
 진실은 [benchmark 실행 전 readiness gate](benchmark-readiness.md)다.
 기존 baseline 태그는 보존한다. 새 baseline은 maintainer가 `check`로 입력/profile을
