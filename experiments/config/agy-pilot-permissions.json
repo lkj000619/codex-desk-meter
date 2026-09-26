@@ -1,14 +1,14 @@
 {
   "policy_version": 1,
   "allow": [
-    "command(dir)",
-    "command(pwd)",
-    "command(Get-ChildItem)",
-    "command(Get-Location)",
-    "command(git status)",
-    "command(git diff)",
-    "command(idf.py set-target esp32s3)",
-    "command(idf.py build)",
-    "command(regex:^python(?:\\.exe)? -m unittest(?: .*)?$)"
+    "command(regex:(?i)^(?:Get-ChildItem|gci|dir|ls)(?: +(?:-Force|-Recurse|-Name|-File|-Directory|-Hidden|-Path|-LiteralPath|(?:\\.|(?:\\./)?[A-Za-z0-9_][A-Za-z0-9_.-]*(?:[\\\\/][A-Za-z0-9_][A-Za-z0-9_.-]*)*)))*$)",
+    "command(regex:(?i)^(?:Get-Location|pwd)$)",
+    "command(regex:(?i)^(?:Get-Content|gc|cat|type)(?: +(?:-Raw|-Path|-LiteralPath|-TotalCount|-Tail|[0-9]+|(?:\\./)?[A-Za-z0-9_][A-Za-z0-9_.-]*(?:[\\\\/][A-Za-z0-9_][A-Za-z0-9_.-]*)*))+$)",
+    "command(regex:^git +status(?: +(?:--short|--porcelain|--branch|-sb|-s))?$)",
+    "command(regex:^git +diff(?: +(?:--stat|--name-only|--check|--numstat|--cached|--staged))*$)",
+    "command(regex:^idf\\.py +(?:--version|set-target +esp32s3|build|reconfigure|size|size-components)$)",
+    "command(regex:^python(?:\\.exe)? +--version$)",
+    "command(regex:^python(?:\\.exe)? +-m +unittest(?: +(?:discover|-v|-q|-s|-p|-t|(?:\\./)?[A-Za-z0-9_][A-Za-z0-9_.-]*(?:[\\\\/][A-Za-z0-9_][A-Za-z0-9_.-]*)*|test_\\*\\.py))*$)",
+    "command(regex:^python(?:\\.exe)? +scripts[\\\\/](?:validate-end-to-end-result|validate-experiment-result)\\.py$)"
   ]
 }

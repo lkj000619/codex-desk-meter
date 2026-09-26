@@ -1,0 +1,32 @@
+{
+  "checked_at": "2026-09-25T18:28:05.209Z",
+  "run_id": "20260926-antigravity-cli-agy-flash-medium-r04",
+  "status": "environment_failed",
+  "measurement": {
+    "wall_clock_seconds": 11.015999999945052,
+    "tool_calls": 1,
+    "failed_commands": 1,
+    "user_interventions": null,
+    "tokens": {
+      "input": 21404,
+      "output": 364,
+      "cached": 0,
+      "reasoning": 273,
+      "provider_total": 21768,
+      "total": 21768,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    }
+  },
+  "pilot_pass": false,
+  "ranking_eligible": false,
+  "hashes": {
+    "run-manifest.json": "c77a9e35ca95ab465651457e4d4b855c76c6a386b9c202522c3a9fadbe32ffc7",
+    "stdout.jsonl": "2cadaf0a511df6b46b265be5df89fef778a3b5a8011cdd83c7c87edac65dd48d",
+    "stderr.txt": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713",
+    "profile.json": "f5f9a319006a36a67d08fa90f62c4e5171993bf5046f0fcec5e9c2cb01337c3d",
+    "prompt.txt": "1425c1700ab1ce67f043dd67c86c3ba85dc6799c73ff5f52e98a1fa03425a90b",
+    "launch-authorization.json": "890dd8c963982b0045bf824289d0dfe5c892c449bff1e6f6a8372476dd1fa804",
+    "implementation.bundle": "2f39c1def3bfaa29c412b5f6e6012924691339564ad341c05dcb26a8f83bd7e6"
+  }
+}

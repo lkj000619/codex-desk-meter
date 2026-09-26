@@ -55,6 +55,17 @@ if ($ToolsRoot) {
         }
         else { Set-Item -LiteralPath "Env:$($pair[0])" -Value $pair[1] }
     }
+    # PowerShell functions do not reach the agent's child shells. Put a launcher
+    # before EIM's unrelated idf.py executable so every child uses this version.
+    $idfShimDirectory = Join-Path $InstallRoot "benchmark-shims\idf-$IdfVersion"
+    New-Item -ItemType Directory -Path $idfShimDirectory -Force | Out-Null
+    $idfShim = @'
+@echo off
+"%IDF_PYTHON_ENV_PATH%\Scripts\python.exe" "%IDF_PATH%\tools\idf.py" %*
+exit /b %errorlevel%
+'@
+    [System.IO.File]::WriteAllText((Join-Path $idfShimDirectory 'idf.py.cmd'), ($idfShim -replace "`r?`n", "`r`n"), [System.Text.Encoding]::ASCII)
+    $env:PATH = "$idfShimDirectory;$env:PATH"
     function global:idf.py { & (Join-Path $env:IDF_PYTHON_ENV_PATH 'Scripts\python.exe') (Join-Path $env:IDF_PATH 'tools\idf.py') @args }
     & $idfPython $idfToolsScript check-python-dependencies
     if ($LASTEXITCODE -ne 0) { throw 'ESP-IDF Python dependencies failed validation.' }

@@ -1,0 +1,38 @@
+"""Check our declared raw-line allow patterns; real CLI matching needs a smoke run."""
+import json
+from pathlib import Path
+import re
+import unittest
+
+
+class CommandPolicyTests(unittest.TestCase):
+    def allowed(self, command):
+        policy = Path(__file__).resolve().parents[2] / 'experiments/config/agy-pilot-permissions.json'
+        for rule in json.loads(policy.read_text())['allow']:
+            target = rule[len('command('):-1]
+            if target.startswith('regex:'):
+                if re.fullmatch(target[6:], command):
+                    return True
+            elif target == command:
+                return True
+        return False
+
+    def test_declared_build_and_read_commands(self):
+        for cmd in ['Get-ChildItem -Force', 'Get-ChildItem . -Recurse -File',
+                    'dir docs', 'ls -Force', 'Get-Content README.md -TotalCount 1',
+                    'Get-Content -Raw docs/PRODUCT_CONTRACT.md',
+                    'git status --short', 'git diff --stat', 'idf.py --version',
+                    'idf.py set-target esp32s3', 'idf.py build',
+                    'python --version', 'python -m unittest discover -s scripts/tests -v']:
+            with self.subTest(cmd=cmd):
+                self.assertTrue(self.allowed(cmd))
+
+    def test_out_of_scope_commands_do_not_match(self):
+        for cmd in ['Get-ChildItem -Force; Remove-Item x', 'dir ..',
+                    'Get-Content C:/Users/me/secret', 'Get-Content $HOME/key',
+                    'Get-Content docs/../secret', 'git log', 'git show HEAD',
+                    'git -c core.pager=evil diff', 'idf.py flash', 'idf.py erase-flash',
+                    'python -c "print(1)"', 'python -m unittest; whoami',
+                    'python -m unittest $(whoami)', 'Get-ChildItem | iex']:
+            with self.subTest(cmd=cmd):
+                self.assertFalse(self.allowed(cmd))
