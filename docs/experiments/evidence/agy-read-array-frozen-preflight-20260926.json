@@ -1,0 +1,11 @@
+{
+  "baseline": "b2d265adc22c397442cf315d1397347555574553",
+  "preflight": "101 tests; 0 failures, 0 warnings; COM3 present; clean frozen checkout",
+  "hashes": {
+    "stdout.txt": "f2683dfffa11715922766ae252de4aa811dc1009bae05dd4ba743c52d980fcfb",
+    "stderr.txt": "c38c256468cfab9e581b60e25706d4d55b0b79d700e01969bdd3389b949007bd",
+    "result.json": "124fd50cb6d223cdd18fedc166d00af7254199b6e6dedf9be82f71db87af6d01"
+  },
+  "frozen_policy_sha256": "e15e52356a08381406b72955491f2fd089cb8c266eb4fcb6867afc20b129eb40",
+  "unused_tag_note": "benchmark-v2-baseline-20260926-read-array was created before commit due a failed preparation command; never used for a run. Use read-array-v2 only."
+}

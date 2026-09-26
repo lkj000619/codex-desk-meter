@@ -3,8 +3,8 @@
 > 운영자 전용: 이 prompt는 `benchmark-readiness.md`의 R0~R9 사전조건이 통과되고
 > R10에서 사용자가 특정 pilot/benchmark 실행을 명시적으로 승인한 경우에만 runner가
 > 전달한다. 사람이 직접 복사·붙여넣어 실행하지 않는다. runner가 만든 manifest,
-> profile, preflight receipt가 없으면 agent는 작업을 시작하지 말고 `not_authorized`
-> 사유만 남긴다.
+> profile, preflight receipt의 존재와 일치는 운영 실행기가 전달 전에 검증한다.
+> 검증 실패 시 운영 실행기가 시작을 차단한다. agent는 이 운영자 파일을 탐색하지 않는다.
 
 > 정량 비교 cohort는 공통 prompt 1회, 후속 질문 0회, 실행 중 외부 구현 피드백
 > 0회다. 운영자·evaluator가 중간에 방향을 알려주거나 코드를 고치면 원본 run은
@@ -16,6 +16,19 @@
 ESP32-S3-LCD-3.16, 프레임워크는 ESP-IDF v5.3.2다.
 
 ## 시작 전 고정 입력
+
+현재 작업 디렉터리가 이번 run의 지정 checkout 루트다. 먼저 native 파일 읽기 도구로
+`docs/DEVELOPMENT_ENVIRONMENT.md`와 `experiments/config/agy-pilot-permissions.json`을 읽어라.
+실행 manifest·profile·receipt는 운영자가 checkout 밖에서 검증하고 관리한다.
+이를 찾기 위해 상위 폴더나 다른 run을 조회하지 말라. 이 runner 전달 자체가 검증된
+실행 진입이며, 에이전트가 운영자 파일의 위치를 추가 탐색할 필요는 없다.
+
+모든 작업 경로는 checkout 내부 상대 경로를 기준으로 한다. `..`로 상위 폴더를
+조회하거나 이동하지 말라. 셸 명령은 허용 목록에 맞춰 한 호출에 하나만 실행하라.
+`;`, `&&`, 파이프, 명령 치환, 별도 shell wrapper로 명령을 결합하지 말라.
+내용 작성·수정은 native 파일 도구를 사용하고, 빌드·시험은 개발 환경 문서의
+선언된 명령군을 사용하라. 권한이 거부되면 다른 도구나 스크립트로 우회하지 말고
+해당 실패를 기록하고 종료하라. 실행 중 권한 추가나 후속 지시를 요청하지 말라.
 
 다음 파일을 모두 읽어라. 기준 commit과 prompt·config·fixture bundle SHA-256 및
 실행 manifest는 운영 실행기가 기록한다. 에이전트는 manifest를 생성하거나 수정하지 않는다.
