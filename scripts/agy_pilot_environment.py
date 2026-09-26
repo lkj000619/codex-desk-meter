@@ -30,7 +30,11 @@ def read_policy(path):
     rules = policy.get("allow")
     if policy.get("policy_version") != 1 or not isinstance(rules, list) or not rules:
         raise ValueError("AGY pilot policy needs version 1 and nonempty allow rules")
-    if any(not isinstance(x, str) or not x.startswith("command(") or
+    declared_reads = {
+        "read_file(C:/Espressif/v5.3.2/esp-idf)",
+        "read_file(C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source)",
+    }
+    if any(not isinstance(x, str) or (not x.startswith("command(") and x not in declared_reads) or
            x in {"command(*)", "command(regex:.*)"} or
            "unsandboxed(" in x for x in rules):
         raise ValueError("AGY pilot policy has an unsupported or unscoped rule")
@@ -56,7 +60,17 @@ def assert_extensions_clear(gemini_root):
         raise ValueError("AGY MCP servers need separate review")
 
 
-def verify_scoped_environment(gemini_root, policy_path):
+def effective_rules(policy_path, workspace=None):
+    rules = read_policy(policy_path)
+    if workspace is not None:
+        workspace = Path(workspace).resolve()
+        if workspace == Path(workspace.anchor) or workspace == Path.home().resolve():
+            raise ValueError("workspace scope must be a dedicated project directory")
+        rules = rules + ["write_file(" + workspace.as_posix() + ")"]
+    return rules
+
+
+def verify_scoped_environment(gemini_root, policy_path, workspace=None):
     """Fail before launch unless the selected AGY scope is actually active."""
     assert_extensions_clear(gemini_root)
     paths = paths_for(gemini_root)
@@ -64,7 +78,7 @@ def verify_scoped_environment(gemini_root, policy_path):
         raise ValueError("AGY global instructions or hooks remain active")
     settings_bytes = paths["settings"].read_bytes()
     settings = json.loads(settings_bytes)
-    if settings.get("permissions") != {"allow": read_policy(policy_path)}:
+    if settings.get("permissions") != {"allow": effective_rules(policy_path, workspace)}:
         raise ValueError("AGY scoped command allow list is not active")
     if settings.get("allowNonWorkspaceAccess", False) is not False or settings.get("toolPermission", "request-review") != "request-review":
         raise ValueError("AGY scoped access or approval mode is not active")
@@ -109,9 +123,11 @@ def restore(backup_dir, *, force=False):
 
 
 @contextmanager
-def scoped_environment(gemini_root, policy_path, backup_dir):
+def scoped_environment(gemini_root, policy_path, backup_dir, workspace=None):
     assert_extensions_clear(gemini_root)
-    rules = read_policy(policy_path)
+    rules = effective_rules(policy_path, workspace)
+    if workspace is not None and not Path(workspace).is_dir():
+        raise ValueError("workspace scope directory does not exist")
     paths = paths_for(gemini_root)
     if not paths["settings"].is_file():
         raise ValueError("AGY settings.json is missing")
@@ -155,6 +171,8 @@ def main():
     parser.add_argument("--policy", type=Path, default=Path(__file__).resolve().parents[1] /
                         "experiments/config/agy-pilot-permissions.json")
     parser.add_argument("--backup-dir", type=Path, required=True)
+    parser.add_argument("--workspace", type=Path,
+                        help="grant writes only to this checkout; runner checks it against manifest")
     parser.add_argument("--force", action="store_true", help="restore after inspecting concurrent edits")
     parser.add_argument("command", nargs=argparse.REMAINDER)
     args = parser.parse_args()
@@ -174,7 +192,7 @@ def main():
                                capture_output=True, text=True)
         if probe.returncode != 0 or probe.stdout.strip() != "0":
             raise ValueError("close other AGY processes before the scoped pilot")
-    with scoped_environment(args.gemini_root, args.policy, args.backup_dir) as identity:
+    with scoped_environment(args.gemini_root, args.policy, args.backup_dir, workspace=args.workspace) as identity:
         print(json.dumps(identity), flush=True)
         child_env = os.environ.copy()
         child_env["AGY_CLI_DISABLE_AUTO_UPDATE"] = "true"

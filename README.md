@@ -7,7 +7,7 @@ ESP32-S3 Super Mini 조립형 장치는 Version 2 검증 뒤 이식합니다.
 ## 현재 단계
 
 현재는 **첫 AGY pilot의 CLI 인자 오류 확인 후 실행 환경 보완 단계**입니다.
-[실행·사후 검증 기록](docs/experiments/evidence/agy-r04-result-20260926.md)을 확인합니다. 실행
+[실행·사후 검증 기록](docs/experiments/evidence/agy-r05-result-20260926.md)을 확인합니다. 실행
 가능 여부는 [실행 전 gate](docs/experiments/benchmark-readiness.md)의 R0~R10으로
 판정하며, `AUTHORIZED`가 되기 전에는 `benchmark.py run`과 수동 prompt 입력을
 실행하지 않습니다.

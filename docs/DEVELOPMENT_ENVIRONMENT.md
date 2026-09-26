@@ -1,5 +1,31 @@
 # Windows 개발 환경
 
+## 제한된 AGY pilot의 명령 사용
+
+runner는 ESP-IDF 5.3.2 환경을 활성화한 상태로 agent를 시작한다. 자식 셸도
+`idf.py --version`으로 같은 버전을 확인한다. 별도 PowerShell wrapper나 환경
+재설정 없이 저장소 루트에서 명령을 한 번에 하나씩 실행한다.
+
+허용 규칙의 원본은 `experiments/config/agy-pilot-permissions.json`이다.
+조회에는 `Get-ChildItem`, `Get-Content`, `Test-Path`, `Get-Item`, `Resolve-Path`,
+`Get-FileHash`와 명시된 옵션·상대 경로를 쓴다. 디렉터리 생성에는
+`New-Item -ItemType Directory -Force -Path main` 또는 `mkdir main`을 쓸 수 있다.
+파일 내용 작성·편집은 agent의 파일 도구를 사용한다. wrapper는 해당 run checkout만
+명시적으로 쓰기 허용하고, runner는 manifest의 checkout과 이 권한 경로가 일치하는지 확인한다.
+
+빌드·시험 명령군은 `idf.py set-target esp32s3`, `idf.py build`와 제한된 `-B` 옵션,
+`python -m unittest discover -s tests -v`, `python -m py_compile <상대 파일>`,
+`python tests/<시험 파일>.py`, `cmake -S <상대 경로> -B build-host -G Ninja`,
+`cmake --build build-host`, `ctest --test-dir build-host --output-on-failure`다.
+생성된 `build-host`의 시험 실행 파일도 실행할 수 있다. 세부 옵션은 정책 파일을 따른다.
+명령 결합, 임의 shell/Python 실행, 다운로드·설치·flash 명령은 허용 목록에 없다.
+
+SDK와 제조사 소스의 읽기는 다음 두 경로만 별도 허용한다. agent의 파일 읽기 도구를
+사용하며 백업 이미지·다른 run은 참조하지 않는다.
+
+- `C:/Espressif/v5.3.2/esp-idf`
+- `C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source`
+
 ## 기준 환경
 
 2026-09-11 현재 Version 2인 Waveshare ESP32-S3-LCD-3.16 개발은 다음 환경을

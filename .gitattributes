@@ -1,6 +1,7 @@
 * text=auto eol=lf
 *.md text
 *.json text
+experiments/config/agy-pilot-permissions.json text eol=lf
 *.yaml text
 *.yml text
 *.ps1 text eol=crlf

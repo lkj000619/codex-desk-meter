@@ -9,6 +9,41 @@ from agy_pilot_environment import read_policy, scoped_environment, sha, verify_s
 
 
 class AgyPilotEnvironmentTests(unittest.TestCase):
+    def test_workspace_write_grant_is_exact_and_verified(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            gemini, settings, instructions, hooks, policy = self.fixture(root)
+            workspace = root / 'checkout'
+            workspace.mkdir()
+            original = settings.read_bytes()
+            with scoped_environment(gemini, policy, root / 'backup', workspace=workspace):
+                active = json.loads(settings.read_text(encoding="utf-8"))
+                self.assertIn('write_file(' + workspace.resolve().as_posix() + ')',
+                              active['permissions']['allow'])
+                verify_scoped_environment(gemini, policy, workspace=workspace)
+                with self.assertRaisesRegex(ValueError, 'scope|allow list'):
+                    verify_scoped_environment(gemini, policy, workspace=root / 'another-run')
+                with self.assertRaisesRegex(ValueError, 'scope|allow list'):
+                    verify_scoped_environment(gemini, policy)
+            self.assertEqual(settings.read_bytes(), original)
+
+    def test_only_declared_sdk_and_manufacturer_read_roots(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / 'policy.json'
+            for rule, accepted in [
+                ('read_file(C:/Espressif/v5.3.2/esp-idf)', True),
+                ('read_file(C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source)', True),
+                ('read_file(*)', False), ('write_file(C:/Espressif)', False),
+                ('read_file(C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/backup)', False),
+            ]:
+                path.write_text(json.dumps({'policy_version': 1, 'allow': [rule]}))
+                with self.subTest(rule=rule):
+                    if accepted:
+                        self.assertEqual(read_policy(path), [rule])
+                    else:
+                        with self.assertRaises(ValueError):
+                            read_policy(path)
+
     def fixture(self, root):
         gemini = root / ".gemini"
         settings = gemini / "antigravity-cli" / "settings.json"

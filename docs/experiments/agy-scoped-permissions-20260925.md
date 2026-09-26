@@ -1,5 +1,9 @@
 # AGY 첫 pilot 권한 정책 — 2026-09-25
 
+> 2026-09-26 사용자 선택에 따라 필요한 명령군과 해당 run checkout만의 쓰기 권한을
+> 적용했다. [현행 정책·실제 workflow 시험](evidence/agy-scoped-workflow-20260926.md)이 최신 근거다.
+> 이전 단순 prefix 및 쓰기 권한 미설정 설명은 과거 관측이다.
+
 ## 결정
 
 사용자는 첫 `antigravity-cli / gemini-3.8-flash-medium` pilot의 도구 권한을 **필요한
@@ -68,7 +72,7 @@ wrapper 없이 AGY pilot을 시작할 수 없다. [실측 기록](evidence/agy-p
 metadata 명령과 복원 검증을 남겼다.
 
 ```powershell
-python scripts/agy_pilot_environment.py --backup-dir C:\Espressif\benchmark-runs\<run-id>-agy-config run -- `
+python scripts/agy_pilot_environment.py --workspace C:\Espressif\benchmark-runs\<run-id>\checkout --backup-dir C:\Espressif\benchmark-runs\<run-id>-agy-config run -- `
   python scripts/benchmark.py run C:\Espressif\benchmark-runs\<run-id> --receipt <receipt.json>
 ```
 
