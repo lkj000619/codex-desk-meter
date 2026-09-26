@@ -55,3 +55,18 @@ class CommandPolicyTests(unittest.TestCase):
                     'python -m pip install anything', 'python scripts/benchmark.py run x']:
             with self.subTest(cmd=cmd):
                 self.assertFalse(self.allowed(cmd))
+
+    def test_read_path_arrays_and_bounded_depth(self):
+        for cmd in ['Get-ChildItem -Recurse experiments, results, docs -Depth 2',
+                    'gci -Path docs,experiments -Depth 0',
+                    'Get-ChildItem -LiteralPath "docs", \'experiments\' -Depth 10']:
+            with self.subTest(cmd=cmd):
+                self.assertTrue(self.allowed(cmd))
+        for cmd in ['Get-ChildItem docs, ../outside -Depth 2',
+                    'Get-ChildItem docs, C:/Users -Depth 2',
+                    'Get-ChildItem docs -Depth 2; whoami',
+                    'Get-ChildItem docs -Depth -1',
+                    'Get-ChildItem docs, $(whoami)',
+                    'Get-ChildItem docs,', 'Get-ChildItem -Depth']:
+            with self.subTest(cmd=cmd):
+                self.assertFalse(self.allowed(cmd))

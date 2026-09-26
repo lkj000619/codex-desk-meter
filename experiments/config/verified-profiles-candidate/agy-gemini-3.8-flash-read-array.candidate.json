@@ -1,0 +1,47 @@
+{
+  "provider": "google",
+  "product": "antigravity-cli",
+  "interface": "cli",
+  "agent_version": "1.2.11",
+  "model": "gemini-3.8-flash-medium",
+  "model_slug": "agy-flash-medium",
+  "reasoning": "medium",
+  "branch_owner": "antigravity",
+  "branch_product": "antigravity-cli",
+  "cohort": "version-2-end-to-end-v1",
+  "adapter": "antigravity",
+  "argv": [
+    "python",
+    "-c",
+    "import subprocess,sys; prompt=sys.stdin.buffer.read().decode(\"utf-8\"); sys.exit(subprocess.call([\"agy\", *sys.argv[1:], \"--print=\"+prompt], stdin=subprocess.DEVNULL))",
+    "--input-format",
+    "text",
+    "--output-format",
+    "stream-json",
+    "--print-timeout",
+    "120m",
+    "--model",
+    "gemini-3.8-flash-medium"
+  ],
+  "version_argv": [
+    "agy",
+    "--version"
+  ],
+  "sandbox_policy": "prompt-and-log",
+  "approval_policy": "request-review",
+  "network_mode": "offline-fixture",
+  "settings_inventory": {
+    "skills": "no custom global skill directories were present at 2026-09-25 inventory; wrapper rejects newly populated directories; built-in slash expansion remains enabled and actual invocation is reviewed after pilot",
+    "mcp": "global mcp_config.json had zero servers and agy mcp list was empty; wrapper rejects newly configured global servers",
+    "memory": "fresh headless process without resume; wrapper removes global GEMINI.md during execution; no provider memory isolation is claimed",
+    "user_instructions": "wrapper removes global GEMINI.md and hooks during execution; fixed prompt.txt is delivered once and raw activity is reviewed after pilot",
+    "cache": "provider cache is neither disabled nor assumed isolated; terminal usage and provider cache fields are preserved for review",
+    "routing": "argv pins gemini-3.8-flash-medium; raw init.model must match in the first pilot and a mismatch invalidates the run",
+    "plugins": "agy plugin list and agy agents returned empty inventories on 2026-09-25; raw activity requires post-pilot review",
+    "permissions": "Static scoped policy semantic SHA-256 901d4c43ea29ef1eb8f89581b7a39b7cfae30dbbd5d77a0902f5b05e6411b44c plus a single exact write_file grant for the manifest checkout; runner verifies that exact effective rule list before launch. No broad command wildcard or permission bypass.",
+    "model_network": "product input uses offline fixtures; agy models fetched the selected ID under scoped settings; model inference connectivity and entitlement are first-pilot observations",
+    "extension_condition": "No custom global skills, MCP, plugins or agents; wrapper removes global hooks/instructions. Only checkout writes and declared SDK/manufacturer source reads are added. Actual usage reviewed from raw events.",
+    "usage_recording": "record actual skills/plugins/MCP usage with raw-log references; unavailable values null with reason"
+  },
+  "measurement_notes": "2026-09-26 scoped workflow profile. Explicit prompt argument adapter, request-review, fixed model. Declared relative-path reads/setup, IDF and host build/test commands; native file tools write only to exact run checkout. Read grants only pinned IDF SDK and manufacturer source, not backups. IDF child-shell launcher pinned to 5.3.2. Per-run effective settings hash captured by wrapper; static policy hash is explicitly canonical JSON semantic SHA to avoid line-ending ambiguity. Diagnostic smoke is separate from product pilot and logged; provider cache isolation not claimed. Use --workspace equal to manifest checkout. New frozen baseline and receipt required; no in-run permission changes. Read-array revision: relative comma-separated Get-ChildItem paths and nonnegative -Depth supported; separate AGY diagnostic verified."
+}

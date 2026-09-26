@@ -1,0 +1,22 @@
+{
+  "status": "pass",
+  "scope": "separate fixture; not product evidence",
+  "usage": {
+    "input_tokens": 29350,
+    "output_tokens": 1221,
+    "thinking_tokens": 215,
+    "cache_read_tokens": 48835,
+    "total_tokens": 30571
+  },
+  "global_settings_restored": true,
+  "raw_hashes": {
+    "prompt.txt": "278213f20ae17fec997fc8a7a4f8974a9f16bc4b9be460b1a7cc51c7b740b7a2",
+    "stdout.jsonl": "dd1553b8dbc15f3ab17b69317492e34b19c3de2c68bef1141087491ebdda90fc",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "commands": [
+    "Get-ChildItem -Recurse experiments, results, docs -Depth 2",
+    "gci -Path docs,experiments -Depth 0",
+    "Get-ChildItem -LiteralPath \"docs\", 'experiments' -Depth 10"
+  ]
+}
