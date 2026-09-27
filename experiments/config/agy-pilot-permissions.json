@@ -21,6 +21,7 @@
     "command(regex:^ctest +--test-dir +(?:(?:\\.|(?:\\.[\\\\/])?[A-Za-z0-9_][A-Za-z0-9_.-]*(?:[\\\\/][A-Za-z0-9_][A-Za-z0-9_.-]*)*)|\"(?:\\.|(?:\\.[\\\\/])?[A-Za-z0-9_][A-Za-z0-9_.-]*(?:[\\\\/][A-Za-z0-9_][A-Za-z0-9_.-]*)*)\"|\\x27(?:\\.|(?:\\.[\\\\/])?[A-Za-z0-9_][A-Za-z0-9_.-]*(?:[\\\\/][A-Za-z0-9_][A-Za-z0-9_.-]*)*)\\x27)(?: +--output-on-failure)?$)",
     "command(regex:^(?:\\.[\\\\/])?build-host[\\\\/][A-Za-z0-9_][A-Za-z0-9_.-]*\\.exe$)",
     "read_file(C:/Espressif/v5.3.2/esp-idf)",
-    "read_file(C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source)"
+    "read_file(C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source)",
+    "command(regex:^git +ls-files(?: +(?:--cached|--others|--exclude-standard|--error-unmatch))*(?: +--)?(?: +(?:(?:\\.[\\\\/])?[A-Za-z0-9_][A-Za-z0-9_.-]*(?:[\\\\/][A-Za-z0-9_][A-Za-z0-9_.-]*)*[\\\\/]?|\"(?:\\.[\\\\/])?[A-Za-z0-9_][A-Za-z0-9_.-]*(?:[\\\\/][A-Za-z0-9_][A-Za-z0-9_.-]*)*[\\\\/]?\"|\\x27(?:\\.[\\\\/])?[A-Za-z0-9_][A-Za-z0-9_.-]*(?:[\\\\/][A-Za-z0-9_][A-Za-z0-9_.-]*)*[\\\\/]?\\x27))*$)"
   ]
 }

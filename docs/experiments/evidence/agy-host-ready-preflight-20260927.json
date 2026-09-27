@@ -1,0 +1,24 @@
+{
+  "baseline": "f7d43815d74305c40a5d98ec5678741a569acf0d",
+  "preflight": "101 tests plus two host C/C++ runtime cases; 0 failures/warnings; COM3 present; clean frozen checkout",
+  "hashes": {
+    "stdout.txt": "f06fc749a070b8713f60701f008850a8844ac9a863478b40ac1a58b51151034f",
+    "stderr.txt": "533eb0835b0121d052f8d6a6fe501dc24b18bf3b788f2599ba0fd3d8bf27e921",
+    "result.json": "124fd50cb6d223cdd18fedc166d00af7254199b6e6dedf9be82f71db87af6d01"
+  },
+  "prompt_sha256": "4e0f6e3bfdf6f18b5c80484c1f59d8722f089d4b1f0c64744ed6a030845b59ab",
+  "policy_sha256": "e15e52356a08381406b72955491f2fd089cb8c266eb4fcb6867afc20b129eb40",
+  "host_toolchain": {
+    "version": "20260616",
+    "root": "C:/Espressif/benchmark-host-tools/llvm-mingw-20260616-ucrt-x86_64",
+    "source": "https://github.com/mstorsjo/llvm-mingw/releases/tag/20260616",
+    "archive_sha256": "b9b68a4d276e16fa25802aaba458e4638f64b3884c290aaccdc2d87083b6ca35",
+    "executables": {
+      "clang.exe": "a8b7a614eeadd9105f814be3701a7f312cda4cea51751b75b408c16100c94e85",
+      "clang++.exe": "a8b7a614eeadd9105f814be3701a7f312cda4cea51751b75b408c16100c94e85",
+      "cc.exe": "a8b7a614eeadd9105f814be3701a7f312cda4cea51751b75b408c16100c94e85",
+      "c++.exe": "a8b7a614eeadd9105f814be3701a7f312cda4cea51751b75b408c16100c94e85"
+    }
+  },
+  "comparison": "new input condition; prior pilots excluded"
+}

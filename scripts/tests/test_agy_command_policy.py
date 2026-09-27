@@ -6,6 +6,17 @@ import unittest
 
 
 class CommandPolicyTests(unittest.TestCase):
+    def test_git_index_listing_is_checkout_scoped(self):
+        for cmd in ['git ls-files', 'git ls-files docs/', 'git ls-files -- docs/README.md',
+                    'git ls-files --others --exclude-standard main']:
+            with self.subTest(cmd=cmd):
+                self.assertTrue(self.allowed(cmd))
+        for cmd in ['git ls-files ../', 'git ls-files C:/Users',
+                    'git ls-files docs/; whoami', 'git ls-files --recurse-submodules',
+                    'git ls-files --with-tree=HEAD~1']:
+            with self.subTest(cmd=cmd):
+                self.assertFalse(self.allowed(cmd))
+
     def allowed(self, command):
         policy = Path(__file__).resolve().parents[2] / 'experiments/config/agy-pilot-permissions.json'
         for rule in json.loads(policy.read_text())['allow']:
