@@ -1,0 +1,14 @@
+{
+  "baseline": "aab0d493888f4fc0bb6eff726bfe7d93b167543c",
+  "preflight": "111 tests plus host C/C++ runtime; 0 failures/warnings; COM3 present; clean frozen checkout",
+  "exit_code": 0,
+  "hashes": {
+    "stdout.txt": "0e37c8024703eec7b1637711bb7e654bbd8cfdfc6ef887c1dceb422b44953a6b",
+    "stderr.txt": "d521b9cc9d7a032f8e8a89d00ed2567a592eb245994de9c456ee1e0ddfa75283",
+    "result.json": "124fd50cb6d223cdd18fedc166d00af7254199b6e6dedf9be82f71db87af6d01"
+  },
+  "policy_sha256": "d48b29287e3900ec0531fe20862f593a619168298b04621c35053d29dbc1e2bc",
+  "source_index_sha256": "4e03c428a91b9d7eff063c591daf900fd5d3edeea276b08f0840f4f0bf91652b",
+  "source_file_count": 189,
+  "comparison": "pilot only; new common input; prior pilots excluded"
+}

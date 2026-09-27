@@ -24,6 +24,11 @@ runner는 ESP-IDF 5.3.2 환경을 활성화한 상태로 agent를 시작한다. 
 `python tests/<시험 파일>.py`, `cmake -S <상대 경로> -B build-host -G Ninja`,
 `cmake --build build-host`, `ctest --test-dir build-host --output-on-failure`다.
 생성된 `build-host`의 시험 실행 파일도 실행할 수 있다. 세부 옵션은 정책 파일을 따른다.
+Python 시험은 파일의 실행 진입점을 먼저 확인한다. `if __name__ == "__main__"`에서
+시험을 실행하는 파일은 `python tests/<시험 파일>.py`로 실행하고, `unittest.TestCase`
+시험은 위 discovery 명령으로 실행한다. CMake 시험은 위 CTest 명령을 사용한다.
+현재 정책에는 `pytest`와 `python -m pytest`가 등록되어 있지 않다. 시험 수와
+실행 결과를 확인하며, discovery가 0개 시험을 실행한 것을 제품 시험 통과로 기록하지 않는다.
 명령 결합, 임의 shell/Python 실행, 다운로드·설치·flash 명령은 허용 목록에 없다.
 
 SDK와 제조사 소스의 읽기는 다음 두 경로만 별도 허용한다. agent의 파일 읽기 도구를

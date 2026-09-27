@@ -1,5 +1,11 @@
 # Benchmark 실행 전 준비 gate
 
+> 현재 판정 (2026-09-28): **PREFLIGHT_PASSED / AGY_COMPLETION_FAILED / PRODUCT_PASS_UNVERIFIED**.
+> [새 pilot 실행·독립 검증](evidence/agy-r01-result-20260928.md): 사전 시험 111개 통과 후 실제 AGY를 실행했다.
+> 미등록 pytest 명령 거부로 완주 실패. 별도 소스 복사본의 host 빌드·CTest 2개·기존 평가 29개·firmware 빌드는 통과했다.
+> 구조화된 결과·PC 통합·실물 평가가 없어 정식 비교는 보류한다. 공통 개발 환경 문서의 시험 실행 선택 기준을 보완했으며,
+> 아래 이전 baseline receipt는 새 문서 입력에 사용할 수 없다. 아래 상태 기록은 역사 기록이다.
+
 > Measurement correction: [comparison integrity review](evidence/agy-comparison-integrity-20260927.md). AGY DONE without exit status is unknown; future failed_commands remains null when incomplete. Past raw runs are immutable. 107 tests passed. Product pilot remains unpassed; no expansion of vendor build access.
 
 > Current review (2026-09-27): **PREFLIGHT_PASSED / PILOT_NOT_PASSED**.
