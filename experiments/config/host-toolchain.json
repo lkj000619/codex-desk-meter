@@ -1,0 +1,12 @@
+{
+  "version": "20260616",
+  "root": "C:/Espressif/benchmark-host-tools/llvm-mingw-20260616-ucrt-x86_64",
+  "source": "https://github.com/mstorsjo/llvm-mingw/releases/tag/20260616",
+  "archive_sha256": "b9b68a4d276e16fa25802aaba458e4638f64b3884c290aaccdc2d87083b6ca35",
+  "executables": {
+    "clang.exe": "a8b7a614eeadd9105f814be3701a7f312cda4cea51751b75b408c16100c94e85",
+    "clang++.exe": "a8b7a614eeadd9105f814be3701a7f312cda4cea51751b75b408c16100c94e85",
+    "cc.exe": "a8b7a614eeadd9105f814be3701a7f312cda4cea51751b75b408c16100c94e85",
+    "c++.exe": "a8b7a614eeadd9105f814be3701a7f312cda4cea51751b75b408c16100c94e85"
+  }
+}

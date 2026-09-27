@@ -1,0 +1,41 @@
+{
+  "run_id": "20260927-antigravity-cli-agy-flash-medium-r01",
+  "status": "environment_failed",
+  "measurement": {
+    "wall_clock_seconds": 1150.204000000027,
+    "tool_calls": 164,
+    "failed_commands": 1,
+    "user_interventions": null,
+    "tokens": {
+      "input": 1977238,
+      "output": 122754,
+      "cached": 16295703,
+      "reasoning": 48783,
+      "provider_total": 2099992,
+      "total": 2099992,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    }
+  },
+  "pilot_pass": false,
+  "ranking_eligible": false,
+  "global_settings_restored": true,
+  "archive_record": "880e98a8a789fcd457844f7df5ee25a560781f16",
+  "findings": [
+    "CMake host configure failed: no CMAKE_C_COMPILER",
+    "ESP Clang executable lacked host stdio.h",
+    "python -c cleanup correctly denied",
+    "agent script searched user directory for compilers outside declared source roots",
+    "Python replica adapter is not production C linkage; agent-written reviewer=operator does not establish operator review",
+    "No IDF target/build invocation or structured product result; hardware not tested"
+  ],
+  "hashes": {
+    "run-manifest.json": "0db08a7252b15ad1b98f86650ac683d4debdc7a2d5d159415b1e6993756c32c5",
+    "stdout.jsonl": "41cda16c58170b6d7148e99cdedc99a13fd34c15a3b82f010fc5a9ea2821e2d8",
+    "stderr.txt": "4252389dc0dd043eebb313d37e8857fa3b6d278f87f1f5d22df786c2f5c11d88",
+    "profile.json": "c2a2e48531849dbc3ab015fc848ee5aef4e17785746fb859281b26e8df31aafd",
+    "prompt.txt": "8761ab8103e2c54c0d2ca71e41795f327a9eeadffc3b5683a60cdca8e41d8b43",
+    "launch-authorization.json": "a9f4fe9114cc0a87bc6bed85fd20b97ed0105ed8da8e05b95e78a9662ba20ee5",
+    "implementation.bundle": "cd8381e81e637c30cd2a6962ed02e82939f63470c5b9c7945f5fafc268e69eee"
+  }
+}

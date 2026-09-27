@@ -109,6 +109,14 @@ if ($null -eq $python) {
 else {
     $pythonPrefix = @()
     if ($python.Name -eq 'py.exe') { $pythonPrefix = @('-3') }
+    & $python.Source @($pythonPrefix + 'scripts/check-host-compiler.py')
+    if ($LASTEXITCODE -eq 0) {
+        Check-Ok 'Host C/C++ configure, compile, link and CTest runtime'
+    }
+    else {
+        Check-Fail 'Host C/C++ configure, compile, link and CTest runtime'
+    }
+
     & $python.Source @($pythonPrefix + $validator)
     if ($LASTEXITCODE -eq 0) {
         Check-Ok 'Example manifest/result validation'

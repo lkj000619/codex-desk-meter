@@ -2,6 +2,12 @@
 
 ## 제한된 AGY pilot의 명령 사용
 
+host C/C++는 `experiments/config/host-toolchain.json`의 LLVM-MinGW 20260616을 사용한다.
+운영자가 배포 archive hash를 검증해 준비하며, `activate-idf.ps1`은 컴파일러 실행 파일
+hash를 확인하고 현재 프로세스의 PATH에만 추가한다. agent가 추가 설치·탐색할 필요는 없다.
+`check-experiment-preflight.ps1`은 C와 C++의 CMake 구성·링크 및 CTest 실행까지 검사한다.
+실패하면 다음 pilot을 시작하지 않는다. 이 검사는 제품 C 코드의 시험을 대신하지 않는다.
+
 runner는 ESP-IDF 5.3.2 환경을 활성화한 상태로 agent를 시작한다. 자식 셸도
 `idf.py --version`으로 같은 버전을 확인한다. 별도 PowerShell wrapper나 환경
 재설정 없이 저장소 루트에서 명령을 한 번에 하나씩 실행한다.

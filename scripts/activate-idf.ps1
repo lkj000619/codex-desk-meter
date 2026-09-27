@@ -81,6 +81,22 @@ else {
 # 문자 변환 오류를 일으킨다. 현재 기준 환경에서는 재현성을 위해 비활성화한다.
 $env:IDF_CCACHE_ENABLE = '0'
 
+# Provisioned by the operator before freezing the benchmark baseline. Only the
+# current process and its children receive this PATH; no machine settings change.
+$hostToolchainConfig = Join-Path $PSScriptRoot '..\experiments\config\host-toolchain.json'
+$hostToolchain = Get-Content -LiteralPath $hostToolchainConfig -Raw | ConvertFrom-Json
+$hostCompilerBin = Join-Path $hostToolchain.root 'bin'
+foreach ($entry in $hostToolchain.executables.PSObject.Properties) {
+    $hostExecutable = Join-Path $hostCompilerBin $entry.Name
+    if (-not (Test-Path -LiteralPath $hostExecutable)) {
+        throw "Pinned host compiler missing: $hostExecutable"
+    }
+    if ((Get-FileHash -LiteralPath $hostExecutable -Algorithm SHA256).Hash.ToLowerInvariant() -ne $entry.Value) {
+        throw "Pinned host compiler hash mismatch: $hostExecutable"
+    }
+}
+$env:PATH = "$hostCompilerBin;$env:PATH"
+
 $actualIdfVersion = idf.py --version
 if ($LASTEXITCODE -ne 0 -or ($actualIdfVersion -join "`n") -notmatch "ESP-IDF v$([regex]::Escape($IdfVersion))(?:\s|$)") {
     throw "ESP-IDF version check failed: $actualIdfVersion"
