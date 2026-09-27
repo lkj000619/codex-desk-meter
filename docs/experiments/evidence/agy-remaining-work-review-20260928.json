@@ -1,0 +1,28 @@
+{
+  "run_id": "20260928-antigravity-cli-agy-flash-medium-r01",
+  "implementation_commit": "9d52fa50529ae8020c6d1f54f193c7f74f875181",
+  "scope": "Remaining-work review only; no source modifications, flashing, AGY execution or runtime feedback",
+  "source_hashes": {
+    "main/main.c": "443257cf82203c5fa416a8d2a308a03eab55a3af94a3aba7279db5eb66436632",
+    "components/meter/meter_gui.c": "bbd7eaf8a6aee38f9c4aa5ae49b1d2a21a908337080d49d413ed3c51781b6a17",
+    "components/meter/meter_transport.c": "6d330f06531ffffd33fb4316c872171967a0a198b083e3c93bb6111bf937aec1",
+    "components/meter/meter_state.c": "696fb96df073361a8b6768a6f139da371410684cf31f181b0325e34fe79b1469",
+    "components/meter/feature_imu.c": "d6e2876689c6678845d0de03ac0d2667638ed375bcee16a48882a66e4df690a6",
+    "sdkconfig": "27ba507468f17e6bcbca91d121aa0ed69dda02904ce935a82b5b17a974791423",
+    "CMakeLists.txt": "aef40450eed463f0e3e7044ee0833651a4586bf8145a66a53abad74026d22535"
+  },
+  "evidence_hashes": {
+    "agy-r01-result-20260928.json": "fe26e86ca96a30ac44a0959e879ef8c689ffb62910aa484e66173f33b56a5711",
+    "agy-r01-hardware-upload-20260928.json": "2f81e27fe9dd1948c5b1c18fa6fda66a7deed4f75236164bdc6c9719f39cd339",
+    "agy-r01-hardware-visual-20260928.json": "c04759bfb8a5f764a4a42ae55d53521e3cc52701cf9fe8a7ee1dd7b43fb1a382",
+    "agy-test-entry-preflight-20260928.json": "5815d1cdc4ccaced046ce0644d3a0d5ebb1c66c86611ad11e97a4afbfb86faca",
+    "agy-remaining-work-review-20260928.md": "dfa0cdcccc7c45f5b9e6fbdf3271b7f162266634e5e3b36fc1f9d108f91efe2b"
+  },
+  "original_run_hashes_verified": true,
+  "agent_checkout_clean": true,
+  "binary_hash_unchanged": true,
+  "structured_result_exists": false,
+  "pilot_pass": false,
+  "product_pass": false,
+  "new_pilot_started": false
+}
