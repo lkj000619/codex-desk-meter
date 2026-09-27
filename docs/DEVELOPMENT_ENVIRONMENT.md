@@ -32,6 +32,14 @@ SDK와 제조사 소스의 읽기는 다음 두 경로만 별도 허용한다. a
 - `C:/Espressif/v5.3.2/esp-idf`
 - `C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source`
 
+제조사 source의 실제 파일명·SHA-256은 [고정 파일 목록](hardware/vendor-source-index.json)을
+확인한다. 제조사 `build`·`backup` 경로는 운영자 기록이며 agent의 읽기 허용 범위가 아니다.
+아래 과거 bring-up 절차의 외부 경로는 현재 실험의 추가 읽기·쓰기 권한을 뜻하지 않는다.
+
+실험 식별자와 고정 해시는 runner가 checkout 안의 `.benchmark-inputs/run-context.json`에
+제공한다. 평가 manifest 사본도 같은 폴더에 제공한다. 이 입력은 실행 전후 hash로 검사하며
+agent가 수정하지 않는다. 실제 시간·토큰과 실물 결과는 운영자가 종료 후 기록한다.
+
 ## 기준 환경
 
 2026-09-11 현재 Version 2인 Waveshare ESP32-S3-LCD-3.16 개발은 다음 환경을

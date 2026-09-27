@@ -18,7 +18,7 @@ import zipfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-from benchmark_support import ROOT, KST, digest, read, save, validate_operator, validate_schema
+from benchmark_support import ROOT, KST, digest, read, save, validate_operator, validate_schema, verify_evidence
 
 
 UNRESOLVED_PROFILE_VALUES = {
@@ -158,6 +158,53 @@ def slug(s):
     return s
 
 
+def prepare_agent_inputs(directory, manifest):
+    """Expose only immutable identity inputs, never runtime telemetry or operator settings."""
+    checkout = Path(manifest["execution"]["worktree"])
+    inputs = checkout / ".benchmark-inputs"
+    inputs.mkdir()
+    context = {
+        "schema_version": 1,
+        "run_id": manifest["run_id"],
+        "experiment_id": manifest["experiment_id"],
+        "baseline": {"id": manifest["baseline_id"], "ref": manifest["baseline_ref"],
+                     "commit": manifest["execution"]["base_commit"]},
+        "agent": manifest["agent"],
+        "input_hashes": {key: value for key, value in manifest["execution"].items()
+                         if key.endswith("_sha256")},
+        "outputs": {key: manifest["outputs"][key] for key in
+                    ("selection_document", "structured_result", "evaluation_manifest")
+                    if key in manifest["outputs"]},
+        "evaluation_manifest_path": ".benchmark-inputs/e2e-evaluation-manifest.json"
+                                    if manifest["experiment_id"] == "version-2-end-to-end-v1" else None,
+    }
+    save(directory / "agent-context.json", context)
+    (inputs / "run-context.json").write_bytes((directory / "agent-context.json").read_bytes())
+    manifest["operator"]["evidence"]["agent-context.json"] = digest(
+        (directory / "agent-context.json").read_bytes())
+    if context["evaluation_manifest_path"]:
+        source = directory / "e2e-evaluation-manifest.json"
+        (inputs / "e2e-evaluation-manifest.json").write_bytes(source.read_bytes())
+        manifest["operator"]["evidence"][source.name] = digest(source.read_bytes())
+
+
+def verify_agent_inputs(directory, manifest):
+    # Historical runs did not have this generated input contract.
+    if "agent-context.json" not in manifest["operator"]["evidence"]:
+        return
+    references = {"agent-context.json": "run-context.json"}
+    if manifest["experiment_id"] == "version-2-end-to-end-v1":
+        references["e2e-evaluation-manifest.json"] = "e2e-evaluation-manifest.json"
+    verify_evidence({"operator": {"evidence": {
+        key: manifest["operator"]["evidence"][key] for key in references}}}, directory)
+    checkout = Path(manifest["execution"]["worktree"])
+    for source, target in references.items():
+        copy = checkout / ".benchmark-inputs" / target
+        if (not copy.is_file() or not copy.resolve().is_relative_to(checkout.resolve())
+                or copy.read_bytes() != (directory / source).read_bytes()):
+            raise ValueError(f"immutable agent input changed: {target}")
+
+
 def prepare(a):
     if git("status", "--porcelain"):
         raise ValueError("commit changes before preparing a baseline run")
@@ -190,9 +237,6 @@ def prepare(a):
     checkout.mkdir()
     _extract_archive(checkout, base)
     git("init", cwd=checkout)
-    git("add", ".", cwd=checkout)
-    git("-c", "user.name=Benchmark", "-c", "user.email=benchmark@localhost", "commit", "-m", "Isolated baseline snapshot", cwd=checkout)
-    local_base = git("rev-parse", "HEAD", cwd=checkout)
     template = (checkout / "experiments/prompts/version-2-agent-task.md").read_bytes()
     prompt = template.decode("utf-8").replace("<run-id>", run_id).encode("utf-8")
     (directory / "prompt.txt").write_bytes(prompt)
@@ -214,7 +258,7 @@ def prepare(a):
              network_mode=profile["network_mode"], timeout_seconds=a.timeout)
     m["operator"] = dict(phase=a.phase, status="prepared", reason=None, repetition=repetition,
                          cohort=profile["cohort"], seed=a.seed, exit_code=None,
-                         delivered_prompt_sha256=digest(prompt), local_base_commit=local_base, evidence={})
+                         delivered_prompt_sha256=digest(prompt), local_base_commit=None, evidence={})
     m["hardware"]["port"] = a.port
     m["measurement"].update(wall_clock_seconds=None, tool_calls=None, failed_commands=None, user_interventions=None)
     m["measurement"]["tokens"]["availability_note"] = "Not yet executed."
@@ -235,6 +279,10 @@ def prepare(a):
             "experiment_id": m["experiment_id"],
             "execution": {"base_commit": base},
         })
+    prepare_agent_inputs(directory, m)
+    git("add", ".", cwd=checkout)
+    git("-c", "user.name=Benchmark", "-c", "user.email=benchmark@localhost", "commit", "-m", "Isolated baseline and immutable run inputs", cwd=checkout)
+    m["operator"]["local_base_commit"] = git("rev-parse", "HEAD", cwd=checkout)
     validate_schema(m, "run-manifest.schema.json")
     validate_operator(m)
     save(directory / "run-manifest.json", m)
@@ -533,6 +581,7 @@ def execute(a):
     if datetime.now(KST).strftime("%Y%m%d") != m["run_id"][:8]:
         raise ValueError("prepared on a different date; reserve a new run")
     checkout = Path(m["execution"]["worktree"])
+    verify_agent_inputs(directory, m)
     if git("status", "--porcelain", cwd=checkout) or git("rev-parse", "HEAD", cwd=checkout) != m["operator"]["local_base_commit"]:
         raise ValueError("checkout changed since preparation")
     if digest((directory / "profile.json").read_bytes()) != m["agent"]["configuration_sha256"]:
@@ -559,6 +608,10 @@ def execute(a):
     m["execution"]["started_at"] = now()
     save(directory / "run-manifest.json", m)
     r = capture(argv, checkout, prompt, directory, m["execution"]["timeout_seconds"], env=agent_env)
+    try:
+        verify_agent_inputs(directory, m)
+    except ValueError as exc:
+        r["status"], r["reason"] = "environment_failed", str(exc)
     if profile["adapter"] == "antigravity" and r["status"] == "completed":
         try:
             check_antigravity_stderr(directory / "stderr.txt")

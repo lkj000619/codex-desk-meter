@@ -19,6 +19,9 @@ ESP32-S3-LCD-3.16, 프레임워크는 ESP-IDF v5.3.2다.
 
 현재 작업 디렉터리가 이번 run의 지정 checkout 루트다. 먼저 native 파일 읽기 도구로
 `docs/DEVELOPMENT_ENVIRONMENT.md`와 `experiments/config/agy-pilot-permissions.json`을 읽어라.
+그 다음 `.benchmark-inputs/run-context.json`을 읽어 이번 run의 식별자, baseline commit/ref,
+입력 해시와 결과 경로를 확인하라. 이 파일과 `.benchmark-inputs/e2e-evaluation-manifest.json`은
+runner가 제공한 고정 입력 사본이다. 변경하지 말고 결과의 identity/manifest 참조에 사용하라.
 실행 manifest·profile·receipt는 운영자가 checkout 밖에서 검증하고 관리한다.
 이를 찾기 위해 상위 폴더나 다른 run을 조회하지 말라. 이 runner 전달 자체가 검증된
 실행 진입이며, 에이전트가 운영자 파일의 위치를 추가 탐색할 필요는 없다.
@@ -70,6 +73,10 @@ Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 요청하거나 �
 
 현재 main에서 제공된 지정 checkout의 현재 문서·파일과 운영자가 명시적으로
 제공한 자료만 사용하라. `docs/experiments/isolation-policy.md`를 읽어라.
+제조사 source 경로와 파일 목록은 `docs/hardware/vendor-source-index.json`에 있다.
+제조사 `build`, `backup`과 운영자가 만든 다른 프로젝트의 산출물은 참조 범위에 포함되지 않는다.
+과거 bring-up 문서에 경로가 나와도 이 범위가 확대되는 것은 아니다. 의존성·header·설정은
+허용된 source와 SDK에서 확인하고 이번 checkout에서 직접 빌드하라.
 다른 branch/worktree, 과거 agent의 구현·결과·로그·대화를 조회하지 말라.
 `git log`, `git show`, 다른 ref 조회, branch 전환 또는 외부 저장소 검색으로
 이전 구현을 탐색하지 말라. 자체 변경 확인용 `git status`, `git diff`는 허용한다.
@@ -156,6 +163,9 @@ results/<run-id>/end-to-end-result.json
 `end-to-end-result.json`은 schema_version 1과
 `experiments/schema/end-to-end-result.schema.json` 계약을 지켜라.
 운영 기록에만 있는 시각·해시·계측값을 추정하지 말라. 최종 보고에 확인 가능한 다음을 포함하라.
+고정 식별자·baseline·입력 해시는 `.benchmark-inputs/run-context.json`에서 사용하라.
+실행 시간·usage·운영자 실물 판정은 종료 후 운영자가 작성한다. 실행 중 알 수 없는
+값은 계약에서 허용하는 null·not_run과 사유로 남겨라.
 
 - agent / product / interface / version / model / reasoning
 - 기준 commit, prompt/config/fixture SHA-256
