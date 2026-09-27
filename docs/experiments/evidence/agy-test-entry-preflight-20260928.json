@@ -1,0 +1,20 @@
+{
+  "baseline": "7fcf9a9af3b1995f1daa0e866774ac85910b673b",
+  "baseline_ref": "benchmark-v2-baseline-20260928-test-entry",
+  "preflight": "111 tests plus host C/C++ runtime; 0 failures/warnings; COM3 present; clean frozen checkout",
+  "hashes": {
+    "stdout.txt": "e61d513500546359a8c3173a1a1aea48ecb1e7ce64dc3fd47e3bb8384bf75ad0",
+    "stderr.txt": "52e59e677bf45734c381d68dc4ba7d0133c14871d2deabe908eb70d7adf9c86d",
+    "result.json": "124fd50cb6d223cdd18fedc166d00af7254199b6e6dedf9be82f71db87af6d01"
+  },
+  "policy_sha256": "d48b29287e3900ec0531fe20862f593a619168298b04621c35053d29dbc1e2bc",
+  "policy_expanded": false,
+  "profile_sha256": "64fa4b695f97d286fe44f9fda8c215a7a0437ed52320d586564f079808ba62c1",
+  "pilot_entry_ready": true,
+  "pilot_pass": false,
+  "product_pass": false,
+  "ranking_eligible": false,
+  "completed_run": "20260928-antigravity-cli-agy-flash-medium-r01",
+  "next_run_started": false,
+  "comparison": "New common environment guidance. Do not pool with previous inputs. Launch from frozen clone after fresh COM3/date checks."
+}

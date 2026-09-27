@@ -6,6 +6,11 @@
 > 구조화된 결과·PC 통합·실물 평가가 없어 정식 비교는 보류한다. 공통 개발 환경 문서의 시험 실행 선택 기준을 보완했으며,
 > 아래 이전 baseline receipt는 새 문서 입력에 사용할 수 없다. 아래 상태 기록은 역사 기록이다.
 
+> 다음 pilot 진입 준비: [시험 진입 지침 기준본 사전 검증](evidence/agy-test-entry-preflight-20260928.json),
+> [새 pilot 전용 receipt](evidence/agy-gemini-3.8-flash-test-entry-receipt.json).
+> 고정 tag `benchmark-v2-baseline-20260928-test-entry`의 ASCII clone에서 새 run을 준비한다.
+> 111개 시험·host runtime·COM3·clean checkout 검증 통과; 정책 확대 없음. 다음 run은 아직 시작하지 않았다.
+
 > Measurement correction: [comparison integrity review](evidence/agy-comparison-integrity-20260927.md). AGY DONE without exit status is unknown; future failed_commands remains null when incomplete. Past raw runs are immutable. 107 tests passed. Product pilot remains unpassed; no expansion of vendor build access.
 
 > Current review (2026-09-27): **PREFLIGHT_PASSED / PILOT_NOT_PASSED**.
