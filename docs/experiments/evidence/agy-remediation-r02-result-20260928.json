@@ -1,0 +1,47 @@
+{
+  "run_id": "20260928-agy-remediation-r02",
+  "classification": "remediation",
+  "status": "environment_failed",
+  "reason": "AGY tool permission denied; inspect terminal denied_actions",
+  "measurement": {
+    "tokens": {
+      "input": 1852908,
+      "output": 70466,
+      "cached": 14842616,
+      "reasoning": 42315,
+      "provider_total": 1923374,
+      "total": 1923374,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    },
+    "tool_calls": 109,
+    "failed_commands": null
+  },
+  "execution": {
+    "start": "2026-09-27T16:35:35.390Z",
+    "end": "2026-09-27T16:46:34.627Z",
+    "elapsed": 659.234000000055,
+    "status": "environment_failed",
+    "reason": "AGY tool permission denied; inspect terminal denied_actions",
+    "code": 0
+  },
+  "denied_command": "Get-ChildItem C:\\Espressif\\vendor\\waveshare-esp32-s3-lcd-3.16\\source",
+  "partial_implementation_commit": "6bb5d7fdfa4d6ba80c3eb5a6205767e942e13fc7",
+  "globals_restored": true,
+  "immutable_inputs_verified": true,
+  "ranking_eligible": false,
+  "product_pass": false,
+  "limitations": [
+    "Partial state/GUI changes and regression tests only; BOOT/transport/main and PC implementation incomplete",
+    "No structured result or hardware upload of this partial snapshot"
+  ],
+  "hashes": {
+    "remediation-manifest.json": "55085265f1988ca01487fd8075364a77ad335bac67c081b9da7c99202953529a",
+    "stdout.jsonl": "76fe1c45c526e18f2cfe9ce00db68a34c077e81795f5d7b852e38da3781c5ce2",
+    "stderr.txt": "4252389dc0dd043eebb313d37e8857fa3b6d278f87f1f5d22df786c2f5c11d88",
+    "command-audit.json": "4f3d6e3f714f4ae1bc241baa383af98fe0d893cb53c8f8f81b6a429af78f32b1",
+    "implementation.bundle": "bca4a985ca7d2d14a5479edccef9776d29659ef4b43f668834d690083b496134",
+    "prompt.txt": "cd941784b3ed02bcf01a5cbdbfd75133e5e8147387da1a5f80142b0e54672ee2",
+    "source-provenance.json": "b998f8f14a8de5112fa54a01057ec7b5b8d716d0587a5dc1fbe14195cf78dc9e"
+  }
+}

@@ -6,6 +6,22 @@ import unittest
 
 
 class CommandPolicyTests(unittest.TestCase):
+    def test_declared_external_read_roots_only(self):
+        vendor = 'C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source'
+        for cmd in ['Get-ChildItem ' + vendor.replace('/', '\\'),
+                    'Get-ChildItem -Recurse -Depth 2 "' + vendor + '"',
+                    'Get-Content C:/Espressif/v5.3.2/esp-idf/tools/idf.py',
+                    'Test-Path ' + vendor + '/ESP32-S3-LCD-3.16-Demo']:
+            with self.subTest(cmd=cmd):
+                self.assertTrue(self.allowed(cmd))
+        for cmd in ['Get-ChildItem C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/build',
+                    'Get-Content ' + vendor + '/../backup/key',
+                    'Get-ChildItem C:/Users', 'Get-ChildItem ' + vendor + '; whoami',
+                    'Remove-Item ' + vendor, 'Get-Content ' + vendor + '/.env',
+                    'Get-ChildItem C:/Espressif/benchmark-runs']:
+            with self.subTest(cmd=cmd):
+                self.assertFalse(self.allowed(cmd))
+
     def test_git_index_known_root_dotfiles(self):
         for cmd in ['git ls-files CMakeLists.txt sdkconfig.defaults .gitignore',
                     'git ls-files -- .gitignore .gitattributes',

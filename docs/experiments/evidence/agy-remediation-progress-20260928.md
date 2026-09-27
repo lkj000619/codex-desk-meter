@@ -23,7 +23,9 @@
 | remediation r01 | 58.359초 후 환경 실패; 제품 변경 없음 | `.gitignore`를 포함한 checkout Git index 조회 거부. 전역 설정 복구·source clean·bundle 보존 확인 |
 | dotfile 진단 1 | 첫 조회 성공, 두 번째 조회 거부 | 두 번째 명령의 현재 디렉터리 `.` 선택자가 규칙에 없었음. 원본 진단·usage 보존 |
 | dotfile 진단 2 | 통과 | `.gitignore`/`.gitattributes` 및 현재 checkout 조회 모두 실제 AGY에서 실행. 전역 설정 복구 |
-| remediation r02 | 실행 시작 | 최종 제한 규칙·고정 입력·원본 source 확인; preflight 112개와 COM3·host runtime·clean checkout 통과 |
+| remediation r02 | 659.234초 후 환경 실패; 부분 수정 보존 | 상태·GUI 코드 및 회귀 시험 수정 뒤 이미 읽기 허용된 vendor source의 절대 경로 셸 조회 거부. snapshot `6bb5d7fdfa4d6ba80c3eb5a6205767e942e13fc7` 보존 |
+| source-read 진단 | 통과 | 기존 SDK/vendor source grant 안의 두 셸 조회가 실제 AGY에서 실행. 기존 자료 접근 범위 유지 |
+| remediation r03 | 실행 시작 | r02의 AGY 부분 수정 파일 114개를 canonical archive 그대로 복사. 제한 정책 회귀 시험·preflight 113개·COM3·host runtime·clean checkout 통과 |
 
 정책 보완은 `git ls-files`의 checkout-root `.gitignore`, `.gitattributes`, 현재 디렉터리
 선택자뿐이다. parent/absolute 경로·history·compound shell·임의 Python·설치·flash는
@@ -31,6 +33,12 @@
 negative boundary 시험과 실제 AGY 진단을 통과했다.
 기존 동결 정량 비교 baseline과 receipt는 변경하지 않는다. 새 정책을 정식 비교에
 사용하려면 모든 후보의 공통 조건을 다시 동결·검증해야 한다.
+
+r03에서는 native 파일 읽기에 이미 허용된 SDK·vendor source 안의 read-only 셸 조회를
+같은 자료 범위로 맞췄다. 외부 source의 작성·실행, vendor build/backup, 사용자 파일,
+parent traversal·명령 결합·설치·flash는 허용하지 않았다. 실패 재현 뒤 negative boundary
+시험과 실제 AGY 진단으로 별도 확인했다. r02의 부분 수정은 AGY 작성이며 운영자는
+추가 제품 코드를 작성하지 않았다. 시작 source와 각 시도의 시간·usage는 별도 기록한다.
 
 ## 보완 범위
 
@@ -44,7 +52,9 @@ provider 전체·오류·복구 시험, 선택 IMU 기능과 최종 구조화 �
 - [첫 보완 시작·사용자 관찰](agy-remediation-launch-20260928.json)
 - [r01 실패 원본·측정·hash](agy-remediation-r01-result-20260928.json)
 - [r02 제한 정책·진단·사전 검증](agy-remediation-policy-preflight-20260928.json)
+- [r02 실패·부분 구현·측정](agy-remediation-r02-result-20260928.json)
+- [r03 source 조회·진단·사전 검증](agy-remediation-source-read-preflight-20260928.json)
 - [기존 남은 작업 점검](agy-remaining-work-review-20260928.md)
-- raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r02`.
+- 현재 raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r03`.
 
 이 문서는 시작 시점의 진행 기록이다. 실행 종료 판정은 별도 결과 보고서로 추가한다.

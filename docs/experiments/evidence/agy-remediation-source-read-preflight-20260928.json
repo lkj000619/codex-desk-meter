@@ -1,0 +1,38 @@
+{
+  "remediation_run_id": "20260928-agy-remediation-r03",
+  "classification": "remediation",
+  "ranking_eligible": false,
+  "preflight": "113 tests plus host C/C++ runtime, COM3, clean checkout; 0 failures/warnings",
+  "policy_change": "Read-only shell queries only inside existing SDK/vendor source grants. Data grants unchanged. Native and shell reads aligned. No parent paths, vendor build/backup, arbitrary commands, installs, serial or flash.",
+  "regression": "Red then green; seven policy tests including negative source boundary cases",
+  "actual_agy_queries": [
+    "Get-ChildItem C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source",
+    "Test-Path C:/Espressif/v5.3.2/esp-idf/tools/idf.py"
+  ],
+  "diagnostic_usage": {
+    "input": 25186,
+    "output": 690,
+    "cached": 32561,
+    "reasoning": 289,
+    "provider_total": 25876,
+    "total": 25876,
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+    "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+  },
+  "source_partial_implementation": "6bb5d7fdfa4d6ba80c3eb5a6205767e942e13fc7",
+  "product_files_preserved": 114,
+  "policy_sha256": "67718286d016a9fee47f9bfee9af1530d4a82bc2ee7736e283adf37857e9008a",
+  "diagnostic_hashes": {
+    "stdout.jsonl": "7307243c9d424cddef10b9ac71ed030804d64aa41f5d2fb725bbc09257cd91ec",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "result.json": "6d89c20e75c0de1eb7f2146cc3ea99eeea73744ed18112d1cb3d544f0d7e03cc",
+    "usage.json": "b879f61a59076c62ea99090bb194cec20e8aa86b0bfaa08cbb1247a304d42c92"
+  },
+  "preflight_hashes": {
+    "preflight-stdout.txt": "1a61e726ecbc57632949fb4d577034ef35775b687e361df6cc8646422b47b79a",
+    "preflight-stderr.txt": "d592e23af3c622f36860aa7d01333e7126b2ae519bd44e7aa996ca9d6c45321d",
+    "preflight-result.json": "124fd50cb6d223cdd18fedc166d00af7254199b6e6dedf9be82f71db87af6d01"
+  },
+  "prompt_sha256": "2e2e10367bcae3e64e50e44e2179723df0723c06fe6389b607d078dbb93dd607",
+  "product_pass": false
+}
