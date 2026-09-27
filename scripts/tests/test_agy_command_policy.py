@@ -6,6 +6,20 @@ import unittest
 
 
 class CommandPolicyTests(unittest.TestCase):
+    def test_git_index_known_root_dotfiles(self):
+        for cmd in ['git ls-files CMakeLists.txt sdkconfig.defaults .gitignore',
+                    'git ls-files -- .gitignore .gitattributes',
+                    'git ls-files -- .gitignore .gitattributes .',
+                    'git ls-files ".gitignore"', "git ls-files '.gitattributes'"]:
+            with self.subTest(cmd=cmd):
+                self.assertTrue(self.allowed(cmd))
+        for cmd in ['git ls-files ../.gitignore', 'git ls-files .env',
+                    'git ls-files -- .gitignore ..',
+                    'git ls-files .git/config', 'git ls-files .gitignore; whoami',
+                    'git ls-files C:/Users/.gitignore', 'git ls-files $(whoami)']:
+            with self.subTest(cmd=cmd):
+                self.assertFalse(self.allowed(cmd))
+
     def test_git_index_listing_is_checkout_scoped(self):
         for cmd in ['git ls-files', 'git ls-files docs/', 'git ls-files -- docs/README.md',
                     'git ls-files --others --exclude-standard main']:
