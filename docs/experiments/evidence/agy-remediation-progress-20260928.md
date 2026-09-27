@@ -25,7 +25,9 @@
 | dotfile 진단 2 | 통과 | `.gitignore`/`.gitattributes` 및 현재 checkout 조회 모두 실제 AGY에서 실행. 전역 설정 복구 |
 | remediation r02 | 659.234초 후 환경 실패; 부분 수정 보존 | 상태·GUI 코드 및 회귀 시험 수정 뒤 이미 읽기 허용된 vendor source의 절대 경로 셸 조회 거부. snapshot `6bb5d7fdfa4d6ba80c3eb5a6205767e942e13fc7` 보존 |
 | source-read 진단 | 통과 | 기존 SDK/vendor source grant 안의 두 셸 조회가 실제 AGY에서 실행. 기존 자료 접근 범위 유지 |
-| remediation r03 | 실행 시작 | r02의 AGY 부분 수정 파일 114개를 canonical archive 그대로 복사. 제한 정책 회귀 시험·preflight 113개·COM3·host runtime·clean checkout 통과 |
+| remediation r03 | 73.5초 후 환경 실패; 제품 추가 변경 없음 | checkout Git index의 파일명 패턴 조회 거부. source·로그·usage·전역 복구와 bundle 보존 |
+| checkout read-pattern 진단 | 통과 | 실제 AGY에서 quoted Git 파일명 패턴, bounded Get-ChildItem filter, .gitignore 읽기 모두 실행. 진단 usage 별도 기록 |
+| remediation r04 | 실행 시작 | r02 부분 수정 source를 보존한 입력. finite 조회 명령군·negative boundary 시험·preflight 114개·COM3·host runtime·clean checkout 통과 |
 
 정책 보완은 `git ls-files`의 checkout-root `.gitignore`, `.gitattributes`, 현재 디렉터리
 선택자뿐이다. parent/absolute 경로·history·compound shell·임의 Python·설치·flash는
@@ -39,6 +41,13 @@ r03에서는 native 파일 읽기에 이미 허용된 SDK·vendor source 안의 
 parent traversal·명령 결합·설치·flash는 허용하지 않았다. 실패 재현 뒤 negative boundary
 시험과 실제 AGY 진단으로 별도 확인했다. r02의 부분 수정은 AGY 작성이며 운영자는
 추가 제품 코드를 작성하지 않았다. 시작 source와 각 시도의 시간·usage는 별도 기록한다.
+
+r04에서는 checkout 내부 읽기 명령의 파일명 패턴·Git 메타파일 형태를 묶어서 검증했다.
+파일명 pattern은 Git/PowerShell 조회 인수이며 `command(*)` 같은 실행 권한 wildcard가
+아니다. parent/absolute non-granted 경로·`.git/config`·`.env`·shell 결합·치환은 negative
+시험으로 차단 확인했다. `docs/hardware/vendor-source-index.json`의 실제 위치와 부분
+수정 source에서 이어간다는 안내도 고정 보완 prompt에 명시했다. 후보 하나에만 이 정보를
+제공하는 정식 비교는 수행하지 않으며, 모든 시도는 별도 보완 이력으로만 남긴다.
 
 ## 보완 범위
 
@@ -54,7 +63,9 @@ provider 전체·오류·복구 시험, 선택 IMU 기능과 최종 구조화 �
 - [r02 제한 정책·진단·사전 검증](agy-remediation-policy-preflight-20260928.json)
 - [r02 실패·부분 구현·측정](agy-remediation-r02-result-20260928.json)
 - [r03 source 조회·진단·사전 검증](agy-remediation-source-read-preflight-20260928.json)
+- [r03 실패 원본·측정](agy-remediation-r03-result-20260928.json)
+- [r04 조회 명령군·진단·사전 검증](agy-remediation-read-groups-preflight-20260928.json)
 - [기존 남은 작업 점검](agy-remaining-work-review-20260928.md)
-- 현재 raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r03`.
+- 현재 raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r04`.
 
 이 문서는 시작 시점의 진행 기록이다. 실행 종료 판정은 별도 결과 보고서로 추가한다.

@@ -1,0 +1,39 @@
+{
+  "remediation_run_id": "20260928-agy-remediation-r04",
+  "classification": "remediation",
+  "ranking_eligible": false,
+  "preflight": "114 tests plus host C/C++ runtime, COM3, clean checkout; 0 failures/warnings",
+  "policy_change": "Finite read command groups now include quoted checkout filename patterns and known Git metadata. Data grants unchanged. No command wildcard, parent/absolute non-granted paths, history, shell compounds, installs, actual serial/flash.",
+  "regression": "Red then green; eight policy tests including negative pattern boundary cases",
+  "actual_agy_queries": [
+    "git ls-files \"*vendor*\"",
+    "Get-ChildItem -Recurse -Filter \"*.c\" main",
+    "Get-Content .gitignore"
+  ],
+  "diagnostic_usage": {
+    "input": 28149,
+    "output": 649,
+    "cached": 48828,
+    "reasoning": 199,
+    "provider_total": 28798,
+    "total": 28798,
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+    "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+  },
+  "product_files_preserved": 114,
+  "partial_product_origin": "6bb5d7fdfa4d6ba80c3eb5a6205767e942e13fc7",
+  "policy_sha256": "4c512c464d68c6c11e887bc7fd4bf90b5141537b8f472e961d89366382b50f51",
+  "diagnostic_hashes": {
+    "stdout.jsonl": "2d4d926509bc3c507eff1ddda8f369f2795543a87053109eca6c7c01203be909",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "result.json": "4e0b13b63fe8524aac06c29cc39ccecc0a0ea59c49e839108193d85762abf445",
+    "usage.json": "c6da29def88237b62205d3617d417b29a2d8f714dc282299f649f7b907bdeebe"
+  },
+  "preflight_hashes": {
+    "preflight-stdout.txt": "34d6bc8cefc03f69216e4a18b32765800e6a1f008f469c7eec0624c4729a6024",
+    "preflight-stderr.txt": "9aa54cf73630c43afe23ba19d2a62f4f723670ffadde6e903dfdaf39d2c515c3",
+    "preflight-result.json": "124fd50cb6d223cdd18fedc166d00af7254199b6e6dedf9be82f71db87af6d01"
+  },
+  "prompt_sha256": "b31201bee5cb9aa9ba7de01d52f21a41ad57e2a090d9b520595318afa100d6e8",
+  "product_pass": false
+}
