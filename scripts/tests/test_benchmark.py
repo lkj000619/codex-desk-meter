@@ -226,7 +226,7 @@ class RunnerTests(unittest.TestCase):
             tokens = telemetry(path, "antigravity")
             self.assertEqual((tokens["input"], tokens["output"], tokens["total"]), (100, 20, 120))
             self.assertEqual((tokens["cached"], tokens["reasoning"], tokens["provider_total"]), (60, 10, 120))
-            self.assertEqual(benchmark.command_metrics(path, "antigravity"), {"tool_calls": 2, "failed_commands": 1})
+            self.assertEqual(benchmark.command_metrics(path, "antigravity"), {"tool_calls": 2, "failed_commands": None})
 
     def test_antigravity_stream_requires_one_successful_turn(self):
         with tempfile.TemporaryDirectory() as folder:

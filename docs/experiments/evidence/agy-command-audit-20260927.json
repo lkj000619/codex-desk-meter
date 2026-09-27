@@ -1,0 +1,494 @@
+{
+  "scope": "post-run reanalysis; original manifests untouched",
+  "runs": {
+    "20260927-antigravity-cli-agy-flash-medium-r01": {
+      "audit": {
+        "source_sha256": "41cda16c58170b6d7148e99cdedc99a13fd34c15a3b82f010fc5a9ea2821e2d8",
+        "tool_calls": 164,
+        "command_count": 29,
+        "failed_commands": null,
+        "failed_commands_lower_bound": 1,
+        "unknown_exit_commands": 28,
+        "commands": [
+          {
+            "step_index": 18,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 20,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 46,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 54,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 56,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 58,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 80,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 82,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 86,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 88,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 90,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 92,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 154,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 156,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 158,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 271,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 277,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 279,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 283,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 287,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 291,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 295,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 299,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 305,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 309,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 315,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 327,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 331,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 333,
+            "state": "ERROR",
+            "exit_code": null,
+            "outcome": "failed",
+            "tool_error": true
+          }
+        ],
+        "availability_note": "DONE/output text is not an exit status. Total failure count is null when any command exit is unknown; lower bound preserves explicit tool errors/nonzero exits. File-tool errors are not shell commands."
+      },
+      "original_measurement": {
+        "wall_clock_seconds": 1150.204000000027,
+        "tool_calls": 164,
+        "failed_commands": 1,
+        "user_interventions": null,
+        "tokens": {
+          "input": 1977238,
+          "output": 122754,
+          "cached": 16295703,
+          "reasoning": 48783,
+          "provider_total": 2099992,
+          "total": 2099992,
+          "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+          "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+        }
+      },
+      "original_manifest_sha256": "0db08a7252b15ad1b98f86650ac683d4debdc7a2d5d159415b1e6993756c32c5"
+    },
+    "20260927-antigravity-cli-agy-flash-medium-r02": {
+      "audit": {
+        "source_sha256": "52ed186ae0b637bf91264020f6dae6752aca6fc3d3f74a7161cbd2699857ac05",
+        "tool_calls": 125,
+        "command_count": 21,
+        "failed_commands": null,
+        "failed_commands_lower_bound": 1,
+        "unknown_exit_commands": 20,
+        "commands": [
+          {
+            "step_index": 18,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 20,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 48,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 54,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 56,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 58,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 136,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 138,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 140,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 180,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 182,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 186,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 190,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 192,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 194,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 216,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 220,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 222,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 226,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 249,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 251,
+            "state": "ERROR",
+            "exit_code": null,
+            "outcome": "failed",
+            "tool_error": true
+          }
+        ],
+        "availability_note": "DONE/output text is not an exit status. Total failure count is null when any command exit is unknown; lower bound preserves explicit tool errors/nonzero exits. File-tool errors are not shell commands."
+      },
+      "original_measurement": {
+        "wall_clock_seconds": 703.454000000027,
+        "tool_calls": 125,
+        "failed_commands": 1,
+        "user_interventions": null,
+        "tokens": {
+          "input": 1350458,
+          "output": 101963,
+          "cached": 16566306,
+          "reasoning": 31644,
+          "provider_total": 1452421,
+          "total": 1452421,
+          "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+          "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+        }
+      },
+      "original_manifest_sha256": "3c69a01f83cc3b46e4202be412d74a695d66c11d60fd1fc95c57955242d0a1a5"
+    },
+    "20260927-antigravity-cli-agy-flash-medium-r03": {
+      "audit": {
+        "source_sha256": "770f6ae0a0ae59c6b58c860437f91537c4a3e8c2570c4a3bc8cdb622f37c979e",
+        "tool_calls": 59,
+        "command_count": 7,
+        "failed_commands": null,
+        "failed_commands_lower_bound": 0,
+        "unknown_exit_commands": 7,
+        "commands": [
+          {
+            "step_index": 18,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 20,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 46,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 54,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 58,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 64,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          },
+          {
+            "step_index": 66,
+            "state": "DONE",
+            "exit_code": null,
+            "outcome": "unknown_exit",
+            "tool_error": false
+          }
+        ],
+        "availability_note": "DONE/output text is not an exit status. Total failure count is null when any command exit is unknown; lower bound preserves explicit tool errors/nonzero exits. File-tool errors are not shell commands."
+      },
+      "original_measurement": {
+        "wall_clock_seconds": 250.5779999999795,
+        "tool_calls": 59,
+        "failed_commands": 0,
+        "user_interventions": null,
+        "tokens": {
+          "input": 751790,
+          "output": 14442,
+          "cached": 4976653,
+          "reasoning": 8488,
+          "provider_total": 766232,
+          "total": 766232,
+          "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+          "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+        }
+      },
+      "original_manifest_sha256": "609ae9842005b64427d90a341808f9b8c3446bb2383bd4cb1b2b0d38c5d39032"
+    }
+  }
+}

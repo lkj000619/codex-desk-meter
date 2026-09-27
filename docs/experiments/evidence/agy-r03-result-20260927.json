@@ -1,0 +1,37 @@
+{
+  "run_id": "20260927-antigravity-cli-agy-flash-medium-r03",
+  "status": "environment_failed",
+  "measurement": {
+    "wall_clock_seconds": 250.5779999999795,
+    "tool_calls": 59,
+    "failed_commands": 0,
+    "user_interventions": null,
+    "tokens": {
+      "input": 751790,
+      "output": 14442,
+      "cached": 4976653,
+      "reasoning": 8488,
+      "provider_total": 766232,
+      "total": 766232,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    }
+  },
+  "pilot_pass": false,
+  "ranking_eligible": false,
+  "global_settings_restored": true,
+  "checkout_unchanged": true,
+  "structured_result_exists": false,
+  "denied_path": "C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/build/09_FactoryProgram-v5.3.2/build.ninja",
+  "scope_note": "Only vendor/source was explicitly granted. No expansion to vendor/build, backups or other runs. No further retry after this out-of-scope read.",
+  "archive_record": "5f69eac22c598413aa388c0c14644fe6ef51a405",
+  "hashes": {
+    "run-manifest.json": "609ae9842005b64427d90a341808f9b8c3446bb2383bd4cb1b2b0d38c5d39032",
+    "stdout.jsonl": "770f6ae0a0ae59c6b58c860437f91537c4a3e8c2570c4a3bc8cdb622f37c979e",
+    "stderr.txt": "2f70f945243833d446f0501960769e51d4aabe7f6b4f4f502a24883d197ccc06",
+    "profile.json": "c5a3712ff7bccca763f1735b13f4e2fedd707b905c44dccb01cd4a663f0fff1e",
+    "prompt.txt": "35c08efd00cc04c8e30e25da9135dc2403b248d99d2bec3291eb1d3517935b1e",
+    "launch-authorization.json": "15c6f8d0a024f0a49d9b562fcb84effc1f4648f5651732939b91deca24110ef8",
+    "implementation.bundle": "7e94aecab16e2b6d2e7056ed58418d39dbdefe0f5473d97bfd1a221167ece220"
+  }
+}

@@ -408,27 +408,59 @@ def telemetry(path, adapter):
     return tokens
 
 
+def antigravity_command_audit(path):
+    """Preserve missing exit status; DONE only means the tool returned output."""
+    report = {"source_sha256": digest(path.read_bytes()), "tool_calls": None,
+              "command_count": None, "failed_commands": None,
+              "failed_commands_lower_bound": None, "unknown_exit_commands": None,
+              "commands": [], "availability_note": ""}
+    try:
+        inspect_antigravity_stream(path, reject_permission_errors=False)
+        events = _antigravity_events(path)
+    except (UnicodeError, ValueError) as exc:
+        report["availability_note"] = f"Unusable terminal stream: {exc}"
+        return report
+    steps = {}
+    for event in events:
+        step = event.get("step_update")
+        if event.get("event") != "step_update" or not isinstance(step, dict):
+            continue
+        if (step.get("state") in {"DONE", "ERROR"} and step.get("step_type") == "tool"
+                and type(step.get("step_index")) is int):
+            steps[step["step_index"]] = step
+    failed = unknown = 0
+    for index, step in sorted(steps.items()):
+        info = step.get("tool_info")
+        info = info if isinstance(info, dict) else {}
+        if step.get("tool_name", info.get("name")) != "run_command":
+            continue
+        exit_code = info.get("exit_code")
+        exit_code = exit_code if type(exit_code) is int else None
+        tool_error = step.get("state") == "ERROR" or bool(info.get("error"))
+        if tool_error or (exit_code is not None and exit_code != 0):
+            outcome = "failed"
+            failed += 1
+        elif exit_code == 0:
+            outcome = "success"
+        else:
+            outcome = "unknown_exit"
+            unknown += 1
+        report["commands"].append({"step_index": index, "state": step["state"],
+                                   "exit_code": exit_code, "outcome": outcome,
+                                   "tool_error": tool_error})
+    report.update(tool_calls=len(steps), command_count=len(report["commands"]),
+                  failed_commands=None if unknown else failed,
+                  failed_commands_lower_bound=failed, unknown_exit_commands=unknown,
+                  availability_note=("DONE/output text is not an exit status. Total failure count is null "
+                                     "when any command exit is unknown; lower bound preserves explicit "
+                                     "tool errors/nonzero exits. File-tool errors are not shell commands."))
+    return report
+
+
 def command_metrics(path, adapter):
     if adapter == "antigravity":
-        try:
-            inspect_antigravity_stream(path, reject_permission_errors=False)
-            events = _antigravity_events(path)
-        except (UnicodeError, ValueError):
-            return dict(tool_calls=None, failed_commands=None)
-        tools = {}
-        for event in events:
-            step = event.get("step_update")
-            if event.get("event") != "step_update" or not isinstance(step, dict):
-                continue
-            if step.get("state") in {"DONE", "ERROR"} and step.get("step_type") == "tool" and type(step.get("step_index")) is int:
-                tools[step["step_index"]] = step
-        failed = sum(
-            step.get("state") == "ERROR" or (
-                isinstance(step.get("tool_info"), dict) and bool(step["tool_info"].get("error")))
-            for step in tools.values()
-            if step.get("tool_name") == "run_command"
-        )
-        return dict(tool_calls=len(tools), failed_commands=failed)
+        audit = antigravity_command_audit(path)
+        return {key: audit[key] for key in ("tool_calls", "failed_commands")}
     if adapter != "codex":
         return dict(tool_calls=None, failed_commands=None)
     items = {}
@@ -541,6 +573,10 @@ def execute(a):
     m["measurement"]["wall_clock_seconds"] = r["elapsed"]
     m["measurement"]["tokens"] = telemetry(directory / "stdout.jsonl", profile["adapter"])
     m["measurement"].update(command_metrics(directory / "stdout.jsonl", profile["adapter"]))
+    if profile["adapter"] == "antigravity":
+        audit_path = directory / "command-audit.json"
+        save(audit_path, antigravity_command_audit(directory / "stdout.jsonl"))
+        m["operator"]["evidence"][audit_path.name] = digest(audit_path.read_bytes())
     for name in ("stdout.jsonl", "stderr.txt", "prompt.txt", "profile.json"):
         m["operator"]["evidence"][name] = digest((directory / name).read_bytes())
     save(directory / "run-manifest.json", m)

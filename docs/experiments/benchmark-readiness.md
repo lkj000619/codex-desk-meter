@@ -1,5 +1,10 @@
 # Benchmark 실행 전 준비 gate
 
+> Measurement correction: [comparison integrity review](evidence/agy-comparison-integrity-20260927.md). AGY DONE without exit status is unknown; future failed_commands remains null when incomplete. Past raw runs are immutable. 107 tests passed. Product pilot remains unpassed; no expansion of vendor build access.
+
+> Current review (2026-09-27): **PREFLIGHT_PASSED / PILOT_NOT_PASSED**.
+> [r03 and preceding pilot results](evidence/agy-r03-result-20260927.md): pinned host/IDF environment and 102 tests passed; r03 requested an undeclared vendor build path and was denied. No product pass or formal comparison readiness. Earlier notes below are historical.
+
 > Latest reviewed run: **r07 / ENVIRONMENT_FAILED / PILOT_NOT_PASSED**.
 > [2026-09-26 result](evidence/agy-r07-result-20260926.md): 101 tests and separate AGY read diagnostics passed; product pilot attempted parent-directory access and a compound command, which the restricted policy correctly denied. No product artifacts or ranking-eligible result exist.
 > Earlier status notes below are historical, not current authorization.
