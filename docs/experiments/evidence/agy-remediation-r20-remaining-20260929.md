@@ -48,4 +48,6 @@ AGY 작성 운영 절차:
 - [독립 소프트웨어 검증](agy-remediation-r20-independent-review-20260928.json)
 - [실물 업로드·순번·영상 검증](agy-remediation-r20-hardware-review-20260929.json)
 - [RST 확인·같은 store 27 수신 추가 기록](agy-remediation-r20-rst-video-supplement-20260929.json)
+- [실물 원본·세 영상 archive receipt](agy-remediation-r20-hardware-artifacts-20260929.json)
+- [실물 원본 자료 archive](agy-remediation-r20-hardware-artifacts-20260929.zip)
 - [누적 진행 기록](agy-remediation-progress-20260928.md)

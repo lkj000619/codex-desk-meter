@@ -617,3 +617,15 @@ BOOT 결함으로 처리하지 않는다. 영상에는 화면 뒷면/카메라 �
 root의 reinit/reset/flash·제품 변경은 없다. 기존 hardware review와 세 영상 원본을 모두 보존한다.
 
 - [사용자 RST 확인·41.73초 영상·순번 27 복구 추가 기록](agy-remediation-r20-rst-video-supplement-20260929.json)
+
+### r20 실물 원본 archive 고정
+
+실제 flash/boot·원본 CLI·고유 store 순번·native reopen·실제 manual/automatic·유한 12회 송신·
+세 영상 원본·추출 frame·관측 오류·RST 확인 후 27 수신·제품 외부 owner helper들을 255개 entry,
+69,192,367 bytes의 archive로 고정했다. SHA256은
+`2d058c873ec124a5060108dcd6c0af885c545d79862a815292ef5dcd2d061449`다.
+packaging 직전 모든 제품 source/binary hash가 독립 build 보존본과 같은 것을 확인했다.
+최종 고정 영상은 요청 대기 상태이며 archive를 덮어쓰지 않고 후속 증거로 추가한다.
+
+- [r20 실물 원본 archive receipt](agy-remediation-r20-hardware-artifacts-20260929.json)
+- [r20 실물 원본·세 영상·관측 도구](agy-remediation-r20-hardware-artifacts-20260929.zip)
