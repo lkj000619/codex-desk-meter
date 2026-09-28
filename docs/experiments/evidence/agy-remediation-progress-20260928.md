@@ -457,3 +457,53 @@ write-error reconnect, 정확한 운영 명령과 owner F9 미확인 항목을 �
 실행 환경 준비를 제품 합격으로 분류하지 않는다. 보드는 실물 평가된 r16이 올라간 상태다.
 
 - [r17 동일 정책·source·사전 검증](agy-remediation-r17-preflight-20260928.json)
+
+## r17 target 정책 중단·파서 보완 검증·한정된 빌드 명령 사전 시험
+
+r17은 666.297초 뒤 미등록 `cmake --build build-host --target test_meter_parser`에서 중단됐다.
+terminal SUCCESS와 구분해 environment_failed로 기록하고 AGY partial commit
+`acb9173fffb93bb0936b1d522822e72b7c9aca1a`의 제품 3개 파일·512 insertions·96 deletions를
+보존했다. 해당 수정본은 업로드하지 않았으며 보드에는 앞서 평가한 r16이 올라가 있다.
+
+Fresh host/IDF 빌드·CTest 4개·legacy 29개는 통과했다. 새 canonical 4개 부정 입력이 거부되고,
+nullable token 3개와 독립 percent 값·0/100/null 긍정 입력도 수용됐다. 이전 schema/envelope
+거부·절대량 보존·last-good·5개 identity cycling·32개 고유 durable 순번 예약은 유지됐다.
+실제 parser 최대 단독 함수 stack은 1328 bytes이며 전체 runtime 상한 검증은 아니다.
+
+PC 제품 코드 보완 전 새 회귀 시험만 추가된 상태로 중단돼 Python 17개 중 2 failures/1 error가
+남았다. DTR/RTS를 open 전에 안전하게 설정하는 조건, 정상 serial session 유지, 복구 CLI flag
+시험이 실패했다. 현재 r17 result는 없으므로 trusted current-result 검증도 실행하지 않았다.
+새 assertion을 제거해서 실패를 숨기는 방식으로 처리하지 않는다. root 제품 코드 수정은 없다.
+
+사용자가 앞서 선택한 '필요 명령 제한 유지·조회/파일/빌드/시험 명령군 정리와 별도 사전 검증'에 따라
+`build-host` 아래 알려진 target 6개만 등록했다: `test_meter_parser`, `test_meter_state`,
+`test_feature_imu`, `test_gui_regression`, `meter-test`, `meter_core`. 정책 시험에서 등록 전 6개
+거부를 재현하고 등록 후 16개 시험을 통과했다. 임의/install/clean target·다른 build 경로·추가
+argument·파이프·복합 명령은 거부한다. 다른 command 규칙과 data grant는 byte/목록 기준 동일하다.
+정책 SHA256은 `22ef9080…a02d`에서 `6746977f…86187`로 변경됐으며 비교 순위 실행에 적용하지 않는다.
+
+별도 checkout의 실제 AGY 정책 smoke는 33.171초에 지정한 6개 target build만 완료했다.
+source hash 불변·전역 설정 byte 동일 복구·raw stream/stderr/usage/입력·정책 전후 사본을 보존했다.
+이 diagnostic은 제품 구현·정량 비교 run이 아니다. smoke와 r17 평가에 원본 archive/hash receipt를 남겼다.
+
+운영자가 두 SDK activation을 병렬로 시작해 공유 shim WriteAllText 경합이 발생했고 최초 additional
+probe는 시작되지 않았다. 순차 activation 후 실제 probe를 모두 완료했다. 운영자 실행 오류이며
+AGY 제품 실패로 분류하지 않았다. 원본 실패와 수정 경위를 review에 기록했다.
+
+- [r17 중단·partial 보존](agy-remediation-r17-result-20260928.json)
+- [r17 파서 개선·PC 실패·평가 한계](agy-remediation-r17-independent-review-20260928.json)
+- [r17 독립 archive receipt](agy-remediation-r17-independent-artifacts-20260928.json)
+- [r17 독립 raw 자료](agy-remediation-r17-independent-artifacts-20260928.zip)
+- [6개 target 한정 정책·실제 AGY smoke](agy-build-target-policy-smoke-20260929.json)
+- [정책 smoke raw 자료·전후 정책](agy-build-target-policy-smoke-20260929.zip)
+
+## r18 PC 시리얼·재연결·운영 절차 보완 실행
+
+r18은 확인된 r17 parser/회귀 변경을 그대로 가져왔으며 제품 파일 116개 byte/hash 일치·
+checkout 2개 준비 commit·clean 상태와 새 사전 검증 122개·host runtime·COM3를 통과했다.
+사전 시험된 한정 target 정책 `6746977f…86187`·동일 모델을 사용한다. 새 고정 지시문은 검증된
+파서 개선을 유지하고 아직 수정되지 않은 PC native serial 제어선/open/close/reconnect·실패 순번·
+운영 명령·현재 결과 문서부터 보완하도록 요청한다. 실행을 시작했고 runtime feedback은 하지 않는다.
+보드에는 r16이 유지되며 root 제품 소스 수정·원래 비교 순위 편입은 없다. `product_pass:false`다.
+
+- [r18 source·한정 정책 변경·사전 검증](agy-remediation-r18-preflight-20260928.json)

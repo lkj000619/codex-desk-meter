@@ -221,6 +221,22 @@ class CommandPolicyTests(unittest.TestCase):
             with self.subTest(cmd=cmd):
                 self.assertFalse(self.allowed(cmd))
 
+    def test_named_host_build_targets_remain_finite(self):
+        for target in ['test_meter_parser', 'test_meter_state', 'test_feature_imu',
+                       'test_gui_regression', 'meter-test', 'meter_core']:
+            with self.subTest(target=target):
+                self.assertTrue(self.allowed('cmake --build build-host --target ' + target))
+        for command in ['cmake --build build-host --target install',
+                        'cmake --build build-host --target clean',
+                        'cmake --build build-host --target arbitrary',
+                        'cmake --build ../outside --target test_meter_parser',
+                        'cmake --build build --target test_meter_parser',
+                        'cmake --build build-host --target test_meter_parser; whoami',
+                        'cmake --build build-host --target test_meter_parser | iex',
+                        'cmake --build build-host --target test_meter_parser -- -x']:
+            with self.subTest(command=command):
+                self.assertFalse(self.allowed(command))
+
     def test_read_path_arrays_and_bounded_depth(self):
         for cmd in ['Get-ChildItem -Recurse experiments, results, docs -Depth 2',
                     'gci -Path docs,experiments -Depth 0',

@@ -1,0 +1,108 @@
+{
+  "run_id": "20260928-agy-remediation-r18",
+  "checked_at": "2026-09-28T17:50:21.402011+00:00",
+  "classification": "remediation",
+  "ranking_eligible": false,
+  "product_pass": false,
+  "preflight_is_environment_and_harness_not_product_acceptance": true,
+  "preflight_exit_code": 0,
+  "preflight_test_count": 122,
+  "hardware_required": "COM3",
+  "local_preparation_commit_count": 2,
+  "operator_product_edits": false,
+  "source_implementation_commit": "acb9173fffb93bb0936b1d522822e72b7c9aca1a",
+  "product_files_preserved": 116,
+  "product_bytes_identical_to_previous_agy_archive": true,
+  "same_model": "gemini-3.8-flash-medium",
+  "same_policy_sha256": "6746977f3b915bcab039127ac69f5d3a32525acb53e0197f4cf3eb077ee86187",
+  "previous_global_settings_restored_byte_exact": true,
+  "already_registered_query_alternatives_verified": [
+    "rg --files -g \"*.json\"",
+    "git ls-files \"*.json\"",
+    "Get-ChildItem -Recurse -Filter \"*.json\""
+  ],
+  "pipeline_remains_denied": true,
+  "policy_or_data_scope_changed": true,
+  "prompt_sha256": "18ce752cf2ebb64c4bf269661318c098abcfcdaf164e33b76f9d5d0be57d5a0b",
+  "global_hashes_before_wrapper": {
+    "settings": "a9e7b57b56bb0225448a7068f18264ca3056c5a3c0ee49114f37bf4292ee0d48",
+    "instructions": "12552a5e4b15f1b272fbd85c865e2457f7b045c69136ed9c7731d23314edc512",
+    "hooks": "90d1b998102ca61fac85e85ece8597a264791339135820b20ccb6e5bddfc0c2e"
+  },
+  "preflight_hashes": {
+    "preflight-stdout.txt": "66d93936003bfbfe0c461181686d07d58bea2528c5a92609d165f87775bff0e8",
+    "preflight-stderr.txt": "421db8f321130dd6518614ddcb3172a36de5bce70f36b3f25dba555aa4d82fb9",
+    "preflight-result.json": "80fe718c02a9fdd355df5956141708812ab07821097294c802e8e67f3787e9a6"
+  },
+  "policy_sha256": "6746977f3b915bcab039127ac69f5d3a32525acb53e0197f4cf3eb077ee86187",
+  "data_scope_changed": false,
+  "finite_policy_change": {
+    "classification": "operator_preflight_diagnostic_not_product_run",
+    "ranking_eligible": false,
+    "product_pass": false,
+    "authorization": "Prior user selected finite required read/file/build/test command groups with separate prevalidation; this adds only six known local host build targets",
+    "policy_before_sha256": "22ef9080a8845fd511b0fb25ae3033ab66c6e39437cca4b4c42e8d8a4ec3a02d",
+    "policy_after_sha256": "6746977f3b915bcab039127ac69f5d3a32525acb53e0197f4cf3eb077ee86187",
+    "exact_added_rule": "command(regex:^cmake --build build-host --target (?:test_meter_parser|test_meter_state|test_feature_imu|test_gui_regression|meter-test|meter_core)$)",
+    "registered_commands": [
+      "cmake --build build-host --target test_meter_parser",
+      "cmake --build build-host --target test_meter_state",
+      "cmake --build build-host --target test_feature_imu",
+      "cmake --build build-host --target test_gui_regression",
+      "cmake --build build-host --target meter-test",
+      "cmake --build build-host --target meter_core"
+    ],
+    "all_other_rules_and_data_grants_identical": true,
+    "source_unchanged": true,
+    "native_cli_smoke": {
+      "start": "2026-09-28T17:44:54.008Z",
+      "end": "2026-09-28T17:45:27.191Z",
+      "elapsed": 33.17099999997299,
+      "status": "completed",
+      "reason": null,
+      "code": 0
+    },
+    "actual_completed_commands": [
+      {
+        "command": "cmake --build build-host --target test_meter_parser",
+        "output": "ninja: no work to do.\r\n"
+      },
+      {
+        "command": "cmake --build build-host --target test_meter_state",
+        "output": "ninja: no work to do.\r\n"
+      },
+      {
+        "command": "cmake --build build-host --target test_feature_imu",
+        "output": "ninja: no work to do.\r\n"
+      },
+      {
+        "command": "cmake --build build-host --target test_gui_regression",
+        "output": "ninja: no work to do.\r\n"
+      },
+      {
+        "command": "cmake --build build-host --target meter-test",
+        "output": "ninja: no work to do.\r\n"
+      },
+      {
+        "command": "cmake --build build-host --target meter_core",
+        "output": "ninja: no work to do.\r\n"
+      }
+    ],
+    "global_settings_restored_byte_exact": true,
+    "negative_boundaries": [
+      "unknown/install/clean targets",
+      "outside/build target directory",
+      "shell compounds/pipes/extraarguments",
+      "actual board/flash/erase/install/inlineinterpreters"
+    ],
+    "policy_test_count": 16,
+    "raw_hashes": {
+      "stdout.jsonl": "4b0375a589d2c214f4665f7616e73777e407423569d03251136456d1c1d17862",
+      "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "result.json": "374eca51989375d44e3c0251cc3fa0263f2b6dfaa5c1fe40f3d31bd93027bf5c",
+      "usage.json": "46c2ebd5db57b3427289d259a6e3ef59c304825e6c5f32f99cfb8cd156894a2c",
+      "prompt.txt": "8e127d957ee288cd7c006b7b5b2cab9fdc15a972aa5d259e55090c6be3602667",
+      "source-hashes.json": "1fbfc8c447975ba58e0ebe20c9f6dc3a6589bf14724d1baf89af5e362477469c"
+    }
+  }
+}
