@@ -1,0 +1,87 @@
+{
+  "run_id": "20260928-agy-remediation-r11",
+  "classification": "independent_partial_remediation_evaluation",
+  "ranking_eligible": false,
+  "implementation_commit": "83014daa61fa7f836ed6b36a5664157eec8de566",
+  "agent_completed": false,
+  "agent_status": "environment_failed",
+  "product_pass": false,
+  "hardware_verified": false,
+  "binary_uploaded": false,
+  "operator_product_edits": false,
+  "candidate_python_suite_interrupted": true,
+  "source_changes_after_build": {},
+  "commands": [
+    {
+      "name": "host-configure",
+      "exit_code": 0
+    },
+    {
+      "name": "host-build",
+      "exit_code": 0
+    },
+    {
+      "name": "ctest",
+      "exit_code": 8
+    },
+    {
+      "name": "candidate-python-tests",
+      "exit_code": 4294967295
+    },
+    {
+      "name": "legacy-29",
+      "exit_code": 0
+    },
+    {
+      "name": "idf-set-target",
+      "exit_code": 0
+    },
+    {
+      "name": "idf-build",
+      "exit_code": 2
+    }
+  ],
+  "findings": "\nThe supplied source is the preserved PARTIAL AGY remediation snapshot 83014daa61fa7f836ed6b36a5664157eec8de566. It changed fourteen source/test files (1190 insertions, 101 deletions) before a prohibited inline python -c fixture-generation command was denied. The operator did not edit product code, resume that conversation or flash the partial build. This is a fresh separate remediation, excluded from original one-shot comparison and ranking. Preserve the useful partial changes and finish implementation, regressions, documentation and the current-run result. No old-run directories are readable.\n\nCommand boundary is unchanged. NEVER use python -c or inline interpreter snippets. To generate a test frame or inspect a value, author a real tests/test_*.py file with native file tools and run python tests/<file>.py. Native file tools can write the test entry point; a denied command ends this noninteractive run. The finite test-file execution family is already available. No permission expansion or bypass. Do not rerun prohibited syntax.\n\nIndependent evaluation of this supplied partial source:\n- Fresh host configure/build succeeded. CTest has two failures: test_meter_parser at line 137 (state.accepted_frames == 1), and test_meter_state at line 31 (state.has_good_usage). Feature IMU and GUI CTest cases pass; 29 legacy evaluator cases pass. Some hand-built C test frames may not satisfy newly enforced canonical framing; repair invalid test fixtures using the production frame builder while retaining meaningful valid/invalid assertions. Do not weaken the contract/parser or delete required regressions to make these pass. Complete your newly added regressions and actually run the tests.\n- Pinned ESP-IDF set-target succeeds but build fails at main/main.c:179: implicit declaration of esp_lcd_panel_io_del. Fix the declaration/component use against the pinned SDK. There is also an unused g_fb warning. A target transport object was built: receive function stack allocation is now 64 bytes against task 8192 bytes, improving the prior 20144/4096 mismatch. Verify the full target receive/parser/state call chain and allocation failures, not only this single prologue.\n- Independent transport tests now reject CRLF, invalid UTF-8, bad CRC, pretty input, junk prefix and oversized line suffix; after an oversized line plus a delimiter the next valid frame is accepted. Canonical five-provider input is accepted. However canonical JSON followed by literal junk before its newline is still accepted, both direct parser and transport (accepted=1,rejected=0). Enforce complete canonical envelope/JSON consumption, schema and integrity, including suffix/duplicate/extra-key malformed inputs; do not just search for fields or CRC inside a larger string.\n- Last-good windows remain 1 after HTTP_500; old source remains stale after tick. The ESP conditional transport replay probe now keeps receive time at 10 after the duplicate at 999, and logs rejection. Preserve these fixes. Test provider identity/cycling, provider-local last-good/error, source-time age 299/300, future/unknown handling and valid recovery using real production modules.\n- Actual candidate CLI --candidate --init-device --sequence 7 succeeds in an isolated mock state directory, but a fresh process --candidate --loopback returns LOCK_TIMEOUT after 15.422 seconds instead of sending. reserve_next_sequence acquires a _DeviceLockContext and calls get_current_sequence, which acquires another context and attempts a second native file lock on the same path. Thread RLock alone does not make the separate file locks reentrant. Diagnose and repair the production lock/ownership design. Your Python suite first fails candidate CLI orchestration, then waits repeatedly in the 8-worker/32-reservation test; operator stopped that independent test process after 202.6 seconds and records it as interrupted/failing, not a full run. Complete the suite without hangs and prove unique atomic reservations across process/thread instances.\n- Reservation locking must also enforce one sender owner across collection/transmission/periodic operation, not only around counter read/write; interleaved processes may send reserved numbers out of order. Durably persist reservation before write; failed sends consume a number; missing/corrupt state stops; stable device identity survives COM changes. Existing --force-init overwrites state without receiver-reset/recovery evidence. Enforce the existing explicit initialization/recovery boundary and document it; never silently reset the counter on restart/stale/disconnect.\n- Candidate CLI now has --candidate/--loopback/--refresh/--max-cycles/--poll-interval, but the loop runs all cycles immediately without using poll_interval to schedule them, and no reconnect loop is implemented. Implement a real bounded polling/reconnect lifecycle, <=60-second automatic collection, <=1Hz retry, <=5-second usable-port/refresh delivery, safe close/stop and exclusive ownership. Cover actual CLI and process restart/manual refresh with offline fakes; no real port during AGY execution. Preserve maintainer oracle default dry-run behavior, clearly document the candidate production command, and report actual elapsed behavior rather than an unused parameter.\n- No current-run structured result or completed updated hardware procedure exists yet. Original F9 selected IMU and original three candidates imu-auto-rotation / rtc-offline-clock / battery-adc-monitor must match current documentation and result, with actual SDA15/SCL7. Earlier JSON ambient-light/touch candidates and GPIO8/9 are inconsistent. Label self assessments; unknown owner scores stay null. Do not reuse an earlier run's identity or claim hardware/GUI pass. Operator will upload and test BOOT, LCD scanout and IMU after your completed build and independent gates.\n\nRead the immutable current run context for exact identities. Finish the existing I1-I4, C1-C8, F1-F9 product scope. Earlier findings in checkout refer to original uploaded firmware and some defects are already repaired in this supplied partial source; establish current behavior and retain the verified improvements. Do not alter contracts/schema/evaluator gates/frozen input to reduce requirements. Product implementation and meaningful regressions must be authored by you. Complete host and target builds, nonzero automated test suites, safe offline production integration evidence, result validation and honest missing hardware evidence. There is one fixed prompt and no runtime operator guidance.\n",
+  "evidence": [
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r11-20260928\\evaluation.json",
+      "sha256": "f6c1fdd78f1d2f6269e740111e6360445b53ea55e555ecef23c343f7b672354d"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r11-20260928\\ctest-stdout.txt",
+      "sha256": "326e8a5d94b8e9220b3a6f5454ed46d519fbfb46d3229c2c087cb188e5e86b5e"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r11-20260928\\candidate-python-tests-stderr.txt",
+      "sha256": "c68b94beda974a88667cc3b3b18de8191b7f5e2dd2ff02e1e092512bfdf18c3b"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r11-20260928\\candidate-tests-operator-stop.json",
+      "sha256": "d5d0b8637386536148db875b4123e10f8ecdb20eeb2afd054a215d1bc256bba7"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r11-20260928\\idf-build-stdout.txt",
+      "sha256": "64d543e7bb56dafc72fe4369bbca4c81aacd9228d562a40f58820fcaa906f166"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r11-20260928\\operator-frame-tests\\report.json",
+      "sha256": "2d622feba62ee60887e433b44592ad7d461c771c25831e9da0a6eb2dd8a6ca70"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r11-20260928\\operator-frame-tests\\target-stack-report.json",
+      "sha256": "8e22e6771cbc754b337a8a6751a62dd3b22ad7a5da8ab08718465f9b173cac0c"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r11-20260928\\operator-state-tests\\report.json",
+      "sha256": "675bea5572608304015d9dde6bb96fd03b6ee64a021aa6f666dbdb7823c29133"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r11-20260928\\operator-esp-replay-tests\\report.json",
+      "sha256": "962adee1761aa08f34f972a4e730654e5721b5dfed9b96ee5a9ad0c96dcebbef"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r11-20260928\\operator-cli-tests\\report.json",
+      "sha256": "dc160d678bc2496cdf150a602459d2f8839b1c41f509b0a542a635e5da72e146"
+    }
+  ]
+}

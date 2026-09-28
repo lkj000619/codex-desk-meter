@@ -39,7 +39,8 @@
 | remediation r09 | 225.906초 후 환경 실패; 제품 추가 변경 없음 | 자체 CTest 4개·legacy 29개·PC regression 9개 통과 후 terminal `git grep` 구분자 조회 거부. 입력 불변·전역 복구·bundle 보존 |
 | standard query/test 진단 | 권한 8회 통과; 기대 동작 7회 확인 | 실제 AGY에서 8개 명령 모두 dispatch. `git diff --unified 3 -- .`는 운영자 지정 인수 표기 오류이며 diff 성공이 아님. 진단 unittest 실제 1개 실행 및 전역 설정 byte 복구 확인 |
 | remediation r10 | 940.172초 후 완주; 제품 합격 아님 | snapshot `f2063cfbda418f4003457a945e6f585731c5a58c`. 독립 빌드·CTest 4·PC 9·legacy 29·trusted 결과 형식 통과. 독립 수신/상태/송신 번호 시험에서 추가 결함 재현. 아직 업로드 안 함 |
-| remediation r11 | 실행 시작 | r10 제품 파일 115개 byte 보존. 독립 결함을 고정 prompt에 사전 제공. preflight 120개·COM3·clean checkout 및 실제 AGY의 수정된 Git 조회 확인. 최초 정량 비교·순위에서 제외 |
+| remediation r11 | 986.688초 후 환경 실패; 부분 수정 보존 | `python -c` 미등록 명령 거부. AGY 14개 source/test 파일 수정, snapshot `83014daa61fa7f836ed6b36a5664157eec8de566`, 전역 복구·입력 불변·bundle 확인. 독립 평가에서 개선과 남은 실패를 각각 기록 |
+| remediation r12 | 실행 시작 | r11 partial 제품 source 116개 byte 보존. 동일 정책 hash와 실제 명령 진단 재확인. preflight 120개·COM3·clean checkout 실패/경고 0. 금지 inline 명령과 파일형 시험 경로 및 독립 결함을 고정 지시에 사전 제공 |
 
 정책 보완은 `git ls-files`의 checkout-root `.gitignore`, `.gitattributes`, 현재 디렉터리
 선택자뿐이다. parent/absolute 경로·history·compound shell·임의 Python·설치·flash는
@@ -211,3 +212,30 @@ last-update가 10초에서 999초로 바뀌고 Accepted 로그가 두 번 나왔
 
 - [독립 평가 archive receipt](agy-remediation-r10-independent-artifacts-20260928.json)
 - [독립 평가 원본·재현 도구 archive](agy-remediation-r10-independent-artifacts-20260928.zip)
+
+## r11 부분 수정 검증과 r12 준비
+
+r11은 금지된 inline Python 실행으로 종료됐고, 명령 제한은 넓히지 않았다. 제품 14개 파일의
+1190줄 추가·101줄 삭제를 AGY snapshot과 bundle에 보존했다. 독립 fresh archive에서
+CRLF·oversized line 처리, HTTP_500 이후 last-good 유지, source stale 유지, 중복 프레임의
+수신 시각/Accepted 로그 오염 방지가 개선된 것을 확인했다. 새 target 수신 함수 prologue는
+64바이트, 태스크는 8192바이트이며 전체 call chain·제품 합격을 의미하지 않는다.
+
+Host 빌드는 통과했으나 CTest 두 개가 실패했고, IDF build는 `esp_lcd_panel_io_del` 선언
+누락으로 실패했다. canonical JSON 뒤 `junk`를 붙인 line도 아직 수락한다. 후보 CLI의 mock
+초기화는 성공했지만 loopback 송신은 15.422초 후 LOCK_TIMEOUT으로 실패한다. 번호 예약과
+내부 조회가 별도 file-lock context로 중첩되는 source 경로를 확인했다. Python suite는 첫
+CLI 사례에서 실패한 뒤 동시 예약에서 반복 대기해 202.6초 후 운영자가 해당 시험 프로세스만
+중단했다. 원본 일부 출력과 종료 기록을 보존하며 suite 완주·통과로 취급하지 않는다.
+
+Legacy 29개는 통과했으나 r11의 완성된 structured result·binary·실물 검증은 없다. 현재
+partial source의 주기 송신/재연결/단일 송신자 수명 관리와 F9 기록도 보완 대상이다. r12는
+이 결과를 시작 전에만 전달하며, 올바른 시험 fixture를 제품 builder로 작성하되 계약을 약화해
+실패를 없애지 않도록 명시한다. 제품 변경은 계속 AGY가 작성한다. 입력·정책·원본 실패 기록은
+보존하고 최초 정량 비교에서 제외한다. 보드에 올릴 수정 binary는 아직 준비되지 않았다.
+
+- [r11 실패·부분 수정·보존](agy-remediation-r11-result-20260928.json)
+- [r11 독립 평가·시험 중단·남은 결함](agy-remediation-r11-independent-review-20260928.json)
+- [r11 독립 평가 archive receipt](agy-remediation-r11-independent-artifacts-20260928.json)
+- [r11 독립 평가 원본·재현 도구](agy-remediation-r11-independent-artifacts-20260928.zip)
+- [r12 사전 검증·입력 보존·동일 정책](agy-remediation-r12-preflight-20260928.json)

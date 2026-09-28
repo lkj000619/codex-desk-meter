@@ -1,0 +1,57 @@
+{
+  "run_id": "20260928-agy-remediation-r11",
+  "classification": "remediation",
+  "status": "environment_failed",
+  "reason": "AGY tool permission denied; inspect terminal denied_actions",
+  "measurement": {
+    "tokens": {
+      "input": 1600974,
+      "output": 131171,
+      "cached": 20605539,
+      "reasoning": 64286,
+      "provider_total": 1732145,
+      "total": 1732145,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    },
+    "tool_calls": 138,
+    "failed_commands": null
+  },
+  "execution": {
+    "start": "2026-09-28T08:47:51.282Z",
+    "end": "2026-09-28T09:04:17.962Z",
+    "elapsed": 986.6879999999655,
+    "status": "environment_failed",
+    "reason": "AGY tool permission denied; inspect terminal denied_actions",
+    "code": 0
+  },
+  "error_command_events": [
+    "python -c \"import sys; sys.path.insert(0, 'scripts'); from host_device_pipeline import build_frame, encode_frame; f = build_frame({'usage': [], 'global_resets': []}, 1, '2026-09-10T00:00:00Z'); print(encode_frame(f).decode())\""
+  ],
+  "archive": {
+    "run_id": "20260928-agy-remediation-r11",
+    "archived_at": "2026-09-28T09:04:46.942662+00:00",
+    "status": "environment_failed",
+    "implementation_commit": "83014daa61fa7f836ed6b36a5664157eec8de566",
+    "pre_archive_status": "M components/meter/include/meter_gui.h\n M components/meter/include/meter_state.h\n M components/meter/include/meter_transport.h\n M components/meter/include/meter_types.h\n M components/meter/meter_gui.c\n M components/meter/meter_parser.c\n M components/meter/meter_state.c\n M components/meter/meter_transport.c\n M main/main.c\n M scripts/host_device_pipeline.py\n M scripts/run-host-device-pipeline.py\n M tests/test_meter_parser.c\n M tests/test_meter_state.c\n M tests/test_pc_pipeline_regressions.py",
+    "product_diff_stat": "components/meter/include/meter_gui.h       |   2 +\n components/meter/include/meter_state.h     |   8 +\n components/meter/include/meter_transport.h |   3 +\n components/meter/include/meter_types.h     |  10 +\n components/meter/meter_gui.c               |  76 +++++--\n components/meter/meter_parser.c            |  55 +++++\n components/meter/meter_state.c             | 320 ++++++++++++++++++++++++++---\n components/meter/meter_transport.c         |  86 ++++++--\n main/main.c                                |  41 +++-\n scripts/host_device_pipeline.py            | 186 ++++++++++++++---\n scripts/run-host-device-pipeline.py        | 103 +++++++++-\n tests/test_meter_parser.c                  |  54 +++++\n tests/test_meter_state.c                   | 216 +++++++++++++++++++\n tests/test_pc_pipeline_regressions.py      | 131 ++++++++++++\n 14 files changed, 1190 insertions(+), 101 deletions(-)",
+    "inputs_immutable": true,
+    "globals_restored": true,
+    "archive_operator_product_edits": false,
+    "bundle_sha256": "5fa10279f83530f615a6944dc3fe3500433a04d01215b89fcdba099fb2d31988",
+    "ranking_eligible": false,
+    "product_pass": false
+  },
+  "ranking_eligible": false,
+  "product_pass": false,
+  "hashes": {
+    "remediation-manifest.json": "902a0f9a3ad3e51c6a75379e602b75ed23fe8e4fbc3195d0766e2b3e1c081c8b",
+    "stdout.jsonl": "07be2659e434ff0460c08e2ebe527f34ccc148ca628e32272d1f2bac77e73975",
+    "stderr.txt": "4252389dc0dd043eebb313d37e8857fa3b6d278f87f1f5d22df786c2f5c11d88",
+    "command-audit.json": "d8274baf3e96b722693ffc9b2eb7c726058dfe36ce4b86eca881196906456c13",
+    "implementation.bundle": "5fa10279f83530f615a6944dc3fe3500433a04d01215b89fcdba099fb2d31988",
+    "archive-record.json": "dfeaff53ff3314fce433f4750fe3a0dc4137615248f4768ce71aab3ce3b26df2",
+    "prompt.txt": "68e53417bf11fdd96835b3f09f8640e0cbb3dced1534d64508ca2799d3610a52",
+    "source-provenance.json": "8e19868f68aa60a9571c1cb206627319e963bdfedf9e0be009cf1bca7bd60fde"
+  }
+}

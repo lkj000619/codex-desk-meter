@@ -1,0 +1,24 @@
+{
+  "run_id": "20260928-agy-remediation-r12",
+  "classification": "remediation",
+  "ranking_eligible": false,
+  "product_pass": false,
+  "preflight_test_count": 120,
+  "preflight_exit_code": 0,
+  "hardware_required": "COM3",
+  "policy_unchanged_from_r11": true,
+  "policy_sha256": "98a966efae74018ce42a6bf1d0a5b14ff1b310db97d4794e8debb2da1b6f4d73",
+  "actual_agy_policy_diagnostic_receipt": "agy-remediation-r11-preflight-20260928.json",
+  "actual_agy_policy_diagnostic_receipt_sha256": "b442cba927ae5b46949fbeb1efaaae2b8206af581e06fe5a6984d5598e9485ef",
+  "source_commit": "83014daa61fa7f836ed6b36a5664157eec8de566",
+  "product_files_preserved": 116,
+  "operator_product_edits": false,
+  "local_preparation_commit_count": 2,
+  "prompt_sha256": "ad299efda14b4a618cb2c3d361b59d9ea2c5a0b60090d8a07336d5d96b2e3e11",
+  "preflight_hashes": {
+    "preflight-stdout.txt": "a22dce6f24410083b786b2739b68996d627477e897c957066606408a76be5f2a",
+    "preflight-stderr.txt": "f0163377fd0e522cac612e132bfda70482e85f31cd4f99cc81938e62dfc7c247",
+    "preflight-result.json": "80fe718c02a9fdd355df5956141708812ab07821097294c802e8e67f3787e9a6"
+  },
+  "fixed_input_change": "Clear prohibition of inline Python; author a tests file using native file tools. Preserve verified partial repairs and disclose independent remaining failures upfront; no runtime feedback."
+}
