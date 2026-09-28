@@ -6,6 +6,22 @@ import unittest
 
 
 class CommandPolicyTests(unittest.TestCase):
+    def test_git_grep_literal_option_pattern_after_delimiter(self):
+        for cmd in ['git grep -- "--candidate"',
+                    'git grep -n -- "--candidate" scripts',
+                    "git grep -- '--textconv'", 'git grep -- "-x" ./main']:
+            with self.subTest(cmd=cmd):
+                self.assertTrue(self.allowed(cmd))
+        for cmd in ['git grep "--candidate"', 'git grep --textconv "--candidate"',
+                    'git grep -- "--candidate" ../main',
+                    'git grep -- "--candidate" C:/Users',
+                    'git grep -- "--candidate" .git/config',
+                    'git grep -- "--candidate" --textconv',
+                    'git grep -- "--candidate"; whoami',
+                    'git grep -- "--$(whoami)"']:
+            with self.subTest(cmd=cmd):
+                self.assertFalse(self.allowed(cmd))
+
     def test_optional_git_path_delimiters_and_standard_test_options(self):
         for cmd in ['git grep -n "16:54:07" --', 'git grep -n "BOOT" --',
                     'git diff -U5 -- components/meter/meter_gui.c',

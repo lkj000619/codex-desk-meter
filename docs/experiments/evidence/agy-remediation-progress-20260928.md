@@ -41,7 +41,9 @@
 | remediation r10 | 940.172초 후 완주; 제품 합격 아님 | snapshot `f2063cfbda418f4003457a945e6f585731c5a58c`. 독립 빌드·CTest 4·PC 9·legacy 29·trusted 결과 형식 통과. 독립 수신/상태/송신 번호 시험에서 추가 결함 재현. 아직 업로드 안 함 |
 | remediation r11 | 986.688초 후 환경 실패; 부분 수정 보존 | `python -c` 미등록 명령 거부. AGY 14개 source/test 파일 수정, snapshot `83014daa61fa7f836ed6b36a5664157eec8de566`, 전역 복구·입력 불변·bundle 확인. 독립 평가에서 개선과 남은 실패를 각각 기록 |
 | remediation r12 | 1109.016초 후 완주; 제품 합격 아님 | snapshot `fb3b8e95c207fb9caff5869ed946cd80c4dcb715`. 독립 host/IDF 빌드·CTest·Python·legacy·trusted validator 통과, source 변경 없음. 추가 모듈 통합 검증에서 기본 fixture 거부·거부 후 상태 변경·잘못된 수치/단위 수락 재현 |
-| remediation r13 | 실행 시작 | r12 제품 source 116개 byte 보존. preflight 120개·COM3·clean checkout 실패/경고 0. 동일 제한 정책과 진단 hash 확인. 실제 남은 결함·확인된 개선을 고정 prompt로 사전 제공. 원본 순위 제외 유지 |
+| remediation r13 | 241.5초 후 환경 실패; 제품 변경 없음 | `git grep -- "--candidate"` literal 조회 거부. snapshot `2210c2b0725fc0b2472be43748dac6829abfd427`; 입력 불변·전역 복구·bundle 보존 |
+| literal option-pattern 조회 진단 | 통과 | 명시적 `--` 뒤의 제한된 dash 문자열 조회만 등록. 실제 AGY query 3회·전역 설정 byte 복구, 부모 경로/변환기/명령 결합 거부 유지 |
+| remediation r14 | 실행 시작 | 제품 파일 116개가 r12 완성 source와 동일. preflight 121개·COM3·clean checkout·준비 commit 2개 및 실제 AGY query 확인. 전체 계약과 원본 순위 제외 유지 |
 
 정책 보완은 `git ls-files`의 checkout-root `.gitignore`, `.gitattributes`, 현재 디렉터리
 선택자뿐이다. parent/absolute 경로·history·compound shell·임의 Python·설치·flash는
@@ -272,3 +274,19 @@ trusted 결과 형식 검증을 모두 통과했다. 평가 중 archive source �
 - [r12 독립 평가 archive receipt](agy-remediation-r12-independent-artifacts-20260928.json)
 - [r12 독립 평가 원본·재현 코드](agy-remediation-r12-independent-artifacts-20260928.zip)
 - [r13 동일 정책·입력 보존·사전 검증](agy-remediation-r13-preflight-20260928.json)
+
+## r13 조회 중단·r14 제한 문법 보완
+
+r13은 제품 변경 전 literal `--candidate` 검색에서 중단됐다. 원본 source와 실패 로그·usage·
+bundle·전역 설정 복구를 확인했다. `--`가 옵션을 끝낸 뒤의 dash로 시작하는 제한된 문자열
+조회만 별도 등록했다. 기존 `--textconv` 실행 옵션을 등록한 것이 아니며, `--` 뒤 literal
+문자열 검색은 실제 Git/AGY 진단에서 source marker를 출력했다. 검색 범위는 기존 checkout
+읽기이며 native 파일 접근·실행 명령군·하드웨어 grant를 넓히지 않았다.
+
+먼저 회귀 실패를 재현한 뒤 정책 시험 15개를 통과했고, 실제 AGY query 3개와 전체 preflight
+121개·COM3·clean checkout을 통과했다. 부모/비허용 절대 경로·명령 결합·변환기 flag는 계속
+거부한다. r14의 제품 파일 116개가 r13 시작 source와 hash 동일하며, 운영자 제품 변경은 없다.
+시작 전에 고정 보완 지시를 제공하고 실행 중 추가 지시 없이 종료 후 평가한다.
+
+- [r13 실패·원본 보존](agy-remediation-r13-result-20260928.json)
+- [r14 literal 조회·권한 경계·사전 검증](agy-remediation-r14-preflight-20260928.json)
