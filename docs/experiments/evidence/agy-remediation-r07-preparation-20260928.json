@@ -1,0 +1,47 @@
+{
+  "run_id": "20260928-agy-remediation-r07",
+  "classification": "remediation-preparation",
+  "remediation_agent_started": false,
+  "ranking_eligible": false,
+  "product_pass": false,
+  "status": "preparation_rejected",
+  "reason": "Actual AGY search-policy diagnostic denied a permitted-by-Python query; remediation agent not launched",
+  "diagnostic_execution": {
+    "start": "2026-09-28T07:53:09.559Z",
+    "end": "2026-09-28T07:53:19.412Z",
+    "elapsed": 9.844000000040978,
+    "status": "environment_failed",
+    "reason": "AGY tool permission denied; inspect terminal denied_actions",
+    "code": 0
+  },
+  "diagnostic_usage": {
+    "input": 18907,
+    "output": 360,
+    "cached": 0,
+    "reasoning": 254,
+    "provider_total": 19267,
+    "total": 19267,
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+    "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+  },
+  "inference": "AGY executable contains Go regexp/syntax markers; negative lookahead newly added to search rules is unsupported by RE2. This explains the Python-vs-AGY discrepancy and is checked by a subsequent real-CLI diagnostic. No AGY internal source was available.",
+  "primary_regex_reference": "https://github.com/google/re2/wiki/Syntax",
+  "product_changes": false,
+  "original_prepared_inputs_preserved": true,
+  "hashes": {
+    "prepared-manifest.json": "98f60252ba94c213ad8fa6850bdf9313a61202dbfb3f3ad5bdfda78b0a7e5fb8",
+    "prepared-implementation.bundle": "874ade90a48780c00e4b66fec11e14509a638498c79b0a1344a5e8df093ba207",
+    "profile.json": "9f6941406c528236a1a93b991a771c9bbcae06283406c933411bc07fea611e5e",
+    "prompt.txt": "a34008ec07aecea5d93b637a16da2dc5b2d7891bd68d63e0d4266bf44c02d576",
+    "agent-context.json": "e5190cacd15018b8b591b88dae575a23ee911a9181ad2579fe35e4110207cc35",
+    "e2e-evaluation-manifest.json": "c879fe744ed069720bb678237effe73676a08c5df2aadf1742cc294e8ff0ca8e",
+    "source-provenance.json": "2d60c9e511b4aaeaa943c084858e3e9ee7792db924b018d6e0dcfa84cd64fe2f",
+    "preflight-result.json": "80fe718c02a9fdd355df5956141708812ab07821097294c802e8e67f3787e9a6"
+  },
+  "diagnostic_hashes": {
+    "result.json": "d90e5bdd26ae0affd275772d2a759166602d32c7acd2bdc18ebfc53955ae791f",
+    "usage.json": "8fb1cdb1499e4e8bd06d297cbc79e43e6cdc68871e4807e3eafc0d5b9b6cc321",
+    "stdout.jsonl": "a18f192c27e6c32a466a55a0bc355eae87e6b61fc4bbf22e68dcf6feb6a90e8a",
+    "stderr.txt": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713"
+  }
+}

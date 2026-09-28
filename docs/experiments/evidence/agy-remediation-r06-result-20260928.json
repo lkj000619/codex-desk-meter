@@ -1,0 +1,57 @@
+{
+  "run_id": "20260928-agy-remediation-r06",
+  "classification": "remediation",
+  "status": "environment_failed",
+  "reason": "AGY tool permission denied; inspect stderr evidence",
+  "measurement": {
+    "tokens": {
+      "input": 258030,
+      "output": 10149,
+      "cached": 2555318,
+      "reasoning": 6265,
+      "provider_total": 268179,
+      "total": 268179,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    },
+    "tool_calls": 37,
+    "failed_commands": null
+  },
+  "execution": {
+    "start": "2026-09-28T07:47:32.152Z",
+    "end": "2026-09-28T07:50:00.396Z",
+    "elapsed": 148.23499999998603,
+    "status": "environment_failed",
+    "reason": "AGY tool permission denied; inspect stderr evidence",
+    "code": 0
+  },
+  "error_command_events": [
+    "rg \"BOOT_BUTTON_PIN|LCD_IO_SPI_CS\" -- \"main\" \"components\" \"tests\""
+  ],
+  "archive": {
+    "run_id": "20260928-agy-remediation-r06",
+    "archived_at": "2026-09-28T07:51:25.747576+00:00",
+    "status": "environment_failed",
+    "implementation_commit": "62d74d2c311cc8627b790f5db9e4d8fec673741c",
+    "pre_archive_status": "",
+    "product_diff_stat": "",
+    "inputs_immutable": true,
+    "globals_restored": true,
+    "archive_operator_product_edits": false,
+    "bundle_sha256": "a2a54d32f9ff5a5a178a4748476fb31ac42c6aee5a53015719d7dd1e567df946",
+    "ranking_eligible": false,
+    "product_pass": false
+  },
+  "ranking_eligible": false,
+  "product_pass": false,
+  "hashes": {
+    "remediation-manifest.json": "3f954080c2a22ccbd1a777a7b3f27180b183867d2478ff23646276fe0328d4f3",
+    "stdout.jsonl": "76d4de1ceb931ba2f3557b61df0ae09e41b55b985366b6123795ab9a2f6c5910",
+    "stderr.txt": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713",
+    "command-audit.json": "1476d0221e9482fa14a05149385bbf962f563d8bba02d5790636b7d2047960c2",
+    "implementation.bundle": "a2a54d32f9ff5a5a178a4748476fb31ac42c6aee5a53015719d7dd1e567df946",
+    "archive-record.json": "9591d2169eaf472be82c0ff3692bf4dfed0bb7dcab2be7456a7bb6b2c340d386",
+    "prompt.txt": "c785c04f14e4ba984ac64111005dbf1ef85f94a63478b8e9be2ea100dc654188",
+    "source-provenance.json": "259d727a74f01e33cc395cea4ead404ab58f5257a7fc087465157ce95c64075d"
+  }
+}

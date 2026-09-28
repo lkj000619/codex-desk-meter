@@ -6,6 +6,31 @@ import unittest
 
 
 class CommandPolicyTests(unittest.TestCase):
+    def test_patterns_exclude_re2_unsupported_lookaround_and_backreferences(self):
+        policy = Path(__file__).resolve().parents[2] / 'experiments/config/agy-pilot-permissions.json'
+        for rule in json.loads(policy.read_text())['allow']:
+            if rule.startswith('command(regex:'):
+                for unsupported in ['(?=', '(?!', '(?<=', '(?<!', r'\1', r'\2']:
+                    with self.subTest(unsupported=unsupported):
+                        self.assertNotIn(unsupported, rule)
+
+    def test_search_delimiters_and_option_combinations(self):
+        for cmd in ['rg "BOOT_BUTTON_PIN|LCD_IO_SPI_CS" -- "main" "components" "tests"',
+                    'rg -n -e "BOOT" -g "*.c" main',
+                    'rg -- "BOOT" main', 'rg "BOOT" main -n',
+                    'rg -n -A 3 -B 1 "BOOT" main',
+                    'rg --files -- main components',
+                    'git grep -n -e "BOOT" -- main',
+                    'git grep -n -A 3 "BOOT" -- main']:
+            with self.subTest(cmd=cmd):
+                self.assertTrue(self.allowed(cmd))
+        for cmd in ['rg "--pre" "evil" main', 'rg "--pre=evil" main',
+                    'git grep "--textconv" x', 'rg --pre evil "BOOT" main',
+                    'rg "BOOT" -- ../main', 'rg "BOOT" -- C:/Users',
+                    'rg "BOOT" main -g "$(whoami)"', 'rg --files -- ../']:
+            with self.subTest(cmd=cmd):
+                self.assertFalse(self.allowed(cmd))
+
     def test_git_working_tree_and_result_validation_groups(self):
         for cmd in ['git diff components/meter/meter_gui.c',
                     'git diff --stat -- main components',

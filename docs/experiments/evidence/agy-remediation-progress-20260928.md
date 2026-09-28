@@ -31,7 +31,10 @@
 | code-search 진단 | 통과 | 실제 AGY에서 제한된 git grep·rg·Select-String·rg --files 4회 실행 및 전역 설정 복구 확인 |
 | remediation r05 | 613.047초 후 환경 실패; 부분 수정 7개 파일 보존 | 파일을 지정한 `git diff` 조회 거부. AGY PC 수집 경로·상태/GUI·회귀 시험 변경, snapshot `ee511516dd700e81e42ae1e266301f044ad1e894`, 전역 복구·입력 불변·bundle 확인 |
 | working-tree/result-validation 진단 | 통과 | 실제 AGY에서 파일 지정 diff, directory diff, diff check, 복수 status flag, validator의 결과 파일 인수 5회 실행. 전역 설정 byte 복구 확인 |
-| remediation r06 | 실행 시작 | r05 AGY 부분 수정 포함 제품 파일 115개 canonical archive 보존. preflight 116개·host runtime·COM3·clean checkout, 실패/경고 0 |
+| remediation r06 | 148.235초 후 환경 실패; 제품 추가 변경 없음 | `rg` 검색의 `--` 구분자 조합 거부. 입력 불변·전역 복구·bundle 보존 |
+| r07 준비 | 실제 AGY 진단 실패로 보완 실행 시작 안 함 | Python 시험에서만 지원되는 검색 규칙의 negative lookahead 사용. 원래 준비 snapshot·정책·사전 검증·실패 진단 보존 |
+| search-dialect 진단 2 | 통과 | RE2 호환 문자 클래스로 제한을 유지하고 실제 AGY에서 검색 구분자·옵션·문맥 출력 8회 확인. 전역 설정 byte 복구 확인 |
+| remediation r08 | 실행 시작 | r05 부분 수정 제품 파일 115개 보존. preflight 118개·host runtime·COM3·clean checkout, 실패/경고 0 |
 
 정책 보완은 `git ls-files`의 checkout-root `.gitignore`, `.gitattributes`, 현재 디렉터리
 선택자뿐이다. parent/absolute 경로·history·compound shell·임의 Python·설치·flash는
@@ -70,7 +73,7 @@ provider 전체·오류·복구 시험, 선택 IMU 기능과 최종 구조화 �
 - [r03 실패 원본·측정](agy-remediation-r03-result-20260928.json)
 - [r04 조회 명령군·진단·사전 검증](agy-remediation-read-groups-preflight-20260928.json)
 - [기존 남은 작업 점검](agy-remaining-work-review-20260928.md)
-- 현재 raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r06`.
+- 현재 raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r08`.
 
 이 문서는 시작 시점의 진행 기록이다. 실행 종료 판정은 별도 결과 보고서로 추가한다.
 
@@ -102,3 +105,22 @@ archive와 byte 일치하며 운영자는 제품 구현을 수정하지 않았�
 - [보드 재연결 확인](agy-remediation-board-reconnected-20260928.json)
 - [r05 실패·부분 구현·보존](agy-remediation-r05-result-20260928.json)
 - [r06 변경 조회·실제 진단·사전 검증](agy-remediation-working-tree-preflight-20260928.json)
+
+## r08 검색 문법·엔진 차이 보완
+
+r06은 검색 구분자 조합 때문에 중단됐고 제품 변경은 없었다. r07 준비 정책에는 quoted
+옵션 위장을 차단하는 negative lookahead가 추가됐으나, Python 시험 통과와 달리 실제 AGY
+진단에서는 규칙이 동작하지 않았다. 보완 agent는 시작하지 않고 해당 준비 원본을 보존했다.
+
+AGY 실행 파일의 Go regexp/syntax 표식과 [RE2 문법](https://github.com/google/re2/wiki/Syntax)을
+대조하면 해당 표현 미지원이 원인이라는 추론을 뒷받침한다. AGY 내부 소스 확인은 하지
+못했다. 같은 제한을 문자 클래스로 표현한 뒤 실제 CLI 진단 8개 명령이 모두 실행됐으며,
+unsupported lookaround/backreference를 차단하는 사전 시험도 추가했다.
+
+r08은 동일 AGY 제품 부분 소스를 사용한다. 하드웨어 접근·설치·history·명령 결합·임의
+변환기 허용은 추가하지 않았다. 원본 업로드 결과를 해결·합격으로 승격하지 않으며 실행
+종료 후 독립 빌드·시험과 보드 관찰을 진행한다.
+
+- [r06 실패·보존](agy-remediation-r06-result-20260928.json)
+- [r07 준비 반려·원본 보존](agy-remediation-r07-preparation-20260928.json)
+- [r08 실제 검색 진단·사전 검증](agy-remediation-search-dialect-preflight-20260928.json)
