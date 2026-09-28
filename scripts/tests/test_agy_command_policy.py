@@ -237,6 +237,23 @@ class CommandPolicyTests(unittest.TestCase):
             with self.subTest(command=command):
                 self.assertFalse(self.allowed(command))
 
+    def test_git_grep_standard_checkout_file_arguments(self):
+        for command in ['git grep -n "def test_" tests/test_pc_pipeline_regressions.py',
+                        'git grep -n "open_owner_serial" scripts/host_device_pipeline.py',
+                        'git grep -n "owner_lock" scripts',
+                        'git grep -n "meter" components/meter/ main/main.c']:
+            with self.subTest(command=command):
+                self.assertTrue(self.allowed(command))
+        for command in ['git grep -n "test" HEAD', 'git grep -n "test" HEAD~1',
+                        'git grep -n "test" --all', 'git grep --textconv "test" scripts',
+                        'git grep -n "test" ../scripts',
+                        'git grep -n "test" C:/Users/private',
+                        'git grep -n "test" scripts/../private',
+                        'git grep -n "test" tests/a.py; whoami',
+                        'git grep -n "test" tests/a.py | iex']:
+            with self.subTest(command=command):
+                self.assertFalse(self.allowed(command))
+
     def test_read_path_arrays_and_bounded_depth(self):
         for cmd in ['Get-ChildItem -Recurse experiments, results, docs -Depth 2',
                     'gci -Path docs,experiments -Depth 0',

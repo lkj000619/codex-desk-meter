@@ -507,3 +507,39 @@ checkout 2개 준비 commit·clean 상태와 새 사전 검증 122개·host runt
 보드에는 r16이 유지되며 root 제품 소스 수정·원래 비교 순위 편입은 없다. `product_pass:false`다.
 
 - [r18 source·한정 정책 변경·사전 검증](agy-remediation-r18-preflight-20260928.json)
+
+## r18 조회 형식 중단·제품 변경 없음·한정된 표준 grep 사전 검증
+
+r18은 67.875초 뒤 `git grep -n "def test_" tests/test_pc_pipeline_regressions.py`에서 중단됐다.
+기존 규칙이 pattern 뒤의 파일 경로에 `--`를 요구해 실제 Git의 표준 형식이 거부됐다.
+제품 수정 전 종료였고 archive `90cd79b70de2bb1de607b86dde3880f41b85080f`의 diff는 없다.
+제품 파일 116개를 hash 비교해 r17과 동일함을 확인했다. 전체 제품 빌드를 다시 반복하지 않고
+r17 검증을 참조하며, 현재 result 미생성·미완주·제품 미합격·업로드 없음으로 별도 기록했다.
+
+같은 사용자 제한 명령군 정리 요청에 따라 알려진 checkout 경로의 Git grep 파일 인자 형식을
+추가 등록했다. source/시험/docs 등 현재 경로만 허용하며 HEAD/history refs·all·textconv·
+외부/부모 경로·경로 순회·복합 명령·파이프는 계속 거부한다. 다른 규칙과 data grant는 동일하다.
+새 정책 SHA256은 `2c79ccc4…1034f`다. 등록 전 4개 표준 조회 거부를 재현하고 등록 후
+정책 시험 17개를 통과했다. 실제 AGY의 3개 조회 smoke는 27.687초에 모두 실행됐고 checkout
+source hash 불변·전역 설정 byte 동일 복구를 확인했다. raw 입출력·usage·정책 전후 사본을 보존했다.
+
+r18 launch gate의 console에 오래된 `policy_unchanged:true` label이 남아 있었지만 signed JSON은
+이미 실제 한정 정책 변경을 기록했다. 운영자 helper의 다음 출력부터 label을 바로잡았으며 제품
+변경이나 policy scope 변경으로 처리하지 않는다. source 수정은 계속 AGY만 담당한다.
+
+- [r18 조회 중단·수정 없음·원본 보존](agy-remediation-r18-result-20260928.json)
+- [r18 source 동일 확인·r17 검증 참조](agy-remediation-r18-independent-review-20260928.json)
+- [표준 grep 한정 정책·실제 AGY 조회 시험](agy-standard-grep-policy-smoke-20260929.json)
+- [표준 grep smoke 원본·정책 전후](agy-standard-grep-policy-smoke-20260929.zip)
+
+## r19 PC 보완 실행 시작
+
+r19는 r18 보존본의 제품 파일 116개를 byte/hash 그대로 이어받았다. 새 사전 검증 123개,
+host runtime, COM3, 2개 준비 commit 및 clean checkout 조건을 통과한 뒤 실행을 시작했다.
+명령 정책은 별도 AGY 조회 시험을 통과한 `2c79ccc4…1034f`이며 데이터 접근 범위는 동일하다.
+PC serial 제어선·정상 session 유지·실패 후 재수집/새 순번·정확한 운영 명령·현재 결과 제출을
+고정 지시문으로 요청했다. 실행 중 추가 피드백과 root 제품 소스 수정은 하지 않는다.
+원래 단회 정량 비교 순위에 포함하지 않는 보완 실행이며 `ranking_eligible:false`다.
+보드는 현재 r16이고 r19 업로드 및 전체 제품 합격은 아직 확인되지 않았다.
+
+- [r19 source·제한 정책 변경·사전 검증](agy-remediation-r19-preflight-20260928.json)
