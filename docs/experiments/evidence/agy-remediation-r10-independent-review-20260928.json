@@ -1,0 +1,65 @@
+{
+  "run_id": "20260928-agy-remediation-r10",
+  "classification": "independent_remediation_evaluation",
+  "ranking_eligible": false,
+  "implementation_commit": "f2063cfbda418f4003457a945e6f585731c5a58c",
+  "agent_completed": true,
+  "fresh_automated_commands": [
+    {
+      "name": "host-configure",
+      "exit_code": 0
+    },
+    {
+      "name": "host-build",
+      "exit_code": 0
+    },
+    {
+      "name": "ctest",
+      "exit_code": 0
+    },
+    {
+      "name": "candidate-python-tests",
+      "exit_code": 0
+    },
+    {
+      "name": "legacy-29",
+      "exit_code": 0
+    },
+    {
+      "name": "idf-set-target",
+      "exit_code": 0
+    },
+    {
+      "name": "idf-build",
+      "exit_code": 0
+    },
+    {
+      "name": "trusted-result-validation",
+      "exit_code": 0
+    }
+  ],
+  "source_changes_after_build": {},
+  "product_pass": false,
+  "hardware_verified": false,
+  "corrected_binary_uploaded": false,
+  "operator_product_edits": false,
+  "findings": "\nIndependent evaluation of the supplied completed source (f2063cfbda418f4003457a945e6f585731c5a58c): fresh host configure/build, 4 CTest cases, 9 PC regressions, 29 legacy cases, pinned ESP-IDF build and trusted structured-result validation all exited zero. Product pass remains false. The operator made no product edits and did not flash this binary. Passing those tests does not resolve these independently observed defects:\n\n1. The target Xtensa object gives meter_transport_process_bytes an entry stack frame of 20,144 bytes, while serial_rx_task is allocated 4,096 bytes (ESP-IDF task stack argument is bytes). cdm_frame_t is 20,080 bytes. Ensure sufficient bounded memory for the real receive/parser call chain, allocation failure handling, and concurrent GUI/state access. Verify the target build as well as host tests.\n2. Feeding an exact canonical frame converted to CRLF currently yields accepted=1, rejected=0. Feeding 65,536 x bytes followed immediately by a valid frame without an intervening newline yields accepted=1,rejected=1: an oversized line's suffix must not become a new accepted frame. Preserve exact cdm/1 canonical bytes, length, UTF-8, JSON/schema/CRC rejection and resynchronize at the delimiter. Empty/extra newline treatment must respect the existing stream contract. Test production transport, not only the host reference receiver.\n3. A valid OpenAI snapshot followed by a same-identity HTTP_500 error snapshot changes last_good_usage.windows_count from 1 to 0 and stores HTTP_500 as last good. Preserve last-good data and source time while exposing current provider-local error. An old source observation (2026-09-08T00:00:00Z received at 2026-09-10T00:04:59Z) is stale before tick but becomes fresh after one second. Keep source age, 299/300-second boundary, unknown/future timestamps and elapsed-time handling honest. A future observation at 00:06 was accepted against 00:04:59; check it against the existing timestamp policy without inventing values.\n4. Transport ignores the bool result of meter_state_process_frame and always refreshes monotonic last-update and logs Accepted even for parse-valid duplicate/older sequences. Failed acceptance must not refresh freshness, cached source reference time or receipt claims. Verify the ESP conditional path, which differs from host code.\n5. The frame parser reads all five supplied provider examples but state retains only frame.usage[0]. Retain each provider/agent/host identity, units, windows, source/error/stale/last-good state, and allow available providers to cycle in the actual GUI as required by integration-contract. Do not reduce the provider matrix or replace values with fabricated fallback data.\n6. ProductionCollector and PersistentSequenceStore exist but the documented scripts/run-host-device-pipeline.py --send --port COM3 entry point still uses the maintainer one-shot reference path and resets its default sequence to 1. Deliver a separate explicit candidate production CLI, or clearly wire a candidate mode while preserving oracle dry-run behavior, with documented safe initial state, restart, refresh, <=60-second polling, identified-device reconnect and one sender owner. All agent tests must use fake/loopback sinks; no real port. Exercise the real CLI/application orchestration in offline tests, including separate process restart/manual refresh and failed write.\n7. Independent concurrent calls to PersistentSequenceStore.reserve_next_sequence using 8 workers/32 reservations produced 17 successful returns but only 4 unique values, 13 duplicates, plus 15 native write errors. Existing initialize_device overwrites counter 11 with 1. Enforce exclusive sender ownership and atomic durable reservation across process/thread instances; missing/corrupt state must stop; explicit initialization must refuse existing state. Do not clear receiver ordering on disconnect/stale/new sent_at. Keep stable physical-device alias independent of COM enumeration.\n8. F9 structured JSON lists ambient light and FT6336 touch while the original archived AGY selection document lists imu-auto-rotation, rtc-offline-clock and battery-adc-monitor. Preserve those original three candidates and selected IMU in current documentation/result consistently. JSON reports IMU GPIO8/9 while implementation/board selection says SDA15/SCL7. Align claims with pinned board source. Self-assigned 30/30 is not an operator score; label author assessment and keep unmeasured owner metrics unknown.\n9. LCD scanout stability, BOOT feedback and physical IMU rotation remain unverified; a CPU render buffer copied into a single continuously scanned framebuffer is not independent proof of tear-free display. Diagnose actual board/driver requirements, use coherent synchronization and state ownership where needed, and add meaningful automated coverage. Operator will inspect video/press/rotation after you finish. Do not claim hardware pass.\n\nThese findings are supplied once before this new remediation; there will be no runtime guidance. Fix the full existing product contract rather than only making a result validator pass. Existing earlier self pass labels are not independent product proof. Keep schema/contracts/frozen input and evaluator gates intact. Author product changes and meaningful regressions yourself, run actual builds/tests, and deliver honest remaining limitations and current-run structured result. No hardware access, credentials, network provider collection, added hardware, installs, arbitrary shell or permission bypass. Permitted git diff context syntax is --unified=3 or -U3; --unified 3 is invalid Git syntax and is excluded from the narrowed policy.\n",
+  "evidence": [
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r10-20260928\\evaluation.json",
+      "sha256": "5e834cee45be108f2875d85301eeb9ba20b8e8193b5ca769dfa6202769afac9c"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r10-20260928\\operator-frame-tests\\report.json",
+      "sha256": "552a854670bfe0c38f1379e295a3c2ff377d9e74ec0ee791dee5abc868d016d6"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r10-20260928\\operator-frame-tests\\target-stack-report.json",
+      "sha256": "398ba452158ce066f00c96fffa2ebfe2400aacb835a2558dc02b7b660690b0b3"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r10-20260928\\operator-state-tests\\report.json",
+      "sha256": "05a5451e88cd3b6c1d1e03e348728879231bb03dcb302da76fc13f220b5426a4"
+    }
+  ]
+}

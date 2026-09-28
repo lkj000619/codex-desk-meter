@@ -1,0 +1,51 @@
+{
+  "run_id": "20260928-agy-remediation-r11",
+  "classification": "remediation",
+  "ranking_eligible": false,
+  "product_pass": false,
+  "preflight_test_count": 120,
+  "preflight_exit_code": 0,
+  "hardware_required": "COM3",
+  "actual_agy_diagnostic": {
+    "start": "2026-09-28T08:46:45.728Z",
+    "end": "2026-09-28T08:47:03.823Z",
+    "elapsed": 18.094000000040978,
+    "status": "completed",
+    "reason": null,
+    "code": 0
+  },
+  "diagnostic_usage": {
+    "input": 21860,
+    "output": 567,
+    "cached": 16284,
+    "reasoning": 211,
+    "provider_total": 22427,
+    "total": 22427,
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+    "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+  },
+  "diagnostic_commands": [
+    "git diff --unified=3 -- ."
+  ],
+  "expected_behavior_confirmed": true,
+  "globals_restored_byte_exact": true,
+  "policy_change": "Narrowing only: reject invalid --unified space-number; accept --unified=N. No additional command family or data grant.",
+  "policy_regression": "14 tests; revised invalid-syntax rejection failed before narrowing and passed afterward",
+  "source_commit": "f2063cfbda418f4003457a945e6f585731c5a58c",
+  "product_files_preserved": 115,
+  "operator_product_edits": false,
+  "policy_sha256": "98a966efae74018ce42a6bf1d0a5b14ff1b310db97d4794e8debb2da1b6f4d73",
+  "prompt_sha256": "68e53417bf11fdd96835b3f09f8640e0cbb3dced1534d64508ca2799d3610a52",
+  "preflight_hashes": {
+    "preflight-stdout.txt": "60bc5a8a7f422e36abdd4f6fef443247cd81253e905a86acb221943feeb8d787",
+    "preflight-stderr.txt": "72ea7454777592292c567536488d59221eee3ff333a92363412dcbdd6d3b2d99",
+    "preflight-result.json": "80fe718c02a9fdd355df5956141708812ab07821097294c802e8e67f3787e9a6"
+  },
+  "diagnostic_hashes": {
+    "stdout.jsonl": "832d9561ce6b3ec1443e8e063da5a68c6de98042d8397e9abddde38c5530a64e",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "result.json": "c21695dc87968b2d0b7a37d430de755567367e1a001dc90308452cba346facbe",
+    "usage.json": "c6219a4a9e6dfaf9b50ee5eacffc821bb3a265e357b3ca2ca25daf4433440c0f",
+    "expected-commands.json": "3e06233b5d4b12c9fe77c9c8525be8d141e0677388268fa3b209259db1cf3276"
+  }
+}

@@ -9,7 +9,7 @@ class CommandPolicyTests(unittest.TestCase):
     def test_optional_git_path_delimiters_and_standard_test_options(self):
         for cmd in ['git grep -n "16:54:07" --', 'git grep -n "BOOT" --',
                     'git diff -U5 -- components/meter/meter_gui.c',
-                    'git diff --unified 3 -- .',
+                    'git diff --unified=3 -- .',
                     'git diff --no-color --exit-code -- main',
                     'python -u -m unittest discover -s tests -p "*regression*.py" -v',
                     'python -m unittest discover --start-directory tests --pattern "test_*.py" --verbose',
@@ -18,7 +18,7 @@ class CommandPolicyTests(unittest.TestCase):
                 self.assertTrue(self.allowed(cmd))
         for cmd in ['git grep -n "x" -- ../main', 'git grep -n "x" HEAD --',
                     'git grep "--textconv" --', 'git diff -U5 HEAD',
-                    'git diff --output=x -U5 -- .',
+                    'git diff --output=x -U5 -- .', 'git diff --unified 3 -- .',
                     'python -u -m unittest discover -s ../tests',
                     'python -m unittest discover -p "$(whoami)"',
                     'python -u tests/test_x.py; whoami']:

@@ -38,7 +38,8 @@
 | local-metadata 진단 | 통과 | 준비 커밋 두 개만 있는 진단 checkout에서 제한된 metadata 조회 3회 및 전역 설정 byte 복구 확인 |
 | remediation r09 | 225.906초 후 환경 실패; 제품 추가 변경 없음 | 자체 CTest 4개·legacy 29개·PC regression 9개 통과 후 terminal `git grep` 구분자 조회 거부. 입력 불변·전역 복구·bundle 보존 |
 | standard query/test 진단 | 권한 8회 통과; 기대 동작 7회 확인 | 실제 AGY에서 8개 명령 모두 dispatch. `git diff --unified 3 -- .`는 운영자 지정 인수 표기 오류이며 diff 성공이 아님. 진단 unittest 실제 1개 실행 및 전역 설정 byte 복구 확인 |
-| remediation r10 | 실행 시작 | r05 부분 수정 제품 파일 115개 보존. preflight 120개·host runtime·COM3·clean checkout, 실패/경고 0. 현재 준비 커밋 두 개 조건 유지 |
+| remediation r10 | 940.172초 후 완주; 제품 합격 아님 | snapshot `f2063cfbda418f4003457a945e6f585731c5a58c`. 독립 빌드·CTest 4·PC 9·legacy 29·trusted 결과 형식 통과. 독립 수신/상태/송신 번호 시험에서 추가 결함 재현. 아직 업로드 안 함 |
+| remediation r11 | 실행 시작 | r10 제품 파일 115개 byte 보존. 독립 결함을 고정 prompt에 사전 제공. preflight 120개·COM3·clean checkout 및 실제 AGY의 수정된 Git 조회 확인. 최초 정량 비교·순위에서 제외 |
 
 정책 보완은 `git ls-files`의 checkout-root `.gitignore`, `.gitattributes`, 현재 디렉터리
 선택자뿐이다. parent/absolute 경로·history·compound shell·임의 Python·설치·flash는
@@ -168,3 +169,34 @@ Git 인수 오류를 검출했으나 이후 실행 호출이 진행된 운영 �
 
 - [r09 실패·자체 시험·보존](agy-remediation-r09-result-20260928.json)
 - [r10 표준 옵션·실제 진단·사전 검증](agy-remediation-standard-options-preflight-20260928.json)
+
+## r10 완주와 독립 검증, r11 보완 입력
+
+r10은 고정 prompt 한 번으로 종료했고, 입력 불변·AGY 변경 snapshot·bundle·전역 설정 복구를
+확인했다. fresh archive의 host/ESP-IDF 빌드, CTest 4개·PC regression 9개·legacy 29개,
+운영자 trusted validator는 통과했다. 독립 빌드가 제품 source를 바꾸지 않았음도 hash로 확인했다.
+운영자의 첫 Windows IDF 호출 오류는 후보 오류와 구분해 원본 기록을 보존했다.
+
+그 이후 실제 제품 모듈을 호출한 별도 시험과 대상 object 분석에서 다음 결함을 확인했다.
+
+- 대상 수신 함수 스택 20,144바이트에 비해 태스크 스택은 4,096바이트.
+- CRLF 수락 및 oversized line의 delimiter 없는 suffix를 새 프레임으로 수락.
+- 오류 응답이 last-good windows 1개를 0개로 덮어씀. 오래된 source가 tick 이후 fresh가 됨.
+- 수신은 5개 provider를 파싱하지만 상태는 첫 provider만 보존. sequence 거부 후에도
+  ESP 경로가 수신 시각을 갱신하고 Accepted 로그를 출력하는 source 경로 확인.
+- PC production 클래스와 실제 명령 경로의 연결 누락. 동시 예약 32회에서 성공 17회 중
+  고유 번호는 4개(중복 13개), write 오류 15개. 기존 번호 11을 초기화로 1로 되돌릴 수 있음.
+- F9 JSON과 원래 후보 세 개·실제 IMU pin 설명이 불일치. 자체 점수는 운영자 평가가 아님.
+
+이 결과는 제품 합격이 아니며, 해당 binary는 업로드하지 않았다. 보드는 사용자 재연결 후
+COM3·VID/PID·serial이 기존 장치와 일치했다. BOOT/LCD/IMU 실물 동작은 여전히 미검증이다.
+
+r11은 r10 canonical 제품 source를 그대로 받아 위 결함을 시작 전에 한 번만 제공한다.
+제품 수정·회귀 시험 작성은 AGY가 수행한다. 운영자는 독립 평가 도구와 기록만 작성했다.
+실행 중 추가 지시·정책 변경·제품 수정은 하지 않는다. 보완 시간·usage와 결과는 최초 단일
+prompt 성적에 합산하지 않는다. 잘못된 Git `--unified 3` 표기는 회귀 실패 재현 뒤 정책에서
+제외했고, 올바른 `--unified=3`와 기존 `-U3`만 허용한다. 권한 범위를 넓히지 않았다.
+
+- [r10 실행·보존](agy-remediation-r10-result-20260928.json)
+- [r10 독립 검증·원본 증거 경로와 hash](agy-remediation-r10-independent-review-20260928.json)
+- [r11 사전 검증·실제 제한 명령 진단](agy-remediation-r11-preflight-20260928.json)

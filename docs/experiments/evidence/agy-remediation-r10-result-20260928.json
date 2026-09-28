@@ -1,0 +1,55 @@
+{
+  "run_id": "20260928-agy-remediation-r10",
+  "classification": "remediation",
+  "status": "completed",
+  "reason": null,
+  "measurement": {
+    "tokens": {
+      "input": 2044373,
+      "output": 88145,
+      "cached": 19669947,
+      "reasoning": 50636,
+      "provider_total": 2132518,
+      "total": 2132518,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    },
+    "tool_calls": 146,
+    "failed_commands": null
+  },
+  "execution": {
+    "start": "2026-09-28T08:14:50.471Z",
+    "end": "2026-09-28T08:30:30.645Z",
+    "elapsed": 940.1720000000205,
+    "status": "completed",
+    "reason": null,
+    "code": 0
+  },
+  "error_command_events": [],
+  "archive": {
+    "run_id": "20260928-agy-remediation-r10",
+    "archived_at": "2026-09-28T08:31:05.394302+00:00",
+    "status": "completed",
+    "implementation_commit": "f2063cfbda418f4003457a945e6f585731c5a58c",
+    "pre_archive_status": "M components/meter/CMakeLists.txt\n M components/meter/include/meter_types.h\n M components/meter/meter_gui.c\n M components/meter/meter_state.c\n M components/meter/meter_transport.c\n M main/main.c\n?? docs/agent-runs/20260928-agy-remediation-r10/\n?? results/20260928-agy-remediation-r10/",
+    "product_diff_stat": "components/meter/CMakeLists.txt        |  3 +++\n components/meter/include/meter_types.h |  2 ++\n components/meter/meter_gui.c           |  3 +++\n components/meter/meter_state.c         |  5 ++++\n components/meter/meter_transport.c     | 41 +++++++++++++++++++++++++--------\n main/main.c                            | 42 ++++++++++++++++++++++++++--------\n 6 files changed, 78 insertions(+), 18 deletions(-)",
+    "inputs_immutable": true,
+    "globals_restored": true,
+    "archive_operator_product_edits": false,
+    "bundle_sha256": "de4ae4dc8b3cfccf602eec4ac16456956536138d1d78797fb79f1431931e0578",
+    "ranking_eligible": false,
+    "product_pass": false
+  },
+  "ranking_eligible": false,
+  "product_pass": false,
+  "hashes": {
+    "remediation-manifest.json": "96611440e442126cbfd13be2dd3568fe5edb4a7e1c8297607b4eb4e2b69cda08",
+    "stdout.jsonl": "b1a8cf88ce1a4160831159e4e4e77e6ae2c02996b9518c77d7aa79dcd5af7807",
+    "stderr.txt": "b5fe43bbb87021695eff5d1f8ab4e7e58a31757ef53d56675f52251d8c15dc7b",
+    "command-audit.json": "3bbff69ae952232a0a3ecde835fdf61fdbad5b3e25eefd55c58bed90f9dde4e5",
+    "implementation.bundle": "de4ae4dc8b3cfccf602eec4ac16456956536138d1d78797fb79f1431931e0578",
+    "archive-record.json": "12b1593da50400d37059e73f7f73a930e14860c6d207cf5496740e248cb0105c",
+    "prompt.txt": "f278e94563cb0d15f63ef374953bea99d1cd920232494965e3e0b419f293c7c1",
+    "source-provenance.json": "21e7aca4dcfd184fd6579fa9cde512a18f4262fe0e6795c508cef863f0425f52"
+  }
+}
