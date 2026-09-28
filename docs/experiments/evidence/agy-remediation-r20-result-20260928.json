@@ -1,0 +1,55 @@
+{
+  "run_id": "20260928-agy-remediation-r20",
+  "classification": "remediation",
+  "status": "completed",
+  "reason": null,
+  "measurement": {
+    "tokens": {
+      "input": 600158,
+      "output": 77023,
+      "cached": 10020224,
+      "reasoning": 48747,
+      "provider_total": 677181,
+      "total": 677181,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    },
+    "tool_calls": 83,
+    "failed_commands": null
+  },
+  "execution": {
+    "start": "2026-09-28T18:10:26.249Z",
+    "end": "2026-09-28T18:20:22.740Z",
+    "elapsed": 596.4839999999385,
+    "status": "completed",
+    "reason": null,
+    "code": 0
+  },
+  "error_command_events": [],
+  "archive": {
+    "run_id": "20260928-agy-remediation-r20",
+    "archived_at": "2026-09-28T18:21:07.025843+00:00",
+    "status": "completed",
+    "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+    "pre_archive_status": "M scripts/host_device_pipeline.py\n M scripts/run-host-device-pipeline.py\n M tests/test_pc_pipeline_regressions.py\n?? docs/agent-runs/20260928-agy-remediation-r20/\n?? results/20260928-agy-remediation-r20/",
+    "product_diff_stat": "scripts/host_device_pipeline.py       | 137 ++++++++++++++++-------------\n scripts/run-host-device-pipeline.py   |   9 +-\n tests/test_pc_pipeline_regressions.py | 157 ++++++++++++++++++++++++++++++++++\n 3 files changed, 242 insertions(+), 61 deletions(-)",
+    "inputs_immutable": true,
+    "globals_restored": true,
+    "archive_operator_product_edits": false,
+    "bundle_sha256": "49bb9e1f7a6f77db4ba3b0933cc07f34aa08791f0a40f9d4bbec76db89d18c82",
+    "ranking_eligible": false,
+    "product_pass": false
+  },
+  "ranking_eligible": false,
+  "product_pass": false,
+  "hashes": {
+    "remediation-manifest.json": "38c609d5bed960bd8dd449a4629d790bc01302712300c4ccf7da7764899686cd",
+    "stdout.jsonl": "e8a2d031ebe4ee34b4503947fe33a97a18d11944be7785b70103dfa81023f338",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "command-audit.json": "5c8b04354202d797e8d028a23e790e4f8aa5191790835b003eeb4c42c37c0dce",
+    "implementation.bundle": "49bb9e1f7a6f77db4ba3b0933cc07f34aa08791f0a40f9d4bbec76db89d18c82",
+    "archive-record.json": "cfcac05c133911957bc49994cd7aa9d7e6b2a8792df162da91b4448d276d1117",
+    "prompt.txt": "66aebd986d60eb5232c4f576aaee4fedcd928816660cb62d45668d30c3fbe1d5",
+    "source-provenance.json": "c15af21ea34bba68e84e5c8219b9e9c02dc10e107ce7f14214f721b8684dc19c"
+  }
+}

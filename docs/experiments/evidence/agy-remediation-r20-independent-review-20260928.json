@@ -1,0 +1,415 @@
+{
+  "run_id": "20260928-agy-remediation-r20",
+  "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+  "classification": "independent_completed_remediation_review",
+  "ranking_eligible": false,
+  "agent_completed": true,
+  "product_pass": false,
+  "hardware_verified": false,
+  "operator_product_edits": false,
+  "source_hashes_rechecked_after_all_probes": true,
+  "commands": [
+    {
+      "name": "host-configure",
+      "argv": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build-host",
+        "-G",
+        "Ninja"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 2.0790000000270084,
+      "timed_out": false,
+      "stdout_sha256": "9bb7b933d5461d2dd20de5e11b4728f72c84bfd38fa48c905adaf1b7968d4668",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "host-build",
+      "argv": [
+        "cmake",
+        "--build",
+        "build-host"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.8279999999795109,
+      "timed_out": false,
+      "stdout_sha256": "1e4c2aae870eeb46cc4e3191c02300f643b995a55689ee72990baee73a3c2e2c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ctest",
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "build-host",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.3279999999795109,
+      "timed_out": false,
+      "stdout_sha256": "2937ae9eecf5059649a8d51171088ed424aee7c08cff3bc439b59a1d2a2119b7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "candidate-python-tests",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 10.702999999979511,
+      "timed_out": false,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e21b94f6c073967ccf0fab06adbffb7fd4b3fdb4e1eb5dc01570aee80e4f0466"
+    },
+    {
+      "name": "legacy-29",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "tests/test_evaluation_adapter.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.375,
+      "timed_out": false,
+      "stdout_sha256": "04e9b334c1136d45f37e1b821f47954316c727e562b9e67f5a7700099a7863ff",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "idf-set-target",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "C:\\Espressif\\v5.3.2\\esp-idf\\tools\\idf.py",
+        "set-target",
+        "esp32s3"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 17.0,
+      "timed_out": false,
+      "stdout_sha256": "0369673aca0074deb751ad831397a47b08865c650341c1fdd6ad75fbb340de76",
+      "stderr_sha256": "76afca6cf96745dd53af5188f8c7f0fcaa7914e41fce829a601b629c22d9e74b"
+    },
+    {
+      "name": "idf-build",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "C:\\Espressif\\v5.3.2\\esp-idf\\tools\\idf.py",
+        "build"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 58.53200000000652,
+      "timed_out": false,
+      "stdout_sha256": "d0a4e0213a6e007735c54685c34de9bfb3201be74cfb873b5726331d5ecc99c1",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "trusted-result-validation",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "C:\\Users\\\uc774\uad11\uc9c4\\orca\\codex-desk-meter\\scripts\\validate-end-to-end-result.py",
+        "--result",
+        "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\checkout\\results\\20260928-agy-remediation-r20\\end-to-end-result.json",
+        "--manifest",
+        "C:\\Espressif\\benchmark-remediation\\20260928-agy-remediation-r20\\e2e-evaluation-manifest.json",
+        "--evidence-root",
+        "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\checkout"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.35999999998603016,
+      "timed_out": false,
+      "stdout_sha256": "cc42c7efb1c9e9b832dc65cd6901d8f86bf52519d2fa6da7591477779ddc64e1",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "binary_hashes": {
+    "codex-desk-meter.bin": "c5d0e53fb3db09f824411083dce14ce0770de1443b6e7a459d50563673dfcc57",
+    "codex-desk-meter.elf": "056dfcca893b57cb237296c0744da305867abeed1b6adeed1a18e99f3b451b62",
+    "bootloader/bootloader.bin": "a27e4f331172f0eee46fa14fa30f9721da7a6ef718bb717c87b454393bbcede2",
+    "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "confirmed": [
+    "Fresh host and IDF builds, CTest4, Python20, legacy29 and ROOT original current-result validator pass",
+    "Real native API safe-control-before-open and healthy reuse/owner cleanup covered by retained regressions",
+    "Actual CLI main after three open failures recovers with1Hz retry and sends7,8 on healthy reused session",
+    "Actual CLI main post-write exception consumes7, reopens, recollects and sends8,9; next durable sequence10",
+    "Manual request and independent automatic8s schedule pass, failed manual status rejection regression retained",
+    "Native fsync and durable successor precede write",
+    "Actual production transport rejects trusted17 nested negatives and six envelope negatives",
+    "Current procedure uses stable physical alias, sufficient periodic max-cycles, manual owner request, no-reinit restart and recorded-reset forced recovery; offline source provenance disclosed"
+  ],
+  "manual_observation": {
+    "run_id": "20260928-agy-remediation-r20",
+    "hardware_accessed": false,
+    "operator_product_edits": false,
+    "test_type": "Actual candidate CLI in two processes with file observation, loopback sink; no hardware/ACK proof",
+    "owner_argv": [
+      "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\checkout\\scripts\\run-host-device-pipeline.py",
+      "--candidate",
+      "--device-alias",
+      "operator-active-refresh",
+      "--sequence-store-dir",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-active-refresh-tests\\state",
+      "--loopback",
+      "--max-cycles",
+      "3",
+      "--poll-interval",
+      "8",
+      "--output",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-active-refresh-tests\\last-frame.bin"
+    ],
+    "owner_exit_code": 0,
+    "refresh_argv": [
+      "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\checkout\\scripts\\run-host-device-pipeline.py",
+      "--candidate",
+      "--device-alias",
+      "operator-active-refresh",
+      "--sequence-store-dir",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-active-refresh-tests\\state",
+      "--loopback",
+      "--refresh"
+    ],
+    "refresh_exit_code": 0,
+    "refresh_command_elapsed_seconds": 0.609000000054948,
+    "observed_frames": [
+      {
+        "sequence": 7,
+        "monotonic": 793554.828,
+        "sha256": "2c4cbdb9bf47d9f2418d3e9365476cb016cd91ef0d04ebc583f11f8c5f3408b8"
+      },
+      {
+        "sequence": 8,
+        "monotonic": 793555.937,
+        "sha256": "2b5c7b4ffd5671192b4b368b9ae9196491485f9db7e57928314944db41414336"
+      },
+      {
+        "sequence": 9,
+        "monotonic": 793563.406,
+        "sha256": "c92e9e770c395fa9ef5902862487559caf90e808eb655cc4e88c111ea30dd663"
+      }
+    ],
+    "refresh_invoked_at": 793555.328,
+    "first_frame_after_refresh_seconds": 0.609000000054948,
+    "configured_poll_interval_seconds": 8,
+    "first_to_third_observed_seconds": 8.577999999979511
+  },
+  "sender_recovery": {
+    "run_id": "20260928-agy-remediation-r20",
+    "hardware_accessed": false,
+    "operator_product_edits": false,
+    "test_type": "Actual candidate CLI main with independently injected serial open/write failures; no product code changes, no hardware/ACK proof",
+    "cases": [
+      {
+        "name": "three-open-failures",
+        "exit_code": 0,
+        "elapsed_seconds": 5.312000000034459,
+        "backend_would_be_usable_on_attempt": 4,
+        "events": [
+          {
+            "event": "open",
+            "attempt": 1,
+            "monotonic": 793554.062,
+            "port": "OPERATOR-MOCK"
+          },
+          {
+            "event": "open",
+            "attempt": 2,
+            "monotonic": 793555.062,
+            "port": "OPERATOR-MOCK"
+          },
+          {
+            "event": "open",
+            "attempt": 3,
+            "monotonic": 793556.062,
+            "port": "OPERATOR-MOCK"
+          },
+          {
+            "event": "open",
+            "attempt": 4,
+            "monotonic": 793557.062,
+            "port": "OPERATOR-MOCK"
+          },
+          {
+            "event": "write",
+            "monotonic": 793557.75,
+            "sequence": 7,
+            "bytes": 3961,
+            "fail_write": false,
+            "input_sha256": "2c4cbdb9bf47d9f2418d3e9365476cb016cd91ef0d04ebc583f11f8c5f3408b8"
+          },
+          {
+            "event": "write",
+            "monotonic": 793559.343,
+            "sequence": 8,
+            "bytes": 3961,
+            "fail_write": false,
+            "input_sha256": "2b5c7b4ffd5671192b4b368b9ae9196491485f9db7e57928314944db41414336"
+          }
+        ],
+        "stored_next_sequence": 9,
+        "write_sequences": [
+          7,
+          8
+        ]
+      },
+      {
+        "name": "one-write-failure",
+        "exit_code": 0,
+        "elapsed_seconds": 3.969000000040978,
+        "backend_would_be_usable_on_attempt": 2,
+        "events": [
+          {
+            "event": "open",
+            "attempt": 1,
+            "monotonic": 793559.359,
+            "port": "OPERATOR-MOCK"
+          },
+          {
+            "event": "write",
+            "monotonic": 793559.968,
+            "sequence": 7,
+            "bytes": 3961,
+            "fail_write": true,
+            "input_sha256": "2c4cbdb9bf47d9f2418d3e9365476cb016cd91ef0d04ebc583f11f8c5f3408b8"
+          },
+          {
+            "event": "open",
+            "attempt": 2,
+            "monotonic": 793560.968,
+            "port": "OPERATOR-MOCK"
+          },
+          {
+            "event": "write",
+            "monotonic": 793561.64,
+            "sequence": 8,
+            "bytes": 3961,
+            "fail_write": false,
+            "input_sha256": "2b5c7b4ffd5671192b4b368b9ae9196491485f9db7e57928314944db41414336"
+          },
+          {
+            "event": "write",
+            "monotonic": 793563.312,
+            "sequence": 9,
+            "bytes": 3961,
+            "fail_write": false,
+            "input_sha256": "c92e9e770c395fa9ef5902862487559caf90e808eb655cc4e88c111ea30dd663"
+          }
+        ],
+        "stored_next_sequence": 10,
+        "write_sequences": [
+          7,
+          8,
+          9
+        ]
+      }
+    ]
+  },
+  "schema_false_accept_cases": [],
+  "envelope_false_accept_cases": [],
+  "unchanged_c_source_and_tests": {
+    "components/lcd_bl_pwm_bsp/CMakeLists.txt": "9e39fb719956a1f7da93a16a306690a96c29df367202cad0b2511d226433afa3",
+    "components/lcd_bl_pwm_bsp/lcd_bl_pwm_bsp.c": "cbfd147fef0abd7a1c8db740b5ac38818c52f78c83af2e3166b9d01a4ead79bf",
+    "components/lcd_bl_pwm_bsp/lcd_bl_pwm_bsp.h": "0529999f8f77ed1f0531ea356bfef98ec145a6a99867a568b12fb30a326b7741",
+    "components/meter/CMakeLists.txt": "7bef7166f30da8e53f64f20a0d111d46594fc79ce97044deb71c7c67f33ad9cf",
+    "components/meter/feature_imu.c": "d6e2876689c6678845d0de03ac0d2667638ed375bcee16a48882a66e4df690a6",
+    "components/meter/include/feature_imu.h": "bcb3f43c7df672bb69fbca3cc5ed121e67aaa7ca8f041253126e7a117c7432c9",
+    "components/meter/include/meter_gui.h": "8447b06188f008fceba56819fad7f993b72ba6f424efd1e75e237e26d818d6ef",
+    "components/meter/include/meter_parser.h": "73ca068a86262b27a26512d9796eeb103f1dc285edeed78c586cda2099cdca9c",
+    "components/meter/include/meter_state.h": "f9cdf10c09ce45a0297839b174c386d9c404c38f44a33b17c0a6aabf8fa2816d",
+    "components/meter/include/meter_transport.h": "304db9cdfc76ead7b0148a53f23d40cf23b5a38af16b35eb0ca9d46cd18bcf3d",
+    "components/meter/include/meter_types.h": "071d18396f457c01053bdaf81b5f6f17a2bba5cdd10763cd9d3db918e50eba01",
+    "components/meter/meter_gui.c": "396111c0b2df58a89841a16b299f36c61da36db6a2b30368e321e6f4ffe6469f",
+    "components/meter/meter_parser.c": "f9efa12462942744044812cbde313e69c744145ad6327f1fdda088e426ef440d",
+    "components/meter/meter_state.c": "e21ad4f4486b68c85b5ff2f4f8f429f0973796e4d1162aa4d4b6ae9b0fe0a8b3",
+    "components/meter/meter_transport.c": "3358a2ea28b4996ff87eee406616ca0be40189810e09cbf5b8b2943619b1045d",
+    "main/CMakeLists.txt": "05b254819cd46eab54300a2536a3315f407ed91b382258528afa0398e9a7fa44",
+    "main/idf_component.yml": "039233eeb131414d975fd9c37f76507eac15dd8e119427e7fc1d3ca176cae45f",
+    "main/main.c": "12e14391272dd946d3070fd41d3da3fbff601590eca3ab625c88eaf0359a31fa",
+    "tests/meter_test_adapter.c": "bfa658b2a8bd18c9852ec2160a2cc617b8706134dd846752f01e7f9707efcf28",
+    "tests/test_feature_imu.c": "95eb7bce2aeb6c369677190f1785bc2bc730a7037c7645f3f6ce42f125feaab7",
+    "tests/test_gui_regression.c": "f38c242df770bdf3d7f321d65309a35814934fb5a8b1051488d0d33cf9b2c48d",
+    "tests/test_meter_parser.c": "b2fb87d50171f94852e9dc1512b05ad9c6f00acf3d43e7b00b7478fe7baef48d",
+    "tests/test_meter_state.c": "d676b57d827dbc3723db43d4ec359696efa23c94db265d6635cb197ed9f1c495"
+  },
+  "parser_supplemental_evidence_reused_from": "agy-remediation-r17-independent-review-20260928.json: identical C/main/C-test bytes; scoped/nullability/canonical supplementary probes not newly rerun",
+  "self_f9_score": 22,
+  "self_f9_score_status": "explicitly provisional conservative agent self-assessment; not blind owner physical score",
+  "owner_f9_score": null,
+  "owner_gui_scores": null,
+  "remaining": [
+    "New actual native serial lifecycle/powered restart order retention not yet hardware tested",
+    "30s continuous LCD, BOOT300ms, accepted-frame visible2s, full180rotation/noise stability need physical observation",
+    "Power-maintained USB cable removal/re-enumeration not actually performed",
+    "50cm model-blind G1-G6 and owner F9 scores remain unknown; full runtime stack bound unmeasured"
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\evaluation.json",
+      "sha256": "47827b4261879075672a675847360cf4d0cc8f8af8cf5619fbd313c6049690b4"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\additional-module-commands.json",
+      "sha256": "0bd22705559fa8828308c5d81b49048a4f4e059f8d782cdb1028d4cb26837689"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-absolute-value-tests\\report.json",
+      "sha256": "5c3ec6d966abb35cf9df73f070f2dd73b62cbd69397fbc8e87d3cfb13136641d"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-active-refresh-tests\\report.json",
+      "sha256": "2d3274f8587fbc312b0abaab77505b080303db053384ab76a7c82368e35eea16"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-atomic-state-tests\\report.json",
+      "sha256": "b84b49ca1208a249bd26b4408ed8fff461a6461225e56ac52ac9fec4f40cc1b2"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-cli-lifecycle-tests\\report.json",
+      "sha256": "15a855ae13af391d1ab10913f3656653dde52edb68014165c0c0c240887da6b5"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-consistent-clock-tests\\report.json",
+      "sha256": "7a443076f65b92ae0d06abb0972425873def186bea857c49cf8cd8bdd760679c"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-durable-reservation-tests\\report.json",
+      "sha256": "5761df8347a4c89e5fa83200b084c35417ea6bfc182600037277b9dc454e3189"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-envelope-type-tests\\report.json",
+      "sha256": "dec1371df28089b9bded37fcfbd1485cd2930b73f0122d0ab15f0f68a79adb91"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-esp-replay-tests\\report.json",
+      "sha256": "d81e415ba8ae2a5736cdf17ada2f8d971108f886772ae33faff96f837570eb1f"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-frame-tests\\report.json",
+      "sha256": "faad6141f8af9fb38569c9e4555dde623fffbf871771aafd19945b5d4327a5c1"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-provider-tests\\report.json",
+      "sha256": "1de771fa74f358f5d556cc51874bd5b453a6963dc4a8a7b95ff2efc96c97c980"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-sender-recovery-tests\\report.json",
+      "sha256": "ab5192e12533c3adbb97835f6afa1609cba8eeb4cf14d6b0bdd3fe79cf0b1807"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-state-tests\\report.json",
+      "sha256": "1a7caf6921df375b93e44fff813742696d8532342e8620f9d9ce45cd200c5b43"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\operator-target-state-stack\\report.json",
+      "sha256": "7937c50ac3cdb3c33ee7016d518b96d2c32a9bd89483633bd7ddd74e75aedbfe"
+    }
+  ]
+}

@@ -566,3 +566,41 @@ r20는 이 PC 개선 116개 제품 파일을 byte/hash 그대로 이어받아 �
 - [r19 독립 원본 archive receipt](agy-remediation-r19-independent-artifacts-20260928.json)
 - [r19 독립 시험 원본 자료](agy-remediation-r19-independent-artifacts-20260928.zip)
 - [r20 제품 보존·정책 동일·사전 검증](agy-remediation-r20-preflight-20260928.json)
+
+## r20 정상 완주·독립 소프트웨어 통과·업로드·실물 데이터 확인
+
+r20는 596.484초에 정상 완주했고 전역 설정을 복구했다. AGY 제품 파일 3개 변경과 새 운영 문서·
+현재 결과를 commit `6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c`에 보존했다. 독립 fresh archive에서
+host build·CTest 4개·Python 20개·legacy 29개·IDF build·root 원래 current-result validator가 통과했다.
+실제 CLI main의 write 오류 주입은 7 소비 후 1초 재연결·재수집으로 8/9를 보내고 다음 10을 저장했다.
+native fsync-before-write·manual과 독립 automatic·현재 운영 명령을 확인했다. C/main/C-test bytes는
+r17과 동일하여 parser 추가 nullable/canonical/scoped 및 direct stack 증거는 그 보존본을 참조한다.
+F9 22점은 AGY의 보수적 잠정 자체 점수이며 최종 owner 점수와 G 점수는 미확인이다.
+
+검증된 바이너리를 COM3의 동일 보드에 업로드했다. 부팅 ELF prefix `056dfcca8`은 독립 빌드 ELF
+SHA256 `056dfcca893b57cb237296c0744da305867abeed1b6adeed1a18e99f3b451b62`와 일치하며 20초 로그에
+패닉 표시가 없다. 기록된 초기 flash/reset 뒤 새 store를 명시적으로 7로 초기화했다.
+실제 CLI 7·재시작 8·manual 9 수신 로그가 같은 firmware uptime에서 이어졌다.
+같은 USB 전원 상태에서 original native backend로 10 수신, 낮은 1 거부, close/reopen 후 낮은 1 재거부,
+11 수신을 확인했다. 이 제한된 native reopen 순서 보존 시험은 통과했다. 마지막 11 수신 이후 passive
+read에 ClearCommError가 한 번 발생했다. 원인을 확정하지 않고 원본을 보존했으며 전체 무오류로 판정하지 않는다.
+
+별도 실제 두-process CLI 시험은 manual 명령 0.625초·frame 관측 0.594초·8초 automatic 관측 8.485초,
+12/13/14 송신과 14 device 수신을 확인했다. 이후 미수정 AGY CLI를 15초 간격 12회 실행하여 15부터 26까지
+송신했고 정상 종료·다음 27을 저장했다. 중간에 받은 실제 영상은 순번 20·9건 accepted·CONNECTED·
+validated cache·사용량과 글로벌 reset 값이 표시되는 것을 확인했다. 고정 offline fixture이므로 STALE는
+정상적인 출처 나이 표현이며 실제 온라인 quota를 의미하지 않는다.
+
+첫 새 영상은 29.22초(SHA `dc644173…a439d`), 다음 영상은 9.02초(SHA `b95c6077…fe66`)다.
+첫 영상에서 세 화면 BOOT 전환과 물리적 180도 회전을 확인했다. 각각 876/270개 전체 decode frame의
+거친 색상 기준 검사에 whole-screen blank 후보가 없었지만 미세 flicker/timing 판정은 아니다.
+두 영상을 이어서 30초 연속 합격으로 만들지 않는다. 35초 고정 영상을 추가 요청했다.
+BOOT≤300ms·수신 후 LCD≤2s·별도 전원을 유지한 실제 USB cable 분리/재열거·50cm 모델 비공개 G/F9
+정식 채점은 여전히 미확인이다. 완주는 확인됐고 전체 `product_pass:false`를 유지한다.
+제품 코드/시험은 AGY 작성, root는 환경 준비·분리된 검증·기록·업로드만 담당하며 원래 정량 순위와 별도다.
+
+- [r20 정상 완주·원본·계측](agy-remediation-r20-result-20260928.json)
+- [r20 독립 소프트웨어 검증](agy-remediation-r20-independent-review-20260928.json)
+- [r20 독립 시험 archive receipt](agy-remediation-r20-independent-artifacts-20260928.json)
+- [r20 독립 시험 원본 자료](agy-remediation-r20-independent-artifacts-20260928.zip)
+- [r20 upload·native reopen·actual CLI·영상 검증](agy-remediation-r20-hardware-review-20260929.json)

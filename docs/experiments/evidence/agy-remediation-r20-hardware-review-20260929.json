@@ -1,0 +1,624 @@
+{
+  "run_id": "20260928-agy-remediation-r20",
+  "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+  "recorded_at": "2026-09-28T18:35:23.106734+00:00",
+  "classification": "post_run_remediation_hardware_review",
+  "ranking_eligible": false,
+  "agent_completed": true,
+  "product_pass": false,
+  "operator_product_edits": false,
+  "exact_independently_built_binary_uploaded": true,
+  "flash": {
+    "run_id": "20260928-agy-remediation-r20",
+    "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+    "classification": "remediation_post_run_hardware",
+    "ranking_eligible": false,
+    "product_pass": false,
+    "operator_product_edits": false,
+    "user_flash_authorization": "User explicitly authorized upload earlier; resumed remaining work",
+    "operator_action": "Flash exact fresh independently evaluated AGY binary; no rebuild or source edits",
+    "port": "COM3",
+    "board_identity": {
+      "vid": "303A",
+      "pid": "1001",
+      "serial": "28:84:85:B0:85:18"
+    },
+    "started_at": "2026-09-28T18:24:21.002380+00:00",
+    "file_hashes": {
+      "bootloader/bootloader.bin": "a27e4f331172f0eee46fa14fa30f9721da7a6ef718bb717c87b454393bbcede2",
+      "codex-desk-meter.bin": "c5d0e53fb3db09f824411083dce14ce0770de1443b6e7a459d50563673dfcc57",
+      "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+    },
+    "argv": [
+      "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+      "-m",
+      "esptool",
+      "--chip",
+      "esp32s3",
+      "--port",
+      "COM3",
+      "--baud",
+      "460800",
+      "--before",
+      "default_reset",
+      "--after",
+      "hard_reset",
+      "write_flash",
+      "--flash_mode",
+      "dio",
+      "--flash_size",
+      "16MB",
+      "--flash_freq",
+      "80m",
+      "0x0",
+      "bootloader/bootloader.bin",
+      "0x10000",
+      "codex-desk-meter.bin",
+      "0x8000",
+      "partition_table/partition-table.bin"
+    ],
+    "software_gate_sha256": "f2bae0251974e6d734bbc1f883654e5523e5a8da376738df603e9542b69a24a7",
+    "exit_code": 0,
+    "finished_at": "2026-09-28T18:24:30.039098+00:00",
+    "file_hashes_after": {
+      "bootloader/bootloader.bin": "a27e4f331172f0eee46fa14fa30f9721da7a6ef718bb717c87b454393bbcede2",
+      "codex-desk-meter.bin": "c5d0e53fb3db09f824411083dce14ce0770de1443b6e7a459d50563673dfcc57",
+      "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+    },
+    "log_hashes": {
+      "flash-stdout.txt": "b1305581c6f677d7475f51cdc979d2c0c8a3cbf8d3a4852d76ee1a3dc7fe8934",
+      "flash-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "boot": {
+    "run_id": "20260928-agy-remediation-r20",
+    "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+    "capture_seconds": 20,
+    "started_at": "2026-09-28T18:24:30.045611+00:00",
+    "port": "COM3",
+    "operator_reset": "Native USB HardReset followed by serial observation; this intentionally resets RAM receiver state",
+    "product_pass": false,
+    "finished_at": "2026-09-28T18:24:50.521676+00:00",
+    "capture_elapsed_seconds": 20.04700000002049,
+    "byte_count": 6543,
+    "elf_sha256": "056dfcca893b57cb237296c0744da305867abeed1b6adeed1a18e99f3b451b62",
+    "boot_elf_prefix": "056dfcca8",
+    "boot_elf_identity_matches": true,
+    "log_hashes": {
+      "boot-serial.bin": "96250c847a855b76ba727f751c10ab3997f65e847d35cc7d4678140e4e2ddca1",
+      "boot-serial.txt": "b4f943fe916776f7837a7adda140034c14f75d81035243c6d6b6b7478483a98c"
+    },
+    "potential_panic_markers": []
+  },
+  "cli": {
+    "run_id": "20260928-agy-remediation-r20",
+    "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+    "recorded_at": "2026-09-28T18:25:23.850447+00:00",
+    "operator_product_edits": false,
+    "ranking_eligible": false,
+    "product_pass": false,
+    "hardware_accessed": true,
+    "scope": "Recorded flash/native-reset occurs before explicit new-store initialization. First send is an unmodified subprocess CLI. Later calls use actual CLI main and original native serial backend; owner proxy delegates native open/write/flush/close and reads existing firmware logs for3s after flush on the same stream. No ACK protocol or additional serial reader. Instrumented timings are excluded from latency and quantitative ranking. Offline fixture data are not live quota.",
+    "records": [
+      {
+        "name": "explicit-fresh-initialization-after-recorded-flash-reset",
+        "argv": [
+          "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+          "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\checkout\\scripts\\run-host-device-pipeline.py",
+          "--candidate",
+          "--device-alias",
+          "esp32s3-288485b08518",
+          "--sequence-store-dir",
+          "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\actual-cli-tests\\sequence-store",
+          "--init-device",
+          "--sequence",
+          "7"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.10999999998603016,
+        "instrumented": false,
+        "next_sequence": 7
+      },
+      {
+        "name": "first-unmodified-cli-send",
+        "argv": [
+          "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+          "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\checkout\\scripts\\run-host-device-pipeline.py",
+          "--candidate",
+          "--device-alias",
+          "esp32s3-288485b08518",
+          "--sequence-store-dir",
+          "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\actual-cli-tests\\sequence-store",
+          "--send",
+          "--port",
+          "COM3",
+          "--max-cycles",
+          "1",
+          "--output",
+          "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\actual-cli-tests\\first-frame.bin"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 0.75,
+        "instrumented": false,
+        "next_sequence": 8
+      },
+      {
+        "name": "ordinary-process-restart",
+        "argv": [
+          "--candidate",
+          "--device-alias",
+          "esp32s3-288485b08518",
+          "--sequence-store-dir",
+          "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\actual-cli-tests\\sequence-store",
+          "--send",
+          "--port",
+          "COM3",
+          "--max-cycles",
+          "1",
+          "--output",
+          "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\actual-cli-tests\\ordinary-process-restart-frame.bin"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds_includes_owner_observation": 3.60999999998603,
+        "instrumented": true,
+        "next_sequence": 9
+      },
+      {
+        "name": "manual-refresh",
+        "argv": [
+          "--candidate",
+          "--device-alias",
+          "esp32s3-288485b08518",
+          "--sequence-store-dir",
+          "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\actual-cli-tests\\sequence-store",
+          "--send",
+          "--port",
+          "COM3",
+          "--max-cycles",
+          "1",
+          "--output",
+          "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\actual-cli-tests\\manual-refresh-frame.bin",
+          "--refresh"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds_includes_owner_observation": 3.547000000020489,
+        "instrumented": true,
+        "next_sequence": 10
+      }
+    ],
+    "events": [
+      {
+        "event": "original_backend_open",
+        "case": "ordinary-process-restart",
+        "port": "COM3",
+        "dtr": false,
+        "rts": false
+      },
+      {
+        "event": "original_backend_write",
+        "case": "ordinary-process-restart",
+        "sequence": 8,
+        "frame_sha256": "2b5c7b4ffd5671192b4b368b9ae9196491485f9db7e57928314944db41414336"
+      },
+      {
+        "event": "same_stream_existing_log_observation",
+        "case": "ordinary-process-restart",
+        "error": null,
+        "elapsed_seconds": 3.015999999945052,
+        "log_file": "ordinary-process-restart-device-log.txt",
+        "log_sha256": "f83133e39bf884976f4a279e3a9ae70a8ffafd9752e38ba8c568864eb5eaebc7"
+      },
+      {
+        "event": "original_backend_close",
+        "case": "ordinary-process-restart"
+      },
+      {
+        "event": "original_backend_open",
+        "case": "manual-refresh",
+        "port": "COM3",
+        "dtr": false,
+        "rts": false
+      },
+      {
+        "event": "original_backend_write",
+        "case": "manual-refresh",
+        "sequence": 9,
+        "frame_sha256": "c92e9e770c395fa9ef5902862487559caf90e808eb655cc4e88c111ea30dd663"
+      },
+      {
+        "event": "same_stream_existing_log_observation",
+        "case": "manual-refresh",
+        "error": null,
+        "elapsed_seconds": 3.015999999945052,
+        "log_file": "manual-refresh-device-log.txt",
+        "log_sha256": "de73b56ddd01211e2e28e65a75994365d4482a752b18d484059af4eb13069d12"
+      },
+      {
+        "event": "original_backend_close",
+        "case": "manual-refresh"
+      }
+    ]
+  },
+  "targeted_powered_native_reopen_order_retention_verified": true,
+  "powered_ordering_evidence": {
+    "run_id": "20260928-agy-remediation-r20",
+    "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+    "recorded_at": "2026-09-28T18:26:05.000028+00:00",
+    "operator_product_edits": false,
+    "ranking_eligible": false,
+    "product_pass": false,
+    "hardware_accessed": true,
+    "scope": "Owner protocol injection with actual candidate fixture/frame/store and original native backend. Not automatic CLI or latency evidence. Same USB-powered board; no explicit reset, erase, or initialization. Low1 is an intentional rejection test. Existing firmware logs are passively observed on the same already-open stream.",
+    "next_sequence": 12,
+    "records": [
+      {
+        "name": "first-control-settings",
+        "dtr": false,
+        "rts": false
+      },
+      {
+        "name": "first-native-backend-open",
+        "type": "existing_log_observation",
+        "errors": [],
+        "log_sha256": "4eb590516d8d5aacf537040221b1bae11a53709038e5203f1b44b1218469b5d1",
+        "text": "\u001b[0;32mI (77562) codex_meter: BOOT pressed: Switched to screen 0\u001b[0m\r\n"
+      },
+      {
+        "name": "persisted-current-sequence",
+        "type": "owner_protocol_conformance_injection",
+        "sequence": 10,
+        "reserved_with_actual_candidate_store": true,
+        "bytes_written": 3962,
+        "frame_sha256": "68cb9355581d99d51c8311c0a6ba24990f5702aded561e3564e08d70a5d72110"
+      },
+      {
+        "name": "persisted-current-sequence",
+        "type": "existing_log_observation",
+        "errors": [],
+        "log_sha256": "e54a722fae1594bb1f34e266c67243db88efc8c5d1b8f71f07f389c70f4d06d1",
+        "text": "\u001b[0;32mI (78629) meter_transport: Accepted cdm/1 frame seq=10 (COM3 / USB Serial)\u001b[0m\r\n\u001b[0;32mI (80992) codex_meter: BOOT pressed: Switched to screen 0\u001b[0m\r\n"
+      },
+      {
+        "name": "low1-same-open-backend",
+        "type": "owner_protocol_conformance_injection",
+        "sequence": 1,
+        "reserved_with_actual_candidate_store": false,
+        "bytes_written": 3961,
+        "frame_sha256": "72a1b0ca2475b38dc95b31f2229019f9e50b4192071cef0b146bca9fccdbb4cc"
+      },
+      {
+        "name": "low1-same-open-backend",
+        "type": "existing_log_observation",
+        "errors": [],
+        "log_sha256": "61062f58b61e079e118ebafdf1725d9aebfdf90290efc9e757db1b1a1de79c90",
+        "text": "\u001b[0;33mW (82060) meter_transport: Rejected cdm/1 frame seq=1 by state machine\u001b[0m\r\n\u001b[0;32mI (82361) codex_meter: BOOT pressed: Switched to screen 1\u001b[0m\r\n"
+      },
+      {
+        "name": "reopened-control-settings",
+        "dtr": false,
+        "rts": false
+      },
+      {
+        "name": "reopened-original-native-backend",
+        "type": "existing_log_observation",
+        "errors": [],
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "text": ""
+      },
+      {
+        "name": "low1-after-native-backend-reopen",
+        "type": "owner_protocol_conformance_injection",
+        "sequence": 1,
+        "reserved_with_actual_candidate_store": false,
+        "bytes_written": 3961,
+        "frame_sha256": "72a1b0ca2475b38dc95b31f2229019f9e50b4192071cef0b146bca9fccdbb4cc"
+      },
+      {
+        "name": "low1-after-native-backend-reopen",
+        "type": "existing_log_observation",
+        "errors": [],
+        "log_sha256": "e62fb7aef1d640c47a10fde846eabeb3f76a62a0e6ebce0625389c4fbba091c4",
+        "text": "\u001b[0;33mW (89416) meter_transport: Rejected cdm/1 frame seq=1 by state machine\u001b[0m\r\n\u001b[0;32mI (89566) codex_meter: BOOT pressed: Switched to screen 2\u001b[0m\r\n\u001b[0;32mI (90966) codex_meter: BOOT pressed: Switched to screen 0\u001b[0m\r\n"
+      },
+      {
+        "name": "persisted-successor",
+        "type": "owner_protocol_conformance_injection",
+        "sequence": 11,
+        "reserved_with_actual_candidate_store": true,
+        "bytes_written": 3962,
+        "frame_sha256": "78f4078ccfe2808427922c0eb34d6743eced7704ed493807e6aeab276abefeb2"
+      },
+      {
+        "name": "persisted-successor",
+        "type": "existing_log_observation",
+        "errors": [
+          "SerialException(\"ClearCommError failed (PermissionError(13, '장치가 명령을 인식하지 않습니다.', None, 22))\")"
+        ],
+        "log_sha256": "f98d04e39c77d5702ba04b1ffc251ffdc3edbd17b42de787613ed0bf1d455171",
+        "text": "\u001b[0;32mI (92278) meter_transport: Accepted cdm/1 frame seq=11 (COM3 / USB Serial)\u001b[0m\r\n"
+      }
+    ]
+  },
+  "active_real_serial_cli": {
+    "run_id": "20260928-agy-remediation-r20",
+    "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+    "recorded_at": "2026-09-28T18:27:54.984440+00:00",
+    "hardware_accessed": true,
+    "operator_product_edits": false,
+    "ranking_eligible": false,
+    "product_pass": false,
+    "scope": "Unmodified candidate CLI in two actual processes on original native COM3 backend. File observations follow actual send completion; owner reads existing device logs after sole owner exits through the same safe original backend. No reset, reinit, ACK or product edits. This confirms transport/log acceptance, not physical LCD display latency.",
+    "owner_argv": [
+      "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\checkout\\scripts\\run-host-device-pipeline.py",
+      "--candidate",
+      "--device-alias",
+      "esp32s3-288485b08518",
+      "--sequence-store-dir",
+      "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\actual-cli-tests\\sequence-store",
+      "--send",
+      "--port",
+      "COM3",
+      "--max-cycles",
+      "3",
+      "--poll-interval",
+      "8",
+      "--output",
+      "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\active-refresh-test\\last-frame.bin"
+    ],
+    "owner_exit_code": 0,
+    "refresh_argv": [
+      "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\checkout\\scripts\\run-host-device-pipeline.py",
+      "--candidate",
+      "--device-alias",
+      "esp32s3-288485b08518",
+      "--sequence-store-dir",
+      "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\actual-cli-tests\\sequence-store",
+      "--refresh"
+    ],
+    "refresh_exit_code": 0,
+    "refresh_command_elapsed_seconds": 0.625,
+    "observed_frames": [
+      {
+        "sequence": 12,
+        "monotonic": 793785.89,
+        "sha256": "d240279048c0500bca1ca89c71e392cbf34bd4cff61800414ade6d3268a0a715"
+      },
+      {
+        "sequence": 13,
+        "monotonic": 793787.0,
+        "sha256": "b7eaa7d30eca6cecbbec6f4d9bbd4d8f60ba7fafedd9e5f77981d74ee9a9e0d1"
+      },
+      {
+        "sequence": 14,
+        "monotonic": 793794.375,
+        "sha256": "51bfac926764cfb275ccf7c46dce5954b3d14bd3412a4cae3a6b9cf5a23259f8"
+      }
+    ],
+    "refresh_invoked_at": 793786.406,
+    "first_frame_after_refresh_seconds": 0.5940000000409782,
+    "configured_poll_interval_seconds": 8,
+    "first_to_third_observed_seconds": 8.48499999998603,
+    "next_sequence": 15,
+    "records": [
+      {
+        "name": "post-owner-existing-log-observation",
+        "dtr": false,
+        "rts": false,
+        "log_sha256": "62b424d3e08e154482cb4b6f2f6c0c4ae72377dbff4ac9a9dea72f062fce6b68"
+      }
+    ]
+  },
+  "finite_visible_data_sender": {
+    "run_id": "20260928-agy-remediation-r20",
+    "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+    "operator_product_edits": false,
+    "ranking_eligible": false,
+    "product_pass": false,
+    "hardware_accessed": true,
+    "purpose": "Actual unmodified AGY CLI maintains visible offline fixture data for owner video. No reset/reinitialization. Automatic finite12cycles at15s interval; fixture data are not live quota.",
+    "started_at": "2026-09-28T18:30:41.295780+00:00",
+    "argv": [
+      "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\checkout\\scripts\\run-host-device-pipeline.py",
+      "--candidate",
+      "--device-alias",
+      "esp32s3-288485b08518",
+      "--sequence-store-dir",
+      "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\actual-cli-tests\\sequence-store",
+      "--send",
+      "--port",
+      "COM3",
+      "--max-cycles",
+      "12",
+      "--poll-interval",
+      "15",
+      "--output",
+      "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\visible-data-window\\last-frame.bin"
+    ],
+    "initial_next_sequence": 15,
+    "exit_code": 0,
+    "elapsed_seconds": 171.51500000001397,
+    "finished_at": "2026-09-28T18:33:32.805278+00:00",
+    "next_sequence": 27,
+    "log_hashes": {
+      "stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr.txt": "6780efce5bd839375f96c4733099d3084f15ca931eec17e1fae77d1dd2cd1677"
+    }
+  },
+  "all_product_source_and_binary_hashes_rechecked": true,
+  "user_videos": [
+    {
+      "run_id": "20260928-agy-remediation-r20",
+      "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+      "ranking_eligible": false,
+      "product_pass": false,
+      "operator_product_edits": false,
+      "original_path": "C:\\Users\\이광진\\Documents\\카카오톡 받은 파일\\KakaoTalk_20260929_032717269.mp4",
+      "original_and_copy_sha256": "dc64417367fde84576cb7ee9f1c9fb7891829b5e00eecaad9aa87aabfd8a439d",
+      "original_size": 14477736,
+      "duration_seconds": 29.22,
+      "sampling": "2fps approximately0.25s+n*0.5; sampled frames alone do not prove every-frame continuous stability or300ms BOOT timing",
+      "frame_hashes": {
+        "frame-001.jpg": "908fa4619ced32cb89f6275969b2a66ed0d085e6011dd5866217f56bad3fea63",
+        "frame-002.jpg": "6592c400b2b28f6c8b475228d5b69a371185037ea6759f49ce5253a531525518",
+        "frame-003.jpg": "7e2d00095f16f3a9ee5a89027463cf8ff03ddde5ae98d45ea95942fecf0c875e",
+        "frame-004.jpg": "75455f445097d9c8d979cc846a376fac6faf7cbaaedf96889ad81d4214fbee9c",
+        "frame-005.jpg": "7e994e2dd7afd5b028f23285a4700a9f127b949df5674bfc6cae3b75bb7ce083",
+        "frame-006.jpg": "603471f427ce7cd46fd9e2c70612a323c97416769f0d434f7d9c770a612a6b55",
+        "frame-007.jpg": "e23b4972419432f0e504435bbdf6f95491a608e27790873fad3dabad02f5f3ad",
+        "frame-008.jpg": "68bbbf4707e8da0e1801ba1490079c2db048c0711818b7ca91815efd7a734cbd",
+        "frame-009.jpg": "b201a1a4f02fd64ebcdd6b419a6ab2965490af859f15147a922887131d6442c4",
+        "frame-010.jpg": "a3d674d29831bdc2ec98b285e705d22dc9807a9483b32e5ab4e87f014293b4dc",
+        "frame-011.jpg": "f0a576fcfd5092414a5686cba6154ba0d9aa0bc23a92728705f86aafb39a80f2",
+        "frame-012.jpg": "51d231234efb9a13160171b2f2acfdb98ed82c677463aaa348d36c1ac6e06864",
+        "frame-013.jpg": "ab30d51c6c8d962e1c056f1d80a80b5736a78ab683bcc088d38fc07de0d98f32",
+        "frame-014.jpg": "bb3c6d880cbe37256220f090d7c65c9aebffa93b17ef147f11ca3e772879d6bd",
+        "frame-015.jpg": "e3341c16a982f778d36732aaec77cc1d37fcfcc9e1a435d5bc2af1cc234d8bf2",
+        "frame-016.jpg": "0dfae4fff91a695dc3884dada6658d10728e541d1c54c7b28ebc55cfe2022cdf",
+        "frame-017.jpg": "ae86e6b61957add08bdf6bc885f8ed16f1b52b58eb9b87eff1151872fd010090",
+        "frame-018.jpg": "01f60de8d5c5cac37e1786822e66e60528679541cbe6755bf73525414638211c",
+        "frame-019.jpg": "dbca004784a04112d77bad0fce5f6154fa661099551887b1a919355ba8a9446e",
+        "frame-020.jpg": "d6f4ae2d9dbb9b3783d763b0df6d09cad34e5d5b8bba60ea65cddc087bae71dc",
+        "frame-021.jpg": "923a630774cac3f58b0a5d54477dfe1dc85a04ce00c71d775084d836f558e4f4",
+        "frame-022.jpg": "396d4a92ff7b6b1d0937353de9fa13f83a6864b75c8558d51c903a6aea9e2fdb",
+        "frame-023.jpg": "e1b6064b101382590b72b7f5c028d06a125f450097ed8398244ef2b2d7c78c64",
+        "frame-024.jpg": "c7fd817a2724138c8b159f8d5fd1370340526ee3fd349729620573bd8b8de853",
+        "frame-025.jpg": "4634e7b319d609c171ab0fe8ad629966e597cad5eb53a7a3c886cd0de02cd6c7",
+        "frame-026.jpg": "e2a5605876f2a7d0148fb492f230a1cb586c443595250d61b0789f141137a100",
+        "frame-027.jpg": "7624ad8cf3d35ea2ea2629070479a17fec69e8554839c394bf84ed1a35389443",
+        "frame-028.jpg": "e8330b2184f7bef87fce85ae96c97e2169904cb00a94f5b9a5451b83eca19eb5",
+        "frame-029.jpg": "5c4858bce83507155fb70cf2e63e418fb22ad13fdb6eaab0ec68fca33209e769",
+        "frame-030.jpg": "a78fd6a608c17a4b22f1fddb5bb08026442afc091a7e4dccaadd6e0c8f6636e4",
+        "frame-031.jpg": "ef70becc9d15db7015c9f1649c516ba5d5cd9b307cac4b3c995cbf4a181c2441",
+        "frame-032.jpg": "69280b01ef5c2235ea73913b3306a03ee49d96ed0c7176d3de79a0333c3dd83c",
+        "frame-033.jpg": "b70587b327799afd72c2d04ee77c1975b712f94aea48194a9ab84d68cd13d0e5",
+        "frame-034.jpg": "7d89774aa250fa4a4a5a8fee68d59d785aa14196765695a9994416c6039c405f",
+        "frame-035.jpg": "539181a1e5c3d84b250bf43a8f80b973656d5141834e24afaf9b40d4357ad0d5",
+        "frame-036.jpg": "0a9a07269c462701d60aae18544c0f2a648437e0416c524f58aa71cf5df17828",
+        "frame-037.jpg": "1c789b17ab5178da22fc64dde80175bd895a475ebe8cf1c3fda17da0af3fa1f3",
+        "frame-038.jpg": "fcb3370a5137d6fc4a007139fe1f7316e0623a5db4cc75b8a7c94f4237aa1441",
+        "frame-039.jpg": "bb5ffdbf387e50ead63aaa566b3afd06b7f24f29aaf4d9c255d0ed4502fabf2f",
+        "frame-040.jpg": "c8d89d77c2e42bc33e1cd785c23141afa074bf5abad1eb257d4559686c6a9a82",
+        "frame-041.jpg": "3ede8925f7f0af91d0eb81b8605af093ae3ff6f389c45d9ac02d18303ae31776",
+        "frame-042.jpg": "d83d8827b0aee773f79ddd20fb2dac832e5fcae26633959188823ea61b5ad2ce",
+        "frame-043.jpg": "b63efd0e97065edd71234d9b997662442e743450648ce62f67780927b81e79f4",
+        "frame-044.jpg": "b1c8a7524c0c4616662055235bd8a79bee3c69dfe4889c1f36adcfc2f764f909",
+        "frame-045.jpg": "44ac84cb119cb5d2c012269eb361d1075f66dc46f61385574408f7084affb812",
+        "frame-046.jpg": "8661a86d9e25d5222567eca26acc90ffaeadbff88a165cc192871c8c15419dd5",
+        "frame-047.jpg": "b58af1b629cfe8bf943f26e51fb5e512f86896e9b439781495111bad4e9e7d60",
+        "frame-048.jpg": "87d46c05807200899c047e20a4eb6d1815c1fadd7d6ac2621d6c5691b07e8a0f",
+        "frame-049.jpg": "694b7336b866eae2669d945215508890d90a1f2f717f108c55e83522238b91b2",
+        "frame-050.jpg": "32c64af7b3531a4fdea2efbba87d4986136759f720fc8930ba2a869b14912a0c",
+        "frame-051.jpg": "36c3404e8945d250469cf56284c4642dc873dcecb59ab4df0ac68697be1d726f",
+        "frame-052.jpg": "cfda79c4a1ab8f1bced52ba9327921a2a0749d5d4a1b799d80188244e9f0d933",
+        "frame-053.jpg": "8040a5a0ab5795e501f15c60fe4e58080351969f82ce33e8287006f8294d64e3",
+        "frame-054.jpg": "b6efb00f06a6245a14f5cfa0c6093ab88b5c7b3cfa559495819eafa8fe56b3d0",
+        "frame-055.jpg": "a99018b5a25afe71770e93637fc3296e164e73a82b9743152c7bca5ce0b22554",
+        "frame-056.jpg": "d5c5dcb6e62836d08a88796d0a7aac64f94ecbece85a6a5cbd4b0b317a543d40",
+        "frame-057.jpg": "3aace522cc55be66d87dc2b96a4f91b1eac6ed287f75d6482f601df960cb155c",
+        "frame-058.jpg": "66b649d053b0c77c148e69e8d2e07d4cbddc386cb3c223a0f952a6c801dfca10"
+      },
+      "contact_sheet_hashes": {
+        "contact-sheet-01.jpg": "6d522b0aeed6c4c12ead822621cca949fe9feda6b2ae76298760a3e7e8ee7e41",
+        "contact-sheet-02.jpg": "b456d296d916e313443686cfa7eb117941a9da622a017d6e4a5fa873e1a321b2",
+        "contact-sheet-03.jpg": "075ef25a96827ac0f948414092511c2b44593def77cd4e3539be290b28ef9aaa"
+      },
+      "ffmpeg_executable_sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+      "extraction_argv": [
+        "C:\\Espressif\\tmp\\codex-video-tools\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+        "-hide_banner",
+        "-i",
+        "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media\\video.mp4",
+        "-vf",
+        "fps=2,scale=1280:-2",
+        "-q:v",
+        "2",
+        "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media\\frame-%03d.jpg"
+      ]
+    },
+    {
+      "run_id": "20260928-agy-remediation-r20",
+      "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+      "ranking_eligible": false,
+      "product_pass": false,
+      "operator_product_edits": false,
+      "original_path": "C:\\Users\\이광진\\Documents\\카카오톡 받은 파일\\KakaoTalk_20260929_033241502.mp4",
+      "original_and_copy_sha256": "b95c6077702a83f96a26c26366de3a3a0def939a194c88af9269e8832d09fe66",
+      "original_size": 4076849,
+      "duration_seconds": 9.02,
+      "sampling": "2fps approximately0.25s+n*0.5; sampled frames alone do not prove every-frame continuous stability or300ms BOOT timing",
+      "frame_hashes": {
+        "frame-001.jpg": "20150ae9a238758efe52cbaae9ad38c0193f4f084983ca7922e2060aac07ff55",
+        "frame-002.jpg": "b93caadb3dbd8ecd574d8334743ae58f2528ae00c53c6cfa318de44012a2a890",
+        "frame-003.jpg": "bd3746bde574a8f7c1345ece35f26b1b939477ca85d1a981eccdc7d38f8f4d99",
+        "frame-004.jpg": "881a465bc528cbd4d993d6777195b4180f31fe17e1e319ccb65c794b2b64e6ad",
+        "frame-005.jpg": "b562aef4329bf160023cef8d95d07e0668d9a3323292472a70ea266d8beaaa13",
+        "frame-006.jpg": "ceb68b8d4f119ec034fce57235c82b0e119ea1f9781370bce57d749cf4f82681",
+        "frame-007.jpg": "0077ac1a4dfeef22d846e0713a41f53214a34b9f610fa2ac34f55f1db4464fef",
+        "frame-008.jpg": "852f1fa817200426dce289f1af8d281c5601540b2cf8039018fb8f1840dcf345",
+        "frame-009.jpg": "79436f93112309924037c971d6fae8f48cc14ada365deeacf28ba0d9b40b2a42",
+        "frame-010.jpg": "a7a1217e6872b43e8adef06f93e835cd448085011292f91f8b905612f8daa0a0",
+        "frame-011.jpg": "aec1a7b89914737f599ea92686109614855d5f0c9eee3256cc5f4aa26f3d4a39",
+        "frame-012.jpg": "762f9532668ee4de6199429f0b69fac63c859f53df6f9d4152d4fe13e727b0de",
+        "frame-013.jpg": "3916156ff528a2380ff33a9d89596e740cb4ff2d9fba89be1736f0dd60b0446c",
+        "frame-014.jpg": "9ed0cb4a10e4a5810ff6f69a2804c7fb80cc4ac2fe88397de93de7d32d2bb264",
+        "frame-015.jpg": "ece39b5b6573ae51e2042b527391ce90cab95716153d6133a9db9c1aeaafd1e0",
+        "frame-016.jpg": "6fe59bd865c3e0341f5c7e1f6a29ce0d4f0601d59772f0ceddbf71ebd55dca53",
+        "frame-017.jpg": "29dcf3d62f637a90287017b64c0d56bd033c225d95ffc42832e2981496d1acf6",
+        "frame-018.jpg": "fd6c0cf152811dcf02990febe4e4ed664eb38515f2f16f731b7231925d57b5bc"
+      },
+      "contact_sheet_hashes": {
+        "contact-sheet-01.jpg": "45db26f0d60aa54d1a2c4b5b71d998e752c2b8db624ae8f69f27ce8df6a4a4d5"
+      },
+      "ffmpeg_executable_sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+      "extraction_argv": [
+        "C:\\Espressif\\tmp\\codex-video-tools\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+        "-hide_banner",
+        "-i",
+        "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-02\\video.mp4",
+        "-vf",
+        "fps=2,scale=1280:-2",
+        "-q:v",
+        "2",
+        "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-02\\frame-%03d.jpg"
+      ]
+    }
+  ],
+  "visual_observations": [
+    "29.22s video shows BOOT transitions across allthree screens and continuous physical180degree inversion with diagnostics180deg; sampled58frames have complete card areas",
+    "Coarse every-frame color audit of876frames flags no gross whole-screen blank candidate; not proof of all flicker or formal30s stability",
+    "9.02s data video shows diagnosticsFrameSequence20,9accepted/0dropped,CONNECTED,validated cache,STALE; usage percent and global reset values are physically visible",
+    "180degree inverted GUI remains legible while physically rotated; no independent noise-threshold/timing measurement"
+  ],
+  "data_display_verified_in_user_video": true,
+  "thirty_second_continuous_display_gate": "pending: neither video lasts30seconds; clips must not be joined for acceptance",
+  "owner_f9_score": null,
+  "owner_gui_scores": null,
+  "agent_provisional_f9_selfscore": 22,
+  "owner_observation_errors": [
+    {
+      "name": "persisted-successor",
+      "type": "existing_log_observation",
+      "errors": [
+        "SerialException(\"ClearCommError failed (PermissionError(13, '장치가 명령을 인식하지 않습니다.', None, 22))\")"
+      ],
+      "log_sha256": "f98d04e39c77d5702ba04b1ffc251ffdc3edbd17b42de787613ed0bf1d455171",
+      "text": "\u001b[0;32mI (92278) meter_transport: Accepted cdm/1 frame seq=11 (COM3 / USB Serial)\u001b[0m\r\n"
+    }
+  ],
+  "error_scope": "One ClearCommError during final passive read AFTER seq11 accepted; both low1 rejection observations and reopen retained-order test preceding it have no read errors. Later actual native CLI/manual/automatic/video succeed. Exact cause of transient USB/Windows read error not established; not a panic/reset claim or discarded evidence.",
+  "remaining": [
+    "35s stationary video requested for contractual30s continuous LCD stability; BOOT<=300ms and accepted-frame LCD<=2s not directly measured",
+    "Actual USB cable removal/re-enumeration while separately powered remains unperformed",
+    "Model-blind50cm G1-G6 and final ownerF9/noise immunity scores remain unknown",
+    "Whole runtime stack bound not measured"
+  ],
+  "source_provenance": "Only AGY authors product code/tests. Owner hardware probes delegate archived real native backend or run unmodified CLI; passive log instrumentation is separately identified and excluded from performance ranking. No ACK protocol added.",
+  "offline_data_provenance": "Stable fixture reference2026-09-10T16:54:07Z and earlier source observations; STALE display is expected, not live quota. Old initial WAITING video has no synchronized wall-clock/receipt pairing and is not a candidate receive failure by itself.",
+  "owner_tool_corrections": [
+    "Initial standalone verbose serial-port list hit Windows console encoding on COM1 Korean description; nonverbose list/PnP confirmedCOM3. No product edit or reset.",
+    "Generic hardware observation helper init arguments corrected to existing--init-device/--sequence before first execution. No failed hardware initialization or product edit."
+  ]
+}
