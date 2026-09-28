@@ -604,3 +604,16 @@ BOOT≤300ms·수신 후 LCD≤2s·별도 전원을 유지한 실제 USB cable �
 - [r20 독립 시험 archive receipt](agy-remediation-r20-independent-artifacts-20260928.json)
 - [r20 독립 시험 원본 자료](agy-remediation-r20-independent-artifacts-20260928.zip)
 - [r20 upload·native reopen·actual CLI·영상 검증](agy-remediation-r20-hardware-review-20260929.json)
+
+### r20 추가 41.73초 영상·사용자 RST 확인·기존 store 복구 송신
+
+추가 영상 `KakaoTalk_20260929_033800739.mp4`는 41.73초, SHA256
+`7ef18c6b11b6a7431d251794c55933ea777f50fcba14987f0cbd8d1cfc3005a8`다.
+약 5~7초 LCD black 뒤 데이터 대기로 돌아간 것을 확인하여 원인을 질문했고 사용자는
+**“RST를 눌렀음”**이라고 확인했다. 이 구간은 의도적인 reset으로 기록하며 spontaneous reboot나
+BOOT 결함으로 처리하지 않는다. 영상에는 화면 뒷면/카메라 밖 구간도 있어 고정된 30초 연속 표시
+증거로 처리하지 않고, 버튼·회전·reset 없이 LCD 전체를 보이는 35초 영상을 마지막으로 요청했다.
+같은 영구 store의 다음 27을 실제 미수정 AGY CLI로 보내 receiver 수신을 확인했고 다음은 28이다.
+root의 reinit/reset/flash·제품 변경은 없다. 기존 hardware review와 세 영상 원본을 모두 보존한다.
+
+- [사용자 RST 확인·41.73초 영상·순번 27 복구 추가 기록](agy-remediation-r20-rst-video-supplement-20260929.json)
