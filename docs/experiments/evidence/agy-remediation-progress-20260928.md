@@ -543,3 +543,26 @@ PC serial 제어선·정상 session 유지·실패 후 재수집/새 순번·정
 보드는 현재 r16이고 r19 업로드 및 전체 제품 합격은 아직 확인되지 않았다.
 
 - [r19 source·제한 정책 변경·사전 검증](agy-remediation-r19-preflight-20260928.json)
+
+## r19 PC 개선 검증·문서 외부 경로 중단·r20 시작
+
+r19는 155.969초 후 이전 실행 디렉터리의 문서를 읽으려다 접근 제한으로 중단됐다.
+AGY가 수정한 PC 파일 2개, 119 insertions/95 deletions를 commit
+`6e629722f98857d83bdc2b128cbcdb7f136b71a4`와 bundle hash로 보존했다.
+새 native backend는 포트 open 전에 DTR/RTS를 false로 설정하고 건강한 session을 재사용하며
+owner 종료 시 정리한다. 독립 fresh archive에서 Python 17개·CTest 4개·legacy 29개·IDF build가
+통과했다. 실제 보드 확인은 아직 하지 않았다. 현재 result가 없어 trusted current-result validator는
+실행하지 않았다. 실제 도중 write 오류 주입은 순번 7을 소비하고 owner를 종료하므로 지속 복구가 남는다.
+manual 요청 응답 0.641초·frame 관측 0.625초·자동 8초 설정 관측 8.532초, native fsync-before-write를
+독립 확인했다. C/main/tests는 r17 보존본과 동일해 추가 nullable/canonical/scoped 시험은 r17을 참조한다.
+
+r20는 이 PC 개선 116개 제품 파일을 byte/hash 그대로 이어받아 사전 검증 123개와 COM3·clean 조건을
+통과한 뒤 시작했다. 정책·data scope는 유지한다. 현재 checkout 안의 상대 문서 경로를 명시하고
+외부 이전 디렉터리 접근을 금지했으며, native write/flush 지속 복구·운영 절차·현재 결과를 요청했다.
+제품 작성은 AGY만 하고 runtime feedback은 없으며 원래 정량 순위와 별도다. 보드는 r16이다.
+
+- [r19 중단·AGY PC 변경 원본 보존](agy-remediation-r19-result-20260928.json)
+- [r19 독립 검증·잔여 write 복구·물리 확인 미완료](agy-remediation-r19-independent-review-20260928.json)
+- [r19 독립 원본 archive receipt](agy-remediation-r19-independent-artifacts-20260928.json)
+- [r19 독립 시험 원본 자료](agy-remediation-r19-independent-artifacts-20260928.zip)
+- [r20 제품 보존·정책 동일·사전 검증](agy-remediation-r20-preflight-20260928.json)
