@@ -1,0 +1,91 @@
+{
+  "run_id": "20260928-agy-remediation-r12",
+  "classification": "independent_completed_remediation_evaluation",
+  "ranking_eligible": false,
+  "implementation_commit": "fb3b8e95c207fb9caff5869ed946cd80c4dcb715",
+  "agent_completed": true,
+  "product_pass": false,
+  "hardware_verified": false,
+  "binary_uploaded": false,
+  "operator_product_edits": false,
+  "automated_commands": [
+    {
+      "name": "host-configure",
+      "exit_code": 0
+    },
+    {
+      "name": "host-build",
+      "exit_code": 0
+    },
+    {
+      "name": "ctest",
+      "exit_code": 0
+    },
+    {
+      "name": "candidate-python-tests",
+      "exit_code": 0
+    },
+    {
+      "name": "legacy-29",
+      "exit_code": 0
+    },
+    {
+      "name": "idf-set-target",
+      "exit_code": 0
+    },
+    {
+      "name": "idf-build",
+      "exit_code": 0
+    },
+    {
+      "name": "trusted-result-validation",
+      "exit_code": 0
+    }
+  ],
+  "source_changes_after_build": {},
+  "binary_hashes": {
+    "codex-desk-meter.bin": "5f44d9c1e390645b16ec8c61a693beea4c5119c214668923cdfaf4dc38a8f06f",
+    "codex-desk-meter.elf": "df596c70199692829e7807e51497cf31ee5e85fffbc0ea738ec27aceb206887f",
+    "bootloader/bootloader.bin": "5937d72de746c9a8696be8c488881554cd822b03e861158f79615988f97abdaa",
+    "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "findings": "Independent findings on the supplied completed AGY source fb3b8e95c207fb9caff5869ed946cd80c4dcb715:\n\nPassed independently: fresh host build, four CTest cases, Python suite, legacy 29 cases, pinned ESP-IDF build, trusted current-result validation, zero archived source changes during evaluation. Target receive prologue uses 64 bytes with 8192-byte task stack. Last-good after HTTP_500 and old source stale tick work. Eight-worker/32-reservation test yields 32 distinct sequences and zero errors. Existing initialization is refused and counter stays39. Actual CLI fresh-process first send7, refresh8, failed write consumes9, recovery10; two cycles at one-second poll take1.875s and finish at12. Missing state stops. Preserve these improvements and meaningful existing tests.\n\nRemaining failures found in actual production modules:\n1. Candidate CLI defaults to reference_time=2026-09-10T00:04:59Z and emits a valid five-provider frame with global captured_at=2026-09-10T16:54:07Z. Trusted schema/CRC and reference receiver accept the envelope; candidate device parser succeeds but device state rejects the entire frame (accepted0/rejected1) while already storing five providers and healthy quota values. The same valid payload with reference/sent_at16:54:07 is accepted. Align candidate production clock/default fixture handling with the existing temporal/error contract, preserving source observation time, local source errors/unknown time and other healthy providers. Do not make old data look fresh or rewrite frozen fixtures to hide the mismatch. Keep maintainer oracle dry-run semantics unchanged. Validate PC-to-actual-firmware-module integration with the documented default candidate invocation, not only PC-to-reference-model or separate tests.\n2. Definite rejected-frame state corruption: first accepted seq1 stores20% used. Next canonical seq2 has valid usage40% and a future global captured_at17:00 relative to reference16:54:07. Device returns rejection, keeps accepted1/rejected1/sequence1, but last_good_usage becomes40%. A rejected frame must leave all provider/last-good/ordering/reference-clock data unchanged except explicit error/rejection counters. Validate fully before committing, or process schema-valid provider-local/source failure as local error with proper accepted sequence and last-good preservation according to the contract. Future observations must not erase other valid providers or claim healthy data.\n3. At consistent reference16:54:07, a correct-CRC frame containing percent_used150 is accepted (parser true, accepted1/rejected0). A correct-CRC frame containing unit=\"invalid-unit\" is also accepted. The trusted schema rejects both. Current parser improved full JSON consumption, duplicate protocol and extra envelope-key rejection, but nested snapshots/windows still need real schema validation: required fields, correct types, enum sets, finite numeric values, allowed ranges, nullability, limits, uniqueness/unsupported fields and canonical JSON. Reject invalid wire frames; do not coerce invalid units to unknown or clamp fabricated quota. Cover production parser/transport with correctly recomputed CRC negative cases, not negatives rejected only because CRC or reference time is wrong. Keep all supported identity/metric/window/null examples intact.\n4. Five provider identities are retained, but cycle_provider includes the two unsupported Google entries with zero windows. Integration contract says available providers cycle. Preserve unsupported/error diagnostics and skip unavailable providers appropriately in the actual main/GUI cycle; retain same provider+agent with distinct host identity and cache.\n5. CLI holds the exclusive sender lock across its periodic loop, which protects ordering, but ProductionCollector.collect_and_send/CLI have no reconnect/reopen lifecycle: open failure propagates to outer catch and exits. Implement the specified <=1Hz identified-device retry and <=5-second send after usable port, bounded safe shutdown, missing/corrupt-state stop and failure-consuming sequence; exercise actual production orchestration with injected offline backend, not real ports. Manual refresh while periodic owner is active must reach that owner and re-collect/send within5 seconds, while automatic collection remains <=60 seconds and independent; current separate --refresh command waits on the lock and cannot do this. Provide a safe documented operator refresh interface and meaningful concurrent/periodic offline test. Do not add device-to-host protocol or an ACK to cdm/1.\n6. Persistent counter writes use write_text then replace but no explicit durable flush before USB write. Meet atomic durable reservation-before-send semantics and verify ordering/failure in meaningful tests. --force-init still overwrites existing state and merely labels recovered:true without receiver-reset/recovery boundary evidence. Make recovery explicit and recorded for a receiver known empty; ordinary restart/refresh/reconnect must never reset ordering/counter. Retain stable physical-device alias across COM changes and prevent concurrent sender owners.\n7. F9 current JSON/doc now align original three candidates and SDA15/SCL7, with self assessment labeled. Preserve that selection. Hardware/owner GUI scores are still unverified. Hardware instructions still show scripts/run-host-device-pipeline.py --send --port COM3, which invokes the maintainer reference mode with sequence1, omitting --candidate/alias/store/initialization. Deliver accurate candidate production and owner flash/BOOT/LCD/IMU/serial/stale/recovery procedures, default-clock behavior and fixture provenance. Unknown owner metrics stay null and physical checks not_run; never claim product_pass without all required evidence.\n\nThe operator made no product semantic changes and has not flashed this source. These findings are supplied once before the new run; no runtime feedback. Finish the full existing I1-I4/C1-C8/F1-F9 contract while retaining confirmed improvements and honest hardware limits. Do not alter frozen specs/schema/evaluator/fixtures to reduce gates.\n",
+  "evidence": [
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r12-20260928\\evaluation.json",
+      "sha256": "d028b2d6eb3cc9d4617823d3e88ac4e6b11c1de434a2d50c0989895055c9aadc"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r12-20260928\\operator-frame-tests\\report.json",
+      "sha256": "9233662f570f7b531e1bf15f2047e378444cb4620d1f34f35acce4c639c6da59"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r12-20260928\\operator-state-tests\\report.json",
+      "sha256": "71f196e219e8df948a8c4a4b6a475fc0528f1df506463b0ec7689216e140a727"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r12-20260928\\operator-frame-tests\\target-stack-report.json",
+      "sha256": "741ac2c7927f8be4a13c8c6b9c8f4b0efeb92edc7b28c1b733744a4e30912eaa"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r12-20260928\\operator-cli-lifecycle-tests\\report.json",
+      "sha256": "ed8d7ceada6ab856f3717889c1b3217a1057d05661789ba436d855b697e0e0b7"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r12-20260928\\operator-consistent-clock-tests\\report.json",
+      "sha256": "d214a8d6b3a6d521bd06fa7afac938d5549ef74ccb9a9fd809f966485be8b8e4"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r12-20260928\\operator-atomic-state-tests\\report.json",
+      "sha256": "9f4b469ee454d9eb38e7d1044f868f164ade2cdfb3c851b5d8062fa4a15fd95d"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r12-20260928\\operator-provider-tests\\report.json",
+      "sha256": "1de5ec6c05d8219cad01c383b588e07b8b432e660361ccbb4e680026c85a7992"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r12-20260928\\operator-esp-replay-tests\\report.json",
+      "sha256": "551978adb4eb8ba2027a1ce833272b2c0fa21f74caac8092b6dfac1ce4de324b"
+    }
+  ]
+}

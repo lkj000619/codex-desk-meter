@@ -40,7 +40,8 @@
 | standard query/test 진단 | 권한 8회 통과; 기대 동작 7회 확인 | 실제 AGY에서 8개 명령 모두 dispatch. `git diff --unified 3 -- .`는 운영자 지정 인수 표기 오류이며 diff 성공이 아님. 진단 unittest 실제 1개 실행 및 전역 설정 byte 복구 확인 |
 | remediation r10 | 940.172초 후 완주; 제품 합격 아님 | snapshot `f2063cfbda418f4003457a945e6f585731c5a58c`. 독립 빌드·CTest 4·PC 9·legacy 29·trusted 결과 형식 통과. 독립 수신/상태/송신 번호 시험에서 추가 결함 재현. 아직 업로드 안 함 |
 | remediation r11 | 986.688초 후 환경 실패; 부분 수정 보존 | `python -c` 미등록 명령 거부. AGY 14개 source/test 파일 수정, snapshot `83014daa61fa7f836ed6b36a5664157eec8de566`, 전역 복구·입력 불변·bundle 확인. 독립 평가에서 개선과 남은 실패를 각각 기록 |
-| remediation r12 | 실행 시작 | r11 partial 제품 source 116개 byte 보존. 동일 정책 hash와 실제 명령 진단 재확인. preflight 120개·COM3·clean checkout 실패/경고 0. 금지 inline 명령과 파일형 시험 경로 및 독립 결함을 고정 지시에 사전 제공 |
+| remediation r12 | 1109.016초 후 완주; 제품 합격 아님 | snapshot `fb3b8e95c207fb9caff5869ed946cd80c4dcb715`. 독립 host/IDF 빌드·CTest·Python·legacy·trusted validator 통과, source 변경 없음. 추가 모듈 통합 검증에서 기본 fixture 거부·거부 후 상태 변경·잘못된 수치/단위 수락 재현 |
+| remediation r13 | 실행 시작 | r12 제품 source 116개 byte 보존. preflight 120개·COM3·clean checkout 실패/경고 0. 동일 제한 정책과 진단 hash 확인. 실제 남은 결함·확인된 개선을 고정 prompt로 사전 제공. 원본 순위 제외 유지 |
 
 정책 보완은 `git ls-files`의 checkout-root `.gitignore`, `.gitattributes`, 현재 디렉터리
 선택자뿐이다. parent/absolute 경로·history·compound shell·임의 Python·설치·flash는
@@ -239,3 +240,35 @@ partial source의 주기 송신/재연결/단일 송신자 수명 관리와 F9 �
 - [r11 독립 평가 archive receipt](agy-remediation-r11-independent-artifacts-20260928.json)
 - [r11 독립 평가 원본·재현 도구](agy-remediation-r11-independent-artifacts-20260928.zip)
 - [r12 사전 검증·입력 보존·동일 정책](agy-remediation-r12-preflight-20260928.json)
+
+## r12 완주·독립 모듈 통합 검증과 r13 준비
+
+r12는 완주했고 fresh archive의 host/IDF 빌드, CTest 4개, Python regression, legacy 29개,
+trusted 결과 형식 검증을 모두 통과했다. 평가 중 archive source 변경은 없었다. 동시 번호 예약은
+32/32 고유 번호·오류 0이며 기존 번호 39의 재초기화를 거부했다. 실제 candidate CLI를 별도
+프로세스로 실행해 7 송신→8 refresh→실패에서 9 소비→10 복구를 확인했다. 1초 주기 두 cycle은
+1.875초에 완료돼 12까지 예약했다. 하드웨어 접근은 없으며 host write는 device ACK가 아니다.
+
+그 이후 실제 PC 프레임을 실제 firmware parser/state/transport 모듈에 넣어 다음 결함을 재현했다.
+
+- 후보 기본 reference/sent 시각 00:04:59와 fixture global captured 16:54:07이 충돌해 device가
+  기본 전송을 거부한다. parser/schema/CRC는 통과하지만 거부 후 이미 provider 5개가 저장된다.
+  같은 payload의 reference/sent를 16:54:07로 맞추면 수락한다. 이는 time/source 처리와 기본
+  candidate 상호운용 문제이며, frozen fixture를 바꾸거나 source 시각을 새로 만들어 해결하지 않는다.
+- 정상 seq 1에서 last-good 20%를 저장한 후 미래 global source를 포함한 seq 2를 거부하면서,
+  sequence는 1로 유지하고 last-good은 40%로 바뀐다. 거부된 frame이 상태를 오염시키는 실행 증거다.
+- 일관된 reference 시각에서 CRC가 올바른 150% 값과 `invalid-unit`도 수락한다. trusted schema는
+  둘 다 거부한다. 이전 잘못된 시각 때문에 invalid case가 거부되던 사실과 구분해 검증했다.
+- 다중 identity는 보존하지만 unsupported 두 항목까지 provider cycle에 포함된다. source 검토에서
+  주기 owner가 실행 중인 manual refresh, reconnect/reopen, durable 예약과 recovery 기록의
+  기존 계약 충족도 아직 확인되지 않았다. 문서의 물리 sender 명령에는 candidate flag가 누락됐다.
+
+제품 source를 운영자가 수정하지 않았고 아직 수정 binary를 보드에 올리지 않았다. r13에는
+검증된 개선을 유지하면서 위 결함과 기존 전체 계약을 마무리하도록 고정 지시를 시작 전에 제공한다.
+실행 중 추가 지시는 없으며 원래 단일 prompt 정량 비교·순위와 합산하지 않는다.
+
+- [r12 완주·보존](agy-remediation-r12-result-20260928.json)
+- [r12 독립 검증·개선·남은 실패](agy-remediation-r12-independent-review-20260928.json)
+- [r12 독립 평가 archive receipt](agy-remediation-r12-independent-artifacts-20260928.json)
+- [r12 독립 평가 원본·재현 코드](agy-remediation-r12-independent-artifacts-20260928.zip)
+- [r13 동일 정책·입력 보존·사전 검증](agy-remediation-r13-preflight-20260928.json)
