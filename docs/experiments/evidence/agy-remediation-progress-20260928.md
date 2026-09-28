@@ -200,3 +200,14 @@ prompt 성적에 합산하지 않는다. 잘못된 Git `--unified 3` 표기는 �
 - [r10 실행·보존](agy-remediation-r10-result-20260928.json)
 - [r10 독립 검증·원본 증거 경로와 hash](agy-remediation-r10-independent-review-20260928.json)
 - [r11 사전 검증·실제 제한 명령 진단](agy-remediation-r11-preflight-20260928.json)
+
+추가 독립 시험에서는 실제 ESP conditional 수신 source에 하드웨어 없는 timer/driver test
+double을 붙여 실행했다. seq 7의 두 번째 입력은 accepted 1·rejected 1로 계수되지만,
+last-update가 10초에서 999초로 바뀌고 Accepted 로그가 두 번 나왔다. 이는 앞서 r11에
+사전 제공한 source 경로 문제의 실행 재현이며, 실행 중 AGY에 추가 전달하지 않았다.
+
+독립 시험 입력·출력·보고서와 운영자 평가 source도 저장소 내 별도 archive로 보존했다.
+이 archive에는 제품 변경이나 실제 하드웨어 합격 근거가 없으며, 각 entry와 archive hash를 기록했다.
+
+- [독립 평가 archive receipt](agy-remediation-r10-independent-artifacts-20260928.json)
+- [독립 평가 원본·재현 도구 archive](agy-remediation-r10-independent-artifacts-20260928.zip)
