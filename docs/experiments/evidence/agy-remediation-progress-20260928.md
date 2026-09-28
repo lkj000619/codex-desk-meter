@@ -29,7 +29,9 @@
 | checkout read-pattern 진단 | 통과 | 실제 AGY에서 quoted Git 파일명 패턴, bounded Get-ChildItem filter, .gitignore 읽기 모두 실행. 진단 usage 별도 기록 |
 | remediation r04 | 175.718초 후 환경 실패; 제품 추가 변경 없음 | `git grep "16:54:07"` 미등록으로 중단. source·로그·usage·전역 복구·bundle 보존 |
 | code-search 진단 | 통과 | 실제 AGY에서 제한된 git grep·rg·Select-String·rg --files 4회 실행 및 전역 설정 복구 확인 |
-| remediation r05 | 실행 시작 | r02 AGY 부분 수정 114개 제품 파일을 보존. preflight 115개·host runtime·clean checkout 통과; COM3 미연결 경고 기록, 물리 업로드는 연결 후 진행 |
+| remediation r05 | 613.047초 후 환경 실패; 부분 수정 7개 파일 보존 | 파일을 지정한 `git diff` 조회 거부. AGY PC 수집 경로·상태/GUI·회귀 시험 변경, snapshot `ee511516dd700e81e42ae1e266301f044ad1e894`, 전역 복구·입력 불변·bundle 확인 |
+| working-tree/result-validation 진단 | 통과 | 실제 AGY에서 파일 지정 diff, directory diff, diff check, 복수 status flag, validator의 결과 파일 인수 5회 실행. 전역 설정 byte 복구 확인 |
+| remediation r06 | 실행 시작 | r05 AGY 부분 수정 포함 제품 파일 115개 canonical archive 보존. preflight 116개·host runtime·COM3·clean checkout, 실패/경고 0 |
 
 정책 보완은 `git ls-files`의 checkout-root `.gitignore`, `.gitattributes`, 현재 디렉터리
 선택자뿐이다. parent/absolute 경로·history·compound shell·임의 Python·설치·flash는
@@ -68,7 +70,7 @@ provider 전체·오류·복구 시험, 선택 IMU 기능과 최종 구조화 �
 - [r03 실패 원본·측정](agy-remediation-r03-result-20260928.json)
 - [r04 조회 명령군·진단·사전 검증](agy-remediation-read-groups-preflight-20260928.json)
 - [기존 남은 작업 점검](agy-remaining-work-review-20260928.md)
-- 현재 raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r05`.
+- 현재 raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r06`.
 
 이 문서는 시작 시점의 진행 기록이다. 실행 종료 판정은 별도 결과 보고서로 추가한다.
 
@@ -80,3 +82,23 @@ provider 전체·오류·복구 시험, 선택 IMU 기능과 최종 구조화 �
 
 - [r04 실패 및 보존](agy-remediation-r04-result-20260928.json)
 - [r05 검색 명령·실제 진단·사전 검증](agy-remediation-search-preflight-20260928.json)
+
+## r06 실행 준비
+
+사용자가 보드를 다시 연결했고, COM3의 VID/PID 및 serial이 이전 보드와 일치함을 확인했다.
+연결 사실은 버튼·LCD·통신 기능 합격을 의미하지 않는다. r06 preflight는 COM3 필수 조건을
+포함해 0 실패·0 경고였다.
+
+Git 변경 조회의 제한된 파일 경로·옵션 조합과 기존 결과 validator의 파일 인수만 보완했다.
+bare revision/branch, history, 외부 변환기, 파일 출력, parent/비허용 absolute 경로와 shell
+결합은 negative 시험으로 거부했다. 실제 AGY 진단 5개 명령의 출력과 별도 usage를 보존했다.
+
+115개 source 파일에는 AGY가 보완한 maintainer 제공 host oracle 모듈
+`scripts/host_device_pipeline.py`를 추가해 추적한다. 모든 제품 source는 r05 canonical
+archive와 byte 일치하며 운영자는 제품 구현을 수정하지 않았다. r06 prompt는 원본
+업로드 결과의 결함 기록과 이미 작성된 AGY 부분 수정을 구분하며, 실행 중 피드백은 없다.
+이번 보완 이력은 최초 단일 prompt 정량 비교·순위에서 계속 제외한다.
+
+- [보드 재연결 확인](agy-remediation-board-reconnected-20260928.json)
+- [r05 실패·부분 구현·보존](agy-remediation-r05-result-20260928.json)
+- [r06 변경 조회·실제 진단·사전 검증](agy-remediation-working-tree-preflight-20260928.json)

@@ -6,6 +6,27 @@ import unittest
 
 
 class CommandPolicyTests(unittest.TestCase):
+    def test_git_working_tree_and_result_validation_groups(self):
+        for cmd in ['git diff components/meter/meter_gui.c',
+                    'git diff --stat -- main components',
+                    'git diff --no-ext-diff --no-textconv --check -- .',
+                    'git diff --name-only CMakeLists.txt sdkconfig.defaults',
+                    'git status --short --branch', 'git status --porcelain -- main',
+                    'python scripts/validate-end-to-end-result.py --result results/r06/end-to-end-result.json --manifest .benchmark-inputs/e2e-evaluation-manifest.json --evidence-root .',
+                    'python scripts/validate-end-to-end-result.py --help']:
+            with self.subTest(cmd=cmd):
+                self.assertTrue(self.allowed(cmd))
+        for cmd in ['git diff HEAD', 'git diff HEAD~1', 'git diff main',
+                    'git diff --ext-diff', 'git diff --textconv', 'git diff --output=C:/Users/x',
+                    'git diff ../main/main.c', 'git diff C:/Users/key',
+                    'git diff components/meter/meter_gui.c; whoami',
+                    'git status --short; whoami',
+                    'python scripts/validate-end-to-end-result.py --result ../key',
+                    'python scripts/validate-end-to-end-result.py --manifest .env',
+                    'python scripts/validate-end-to-end-result.py --result results/r.json; whoami']:
+            with self.subTest(cmd=cmd):
+                self.assertFalse(self.allowed(cmd))
+
     def test_bounded_code_search_commands(self):
         for cmd in ['git grep "16:54:07"', 'git grep -n -F "BOOT" -- main',
                     'rg -n "BOOT|LCD" main components', 'rg --files -g "*.c"',
