@@ -1,0 +1,145 @@
+{
+  "run_id": "20260928-agy-remediation-r14",
+  "classification": "independent_interrupted_remediation_evaluation",
+  "ranking_eligible": false,
+  "implementation_commit": "c72a6957b77b6f188daf17359beb58950f4cce92",
+  "agent_completed": false,
+  "interruption": "AGY RESOURCE_EXHAUSTED HTTP429, terminal ERROR after final product write",
+  "service_projected_reset_kst": "2026-09-28 21:09:44 +09:00",
+  "projected_reset_is_service_estimate_not_verified": true,
+  "product_pass": false,
+  "hardware_verified": false,
+  "binary_uploaded": false,
+  "operator_product_edits": false,
+  "automated_commands": [
+    {
+      "name": "host-configure",
+      "exit_code": 0
+    },
+    {
+      "name": "host-build",
+      "exit_code": 0
+    },
+    {
+      "name": "ctest",
+      "exit_code": 8
+    },
+    {
+      "name": "candidate-python-tests",
+      "exit_code": 1
+    },
+    {
+      "name": "legacy-29",
+      "exit_code": 0
+    },
+    {
+      "name": "idf-set-target",
+      "exit_code": 0
+    },
+    {
+      "name": "idf-build",
+      "exit_code": 0
+    }
+  ],
+  "structured_result_missing": true,
+  "source_changes_after_build": {},
+  "source_hashes_rechecked_after_all_probes": true,
+  "binary_hashes": {
+    "codex-desk-meter.bin": "1865595eddc555bb39f9a563442a6d483bf022e38d2e8939b37e0f2743c82222",
+    "codex-desk-meter.elf": "151fd6f88bb1dff539fbd9eb737fe9e970af31612d6d6a5ac946482b9945757f",
+    "bootloader/bootloader.bin": "7af2f6cd1d9ca9dda24337d016e3318b2fe5ab0b8fbc9bc22b6df27be35c1084",
+    "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "nested_schema_false_accept_cases": [
+    "missing-provider-id-correct-crc",
+    "negative-units-correct-crc",
+    "missing-window-label-correct-crc",
+    "invalid-source-kind-correct-crc",
+    "invalid-metric-kind-correct-crc",
+    "numeric-stale-correct-crc",
+    "invalid-provider-identity-correct-crc",
+    "extra-snapshot-property-correct-crc",
+    "extra-window-property-correct-crc",
+    "global-forecast-is-schedule-correct-crc",
+    "extra-global-property-correct-crc"
+  ],
+  "envelope_schema_false_accept_cases": [
+    "fractional-sequence",
+    "overflow-sequence",
+    "invalid-integrity-algorithm",
+    "extra-integrity-key",
+    "extra-payload-key"
+  ],
+  "findings": "Independent findings on preserved interrupted AGY checkpoint c72a6957b77b6f188daf17359beb58950f4cce92 (r14). The upstream service returned RESOURCE_EXHAUSTED/HTTP429 after the final product write. The operator made no product changes and did not flash this checkpoint. Tests/build shown earlier in the AGY log predate later changes; fresh archived-source verification is authoritative.\n\nConfirmed improvements to preserve: candidate default frame now uses reference/sent_at 2026-09-10T16:54:07Z, is schema/CRC-valid and is accepted by actual firmware modules. Its five provider identities remain intact; available-provider cycle skips two unsupported entries. Fixed fixture observation times remain old and must not be represented as live quota. Rejecting a future-global frame now preserves last-good 20%, sequence1 and cached reset, rather than overwriting usage40%. ESP-conditional transport with timer/driver doubles accepts seq7 once, rejects duplicate, and keeps last_update_mono=10 instead of999. Eight-worker/32-reservation test yields32 unique numbers, no errors; existing initialization refused39->39. Fresh-process CLI sends7, refresh8, failing sink consumes9, recovery10, two1s cycles end12. Missing state stops. An independent fsync observer calls through to native fsync and confirms it completes before sink.write; state at write already holds last_reserved7/next_sequence8. Forced existing-store recovery now requires reason/reset confirmation. Host/IDF builds and legacy29 pass, but overall product gates do not.\n\nRemaining work, with reproduced evidence:\n1. CRITICAL target stack regression: meter_state_process_frame now declares meter_state_t temp=*state on the serial receive call chain. Actual ESP32-S3 object disassembly shows entry32 plus movsp using a signed literal -46304, total46336 bytes in this function alone. serial_rx_task is8192 bytes. Transport's own64-byte prologue does NOT establish call-chain safety. Preserve atomic rejection without introducing excessive task stack or heap/lifecycle failures. Verify target stack along the real call chain, meaningful state regression and actual IDF build. Do not flash or claim stack-safe based on host tests.\n2. Fresh CTest is3/4: test_meter_state aborts at line269 asserting DASHBOARD in test_multi_provider_retention_and_cycling. Its synthetic multi-provider setup has no real windows, whereas new screen selection filters window_count>0. Diagnose intended contract and fixture, keep available provider cycling and BOOT three-screen behavior correct, and make meaningful healthy/unsupported/error fixtures and assertions. Do not remove assertions or revert correct unsupported skipping just to green the test. Fresh Python suite10/11 passes; concurrent32 test then calls force=True without the now-required recovery reason/reset and errors RECOVERY_BOUNDARY_REQUIRED. Update meaningful tests to verify refused unrecorded recovery, recorded reset recovery, unchanged ordering and full32 unique reservations; do not weaken the explicit boundary.\n3. Actual correct-CRC canonical frames at a consistent clock still violate nested schema: missing provider_id in first of five snapshots is accepted (lookup appears to find a later object's field); negative remaining_units; missing window label; invalid source_kind/metric_kind; stale integer0; invalid provider identity; extra snapshot/window/global properties; forecast_is_schedule=true are accepted. Eleven of17 trusted schema negatives are wrongly accepted. Enforce scoped nested object parsing, required fields/types/enums/ranges/nullable values/canonical bytes and reject unknown/duplicate members as existing schemas require. Avoid searches leaking into later objects and silent truncation/coercion. Percent150, invalid unit/status, boolean/numeric-string percent and global forecast101 now reject; preserve those and valid0/100/null percentages. The root decoder currently accepts an invalid observed_at string too, so a reference-oracle equality test alone does not prove RFC3339 syntax: inspect the frozen date-time contract and validate known/unknown timestamps accurately. Preserve last-good, source-local errors and stale behavior.\n4. Envelope schema remains incomplete: correct-CRC sequence7.5, uint32 overflow4294967296, integrity.algorithm=sha256, extra integrity key and extra payload key all pass actual firmware parsing/state, while trusted schema rejects. Boolean sequence is correctly rejected. Enforce actual uint32 integer ordering/wrap/half-range and exact integrity/payload members; do not cast fractional/overflow values into accepted counters.\n5. Valid normalized values are lost: frozen absolute-token-balance fixture is accepted, but metric_kind becomes quota_window(enum0) instead of token_balance(enum1), and used250/remaining750/limit1000 all parse as null. In mixed-percent-absolute fixture, used100/remaining900/limit1000 are also lost. Current wire snapshot parser does not assign source_kind/metric_kind or absolute numeric fields. Preserve all normalized metadata and supported metric/unit/window/null semantics end-to-end and in GUI rather than only parsing percentage fields. Verify actual parser/state from generated wire frames, not just reference adapter.\n6. Reconnect is only three attempts: injected serial backend unavailable for attempts1-3 and usable at4 causes actual CLI exit1 after2.578s, before it can recover. Keep the identified-device retry lifecycle alive safely until usable or explicit bounded shutdown, rate<=1Hz, new snapshot within5s after usable; ordinary reconnect must not reset receiver/store. Post-write failure is also mishandled: actual CLI with first write error records write sequences[7,7,8], reusing7 across the retry. A failed write consumes its number; each later attempted frame uses a newly reserved durable sequence and new collection as the existing contract requires. No device ACK or replay/retry protocol is part of cdm/1. Test partial/post-write failures and prolonged disconnect in production orchestration with offline backend.\n7. Active-owner manual refresh now signals the owner and actual loopback frame8 appears0.468s after invoking refresh, which is progress. But the refresh command then waits8.859s for the long-lived owner's sequence lock to release, and treats removal of request file as 'sent' before proving actual sink outcome. Preserve timely re-collection, report truthful request/write/failure states without claiming device ACK, avoid reading under a lock that the active owner retains for its whole lifecycle. With configured8s poll, manual request interrupts the pending automatic sleep and first-to-third observed frames take9.359s; current loop resets the full automatic wait after manual sends. Document and test independent <=60s automatic scheduling without manual starvation/postponement, with single-owner ordering and safe shutdown.\n8. The old-source stale operator case is rejected before applying the frame, so stale_before/after=false is NOT proof of correct aging. Frozen schema required error fields remain nullable; current parser adds non-null error_code/reason restrictions for every non-available status. Inspect exact existing schema/semantics and support all valid stale/null/error fixtures without introducing requirements stronger than the frozen contract. Test actual accepted old-source frames before/after ticks with explicit acceptance assertions.\n9. No current-run end-to-end-result.json or updated r14 procedures were produced before quota interruption. Deliver current r15 result/manifest identity and accurate candidate --candidate/physical-alias/store/init/recovery/refresh/poll/disconnect procedures, simulation clock and fixed-fixture provenance. Existing older hardware doc still invokes maintainer reference sender without --candidate. Preserve original selected IMU, three candidate choices and SDA15/SCL7. Unknown physical/owner GUI scores must remain null/not_run. BOOT<=300ms, stable LCD/no continual flashing, serial/LCD latency, disconnect/restart/stale/error recovery, 180-degree orientation and full I1-I4/C1-C8/F1-F9/G acceptance still require operator evidence after safe code gates. Never fabricate it or mark product_pass.\n\nThese observations are supplied once before r15, separately from the original one-shot quantitative cohort. Preserve source authorship and confirmed repairs. You author all product fixes and meaningful regressions. Frozen specs/schema/evaluator/fixtures and hidden inputs are immutable; do not change them to remove failures. Run complete verification after the LAST product modification, create current truthful structured result and finish within permitted finite commands. The operator will independently evaluate and flash only a verified safe archive later.\n",
+  "test_limitations": [
+    "Operator mock/loopback observations are not hardware acceptance or ACK evidence",
+    "Transport64-byte direct prologue alone is not call-chain stack safety; actual state callee46336 exceeds task8192",
+    "Old source probe was rejected before state application; false/false stale outputs are not a pass",
+    "Invalid observed timestamp accepted by both candidate and root decoder; not counted as trusted-schema differential",
+    "Active refresh observed write within0.468s;8.859s command return is not evidence that the frame itself missed5s",
+    "No current structured result validation was run because current result is absent",
+    "Initial target-state-stack operator helper failed decoding CMakeCache with default cp1252; corrected owner harness to explicitUTF8 before actual disassembly measurement; not an AGY product failure"
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\evaluation.json",
+      "sha256": "c8ed6d62bf407fba3b766e26a4bed067b07f53dd20a098ca2285bd76b37efb81"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-absolute-value-tests\\report.json",
+      "sha256": "33cd91f6149a3c633d9be0cec5375207409125430c54b7d3a773e811ffa0f79b"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-active-refresh-tests\\report.json",
+      "sha256": "aeca29e701acd7ce097bd282ba275d96370e66d4e89e1c9f49656e1620bc30b8"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-atomic-state-tests\\report.json",
+      "sha256": "b924fc8c12e764599f258ed39413fc45db338cc3b3fced50f549665ed2544ffa"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-cli-lifecycle-tests\\report.json",
+      "sha256": "b98adfd11b818ca346c543a9d1102606d911009c5f8e21ee9413de1aba8c07b0"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-consistent-clock-tests\\report.json",
+      "sha256": "9b9cab9c82954d5154f4ebdf8f04328def9281d65340152edbb14a3deb0215a0"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-durable-reservation-tests\\report.json",
+      "sha256": "a85e74f1e7a1b00315739572acdaa088d78e1cbf3b034321ce0f483028e18be6"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-envelope-type-tests\\report.json",
+      "sha256": "d245c79253ef2f2d7d5bbca2d52198de5963a87a3058fb368bef77a5a065d680"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-esp-replay-tests\\report.json",
+      "sha256": "50f10c0bac1e81c8fbe319b38efb97713f249849a4c361cf1f529b3234920e5d"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-frame-tests\\report.json",
+      "sha256": "8cca4b9433342d29d9e00bb9bdf7cbf4c66810891d6462b1cb4f185ba90122d3"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-provider-tests\\report.json",
+      "sha256": "5c3c5e1dc9c22e83fbee46fad17f9a9dea8c984607141030efd4452fb2eec7cd"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-sender-recovery-tests\\report.json",
+      "sha256": "b8ad2c05a282fb1cca5f20375e5281581ab70dfe0954f1cbda8a26f090d7f2dd"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-state-tests\\report.json",
+      "sha256": "bab0a66f59e89987587b4d3c702a76d8e7f0cb311744e71dec37423519f46403"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-target-state-stack\\report.json",
+      "sha256": "60b942678c688475b68206cb07df4af159ff774cd945a4dc8e4e1394e35e530a"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r14-20260928\\operator-frame-tests\\target-stack-report.json",
+      "sha256": "01c12823088174fc7ce068984e0f71ea58dc4c4a70c01d7fbc3270aa38ea1d2c"
+    }
+  ]
+}

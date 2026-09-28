@@ -290,3 +290,61 @@ bundle·전역 설정 복구를 확인했다. `--`가 옵션을 끝낸 뒤의 da
 
 - [r13 실패·원본 보존](agy-remediation-r13-result-20260928.json)
 - [r14 literal 조회·권한 경계·사전 검증](agy-remediation-r14-preflight-20260928.json)
+
+## r14 quota 중단·독립 검증·r15 실행
+
+r14는 514.093초 후 AGY 서비스의 `RESOURCE_EXHAUSTED`/HTTP 429로 중단됐다. 마지막 제품 수정 뒤
+정상 종료하지 않았으며, 제품 변경 4개 파일·404 insertions·111 deletions를 AGY 작성 checkpoint
+`c72a6957b77b6f188daf17359beb58950f4cce92`로 보존했다. 입력 불변·전역 설정 복구·bundle hash를
+확인했다. 실행 도중 추가 지시는 없었다. quota 중단·부분 source를 원래 단일 prompt 정량 비교에 합산하지 않는다.
+
+Fresh archive 독립 검증에서 host/ESP-IDF 빌드와 legacy 29개는 통과했다. CTest는 3/4이며,
+provider 화면 전환 fixture/assertion이 실패한다. Python suite는 10/11이며, 변경된 명시적 recovery
+계약에 맞지 않는 force 초기화 test가 실패한다. 현재 run structured result는 없고 제품 합격도 아니다.
+검증 후에도 archive source hash 변경은 없다.
+
+개선 확인: 실제 candidate 기본 frame을 실제 firmware module이 수락했고 provider 5개가 유지된다.
+지원되는 3개 identity의 cycle은 unsupported 2개를 건너뛴다. future-global frame 거부 후 last-good
+20%와 sequence 1을 유지한다. ESP conditional transport 모의 시험은 duplicate를 거부하며 수신
+시각 10을 유지한다. 32/32 번호 예약은 고유·오류 0이다. 실제 CLI의 7→8→실패 9 소비→10 복구와
+전송 전 native fsync 및 next-sequence 8 저장을 확인했다. 모두 모의 시험이며 물리 장치 ACK 증거가 아니다.
+
+남은 업로드 차단 사유:
+
+- 실제 ESP32-S3 상태 처리 함수의 stack은 entry 32 + movsp 46,304 = **46,336 bytes**이다.
+  수신 task stack 8,192보다 크다. transport 단독 prologue 64 bytes 통과만으로 호출 경로 안전을
+  주장할 수 없다. 상태 전체 지역 복사본 변경으로 생긴 타깃 결함이므로 이 binary는 업로드하지 않았다.
+- CRC와 시각이 정상인 nested schema negative 17개 중 11개, envelope negative 6개 중 5개를
+  실제 receiver가 잘못 수락한다. fraction/overflow sequence, 잘못된 integrity algorithm,
+  누락 필드·자료형·추가 속성 등이 포함된다. root decoder 자체도 malformed timestamp를 수락하므로
+  그 항목은 trusted schema 차이로 계수하지 않으며 원래 date-time 계약 검토가 필요하다.
+- 정상 absolute token fixture를 수락하지만 metric_kind를 quota_window로 바꾸고 사용량 250,
+  잔량 750, 한도 1000을 null로 잃는다. mixed window의 100/900/1000도 잃는다.
+- offline serial backend가 세 번 불가 후 네 번째부터 사용 가능해도 CLI가 세 번 뒤 종료한다.
+  첫 write 이후 오류를 주면 실제 write sequence가 `[7,7,8]`로 실패한 번호를 재사용한다.
+- active-owner refresh의 모의 frame은 0.468초 안에 나타났지만 명령은 owner lock에서 기다려
+  8.859초 뒤 종료한다. request 파일 삭제를 전송 성공으로 표시하는 경로와 자동 timer 재설정은
+  보완 대상이다. 명령 종료 지연을 frame 자체의 5초 조건 실패로 해석하지 않는다.
+- 기존 old-source probe는 적용 전에 거부돼 stale false/false가 정상 aging의 증거가 아니다.
+  정확한 nullable·error 계약, accepted stale 입력과 tick 검증이 필요하다.
+- 현재 structured result·candidate 실제 운영 절차·물리 BOOT/LCD/IMU·owner 점수가 미완료다.
+
+독립 raw 입력·stdout/stderr·재현 도구 268개를 ZIP와 entry별 hash로 보존했다. 운영자 검증 도구는
+제품 source 바깥에 있으며 operator product edits는 계속 false다. 기존 보드에는 처음 올린 r01
+firmware가 남아 있고 BOOT/flash 실패 영상은 그 firmware의 실패 증거로 유지한다.
+
+사용량 한도는 서비스가 2026-09-28 21:09:44 KST쯤 초기화를 안내했다. 해당 시각은 서비스 예상이며
+해제 확인 자체가 아니다. 사용자가 2026-09-29 `keep going`을 요청한 뒤 새 실행 전에 사전 검증을
+다시 수행했다. 121개·host runtime·COM3·clean checkout을 통과했고 동일 보드
+`303A:1001 / 28:84:85:B0:85:18`을 확인했다. 첫 사전 검증 로그도 별도로 보존했다.
+
+r15는 위 관찰을 한 번의 고정 지시문으로 제공한다. AGY 제품 파일 116개가 r14 archive와 byte/hash
+동일함을 확인했으며 모델 `gemini-3.8-flash-medium`과 finite 정책 hash `22ef9080…a02d`를
+유지한다. 실행을 시작했고 AGY 종료 후 fresh archive로 독립 평가한다. 이는 환경 사전 검증 통과이며
+제품 합격 또는 물리 검증 완료를 의미하지 않는다. 원래 정량 비교·순위에는 포함하지 않는다.
+
+- [r14 quota 실패·부분 수정·보존](agy-remediation-r14-result-20260928.json)
+- [r14 독립 검증·남은 결함·검증 한계](agy-remediation-r14-independent-review-20260928.json)
+- [r14 독립 증거 archive receipt](agy-remediation-r14-independent-artifacts-20260928.json)
+- [r14 raw 입력·출력·재현 도구](agy-remediation-r14-independent-artifacts-20260928.zip)
+- [r15 동일 모델·정책·source·재검증](agy-remediation-r15-preflight-20260928.json)
