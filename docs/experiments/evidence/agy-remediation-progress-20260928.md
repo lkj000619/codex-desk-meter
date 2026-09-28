@@ -34,7 +34,9 @@
 | remediation r06 | 148.235초 후 환경 실패; 제품 추가 변경 없음 | `rg` 검색의 `--` 구분자 조합 거부. 입력 불변·전역 복구·bundle 보존 |
 | r07 준비 | 실제 AGY 진단 실패로 보완 실행 시작 안 함 | Python 시험에서만 지원되는 검색 규칙의 negative lookahead 사용. 원래 준비 snapshot·정책·사전 검증·실패 진단 보존 |
 | search-dialect 진단 2 | 통과 | RE2 호환 문자 클래스로 제한을 유지하고 실제 AGY에서 검색 구분자·옵션·문맥 출력 8회 확인. 전역 설정 byte 복구 확인 |
-| remediation r08 | 실행 시작 | r05 부분 수정 제품 파일 115개 보존. preflight 118개·host runtime·COM3·clean checkout, 실패/경고 0 |
+| remediation r08 | 107.859초 후 환경 실패; 제품 추가 변경 없음 | `git log -n 5` 조회 거부. 입력 불변·전역 복구·bundle 보존 |
+| local-metadata 진단 | 통과 | 준비 커밋 두 개만 있는 진단 checkout에서 제한된 metadata 조회 3회 및 전역 설정 byte 복구 확인 |
+| remediation r09 | 실행 시작 | r05 부분 수정 제품 파일 115개 보존. preflight 119개·host runtime·COM3·clean checkout, 실패/경고 0. 시작 전 local history가 준비 커밋 두 개뿐인지 강제 확인 |
 
 정책 보완은 `git ls-files`의 checkout-root `.gitignore`, `.gitattributes`, 현재 디렉터리
 선택자뿐이다. parent/absolute 경로·history·compound shell·임의 Python·설치·flash는
@@ -73,7 +75,7 @@ provider 전체·오류·복구 시험, 선택 IMU 기능과 최종 구조화 �
 - [r03 실패 원본·측정](agy-remediation-r03-result-20260928.json)
 - [r04 조회 명령군·진단·사전 검증](agy-remediation-read-groups-preflight-20260928.json)
 - [기존 남은 작업 점검](agy-remaining-work-review-20260928.md)
-- 현재 raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r08`.
+- 현재 raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r09`.
 
 이 문서는 시작 시점의 진행 기록이다. 실행 종료 판정은 별도 결과 보고서로 추가한다.
 
@@ -124,3 +126,19 @@ r08은 동일 AGY 제품 부분 소스를 사용한다. 하드웨어 접근·설
 - [r06 실패·보존](agy-remediation-r06-result-20260928.json)
 - [r07 준비 반려·원본 보존](agy-remediation-r07-preparation-20260928.json)
 - [r08 실제 검색 진단·사전 검증](agy-remediation-search-dialect-preflight-20260928.json)
+
+## r09 현재 준비 메타데이터 조회
+
+현재 isolated checkout에는 Git archive를 받아 만든 준비 커밋 두 개만 존재한다.
+원본 실험 Git history·실패 run history는 포함하지 않는다. 제한된 `git log`의 현재
+메타데이터 조회(최대 5개, 고정 옵션)만 추가하고, 실제 AGY 진단 3회로 확인했다.
+bare/unbounded log·다른 ref·`--all`·patch/custom format·경로·shell 결합은 계속 거부한다.
+실행 controller는 시작 전 commit 수가 정확히 두 개인지 확인하며, 일치하지 않으면
+시작하지 않는다. 이 조건은 별도 보완에만 사용하고 정량 비교의 동결 조건에 반영하지 않는다.
+
+AGY 제품 source는 변경하지 않았으며 r05 부분 수정에서 계속 이어간다. 보드 연결은
+유지된 상태로 준비 시험을 통과했고, 제품 빌드·회귀 시험·BOOT/LCD/USB 실제 동작 판정은
+AGY 종료 후 독립 평가에서 확인한다.
+
+- [r08 실패·보존](agy-remediation-r08-result-20260928.json)
+- [r09 제한된 local metadata 진단·사전 검증](agy-remediation-local-metadata-preflight-20260928.json)

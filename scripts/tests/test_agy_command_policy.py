@@ -6,6 +6,18 @@ import unittest
 
 
 class CommandPolicyTests(unittest.TestCase):
+    def test_bounded_local_preparation_commit_metadata(self):
+        for cmd in ['git log -n 5', 'git log --oneline -n 2',
+                    'git log -n 1 --oneline', 'git log --max-count=5']:
+            with self.subTest(cmd=cmd):
+                self.assertTrue(self.allowed(cmd))
+        for cmd in ['git log', 'git log -n 6', 'git log -n 0',
+                    'git log --all -n 5', 'git log -n 5 HEAD~1',
+                    'git log -n 5 -p', 'git log -n 5 --format=raw',
+                    'git log -n 5 -- main', 'git log -n 5; whoami']:
+            with self.subTest(cmd=cmd):
+                self.assertFalse(self.allowed(cmd))
+
     def test_patterns_exclude_re2_unsupported_lookaround_and_backreferences(self):
         policy = Path(__file__).resolve().parents[2] / 'experiments/config/agy-pilot-permissions.json'
         for rule in json.loads(policy.read_text())['allow']:
