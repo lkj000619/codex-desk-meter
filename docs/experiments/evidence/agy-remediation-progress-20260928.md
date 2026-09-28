@@ -348,3 +348,39 @@ r15는 위 관찰을 한 번의 고정 지시문으로 제공한다. AGY 제품 
 - [r14 독립 증거 archive receipt](agy-remediation-r14-independent-artifacts-20260928.json)
 - [r14 raw 입력·출력·재현 도구](agy-remediation-r14-independent-artifacts-20260928.zip)
 - [r15 동일 모델·정책·source·재검증](agy-remediation-r15-preflight-20260928.json)
+
+## r15 조회 정책 중단·스택/회귀 개선·r16 실행
+
+r15는 701.266초 후 `Get-ChildItem -Recurse -Filter *.json | Select-Object FullName`이 차단돼
+중단됐다. terminal SUCCESS와 달리 denied_actions가 있어 environment_failed이며 완주가 아니다.
+제품 3개 파일·127 insertions·72 deletions를 AGY checkpoint
+`0d660d444e1aca593d42e6d5b7133fee2b6b283f`로 보존하고 입력 불변·전역 설정 복구를 확인했다.
+
+Fresh archive의 host/IDF 빌드·CTest 4개·Python 11개·legacy 29개는 모두 통과했다. 현재 structured
+result는 아직 없으므로 trusted current-result 검증과 제품 전체 합격은 미완료다. 코드 검토에서
+화면 전환 test에 실제 window가 있는 정상 3개와 unsupported/error 2개 입력을 보강했고,
+32개 고유 예약 assertion을 유지하며 미기록 복구와 reset 확인 누락의 거부를 추가했음을 확인했다.
+시험 assertion을 삭제해 회귀 실패를 없앤 변경이 아니다.
+
+실제 target 상태 함수 stack은 80 bytes로 줄었다. transport 단독 64 bytes와 수신 task 8192 bytes를
+별도로 기록했으며, 이 함수 측정 자체를 전체 runtime stack 상한으로 해석하지 않는다. 잘못된
+future-global frame 거부 후 last-good 20%·sequence 1 보존도 실제 독립 시험으로 유지됐다.
+
+그 외 스키마 오수락 11+5개, normalized 절대값·metric_kind 손실, 세 번 뒤 종료하는 reconnect,
+write 오류 뒤 번호 7 재사용, owner refresh/자동 timer·nullable stale·현재 운영 절차/결과의
+미완료를 재현했다. root 검증 도구의 exit 0은 관측 실행 완료이며 해당 제품 조건의 pass가 아니다.
+독립 자료 298개를 ZIP·entry hash로 보존했다. archive source 변경과 운영자 제품 변경은 없다.
+
+r16에는 이미 통과한 스택·회귀 개선을 유지하고 unfinished parser/collector·절차/결과를 마무리할
+고정 지시문을 제공했다. 기존에 허용된 `rg --files -g "*.json"`, `git ls-files "*.json"`,
+`Get-ChildItem -Recurse -Filter "*.json"`을 사용하도록 명시했다. 파이프는 계속 거부하며
+policy/데이터 grant는 변경하지 않았다. 사전 검증 121개·host runtime·COM3·clean checkout과
+제품 파일 116개가 이전 archive와 같은 hash임을 확인하고 동일 모델로 실행을 시작했다.
+실행 중 추가 지시 없이 종료 후 평가한다. 제품 합격·물리 검증·수정 firmware 업로드는 아직 없다.
+이 실행도 원래 단일 prompt 정량 비교 및 순위에 포함하지 않는다.
+
+- [r15 실패·부분 수정·원본 보존](agy-remediation-r15-result-20260928.json)
+- [r15 독립 검증·스택 개선·남은 실패](agy-remediation-r15-independent-review-20260928.json)
+- [r15 독립 archive receipt](agy-remediation-r15-independent-artifacts-20260928.json)
+- [r15 raw 자료·재현 도구](agy-remediation-r15-independent-artifacts-20260928.zip)
+- [r16 동일 정책·source·사전 검증](agy-remediation-r16-preflight-20260928.json)
