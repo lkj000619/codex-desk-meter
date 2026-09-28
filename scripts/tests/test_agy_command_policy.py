@@ -6,6 +6,25 @@ import unittest
 
 
 class CommandPolicyTests(unittest.TestCase):
+    def test_optional_git_path_delimiters_and_standard_test_options(self):
+        for cmd in ['git grep -n "16:54:07" --', 'git grep -n "BOOT" --',
+                    'git diff -U5 -- components/meter/meter_gui.c',
+                    'git diff --unified 3 -- .',
+                    'git diff --no-color --exit-code -- main',
+                    'python -u -m unittest discover -s tests -p "*regression*.py" -v',
+                    'python -m unittest discover --start-directory tests --pattern "test_*.py" --verbose',
+                    'python -u tests/test_evaluation_adapter.py']:
+            with self.subTest(cmd=cmd):
+                self.assertTrue(self.allowed(cmd))
+        for cmd in ['git grep -n "x" -- ../main', 'git grep -n "x" HEAD --',
+                    'git grep "--textconv" --', 'git diff -U5 HEAD',
+                    'git diff --output=x -U5 -- .',
+                    'python -u -m unittest discover -s ../tests',
+                    'python -m unittest discover -p "$(whoami)"',
+                    'python -u tests/test_x.py; whoami']:
+            with self.subTest(cmd=cmd):
+                self.assertFalse(self.allowed(cmd))
+
     def test_bounded_local_preparation_commit_metadata(self):
         for cmd in ['git log -n 5', 'git log --oneline -n 2',
                     'git log -n 1 --oneline', 'git log --max-count=5']:

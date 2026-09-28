@@ -36,7 +36,9 @@
 | search-dialect 진단 2 | 통과 | RE2 호환 문자 클래스로 제한을 유지하고 실제 AGY에서 검색 구분자·옵션·문맥 출력 8회 확인. 전역 설정 byte 복구 확인 |
 | remediation r08 | 107.859초 후 환경 실패; 제품 추가 변경 없음 | `git log -n 5` 조회 거부. 입력 불변·전역 복구·bundle 보존 |
 | local-metadata 진단 | 통과 | 준비 커밋 두 개만 있는 진단 checkout에서 제한된 metadata 조회 3회 및 전역 설정 byte 복구 확인 |
-| remediation r09 | 실행 시작 | r05 부분 수정 제품 파일 115개 보존. preflight 119개·host runtime·COM3·clean checkout, 실패/경고 0. 시작 전 local history가 준비 커밋 두 개뿐인지 강제 확인 |
+| remediation r09 | 225.906초 후 환경 실패; 제품 추가 변경 없음 | 자체 CTest 4개·legacy 29개·PC regression 9개 통과 후 terminal `git grep` 구분자 조회 거부. 입력 불변·전역 복구·bundle 보존 |
+| standard query/test 진단 | 권한 8회 통과; 기대 동작 7회 확인 | 실제 AGY에서 8개 명령 모두 dispatch. `git diff --unified 3 -- .`는 운영자 지정 인수 표기 오류이며 diff 성공이 아님. 진단 unittest 실제 1개 실행 및 전역 설정 byte 복구 확인 |
+| remediation r10 | 실행 시작 | r05 부분 수정 제품 파일 115개 보존. preflight 120개·host runtime·COM3·clean checkout, 실패/경고 0. 현재 준비 커밋 두 개 조건 유지 |
 
 정책 보완은 `git ls-files`의 checkout-root `.gitignore`, `.gitattributes`, 현재 디렉터리
 선택자뿐이다. parent/absolute 경로·history·compound shell·임의 Python·설치·flash는
@@ -75,7 +77,7 @@ provider 전체·오류·복구 시험, 선택 IMU 기능과 최종 구조화 �
 - [r03 실패 원본·측정](agy-remediation-r03-result-20260928.json)
 - [r04 조회 명령군·진단·사전 검증](agy-remediation-read-groups-preflight-20260928.json)
 - [기존 남은 작업 점검](agy-remaining-work-review-20260928.md)
-- 현재 raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r09`.
+- 현재 raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r10`.
 
 이 문서는 시작 시점의 진행 기록이다. 실행 종료 판정은 별도 결과 보고서로 추가한다.
 
@@ -142,3 +144,27 @@ AGY 종료 후 독립 평가에서 확인한다.
 
 - [r08 실패·보존](agy-remediation-r08-result-20260928.json)
 - [r09 제한된 local metadata 진단·사전 검증](agy-remediation-local-metadata-preflight-20260928.json)
+
+## r10 표준 조회·시험 옵션 묶음
+
+r09의 자체 시험은 이전 AGY 부분 수정 소스에서 CTest 4개·legacy evaluator 29개·PC
+regression 9개가 실행돼 통과했다. 이는 GPIO0/BOOT와 실제 USB 수신·LCD 안정성의
+실물 검증 근거가 아니며, 아직 개선 펌웨어를 보드에 올리지 않았다.
+
+pathspec 없이 끝나는 Git grep의 `--`, 숫자로 제한된 diff 문맥 옵션, scoped unittest
+filename pattern/long option, Python unbuffered flag를 기존 명령군 안에서 보완했다.
+조회 자료 범위·실행 명령군·실물 보드 권한을 추가하지 않았다. 실제 AGY 진단 8회에서
+모든 명령의 권한 검사가 통과했고 unittest는 실제 1개를 수행했다. `--unified 3`는 Git이
+`3`을 revision으로 해석해 인수 오류가 났으며, 기대 동작 확인은 7/8이다. 올바른
+`--unified=3` 형태는 운영자의 직접 Git 조회에서 확인했다. 진단 `diff --exit-code`의 1은
+의도적으로 존재하는 진단 변경분에 따른 정상 반환이며 permission failure와 구분했다.
+
+제한 경계 시험 후 preflight 120개·COM3·host runtime·clean checkout을 통과했다.
+r10은 같은 AGY 부분 소스를 받고 단일 고정 prompt로 진행한다. 진단 기록 생성 시 해당
+Git 인수 오류를 검출했으나 이후 실행 호출이 진행된 운영 절차 오류도 기록한다. 실행 중
+정책·prompt를 바꾸거나 추가 지시를 전달하지 않았으며, 현재 결과를 진단 8개 기능 통과로
+표현하지 않는다. 운영자의 제품 코드
+수정이나 실행 중 추가 지시는 없으며 원본 성적·순위와 분리한 보완 기록이다.
+
+- [r09 실패·자체 시험·보존](agy-remediation-r09-result-20260928.json)
+- [r10 표준 옵션·실제 진단·사전 검증](agy-remediation-standard-options-preflight-20260928.json)

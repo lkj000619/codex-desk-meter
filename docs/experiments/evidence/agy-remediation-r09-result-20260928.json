@@ -1,0 +1,57 @@
+{
+  "run_id": "20260928-agy-remediation-r09",
+  "classification": "remediation",
+  "status": "environment_failed",
+  "reason": "AGY tool permission denied; inspect terminal denied_actions",
+  "measurement": {
+    "tokens": {
+      "input": 783727,
+      "output": 13783,
+      "cached": 5057170,
+      "reasoning": 9220,
+      "provider_total": 797510,
+      "total": 797510,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    },
+    "tool_calls": 49,
+    "failed_commands": null
+  },
+  "execution": {
+    "start": "2026-09-28T08:04:56.377Z",
+    "end": "2026-09-28T08:08:42.278Z",
+    "elapsed": 225.90599999995902,
+    "status": "environment_failed",
+    "reason": "AGY tool permission denied; inspect terminal denied_actions",
+    "code": 0
+  },
+  "error_command_events": [
+    "git grep -n \"16:54:07\" --"
+  ],
+  "archive": {
+    "run_id": "20260928-agy-remediation-r09",
+    "archived_at": "2026-09-28T08:11:04.701916+00:00",
+    "status": "environment_failed",
+    "implementation_commit": "6eff6f700938d70031e8703ab4f78a7ab8e6dbad",
+    "pre_archive_status": "",
+    "product_diff_stat": "",
+    "inputs_immutable": true,
+    "globals_restored": true,
+    "archive_operator_product_edits": false,
+    "bundle_sha256": "5e198aeeab561e4538370af94415f1291f884d835696798d846c5da727afcf5b",
+    "ranking_eligible": false,
+    "product_pass": false
+  },
+  "ranking_eligible": false,
+  "product_pass": false,
+  "hashes": {
+    "remediation-manifest.json": "dbe252985bbe2bbeba8be954aea9735917b5add026ef71b77e8310b6650fcd34",
+    "stdout.jsonl": "b1db80dfafb60426abb0f3b0b9af509880294b863b833ecd60a043f279c53654",
+    "stderr.txt": "4252389dc0dd043eebb313d37e8857fa3b6d278f87f1f5d22df786c2f5c11d88",
+    "command-audit.json": "b5ab3b4a008275df36bada9328c5164a4d17a7e2a46a54877ea7a8bdbd722e7c",
+    "implementation.bundle": "5e198aeeab561e4538370af94415f1291f884d835696798d846c5da727afcf5b",
+    "archive-record.json": "2898c67eed4cb8c3b2c4e8de8ad64f8bbe41be044731abe414eed07ebe251c97",
+    "prompt.txt": "b9d90820ee2b14fc463369e851bc6a1be285c32d677e6d3a1b769d3adfe84165",
+    "source-provenance.json": "a82e3a5ef5b5ddc9370c0d21396b100b978f2225b586c5fd3a74c40fd233d8a3"
+  }
+}
