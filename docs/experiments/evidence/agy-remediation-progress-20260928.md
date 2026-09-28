@@ -384,3 +384,76 @@ policy/데이터 grant는 변경하지 않았다. 사전 검증 121개·host run
 - [r15 독립 archive receipt](agy-remediation-r15-independent-artifacts-20260928.json)
 - [r15 raw 자료·재현 도구](agy-remediation-r15-independent-artifacts-20260928.zip)
 - [r16 동일 정책·source·사전 검증](agy-remediation-r16-preflight-20260928.json)
+
+## r16 완주·독립 재검증·실물 업로드 및 추가 결함
+
+r16은 2026-09-29 02:09:28 KST에 1411.953초로 정상 종료했다. AGY 구현
+`e103ad9eb024d53c9905dc65a0d90c05a775e24f`를 보존하고 입력 불변·전역 설정 복구를 확인했다.
+제품 코드와 시험은 AGY가 작성했으며 운영자는 제품 소스를 수정하지 않았다. 이번을 포함한
+보완 실행은 `ranking_eligible:false`이며 원래 단일 지시문 정량 비교의 실패·순위를 대체하지 않는다.
+
+Fresh archive의 host 빌드·CTest 4개·Python 14개·legacy 29개·ESP-IDF 빌드·운영자 원본
+current-result validator가 모두 통과했다. 이전 17개 nested schema와 6개 envelope 부정 입력은
+실제 transport에서 거부됐다. 절대량 250/750/1000 및 100/900/1000과 metric_kind 보존,
+네 번째 open에서 1Hz 재연결, 수동 갱신 응답 0.594초·frame 관측 0.578초, 독립 자동 timer,
+32개 고유 durable 순번 예약·원자적 거부·last-good·duplicate freshness도 확인했다.
+
+직접 parser 시험의 입력 buffer에 길이 밖 newline이 남아 실제 transport와 결과가 달랐다.
+운영자 supplemental 도구에서 실제 transport처럼 NUL을 길이 위치에 두어 원인을 구분했다.
+최초 결과를 삭제하지 않았고 제품 소스는 변경하지 않았다. CC 환경 변수 가정과 CRLF stack
+추출 오류도 운영자 도구 오류로 보존했다. 실제 target 직접 stack은 state 80 bytes,
+transport 64 bytes, parser 최대 단독 함수 1312 bytes이고 task는 8192 bytes다.
+전체 runtime stack 상한이나 여유를 이 값만으로 합격 처리하지 않는다.
+
+허용된 nullable 절대량 거부, 계약에 없는 값 합계 강제, 잘못된 recovery flag와 한 번 뒤 종료하는
+주기 송신 안내가 남았다. agent 자체 F9 30점은 owner 평가로 인정하지 않으며 G/F9 점수는 미확인이다.
+기본 실제 frame 수신·부정 입력 거부·빌드/시험/직접 stack 확인을 근거로 전체 합격과 구분한
+실물 검증용 업로드 gate를 기록하고, 이미 허가된 업로드를 수행했다.
+
+2026-09-29 02:17 KST COM3 동일 보드 `303A:1001 /28:84:85:B0:85:18`에 해당 binary를
+업로드했다. flash exit 0·각 flash file hash 일치·boot ELF prefix `7f7644266` 일치,
+20초 로그의 panic marker 없음, GPIO0 입력 복원과 QMI8658 WHO_AM_I `0x05`를 확인했다.
+실물 LCD 안정성 자체를 부팅 로그만으로 통과 처리하지 않았다.
+
+사용자 영상 `KakaoTalk_20260929_021948404.mp4` 원본 7,076,787 bytes·15.3초를 복사하고
+SHA256 `db5131c531a7623b9b2992901f4db6a9d8b676b6a38d24a8b001d53fd1241248`를 남겼다.
+1Hz 15개 샘플에서 버튼에 따른 dashboard/global/diagnostics 전환을 관찰했다. 이전 r01의
+큰 blank/partial 화면은 샘플에서 관찰되지 않았다. 30초 연속 안정성과 BOOT 300ms 수치는
+확정하지 않았다. 사용자 회전 동작 확인과 IMU 감지 로그를 기록했으며 전체 180도 동작 장면·
+방진·모델 비공개 G/F9 평가는 별도 미확인이다. 영상의 대기/0 수신 화면은 quota 수신 증거가 아니다.
+
+실제 CLI 순번 7의 host write receipt를 보존했다. 후속 CLI의 원래 backend에 로그 관측 proxy를
+두어 실제 native write/open/control 설정을 유지하고 close 전에 3초 읽었다. 순번 8·9의 장치
+수용은 확인했지만 중간 boot 로그가 나타났다. 이 관측 지연은 성능·정량 비교에 포함하지 않는다.
+초기 별도 reader의 ClearCommError는 관측 실패로 기록했으며 panic이나 frame 거부로 단정하지 않았다.
+
+전원이 유지된 보드에서 원래 candidate backend로 통제 시험을 수행했다. 같은 open stream은
+순번 10을 수용하고 낮은 1을 거부했다. backend close/reopen 후 명시적 reset 없이 새 LCD/GPIO/IMU
+초기화 로그가 나타났고 낮은 1을 수용한 뒤 persisted 11을 수용했다. 정상 PC 재시작에서 receiver
+순번 상태를 유지해야 하는 조건은 실패다. 이 순번 부정 입력은 운영자 protocol conformance 시험이며
+자동 collector 또는 ACK 구현으로 분류하지 않는다.
+
+추가 canonical 시험에서 nested window/snapshot 키 순서 반전과 trailing comma 4개를 raw unsigned
+bytes 기준으로 CRC 재계산했을 때 실제 transport가 수용했다. 원본 decoder는 거부한다. 이 자료는
+이미 봉인한 최초 독립 ZIP을 변경하지 않고 하드웨어 supplemental ZIP에 보존했다.
+`product_pass:false`를 유지하며 새 고정 보완 지시문에 증거와 한계를 제공했다.
+
+- [r16 실행 완주·원본 보존](agy-remediation-r16-result-20260928.json)
+- [r16 독립 software 검증·미합격 항목](agy-remediation-r16-independent-review-20260928.json)
+- [r16 최초 독립 검증 archive receipt](agy-remediation-r16-independent-artifacts-20260928.json)
+- [r16 최초 독립 raw 자료](agy-remediation-r16-independent-artifacts-20260928.zip)
+- [r16 업로드·실물·영상·재시작 실패](agy-remediation-r16-hardware-review-20260929.json)
+- [r16 하드웨어 supplemental archive receipt](agy-remediation-r16-hardware-artifacts-20260929.json)
+- [r16 실물 raw logs·원본 영상·추가 canonical 시험](agy-remediation-r16-hardware-artifacts-20260929.zip)
+
+## r17 동일 정책으로 남은 실패 보완 시작
+
+r17은 r16 checkpoint 제품 파일 116개의 byte/hash 일치, 새 checkout 2개 준비 commit·clean 상태,
+사전 검증 121개·host runtime·COM3·0 failure/0 warning을 확인하고 실행을 시작했다.
+모델 `gemini-3.8-flash-medium`, 정책 SHA256 `22ef9080…a02d`와 제한된 command/data grant를
+유지한다. 고정 지시문에 nested canonical/nullability, 실제 native serial open/close의 보드 reset,
+write-error reconnect, 정확한 운영 명령과 owner F9 미확인 항목을 제공했다. 완료된 r16 뒤의
+보완 입력이며 실행 중 feedback·root 제품 수정은 없다. `ranking_eligible:false`이고
+실행 환경 준비를 제품 합격으로 분류하지 않는다. 보드는 실물 평가된 r16이 올라간 상태다.
+
+- [r17 동일 정책·source·사전 검증](agy-remediation-r17-preflight-20260928.json)

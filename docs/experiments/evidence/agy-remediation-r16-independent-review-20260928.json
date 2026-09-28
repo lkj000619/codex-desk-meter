@@ -1,0 +1,154 @@
+{
+  "run_id": "20260928-agy-remediation-r16",
+  "implementation_commit": "e103ad9eb024d53c9905dc65a0d90c05a775e24f",
+  "classification": "independent_completed_remediation_review",
+  "ranking_eligible": false,
+  "agent_completed": true,
+  "product_pass": false,
+  "hardware_verified": false,
+  "operator_product_edits": false,
+  "automated_commands": [
+    {
+      "name": "host-configure",
+      "exit_code": 0
+    },
+    {
+      "name": "host-build",
+      "exit_code": 0
+    },
+    {
+      "name": "ctest",
+      "exit_code": 0
+    },
+    {
+      "name": "candidate-python-tests",
+      "exit_code": 0
+    },
+    {
+      "name": "legacy-29",
+      "exit_code": 0
+    },
+    {
+      "name": "idf-set-target",
+      "exit_code": 0
+    },
+    {
+      "name": "idf-build",
+      "exit_code": 0
+    },
+    {
+      "name": "trusted-result-validation",
+      "exit_code": 0
+    }
+  ],
+  "source_hashes_rechecked_after_all_probes": true,
+  "binary_hashes": {
+    "codex-desk-meter.bin": "fa3a34cd98396df1f157488d37ea2c999b7a5a3963a9c70beaa2d7a6bf8dbf68",
+    "codex-desk-meter.elf": "7f7644266b39d71369152b99e95a7ff05044523afc88025dafc0f49c2bf62c92",
+    "bootloader/bootloader.bin": "d1ec674168b50523270255dece127c74a9b4cb9850ee8a287b900b1a8735517d",
+    "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "nested_schema_false_accept_cases": [],
+  "envelope_false_accept_cases": [],
+  "confirmed_improvements": [
+    "All17 trusted nested negatives and all6 envelope negatives rejected by production transport",
+    "Absolute token metadata and250/750/1000 and100/900/1000 preserved",
+    "Three failed opens then usable fourth recovers with1Hz retries and new write",
+    "Manual refresh command returns0.594s; frame observed0.578s; next automatic observation8.515s for8s interval",
+    "Failed write consumes sequence7 and next process continues8; no duplicate retry",
+    "32 concurrent reservations remain distinct; native fsync precedes write",
+    "Rejected frame preserves last-good state; accepted old source stale retained"
+  ],
+  "remaining": [
+    "Nullable absolute-token fields are schema valid but rejected by candidate",
+    "Schema has no requirement that used+remaining==limit or percent_used+percent_remaining==100; parser adds uncontracted0.01 tolerance restriction",
+    "Mid-stream write error currently exits owner; indefinite reopening exists for open failures only; next sender process preserves sequence but sustained reconnect needs assessment",
+    "Documented recovery --receiver-reset is unrecognized; actual flag --recovery-receiver-reset",
+    "Documented periodic command omits --max-cycles and default1 ends after one send",
+    "Alias in generic document is board model rather than explicit physical identity; fixed offline clock/source provenance and disconnect/restart procedures incomplete",
+    "Agent self-reported F9=30 is not accepted owner scoring; owner F9/G remain null until blind hardware review",
+    "BOOT300ms/LCD30s/rotation, real USB restart/disconnect and source-age/error display still unverified"
+  ],
+  "owner_harness_adjustments": [
+    "Initial direct-parser buffer retained newline beyond length; supplemental NUL-at-length matches actual transport; original reports retained and no product source edited",
+    "First new helper missing CC env default corrected to existing cc",
+    "Initial stack extraction regex missed CRLF; normalized read repaired owner measurement"
+  ],
+  "stack_measurements": {
+    "state_direct_bytes": 80,
+    "transport_direct_bytes": 64,
+    "parser_largest_direct_bytes": 1312,
+    "receiver_task_bytes": 8192,
+    "full_runtime_stack_bound_verified": false
+  },
+  "evidence": [
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\evaluation.json",
+      "sha256": "b41587785e01edcf75f32cc004280709a4f71b7738927775c45d5ad6882c420c"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\additional-module-commands.json",
+      "sha256": "7a1bc4f7c4b9bbee078f27458a8ea89f853ad04465034354830d19f0b362a283"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-absolute-value-tests\\report.json",
+      "sha256": "9c4ec6836b5a8f9dc3bc0399d457838e678ad252eafa92278f3f044857068b3e"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-active-refresh-tests\\report.json",
+      "sha256": "f463c611bdf6aeed9016148367ebae06150e125d16974ea2cbf534d7fc913874"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-atomic-state-tests\\report.json",
+      "sha256": "97a1c5915acee733489424202057f3dfcb0adc84dcc8d6183cd6a42e5ed9ffa5"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-cli-lifecycle-tests\\report.json",
+      "sha256": "e34a43b6b6bea12a2da813098ab5016415fa7dcc0bc2bf33bd657511b6f0697a"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-consistent-clock-tests\\report.json",
+      "sha256": "71b3475df7cd81118ce4d9979fa0bebf15a8fa88be0bf62c2eb3658b8b6e35bd"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-durable-reservation-tests\\report.json",
+      "sha256": "69f1f7a2328f6f9a9eb528c0a68cb13883078719ce81cada7220cbce4054ef6d"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-envelope-type-tests\\report.json",
+      "sha256": "1a60b2889978b133f5b7338c941a716710a100953f3267a99dc921faa34cc220"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-esp-replay-tests\\report.json",
+      "sha256": "3c97f08d55767bab0b98297374e22754e30d35c8749afaece586f4ea70727a1e"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-frame-tests\\report.json",
+      "sha256": "3ecff359f59137e314623e7f3ca07e96b18b2951eff638e5e8438109a5559f2e"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-provider-tests\\report.json",
+      "sha256": "04174dd71625229ecc6894c00182160c1c48c5745e28d91e6f0839fce52ed216"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-remaining-contract-tests\\report.json",
+      "sha256": "736c2f164017ddb7b2a3feaf40f283d3b035a7200413d4cd8e50133b96110e84"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-scoped-parser-tests\\report.json",
+      "sha256": "0d57871b837f3f22632d8b12b6706b4bc8209434c8db97305613b1ae71f8c6f9"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-sender-recovery-tests\\report.json",
+      "sha256": "66aafdb5b6996bc0342f810a9da600308aa385193268e5fa24a2727b60d5adf0"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-state-tests\\report.json",
+      "sha256": "906100e34a47b686cba2c8795396418b543e55497b3b1f5ebb49e7857a2cd4c7"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\evaluation-r16-20260928\\operator-target-state-stack\\report.json",
+      "sha256": "406be2b2afe0e6915549d6896803216970763d91023369952e24814d9998c737"
+    }
+  ]
+}
