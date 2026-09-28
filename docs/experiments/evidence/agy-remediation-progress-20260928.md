@@ -27,7 +27,9 @@
 | source-read 진단 | 통과 | 기존 SDK/vendor source grant 안의 두 셸 조회가 실제 AGY에서 실행. 기존 자료 접근 범위 유지 |
 | remediation r03 | 73.5초 후 환경 실패; 제품 추가 변경 없음 | checkout Git index의 파일명 패턴 조회 거부. source·로그·usage·전역 복구와 bundle 보존 |
 | checkout read-pattern 진단 | 통과 | 실제 AGY에서 quoted Git 파일명 패턴, bounded Get-ChildItem filter, .gitignore 읽기 모두 실행. 진단 usage 별도 기록 |
-| remediation r04 | 실행 시작 | r02 부분 수정 source를 보존한 입력. finite 조회 명령군·negative boundary 시험·preflight 114개·COM3·host runtime·clean checkout 통과 |
+| remediation r04 | 175.718초 후 환경 실패; 제품 추가 변경 없음 | `git grep "16:54:07"` 미등록으로 중단. source·로그·usage·전역 복구·bundle 보존 |
+| code-search 진단 | 통과 | 실제 AGY에서 제한된 git grep·rg·Select-String·rg --files 4회 실행 및 전역 설정 복구 확인 |
+| remediation r05 | 실행 시작 | r02 AGY 부분 수정 114개 제품 파일을 보존. preflight 115개·host runtime·clean checkout 통과; COM3 미연결 경고 기록, 물리 업로드는 연결 후 진행 |
 
 정책 보완은 `git ls-files`의 checkout-root `.gitignore`, `.gitattributes`, 현재 디렉터리
 선택자뿐이다. parent/absolute 경로·history·compound shell·임의 Python·설치·flash는
@@ -66,6 +68,15 @@ provider 전체·오류·복구 시험, 선택 IMU 기능과 최종 구조화 �
 - [r03 실패 원본·측정](agy-remediation-r03-result-20260928.json)
 - [r04 조회 명령군·진단·사전 검증](agy-remediation-read-groups-preflight-20260928.json)
 - [기존 남은 작업 점검](agy-remaining-work-review-20260928.md)
-- 현재 raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r04`.
+- 현재 raw root: `C:/Espressif/benchmark-remediation/20260928-agy-remediation-r05`.
 
 이 문서는 시작 시점의 진행 기록이다. 실행 종료 판정은 별도 결과 보고서로 추가한다.
+
+## r05 실행 준비 및 하드웨어 대기
+
+제한된 코드 검색 명령군을 실패 재현 시험 후 보완했다. `git grep`의 파일 경로는 `--` 뒤로 제한하고, rg·Select-String도 checkout 또는 이미 허용된 source 읽기 범위로 제한했다. 임의 명령·history·외부 변환기·권한 우회는 허용하지 않았다. 실제 AGY 진단의 4개 명령과 usage를 별도로 기록했다.
+
+현재 COM3 미연결은 보드 업로드의 미충족 조건이다. `-RequireHardware` 사전 검증 실패 원본을 보존한 뒤, 실제 보드에 접근하지 않는 AGY 코드 보완용 사전 검증은 0 실패·1 경고로 통과했다. 전체 제품 합격이나 보드 검증 통과로 처리하지 않는다. 실행 중 추가 지시 없이 종료 후 독립 평가를 진행한다.
+
+- [r04 실패 및 보존](agy-remediation-r04-result-20260928.json)
+- [r05 검색 명령·실제 진단·사전 검증](agy-remediation-search-preflight-20260928.json)

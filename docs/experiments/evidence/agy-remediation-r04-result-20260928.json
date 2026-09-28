@@ -1,0 +1,43 @@
+{
+  "run_id": "20260928-agy-remediation-r04",
+  "classification": "remediation",
+  "status": "environment_failed",
+  "reason": "AGY tool permission denied; inspect stderr evidence",
+  "measurement": {
+    "tokens": {
+      "input": 577895,
+      "output": 12111,
+      "cached": 2929054,
+      "reasoning": 8871,
+      "provider_total": 590006,
+      "total": 590006,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    },
+    "tool_calls": 36,
+    "failed_commands": null
+  },
+  "execution": {
+    "start": "2026-09-27T16:57:31.600Z",
+    "end": "2026-09-27T17:00:27.320Z",
+    "elapsed": 175.71799999999348,
+    "status": "environment_failed",
+    "reason": "AGY tool permission denied; inspect stderr evidence",
+    "code": 0
+  },
+  "denied_command": "git grep \"16:54:07\"",
+  "product_changes": false,
+  "globals_restored": true,
+  "immutable_inputs_verified": true,
+  "ranking_eligible": false,
+  "product_pass": false,
+  "hashes": {
+    "remediation-manifest.json": "5987b84852a55f23f56652e0ba31d8c945ea9d77fc58aaf70a0c84533c5c3b1d",
+    "stdout.jsonl": "8f07dac94d6d1c5e2d338fb21a08e8a8f01fcbf218f22a4b4c855a52f099f04c",
+    "stderr.txt": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713",
+    "command-audit.json": "d908e13853506890b8fdef5106c8d2587390981efba39fcc3a712a92b00729e5",
+    "implementation.bundle": "dfbbad4746bff9c261e5bc59b045329c5dab40824d236263c59a53770a27784c",
+    "prompt.txt": "b31201bee5cb9aa9ba7de01d52f21a41ad57e2a090d9b520595318afa100d6e8",
+    "source-provenance.json": "b8240080acac57e1f4adbd7a2b4895e830b38e14afb9e87599854c27ecd83754"
+  }
+}

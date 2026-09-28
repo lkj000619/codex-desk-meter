@@ -1,0 +1,59 @@
+{
+  "remediation_run_id": "20260928-agy-remediation-r05",
+  "classification": "remediation",
+  "ranking_eligible": false,
+  "product_pass": false,
+  "preflight": "115 tests plus host C/C++ runtime and clean checkout; 0 failures, 1 COM3-disconnected warning",
+  "hardware_gate": {
+    "required_preflight_exit_code": 1,
+    "upload_permitted_now": false,
+    "reason": "COM3 not detected; physical upload remains gated"
+  },
+  "policy_change": "Finite git grep, rg, rg --files and Select-String code search forms; data grants unchanged; no parent or non-granted absolute paths, history, shell substitution/compounds, converters, installs or physical serial/flash.",
+  "regression": "Red then green; nine policy tests including negative search boundaries",
+  "actual_agy_queries": [
+    "git grep \"16:54:07\"",
+    "rg -n \"diagnostic\" main",
+    "Select-String -Path main/smoke.c -Pattern \"diagnostic\"",
+    "rg --files -g \"*.c\""
+  ],
+  "diagnostic_execution": {
+    "start": "2026-09-28T07:30:07.462Z",
+    "end": "2026-09-28T07:30:41.311Z",
+    "elapsed": 33.84299999999348,
+    "status": "completed",
+    "reason": null,
+    "code": 0
+  },
+  "diagnostic_usage": {
+    "input": 64384,
+    "output": 797,
+    "cached": 32545,
+    "reasoning": 282,
+    "provider_total": 65181,
+    "total": 65181,
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+    "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+  },
+  "diagnostic_globals_restored": true,
+  "product_files_preserved": 114,
+  "partial_product_origin": "6bb5d7fdfa4d6ba80c3eb5a6205767e942e13fc7",
+  "policy_sha256": "990a34d793292065c45cced013a535b8812bbd6d8067729b02bf50f24c8f324d",
+  "diagnostic_hashes": {
+    "stdout.jsonl": "b7ef79a79365cd7a4ba3f921bb6333ee97bf032d26d235e12b1827224baa06ea",
+    "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "result.json": "6cc64369391faab6e33c09592796cbba4837c1338b97d4461f64441afcb11948",
+    "usage.json": "a236ec7ee03183091c2e74fba593d87970e8fd0c0deb4ed7bd7ad1dfac099dec"
+  },
+  "preflight_hashes": {
+    "preflight-stdout.txt": "b89e58f44e2910f8e3a4366870a56c2952c9503179c8043b8a05ab5fd324aefb",
+    "preflight-stderr.txt": "3372a614da63aba91908bc57ee2e5b52d54b0186506a2d4cc03ec8a80e312810",
+    "preflight-result.json": "68fd21fb05c3a5e1a72ba6dbfaf64910e0311cde67bf6c316587f56ce3f9bde2",
+    "preflight-hardware-required-stdout.txt": "a4fad9c4230d98221fd3b08db8f506b779a7550f38f29b6cb2424ee83e17befa",
+    "preflight-hardware-required-stderr.txt": "fc65084bdefc3f496aac7f72b2bf41df6f9e8cc2f42385ec4613fb13c4934d50",
+    "preflight-hardware-required-result.json": "2618b95f1f6be6bfde8537756f85b83845d039001563135b9d59d817446733eb"
+  },
+  "prompt_sha256": "5d592e15a612968cc76ece328501dcc9748dcda058edcb1c03a7bf086a83c5f3",
+  "started_at": "2026-09-28T07:31:06.185769+00:00",
+  "runtime_feedback": false
+}

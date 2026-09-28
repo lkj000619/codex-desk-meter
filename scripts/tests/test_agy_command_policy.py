@@ -6,6 +6,22 @@ import unittest
 
 
 class CommandPolicyTests(unittest.TestCase):
+    def test_bounded_code_search_commands(self):
+        for cmd in ['git grep "16:54:07"', 'git grep -n -F "BOOT" -- main',
+                    'rg -n "BOOT|LCD" main components', 'rg --files -g "*.c"',
+                    'Select-String -Path main/main.c -Pattern "BOOT"',
+                    'rg -n "GPIO" C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source']:
+            with self.subTest(cmd=cmd):
+                self.assertTrue(self.allowed(cmd))
+        for cmd in ['git grep x HEAD~1', 'git grep x HEAD',
+                    'git grep --textconv x', 'git grep -Oevil x',
+                    'rg --pre evil x', 'rg --follow x', 'rg x ../',
+                    'rg x C:/Users', 'git grep "$(whoami)"',
+                    'Select-String -Path ../key -Pattern x',
+                    'rg "x" main; whoami', 'rg "`whoami`" main']:
+            with self.subTest(cmd=cmd):
+                self.assertFalse(self.allowed(cmd))
+
     def test_checkout_read_patterns_are_not_command_wildcards(self):
         for cmd in ['git ls-files "*vendor*"', 'git ls-files -- "main/*.c"',
                     'Get-ChildItem -Recurse -Filter "*.c" main',
