@@ -680,3 +680,22 @@ provider fixture 디렉터리 밖의 `--fixture` 경로를 거부한다. `Produc
 기존 잔여 네 항목은 고정 fixture E2E 계약의 검증 범위임을 현재 상태 문서에 명시했다.
 실사용 source adapter와 실제 데이터 통합 시험은 PRODUCT_CONTRACT가 구분한 별도 live integration 작업이다.
 사용자 계정 파일·자격증명을 읽거나 제품 코드를 변경하지 않았으며 원래 실험 범위·평가 계약은 유지한다.
+
+### r20 자동 복구 운영 상태·짧은 BOOT 보고·r21 시작
+
+USB/RST/재전원 후 자동 값 복구와 BOOT 짧은 입력 문제가 보고됐다. 최초 process 조회에서
+송신기는 종료 상태였고 COM3는 열거됐다. 기존 미수정 r20 CLI를 같은 durable store로 순번 29부터
+5초 주기·최대 61회 실행했으며, 사용자는 실행 중 RST 후 약 3초에 값이 돌아온다고 확인했다.
+이는 사용자 관찰이고 frame 수신→LCD 2초 측정으로 확대하지 않는다. 물리 cable 시험은 미확인이다.
+main의 GPIO 입력은 renderer/IMU와 같은 loop·lock 안에서 sampled edge를 처리하고 최소 50ms를
+기다리며 inter-event cooldown은 200ms다. 짧은 누름이 sample 사이에 완전히 들어갈 수 있다.
+provider 순환으로 페이지 번호가 그대로인 경우도 있어 의미 변화와 실제 입력 누락은 구분한다.
+
+r21는 같은 r20 제품 파일 116개와 기존 정책/model/data scope를 보존해 사전 검증 123개를 통과했다.
+고정 요청으로 짧은 입력/hold/bounce/release와 slow renderer/IMU 회귀를 생산 handler에서 보완한다.
+운영 명령은 단회 sender 종료와 지속 실행 조건을 명시한다. 새 계정 source·프로토콜·서비스는 추가하지 않는다.
+제품 코드는 AGY만 수정하며 runtime feedback은 없고 원래 단회 정량 순위에서 제외한다.
+보드는 r20이며 r21 업로드·실물 latency·전체 합격은 아직 확인되지 않았다.
+
+- [r21 현재 보완 범위·사용자 관찰·운영자 launch 오류 기록](agy-remediation-r21-status-20260929.md)
+- [r21 환경 사전 검증](agy-remediation-r21-preflight-20260928.json)

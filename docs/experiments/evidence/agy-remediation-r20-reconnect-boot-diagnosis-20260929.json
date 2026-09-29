@@ -1,0 +1,406 @@
+{
+  "run_id": "20260928-agy-remediation-r20",
+  "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+  "recorded_at": "2026-09-29T06:35:19.633452+00:00",
+  "ranking_eligible": false,
+  "product_pass": false,
+  "operator_product_edits": false,
+  "classification": "owner_reported_rst_recovery_and_boot_input_investigation",
+  "initial_process_inventory": "No running run-host-device-pipeline/benchmark-remediation sender process, COM3 enumerated; readonly Windows process/PnP query.",
+  "owner_report": "usb 단절 시, rst 버튼, 혹은 재전원 인가 시 정보가 넘어오지않는것으로 보임. boot 버튼은 2회 누렸을때와 약 500ms 이상 눌렸을 때 페이지가 넘어감. 가끔 1회 눌렸을때도 넘어감.",
+  "owner_could_confirm_provider_change_on_single_boot_press": false,
+  "owner_followup_verbatim": "10초 안에 값이 돌아옴. 약 3초 걸림. boot 짧은 입력은 될때가 있고 안될대가 있음. 내가 봤을때는 boot 스위치를 길게 혹은 짧게 2번 누르고 난 뒤 빠르게 1회 누르면 넘어가는 느낌이였음. 뭐 문제가 될 것을 아니니까.",
+  "rst_recovery": {
+    "verdict": "owner_observed_recovery_while_sender_running",
+    "approximate_seconds": 3,
+    "method": "Owner text observation, not synchronized instrument/video timing. Five-second diagnostic periodic schedule includes wait to next send; not receive-to-LCD <=2s measurement."
+  },
+  "boot_short_input": {
+    "verdict": "partial; owner reports intermittent missed response",
+    "source_findings": [
+      "Sampled GPIO0 edge read in UI/render/IMU task while state lock held",
+      "At least50ms task sleep plus I2C/render work between samples",
+      "200ms inter-event cooldown updates last low sample even when transition is rejected",
+      "Dashboard provider cycling intentionally can keep page number unchanged"
+    ],
+    "root_cause_scope": "Stopped sender explains absent automatic transmissions before diagnostic run. GPIO sampling can miss a short pulse in code; exact physical source of every owner-reported miss is not yet instrumented."
+  },
+  "actual_cable_disconnect_or_powercycle_recovery": "not_run; follow-up did not explicitly establish either",
+  "sender_report": {
+    "run_id": "20260928-agy-remediation-r20",
+    "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+    "operator_product_edits": false,
+    "ranking_eligible": false,
+    "product_pass": false,
+    "hardware_accessed": true,
+    "owner_report": "usb 단절 시, rst 버튼, 혹은 재전원 인가 시 정보가 넘어오지않는것으로 보임. boot 버튼은 2회 누렸을때와 약 500ms 이상 눌렸을 때 페이지가 넘어감. 가끔 1회 눌렸을때도 넘어감.",
+    "precondition": "Process inventory showed no active PC sender; COM3 enumerated. Start unchanged candidate periodic sender on existing durable store, without resetting or initializing board.",
+    "scope": "Five-second diagnostic polling, finite61cycles (~5min). Actual production CLI unchanged; host frame writes alone are not proof of physical LCD or device receipt.",
+    "argv": [
+      "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r20-20260928\\checkout\\scripts\\run-host-device-pipeline.py",
+      "--candidate",
+      "--device-alias",
+      "esp32s3-288485b08518",
+      "--sequence-store-dir",
+      "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\actual-cli-tests\\sequence-store",
+      "--send",
+      "--port",
+      "COM3",
+      "--max-cycles",
+      "61",
+      "--poll-interval",
+      "5",
+      "--output",
+      "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\reported-reconnect-boot-diagnosis\\last-frame.bin"
+    ],
+    "initial_next_sequence": 29,
+    "started_at": "2026-09-29T06:27:39.975503+00:00",
+    "phase": "ended",
+    "sender_pid": 6244,
+    "exit_code": 0,
+    "errors": [],
+    "observed_frames": [
+      {
+        "sequence": 29,
+        "observed_at": "2026-09-29T06:27:40.750871+00:00",
+        "sha256": "7ee13a92cd09822866e90d0e5a14bced23b2a4e2cdb573ada1d4175fb14ad85d"
+      },
+      {
+        "sequence": 30,
+        "observed_at": "2026-09-29T06:27:46.197726+00:00",
+        "sha256": "c24b9a0de238c7e44a1649ba50e6979973e82ff4e144bf955ad797667ba7b394"
+      },
+      {
+        "sequence": 31,
+        "observed_at": "2026-09-29T06:27:51.669908+00:00",
+        "sha256": "e3e0115a7de97723382a1facfe1fd8823b6a5dd0f9be3396fd730b22e047c121"
+      },
+      {
+        "sequence": 32,
+        "observed_at": "2026-09-29T06:27:57.012153+00:00",
+        "sha256": "54ff9595836b596f7d138f9349d55113eb020ac95de0579cceccd3db65bdddf1"
+      },
+      {
+        "sequence": 33,
+        "observed_at": "2026-09-29T06:28:02.499549+00:00",
+        "sha256": "6befa3ed0db57cdc1790fab3cab37e0f75e3d49d0e4c258cb42f9145e3679ba6"
+      },
+      {
+        "sequence": 34,
+        "observed_at": "2026-09-29T06:28:07.841938+00:00",
+        "sha256": "49c6927aeb514dfcc22d33277e51d5607c7cc4501e9b1cff17247f773ffe7b0f"
+      },
+      {
+        "sequence": 35,
+        "observed_at": "2026-09-29T06:28:13.321735+00:00",
+        "sha256": "8b44e774f94ba918b235777decde710e4da32e84207cce5510b377b0fb73ae29"
+      },
+      {
+        "sequence": 36,
+        "observed_at": "2026-09-29T06:28:18.685484+00:00",
+        "sha256": "26bd179fc92b52dac33ddd5c4dc301dce8acc6efdf52ce3a744001c02a2a6ab8"
+      },
+      {
+        "sequence": 37,
+        "observed_at": "2026-09-29T06:28:24.165852+00:00",
+        "sha256": "ece99d3bcd1ab98fd6868360755f17fc2d9a61eb2a2b4f691a9ecfb90c75a070"
+      },
+      {
+        "sequence": 38,
+        "observed_at": "2026-09-29T06:28:29.542648+00:00",
+        "sha256": "5a8e1ad752b73cacf824dcfd3590adbe98a72d4ad97693b7317e7f2486c38467"
+      },
+      {
+        "sequence": 39,
+        "observed_at": "2026-09-29T06:28:34.903034+00:00",
+        "sha256": "945588e122fca26d1a5381b4bc727a184a29b15b76a374bc6d1c8a119f607202"
+      },
+      {
+        "sequence": 40,
+        "observed_at": "2026-09-29T06:28:40.386480+00:00",
+        "sha256": "3e293a0937b6058fe91df3860c646bf5c7997c43f3b4482a7c68aeb43a3f731f"
+      },
+      {
+        "sequence": 41,
+        "observed_at": "2026-09-29T06:28:45.751991+00:00",
+        "sha256": "bffd18e29ed2463674b1a8021aab57df09387913241b41327fe13722658e021e"
+      },
+      {
+        "sequence": 42,
+        "observed_at": "2026-09-29T06:28:51.246805+00:00",
+        "sha256": "07b989a052f7f538b806de8e430dc17cc64dabf469136c7f46b6af980a53500b"
+      },
+      {
+        "sequence": 43,
+        "observed_at": "2026-09-29T06:28:56.580902+00:00",
+        "sha256": "f2b4211d9d178d2dd7be468f99c565e84f06cb1617bc39d73e2381eea113f383"
+      },
+      {
+        "sequence": 45,
+        "observed_at": "2026-09-29T06:29:03.391785+00:00",
+        "sha256": "b3ed6d506681fc28e0f4f55624b7db14f5c03a2e74e8cad2b640a68efbfcd093"
+      },
+      {
+        "sequence": 46,
+        "observed_at": "2026-09-29T06:29:08.777484+00:00",
+        "sha256": "bddd9ccfff29e8dc9a7a966de3172d4e083f70ddef942291ac8a01325897b70b"
+      },
+      {
+        "sequence": 47,
+        "observed_at": "2026-09-29T06:29:14.278299+00:00",
+        "sha256": "c776cedffb40925b770f3e1b423116e8d288bbc1ae097d73147d2336221f1af4"
+      },
+      {
+        "sequence": 48,
+        "observed_at": "2026-09-29T06:29:19.608156+00:00",
+        "sha256": "29281ed2507fcc0de600978f29d24b065eeabee505ce6593041d70349083ef90"
+      },
+      {
+        "sequence": 49,
+        "observed_at": "2026-09-29T06:29:25.099459+00:00",
+        "sha256": "99b6e0c681975a3468a98accacd832eb29a52af6b1ce401958603dc6e95e1697"
+      },
+      {
+        "sequence": 50,
+        "observed_at": "2026-09-29T06:29:30.474334+00:00",
+        "sha256": "8af4b7f7e7142b32671ed5cc119ce58d44f66f58e748ebb9b50c33435c563c46"
+      },
+      {
+        "sequence": 51,
+        "observed_at": "2026-09-29T06:29:35.956757+00:00",
+        "sha256": "2b7b2cd7a56625adaec82dceea4b41b9364df97b8c1269cc9c5c76d858a45eae"
+      },
+      {
+        "sequence": 52,
+        "observed_at": "2026-09-29T06:29:41.299114+00:00",
+        "sha256": "6f06c264bf5c5ae0f473993a11f83e877a1b5da1b17e8d684800bf886ef5b49f"
+      },
+      {
+        "sequence": 53,
+        "observed_at": "2026-09-29T06:29:46.683881+00:00",
+        "sha256": "1730321dca3f95f5274adee5b4e3ea54d21155917122879c120bbba8057b17fb"
+      },
+      {
+        "sequence": 54,
+        "observed_at": "2026-09-29T06:29:52.171433+00:00",
+        "sha256": "6d07e607ae864a628bd882ae2aea7b6212936ded3c2b0afd9a10bdf4b3d192ff"
+      },
+      {
+        "sequence": 55,
+        "observed_at": "2026-09-29T06:29:57.552072+00:00",
+        "sha256": "0198ac958802e7032538d854a45a53bb8be4680af2c53d2fd2241a779e183e92"
+      },
+      {
+        "sequence": 56,
+        "observed_at": "2026-09-29T06:30:02.944583+00:00",
+        "sha256": "8f0921aecfe1cc0ce0b2d96a9ac5f955a5e1fe7f45e3f1adde1b0726df1ccd63"
+      },
+      {
+        "sequence": 57,
+        "observed_at": "2026-09-29T06:30:08.401089+00:00",
+        "sha256": "0d56a703b03e44352f69297bf6115a20674a3c78e6158fc7e6890e1b0500a9ae"
+      },
+      {
+        "sequence": 58,
+        "observed_at": "2026-09-29T06:30:13.779940+00:00",
+        "sha256": "a34b18f90402b880ba077845ae57aa136c9fab7911aaf31ed06f44174bc0bf1b"
+      },
+      {
+        "sequence": 59,
+        "observed_at": "2026-09-29T06:30:19.257563+00:00",
+        "sha256": "00dcfb035d8fe4acaf786efbad2bbe8f08f346acba8b548ace118debf05485ce"
+      },
+      {
+        "sequence": 60,
+        "observed_at": "2026-09-29T06:30:24.656484+00:00",
+        "sha256": "bd1acb0effef9101196107614f8b0d1ad18d2578b405e4fa553ab9c7fad8151e"
+      },
+      {
+        "sequence": 61,
+        "observed_at": "2026-09-29T06:30:30.121347+00:00",
+        "sha256": "0d1d134aaf0c46869f97de47df3543f7c1a6936dae4f855ea1f3d139e3345563"
+      },
+      {
+        "sequence": 62,
+        "observed_at": "2026-09-29T06:30:35.489029+00:00",
+        "sha256": "bb9e9d65466b04b4b3e1a399cb078a13d1a4a2e6f42b635baaa0d631b255385c"
+      },
+      {
+        "sequence": 63,
+        "observed_at": "2026-09-29T06:30:40.882952+00:00",
+        "sha256": "eb018430de874d6a1494389ef607a52d0940f088cfeef54e3d287c69c134f14d"
+      },
+      {
+        "sequence": 64,
+        "observed_at": "2026-09-29T06:30:46.278911+00:00",
+        "sha256": "1ac2b75246a68d8415b30bc9f2adcb23e19d88034c3b715d7d04394167c57c10"
+      },
+      {
+        "sequence": 65,
+        "observed_at": "2026-09-29T06:30:51.755150+00:00",
+        "sha256": "2b669992c999f7ae71abaa581963664939a5a5983f86b27c610b3589e8f92e62"
+      },
+      {
+        "sequence": 66,
+        "observed_at": "2026-09-29T06:30:57.143265+00:00",
+        "sha256": "6e37b9b354db768a848f05a2154d4f0245c6eb3137ea9a696dc4ac25e563b1ac"
+      },
+      {
+        "sequence": 67,
+        "observed_at": "2026-09-29T06:31:02.509266+00:00",
+        "sha256": "e45724b4c512fb75482cade4ba1c2a0de3c2c70fefcb46f24b3733147c33724f"
+      },
+      {
+        "sequence": 68,
+        "observed_at": "2026-09-29T06:31:08.000510+00:00",
+        "sha256": "c4d099cb6d02000b2398b47f17e2a5f9e4729d102f33bccffb14823c9b3c89eb"
+      },
+      {
+        "sequence": 69,
+        "observed_at": "2026-09-29T06:31:13.365638+00:00",
+        "sha256": "d1e9e443dd816c0bf397576c7135c492503bb6f6795edb38f810778538780d4b"
+      },
+      {
+        "sequence": 70,
+        "observed_at": "2026-09-29T06:31:18.821961+00:00",
+        "sha256": "d2703d8dd7291a0e2d86c408cfdf11fc6663f0f7ff378c6f1c9b0b741d64ed1c"
+      },
+      {
+        "sequence": 71,
+        "observed_at": "2026-09-29T06:31:24.297904+00:00",
+        "sha256": "c1879dd2a3de3ab4dcede335f05a8179fb186b42bbe03e885e308e6a078de3b4"
+      },
+      {
+        "sequence": 72,
+        "observed_at": "2026-09-29T06:31:29.672686+00:00",
+        "sha256": "a1b3eefe398f543a19b78e587a1ffd386131262972ec42ea374d691af246eb55"
+      },
+      {
+        "sequence": 73,
+        "observed_at": "2026-09-29T06:31:35.041331+00:00",
+        "sha256": "8162fdf4f865a51431da45f3bb0ad622e23b8d895e6db7b368025a5482c5d620"
+      },
+      {
+        "sequence": 74,
+        "observed_at": "2026-09-29T06:31:40.497750+00:00",
+        "sha256": "7713e562db9ede9da394188dc6ad58ed6ebff2219339cd0a563e367a55de37ea"
+      },
+      {
+        "sequence": 75,
+        "observed_at": "2026-09-29T06:31:45.869677+00:00",
+        "sha256": "d0d9c8350c1db1c838010e5c0d2dd833431f7705b119f063774f9b1e7c7c73c0"
+      },
+      {
+        "sequence": 76,
+        "observed_at": "2026-09-29T06:31:51.336124+00:00",
+        "sha256": "ab83d901b34a9cbf4fda7208eed1f85db61f131094af66d87302ba3c8a8acbb1"
+      },
+      {
+        "sequence": 77,
+        "observed_at": "2026-09-29T06:31:56.698075+00:00",
+        "sha256": "8a0f03a1f12aec54abc1cebf93d54b4927a6509b450357c57623a4ee24cfb16e"
+      },
+      {
+        "sequence": 78,
+        "observed_at": "2026-09-29T06:32:02.181323+00:00",
+        "sha256": "01834d9139783706c5ad4ffb96c20141e1907efe8320ce30f899004717f3d951"
+      },
+      {
+        "sequence": 79,
+        "observed_at": "2026-09-29T06:32:07.524656+00:00",
+        "sha256": "42f33f19adb9b8dd9d478e5804e5a932f0b316b48ef5fd96d65b3f047a245007"
+      },
+      {
+        "sequence": 80,
+        "observed_at": "2026-09-29T06:32:13.008566+00:00",
+        "sha256": "890a97cf68abbcdbbfee1da2f900c82e50369973798cb3394d869c7e1248b35d"
+      },
+      {
+        "sequence": 81,
+        "observed_at": "2026-09-29T06:32:18.367555+00:00",
+        "sha256": "680aeea27d566b8700a4b2b0618bdbf261993bd4af5a996e74422d45886a2186"
+      },
+      {
+        "sequence": 82,
+        "observed_at": "2026-09-29T06:32:23.824247+00:00",
+        "sha256": "14cdcb66d9b8c5bcb4f18eb9cf6a8d29f533be6cea1563d30fd43f461ce655e7"
+      },
+      {
+        "sequence": 83,
+        "observed_at": "2026-09-29T06:32:29.267758+00:00",
+        "sha256": "9aed2f90a7539b4cb0abc99e15b60ae5d490a0179224b80d10d7473079266d7c"
+      },
+      {
+        "sequence": 84,
+        "observed_at": "2026-09-29T06:32:34.635620+00:00",
+        "sha256": "151d4b6aac127f4f02b6740847844e38bb55b97f14ddc42a2caa60a14346aea5"
+      },
+      {
+        "sequence": 85,
+        "observed_at": "2026-09-29T06:32:40.112998+00:00",
+        "sha256": "9ea8a30fdb98c76cb190581da396faec8f59fd05b1708929336698eb98ae2b1c"
+      },
+      {
+        "sequence": 86,
+        "observed_at": "2026-09-29T06:32:45.483872+00:00",
+        "sha256": "8c07bfd445166d70afc8aa8ef6742a991712ba4ae979924efa389f63d8bf85f7"
+      },
+      {
+        "sequence": 87,
+        "observed_at": "2026-09-29T06:32:50.916236+00:00",
+        "sha256": "31fd1810fe179ce6f0db87c9344454ac6291290279b22f506b3a7663bae4ae2f"
+      },
+      {
+        "sequence": 88,
+        "observed_at": "2026-09-29T06:32:56.292355+00:00",
+        "sha256": "07488a85ddc7f7ba61af57035065e7b2ab76202e7bcfc5afdee01c8371c1f174"
+      },
+      {
+        "sequence": 89,
+        "observed_at": "2026-09-29T06:33:01.663939+00:00",
+        "sha256": "3062cf44ddac87eeb402948ef37156501162f102d9ba2a3bcf5ccd7ea9f2262f"
+      }
+    ],
+    "next_sequence": 91,
+    "finished_at": "2026-09-29T06:33:07.103293+00:00"
+  },
+  "sender_cli_summary": {
+    "bytes_written": 3962,
+    "candidate": true,
+    "cycles_run": 61,
+    "device_accessed": true,
+    "device_alias": "esp32s3-288485b08518",
+    "elapsed_seconds": 327.016,
+    "frame_sha256": "c845bb70e99916441030ec58819711ad2c79815de8aa4d6d397ef9d1082dc368",
+    "mode": "serial",
+    "output_path": null,
+    "poll_interval": 5,
+    "sequence": 90,
+    "status": "sent"
+  },
+  "frame_observation_limit": "61 successful CLI cycles, 60 independently sampled frame-file changes. Store29->91 reserves62 sequence numbers: at least one reservation consumed without a returned successful cycle. No individual ACK log for every cycle; do not infer exact failure trigger from sequence gap alone.",
+  "post_sender_native_observation": {
+    "run_id": "20260928-agy-remediation-r20",
+    "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+    "operator_product_edits": false,
+    "ranking_eligible": false,
+    "product_pass": false,
+    "purpose": "Read existing device logs after diagnostic sender closes; no write/reset/reinitialization/firmware upload.",
+    "started_at": "2026-09-29T06:34:02.874378+00:00",
+    "dtr": false,
+    "rts": false,
+    "errors": [],
+    "finished_at": "2026-09-29T06:34:05.925288+00:00",
+    "bytes_observed": 0,
+    "device_log": "",
+    "device_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "source_and_binary_hashes_unchanged": true,
+  "board_still_running_r20": true,
+  "r21_agent_started_without_runtime_feedback": true,
+  "operator_launch_errors_not_agent_trials": [
+    "Launch-gate helper invoked before preflight completion; guard rejected without starting AGY.",
+    "Scoped wrapper options supplied after action run; argparse rejected before changing global files or starting AGY. Correct invocation then started one r21 run."
+  ]
+}

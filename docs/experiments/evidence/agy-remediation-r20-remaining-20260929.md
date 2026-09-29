@@ -5,7 +5,7 @@
 - AGY 실행: **정상 완주 확인**, 596.484초.
 - 독립 소프트웨어 검증: **통과**. CTest 4개·Python 20개·기존 29개·host/ESP32 build·현재 결과 검증.
 - 업로드: **완료**. 독립 빌드 해시와 실물 boot ELF 일치.
-- 실제 데이터 표시·BOOT 화면 전환·180도 IMU 회전: **영상 관측 확인**.
+- 실제 데이터 표시·BOOT 화면 전환·180도 IMU 회전: **영상 관측 확인**. 이후 짧은 BOOT 입력의 간헐적 무반응이 보고돼 입력 신뢰성은 r21 보완 중이다.
 - C2 LCD 유지·세 화면 출력: **영상 기준 통과**. 새 단일 영상 38.96초에서 LCD 유지와 세 화면의 정상 레이아웃을 확인했다.
 - 같은 전원의 native serial close/reopen 후 순번 역전 거부: **제한된 실제 시험 통과**.
 - 전체 제품 합격: **보류**. 아래 직접 측정 및 정식 채점이 남아 있다.
@@ -32,7 +32,7 @@
 
 | 조건 | 현재 증거 | 필요한 다음 증거 |
 |---|---|---|
-| BOOT 피드백 ≤300ms | 세 화면 전환 관측 | 물리 버튼 접점/눌림과 첫 새 화면을 같은 시간축에서 직접 측정 |
+| BOOT 짧은 입력·피드백 ≤300ms | 세 화면 전환 관측, 이후 짧은 입력 간헐적 누락 보고 | r21 생산 handler 보완·독립 회귀·실물 입력과 첫 화면 직접 측정 |
 | 수신 후 LCD 표시 ≤2s | 실제 seq20·9건 수신·사용량/reset 화면 표시 | 프레임 수신과 첫 화면 변경을 같은 시간축에서 직접 측정 |
 | 전원 유지 USB 분리·재열거 | native backend 재열기 순서 유지·offline 오류 복구 | 별도 보드 전원을 유지한 실제 USB cable 제거/재연결 및 동일 alias 순번 지속 |
 | G1–G6·최종 F9 | 실제 화면과 회전 영상, AGY 잠정 F9 22 | 50cm·동일 조명/노출·모델 비공개 평가와 실제 IMU 잡음 안정성 확인 |
@@ -59,7 +59,10 @@ AGY 작성 운영 절차:
 현재 실제 시험 store:
 `C:/Espressif/benchmark-remediation/hardware-r20-20260929/actual-cli-tests/sequence-store`
 
-식별자 `esp32s3-288485b08518`, 현재 포트 COM3, 다음 영구 순번 **29**.
+식별자 `esp32s3-288485b08518`, 현재 포트 COM3, 다음 영구 순번 **91**.
+자동 복구 확인을 위해 기존 r20 sender를 5초 주기·61회 실행한 뒤 정상 종료했다.
+사용자는 실행 중 RST 후 약 3초에 값이 돌아옴을 확인했다. 현재 진단 sender는 종료됐으므로
+이후 reset의 자동 값 복구를 관찰하려면 송신기를 다시 실행해야 한다. 재초기화는 하지 않는다.
 정상 재실행은 이 store와 alias를 이어서 사용한다. 수신기를 리셋하지 않은 상태에서 재초기화하지 않는다.
 데이터는 고정 offline fixture이며 실제 online quota가 아니다.
 
@@ -71,6 +74,8 @@ AGY 작성 운영 절차:
 - [두 번째 사용자 RST·같은 store 28 재수신 기록](agy-remediation-r20-second-rst-supplement-20260929.json)
 - [38.96초 영상·값 복구·C2 LCD 유지 판정](agy-remediation-r20-video04-review-20260929.json)
 - [38.96초 원본 영상 archive receipt](agy-remediation-r20-video04-artifacts-20260929.json)
+- [송신 실행 중 RST 복구·짧은 BOOT 진단](agy-remediation-r20-reconnect-boot-diagnosis-20260929.json)
+- [r21 BOOT 보완 현재 상태](agy-remediation-r21-status-20260929.md)
 - [두 번째 RST 재수신 원본 archive receipt](agy-remediation-r20-second-rst-artifacts-20260929.json)
 - [실물 원본·세 영상 archive receipt](agy-remediation-r20-hardware-artifacts-20260929.json)
 - [실물 원본 자료 archive](agy-remediation-r20-hardware-artifacts-20260929.zip)
