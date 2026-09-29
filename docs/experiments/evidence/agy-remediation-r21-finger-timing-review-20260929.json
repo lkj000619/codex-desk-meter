@@ -1,0 +1,79 @@
+{
+  "recorded_at_utc": "2026-09-29T08:12:46Z",
+  "run_id": "20260928-agy-remediation-r21",
+  "implementation_commit": "8eb40c0ceb47d1f6585307575a09c7dc74f89d51",
+  "classification": "owner_identified_finger_motion_video_response_estimate",
+  "ranking_eligible": false,
+  "product_pass": false,
+  "operator_product_edits": false,
+  "frozen_contract_changed": false,
+  "hardware_accessed": false,
+  "additional_recording_requested": false,
+  "owner_statement_verbatim": "빨간색으로 표기한 손가락이 움찔움찔 한 후에 디스플레이 화면이 변경되잖아. 이게 스위치를 누른 후인거야. 이걸로 측정 가능?",
+  "owner_marked_image_sha256": "77860b36cf1eb88a1b4c4ddbe675f55a95db7ca5dcd11674855518b44e3b8949",
+  "source_video": {
+    "name": "KakaoTalk_20260929_161834322.mp4",
+    "sha256": "301a041a35cab7f256b1fc0725929b6c1f9dcff271ee4012ca9face06749203c",
+    "prior_sealed_archive": "agy-remediation-r21-video02-artifacts-20260929.zip"
+  },
+  "method": {
+    "press_action_identity": "Owner identifies the circled lower-right finger movement as pressing the switch.",
+    "onset_selection": "Operator manual visual estimate of the identified finger actuation, represented by a range of original frames; not an automatically detected GPIO edge.",
+    "display_selection": "Last old display frame to first visible semantic change; a subsequent new-content frame is recorded separately.",
+    "timing_reference": "Original frame PTS from FFmpeg showinfo with no fps resampling",
+    "frame_step_seconds_approx": 0.033333,
+    "frames_inspected": 126,
+    "unique_original_frames": 125,
+    "finger_detail_crop": [630, 1420, 1210, 1860],
+    "original_frame_windows_inclusive": [[45, 96], [108, 144], [144, 180]],
+    "external_output": "C:/Espressif/benchmark-remediation/hardware-r21-20260929/finger-timing-review-20260929",
+    "range_formula": "minimum = display_lower - onset_upper; maximum = display_upper - onset_lower",
+    "scope": "Three observed physical actions using an owner-confirmed visual proxy; electrical actuation/debounce time is not separately measured."
+  },
+  "observations": [
+    {
+      "event": "Anthropic to OpenAI provider",
+      "estimated_onset_frame_interval": [83, 86],
+      "estimated_onset_pts_interval_seconds": [2.766667, 2.866667],
+      "first_display_change_frame_interval": [87, 88],
+      "first_display_change_pts_interval_seconds": [2.9, 2.933333],
+      "new_content_frame": 89,
+      "new_content_pts_seconds": 2.966667,
+      "first_response_estimated_interval_ms": [33.333, 166.666],
+      "new_content_estimated_interval_ms": [100.0, 200.0]
+    },
+    {
+      "event": "Usage to global reset page",
+      "estimated_onset_frame_interval": [123, 127],
+      "estimated_onset_pts_interval_seconds": [4.1, 4.233333],
+      "first_display_change_frame_interval": [128, 129],
+      "first_display_change_pts_interval_seconds": [4.266667, 4.3],
+      "new_content_frame": 130,
+      "new_content_pts_seconds": 4.333333,
+      "first_response_estimated_interval_ms": [33.334, 200.0],
+      "new_content_estimated_interval_ms": [100.0, 233.333]
+    },
+    {
+      "event": "Global reset to diagnostic page",
+      "estimated_onset_frame_interval": [158, 160],
+      "estimated_onset_pts_interval_seconds": [5.266667, 5.333333],
+      "first_display_change_frame_interval": [163, 164],
+      "first_display_change_pts_interval_seconds": [5.433333, 5.466667],
+      "new_content_frame": 165,
+      "new_content_pts_seconds": 5.5,
+      "first_response_estimated_interval_ms": [100.0, 200.0],
+      "new_content_estimated_interval_ms": [166.667, 233.333]
+    }
+  ],
+  "verdict": {
+    "video_based_response_estimate_available": true,
+    "observed_cases_within_300ms_by_video_estimate": 3,
+    "boot_evidence_status": "within_threshold_for_three_observed_cases_using_manual_visual_proxy",
+    "exact_electrical_or_debounce_latency_measured": false,
+    "all_attempt_success_rate_established": false,
+    "physical_hold_single_event_verified": false,
+    "receive_to_lcd_2s_verified": false
+  },
+  "supersedes": "Prior conclusion that visual switch occlusion leaves no usable press anchor for these video02 scenes; historical sealed evidence is retained.",
+  "artifact_receipt": "agy-remediation-r21-finger-timing-artifacts-20260929.json"
+}

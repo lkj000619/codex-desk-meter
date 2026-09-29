@@ -1,0 +1,158 @@
+{
+  "run_id": "20260928-agy-remediation-r21",
+  "implementation_commit": "8eb40c0ceb47d1f6585307575a09c7dc74f89d51",
+  "ranking_eligible": false,
+  "product_pass": false,
+  "operator_product_edits": false,
+  "archive": "agy-remediation-r21-finger-timing-artifacts-20260929.zip",
+  "sha256": "1b44a1454411aa163368ffa68d8a45d374038daee7d650fb6a88b74af5fef06a",
+  "bytes": 11170415,
+  "entry_count": 35,
+  "entries": {
+    "analysis/window-1-039.jpg": {
+      "sha256": "e0960074c1056e6339de4f3506758edc748484a1107231f1422270a364019494",
+      "size": 228147
+    },
+    "analysis/window-1-042.jpg": {
+      "sha256": "a88063178a2643a069c88581f448438fab68034c36fb0e3690aa7a60f73db77c",
+      "size": 232151
+    },
+    "analysis/window-1-043.jpg": {
+      "sha256": "7ac13f0b4895103ab9ba2c498a4d286c27bc53016b3cb464f7d1d2ae3a0fe6fd",
+      "size": 229922
+    },
+    "analysis/window-1-044.jpg": {
+      "sha256": "62b508c607d15a80d96618f412c8f1061e1ca808d4f487472864b03d0d804f72",
+      "size": 234617
+    },
+    "analysis/window-1-045.jpg": {
+      "sha256": "d7490c91cf3257559206cde891bbf03394668f620f91bc402bf3000a5d6d8877",
+      "size": 232398
+    },
+    "analysis/window-2-016.jpg": {
+      "sha256": "2643a229da34492436772724981111e480d24c94eb96a8b5f8ba449f7325e575",
+      "size": 260556
+    },
+    "analysis/window-2-020.jpg": {
+      "sha256": "a78922b2cb3298cfee14c83b9037e52c992a5a4c3afe18520d16b07d695af578",
+      "size": 261956
+    },
+    "analysis/window-2-021.jpg": {
+      "sha256": "b0aedfe6381aa929bc7eb72c551f87a677281e9b9acec40991a855fbcfa7bcd3",
+      "size": 260274
+    },
+    "analysis/window-2-022.jpg": {
+      "sha256": "99311d6f0b9f951e5ea46736c7f5b065fe62e8a77762f7349afb0c9a4295786a",
+      "size": 259862
+    },
+    "analysis/window-2-023.jpg": {
+      "sha256": "08ee797329698ceaf53d16ecfad65dacf75a3422a8ddd24b5ebab1cb301d498c",
+      "size": 254601
+    },
+    "analysis/window-3-015.jpg": {
+      "sha256": "bf735726cc68805a1947b6bb610ce9816cd6853b53ef22ba37f83939fd626538",
+      "size": 254457
+    },
+    "analysis/window-3-017.jpg": {
+      "sha256": "5f3fdf7f457a5a2091aca630e235a5fb7ce8fdd249a6fc7d5adca93973a74436",
+      "size": 259229
+    },
+    "analysis/window-3-020.jpg": {
+      "sha256": "a725f8aee718482b09bcf5147c17fb3fc55d5c167db55e557e53dacfe77d1601",
+      "size": 257421
+    },
+    "analysis/window-3-021.jpg": {
+      "sha256": "ed68aa744fcc369293219b6c17b839b806c9ed205465ca945ca58403030abaa4",
+      "size": 286051
+    },
+    "analysis/window-3-022.jpg": {
+      "sha256": "4bd906c1c809f7641ecd963a1d7780cadd530ead4c294fb352ce6d261578983e",
+      "size": 282926
+    },
+    "analysis/window-1-contact-1.jpg": {
+      "sha256": "c23b99e7e4afe869db6faf8822b184e41136f70fa0fb4b550c4894b62178122a",
+      "size": 713276
+    },
+    "analysis/window-1-contact-2.jpg": {
+      "sha256": "3f3d2067d1f072b333ab0169c0cdb6b3404713b50e7ed2e7dd6f7fc6960bc409",
+      "size": 744697
+    },
+    "analysis/window-1-contact-3.jpg": {
+      "sha256": "ac9043f459bca919230313279660fdf643d25ada18b8b69a35657b51d3d9ac58",
+      "size": 745578
+    },
+    "analysis/window-1-contact-4.jpg": {
+      "sha256": "57b4948603fc648e77b91281dfcba9426c05b751ebfd7a5e2daef7aea863edc2",
+      "size": 188502
+    },
+    "analysis/window-2-contact-1.jpg": {
+      "sha256": "0afb359a42681fb246492a3af87c2d4c982cf47716e415b15c0feddee8678b16",
+      "size": 758418
+    },
+    "analysis/window-2-contact-2.jpg": {
+      "sha256": "e67dc424684dc92cd21bf543d8cb523e9d63b10ad79a0d4e738747649f201279",
+      "size": 749253
+    },
+    "analysis/window-2-contact-3.jpg": {
+      "sha256": "33482d96fb1bfa28f6c90768e6d5ef883962857778d1bbb9920b52bbe4949d79",
+      "size": 238301
+    },
+    "analysis/window-3-contact-1.jpg": {
+      "sha256": "bcb49a70fcd036c835c98b4e35b5ba1368302d027390122f67159b13e0777ab0",
+      "size": 747055
+    },
+    "analysis/window-3-contact-2.jpg": {
+      "sha256": "5ac09c5627afb599e38fa7669471fa4d3c4aa2f8f7f2979207c3bdb2ca0d6bdd",
+      "size": 790303
+    },
+    "analysis/window-3-contact-3.jpg": {
+      "sha256": "aee32f5c45f266b9d252fb08f54d8f940279ca54084b2a857b46051bb52454c3",
+      "size": 254443
+    },
+    "analysis/finger-detail-1.jpg": {
+      "sha256": "68926e79ea19f133ec678fb70c3f3bdda3821d43c8afc66319439bea815b46f8",
+      "size": 281003
+    },
+    "analysis/finger-detail-2.jpg": {
+      "sha256": "0fa2e1deee86f6fbdb56753e1f881b140308196e1b1d83d05b1e533380332cad",
+      "size": 291993
+    },
+    "analysis/finger-detail-3.jpg": {
+      "sha256": "719db6fdb208be67b088b3858c9dff59ad542c5e64c8e61e12b1c44523be1d56",
+      "size": 295060
+    },
+    "analysis/window-1-stderr.txt": {
+      "sha256": "fa84edb18809fe1611d6d9aaaeefc30fb7c175d100cb0ab5718547811c906834",
+      "size": 22531
+    },
+    "analysis/window-2-stderr.txt": {
+      "sha256": "9f129070169bf6bd7e2deb89500ca06852111061004b9fbe6f5009890eee8245",
+      "size": 16606
+    },
+    "analysis/window-3-stderr.txt": {
+      "sha256": "0da2a83778dcc29dee7505851abfde8202e5dc487163a1ad05d6f1a9c9a2207c",
+      "size": 16605
+    },
+    "analysis/extraction-record.json": {
+      "sha256": "a1bba7523e8171cd4b847adb40c28f06e0be1a63f5fb7f1b50364668fbcb90e2",
+      "size": 40061
+    },
+    "owner-marked-finger.png": {
+      "sha256": "77860b36cf1eb88a1b4c4ddbe675f55a95db7ca5dcd11674855518b44e3b8949",
+      "size": 773541
+    },
+    "operator-harness/measure-r21-owner-identified-finger.py": {
+      "sha256": "a73c7c387539127b5ee6978688008e809f4e4e6747f93033eda10c4f8a866282",
+      "size": 2798
+    },
+    "root-review/agy-remediation-r21-finger-timing-review-20260929.json": {
+      "sha256": "573256252d2a1d7e9cdb2326c59f0e493a5eb96b833c23596165a24851e71ddf",
+      "size": 4314
+    }
+  },
+  "all_extracted_frame_hashes_verified": true,
+  "timing_arithmetic_verified": true,
+  "owner_action_identity_confirmed": true,
+  "onset_selection": "manual_visual_estimate",
+  "scope": "Owner-marked screenshot, 15 key frames, sheets covering 126 extracted frames (125 unique original frames), enlarged finger details, PTS logs, extraction record, helper and review. Original video retained in prior sealed video02 archive."
+}
