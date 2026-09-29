@@ -1,0 +1,586 @@
+{
+  "run_id": "20260928-agy-remediation-r20",
+  "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+  "reviewer": "Codex operator, visual evidence review",
+  "recorded_at": "2026-09-29T06:12:15.693294+00:00",
+  "classification": "supplemental_video04_c2_display_gate_review",
+  "ranking_eligible": false,
+  "product_pass": false,
+  "operator_product_edits": false,
+  "hardware_accessed_during_this_review": false,
+  "media": {
+    "run_id": "20260928-agy-remediation-r20",
+    "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+    "ranking_eligible": false,
+    "product_pass": false,
+    "operator_product_edits": false,
+    "original_path": "C:\\Users\\이광진\\Documents\\카카오톡 받은 파일\\KakaoTalk_20260929_150711023.mp4",
+    "original_and_copy_sha256": "3ec42fd9a2152f461124efccbce8b0a1893bdb9cd0ed820e0ad16934a7f57980",
+    "original_size": 18126966,
+    "duration_seconds": 38.96,
+    "sampling": "2fps approximately0.25s+n*0.5; sampled frames alone do not prove every-frame continuous stability or300ms BOOT timing",
+    "frame_hashes": {
+      "frame-001.jpg": "69168a01d984257d1c3b836f7dc284fad287b41ba32794d6ca78afe713758e7b",
+      "frame-002.jpg": "3f562ac059c6ee097ae523947e47c98c0372bdef264fe915305e2d0e268135e0",
+      "frame-003.jpg": "a2a79d9f844e07a3ec2e7b123fc07fb6442f94c5b82fb03aa9901a57863290f2",
+      "frame-004.jpg": "8099025cb6a192822ffeef9239ca31346f1e2acc8b8e8e2d2604fe7152d02c0f",
+      "frame-005.jpg": "6b9933c9d60e3ff50a2a0498760d1ed303dfc5dca875a40cc1f7d990ce45fa90",
+      "frame-006.jpg": "6915b3949e9226b52bad2a9caa2a45ca9580b01968e5f2242681ac4a07524c99",
+      "frame-007.jpg": "1e12ca651eb58a377a879d494a50514401e6c87d1f1d486a4274b3c3cc2f76cc",
+      "frame-008.jpg": "81c801979ea88e4dfb72e338163a503f61a2132aa6646d84778cccdae0ef8f79",
+      "frame-009.jpg": "9d8800b572c058e88181de03da95d8615128c7dfd57d1ae9295a30207b49c7b2",
+      "frame-010.jpg": "9beecd41cba2957245664eda10c784b71fc2b44dfabd5489c44787748d575b58",
+      "frame-011.jpg": "9d9083c19d1c42078e6d56a840a41ec67b34594f3f7f6a223e23b176cd5b9057",
+      "frame-012.jpg": "ae5dc9b6b54edba928e85495a080055b3679b6ca8329d995255900699560c084",
+      "frame-013.jpg": "ed46037025f35976d27458c8b72dd3fadec0f8714850fecc38174bdf475b7fae",
+      "frame-014.jpg": "0cb4a0ba9bf56c8bacc2ae10a06f87f37d2dfbf555e0766e84c6b10cfd98b891",
+      "frame-015.jpg": "df35f09371a9184134121a8215a8280fd125993bce6ac9826f5adbc047c8bfe1",
+      "frame-016.jpg": "28b59a96f7cc9d1ed1f00b01326c6a2116729915eebe5c3a159dcb94845a4942",
+      "frame-017.jpg": "28d4f8eb3052579d857c9e24c01a3f9ed091785e02f65ece4359f5862254e466",
+      "frame-018.jpg": "6427dce290de946d0cf62ce5da720124c6e86481767189bcc27cae04dd9a3ed1",
+      "frame-019.jpg": "fa2218f9729eba5c66f7d68d27f2570fe3a94f031b34930012c2fe9d8848d1ed",
+      "frame-020.jpg": "2af2d362a8dbf4f112a4af66314cba113229cfc7d451a1e0e564cc4792ade661",
+      "frame-021.jpg": "f731b01d1e141e3a186804346813edcf4a071a4f0bd10e9e7f0bfdf495cb5463",
+      "frame-022.jpg": "e66e2056e5b69fa62c919d193894143dbc82fd91fc6adf20c579c94c7d791e38",
+      "frame-023.jpg": "80965ddb6256866a54b0ad9c8aaaa9338adb2ea410e87854bb85ee63259688a6",
+      "frame-024.jpg": "b5563d76cec5cc83d9942d0a36bacffa85da5817ee4d26bd7538c9828002bc69",
+      "frame-025.jpg": "63cf83768e1a56ec59c407a8064c808d5ae766a15c91dfa45982f1c03192c305",
+      "frame-026.jpg": "c2dabdbb8be123ac43e8bc745b368bf9dec9954ae1082bad55e390eacb5c810e",
+      "frame-027.jpg": "1042ef1bc692d4e521bd66a36e509b456c0e0c238bd12939c60331e2fab39873",
+      "frame-028.jpg": "a2717aa479c980a551e42fc20e8d2ee39d328548606c04fc91a2858295b3f21f",
+      "frame-029.jpg": "86bc1eeb6e06a1b820bdcf149795ed965f262e6aa3b1651b38f0a63c39a29ca7",
+      "frame-030.jpg": "6f2d621e4506257bfbbd7de3b828770b2ee1da8a76543264a55e1f362d037bf6",
+      "frame-031.jpg": "0474bd7d7facd50c60f0b2ea203fdda46762d6f2b40578bcf20b9a9a58d663de",
+      "frame-032.jpg": "9bff04bcb9ac5c05a8b6ddc3eafb9313d6eabe575bfd48bb667b38087eaa6e2f",
+      "frame-033.jpg": "385c2610395e0e6bb5ed15e269a67390d11c82505e57a10d0f347896ff02a4b5",
+      "frame-034.jpg": "17c8dab42ba5d154f2b902d4be38e26b03ae6bba70c73f2a2127161051f8f584",
+      "frame-035.jpg": "c8bcdbf2c468fba1ae1ea0a0b4531adbd0e6fe0920f5de549ba7bd6e75294fbe",
+      "frame-036.jpg": "743de88dd043c9703ba7c0a4c774e61c68cb346ec59d371f7bf61ae2b9366b07",
+      "frame-037.jpg": "35de67d92f81f60138245464ed615641b44e9780564a6db36be10ce213e040e5",
+      "frame-038.jpg": "c56f34996dbaaa1982df4bffe2b79ac5f4aaf9e3377e613f6cac650a91ab0efe",
+      "frame-039.jpg": "c396290a7e6ca4c04936967ae3f201f47fee54481b6d8b38e8537d80c1b1da3f",
+      "frame-040.jpg": "9c436f00693f0f3a8ce4f8415f6edda21f56550484855711ca9c0ced1a5ad85e",
+      "frame-041.jpg": "ffd6e1d4366e53aabd368eda1e7667858dc16237b843128b54dcf93e6f146960",
+      "frame-042.jpg": "7eba556aaed1d5a91034ad1b074036fbbf009980e39d433643f9aa286e25f5ee",
+      "frame-043.jpg": "a519c7318077c4c7f43b92ee3461b8649d70bcee17c847ce3d195f4a2699133f",
+      "frame-044.jpg": "6028ed0b4c440fe5035e85c35b54b81f513aa79eea3c16954ac2af6092a4cd70",
+      "frame-045.jpg": "c654e264c5e132af9103b65f39f8325ad2f64e7f81fd1e4b96c58d03029f598f",
+      "frame-046.jpg": "a6490cf355459abec25942cdc781f467077ca3354b5aa652d8b5784a72a2857e",
+      "frame-047.jpg": "5e9dc165c9f83888abd96a9e55d033ee86418ed9a54b7261eb88b25169a19bb3",
+      "frame-048.jpg": "d4685df493f09ef81bc805428730fabe58ae273f3e37a05848895147b0e5da48",
+      "frame-049.jpg": "d91fe0a54e271f65aa0a240ea97b2eec7bd26144f01eec8a6848b073146b45a6",
+      "frame-050.jpg": "f95585c3fd7fb253613edacfe83eadd0744e3d731f6177dcba99149e8dd22c14",
+      "frame-051.jpg": "802be9beb0907040fcb1ca8215853604a95fa5c6f25607b952c7020dfc7752ce",
+      "frame-052.jpg": "a6cdaaf3d059e49c5f5a49ce8872475574f852d475f67729cd4368193496d1b6",
+      "frame-053.jpg": "2629d235ce5b27f826c7bb5e74866f2367eacd71916d5c2dc35423da9bfca025",
+      "frame-054.jpg": "b9f627d9dcea10ecc5d15329c0a3e4b9d9d61fadf2c7c11dcb95f3533dcd7d57",
+      "frame-055.jpg": "a6c0a591fb29bbd0a95a61e8a06ea7f656d90dfa7e520dffc18f782333fe4f96",
+      "frame-056.jpg": "e2bf9e3a6b608a3912a4dbf6ef752c022ad237917e7907fe35c3cd93d9e3ae30",
+      "frame-057.jpg": "7fd19b51a83a46c35e48d5d95173f7e2bdf0f9c6b3d23c064d8c15ad79dc7b89",
+      "frame-058.jpg": "ac2561fc8d690a29e4981c04cb5d1ec2bce57043a295c3812277d56cdb6f2891",
+      "frame-059.jpg": "8326f3231a4990682ca76a49153c1756bccaf39383dd0613cbf96b264368c29e",
+      "frame-060.jpg": "b0939b24d33711a33dd7a63cb7393aeb1303e92bc63ce9ecb0ddcdf07e2641dd",
+      "frame-061.jpg": "67e8495cb17bcdcfae7a8fa4b7aec572e2caf9b51699cf2716b2caa888249563",
+      "frame-062.jpg": "ec8f9aa3483052176d8b5d740657e32890fed867d2f4ff6a5543b87eee33a09e",
+      "frame-063.jpg": "275ee546626c5f723f5fb0894c63703956459c61efcd67d517e81447a4cda8f4",
+      "frame-064.jpg": "3ebf481f8001347aed794ee008f506c28675200e3baf974166e8ada7efdd24c8",
+      "frame-065.jpg": "2e6cd194ad295fd408da55ee1c3fc0519b6b9981caf81b3b4fa05b26e4f9e38b",
+      "frame-066.jpg": "f0ca26336513a21220d900b0eae7048f832ba04a876c8b5ccf3795502e7f0af7",
+      "frame-067.jpg": "6ec1e304914b16ac9acf906c3f58704b60ccfbfb57b43864359a7592c49ed331",
+      "frame-068.jpg": "2409b56c9a680683bed8ea23d16faee18a4cf9b35921411f5432a094f522ca09",
+      "frame-069.jpg": "6ed3c029c883bfd6138b005ffd96f59015c9a7e8dd6ea193e05201e67402e96e",
+      "frame-070.jpg": "4147aec4966aebdb140bd0ec094ac3ebbd2ca92432a1c40251dedf7d5c7556c6",
+      "frame-071.jpg": "01bed2dff6959da4dcfe46f6c90eb196bf48357c04c7a22bc6a69bfd143f6eb7",
+      "frame-072.jpg": "daa76385fe09783c0f134cade9b94732685ab75638316a71f35955d5b5541950",
+      "frame-073.jpg": "255c44ac53024533fb519645c7243f4f9da58c8cd2790b97eff89eb1499d2499",
+      "frame-074.jpg": "97a39a83aebb8ed9e537e9e77462e4d32c02c8f522f2002bcdeb2a68e0f38cee",
+      "frame-075.jpg": "1a0563d57d7a04a6280c2cccb62cd98521fc7940ff6cc74981adad2d4541232a",
+      "frame-076.jpg": "060198fb71f2966b6a8e8917ffcd7ea79f708896b2060b90bab458543931b213",
+      "frame-077.jpg": "a4953e96a36961e957d0bad7c4c0a9fc3769bc46655bd5490d681c9a6d2d767a",
+      "frame-078.jpg": "924a891035e6fe7045464bfde9a2afdad3d694654089415be72e7da262916637"
+    },
+    "contact_sheet_hashes": {
+      "contact-sheet-01.jpg": "2f56fdac7f429ef9a093a06dab251a383ad7dc24ef40a3dfe5ace7ee59dec325",
+      "contact-sheet-02.jpg": "e3363411ce59880b9474df54ea369393da705da6edd3ce9eb39402e838cc01e6",
+      "contact-sheet-03.jpg": "415fe149e8b7a9e74be1353eeac6f96bda6d70914832aeaec0428528eb999d6f",
+      "contact-sheet-04.jpg": "9914bfe94cee9b5542b130e73c65ff5aa1e49aa3fcbe3b7924147fef59a854cd"
+    },
+    "ffmpeg_executable_sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+    "extraction_argv": [
+      "C:\\Espressif\\tmp\\codex-video-tools\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+      "-hide_banner",
+      "-i",
+      "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\video.mp4",
+      "-vf",
+      "fps=2,scale=1280:-2",
+      "-q:v",
+      "2",
+      "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-%03d.jpg"
+    ]
+  },
+  "observations": [
+    "Original single 38.96s clip shows lit LCD during normal BOOT screen changes and board rotation; no visible restart/waiting/counter-reset episode.",
+    "Usage screen shows 80% remaining and 20% used, scheduled reset, observed source time and STALE; other source/provider selection is visible.",
+    "Global screen shows codex-resets.com, latest reset 2026-09-08T01:56:00 UTC and fetched 2026-09-10T16:54:07Z; displayed elapsed advances from 2d14h59m to 2d15h0m.",
+    "Diagnostic screen shows Frame Sequence #28, 1 accepted / 0 dropped, CONNECTED, validated & stored, native serial cdm/1; physical restoration after the previously recorded send is now visible.",
+    "Three screen layouts have no observed software clipping when full LCD is in camera; initial camera framing/brief hand occlusion are recorded separately.",
+    "Physical 180-degree turn and subsequent content orientation adjustment are visible; IMU quantitative noise immunity remains unmeasured."
+  ],
+  "c2": {
+    "verdict": "pass",
+    "scope": "Original contract basic lit-LCD >=30s and three-screen layout output, assessed from this single clip with previous boot/build identity records. No boot timestamp to first display measurement claimed.",
+    "evidence_duration_seconds": 38.96,
+    "contract_refs": [
+      "docs/PRODUCT_CONTRACT.md:296",
+      "docs/PRODUCT_CONTRACT.md:297",
+      "docs/experiments/evaluation-contract.md:97"
+    ],
+    "stationary_request_correction": "Earlier no-button/no-rotation stationary filming request was an operator evidence collection method, not an additional contractual pass criterion. Normal BOOT/IMU operation does not invalidate basic C2 LCD-on evidence.",
+    "limits": "Video and coarse analysis do not certify absence of sub-frame flicker, detailed tearing, BOOT debounce latency or receive-to-LCD latency. Hand briefly partly obscures display near27.53s; still-lit edges/text and adjacent frames observed."
+  },
+  "flag_review": {
+    "frame_index": 826,
+    "nominal_seconds": 27.533333333333335,
+    "coarse_result": "Only broad color candidate, not an automatic defect or pass result.",
+    "direct_visual_result": "Hand motion obscures screen; visible edge/text remain lit, same reset data before and after. No LCD blanking or reboot established.",
+    "followup_decoded_indices": [
+      823,
+      824,
+      825,
+      826,
+      827,
+      828,
+      829
+    ],
+    "followup_argv": [
+      "C:/Espressif/tmp/codex-video-tools/imageio_ffmpeg/binaries/ffmpeg-win-x86_64-v7.1.exe",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-i",
+      "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\video.mp4",
+      "-vf",
+      "select=between(n\\,823\\,829),scale=800:-2",
+      "-fps_mode",
+      "passthrough",
+      "-q:v",
+      "2",
+      "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\flag-followup-%02d.jpg"
+    ]
+  },
+  "new_product_defect_established": false,
+  "physical_lcd_restoration_directly_observed": true,
+  "fixture_provenance": "Unchanged fixed offline fixture; not live quota. Source age/STale fields remain truthful.",
+  "remaining_unverified": [
+    "BOOT debounce-to-LCD <=300ms",
+    "Receive-to-LCD <=2s",
+    "Actual USB cable disconnect/re-enumeration with separate maintained board power",
+    "Final blind/cohort-controlled G1-G6 and F9 scoring including physical IMU noise stability"
+  ],
+  "source_changes_since_independent_build": {},
+  "binary_changes_since_independent_build": {},
+  "previous_sealed_records": [
+    {
+      "path": "agy-remediation-r20-hardware-artifacts-20260929.zip",
+      "sha256": "2d058c873ec124a5060108dcd6c0af885c545d79862a815292ef5dcd2d061449"
+    },
+    {
+      "path": "agy-remediation-r20-second-rst-artifacts-20260929.zip",
+      "sha256": "7d3f61dcc87a07015b9113b7ce0e4fb8d8d3aea9c7e125486ec03baab0e4698b"
+    },
+    {
+      "path": "agy-remediation-r20-hardware-review-20260929.json",
+      "sha256": "667515600461139ef1fabb82a561651c1bb5dc595661ab228ef3355cb2cf7281"
+    },
+    {
+      "path": "agy-remediation-r20-rst-video-supplement-20260929.json",
+      "sha256": "fcbda8b8cf7aa49e29928f08485cbef5c223263d6fd841facec4bc8ec9fc4ba4"
+    },
+    {
+      "path": "agy-remediation-r20-second-rst-supplement-20260929.json",
+      "sha256": "89a6678f5060c22b38cb7b204b1399bb7d8384d5db039ded805960cc8b0ca39b"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\all-frame-decode-stderr.txt",
+      "sha256": "9c5280c371585cf87e6e5df81dfe8b3bad0124dcdbe50c5a5a5bfaeebcddc118"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\all-frame-display-presence.json",
+      "sha256": "d3190f048cfb5e450a29c2a30eeaa8846e71ff46edae6f80d04f810c001b6f29"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\contact-sheet-01.jpg",
+      "sha256": "2f56fdac7f429ef9a093a06dab251a383ad7dc24ef40a3dfe5ace7ee59dec325"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\contact-sheet-02.jpg",
+      "sha256": "e3363411ce59880b9474df54ea369393da705da6edd3ce9eb39402e838cc01e6"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\contact-sheet-03.jpg",
+      "sha256": "415fe149e8b7a9e74be1353eeac6f96bda6d70914832aeaec0428528eb999d6f"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\contact-sheet-04.jpg",
+      "sha256": "9914bfe94cee9b5542b130e73c65ff5aa1e49aa3fcbe3b7924147fef59a854cd"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\extraction-stderr.txt",
+      "sha256": "a9872db68183d5fa6907560202ad086435e342dcca5b439fe0c522289904d4cb"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\extraction-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\flag-followup-01.jpg",
+      "sha256": "d6d3a74d44e822c61d851f7e77625e325e9833ce28eaf7589b25edd76ba8d55d"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\flag-followup-02.jpg",
+      "sha256": "b536ed324017db34e26e39b5c6bc3ecc0cd5f8010bb698391b01e826c5e8b19e"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\flag-followup-03.jpg",
+      "sha256": "07df2597d90a0324eed2bcd7a346d8d13bae1fd666cc7b4919f9caa32b57f260"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\flag-followup-04.jpg",
+      "sha256": "dbe7d6f5a512df723eb877ddd3425f0bcc706b0b2cd080c32ac9f5fcf114ce95"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\flag-followup-05.jpg",
+      "sha256": "a9215e17acdaeda6acc27de73907bd83fc3c9aacb8685f2cd1632bb3c4bcf049"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\flag-followup-06.jpg",
+      "sha256": "8e68cf0d36edfd15468e2b39a3c9433dd2bbdae7cdfdc4e5f2920027b231be03"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\flag-followup-07.jpg",
+      "sha256": "464a73a0b4eb05186cfff3bcaf739d03d8604dac62ebdf48c521f80a8e5cfc46"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-001.jpg",
+      "sha256": "69168a01d984257d1c3b836f7dc284fad287b41ba32794d6ca78afe713758e7b"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-002.jpg",
+      "sha256": "3f562ac059c6ee097ae523947e47c98c0372bdef264fe915305e2d0e268135e0"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-003.jpg",
+      "sha256": "a2a79d9f844e07a3ec2e7b123fc07fb6442f94c5b82fb03aa9901a57863290f2"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-004.jpg",
+      "sha256": "8099025cb6a192822ffeef9239ca31346f1e2acc8b8e8e2d2604fe7152d02c0f"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-005.jpg",
+      "sha256": "6b9933c9d60e3ff50a2a0498760d1ed303dfc5dca875a40cc1f7d990ce45fa90"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-006.jpg",
+      "sha256": "6915b3949e9226b52bad2a9caa2a45ca9580b01968e5f2242681ac4a07524c99"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-007.jpg",
+      "sha256": "1e12ca651eb58a377a879d494a50514401e6c87d1f1d486a4274b3c3cc2f76cc"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-008.jpg",
+      "sha256": "81c801979ea88e4dfb72e338163a503f61a2132aa6646d84778cccdae0ef8f79"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-009.jpg",
+      "sha256": "9d8800b572c058e88181de03da95d8615128c7dfd57d1ae9295a30207b49c7b2"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-010.jpg",
+      "sha256": "9beecd41cba2957245664eda10c784b71fc2b44dfabd5489c44787748d575b58"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-011.jpg",
+      "sha256": "9d9083c19d1c42078e6d56a840a41ec67b34594f3f7f6a223e23b176cd5b9057"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-012.jpg",
+      "sha256": "ae5dc9b6b54edba928e85495a080055b3679b6ca8329d995255900699560c084"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-013.jpg",
+      "sha256": "ed46037025f35976d27458c8b72dd3fadec0f8714850fecc38174bdf475b7fae"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-014.jpg",
+      "sha256": "0cb4a0ba9bf56c8bacc2ae10a06f87f37d2dfbf555e0766e84c6b10cfd98b891"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-015.jpg",
+      "sha256": "df35f09371a9184134121a8215a8280fd125993bce6ac9826f5adbc047c8bfe1"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-016.jpg",
+      "sha256": "28b59a96f7cc9d1ed1f00b01326c6a2116729915eebe5c3a159dcb94845a4942"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-017.jpg",
+      "sha256": "28d4f8eb3052579d857c9e24c01a3f9ed091785e02f65ece4359f5862254e466"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-018.jpg",
+      "sha256": "6427dce290de946d0cf62ce5da720124c6e86481767189bcc27cae04dd9a3ed1"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-019.jpg",
+      "sha256": "fa2218f9729eba5c66f7d68d27f2570fe3a94f031b34930012c2fe9d8848d1ed"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-020.jpg",
+      "sha256": "2af2d362a8dbf4f112a4af66314cba113229cfc7d451a1e0e564cc4792ade661"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-021.jpg",
+      "sha256": "f731b01d1e141e3a186804346813edcf4a071a4f0bd10e9e7f0bfdf495cb5463"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-022.jpg",
+      "sha256": "e66e2056e5b69fa62c919d193894143dbc82fd91fc6adf20c579c94c7d791e38"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-023.jpg",
+      "sha256": "80965ddb6256866a54b0ad9c8aaaa9338adb2ea410e87854bb85ee63259688a6"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-024.jpg",
+      "sha256": "b5563d76cec5cc83d9942d0a36bacffa85da5817ee4d26bd7538c9828002bc69"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-025.jpg",
+      "sha256": "63cf83768e1a56ec59c407a8064c808d5ae766a15c91dfa45982f1c03192c305"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-026.jpg",
+      "sha256": "c2dabdbb8be123ac43e8bc745b368bf9dec9954ae1082bad55e390eacb5c810e"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-027.jpg",
+      "sha256": "1042ef1bc692d4e521bd66a36e509b456c0e0c238bd12939c60331e2fab39873"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-028.jpg",
+      "sha256": "a2717aa479c980a551e42fc20e8d2ee39d328548606c04fc91a2858295b3f21f"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-029.jpg",
+      "sha256": "86bc1eeb6e06a1b820bdcf149795ed965f262e6aa3b1651b38f0a63c39a29ca7"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-030.jpg",
+      "sha256": "6f2d621e4506257bfbbd7de3b828770b2ee1da8a76543264a55e1f362d037bf6"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-031.jpg",
+      "sha256": "0474bd7d7facd50c60f0b2ea203fdda46762d6f2b40578bcf20b9a9a58d663de"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-032.jpg",
+      "sha256": "9bff04bcb9ac5c05a8b6ddc3eafb9313d6eabe575bfd48bb667b38087eaa6e2f"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-033.jpg",
+      "sha256": "385c2610395e0e6bb5ed15e269a67390d11c82505e57a10d0f347896ff02a4b5"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-034.jpg",
+      "sha256": "17c8dab42ba5d154f2b902d4be38e26b03ae6bba70c73f2a2127161051f8f584"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-035.jpg",
+      "sha256": "c8bcdbf2c468fba1ae1ea0a0b4531adbd0e6fe0920f5de549ba7bd6e75294fbe"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-036.jpg",
+      "sha256": "743de88dd043c9703ba7c0a4c774e61c68cb346ec59d371f7bf61ae2b9366b07"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-037.jpg",
+      "sha256": "35de67d92f81f60138245464ed615641b44e9780564a6db36be10ce213e040e5"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-038.jpg",
+      "sha256": "c56f34996dbaaa1982df4bffe2b79ac5f4aaf9e3377e613f6cac650a91ab0efe"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-039.jpg",
+      "sha256": "c396290a7e6ca4c04936967ae3f201f47fee54481b6d8b38e8537d80c1b1da3f"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-040.jpg",
+      "sha256": "9c436f00693f0f3a8ce4f8415f6edda21f56550484855711ca9c0ced1a5ad85e"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-041.jpg",
+      "sha256": "ffd6e1d4366e53aabd368eda1e7667858dc16237b843128b54dcf93e6f146960"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-042.jpg",
+      "sha256": "7eba556aaed1d5a91034ad1b074036fbbf009980e39d433643f9aa286e25f5ee"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-043.jpg",
+      "sha256": "a519c7318077c4c7f43b92ee3461b8649d70bcee17c847ce3d195f4a2699133f"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-044.jpg",
+      "sha256": "6028ed0b4c440fe5035e85c35b54b81f513aa79eea3c16954ac2af6092a4cd70"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-045.jpg",
+      "sha256": "c654e264c5e132af9103b65f39f8325ad2f64e7f81fd1e4b96c58d03029f598f"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-046.jpg",
+      "sha256": "a6490cf355459abec25942cdc781f467077ca3354b5aa652d8b5784a72a2857e"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-047.jpg",
+      "sha256": "5e9dc165c9f83888abd96a9e55d033ee86418ed9a54b7261eb88b25169a19bb3"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-048.jpg",
+      "sha256": "d4685df493f09ef81bc805428730fabe58ae273f3e37a05848895147b0e5da48"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-049.jpg",
+      "sha256": "d91fe0a54e271f65aa0a240ea97b2eec7bd26144f01eec8a6848b073146b45a6"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-050.jpg",
+      "sha256": "f95585c3fd7fb253613edacfe83eadd0744e3d731f6177dcba99149e8dd22c14"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-051.jpg",
+      "sha256": "802be9beb0907040fcb1ca8215853604a95fa5c6f25607b952c7020dfc7752ce"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-052.jpg",
+      "sha256": "a6cdaaf3d059e49c5f5a49ce8872475574f852d475f67729cd4368193496d1b6"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-053.jpg",
+      "sha256": "2629d235ce5b27f826c7bb5e74866f2367eacd71916d5c2dc35423da9bfca025"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-054.jpg",
+      "sha256": "b9f627d9dcea10ecc5d15329c0a3e4b9d9d61fadf2c7c11dcb95f3533dcd7d57"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-055.jpg",
+      "sha256": "a6c0a591fb29bbd0a95a61e8a06ea7f656d90dfa7e520dffc18f782333fe4f96"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-056.jpg",
+      "sha256": "e2bf9e3a6b608a3912a4dbf6ef752c022ad237917e7907fe35c3cd93d9e3ae30"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-057.jpg",
+      "sha256": "7fd19b51a83a46c35e48d5d95173f7e2bdf0f9c6b3d23c064d8c15ad79dc7b89"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-058.jpg",
+      "sha256": "ac2561fc8d690a29e4981c04cb5d1ec2bce57043a295c3812277d56cdb6f2891"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-059.jpg",
+      "sha256": "8326f3231a4990682ca76a49153c1756bccaf39383dd0613cbf96b264368c29e"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-060.jpg",
+      "sha256": "b0939b24d33711a33dd7a63cb7393aeb1303e92bc63ce9ecb0ddcdf07e2641dd"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-061.jpg",
+      "sha256": "67e8495cb17bcdcfae7a8fa4b7aec572e2caf9b51699cf2716b2caa888249563"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-062.jpg",
+      "sha256": "ec8f9aa3483052176d8b5d740657e32890fed867d2f4ff6a5543b87eee33a09e"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-063.jpg",
+      "sha256": "275ee546626c5f723f5fb0894c63703956459c61efcd67d517e81447a4cda8f4"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-064.jpg",
+      "sha256": "3ebf481f8001347aed794ee008f506c28675200e3baf974166e8ada7efdd24c8"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-065.jpg",
+      "sha256": "2e6cd194ad295fd408da55ee1c3fc0519b6b9981caf81b3b4fa05b26e4f9e38b"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-066.jpg",
+      "sha256": "f0ca26336513a21220d900b0eae7048f832ba04a876c8b5ccf3795502e7f0af7"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-067.jpg",
+      "sha256": "6ec1e304914b16ac9acf906c3f58704b60ccfbfb57b43864359a7592c49ed331"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-068.jpg",
+      "sha256": "2409b56c9a680683bed8ea23d16faee18a4cf9b35921411f5432a094f522ca09"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-069.jpg",
+      "sha256": "6ed3c029c883bfd6138b005ffd96f59015c9a7e8dd6ea193e05201e67402e96e"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-070.jpg",
+      "sha256": "4147aec4966aebdb140bd0ec094ac3ebbd2ca92432a1c40251dedf7d5c7556c6"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-071.jpg",
+      "sha256": "01bed2dff6959da4dcfe46f6c90eb196bf48357c04c7a22bc6a69bfd143f6eb7"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-072.jpg",
+      "sha256": "daa76385fe09783c0f134cade9b94732685ab75638316a71f35955d5b5541950"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-073.jpg",
+      "sha256": "255c44ac53024533fb519645c7243f4f9da58c8cd2790b97eff89eb1499d2499"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-074.jpg",
+      "sha256": "97a39a83aebb8ed9e537e9e77462e4d32c02c8f522f2002bcdeb2a68e0f38cee"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-075.jpg",
+      "sha256": "1a0563d57d7a04a6280c2cccb62cd98521fc7940ff6cc74981adad2d4541232a"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-076.jpg",
+      "sha256": "060198fb71f2966b6a8e8917ffcd7ea79f708896b2060b90bab458543931b213"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-077.jpg",
+      "sha256": "a4953e96a36961e957d0bad7c4c0a9fc3769bc46655bd5490d681c9a6d2d767a"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\frame-078.jpg",
+      "sha256": "924a891035e6fe7045464bfde9a2afdad3d694654089415be72e7da262916637"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\media-record.json",
+      "sha256": "c7ae2d0f36b44ece7792bf7c4700418ac9c83375aaf68cee546aa2d315e96b40"
+    },
+    {
+      "path": "C:\\Espressif\\benchmark-remediation\\hardware-r20-20260929\\user-media-04\\video.mp4",
+      "sha256": "3ec42fd9a2152f461124efccbce8b0a1893bdb9cd0ed820e0ad16934a7f57980"
+    }
+  ]
+}

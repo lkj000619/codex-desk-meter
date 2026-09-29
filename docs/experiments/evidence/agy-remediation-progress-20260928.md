@@ -644,3 +644,25 @@ LCD가 다시 표시됐는지는 새 영상으로 직접 확인하지 않았으�
 - [두 번째 사용자 RST·순번 28 재수신 기록](agy-remediation-r20-second-rst-supplement-20260929.json)
 - [두 번째 RST 재수신 원본 archive receipt](agy-remediation-r20-second-rst-artifacts-20260929.json)
 - [두 번째 RST 재수신 원본 자료](agy-remediation-r20-second-rst-artifacts-20260929.zip)
+
+### r20 새 38.96초 영상·값 복구·C2 LCD 유지 판정
+
+사용자가 `KakaoTalk_20260929_150711023.mp4`를 제공했다. 원본 18,126,966 bytes,
+38.96초, SHA256 `3ec42fd9a2152f461124efccbce8b0a1893bdb9cd0ed820e0ad16934a7f57980`을
+복사 검증·보존했다. 78개 반초 sample과 전체 1,168개 decode frame의 거친 화면 색상 검사를 확인했다.
+유일한 후보 frame 826(약 27.53초)은 추가 인접 frame 직접 검토에서 손이 화면을 가린 것으로 확인했다.
+LCD 가장자리/텍스트는 켜져 있고, 손이 지난 뒤 같은 reset 값이 계속 보인다. 소등·재부팅 징후로 판정하지 않는다.
+영상에서 실제 사용량 80% remaining/20% used, 글로벌 reset 시각/출처, 진단 순번 28·1건 수신·0건 dropped,
+CONNECTED·validated/stored·STALE를 직접 확인했다. 반복 BOOT 화면 전환과 IMU 반전 뒤에도 표시가 유지된다.
+고정 offline fixture의 stale/조회 시각이며 새 online quota를 의미하지 않는다.
+
+원래 PRODUCT_CONTRACT 실물 시험과 evaluation-contract C2는 LCD 30초 유지·세 화면 잘림 없음을 요구한다.
+이 영상에서 해당 C2를 pass로 기록한다. 앞서 운영자가 요청한 '버튼 없이 고정'은 촬영 방법이고 계약의
+추가 합격 조건이 아니므로 재촬영을 필수로 요구하지 않는다. 이전 판정/원본은 덮어쓰지 않는다.
+영상 관측은 세밀한 flicker·300ms BOOT·수신→LCD 2s 계측의 증거로 확대하지 않는다.
+물리 입력 timing·USB cable 분리/재열거·정식 G/F9와 IMU 잡음 검증이 남아 전체 product_pass는 false다.
+제품/바이너리 해시는 독립 빌드 보존본 그대로이며 이번 확인 중 보드 송신·reset·flash는 하지 않았다.
+
+- [38.96초 영상·값 복구·C2 판정](agy-remediation-r20-video04-review-20260929.json)
+- [38.96초 원본 영상 archive receipt](agy-remediation-r20-video04-artifacts-20260929.json)
+- [38.96초 원본 영상·검토 자료](agy-remediation-r20-video04-artifacts-20260929.zip)
