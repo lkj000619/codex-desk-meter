@@ -1,0 +1,50 @@
+{
+  "recorded_at_utc": "2026-09-29T07:52:03Z",
+  "run_id": "20260928-agy-remediation-r21",
+  "implementation_commit": "8eb40c0ceb47d1f6585307575a09c7dc74f89d51",
+  "classification": "original_video_pts_timing_reinspection",
+  "ranking_eligible": false,
+  "product_pass": false,
+  "operator_product_edits": false,
+  "frozen_contract_changed": false,
+  "hardware_accessed": false,
+  "additional_recording_requested": false,
+  "owner_statement_verbatim": "300ms·2초 기준을 영상의 시간. 영상을 배속으로 땡긴것이 아니니 영상으로 해당 시간을 측정할 수 있는거 아니니?",
+  "normal_speed_basis": "Owner confirms the supplied video was not sped up.",
+  "method_correction": "Normal-speed video PTS differences can measure two identifiable visible events. Visible physical press to display response can be assessed without requiring an internal debounce timestamp, with its start definition stated. The issue is identifiable event boundaries, not video clock validity. Prior 2fps analysis samples do not represent original frame cadence.",
+  "source_video": {
+    "name": "KakaoTalk_20260929_160043587.mp4",
+    "sha256": "5fb979d0c5f706a93358877c95631e83b0f901a8238fc3ae24f4d2c2cf267fa7",
+    "sealed_archive": "agy-remediation-r21-video01-artifacts-20260929.zip",
+    "sealed_archive_sha256": "1a272490672f19bd35f258e110296b3d3488c910930ae7b52fc534c21ed6879f"
+  },
+  "extraction": {
+    "frames_inspected": 111,
+    "original_frame_windows_inclusive": [[186, 222], [360, 396], [603, 639]],
+    "fps_resampling": false,
+    "pts_source": "FFmpeg select and showinfo with passthrough frame timing",
+    "observed_pts_step_seconds_approx": 0.033333,
+    "external_output": "C:/Espressif/benchmark-remediation/hardware-r21-20260929/video-timing-recheck-20260929",
+    "artifact_archive": "agy-remediation-r21-video-timing-artifacts-20260929.zip"
+  },
+  "visible_transition_brackets": [
+    {"event": "OpenAI to Anthropic provider", "last_old_frame": 204, "last_old_pts_seconds": 6.8, "first_new_frame": 205, "first_new_pts_seconds": 6.833333},
+    {"event": "Usage to global reset page", "last_old_frame": 372, "last_old_pts_seconds": 12.4, "first_changed_frame": 373, "first_changed_pts_seconds": 12.433333, "new_content_frame": 374, "new_content_pts_seconds": 12.466667},
+    {"event": "OpenAI to Anthropic provider", "last_old_frame": 608, "last_old_pts_seconds": 20.266667, "first_new_frame": 609, "first_new_pts_seconds": 20.3}
+  ],
+  "press_start_assessment": {
+    "scope": "Three re-inspected transition windows only",
+    "physical_press_start_identified": false,
+    "reason": "Finger covers the physical switch through the transitions; continuous contact does not establish the exact actuation boundary.",
+    "press_to_display_latency_seconds": null,
+    "boot_300ms_verified": false,
+    "note": "Screen-change brackets do not measure input latency; a clear visible press start could provide a video-based response bound."
+  },
+  "receive_start_assessment": {
+    "packet_receive_event_visible_in_supplied_video": false,
+    "receive_to_display_latency_seconds": null,
+    "receive_to_lcd_2s_verified": false,
+    "reason": "Numeric values and diagnostic sequence numbers are visible after receipt; they do not reveal when that packet arrived. Reset/power recovery is a different, already measured interval."
+  },
+  "preservation": "Existing functional evidence, prior recovery timing, sealed archives and original quantitative ranking are retained; no new product pass claim."
+}
