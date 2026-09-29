@@ -800,3 +800,18 @@ BOOT300ms·physical hold 단일 event·수신→LCD2s·별도 전원 유지 cabl
 archive 생성 단계의 hash 검증은 이미 통과했고, 이후 Unicode escape 비교로 추가 검사를 재실행해
 전체239개 entry·archive SHA·PTS reference·답변 원문·판정 범위를 모두 확인했다. sealed archive와
 제품은 변경하지 않았다. [추가 검사 기록](agy-remediation-r21-video02-verification-20260929.json)을 보존한다.
+
+### r21 전원 유지 USB cable 시험의 장비 제약 반영
+
+사용자는 **“전원을 유지한 usb 재연결 시험의 경우 불가능. 해당 board의 배터리가 없어서 전원을 유지한채로 usb 재연결 시험 불가능.”**이라고 확인했다.
+현재 장비에서 USB cable을 분리하면 전원이 꺼지는 조건은 후속 영상의 관측과도 일치한다.
+전원 유지 물리 cable 제거·재연결 시험은 `not_feasible_in_current_configuration`으로 기록하고
+진행할 작업 목록에서 제외한다. 평가 상태는 `not_run`이며 합격·제품 결함으로 계산하지 않는다.
+USB 재전원 후 값 복구는 이미 직접 관측 완료이며 이 기록과 구분해 유지한다.
+
+제품 코드·시험·바이너리·고정 계약·원래 정량 순위는 변경하지 않았다. 이전 sealed 자료를 보존하고
+사용자 답변과 시험 가능성 판정을 별도 addendum에 기록했다. 전체 `product_pass:false`를 유지한다.
+현재 실행 가능한 남은 검증은 BOOT 정밀 반응 시간·긴 입력 단일 반응, 수신→LCD 정밀 시간,
+정식 G1–G6/F9 및 50cm/조명·IMU 잡음 실물 평가다. 실제 Codex source 연동은 별도 범위다.
+
+- [전원 유지 USB 시험 장비 제약 기록](agy-remediation-r21-usb-test-feasibility-20260929.json)
