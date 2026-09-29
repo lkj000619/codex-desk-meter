@@ -1,0 +1,27 @@
+{
+  "run_id": "20260928-agy-remediation-r21",
+  "classification": "operator_evidence_verification_followup",
+  "ranking_eligible": false,
+  "product_pass": false,
+  "operator_product_edits": false,
+  "first_additional_check_exit_code": 1,
+  "failed_assertion": "UTF8 owner reply compared against a Korean literal passed through the default PowerShell stdin pipeline",
+  "diagnostic": {
+    "inline_expected_ascii_representation": "RST? ???",
+    "utf8_file_ascii_representation": "RST\\ub97c \\ub20c\\ub800\\uc74c",
+    "cause": "PowerShell pipeline replaced the inline Korean literal before Python read it. The UTF8 evidence file retained the exact owner reply.",
+    "diagnostic_exit_code": 0
+  },
+  "operator_sequencing_error": "Commit 6a71ab8 was created without stopping the sequential tool script after the additional check returned nonzero. Archive packaging had already verified all entry hashes. The remaining owner text comparison was then diagnosed and verified with ASCII Unicode escapes.",
+  "corrected_additional_check_exit_code": 0,
+  "checks_verified": [
+    "Video archive SHA256 e0aed7bdd6a4d9aa74f12fac5a02402954e7ce42c41a4aa44fad256a55da3ed1",
+    "All 239 archive entry hashes and ZIP integrity",
+    "All stated reset, power and numeric-transition PTS references exist in captured frame manifests",
+    "Exact UTF8 owner reply RST를 눌렀음",
+    "Recorded source/binary changes empty",
+    "Full product pass, ranking eligibility, receive-to-LCD2s and powered USB cable test remain false"
+  ],
+  "sealed_archive_modified": false,
+  "product_failure_established_by_this_check": false
+}

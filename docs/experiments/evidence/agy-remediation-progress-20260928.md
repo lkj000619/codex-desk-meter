@@ -793,3 +793,10 @@ BOOT300ms·physical hold 단일 event·수신→LCD2s·별도 전원 유지 cabl
 
 - [후속 영상·RST/USB 재전원 직접 복구 검토](agy-remediation-r21-video02-review-20260929.json)
 - [후속 영상 원본·PTS 증거 archive receipt](agy-remediation-r21-video02-artifacts-20260929.json)
+
+운영자의 추가 무결성 검사에서 PowerShell stdin이 inline 한글 기대 문자열을 `RST? ???`로
+바꿔 사용자 답변 비교가 한 번 실패했다. UTF8 원본 답변은 정확했다. 순차 tool script가 이 nonzero에
+멈추지 않아 추가 검사 확인 전에 commit `6a71ab8`을 만든 운영 순서 오류도 기록한다.
+archive 생성 단계의 hash 검증은 이미 통과했고, 이후 Unicode escape 비교로 추가 검사를 재실행해
+전체239개 entry·archive SHA·PTS reference·답변 원문·판정 범위를 모두 확인했다. sealed archive와
+제품은 변경하지 않았다. [추가 검사 기록](agy-remediation-r21-video02-verification-20260929.json)을 보존한다.
