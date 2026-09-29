@@ -750,3 +750,19 @@ RST/USB 복구는 이번 영상에서 조작이 보이지 않는 사용자 관�
 
 - [r21 새 영상 검토·C2 판정·복구 사용자 관찰](agy-remediation-r21-video01-review-20260929.json)
 - [r21 원본 영상 보존 receipt](agy-remediation-r21-video01-artifacts-20260929.json)
+
+### r21 짧은 BOOT 매 입력 기능 반응·USB 재전원 조건 확인
+
+사용자는 1페이지에서 OpenAI Codex → Anthropic Claude로 **매번 공급자가 변경됨**을 확인했다.
+이 전환은 영상에도 있고 production `meter_state_cycle_screen`의 공급자 우선 순환 규칙과 일치한다.
+짧은 입력의 기능 반응을 사용자 확인 완료로 갱신한다. 실제 접점과 debounce 시각·시험 횟수는
+계측하지 않았으므로 정밀 300ms 합격·수치 성공률·긴 hold 단일 반응을 주장하지 않는다.
+영상에 공급자 전환이 없었다는 의미로 이전 입력 횟수 미확정을 해석하지 않는다.
+
+사용자는 USB 분리 시 **“LCD가 꺼졌다가 재연결 후 켜졌음”**을 확인했다. 앞선 값 복구 확인과
+합쳐 이번 시험을 USB 재전원 후 값 복구 사용자 관찰로 기록한다. 별도 전원을 유지한 USB
+통신 단절·재열거 시험은 수행되지 않았다. RST 복구 관찰도 유지한다.
+sealed 원본 영상 검토를 덮어쓰지 않고 별도 addendum에 답변 원문·판정·한계를 보존했다.
+제품 변경·새 AGY 실행·보드 조작 없이 기록만 갱신했으며 전체 product_pass:false와 원래 정량 순위를 유지한다.
+
+- [짧은 BOOT·USB 재전원 조건 사용자 확인](agy-remediation-r21-owner-confirmation-20260929.json)

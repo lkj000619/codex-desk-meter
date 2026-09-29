@@ -1,0 +1,57 @@
+{
+  "run_id": "20260928-agy-remediation-r21",
+  "implementation_commit": "8eb40c0ceb47d1f6585307575a09c7dc74f89d51",
+  "recorded_at": "2026-09-29T07:13:02Z",
+  "classification": "supplemental_owner_confirmation_of_boot_and_power_cycle_recovery",
+  "ranking_eligible": false,
+  "product_pass": false,
+  "operator_product_edits": false,
+  "hardware_accessed_during_this_review": false,
+  "owner_replies_verbatim": {
+    "short_boot": "상단에 openai codex cli냐 앤트로픽 클로드냐 공급자가 매번 변경되냐라고 물어보는게 맞을까? 맞아 변경됨. 1번째 페이지에서 openai codex에서 또 한번 누르면 똑같은 페이지에 앤트로픽 클로드로 그건 영상에서도 나올텐데",
+    "usb_power": "LCD가 꺼졌다가 재연결 후 켜졌음",
+    "previous_recovery": "rst, usb 분리, 재연결 시 값이 돌아옴. \"C:\\Users\\이광진\\Documents\\카카오톡 받은 파일\\KakaoTalk_20260929_160043587.mp4\""
+  },
+  "short_boot": {
+    "verdict": "functional_response_confirmed_by_owner_and_supported_by_video",
+    "meaning": "On dashboard SCREEN1/3, a press changes the selected available provider before advancing to global reset. OpenAI Codex to Anthropic Claude on the same page is an accepted input response.",
+    "every_press_responded_in_owner_observation": true,
+    "documented_attempt_count": null,
+    "measured_success_percentage": null,
+    "debounce_to_display300ms_verified": false,
+    "physical_long_hold_single_event_verified": false,
+    "code_reference": "components/meter/meter_state.c:116",
+    "code_sha256": "e21ad4f4486b68c85b5ff2f4f8f429f0973796e4d1162aa4d4b6ae9b0fe0a8b3",
+    "correction": "Provider transitions were already visible in video. Operator uncertainty concerned obscured contact timing and counting every press; it must not be presented as absence of functional navigation evidence. Owner has now confirmed every observed short press changed provider or screen."
+  },
+  "usb_recovery": {
+    "board_power_lost_on_usb_removal": true,
+    "lcd_power_restored_on_reconnection": true,
+    "values_restored_after_reconnection": true,
+    "evidence_class": "owner_observation",
+    "test_classification": "USB_power_cycle_and_values_recovery",
+    "separate_power_maintained_usb_disconnect_test_performed": false,
+    "restore_latency_measured": false,
+    "continuing_pc_sender_required": true
+  },
+  "rst_recovery": {
+    "values_restored": true,
+    "evidence_class": "previous_owner_observation_on_r21",
+    "restore_latency_measured_on_r21": false
+  },
+  "sealed_video_review_preserved": "agy-remediation-r21-video01-review-20260929.json",
+  "sealed_video_archive": {
+    "path": "agy-remediation-r21-video01-artifacts-20260929.zip",
+    "sha256": "1a272490672f19bd35f258e110296b3d3488c910930ae7b52fc534c21ed6879f",
+    "original_video_sha256": "5fb979d0c5f706a93358877c95631e83b0f901a8238fc3ae24f4d2c2cf267fa7"
+  },
+  "remaining_unverified": [
+    "BOOT debounce-to-display <=300ms",
+    "Physical long hold yields exactly one navigation event",
+    "Receive-to-LCD <=2s",
+    "USB cable disconnect/re-enumeration while separate board power is maintained",
+    "Blinded G1-G6/F9 scoring under controlled lighting/exposure/50cm distance and physical IMU noise assessment"
+  ],
+  "data_scope": "Unchanged fixed offline fixtures; actual Codex account quota collector remains unimplemented.",
+  "experiment_integrity": "No product modification, no new AGY run, no runtime feedback, and no original quantitative ranking change. This addendum updates evidence interpretation without overwriting sealed prior review."
+}
