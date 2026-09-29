@@ -1,0 +1,59 @@
+{
+  "run_id": "20260928-agy-remediation-r20",
+  "implementation_commit": "6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c",
+  "ranking_eligible": false,
+  "product_pass": false,
+  "operator_product_edits": false,
+  "archive": "agy-remediation-r20-second-rst-artifacts-20260929.zip",
+  "sha256": "7d3f61dcc87a07015b9113b7ce0e4fb8d8d3aea9c7e125486ec03baab0e4698b",
+  "bytes": 9756,
+  "entry_count": 11,
+  "entries": {
+    "hardware/after-owner-confirmed-reset-02/device-log.txt": {
+      "sha256": "3f67065a41d2caa0d94042d9e21f8b3087633774389e8659a4587c197387f3ce",
+      "size": 88
+    },
+    "hardware/after-owner-confirmed-reset-02/frame.bin": {
+      "sha256": "387a0abadff100b7ed8ec0a2576b662e0ad9cbbca38d39ac1e5bda46744bddbd",
+      "size": 3962
+    },
+    "hardware/after-owner-confirmed-reset-02/report.json": {
+      "sha256": "3c91d41638464b435fb68a524309c1e6f3dbaf7ef598221a2ad3d5dfaf10e424",
+      "size": 2160
+    },
+    "hardware/after-owner-confirmed-reset-02/stderr.txt": {
+      "sha256": "adae3a2563ba2a17a40efd2a67fa46e014892cd529f3217c514dcc8f32867366",
+      "size": 330
+    },
+    "hardware/after-owner-confirmed-reset-02/stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "sequence-store-snapshot/esp32s3-288485b08518.json": {
+      "sha256": "f72b29720bac64cc3fb6ae724007cf87a9a1e57e8f71e4fdda2a02beb5308b2f",
+      "size": 142
+    },
+    "sequence-store-snapshot/esp32s3-288485b08518.lock": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "sequence-store-snapshot/esp32s3-288485b08518.owner.lock": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size": 0
+    },
+    "owner-helpers/restore-data-after-owner-reset-02.py": {
+      "sha256": "d8d6280b18edd666faa9dfa24c7dbef9e1b6c6a400465c3d30865bfa15e1dc80",
+      "size": 3631
+    },
+    "owner-helpers/archive-second-owner-reset.py": {
+      "sha256": "d9e737e16d6c12896e3891f1c47924b70422334dcdaf5ee24d37bb152adfa456",
+      "size": 4998
+    },
+    "root-review/agy-remediation-r20-second-rst-supplement-20260929.json": {
+      "sha256": "89a6678f5060c22b38cb7b204b1399bb7d8384d5db039ded805960cc8b0ca39b",
+      "size": 4873
+    }
+  },
+  "store_snapshot_scope": "Post-transmission snapshot; durable next sequence 29. Original prior archive remains at its earlier snapshot.",
+  "previous_hardware_archive_preserved_sha256": "2d058c873ec124a5060108dcd6c0af885c545d79862a815292ef5dcd2d061449"
+}

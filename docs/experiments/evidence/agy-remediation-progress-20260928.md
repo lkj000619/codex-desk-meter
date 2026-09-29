@@ -629,3 +629,18 @@ packaging 직전 모든 제품 source/binary hash가 독립 build 보존본과 �
 
 - [r20 실물 원본 archive receipt](agy-remediation-r20-hardware-artifacts-20260929.json)
 - [r20 실물 원본·세 영상·관측 도구](agy-remediation-r20-hardware-artifacts-20260929.zip)
+
+### r20 두 번째 사용자 RST·동일 store 순번 28 재수신
+
+사용자가 **“야 내가 또 리셋 눌렸어.”**, **“rst 버튼 눌렸어. 그래서 lcd에 값들이 안나옴”**이라고
+확인했다. 같은 조작에 대한 추가 설명으로 기록하며 별도의 세 번째 reset을 가정하지 않는다.
+2026-09-29T06:04:49.729593Z부터 미수정 AGY CLI를 동일 alias/store로 한 번 실행했고 정상 종료했다.
+기존 보드 로그에서 `Accepted cdm/1 frame seq=28`을 확인했으며 다음 영구 순번은 29다.
+native DTR/RTS는 false였고, root는 재초기화·reset·flash·제품 변경을 하지 않았다.
+LCD가 다시 표시됐는지는 새 영상으로 직접 확인하지 않았으므로 수신 로그 확인과 구분한다.
+30초 연속 표시·직접 timing·실제 cable 분리/재열거·정식 G/F9 채점은 여전히 미확인이다.
+기존 archive를 유지하고 새 수신 로그·사용자 진술·owner 도구를 별도 supplement로 고정한다.
+
+- [두 번째 사용자 RST·순번 28 재수신 기록](agy-remediation-r20-second-rst-supplement-20260929.json)
+- [두 번째 RST 재수신 원본 archive receipt](agy-remediation-r20-second-rst-artifacts-20260929.json)
+- [두 번째 RST 재수신 원본 자료](agy-remediation-r20-second-rst-artifacts-20260929.zip)

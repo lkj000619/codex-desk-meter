@@ -25,6 +25,9 @@
 
 저장된 영상을 연결해 연속 30초 조건을 충족했다고 처리하지 않는다.
 41.73초 영상의 약 5~7초 black/데이터 대기는 사용자가 확인한 의도적인 RST다.
+이후 사용자가 RST를 다시 눌러 값이 사라졌다고 확인했다. 같은 store의 순번 28을 실제 AGY 송신기로
+재송신했고, 보드의 기존 로그에서 정상 수신을 확인했다. 추가 영상은 제공되지 않아 LCD 복구 자체는
+직접 관측한 것으로 기록하지 않는다. 두 번째 RST도 사용자 조작으로 기록한다.
 시리얼 관측 중 발생한 한 번의 ClearCommError는 원본을 보존했으며 원인은 미확정이다.
 후속 실제 송신 및 영상은 정상 관측됐지만 전체 USB 무오류 시험으로 확대하지 않는다.
 
@@ -39,7 +42,7 @@ AGY 작성 운영 절차:
 현재 실제 시험 store:
 `C:/Espressif/benchmark-remediation/hardware-r20-20260929/actual-cli-tests/sequence-store`
 
-식별자 `esp32s3-288485b08518`, 현재 포트 COM3, 다음 영구 순번 **28**.
+식별자 `esp32s3-288485b08518`, 현재 포트 COM3, 다음 영구 순번 **29**.
 정상 재실행은 이 store와 alias를 이어서 사용한다. 수신기를 리셋하지 않은 상태에서 재초기화하지 않는다.
 데이터는 고정 offline fixture이며 실제 online quota가 아니다.
 
@@ -48,6 +51,8 @@ AGY 작성 운영 절차:
 - [독립 소프트웨어 검증](agy-remediation-r20-independent-review-20260928.json)
 - [실물 업로드·순번·영상 검증](agy-remediation-r20-hardware-review-20260929.json)
 - [RST 확인·같은 store 27 수신 추가 기록](agy-remediation-r20-rst-video-supplement-20260929.json)
+- [두 번째 사용자 RST·같은 store 28 재수신 기록](agy-remediation-r20-second-rst-supplement-20260929.json)
+- [두 번째 RST 재수신 원본 archive receipt](agy-remediation-r20-second-rst-artifacts-20260929.json)
 - [실물 원본·세 영상 archive receipt](agy-remediation-r20-hardware-artifacts-20260929.json)
 - [실물 원본 자료 archive](agy-remediation-r20-hardware-artifacts-20260929.zip)
 - [누적 진행 기록](agy-remediation-progress-20260928.md)
