@@ -1,0 +1,51 @@
+{
+  "run_id": "20260928-agy-remediation-r21",
+  "implementation_commit": "8eb40c0ceb47d1f6585307575a09c7dc74f89d51",
+  "ranking_eligible": false,
+  "product_pass": false,
+  "operator_product_edits": false,
+  "archive": "agy-remediation-r21-audio-click-artifacts-20260929.zip",
+  "sha256": "4d64fc35db4b9811e19dc6915fa367b9cd00e6d151f290b46372f6ef4fb3b867",
+  "bytes": 1486646,
+  "entry_count": 8,
+  "entries": {
+    "audio-analysis/audio-analysis-record.json": {
+      "sha256": "32e4fac7efc88d4b076d4288bd63e93c080b12bfd96cd282d764c118279ee1d4",
+      "size": 5855
+    },
+    "audio-analysis/audio-extraction-stderr.txt": {
+      "sha256": "7e52d4d1528d9e6ed23c64bdcb9ebb8b10e43224c15d98b0295612b30027ec5f",
+      "size": 503117
+    },
+    "audio-analysis/click-window-1.mp3": {
+      "sha256": "3d744bc5e35ba01710ef2706cd547fd564de202d620de062d69b966d27224265",
+      "size": 5507
+    },
+    "audio-analysis/click-window-2.mp3": {
+      "sha256": "2344dcfbbf47f6cccb669ed593821ab63c613a7e2bec3bee2b96a1d1e46a4775",
+      "size": 5507
+    },
+    "audio-analysis/click-window-3.mp3": {
+      "sha256": "11ebd74d1b8a4fd81fc33dc3695729d15c514e5e4b10fee01efe57e2f44a68a7",
+      "size": 6227
+    },
+    "audio-analysis/original-audio-mono-48k.wav": {
+      "sha256": "d5d7fe63c010c4f4e7089456f09b8e79a7331c778795552b3921a371ad7fc781",
+      "size": 5216334
+    },
+    "operator-harness/analyze-r21-audio-clicks.py": {
+      "sha256": "a34292befae99da0be2739c94e0a014a6671f17c4ad92a3eb4bf3788f5c361b4",
+      "size": 3862
+    },
+    "root-review/agy-remediation-r21-audio-click-review-20260929.json": {
+      "sha256": "bec16c1384ee6eb6103b47d2fe975a759a8a8436d1c9ed168affe0a93d999da0",
+      "size": 3063
+    }
+  },
+  "audio_pts_offset_seconds": 0.002,
+  "pcm_sample_count": 2608128,
+  "direct_audition_supported": false,
+  "press_click_classified": false,
+  "boot_300ms_verified": false,
+  "scope": "Original decoded mono PCM, original PTS logs, three MP3 audition aids, candidate analysis, operator helper and independent review; no audio content alteration in measurement PCM."
+}

@@ -103,6 +103,27 @@ RST나 재전원→값 복구 시간은 기존 영상으로 이미 측정했으�
 - [원본 111개 frame의 PTS 재검토](agy-remediation-r21-video-timing-recheck-20260929.json)
 - [전환 key frame·검토 sheet·추출 도구 보존 receipt](agy-remediation-r21-video-timing-artifacts-20260929.json)
 
+### 스위치 소리를 시작점으로 사용하는 방법
+
+사용자는 스위치의 딸깍 소리를 지적했다. 눌림 소리를 식별하면 스위치가 손가락에 가려져도
+그 오디오 시각→화면 변화 시각을 측정할 수 있다. 시각적 가림만으로 입력 시작점을 얻을 수
+없다고 결론 낸 설명은 오디오 단서를 누락했다. 누를 때·뗄 때의 소리와 다른 접촉 소음을
+구분하고, 오디오와 비디오의 원래 PTS를 사용한다. 이러한 추정에 내부 timestamp는 필수가 아니다.
+
+원본 video01의 AAC 48kHz stereo 트랙을 확인하고 mono PCM으로 추출했다. 첫 오디오 PTS는
+0이 아닌 **0.002초**였으며, sample index에 이 offset을 더해 원본 영상 시간에 맞췄다.
+2,547개 오디오 frame의 연속성과 총 sample 수를 검증했다. 이전 세 전환 구간에서 1ms 단위
+파형 변화 후보를 추출했으나, 자동 peak는 눌림 소리의 판정이 아니다. 현재 도구의 audio input은
+지원되지 않아 운영자가 직접 청취하지 못했다. 실제로 들었다고 주장하지 않는다.
+
+첫 구간의 두드러진 후보 peak는6.296초이며 화면 변화는6.800~6.833333초다. 이 peak가 눌림인지,
+뗌인지 또는 보드 이동 소음인지 분류되지 않았으므로 두 시각 차이를 BOOT latency로 채택하지 않는다.
+소리 단서를 활용할 수 있다는 방법상의 정정을 기록하고 기존300ms 판정은 미확정으로 유지한다.
+BOOT 소리는 USB 패킷 수신 시각을 나타내지 않으므로 수신→LCD2초와 연결하지 않는다.
+
+- [오디오 단서·PTS 정렬·소리 후보 검토](agy-remediation-r21-audio-click-review-20260929.json)
+- [원본 PCM·후보 분석·오디오 발췌 보존 receipt](agy-remediation-r21-audio-click-artifacts-20260929.json)
+
 PC 프로그램은 AGY가 작성한 송신기로 실행 중이며 고정 fixture를 보낸다. 실제 사용자 Codex
 계정의 잔여 token/usage를 자동 수집하는 프로그램은 구현되지 않았다. 실제 source 연동은
 별도 live integration 범위다. 송신기가 끝난 뒤 RST하면 새 frame이 올 때까지 값이 없는 상태가 된다.

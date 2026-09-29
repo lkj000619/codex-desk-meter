@@ -853,3 +853,23 @@ video01 archive를 참조하며 변경하지 않았다. 제품 변경·보드 �
 
 - [원본 영상 시간 측정 재검토](agy-remediation-r21-video-timing-recheck-20260929.json)
 - [PTS 검토 자료 보존 receipt](agy-remediation-r21-video-timing-artifacts-20260929.json)
+
+### r21 BOOT 딸깍 소리의 입력 시작점 단서 추가
+
+사용자가 **“스위치를 누르는 딸깍 소리가 들리지않니?”**라고 지적했다. 시각적 가림만으로
+시작점을 확보할 수 없다고 설명한 것은 오디오를 누락했다. 누를 때의 소리가 식별되면 원본
+audio PTS→화면 변화 PTS 차이로 반응 시간을 추정할 수 있다. 누름·놓음·다른 접촉음을 구분해야 한다.
+
+video01의 AAC48kHz stereo를 확인·추출했다. 첫 PTS가0이라고 가정한 guard는0.002초 offset을
+검출해 한 번 중단했다. 원본 audio PTS를 사용하는 방식으로 수정한 뒤 2,547개 frame의 연속성과
+전체2,608,128 sample 수를 확인했다. 분석 PCM은 sample/48000+0.002초로 영상 시간에 연결했다.
+세 전환 구간에서1ms differenced-RMS peak 후보와 원속 발췌를 보존했다. 첫 구간 후보6.296초는
+눌림으로 분류되지 않았으므로 latency 계산에 채택하지 않는다. 자동 peak를 switch click으로 단정하지 않는다.
+
+오디오 발췌를 모델 audio input으로 전달하려 했으나 도구는 `audio content omitted because you do not support audio input`을 반환했다.
+따라서 운영자의 직접 청취 확인은 불가능했고 실제 소리를 들었다고 기록하지 않는다. 이는 원본에
+소리가 없다는 의미가 아니다. 원본 PTS와 파형 후보를 보존하며300ms·2s 합격/실패를 새로 주장하지 않는다.
+제품·보드·고정 비교 기준 변경과 추가 촬영 요청 없이 기존 실물 동작 증거를 유지한다.
+
+- [소리 단서와 오디오 분석 검토](agy-remediation-r21-audio-click-review-20260929.json)
+- [오디오 원본 추출·분석 보존 receipt](agy-remediation-r21-audio-click-artifacts-20260929.json)
