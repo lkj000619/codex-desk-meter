@@ -893,3 +893,13 @@ BOOT 손가락 동작을 USB 패킷 수신 시각으로 사용하지 않는다. 
 
 - [손가락 동작 기준 세 사례 측정](agy-remediation-r21-finger-timing-review-20260929.json)
 - [식별 이미지·시간 근거 보존 receipt](agy-remediation-r21-finger-timing-artifacts-20260929.json)
+
+### r21 최종 평가 문서 작성 완료
+
+기존 AGY 산출물, 독립 software/hardware 검토 및 보존 영상에 대한 최종 평가를 마쳤다. 문서 정리 완료는 제품 합격과 구분한다. 현재 `ranking_eligible:false`, `product_pass:false`이며, C1/C2와 F8 빌드·배포·관측 gate는 pass로 판정했다. 나머지 미증명 조건은 `partial`, `not_run` 또는 null로 유지했다. 원래 r01 결과·정량 순위는 덮어쓰지 않았다.
+
+video02의 사용자 식별 손가락 동작 기반 세 BOOT 관측은 300ms 이내의 수동 영상 추정 근거가 있다. RST 복구 약 6.7–7.0초, USB 재전원 복구 약 2.3–2.6초는 boot와 다음 송신 대기를 포함해 packet receive→LCD ≤2초 측정으로 쓰지 않는다. 긴 실물 hold 단일 event와 전체 입력 성공률은 미확정이다. 배터리 부재로 전원 유지 USB cable 제거 시험은 현재 구성에서 수행 불가(`not_run`)이고 활성 사용자 과제가 아니다. 정식 GUI G1–G6/F9 점수는 null이며 AGY의 22/30은 잠정 자체 점수로만 기록한다. 고정 fixture collector는 실제 Codex 계정 잔여량 collector가 아니다.
+
+- [r21 최종 평가 보고서](agy-remediation-r21-final-evaluation-20260929.md)
+- [r21 최종 구조화 평가 addendum](agy-remediation-r21-final-evaluation-20260929.json)
+- [최신 r21 상태와 판정 요약](agy-remediation-r21-status-20260929.md)

@@ -59,7 +59,7 @@ FreeRTOS scheduling·실물 접점·첫 LCD 변경 시간을 측정한 결과가
 | r21 LCD 30초 유지·세 화면 잘림 없음 | 새 단일 54.33초 영상의 34초 구간·세 화면 확인, C2 통과 |
 | RST·USB 재전원 후 값 복구 | 후속 66.39초 영상에서 직접 확인: blank→값 약 6.7~7.0초, 재전원 표시→값 약 2.3~2.6초 |
 | 별도 전원 유지 USB cable 제거·재열거 | 현재 장비 조건상 수행 불가; 평가 `not_run`, 진행할 작업 목록에서 제외 |
-| G1–G6·F9·50cm/조명·IMU 잡음 | GUI·회전 실물 영상 있음; 정식 채점 미완료, 50cm·조명·노출과 잡음 시험 조건은 확인되지 않음 |
+| G1–G6·F9·50cm/조명·IMU 잡음 | 기존 증거 기반 평가 정리 완료; GUI·회전 관측 있음, 정식 점수는 조건 미입증으로 null |
 
 사용자는 보드에 배터리가 없고 USB 분리 시 전원을 유지할 수 없다고 확인했다. 영상에서도
 USB 분리 시 LCD 전원이 꺼지는 것이 관측됐다. 전원을 유지한 물리적 cable 제거 시험은
@@ -73,12 +73,13 @@ USB 분리 시 LCD 전원이 꺼지는 것이 관측됐다. 전원을 유지한 
 BOOT 전환·데이터 표시·회전·RST/재전원 복구의 증거로 사용한다. 긴 입력 장면이 포함됐다는
 사용자의 지적도 보존한다. 접점이 가려진 영상만으로 정확한 hold 길이·단일 event를 확정하지 않는다.
 
-현재 남은 것은 평가자의 자료 정리와 판정 작업이다. 사용자에게 같은 동작의 추가 촬영을 요청하지 않는다.
+기존 자료의 평가 정리와 판정 문서 작성은 완료됐다. [최종 평가](agy-remediation-r21-final-evaluation-20260929.md)에
+다음 근거 범위와 제한을 기록했다. 사용자에게 같은 동작의 추가 촬영을 요청하지 않는다.
 
-1. 기존 영상·host 시험·수신 로그를 연결한다. BOOT의 세 관측 사례는300ms 이내 영상 추정으로
-   기록하고, 실물 hold 및 수신→LCD ≤2s의 기준 시각이 없는 부분은 증거 부족으로 명시한다.
-2. 기존 자료로 판정 가능한 GUI/F9 항목을 정리하고, 50cm·조명·잡음 조건이 입증되지 않은
-   부분은 정식 점수로 확정하지 않는다. 기능 동작 증거를 없다고 표현하지 않는다.
+1. 기존 영상·host 시험·수신 로그를 연결했다. BOOT의 세 관측 사례는300ms 이내 영상 추정으로
+   기록하고, 실물 hold 및 수신→LCD ≤2s의 기준 시각이 없는 부분은 증거 부족으로 명시했다.
+2. 기존 자료로 판정 가능한 GUI/F9 항목을 정리했다. 50cm·조명·잡음 조건이 입증되지 않은
+   부분은 정식 점수로 확정하지 않았다. 기능 동작 증거는 보존했다.
 
 [기존 영상 범위와 남은 평가 작업 정정 기록](agy-remediation-r21-evidence-coverage-correction-20260929.json)을 따른다.
 
@@ -223,3 +224,15 @@ RST 후 **약 3초, 10초 이내에 값이 돌아옴**을 확인했다. 이는 �
 - [r21 후속 원본 영상·PTS 검토 archive receipt](agy-remediation-r21-video02-artifacts-20260929.json)
 - [r20 RST 복구·BOOT 진단 기록](agy-remediation-r20-reconnect-boot-diagnosis-20260929.json)
 - [r20 진단 원본 archive receipt](agy-remediation-r20-reconnect-boot-artifacts-20260929.json)
+
+## 최종 평가 작성 완료
+
+[r21 최종 평가](agy-remediation-r21-final-evaluation-20260929.md)와 같은 basename의 구조화 평가 addendum을 작성했다. 이는 기존 봉인 자료와 시험 결과의 채점·정리 완료를 뜻하며 **전체 제품 합격을 뜻하지 않는다**. `ranking_eligible:false`, `product_pass:false`를 유지한다. C1·C2와 F8 빌드·배포·관측 gate는 pass이며, 다른 필수 C/F/I 범위에 `partial`·`not_run`이 남아 있다.
+
+- 사용자 식별 손가락 동작 기준 video02의 세 BOOT 반응 추정은 약 33–200ms, 새 내용 완료는 약 100–233ms 범위로 각 관측 사례에서 300ms 이내다. 전체 입력 성공률이나 실물 긴 hold 단일 event 수는 확정하지 않는다.
+- video02의 RST blank→값은 약 6.7–7.0초, USB 재전원 후 표시 복귀→값은 약 2.3–2.6초다. 둘 다 boot 및 다음 송신 대기를 포함하며 packet receive→LCD ≤2초 계측이 아니다.
+- 전원 유지 USB cable 시험은 배터리 부재로 현재 구성에서 수행 불가이며 `not_run`; pass·요구 면제·제품 결함으로 계산하지 않고 추가 촬영 과제에도 포함하지 않는다.
+- 정식 G1–G6와 F9 독립 점수는 null이다. AGY의 22/30은 잠정 자체 점수로 구분한다. fixture collector는 실 계정 Codex 잔여량 연동이 아니다.
+- 원래 r01 실패·순위는 remediation 결과로 덮지 않았다.
+
+항목별 범위·증거·제한: [최종 평가 보고서](agy-remediation-r21-final-evaluation-20260929.md), [구조화 evaluation addendum](agy-remediation-r21-final-evaluation-20260929.json).
