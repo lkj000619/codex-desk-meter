@@ -666,3 +666,17 @@ CONNECTED·validated/stored·STALE를 직접 확인했다. 반복 BOOT 화면 �
 - [38.96초 영상·값 복구·C2 판정](agy-remediation-r20-video04-review-20260929.json)
 - [38.96초 원본 영상 archive receipt](agy-remediation-r20-video04-artifacts-20260929.json)
 - [38.96초 원본 영상·검토 자료](agy-remediation-r20-video04-artifacts-20260929.zip)
+
+### r20 PC 송신 구현·실제 계정 연동 범위 재확인
+
+사용자가 표시 중인 데이터가 실제 Codex 잔여량인지, PC 송신 프로그램이 작성됐는지 확인을 요청했다.
+AGY r20의 `scripts/run-host-device-pipeline.py`와 `scripts/host_device_pipeline.py`를 조회했다.
+실제 송신 CLI는 `FixtureRegistry.with_defaults` 또는 지정된 `FixtureFileAdapter`만 입력으로 사용하며,
+provider fixture 디렉터리 밖의 `--fixture` 경로를 거부한다. `ProductionCollector`는 이 registry와
+영속 순번·USB transport를 연결한다. 후보 운영 문서 7절도 고정 fixture/오프라인 기준 시각을 명시한다.
+따라서 PC 송신 프로그램은 구현·실물 실행됐지만 로컬 Codex/실제 계정 source 자동 수집은 구현되지 않았다.
+현재 LCD의 사용량/글로벌 reset 값은 실제 계정 측정값이 아니다.
+
+기존 잔여 네 항목은 고정 fixture E2E 계약의 검증 범위임을 현재 상태 문서에 명시했다.
+실사용 source adapter와 실제 데이터 통합 시험은 PRODUCT_CONTRACT가 구분한 별도 live integration 작업이다.
+사용자 계정 파일·자격증명을 읽거나 제품 코드를 변경하지 않았으며 원래 실험 범위·평가 계약은 유지한다.

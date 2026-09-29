@@ -14,6 +14,20 @@
 제품 구현과 제품 시험 작성은 AGY가 담당했다. 운영자 검증 도구는 제품 외부에 있고,
 이 보완 실행은 원래 단회 정량 비교 순위에 포함하지 않는다.
 
+## PC 송신 구현과 실사용 연동 범위
+
+- PC→ESP32 송신 프로그램은 AGY r20 checkout의 `scripts/run-host-device-pipeline.py`에 구현되어 있고,
+  동일 프로그램으로 실제 USB 송신·재수집·주기 송신·순번 지속을 검증했다.
+- 현재 입력은 `FixtureRegistry`와 `FixtureFileAdapter`가 읽는 저장소의 고정 JSON fixture다.
+  화면의 80% remaining·20% used 및 글로벌 reset 시각은 예제 값이며 사용자 실제 계정의 잔여량이 아니다.
+- 로컬 Codex 런타임이나 실제 계정 source에서 사용량/쿼터를 자동 수집하는 adapter는 현재 AGY 결과에 없다.
+  송신 경로의 완성과 실제 계정 수집기의 완성은 구분한다.
+- 아래 네 가지 잔여 검증은 **고정 fixture E2E 실험**의 범위다. 이를 모두 통과해도 실제 계정 연동을
+  완료했다고 판정하지 않는다. PRODUCT_CONTRACT의 실제 source 전환은 별도 `version-2-live-integration-v1`이다.
+- 실사용 준비에는 허용된 로컬 source의 실제 제공 지표 확인, source adapter 구현, 조회 시각·오류·갱신
+  검증, 기존 frame/USB 경로와의 통합 시험이 추가로 필요하다. source가 절대 잔여 token 수를 제공하지
+  않으면 제공된 백분율/단위만 표시한다. 고정 fixture와 원래 실험 판정·순위는 유지한다.
+
 ## 남은 조건
 
 | 조건 | 현재 증거 | 필요한 다음 증거 |
