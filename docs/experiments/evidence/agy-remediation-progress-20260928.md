@@ -766,3 +766,30 @@ sealed 원본 영상 검토를 덮어쓰지 않고 별도 addendum에 답변 원
 제품 변경·새 AGY 실행·보드 조작 없이 기록만 갱신했으며 전체 product_pass:false와 원래 정량 순위를 유지한다.
 
 - [짧은 BOOT·USB 재전원 조건 사용자 확인](agy-remediation-r21-owner-confirmation-20260929.json)
+
+### r21 후속 66.39초 영상·RST/USB 재전원 값 복구 직접 관측
+
+사용자가 `KakaoTalk_20260929_161834322.mp4`를 제공했다. 원본 30,020,783 bytes·66.39초,
+SHA256 `301a041a35cab7f256b1fc0725929b6c1f9dcff271ee4012ca9face06749203c`을 복사 검증·보존했다.
+2fps sample 133개·전체 decode 1,990개를 확인하고, reset/전원/값 전환의 선택 frame 53개에
+FFmpeg showinfo의 실제 PTS를 기록했다. 평균 fps는 29.98이므로 정밀 bracket은 nominal n/30 대신 PTS를 쓴다.
+
+사용자는 약 10초의 버튼을 **“RST를 눌렀음”**으로 확인했다. UI가 사라지는 전환은 10.4~10.5초,
+대기 UI가 먼저 나타남은 12.4~12.5초, 실제 사용량 값의 복구는 17.2~17.4초 사이였다.
+blank 전환→값 복구는 영상 기준 약 6.7~7.0초다. 부팅과 다음 주기 송신 대기를 포함한다.
+RST 전 진단 순번340·101accepted, 이후344·2accepted를 관측했고 dropped는0이었다.
+
+USB connector가 실제로 분리되고 42.6초에 LCD/LED가 꺼졌다. 재연결 위치 조정 뒤
+46.8~46.9초 사이에 LED/LCD가 켜지고 48.8초에 대기 UI, 49.2~49.4초 사이에 실제 값이 나왔다.
+재전원 표시→값은 약2.3~2.6초다. 정확한 USB 삽입 전기 접점과 패킷 수신 시각은 측정하지 않았다.
+이후 진단351·3accepted/0dropped·CONNECTED를 관측했고 동일 PC store의 보존 frame과 연결했다.
+coarse 후보130개는 intentional USB 전원 제거/복귀 구간에 해당했다. 첫 RST의 uniform blank는
+색상 heuristic이 감지하지 못하므로 이를 전체 blank/content/flicker 인증 도구로 사용하지 않는다.
+
+이 영상의 RST/USB 복구는 직접 관측 완료로 갱신한다. 기존 C2는 이전 단일 영상 판정을 유지한다.
+BOOT300ms·physical hold 단일 event·수신→LCD2s·별도 전원 유지 cable 재열거·정식 G/F9는 미확인이다.
+제품/바이너리 hash는 독립 빌드 그대로이며 operator는 포트 접근·reset·flash·새 AGY 실행을 하지 않았다.
+원본·PTS frame·검토 도구·후속 사용자 확인을 별도 archive에 보존하고 전체 product_pass:false를 유지한다.
+
+- [후속 영상·RST/USB 재전원 직접 복구 검토](agy-remediation-r21-video02-review-20260929.json)
+- [후속 영상 원본·PTS 증거 archive receipt](agy-remediation-r21-video02-artifacts-20260929.json)
