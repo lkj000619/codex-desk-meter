@@ -699,3 +699,29 @@ r21는 같은 r20 제품 파일 116개와 기존 정책/model/data scope를 보�
 
 - [r21 현재 보완 범위·사용자 관찰·운영자 launch 오류 기록](agy-remediation-r21-status-20260929.md)
 - [r21 환경 사전 검증](agy-remediation-r21-preflight-20260928.json)
+
+### r21 완주·독립 검증·BOOT 입력 보완 업로드
+
+AGY r21는 871.828초에 정상 종료했다. 구현 `8eb40c0ceb47d1f6585307575a09c7dc74f89d51`,
+입력 고정·전역 설정 복구·단일 frozen prompt·runtime feedback 없음 확인. 원래 단회 정량 순위에서 제외한다.
+fresh archive의 CTest 4개·Python 25개·기존 평가 29개와 ESP32/host build·현재 결과 검증이 통과했다.
+GPIO0 전용 입력 task·debounce FSM·queue를 추가했고 기존 parser/state/GUI/USB/IMU/PC source는 동일하다.
+외부 운영자 probe의 50/100ms sample phase sweep과 빠른 두 입력·hold·FIFO 시험도 통과했다.
+30ms guaranteed 설명과 문서의 100%/1ms/300ms 보장 주장은 측정 근거가 없어 검증 결론에서 제외했다.
+
+독립 빌드 바이너리를 COM3에 업로드했고 boot ELF `c281f79bc…` 일치·20초 panic 징후 없음 확인.
+기존 store 순번 91·92가 실제 보드에서 accepted됐으며 순번을 재초기화하지 않았다.
+2026-09-29T06:54:58.686Z부터 기존 AGY CLI로 5초 주기·최대 1,000회/운영 제한 90분 송신을 시작했다.
+sender PID 8188, 운영자 helper PID 10144. raw hardware archive는 실행 중 순번 109까지의 snapshot이다.
+완료하지 않은 1,000회 cycle 또는 모든 cycle의 LCD/수신을 합격으로 기록하지 않는다.
+고정 fixture 데이터이며 실제 사용자 quota collector는 없다.
+
+사용자에게 새 r21의 짧은 BOOT 입력·긴 hold·RST·USB 분리/재연결·35초 영상 확인을 요청했다.
+정밀 300ms/2s timing·USB 전원 유지 cable 시험·r21 LCD 출력·모델 비공개 G/F9는 아직 미확인이다.
+제품 작성은 AGY가 수행했고 root는 보존·외부 독립 평가·업로드·운영 관측·문서 기록을 수행했다.
+전체 product_pass는 false를 유지한다.
+
+- [r21 현재 상태·남은 검증](agy-remediation-r21-status-20260929.md)
+- [r21 독립 검토](agy-remediation-r21-independent-review-20260928.json)
+- [r21 실물 수신·업로드 검토](agy-remediation-r21-hardware-review-20260929.json)
+- [r21 실물 원본 보존 receipt](agy-remediation-r21-hardware-artifacts-20260929.json)

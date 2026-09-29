@@ -2,6 +2,55 @@
 
 ## 범위와 현재 상태
 
+**r21 AGY 완주·독립 소프트웨어 검증·실물 업로드 완료. 전체 제품 합격은 미확인.**
+
+- 구현 commit: `8eb40c0ceb47d1f6585307575a09c7dc74f89d51`.
+- AGY 실행: 871.828초, 정상 종료. 입력 고정·전역 설정 복구 확인.
+- 독립 검증: fresh archive의 CTest 4개·Python 25개·기존 평가 29개·ESP32 빌드·결과 구조 검증 통과.
+- 업로드: COM3 보드 식별 후 독립 빌드 바이너리 그대로 업로드. 부팅 ELF 해시 일치,
+  20초 관측에 panic/stack overflow 징후 없음. IMU와 전용 BOOT 입력 task 시작 로그 확인.
+- 실제 수신: 기존 store를 재초기화하지 않고 순번 91·92 전송·보드 수락 로그 확인.
+- 운영 송신: 같은 AGY CLI를 2026-09-29 15:54:58 KST부터 5초 주기·최대 1,000회 실행.
+  성공 cycle 기준 약 83분이며 운영자 제한은 90분이다. sender PID 8188, 외부 관측 helper PID 10144.
+  이 문서의 실행 상태는 기록 시점의 상태이고 영구 자동 실행을 설치한 것은 아니다.
+- 원본 보존 시점: 주기 송신의 순번 109까지 host 파일 관측. 모든 frame의 device 수신을 증명하지 않는다.
+- r21 영상·실물 BOOT 반응과 USB/재전원 복구 결과는 사용자 확인 대기 중이다.
+
+## 보완 내용과 독립 검증의 한계
+
+AGY는 GPIO0 수집을 전용 FreeRTOS task로 옮겼다. 입력 task는 nominal 10ms마다 읽고,
+press/release debounce와 16개 event queue로 입력을 보존한다. UI task가 event를 받아
+원래 공급자 우선 순환 규칙으로 화면을 바꾼다. 길게 누르는 동안 자동 반복하지 않는다.
+parser/state/GUI/transport/IMU와 PC 송신 원본은 r20과 hash가 동일하다.
+
+제품 외부의 운영자 probe는 실제 production input library를 연결해 sample phase 10개에서
+50ms·100ms 입력과 50ms release를 사이에 둔 두 입력을 확인했다. 3초 hold는 한 event였고,
+16개 queue의 FIFO·overflow drop도 확인했다. 이는 이상적인 host sample 시험이며
+FreeRTOS scheduling·실물 접점·첫 LCD 변경 시간을 측정한 결과가 아니다.
+
+30ms pulse는 10개 phase 모두 event가 없었다. header의 30ms guaranteed minimum 설명과
+사용하지 않는 min_press_ms는 실물 보장으로 채택하지 않는다. AGY 운영 문서의 100% 성공,
+완벽한 debounce, 1ms 미만 wake/lock, 300ms 보장 주장도 계측 증거가 없어 제외한다.
+렌더러 일부는 여전히 state lock 안에서 수행된다. 예전 loop의 두 Python 재현은 가정한
+70ms 주기를 쓰는 simulation이고 실제 r20 production 실행의 성능 측정이 아니다.
+
+## 현재 남은 검증
+
+| 항목 | 상태 |
+|---|---|
+| 짧은 BOOT 입력 신뢰성·첫 화면 반응 ≤300ms | 생산 코드 회귀 통과, r21 실물 확인 대기 |
+| 수신→LCD 표시 ≤2s | 순번 91·92 수신 확인, 직접 timing 미확인 |
+| r21 LCD 30초 유지·세 화면 잘림 없음 | r20 영상 판정 보존, 변경된 r21의 새 영상 미확인 |
+| RST·USB 분리·재전원 복구 | r20 송신 중 RST 약 3초 복구 사용자 관찰; r21 확인 대기 |
+| 별도 전원 유지 USB cable 제거·재열거 | 실제 시험 미확인; USB 재전원과 구분 |
+| G1–G6·F9·50cm/조명·IMU 잡음 | 정식 실물 측정·모델 비공개 평가 미확인 |
+
+PC 프로그램은 AGY가 작성한 송신기로 실행 중이며 고정 fixture를 보낸다. 실제 사용자 Codex
+계정의 잔여 token/usage를 자동 수집하는 프로그램은 구현되지 않았다. 실제 source 연동은
+별도 live integration 범위다. 송신기가 끝난 뒤 RST하면 새 frame이 올 때까지 값이 없는 상태가 된다.
+
+## 앞선 r20 진단
+
 사용자가 USB 단절·RST·재전원 인가 후 값이 오지 않고, BOOT는 짧은 입력에서 간헐적으로 반응하지
 않으며 두 번 누르거나 약 500ms 이상 누르면 페이지가 바뀐다고 보고했다.
 현재 r20 보드의 30초 LCD 출력 판정은 유지하되, 짧은 BOOT 입력의 신뢰성과 정확한 latency는
@@ -24,7 +73,7 @@ RST 후 **약 3초, 10초 이내에 값이 돌아옴**을 확인했다. 이는 �
 - 시작 보존본: AGY r20 `6e00bd8ba518f008d50a762f035a5e8c7e8b6e5c`, 제품 파일 116개 byte/hash 동일.
 - 모델: `gemini-3.8-flash-medium`, 기존 finite 정책 `2c79ccc4…1034f`, data scope 동일.
 - 환경 사전 검증: 123개 통과, host runtime·COM3·clean checkout·준비 commit 2개 확인.
-- 시작: `2026-09-29T06:31:27.025335Z`, 현재 실행 중. 보드는 아직 r20이다.
+- 시작: `2026-09-29T06:31:27.026Z`, 종료: `06:45:58.853Z`. 보드는 현재 r21이다.
 - 고정 요청: 실제 firmware 입력 handler가 짧은 입력·bounce·hold·release를 처리하고,
   느린 renderer/IMU에 입력 수집이 종속되지 않도록 실패 재현과 생산 코드 회귀 시험을 먼저 작성.
 - 기존 provider 순환·framebuffer·IMU·parser·USB와 고정 fixture를 유지하고, PC 송신 운영 조건을 명시.
@@ -38,5 +87,10 @@ RST 후 **약 3초, 10초 이내에 값이 돌아옴**을 확인했다. 이는 �
 옵션을 action보다 앞에 둔 정상 호출로 시작했다. 두 사건은 제품 실패/AGY trial로 계산하지 않는다.
 
 - [r21 사전 검증 및 입력 고정 receipt](agy-remediation-r21-preflight-20260928.json)
+- [r21 완주·보존 receipt](agy-remediation-r21-result-20260928.json)
+- [r21 독립 검토·소프트웨어 gate](agy-remediation-r21-independent-review-20260928.json)
+- [r21 독립 시험 원본 archive receipt](agy-remediation-r21-independent-artifacts-20260928.json)
+- [r21 업로드·실물 수신·운영 송신 snapshot](agy-remediation-r21-hardware-review-20260929.json)
+- [r21 실물 원본 archive receipt](agy-remediation-r21-hardware-artifacts-20260929.json)
 - [r20 RST 복구·BOOT 진단 기록](agy-remediation-r20-reconnect-boot-diagnosis-20260929.json)
 - [r20 진단 원본 archive receipt](agy-remediation-r20-reconnect-boot-artifacts-20260929.json)

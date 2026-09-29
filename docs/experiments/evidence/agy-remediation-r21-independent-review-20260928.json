@@ -1,0 +1,207 @@
+{
+  "run_id": "20260928-agy-remediation-r21",
+  "implementation_commit": "8eb40c0ceb47d1f6585307575a09c7dc74f89d51",
+  "reviewed_at": "2026-09-29T06:52:42.253196+00:00",
+  "classification": "independent_post_run_remediation_review",
+  "ranking_eligible": false,
+  "operator_product_edits": false,
+  "software_flash_allowed": true,
+  "product_pass": false,
+  "hardware_verified": false,
+  "evaluation_manifest_sha256": "e31fab8b11d7ba461c13cbaba4ab279c06df0dc749e8b7a3d0d5d8632ecb9a58",
+  "commands": [
+    {
+      "name": "host-configure",
+      "argv": [
+        "cmake",
+        "-S",
+        ".",
+        "-B",
+        "build-host",
+        "-G",
+        "Ninja"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.4839999999385327,
+      "timed_out": false,
+      "stdout_sha256": "b555e01e341d091840e7abd7093260251b6cf012072f8d0316337028d39681e4",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "host-build",
+      "argv": [
+        "cmake",
+        "--build",
+        "build-host"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.6410000000614673,
+      "timed_out": false,
+      "stdout_sha256": "6e09e4f4953dff184511fd5da9ca40035be669140adaa0f4d07540c976484eab",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "ctest",
+      "argv": [
+        "ctest",
+        "--test-dir",
+        "build-host",
+        "--output-on-failure"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.4059999999590218,
+      "timed_out": false,
+      "stdout_sha256": "ff886894679f2afeb20d7943805c73457ad4f465809a7ee363abb1bbdfaf1d4c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "candidate-python-tests",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 9.765999999945052,
+      "timed_out": false,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "1f6bcea16e2d2522bfe69da63a796cbec8cfe7996e3c71d1eaec2cd18996e792"
+    },
+    {
+      "name": "legacy-29",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "tests/test_evaluation_adapter.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.26599999994505197,
+      "timed_out": false,
+      "stdout_sha256": "04e9b334c1136d45f37e1b821f47954316c727e562b9e67f5a7700099a7863ff",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "idf-set-target",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "C:\\Espressif\\v5.3.2\\esp-idf\\tools\\idf.py",
+        "set-target",
+        "esp32s3"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 11.781000000075437,
+      "timed_out": false,
+      "stdout_sha256": "32ef0dcb9bd4504d97448d3f9d7599ef5bbf428ee357d35fd22213be6d66363b",
+      "stderr_sha256": "76afca6cf96745dd53af5188f8c7f0fcaa7914e41fce829a601b629c22d9e74b"
+    },
+    {
+      "name": "idf-build",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "C:\\Espressif\\v5.3.2\\esp-idf\\tools\\idf.py",
+        "build"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 39.29700000002049,
+      "timed_out": false,
+      "stdout_sha256": "b9bb81a89d336334216805772fff0cf916a724c85d0dda924d1274c8fa39050f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "trusted-result-validation",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "C:\\Users\\이광진\\orca\\codex-desk-meter\\scripts\\validate-end-to-end-result.py",
+        "--result",
+        "C:\\Espressif\\benchmark-remediation\\evaluation-r21-20260928\\checkout\\results\\20260928-agy-remediation-r21\\end-to-end-result.json",
+        "--manifest",
+        "C:\\Espressif\\benchmark-remediation\\20260928-agy-remediation-r21\\e2e-evaluation-manifest.json",
+        "--evidence-root",
+        "C:\\Espressif\\benchmark-remediation\\evaluation-r21-20260928\\checkout"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.2809999999590218,
+      "timed_out": false,
+      "stdout_sha256": "3ead8a6f8d8a820a73e7974f77b194bdd12a6508d10cfab81972e5daf2c6d492",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "host_ctest_count": 4,
+  "candidate_python_test_count": 25,
+  "legacy_evaluation_case_count": 29,
+  "unchanged_from_r20": {
+    "components/meter/meter_parser.c": "f9efa12462942744044812cbde313e69c744145ad6327f1fdda088e426ef440d",
+    "components/meter/meter_state.c": "e21ad4f4486b68c85b5ff2f4f8f429f0973796e4d1162aa4d4b6ae9b0fe0a8b3",
+    "components/meter/meter_gui.c": "396111c0b2df58a89841a16b299f36c61da36db6a2b30368e321e6f4ffe6469f",
+    "components/meter/meter_transport.c": "3358a2ea28b4996ff87eee406616ca0be40189810e09cbf5b8b2943619b1045d",
+    "components/meter/feature_imu.c": "d6e2876689c6678845d0de03ac0d2667638ed375bcee16a48882a66e4df690a6",
+    "scripts/host_device_pipeline.py": "a2cd2a3565058dd66374021d5352519c07c7719f29b9ed22e9480ea52361fba5",
+    "scripts/run-host-device-pipeline.py": "918ab52b5e9ffd60581398381c5446de4c0d5207a8d486c07fc16bbd108f1b4d"
+  },
+  "binary_hashes": {
+    "codex-desk-meter.bin": "58bfeeb7b59f9ffce83deccbdbf83142a83eae8249f0942a40ed74bd4a9adcd5",
+    "codex-desk-meter.elf": "c281f79bc69ca192c8efcfa7086b381092943ed8399806c4a782de9317b3e1b2",
+    "bootloader/bootloader.bin": "69ddf42f77d78783853ece3cb5afaa3dcfd1beb25f8f1f4d727866f257d12237",
+    "partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "input_path_review": [
+    "GPIO0 sampled in a dedicated priority6 FreeRTOS task every nominal10ms; screen drawing and IMU work are absent from the input task.",
+    "Production FSM confirms stable press, enqueues one event per held press, and rearms after release debounce. Original provider-first navigation remains unchanged.",
+    "Queued events wake the UI task. Driver bitmap transfer and IMU reads moved outside state lock; software rendering still occurs within state lock. No measured sub-millisecond lock claim adopted."
+  ],
+  "independent_input_probe": {
+    "operator_product_edits": false,
+    "compile_argv": [
+      "C:/Espressif/benchmark-host-tools/llvm-mingw-20260616-ucrt-x86_64/bin/cc.exe",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-I",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r21-20260928\\checkout\\components\\meter\\include",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r21-20260928\\operator-input-tests\\phase-probe.c",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r21-20260928\\checkout\\build-host\\libmeter_core.a",
+      "-o",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r21-20260928\\operator-input-tests\\phase-probe.exe"
+    ],
+    "compile_exit_code": 0,
+    "probe_exit_code": 0,
+    "result": {
+      "failures": 0,
+      "phase_offsets": 10,
+      "50ms_single_cases": 10,
+      "100ms_single_cases": 10,
+      "50ms_press_50ms_release_two_press_cases": 10,
+      "held_3s_event_count": 1,
+      "queue_entries": 16,
+      "queue_overflow_drops": 4,
+      "fifo_ordered": true,
+      "30ms_observed_events_of_10": 0,
+      "timing_scope": "ideal host samples; no FreeRTOS or physical LCD latency proof"
+    },
+    "hashes": {
+      "phase-probe.c": "3e01e8bbc4168ca9e651bf69863580003ff5c622fe54fe0111b23601a4e9463e",
+      "run-probe.py": "ee23aee266dbf755c482f8ae952dca3203c5b3e7d402992de5671ecfe54f2aa2",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r21-20260928\\checkout\\build-host\\libmeter_core.a": "3dc4b3f562ab56b40699f78f4e6bba3e59739d071998a459bfddd8e96341f07c",
+      "C:\\Espressif\\benchmark-remediation\\evaluation-r21-20260928\\checkout\\components\\meter\\meter_input.c": "1ea095fad2e7894c3ac378ecfcfb2747c3c390ee6e63a8b7cf0f0cbff92c5496"
+    }
+  },
+  "evidence_limits": [
+    "Ideal host sample phase sweep passed 50ms/100ms press cases at all10 millisecond phases, two50ms presses separated by50ms release, one event for3s hold, and bounded16entry FIFO overflow behavior. This does not measure physical contacts, scheduler delay, or LCD latency.",
+    "30ms pulses produced0events in10phase cases; min_press_ms is unused. Header minimum guaranteed30ms assertion is unsupported. Tested50ms envelope is conditional on nominal10ms sampling.",
+    "Two historical regression Python tests simulate the old polling logic with assumed70ms loop timing; they do not execute r20 production input or establish measured before/after hardware performance.",
+    "AGY operations document statements about100percent success, perfect debounce, sub1ms wake/lock time and guaranteed300ms response are excluded from operator conclusions.",
+    "Startup task ordering before IMU initialization and final initial draw has not been exhaustively stress-tested; boot capture will check this upload for panic markers."
+  ],
+  "physical_pending": [
+    "r21 short BOOT press reliability and debounce-to-display300ms",
+    "r21 receive-to-LCD2s",
+    "r21 basic30s LCD/three layouts",
+    "Real cable disconnect/re-enumeration and power-cycle recovery while PC sender active",
+    "Blinded lighting/50cm visibility/IMU noise/F9 owner score"
+  ],
+  "live_data_scope": "Fixed fixtures only; unchanged AGY sender exists. Actual local Codex quota collector is not implemented. No live provider account data accessed.",
+  "experiment_integrity": "One frozen remediation prompt; no runtime feedback; original one-shot ranking remains unchanged. Product changes and product tests are AGY authored. Operator probe is external evaluation code."
+}
