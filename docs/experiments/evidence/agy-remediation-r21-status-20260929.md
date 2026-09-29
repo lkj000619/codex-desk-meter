@@ -14,7 +14,12 @@
   성공 cycle 기준 약 83분이며 운영자 제한은 90분이다. sender PID 8188, 외부 관측 helper PID 10144.
   이 문서의 실행 상태는 기록 시점의 상태이고 영구 자동 실행을 설치한 것은 아니다.
 - 원본 보존 시점: 주기 송신의 순번 109까지 host 파일 관측. 모든 frame의 device 수신을 증명하지 않는다.
-- r21 영상·실물 BOOT 반응과 USB/재전원 복구 결과는 사용자 확인 대기 중이다.
+- r21 영상: 새 단일 영상 54.33초를 보존·검토했다. 화면 전체가 보이는 약 7.25~41.25초의
+  34초 구간과 세 화면 출력을 확인해 C2 기본 LCD gate를 **통과**로 기록했다.
+- 반복 BOOT 공급자/화면 전환과 IMU 회전 후 표시 유지가 영상에서 관측됐다. 짧은 입력의 모든
+  시도 성공과 긴 hold 1회 반응·300ms timing은 접점이 손에 가려져 확정하지 않는다.
+- 사용자는 r21에서 **“rst, usb 분리, 재연결 시 값이 돌아옴”**이라고 확인했다. 이 조작은 영상에
+  직접 나타나지 않아 사용자 관찰로 기록하고, USB 분리 중 별도 전원 유지 여부는 확인 대기 중이다.
 
 ## 보완 내용과 독립 검증의 한계
 
@@ -34,20 +39,26 @@ FreeRTOS scheduling·실물 접점·첫 LCD 변경 시간을 측정한 결과가
 렌더러 일부는 여전히 state lock 안에서 수행된다. 예전 loop의 두 Python 재현은 가정한
 70ms 주기를 쓰는 simulation이고 실제 r20 production 실행의 성능 측정이 아니다.
 
-## 현재 남은 검증
+## 검증 상태와 남은 항목
 
 | 항목 | 상태 |
 |---|---|
-| 짧은 BOOT 입력 신뢰성·첫 화면 반응 ≤300ms | 생산 코드 회귀 통과, r21 실물 확인 대기 |
+| 짧은 BOOT 입력 신뢰성·첫 화면 반응 ≤300ms | 생산 코드 회귀·영상 전환 확인, 모든 시도 성공·정밀 timing 미확인 |
 | 수신→LCD 표시 ≤2s | 순번 91·92 수신 확인, 직접 timing 미확인 |
-| r21 LCD 30초 유지·세 화면 잘림 없음 | r20 영상 판정 보존, 변경된 r21의 새 영상 미확인 |
-| RST·USB 분리·재전원 복구 | r20 송신 중 RST 약 3초 복구 사용자 관찰; r21 확인 대기 |
-| 별도 전원 유지 USB cable 제거·재열거 | 실제 시험 미확인; USB 재전원과 구분 |
+| r21 LCD 30초 유지·세 화면 잘림 없음 | 새 단일 54.33초 영상의 34초 구간·세 화면 확인, C2 통과 |
+| RST·USB 분리/재연결 후 값 복구 | r21 사용자 관찰 확인, 이번 직접 복구 시간은 미측정 |
+| 별도 전원 유지 USB cable 제거·재열거 | USB 분리 때 전원 조건 확인 대기; 재전원과 구분 |
 | G1–G6·F9·50cm/조명·IMU 잡음 | 정식 실물 측정·모델 비공개 평가 미확인 |
 
 PC 프로그램은 AGY가 작성한 송신기로 실행 중이며 고정 fixture를 보낸다. 실제 사용자 Codex
 계정의 잔여 token/usage를 자동 수집하는 프로그램은 구현되지 않았다. 실제 source 연동은
 별도 live integration 범위다. 송신기가 끝난 뒤 RST하면 새 frame이 올 때까지 값이 없는 상태가 된다.
+
+영상 진단 화면에서 순번 148·53건 accepted/0건 dropped·CONNECTED·Active Error NONE를
+확인했다. 계속 실행 중인 sender의 보존 frame 148과 연결된다. 영상의 1,630개 decoded frame을
+색상으로 검사했고, 약 43.27~43.37초·46.23~46.27초의 후보 6개는 인접 14개 frame 직접 검토에서
+비스듬한 회전으로 화면 투영 면적이 줄어든 장면이었다. 화면은 켜져 있어 새 소등 결함으로 판정하지 않는다.
+미세 flicker·tearing·정밀 입력/수신 latency의 무결함 증거로 확대하지 않는다.
 
 ## 앞선 r20 진단
 
@@ -92,5 +103,7 @@ RST 후 **약 3초, 10초 이내에 값이 돌아옴**을 확인했다. 이는 �
 - [r21 독립 시험 원본 archive receipt](agy-remediation-r21-independent-artifacts-20260928.json)
 - [r21 업로드·실물 수신·운영 송신 snapshot](agy-remediation-r21-hardware-review-20260929.json)
 - [r21 실물 원본 archive receipt](agy-remediation-r21-hardware-artifacts-20260929.json)
+- [r21 새 영상·C2 판정·RST/USB 사용자 관찰](agy-remediation-r21-video01-review-20260929.json)
+- [r21 원본 영상·검토 자료 archive receipt](agy-remediation-r21-video01-artifacts-20260929.json)
 - [r20 RST 복구·BOOT 진단 기록](agy-remediation-r20-reconnect-boot-diagnosis-20260929.json)
 - [r20 진단 원본 archive receipt](agy-remediation-r20-reconnect-boot-artifacts-20260929.json)

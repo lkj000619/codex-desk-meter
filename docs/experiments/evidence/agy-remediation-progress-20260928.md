@@ -725,3 +725,28 @@ sender PID 8188, 운영자 helper PID 10144. raw hardware archive는 실행 중 
 - [r21 독립 검토](agy-remediation-r21-independent-review-20260928.json)
 - [r21 실물 수신·업로드 검토](agy-remediation-r21-hardware-review-20260929.json)
 - [r21 실물 원본 보존 receipt](agy-remediation-r21-hardware-artifacts-20260929.json)
+
+### r21 새 54.33초 영상·C2 통과·RST/USB 값 복구 사용자 관찰
+
+사용자가 **“rst, usb 분리, 재연결 시 값이 돌아옴”**과 `KakaoTalk_20260929_160043587.mp4`를
+제공했다. 원본 26,988,673 bytes·54.33초,
+SHA256 `5fb979d0c5f706a93358877c95631e83b0f901a8238fc3ae24f4d2c2cf267fa7`을 복사 검증·보존했다.
+2fps sample 109개와 전체 1,630개 decoded frame의 coarse 화면 검사를 수행했다.
+후보 6개(frame1298~1301,1387~1388)는 인접 14개 frame 직접 검토에서 회전 중 비스듬한
+시야로 화면 면적이 줄어든 장면이었고 LCD는 켜져 있었다. 새 LCD 소등 결함은 확인되지 않았다.
+
+약 7.25~41.25초의 34초 구간에서 전체 LCD가 켜지고 사용량·글로벌 리셋·진단 화면이 잘림 없이
+출력돼 r21 C2 기본 gate를 pass로 기록했다. 영상 진단은 순번148·53accepted/0dropped·
+CONNECTED·Active Error NONE였으며 sender의 보존 frame148과 연결된다. 반복 공급자/페이지
+전환과 회전 후 표시 조정도 관측됐다. 초기 부분은 카메라 밖으로 끝부분이 나가고 후반 회전에는
+잠깐 off-camera 구간이 있어, 이를 소프트웨어 clipping/blanking으로 취급하지 않는다.
+
+RST/USB 복구는 이번 영상에서 조작이 보이지 않는 사용자 관찰로 기록했다. 전원 유지 여부·직접
+복구 timing을 가정하지 않는다. 짧은 BOOT 모든 입력 성공·긴 hold 1회 반응은 접점이 가려져
+확정하지 않고, BOOT300ms·수신→LCD2s·전원 유지 cable 재열거·정식 G/F9·IMU 잡음은 미확인이다.
+사용자에게 짧은 BOOT 매번 변화 여부와 USB 분리 시 LCD 전원 상태를 확인하는 질문을 보냈다.
+제품 source/binary 변경은 없고 board 재업로드·reset·포트 재열기를 하지 않았다.
+원래 정량 순위·고정 fixture·product_pass:false를 유지하며 이전 sealed archive를 보존한다.
+
+- [r21 새 영상 검토·C2 판정·복구 사용자 관찰](agy-remediation-r21-video01-review-20260929.json)
+- [r21 원본 영상 보존 receipt](agy-remediation-r21-video01-artifacts-20260929.json)
