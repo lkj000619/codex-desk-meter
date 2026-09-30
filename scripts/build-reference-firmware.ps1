@@ -12,7 +12,7 @@ if ($LASTEXITCODE -ne 0 -or $idfVersion -notmatch 'ESP-IDF v5\.3\.2') {
     throw "Pinned ESP-IDF 5.3.2 was not activated: $idfVersion"
 }
 
-$stamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+$stamp = if ($env:CDM_BUILD_TAG) { $env:CDM_BUILD_TAG } else { Get-Date -Format 'yyyyMMdd-HHmmss' }
 $stageName = "codex-desk-meter-reference-$stamp"
 $stageRoot = Join-Path 'C:\Espressif\projects' $stageName
 $buildRoot = Join-Path 'C:\Espressif\builds' $stageName
@@ -29,13 +29,23 @@ try {
     Write-Output "ascii_stage=$stageRoot"
     Write-Output "build_dir=$buildRoot"
     Write-Output "idf_version=$idfVersion"
-    & idf.py -C $stageRoot -B $buildRoot set-target esp32s3
-    if ($LASTEXITCODE -ne 0) { throw "idf.py set-target failed with exit code $LASTEXITCODE" }
+    if (-not (Test-Path -LiteralPath (Join-Path $stageRoot 'sdkconfig'))) {
+        & idf.py -C $stageRoot -B $buildRoot set-target esp32s3
+        if ($LASTEXITCODE -ne 0) { throw "idf.py set-target failed with exit code $LASTEXITCODE" }
+    } else {
+        Write-Output 'target_config=existing esp32s3 sdkconfig; preserving incremental build directory'
+    }
 
     # Parallel Xtensa compilation hit an internal compiler fault in the IDF RGB driver.
     # Serial Ninja completed the same pinned toolchain build and is used for reproducibility.
-    & ninja -C $buildRoot -j1 all
-    if ($LASTEXITCODE -ne 0) { throw "ninja -j1 all failed with exit code $LASTEXITCODE" }
+    $ninjaExit = 1
+    for ($attempt = 1; $attempt -le 2; $attempt++) {
+        & ninja -C $buildRoot -j1 all
+        $ninjaExit = $LASTEXITCODE
+        if ($ninjaExit -eq 0) { break }
+        if ($attempt -lt 2) { Write-Output 'ninja_retry=1 after compiler/build failure; retrying remaining work serially' }
+    }
+    if ($ninjaExit -ne 0) { throw "ninja -j1 all failed after retry with exit code $ninjaExit" }
     & idf.py -C $stageRoot -B $buildRoot build
     if ($LASTEXITCODE -ne 0) { throw "idf.py build failed with exit code $LASTEXITCODE" }
 

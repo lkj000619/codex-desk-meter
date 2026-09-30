@@ -182,7 +182,8 @@ static void draw_dashboard(const CdmReceiver *receiver, int64_t now_epoch) {
         int y = 104 + row * 96;
         fill_rect(x, y, 186, 82, (card % 2u) ? COLOR_PANEL : COLOR_PANEL_ALT);
         char identity[48];
-        snprintf(identity, sizeof(identity), "%s/%s", usage->provider_id, usage->agent_id[0] ? usage->agent_id : "UNKNOWN");
+        snprintf(identity, sizeof(identity), "%.20s/%.25s", usage->provider_id,
+                 usage->agent_id[0] ? usage->agent_id : "UNKNOWN");
         draw_text(x + 8, y + 4, identity, 1, COLOR_CYAN);
         draw_text(x + 8, y + 16, window->label, 1, COLOR_WHITE);
         char value[24];
@@ -249,7 +250,7 @@ static void draw_status(const CdmReceiver *receiver, bool rtc_ready) {
     for (size_t i = 0; i < receiver->usage_count && i < 2; ++i) {
         const CdmUsage *usage = &receiver->usage[i];
         if (strcmp(usage->status, "available") == 0 && !usage->stale) continue;
-        snprintf(line, sizeof(line), "%s %s %s", usage->provider_id, usage->status,
+        snprintf(line, sizeof(line), "%.20s %.12s %.40s", usage->provider_id, usage->status,
                  usage->error_code[0] ? usage->error_code : "STALE");
         draw_text(380, y, line, 1, COLOR_YELLOW);
         y += 12;
