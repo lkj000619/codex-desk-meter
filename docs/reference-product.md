@@ -119,6 +119,10 @@ bootloader and partition binaries into that result's `artifacts/`, and prints
 their SHA-256 hashes. The matching ASCII staging source/build paths are printed
 in the log.
 
+The firmware receives frames through the board's native USB Serial/JTAG COM
+port at 115200 baud, 8N1. The upload and monitor command uses that port too;
+close the monitor before running the separate PC sender.
+
 After reviewing the artifact and backing up the board as required by the
 operator's hardware procedure, upload only the application build:
 
