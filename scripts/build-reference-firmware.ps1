@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 
 $sourceRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$runId = 'codex-reference-20260929'
+$runId = 'codex-product-20261001'
 $resultRoot = Join-Path $sourceRoot "results\$runId"
 $artifactRoot = Join-Path $resultRoot 'artifacts'
 New-Item -ItemType Directory -Force -Path $resultRoot,$artifactRoot | Out-Null
@@ -26,7 +26,11 @@ $logPath = Join-Path $resultRoot 'build.log'
 Start-Transcript -LiteralPath $logPath -Append | Out-Null
 try {
     Write-Output "source_commit=$(& git -C $sourceRoot rev-parse HEAD)"
-    Write-Output "source_dirty=$([bool](& git -C $sourceRoot status --porcelain))"
+    & git -C $sourceRoot diff --quiet
+    $trackedWorkingChanges = $LASTEXITCODE -ne 0
+    & git -C $sourceRoot diff --cached --quiet
+    $trackedStagedChanges = $LASTEXITCODE -ne 0
+    Write-Output "source_tracked_dirty=$($trackedWorkingChanges -or $trackedStagedChanges)"
     Write-Output "source_workspace=$sourceRoot"
     Write-Output "ascii_stage=$stageRoot"
     Write-Output "build_dir=$buildRoot"

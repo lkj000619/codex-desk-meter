@@ -114,7 +114,7 @@ erase the board.
 ```
 
 The script writes the full transcript under
-`results/codex-reference-20260929/build.log`, copies the application,
+`results/codex-product-20261001/build.log`, copies the application,
 bootloader and partition binaries into that result's `artifacts/`, and prints
 their SHA-256 hashes. The matching ASCII staging source/build paths are printed
 in the log.
