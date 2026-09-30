@@ -1,7 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
 $sourceRoot = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$runId = 'codex-product-20261001'
+$runId = if ($env:CDM_RESULT_ID) { $env:CDM_RESULT_ID } else { 'codex-product-20261001' }
+if ($runId -notmatch '^[A-Za-z0-9_-]+$') { throw 'CDM_RESULT_ID must be an ASCII directory label.' }
 $resultRoot = Join-Path $sourceRoot "results\$runId"
 $artifactRoot = Join-Path $resultRoot 'artifacts'
 New-Item -ItemType Directory -Force -Path $resultRoot,$artifactRoot | Out-Null

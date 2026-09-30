@@ -9,6 +9,11 @@
 
 #define CDM_MAX_LINE 65536u
 
+typedef struct {
+    CdmUsage usage[CDM_MAX_USAGE];
+    CdmGlobalReset global_resets[CDM_MAX_GLOBAL_RESETS];
+} CdmParsedState;
+
 static bool copy_string(char *target, size_t capacity, const cJSON *value, bool nullable) {
     if (cJSON_IsNull(value) && nullable) {
         target[0] = '\0';
@@ -339,20 +344,27 @@ CdmResult cdm_receiver_apply(CdmReceiver *receiver, const char *json, size_t len
         !cJSON_IsArray(resets) || cJSON_GetArraySize(usage) > CDM_MAX_USAGE || cJSON_GetArraySize(resets) > CDM_MAX_GLOBAL_RESETS) {
         cJSON_Delete(root); receiver->last_error = CDM_REJECT_CAPACITY; return CDM_REJECT_CAPACITY;
     }
-    CdmUsage parsed_usage[CDM_MAX_USAGE] = {0};
-    CdmGlobalReset parsed_resets[CDM_MAX_GLOBAL_RESETS] = {0};
+    CdmParsedState *parsed = calloc(1, sizeof(*parsed));
+    if (parsed == NULL) {
+        cJSON_Delete(root); receiver->last_error = CDM_REJECT_CAPACITY; return CDM_REJECT_CAPACITY;
+    }
     size_t usage_count = 0, reset_count = 0;
     for (const cJSON *item = usage->child; item != NULL; item = item->next) {
-        if (!parse_usage(item, &parsed_usage[usage_count++])) { cJSON_Delete(root); receiver->last_error = CDM_REJECT_SCHEMA; return CDM_REJECT_SCHEMA; }
+        if (!parse_usage(item, &parsed->usage[usage_count++])) {
+            free(parsed); cJSON_Delete(root); receiver->last_error = CDM_REJECT_SCHEMA; return CDM_REJECT_SCHEMA;
+        }
     }
     for (const cJSON *item = resets->child; item != NULL; item = item->next) {
-        if (!parse_global_reset(item, &parsed_resets[reset_count++])) { cJSON_Delete(root); receiver->last_error = CDM_REJECT_SCHEMA; return CDM_REJECT_SCHEMA; }
+        if (!parse_global_reset(item, &parsed->global_resets[reset_count++])) {
+            free(parsed); cJSON_Delete(root); receiver->last_error = CDM_REJECT_SCHEMA; return CDM_REJECT_SCHEMA;
+        }
     }
     cJSON_Delete(root);
-    memcpy(receiver->usage, parsed_usage, sizeof(parsed_usage));
-    memcpy(receiver->global_resets, parsed_resets, sizeof(parsed_resets));
+    memcpy(receiver->usage, parsed->usage, sizeof(receiver->usage));
+    memcpy(receiver->global_resets, parsed->global_resets, sizeof(receiver->global_resets));
     receiver->usage_count = usage_count;
     receiver->reset_count = reset_count;
+    free(parsed);
     receiver->sequence = sequence_value;
     receiver->has_sequence = true;
     receiver->has_good_frame = true;
