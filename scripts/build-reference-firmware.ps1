@@ -13,18 +13,20 @@ if ($LASTEXITCODE -ne 0 -or $idfVersion -notmatch 'ESP-IDF v5\.3\.2') {
 }
 
 $stamp = if ($env:CDM_BUILD_TAG) { $env:CDM_BUILD_TAG } else { Get-Date -Format 'yyyyMMdd-HHmmss' }
+if ($stamp -notmatch '^[A-Za-z0-9_-]+$') { throw 'CDM_BUILD_TAG must be an ASCII directory label.' }
 $stageName = "codex-desk-meter-reference-$stamp"
 $stageRoot = Join-Path 'C:\Espressif\projects' $stageName
 $buildRoot = Join-Path 'C:\Espressif\builds' $stageName
-New-Item -ItemType Directory -Force -Path $stageRoot | Out-Null
-Copy-Item -Recurse -Force (Join-Path $sourceRoot 'main') (Join-Path $stageRoot 'main')
-Copy-Item -Recurse -Force (Join-Path $sourceRoot 'managed_components') (Join-Path $stageRoot 'managed_components')
+New-Item -ItemType Directory -Force -Path (Join-Path $stageRoot 'main'),(Join-Path $stageRoot 'managed_components') | Out-Null
+Copy-Item -Recurse -Force (Join-Path $sourceRoot 'main\*') (Join-Path $stageRoot 'main')
+Copy-Item -Recurse -Force (Join-Path $sourceRoot 'managed_components\*') (Join-Path $stageRoot 'managed_components')
 Copy-Item -Force (Join-Path $sourceRoot 'CMakeLists.txt'),(Join-Path $sourceRoot 'sdkconfig.defaults'),(Join-Path $sourceRoot 'dependencies.lock') $stageRoot
 
 $logPath = Join-Path $resultRoot 'build.log'
 Start-Transcript -LiteralPath $logPath -Append | Out-Null
 try {
     Write-Output "source_commit=$(& git -C $sourceRoot rev-parse HEAD)"
+    Write-Output "source_dirty=$([bool](& git -C $sourceRoot status --porcelain))"
     Write-Output "source_workspace=$sourceRoot"
     Write-Output "ascii_stage=$stageRoot"
     Write-Output "build_dir=$buildRoot"

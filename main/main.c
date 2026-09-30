@@ -3,20 +3,19 @@
 #include "cdm_rtc.h"
 
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/time.h>
 #include <time.h>
 
 #include "driver/gpio.h"
-#include "driver/uart.h"
+#include "driver/usb_serial_jtag.h"
 #include "esp_heap_caps.h"
 #include "esp_log.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-#define UART_PORT UART_NUM_0
-#define UART_BAUD 115200
 #define MAX_LINE 65536
 #define BOOT_PIN GPIO_NUM_0
 
@@ -28,6 +27,14 @@ static char *line_buffer;
 static size_t line_length;
 static bool dropping_line;
 static bool rtc_ready;
+static bool display_dirty = true;
+static void trace_receiver(const char *event) {
+    char trace[96];
+    int length = snprintf(trace, sizeof(trace), "CDM_%s sequence=%lu result=%d\n",
+                          event, (unsigned long)receiver.sequence, (int)receiver.last_error);
+    if (length > 0 && length < (int)sizeof(trace))
+        usb_serial_jtag_write_bytes(trace, (size_t)length, 0);
+}
 static int64_t current_epoch(void) {
     time_t now = time(NULL);
     return now >= 0 ? (int64_t)now : 0;
@@ -42,6 +49,8 @@ static void apply_line(void) {
     line_buffer[line_length] = '\0';
     int64_t now = current_epoch();
     CdmResult result = cdm_receiver_apply(&receiver, line_buffer, line_length, now);
+    display_dirty = true;
+    trace_receiver("RX");
     if (result == CDM_ACCEPTED) {
         struct timeval tv = {.tv_sec = receiver.last_good_epoch, .tv_usec = 0};
         settimeofday(&tv, NULL);
@@ -51,8 +60,8 @@ static void apply_line(void) {
 }
 
 static void receive_serial(void) {
-    uint8_t bytes[256];
-    int count = uart_read_bytes(UART_PORT, bytes, sizeof(bytes), pdMS_TO_TICKS(10));
+    uint8_t bytes[1024];
+    int count = usb_serial_jtag_read_bytes(bytes, sizeof(bytes), 0);
     for (int i = 0; i < count; ++i) {
         uint8_t byte = bytes[i];
         if (byte == '\n') {
@@ -80,13 +89,10 @@ void app_main(void) {
         return;
     }
 
-    uart_config_t uart_config = {.baud_rate = UART_BAUD, .data_bits = UART_DATA_8_BITS,
-        .parity = UART_PARITY_DISABLE, .stop_bits = UART_STOP_BITS_1, .flow_ctrl = UART_HW_FLOWCTRL_DISABLE,
-        .source_clk = UART_SCLK_DEFAULT};
-    ESP_ERROR_CHECK(uart_driver_install(UART_PORT, 16384, 0, 0, NULL, 0));
-    ESP_ERROR_CHECK(uart_param_config(UART_PORT, &uart_config));
-    ESP_ERROR_CHECK(uart_set_pin(UART_PORT, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE,
-                                 UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE));
+    // The board's USB connector enumerates the ESP32-S3 native Serial/JTAG port.
+    usb_serial_jtag_driver_config_t usb_config = {
+        .rx_buffer_size = MAX_LINE + 1, .tx_buffer_size = 1024};
+    ESP_ERROR_CHECK(usb_serial_jtag_driver_install(&usb_config));
 
     rtc_ready = cdm_rtc_init(NULL);
     if (!cdm_display_init()) {
@@ -104,12 +110,16 @@ void app_main(void) {
         receive_serial();
         uint32_t now_ms = (uint32_t)(xTaskGetTickCount() * portTICK_PERIOD_MS);
         bool raw_pressed = gpio_get_level(BOOT_PIN) == 0;
-        if (cdm_button_update(&boot_button, raw_pressed, now_ms, 50) && boot_button.stable_pressed)
+        if (cdm_button_update(&boot_button, raw_pressed, now_ms, 50) && boot_button.stable_pressed) {
             screen = cdm_screen_next(screen);
+            display_dirty = true;
+        }
         int64_t now = current_epoch();
         cdm_receiver_update_stale(&receiver, now);
-        if ((uint32_t)(now_ms - last_render) >= 1000) {
+        if (display_dirty || (uint32_t)(now_ms - last_render) >= 1000) {
             cdm_display_render(&receiver, screen, now, rtc_ready);
+            if (display_dirty) trace_receiver("DISPLAY");
+            display_dirty = false;
             last_render = now_ms;
         }
         vTaskDelay(pdMS_TO_TICKS(10));

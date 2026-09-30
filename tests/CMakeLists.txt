@@ -17,3 +17,11 @@ else()
 endif()
 enable_testing()
 add_test(NAME receiver_core COMMAND test_receiver_core)
+
+add_executable(test_main_loop test_main_loop.c ../main/cdm_receiver.c
+    ${CDM_IDF_ROOT}/components/json/cJSON/cJSON.c)
+target_include_directories(test_main_loop PRIVATE idf_stubs ../main
+    ${CDM_IDF_ROOT}/components/json/cJSON)
+target_compile_features(test_main_loop PRIVATE c_std_11)
+add_test(NAME native_usb_to_display COMMAND test_main_loop usb)
+add_test(NAME boot_render_latency_and_hold COMMAND test_main_loop boot)

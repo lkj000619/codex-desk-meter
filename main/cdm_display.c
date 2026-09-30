@@ -317,7 +317,7 @@ bool cdm_display_init(void) {
 
     native_frame = heap_caps_calloc(PANEL_W * PANEL_H, sizeof(uint16_t), MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
     if (native_frame == NULL) native_frame = calloc(PANEL_W * PANEL_H, sizeof(uint16_t));
-    if (native_frame == NULL) return ESP_ERR_NO_MEM;
+    if (native_frame == NULL) return false;
     ESP_LOGI(TAG, "ST7701 initialized, logical landscape 820x320");
     return true;
 }
