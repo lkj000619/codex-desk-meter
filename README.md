@@ -6,7 +6,13 @@ ESP32-S3 Super Mini 조립형 장치는 Version 2 검증 뒤 이식합니다.
 
 ## 현재 단계
 
-현재는 **제한 정책의 환경 시험 통과 후 제품 pilot 미통과 단계**입니다.
+2026-09-29 사용자 지시에 따라 **Codex 기준 제품 제작 → 동일 시작 자료의 첫 결과 비교
+→ 기준 수준에 도달하는 수정 비용 비교**로 진행 방식을 전환합니다.
+[새 진행 방식](docs/experiments/reference-comparison-20260929.md)을 현재 작업의 기준으로
+사용합니다. 아래 기존 gate·단회 규칙은 이전 실험의 기록이며 새 기준 제품 제작을
+차단하는 조건으로 적용하지 않습니다. 기존 AGY 결과와 평가 원본은 보존합니다.
+
+기존 단회 실험의 마지막 준비 기록은 **제한 정책의 환경 시험 통과 후 제품 pilot 미통과**였습니다.
 [실행·사후 검증 기록](docs/experiments/evidence/agy-r03-result-20260927.md)을 확인합니다. 실행
 가능 여부는 [실행 전 gate](docs/experiments/benchmark-readiness.md)의 R0~R10으로
 판정하며, `AUTHORIZED`가 되기 전에는 `benchmark.py run`과 수동 prompt 입력을
