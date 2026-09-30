@@ -26,3 +26,8 @@ target_include_directories(test_main_loop PRIVATE idf_stubs ../main
 target_compile_features(test_main_loop PRIVATE c_std_11)
 add_test(NAME native_usb_to_display COMMAND test_main_loop usb)
 add_test(NAME boot_render_latency_and_hold COMMAND test_main_loop boot)
+
+add_executable(test_display_backlight test_display_backlight.c)
+target_include_directories(test_display_backlight PRIVATE ../main)
+target_compile_features(test_display_backlight PRIVATE c_std_11)
+add_test(NAME display_backlight_polarity COMMAND test_display_backlight)

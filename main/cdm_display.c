@@ -1,4 +1,5 @@
 #include "cdm_display.h"
+#include "cdm_backlight.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -262,7 +263,7 @@ bool cdm_display_init(void) {
         .timer_num = LEDC_TIMER_3, .freq_hz = 50000, .clk_cfg = LEDC_SLOW_CLK_RC_FAST};
     ledc_channel_config_t channel = {.gpio_num = GPIO_NUM_6, .speed_mode = LEDC_LOW_SPEED_MODE,
         .channel = LEDC_CHANNEL_1, .intr_type = LEDC_INTR_DISABLE, .timer_sel = LEDC_TIMER_3,
-        .duty = 255, .hpoint = 0};
+        .duty = cdm_backlight_duty(100), .hpoint = 0};
     if (ledc_timer_config(&timer) != ESP_OK || ledc_channel_config(&channel) != ESP_OK) {
         ESP_LOGE(TAG, "backlight PWM init failed");
         return false;
