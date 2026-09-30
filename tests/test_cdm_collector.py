@@ -3,6 +3,8 @@ import json
 import pathlib
 import tempfile
 import unittest
+from types import SimpleNamespace
+from unittest.mock import patch
 import jsonschema
 
 
@@ -13,6 +15,33 @@ spec.loader.exec_module(collector)
 
 
 class CollectorTests(unittest.TestCase):
+    def test_windows_serial_resolves_mode_com_executable_before_subprocess(self):
+        class FakeFunction:
+            def __init__(self, result):
+                self.result = result
+                self.restype = None
+
+            def __call__(self, *args):
+                return self.result
+
+        class FakeKernel32:
+            def __init__(self):
+                self.CreateFileW = FakeFunction(1234)
+                self.CloseHandle = FakeFunction(1)
+
+        mode_path = r"C:\Windows\System32\mode.com"
+        kernel32 = FakeKernel32()
+        serial = collector.WindowsSerial("COM3")
+        with patch("shutil.which", return_value=mode_path) as which, \
+                patch("subprocess.run", return_value=SimpleNamespace(returncode=0, stderr="", stdout="")) as run, \
+                patch.object(collector.ctypes, "WinDLL", return_value=kernel32, create=True):
+            serial.open(timeout_seconds=0.01)
+            serial.close()
+
+        which.assert_called_once_with("mode.com")
+        command = run.call_args.args[0]
+        self.assertEqual(command, [mode_path, "COM3", "BAUD=115200", "PARITY=n", "DATA=8", "STOP=1"])
+
     def test_fixture_registry_normalizes_supported_and_unsupported_providers(self):
         registry = collector.FixtureRegistry(ROOT / "experiments" / "fixtures" / "providers")
         snapshots = registry.collect_all()

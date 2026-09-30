@@ -13,6 +13,7 @@ import math
 import os
 import pathlib
 import re
+import shutil
 import sys
 import tempfile
 import time
@@ -362,10 +363,13 @@ class WindowsSerial:
     def open(self, timeout_seconds: float = 5.0) -> None:
         import subprocess
 
+        mode_executable = shutil.which("mode.com")
+        if mode_executable is None:
+            raise FileNotFoundError("Windows mode.com executable was not found on PATH")
         deadline = time.monotonic() + timeout_seconds
         last_error = "port not available"
         while time.monotonic() < deadline:
-            config = subprocess.run(["mode", self.port, f"BAUD={self.baud}", "PARITY=n", "DATA=8", "STOP=1"],
+            config = subprocess.run([mode_executable, self.port, f"BAUD={self.baud}", "PARITY=n", "DATA=8", "STOP=1"],
                                     capture_output=True, text=True, check=False)
             if config.returncode == 0:
                 kernel32 = ctypes.WinDLL("kernel32", use_last_error=True)
