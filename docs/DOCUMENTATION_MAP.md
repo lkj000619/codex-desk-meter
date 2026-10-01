@@ -2,6 +2,8 @@
 
 ## 2026-10-02 실험 결과 기반 문서 정비
 
+- [다음 동일 조건 비교 준비 상태](experiments/next-comparison-readiness.md):
+  채택 조건, 현재 YAML/prompt/runner와 새 계약의 차이, 실행 전 남은 연결의 진입점.
 - [세 에이전트 결과에 따른 아키텍처 평가](experiments/architecture-review-20261002.md):
   A01~A10의 근거·영향·수정 조건. 동일 조건의 에이전트 순위 자료는 아니다.
 - [기준 문서 수정 계획](superpowers/plans/2026-10-02-experiment-contract-remediation.md):
