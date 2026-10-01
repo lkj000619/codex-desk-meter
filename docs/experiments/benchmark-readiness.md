@@ -1,5 +1,12 @@
 # Benchmark 실행 전 준비 gate
 
+> 적용 범위 정리 (2026-10-02): 아래 R0~R10과 pilot 상태는 기존 단회 cohort의
+> 역사적 준비·실행 기록이다. 다음 첫 결과+수정 비용 비교의 목표·예산·보드 제공
+> 조건은 [새 운영 계약](comparison-operating-contract.md)을 따른다.
+> 실행 인프라 준비와 후보 제품 품질을 구분하며 후보의 제품 실패도 결과로 남긴다.
+> 입력·도구 동기화는 [수정 계획](../superpowers/plans/2026-10-02-experiment-contract-remediation.md)의
+> 후속 작업이다. 이 주석으로 새 실행이나 중지된 OpenCode를 재개하지 않는다.
+
 > 현재 판정 (2026-09-28): **PREFLIGHT_PASSED / AGY_COMPLETION_FAILED / PRODUCT_PASS_UNVERIFIED**.
 > [새 pilot 실행·독립 검증](evidence/agy-r01-result-20260928.md): 사전 시험 111개 통과 후 실제 AGY를 실행했다.
 > 미등록 pytest 명령 거부로 완주 실패. 별도 소스 복사본의 host 빌드·CTest 2개·기존 평가 29개·firmware 빌드는 통과했다.

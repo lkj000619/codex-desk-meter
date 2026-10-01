@@ -1,5 +1,23 @@
 # 문서 역할과 기준 안내
 
+## 2026-10-02 실험 결과 기반 문서 정비
+
+- [세 에이전트 결과에 따른 아키텍처 평가](experiments/architecture-review-20261002.md):
+  A01~A10의 근거·영향·수정 조건. 동일 조건의 에이전트 순위 자료는 아니다.
+- [기준 문서 수정 계획](superpowers/plans/2026-10-02-experiment-contract-remediation.md):
+  수정 대상·의존 순서·검증 조건과 사용자 결정 기록.
+- [새 비교 운영 계약](experiments/comparison-operating-contract.md),
+  [reference-match 목록](experiments/reference-match-matrix.md):
+  확인된 Codex 기능 도달과 전체 제품 합격을 분리한다. 후속 최대 3회·누적 120분,
+  보드 사실/제조사 source만 제공하는 조건을 사용자 선택으로 기록했다.
+- [2026-09-29 비교 방향 전환](experiments/reference-comparison-20260929.md)은
+  첫 결과와 후속 수정 비용을 함께 평가하는 방향이다. 아래 기존 단회 protocol과
+  readiness 문서의 새 비교 적용 관계는 운영 계약을 따른다. YAML/prompt와 runner의
+  동기화·동결은 남아 있으며 문서 정비로 새 실행을 시작하지 않는다.
+- C1~C8 결과 필드와 원본/정규화 token 계약은 이미 구현되어 있다.
+  [2026-09-20 검토](DOCUMENTATION_REVIEW.md)의 당시 미완료 설명은
+  [후속 완료 기록](DOCUMENTATION_REVIEW_CHECKLIST.md)과 구분한다.
+
 ## 읽는 순서와 상태 해석
 
 1. [프로젝트 목적](PROJECT_PURPOSE.md): 제품과 실험을 만드는 이유, 현재·후속 범위.

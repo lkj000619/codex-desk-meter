@@ -1,0 +1,197 @@
+# 실험 기준 문서 정비 Implementation Plan
+
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** 세 에이전트 실험에서 발견한 문서 결함을 정리하고, 동일 시작 조건의 첫 결과와 수정 비용을 해석할 수 있는 기준 문서를 만든다.
+
+**Architecture:** 제품 계약, 실험 운영 규칙, 기계 결과 계약, 시점별 증거의 역할을 구분한다. 현재 schema 설명 오류를 정정하고 사용자가 선택한 비교 목표·수정 예산·BSP 제공 수준을 공통 운영 계약에 반영한다. 실제 후보 구현과 과거 frozen 입력은 변경하지 않는다.
+
+**Tech Stack:** Markdown, Git, 기존 JSON Schema/Python unittest 기반 계약 검증. 제품 대상은 ESP-IDF v5.3.2·Waveshare ESP32-S3-LCD-3.16이다.
+
+**Spec:** [세 에이전트 결과에 따른 아키텍처 평가](../../experiments/architecture-review-20261002.md). 기존 채택 방향은 [reference-comparison-20260929.md](../../experiments/reference-comparison-20260929.md)다.
+
+## Global Constraints
+
+- 현재 작업 브랜치: `docs/architecture-review-20261002`. `docs/verification-20260916` 때문에 Git ref 이름 `docs` 자체는 만들 수 없다.
+- 과거 입력 `aab0d493888f4fc0bb6eff726bfe7d93b167543c`와 원본 run·점수·코드 commit은 변경하지 않는다.
+- 동일 비교군은 같은 제품 코드 없는 시작 자료·최초 prompt template·정책을 받는다. run ID 치환 후 전달 hash도 별도로 기록한다.
+- fixture-only E2E와 owner-only live integration은 분리한다. 계정·credential source를 이 정비에서 추가하지 않는다.
+- cdm/1은 host-to-device이며 ACK가 없다. 문서 정비로 ACK나 retry protocol을 암묵적으로 추가하지 않는다.
+- validator 통과·host 시험·device acceptance·광학 LCD 출력·제품 합격을 별도 판정한다.
+- token 원본 input/output/cached/reasoning/provider_total과 정의를 보존한다. 정규화 total은 input+output이며 cached/reasoning을 더하지 않는다.
+- COM3를 열거나 flash·후보 실행을 하지 않는다. OpenCode 사용자 중지 상태를 유지한다.
+- 이 계획의 질문 답변은 비교 설계값이며 새 실험 실행 지시로 해석하지 않는다.
+
+## Review Focus
+
+1. reference 제품에도 미확인인 항목을 후보의 필수 reference-match 합격 조건으로 끼워 넣지 않는다 → Task 2의 목표 목록 검토.
+2. runtime uptime을 epoch로 비교해 정상 frame을 거부하거나 source timestamp를 송신 시각으로 덮어쓰지 않는다 → Task 3의 clock 시나리오.
+3. host parser/GUI marker 성공으로 상수 표시·문자 미출력·검은 화면을 놓치지 않는다 → Task 4의 의미 연결과 광학 매핑.
+4. 후보 sender와 운영자 capture의 별도 port open으로 수락 증거가 사라지거나 전원 제거를 통신 단절로 채점하지 않는다 → Task 5의 단일 소유·powered-disconnect 절차.
+5. 명령 표기·정책 차이 또는 누락 evidence를 제품 능력/빠른 성공으로 집계하지 않는다 → Task 6의 capability 분리와 Task 7의 복원 기준.
+
+## 사용자 결정 항목
+
+질문은 2026-10-02에 전달했고 사용자는 세 항목 모두 아래 선택값으로 답했다.
+채택된 설계값은 [운영 계약](../../experiments/comparison-operating-contract.md)에 기록했다.
+실행 입력·도구 연결은 후속 작업이며 이번 커밋으로 자동 완료되지 않는다.
+
+| ID | 질문 | 사용자 선택 (2026-10-02) | 검토한 대안 | 영향을 받는 작업 |
+|---|---|---|---|---|
+| Q1 | 기준 도달의 의미 | 확인된 Codex 기능에 대한 reference-match; 전체 계약 합격은 별도 production-conformance | C1~C8·I1~I4·F1~F9 전체 계약 합격을 도달 조건으로 사용 | Task 2·4·5 |
+| Q2 | 공통 최초/후속 실행 한도 | 최초 120분, 후속 최대 3회·누적 120분 | 후속 최대 6회·누적 120분 또는 회차 제한 없이 후속 누적 120분; 최초 120분 유지 | Task 2·6 |
+| Q3 | 보드 기반 제공 수준 | 보드 사실·제조사 source만 동일 제공; BSP 작성 비용도 포함 | 검증된 공통 BSP를 제공하고 제품 로직·UI·통합을 비교 | Task 2·3 |
+
+Q2의 누적 120분은 **후속 후보 실행 시간만** 합산한다. 최초 실행과 운영·독립 평가
+비용은 별도다. 선택된 조건의 후보 실행 총 한도는 최초 120분+후속 누적 120분이다.
+개별 timeout에 걸린 시간도 누적에 포함한다.
+
+Q1~Q3의 사용자 결정은 완료했다. 기준 fixture/hash 복구와 실행 입력 동기화·동결은 남아 있다.
+
+## 파일별 역할
+
+| 파일 | 역할·변경 |
+|---|---|
+| `docs/experiments/architecture-review-20261002.md` | 평가 근거·A01~A10·원래 상태와 이번 정정 기록 |
+| `docs/PRODUCT_CONTRACT.md` | C/I 제품 동작·현재 schema 설명·runtime 시계/관측 경계 |
+| `docs/experiments/evaluation-contract.md` | production seam과 요구별 시험·증거 매핑 |
+| `docs/DOCUMENTATION_REVIEW.md` | 과거 D07/D09/D10의 당시 판정과 후속 완료를 구분 |
+| `docs/DOCUMENTATION_MAP.md` | 최신 평가·계획·적용 상태의 진입점 |
+| `docs/experiments/comparison-operating-contract.md` (Task 2 기록) | 새 비교의 규칙·우선순위·예산·역할을 소유하는 운영 계약 |
+| `docs/experiments/reference-match-matrix.md` (Task 2 초안 기록) | 기준 commit에서 확인한 기능·미확인 항목·동일 stimulus·증거 |
+| `docs/hardware/board-integration-contract.md` (Task 3 생성) | 고정 제조사 source 기반 핀·극성·PSRAM·LCD·USB 전제 및 Q3 경계 |
+| 기존 protocol·management·readiness·reference-comparison | 새 운영 계약에 적용/대체 조항을 연결하고 과거 gate를 역사 범위로 구분 |
+| `experiments/config/version-2-baseline.yaml`·공통 prompt | 결정된 새 비교 조건을 다음 입력본에 함께 반영; 이전 tag 변경 금지 |
+| `docs/experiments/host-device-pipeline-contract.md` | clock/freshness 의미와 단일 소유 관측 절차의 참조 |
+
+## Task 1: 평가를 Git에 기록하고 실제 schema 설명을 정정한다 — A02
+
+**Files:**
+- Create: `docs/experiments/architecture-review-20261002.md`
+- Modify: `docs/PRODUCT_CONTRACT.md`, `docs/experiments/evaluation-contract.md`, `docs/DOCUMENTATION_REVIEW.md`, `docs/DOCUMENTATION_MAP.md`
+- Evidence: `experiments/schema/end-to-end-result.schema.json`, `scripts/validate-end-to-end-result.py`, `docs/DOCUMENTATION_REVIEW_CHECKLIST.md`
+
+**Interfaces:**
+- Consumes: 기존 core_results required, provider_total 정의, N3/N4 완료 기록.
+- Produces: 현재 설명과 과거 평가가 구분된 문서. 제품 schema·코드 동작은 그대로다.
+
+- [x] **Step 1:** 새 docs 계열 브랜치에서 A01~A10 평가를 기록한다.
+- [x] **Step 2:** C1~C8 개별 필드 부재 설명을 실제 required와 product_pass 검사로 정정한다.
+- [x] **Step 3:** provider_total 원본 보존과 total=input+output의 구현 완료 근거를 연결한다.
+- [x] **Step 4:** 2026-09-20 검토 본문·점수는 역사 기록으로 유지하고 후속 완료 주석을 추가한다.
+- [x] **Step 5:** `python -m unittest discover -s scripts/tests -p test_validate_end_to_end_result.py -v` 실행: 22개 통과. 기존 required·provider total·invalid product_pass 검사를 확인했다.
+- [x] **Step 6:** 링크·문서/schema 대조·`git diff --check`를 통과했고 이번 문서 파일만 커밋 대상으로 지정했다.
+
+## Task 2: 적용 규칙·기준 도달·수정 예산을 한 번 고정한다 — A01/A03
+
+**Files:**
+- Create (초안 기록 완료): `docs/experiments/comparison-operating-contract.md`, `docs/experiments/reference-match-matrix.md`
+- Modify: `docs/experiments/agent-experiment-protocol.md`, `docs/experiments/benchmark-management.md`, `docs/experiments/benchmark-readiness.md`, `docs/experiments/reference-comparison-20260929.md`, `docs/DOCUMENTATION_MAP.md`, `experiments/config/version-2-baseline.yaml`, `experiments/prompts/version-2-agent-task.md`
+
+**Interfaces:**
+- Consumes: Q1/Q2/Q3 응답, 원래 실험 입력 commit, Codex 기준 commit `7923f96`의 확인/미확인 evidence.
+- Produces: 최초 실행과 종료 후 수정의 적용 cohort·역할·한도·판정 의미가 일치하는 운영 계약. runner에 없는 기능은 구현 완료로 표현하지 않는다.
+
+- [x] **Step 1:** Q1~Q3 응답을 날짜·선택값과 함께 이 계획 및 새 운영 계약에 기록한다.
+- [ ] **Step 2:** reference-match 표의 관찰·기준 evidence 초안은 기록했다. 다음 입력 동결 전 실제 fixture 경로/hash·reference_time·명령·expected frame과 후보 판정 기록 형식을 복구·연결한다. RTC holdover·정밀 latency·30초 유지 등 미입증 항목은 기준 확인으로 채우지 않는다.
+- [x] **Step 3:** Q1의 판정과 production-conformance 결과를 별도 이름으로 정의한다. 미검증은 pass로 바꾸지 않는다.
+- [x] **Step 4:** Q2의 최초 시간·수정 회차·후속 누적 시간과 timeout/abort 집계 규칙을 기록한다. 수정 회차는 종료 후 별도 지시로 시작한 session이며 실행 내 자체 edit 수가 아니다.
+- [x] **Step 5:** 최초 공통 prompt와 후속 피드백 template을 구분한다. 후속 template의 필수 내용은 관측·기대 동작·근거·직전 source commit·누적 한도다. 다른 후보 코드·구현 patch 제공은 개입으로 기록한다.
+- [ ] **Step 6:** protocol·readiness·reference-comparison·문서 지도에는 적용 관계를 연결했다. 다음 입력본의 YAML·공통 prompt·management와 runner에 실제 운영 조건을 동기화한다. 기존 pilot의 승인/결과는 historical로 보존한다. 모든 후보에 같은 새 baseline을 적용하며 과거 결과를 새 조건으로 재명명하지 않는다. 누적 예산·수정 회차·reference 도달 결과의 자동 기록은 별도 runner 구현이 필요하다.
+- [ ] **Step 7:** 적용 규칙·최초/후속 한도·Q1 판정 이름을 파일별로 대조한다. Q1~Q3 미응답 항목이 남으면 조건 동결을 완료 처리하지 않는다.
+
+## Task 3: clock과 보드 전제를 명시한다 — A04/A05
+
+**Files:**
+- Create: `docs/hardware/board-integration-contract.md`
+- Modify: `docs/PRODUCT_CONTRACT.md`, `docs/experiments/integration-contract.md`, `docs/experiments/host-device-pipeline-contract.md`, `docs/hardware/version-2-capabilities.md`
+- Evidence: `docs/hardware/vendor-source-index.json`, `docs/hardware/version-2-bring-up.md`
+
+**Interfaces:**
+- Consumes: Q3의 공통 BSP 제공 경계, 제조사 source·hash, 기존 observed_at/last_good_at/sent_at.
+- Produces: epoch 유효 여부·monotonic 시간·fixture reference anchor와 source/수신 freshness의 의미; 검증된 보드 사실의 참조 목록.
+
+- [ ] **Step 1:** source observed_at, frame sent_at, 장치 수신 시각, last_good_at의 의미와 단위를 표로 정의한다. uptime을 epoch로 취급하지 않는다.
+- [ ] **Step 2:** fixture 모드의 reference anchor 전달·monotonic 경과 계산과 시각 미확정의 unknown/오류 정책을 제안한다. source timestamp를 현재 시각으로 덮어쓰지 않는다. 이는 계약 제안이며 후보 firmware 수정은 별도다.
+- [ ] **Step 3:** 정상 부팅·미확정 시각·reboot·299/300초·만료 reset·오래된 source 재전송 사례의 입력과 기대 상태를 기록한다. source-stale과 transport-stale 중 하나의 회복이 다른 하나의 회복을 대신하지 않도록 한다.
+- [ ] **Step 4:** 제조사 파일 목록의 실제 source/hash에서 핀 역할·백라이트 극성·PSRAM/framebuffer·LCD init/지원 API·USB-Serial/JTAG와 UART 관계를 확인해 보드 계약에 연결한다. 미확인 값은 확인된 보드 사실로 채우지 않는다.
+- [ ] **Step 5:** Q3가 보드 사실 제공이면 제품/BSP source를 제공하지 않는다. 공통 BSP 제공이면 별도 제작·검증·commit 고정 후 다음 입력본에 포함하는 작업을 추가하고 검증 전까지 완료로 표시하지 않는다.
+- [ ] **Step 6:** `python -m unittest discover -s scripts/tests -p test_host_device_pipeline.py -v`로 기존 wire·stale·sequence 계약이 유지됨을 확인한다. 이것은 새 clock 정책의 firmware 실행 검증이 아니다.
+
+## Task 4: 요구사항에서 실제 표시까지의 검증 목록을 연결한다 — A06
+
+**Files:**
+- Modify: `docs/experiments/evaluation-contract.md`, `docs/experiments/feature-comparison.md`, `docs/PRODUCT_CONTRACT.md`
+- Reference: `scripts/evaluate-product.py`, `experiments/fixtures/provider-fixture-matrix.json`
+
+**Interfaces:**
+- Consumes: Task 2의 목표 matrix, Task 3의 clock 의미, 기존 production parser/상태 링크 규칙.
+- Produces: `요구 ID / stimulus·기준 시각 / 실행하는 production 경로 / 기대 값·상태 / 증거 종류 / 판정` 표.
+
+- [ ] **Step 1:** fixture 두 개의 서로 다른 window/수치/reset/출처를 선택하고 현재 파일에 있는 실제 기대값을 표에 기록한다. host legacy 출력을 최신 wire 필드로 그대로 보내지 않는다.
+- [ ] **Step 2:** production receiver→state→view-model에서 fixture 전환이 표시 의미를 바꾸는지 확인할 시험을 정의한다. payload 대신 42 고정, reset 대신 sent_at 대체, uptime/epoch 혼동은 각각 C3/C4/I4 실패로 연결한다.
+- [ ] **Step 3:** 정상→손상 frame→정상 복구와 null/stale/error 표시의 관찰 항목을 고정한다. last-good 보존과 오류 해제를 모두 확인하도록 한다.
+- [ ] **Step 4:** host에서 볼 수 있는 view-model 값과 실물에서 확인할 glyph·가시 출력·가독성을 구분한다. 기존 legacy 29개 시험의 범위를 확대했다고 주장하지 않는다.
+- [ ] **Step 5:** 현재 evaluator로 실행할 수 없는 항목은 새 평가 도구 구현 backlog로 명시한다. 도구 변경에는 별도 failing case와 production seam 검증이 필요하며 이번 문서 계획으로 구현 완료 처리하지 않는다.
+- [ ] **Step 6:** C1~C8·I1~I4·F1~F9의 범위와 표의 시험 ID를 대조한다. 미검증 영역은 명시적으로 남긴다.
+
+## Task 5: 실물 관측과 단절 시험을 실행 가능한 절차로 만든다 — A07
+
+**Files:**
+- Modify: `docs/PRODUCT_CONTRACT.md`, `docs/experiments/evaluation-contract.md`, `docs/experiments/host-device-pipeline-contract.md`, `docs/experiments/agent-run-commands.md`
+
+**Interfaces:**
+- Consumes: cdm/1 ACK 부재·단일 port 소유, Task 2의 판정 목표, Task 4의 증거 표.
+- Produces: 후보 sender의 frame sequence/hash→device 수락→화면 관찰을 구분해 연결한 운영자 절차.
+
+- [ ] **Step 1:** C1 build log, C2 가시 출력/30초/세 화면 관찰, C3~C6 값·출처 매핑, C8 입력·갱신 시각의 요구별 증거 종류를 명시한다. serial log만으로 광학 pass를 주지 않는다.
+- [ ] **Step 2:** 송신과 capture를 한 serial 소유 경로로 연결하는 harness 설계를 기록한다. 포트 open/reset·DTR/RTS·재열거·capture 실패를 운영 이벤트로 남긴다. 기존 별도 진단을 후보 sender 성공으로 승격하지 않는다.
+- [ ] **Step 3:** 켜진 보드에서 collector stop/restart, 실제 링크 단절, RST, USB 전원 재인가를 별도 시나리오로 정의한다. 배터리 없는 USB 제거를 전원 유지 단절의 필수 성공으로 요구하지 않는다.
+- [ ] **Step 4:** host write, frame accepted, visible update, latency 각각의 시작/종료 anchor를 정한다. 증거 없는 지연·성공률을 추정값에서 확정값으로 바꾸지 않는다.
+- [ ] **Step 5:** 관측 harness 구현과 실물 확인은 별도 후속 작업으로 남긴다. 문서 변경만으로 I3/I4/C2/C8 pass를 표시하지 않는다.
+
+## Task 6: 정책 준수와 실패 분류를 분리한다 — A08
+
+**Files:**
+- Modify: `docs/DEVELOPMENT_ENVIRONMENT.md`, `docs/experiments/agent-usage-and-permissions.md`, `docs/experiments/isolation-policy.md`, `docs/experiments/benchmark-management.md`, `docs/experiments/comparison-operating-contract.md`
+- Reference: `experiments/config/agy-pilot-permissions.json`, `scripts/agy_pilot_environment.py`, `scripts/tests/test_agy_command_policy.py`, 기존 runner profiles
+
+**Interfaces:**
+- Consumes: Task 2의 공통 운영 조건, 표면별 native 도구·허용 작업과 원본 실행 결과.
+- Produces: 동일 작업군의 capability 표와 실행/정책/제품/비교 적격성의 별도 해석 규칙.
+
+- [ ] **Step 1:** 읽기·쓰기·조회·host build/test·IDF build·web/vendor 참조의 공통 작업군과 각 표면의 실제 허용 방법을 기록한다. AGY 파일 이름을 모든 표면의 능력이 동일하다는 증거로 취급하지 않는다.
+- [ ] **Step 2:** 상대 경로 표기 차이와 명령 허용 여부를 실행 전에 확인할 대표 호출 목록을 정한다. 필요한 정책 정규화가 있으면 별도 구현·검증·다음 baseline 변경으로 기록한다.
+- [ ] **Step 3:** 결과 해석에 실행 상태, 명시적 지시 준수, 제품 요구 판정, ranking eligibility를 분리한다. 원래 schema에 없는 필드를 즉시 candidate JSON에 요구하지 않는다.
+- [ ] **Step 4:** denied 후 종료 지시를 유지할지에 대한 현재 정책을 명시하고 위반을 관측으로 보존한다. 자동 종료한 미완료 run을 빠른 성공으로 집계하지 않는다.
+- [ ] **Step 5:** AGY environment_failed와 OpenCode 거부 후 계속 사례로 분류 예시를 작성한다. 과거 원본을 소급 변경하지 않는다.
+
+## Task 7: 현재 상태 탐색과 artifact 복원을 정리한다 — A09/A10
+
+**Files:**
+- Modify: `docs/DOCUMENTATION_MAP.md`, `docs/experiments/benchmark-management.md`, `docs/experiments/agent-run-commands.md`
+- External notes, 별도 후속: Lab-Notes `00 Home.md`, Codex Desk Meter `Overview.md`
+
+**Interfaces:**
+- Consumes: Task 2의 적용 범위, 원본 source/artifact/evidence 위치·hash.
+- Produces: 현재 적용 문서와 역사적 상태의 링크, clone과 evidence package의 복구 조건.
+
+- [ ] **Step 1:** Git 문서 지도에서 현재 평가/계획/공통 계약으로 가는 링크를 확인한다. 과거 날짜의 현재 상태 문구는 날짜와 적용 범위를 붙인다.
+- [ ] **Step 2:** Lab-Notes 후속 갱신은 README·템플릿 규칙에 따라 수행하고 Version 1·세로·전망 목표를 역사/후속 범위로 분리한다. 이는 Git docs 커밋의 포함 파일이 아니다.
+- [ ] **Step 3:** source bundle, binaries/ELF/map/partition, frame·시험 evidence, manifest의 복구 목록과 상대 경로/hash 계약을 정의한다. 기존 미추적 결과·대용량 로그를 자동 stage하지 않는다.
+- [ ] **Step 4:** 새 임시 경로에 복원한 상태에서 result validator가 source/evidence를 찾는 것을 artifact 보존 완료 조건으로 둔다. 원본 checkout 통과를 복원 통과로 대체하지 않는다.
+
+## 검증과 현재 반영 범위
+
+이번 docs 업데이트는 Task 1과 Task 2의 사용자 결정·운영 계약·기준 목록 초안을
+기록한다. 실행 입력 동기화·도구 구현·Lab-Notes 추가 갱신·실험 재개는 완료하지 않았다.
+
+- [x] 변경 Markdown 11개의 로컬 링크 190개 존재를 확인했다. 로컬 전용 evidence는 따로 표시했다.
+- [x] 문서/schema의 core_results와 token 설명을 대조했다.
+- [x] Task 1의 기존 validator 시험 22개가 통과했다.
+- [x] `git diff --check`가 통과했다. stage/commit에는 이번 Markdown 11개만 지정한다.
+- [x] 계획의 A01~A10 누락·결정 의존 관계·파일 경로를 자체 검토했다.
+- [ ] 문서 변경만 commit하고 commit ID·브랜치·채택된 결정과 남은 작업을 사용자에게 보고한다.
+
+다음 작업은 Task 2의 실제 기준 입력·판정 형식 복구와 YAML/prompt/runner 동기화다.
+원본 코드 수리나 새로운 후보 실행은 이 계획 저장·커밋을 근거로 시작하지 않는다.

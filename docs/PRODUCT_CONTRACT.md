@@ -186,8 +186,10 @@ Contract clarifications for the synthetic E2E validator:
   `input_plus_output_excludes_cached_and_reasoning`.
   Runner 원본 telemetry의 total 정의는 제공자별로 다를 수 있다. 특히 OpenCode의
   provider-reported total을 E2E total로 그대로 복사하면 validator에서 거부될 수
-  있다. 원본 보존과 정규화 변환 정책은 [검토 보고서](DOCUMENTATION_REVIEW.md)의
-  D09 미해결 항목이며, 값을 맞추기 위해 원본을 덮어쓰지 않는다.
+  있다. 원본 값은 `provider_total`과 정의로 보존하고 E2E `total`에는
+  `input + output` 정규화 값을 기록한다. 이 연결은 schema·runner·validator에
+  구현되어 있으며 [진행 체크리스트의 N3/D09](DOCUMENTATION_REVIEW_CHECKLIST.md)에
+  완료 근거가 있다. 값을 맞추기 위해 원본을 덮어쓰지 않는다.
 
 `GlobalResetSnapshot`은 현재 Codex 관련 공개 서비스에만 적용되는 보조 데이터다.
 Claude Code, Gemini 또는 Orca/IDE의 quota reset으로 재사용하거나 provider 사이에서
@@ -285,11 +287,13 @@ LCD GUI(F5), 입력·갱신(F6), 글로벌 리셋(F7), 빌드·관측(F8), 자�
 E2E 결과 계약은 해당 필드를 보유하며, historical prep용 schema 확장과 새 정식
 baseline 동결은 별도 종료 조건이다.
 
-현재 E2E 결과 스키마는 F/I/G와 build/host/transport/hardware 상태를 검사하지만
-C1~C8의 개별 판정 필드는 없다. 따라서 validator 통과가 C1~C8 전부의 합격
-증거는 아니다. 운영자는 [실물 채점 기록](experiments/evaluation-contract.md)의
-C별 판정·근거를 별도로 보존한다. 구조화 연결의 미완료 범위는
-[문서 검토 D10](DOCUMENTATION_REVIEW.md)에 기록한다.
+현재 E2E 결과 스키마는 `core_results.C1`~`C8`과 F/I/G,
+build/host/transport/hardware 상태를 기록한다. validator는 C별 필수 항목과
+상태·증거 참조를 검사하고, `product_pass: true`에는 모든 C 항목의 `pass`를
+요구한다. 이는 제출된 판정의 계약 검증이며 LCD 출력이나 실제 수신 동작을
+직접 측정하는 시험은 아니다. 운영자는 [실물 채점 기록](experiments/evaluation-contract.md)의
+C별 판정·근거를 보존한다. 구조화 연결의 완료 근거는
+[진행 체크리스트의 N4/D10](DOCUMENTATION_REVIEW_CHECKLIST.md)에 기록한다.
 
 ### 실물 시험
 

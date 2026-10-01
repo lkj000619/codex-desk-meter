@@ -62,9 +62,11 @@ window `window_id` 등을 사용하며, global wire 매핑은
 마지막 정상값 보존 및 복구를 검사한다. 이는 C3~C7 자동 검사 범위의 회귀 시험이다.
 C1 빌드와 C2/C8 실물 동작은 별도로 확인하며 이 도구가 제품 합격을 선언하지 않는다.
 
-E2E result validator 또한 C1~C8 개별 판정을 직접 검사하지 않는다. C별 판정은
-아래 평가 기록과 증거로 남기고, 구조화 연결은 [문서 검토 D10](../DOCUMENTATION_REVIEW.md)의
-후속 구현 항목으로 관리한다.
+E2E result validator는 `core_results.C1`~`C8`의 필수 판정과 증거 참조를
+검사하며 `product_pass: true`에는 모든 C 항목의 `pass`를 요구한다.
+validator 자체가 C1 빌드나 C2/C8 실물 동작을 실행·측정하는 것은 아니다.
+C별 판정은 아래 평가 기록과 증거로 남긴다. 구조화 연결 완료 근거는
+[진행 체크리스트의 N4/D10](../DOCUMENTATION_REVIEW_CHECKLIST.md)을 따른다.
 
 ## 기능·GUI 결과 분리
 
