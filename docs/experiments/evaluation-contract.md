@@ -66,7 +66,7 @@ E2E result validator는 `core_results.C1`~`C8`의 필수 판정과 증거 참조
 검사하며 `product_pass: true`에는 모든 C 항목의 `pass`를 요구한다.
 validator 자체가 C1 빌드나 C2/C8 실물 동작을 실행·측정하는 것은 아니다.
 C별 판정은 아래 평가 기록과 증거로 남긴다. 구조화 연결 완료 근거는
-[진행 체크리스트의 N4/D10](../DOCUMENTATION_REVIEW_CHECKLIST.md)을 따른다.
+[진행 체크리스트의 N4/D10](../archive/reviews/DOCUMENTATION_REVIEW_CHECKLIST.md)을 따른다.
 
 ## 기능·GUI 결과 분리
 

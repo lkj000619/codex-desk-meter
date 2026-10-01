@@ -165,7 +165,7 @@
 | **Major** | M-02 | `docs/experiments/integration-contract.md:76-78, 124, 144, 183` | Baseline transport가 이미 고정되었음에도 "아직 transport 선택이 끝나지 않았다"는 미확정 서술 유지 |
 | **Minor** | m-01 | `docs/PRODUCT_CONTRACT.md:239`, `docs/experiments/evaluation-contract.md:75` | USB baseline 하에서 C7 실물 시험 기준에 "Wi-Fi 단절"만 기재됨 (USB 케이블 단절 누락) |
 | **Minor** | m-02 | `docs/experiments/benchmark-readiness.md:90` | R1 종료 산출물에 "transport ADR"이 명시되어 있으나 ADR 미작성 및 남은 작업 목록 누락 |
-| **Minor** | m-03 | `docs/experiments/e2e-contract-readiness-proposal.md:25` | 제안 문서의 R1 상태에 "transport remains unset" 서술 잔재 |
+| **Minor** | m-03 | `docs/archive/experiments/e2e-contract-readiness-proposal.md:25` | 제안 문서의 R1 상태에 "transport remains unset" 서술 잔재 |
 
 ---
 
@@ -234,13 +234,13 @@
 ---
 
 ### [Minor m-03] `e2e-contract-readiness-proposal.md`의 "transport remains unset" 서술 잔재
-- **파일:라인**: `docs/experiments/e2e-contract-readiness-proposal.md:25`
+- **파일:라인**: `docs/archive/experiments/e2e-contract-readiness-proposal.md:25`
 - **현재 문구**:
   > `| R1 inputs | schema, fixture, baseline, and transport inputs | in_review: schemas and fixtures are present; transport remains unset |`
 - **모순 이유**:
   - 비록 proposal 문서이나, "transport remains unset"이라는 서술이 현행 baseline(`transport_choice: usb-serial-cdm-1`) 및 PRODUCT_CONTRACT의 고정 선언과 배치됩니다.
 - **추가 수정 제안 (문구 수준)**:
-  - `docs/experiments/e2e-contract-readiness-proposal.md:25`:
+  - `docs/archive/experiments/e2e-contract-readiness-proposal.md:25`:
     > `| R1 inputs | schema, fixture, baseline, and transport inputs | in_review: schemas, fixtures, and transport choice (usb-serial-cdm-1) are present; baseline commit/hash freeze pending |`
 
 ---

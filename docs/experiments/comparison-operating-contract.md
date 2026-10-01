@@ -1,6 +1,6 @@
 # 첫 결과와 후속 수정 비용 비교 운영 계약
 
-상태: **2026-10-02 사용자 결정 반영. 실행 입력 동기화·동결과 도구 연결은 후속 작업.**
+상태: **2026-10-02 사용자 결정·후보 입력 축소 반영. 입력 동결·후속 예산 manager는 미완료.**
 
 이 문서는 [2026-09-29 방향 전환](reference-comparison-20260929.md)을 구체화한다.
 사용자는 2026-10-02에 아래 목표·예산·보드 제공 수준을 선택했다.
@@ -27,8 +27,10 @@ protocol·approval·원본 판정은 당시 조건의 역사 기록으로 유지
 | pilot 전체 합격 뒤 본 실험 | 실행 인프라의 준비와 제품 품질을 구분. 후보의 제품 실패도 결과로 기록 |
 | 전체 제품 합격을 유일한 완료로 해석 | reference-match와 production-conformance를 분리 |
 
-현재 `version-2-baseline.yaml`·공통 prompt는 이전 단회 cohort의 입력이다.
-다음 비교 입력으로 배포하기 전에 이 계약과 함께 동기화해야 한다.
+현재 `version-2-baseline.yaml`·최초 prompt에 채택 조건을 반영했다.
+후보는 [allowlist](../../experiments/config/agent-inputs.json)의 실행 과제·제품 계약·보드 자료
+3개와 필요한 기계 입력만 제공받는다. 이 운영 문서·평가 원본·과거 기록은 복사하지 않는다.
+후속 feedback 입력·예산 manager·reference 판정 연결과 최종 baseline 동결은 남아 있다.
 계약 채택과 runner의 누적 예산 자동 enforcement 구현은 같은 완료 상태가 아니다.
 
 ## 2. 기준 도달과 전체 합격

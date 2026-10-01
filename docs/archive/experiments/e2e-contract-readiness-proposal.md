@@ -6,17 +6,17 @@ a transport, access a provider, flash hardware, or change the existing baseline.
 
 ## Proposed links
 
-- [UsageSnapshot schema](../../experiments/schema/usage-snapshot.schema.json)
-- [End-to-end result schema](../../experiments/schema/end-to-end-result.schema.json)
-- [Provider fixture matrix](../../experiments/fixtures/providers/README.md)
-- [Machine-readable fixture expectations](../../experiments/fixtures/provider-fixture-matrix.json)
-- [Fixture matrix schema](../../experiments/schema/provider-fixture-matrix.schema.json)
-- [Result examples](../../experiments/examples/README.md)
-- [Semantic validator](../../scripts/validate-end-to-end-result.py)
-- [Host-device pipeline contract](host-device-pipeline-contract.md)
-- [Host-device pipeline evidence](../../experiments/examples/host-device-pipeline-evidence.example.json)
-- [Integration contract](integration-contract.md)
-- [Benchmark readiness gate](benchmark-readiness.md)
+- [UsageSnapshot schema](../../../experiments/schema/usage-snapshot.schema.json)
+- [End-to-end result schema](../../../experiments/schema/end-to-end-result.schema.json)
+- [Provider fixture matrix](../../../experiments/fixtures/providers/README.md)
+- [Machine-readable fixture expectations](../../../experiments/fixtures/provider-fixture-matrix.json)
+- [Fixture matrix schema](../../../experiments/schema/provider-fixture-matrix.schema.json)
+- [Result examples](../../../experiments/examples/README.md)
+- [Semantic validator](../../../scripts/validate-end-to-end-result.py)
+- [Host-device pipeline contract](../../experiments/host-device-pipeline-contract.md)
+- [Host-device pipeline evidence](../../../experiments/examples/host-device-pipeline-evidence.example.json)
+- [Integration contract](../../experiments/integration-contract.md)
+- [Benchmark readiness gate](../../experiments/benchmark-readiness.md)
 
 ## Proposed readiness update
 
@@ -52,7 +52,7 @@ remain open. Host simulation remains `host_simulated` /
 
 This report preserves the checks and evidence recorded at review time.
 Its mandatory OS-sandbox/read-isolation gate is superseded by
-[isolation-policy.md](isolation-policy.md): `prompt-and-log` is the default;
+[isolation-policy.md](../../experiments/isolation-policy.md): `prompt-and-log` is the default;
 Docker/VM is optional. Host toolchain checks plus prompt scope, activity logging,
 network/settings evidence can satisfy the revised R5 preflight requirement.
 OS read isolation is `not_enforced` in the default mode. Lack of a Docker/sandbox

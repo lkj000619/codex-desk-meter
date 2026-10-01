@@ -47,14 +47,14 @@ operation, or flash.
 
 ## Required source records read
 
-- [`DOCUMENTATION_REVIEW_CHECKLIST.md`](../DOCUMENTATION_REVIEW_CHECKLIST.md)
-- [`benchmark-readiness.md`](benchmark-readiness.md)
-- [`agent-run-commands.md`](agent-run-commands.md)
+- [`DOCUMENTATION_REVIEW_CHECKLIST.md`](../reviews/DOCUMENTATION_REVIEW_CHECKLIST.md)
+- [`benchmark-readiness.md`](../../experiments/benchmark-readiness.md)
+- [`agent-run-commands.md`](../../experiments/agent-run-commands.md)
 - [`r4-profile-resolution.md`](r4-profile-resolution.md)
-- [`preflight-evidence-20260918.md`](preflight-evidence-20260918.md)
-- [`agent-experiment-protocol.md`](agent-experiment-protocol.md)
-- [`agent-usage-and-permissions.md`](agent-usage-and-permissions.md)
-- [`isolation-policy.md`](isolation-policy.md)
+- [`preflight-evidence-20260918.md`](../../experiments/preflight-evidence-20260918.md)
+- [`agent-experiment-protocol.md`](../../experiments/agent-experiment-protocol.md)
+- [`agent-usage-and-permissions.md`](../../experiments/agent-usage-and-permissions.md)
+- [`isolation-policy.md`](../../experiments/isolation-policy.md)
 - [`launch-coordination-20260921.md`](launch-coordination-20260921.md)
 - `scripts/benchmark.py`, `experiments/schema/runner-profile.schema.json`, and the
   local preflight/activation scripts.
@@ -77,9 +77,9 @@ evidence; it does not mean that a model or product run is approved.
 | Item | Status | Evidence | Remaining action |
 |---|---|---|---|
 | Repository/ref inventory | observed | This record; starting `git status`, HEAD, and diff summary | Keep all prior changes; choose a clean approved baseline later |
-| Codex executable identity | observed | [`codex-cli-preflight-20260921.txt`](evidence/codex-cli-preflight-20260921.txt) | Re-run immediately before any future prepare; exact output must still match |
+| Codex executable identity | observed | [`codex-cli-preflight-20260921.txt`](../../experiments/evidence/codex-cli-preflight-20260921.txt) | Re-run immediately before any future prepare; exact output must still match |
 | Codex noninteractive argv shape | observed | Same evidence; version/help exits are recorded | Use only the candidate argv; no unlisted switch may be added |
-| Candidate model/reasoning IDs | observed | Local model metadata excerpt in [`codex-cli-preflight-20260921.txt`](evidence/codex-cli-preflight-20260921.txt) | User chooses cohort; a future run must separately establish access/entitlement |
+| Candidate model/reasoning IDs | observed | Local model metadata excerpt in [`codex-cli-preflight-20260921.txt`](../../experiments/evidence/codex-cli-preflight-20260921.txt) | User chooses cohort; a future run must separately establish access/entitlement |
 | Settings isolation | blocked | Runtime config inventory in the evidence file; explicit argv in candidates | Prove the effective profile used by the exact runner; do not call policy strings proof |
 | ESP-IDF activation/version | observed | Activation exit 0; `idf.py --version` exit 0; ESP-IDF v5.3.2 | Repeat in the final clean selected checkout |
 | ESP-IDF compile smoke check | observed | ASCII hello-world build exit 0; three binary hashes in the evidence file | This proves toolchain/build readiness only; repository product firmware is still absent |
@@ -222,7 +222,7 @@ disabled or add unsupported environment plumbing.
 ### Feature-flag follow-up (2026-09-22)
 
 The exact commands and sanitized feature-state inventory are preserved in
-[`codex-feature-controls-20260922.txt`](evidence/codex-feature-controls-20260922.txt).
+[`codex-feature-controls-20260922.txt`](../../experiments/evidence/codex-feature-controls-20260922.txt).
 
 The installed top-level and `exec` help both exited 0 and document `--enable <FEATURE>`
 and `--disable <FEATURE>`, with the explicit equivalence

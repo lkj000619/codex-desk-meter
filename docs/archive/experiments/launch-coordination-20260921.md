@@ -80,7 +80,7 @@ R8은 pre-pilot evaluator-harness와 post-run production 평가의 경계가 미
 ## 준비 산출물
 
 - [Luna 준비 기록](launch-readiness-20260921.md)
-- [CLI·환경·빌드 증거](evidence/codex-cli-preflight-20260921.txt)
+- [CLI·환경·빌드 증거](../../experiments/evidence/codex-cli-preflight-20260921.txt)
 - 후보 profile: `experiments/config/verified-profiles-candidate/`의 Codex 2종.
 - 설치 CLI 0.153.2, IDF v5.3.2 활성화 및 ESP32-S3 hello-world 빌드 확인.
 - 81개 테스트, 세 validator, host dry-run, diff 검사 통과.
@@ -98,14 +98,14 @@ R8은 pre-pilot evaluator-harness와 post-run production 평가의 경계가 미
 
 ## AGY 현재 감사 연결 (2026-09-25)
 
-상세 판정과 다음 작업은 [AGY launch review](agy-launch-review-20260925.md)에 기록하며,
+상세 판정과 다음 작업은 [AGY launch review](../../experiments/agy-launch-review-20260925.md)에 기록하며,
 수정 후 독립 재검증은 [AGY Sol review](agy-launch-sol-review-20260925.md)에 기록한다.
 Q1의 기존 6종 계획 유지, Q2의 baseline commit/tag 승인, Q3의
 `antigravity-cli / gemini-3.8-flash-medium` 파일럿 및 옵션 A(COM3/실물 평가) 결정은
 변경하지 않는다. Q3는 R10 발효가 아니다.
 
 - 실제 `agy --version`은 `1.2.9`이고, `agy --help` 및 MCP/plugin 목록은
-  [2026-09-25 evidence](evidence/agy-cli-20260925.txt)에 원문과 SHA-256으로 보존했다.
+  [2026-09-25 evidence](../../experiments/evidence/agy-cli-20260925.txt)에 원문과 SHA-256으로 보존했다.
 - 2026-09-24 raw preflight는 version과 빈 MCP/plugin 목록만 관측하며
   memory/cache/routing이 CLI에서 직접 관측되지 않는다고 명시한다. 기존 candidate의
   builtin-only·cleared/disabled/direct 주장은 제거하고 `unverified`로 표시했다.

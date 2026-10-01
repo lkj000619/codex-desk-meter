@@ -1,5 +1,10 @@
 # 에이전트 실행 가이드
 
+2026-10-02: 운영자용 안내다. 새 baseline의 후보 입력은
+[allowlist](../../experiments/config/agent-inputs.json)로 제한한다.
+이 문서·profile·과거 기록을 후보에게 복사하지 않는다.
+새 비교의 현재 준비 상태는 [준비 상태](next-comparison-readiness.md)를 따른다.
+
 > Measurement correction: [comparison integrity review](evidence/agy-comparison-integrity-20260927.md). AGY DONE without exit status is unknown; future failed_commands remains null when incomplete. Past raw runs are immutable. 107 tests passed. Product pilot remains unpassed; no expansion of vendor build access.
 
 > Current review (2026-09-27): **PREFLIGHT_PASSED / PILOT_NOT_PASSED**.
@@ -66,7 +71,7 @@ AGY stream/usage 및 soft-denial, 실제 operator intervention은 첫 pilot에�
 그 관측값을 그 pilot의 선행조건으로 요구하지 않는다. 실행 전에 위에 적힌 model-list/profile,
 synthetic parser, one-shot mock, telemetry preservation, evaluator read-only 조건은 충족해야 한다.
 AGY 명령 권한의 선택과 설정 검토 순서는
-[scoped permission 계획](agy-scoped-permissions-20260925.md)에 따른다. 필요한 명령은 승인된
+[scoped permission 계획](../archive/experiments/agy-scoped-permissions-20260925.md)에 따른다. 필요한 명령은 승인된
 checkout에서 확인해 고정하며, `--dangerously-skip-permissions`는 후보 argv에 넣지 않는다.
 
 ## 1. 환경과 도구 검증
@@ -93,7 +98,7 @@ reasoning, 설치 버전, argv, skills/plugins/MCP/메모리/사용자 지침/�
 반복마다 동일 profile을 사용한다. 순수 모델 비교가 아닌 agent+model+설정 비교다.
 
 버전·실행 파일의 시점별 실측과 남은 설정은
-[R4 profile 검토 기록](r4-profile-resolution.md)을 따른다. 해당 기록의 버전을
+[R4 profile 검토 기록](../archive/experiments/r4-profile-resolution.md)을 따른다. 해당 기록의 버전을
 현재 설치본이나 실행 가능한 profile의 증거로 간주하지 않는다. 설치 확인은
 로그인·모델 접근·sandbox 합격을 뜻하지 않는다.
 
@@ -187,7 +192,7 @@ sandbox 내부 검증과 `read_isolation: pass` 증거를 확보한다.
 1. 선택 baseline `benchmark-v2-baseline-20260925`와 검증된 candidate
    `experiments/config/verified-profiles-candidate/agy-gemini-3.8-flash.candidate.json`을
    확인한다. baseline commit은 `eef278013428a79c29d6b9456018049af149ca61`이다.
-2. [제한 정책](agy-scoped-permissions-20260925.md)과 wrapper가 기존 전역 허용 규칙·
+2. [제한 정책](../archive/experiments/agy-scoped-permissions-20260925.md)과 wrapper가 기존 전역 허용 규칙·
    공통 지침·hook을 일시 분리하는지 확인한다. `--dangerously-skip-permissions`는 사용하지
    않는다. 아래 check가 `inputs_valid`를 반환하는지 확인한다.
 3. [profile-bound receipt](evidence/agy-gemini-3.8-flash-receipt.json)의 evidence SHA와

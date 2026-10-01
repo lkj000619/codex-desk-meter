@@ -223,12 +223,12 @@ scripts/tests/test_benchmark.py
 ~~~text
 docs/experiments/benchmark-readiness.md
 docs/experiments/e2e-contract-implementation-plan.md
-docs/experiments/e2e-contract-readiness-proposal.md
+docs/archive/experiments/e2e-contract-readiness-proposal.md
 docs/experiments/feature-comparison.md
 docs/experiments/host-device-pipeline-contract.md
 docs/experiments/host-device-pipeline-implementation-plan.md
 docs/experiments/integration-contract.md
-docs/experiments/readiness-review-20260913.md
+docs/archive/experiments/readiness-review-20260913.md
 experiments/config/preflight-inputs.example.json
 experiments/config/runner-profiles/README.md
 experiments/config/runner-profiles/antigravity-cli.example.json
@@ -357,7 +357,7 @@ local-link check (exit 1) was corrected; the corrected check exited 0.
 
 This report preserves the checks and evidence recorded at review time.
 Its mandatory OS-sandbox/read-isolation gate is superseded by
-[isolation-policy.md](isolation-policy.md): `prompt-and-log` is the default;
+[isolation-policy.md](../../experiments/isolation-policy.md): `prompt-and-log` is the default;
 Docker/VM is optional. Host toolchain checks plus prompt scope, activity logging,
 network/settings evidence can satisfy the revised R5 preflight requirement.
 OS read isolation is `not_enforced` in the default mode. Lack of a Docker/sandbox

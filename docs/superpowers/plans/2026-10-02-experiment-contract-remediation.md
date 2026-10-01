@@ -55,7 +55,7 @@ Q1~Q3의 사용자 결정은 완료했다. 기준 fixture/hash 복구와 실행 
 | `docs/experiments/architecture-review-20261002.md` | 평가 근거·A01~A10·원래 상태와 이번 정정 기록 |
 | `docs/PRODUCT_CONTRACT.md` | C/I 제품 동작·현재 schema 설명·runtime 시계/관측 경계 |
 | `docs/experiments/evaluation-contract.md` | production seam과 요구별 시험·증거 매핑 |
-| `docs/DOCUMENTATION_REVIEW.md` | 과거 D07/D09/D10의 당시 판정과 후속 완료를 구분 |
+| `docs/archive/reviews/DOCUMENTATION_REVIEW.md` | 과거 D07/D09/D10의 당시 판정과 후속 완료를 구분 |
 | `docs/DOCUMENTATION_MAP.md` | 최신 평가·계획·적용 상태의 진입점 |
 | `docs/experiments/comparison-operating-contract.md` (Task 2 기록) | 새 비교의 규칙·우선순위·예산·역할을 소유하는 운영 계약 |
 | `docs/experiments/reference-match-matrix.md` (Task 2 초안 기록) | 기준 commit에서 확인한 기능·미확인 항목·동일 stimulus·증거 |
@@ -68,8 +68,8 @@ Q1~Q3의 사용자 결정은 완료했다. 기준 fixture/hash 복구와 실행 
 
 **Files:**
 - Create: `docs/experiments/architecture-review-20261002.md`
-- Modify: `docs/PRODUCT_CONTRACT.md`, `docs/experiments/evaluation-contract.md`, `docs/DOCUMENTATION_REVIEW.md`, `docs/DOCUMENTATION_MAP.md`
-- Evidence: `experiments/schema/end-to-end-result.schema.json`, `scripts/validate-end-to-end-result.py`, `docs/DOCUMENTATION_REVIEW_CHECKLIST.md`
+- Modify: `docs/PRODUCT_CONTRACT.md`, `docs/experiments/evaluation-contract.md`, `docs/archive/reviews/DOCUMENTATION_REVIEW.md`, `docs/DOCUMENTATION_MAP.md`
+- Evidence: `experiments/schema/end-to-end-result.schema.json`, `scripts/validate-end-to-end-result.py`, `docs/archive/reviews/DOCUMENTATION_REVIEW_CHECKLIST.md`
 
 **Interfaces:**
 - Consumes: 기존 core_results required, provider_total 정의, N3/N4 완료 기록.
@@ -195,3 +195,41 @@ Q1~Q3의 사용자 결정은 완료했다. 기준 fixture/hash 복구와 실행 
 
 다음 작업은 Task 2의 실제 기준 입력·판정 형식 복구와 YAML/prompt/runner 동기화다.
 원본 코드 수리나 새로운 후보 실행은 이 계획 저장·커밋을 근거로 시작하지 않는다.
+
+
+## 2026-10-02 승인된 입력 축소 작업
+
+사용자 승인: 후보 입력을 실행 과제·제품 계약·보드 자료로 제한하고 운영/평가·과거 기록을 분리한다.
+작업은 현재 main에서 수행한다. 실제 후보 실행·보드 접근·원격 push는 포함하지 않는다.
+
+**설계:** 기존 세 MD 경로를 유지하고 내용 소유자를 명확히 한다. JSON allowlist로
+schema/fixture/필요 도구를 선택하고, runner는 전체 baseline을 운영자 임시 snapshot에서
+검증한 뒤 허용 파일만 독립 candidate checkout에 복사한다. 운영 criteria hash는
+checkout 밖에서 계산한다. 목록·파일 hash를 운영자 증거와 candidate 사본으로 보존하고
+실행 전/후 변경을 검사한다. 과거 frozen baseline은 당시 전달 방식을 유지한다.
+이것은 제공 파일 제한이며 OS 차원의 외부 읽기 sandbox를 보장하지 않는다.
+
+**변경 파일:** 세 필수 MD, `experiments/config/agent-inputs.json`, `scripts/benchmark.py`,
+`README.md`, `docs/DOCUMENTATION_MAP.md`, 관련 운영 안내와 날짜별 검토의 archive 경로.
+**검증 파일:** `scripts/tests/test_candidate_bundle.py`, `test_agent_inputs.py`, `test_benchmark.py`.
+
+- [x] 목록 밖 문서/결과/runner, 누락 입력·unsafe path 차단 시험을 먼저 실패시킨다.
+- [x] 명시적 파일 목록을 검증·복사하고 input bundle에 내용 hash를 연결한다.
+- [x] 운영 criteria는 candidate에게 전달하지 않고 run별 inventory와 immutable 검사에 연결한다.
+- [x] 14개 입력 묶음의 전부 읽기 지시를 세 MD와 계층별 필요한 JSON으로 줄인다.
+- [x] dated review 17개를 archive로 옮기고 진입 문서·상대 링크를 정리했다. 원본 evidence 212개는 변경하지 않았다.
+- [x] 지원 도구 변경 시 bundle hash 변경·입력 변조·실제 prepare 격리·historical 회귀 시험을 확인했다.
+- [x] 전체 시험·링크/공백·출처를 확인했다. 검증한 변경은 로컬 main에 commit해 보고한다.
+
+**검토 초점:** 기록 없는 allowlist 누락, 상위/절대/symlink 경로, Git LF/CRLF hash,
+기준 MD 수정으로 요구 축소, 기존 baseline 복구 호환성. 후보 제품 파일 생성은 허용하며
+제공 기준 파일 변경은 거부한다. 수정 회차 누적 예산·reference fixture 복구·실물 평가 자동화는
+기존 Tasks 2~6의 남은 작업으로 유지한다.
+
+
+입력 축소 검증: 필수 MD 570→245줄, 제공 파일 57개(MD 3 + JSON/도구 54).
+전체 133개 시험 중 132개 통과, symlink 생성 권한이 없는 Windows 시험 1개 건너뜀.
+마지막 profile snapshot 저장 순서 조정 뒤 runner 회귀 44개도 통과했다.
+문서 로컬 링크 272개 누락 없음, 제조사 source 189개 hash 일치,
+원본 evidence 212개 Git blob 변경 없음. OS sandbox·실물 동작·새 실험 승인 또는
+후속 회차/누적 예산 구현 완료를 주장하지 않는다.

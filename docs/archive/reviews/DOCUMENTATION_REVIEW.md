@@ -5,7 +5,7 @@
 > [진행 체크리스트](DOCUMENTATION_REVIEW_CHECKLIST.md)에 기록되어 있다.
 > 현재 E2E 계약에는 C1~C8 개별 결과, 원본/정규화 token 구분과
 > 평가 manifest/archive 연결이 있다. 세 에이전트의 실험 결과에 따른 최신
-> 문서 평가는 [2026-10-02 아키텍처 평가](experiments/architecture-review-20261002.md)를 따른다.
+> 문서 평가는 [2026-10-02 아키텍처 평가](../../experiments/architecture-review-20261002.md)를 따른다.
 > 이 주석은 과거 판정이나 동결된 실험 입력을 변경하지 않는다.
 
 ## 상태와 검토 기준
@@ -15,7 +15,7 @@
 저장소에 추적된 MD 42개를 대상으로 본문을 검토했다. 로컬 설치 스킬과 생성
 artifact는 제품 문서 목록에 포함하지 않는다. 적용되는 AGENTS.md는 저장소 및
 상위 경로에서 발견되지 않았다. requirement-review의 여섯 품질 축을 적용한다.
-문서별 역할·상태·읽는 순서는 [문서 지도](DOCUMENTATION_MAP.md)에 정리했다.
+문서별 역할·상태·읽는 순서는 [문서 지도](../../DOCUMENTATION_MAP.md)에 정리했다.
 
 판정: 문서만으로 고칠 수 있는 설명·참조 문제는 수정했다. 목적과 E2E 평가의
 큰 구조는 구체적이지만, formal E2E 준비 완료 판정은 **주요 보완 필요**다.
@@ -34,9 +34,9 @@ R0~R10 상태 변경이 아니다.
 - 완료 조건: C1~C8·I1~I4·F1~F9 및 실물 증거와 G1~G6 평가를 구분해 확인.
   host 시뮬레이션이나 schema 통과만으로 제품 합격을 선언하지 않는다.
 
-근거: [목적](PROJECT_PURPOSE.md), [제품 계약](PRODUCT_CONTRACT.md),
-[기능 비교](experiments/feature-comparison.md),
-[현재 gate](experiments/benchmark-readiness.md).
+근거: [목적](../../PROJECT_PURPOSE.md), [제품 계약](../../PRODUCT_CONTRACT.md),
+[기능 비교](../../experiments/feature-comparison.md),
+[현재 gate](../../experiments/benchmark-readiness.md).
 
 ## 발견 사항과 처리 결과
 
@@ -59,31 +59,31 @@ R0~R10 상태 변경이 아니다.
 
 ### 코드 대조 근거와 재현 방법
 
-- D07: [runner](../scripts/benchmark.py)의 `prepare`는 E2E 결과 경로를 선택하지만
+- D07: [runner](../../../scripts/benchmark.py)의 `prepare`는 E2E 결과 경로를 선택하지만
   `archive_run`은 `hardware-feature-result.schema.json`만 검증한다. 별도
-  [E2E 평가 manifest schema](../experiments/schema/end-to-end-manifest.schema.json)는
-  운영 manifest와 구조가 다르다. [summary](../scripts/summarize-benchmark.py)는
+  [E2E 평가 manifest schema](../../../experiments/schema/end-to-end-manifest.schema.json)는
+  운영 manifest와 구조가 다르다. [summary](../../../scripts/summarize-benchmark.py)는
   manifest 행만 출력하며 통계·F/I/G 결과를 계산하지 않는다.
-- D08: [evaluator](../scripts/evaluate-product.py)의 `cases`/`check`와
+- D08: [evaluator](../../../scripts/evaluate-product.py)의 `cases`/`check`와
   `scripts/tests/test_benchmark.py`의 `EvaluatorTests`를 대조했다. personal 입력은
   `source=fixture`, 원본 windows의 `id`를 유지하지만 E2E 모델은 `source_kind`,
   `window_id`를 사용한다. 새 제품 요구를 legacy 출력으로 축소하지 않았다.
-- D09: runner `telemetry`와 [E2E validator](../scripts/validate-end-to-end-result.py)의
+- D09: runner `telemetry`와 [E2E validator](../../../scripts/validate-end-to-end-result.py)의
   `_check_telemetry`를 대조했다. 저장된 OpenCode probe 예시 2005+15와 원본 total
   2065는 다르다. 기존 테스트의 provider total 보존과 E2E input+output 검사는
   각각 통과하지만 두 계약을 직접 연결할 수 있다는 검증은 아니다.
-- D10: [E2E result schema](../experiments/schema/end-to-end-result.schema.json)와
+- D10: [E2E result schema](../../../experiments/schema/end-to-end-result.schema.json)와
   `_check_product_pass`는 F/I/validation/G를 검사하며 C1~C8 개별 결과는 검사하지
   않는다. F9도 상태·증거만 기록하며 후보 3개·30점 세부 구조는 선택 문서에 남겨야 한다.
-- D11: [baseline YAML](../experiments/config/version-2-baseline.yaml)의 live 허용 키가
+- D11: [baseline YAML](../../../experiments/config/version-2-baseline.yaml)의 live 허용 키가
   true다. scripts에서 해당 키를 직접 소비하는 코드는 검색으로 발견하지 못했다.
   즉 이번 검토가 실제 live 호출을 발견한 것은 아니며, 고정 입력을 읽는 agent가
   범위를 오해할 수 있는 계약 불일치다.
-- D13: [UsageSnapshot schema](../experiments/schema/usage-snapshot.schema.json)의
+- D13: [UsageSnapshot schema](../../../experiments/schema/usage-snapshot.schema.json)의
   required 키를 제품 문서와 대조했다.
-- D14: [관리 기준](experiments/benchmark-management.md) §상태,
-  [R4 종료 조건](experiments/r4-profile-resolution.md),
-  [readiness](experiments/benchmark-readiness.md) §필수 gate를 대조했다.
+- D14: [관리 기준](../../experiments/benchmark-management.md) §상태,
+  [R4 종료 조건](../experiments/r4-profile-resolution.md),
+  [readiness](../../experiments/benchmark-readiness.md) §필수 gate를 대조했다.
 
 ## 품질 평가
 

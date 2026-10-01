@@ -30,6 +30,9 @@ target:
   hardware_profile: docs/hardware/version-2-capabilities.md
 
 inputs:
+  candidate_allowlist: experiments/config/agent-inputs.json
+  required_candidate_markdown_count: 3
+  # Following references are operator-owned; candidate reads only the allowlisted bundle.
   purpose: docs/PROJECT_PURPOSE.md
   environment: docs/DEVELOPMENT_ENVIRONMENT.md
   protocol: docs/experiments/hardware-feature-discovery.md
@@ -43,8 +46,9 @@ run_policy:
   same_base_commit: true
   isolated_branch_or_worktree: true
   preserve_prompt_and_attempted_followups_as_evidence: true
+  # Initial session stays one-shot; separately recorded remediation follows the adopted contract.
   one_shot_primary_cohort: true
-  followups_allowed: false
+  followups_allowed: true
   external_feedback_allowed: false
   evaluator_read_only: true
   preserve_failed_runs: true
@@ -54,6 +58,15 @@ run_policy:
   repetitions_per_agent_model: 3
   randomized_run_order: true
   hard_timeout_seconds: 7200
+  remediation_max_rounds: 3
+  remediation_cumulative_timeout_seconds: 7200
+  candidate_total_timeout_seconds: 14400
+  remediation_budget_runner_status: pending
+  operating_contract: docs/experiments/comparison-operating-contract.md
+  reference_match_matrix: docs/experiments/reference-match-matrix.md
+  reference_match_is_product_pass: false
+  board_inputs: facts-and-fixed-manufacturer-source
+  bsp_implementation_in_scope: true
   hardware_runs_are_serial: true
   agent_flash_erase_allowed: false
 
@@ -110,7 +123,8 @@ core_requirements:
   required_ids: [C1, C2, C3, C4, C5, C6, C7, C8]
   c3_scope: pc-fixture-to-esp32-display
   cohort_product_pass_eligible: true
-  all_must_pass_for_prep_completion: true
+  all_must_pass_for_prep_completion: false
+  product_failure_is_recorded_comparison_result: true
 
 planned_product_integration_requirements:
   contract: docs/PRODUCT_CONTRACT.md

@@ -4,8 +4,8 @@
 
 > **현재 작업 상태 (2026-09-26):** AGY pilot `PILOT_PREPARED / LAUNCH_RECHECK_REQUIRED`.
 > 아래의 9월 20~25일 BLOCKED 기록은 당시 감사 스냅샷이다. 현재 기준은
-> [readiness gate](experiments/benchmark-readiness.md)와
-> [실행 가이드](experiments/agent-run-commands.md)를 따른다.
+> [readiness gate](../../experiments/benchmark-readiness.md)와
+> [실행 가이드](../../experiments/agent-run-commands.md)를 따른다.
 >
 > 선택 baseline `benchmark-v2-baseline-20260925` →
 > `eef278013428a79c29d6b9456018049af149ca61`, profile SHA256
@@ -18,7 +18,7 @@
 > **완료:** 문서·증빙 commit → tag의 깨끗한 별도 checkout에서
 > `20260925-antigravity-cli-agy-flash-medium-r01` 준비 → manifest·receipt·hash 검증 →
 > 2026-09-26 COM3 비파괴 재확인 → 92개 시험 및 hardware preflight 0/0 재통과.
-> 세부 근거는 [준비 완료 검증](experiments/evidence/agy-pilot-prepared-20260926.md)에 있다.
+> 세부 근거는 [준비 완료 검증](../../experiments/evidence/agy-pilot-prepared-20260926.md)에 있다.
 > **남은 순서:** 실제 실행 직전 COM3 단독 점유 확인 → 조건부 승인 발효 시점(R10) 기록 →
 > 첫 pilot. 첫 pilot의 모델 entitlement·실제 tool permission·usage·제품 동작은 실행 후 판정한다.
 > 크레딧 소진 시 이 순서의 미완료 항목부터 재개한다. 준비된 run을 다시 만들지 않는다.
@@ -31,11 +31,11 @@
   Q1/Q2/Q3 결정과 baseline tag는 보존되어 있으며, 수정된 profile과 receipt는
   근거가 부족한 설정에서 의도대로 실행을 차단한다.
 - 2026-09-25 후속 준비: R8의 pilot 전 harness 기준과 pilot 후 제품 평가를
-  [readiness gate](experiments/benchmark-readiness.md#r8-pilot-전-완료-기준)에서 분리했다.
+  [readiness gate](../../experiments/benchmark-readiness.md#r8-pilot-전-완료-기준)에서 분리했다.
   AGY `stream-json` 결과·token·tool event의 오프라인 parser와 host report 파일 출력을
   구현해 현재 개발 checkout에서 85개 시험을 통과했다. 이 검사는
-  [R8 개발 증거](experiments/evidence/r8-harness-development-20260925.md)이며 최종
-  baseline의 R8 pass는 아니다. [로컬 AGY inventory](experiments/evidence/agy-local-inventory-20260925.md)는
+  [R8 개발 증거](../../experiments/evidence/r8-harness-development-20260925.md)이며 최종
+  baseline의 R8 pass는 아니다. [로컬 AGY inventory](../../experiments/evidence/agy-local-inventory-20260925.md)는
   모델 목록·설정 파일 존재를 확인했지만 effective permission과 모델 실행 권한은 입증하지 않는다.
 - 2026-09-25 추가 검증: `SUCCESS`와 함께 온 구조화된 권한 거부를 runner가 실패로
   처리하고 원본 usage·도구 실패 수는 보존하도록 보완했다. 현재 dirty-tree offline suite는
@@ -47,8 +47,8 @@
   전달하도록 수정했으며 offline suite 88개가 통과했다. R4·R6·R7은
   `pilot_entry`와 `post_pilot`을 분리했고, R9의 candidate artifact 검사는 pilot 이후로
   옮겼다. 현재 상태는 여전히 `BLOCKED / NOT_AUTHORIZED`다.
-- 다음 행동: [AGY Luna 감사](experiments/agy-launch-review-20260925.md)와
-  [Sol 독립 검증](experiments/agy-launch-sol-review-20260925.md)을 먼저 읽는다.
+- 다음 행동: [AGY Luna 감사](../../experiments/agy-launch-review-20260925.md)와
+  [Sol 독립 검증](../experiments/agy-launch-sol-review-20260925.md)을 먼저 읽는다.
   AGY 권한·전역 지침·확장 조건을 실측하고 실행 정책을 확정한다. R8은 새 runner가
   포함된 깨끗한 최종 baseline에서 재검증하고, R9 보드·백업·COM3 확인을 마친 뒤
   새 profile/bundle hash와 receipt를 발행한다. 날짜가 지난
@@ -61,7 +61,7 @@
   AGY target `gemini-3.8-flash-medium`을 확인했지만, effective settings·approval·
   network·host preflight 근거가 없어 R4=`not_ready`, R5=`blocked`, R6/R7=`not_ready`,
   R8/R9=`not_ready`, R10=`not_authorized`다. 상세 기록은
-  [`agy-launch-review-20260925.md`](experiments/agy-launch-review-20260925.md)다.
+  [`agy-launch-review-20260925.md`](../../experiments/agy-launch-review-20260925.md)다.
 
 ## 체크리스트
 
@@ -94,7 +94,7 @@
   N4 완료. C1~C8 및 F9 세부 증거를 E2E 결과 계약에 연결했다. N5 완료. E2E evaluation manifest,
   archive 정규화, summary 집계를 연결했다. offline unittest 77개와 validators exit 0.
 - 2026-09-25: AGY `1.2.9`의 실제 `--version`/`--help`와 빈 MCP/plugin 목록을
-  [`agy-cli-20260925.txt`](experiments/evidence/agy-cli-20260925.txt)에 보존했다.
+  [`agy-cli-20260925.txt`](../../experiments/evidence/agy-cli-20260925.txt)에 보존했다.
   기존 raw preflight가 memory/cache/routing 비관측을 명시하므로 candidate의 false
   builtin-only/cleared/disabled/direct 및 Codex 전용 approval 주장을 제거하고,
   receipt의 근거 없는 pass를 `not_observed`/`blocked`로 정정했다. profile semantic
@@ -188,7 +188,7 @@ N6~N8은 실제 model/reasoning/settings, baseline hash 재검증, pilot/COM3/fl
 재개 요청 예시:
 
 ```text
-docs/DOCUMENTATION_REVIEW_CHECKLIST.md를 읽고 현재 Git 변경을 보존해 이어서 진행하라.
+docs/archive/reviews/DOCUMENTATION_REVIEW_CHECKLIST.md를 읽고 현재 Git 변경을 보존해 이어서 진행하라.
 완료된 문서 검토는 반복하지 말고, 미완료 단계 또는 내가 지정한 후속 항목부터 처리하라.
 진행 결과와 검증 증거를 같은 체크리스트에 계속 기록하라.
 ```
@@ -279,8 +279,8 @@ COM3/hardware, flash, commit, tag, or push was performed.
 - [x] `python scripts/validate-experiment-result.py` — exit 0.
 - [x] `git diff --check` — exit 0.
 
-summary 계약은 [results/README.md](../results/README.md)와
-[experiments/examples/README.md](../experiments/examples/README.md)에
+summary 계약은 [results/README.md](../../../results/README.md)와
+[experiments/examples/README.md](../../../experiments/examples/README.md)에
 동기화했다. N6~N8은 모델/reasoning/profile-bound receipt, baseline freeze,
 owner-authorized pilot/COM3/flash 판단이 필요한 수동 gate로 남아 있다.
 
@@ -346,9 +346,9 @@ host pipeline dry-run은 3961 synthetic bytes, `device_accessed=false`로 통과
 
 ## 실험 시작 준비 위임 및 재개 (2026-09-22)
 
-현재 재개 지점은 [위임·결정 기록](experiments/launch-coordination-20260921.md)이다.
-Luna max가 [준비 산출물](experiments/launch-readiness-20260921.md)을 작성했고,
-Sol medium의 [독립 검증](experiments/launch-review-sol-20260921.md)에서 후보
+현재 재개 지점은 [위임·결정 기록](../experiments/launch-coordination-20260921.md)이다.
+Luna max가 [준비 산출물](../experiments/launch-readiness-20260921.md)을 작성했고,
+Sol medium의 [독립 검증](../experiments/launch-review-sol-20260921.md)에서 후보
 profile·입력 hash와 빌드 파일 hash를 재현했다. 발견된 빌드 hash 오타는 수정됐다.
 
 - [x] 설치 CLI·실제 인자 순서·로컬 모델 metadata 확인.
@@ -360,7 +360,7 @@ profile·입력 hash와 빌드 파일 hash를 재현했다. 발견된 빌드 has
 - [x] 추가 prompt-input 진단 결과를 동일 Sol 세션에서 검토하고 잘못된 검증 제안 정정.
 - [x] Q1 기존 6종 계획 유지, Q2 baseline commit/tag 승인, Q3 AGY
   `gemini-3.8-flash-medium` 및 옵션 A 결정은
-  [`launch-coordination-20260921.md`](experiments/launch-coordination-20260921.md)에 기록했다.
+  [`launch-coordination-20260921.md`](../experiments/launch-coordination-20260921.md)에 기록했다.
   최종 AGY profile/settings evidence·receipt gate·R10 발효는 미완료다.
 
 Luna의 추가 진단은 사용량 제한으로 중단됐고, 2026-09-22 사용자 재개 요청으로
@@ -369,7 +369,7 @@ Luna의 추가 진단은 사용량 제한으로 중단됐고, 2026-09-22 사용�
 historical snapshot이다. 이후 사용자 Q1/Q2/Q3 결정은 coordination record에 반영됐고,
 현재 AGY gate만 후속 검증한다. 실제 모델 실행·serial open·flash는 하지 않았다.
 
-후속 feature 진단: [로컬 기능 제어 증거](experiments/evidence/codex-feature-controls-20260922.txt).
+후속 feature 진단: [로컬 기능 제어 증거](../../experiments/evidence/codex-feature-controls-20260922.txt).
 plugins/skill_search/enable_mcp_apps 비활성 값과 skip_host_skill_discovery 활성 값은
 metadata로 확인됐다. 현재 세션의 SKILL.md 참조 수 감소는 관측됐지만 사용자 확장
 제외를 증명하지 않는다. 실제 exec의 설정·출처와 결합된 증거가 있어야 R4/R5를 닫는다.

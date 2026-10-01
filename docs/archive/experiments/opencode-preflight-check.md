@@ -83,7 +83,7 @@ Reference: https://opencode.ai/docs/permissions/
 
 This report preserves the checks and evidence recorded at review time.
 Its mandatory OS-sandbox/read-isolation gate is superseded by
-[isolation-policy.md](isolation-policy.md): `prompt-and-log` is the default;
+[isolation-policy.md](../../experiments/isolation-policy.md): `prompt-and-log` is the default;
 Docker/VM is optional. Host toolchain checks plus prompt scope, activity logging,
 network/settings evidence can satisfy the revised R5 preflight requirement.
 OS read isolation is `not_enforced` in the default mode. Lack of a Docker/sandbox

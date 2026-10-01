@@ -57,3 +57,23 @@ class AgentInputTests(unittest.TestCase):
         (self.run / "agent-context.json").write_text('{}')
         with self.assertRaisesRegex(ValueError, "evidence hash mismatch"):
             benchmark.verify_agent_inputs(self.run, self.manifest)
+
+    def test_candidate_file_tamper_is_rejected(self):
+        path = self.checkout / "docs/PRODUCT_CONTRACT.md"
+        path.parent.mkdir(parents=True)
+        path.write_text("fixed contract")
+        inventory = {"schema_version": 1, "policy_sha256": "a" * 64,
+                     "files": {"docs/PRODUCT_CONTRACT.md": benchmark.digest(path.read_bytes())}}
+        benchmark.save(self.run / "candidate-inputs.json", inventory)
+        benchmark.prepare_agent_inputs(self.run, self.manifest)
+        benchmark.verify_agent_inputs(self.run, self.manifest)
+        path.write_text("weakened contract")
+        with self.assertRaisesRegex(ValueError, "immutable candidate input"):
+            benchmark.verify_agent_inputs(self.run, self.manifest)
+
+    def test_inventory_copy_tamper_is_rejected(self):
+        benchmark.save(self.run / "candidate-inputs.json", {"files": {}})
+        benchmark.prepare_agent_inputs(self.run, self.manifest)
+        (self.checkout / ".benchmark-inputs/input-files.json").write_text('{}')
+        with self.assertRaisesRegex(ValueError, "immutable agent input"):
+            benchmark.verify_agent_inputs(self.run, self.manifest)

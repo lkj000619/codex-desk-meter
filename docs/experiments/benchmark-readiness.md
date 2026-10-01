@@ -72,7 +72,7 @@ ADR-0005/0006은 선택된 pilot 범위로 채택 상태를 정리했다. 이 �
 동결 baseline 입력을 변경하지 않는다. 최신 운영 기록은 checkout 밖에서 관리한다.
 
 2026-09-18 설계 검토 후속 변경과 최신 host 검증은
-[design-remediation-20260918.md](design-remediation-20260918.md)에 기록한다.
+[design-remediation-20260918.md](../archive/experiments/design-remediation-20260918.md)에 기록한다.
 계약·fixture·IDF 활성화 보완과 host 시험 통과는 개별 실행 profile/receipt 확정이나
 실물 합격을 뜻하지 않는다. 과거 기록의 미충족 상태는 아래 최신 pilot-entry 표와 구분한다.
 
@@ -99,7 +99,7 @@ ADR-0005/0006은 선택된 pilot 범위로 채택 상태를 정리했다. 이 �
 2026-09-20 로컬 ref 확인에서는 `version-2-baseline-20260911`과
 `benchmark-v2-baseline-20260914`도 존재한다. 위 태그와 서로 다른 commit이며,
 태그 존재만으로 현재 E2E 계약의 동결·승인 증거가 되지 않는다. ref별 commit은
-[문서 검토 기록](../DOCUMENTATION_REVIEW.md)에 보존한다.
+[문서 검토 기록](../archive/reviews/DOCUMENTATION_REVIEW.md)에 보존한다.
 
 입력 검사와 run 준비를 분리해 순환 의존을 해소했다. 현재 순서는 마지막 절과
 [실행 가이드](agent-run-commands.md) §1~6을 따른다. 기존 조건부 승인 기록을
@@ -430,7 +430,7 @@ collector·transport·receiver를 구현·검증하기 전에는 “실시간 Co
 ## Current review addendum (2026-09-13 snapshot)
 
 The offline readiness review is recorded in
-[`readiness-review-20260913.md`](readiness-review-20260913.md). The R0-R10 statuses
+[`readiness-review-20260913.md`](../archive/experiments/readiness-review-20260913.md). The R0-R10 statuses
 below are that review's snapshot, not the current norm: R0 `in_review`, R1
 `in_review`, R2 `in_review`, R3 `in_review`, R4 `not_ready`, R5 `not_ready`,
 R6 `partial`, R7 `not_ready`, R8 `partial`, R9 `not_ready`, and R10

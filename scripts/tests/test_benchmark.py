@@ -480,7 +480,11 @@ class IsolationTests(unittest.TestCase):
             repo = root / "repo"
             repo.mkdir()
             shutil.copytree(ROOT / "experiments", repo / "experiments")
-            shutil.copytree(ROOT / "docs", repo / "docs")
+            shutil.copytree(ROOT / "docs", repo / "docs", ignore=shutil.ignore_patterns("evidence"))
+            shutil.copytree(ROOT / "scripts", repo / "scripts", ignore=shutil.ignore_patterns("__pycache__"))
+            historical = repo / "docs/experiments/evidence/previous-candidate.md"
+            historical.parent.mkdir(parents=True)
+            historical.write_text("previous candidate solution must not reach the new checkout")
             subprocess.run(["git", "init", str(repo)], check=True, capture_output=True)
             subprocess.run(["git", "-C", str(repo), "add", "."], check=True, capture_output=True)
             subprocess.run(["git", "-C", str(repo), "-c", "user.name=Test", "-c", "user.email=test@localhost", "commit", "-m", "baseline"], check=True, capture_output=True)
@@ -503,6 +507,9 @@ class IsolationTests(unittest.TestCase):
                 with contextlib.redirect_stdout(check_output):
                     benchmark.check_inputs(SimpleNamespace(baseline="HEAD", profile=str(profile_path)))
                 checked = json.loads(check_output.getvalue())
+                frozen = root / "frozen"
+                frozen.mkdir()
+                benchmark._extract_archive(frozen, "HEAD")
                 benchmark.prepare(args)
                 benchmark.prepare(args)
                 bad_profile = dict(profile, model="operator-check-required")
@@ -517,6 +524,12 @@ class IsolationTests(unittest.TestCase):
                 self.assertEqual(original_git("rev-list", "--count", "HEAD", cwd=run / "checkout"), "1")
                 self.assertEqual(original_git("remote", cwd=run / "checkout"), "")
                 self.assertFalse((run / "checkout/run-manifest.json").exists())
+                self.assertFalse((run / "checkout/docs/experiments/evidence").exists())
+                self.assertFalse((run / "checkout/docs/experiments/comparison-operating-contract.md").exists())
+                self.assertFalse((run / "checkout/scripts/benchmark.py").exists())
+                self.assertEqual(len(list((run / "checkout").rglob("*.md"))), 3)
+                inventory = read(run / "candidate-inputs.json")
+                self.assertEqual(read(run / "checkout/.benchmark-inputs/input-files.json"), inventory)
                 self.assertNotIn(b"<run-id>", (run / "prompt.txt").read_bytes())
             for index, run in enumerate(runs):
                 m = read(run / "run-manifest.json")
@@ -527,10 +540,10 @@ class IsolationTests(unittest.TestCase):
                 expected_fixture_hash = benchmark.digest(("\n".join(fixture_lines) + "\n").encode())
                 self.assertEqual(m["execution"]["fixture_sha256"], expected_fixture_hash)
                 hashes = benchmark.input_bundle_hashes(
-                    run / "checkout", run / "profile.json", m["baseline_ref"], m["execution"]["base_commit"]
+                    frozen, run / "profile.json", m["baseline_ref"], m["execution"]["base_commit"]
                 )
                 for key, expected in hashes.items():
-                    self.assertEqual(m["execution"][key], expected)
+                    self.assertEqual(m["execution"][key], expected, key)
                 if index == 0:
                     for key in hashes:
                         self.assertEqual(checked[key], m["execution"][key])

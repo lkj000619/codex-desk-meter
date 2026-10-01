@@ -1,7 +1,7 @@
 # AGY 첫 pilot 권한 정책 — 2026-09-25
 
 > 2026-09-26 사용자 선택에 따라 필요한 명령군과 해당 run checkout만의 쓰기 권한을
-> 적용했다. [현행 정책·실제 workflow 시험](evidence/agy-scoped-workflow-20260926.md)이 최신 근거다.
+> 적용했다. [현행 정책·실제 workflow 시험](../../experiments/evidence/agy-scoped-workflow-20260926.md)이 최신 근거다.
 > 이전 단순 prefix 및 쓰기 권한 미설정 설명은 과거 관측이다.
 
 ## 결정
@@ -59,16 +59,16 @@ R4/R5 통과 판정은 아니다.
 
 ## 현재 구현과 사용 순서
 
-[pilot allow 정책](../../experiments/config/agy-pilot-permissions.json)은 Git 상태·diff,
+[pilot allow 정책](../../../experiments/config/agy-pilot-permissions.json)은 Git 상태·diff,
 ESP-IDF target/build, Python unittest와 인자 없는 현재 폴더 목록·위치 확인
 (`dir`, `pwd`, `Get-ChildItem`, `Get-Location`)을 허용한다.
-2026-09-26 [권한·계측 보완](evidence/agy-remediation-20260926.md)은 새 baseline/receipt
-동결 전의 개발 상태다. [설정 wrapper](../../scripts/agy_pilot_environment.py)는
+2026-09-26 [권한·계측 보완](../../experiments/evidence/agy-remediation-20260926.md)은 새 baseline/receipt
+동결 전의 개발 상태다. [설정 wrapper](../../../scripts/agy_pilot_environment.py)는
 다른 AGY 프로세스가 없고 custom skill/MCP가 없는지 확인한 뒤, 전역 설정·공통 지침·hook을
 로컬 backup directory에 보존한다. 한 명령을 제한된 설정으로 실행하고 원본 바이트를 복원한다.
 AGY가 파일에서 문서화된 기본값을 생략하는 경우만 허용하며, 허용 목록 등 다른 변경이
 발생하면 자동 복원을 멈추고 수동 점검을 요구한다. runner도 활성 정책을 검사하므로
-wrapper 없이 AGY pilot을 시작할 수 없다. [실측 기록](evidence/agy-pilot-environment-20260925.md)에
+wrapper 없이 AGY pilot을 시작할 수 없다. [실측 기록](../../experiments/evidence/agy-pilot-environment-20260925.md)에
 metadata 명령과 복원 검증을 남겼다.
 
 ```powershell

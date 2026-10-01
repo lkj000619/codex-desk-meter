@@ -124,10 +124,10 @@ the remaining conditional requirements are met and R10 activation is recorded.
 ## Reviewed artifacts
 
 - [`launch-readiness-20260921.md`](launch-readiness-20260921.md)
-- [`codex-cli-preflight-20260921.txt`](evidence/codex-cli-preflight-20260921.txt)
+- [`codex-cli-preflight-20260921.txt`](../../experiments/evidence/codex-cli-preflight-20260921.txt)
 - `experiments/config/verified-profiles-candidate/codex-cli-luna-max.candidate.json`
 - `experiments/config/verified-profiles-candidate/codex-cli-sol-medium.candidate.json`
 - [`launch-coordination-20260921.md`](launch-coordination-20260921.md)
-- [`benchmark-readiness.md`](benchmark-readiness.md)
-- [`agent-run-commands.md`](agent-run-commands.md)
+- [`benchmark-readiness.md`](../../experiments/benchmark-readiness.md)
+- [`agent-run-commands.md`](../../experiments/agent-run-commands.md)
 - `scripts/benchmark.py`

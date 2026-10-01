@@ -2,7 +2,7 @@
 
 - Branch: `experiment/opencode/cli/muse-spark-1-3-contributor-free`
 - Model: `opencode/muse-spark-1.3-contributor-free` (OpenCode 1.18.30, native exe)
-- 목적: `docs/experiments/opencode-preflight-check.md`의 잔여항목
+- 목적: `docs/archive/experiments/opencode-preflight-check.md`의 잔여항목
   "Stdin delivery for the full candidate task remains unverified" 중
   stdin 경로 자체가 메시지로 전달되는지 확인. 후보 프롬프트는 전달하지 않음.
 
@@ -37,7 +37,7 @@
 
 This report preserves the checks and evidence recorded at review time.
 Its mandatory OS-sandbox/read-isolation gate is superseded by
-[isolation-policy.md](isolation-policy.md): `prompt-and-log` is the default;
+[isolation-policy.md](../../experiments/isolation-policy.md): `prompt-and-log` is the default;
 Docker/VM is optional. Host toolchain checks plus prompt scope, activity logging,
 network/settings evidence can satisfy the revised R5 preflight requirement.
 OS read isolation is `not_enforced` in the default mode. Lack of a Docker/sandbox

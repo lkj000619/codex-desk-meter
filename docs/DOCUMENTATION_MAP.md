@@ -1,127 +1,54 @@
-# 문서 역할과 기준 안내
+# 문서 지도
 
-## 2026-10-02 실험 결과 기반 문서 정비
+문서를 후보 입력·운영/평가·과거 기록으로 구분한다. 모든 MD를 읽는 절차는 없다.
+한 요구사항을 여러 문서에서 정의하지 않는다. 제품 동작의 원본은 제품 계약과 JSON schema,
+새 비교 운영 규칙의 원본은 운영 계약이다. 문서/schema가 충돌하면 결함으로 기록한다.
 
-- [다음 동일 조건 비교 준비 상태](experiments/next-comparison-readiness.md):
-  채택 조건, 현재 YAML/prompt/runner와 새 계약의 차이, 실행 전 남은 연결의 진입점.
-- [세 에이전트 결과에 따른 아키텍처 평가](experiments/architecture-review-20261002.md):
-  A01~A10의 근거·영향·수정 조건. 동일 조건의 에이전트 순위 자료는 아니다.
-- [기준 문서 수정 계획](superpowers/plans/2026-10-02-experiment-contract-remediation.md):
-  수정 대상·의존 순서·검증 조건과 사용자 결정 기록.
-- [새 비교 운영 계약](experiments/comparison-operating-contract.md),
-  [reference-match 목록](experiments/reference-match-matrix.md):
-  확인된 Codex 기능 도달과 전체 제품 합격을 분리한다. 후속 최대 3회·누적 120분,
-  보드 사실/제조사 source만 제공하는 조건을 사용자 선택으로 기록했다.
-- [2026-09-29 비교 방향 전환](experiments/reference-comparison-20260929.md)은
-  첫 결과와 후속 수정 비용을 함께 평가하는 방향이다. 아래 기존 단회 protocol과
-  readiness 문서의 새 비교 적용 관계는 운영 계약을 따른다. YAML/prompt와 runner의
-  동기화·동결은 남아 있으며 문서 정비로 새 실행을 시작하지 않는다.
-- C1~C8 결과 필드와 원본/정규화 token 계약은 이미 구현되어 있다.
-  [2026-09-20 검토](DOCUMENTATION_REVIEW.md)의 당시 미완료 설명은
-  [후속 완료 기록](DOCUMENTATION_REVIEW_CHECKLIST.md)과 구분한다.
+## 후보 입력: 필수 MD 3개
 
-## 읽는 순서와 상태 해석
+| 순서 | 문서 | 역할 |
+|---|---|---|
+| 1 | [실행 과제](../experiments/prompts/version-2-agent-task.md) | 목표·범위·실행·제출 |
+| 2 | [제품 계약](PRODUCT_CONTRACT.md) | C/I/F·데이터·wire·화면·시험 |
+| 3 | [보드 자료](hardware/version-2-capabilities.md) | 핀·극성·설정·제조사 source |
 
-1. [프로젝트 목적](PROJECT_PURPOSE.md): 제품과 실험을 만드는 이유, 현재·후속 범위.
-2. [제품 계약](PRODUCT_CONTRACT.md): 구현할 동작과 합격 조건.
-3. [기능·GUI 비교](experiments/feature-comparison.md),
-   [평가 interface](experiments/evaluation-contract.md),
-   [통합 계약](experiments/integration-contract.md): 평가와 계층별 상세 계약.
-4. [실험 프로토콜](experiments/agent-experiment-protocol.md),
-   [운영 관리](experiments/benchmark-management.md),
-   [접근 정책](experiments/isolation-policy.md): 동일 조건·역할·증거 보존.
-5. [readiness gate](experiments/benchmark-readiness.md): 현재 실행 가능 여부와 잔여 조건.
-   첫 AGY pilot의 최신 상태는 [2026-09-26 실행·사후 검증](experiments/evidence/agy-r03-result-20260927.md)에 기록한다.
-6. 승인된 실행의 [공통 prompt](../experiments/prompts/version-2-agent-task.md)와
-   [실행 가이드](experiments/agent-run-commands.md).
+[파일 allowlist](../experiments/config/agent-inputs.json)는 schema/fixture/예제/필요 도구를
+정확한 경로로 고정한다. runner가 만든 `.benchmark-inputs/`는 식별자·평가 manifest 사본·
+목록/hash다. 운영 profile·receipt·계측은 후보 checkout 밖에서 관리한다.
+main에 문서가 존재한다는 이유로 후보에게 읽도록 제공하지 않는다.
 
-주제별 기준 문서가 요구사항을 소유하고 다른 문서는 이를 참조한다. 충돌 시
-날짜가 최신이라는 이유만으로 우선하지 않는다. 적용 cohort·승인 상태·대체 관계를
-확인하고, 문서와 schema/code가 다르면 결함으로 기록한다. 구현이 있다는 이유로
-요구사항을 낮추거나 문서만으로 구현 완료를 선언하지 않는다.
+## 운영자·평가자
 
-- **승인 ADR:** 승인된 결정과 그 적용 범위를 기록한다. ADR-0002는 대체된 기록이다.
-- **pilot 적용 계약:** 선택된 AGY 첫 pilot은 `benchmark-v2-baseline-20260925`의
-  USB·가로·단일 출처 계약을 사용한다. ADR-0005/0006의 적용 상태는 2026-09-26에
-  정리했다. 동결 checkout의 과거 운영 상태는 최신 준비 기록으로 보완하며 입력은 수정하지 않는다.
-- **계획·제안:** 작업 순서나 변경안을 설명한다. 현재 구현·gate 상태를 보장하지 않는다.
-- **시점별 증거:** 명시된 날짜·commit·대상에서 관측한 결과다. 당시 `현재`·`미커밋`·
-  `남은 작업`을 오늘의 상태로 읽지 않는다. 과거 실물 사진·로그는 새 artifact의 증거가 아니다.
-- **예제:** schema·오류 검사 입력이다. preflight 예제의 HEAD·순서·태그는 실측 receipt가 아니다.
-
-현재 실행 상태는 readiness gate의 본문 표에서 확인한다. 조건부 승인 기록과 승인
-전제조건 충족은 구분한다. 문서 정비·host 검사 완료는 R10 발효가 아니다.
-
-## 문서 목록
-
-2026-09-20 검토 시작 HEAD의 추적 MD 42개를 모두 검토했다. 아래는 해당 목록이다.
-추가된 문서 지도·검토 보고서·진행 체크리스트는 마지막 절에 별도로 연결한다.
-
-| 문서 | 역할·상태 |
+| 용도 | 문서 |
 |---|---|
-| [README](../README.md) | 진입점·요약; 상세 요구사항은 아래 기준 문서 참조 |
-| [PROJECT_PURPOSE](PROJECT_PURPOSE.md) | 목적·현재 범위·후속 목표 |
-| [PRODUCT_CONTRACT](PRODUCT_CONTRACT.md) | 검토 중 E2E 제품 계약, C/I 합격 조건 |
-| [DEVELOPMENT_ENVIRONMENT](DEVELOPMENT_ENVIRONMENT.md) | 개발 절차와 날짜별 환경 관측 |
-| [ADR-0001](decisions/0001-use-esp-idf.md) | 승인: ESP-IDF 사용 |
-| [ADR-0002](decisions/0002-version-1-first.md) | 대체됨: Version 1 우선 개발 당시 기록 |
-| [ADR-0003](decisions/0003-version-2-first.md) | 승인: Version 2 우선; 화면 변경 제안은 ADR-0006 참조 |
-| [ADR-0004](decisions/0004-pin-esp-idf-5.3.2.md) | 승인: Version 2 ESP-IDF v5.3.2 |
-| [ADR-0005](decisions/0005-transport-usb-serial-baseline.md) | 채택: 선택된 AGY pilot의 USB serial 기준 |
-| [ADR-0006](decisions/0006-resets-single-landscape-default.md) | 채택: 선택된 AGY pilot의 단일 출처·가로 기준 |
-| [하드웨어 기능 카탈로그](hardware/version-2-capabilities.md) | 고정 입력 후보, 제조사·과거 관측 근거 |
-| [bring-up 기록](hardware/version-2-bring-up.md) | 2026-09-11 보드 관측; 현재 제품 합격 아님 |
-| [제조사 예제](hardware/waveshare-manufacturer-example.md) | 재현 절차와 2026-09-11 증거 |
-| [실험 프로토콜](experiments/agent-experiment-protocol.md) | 실험 단위·공정성·역할·평가 절차 |
-| [실행 가이드](experiments/agent-run-commands.md) | 준비·실행·평가 명령과 도구의 현재 한계 |
-| [사용법·계측·권한](experiments/agent-usage-and-permissions.md) | 날짜별 CLI 관측과 계측·권한 설정 안내 |
-| [운영 관리](experiments/benchmark-management.md) | baseline·run ID·반복·보존·게시 기준 |
-| [readiness](experiments/benchmark-readiness.md) | 현재 R0~R10 상태의 기준 |
-| [접근 정책](experiments/isolation-policy.md) | prompt-and-log·builtin-only-v1, 관측 한계 |
-| [기능·GUI 비교](experiments/feature-comparison.md) | F1~F9·G1~G6 기준 |
-| [평가 interface](experiments/evaluation-contract.md) | legacy host 회귀·실물 C 판정; E2E와의 경계 |
-| [자율 기능 실험](experiments/hardware-feature-discovery.md) | 후보 3개·선택 1개·별도 30점 |
-| [통합 계약](experiments/integration-contract.md) | 초안: I1~I4·논리/wire 매핑 |
-| [host-device 계약](experiments/host-device-pipeline-contract.md) | cdm/1 bytes·순번·복구, host oracle 한계 |
-| [E2E 구현 계획](experiments/e2e-contract-implementation-plan.md) | 도구 구현 계획; 실제 완료는 코드·검증 증거 참조 |
-| [E2E readiness 제안](experiments/e2e-contract-readiness-proposal.md) | 과거 제안·후속 주석; 현행 gate 표 아님 |
-| [host-device 구현 계획](experiments/host-device-pipeline-implementation-plan.md) | offline 인프라 계획; 제품 구현 승인 아님 |
-| [설계 검토 후속 기록](experiments/design-remediation-20260918.md) | 2026-09-18 변경·63개 시험·잔여 조건 기록 |
-| [preflight 증거](experiments/preflight-evidence-20260918.md) | 2026-09-18 초기 측정과 조건부 승인 기록 |
-| [R4 profile 검토](experiments/r4-profile-resolution.md) | 2026-09-18 실측·후속 관측, draft 모델·설정 미확정 |
-| [offline readiness 검토](experiments/readiness-review-20260913.md) | 2026-09-13/14 당시 검증·변경 목록 |
-| [tooling 검증](experiments/tooling-readiness-20260911.md) | 2026-09-11 도구 관측과 후속 정책 주석 |
-| [2차 검증](experiments/verification-report-2nd.md) | 2026-09-17 특정 branch/commit 평가; 최신 계약 증거 아님 |
-| [OpenCode 준비 점검](experiments/opencode-preflight-check.md) | 당시 probe·archive 미완료 기록 |
-| [OpenCode stdin probe](experiments/opencode-stdin-probe-20260914.md) | 2026-09-14 단순 응답 probe; 제품 실험 아님 |
-| [OpenCode 실물 진단](experiments/opencode-hardware-diagnosis-20260914.md) | manual pilot 관측·미해결 원인; 정식 합격 아님 |
-| [profile 안내](../experiments/config/runner-profiles/README.md) | 실행 불가 템플릿·현재 후보와 conditional 구분 |
-| [결과 예제 안내](../experiments/examples/README.md) | synthetic valid/invalid 입력·검증 의미 |
-| [legacy fixture 안내](../experiments/fixtures/README.md) | parser 입력·표시 범위·live 경계 |
-| [provider fixture 안내](../experiments/fixtures/providers/README.md) | 합성 정상·오류 matrix; 실제 provider 능력 증명 아님 |
-| [공통 prompt](../experiments/prompts/version-2-agent-task.md) | 승인된 runner만 전달하는 E2E 과제 |
-| [결과 인덱스](../results/README.md) | main 게시 규칙; 정식 본 실험 결과 없음 |
+| 다음 실험 준비·잔여 조건 | [준비 상태](experiments/next-comparison-readiness.md) |
+| 새 운영 규칙 | [운영 계약](experiments/comparison-operating-contract.md) |
+| Codex 기능 도달 판정 | [RM 목록](experiments/reference-match-matrix.md) |
+| 수정 작업·의존 순서 | [계획](superpowers/plans/2026-10-02-experiment-contract-remediation.md) |
+| 문제와 근거 | [세 에이전트 평가](experiments/architecture-review-20261002.md) |
+| GUI/F 평가·host seam | [기능 평가](experiments/feature-comparison.md) · [평가 도구](experiments/evaluation-contract.md) |
+| host oracle의 범위 | [pipeline 도구 안내](experiments/host-device-pipeline-contract.md) |
+| 접근·보존·게시 | [접근 정책](experiments/isolation-policy.md) · [운영 관리](experiments/benchmark-management.md) |
+| 환경·명령·profile | [개발 환경](DEVELOPMENT_ENVIRONMENT.md) · [실행 가이드](experiments/agent-run-commands.md) · [profile 안내](../experiments/config/runner-profiles/README.md) |
+| 목표·결정 | [프로젝트 목적](PROJECT_PURPOSE.md) · [ADR](decisions/) |
 
-## 기계 계약과 증거 연결
+reference 도달과 `product_pass`는 별도 판정이다. 후보 실패도 첫 결과로 보존한다.
+운영자 자료를 후보에게 전부 읽히거나, 이전 구현·실험 결과를 공통 입력에 넣지 않는다.
+후속 피드백은 자신의 직전 결과에 대한 고정 요구·관측·근거·남은 예산만 제공한다.
 
-| 주제 | 문서 | 기계 계약·구현 | 검증 경계 |
-|---|---|---|---|
-| 현재 E2E 범위 | 제품·실험 계약 | [baseline YAML](../experiments/config/version-2-baseline.yaml), 공통 prompt | fixture-only E2E 범위이며 `live_api_allowed_after_fixture: false`; N2 완료. 계획값은 승인 receipt가 아님 |
-| provider/window 모델 | 제품 §3 | [UsageSnapshot schema](../experiments/schema/usage-snapshot.schema.json), [fixture matrix](../experiments/fixtures/provider-fixture-matrix.json) | 합성 입력의 구조·의미 검증 |
-| transport | 통합·host-device 계약 | [frame schema](../experiments/schema/cdm-frame.schema.json), [host oracle](../scripts/host_device_pipeline.py) | host 성공이 I3/I4 실물 pass 아님 |
-| 운영 기록 | 실험 프로토콜 | [run manifest schema](../experiments/schema/run-manifest.schema.json), [runner](../scripts/benchmark.py) | 실행 계측; E2E 평가 manifest와 다름 |
-| E2E 평가 | 제품·기능·평가 계약 | [평가 manifest](../experiments/schema/end-to-end-manifest.schema.json), [result schema](../experiments/schema/end-to-end-result.schema.json), [validator](../scripts/validate-end-to-end-result.py) | 오프라인 범위에서 C1~C8 판정·token 정규화·manifest/archive/summary 연결 완료 (N3~N5); 실물 제품 합격은 별도 |
-| historical 결과 | 과거 cohort 자료 | [historical schema](../experiments/schema/hardware-feature-result.schema.json), [validator](../scripts/validate-experiment-result.py) | E2E 결과의 대체물 아님 |
+## 과거 기록
 
-2026-09-25 AGY pilot 준비에 대한 최신 독립 기록은
-[AGY launch review](experiments/agy-launch-review-20260925.md)와
-[독립 검토](experiments/agy-launch-sol-review-20260925.md)다. 둘 다 해당 날짜의
-관측 기록이며, 현재 설정·실행 승인 또는 실물 검증을 보증하지 않는다. 최신 준비 실측은
-[AGY pilot 환경 증거](experiments/evidence/agy-pilot-environment-20260925.md),
-[R8 ledger](experiments/evidence/r8-baseline-20260925/ledger.json),
-[R9 보드 점검](experiments/evidence/agy-r9-board-readiness-20260925.md)에 있다.
-현재 gate와 새 실행의 선행 조건은
-[benchmark readiness](experiments/benchmark-readiness.md)에서 확인한다.
+- [2026-09-29 비교 방향 전환](experiments/reference-comparison-20260929.md).
+- [archive](archive/): 날짜별 검토·launch·진단·과거 제안 17개를 이동했다.
+  [문서 검토](archive/reviews/DOCUMENTATION_REVIEW.md)와
+  [당시 작업 체크리스트](archive/reviews/DOCUMENTATION_REVIEW_CHECKLIST.md)는 현재 준비 상태가 아니다.
+- [기존 단회 프로토콜](experiments/agent-experiment-protocol.md)·
+  [기존 gate](experiments/benchmark-readiness.md)는 해당 historical cohort에만 적용한다.
+- [원본 evidence](experiments/evidence/)는 파일/hash 보존을 위해 경로·내용을 유지한다.
+  evidence가 참조하는 [AGY launch 검토](experiments/agy-launch-review-20260925.md)·
+  [초기 preflight](experiments/preflight-evidence-20260918.md)도 기존 경로에 남겼다.
+- [보드 bring-up](hardware/version-2-bring-up.md)·[제조사 재현](hardware/waveshare-manufacturer-example.md),
+  [HTML overview](overview/index.html), [결과 인덱스](../results/README.md)는 관측 시점·대상을 확인한다.
 
-문서 정비 결과와 미해결 결정은 [검토 보고서](DOCUMENTATION_REVIEW.md), 중단 후
-작업 재개는 [체크리스트](DOCUMENTATION_REVIEW_CHECKLIST.md)를 따른다.
+archive를 포함한 과거 기록의 `현재`·`승인`·`남은 작업`은 해당 시점의 표현이다.
+이전 commit/tag의 동결 파일은 Git 이력에서 복구하며 새 입력 조건을 과거 실행에 소급하지 않는다.

@@ -1,182 +1,69 @@
-# Version 2 에이전트 공통 프롬프트
+# Version 2 구현 과제
 
-> 운영자 전용: 이 prompt는 `benchmark-readiness.md`의 R0~R9 사전조건이 통과되고
-> R10에서 사용자가 특정 pilot/benchmark 실행을 명시적으로 승인한 경우에만 runner가
-> 전달한다. 사람이 직접 복사·붙여넣어 실행하지 않는다. runner가 만든 manifest,
-> profile, preflight receipt의 존재와 일치는 운영 실행기가 전달 전에 검증한다.
-> 검증 실패 시 운영 실행기가 시작을 차단한다. agent는 이 운영자 파일을 탐색하지 않는다.
+목표: Waveshare ESP32-S3-LCD-3.16에서 **PC fixture → USB serial → 실제 firmware
+receiver → LCD**를 연결하는 ESP-IDF v5.3.2 제품을 구현한다. 이번 실행 ID는 `<run-id>`다.
 
-> 정량 비교 cohort는 공통 prompt 1회, 후속 질문 0회, 실행 중 외부 구현 피드백
-> 0회다. 운영자·evaluator가 중간에 방향을 알려주거나 코드를 고치면 원본 run은
-> 보존하되 `invalid_for_comparison`으로 판정한다. 수정은 종료 후 별도
-> `remediation/<run-id>-...`에서 수행한다.
+## 먼저 읽을 입력
 
-당신은 Codex Desk Meter Version 2의 기준 구현을 담당한다. 작업 결과는
-`docs/PRODUCT_CONTRACT.md`의 C1~C8을 만족해야 하며, 대상 보드는 Waveshare
-ESP32-S3-LCD-3.16, 프레임워크는 ESP-IDF v5.3.2다.
+1. `.benchmark-inputs/run-context.json`: 식별자·baseline·결과 경로·입력 hash.
+2. `docs/PRODUCT_CONTRACT.md`: 구현 동작과 합격 조건의 유일한 원본.
+3. `docs/hardware/version-2-capabilities.md`: 보드 사실과 제조사 source 범위.
 
-## 시작 전 고정 입력
+이 과제·제품 계약·보드 자료가 필수 MD 전부다. JSON schema·fixture·예제는
+구현할 계층에 필요한 것만 읽는다. `.benchmark-inputs/input-files.json`은 runner가
+제공한 파일 목록·hash다. 제공 입력과 identity 사본을 수정하지 않는다.
+운영 manifest·profile·receipt·과거 실험 자료는 checkout 밖에서 운영자가 관리한다.
+결과 예제는 필드 형식 설명이다. 예제의 운영자 evidence 경로는 후보에게 제공되지 않으며
+자신의 증거로 복사하지 않는다. validator에는 자신의 result·고정 manifest·evidence root를 전달한다.
 
-현재 작업 디렉터리가 이번 run의 지정 checkout 루트다. 먼저 native 파일 읽기 도구로
-`docs/DEVELOPMENT_ENVIRONMENT.md`와 `experiments/config/agy-pilot-permissions.json`을 읽어라.
-그 다음 `.benchmark-inputs/run-context.json`을 읽어 이번 run의 식별자, baseline commit/ref,
-입력 해시와 결과 경로를 확인하라. 이 파일과 `.benchmark-inputs/e2e-evaluation-manifest.json`은
-runner가 제공한 고정 입력 사본이다. 변경하지 말고 결과의 identity/manifest 참조에 사용하라.
-실행 manifest·profile·receipt는 운영자가 checkout 밖에서 검증하고 관리한다.
-이를 찾기 위해 상위 폴더나 다른 run을 조회하지 말라. 이 runner 전달 자체가 검증된
-실행 진입이며, 에이전트가 운영자 파일의 위치를 추가 탐색할 필요는 없다.
+## 실행 범위
 
-모든 작업 경로는 checkout 내부 상대 경로를 기준으로 한다. `..`로 상위 폴더를
-조회하거나 이동하지 말라. 셸 명령은 허용 목록에 맞춰 한 호출에 하나만 실행하라.
-`;`, `&&`, 파이프, 명령 치환, 별도 shell wrapper로 명령을 결합하지 말라.
-내용 작성·수정은 native 파일 도구를 사용하고, 빌드·시험은 개발 환경 문서의
-선언된 명령군을 사용하라. 권한이 거부되면 다른 도구나 스크립트로 우회하지 말고
-해당 실패를 기록하고 종료하라. 실행 중 권한 추가나 후속 지시를 요청하지 말라.
+- 최초 실행은 최대 120분, 실행 중 질문·외부 구현 피드백 없이 수행한다.
+  종료 후 수정은 운영자가 별도로 시작하며 최대 3회·누적 120분이다.
+  이번 호출만 수행하고 스스로 후속 session을 시작하지 않는다.
+- 제품 C1~C8·I1~I4·F1~F9를 구현·검증한다. Codex에서 확인된 기능 도달과
+  전체 제품 합격은 운영자가 별도로 판정한다. 기능 도달만으로 `product_pass`를 참으로 쓰지 않는다.
+- 동일한 보드 사실·제조사 source를 제공하며 BSP 구현도 작업 범위다.
+  제공 host oracle은 시험 도구이며 candidate firmware를 대신하지 않는다.
+- checkout 내부와 선언된 SDK·제조사 source만 사용한다. 상위 폴더, 다른 ref/worktree,
+  과거 구현·결과·대화·사용자 파일·credential을 탐색하지 않는다.
+  `git status`, `git diff`로 자신의 변경을 확인한다. 다른 ref 조회·전환은 금지한다.
+- 개인 계정/API key/cookie를 요청하거나 기록하지 않는다. 제품 입력은 offline fixture다.
+  네트워크·MCP·모델 호출은 실행 전에 선언된 정책 범위에서만 사용한다.
+- serial port 열기·flash·reset·`erase_flash`는 수행하지 않는다. 실물 시험은 운영자가
+  동결된 artifact로 수행한다. 실행할 명령과 관측할 결과를 제출한다.
 
-host C/C++ 컴파일러는 운영자가 고정해 PATH에 제공하며 실제 CMake/CTest 실행을
-사전 검증한다. 도구가 없거나 실행되지 않으면 환경 실패로 기록하고 종료하라.
-사용자 폴더나 다른 설치 폴더를 검색하거나 도구를 설치하지 말라. 진단용 임시
-파일은 남겨도 되며, 정리를 위해 허용되지 않은 삭제·인라인 Python을 실행하지 말라.
-제품 C 코드의 시험은 실제 C 모듈을 컴파일·링크해 호출해야 한다. Python 등으로
-동작을 복제한 구현의 시험을 제품 C 코드 검증으로 대체하지 말라. `reviewer`와
-운영자 평가 증거는 운영자가 종료 후 작성하며, agent가 운영자 검증을 주장하지 말라.
+## 빌드와 시험
 
-다음 파일을 모두 읽어라. 기준 commit과 prompt·config·fixture bundle SHA-256 및
-실행 manifest는 운영 실행기가 기록한다. 에이전트는 manifest를 생성하거나 수정하지 않는다.
+운영자가 SDK·Python·C/C++ compiler·CMake·Ninja를 준비한다. 없거나 실행되지 않으면
+환경 실패와 근거를 남기고 종료한다. 설치 폴더 검색이나 도구 설치로 우회하지 않는다.
 
-1. `docs/PROJECT_PURPOSE.md`
-2. `docs/PRODUCT_CONTRACT.md`
-3. `docs/hardware/version-2-capabilities.md`
-4. `docs/DEVELOPMENT_ENVIRONMENT.md`
-5. `docs/experiments/agent-experiment-protocol.md`
-6. `docs/experiments/hardware-feature-discovery.md`
-7. `experiments/config/version-2-baseline.yaml`
-8. `experiments/fixtures/`의 모든 파일
-9. `docs/experiments/benchmark-management.md`
-10. `docs/experiments/evaluation-contract.md`
-11. `docs/experiments/integration-contract.md`
-12. `docs/experiments/host-device-pipeline-contract.md`
-13. `experiments/schema/usage-snapshot.schema.json`, `experiments/schema/cdm-frame.schema.json`
-14. `experiments/schema/end-to-end-result.schema.json`와 E2E valid/invalid examples
+- `idf.py --version`, `idf.py set-target esp32s3`, `idf.py build`
+- `python -m unittest discover -s tests -v`, `python tests/<시험 파일>.py`
+- `python -m py_compile <상대 파일>`
+- `cmake -S <상대 경로> -B build-host -G Ninja`, `cmake --build build-host`
+- `ctest --test-dir build-host --output-on-failure`
 
-이 과제는 `version-2-end-to-end-v1`이다. F1~F9와 I1~I4를 모두 구현 범위에
-포함한다. PC의 synthetic provider fixture → 정규화 → USB serial `cdm/1`
-전송 → 실제 ESP32 receiver/cache/stale → LCD GUI를 연결하라. 제공된 PC reference
-receiver나 loopback 성공은 실제 firmware receiver 또는 실물 전송의 합격 증거가 아니다.
+셸 명령은 한 호출에 하나만 실행한다. `;`, `&&`, 파이프·명령 치환·shell wrapper로
+결합하지 않는다. 파일 작성은 native 파일 도구를 사용한다. 제한 정책은
+`experiments/config/agy-pilot-permissions.json`에서 필요한 명령 규칙만 확인한다.
+권한 거부는 실패로 기록하고 종료하며 다른 도구로 우회하거나 권한 추가를 요청하지 않는다.
+정책에 없는 `pytest`·삭제·인라인 Python을 실행하지 않는다.
 
-공통 프롬프트의 `<run-id>`는 운영 실행기가 치환해 전달한다. 계정 쿠키,
-Wi-Fi 비밀번호, API 키 또는 개인 사용량 원본을 요청하거나 커밋하지 말라.
-개인 사용량은 fixture로 먼저 구현·검증하고, 실제 계정 통합이 불가능하면 그
-사유를 기록하라.
+실제 제품 파서·상태 전이 C 모듈을 compile/link해 호출하는 host 시험을 제공한다.
+Python 모방 구현의 성공을 firmware 검증으로 제출하지 않는다. 제공 validator·host
+oracle의 성공과 실제 USB 수신·LCD 성공을 구분한다.
 
-## 참조 범위와 실행 접근 정책
+## 제출
 
-현재 main에서 제공된 지정 checkout의 현재 문서·파일과 운영자가 명시적으로
-제공한 자료만 사용하라. `docs/experiments/isolation-policy.md`를 읽어라.
-제조사 source 경로와 파일 목록은 `docs/hardware/vendor-source-index.json`에 있다.
-제조사 `build`, `backup`과 운영자가 만든 다른 프로젝트의 산출물은 참조 범위에 포함되지 않는다.
-과거 bring-up 문서에 경로가 나와도 이 범위가 확대되는 것은 아니다. 의존성·header·설정은
-허용된 source와 SDK에서 확인하고 이번 checkout에서 직접 빌드하라.
-다른 branch/worktree, 과거 agent의 구현·결과·로그·대화를 조회하지 말라.
-`git log`, `git show`, 다른 ref 조회, branch 전환 또는 외부 저장소 검색으로
-이전 구현을 탐색하지 말라. 자체 변경 확인용 `git status`, `git diff`는 허용한다.
-허용된 toolchain·의존성 경로는 사용할 수 있으나 사용자 파일·credential을 탐색하지 말라.
-사용한 명령·도구·참고 자료를 기록하고 로그의 관측 한계도 보고하라.
-기본 접근 정책은 `prompt-and-log`이며 Docker/VM은 선택 사항이다.
-제품 입력은 offline fixture를 사용한다. 모델 호출용 네트워크와 웹 검색·MCP
-권한은 profile의 사전 선언 조건을 따르고 임의로 확대하지 말라.
+- ESP-IDF 프로젝트, PC collector·sender, firmware receiver·GUI와 자체 시험.
+- `docs/agent-runs/<run-id>/hardware-feature-selection.md`: 보드 기능 후보 정확히 3개,
+  각각의 사용자 가치·자원·비용·위험·시험, 선택 1개와 나머지 2개의 탈락 이유.
+  선택 기능을 핵심과 분리해 구현한다. 제조사 데모 반복은 추가 기능으로 인정하지 않는다.
+- `results/<run-id>/end-to-end-result.json`: 제공 result schema의 C/F/I/G·build/host/
+  transport/hardware 상태와 증거 경로. 새 JSON 필드를 만들지 않는다.
+- 빌드·시험 재현 명령, 오류/stale/복구 시험, 실물 업로드·관측 절차와 남은 문제.
 
-## 구현 요구
-
-- 기준 커밋에서 ESP-IDF 프로젝트를 생성하고 `idf.py set-target esp32s3`와
-  `idf.py build`를 실행하라.
-- C1~C8을 모두 구현하라. 핵심 요구사항을 제거하거나 축소하지 말라.
-- C3는 PC에서 제공한 fixture가 전송·수신되어 firmware 상태와 LCD까지 반영되는
-  데이터 경로를 포함한다. firmware에 고정 fixture를 내장하는 것으로 대체하지 말라.
-- 개인 사용량과 `codex-resets.com` 리셋 기록을 공통 데이터 모델로
-  정규화하되 출처와 시각을 보존하라. 표시 계층은 `codex-resets.com`을 사용하고,
-  기록이 없으면 경과 시간 또는 default 화면을 표시하라.
-- PC collector·정규화 adapter·USB serial transport·실제 ESP32 receiver를 구현하고
-  I1~I4별 raw input/output, frame version·길이·CRC, 재연결·오류·stale·복구
-  시험을 제공하라. 기존 maintainer host 도구를 활용할 수 있으나 실제 제품 모듈을
-  호출하는 시험과 새로 구현한 부분을 명확히 기록하라.
-- collector와 공통 상태는 Codex 전용 필드에 하드코딩하지 말고 provider adapter
-  registry와 동적 quota window 목록을 수용하도록 설계하라. 향후 Codex CLI,
-  Claude Code, Antigravity CLI(Google 기본; gemini-cli는 Enterprise/API 키
-  conditional), Orca/IDE host를 연결할 수 있어야 하며 provider, agent,
-  model, host, account profile과 metric 단위를 분리하라. source가 절대 token
-  잔량을 제공하지 않으면 percent/unknown과 `unsupported`/`unavailable` 상태를
-  보존하고 임의로 token 수를 계산하지 말라.
-- 글로벌 화면은 `codex-resets.com` 단일 출처를 사용하고, 경과 시간을 확정 일정처럼 표현하지 말라.
-- 네트워크·TLS·HTTP·JSON 오류와 오래된 데이터에서도 화면을 중단시키지 말라.
-- 820 × 320 가로 LCD를 기본으로 대시보드, 글로벌 리셋, 상태/오류 화면을 제공하라.
-- BOOT 입력 동작과 자동·수동 갱신 주기를 문서화하고 시험하라. RST는 시스템
-  리셋 전용으로 유지하라.
-- BOOT는 화면 전환, 수동 갱신은 PC collector의 재수집·전송 명령으로 구현하라.
-  host-device-pipeline-contract.md의 응답 시간과 영속 sequence 규칙을 따르고,
-  보드 재부팅 없이 PC collector 재시작 후 복구하는 시험을 제공하라.
-- 추가 하드웨어를 사용하지 말라. Version 1 전용 하드웨어를 요구하지 말라.
-
-I1~I4와 F1~F9는 모두 이번 과제 범위다. 실물 시험은 운영자가 동결된 artifact에
-대해 수행한다. agent는 serial port를 열거나 보드에 flash하지 말고 운영 절차를 제공하라.
-
-## 하드웨어 자율 기능
-
-핵심 기능과 별도로 보드의 IMU, RTC, 배터리 ADC, TF, BOOT, Wi-Fi/BLE 등 실제
-자원을 활용하는 후보를 정확히 3개 작성하라. 각 후보에 사용자 가치, 자원,
-구현 비용, 위험과 검증 방법을 적고, 사용자에게 선택을 넘기지 말고 1개를
-스스로 선택·구현하라. 선택하지 않은 2개와 탈락 이유를 보존하라.
-
-선택 기능은 핵심 코드와 분리된 모듈 또는 설정으로 구현하라. 제조사 예제 기능을
-그대로 복사한 것은 추가 기능으로 인정하지 않는다. 추가 기능 점수는 핵심 C1~C8
-점수와 별도로 계산한다.
-
-## 검증과 산출물
-
-변경 뒤 가능한 범위에서 다음을 실행하고 결과를 명령 로그에 남겨라.
-
-1. 파서 및 fixture 단위 시험
-   - `docs/experiments/evaluation-contract.md`에 따라 실제 제품 모듈을 호출하는 host 어댑터 제공
-2. `idf.py build`
-3. 선택 기능 자동 시험
-4. 운영자 승인 뒤 COM3에 플래시하는 실물 시험 계획
-
-각 산출물에는 다음 기능 상태를 핵심 C1~C8과 분리해 기록하라: F1 PC agent/provider collector,
-F2 정규화·출처, F3 PC→ESP32 transport, F4 receiver/state/cache, F5 LCD GUI,
-F6 입력·갱신, F7 글로벌 리셋, F8 빌드·관측, F9 자율 하드웨어. F1/F3도
-구현·시험 결과와 증거를 기록한다. F5 화면은
-`docs/experiments/feature-comparison.md`의 G1~G6 rubric과 화면별 사진·영상
-증거를 사용한다.
-
-`erase_flash`는 실행하지 말라. 실제 보드 검증을 할 수 없으면 `blocked` 또는
-`not_run`과 구체적인 이유를 기록하라.
-
-다음 선택 문서와 구조화 결과를 남겨라. manifest의 실행 식별·계측 필드와
-commands.jsonl은 운영 실행기가 관리한다. 실행 중 원본 로그를 읽거나 덮어쓰지 말라.
-시간·토큰을 추정해 채우지 말고 미측정 값은 null과 사유로 남겨라.
-
-```text
-docs/agent-runs/<run-id>/hardware-feature-selection.md
-results/<run-id>/end-to-end-result.json
-```
-
-`end-to-end-result.json`은 schema_version 1과
-`experiments/schema/end-to-end-result.schema.json` 계약을 지켜라.
-운영 기록에만 있는 시각·해시·계측값을 추정하지 말라. 최종 보고에 확인 가능한 다음을 포함하라.
-고정 식별자·baseline·입력 해시는 `.benchmark-inputs/run-context.json`에서 사용하라.
-실행 시간·usage·운영자 실물 판정은 종료 후 운영자가 작성한다. 실행 중 알 수 없는
-값은 계약에서 허용하는 null·not_run과 사유로 남겨라.
-
-- agent / product / interface / version / model / reasoning
-- 기준 commit, prompt/config/fixture SHA-256
-- 시작·종료 시각, 제한 시간, wall-clock
-- 도구 호출·실패 명령·사용자 개입 수
-- input/output/cached/reasoning/total 토큰(제공되는 경우)
-- 빌드·자동 시험·실물 시험과 실패·미해결 위험
-
-자체 시험 결과는 운영자의 공통 평가와 구분하라. 최종 제품 합격과 자율 기능
-점수는 운영자가 증거를 검토해 확정한다. 실제 전송 계층 오류와 주입 시험 결과를
-구분하고, 판정 기준 시각은 제품 계약을 따르라.
-
-토큰 수와 시간만으로 결과를 판단하지 말라. 핵심 기능의 정확성, 장치 안정성,
-오류 처리와 선택 기능의 실제 가치를 함께 검증하라.
+identity와 evaluation manifest 참조는 `.benchmark-inputs/`의 사본을 사용한다.
+실행 시간·token·운영자 실물 판정은 운영자가 종료 후 작성한다. 미측정은 허용된
+null·`not_run`·`blocked`와 사유로 남기고, 자체 시험을 독립 평가로 표현하지 않는다.

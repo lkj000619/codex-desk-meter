@@ -33,6 +33,74 @@ EVALUATION_CRITERIA_PATHS = (
     "docs/experiments/hardware-feature-discovery.md",
 )
 
+CANDIDATE_POLICY = "experiments/config/agent-inputs.json"
+CANDIDATE_MARKDOWN = (
+    "experiments/prompts/version-2-agent-task.md",
+    "docs/PRODUCT_CONTRACT.md",
+    "docs/hardware/version-2-capabilities.md",
+)
+CANDIDATE_TOOLS = {
+    "scripts/activate-idf.ps1", "scripts/check-host-compiler.py",
+    "scripts/benchmark_support.py", "scripts/evaluate-product.py",
+    "scripts/host_device_pipeline.py", "scripts/run-host-device-pipeline.py",
+    "scripts/validate-end-to-end-result.py",
+    "scripts/requirements-benchmark.txt",
+}
+CANDIDATE_OPERATOR_INPUTS = {
+    "experiments/schema/operator.schema.json", "experiments/schema/run-manifest.schema.json",
+    "experiments/schema/runner-profile.schema.json", "experiments/schema/hardware-feature-result.schema.json",
+    "experiments/examples/run-manifest.example.json", "experiments/examples/hardware-feature-result.example.json",
+}
+
+
+def candidate_input_inventory(root):
+    """Validate the explicit candidate file list before copying any bytes."""
+    root = Path(root).resolve()
+    policy_path = root / CANDIDATE_POLICY
+    policy = read(policy_path)
+    if (policy.get("schema_version") != 1
+            or policy.get("required_markdown") != list(CANDIDATE_MARKDOWN)
+            or not isinstance(policy.get("files"), list)):
+        raise ValueError("invalid candidate input policy")
+    paths = policy["files"]
+    if (not all(isinstance(p, str) for p in paths) or len(paths) != len(set(paths))
+            or not set(CANDIDATE_MARKDOWN).issubset(paths)):
+        raise ValueError("candidate inputs must include the three required documents without duplicates")
+    files = {}
+    for relative in sorted(paths):
+        if ("\\" in relative or ":" in relative or relative.startswith("/")
+                or any(part in {"", ".", ".."} for part in relative.split("/"))):
+            raise ValueError(f"unsafe candidate input: {relative}")
+        allowed_json = (relative.endswith(".json") and relative not in CANDIDATE_OPERATOR_INPUTS
+                        and relative.startswith(("experiments/fixtures/", "experiments/schema/",
+                                                 "experiments/examples/")))
+        if not (relative in CANDIDATE_MARKDOWN or relative in CANDIDATE_TOOLS or allowed_json
+                or relative in {"docs/hardware/vendor-source-index.json",
+                                "experiments/config/agy-pilot-permissions.json",
+                                "experiments/config/host-toolchain.json"}):
+            raise ValueError(f"candidate input outside permitted scope: {relative}")
+        path = root / relative
+        if not path.resolve().is_relative_to(root) or path.is_symlink():
+            raise ValueError(f"unsafe candidate input: {relative}")
+        if not path.is_file():
+            raise ValueError(f"candidate input missing: {relative}")
+        files[relative] = digest(path.read_bytes())
+    return {"schema_version": 1, "policy_sha256": digest(policy_path.read_bytes()), "files": files}
+
+
+def materialize_candidate_inputs(root, checkout):
+    inventory = candidate_input_inventory(root)
+    checkout = Path(checkout).resolve()
+    for relative in inventory["files"]:
+        target = checkout / relative
+        if not target.resolve().is_relative_to(checkout):
+            raise ValueError(f"unsafe candidate destination: {relative}")
+    for relative in inventory["files"]:
+        target = checkout / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((Path(root) / relative).read_bytes())
+    return inventory
+
 
 def _hash_group(root, paths):
     root = Path(root).resolve()
@@ -74,6 +142,11 @@ def input_bundle_hashes(root, profile_path, baseline_ref, baseline_commit):
         for path in (root / "experiments/schema").rglob("*.json")
     )
     evaluation_paths = list(EVALUATION_CRITERIA_PATHS)
+    candidate_inventory = None
+    if (root / CANDIDATE_POLICY).is_file():
+        evaluation_paths.extend(("docs/experiments/comparison-operating-contract.md",
+                                 "docs/experiments/reference-match-matrix.md"))
+        candidate_inventory = candidate_input_inventory(root)
     values = {
         "prompt_sha256": digest((root / "experiments/prompts/version-2-agent-task.md").read_bytes()),
         "config_sha256": digest((root / "experiments/config/version-2-baseline.yaml").read_bytes()),
@@ -93,6 +166,9 @@ def input_bundle_hashes(root, profile_path, baseline_ref, baseline_commit):
         "evaluation_criteria_sha256",
         "profile_sha256",
     )]
+    if candidate_inventory is not None:
+        bundle_lines.append("candidate_inputs_sha256=" + digest(json.dumps(
+            candidate_inventory, sort_keys=True, separators=(",", ":")).encode("utf-8")))
     values["input_bundle_sha256"] = digest(("\n".join(bundle_lines) + "\n").encode())
     return values
 
@@ -130,6 +206,8 @@ def check_inputs(a):
         snapshot.mkdir()
         _extract_archive(snapshot, baseline)
         hashes = input_bundle_hashes(snapshot, profile_path, a.baseline, baseline)
+        candidate_inventory = (candidate_input_inventory(snapshot)
+                               if (snapshot / CANDIDATE_POLICY).is_file() else None)
     print(json.dumps({
         "status": "inputs_valid",
         "run_id_reserved": False,
@@ -140,6 +218,7 @@ def check_inputs(a):
         "product": product,
         "model_slug": model_slug,
         **hashes,
+        "candidate_inputs": candidate_inventory,
         "next": "freeze baseline, obtain profile-bound receipt and explicit approval, then run prepare",
     }, ensure_ascii=True, indent=2))
 
@@ -186,6 +265,10 @@ def prepare_agent_inputs(directory, manifest):
         source = directory / "e2e-evaluation-manifest.json"
         (inputs / "e2e-evaluation-manifest.json").write_bytes(source.read_bytes())
         manifest["operator"]["evidence"][source.name] = digest(source.read_bytes())
+    inventory_path = directory / "candidate-inputs.json"
+    if inventory_path.is_file():
+        (inputs / "input-files.json").write_bytes(inventory_path.read_bytes())
+        manifest["operator"]["evidence"][inventory_path.name] = digest(inventory_path.read_bytes())
 
 
 def verify_agent_inputs(directory, manifest):
@@ -195,6 +278,8 @@ def verify_agent_inputs(directory, manifest):
     references = {"agent-context.json": "run-context.json"}
     if manifest["experiment_id"] == "version-2-end-to-end-v1":
         references["e2e-evaluation-manifest.json"] = "e2e-evaluation-manifest.json"
+    if "candidate-inputs.json" in manifest["operator"]["evidence"]:
+        references["candidate-inputs.json"] = "input-files.json"
     verify_evidence({"operator": {"evidence": {
         key: manifest["operator"]["evidence"][key] for key in references}}}, directory)
     checkout = Path(manifest["execution"]["worktree"])
@@ -203,6 +288,12 @@ def verify_agent_inputs(directory, manifest):
         if (not copy.is_file() or not copy.resolve().is_relative_to(checkout.resolve())
                 or copy.read_bytes() != (directory / source).read_bytes()):
             raise ValueError(f"immutable agent input changed: {target}")
+    if "candidate-inputs.json" in references:
+        for relative, expected in read(directory / "candidate-inputs.json")["files"].items():
+            path = checkout / relative
+            if (not path.resolve().is_relative_to(checkout.resolve()) or not path.is_file()
+                    or digest(path.read_bytes()) != expected):
+                raise ValueError(f"immutable candidate input changed: {relative}")
 
 
 def prepare(a):
@@ -235,13 +326,21 @@ def prepare(a):
         raise ValueError("daily repetition slots exhausted")
     checkout = directory / "checkout"
     checkout.mkdir()
-    _extract_archive(checkout, base)
+    save(directory / "profile.json", profile)
+    with tempfile.TemporaryDirectory(prefix="meter-operator-baseline-") as temp:
+        snapshot = Path(temp)
+        _extract_archive(snapshot, base)
+        hashes = input_bundle_hashes(snapshot, directory / "profile.json", a.baseline, base)
+        template = (snapshot / "experiments/prompts/version-2-agent-task.md").read_bytes()
+        m = read(snapshot / "experiments/examples/run-manifest.example.json")
+        if (snapshot / CANDIDATE_POLICY).is_file():
+            save(directory / "candidate-inputs.json", materialize_candidate_inputs(snapshot, checkout))
+        else:
+            # Historical frozen baselines retain their original delivery behavior.
+            _extract_archive(checkout, base)
     git("init", cwd=checkout)
-    template = (checkout / "experiments/prompts/version-2-agent-task.md").read_bytes()
     prompt = template.decode("utf-8").replace("<run-id>", run_id).encode("utf-8")
     (directory / "prompt.txt").write_bytes(prompt)
-    save(directory / "profile.json", profile)
-    m = read(checkout / "experiments/examples/run-manifest.example.json")
     if profile["cohort"] == "version-2-end-to-end-v1":
         m["experiment_id"] = "version-2-end-to-end-v1"
     m["run_id"] = run_id
@@ -249,7 +348,6 @@ def prepare(a):
     m["baseline_ref"] = a.baseline
     m["agent"].update({k: profile[k] for k in ("provider", "product", "interface", "agent_version", "model", "reasoning")})
     m["agent"]["configuration_sha256"] = digest((directory / "profile.json").read_bytes())
-    hashes = input_bundle_hashes(checkout, directory / "profile.json", a.baseline, base)
     e = m["execution"]
     e.update(started_at=None, ended_at=None, base_commit=base, **hashes,
              branch=f"experiment/{slug(profile['branch_owner'])}/{slug(profile['branch_product'])}/{model_slug}",
