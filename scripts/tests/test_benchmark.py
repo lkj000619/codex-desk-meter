@@ -110,6 +110,105 @@ class ContractTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             validator.validate_manifest(self.m)
 
+    def test_legacy_validator_rejects_end_to_end_cohort(self):
+        self.m["experiment_id"] = "version-2-end-to-end-v1"
+        self.m["outputs"]["structured_result"] = f"results/{self.m['run_id']}/end-to-end-result.json"
+        with self.assertRaisesRegex(ValueError, "experiment_id"):
+            validator.validate_manifest(self.m)
+
+    def test_baseline_restoration_must_be_recorded(self):
+        del self.m["hardware"]["baseline_restored"]
+        with self.assertRaisesRegex(ValueError, "baseline_restored"):
+            validator.validate_manifest(self.m)
+
+    def test_measurements_require_integer_counts_not_integral_floats(self):
+        for path in [("execution", "timeout_seconds"),
+                     *(("measurement", key) for key in ("tool_calls", "failed_commands", "user_interventions")),
+                     *(("measurement", "tokens", key) for key in ("input", "output", "cached", "reasoning", "provider_total", "total"))]:
+            with self.subTest(path=path):
+                manifest = copy.deepcopy(self.m)
+                target = manifest
+                for key in path[:-1]:
+                    target = target[key]
+                target[path[-1]] = 1.0
+                with self.assertRaisesRegex(ValueError, "integer"):
+                    validator.validate_manifest(manifest)
+        for key in ("input", "output", "cached", "reasoning", "total"):
+            with self.subTest(result_token=key):
+                result = copy.deepcopy(self.r)
+                result["metrics"]["tokens"][key] = 1.0
+                with self.assertRaisesRegex(ValueError, "integer"):
+                    validator.validate_result(result, self.m)
+
+    def test_whitespace_is_not_telemetry_explanation_or_core_evidence(self):
+        self.m["measurement"]["tokens"]["availability_note"] = " \t "
+        with self.assertRaisesRegex(ValueError, "availability_note"):
+            validator.validate_manifest(self.m)
+        for key in self.r["core_requirements"]:
+            with self.subTest(requirement=key):
+                result = copy.deepcopy(self.r)
+                result["core_requirements"][key]["evidence"] = " \t "
+                with self.assertRaisesRegex(ValueError, "evidence"):
+                    validator.validate_result(result, self.m)
+
+    def test_candidate_selection_must_partition_unique_candidates(self):
+        mutations = (
+            lambda r: r["candidate_features"][1].update(id=r["candidate_features"][0]["id"]),
+            lambda r: r.update(selected_feature_id="unknown-candidate"),
+            lambda r: r.update(rejected_feature_ids=[r["selected_feature_id"], "unknown-candidate"]),
+        )
+        for index, mutate in enumerate(mutations):
+            with self.subTest(mutation=index):
+                result = copy.deepcopy(self.r)
+                mutate(result)
+                with self.assertRaises(ValueError):
+                    validator.validate_result(result, self.m)
+
+    def test_result_identity_must_match_manifest(self):
+        self.r["run_id"] = self.r["run_id"].replace("-r01", "-r02")
+        with self.assertRaisesRegex(ValueError, "run_id"):
+            validator.validate_result(self.r, self.m)
+
+    def test_discovery_timestamps_reject_invalid_text(self):
+        for field in ("discovery_started_at", "discovery_ended_at"):
+            for value in ("", " ", "invalid-timestamp"):
+                with self.subTest(field=field, value=value):
+                    result = copy.deepcopy(self.r)
+                    result["metrics"][field] = value
+                    with self.assertRaises(ValueError):
+                        validator.validate_result(result, self.m)
+
+    def test_schema_checks_build_and_test_blocks(self):
+        for block, field in (("build", "command"), ("automated_tests", "commands")):
+            with self.subTest(block=block):
+                result = copy.deepcopy(self.r)
+                del result["implementation"][block][field]
+                with self.assertRaises(ValueError):
+                    validator.validate_result(result, self.m)
+
+    def test_hash_and_candidate_patterns_require_the_entire_string(self):
+        fields = [("execution", key) for key in ("base_commit", "prompt_sha256", "config_sha256", "fixture_sha256",
+                  "schema_sha256", "evaluation_criteria_sha256", "profile_sha256", "input_bundle_sha256")]
+        fields += [("agent", "configuration_sha256"), ("hardware", "baseline_image_sha256"),
+                   ("outputs", "implementation_commit")]
+        for block, field in fields:
+            with self.subTest(block=block, field=field):
+                manifest = copy.deepcopy(self.m)
+                manifest[block][field] = "a" * 64 + "\n"
+                with self.assertRaises(ValueError):
+                    validator.validate_manifest(manifest)
+        self.r["implementation"]["commit"] = "a" * 40 + "\n"
+        with self.assertRaises(ValueError):
+            validator.validate_result(self.r, self.m)
+        self.r["implementation"]["commit"] = None
+        old_id = self.r["candidate_features"][0]["id"]
+        self.r["candidate_features"][0]["id"] += "\n"
+        if self.r["selected_feature_id"] == old_id:
+            self.r["selected_feature_id"] += "\n"
+        self.r["rejected_feature_ids"] = [key + "\n" if key == old_id else key for key in self.r["rejected_feature_ids"]]
+        with self.assertRaises(ValueError):
+            validator.validate_result(self.r, self.m)
+
 
 class RunnerTests(unittest.TestCase):
     def test_opencode_provider_total_and_reasoning_preserved(self):
@@ -175,6 +274,38 @@ class RunnerTests(unittest.TestCase):
             path = Path(folder) / "events.jsonl"
             path.write_text("invalid event\n", encoding="utf-8")
             self.assertIsNone(telemetry(path, "gemini")["total"])
+
+    def test_telemetry_preserves_unknown_counts_without_discarding_valid_fields(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "events.jsonl"
+            for adapter in ("codex", "opencode"):
+                for invalid in (None, True, -1, 1.0, "1"):
+                    with self.subTest(adapter=adapter, invalid=invalid):
+                        if adapter == "codex":
+                            events = [{"type": "turn.completed", "usage": {
+                                "input_tokens": value, "output_tokens": 2,
+                                "cached_input_tokens": 0, "total_tokens": 10,
+                            }} for value in (3, invalid)]
+                        else:
+                            events = [{"type": "step_finish", "part": {"tokens": {
+                                "input": value, "output": 2, "reasoning": 0,
+                                "cache": {"read": 0}, "total": 10,
+                            }}} for value in (3, invalid)]
+                        path.write_text("\n".join(map(json.dumps, events)), encoding="utf-8")
+                        measured = telemetry(path, adapter)
+                        self.assertIsNone(measured["input"])
+                        self.assertIsNone(measured["total"])
+                        self.assertEqual(measured["output"], 4)
+                        self.assertEqual(measured["cached"], 0)
+                        self.assertEqual(measured["provider_total"], 20)
+            for cache in (None, False, [], {"read": None}, {"read": True}):
+                with self.subTest(cache=cache):
+                    path.write_text(json.dumps({"type": "step_finish", "part": {"tokens": {
+                        "input": 0, "output": 0, "total": 0, "cache": cache,
+                    }}}), encoding="utf-8")
+                    measured = telemetry(path, "opencode")
+                    self.assertIsNone(measured["cached"])
+                    self.assertEqual(measured["total"], 0)
 
     def test_antigravity_mock_stream_preserves_one_shot_prompt_and_unknown_metrics(self):
         prompt = "AGY one-shot 한글 prompt".encode("utf-8")

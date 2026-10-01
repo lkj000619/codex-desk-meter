@@ -233,3 +233,12 @@ checkout 밖에서 계산한다. 목록·파일 hash를 운영자 증거와 cand
 문서 로컬 링크 272개 누락 없음, 제조사 source 189개 hash 일치,
 원본 evidence 212개 Git blob 변경 없음. OS sandbox·실물 동작·새 실험 승인 또는
 후속 회차/누적 예산 구현 완료를 주장하지 않는다.
+
+## 2026-10-02 스크립트 중복 축소
+
+사용자 요청에 따라 [공개 Ponytail 원본 지침](https://github.com/DietrichGebert/ponytail/blob/main/skills/ponytail/SKILL.md)을 적용했다. 설치 플러그인의 지침·도구는 이 세션에 노출되지 않았다.
+루트 Python 10개 중 allowlist로 후보에게 제공하는 공통 도구는 6개, 운영자용은 4개다.
+스키마와 중복된 legacy 검사, 토큰 합산, fixture 어댑터 오류 처리의 중복을 줄였다. CLI·스키마·후보 입력 목록은 유지했다.
+시간 파싱·전체 문자열 hash/ID·정수 계측·후보 선택·증거 검사는 보존했다. 날짜 형식 검사기의 선택 의존성과 정규식 `$`의 마지막 개행 허용 때문에 명시적 검사가 필요하다.
+실행용 Python은 3,374→3,193줄(181줄, 5.4% 감소). 전체 144개 시험 중 143개 통과, Windows symlink 권한 시험 1개 건너뜀.
+기존 검증기와 수정본의 필드 변형·삭제 2,230개에서 합격/불합격 판정이 일치했다. 예제 CLI·fixture matrix 검사와 `git diff --check`도 통과했다.

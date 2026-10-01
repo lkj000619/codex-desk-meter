@@ -112,6 +112,34 @@ class HostDevicePipelineTests(unittest.TestCase):
         self.assertIsNone(history["forecast_24h_percent"])
         self.assertNotIn("source_url", forecast)
 
+    def test_registry_preserves_typed_and_unexpected_adapter_errors(self):
+        healthy = read_json("experiments/fixtures/providers/codex-percent-window.json")
+        for error, code, message in (
+            (pipeline.PipelineError("SOURCE_UNAVAILABLE", "source missing"), "SOURCE_UNAVAILABLE", "source missing"),
+            (RuntimeError("adapter crashed"), "ADAPTER_FAILURE", "adapter crashed"),
+        ):
+            with self.subTest(code=code):
+                class FailingAdapter:
+                    adapter_id = "broken"
+
+                    def collect(self):
+                        raise error
+
+                collected = pipeline.FixtureRegistry(
+                    [FailingAdapter(), StaticAdapter("healthy", [healthy])],
+                    [FailingAdapter()], reference_time="2026-09-10T00:04:59Z",
+                ).collect()
+                expected = {"adapter_id": "broken", "code": code, "message": message}
+                self.assertEqual(collected.failures, [expected, expected])
+                self.assertEqual(collected.snapshots[0]["error_code"], code)
+                self.assertEqual(collected.snapshots[1], healthy)
+                self.assertEqual(collected.global_resets, [{
+                    "schema_version": 1, "source": "broken", "captured_at": "2026-09-10T00:04:59Z",
+                    "forecast_24h_percent": None, "forecast_48h_percent": None,
+                    "forecast_is_schedule": False, "latest_reset_at": None,
+                    "stale": True, "error_code": code,
+                }])
+
     def test_registry_preserves_percent_only_absolute_and_missing_reset_fixture_values(self):
         provider_root = ROOT / "experiments" / "fixtures" / "providers"
         registry = pipeline.FixtureRegistry(

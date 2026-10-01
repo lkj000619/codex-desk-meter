@@ -482,6 +482,11 @@ def check_antigravity_stderr(path):
         raise ValueError("AGY tool permission denied; inspect stderr evidence")
 
 
+def _sum_counts(values):
+    values = list(values)
+    return sum(values) if values and all(type(v) is int and v >= 0 for v in values) else None
+
+
 def telemetry(path, adapter):
     tokens = dict(input=None, output=None, cached=None, reasoning=None, provider_total=None, total=None,
                   provider_total_definition="provider_reported_total_preserved_without_recomputation",
@@ -499,14 +504,8 @@ def telemetry(path, adapter):
         usages = [e["usage"] for e in events if e.get("type") == "turn.completed" and isinstance(e.get("usage"), dict)]
         if usages:
             for target, source in (("input", "input_tokens"), ("output", "output_tokens"), ("cached", "cached_input_tokens")):
-                values = [u.get(source) for u in usages]
-                if all(type(v) is int and v >= 0 for v in values):
-                    tokens[target] = sum(values)
-            provider_totals = [u.get("total_tokens", u.get("total")) for u in usages]
-            if all(type(v) is int and v >= 0 for v in provider_totals):
-                tokens["provider_total"] = sum(provider_totals)
-            if tokens["input"] is not None and tokens["output"] is not None:
-                tokens["total"] = tokens["input"] + tokens["output"]
+                tokens[target] = _sum_counts(u.get(source) for u in usages)
+            tokens["provider_total"] = _sum_counts(u.get("total_tokens", u.get("total")) for u in usages)
             tokens["availability_note"] = "Codex turn.completed usage; cached is included in input; reasoning unavailable."
     if adapter == "opencode":
         # step_finish contains per-step provider usage; cache read/write are separate.
@@ -516,19 +515,12 @@ def telemetry(path, adapter):
                   and isinstance(e["part"].get("tokens"), dict)]
         if usages:
             for target in ("input", "output", "reasoning"):
-                values = [u.get(target) for u in usages]
-                if all(type(v) is int and v >= 0 for v in values):
-                    tokens[target] = sum(values)
-            values = [u.get("total") for u in usages]
-            if all(type(v) is int and v >= 0 for v in values):
-                tokens["provider_total"] = sum(values)
-            if all(type(u.get("input")) is int and type(u.get("output")) is int
-                   and u.get("input") >= 0 and u.get("output") >= 0 for u in usages):
-                tokens["total"] = sum(u["input"] + u["output"] for u in usages)
-            values = [u.get("cache", {}).get("read") for u in usages
-                      if isinstance(u.get("cache", {}), dict)]
-            if len(values) == len(usages) and all(type(v) is int and v >= 0 for v in values):
-                tokens["cached"] = sum(values)
+                tokens[target] = _sum_counts(u.get(target) for u in usages)
+            tokens["provider_total"] = _sum_counts(u.get("total") for u in usages)
+            tokens["cached"] = _sum_counts(
+                u.get("cache", {}).get("read") if isinstance(u.get("cache", {}), dict) else None
+                for u in usages
+            )
             tokens["availability_note"] = (
                 "OpenCode step_finish provider usage; provider_total preserves the raw total, "
                 "total is normalized input+output and excludes cache/reasoning; cache write is raw-log-only."
@@ -542,15 +534,13 @@ def telemetry(path, adapter):
             for target, source in (("input", "input_tokens"), ("output", "output_tokens"),
                                    ("cached", "cache_read_tokens"), ("reasoning", "thinking_tokens"),
                                    ("provider_total", "total_tokens")):
-                value = usage.get(source)
-                if type(value) is int and value >= 0:
-                    tokens[target] = value
-            if tokens["input"] is not None and tokens["output"] is not None:
-                tokens["total"] = tokens["input"] + tokens["output"]
+                tokens[target] = _sum_counts([usage.get(source)])
             tokens["availability_note"] = (
                 "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; "
                 "total is normalized input+output; cache_read and thinking are annotations."
             )
+    if tokens["input"] is not None and tokens["output"] is not None:
+        tokens["total"] = tokens["input"] + tokens["output"]
     return tokens
 
 

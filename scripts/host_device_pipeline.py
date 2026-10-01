@@ -318,39 +318,28 @@ class FixtureRegistry:
                 for snapshot in entries:
                     _validate_snapshot(snapshot)
                     snapshots.append(copy.deepcopy(snapshot))
-            except PipelineError as error:
-                failures.append({"adapter_id": adapter.adapter_id, "code": error.code, "message": error.message})
-                snapshots.append(_error_snapshot(adapter, self.reference_time, error.code, error.message))
             except Exception as error:  # adapter boundary turns failures into data
-                message = str(error)
-                failures.append({"adapter_id": adapter.adapter_id, "code": "ADAPTER_FAILURE", "message": message})
-                snapshots.append(_error_snapshot(adapter, self.reference_time, "ADAPTER_FAILURE", message))
+                code, message = (
+                    (error.code, error.message) if isinstance(error, PipelineError) else ("ADAPTER_FAILURE", str(error))
+                )
+                failures.append({"adapter_id": adapter.adapter_id, "code": code, "message": message})
+                snapshots.append(_error_snapshot(adapter, self.reference_time, code, message))
         for adapter in self.global_reset_adapters:
             try:
                 reset = adapter.collect()
                 _validate_global_reset(reset)
                 global_resets.append(copy.deepcopy(reset))
-            except PipelineError as error:
-                failures.append({"adapter_id": adapter.adapter_id, "code": error.code, "message": error.message})
-                global_resets.append(
-                    _normalize_global_reset(
-                        {
-                            "source": adapter.adapter_id,
-                            "captured_at": _as_of(self.reference_time).isoformat().replace("+00:00", "Z"),
-                            "error_code": error.code,
-                            "stale": True,
-                        }
-                    )
-                )
             except Exception as error:
-                message = str(error)
-                failures.append({"adapter_id": adapter.adapter_id, "code": "ADAPTER_FAILURE", "message": message})
+                code, message = (
+                    (error.code, error.message) if isinstance(error, PipelineError) else ("ADAPTER_FAILURE", str(error))
+                )
+                failures.append({"adapter_id": adapter.adapter_id, "code": code, "message": message})
                 global_resets.append(
                     _normalize_global_reset(
                         {
                             "source": adapter.adapter_id,
                             "captured_at": _as_of(self.reference_time).isoformat().replace("+00:00", "Z"),
-                            "error_code": "ADAPTER_FAILURE",
+                            "error_code": code,
                             "stale": True,
                         }
                     )

@@ -18,10 +18,6 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = ROOT / "experiments" / "examples"
-RUN_ID_RE = re.compile(r"^[0-9]{8}-[a-z0-9]+(?:-[a-z0-9]+)*-r[0-9]{2}$")
-SHA_RE = re.compile(r"^[A-Fa-f0-9]{64}$")
-COMMIT_RE = re.compile(r"^[A-Fa-f0-9]{7,64}$")
-STATUSES = {"pass", "partial", "fail", "not_run", "timeout", "blocked"}
 
 
 class ValidationError(ValueError):
@@ -42,10 +38,11 @@ def load_json(path: Path) -> dict[str, Any]:
     return value
 
 
-def required(obj: dict[str, Any], keys: list[str], where: str) -> None:
-    missing = [key for key in keys if key not in obj]
-    if missing:
-        raise ValidationError(f"{where}: missing {', '.join(missing)}")
+def nonnegative_int(value: Any, where: str, nullable: bool = False) -> None:
+    if value is None and nullable:
+        return
+    if not isinstance(value, int) or isinstance(value, bool) or value < 0:
+        raise ValidationError(f"{where}: expected a non-negative integer")
 
 
 def timestamp(value: Any, where: str, nullable: bool = False) -> None:
@@ -59,229 +56,72 @@ def timestamp(value: Any, where: str, nullable: bool = False) -> None:
         raise ValidationError(f"{where}: invalid timestamp {value!r}") from exc
 
 
-def sha(value: Any, where: str, nullable: bool = False) -> None:
-    if value is None and nullable:
-        return
-    if not isinstance(value, str) or not SHA_RE.fullmatch(value):
-        raise ValidationError(f"{where}: expected 64 hexadecimal characters")
-
-
-def commit(value: Any, where: str, nullable: bool = False) -> None:
-    if value is None and nullable:
-        return
-    if not isinstance(value, str) or not COMMIT_RE.fullmatch(value):
-        raise ValidationError(f"{where}: expected a 7-64 character hexadecimal commit")
-
-
-def nonnegative_int(value: Any, where: str, nullable: bool = False) -> None:
-    if value is None and nullable:
-        return
-    if not isinstance(value, int) or isinstance(value, bool) or value < 0:
-        raise ValidationError(f"{where}: expected a non-negative integer")
+def hexadecimal(value: str | None, where: str, minimum: int = 64) -> None:
+    # Schema has already checked type/nullability. Its '$' anchor also accepts
+    # a trailing newline, whereas recorded hashes must match the entire string.
+    if value is not None and not re.fullmatch(fr"[A-Fa-f0-9]{{{minimum},64}}", value):
+        expected = "64 hexadecimal characters" if minimum == 64 else "a 7-64 character hexadecimal commit"
+        raise ValidationError(f"{where}: expected {expected}")
 
 
 def validate_manifest(manifest: dict[str, Any]) -> None:
     from benchmark_support import validate_schema, validate_operator
     validate_schema(manifest, "run-manifest.schema.json")
     validate_operator(manifest)
-    required(
-        manifest,
-        ["schema_version", "run_id", "experiment_id", "baseline_id", "baseline_ref", "agent", "execution", "hardware", "measurement", "outputs"],
-        "manifest",
-    )
-    if manifest["schema_version"] != 2:
-        raise ValidationError("manifest.schema_version must be 2")
-    if not isinstance(manifest["run_id"], str) or not RUN_ID_RE.fullmatch(manifest["run_id"]):
-        raise ValidationError("manifest.run_id does not match YYYYMMDD-product-model-rNN")
+    # Schema owns shape, required fields and enums. Keep stricter patterns,
+    # cohort restrictions and semantic checks here; date-time checking is optional.
     if manifest["experiment_id"] != "version-2-hardware-autonomy-v1":
         raise ValidationError("manifest.experiment_id is not the Version 2 baseline")
-    for key in ("baseline_id", "baseline_ref"):
-        if not isinstance(manifest[key], str) or not manifest[key].strip():
-            raise ValidationError(f"manifest.{key} is required")
-
-    agent = manifest["agent"]
-    if not isinstance(agent, dict):
-        raise ValidationError("manifest.agent must be an object")
-    required(agent, ["provider", "product", "interface", "agent_version", "model", "reasoning"], "manifest.agent")
-    if agent["interface"] not in {"cli", "ide", "web", "api"}:
-        raise ValidationError("manifest.agent.interface is invalid")
-    if agent.get("configuration_sha256") is not None:
-        sha(agent["configuration_sha256"], "manifest.agent.configuration_sha256")
-
-    execution = manifest["execution"]
-    if not isinstance(execution, dict):
-        raise ValidationError("manifest.execution must be an object")
-    required(
-        execution,
-        [
-            "started_at",
-            "ended_at",
-            "timeout_seconds",
-            "base_commit",
-            "prompt_sha256",
-            "config_sha256",
-            "fixture_sha256",
-            "schema_sha256",
-            "evaluation_criteria_sha256",
-            "profile_sha256",
-            "input_bundle_sha256",
-            "network_mode",
-            "sandbox_policy",
-            "approval_policy",
-            "branch",
-            "worktree",
-        ],
-        "manifest.execution",
-    )
-    timestamp(execution["started_at"], "manifest.execution.started_at", nullable=True)
-    timestamp(execution["ended_at"], "manifest.execution.ended_at", nullable=True)
-    nonnegative_int(execution["timeout_seconds"], "manifest.execution.timeout_seconds")
-    if execution["timeout_seconds"] < 1:
-        raise ValidationError("manifest.execution.timeout_seconds must be positive")
-    commit(execution["base_commit"], "manifest.execution.base_commit")
-    for key in ("prompt_sha256", "config_sha256", "fixture_sha256", "schema_sha256", "evaluation_criteria_sha256", "profile_sha256", "input_bundle_sha256"):
-        sha(execution[key], f"manifest.execution.{key}")
-    if execution["network_mode"] not in {"offline-fixture", "public-read", "live-integration"}:
-        raise ValidationError("manifest.execution.network_mode is invalid")
-
-    hardware = manifest["hardware"]
-    if not isinstance(hardware, dict):
-        raise ValidationError("manifest.hardware must be an object")
-    required(hardware, ["board", "port", "board_revision", "tf_card_present", "hardware_slot"], "manifest.hardware")
-    if hardware["board"] != "waveshare-esp32-s3-lcd-3.16":
-        raise ValidationError("manifest.hardware.board is not the Version 2 board")
-    if not isinstance(hardware.get("baseline_restored"), bool):
+    if not isinstance(manifest["hardware"].get("baseline_restored"), bool):
         raise ValidationError("manifest.hardware.baseline_restored must be boolean")
-    if hardware.get("baseline_image_sha256") is not None:
-        sha(hardware["baseline_image_sha256"], "manifest.hardware.baseline_image_sha256")
-
+    hexadecimal(manifest["agent"].get("configuration_sha256"), "manifest.agent.configuration_sha256")
+    hexadecimal(manifest["hardware"].get("baseline_image_sha256"), "manifest.hardware.baseline_image_sha256")
+    execution = manifest["execution"]
+    for key in ("started_at", "ended_at"):
+        timestamp(execution[key], f"manifest.execution.{key}", nullable=True)
+    for key in ("prompt_sha256", "config_sha256", "fixture_sha256", "schema_sha256",
+                "evaluation_criteria_sha256", "profile_sha256", "input_bundle_sha256"):
+        hexadecimal(execution[key], f"manifest.execution.{key}")
+    hexadecimal(execution["base_commit"], "manifest.execution.base_commit", minimum=7)
+    hexadecimal(manifest["outputs"]["implementation_commit"], "manifest.outputs.implementation_commit", minimum=7)
+    # JSON Schema accepts integral floats; recorded counts must be Python ints.
+    nonnegative_int(manifest["execution"]["timeout_seconds"], "manifest.execution.timeout_seconds")
     measurement = manifest["measurement"]
-    if not isinstance(measurement, dict):
-        raise ValidationError("manifest.measurement must be an object")
-    required(measurement, ["wall_clock_seconds", "tool_calls", "failed_commands", "user_interventions", "tokens"], "manifest.measurement")
-    wall_clock = measurement["wall_clock_seconds"]
-    if wall_clock is not None and (not isinstance(wall_clock, (int, float)) or isinstance(wall_clock, bool) or wall_clock < 0):
-        raise ValidationError("manifest.measurement.wall_clock_seconds must be non-negative or null")
     for key in ("tool_calls", "failed_commands", "user_interventions"):
         nonnegative_int(measurement[key], f"manifest.measurement.{key}", nullable=True)
     tokens = measurement["tokens"]
-    if not isinstance(tokens, dict):
-        raise ValidationError("manifest.measurement.tokens must be an object")
-    required(tokens, ["input", "output", "cached", "reasoning", "provider_total", "total", "provider_total_definition", "availability_note"], "manifest.measurement.tokens")
     for key in ("input", "output", "cached", "reasoning", "provider_total", "total"):
         nonnegative_int(tokens[key], f"manifest.measurement.tokens.{key}", nullable=True)
-    if tokens["provider_total_definition"] != "provider_reported_total_preserved_without_recomputation":
-        raise ValidationError("manifest.measurement.tokens.provider_total_definition is invalid")
-    if not isinstance(tokens["availability_note"], str) or not tokens["availability_note"].strip():
+    if not tokens["availability_note"].strip():
         raise ValidationError("manifest.measurement.tokens.availability_note is required")
-
-    outputs = manifest["outputs"]
-    if not isinstance(outputs, dict):
-        raise ValidationError("manifest.outputs must be an object")
-    required(
-        outputs,
-        ["selection_document", "structured_result", "implementation_commit", "build_status", "automated_test_status", "hardware_verification_status"],
-        "manifest.outputs",
-    )
-    commit(outputs["implementation_commit"], "manifest.outputs.implementation_commit", nullable=True)
-    if outputs["build_status"] not in {"pass", "fail", "not_run", "timeout"}:
-        raise ValidationError("manifest.outputs.build_status is invalid")
-    if outputs["automated_test_status"] not in {"pass", "partial", "fail", "not_run", "timeout"}:
-        raise ValidationError("manifest.outputs.automated_test_status is invalid")
-    if outputs["hardware_verification_status"] not in {"pass", "partial", "fail", "not_run", "timeout", "blocked"}:
-        raise ValidationError("manifest.outputs.hardware_verification_status is invalid")
 
 
 def validate_result(result: dict[str, Any], manifest: dict[str, Any]) -> None:
     from benchmark_support import validate_schema
     validate_schema(result, "hardware-feature-result.schema.json")
-    required(
-        result,
-        [
-            "schema_version",
-            "run_id",
-            "experiment_id",
-            "candidate_features",
-            "selected_feature_id",
-            "selection_rationale",
-            "rejected_feature_ids",
-            "implementation",
-            "core_requirements",
-            "metrics",
-            "failures",
-            "unresolved_risks",
-        ],
-        "result",
-    )
-    if result["schema_version"] != 2:
-        raise ValidationError("result.schema_version must be 2")
-    if result["run_id"] != manifest["run_id"]:
-        raise ValidationError("result.run_id must equal manifest.run_id")
-    if result["experiment_id"] != manifest["experiment_id"]:
-        raise ValidationError("result.experiment_id must equal manifest.experiment_id")
-
-    candidates = result["candidate_features"]
-    if not isinstance(candidates, list) or len(candidates) != 3:
-        raise ValidationError("result.candidate_features must contain exactly 3 items")
-    candidate_ids: list[str] = []
-    for index, candidate in enumerate(candidates):
-        where = f"result.candidate_features[{index}]"
-        if not isinstance(candidate, dict):
-            raise ValidationError(f"{where} must be an object")
-        required(candidate, ["id", "name", "hardware_resource", "user_value", "implementation_cost", "risk", "verification_plan"], where)
+    for key in ("run_id", "experiment_id"):
+        if result[key] != manifest[key]:
+            raise ValidationError(f"result.{key} must equal manifest.{key}")
+    candidate_ids: set[str] = set()
+    for index, candidate in enumerate(result["candidate_features"]):
         identifier = candidate["id"]
-        if not isinstance(identifier, str) or not re.fullmatch(r"^[a-z0-9-]+$", identifier):
-            raise ValidationError(f"{where}.id is invalid")
+        if not re.fullmatch(r"[a-z0-9-]+", identifier):
+            raise ValidationError(f"result.candidate_features[{index}].id is invalid")
         if identifier in candidate_ids:
             raise ValidationError(f"duplicate candidate id: {identifier}")
-        candidate_ids.append(identifier)
-
+        candidate_ids.add(identifier)
     selected = result["selected_feature_id"]
     if selected not in candidate_ids:
         raise ValidationError("result.selected_feature_id must reference one candidate")
-    rejected = result["rejected_feature_ids"]
-    if not isinstance(rejected, list) or len(rejected) != 2 or len(set(rejected)) != 2:
-        raise ValidationError("result.rejected_feature_ids must contain exactly 2 unique IDs")
-    if set(rejected) != set(candidate_ids) - {selected}:
+    if set(result["rejected_feature_ids"]) != candidate_ids - {selected}:
         raise ValidationError("rejected IDs must be the two candidates not selected")
-
-    implementation = result["implementation"]
-    if not isinstance(implementation, dict):
-        raise ValidationError("result.implementation must be an object")
-    required(implementation, ["files", "commit", "build", "automated_tests", "hardware_test_plan", "hardware_result"], "result.implementation")
-    commit(implementation["commit"], "result.implementation.commit", nullable=True)
-    if implementation["hardware_result"] not in STATUSES:
-        raise ValidationError("result.implementation.hardware_result is invalid")
-    for key in ("build", "automated_tests"):
-        block = implementation[key]
-        if not isinstance(block, dict):
-            raise ValidationError(f"result.implementation.{key} must be an object")
-        required(block, ["status", "command" if key == "build" else "commands", "notes"], f"result.implementation.{key}")
-        allowed = {"pass", "fail", "not_run", "timeout"} if key == "build" else {"pass", "partial", "fail", "not_run", "timeout"}
-        if block["status"] not in allowed:
-            raise ValidationError(f"result.implementation.{key}.status is invalid")
-
-    core = result["core_requirements"]
-    if not isinstance(core, dict):
-        raise ValidationError("result.core_requirements must be an object")
-    for identifier in ("C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8"):
-        if identifier not in core or not isinstance(core[identifier], dict):
-            raise ValidationError(f"result.core_requirements.{identifier} is missing")
-        required(core[identifier], ["status", "evidence"], f"result.core_requirements.{identifier}")
-        if core[identifier]["status"] not in STATUSES:
-            raise ValidationError(f"result.core_requirements.{identifier}.status is invalid")
-        if not isinstance(core[identifier]["evidence"], str) or not core[identifier]["evidence"].strip():
+    hexadecimal(result["implementation"]["commit"], "result.implementation.commit", minimum=7)
+    for identifier, requirement in result["core_requirements"].items():
+        if not requirement["evidence"].strip():
             raise ValidationError(f"result.core_requirements.{identifier}.evidence is required")
-
     metrics = result["metrics"]
-    if not isinstance(metrics, dict):
-        raise ValidationError("result.metrics must be an object")
-    required(metrics, ["discovery_started_at", "discovery_ended_at", "tokens", "notes"], "result.metrics")
-    timestamp(metrics["discovery_started_at"], "result.metrics.discovery_started_at", nullable=True)
-    timestamp(metrics["discovery_ended_at"], "result.metrics.discovery_ended_at", nullable=True)
-    if not isinstance(metrics["tokens"], dict):
-        raise ValidationError("result.metrics.tokens must be an object")
-    required(metrics["tokens"], ["input", "output", "cached", "reasoning", "total"], "result.metrics.tokens")
+    for key in ("discovery_started_at", "discovery_ended_at"):
+        timestamp(metrics[key], f"result.metrics.{key}", nullable=True)
     for key in ("input", "output", "cached", "reasoning", "total"):
         nonnegative_int(metrics["tokens"][key], f"result.metrics.tokens.{key}", nullable=True)
 
