@@ -4,142 +4,22 @@
 > 역사적 준비·실행 기록이다. 다음 첫 결과+수정 비용 비교의 목표·예산·보드 제공
 > 조건은 [새 운영 계약](comparison-operating-contract.md)을 따른다.
 > 실행 인프라 준비와 후보 제품 품질을 구분하며 후보의 제품 실패도 결과로 남긴다.
-> 입력·도구 동기화는 [수정 계획](../superpowers/plans/2026-10-02-experiment-contract-remediation.md)의
-> 후속 작업이다. 이 주석으로 새 실행이나 중지된 OpenCode를 재개하지 않는다.
+> 입력·도구 구현과 실제 실행 전 남은 확인은 [새 비교 준비 상태](next-comparison-readiness.md)와
+> [구현 검증](../../results/comparison-tooling-20261002/report.md)을 참조한다.
+> 이 주석으로 새 실행이나 중지된 OpenCode를 재개하지 않는다.
 
-> 현재 판정 (2026-09-28): **PREFLIGHT_PASSED / AGY_COMPLETION_FAILED / PRODUCT_PASS_UNVERIFIED**.
-> [새 pilot 실행·독립 검증](evidence/agy-r01-result-20260928.md): 사전 시험 111개 통과 후 실제 AGY를 실행했다.
-> 미등록 pytest 명령 거부로 완주 실패. 별도 소스 복사본의 host 빌드·CTest 2개·기존 평가 29개·firmware 빌드는 통과했다.
-> 구조화된 결과·PC 통합·실물 평가가 없어 정식 비교는 보류한다. 공통 개발 환경 문서의 시험 실행 선택 기준을 보완했으며,
-> 아래 이전 baseline receipt는 새 문서 입력에 사용할 수 없다. 아래 상태 기록은 역사 기록이다.
+## 기존 pilot 기록의 적용 범위
 
-> 다음 pilot 진입 준비: [시험 진입 지침 기준본 사전 검증](evidence/agy-test-entry-preflight-20260928.json),
-> [새 pilot 전용 receipt](evidence/agy-gemini-3.8-flash-test-entry-receipt.json).
-> 고정 tag `benchmark-v2-baseline-20260928-test-entry`의 ASCII clone에서 새 run을 준비한다.
-> 111개 시험·host runtime·COM3·clean checkout 검증 통과; 정책 확대 없음. 다음 run은 아직 시작하지 않았다.
-
-> Measurement correction: [comparison integrity review](evidence/agy-comparison-integrity-20260927.md). AGY DONE without exit status is unknown; future failed_commands remains null when incomplete. Past raw runs are immutable. 107 tests passed. Product pilot remains unpassed; no expansion of vendor build access.
-
-> Current review (2026-09-27): **PREFLIGHT_PASSED / PILOT_NOT_PASSED**.
-> [r03 and preceding pilot results](evidence/agy-r03-result-20260927.md): pinned host/IDF environment and 102 tests passed; r03 requested an undeclared vendor build path and was denied. No product pass or formal comparison readiness. Earlier notes below are historical.
-
-> Latest reviewed run: **r07 / ENVIRONMENT_FAILED / PILOT_NOT_PASSED**.
-> [2026-09-26 result](evidence/agy-r07-result-20260926.md): 101 tests and separate AGY read diagnostics passed; product pilot attempted parent-directory access and a compound command, which the restricted policy correctly denied. No product artifacts or ranking-eligible result exist.
-> Earlier status notes below are historical, not current authorization.
-
-> ?? ??: [r05 ??](evidence/agy-r05-result-20260926.md). baseline 0702c29, 97? ??? ?? CLI smoke ?? ? ????? Test-Path ?? ??? ??. ?? ?? ?? ? ?? ??? ????. ?? ??? ?? ?? ????.
-
-> ?? ??: [r04 ??](evidence/agy-r04-result-20260926.md). ? baseline b299d5a?? ????? Get-ChildItem -Force ?? ??? ??. ?? ??? ????? pilot? ????. ?? ??? ?? ?? ????.
-
-> 2026-09-26 보완: 권한·계측 수정과 94개 시험 검증을 완료했다.
-> [보완 기록](evidence/agy-remediation-20260926.md) 참조. 새 baseline 동결과
-> 새 receipt 발행 전에는 과거 baseline으로 재실행하지 않는다.
-
-> ?? ??: **PILOT_NOT_PASSED / PERMISSION_POLICY_BLOCKED**. r03? ???? ?? ? ? ??? ?? ???? ????. runner? completed/0 tool ??? ?? ???? ????? ????. [?? ?????](evidence/agy-pilot-retry-result-20260926.md)? ????. ?? ? ????? ??? ????. ?? ?? ? ?? ??? ERROR/denied_actions ?? ??? ????.
-
-## 현재 상태
-
-**상태: `ENVIRONMENT_FAILED / PILOT_NOT_PASSED`** (2026-09-26 KST)
-
-첫 AGY pilot `20260926-antigravity-cli-agy-flash-medium-r01`은 승인 발효 후 한 번
-실행됐으나 CLI의 `--print` 인자 파싱 오류로 exit 2 종료됐다.
-[실행·사후 검증](evidence/agy-pilot-result-20260926.md)이 현재 판정이다.
-해당 run과 승인은 소진됐으며 재실행하지 않는다. R4의 실제 argv 호환성은 실패,
-R6/R7의 모델 stream 관측은 미수행이다. 아래 준비 통과 기록은 실행 이전 증거다.
-다음 실행은 profile·receipt 재검증과 새 run 준비가 필요하다.
-
-### 실행 이전 준비 기록
-
-다음 준비 서술은 첫 run 시작 이전 상태다. 현재 실행 결과는 위 판정과 갱신된
-gate 표를 우선한다. 첫 run의 R10은 실행 직전 발효됐고 실행 종료로 소진됐다.
-
-AGY 1.2.11 제한 정책, profile 입력 검사, host preflight, R8 평가 harness와 현재 보드
-백업을 검증했다. [AGY 환경 증거](evidence/agy-pilot-environment-20260925.md),
-[R8 ledger](evidence/r8-baseline-20260925/ledger.json),
-[R9 보드 점검](evidence/agy-r9-board-readiness-20260925.md),
-[preflight receipt](evidence/agy-gemini-3.8-flash-receipt.json)가 최신 근거다.
-R0~R9의 첫 pilot 진입 조건을 확인하고 새 run
-`20260926-antigravity-cli-agy-flash-medium-r01`의 `prepare`도 통과했다.
-[최신 준비 검증](evidence/agy-pilot-readiness-20260926.md)에 manifest·receipt·COM3
-재검사 근거를 기록했다. 기존 조건부 승인과 Q3 결정은 이 AGY 첫 pilot에 적용된다.
-실제 `run` 직전에는 시간에 민감한 COM3 단독 점유를 다시 확인하고 R10 발효 시점을
-기록한다. 첫 pilot의
-model entitlement·실제 도구 권한 동작·usage와 실물 제품 성능은 사후 관측이다.
-
-run ID의 날짜는 실행일(KST)과 같아야 한다. 9월 25일 준비 run은 이력으로 보존하며
-실행하지 않는다. 다시 날짜가 바뀌면 새 run을 준비하고 receipt와 날짜를 재검증한다.
-ADR-0005/0006은 선택된 pilot 범위로 채택 상태를 정리했다. 이 운영 상태 정정은
-동결 baseline 입력을 변경하지 않는다. 최신 운영 기록은 checkout 밖에서 관리한다.
-
-2026-09-18 설계 검토 후속 변경과 최신 host 검증은
-[design-remediation-20260918.md](../archive/experiments/design-remediation-20260918.md)에 기록한다.
-계약·fixture·IDF 활성화 보완과 host 시험 통과는 개별 실행 profile/receipt 확정이나
-실물 합격을 뜻하지 않는다. 과거 기록의 미충족 상태는 아래 최신 pilot-entry 표와 구분한다.
-
-이 문서는 에이전트 제품 구현을 실행하는 지침이 아니라, 실행해도 되는지 판단하는
-운영 gate다. 현재 이 gate가 `AUTHORIZED`로 바뀌지 않았으므로 agent prompt를
-수동으로 붙여넣거나 `benchmark.py run`을 실행하지 않는다. 문서 보완·schema·runner
-자체 시험은 제품 실험 실행이 아니다.
-
-## 기준 저장소
-
-- 정식 기준 브랜치: `main`
-- 선택된 AGY pilot baseline tag: `benchmark-v2-baseline-20260925`
-- 선택된 baseline commit: `eef278013428a79c29d6b9456018049af149ca61`
-- 이전 baseline `benchmark-v2-baseline-20260923` →
-  `9ef945efd9d6c2c4b4eedca75eccc9f280b3aced`는 이력으로 보존한다.
-  새 입력 bundle과 profile SHA는 2026-09-25 태그의 `benchmark.py check` 출력에 고정했다.
-- 보존 중인 historical baseline tag: `benchmark-v2-baseline-20260911`
-- 해당 historical tag의 commit: `34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f`
-- `main-2`는 runner tooling을 추가한 중간 개발 브랜치이며, 앞으로의 기준은
-  검토·승인된 `main` commit과 tag로만 정한다.
-- `experiment/...` 브랜치는 한 agent의 동결 결과를 보관한다. 다음 run의 시작점으로
-  사용하지 않는다.
-
-2026-09-20 로컬 ref 확인에서는 `version-2-baseline-20260911`과
-`benchmark-v2-baseline-20260914`도 존재한다. 위 태그와 서로 다른 commit이며,
-태그 존재만으로 현재 E2E 계약의 동결·승인 증거가 되지 않는다. ref별 commit은
-[문서 검토 기록](../archive/reviews/DOCUMENTATION_REVIEW.md)에 보존한다.
-
-입력 검사와 run 준비를 분리해 순환 의존을 해소했다. 현재 순서는 마지막 절과
-[실행 가이드](agent-run-commands.md) §1~6을 따른다. 기존 조건부 승인 기록을
-확인하고 로컬 prepare를 수행한 뒤, 준비 성공을 포함한 원래 조건이 모두
-충족됐는지 확인해 R10을 발효한다. 문서 정비만으로 gate를 통과시키지 않는다.
-
-## 역할 분리
-
-| 역할 | 허용 작업 | 금지 작업 |
-|---|---|---|
-| 기준 저장소 maintainer | 목적·계약·prompt·schema·runner·평가 기준 수정 | 실험 중인 agent 결과를 main에 섞기 |
-| agent | 깨끗한 checkout에서 제품 구현·자체 시험·결과 초안 작성 | manifest 조작, COM3 flash, private credential 요청 |
-| 공통 evaluator | 동결된 artifact를 read-only로 평가 | 평가 중 코드 수정·수정 지시 |
-| hardware operator | 승인된 artifact를 COM3에 flash하고 사진/영상·로그 수집 | 평가 전 임의 수정, erase_flash |
-| remediation 작업자 | 평가 후 별도 branch에서 수리·개선 | 원본 benchmark commit·점수 덮어쓰기 |
-
-## 실행 단계
-
-```text
-P0 목적·범위·계약 고정
-        ↓
-P1 runner/profile/access-policy/schema 준비 및 독립 검증
-        ↓
-P2 도구별 preflight와 preflight receipt 검토
-        ↓
-P3 사용자 승인 후 pilot 1회
-        ↓
-P4 pilot 합격 후 agent/model별 benchmark 반복
-        ↓
-P5 결과 동결 → 공통 평가 → 운영자 하드웨어 평가
-        ↓
-P6 필요 시 remediation 별도 실험
-```
-
-P0~P2의 pilot-entry 조건이 완료되지 않으면 P3 이후로 진행하지 않는다. R4·R6·R7은
-pilot 전 준비와 첫 pilot 후 관측을 나누어 기록한다. 첫 pilot 후에만 생길 수 있는
-entitlement·실제 stream/usage·soft-denial·operator intervention 증거는 해당 pilot의
-선행조건이 아니다. 현재 R0~R9의 pilot-entry 조건과 새 run prepare는 통과했으며 실행
-직전 COM3 재확인과 기존 조건부 승인 발효 기록이 남았다. pilot은 운영 인프라를 검증하는 단계이지 제품 구현을
-개선하는 단계가 아니며, 순위 통계에서 제외한다.
+이하 R0~R10 표와 명령은 2026-09-25~28 단회 pilot의 준비·승인·사후 판정 기록이다.
+표의 현재/미완료 표현도 해당 관측 시점에 한정한다. 이후 AGY r21 판정은
+[최종 평가](evidence/agy-remediation-r21-final-evaluation-20260929.md)에 보존돼 있다.
+2026-10-02의 다음 비교 준비 상태나 기존 run 재실행 승인으로 읽지 않는다.
+정리 전 상태 설명은 Git `eb69163:docs/experiments/benchmark-readiness.md`에서 복구한다.
+새 비교의 인프라 준비와 후보 제품 품질은 [운영 계약](comparison-operating-contract.md)이 구분한다.
+후속 정정 (2026-10-02, 새 비교 안내에 한정): comparison 연결 run의 infrastructure/capability
+receipt 적용은 [구현·시험 기록](../../results/comparison-tooling-20261002/report.md)에 연결한다.
+comparison 없는 historical run의 pilot_pass gate와 아래 원본 표·판정은 보존한다.
+현재 잔여 조건의 원본은 [새 비교 준비 상태](next-comparison-readiness.md)다.
 
 ## 필수 gate
 
@@ -176,8 +56,9 @@ R0~R9의 `pilot_entry=pass`와 대상에 적용되는 R10 승인 조건이 충�
 R3 결과 계약과 R1/R3의 transport 설계에는 Waveshare 공식
 [`waveshareteam/codex-meter`](https://github.com/waveshareteam/codex-meter)를 참조할 수
 있다. 참고 범위와 provenance·라이선스·보드 차이·검증 경계는
-[PC 수집기–ESP32 통합 계약 초안](integration-contract.md)의 “외부 참조 구현”을
-따른다. 참고했다는 사실만으로 gate 상태를 `pass`로 바꾸지 않는다.
+[통합 안내](integration-contract.md)에 연결된 Git의 과거 설계 초안
+`d6da44a:docs/experiments/integration-contract.md`를 따른다. 그 원본의 “외부 참조 구현”은
+역사적 참고 범위이며 현재 후보 입력이 아니다. 참고했다는 사실만으로 gate 상태를 `pass`로 바꾸지 않는다.
 
 R1~R3을 확정할 때에는 다중 provider fixture matrix도 고정한다. 최소 대상은 Codex,
 Claude Code, Antigravity CLI(Google 기본), Orca/IDE host와 unsupported

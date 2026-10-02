@@ -1,5 +1,14 @@
 # Offline readiness review - 2026-09-13
 
+<!-- archive-note:2026-10-02:start -->
+> 경로 보관 안내 (2026-10-02, 경로에 한정): 아래 판정·시험·파일 목록은 2026-09-13의 기록이다.
+> 당시 목록의 `docs/experiments/e2e-contract-implementation-plan.md`는
+> [보관한 E2E 계획](../plans/2026-09-13-e2e-contract-implementation-plan.md)으로,
+> `docs/experiments/host-device-pipeline-implementation-plan.md`는
+> [보관한 host 계획](../plans/2026-09-13-host-device-pipeline-implementation-plan.md)으로 이동했다.
+> 당시 경로 목록과 원문은 보존했으며 현재 실행 승인·준비 상태를 갱신한 것은 아니다.
+<!-- archive-note:2026-10-02:end -->
+
 ## Scope and boundary
 
 This is an independent review of the current uncommitted planning/tooling state

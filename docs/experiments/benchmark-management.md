@@ -2,18 +2,14 @@
 
 ## 상태
 
-이 문서는 합의된 운영 설계다. AGY 첫 pilot의 현재 상태는
-**`PILOT_PREPARED / LAUNCH_RECHECK_REQUIRED`**이다. 동결된
-`benchmark-v2-baseline-20260925`와 profile-bound receipt의 pilot 전 검증이
-완료됐으며, 새 run prepare는
-`20260925-antigravity-cli-agy-flash-medium-r01`에서 통과했다. 실행 직전 COM3 재확인·조건부 승인 발효 전에는
-pilot을 실행하지 않는다. 실행 gate의 단일
-진실은 [benchmark 실행 전 readiness gate](benchmark-readiness.md)다.
-기존 baseline 태그는 보존한다. 새 baseline은 maintainer가 `check`로 입력/profile을
-검사한 뒤 R1에서 hash를 동결하는 기준점이며, receipt·R10 승인이나 pilot 실행의
-증거가 아니다. 동결 뒤 profile-bound receipt와 적용되는 승인 기록을 확인하고
-`prepare`를 호출한다. 조건부 승인의 준비 성공 등 잔여 조건을 확인해 R10을
-발효한 뒤에만 `run`을 호출한다.
+이 문서는 운영자의 run ID·계측·보관·복구 방법을 정의한다. 다음 비교의 채택 조건은
+[운영 계약](comparison-operating-contract.md), 실제 준비 상태는
+[새 비교 준비 상태](next-comparison-readiness.md)가 소유한다.
+
+2026-09-25의 `PILOT_PREPARED / LAUNCH_RECHECK_REQUIRED`는 당시 준비 상태다.
+이후 첫 실행과 r21 보완의 결과는 [원본 evidence](evidence/agy-remediation-r21-final-evaluation-20260929.md)에
+보존했다. [기존 pilot gate](benchmark-readiness.md)와 receipt는 해당 날짜·baseline·profile에만 적용한다.
+새 baseline은 검토한 입력 commit/hash이며 실행 지시나 제품 합격의 증거가 아니다.
 
 ## 브랜치와 run ID
 
@@ -55,7 +51,7 @@ OpenCode 등의 모델 제공자·endpoint 별칭·정확한 모델 ID·자동 �
 
 ## 독립 반복과 코드 보존
 
-각 run은 동일 baseline의 새 임시 checkout과 새 에이전트 세션에서 시작한다.
+독립적인 최초 run은 동일 baseline의 새 임시 checkout과 새 에이전트 세션에서 시작한다.
 agent/model 보관 브랜치의 최신 코드를 다음 반복의 시작점으로 사용하지 않는다.
 이전 run의 코드·로그·대화·결과 요약은 실행 checkout에 제공하지 않는다.
 Git 이력으로 이전 결과를 읽는 것을 피하려면 baseline 파일만 가진 별도 저장소를
@@ -67,8 +63,8 @@ Git 이력으로 이전 결과를 읽는 것을 피하려면 baseline 파일만 
 2. agent/model 브랜치에 해당 스냅샷과 `results/<run-id>/`를 보존한다.
    앞선 결과 디렉터리를 유지하면서 프로젝트 소스는 해당 run의 스냅샷으로 교체한다.
 3. 결과 레코드가 구현 commit SHA와 증거 파일 해시를 참조하도록 별도 커밋한다.
-4. 다음 run은 다시 baseline에서 시작한다. 이전 구현을 개선하는 실행은
-   독립 반복이 아닌 별도 개선 실험으로 분류한다.
+4. 다음 독립 반복은 다시 baseline에서 시작한다. 후속 수정은 자신의 직전 frozen
+   결과에서 이어지며 최초 결과와 연결해 보관한다. 회차·누적 예산은 운영 계약을 따른다.
 
 실행 checkout의 로컬 SHA, 원본 baseline SHA, 보관된 구현 SHA를 구분한다.
 에이전트 종료 후 운영자가 코드를 고치면 원본 run은 그대로 보존하고 별도 수정으로 기록한다.
@@ -112,9 +108,23 @@ cached/reasoning이 input/output의 부분집합인지 명시하고 중복 합�
 형식 검증 통과는 C1~C8 합격을 의미하지 않는다. 부분합격·미검증은 제품 합격으로 집계하지 않는다.
 중단되어 후보 3개를 작성하지 못한 run도 운영 기록만으로 보존할 수 있어야 한다.
 
-최소 3회는 탐색적 비교다. 실행 순서와 난수 seed를 사전 기록한다. 성공/시도 수,
-중단·시간 초과·환경 실패 수, 완료 run의 시간 중앙값·범위를 함께 표시한다.
-미완료 run의 경과 시간은 별도로 제시하며 빠른 성공으로 취급하지 않는다.
+최소 3회는 탐색적 비교다. 실행 순서와 난수 seed를 사전 기록한다.
+비교군별로 전체 시도 수와 completed/aborted/timeout/environment_failed를 각각 보고하고,
+reference 도달과 제품 합격의 성공 수를 구분한다. 완료 결과에 조건부인 성공률과
+전체 시도 기준 성공률을 별도 이름으로 표시한다. 실행된 실패·중단·timeout의 시간과
+측정 가능한 token도 소비 비용에 포함하며, 준비·독립 평가 비용은 운영 계약대로 분리한다.
+
+`summarize-benchmark.py`의 첫 표는 유효 completed에 조건부인 비율·중앙값이며
+후속 회차는 독립 반복에서 제외한다. 별도 전체 시도 표에 실패 상태·소비 시간·
+정규화 token과 측정 coverage를 표시한다. 제품 결과가 누락/무효여도 유효 manifest의
+실행 비용은 남긴다. 최초·후속·누적·reference 도달 비용 표도 출력한다.
+RM 도달 비용은 hashed 전체 pass review와 이전 모든 회차·측정이 있을 때만 계산한다.
+
+조건부 표에서는 pilot·incomplete·schema-invalid·semantic-unjoined result와 중복 경로/run
+identity를 제외한다. 비교군은 agent 설정·experiment·baseline id/ref/commit·input bundle의
+전체 값으로 구분하며 화면의 짧은 label로 병합하지 않는다. `--min-repetitions` 미만은
+ineligible로 표시한다. E2E 유효성에는 operator·evaluation manifest·result·baseline·evidence의 연결 검사가 포함된다.
+명령과 입력 범위는 [도구 안내](comparison-tooling.md)를 따른다.
 
 ## main 결과 게시
 
@@ -125,29 +135,45 @@ F1~F9 기능 범위, G1~G6 GUI 점수, 시간·토큰과 측정 한계, 실물 �
 결과를 실시간 개인 계정 연동 완료로 요약하지 않는다.
 원본 대용량 로그·영상은 별도 artifact로 보관하고 위치·SHA-256·보존 정책을 기록한다.
 
+`benchmark.py archive`는 E2E schema·상태별 evidence·manifest identity·최종 normalized
+경로를 검사한 뒤 로컬 archive index에 게시한다. E2E 검증에 실패한 입력은 raw source
+snapshot을 보존하며 normalized result나 성공 상태를 부여하지 않는다.
+`automated_test_status`는 integration-test evidence에서 가져오며 `product_pass`로 대체하지 않는다.
+
 ## 구현 및 검증 상태
 
-- scaffold/검토 대상: date-only ID, schema v2 초안, 격리 checkout과 manifest 생성 도구
-- scaffold/검토 대상: 시간·timeout·외부 로그·Codex usage 이벤트 수집 경로
-- scaffold/검토 대상: 증거 경로·SHA-256 검사와 host preflight 차단
-- 별도 공통 평가 도구: fixture 오류 주입·0/299/300초 기준과 실물 채점표
-- 미완료: historical prep용 result schema의 F1~F9/I1~I4·G1~G6 기록 확장(E2E 결과 계약은 해당 필드 보유). 동결·승인 전이므로 새 baseline 확정 금지
-- 미완료: 도구별 정확한 모델/설정 확정, 실제 preflight receipt, Gemini/OpenCode/Antigravity telemetry 어댑터 검증
-- 미완료: one-shot 경계 검증, 새 baseline 확정, 각 도구의 제품 pilot, COM 포트와 실물 검증
-- 완료(offline tooling): E2E 평가 manifest는 `prepare`에서 생성되고 archive가
-  E2E result와 함께 identity를 정규화해 보존한다. summary는 조건별 유효 반복 수,
-  성공률, 시간·정규화 token 중앙값/범위와 build/hardware 상태를 집계한다.
-  C/F/G 상세 점수와 provider 원본 token은 결과·telemetry를 별도로 검토한다.
-- 완료(offline tooling): provider 원본 token total과 E2E 정규화 total 계약을
-  schema·runner·validator·회귀 테스트에 연결했다. 실제 provider telemetry는 여전히
-  실행 전 확인 대상이다.
-- 미완료: 도구별 정확한 모델/설정 확정, 실제 preflight receipt, Gemini/OpenCode/Antigravity telemetry
-  live 어댑터 검증, 제품 pilot·COM 포트·실물 검증.
+현재 도구에는 독립 checkout·allowlist 복사·입력 hash/변조 검사, 외부 실행 로그·timeout,
+E2E 평가 manifest 생성과 archive의 identity/evidence 검사가 구현돼 있다.
+기존 회귀시험의 범위와 새 비교에 남은 연결은
+[준비 상태](next-comparison-readiness.md)에서 함께 확인한다.
+historical schema는 과거 결과 형식으로 유지하며 새 E2E 필드를 소급 확장하지 않는다.
 
 운영 도구 자동 시험과 제품 pilot은 별개다. synthetic subprocess 시험을 제품 pilot으로
 기록하지 않는다. schema v1 과거 자료는 보존하며 새 validator로 덮어쓰거나 자동 이관하지 않는다.
 
-이 목록은 향후 readiness 작업이며, 문서 보완 자체가 실험 실행 승인을 뜻하지
-않는다. prompt를 직접 복사해 실행하면 manual pilot으로만 기록하고 정량 비교에서
-제외한다. maintainer/evaluator의 실행 중 수정·피드백도 동일하게 원본 run을
-무효화한다.
+문서 보완 자체가 실험 실행 승인을 뜻하지 않는다. runner 밖에서 prompt를 직접 복사한
+실행은 manual pilot으로 기록하고 독립 최초 실행의 정량 비교에서 제외한다.
+실행 중 maintainer/evaluator가 수정·피드백을 제공하면 개입을 보존하고 비교 적격성을
+검토한다. 종료 후 채택 절차대로 전달한 후속 피드백은 별도 수정 회차로 연결한다.
+
+## source와 evidence의 독립 복구
+
+소스 Git bundle과 실행 증거 package를 함께 보관한다. 소스에서 ignore된 frame·빌드
+로그·binary도 result가 참조하면 복구 대상이다. 아래 목록은 운영자 package의 보관 조건이며
+후보 result schema에 새 필드를 추가하는 지시가 아니다.
+
+| 보관 항목 | 식별·복구 조건 |
+|---|---|
+| source | run ID, baseline commit, 최초/직전/구현 commit과 검증 가능한 Git bundle |
+| artifact | 원본 app·ELF·map·bootloader·partition, 빌드 명령·도구 버전, 파일별 상대 경로·byte 수·SHA-256 |
+| stimulus·관측 | 실제 fixture와 기준 시각, expected/raw frame·sequence, collector/capture 명령·로그·사진/영상과 hash |
+| 결과·계측 | run/evaluation manifest, result, raw telemetry, 최초/후속 연결과 기록별 집계 범위 |
+| package 목록 | package별 SHA-256과 root 기준의 파일 목록. 절대 로컬 경로는 원본 provenance로만 별도 보존 |
+
+완료 검사는 기존 checkout을 참조할 수 없는 새 임시 root에 source와 evidence를 복원해
+수행한다. 원본 commit과 파일 hash를 대조하고, 복원 root를 `--evidence-root`로 지정해
+`validate-end-to-end-result.py --result <복원-result> --manifest <복원-evaluation-manifest>`를
+실행한다. source bundle 확인만으로 evidence 복구를 완료 처리하지 않는다.
+복원 검사 로그·종료 코드·root·검사 목록을 운영자가 보존한다.
+`package-evidence.py`의 source/evidence 제작·독립 root 복원은 임시 E2E 회귀시험으로 검증했다.
+실제 후보 firmware artifact와 실물 원본을 담은 package는 해당 실행 종료 뒤 별도 검증한다.

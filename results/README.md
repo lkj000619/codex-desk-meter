@@ -1,46 +1,32 @@
 # 검증 결과 인덱스
 
-현재 게시된 본 실험 결과는 없다. 실험 원본은 agent/model 보관 브랜치에서 관리한다.
-main에는 운영자가 확인한 요약과 고정 commit 링크만 추가한다.
+확인일: 2026-10-02. 새 동일 조건 비교의 정식 집계 결과는 아직 게시하지 않았다.
+아래에는 과거 관측 검토와 운영 도구의 검증 기록이 있다. 각 보고서의 날짜·대상·시험 범위를 확인한다.
 
-`python scripts/summarize-benchmark.py <manifest> ... --output <new-summary.md>`로
-초안을 만든 뒤 C1~C8, F1~F9 기능 상태, G1~G6 LCD GUI rubric, 자율 기능 점수,
-판정자, 평가 버전, 증거 링크, 토큰 정의와 측정 한계를 검토해서 추가한다. 이
-명령은 자동 commit/push/merge하지 않는다.
-완료 run의 중앙값·범위와 성공/전체 시도 수를 함께 집계하고 pilot은 제외한다.
-summary 도구는 pilot/incomplete/schema-invalid/semantic-unjoined result와
-동일 경로 또는 동일 run identity의 중복 입력을 제외하고, valid completed
-result를 comparison group별로 집계한다. group은 agent 설정과 experiment,
-baseline id/ref/commit, input bundle 전체 값으로 결정한다. `--min-repetitions`
-미만 group은 ineligible로 표시하고 success ratio, median/range, E2E
-evaluation manifest/evidence join 결과를 보고한다.
+## 과거 관측·비교 검토
 
-historical firmware-only cohort는 fixture 기반 firmware·LCD·입력·자율 기능만
-다룬다. 정식 end-to-end 결과는 PC agent/provider collector와 PC→ESP32
-transport/receiver를 포함해야 한다. 전자가 구현·검증되지 않은 결과는 F1/F3을
-`not_run; out of cohort`로 기록하며, 이를 “실시간 개인 사용량 표시 완료”로
-요약하지 않는다. agent 자체 시험, 공통 evaluator, 운영자 COM3 시험은 각각
-분리된 상태·증거로 보존한다.
+- [AGY·Codex 진행 상태 비교](agy-codex-progress-comparison-20261001.md)
+- [Codex 기준 검토 데이터](codex-reference-review-20261001.json)
+- [OpenCode 첫 결과 검토](opencode-first-output-review-20261001.md)
 
-수동으로 prompt를 붙여넣었거나 실행 중 외부 피드백·코드 수정이 있었거나
-manifest/receipt/raw log/token telemetry가 빠진 결과는
-`manual pilot; invalid for cross-agent quantitative comparison`으로 보존하고
-정식 중앙값·순위 집계에서 제외한다.
-## Implemented offline summary contract
+이 기록의 실행 조건은 서로 다르다. 새 동일 조건 비교의 순위나 비용 집계로 해석하지 않는다.
 
-The current `scripts/summarize-benchmark.py` implementation excludes pilot,
-incomplete, schema-invalid, semantically unjoined, and duplicate path/run
-identity records. It groups only valid completed repetitions using the full
-agent configuration, experiment, baseline id/ref/commit, and input-bundle
-identity. Long identity values are shortened only in the human-readable label;
-the grouping key keeps their complete values. The summary reports success ratio
-plus median/range for wall clock and normalized tokens, and marks groups below
-`--min-repetitions` as ineligible. E2E validity includes the operator,
-evaluation-manifest, result, baseline, and evidence joins; `provider_total`
-remains preserved telemetry and is not presented as normalized `total`.
+## main·운영 도구 검증
 
-`benchmark.py archive` validates E2E schema, semantic status/evidence rules,
-manifest identity, and the final normalized path before publishing a result to
-the local archive index. Failed E2E results keep the raw source snapshot and
-do not receive a normalized result or a success status. `automated_test_status`
-comes from integration-test evidence, never from `product_pass`.
+| 기록 | 검증 범위 |
+|---|---|
+| [프로젝트 목적·실험 개선 검토](main-purpose-review-20261002/review.md) | 정비 전 발견 사항과 당시 시험 |
+| [문서 수정 기록](main-purpose-review-20261002/document-fixes.md) | 문서·prompt 정비와 당시 남은 구현 |
+| [비교 도구 구현·검증](comparison-tooling-20261002/report.md) | 예산·실패 비용·관측·독립 복원 도구 |
+| [파일 트리·중복 평가](main-tree-review-20261002/report.md) | 정리 전 구조·중복·링크 검사 |
+| [파일 트리 정리 결과](main-tree-cleanup-20261002/report.md) | 후속 문서 정리·계획 이동·로그 보존 |
+
+## 새 결과의 작성·해석
+
+집계 명령은 [비교 도구 안내](../docs/experiments/comparison-tooling.md),
+비교 적격성·결과 보존·main 게시 기준은 [운영 관리](../docs/experiments/benchmark-management.md)를 따른다.
+집계에는 유효 completed의 조건부 표와 별도 전체 시도·실패 비용·최초/후속/기준 도달 비용 표가 있다.
+미측정 비용과 실물 미검증을 통과나 0으로 해석하지 않는다.
+
+현재 준비 상태는 [다음 비교 준비 상태](../docs/experiments/next-comparison-readiness.md)에서 확인한다.
+과거 보고서의 미완료 표현은 당시의 상태이며 후속 구현·정비 보고서와 함께 읽는다.

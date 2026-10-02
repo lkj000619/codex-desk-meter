@@ -8,7 +8,7 @@
 문서는 주요 수정이 필요하다.** 중요한 문제는 Critical 2건·Major 6건이며 부수 정리
 항목은 Minor 2건이다. Critical은 새 실험의 해석을 막는 문제를 뜻한다.
 
-후속 작업은 [수정 계획](../superpowers/plans/2026-10-02-experiment-contract-remediation.md)을
+후속 작업은 [수정 계획](../plans/2026-10-02-experiment-contract-remediation.md)을
 따른다. 이 문서는 과거 실행의 점수를 바꾸거나 새 제품 실험을 시작하는 지시가 아니다.
 
 ## 평가 범위와 근거

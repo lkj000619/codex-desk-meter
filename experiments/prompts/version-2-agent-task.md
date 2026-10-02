@@ -45,8 +45,10 @@ receiver → LCD**를 연결하는 ESP-IDF v5.3.2 제품을 구현한다. 이번
 - `ctest --test-dir build-host --output-on-failure`
 
 셸 명령은 한 호출에 하나만 실행한다. `;`, `&&`, 파이프·명령 치환·shell wrapper로
-결합하지 않는다. 파일 작성은 native 파일 도구를 사용한다. 제한 정책은
-`experiments/config/agy-pilot-permissions.json`에서 필요한 명령 규칙만 확인한다.
+결합하지 않는다. 파일 작성은 native 파일 도구를 사용한다. 제공된
+`experiments/config/agy-pilot-permissions.json`은 명령 규칙의 참조 자료다.
+각 실행 표면의 실효 권한·도구 설정은 운영자가 사전에 확인해 고정한다.
+이 파일의 존재만으로 모든 표면의 권한 강제가 같다고 가정하지 않는다.
 권한 거부는 실패로 기록하고 종료하며 다른 도구로 우회하거나 권한 추가를 요청하지 않는다.
 정책에 없는 `pytest`·삭제·인라인 Python을 실행하지 않는다.
 

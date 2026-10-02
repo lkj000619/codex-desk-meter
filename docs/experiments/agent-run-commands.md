@@ -5,46 +5,20 @@
 이 문서·profile·과거 기록을 후보에게 복사하지 않는다.
 새 비교의 현재 준비 상태는 [준비 상태](next-comparison-readiness.md)를 따른다.
 
-> Measurement correction: [comparison integrity review](evidence/agy-comparison-integrity-20260927.md). AGY DONE without exit status is unknown; future failed_commands remains null when incomplete. Past raw runs are immutable. 107 tests passed. Product pilot remains unpassed; no expansion of vendor build access.
+## 적용 시점과 실행 경계
 
-> Current review (2026-09-27): **PREFLIGHT_PASSED / PILOT_NOT_PASSED**.
-> [r03 and preceding pilot results](evidence/agy-r03-result-20260927.md): pinned host/IDF environment and 102 tests passed; r03 requested an undeclared vendor build path and was denied. No product pass or formal comparison readiness. Earlier notes below are historical.
+아래 CLI/profile/receipt 예시는 2026-09-18~27 관측과 기존 단회 pilot 절차다.
+그 당시 버전·모델·권한과 로컬 절대 경로는 새 실행의 실효 환경 검증을 대신하지 않는다.
+당시 첫 pilot의 실패·회차 기록은 [원본 evidence](evidence/agy-pilot-result-20260926.md),
+[후속 실행](evidence/agy-r03-result-20260927.md),
+[최종 r21 평가](evidence/agy-remediation-r21-final-evaluation-20260929.md)를 따른다.
+정리 전 안내는 Git `eb69163:docs/experiments/agent-run-commands.md`에서 복구한다.
 
-> Latest reviewed run: **r07 / ENVIRONMENT_FAILED / PILOT_NOT_PASSED**.
-> [2026-09-26 result](evidence/agy-r07-result-20260926.md): 101 tests and separate AGY read diagnostics passed; product pilot attempted parent-directory access and a compound command, which the restricted policy correctly denied. No product artifacts or ranking-eligible result exist.
-> Earlier status notes below are historical, not current authorization.
-
-> ?? ??: [r05 ??](evidence/agy-r05-result-20260926.md). baseline 0702c29, 97? ??? ?? CLI smoke ?? ? ????? Test-Path ?? ??? ??. ?? ?? ?? ? ?? ??? ????. ?? ??? ?? ?? ????.
-
-> ?? ??: [r04 ??](evidence/agy-r04-result-20260926.md). ? baseline b299d5a?? ????? Get-ChildItem -Force ?? ??? ??. ?? ??? ????? pilot? ????. ?? ??? ?? ?? ????.
-
-> 2026-09-26 개발 보완 완료: [권한·계측 수정](evidence/agy-remediation-20260926.md).
-> 다음 실행에는 이 수정이 포함된 새 baseline과 remediation profile에 연결된 새 receipt가 필요하다.
-
-> ?? ??: **PILOT_NOT_PASSED / PERMISSION_POLICY_BLOCKED**. r03? ???? ?? ? ? ??? ?? ???? ????. runner? completed/0 tool ??? ?? ???? ????? ????. [?? ?????](evidence/agy-pilot-retry-result-20260926.md)? ????. ?? ? ????? ??? ????. ?? ?? ? ?? ??? ERROR/denied_actions ?? ??? ????.
-
-## 상태
-
-**현재 상태: `ENVIRONMENT_FAILED / PILOT_NOT_PASSED`** (2026-09-26 KST).
-[첫 실행 결과](evidence/agy-pilot-result-20260926.md): 아래 run은 CLI 인자 오류로
-종료됐으므로 재실행하지 않는다. 다음 실행에는 수정 profile 검증·새 receipt·새 run이 필요하다.
-아래 준비 안내는 첫 실행 이전 절차 기록이다.
-첫 AGY pilot의 준비 run은
-`C:\Espressif\benchmark-runs\20260926-antigravity-cli-agy-flash-medium-r01`이다.
-[최신 준비 검증](evidence/agy-pilot-readiness-20260926.md)을 확인하고 실행 직전 COM3를
-다시 점검해 R10 발효를 기록한다. run ID 날짜가 실행일(KST)과 같고 상태가 `prepared`인
-경우에만 사용한다. 날짜가 바뀌면 이전 예약을 보존하고 새 ID로 `prepare`한다.
-
-운영 도구의 일부 scaffold가 있어도 도구별 모델·sandbox·기능 결과 schema 검증이
-끝난 것은 아니다. run 준비·실행·보존 명령은 [readiness gate](benchmark-readiness.md)의
-조건과 해당 작업 승인을 확인한 뒤 수행한다. §1의 host 검사와 §2~3의 문서·설정
-검토는 gate 충족을 준비하는 작업이며 agent 실행 승인을 요구하지 않는다. 이 문서를
-읽거나 보완하는 것, 명령을 검토하는 것은 agent process를 시작하는 행위가 아니다.
-
-공통 prompt는 사람이 CLI에 직접 붙여넣지 않는다. runner가 생성한 `prompt.txt`를
-정확히 한 번 전달하고, 실행 중 follow-up·구현 피드백·코드 수정이 발생하면 해당
-run을 정량 비교에서 제외한다. 아래의 환경·validator 명령을 실행했다고 해서
-제품 구현이나 COM3 검증이 완료되었다고 해석하지 않는다.
+다음 비교는 새 준비 상태와 [운영 계약](comparison-operating-contract.md)의 최초/후속 규칙을
+따른다. 기존 receipt를 새 baseline/profile의 준비 증거로 재사용하지 않는다.
+로컬 도구 검사와 문서 검토는 준비 작업이다. 후보 process 실행은 실제 실행 지시에 연결하고,
+최초 전달과 종료 후 수정 session의 로그·시간·token을 각각 보존한다.
+실행 중 구현 피드백은 개입으로 기록한다. 명령·예제 검사만으로 실제 송수신·LCD 합격을 주장하지 않는다.
 
 ## 0. 실행 승인 gate
 

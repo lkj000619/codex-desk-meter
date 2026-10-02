@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "reference_commit": "7923f960fc9cc96fd576ab71f36f3d6500cc8190",
+  "required_ids": [
+    "RM1",
+    "RM2",
+    "RM3",
+    "RM4",
+    "RM5"
+  ],
+  "reference_time": "2026-09-30T18:40:49Z",
+  "monotonic_offsets": [
+    0.0,
+    5.0
+  ],
+  "expected_frames": "expected-frames.jsonl",
+  "expected_frames_sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+  "receiver_accepted_sequences": [
+    0,
+    1
+  ],
+  "source_status": "stale",
+  "display_values": {
+    "five-hour": {
+      "percent_used": 42,
+      "percent_remaining": 58
+    },
+    "weekly": {
+      "percent_used": 18,
+      "percent_remaining": 82
+    }
+  },
+  "fixture_files": {
+    "experiments/fixtures/personal-usage.json": "738674a3b9e587fc851557630a637bef311020bf587f300c5452beabab575e11",
+    "experiments/fixtures/codex-reset-forecast.json": "71a01e40800baf23407a22b22761f2a73d6ff2fb27e1cdf2adb077be1667d5a4",
+    "experiments/fixtures/codex-resets-history.json": "f3054d15bafa93575b6d1b17ea6738642594dcfb0d45bc31346c2626e577740e"
+  },
+  "collector_source": {
+    "git_path": "scripts/cdm_collector.py",
+    "sha256": "0494714164cfcf5dd42c7e4a7eaa8e349d5fc08dde6e80eb3c536e9a25e6ea5d"
+  },
+  "original_procedure": {
+    "harness_sha256": "6b3ee68d8e5006bd23a7690ecceebc6ed89fc6e657c976dff519b4e4c7740b1f",
+    "fixture_args": {
+      "all_provider_fixtures": false,
+      "fixture": null,
+      "omit_global_reset": false
+    },
+    "calls": [
+      "collect_cli_fixtures(args)",
+      "SenderSequence.reserve()",
+      "make_frame(usage,resets,sequence)",
+      "write_frame(owned_port,frame)"
+    ],
+    "sender_timestamp": "runtime UTC; exact recorded sent_at is frozen above"
+  },
+  "provenance": {
+    "sender_log_sha256": "a1429e81294a25607654c64c96453fb829e91fdf70c107116ad3ba133b9ec11f",
+    "device_check_sha256": "16ec99aee0f441f9c37284a56045c2f1b100f47808c6265e3c5297910b32038c",
+    "source_directory": "C:\\Users\\이광진\\orca\\codex-desk-meter\\results\\codex-reference-upload-20261001\\lcd-retest"
+  },
+  "scope": "Recovered original stale synthetic values and accepted frames; optical/page evidence remains the original video review; no new hardware observation"
+}

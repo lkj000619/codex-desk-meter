@@ -44,6 +44,11 @@ C1~C8·I1~I4·F1~F9는 모두 평가 대상이다. 미구현·미검증은 사�
 - snapshot은 고정 reference_time을 주입해 시험한다. observed_at 기준 age≥300초는 stale이다.
   0·299·300초 경계를 시험한다. LCD는 last-good 수신 뒤 단조 시계의 age≥300초에서 stale을 표시한다.
   원본 조회 시각을 수집·전송 시각으로 덮어써 오래된 값을 새 값처럼 보이지 않는다.
+  source-age(observed_at부터의 경과)와 receive-age(검증된 frame 수신부터의 경과)는
+  별도로 판정한다. 새 frame 수신으로 오래된 source의 stale을 해제하지 않는다.
+  reference_time은 시험의 UTC 시각 기준이며, firmware의 uptime 초를 RFC3339 epoch와
+  직접 비교하지 않는다. fixture 기준 시각과 부팅 후 단조 경과를 연결하는 방법은
+  시험 절차에 기록한다. 시각 기준이 미확정이면 시각 기반 표시는 unknown으로 남긴다.
 - 미래 resets_at은 scheduled로 허용하고 과거 resets_at은 expired/재조회 상태로 표시한다.
   경과 시간과 예측을 확정 일정으로 표시하지 않는다.
 - `codex-reset.com`과 `codex-resets.com`은 별개다. 첫 source의 forecast는 파서 호환용이며

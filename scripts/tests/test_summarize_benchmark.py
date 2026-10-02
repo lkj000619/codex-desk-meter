@@ -28,6 +28,93 @@ def read(relative):
 
 
 class SummaryTests(unittest.TestCase):
+    def test_followup_is_not_an_independent_repetition_but_keeps_attempt_cost(self):
+        with tempfile.TemporaryDirectory() as folder:
+            manifest = read("experiments/examples/run-manifest.example.json")
+            manifest["operator"]["phase"] = "benchmark"
+            manifest["operator"]["comparison"] = {"ledger": "comparison.json", "comparison_id": "series", "round": 1,
+                "starting_commit": "a"*40, "feedback_sha256": "a"*64, "reference_status": "not_run", "reference_inputs_sha256": "a"*64}
+            path = Path(folder) / "run-manifest.json"
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+            records, excluded = summary.collect_records([path])
+            self.assertEqual(records, [])
+            self.assertEqual(excluded["followup"], 1)
+            self.assertEqual(len(summary.collect_attempts([path])[0]), 1)
+
+    def test_series_reports_initial_followup_and_reference_cost_without_trusting_unbound_pass(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            attempts = []
+            for number, seconds in ((0, 600), (1, 100)):
+                manifest = read("experiments/examples/run-manifest.example.json")
+                manifest["operator"]["comparison"] = {"comparison_id": "series", "round": number, "reference_status": "pass", "reference_inputs_sha256": "a"*64}
+                manifest["operator"]["evidence"] = {}
+                attempts.append({"manifest": manifest, "path": root / "run-manifest.json", "seconds": seconds,
+                                 "tokens": 75 if number == 0 else None})
+            result = summary.comparison_series(attempts)[0]
+            self.assertEqual(result["initial_seconds"], 600)
+            self.assertEqual(result["followup_seconds"], 100)
+            self.assertEqual(result["total_seconds"], 700)
+            self.assertIsNone(result["reference_seconds"])
+            report = {"run_id": attempts[1]["manifest"]["run_id"], "reference_inputs_sha256": "a"*64,
+                      "items": {key: {"status": "pass", "evidence": [{"path": "observation.txt", "sha256": summary.digest(b"observed")}]}
+                                for key in ("RM1", "RM2", "RM3", "RM4", "RM5")}}
+            (root / "observation.txt").write_bytes(b"observed")
+            (root / "reference-review.json").write_text(json.dumps(report), encoding="utf-8")
+            attempts[1]["manifest"]["operator"]["evidence"]["reference-review.json"] = summary.digest((root / "reference-review.json").read_bytes())
+            result = summary.comparison_series(attempts)[0]
+            self.assertEqual(result["reference_seconds"], 700)
+            self.assertEqual(result["token_coverage"], "1/2")
+    def test_attempt_costs_include_timeout_without_a_product_result(self):
+        with tempfile.TemporaryDirectory(prefix="meter-attempts-") as folder:
+            root = Path(folder)
+            manifest = read("experiments/examples/run-manifest.example.json")
+            manifest["operator"].update(phase="benchmark", status="timeout", reason="time budget",
+                                        exit_code=None)
+            manifest["measurement"]["tokens"].update(input=50, output=25, total=75)
+            path = root / "run-manifest.json"
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+            attempts, excluded = summary.collect_attempts([path, path])
+            self.assertEqual(len(attempts), 1)
+            self.assertEqual(attempts[0]["status"], "timeout")
+            self.assertEqual(attempts[0]["seconds"], 600)
+            self.assertEqual(attempts[0]["tokens"], 75)
+            self.assertIsNone(attempts[0]["success"])
+            self.assertEqual(excluded["duplicate"], 1)
+
+    def test_prepared_runs_are_not_attempts_and_unknown_tokens_remain_unknown(self):
+        with tempfile.TemporaryDirectory(prefix="meter-attempt-states-") as folder:
+            root = Path(folder)
+            manifest = read("experiments/examples/run-manifest.example.json")
+            manifest["operator"].update(phase="benchmark", status="prepared", exit_code=None)
+            manifest["execution"].update(started_at=None, ended_at=None)
+            manifest["measurement"].update(wall_clock_seconds=None)
+            path = root / "run-manifest.json"
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+            attempts, excluded = summary.collect_attempts([path])
+            self.assertEqual(attempts, [])
+            self.assertEqual(excluded["prepared"], 1)
+            manifest["operator"].update(status="aborted", reason="operator stop")
+            manifest["execution"].update(started_at="2026-09-11T00:00:00Z",
+                                         ended_at="2026-09-11T00:10:00Z")
+            manifest["measurement"].update(wall_clock_seconds=600)
+            manifest["measurement"]["tokens"].update(input=None, output=None, total=None)
+            path.write_text(json.dumps(manifest), encoding="utf-8")
+            attempts, excluded = summary.collect_attempts([path])
+            self.assertIsNone(attempts[0]["tokens"])
+
+    def test_all_attempt_ratio_and_cost_coverage_are_distinct_from_completed_ratio(self):
+        manifest = read("experiments/examples/run-manifest.example.json")
+        attempts = [
+            {"manifest": manifest, "group": "same", "group_key": ("same",), "status": "completed",
+             "success": True, "seconds": 10, "tokens": 100},
+            {"manifest": manifest, "group": "same", "group_key": ("same",), "status": "timeout",
+             "success": None, "seconds": 600, "tokens": None},
+        ]
+        rendered = summary.render_attempt_summary(attempts, {})
+        self.assertIn("| 2 | 1 | 1 | 0 | 0 | 0.500 | 610 | 2/2 | 100 | 1/2 |", rendered)
+        self.assertIn("Measured costs", rendered)
+
     def test_group_aggregation_reports_ratio_median_range_and_minimum(self):
         base_manifest = read("experiments/examples/run-manifest.example.json")
         base_manifest["experiment_id"] = "version-2-end-to-end-v1"

@@ -6,7 +6,7 @@ import json
 import statistics
 from pathlib import Path
 
-from benchmark_support import read, validate_operator, validate_schema
+from benchmark_support import digest, read, validate_operator, validate_schema, verify_evidence
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -190,7 +190,7 @@ def _success(manifest, result):
 def collect_records(manifest_paths):
     """Return valid, non-pilot completed records and excluded-input counts."""
     records = []
-    excluded = {"pilot": 0, "incomplete": 0, "invalid": 0, "duplicate": 0}
+    excluded = {"pilot": 0, "incomplete": 0, "invalid": 0, "duplicate": 0, "followup": 0}
     seen_paths = set()
     seen_run_ids = set()
     for path in manifest_paths:
@@ -207,6 +207,9 @@ def collect_records(manifest_paths):
             validate_schema(manifest, "run-manifest.schema.json")
             if manifest["operator"]["phase"] == "pilot":
                 excluded["pilot"] += 1
+                continue
+            if manifest["operator"].get("comparison", {}).get("round", 0) > 0:
+                excluded["followup"] += 1
                 continue
             if manifest["operator"]["status"] != "completed":
                 excluded["incomplete"] += 1
@@ -240,6 +243,139 @@ def collect_records(manifest_paths):
 
 def _number(value):
     return "—" if value is None else f"{value:g}" if isinstance(value, float) else str(value)
+
+
+def collect_attempts(manifest_paths):
+    """Preserve execution costs independently of product-result validity."""
+    attempts, seen_paths, seen_ids = [], set(), set()
+    excluded = {"pilot": 0, "prepared": 0, "invalid": 0, "duplicate": 0}
+    for value in manifest_paths:
+        path = Path(value)
+        key = str(path.resolve())
+        if key in seen_paths:
+            excluded["duplicate"] += 1
+            continue
+        seen_paths.add(key)
+        try:
+            manifest = read(path)
+            validate_schema(manifest, "run-manifest.schema.json")
+            validate_operator(manifest)
+        except (OSError, KeyError, TypeError, ValueError):
+            excluded["invalid"] += 1
+            continue
+        if manifest["operator"]["phase"] == "pilot":
+            excluded["pilot"] += 1
+            continue
+        if manifest["operator"]["status"] == "prepared":
+            excluded["prepared"] += 1
+            continue
+        if manifest["run_id"] in seen_ids:
+            excluded["duplicate"] += 1
+            continue
+        seen_ids.add(manifest["run_id"])
+        result = None
+        if manifest["operator"]["status"] == "completed":
+            try:
+                result = _load_valid_result(path, manifest)
+            except (OSError, KeyError, TypeError, ValueError):
+                pass
+        tokens = manifest["measurement"]["tokens"]
+        total = (tokens["input"] + tokens["output"]
+                 if tokens["input"] is not None and tokens["output"] is not None else None)
+        attempts.append({"manifest": manifest, "path": path, "group": _comparison_group(manifest),
+                         "group_key": _comparison_key(manifest), "status": manifest["operator"]["status"],
+                         "success": None if result is None else _success(manifest, result),
+                         "seconds": manifest["measurement"]["wall_clock_seconds"], "tokens": total})
+    return attempts, excluded
+
+
+def render_attempt_summary(attempts, excluded):
+    rows = ["## All attempts and costs", "",
+            "Measured costs include failed, aborted and timed-out attempts. Missing measurements remain unknown; coverage is measured attempts / all attempts. Product success requires a valid joined result.", "",
+            "| Comparison group | Attempts | Completed | Timeout | Aborted | Environment failed | Product success / attempts | Measured seconds | Time coverage | Measured normalized tokens | Token coverage | Running | Unvalidated products |",
+            "|---|---:|---:|---:|---:|---:|---:|---:|---|---:|---|---:|---:|"]
+    groups = {}
+    for item in attempts:
+        bucket = groups.setdefault(item["group_key"], {"label": item["group"], "items": []})
+        bucket["items"].append(item)
+    for bucket in sorted(groups.values(), key=lambda item: item["label"]):
+        items, count = bucket["items"], len(bucket["items"])
+        seconds = [item["seconds"] for item in items if item["seconds"] is not None]
+        tokens = [item["tokens"] for item in items if item["tokens"] is not None]
+        values = [bucket["label"].replace("|", "\\|"), count]
+        values += [sum(item["status"] == state for item in items)
+                   for state in ("completed", "timeout", "aborted", "environment_failed")]
+        values += [f"{sum(item['success'] is True for item in items) / count:.3f}",
+                   _number(sum(seconds)) if seconds else "—", f"{len(seconds)}/{count}",
+                   str(sum(tokens)) if tokens else "—", f"{len(tokens)}/{count}",
+                   sum(item["status"] == "running" for item in items),
+                   sum(item["status"] == "completed" and item["success"] is None for item in items)]
+        rows.append("| " + " | ".join(map(str, values)) + " |")
+    rows.extend(["", "Attempt exclusions: " + "; ".join(f"{key}={value}" for key, value in excluded.items()) + ".", ""])
+    return "\n".join(rows)
+
+
+def _reference_reached(attempt):
+    manifest, root = attempt["manifest"], attempt["path"].parent
+    comparison = manifest["operator"]["comparison"]
+    try:
+        name = "reference-review.json"
+        expected = manifest["operator"]["evidence"].get(name)
+        if comparison["reference_status"] != "pass" or expected != digest((root / name).read_bytes()):
+            return False
+        review = read(root / name)
+        if (review["run_id"] != manifest["run_id"] or review["reference_inputs_sha256"] != comparison["reference_inputs_sha256"]
+                or set(review["items"]) != {"RM1", "RM2", "RM3", "RM4", "RM5"}):
+            return False
+        for item in review["items"].values():
+            if item["status"] != "pass" or not item["evidence"]:
+                return False
+            verify_evidence({"operator": {"evidence": {value["path"]: value["sha256"] for value in item["evidence"]}}}, root)
+        return True
+    except (ValueError, OSError, KeyError, TypeError):
+        return False
+
+
+def comparison_series(attempts):
+    groups = {}
+    for item in attempts:
+        connection = item["manifest"]["operator"].get("comparison")
+        if connection:
+            # Shared ID alone cannot merge different baselines or reference inputs.
+            key = (connection["comparison_id"], item["manifest"]["execution"]["input_bundle_sha256"], connection["reference_inputs_sha256"])
+            groups.setdefault(key, []).append(item)
+    results = []
+    for key, items in sorted(groups.items()):
+        items.sort(key=lambda item: item["manifest"]["operator"]["comparison"]["round"])
+        rounds = [item["manifest"]["operator"]["comparison"]["round"] for item in items]
+        initial = [item for item in items if item["manifest"]["operator"]["comparison"]["round"] == 0]
+        followup = [item for item in items if item["manifest"]["operator"]["comparison"]["round"] > 0]
+        known = lambda values, field: [item[field] for item in values if item[field] is not None]
+        cost = lambda values, field: sum(known(values, field)) if known(values, field) else None
+        reached = next((index for index, item in enumerate(items) if _reference_reached(item)), None)
+        prefix = [] if reached is None else items[:reached+1]
+        complete_prefix = bool(prefix) and rounds[:len(prefix)] == list(range(len(prefix)))
+        results.append({"comparison_id": key[0], "initial_seconds": cost(initial, "seconds"),
+                        "followup_seconds": cost(followup, "seconds"), "total_seconds": cost(items, "seconds"),
+                        "initial_tokens": cost(initial, "tokens"), "followup_tokens": cost(followup, "tokens"),
+                        "total_tokens": cost(items, "tokens"), "time_coverage": f"{len(known(items, 'seconds'))}/{len(items)}",
+                        "token_coverage": f"{len(known(items, 'tokens'))}/{len(items)}", "followup_rounds": len(followup),
+                        "reference_round": None if not complete_prefix else rounds[reached],
+                        "reference_seconds": cost(prefix, "seconds") if complete_prefix and len(known(prefix, "seconds")) == len(prefix) else None,
+                        "reference_tokens": cost(prefix, "tokens") if complete_prefix and len(known(prefix, "tokens")) == len(prefix) else None})
+    return results
+
+
+def render_series_summary(attempts):
+    rows = ["## First and follow-up comparison costs", "",
+            "Follow-ups remain part of their initial series and do not count as independent repetitions. Reference cost requires a hashed RM1–RM5 pass review, every preceding round, and full measurement coverage. A dash means unknown or not reached.", "",
+            "| Series | Follow-up rounds | Initial seconds | Follow-up seconds | Total measured seconds | Time coverage | Initial tokens | Follow-up tokens | Total measured tokens | Token coverage | Reference round | Reference seconds | Reference tokens |",
+            "|---|---:|---:|---:|---:|---|---:|---:|---:|---|---:|---:|---:|"]
+    fields = ("comparison_id", "followup_rounds", "initial_seconds", "followup_seconds", "total_seconds", "time_coverage",
+              "initial_tokens", "followup_tokens", "total_tokens", "token_coverage", "reference_round", "reference_seconds", "reference_tokens")
+    for item in comparison_series(attempts):
+        rows.append("| " + " | ".join(_number(item[key]).replace("|", "\\|") for key in fields) + " |")
+    return "\n".join(rows) + "\n"
 
 
 def _range(values):
@@ -312,6 +448,7 @@ def render_summary(records, excluded, min_repetitions):
         "## Exclusions",
         "",
         f"Pilot: {excluded.get('pilot', 0)}; incomplete: {excluded.get('incomplete', 0)}; invalid or semantically unjoined: {excluded.get('invalid', 0)}; duplicate path/run identity: {excluded.get('duplicate', 0)}.",
+        f"Follow-ups excluded from independent repetitions: {excluded.get('followup', 0)}.",
         "",
     ])
     return "\n".join(rows)
@@ -324,9 +461,11 @@ def main():
     parser.add_argument("--min-repetitions", type=int, default=3, choices=range(1, 101), metavar="1..100")
     args = parser.parse_args()
     records, excluded = collect_records(args.manifests)
+    attempts, attempt_exclusions = collect_attempts(args.manifests)
     # Exclusive creation prevents accidentally replacing a reviewed result index.
     with args.output.open("x", encoding="utf-8") as handle:
-        handle.write(render_summary(records, excluded, args.min_repetitions) + "\n")
+        handle.write(render_summary(records, excluded, args.min_repetitions) + "\n"
+                     + render_attempt_summary(attempts, attempt_exclusions) + "\n" + render_series_summary(attempts))
 
 
 if __name__ == "__main__":

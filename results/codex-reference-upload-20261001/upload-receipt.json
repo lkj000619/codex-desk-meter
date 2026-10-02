@@ -1,0 +1,139 @@
+﻿{
+    "timestamp_utc":  "2026-09-30T18:10:31.664083+00:00",
+    "source_commit":  "6215c70f9591cab08c44bd1ea9e106e38db62ecb",
+    "app_sha256":  "824cd21be557b2330d92d1bf32bf428de004e6d683fc08b9915f13dfc89eb67b",
+    "app_bytes":  347632,
+    "app_offset":  "0x10000",
+    "port":  "COM3",
+    "backup":  {
+                   "path":  "results\\codex-reference-upload-20261001\\pre-upload-app.bin",
+                   "bytes":  1048576,
+                   "sha256":  "700464fb3a321cdcb08eab7e2e7e81187b6b7932878c91e47b8af2bdc14854c9"
+               },
+    "flash":  "written_and_upload_hash_verified",
+    "independent_verify_flash":  "passed_digest_matched",
+    "flash_log":  "results\\codex-reference-upload-20261001\\flash.log",
+    "verify_log":  "results\\codex-reference-upload-20261001\\verify-flash-utf8.log",
+    "initial_verify_attempt":  "Failed in host invocation before verification completed; rerun with UTF-8 succeeded.",
+    "device_boot":  "confirmed_by_actual_app_identity_and_startup_serial_logs",
+    "device_receive":  "failed_heap_caps_free_assert_and_software_reboot_on_each_of_two_fixture_frames",
+    "observed_frame_sequences":  [
+                                     2,
+                                     3
+                                 ],
+    "optical_lcd_behavior":  "not_observed_by_operator",
+    "operator_product_source_changes_this_upload":  false,
+    "remediation":  {
+                        "session":  "original Codex Desk Meter creation session",
+                        "terminal":  "term_6ed025cf-8d40-438a-939f-919b983df548",
+                        "request_id":  "f209553a-d769-43d5-82f2-8695254d9fcd",
+                        "delivery":  "accepted_and_turn_started",
+                        "status":  "firmware_fix_reuploaded_and_physical_receive_verified"
+                    },
+    "live_data":  false,
+    "retest":  {
+                   "timestamp_utc":  "2026-09-30T18:27:30.705409+00:00",
+                   "firmware_commit":  "1e17bc4",
+                   "app_sha256":  "737fd26dc411d8f50805d424e979cf5110ce106a8e68585f6be6f92755aa7369",
+                   "app_bytes":  347392,
+                   "flash":  "passed",
+                   "independent_verify_flash":  "passed_digest_matched",
+                   "device_sequences":  [
+                                            0,
+                                            1
+                                        ],
+                   "receiver_accepted":  true,
+                   "display_call_completed":  true,
+                   "assert_or_reboot_in_responses":  false,
+                   "optical_lcd_behavior":  "failed_owner_report_black_screen_no_values",
+                   "cli_sender_first_test":  "failed_exit_2_WinError_2_command_not_found",
+                   "cli_fix_request_id":  "29511c28-36dd-4c90-aabc-3fcd1c1b2965",
+                   "cli_fix_author":  "original Codex Desk Meter creation session",
+                   "evidence_directory":  "results\\codex-reference-upload-20261001\\retest",
+                   "lcd_remediation_request_id":  "cf8b6c23-a03b-4913-9ace-d2744c1c36f7",
+                   "lcd_remediation_session":  "original Codex Desk Meter creation session",
+                   "cli_sender_after_fix":  {
+                                                "commit":  "eb1264f",
+                                                "exit_code":  0,
+                                                "bytes_written":  1543,
+                                                "sequence":  2,
+                                                "evidence":  "retest/cli-send-fixed.log",
+                                                "device_acceptance_of_cli_send":  "not separately acknowledged"
+                                            }
+               },
+    "lcd_retest":  {
+                       "timestamp_utc":  "2026-09-30T18:42:33.571975+00:00",
+                       "firmware_commit":  "7923f96",
+                       "fix_author":  "original Codex Desk Meter creation session",
+                       "app_sha256":  "895dbe7aaf1b082f23b86d03c45bc9bd28dbfe82403aa745d65960c3a84c6cf1",
+                       "app_bytes":  347376,
+                       "port":  "COM3",
+                       "app_offset":  "0x10000",
+                       "flash":  "passed_hash_verified",
+                       "independent_verify_flash":  "passed_digest_matched",
+                       "normal_frame_sequences":  [
+                                                      0,
+                                                      1
+                                                  ],
+                       "receiver_accepted":  true,
+                       "display_call_completed":  true,
+                       "assert_or_reboot_in_responses":  false,
+                       "optical_lcd_behavior":  "passed_basic_screen_values_and_three_page_cycle_owner_video_corroborated",
+                       "automated_verification":  {
+                                                      "python_passed":  15,
+                                                      "ctest_passed":  4
+                                                  },
+                       "evidence_directory":  "lcd-retest",
+                       "product_source_modified_by_operator_this_upload":  false,
+                       "owner_confirmation":  {
+                                                  "timestamp_recorded_utc":  "2026-09-30T18:43:29.576218+00:00",
+                                                  "report":  "Screen and values are visible.",
+                                                  "evidence_type":  "owner_report",
+                                                  "photo_or_video_of_corrected_version_received":  false
+                                              },
+                       "owner_current_status_confirmation":  {
+                                                                 "timestamp_recorded_utc":  "2026-09-30T18:45:22.296566+00:00",
+                                                                 "report":  "Screen and values remain visible.",
+                                                                 "evidence_type":  "owner_report",
+                                                                 "clarifies_previous_quoted_instruction":  true
+                                                             },
+                       "owner_video_evidence":  {
+                                                    "record":  "user-video-01/video-record.json",
+                                                    "duration_seconds":  26.87,
+                                                    "sha256":  "325f02f236012209f758a9e678b3d44fb1b3e55a09fee06c632f3580aac674f1",
+                                                    "original_copy":  "user-video-01/original.mp4",
+                                                    "review_status":  "completed_basic_display_and_three_page_cycle_confirmed"
+                                                }
+                   },
+    "final_uploaded_firmware":  "7923f96",
+    "additional_worker_requests":  [
+                                       {
+                                           "request_id":  "f209553a-d769-43d5-82f2-8695254d9fcd",
+                                           "result_commit":  "1e17bc4",
+                                           "issue":  "receiver crash"
+                                       },
+                                       {
+                                           "request_id":  "29511c28-36dd-4c90-aabc-3fcd1c1b2965",
+                                           "result_commit":  "eb1264f",
+                                           "issue":  "Windows sender command lookup"
+                                       },
+                                       {
+                                           "request_id":  "cf8b6c23-a03b-4913-9ace-d2744c1c36f7",
+                                           "result_commit":  "7923f96",
+                                           "issue":  "owner reported black LCD"
+                                       }
+                                   ],
+    "worker_cumulative_usage":  {
+                                    "timestamp_utc":  "2026-09-30T18:38:29.125Z",
+                                    "usage":  {
+                                                  "input_tokens":  29542838,
+                                                  "cached_input_tokens":  28751360,
+                                                  "cache_write_input_tokens":  0,
+                                                  "output_tokens":  161905,
+                                                  "reasoning_output_tokens":  81549,
+                                                  "total_tokens":  29704743
+                                              }
+                                },
+    "worker_usage_scope":  "Entire original worker session including earlier work, excluding operator session; cached/reasoning values are not additive to reported total.",
+    "status":  "upload_complete_basic_receive_and_visible_display_confirmed"
+}

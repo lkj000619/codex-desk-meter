@@ -4,6 +4,21 @@
 한 요구사항을 여러 문서에서 정의하지 않는다. 제품 동작의 원본은 제품 계약과 JSON schema,
 새 비교 운영 규칙의 원본은 운영 계약이다. 문서/schema가 충돌하면 결함으로 기록한다.
 
+## 디렉터리 역할
+
+| 디렉터리 | 보관하는 내용 |
+|---|---|
+| `decisions/` | 채택 범위·근거가 있는 ADR |
+| `hardware/` | 공통 보드 사실·제조사 source·bring-up 자료 |
+| `experiments/` | 운영·평가 계약과 현재 준비 상태, `evidence/`의 원본 관측 |
+| `plans/` | 앞으로 할 작업·의존 순서·완료 조건. 채택 규칙과 실행 승인은 별도 원본을 참조 |
+| `design/` | 구현 인터페이스·상태·증거 연결 설계. 제품·운영 규칙의 원본을 참조 |
+| `overview/` | 관측 시점이 표시된 HTML 탐색 자료 |
+| `archive/` | 날짜·대상·원본 판정을 보존한 과거 문서 |
+
+계획은 도구 이름과 독립된 `plans/`에 둔다. 새 문서의 저장 위치와 이동 시 참조 갱신은
+[프로젝트 지침](../AGENTS.md)을 따른다. 계획을 읽는 것만으로 남은 작업 전체의 실행을 시작하지 않는다.
+
 ## 후보 입력: 필수 MD 3개
 
 | 순서 | 문서 | 역할 |
@@ -24,7 +39,8 @@ main에 문서가 존재한다는 이유로 후보에게 읽도록 제공하지 
 | 다음 실험 준비·잔여 조건 | [준비 상태](experiments/next-comparison-readiness.md) |
 | 새 운영 규칙 | [운영 계약](experiments/comparison-operating-contract.md) |
 | Codex 기능 도달 판정 | [RM 목록](experiments/reference-match-matrix.md) |
-| 수정 작업·의존 순서 | [계획](superpowers/plans/2026-10-02-experiment-contract-remediation.md) |
+| 수정 작업·의존 순서 | [계획](plans/2026-10-02-experiment-contract-remediation.md) |
+| 비교 도구 명령·증거 형식 | [도구 안내](experiments/comparison-tooling.md) · [구현 계획](plans/2026-10-02-comparison-tooling.md) · [설계](design/2026-10-02-comparison-tooling.md) |
 | 문제와 근거 | [세 에이전트 평가](experiments/architecture-review-20261002.md) |
 | GUI/F 평가·host seam | [기능 평가](experiments/feature-comparison.md) · [평가 도구](experiments/evaluation-contract.md) |
 | host oracle의 범위 | [pipeline 도구 안내](experiments/host-device-pipeline-contract.md) |
@@ -42,6 +58,10 @@ reference 도달과 `product_pass`는 별도 판정이다. 후보 실패도 첫 
 - [archive](archive/): 날짜별 검토·launch·진단·과거 제안 17개를 이동했다.
   [문서 검토](archive/reviews/DOCUMENTATION_REVIEW.md)와
   [당시 작업 체크리스트](archive/reviews/DOCUMENTATION_REVIEW_CHECKLIST.md)는 현재 준비 상태가 아니다.
+- 2026-10-02에는 과거 구현 계획 2개를 `archive/plans/`로 보관했다:
+  [2026-09-13 E2E 계약 계획](archive/plans/2026-09-13-e2e-contract-implementation-plan.md) ·
+  [2026-09-13 host pipeline 계획](archive/plans/2026-09-13-host-device-pipeline-implementation-plan.md).
+  원문과 당시 검증 기록을 보존하며 현재 작업은 `plans/`와 새 비교 준비 상태를 따른다.
 - [기존 단회 프로토콜](experiments/agent-experiment-protocol.md)·
   [기존 gate](experiments/benchmark-readiness.md)는 해당 historical cohort에만 적용한다.
 - [원본 evidence](experiments/evidence/)는 파일/hash 보존을 위해 경로·내용을 유지한다.

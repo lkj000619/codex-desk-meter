@@ -1,0 +1,42 @@
+﻿{
+    "filename":  "KakaoTalk_20261001_034236662.mp4",
+    "video_sha256":  "325f02f236012209f758a9e678b3d44fb1b3e55a09fee06c632f3580aac674f1",
+    "bytes":  13141270,
+    "duration_seconds":  26.87,
+    "fps":  30,
+    "resolution":  [
+                       1080,
+                       1920
+                   ],
+    "firmware_association":  "7923f96 based on upload chronology and owner report",
+    "ffmpeg_sha256":  "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+    "additional_recording_required_for_this_review":  false,
+    "visual_review":  "completed_basic_display_and_three_page_cycle_confirmed",
+    "scope_limits":  [
+                         "Firmware association based on upload chronology and owner reports, not independently encoded in video.",
+                         "BOOT latency, exact press count and long-hold behavior not quantitatively measured in this review.",
+                         "Sampled inspection does not establish every-frame continuity or 30-second stability; duration is 26.87 seconds.",
+                         "Shown RTC readiness does not establish backup-power holdover; physical rotation does not establish IMU auto-rotation."
+                     ],
+    "source_and_copy_hash_match":  true,
+    "representative_images":  {
+                                  "early-boot.jpg":  "215d3067b1bd9701d5be92510a0de7f95b66288300f49be46ddaad0074a55ce6",
+                                  "overview.jpg":  "09fd3cdc3280b3dc66c1ae1973472b2df85be69059abf0c845f4799f16d5bff5",
+                                  "later-boot.jpg":  "8f840df70a4aa82297499f496c82e2aefdecc8a8a7a422482cf6310ee77d1af9",
+                                  "first.jpg":  "c7310ace3e09ef80ccdc546dce5be7a5ee8eec243c05e4b083ae48c4c77c6405"
+                              },
+    "preserved_copy":  "original.mp4",
+    "data_type":  "synthetic_fixture_not_live_account_usage",
+    "review_method":  "Overview samples span the clip; 2 fps scenes inspected over the first 16 seconds. Audio timing not measured.",
+    "confirmed_observations":  [
+                                   "Dashboard visibly shows OpenAI/Codex-cli fixture values: 58% left in the 5-hour window and 82% left in the weekly window.",
+                                   "Three pages appear in order: dashboard, global reset, device status, then dashboard again, alongside visible BOOT manipulation.",
+                                   "Global reset shows 2026-09-08T01:56:00Z and source CODEX-RESETS.COM.",
+                                   "Status shows FRAME RECEIVED, sequence 1, snapshots 1, reset sources 2, and LAST RECEIVER RESULT 0.",
+                                   "Status shows STALE - LAST GOOD KEPT and PCF85063 RTC: HOLDOVER READY.",
+                                   "No black-screen failure observed in reviewed sampled scenes."
+                               ],
+    "source_path":  "C:\\Users\\이광진\\Documents\\카카오톡 받은 파일\\KakaoTalk_20261001_034236662.mp4",
+    "source_sha256":  "325f02f236012209f758a9e678b3d44fb1b3e55a09fee06c632f3580aac674f1",
+    "reviewed_at_utc":  "2026-09-30T19:00:09.5422065Z"
+}

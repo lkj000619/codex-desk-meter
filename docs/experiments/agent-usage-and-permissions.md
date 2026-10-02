@@ -1,8 +1,29 @@
 # 에이전트 사용법·계측·권한 옵션
 
-실험 대상 표면을 runner로 실행하기 위한 조작법 정리. 2026-09-18 실측과 공식
-문서를 근거로 하며, 미확인 항목은 `미확인`으로 표기한다. 본 문서를 읽는 것은
-실행이 아니며, R10 승인 전에는 어떤 에이전트도 실행하지 않는다.
+실험 대상 표면의 조작법·계측·권한 관측 기록이다. 아래 버전·모델·옵션은
+2026-09-18~27 관측 시점의 자료다. 새 실행의 실제 설치·계정 권한을 의미하지 않는다.
+다음 비교의 채택 조건과 현재 준비 상태는 [운영 계약](comparison-operating-contract.md)과
+[준비 상태](next-comparison-readiness.md)를 따른다.
+
+## 새 입력의 표면별 capability 확인
+
+공통 작업은 읽기·쓰기·조회·host build/test·ESP-IDF build·고정 vendor 참조다.
+각 표면의 profile에 실제 argv/native 도구·실효 설정·허용/거부 결과·증거 hash를 연결한다.
+AGY 정책 파일의 제공과 다른 표면의 실제 권한 강제는 별도 확인 항목이다.
+
+| 작업 | 고정할 실행 방법 | 확인 근거 |
+|---|---|---|
+| 파일 읽기·쓰기·조회 | native 도구와 checkout/SDK/vendor 범위 | 대표 상대 경로·path array 호출과 범위 밖 거부 |
+| Git 변경 확인 | `git status`, `git diff`, 허용된 검색 표기 | 상대 경로·option 표기별 실제 허용 여부 |
+| host build/test | 공통 prompt의 CMake/CTest/unittest 중 해당 후보에 필요한 호출 | compiler/runtime 실행과 시험 진입 명령·거부 동작 |
+| firmware build | 고정 SDK의 `idf.py`·target/build | 새 child shell에서 SDK·toolchain·정책이 실제로 적용된 로그 |
+| vendor 참조 | source index의 경로·hash | 파일 존재·hash와 build/backup 접근 경계 |
+| 계측·확장·network | CLI 버전·model/reasoning·skills/plugins/MCP·모델 호출/외부 참조 조건 | 설정 목록·실효 상태와 실제 stream 원본 정의 |
+
+`benchmark.py check`는 snapshot 입력·profile 구조/hash 검사다. 실제 capability·entitlement·
+telemetry와 OS 읽기 차단은 그 명령의 검사 범위가 아니다. 미관측 항목은 미확인으로 남긴다.
+공통 prompt의 거부 종료 규칙을 유지하며, 거부 뒤 계속 실행한 사실·환경 원인·제품 판정은
+각각 보존한다. 이 목록은 사전 확인 절차이며 실제 표면별 검증 완료를 주장하지 않는다.
 
 > **gemini-cli 비교군 제외.** Google이 2026-05-19에 Gemini CLI → Antigravity CLI
 > 전환을 발표했고, 2026-06-18부터 개인(Pro/Ultra/무료) 계정의 Gemini CLI 요청이

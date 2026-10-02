@@ -25,12 +25,13 @@ schema·fixture·예제와 필요한 host 시험 도구도 고정 목록으로 �
 
 [다음 비교 준비 상태](docs/experiments/next-comparison-readiness.md) →
 [운영 계약](docs/experiments/comparison-operating-contract.md) →
-[수정 계획](docs/superpowers/plans/2026-10-02-experiment-contract-remediation.md) 순서로 확인한다.
+[수정 계획](docs/plans/2026-10-02-experiment-contract-remediation.md) 순서로 확인한다.
 Codex에서 확인된 기능 도달과 전체 제품 합격은 별도로 판정한다.
 최초 최대 120분, 후속 최대 3회·누적 120분이며 BSP 구현도 후보 작업에 포함한다.
 
-문서 압축과 후보 입력 제한은 구현했다. 기준 stimulus 복구·입력 동결·환경 검증,
-후속 누적 예산 runner·reference 판정 연결은 남아 있다. 실제 새 비교를 시작할 준비 완료를 뜻하지 않는다.
+후보 입력 제한, 기준 stimulus 복구, 후속 예산·reference 판정, 실패 비용 집계와
+관측·복원 도구를 구현했다. [도구 안내](docs/experiments/comparison-tooling.md)에 명령과 증거 형식을 정리했다.
+실제 표면의 권한 확인·후보 생산 코드/실물 측정·새 입력 동결은 남아 있다.
 기존 단회 pilot의 gate·원본 판정은 당시 기록이며 새 운영 계약을 대신하지 않는다.
 실제 후보 실행·보드 업로드·계정 통합은 운영자가 별도로 관리한다.
 

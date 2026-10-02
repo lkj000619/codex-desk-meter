@@ -147,6 +147,16 @@ def input_bundle_hashes(root, profile_path, baseline_ref, baseline_commit):
         evaluation_paths.extend(("docs/experiments/comparison-operating-contract.md",
                                  "docs/experiments/reference-match-matrix.md"))
         candidate_inventory = candidate_input_inventory(root)
+    # Additive: old frozen snapshots keep their original hash basis.
+    if (root / "scripts/comparison_manager.py").is_file():
+        evaluation_paths.extend("scripts/" + name for name in (
+            "comparison_manager.py", "comparison.py", "product_observation.py", "observe-product.py",
+            "production_evaluation.py", "evaluate-production.py", "evidence_package.py", "package-evidence.py",
+            "reference_inputs.py", "summarize-benchmark.py", "benchmark.py", "benchmark_support.py"))
+        from reference_inputs import validate_reference
+        reference_path = root / "experiments/reference/codex-7923f96/reference-inputs.json"
+        _, reference_files = validate_reference(reference_path)
+        evaluation_paths.extend((reference_path.parent / name).relative_to(root).as_posix() for name in reference_files)
     values = {
         "prompt_sha256": digest((root / "experiments/prompts/version-2-agent-task.md").read_bytes()),
         "config_sha256": digest((root / "experiments/config/version-2-baseline.yaml").read_bytes()),
@@ -327,12 +337,24 @@ def prepare(a):
     checkout = directory / "checkout"
     checkout.mkdir()
     save(directory / "profile.json", profile)
+    prepared_reference_files = {}
     with tempfile.TemporaryDirectory(prefix="meter-operator-baseline-") as temp:
         snapshot = Path(temp)
         _extract_archive(snapshot, base)
         hashes = input_bundle_hashes(snapshot, directory / "profile.json", a.baseline, base)
         template = (snapshot / "experiments/prompts/version-2-agent-task.md").read_bytes()
         m = read(snapshot / "experiments/examples/run-manifest.example.json")
+        reference_path = snapshot / "experiments/reference/codex-7923f96/reference-inputs.json"
+        if reference_path.is_file():
+            from reference_inputs import validate_reference
+            _, reference_files = validate_reference(reference_path)
+            for name in reference_files:
+                target_name = "reference/" + name
+                target = directory / target_name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                data = (reference_path.parent / name).read_bytes()
+                target.write_bytes(data)
+                prepared_reference_files[target_name] = digest(data)
         if (snapshot / CANDIDATE_POLICY).is_file():
             save(directory / "candidate-inputs.json", materialize_candidate_inputs(snapshot, checkout))
         else:
@@ -356,7 +378,7 @@ def prepare(a):
              network_mode=profile["network_mode"], timeout_seconds=a.timeout)
     m["operator"] = dict(phase=a.phase, status="prepared", reason=None, repetition=repetition,
                          cohort=profile["cohort"], seed=a.seed, exit_code=None,
-                         delivered_prompt_sha256=digest(prompt), local_base_commit=None, evidence={})
+                         delivered_prompt_sha256=digest(prompt), local_base_commit=None, evidence=prepared_reference_files)
     m["hardware"]["port"] = a.port
     m["measurement"].update(wall_clock_seconds=None, tool_calls=None, failed_commands=None, user_interventions=None)
     m["measurement"]["tokens"]["availability_note"] = "Not yet executed."
@@ -655,6 +677,20 @@ def validate_preflight_receipt(receipt, manifest, profile, evidence_root):
         raise ValueError("preflight receipt needs evidence file hashes")
     from benchmark_support import verify_evidence
     verify_evidence({"operator": {"evidence": receipt["evidence"]}}, evidence_root)
+    comparison = manifest["operator"].get("comparison")
+    if comparison is not None:
+        if receipt.get("infrastructure_ready") is not True:
+            raise ValueError("comparison requires reviewed infrastructure readiness")
+        for key, expected in (("comparison_id", comparison["comparison_id"]),
+                              ("input_bundle_sha256", manifest["execution"]["input_bundle_sha256"]),
+                              ("reference_inputs_sha256", comparison["reference_inputs_sha256"])):
+            if receipt.get(key) != expected:
+                raise ValueError("comparison receipt mismatch: " + key)
+        capabilities = receipt.get("capabilities", {})
+        for key in ("read", "write", "list", "host_build", "host_test", "idf_build", "vendor_reference", "telemetry", "settings"):
+            entry = capabilities.get(key, {})
+            if entry.get("status") != "pass" or entry.get("evidence") not in receipt["evidence"]:
+                raise ValueError("comparison capability needs passed evidence: " + key)
 
 
 def execute(a):
@@ -678,7 +714,8 @@ def execute(a):
     if digest(prompt) != m["operator"]["delivered_prompt_sha256"]:
         raise ValueError("delivered prompt changed")
     receipt = read(a.receipt)
-    if m["operator"]["phase"] == "benchmark" and receipt.get("pilot_pass") is not True:
+    if (m["operator"]["phase"] == "benchmark" and "comparison" not in m["operator"]
+            and receipt.get("pilot_pass") is not True):
         raise ValueError("benchmark requires reviewed pilot pass in the receipt")
     validate_preflight_receipt(receipt, m, profile, Path(a.receipt).resolve().parent)
     argv = [s.replace("{checkout}", str(checkout)).replace("{model}", profile["model"]) for s in profile["argv"]]
@@ -692,6 +729,26 @@ def execute(a):
                                              env=agent_env).strip()
     if actual_version != profile["agent_version"]:
         raise ValueError(f"CLI version mismatch: {actual_version}")
+    from evidence_package import safe_path
+    receipt_path = Path(a.receipt).resolve()
+    receipt_bytes = receipt_path.read_bytes()
+    if json.loads(receipt_bytes.decode("utf-8-sig")) != receipt:
+        raise ValueError("preflight receipt changed during verification")
+    for name, expected in receipt["evidence"].items():
+        source = safe_path(receipt_path.parent, name)
+        data = source.read_bytes()
+        if digest(data) != expected:
+            raise ValueError("preflight evidence changed during verification")
+        target_name = "preflight-evidence/" + name
+        target = safe_path(directory, target_name)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(data)
+        m["operator"]["evidence"][target_name] = expected
+    (directory / "execution-preflight.json").write_bytes(receipt_bytes)
+    m["operator"]["evidence"]["execution-preflight.json"] = digest(receipt_bytes)
+    if "comparison" in m["operator"]:
+        from comparison_manager import start_run
+        m["execution"]["timeout_seconds"] = start_run(directory)
     m["operator"]["status"] = "running"
     m["execution"]["started_at"] = now()
     save(directory / "run-manifest.json", m)
@@ -722,6 +779,9 @@ def execute(a):
         m["operator"]["evidence"][name] = digest((directory / name).read_bytes())
     save(directory / "run-manifest.json", m)
     validate_operator(m)
+    if "comparison" in m["operator"]:
+        from comparison_manager import finish_run
+        finish_run(directory)
     print(json.dumps(r))
     return 0 if r["status"] == "completed" else 1
 

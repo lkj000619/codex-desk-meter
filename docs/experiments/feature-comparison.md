@@ -5,7 +5,7 @@
 기능 상태는 `pass / partial / fail / not_run / blocked / timeout` 중 하나로
 기록하고, 상태만 적지 말고 실행 명령·로그·사진·영상·해시 등 확인 가능한
 증거를 함께 남긴다. PC 수집기와 frame/receiver 경계의 설계는
-[통합 계약 초안](integration-contract.md)을 참조한다.
+[통합 계약 안내](integration-contract.md)를 참조한다.
 
 ## 1. 실험군과 제품 통합 범위
 
@@ -123,19 +123,7 @@ GUI 총점은 제품 합격률로 환산하지 않는다. C2가 `not_run` 또는
   device payload 및 Wi-Fi/BLE transport 구현을 참고할 수 있다. 단, 우리 결과
   schema와 ESP32-S3-LCD-3.16 실물 검증을 대신하지 않으며, 사용한 upstream commit
   SHA·확인 날짜·라이선스를 결과 provenance에 기록한다.
-### Machine contract for E2E result fields
-
-The E2E schema requires `core_results.C1` through `C8` at the top level for
-every result. Only `feature_results.F9` may contain `details`; F1-F8 reject
-that field. Assessed F9 details contain exactly three structured candidates:
-user value, resource/implementation cost, risk, verification method,
-selection/rejection rationale or a selection-document evidence reference, and
-candidate evidence. The F9 score is the canonical 30-point sum of
-`hardware_understanding` (5), `user_value` (5), `selection_logic` (5),
-`implementation_completeness` (10), and `separation_portability` (5).
-
-`benchmark.py archive` performs schema validation, semantic validation, and
-the evaluation-manifest/evidence join before adding a normalized E2E result;
-it validates again after archive-path mutation. Failed results retain only the
-raw source snapshot. `automated_test_status` is derived from integration-test
-entries and their evidence, never from `product_pass`.
+필드의 필수 조건은 [E2E schema](../../experiments/schema/end-to-end-result.schema.json),
+의미·결과 연결 검사는 [평가 계약](evaluation-contract.md),
+F9 선택·점수 rubric은 [자율 기능 평가](hardware-feature-discovery.md)가 소유한다.
+이 비교표에 같은 필드 구조와 archive 검사 규칙을 중복 정의하지 않는다.

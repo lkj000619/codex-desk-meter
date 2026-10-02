@@ -44,8 +44,9 @@ Codex Desk Meter는 이 두 문제를 하나의 실제 임베디드 프로젝트
 
 현재 검토 중인 E2E 범위에서 글로벌 리셋 예측은 표시 목표가 아니다.
 `codex-reset.com` 입력은 파서 호환·회귀용으로만 보존한다.
-[ADR-0006](decisions/0006-resets-single-landscape-default.md)은 제안 상태이며,
-제품 문서에 반영된 선택값의 승인과 baseline 동결은 R1에서 별도로 확인한다.
+[ADR-0006](decisions/0006-resets-single-landscape-default.md)은 2026-09-26 선택된
+AGY pilot 범위에서 채택됐다. 다음 비교의 입력 동결·환경 준비는
+[새 비교 준비 상태](experiments/next-comparison-readiness.md)에서 별도로 확인한다.
 
 ### 3.2 정보의 의미 구분
 
@@ -110,8 +111,9 @@ firmware·GUI·입력·보드 자율 기능만 비교한 준비용 자료다. �
 목표는 표준 fixture collector와 transport까지 포함한 Version 2 end-to-end
 단계이며, 실제 계정 source 전환은 owner-only live integration으로 분리한다.
 어느 단계에서도 fixture를 LCD에 그린 결과를 실시간 개인 계정 연동의 증거로
-해석하지 않는다. 계층·frame·재연결 계약 초안은
-[PC 수집기·ESP32 통합 계약](experiments/integration-contract.md)에서 관리한다.
+해석하지 않는다. 현행 계층·frame·재연결 규칙은
+[제품 계약](PRODUCT_CONTRACT.md)이 소유하며,
+[PC 수집기·ESP32 통합 안내](experiments/integration-contract.md)는 관련 기계 계약을 연결한다.
 
 ## 4. 하드웨어 목표
 
@@ -258,8 +260,10 @@ Version 1의 필수 기능으로 자동 승격하지 않는다. 추가 하드웨
 
 정식 기준은 `main` branch의 검토된 commit/tag다. 기준 저장소의 문서·prompt·schema·
 평가 도구를 수정하는 일과 agent에게 prompt를 전달해 제품을 구현하는 일은 서로
-다른 단계다. readiness gate가 `AUTHORIZED`가 되기 전에는 기준 저장소에서
-benchmark runner나 agent process를 시작하지 않는다.
+다른 단계다. 입력 검사·오프라인 회귀시험은 준비 작업이며, 후보 실행은 대상
+baseline/profile과 사용자 실행 지시에 연결한다. 다음 비교의 조건과 준비 상태는
+[운영 계약](experiments/comparison-operating-contract.md)과
+[준비 상태](experiments/next-comparison-readiness.md)를 따른다.
 
 개별 에이전트가 작성한 제품 구현, 원본 로그와 해당 실행의 상세 결과는 별도
 실험 브랜치에서 관리한다. 검증된 요약 통계는 출처가 되는 브랜치와 커밋을
@@ -307,13 +311,7 @@ benchmark runner나 agent process를 시작하지 않는다.
 
 ## 9. 연계 문서
 
-이 문서는 프로젝트가 존재하는 이유와 달성하려는 결과를 정의한다. 구현과
-실험에서는 다음 문서를 함께 읽고, 기준 커밋에서 동일하게 제공한다.
-
-- [Version 2 제품 계약과 합격 기준](PRODUCT_CONTRACT.md)
-- [Windows 개발 환경과 ESP-IDF 버전 정책](DEVELOPMENT_ENVIRONMENT.md)
-- [Version 2 하드웨어 기능 카탈로그](hardware/version-2-capabilities.md)
-- [제조사 예제 및 실제 bring-up 기록](hardware/waveshare-manufacturer-example.md)
-- [AI 에이전트 비교 실험 프로토콜](experiments/agent-experiment-protocol.md)
-- [하드웨어 기반 자율 기능 선택 및 평가 절차](experiments/hardware-feature-discovery.md)
-- [실험 기준 설정·prompt·fixture·스키마](../experiments/)
+이 문서는 운영자와 검토자가 프로젝트의 목적·장기 범위를 이해하기 위한 자료다.
+문서별 독자와 소유 내용은 [문서 지도](DOCUMENTATION_MAP.md)를 따른다.
+후보에게 실제 전달할 파일은 [allowlist](../experiments/config/agent-inputs.json)가 정한다.
+목적·운영·평가 문서를 후보 입력에 추가하는 목록으로 해석하지 않는다.

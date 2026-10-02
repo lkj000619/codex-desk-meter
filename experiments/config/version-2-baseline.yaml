@@ -37,7 +37,7 @@ inputs:
   environment: docs/DEVELOPMENT_ENVIRONMENT.md
   protocol: docs/experiments/hardware-feature-discovery.md
   prompt: experiments/prompts/version-2-agent-task.md
-  readiness: docs/experiments/benchmark-readiness.md
+  readiness: docs/experiments/next-comparison-readiness.md
   feature_comparison: docs/experiments/feature-comparison.md
   evaluation_contract: docs/experiments/evaluation-contract.md
   integration_contract: docs/experiments/integration-contract.md
@@ -61,7 +61,9 @@ run_policy:
   remediation_max_rounds: 3
   remediation_cumulative_timeout_seconds: 7200
   candidate_total_timeout_seconds: 14400
-  remediation_budget_runner_status: pending
+  remediation_budget_runner_status: implemented_offline_verified
+  comparison_manager: scripts/comparison.py
+  frozen_reference_inputs: experiments/reference/codex-7923f96/reference-inputs.json
   operating_contract: docs/experiments/comparison-operating-contract.md
   reference_match_matrix: docs/experiments/reference-match-matrix.md
   reference_match_is_product_pass: false

@@ -4,7 +4,11 @@
 > 다음 첫 결과+후속 수정 비용 비교의 채택 조건은
 > [새 운영 계약](comparison-operating-contract.md)을 따른다. 최초 실행의
 > prompt 1회·실행 중 피드백 0회는 유지하고, 종료 후 수정은 최대 3회·누적 120분으로
-> 별도 기록한다. 다음 입력본의 YAML/prompt·runner 동기화는 후속 작업이다.
+> 별도 기록한다. YAML과 최초 prompt에는 채택 조건을 반영했다.
+> 후속 정정 (2026-10-02, 새 비교 안내에 한정): feedback·누적 예산·reference 판정 연결의
+> 구현·시험은 [도구 검증 보고서](../../results/comparison-tooling-20261002/report.md)에 기록했다.
+> 실제 표면·후보·보드 검증과 새 조건 동결 등 현재 잔여 조건은
+> [새 비교 준비 상태](next-comparison-readiness.md)를 따른다.
 > 기존 실행의 승인·판정은 당시 규칙을 보존한다.
 
 이 프로토콜은 동일한 Version 2 과제를 여러 AI 에이전트에 실행하여 구현 품질,
@@ -12,8 +16,8 @@
 [Version 2 제품 계약](../PRODUCT_CONTRACT.md), 하드웨어 자율 기능 선택은
 [하드웨어 자율 기능 실험](hardware-feature-discovery.md)을 따른다. 실제 CLI·IDE
 실행 예시는 [에이전트 실행 명령 템플릿](agent-run-commands.md)을 따른다.
-실행 가능 여부는 [benchmark 실행 전 readiness gate](benchmark-readiness.md)가
-우선하며, 이 문서 자체는 prompt 전달이나 agent process 시작을 승인하지 않는다.
+아래 단회 규칙의 readiness는 [기존 pilot gate](benchmark-readiness.md)에 보존한다.
+다음 비교의 실행 준비는 [새 비교 준비 상태](next-comparison-readiness.md)를 따른다.
 
 ## 1. 실험 단위와 비교군
 
@@ -42,7 +46,9 @@ manifest에 명시한다. 모델 이름만 같게 하고 실행 표면이 다른
 
 ## 2. 고정해야 할 입력
 
-실험 시작 전에 다음을 하나의 baseline tag와 SHA-256 목록으로 고정한다.
+운영자는 실험 시작 전에 다음을 하나의 baseline tag와 SHA-256 목록으로 고정한다.
+이는 운영자의 동결 대상이며 후보 전달 목록과 다르다. 현재 후보 전달은
+[allowlist](../../experiments/config/agent-inputs.json)의 필수 MD 3개와 기계 입력만 따른다.
 
 - 제품 계약, 하드웨어 카탈로그, 개발환경 문서
 - `experiments/config/version-2-baseline.yaml`
@@ -173,15 +179,8 @@ fixture-only firmware cohort에서 자동으로 합격 처리하지 않으며, �
 `not_run; out of cohort`로 남긴다. F5 LCD GUI의 G1~G6 점수(총 18점)는 C2
 하드웨어 gate와 별도이며, 실물 사진·영상 없이 확정하지 않는다.
 
-하드웨어 자율 기능은 별도 30점으로 채점한다.
-
-| 항목 | 점수 |
-|---|---:|
-| 하드웨어 이해 | 5 |
-| 사용자 가치 | 5 |
-| 선택 논리 | 5 |
-| 구현 완성도 | 10 |
-| 핵심 코드와의 분리·이식성 | 5 |
+하드웨어 자율 기능은 별도 30점으로 채점한다. 항목별 배점·판단 기준의 원본은
+[자율 기능 평가](hardware-feature-discovery.md#평가)다.
 
 비교 요약은 평균만 사용하지 않고 반복 결과의 중앙값과 범위를 함께 표시한다.
 주요 지표는 다음 순서로 제시한다.
@@ -212,8 +211,8 @@ results/<run-id>/logs/
 
 `run-manifest.json`은 runner 운영 기록이며 E2E 평가 manifest와 다르다.
 E2E 결과 검증에는 `end-to-end-manifest.schema.json`을 따르는 별도 평가 manifest가
-필요하다. 현재 자동 생성·archive 연결의 미완료 범위는
-[실행 가이드](agent-run-commands.md)의 §6~7을 따른다.
+필요하다. 현재 도구에는 평가 manifest 생성·archive identity/evidence 검사가 구현돼 있다.
+새 비교에 남은 후속 입력·예산·판정 연결은 [준비 상태](next-comparison-readiness.md)를 따른다.
 historical hardware-autonomy 자료만 `hardware-feature.json` 형식을 사용한다.
 
 구조화 결과는 `experiments/schema/`를 통과해야 한다. 원본 로그에 Authorization,

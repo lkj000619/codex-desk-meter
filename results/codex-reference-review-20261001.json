@@ -1,0 +1,49 @@
+{
+  "review_date_local": "2026-10-01",
+  "reviewer_role": "operator_verification_only",
+  "workspace": "C:/Users/이광진/orca/workspaces/codex-desk-meter/codex-reference-20260929",
+  "final_commit": "6215c70",
+  "first_worker_product_commit": "6ccdeb1739c70aeaf2d2e0e65f7b56200e87d00d",
+  "operator_implementation_commit_included": "04dd1a0c1de742bfbfbaffaaef7984371abeb5c4",
+  "build_source_commit": "d48bf6cc7574bc129b1f119ace0e7fcfd0d093c1",
+  "authorship": {
+    "first_output": "original Codex Desk Meter creation session",
+    "final_output": "original creation session plus operator implementation",
+    "independent_original_session_only": false,
+    "note": "The final session retained the operator USB/BOOT changes and tests. Separate result folders and a clean build do not remove this implementation contribution. The original first commit remains preserved."
+  },
+  "fresh_verification": {
+    "python_unittest_discover_tests": {"passed": 14, "failed": 0},
+    "ctest": {"passed": 3, "failed": 0, "hardware_dependencies": "simulated for main-loop tests"},
+    "esp_idf_build": {"version": "5.3.2", "exit_code": 0, "type": "existing build independently rerun"},
+    "staged_sources": {"compared_files": 12, "all_equal_to_current_source": true},
+    "artifact_hashes_match_worker_record_and_build_output": true,
+    "git_diff_check": "passed"
+  },
+  "application": {
+    "size_bytes": 347632,
+    "sha256": "824cd21be557b2330d92d1bf32bf428de004e6d683fc08b9915f13dfc89eb67b",
+    "artifact": "results/codex-product-20261001/artifacts/codex_desk_meter.bin"
+  },
+  "remaining_product_checks": ["upload this final artifact", "observe LCD display and BOOT behavior", "confirm device frame acceptance and recovery", "verify selected RTC behavior within available hardware"],
+  "live_account_collection": "not_implemented_offline_fixture_only",
+  "hardware_actions_during_this_review": "none",
+  "comparison": {
+    "reference_status": "build_and_host_tests_verified_hardware_pending",
+    "candidate_comparison_started": false,
+    "full_product_pass_required_before_candidate_start": false
+  },
+  "worker_session_usage": {
+    "session_id": "01a0ec7a-a468-7210-9bf6-9ec29d859225",
+    "model": "gpt-6-luna",
+    "provider_report_timestamp": "2026-09-30T17:55:22.664Z",
+    "scope": "provider cumulative counter for the entire original worker session; not the latest continuation alone and excludes operator session",
+    "input_tokens": 18962306,
+    "cached_input_tokens": 18403840,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 118975,
+    "reasoning_output_tokens": 56222,
+    "total_tokens": 19081281,
+    "note": "Preserve provider fields as reported. Cached and reasoning counters must not be added again to total. Operator token usage is unavailable here."
+  }
+}

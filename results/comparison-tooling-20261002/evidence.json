@@ -1,0 +1,304 @@
+{
+  "verified_on": "2026-10-02",
+  "tests": 176,
+  "passed": 175,
+  "skipped": 1,
+  "checks": [
+    {
+      "name": "unittest-final",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "expected": 0,
+      "log_sha256": "226055d6ff7a05fbe6244a87f1d1f753eab164a9daaf15c2088d5adabe310ba2"
+    },
+    {
+      "name": "e2e-example",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/validate-end-to-end-result.py"
+      ],
+      "exit_code": 0,
+      "expected": 0,
+      "log_sha256": "a7b6c7377268074db9124a15d9cb7a8f939458a8e32d21127032b8a2aeb1325f"
+    },
+    {
+      "name": "provider-matrix",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/validate-end-to-end-result.py",
+        "--matrix",
+        "experiments/fixtures/provider-fixture-matrix.json"
+      ],
+      "exit_code": 0,
+      "expected": 0,
+      "log_sha256": "a7b6c7377268074db9124a15d9cb7a8f939458a8e32d21127032b8a2aeb1325f"
+    },
+    {
+      "name": "negative-product-pass",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/validate-end-to-end-result.py",
+        "--result",
+        "C:\\Users\\이광진\\orca\\codex-desk-meter\\results\\comparison-tooling-20261002\\invalid-product-pass.json",
+        "--manifest",
+        "experiments/examples/end-to-end-manifest.example.json",
+        "--evidence-root",
+        "C:\\Users\\이광진\\orca\\codex-desk-meter"
+      ],
+      "exit_code": 1,
+      "expected": 1,
+      "log_sha256": "7157607d69ebc1a0db22e4c0617d6496c8eb9036e7f650363ff8f974961cc1ad"
+    },
+    {
+      "name": "help-comparison",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/comparison.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "expected": 0,
+      "log_sha256": "5cf63b5e57fe474f84e374858cfcbd98ad3aad2bedb00871e96b34e641934267"
+    },
+    {
+      "name": "help-observe-product",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/observe-product.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "expected": 0,
+      "log_sha256": "413b25b87386b09f099e62245beb55bdbbbca5f6ac89ee860d8f0a87f5ffe822"
+    },
+    {
+      "name": "help-evaluate-production",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/evaluate-production.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "expected": 0,
+      "log_sha256": "c892f99dfef3741222bd5c78a466eae13f227e677b8bd29a7767994790e05f9b"
+    },
+    {
+      "name": "help-package-evidence",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/package-evidence.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "expected": 0,
+      "log_sha256": "85327aedf001d065dd6210bb5a615f45fb8e2fc050f27083c5b607f3e2b2697c"
+    },
+    {
+      "name": "help-reference_inputs",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/reference_inputs.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "expected": 0,
+      "log_sha256": "9c6e01f6d034a6d5a5db0c81a9c71d6d7b133da648511eb02d2f20ca2e29ebf2"
+    },
+    {
+      "name": "help-summarize-benchmark",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/summarize-benchmark.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "expected": 0,
+      "log_sha256": "15b3efa317e15ed89c9e8efa59506110c77a9182b12507e91fc8a5c3f0832f84"
+    },
+    {
+      "name": "reference-replay",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/observe-product.py",
+        "--frames",
+        "C:\\Users\\이광진\\orca\\codex-desk-meter\\experiments\\reference\\codex-7923f96\\expected-frames.jsonl",
+        "--reference-time",
+        "2026-09-30T18:40:49Z",
+        "--schedule",
+        "C:\\Users\\이광진\\orca\\codex-desk-meter\\experiments\\reference\\codex-7923f96\\schedule.json",
+        "--output",
+        "C:\\Users\\이광진\\orca\\codex-desk-meter\\results\\comparison-tooling-20261002\\reference-oracle.json"
+      ],
+      "exit_code": 0,
+      "expected": 0,
+      "log_sha256": "e85446f4b5159550281d66feaafba1e1081c4e68e04e289be94c7f26d129fd6f"
+    },
+    {
+      "name": "send-without-port-rejected",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/observe-product.py",
+        "--frames",
+        "C:\\Users\\이광진\\orca\\codex-desk-meter\\experiments\\reference\\codex-7923f96\\expected-frames.jsonl",
+        "--send",
+        "--output",
+        "C:\\Users\\이광진\\orca\\codex-desk-meter\\results\\comparison-tooling-20261002\\unused-no-port"
+      ],
+      "exit_code": 1,
+      "expected": 1,
+      "log_sha256": "bd078a7fde1ff8c9dd0ce7c315db2d6bbb3753d67f838da092f27d1e6688e493"
+    },
+    {
+      "name": "package-create-cli",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/package-evidence.py",
+        "create",
+        "--directory",
+        "C:\\Users\\이광진\\AppData\\Local\\Temp\\meter-package-tm1rue29\\run",
+        "--output",
+        "C:\\Users\\이광진\\AppData\\Local\\Temp\\meter-package-tm1rue29\\package"
+      ],
+      "exit_code": 0,
+      "expected": 0,
+      "log_sha256": "160da79056df974bce0643b2f0a7dfb7e36e70d4815839da6957a77ab84ec401"
+    },
+    {
+      "name": "package-restore-cli",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/package-evidence.py",
+        "restore",
+        "--package",
+        "C:\\Users\\이광진\\AppData\\Local\\Temp\\meter-package-tm1rue29\\package",
+        "--output",
+        "C:\\Users\\이광진\\AppData\\Local\\Temp\\meter-package-tm1rue29\\restored",
+        "--expected-sha256",
+        "c59f87b7028b10949c9f8fe311a539603150f4c36558ec8d8d325ab07af43cd3"
+      ],
+      "exit_code": 0,
+      "expected": 0,
+      "log_sha256": "97c5e0b9d08fe264440f3ee9794c2185e3a234d2b28c475ea7b9d785b7c027e8"
+    },
+    {
+      "name": "package-untrusted-hash-rejected",
+      "command": [
+        "C:\\Espressif\\tools\\python\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/package-evidence.py",
+        "restore",
+        "--package",
+        "C:\\Users\\이광진\\AppData\\Local\\Temp\\meter-package-tm1rue29\\package",
+        "--output",
+        "C:\\Users\\이광진\\AppData\\Local\\Temp\\meter-package-tm1rue29\\rejected",
+        "--expected-sha256",
+        "0000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "exit_code": 1,
+      "expected": 1,
+      "log_sha256": "6ec5435dbc10f1f1a13100d4599ed85b642241eea8e2db17665b8f95841aa062"
+    }
+  ],
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "reference_files": {
+    "reference-inputs.json": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+    "schedule.json": "a27082eda1b572286c9328ceadc3590aa06a12ac016f20341ef1e45b83177c78",
+    "experiments/fixtures/personal-usage.json": "738674a3b9e587fc851557630a637bef311020bf587f300c5452beabab575e11",
+    "experiments/fixtures/codex-reset-forecast.json": "71a01e40800baf23407a22b22761f2a73d6ff2fb27e1cdf2adb077be1667d5a4",
+    "experiments/fixtures/codex-resets-history.json": "f3054d15bafa93575b6d1b17ea6738642594dcfb0d45bc31346c2626e577740e",
+    "expected-frames.jsonl": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd"
+  },
+  "reference_sequences": [
+    0,
+    1
+  ],
+  "reference_offsets": [
+    0.0,
+    5.0
+  ],
+  "reference_source_status": "stale",
+  "restoration": {
+    "run_id": "20260911-e2e-contract-example-r01",
+    "implementation_commit": "53b5836658588230636cbb260b47ef1604291c68",
+    "restored_root": "C:\\Users\\이광진\\AppData\\Local\\Temp\\meter-package-tm1rue29\\restored",
+    "result_valid": true,
+    "manifest_identity_verified": true,
+    "package_manifest_sha256": "c59f87b7028b10949c9f8fe311a539603150f4c36558ec8d8d325ab07af43cd3",
+    "original_checkout_used": false,
+    "files_verified": 17
+  },
+  "candidate_files": 57,
+  "candidate_markdown": [
+    "docs/PRODUCT_CONTRACT.md",
+    "docs/hardware/version-2-capabilities.md",
+    "experiments/prompts/version-2-agent-task.md"
+  ],
+  "markdown_files": 100,
+  "local_links_checked": 679,
+  "broken_links": [],
+  "git_diff_check": "pass",
+  "model_calls": 0,
+  "hardware_accessed": false,
+  "scope": "Operator tooling only; controlled subprocess/adapter/media tests are not product or live capability evidence",
+  "vendor_files_verified": 189,
+  "historical_archive_evidence_diff": "",
+  "head": "eb69163ed33ebf1afff4ba3d85d97677dc88b395",
+  "implementation_sha256": {
+    "scripts/agy_pilot_environment.py": "f91b635cd6db3a4bb7aa42b5cf6ec05ad9556e641937630d052e394e2fb866f3",
+    "scripts/benchmark.py": "ad19daeb3ff85e1ed872d75a40b77b4adc80818a76e32bcf1443ff64a6094e71",
+    "scripts/benchmark_support.py": "0ccfd0f66f0f5d9aa759f8a24598125b5e21a93d636c68662f29d7a7ef96d6ff",
+    "scripts/check-host-compiler.py": "6fabb114f81f355309e3e4d16071f8c09c2e93c78525986b3cfafd2ced2acf95",
+    "scripts/comparison.py": "8129cf3b555d37235591978a5d2109e193349fe5138f3e4f90144b4a1bcc7eab",
+    "scripts/comparison_manager.py": "fc691c2102f54c37275aa9039600628ddd9c35a16fde4e7039b53c0b5d4910ae",
+    "scripts/evaluate-product.py": "6fa43ae800784aeb3ede855bb4e36e96cebe5433c3a8b506bd4d91440ed2452c",
+    "scripts/evaluate-production.py": "fc4234647d798cca1d8284fc54bef7a41db32705266cbe810fa951f63cc13958",
+    "scripts/evidence_package.py": "b08f8ec5b66dcfc9415f89e6badac8f48a3f76d11fb023b093596e5383149307",
+    "scripts/host_device_pipeline.py": "bc04def83b72fec838c27e1b03c993b6971942bdf1c94b9320284990ca6d2061",
+    "scripts/observe-product.py": "8c1bca546fd9289193fe752e874e06cc51cef80507494db4fcec5e8c0d2faee0",
+    "scripts/package-evidence.py": "3323997e74f53a5ae5e54b0bb99f2a27e84f167bbb2a058f491ad03c0e1dd4e9",
+    "scripts/production_evaluation.py": "df2a781557ece7b6f173860670a1cb3a66a5c549be305b0f146a2fc58cf9e1d6",
+    "scripts/product_observation.py": "371c8d6bd1cbe6e6e533a7b96ed2ca141321732ba47ccc6048ecd35487c6f698",
+    "scripts/reference_inputs.py": "1cfd2fc5fb88178cc2adc915393bf40c0a7a697883092c8ea1167267b1df4d4b",
+    "scripts/run-host-device-pipeline.py": "fbb23f1f62a4f9858d8555572a4a6e8ca2b8ab7629caabbdc226142c7c1f262c",
+    "scripts/summarize-benchmark.py": "706c0a51f875d6500667eeed8e910652e67745e08627280d08c5aec2d5bde1bb",
+    "scripts/validate-end-to-end-result.py": "9723c557fe5b32ea62dbc7669b02e5d2ee1d0cde7f11823cb20f6835e8170731",
+    "scripts/validate-experiment-result.py": "7782a04e5abf50be0e993c8c9c6379a3ed14cdced5b09f27816eb7826e740a1c"
+  }
+}

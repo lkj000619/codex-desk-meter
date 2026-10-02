@@ -9,6 +9,16 @@ experiments/config/agy-pilot-permissions.json text eol=lf
 *.bin binary
 *.elf binary
 *.gz binary
+# Frozen stimulus hashes cover the original bytes, including line endings.
+experiments/reference/** binary
+# Keep reviewed verification logs byte-exact, including UTF-16 and line endings.
+results/comparison-tooling-20261002/unittest-final.log binary
+results/main-purpose-review-20261002/document-fixes-unittest.log binary
+results/main-purpose-review-20261002/unittest.log binary
+results/main-purpose-review-20261002/host-frame.jsonl binary
+results/main-purpose-review-20261002/host-report.json binary
+# Historical sender records are hashed against their original bytes.
+results/codex-reference-upload-20261001/** binary
 docs/experiments/evidence/r8-baseline-20260925/*.stdout binary
 docs/experiments/evidence/r8-baseline-20260925/*.stderr binary
 docs/experiments/evidence/r8-baseline-20260925/*.jsonl binary

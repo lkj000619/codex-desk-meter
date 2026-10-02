@@ -13,6 +13,19 @@
     "exit_code": {"type": ["integer", "null"]},
     "delivered_prompt_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
     "local_base_commit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
-    "evidence": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}}
+    "evidence": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[a-f0-9]{64}$"}},
+    "comparison": {
+      "type": "object", "additionalProperties": false,
+      "required": ["ledger", "comparison_id", "round", "starting_commit", "feedback_sha256", "reference_status", "reference_inputs_sha256"],
+      "properties": {
+        "ledger": {"type": "string", "minLength": 1},
+        "comparison_id": {"type": "string", "minLength": 1},
+        "round": {"type": "integer", "minimum": 0, "maximum": 3},
+        "starting_commit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+        "feedback_sha256": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+        "reference_status": {"enum": ["pass", "fail", "not_run"]},
+        "reference_inputs_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    }
   }
 }

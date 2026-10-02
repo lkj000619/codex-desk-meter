@@ -109,21 +109,55 @@ I3/I4 복구 시험은 USB 재연결과 PC collector 프로세스 재시작을 �
 후자는 보드를 켜 둔 상태에서 수행하고, 영속 순번의 연속성·정상 화면 복구를
 확인한다. 순번 저장소 유실은 자동 복구 성공으로 채점하지 않고, 전송 차단과
 운영자 복구 절차를 검증한다. 상세 기준은 host-device-pipeline-contract.md를 따른다.
-### Machine-enforced E2E scoring and joins
 
-The E2E contract requires top-level `core_results.C1` through `C8` in every
-result. F9 details are scoped to `feature_results.F9`; F1-F8 reject that field.
-When F9 is assessed, its three candidates record user value,
-resource/implementation cost, risk, verification method, selection state, and
-selection/rejection rationale or a selection-document evidence reference.
-The canonical F9 rubric is a 30-point sum:
-`hardware_understanding=5`, `user_value=5`, `selection_logic=5`,
-`implementation_completeness=10`, `separation_portability=5`. `total` must
-equal the sum.
+## 기계 결과와 archive 연결
 
-The normalized token total is always `input + output`; nullable
-`provider_total` preserves the provider-reported raw value under its required
-definition field. Archive accepts a normalized E2E result only after schema,
-semantic, evaluation-manifest, and evidence-join validation, including a
-second validation after path normalization. Failed validation retains the raw
-snapshot only.
+필수 필드·nullable·F9.details 구조는
+[E2E result schema](../../experiments/schema/end-to-end-result.schema.json)가 소유한다.
+F9의 점수 의미는 [자율 기능 평가](hardware-feature-discovery.md)를 따른다.
+validator는 schema, 판정/증거, 평가 manifest의 identity 연결과 점수 합계를 검사한다.
+archive는 경로 정규화 전·후 모두 검증하며 실패한 경우 raw snapshot만 보존한다.
+`automated_test_status`는 integration-test 항목과 증거에서 계산하며 product_pass를 복사하지 않는다.
+
+## production 경로의 평가 사례
+
+아래는 기존 C/F/I 요구를 검사할 사례다. host view-model 검사와 운영자 관측을 연결할
+목록이며, 현재 legacy 29개 시험이 이 목록을 모두 실행한다는 뜻은 아니다.
+reference-match의 58%·82% stimulus는 [RM 목록](reference-match-matrix.md)에서
+원본을 복구한다. 아래 다른 fixture를 그 원본으로 대신하지 않는다.
+
+E1의 파일은 `experiments/fixtures/providers/`, E2의 파일은 `experiments/fixtures/`에 있다.
+E1의 정상 시험 기준 시각은
+`2026-09-10T00:00:01Z`이며 E2는 해당 원본의 captured_at을 기준으로 한다.
+관측할 raw frame·sequence·수신 시각·표시 값과 fixture hash를 실행 기록에 남긴다.
+
+| 시험 | 요구 ID | stimulus·기대값 | 실행 경로·증거 |
+|---|---|---|---|
+| E1 값·window 변화 | C3/F1~F5/I1~I4 | `codex-percent-window.json`: openai 5h used 20%/remaining 80%, reset `2026-09-10T05:00:00Z`. 다음 새 sequence에 `claude-code-windows.json`: anthropic 5h 35/65, weekly 40/60, model-sub-limit 10/90. window 수와 값·identity가 payload대로 바뀜 | candidate collector→실제 receiver→state→view-model 값·로그와 실제 글자/값 사진. 상수 42는 실패 |
+| E2 글로벌 source·시각 | C4~C6/F2/F5/F7/I2/I4 | `codex-resets-history.json`: captured `2026-09-10T16:54:07Z`, latest reset `2026-09-08T01:56:00Z`. 경과는 captured−latest=226,687초이며 sent_at은 reset 시각이 아님 | legacy→wire 매핑, 실제 state/view-model, 출처·조회 시각·경과 표시 사진. reset의 sent_at 대체는 실패 |
+| E3 source freshness | C3/C7/F2/F4/I2/I4 | E1 원본에서 reference_time을 observed_at+0/+299/+300초로 변경. 300초 available 입력은 의미 오류 또는 stale로 정규화. 미래 observed_at/last_good_at은 오류. source 시각을 바꿔 새 값으로 만들지 않음 | semantic validator와 production 상태를 별도 대조. envelope sent_at만 새롭게 해도 source-stale이 유지됨 |
+| E4 수신·오류 복구 | C7/F3/F4/I3/I4 | 정상→CRC 손상/잘림/중복·역순→새 정상 frame. 마지막 정상 값·순번 보존, 오류 표시·정상 복구. 유효 수신 후 단조 경과 299/300초 경계는 source 상태와 별도로 관찰 | production receiver/cache/view-model, raw bytes·last-good hash·오류/복구 로그 |
+| E5 null·복수 source | C3/C7/F1/F2/F5/I1/I2 | matrix의 reset 미제공·unsupported·error·stale·복수 provider. 미제공은 unknown, 0%와 구분. 한 adapter 실패로 다른 provider를 삭제하지 않음 | fixture identity별 의미 대조, production 상태·화면 및 source별 last-good |
+| E6 화면·입력 | C2/C8/F5/F6/F8 | 동일 artifact의 30초 유지·세 정보 화면·BOOT/RST·자동/수동 갱신. 시간 한도는 제품 계약을 따름 | LCD 가시 출력과 읽을 수 있는 glyph 영상, 입력·전송·수락·표시 시각의 개별 anchor |
+| E7 재연결 | C7/F3/F4/I3/I4 | 보드 전원을 유지한 collector stop/restart, powered link 단절/복구, sender 순번 저장소 유실을 각각 관찰 | 단일 port capture, 후보 frame 수락과 화면 복구. USB 전원 제거/RST는 별도 시나리오 |
+| E8 선택 기능 | F9 | 선택 문서의 자원·위험·검증 방법, 미장착/오류 동작 | 실제 선택 기능별 시험과 증거. 후보 자체 점수를 운영자 판정으로 복사하지 않음 |
+
+firmware epoch 기준의 확보·fixture anchor·부팅 후 단조 경과 연결은 후보의 시험 절차에서
+확인한다. 같은 frame을 uptime 초와 epoch로 비교해 정상 입력을 거부하면 I4 실패다.
+시각 기준이 없는 부팅 상태를 정상 시각으로 간주하지 않는다.
+
+## 송신·수락·광학 관측
+
+1. 운영자가 고정 artifact/fixture/frame hash와 sequence를 기록하고 한 process에서 port를
+   점유해 write와 capture를 수행한다. port open/reset, DTR/RTS, 재열거·read 실패를 운영 이벤트로 남긴다.
+2. 후보 sender를 관측 경로와 연결할 수 없으면 그 후보의 device acceptance는 미확인으로 남긴다.
+   별도 운영자 sender의 수락 로그를 후보 sender의 성공으로 승격하지 않는다.
+3. host write 완료, 장치 frame 수락, LCD 가시 변화는 각각 다른 event다. cdm/1에는 ACK가 없어
+   seq를 포함한 receiver 로그와 동시 화면 관측으로 연결한다. 해당 로그가 없으면 수락을 추정하지 않는다.
+4. BOOT debounce 완료→가시 전환, 수동 명령 시작→write, 장치 수락→LCD 변화의 시작/끝 anchor를
+   기록한다. 측정 해상도와 실패한 capture를 남기고 추정 시간을 확정 pass로 바꾸지 않는다.
+5. collector 정지/재시작과 powered link 단절은 보드가 켜진 조건에서 수행한다.
+   배터리 없는 USB 제거는 재전원 시험이다. 정상 부팅, RST, 재전원과 혼합 채점하지 않는다.
+
+관측 harness와 E1~E8 production 자동화의 구현·실물 실행은 새 비교 준비 상태에서 관리한다.
+이 절차 정의와 도구 회귀 통과만으로 C/F/I 실물 pass를 기록하지 않는다.

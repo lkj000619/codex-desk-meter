@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-02. 상태: **후보 입력 축소·파일/hash 격리 구현 / 새 비교 전체 준비 미완료**.
+확인일: 2026-10-02. 상태: **비교·관측·복원 도구 구현 / 실제 표면·후보·보드 검증과 새 조건 동결 전**.
 
 이 문서는 다음 실험을 준비할 때의 진입점이다. 제품 전체 합격을 후보 시작의
 전제조건으로 삼지 않는다. 실행 인프라의 준비 상태와 후보 제품 품질을 구분한다.
@@ -15,21 +15,22 @@
 
 상세 기준은 [운영 계약](comparison-operating-contract.md),
 [기준 기능 목록](reference-match-matrix.md),
-[정비 계획](../superpowers/plans/2026-10-02-experiment-contract-remediation.md)을 따른다.
+[정비 계획](../plans/2026-10-02-experiment-contract-remediation.md)을 따른다.
 
 ## 실행 전 남은 연결
 
 | 순서 | 상태 | 준비 항목 | 현재 근거·완료 조건 |
 |---|---|---|---|
 | 1 | 완료 | 운영 조건·판정 의미를 문서로 기록 | Q1~Q3 선택과 최초/후속 예산, reference와 전체 합격 구분 |
-| 2 | 미완료 | reference 입력 복구 | 실제 fixture 경로/hash·기준 시각·collector 명령·expected frame을 원본에서 복구. RM1~RM5 stimulus를 동일 입력으로 고정 |
-| 3 | 일부 완료 | clock·보드 사실·요구별 평가 정리 | 제품 계약의 source/수신 freshness와 보드 자료의 핀·극성·PSRAM 사실을 정리. 기준 epoch/uptime 연결·payload→표시 매핑·광학/단절 관측 절차는 남음 |
-| 4 | 일부 완료 | YAML·최초/후속 prompt 동기화 | 최초 prompt와 YAML에 채택 조건·입력 경계를 반영. 후속 회차의 고정 feedback 입력·manager는 미구현 |
-| 5 | 미완료 | runner의 수정 회차·누적 예산·도달 결과 연결 | 현재 prepare/run은 단회 run을 준비·실행한다. 후속 3회/누적 7,200초, 직전 후보 commit 출발, reference 도달 종료를 자동 처리하지 않음 |
-| 6 | 미완료 | 원래 pilot gate와 새 비교 적용 범위 연결 | `benchmark.py:execute`는 phase=benchmark에 pilot_pass receipt를 요구. 새 비교의 인프라 준비와 제품 실패 기록 원칙에 맞게 검증·기록을 연결 |
-| 7 | 일부 완료 | 새 평가 문서·도구의 입력 hash 연결 | 새 baseline은 기존 4개 criteria에 운영 계약·RM 목록을 추가 hash. allowlist·지원 도구의 candidate inventory도 bundle hash에 연결. 미래 후속 feedback hash는 남음 |
+| 2 | 복구 완료 | reference 입력 복구 | [기계 목록](../../experiments/reference/codex-7923f96/reference-inputs.json)에 raw fixture/hash·기준 시각·원본 collector 호출·seq 0/1 frame·5초 간격 복구. 영상 58/82는 stale synthetic 남은 비율. 새 baseline 동결은 남음 |
+| 3 | 도구 완료·실물 미확인 | clock·production·공통 관측 | source/수신 300초 oracle, 실제 production adapter 실행·hash, 단일 포트 capture, 광학 annotation/frame/지연 결합 구현. 실제 후보 코드 연결·시각 anchor·단절/BOOT/화면 측정은 별도 실행 필요 |
+| 4 | 구현 완료 | YAML·최초/후속 prompt 동기화 | 후속 feedback의 직전 run/commit·목표·관측·기대·근거 hash·잔여 회차/초를 manager가 prompt에 고정 |
+| 5 | 구현 완료 | runner의 수정 회차·누적 예산·도달 결과 연결 | 최초 7,200초, 후속 최대 3회/누적 7,200초 적용. 자기 직전 frozen bundle 출발·같은 profile·동시 실행 차단·hashed RM 전체 pass 시 종료. 중단은 reconcile 전 새 실행 차단 |
+| 6 | 구현 완료 | 원래 pilot gate와 새 비교 적용 범위 연결 | comparison 연결 run은 입력/profile에 묶인 infrastructure/capability receipt 사용. comparison 없는 historical run의 pilot_pass gate 유지. dummy subprocess로 연결 검증 |
+| 7 | 구현 완료·동결 전 | 새 평가 문서·도구의 입력 hash 연결 | 새 도구가 있는 snapshot은 operator 도구·reference bytes도 criteria hash에 포함. 후속 feedback/profile/immutable 입력 변조 거부. 기존 frozen snapshot hash 기준 유지 |
 | 8 | 새 확인 필요 | 표면별 CLI/model/설정·권한·계측 | 기존 profile/receipt는 당시 증거. 새 입력과 실제 표면에 맞는 version·capability·telemetry를 확인하고 원본 정의 유지 |
-| 9 | 미완료 | 독립 복구와 조건 동결 | source/evidence package를 새 경로에 복원·검증. 제품 코드 없는 시작 자료와 공통 입력을 commit/hash로 고정 |
+| 9 | 도구 검증 완료·실제 package 대기 | 독립 복구와 조건 동결 | source·ignored evidence·artifact 목록/hash와 독립 root 복원 도구 구현. 임시 E2E 자료에서 원 checkout 없이 validator 검증. 실제 후보 artifact package·공통 입력 동결은 남음 |
+| 10 | 구현 완료 | 전체 시도·실패 비용·도달 비용 집계 | 유효 completed 조건부 표와 별도 전체 시도/실패 비용/coverage, 최초·후속·누적·RM 도달 비용 표시. 후속은 독립 반복 수에서 제외 |
 
 위 미완료는 준비 backlog다. 후보가 실제 실행에서 기능을 구현하지 못한 경우는
 실험 결과이며 이 준비 목록을 다시 제품 합격 gate로 늘리는 이유로 삼지 않는다.
@@ -56,12 +57,13 @@ python scripts/benchmark.py check --baseline <고정한-새-commit> --profile <�
 ```
 
 `check`는 선택한 commit의 snapshot에서 입력을 검사하고 run ID를 예약하지 않는다.
-현재 `check` 통과만으로 위 새 운영 조건을 runner가 자동 적용한다고 해석하지 않는다.
-후속 회차·누적 예산·reference 판정의 연결은 별도 구현과 검증이 필요하다.
+`check`는 입력 검사다. 새 예산·후속·reference 관리는 `comparison.py init`으로 ledger를
+연결한 run에 적용한다. [도구 안내](comparison-tooling.md)의 receipt·평가·복원 절차와
+[구현 계획](../plans/2026-10-02-comparison-tooling.md)의 검증 기록을 따른다.
 
 ## 완료 판정과 다음 실행
 
-준비 담당자는 순서 2~9의 실제 산출물·검증 근거를 계획에 연결한다. 이전 tag를
+준비 담당자는 순서 2~10의 실제 산출물·검증 근거를 계획에 연결한다. 이전 tag를
 덮어쓰지 않고 모든 후보에 같은 새 입력을 제공한다. 첫 결과는 종료 시 동결하고
 후속 수정은 자신의 결과에서 이어서 비용을 기록한다.
 

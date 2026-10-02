@@ -1,7 +1,9 @@
 # 하드웨어 기반 자율 기능 실험
 
-> 이 문서는 실행 전 기능 설계·평가 기준이다. [readiness gate](benchmark-readiness.md)의
-> 승인 없이 agent에게 prompt를 전달하거나 보드에 업로드하지 않는다.
+이 문서는 운영자의 F9 선택 근거·점수 평가 기준이다. 후보의 구현 행동은
+[제품 계약](../PRODUCT_CONTRACT.md), 다음 비교의 운영 조건은
+[운영 계약](comparison-operating-contract.md), 준비 상태는
+[새 비교 준비 상태](next-comparison-readiness.md)를 따른다.
 
 ## 목적
 
@@ -15,15 +17,10 @@
 
 ## 고정 입력
 
-모든 에이전트에 다음 파일의 동일 커밋을 제공한다.
-
-- `docs/PROJECT_PURPOSE.md`
-- `docs/hardware/version-2-capabilities.md`
-- `docs/DEVELOPMENT_ENVIRONMENT.md`
-- `experiments/config/version-2-baseline.yaml`
-- `experiments/prompts/version-2-agent-task.md`
-- `docs/experiments/feature-comparison.md`
-- `docs/experiments/benchmark-readiness.md`
+후보에게 제공하는 파일은
+[allowlist](../../experiments/config/agent-inputs.json)의 동일한 고정 입력을 사용한다.
+필수 MD는 실행 과제·제품 계약·보드 자료의 3개이며, schema·fixture·지원 도구는
+목록에 있는 파일만 제공한다. 이 문서·목적·환경·운영·평가 문서는 운영자가 읽는 자료다.
 
 공식 제조사 문서를 추가로 조회할 수 있지만, 인터넷 접근 허용 여부는 동일
 비교군의 모든 실행에서 같아야 한다. 에이전트별로 다른 힌트나 기능 예시를
@@ -31,8 +28,8 @@
 
 ## 기본 실행 규칙
 
-1. R0~R10 readiness gate와 사용자 승인 후, 에이전트는 핵심 요구사항과 전체
-   하드웨어 카탈로그를 먼저 읽는다.
+1. 운영자가 대상 baseline/profile과 실행 지시를 연결한 후, 에이전트는 제품 계약과
+   보드 자료에서 핵심 요구사항과 자율 기능 자원을 확인한다.
 2. 하드웨어를 활용한 기능 후보를 정확히 3개 작성한다.
 3. 각 후보에 사용자 가치, 사용 자원, 구현 비용, 위험과 검증 방법을 기록한다.
 4. 에이전트가 사용자에게 선택을 넘기지 않고 후보 1개를 스스로 선택한다.
@@ -97,10 +94,12 @@ docs/agent-runs/<run-id>/hardware-feature-selection.md
 results/<run-id>/end-to-end-result.json
 ```
 
-후보 3개·선택 근거·자율 기능 30점의 항목별 증거는 선택 문서에 보존하고 E2E
-결과의 F9 증거에서 참조한다. 현재 E2E schema는 historical schema의 후보·점수
-구조를 직접 포함하지 않는다. `hardware-feature-result.schema.json`과
-`hardware-feature.json`은 과거 hardware-autonomy 자료용으로 보존한다.
+E2E 결과의 `feature_results.F9.details`에는 후보 목록·선택 ID·항목별 점수를 기록한다.
+선택 문서와 구현·시험·실물 증거를 연결하며, 필수 필드와 조건은 위 result schema와
+[validator](../../scripts/validate-end-to-end-result.py)를 따른다. F9가 pass이면 details가 필요하고,
+구조화 후보는 정확히 3개이며 점수 합계는 아래 rubric과 일치해야 한다.
+`hardware-feature-result.schema.json`과 `hardware-feature.json`은 과거
+hardware-autonomy 자료용으로 보존한다.
 
 ## 평가
 
@@ -131,5 +130,6 @@ results/<run-id>/end-to-end-result.json
 reasoning·전체를 분리하고, 제공자가 공개하지 않으면 `null`과 사유를 기록한다.
 서로 다른 제공자의 tokenizer와 reasoning 집계는 직접 합산하지 않는다. 자율
 기능 점수와 비용을 함께 제시하되, 낮은 비용만으로 더 좋은 결과라고 판단하지
-않는다. 반복 횟수·무작위 순서·하드웨어 슬롯은
-[에이전트 실험 프로토콜](agent-experiment-protocol.md)을 따른다.
+않는다. 새 비교의 최초/후속 비용은 운영 계약과 관리 기준을 따른다.
+독립 반복의 무작위 순서·하드웨어 슬롯 절차는
+[기존 프로토콜](agent-experiment-protocol.md)의 해당 cohort 범위를 확인한다.

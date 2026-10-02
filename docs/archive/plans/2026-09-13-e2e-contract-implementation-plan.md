@@ -1,5 +1,14 @@
 # E2E 계약 도구 구현 계획
 
+<!-- archive-note:2026-10-02:start -->
+> 보관 안내 (2026-10-02): **과거 계획 / offline 계약 도구 구현·검증 기록 보존**.
+> 최초 Git 등록은 2026-09-13, commit `d2f2e22`이며 원래 경로는
+> `docs/experiments/e2e-contract-implementation-plan.md`다.
+> 아래 원문은 당시 계획이다. 구현과 당시 시험은 [2026-09-13 검토](../experiments/readiness-review-20260913.md)에 기록했다.
+> 원문의 작업 제한과 완료 조건은 당시 적용 범위이며 현재 작업 지시로 재사용하지 않는다.
+> 현재 잔여 작업은 [다음 비교 준비 상태](../../experiments/next-comparison-readiness.md)를 따른다.
+<!-- archive-note:2026-10-02:end -->
+
 ## 상태와 목적
 
 이 문서는 `version-2-end-to-end-v1` 제품 실험을 실행하기 전에 maintainer가

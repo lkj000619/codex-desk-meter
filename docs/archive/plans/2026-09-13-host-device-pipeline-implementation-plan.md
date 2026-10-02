@@ -1,5 +1,14 @@
 # Host-to-device pre-experiment infrastructure plan
 
+<!-- archive-note:2026-10-02:start -->
+> 보관 안내 (2026-10-02): **과거 계획 / offline fixture-to-frame-to-receiver 도구 구현·검증 기록 보존**.
+> 최초 Git 등록은 2026-09-13, commit `d2f2e22`이며 원래 경로는
+> `docs/experiments/host-device-pipeline-implementation-plan.md`다.
+> 아래 원문은 당시 계획이며 `IMPLEMENTATION_AUTHORIZED`도 당시 범위에 한정한다.
+> [2026-09-13 검토](../experiments/readiness-review-20260913.md)의 host simulation 시험은 실제 receiver·LCD 통과를 뜻하지 않는다.
+> 현재 잔여 작업과 별도 production·관측 도구는 [다음 비교 준비 상태](../../experiments/next-comparison-readiness.md)를 따른다.
+<!-- archive-note:2026-10-02:end -->
+
 ## Status and purpose
 
 **`IMPLEMENTATION_AUTHORIZED / EXPERIMENT_NOT_AUTHORIZED`**

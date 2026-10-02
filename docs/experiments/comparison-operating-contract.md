@@ -1,6 +1,6 @@
 # 첫 결과와 후속 수정 비용 비교 운영 계약
 
-상태: **2026-10-02 사용자 결정·후보 입력 축소 반영. 입력 동결·후속 예산 manager는 미완료.**
+상태: **2026-10-02 운영 도구 구현 반영. 실제 표면·후보·보드 검증과 새 baseline 동결은 남음.**
 
 이 문서는 [2026-09-29 방향 전환](reference-comparison-20260929.md)을 구체화한다.
 사용자는 2026-10-02에 아래 목표·예산·보드 제공 수준을 선택했다.
@@ -30,8 +30,9 @@ protocol·approval·원본 판정은 당시 조건의 역사 기록으로 유지
 현재 `version-2-baseline.yaml`·최초 prompt에 채택 조건을 반영했다.
 후보는 [allowlist](../../experiments/config/agent-inputs.json)의 실행 과제·제품 계약·보드 자료
 3개와 필요한 기계 입력만 제공받는다. 이 운영 문서·평가 원본·과거 기록은 복사하지 않는다.
-후속 feedback 입력·예산 manager·reference 판정 연결과 최종 baseline 동결은 남아 있다.
-계약 채택과 runner의 누적 예산 자동 enforcement 구현은 같은 완료 상태가 아니다.
+후속 feedback·예산 manager·reference 판정·전체 실패 비용·관측·복원 도구는
+[도구 안내](comparison-tooling.md)에 연결했다. 최종 baseline 동결과 실제 관측 완료는
+[준비 상태](next-comparison-readiness.md)에서 별도로 관리한다.
 
 ## 2. 기준 도달과 전체 합격
 
@@ -72,8 +73,10 @@ reference 도달, 수정 3회 소진, 후속 누적 시간 소진 또는 사용�
 
 - 제품 코드 없는 동일 시작 commit, 공통 prompt template, fixture·schema·정책과
   제조사 source 목록/hash를 모든 후보에 제공한다.
-- 핀 역할·백라이트 극성·PSRAM/framebuffer·LCD API·USB/UART의 확인된 사실을
-  [보드 카탈로그](../hardware/version-2-capabilities.md)와 후속 보드 계약에서 연결한다.
+- 핀 역할·백라이트 극성·PSRAM/framebuffer·LCD API의 사실과 source 근거는
+  [보드 카탈로그](../hardware/version-2-capabilities.md)에서 관리한다. 실제 USB/UART
+  경로·시각 기준·관측 장치 설정은 [평가 절차](evaluation-contract.md)에 따른 실행 기록으로
+  확인한다. 미확인 설정을 공통 보드 사실로 채우지 않는다.
 - 검증된 공통 BSP나 Codex/다른 후보의 제품 source·patch를 제공하지 않는다.
   BSP 구현과 수정에 소비한 자원도 후보 실행 비용에 포함한다.
 - provider/model/설정은 최초 실행부터 후속 수정까지 보존한다. 변경한 시도는
@@ -107,6 +110,6 @@ reference 도달, 수정 3회 소진, 후속 누적 시간 소진 또는 사용�
 별도 결과로 읽는다. 원본 token 정의를 보존하고 provider total의 직접 비용 순위를
 만들지 않는다. 최초·회차별·누적의 집계 범위를 명시한다.
 
-후속 완료 조건은 [정비 계획](../superpowers/plans/2026-10-02-experiment-contract-remediation.md)의
+후속 완료 조건은 [정비 계획](../plans/2026-10-02-experiment-contract-remediation.md)의
 입력 동기화, clock/board 계약, production 의미 연결 평가, 실물 관측·capability·복원
 작업이다. 기존 과거 실행을 이 계약과 동등한 새 반복으로 편입하지 않는다.

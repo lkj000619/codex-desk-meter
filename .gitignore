@@ -9,6 +9,16 @@ sdkconfig
 *.elf
 *.map
 *.log
+# Reviewed verification evidence referenced by the dated reports.
+!results/comparison-tooling-20261002/unittest-final.log
+!results/main-purpose-review-20261002/document-fixes-unittest.log
+!results/main-purpose-review-20261002/unittest.log
+
+# Original media and sender runtime locks stay in the local evidence archive.
+results/codex-reference-upload-20261001/**/*.lock
+results/codex-reference-upload-20261001/user-video-01/*.mp4
+results/codex-reference-upload-20261001/user-video-01/*.jpg
+results/codex-reference-upload-20261001/user-video-01/*.stderr.txt
 
 # Local credentials and agent session data
 .env

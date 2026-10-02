@@ -445,6 +445,25 @@ class PreflightPolicyTests(unittest.TestCase):
     def test_prompt_and_log_accepts_no_os_isolation(self):
         self.validate()
 
+    def test_comparison_receipt_requires_bound_capabilities_and_rejects_denial(self):
+        connection = {"comparison_id": "test-series", "reference_inputs_sha256": "a"*64}
+        self.manifest["operator"]["comparison"] = connection
+        self.receipt.update(infrastructure_ready=True, comparison_id=connection["comparison_id"],
+                            reference_inputs_sha256=connection["reference_inputs_sha256"],
+                            input_bundle_sha256=self.manifest["execution"]["input_bundle_sha256"])
+        with self.assertRaisesRegex(ValueError, "capability"):
+            self.validate()
+        self.receipt["capabilities"] = {key: {"status": "pass", "evidence": "probe.txt"} for key in
+            ("read", "write", "list", "host_build", "host_test", "idf_build", "vendor_reference", "telemetry", "settings")}
+        self.validate()
+        self.receipt["capabilities"]["write"]["status"] = "denied"
+        with self.assertRaisesRegex(ValueError, "write"):
+            self.validate()
+        self.receipt["capabilities"]["write"]["status"] = "pass"
+        self.receipt["input_bundle_sha256"] = "b"*64
+        with self.assertRaisesRegex(ValueError, "input_bundle"):
+            self.validate()
+
     def test_prompt_scope_and_logging_required(self):
         for key in ("prompt_scope", "activity_logging"):
             with self.subTest(key=key):
@@ -578,6 +597,21 @@ class InputBundleCheckTests(unittest.TestCase):
     def args(self, baseline="HEAD"):
         return SimpleNamespace(baseline=baseline, profile=str(self.profile_path))
 
+    def test_new_operator_tooling_and_reference_bytes_are_bound_to_future_bundle(self):
+        root = Path(self.temp.name) / "inputs"
+        root.mkdir()
+        for name in ("experiments", "docs", "scripts"):
+            shutil.copytree(ROOT / name, root / name, ignore=shutil.ignore_patterns("__pycache__"))
+        before = benchmark.input_bundle_hashes(root, self.profile_path, "new", "a"*40)
+        source = root / "scripts/comparison_manager.py"
+        source.write_bytes(source.read_bytes() + b"\n# hash sensitivity\n")
+        after = benchmark.input_bundle_hashes(root, self.profile_path, "new", "a"*40)
+        self.assertNotEqual(before["evaluation_criteria_sha256"], after["evaluation_criteria_sha256"])
+        frame = root / "experiments/reference/codex-7923f96/expected-frames.jsonl"
+        frame.write_bytes(b"changed")
+        with self.assertRaisesRegex(ValueError, "reference hash"):
+            benchmark.input_bundle_hashes(root, self.profile_path, "new", "a"*40)
+
     def test_check_hashes_full_bundle_without_reserving_or_mutating(self):
         before = sorted(path.name for path in ROOT.iterdir())
         output = io.StringIO()
@@ -610,6 +644,7 @@ class IsolationTests(unittest.TestCase):
             root = Path(folder)
             repo = root / "repo"
             repo.mkdir()
+            shutil.copyfile(ROOT / ".gitattributes", repo / ".gitattributes")
             shutil.copytree(ROOT / "experiments", repo / "experiments")
             shutil.copytree(ROOT / "docs", repo / "docs", ignore=shutil.ignore_patterns("evidence"))
             shutil.copytree(ROOT / "scripts", repo / "scripts", ignore=shutil.ignore_patterns("__pycache__"))
