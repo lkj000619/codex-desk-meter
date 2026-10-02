@@ -1,0 +1,77 @@
+{
+  "access_policy": "prompt-and-log",
+  "base_commit": "85ba1089226a2e3198983a42eea375a3fd7e6ed0",
+  "profile_sha256": "c8afc781975500332c0786c045da699e5e02ebf96c442caaff885f9c654431bf",
+  "infrastructure_ready": true,
+  "comparison_id": "20261002-antigravity-cli-agy-pro-r02",
+  "input_bundle_sha256": "ba9027cbeda1ea7fc9e5743adb82b12226f3b33bc193e2d6ef9a0698efb7c415",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "checks": {
+    "idf_build": "pass",
+    "compiler": "pass",
+    "ninja": "pass",
+    "git": "pass",
+    "temp_write": "pass",
+    "network_policy": "pass",
+    "settings_inventory": "pass",
+    "prompt_scope": "pass",
+    "activity_logging": "pass",
+    "read_isolation": "not_enforced"
+  },
+  "evidence": {
+    "evidence/common/settings-inventory.json": "b8723284d58287b5e49c4003fe78938c0d0d085a70fcecf1a3635779532d412f",
+    "evidence/common/clean-baseline-preflight.txt": "decf30a118f9ff762907a33a79575755ffc5d8a9c8288ac5c16fdc7c35f75d4f",
+    "evidence/probes/agy-pro-capabilities-r4/capabilities.json": "76a992ad038944447f19e3ca0c730b6a5d387de00f0deda389c739be5886cff2",
+    "evidence/probes/agy-pro-capabilities-r4/stdout.jsonl": "cf188fce304e5dc18ecfc950bc930678ec56ac368dd00f1ae5037c2ad483c3c5",
+    "evidence/probes/agy-pro-capabilities-r4/invocation.json": "fe645d437c0e49cd00e82cb7651a1c5c55ecbbf8d240a4dfbdcbae1f3adcd460",
+    "evidence/probes/agy-pro-capabilities-r4/outcome.json": "3742d65a1b165f0c3d7fc083ed261a6ab84d50e5034fdff2b3568c854cea10e8",
+    "evidence/probes/agy-pro-capabilities-r4/artifacts/probe-input.txt": "3734eb1910baa9e5cbfb6b675a24b1015052d36c72056a7dfba216856e1c6494",
+    "evidence/probes/agy-pro-capabilities-r4/artifacts/probe-output.txt": "6b1f49762ba2030877cd1fdbbbd1256157eef7967d1b86afa6830add1b768c3c",
+    "evidence/probes/agy-pro-capabilities-r4/artifacts/build-host/preparation_host.exe": "ce0f1068bdfdbeabc108095f369657714c4fa54d19e123142398e3e602d549d5",
+    "evidence/probes/agy-pro-capabilities-r4/artifacts/build-idf/preparation_fixture.bin": "abfc67d2db84d179d8510a3d26ecfa46698e91f2e4d5e94f061855e6681968e7",
+    "evidence/probes/agy-pro-capabilities-r4/artifacts/build-idf/preparation_fixture.elf": "0b8851a9ea2c81637e281a606a9a21f6e1b6adaaa75bc19f80e1f3cb72bcf08c",
+    "evidence/probes/agy-pro-capabilities-r4/artifacts/build-idf/preparation_fixture.map": "463709f18ef8c5605694bfc493fa0840736b7f296b2baafdd73f2a3e8b32c4c6",
+    "evidence/probes/agy-pro-capabilities-r4/artifacts/build-idf/bootloader/bootloader.bin": "1b1a6d37995c7f4c80c325510142a10b7c38ece8eb0c7f71cfe2fc9c7572adc2",
+    "evidence/probes/agy-pro-capabilities-r4/artifacts/build-idf/partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "capabilities": {
+    "read": {
+      "status": "pass",
+      "evidence": "evidence/probes/agy-pro-capabilities-r4/capabilities.json"
+    },
+    "write": {
+      "status": "pass",
+      "evidence": "evidence/probes/agy-pro-capabilities-r4/capabilities.json"
+    },
+    "list": {
+      "status": "pass",
+      "evidence": "evidence/probes/agy-pro-capabilities-r4/capabilities.json"
+    },
+    "host_build": {
+      "status": "pass",
+      "evidence": "evidence/probes/agy-pro-capabilities-r4/capabilities.json"
+    },
+    "host_test": {
+      "status": "pass",
+      "evidence": "evidence/probes/agy-pro-capabilities-r4/capabilities.json"
+    },
+    "idf_build": {
+      "status": "pass",
+      "evidence": "evidence/probes/agy-pro-capabilities-r4/capabilities.json"
+    },
+    "vendor_reference": {
+      "status": "pass",
+      "evidence": "evidence/probes/agy-pro-capabilities-r4/capabilities.json"
+    },
+    "telemetry": {
+      "status": "pass",
+      "evidence": "evidence/probes/agy-pro-capabilities-r4/capabilities.json"
+    },
+    "settings": {
+      "status": "pass",
+      "evidence": "evidence/probes/agy-pro-capabilities-r4/capabilities.json"
+    }
+  },
+  "scope": "preparation verified; no authorization to execute product benchmark",
+  "product_execution_authorized": false
+}

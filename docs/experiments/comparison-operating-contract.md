@@ -1,6 +1,6 @@
 # 첫 결과와 후속 수정 비용 비교 운영 계약
 
-상태: **2026-10-02 운영 도구 구현 반영. 실제 표면·후보·보드 검증과 새 baseline 동결은 남음.**
+상태: **2026-10-02 운영 도구·실제 CLI 준비·공통 입력 동결 반영. 본 실험은 미실행이며 실물 기능 관측은 후보 실행 이후 수행.**
 
 이 문서는 [2026-09-29 방향 전환](reference-comparison-20260929.md)을 구체화한다.
 사용자는 2026-10-02에 아래 목표·예산·보드 제공 수준을 선택했다.
@@ -31,7 +31,7 @@ protocol·approval·원본 판정은 당시 조건의 역사 기록으로 유지
 후보는 [allowlist](../../experiments/config/agent-inputs.json)의 실행 과제·제품 계약·보드 자료
 3개와 필요한 기계 입력만 제공받는다. 이 운영 문서·평가 원본·과거 기록은 복사하지 않는다.
 후속 feedback·예산 manager·reference 판정·전체 실패 비용·관측·복원 도구는
-[도구 안내](comparison-tooling.md)에 연결했다. 최종 baseline 동결과 실제 관측 완료는
+[도구 안내](comparison-tooling.md)에 연결했다. baseline 동결 상태와 실제 관측 완료는
 [준비 상태](next-comparison-readiness.md)에서 별도로 관리한다.
 
 ## 2. 기준 도달과 전체 합격

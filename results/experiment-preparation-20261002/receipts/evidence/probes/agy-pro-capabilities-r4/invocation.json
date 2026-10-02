@@ -1,0 +1,23 @@
+{
+  "family": "antigravity",
+  "model": "gemini-3.1-pro-high",
+  "effort": "high",
+  "argv": [
+    "C:\\Espressif\\tools\\python\\python.exe",
+    "-c",
+    "import subprocess,sys; prompt=sys.stdin.buffer.read().decode(\"utf-8\"); sys.exit(subprocess.call([sys.argv[1], *sys.argv[2:], \"--print=\"+prompt], stdin=subprocess.DEVNULL))",
+    "C:\\meter-cli-frozen-20261002\\agy-1.2.14\\agy.exe",
+    "--input-format",
+    "text",
+    "--output-format",
+    "stream-json",
+    "--print-timeout",
+    "120m",
+    "--model",
+    "gemini-3.1-pro-high"
+  ],
+  "cwd": "C:\\meter-preflight-20261002\\agy-pro-capabilities-r4\\workspace",
+  "stdin_sha256": "7a17785bc3741da431679a9fd9a9982971207007f7d579b3d17d501344deeef6",
+  "purpose": "preparation-only",
+  "product_execution": false
+}

@@ -1,0 +1,149 @@
+{
+  "target": "agy-pro",
+  "selected_probe": "agy-pro-capabilities-r4",
+  "status": "pass",
+  "purpose": "preparation-only",
+  "product_execution": false,
+  "commands": [
+    {
+      "command": "Get-ChildItem -Name",
+      "exit_code": "see native tool output",
+      "event": 2
+    },
+    {
+      "command": "git status --short",
+      "exit_code": "see native tool output",
+      "event": 4
+    },
+    {
+      "command": "cmake -S tests -B build-host -G Ninja",
+      "exit_code": "see native tool output",
+      "event": 9
+    },
+    {
+      "command": "cmake --build build-host",
+      "exit_code": "see native tool output",
+      "event": 11
+    },
+    {
+      "command": "ctest --test-dir build-host --output-on-failure",
+      "exit_code": "see native tool output",
+      "event": 13
+    },
+    {
+      "command": "idf.py -B build-idf build",
+      "exit_code": "see native tool output",
+      "event": 15
+    }
+  ],
+  "tools": [
+    {
+      "name": "run_command",
+      "input": {
+        "CommandLine": "Get-ChildItem -Name"
+      },
+      "event": 2
+    },
+    {
+      "name": "view_file",
+      "input": {
+        "AbsolutePath": "C:\\meter-preflight-20261002\\agy-pro-capabilities-r4\\workspace\\probe-input.txt"
+      },
+      "event": 3
+    },
+    {
+      "name": "run_command",
+      "input": {
+        "CommandLine": "git status --short"
+      },
+      "event": 4
+    },
+    {
+      "name": "view_file",
+      "input": {
+        "AbsolutePath": "C:\\Espressif\\v5.3.2\\esp-idf\\tools\\cmake\\project.cmake"
+      },
+      "event": 5
+    },
+    {
+      "name": "view_file",
+      "input": {
+        "AbsolutePath": "C:\\Espressif\\vendor\\waveshare-esp32-s3-lcd-3.16\\source\\ESP32-S3-LCD-3.16-Demo\\ESP-IDF\\01_ADC_Test\\CMakeLists.txt"
+      },
+      "event": 6
+    },
+    {
+      "name": "write_to_file",
+      "input": {
+        "TargetFile": "C:\\meter-preflight-20261002\\agy-pro-capabilities-r4\\workspace\\probe-output.txt"
+      },
+      "event": 8
+    },
+    {
+      "name": "run_command",
+      "input": {
+        "CommandLine": "cmake -S tests -B build-host -G Ninja"
+      },
+      "event": 9
+    },
+    {
+      "name": "run_command",
+      "input": {
+        "CommandLine": "cmake --build build-host"
+      },
+      "event": 11
+    },
+    {
+      "name": "run_command",
+      "input": {
+        "CommandLine": "ctest --test-dir build-host --output-on-failure"
+      },
+      "event": 13
+    },
+    {
+      "name": "run_command",
+      "input": {
+        "CommandLine": "idf.py -B build-idf build"
+      },
+      "event": 15
+    }
+  ],
+  "artifact_sha256": {
+    "probe-input.txt": "3734eb1910baa9e5cbfb6b675a24b1015052d36c72056a7dfba216856e1c6494",
+    "probe-output.txt": "6b1f49762ba2030877cd1fdbbbd1256157eef7967d1b86afa6830add1b768c3c",
+    "build-host/preparation_host.exe": "ce0f1068bdfdbeabc108095f369657714c4fa54d19e123142398e3e602d549d5",
+    "build-idf/preparation_fixture.bin": "abfc67d2db84d179d8510a3d26ecfa46698e91f2e4d5e94f061855e6681968e7",
+    "build-idf/preparation_fixture.elf": "0b8851a9ea2c81637e281a606a9a21f6e1b6adaaa75bc19f80e1f3cb72bcf08c",
+    "build-idf/preparation_fixture.map": "463709f18ef8c5605694bfc493fa0840736b7f296b2baafdd73f2a3e8b32c4c6",
+    "build-idf/bootloader/bootloader.bin": "1b1a6d37995c7f4c80c325510142a10b7c38ece8eb0c7f71cfe2fc9c7572adc2",
+    "build-idf/partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "vendor_source_path": "C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/01_ADC_Test/CMakeLists.txt",
+  "vendor_source_sha256": "dabd25d271c91c810333983aa9fdb55a20899db64033af538df12287f977486c",
+  "telemetry": {
+    "input": 59655,
+    "output": 3555,
+    "cached": 101455,
+    "reasoning": 2249,
+    "provider_total": 63210,
+    "total": 63210,
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+    "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+  },
+  "native_terminal_usage": [],
+  "normalization_limit": null,
+  "capabilities": {
+    "read": "pass",
+    "write": "pass",
+    "list": "pass",
+    "host_build": "pass",
+    "host_test": "pass",
+    "idf_build": "pass",
+    "vendor_reference": "pass",
+    "telemetry": "pass",
+    "settings": "pass"
+  },
+  "settings_evidence": "common/settings-inventory.json; final profile argv and native catalogs",
+  "extension_invocation_metrics": null,
+  "extension_invocation_metrics_reason": "Complete per-extension activation/call counters are not emitted by these CLI streams; native tool names and effective catalogs are preserved instead."
+}

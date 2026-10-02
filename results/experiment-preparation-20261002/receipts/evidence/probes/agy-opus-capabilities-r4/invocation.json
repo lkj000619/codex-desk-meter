@@ -1,0 +1,23 @@
+{
+  "family": "antigravity",
+  "model": "claude-opus-4-6-thinking",
+  "effort": "model-thinking-default",
+  "argv": [
+    "C:\\Espressif\\tools\\python\\python.exe",
+    "-c",
+    "import subprocess,sys; prompt=sys.stdin.buffer.read().decode(\"utf-8\"); sys.exit(subprocess.call([sys.argv[1], *sys.argv[2:], \"--print=\"+prompt], stdin=subprocess.DEVNULL))",
+    "C:\\meter-cli-frozen-20261002\\agy-1.2.14\\agy.exe",
+    "--input-format",
+    "text",
+    "--output-format",
+    "stream-json",
+    "--print-timeout",
+    "120m",
+    "--model",
+    "claude-opus-4-6-thinking"
+  ],
+  "cwd": "C:\\meter-preflight-20261002\\agy-opus-capabilities-r4\\workspace",
+  "stdin_sha256": "885cb84071b7295f7bac519166524f9bece2323f5352d30f53cd96b71a161f76",
+  "purpose": "preparation-only",
+  "product_execution": false
+}

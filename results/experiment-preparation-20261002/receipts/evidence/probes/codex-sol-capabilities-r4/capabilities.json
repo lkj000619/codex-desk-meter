@@ -1,0 +1,101 @@
+{
+  "target": "codex-sol",
+  "selected_probe": "codex-sol-capabilities-r4",
+  "status": "pass",
+  "purpose": "preparation-only",
+  "product_execution": false,
+  "commands": [
+    {
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Name'",
+      "exit_code": 0,
+      "event": "item_2"
+    },
+    {
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-Content -Raw -LiteralPath .\\\\probe-input.txt\"",
+      "exit_code": 0,
+      "event": "item_3"
+    },
+    {
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git status --short'",
+      "exit_code": 0,
+      "event": "item_5"
+    },
+    {
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'cmake -S tests -B build-host -G Ninja'",
+      "exit_code": 0,
+      "event": "item_6"
+    },
+    {
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'cmake --build build-host'",
+      "exit_code": 0,
+      "event": "item_8"
+    },
+    {
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'ctest --test-dir build-host --output-on-failure'",
+      "exit_code": 0,
+      "event": "item_9"
+    },
+    {
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'idf.py -B build-idf build'",
+      "exit_code": 0,
+      "event": "item_10"
+    },
+    {
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-Content -LiteralPath 'C:\\\\Espressif\\\\v5.3.2\\\\esp-idf\\\\tools\\\\cmake\\\\project.cmake' -TotalCount 8\"",
+      "exit_code": 0,
+      "event": "item_13"
+    },
+    {
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-Content -LiteralPath 'C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\01_ADC_Test\\\\CMakeLists.txt' -TotalCount 8\"",
+      "exit_code": 0,
+      "event": "item_14"
+    }
+  ],
+  "tools": [],
+  "artifact_sha256": {
+    "probe-input.txt": "cc8a2272f2201e0faa785cf52a738212b39b1284e490e7c730816e10f3593b9a",
+    "probe-output.txt": "94b6b68c7dd9fc0fead2a5dccaad0504f960b12a9a9b971b1ca1bea086a98541",
+    "build-host/preparation_host.exe": "d7d68c7c03579491a6a022f09b7a3098f094de4b8c8cc73691e4da82bcf2b01b",
+    "build-idf/preparation_fixture.bin": "58dba3f35256336043ff14a90379b8a8403a75b723ef0450a573fdb7672c804b",
+    "build-idf/preparation_fixture.elf": "bf161afe054bd4f3a3e8b900ecf5d1130bce05de6dff7d9a20d1671bed096c23",
+    "build-idf/preparation_fixture.map": "8af4c22bece6e3d728d0e8c877bc25f2535738906b1881c6429b6ca96d2a7a7a",
+    "build-idf/bootloader/bootloader.bin": "037012a6dde748eae5455155ca6bbf6605f67ee2d97fd9fa2fcc1e3420937c52",
+    "build-idf/partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "vendor_source_path": "C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/01_ADC_Test/CMakeLists.txt",
+  "vendor_source_sha256": "dabd25d271c91c810333983aa9fdb55a20899db64033af538df12287f977486c",
+  "telemetry": {
+    "input": 328568,
+    "output": 1957,
+    "cached": 280576,
+    "reasoning": null,
+    "provider_total": null,
+    "total": 330525,
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+    "availability_note": "Codex turn.completed usage; cached is included in input; reasoning unavailable."
+  },
+  "native_terminal_usage": [
+    {
+      "input_tokens": 328568,
+      "cached_input_tokens": 280576,
+      "cache_write_input_tokens": 0,
+      "output_tokens": 1957,
+      "reasoning_output_tokens": 494
+    }
+  ],
+  "normalization_limit": "Frozen baseline normalizer does not map new Codex reasoning_output_tokens; native terminal usage above and raw events preserve it.",
+  "capabilities": {
+    "read": "pass",
+    "write": "pass",
+    "list": "pass",
+    "host_build": "pass",
+    "host_test": "pass",
+    "idf_build": "pass",
+    "vendor_reference": "pass",
+    "telemetry": "pass",
+    "settings": "pass"
+  },
+  "settings_evidence": "common/settings-inventory.json; final profile argv and native catalogs",
+  "extension_invocation_metrics": null,
+  "extension_invocation_metrics_reason": "Complete per-extension activation/call counters are not emitted by these CLI streams; native tool names and effective catalogs are preserved instead."
+}

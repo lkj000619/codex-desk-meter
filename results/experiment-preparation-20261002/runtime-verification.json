@@ -1,0 +1,50 @@
+{
+  "cli_checks": [
+    {
+      "target": "codex-sol",
+      "version": "codex-cli 0.159.2",
+      "executable_sha256": "52f75c649bebb8001102a1dd129c1ea6d02b0940321e6d7e82ee0526753bd58a",
+      "status": "pass"
+    },
+    {
+      "target": "codex-luna",
+      "version": "codex-cli 0.159.2",
+      "executable_sha256": "52f75c649bebb8001102a1dd129c1ea6d02b0940321e6d7e82ee0526753bd58a",
+      "status": "pass"
+    },
+    {
+      "target": "opencode-muse",
+      "version": "1.18.34",
+      "executable_sha256": "184f196ec97c843a64b2e1a2b49165f25e73a5d6993e2f842c9958c2b1f7a5b2",
+      "status": "pass"
+    },
+    {
+      "target": "agy-flash",
+      "version": "1.2.14",
+      "executable_sha256": "07f7ed55654b7066886c7390d3f5e245dbe4ede425c005909342cfc90333f2f8",
+      "status": "pass"
+    },
+    {
+      "target": "agy-pro",
+      "version": "1.2.14",
+      "executable_sha256": "07f7ed55654b7066886c7390d3f5e245dbe4ede425c005909342cfc90333f2f8",
+      "status": "pass"
+    },
+    {
+      "target": "agy-opus",
+      "version": "1.2.14",
+      "executable_sha256": "07f7ed55654b7066886c7390d3f5e245dbe4ede425c005909342cfc90333f2f8",
+      "status": "pass"
+    }
+  ],
+  "vendor_files_checked": 189,
+  "vendor_inventory_sha256": "4e03c428a91b9d7eff063c591daf900fd5d3edeea276b08f0840f4f0bf91652b",
+  "sdk_commit": "9d7f2d69f50d1288526d4f1027108e314e8c879f",
+  "sdk_sources": {
+    "C:\\Espressif\\v5.3.2\\esp-idf\\tools\\cmake\\project.cmake": "2d3660e0ec3684d5744adde0d051930c344b6ccb5e15009cadb5a6f76dd50163",
+    "C:\\Espressif\\v5.3.2\\esp-idf\\components\\esp_lcd\\rgb\\esp_lcd_panel_rgb.c": "83288416a8577c16f9d17ddbb6e3e6ea24297237cd3bb9fa0e37e4c0519c829d"
+  },
+  "compiler_executable_sha256": "3d364efa87f069c6685a9b2c4be7e8324dabb3baa926d21b40e6fc3e94a75b3e",
+  "preparation_package_sha256": "14e754096254096930bf6cb36a6958f4dfd3c7fbcabc958d240aa4ad1d19733a",
+  "product_runs": 0
+}

@@ -1,0 +1,23 @@
+{
+  "family": "antigravity",
+  "model": "gemini-3.8-flash-medium",
+  "effort": "medium",
+  "argv": [
+    "C:\\Espressif\\tools\\python\\python.exe",
+    "-c",
+    "import subprocess,sys; prompt=sys.stdin.buffer.read().decode(\"utf-8\"); sys.exit(subprocess.call([sys.argv[1], *sys.argv[2:], \"--print=\"+prompt], stdin=subprocess.DEVNULL))",
+    "C:\\meter-cli-frozen-20261002\\agy-1.2.14\\agy.exe",
+    "--input-format",
+    "text",
+    "--output-format",
+    "stream-json",
+    "--print-timeout",
+    "120m",
+    "--model",
+    "gemini-3.8-flash-medium"
+  ],
+  "cwd": "C:\\meter-preflight-20261002\\agy-flash-capabilities-r6\\workspace",
+  "stdin_sha256": "61e01d1ebcd0b69293fbc41ba8f66034c4f66354af0cd6cf721476f2035cd1f9",
+  "purpose": "preparation-only",
+  "product_execution": false
+}

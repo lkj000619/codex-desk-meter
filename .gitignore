@@ -14,6 +14,7 @@ sdkconfig
 !results/main-purpose-review-20261002/document-fixes-unittest.log
 !results/main-purpose-review-20261002/unittest.log
 
+
 # Original media and sender runtime locks stay in the local evidence archive.
 results/codex-reference-upload-20261001/**/*.lock
 results/codex-reference-upload-20261001/user-video-01/*.mp4
@@ -35,3 +36,7 @@ __pycache__/
 # Local experiment scratch output (reviewed results remain under results/)
 logs/
 artifacts/
+
+# Reviewed empty-app preparation artifacts; original build trees stay ignored.
+!results/experiment-preparation-20261002/receipts/evidence/probes/*/artifacts/
+!results/experiment-preparation-20261002/receipts/evidence/probes/*/artifacts/**

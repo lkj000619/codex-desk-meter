@@ -1,5 +1,10 @@
 # Planned runner profiles (operator-check only)
 
+The 2026-10-02 actual CLI checks and frozen executable profiles are recorded in
+[verified profiles](../verified-profiles-20261002/README.md). These templates retain
+their historical planning role; current preparation is tracked in
+[next comparison readiness](../../../docs/experiments/next-comparison-readiness.md).
+
 Default access policy: `sandbox_policy: prompt-and-log`.
 Docker/VM is optional; OS read isolation is recorded as `not_enforced`.
 See [access policy](../../../docs/experiments/isolation-policy.md).

@@ -20,6 +20,7 @@
 | [비교 도구 구현·검증](comparison-tooling-20261002/report.md) | 예산·실패 비용·관측·독립 복원 도구 |
 | [파일 트리·중복 평가](main-tree-review-20261002/report.md) | 정리 전 구조·중복·링크 검사 |
 | [파일 트리 정리 결과](main-tree-cleanup-20261002/report.md) | 후속 문서 정리·계획 이동·로그 보존 |
+| [본 실험 실행 준비](experiment-preparation-20261002/report.md) | 실제 CLI 6개 capability·설정·공통 입력·예약·독립 복원. 제품 실험은 미실행 |
 
 ## 새 결과의 작성·해석
 

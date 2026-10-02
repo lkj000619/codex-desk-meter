@@ -1,0 +1,205 @@
+{
+  "target": "agy-opus",
+  "selected_probe": "agy-opus-capabilities-r4",
+  "status": "pass",
+  "purpose": "preparation-only",
+  "product_execution": false,
+  "commands": [
+    {
+      "command": "Get-ChildItem -Name",
+      "exit_code": "see native tool output",
+      "event": 2
+    },
+    {
+      "command": "git status --short",
+      "exit_code": "see native tool output",
+      "event": 8
+    },
+    {
+      "command": "cmake -S tests -B build-host -G Ninja",
+      "exit_code": "see native tool output",
+      "event": 10
+    },
+    {
+      "command": "cmake --build build-host",
+      "exit_code": "see native tool output",
+      "event": 12
+    },
+    {
+      "command": "ctest --test-dir build-host --output-on-failure",
+      "exit_code": "see native tool output",
+      "event": 14
+    },
+    {
+      "command": "idf.py -B build-idf build",
+      "exit_code": "see native tool output",
+      "event": 16
+    }
+  ],
+  "tools": [
+    {
+      "name": "run_command",
+      "input": {
+        "CommandLine": "Get-ChildItem -Name"
+      },
+      "event": 2
+    },
+    {
+      "name": "view_file",
+      "input": {
+        "AbsolutePath": "C:\\meter-preflight-20261002\\agy-opus-capabilities-r4\\workspace\\probe-input.txt"
+      },
+      "event": 4
+    },
+    {
+      "name": "write_to_file",
+      "input": {
+        "TargetFile": "C:\\meter-preflight-20261002\\agy-opus-capabilities-r4\\workspace\\probe-output.txt"
+      },
+      "event": 6
+    },
+    {
+      "name": "run_command",
+      "input": {
+        "CommandLine": "git status --short"
+      },
+      "event": 8
+    },
+    {
+      "name": "run_command",
+      "input": {
+        "CommandLine": "cmake -S tests -B build-host -G Ninja"
+      },
+      "event": 10
+    },
+    {
+      "name": "run_command",
+      "input": {
+        "CommandLine": "cmake --build build-host"
+      },
+      "event": 12
+    },
+    {
+      "name": "run_command",
+      "input": {
+        "CommandLine": "ctest --test-dir build-host --output-on-failure"
+      },
+      "event": 14
+    },
+    {
+      "name": "run_command",
+      "input": {
+        "CommandLine": "idf.py -B build-idf build"
+      },
+      "event": 16
+    },
+    {
+      "name": "view_file",
+      "input": {
+        "AbsolutePath": "C:\\Espressif\\v5.3.2\\esp-idf\\tools\\cmake\\project.cmake"
+      },
+      "event": 18
+    },
+    {
+      "name": "view_file",
+      "input": {
+        "AbsolutePath": "C:\\Espressif\\vendor\\waveshare-esp32-s3-lcd-3.16\\source\\ESP32-S3-LCD-3.16-Demo\\ESP-IDF\\01_ADC_Test\\CMakeLists.txt"
+      },
+      "event": 19
+    },
+    {
+      "name": "schedule",
+      "input": {
+        "DurationSeconds": 120,
+        "Prompt": "Check on the IDF build task status"
+      },
+      "event": 21
+    },
+    {
+      "name": "manage_task",
+      "input": {
+        "Action": "status",
+        "TaskId": "d718a149-b32e-450d-b116-d3bad5d5ccb6/task-16"
+      },
+      "event": 23
+    },
+    {
+      "name": "manage_task",
+      "input": {
+        "Action": "status",
+        "TaskId": "d718a149-b32e-450d-b116-d3bad5d5ccb6/task-16"
+      },
+      "event": 25
+    },
+    {
+      "name": "manage_task",
+      "input": {
+        "Action": "status",
+        "TaskId": "d718a149-b32e-450d-b116-d3bad5d5ccb6/task-16"
+      },
+      "event": 27
+    },
+    {
+      "name": "manage_task",
+      "input": {
+        "Action": "kill",
+        "TaskId": "d718a149-b32e-450d-b116-d3bad5d5ccb6/task-21"
+      },
+      "event": 31
+    },
+    {
+      "name": "schedule",
+      "input": {
+        "DurationSeconds": 90,
+        "Prompt": "Check IDF build completion"
+      },
+      "event": 33
+    },
+    {
+      "name": "manage_task",
+      "input": {
+        "Action": "status",
+        "TaskId": "d718a149-b32e-450d-b116-d3bad5d5ccb6/task-16"
+      },
+      "event": 35
+    }
+  ],
+  "artifact_sha256": {
+    "probe-input.txt": "a6ef72b58854fff1e16526bc4dbdf77f6a49c8d8a68995266ec94990c277fc87",
+    "probe-output.txt": "6a5b45e6e394fa27959c42825f337e4892301825f0ae8fdbbb632e63e457d5ae",
+    "build-host/preparation_host.exe": "a72644f5db315777e121dea3fe794094519c816e1cefd3a880afe5757431f74c",
+    "build-idf/preparation_fixture.bin": "47e43c5ef1470a906098f8276aad4c2e76e7b0a023d5df25cf3eba5298ca068e",
+    "build-idf/preparation_fixture.elf": "3b63a0154ffd662008ada366caeecc59cbd71b3c6d07fad42bead4a579e4b891",
+    "build-idf/preparation_fixture.map": "d99c23a601c72eb2238f0669253fb0ceed7bfb71e7b29766c9c447e857ce1279",
+    "build-idf/bootloader/bootloader.bin": "da86f7c46cc5406e9556952e475a42e8aa7e5bc67acdd968959441e6b4498201",
+    "build-idf/partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "vendor_source_path": "C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/01_ADC_Test/CMakeLists.txt",
+  "vendor_source_sha256": "dabd25d271c91c810333983aa9fdb55a20899db64033af538df12287f977486c",
+  "telemetry": {
+    "input": 27448,
+    "output": 4007,
+    "cached": 433138,
+    "reasoning": 0,
+    "provider_total": 31455,
+    "total": 31455,
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+    "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+  },
+  "native_terminal_usage": [],
+  "normalization_limit": null,
+  "capabilities": {
+    "read": "pass",
+    "write": "pass",
+    "list": "pass",
+    "host_build": "pass",
+    "host_test": "pass",
+    "idf_build": "pass",
+    "vendor_reference": "pass",
+    "telemetry": "pass",
+    "settings": "pass"
+  },
+  "settings_evidence": "common/settings-inventory.json; final profile argv and native catalogs",
+  "extension_invocation_metrics": null,
+  "extension_invocation_metrics_reason": "Complete per-extension activation/call counters are not emitted by these CLI streams; native tool names and effective catalogs are preserved instead."
+}

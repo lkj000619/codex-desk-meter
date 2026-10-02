@@ -37,6 +37,7 @@ main에 문서가 존재한다는 이유로 후보에게 읽도록 제공하지 
 | 용도 | 문서 |
 |---|---|
 | 다음 실험 준비·잔여 조건 | [준비 상태](experiments/next-comparison-readiness.md) |
+| 실행 준비의 실제 검증·동결 | [준비 계획](plans/2026-10-02-experiment-launch-preparation.md) · [준비 보고서](../results/experiment-preparation-20261002/report.md) |
 | 새 운영 규칙 | [운영 계약](experiments/comparison-operating-contract.md) |
 | Codex 기능 도달 판정 | [RM 목록](experiments/reference-match-matrix.md) |
 | 수정 작업·의존 순서 | [계획](plans/2026-10-02-experiment-contract-remediation.md) |

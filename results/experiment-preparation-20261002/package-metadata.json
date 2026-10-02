@@ -1,0 +1,8 @@
+{
+  "package": "preparation-package.zip",
+  "sha256": "14e754096254096930bf6cb36a6958f4dfd3c7fbcabc958d240aa4ad1d19733a",
+  "bytes": 10394476,
+  "baseline_commit": "85ba1089226a2e3198983a42eea375a3fd7e6ed0",
+  "inventory_sha256": "9147ad956a9f2b91d8309d5e8b49c690b68fe1f89f046b6b15b7084440373f10",
+  "operator_source_tree_sha256": "1374f78da0fc700e9dfa44dbbaab19e474597ff7a5dd03735bda3303cc5e6245"
+}

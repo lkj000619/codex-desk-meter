@@ -1,0 +1,879 @@
+{
+  "opencode-muse": {
+    "target": "opencode-muse",
+    "selected_probe": "opencode-muse-capabilities-r2",
+    "status": "pass",
+    "purpose": "preparation-only",
+    "product_execution": false,
+    "commands": [
+      {
+        "command": "git status --short",
+        "exit_code": 0,
+        "event": "prt_0fc16f2fc0011hE0ts8zxFI6KE"
+      },
+      {
+        "command": "cmake -S tests -B build-host -G Ninja",
+        "exit_code": 0,
+        "event": "prt_0fc16fc6c001nrx6mJYJocTkAP"
+      },
+      {
+        "command": "cmake --build build-host",
+        "exit_code": 0,
+        "event": "prt_0fc17059d00176pP6OVwECwPFj"
+      },
+      {
+        "command": "ctest --test-dir build-host --output-on-failure",
+        "exit_code": 0,
+        "event": "prt_0fc170ef5001QkbnQmmd94S50G"
+      },
+      {
+        "command": "idf.py -B build-idf build",
+        "exit_code": 0,
+        "event": "prt_0fc1717ee001w8o3cdMA8229a4"
+      }
+    ],
+    "tools": [
+      {
+        "name": "read",
+        "status": "completed",
+        "input": {
+          "filePath": "C:/meter-preflight-20261002/opencode-muse-capabilities-r2/workspace"
+        },
+        "event": "prt_0fc16d5f7001tu2W47VK0MmDmP"
+      },
+      {
+        "name": "read",
+        "status": "completed",
+        "input": {
+          "filePath": "C:/meter-preflight-20261002/opencode-muse-capabilities-r2/workspace/probe-input.txt"
+        },
+        "event": "prt_0fc16dd4f001nPdhRJTOEuDV5E"
+      },
+      {
+        "name": "write",
+        "status": "completed",
+        "input": {
+          "content": "PREPARATION-opencode-muse-20261002-85ba108\n",
+          "filePath": "C:/meter-preflight-20261002/opencode-muse-capabilities-r2/workspace/probe-output.txt"
+        },
+        "event": "prt_0fc16e9be001y1igfQYlhV5fWu"
+      },
+      {
+        "name": "bash",
+        "status": "completed",
+        "input": {
+          "command": "git status --short",
+          "workdir": "C:/meter-preflight-20261002/opencode-muse-capabilities-r2/workspace"
+        },
+        "event": "prt_0fc16f2fc0011hE0ts8zxFI6KE"
+      },
+      {
+        "name": "bash",
+        "status": "completed",
+        "input": {
+          "command": "cmake -S tests -B build-host -G Ninja",
+          "workdir": "C:/meter-preflight-20261002/opencode-muse-capabilities-r2/workspace"
+        },
+        "event": "prt_0fc16fc6c001nrx6mJYJocTkAP"
+      },
+      {
+        "name": "bash",
+        "status": "completed",
+        "input": {
+          "command": "cmake --build build-host",
+          "workdir": "C:/meter-preflight-20261002/opencode-muse-capabilities-r2/workspace"
+        },
+        "event": "prt_0fc17059d00176pP6OVwECwPFj"
+      },
+      {
+        "name": "bash",
+        "status": "completed",
+        "input": {
+          "command": "ctest --test-dir build-host --output-on-failure",
+          "workdir": "C:/meter-preflight-20261002/opencode-muse-capabilities-r2/workspace"
+        },
+        "event": "prt_0fc170ef5001QkbnQmmd94S50G"
+      },
+      {
+        "name": "bash",
+        "status": "completed",
+        "input": {
+          "command": "idf.py -B build-idf build",
+          "workdir": "C:/meter-preflight-20261002/opencode-muse-capabilities-r2/workspace"
+        },
+        "event": "prt_0fc1717ee001w8o3cdMA8229a4"
+      },
+      {
+        "name": "read",
+        "status": "completed",
+        "input": {
+          "filePath": "C:/Espressif/v5.3.2/esp-idf/tools/cmake/project.cmake",
+          "limit": 8,
+          "offset": 1
+        },
+        "event": "prt_0fc187e21001nTbtwwl6aEzm9U"
+      },
+      {
+        "name": "read",
+        "status": "completed",
+        "input": {
+          "filePath": "C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/01_ADC_Test/CMakeLists.txt",
+          "limit": 8,
+          "offset": 1
+        },
+        "event": "prt_0fc188e5f001vSwmRm2VFJV0pv"
+      }
+    ],
+    "artifact_sha256": {
+      "probe-input.txt": "be8edee47cd546e2475820324b006a0ed13a6c7915d48fb7155f861dd72f36ea",
+      "probe-output.txt": "2125197417789e4f29225419368e487d13dc9f676b6d0f0d732ceb152630ec59",
+      "build-host/preparation_host.exe": "34a7cd2b8ab9b7756437dcffbf5aad258c64483be211ddc4d36f406cfbcc2447",
+      "build-idf/preparation_fixture.bin": "70aa40c0ab71a0277fb86f834b94aa08420d73a9f4cee7bc79456eef70cc29ea",
+      "build-idf/preparation_fixture.elf": "96b1215fa99a8248a774676656861bcdbb1af03c6de9f630923b5be4e851b34b",
+      "build-idf/preparation_fixture.map": "21b525a5666e59629bbb253f9baa23dd240c2f3d4c8f1289dcf72d18e8023718",
+      "build-idf/bootloader/bootloader.bin": "02ee5fcc91fc4758c86fd825cf3301384e72d0effaa34df38f0ce0ec08f62df5",
+      "build-idf/partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+    },
+    "vendor_source_path": "C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/01_ADC_Test/CMakeLists.txt",
+    "vendor_source_sha256": "dabd25d271c91c810333983aa9fdb55a20899db64033af538df12287f977486c",
+    "telemetry": {
+      "input": 25830,
+      "output": 1419,
+      "cached": 117339,
+      "reasoning": 1167,
+      "provider_total": 145755,
+      "total": 27249,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "OpenCode step_finish provider usage; provider_total preserves the raw total, total is normalized input+output and excludes cache/reasoning; cache write is raw-log-only."
+    },
+    "native_terminal_usage": [],
+    "normalization_limit": null,
+    "capabilities": {
+      "read": "pass",
+      "write": "pass",
+      "list": "pass",
+      "host_build": "pass",
+      "host_test": "pass",
+      "idf_build": "pass",
+      "vendor_reference": "pass",
+      "telemetry": "pass",
+      "settings": "pass"
+    },
+    "settings_evidence": "common/settings-inventory.json; final profile argv and native catalogs",
+    "extension_invocation_metrics": null,
+    "extension_invocation_metrics_reason": "Complete per-extension activation/call counters are not emitted by these CLI streams; native tool names and effective catalogs are preserved instead."
+  },
+  "agy-flash": {
+    "target": "agy-flash",
+    "selected_probe": "agy-flash-capabilities-r6",
+    "status": "pass",
+    "purpose": "preparation-only",
+    "product_execution": false,
+    "commands": [
+      {
+        "command": "Get-ChildItem -Name",
+        "exit_code": "see native tool output",
+        "event": 2
+      },
+      {
+        "command": "git status --short",
+        "exit_code": "see native tool output",
+        "event": 8
+      },
+      {
+        "command": "cmake -S tests -B build-host -G Ninja",
+        "exit_code": "see native tool output",
+        "event": 10
+      },
+      {
+        "command": "cmake --build build-host",
+        "exit_code": "see native tool output",
+        "event": 12
+      },
+      {
+        "command": "ctest --test-dir build-host --output-on-failure",
+        "exit_code": "see native tool output",
+        "event": 14
+      },
+      {
+        "command": "idf.py -B build-idf build",
+        "exit_code": "see native tool output",
+        "event": 16
+      }
+    ],
+    "tools": [
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "Get-ChildItem -Name"
+        },
+        "event": 2
+      },
+      {
+        "name": "view_file",
+        "input": {
+          "AbsolutePath": "C:\\meter-preflight-20261002\\agy-flash-capabilities-r6\\workspace\\probe-input.txt"
+        },
+        "event": 4
+      },
+      {
+        "name": "write_to_file",
+        "input": {
+          "TargetFile": "C:\\meter-preflight-20261002\\agy-flash-capabilities-r6\\workspace\\probe-output.txt"
+        },
+        "event": 6
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "git status --short"
+        },
+        "event": 8
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "cmake -S tests -B build-host -G Ninja"
+        },
+        "event": 10
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "cmake --build build-host"
+        },
+        "event": 12
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "ctest --test-dir build-host --output-on-failure"
+        },
+        "event": 14
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "idf.py -B build-idf build"
+        },
+        "event": 16
+      },
+      {
+        "name": "manage_task",
+        "input": {
+          "Action": "status",
+          "TaskId": "ebde6a95-b6b4-494c-959f-cfcc9cb65988/task-16"
+        },
+        "event": 18
+      },
+      {
+        "name": "view_file",
+        "input": {
+          "AbsolutePath": "C:/Espressif/v5.3.2/esp-idf/tools/cmake/project.cmake"
+        },
+        "event": 22
+      },
+      {
+        "name": "view_file",
+        "input": {
+          "AbsolutePath": "C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/01_ADC_Test/CMakeLists.txt"
+        },
+        "event": 24
+      }
+    ],
+    "artifact_sha256": {
+      "probe-input.txt": "1966ec743038d444bfe2368daad878470ced12e2c41c66f039f4ef634a54318a",
+      "probe-output.txt": "3e30bafe910aa5af3a9fbe8f4bd32bfdb375e65b8a830fa2601ce07e4551072e",
+      "build-host/preparation_host.exe": "1e60b9ac9ac57f6a416f0d5389a0d0106911e8c63bc224da07ec9dface7d48cd",
+      "build-idf/preparation_fixture.bin": "5162ca3c16762d7f15e80ab4d57f5d643736bdd37324a63b21c5a7df4b798bc0",
+      "build-idf/preparation_fixture.elf": "30485ac8b62d31c915a6cbc44e4e86d6686d5e725e022b6bea2fe628f3d74f0e",
+      "build-idf/preparation_fixture.map": "7488b44a1e113867e4cea816595efc2f39da92e4322fdd324a4be1f744daf2a6",
+      "build-idf/bootloader/bootloader.bin": "9469bfa80cd4d7411829445d7d43392904fa0f2d6de2aec82b1a297ddc0d2b68",
+      "build-idf/partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+    },
+    "vendor_source_path": "C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/01_ADC_Test/CMakeLists.txt",
+    "vendor_source_sha256": "dabd25d271c91c810333983aa9fdb55a20899db64033af538df12287f977486c",
+    "telemetry": {
+      "input": 71008,
+      "output": 3897,
+      "cached": 219965,
+      "reasoning": 1664,
+      "provider_total": 74905,
+      "total": 74905,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    },
+    "native_terminal_usage": [],
+    "normalization_limit": null,
+    "capabilities": {
+      "read": "pass",
+      "write": "pass",
+      "list": "pass",
+      "host_build": "pass",
+      "host_test": "pass",
+      "idf_build": "pass",
+      "vendor_reference": "pass",
+      "telemetry": "pass",
+      "settings": "pass"
+    },
+    "settings_evidence": "common/settings-inventory.json; final profile argv and native catalogs",
+    "extension_invocation_metrics": null,
+    "extension_invocation_metrics_reason": "Complete per-extension activation/call counters are not emitted by these CLI streams; native tool names and effective catalogs are preserved instead."
+  },
+  "agy-opus": {
+    "target": "agy-opus",
+    "selected_probe": "agy-opus-capabilities-r4",
+    "status": "pass",
+    "purpose": "preparation-only",
+    "product_execution": false,
+    "commands": [
+      {
+        "command": "Get-ChildItem -Name",
+        "exit_code": "see native tool output",
+        "event": 2
+      },
+      {
+        "command": "git status --short",
+        "exit_code": "see native tool output",
+        "event": 8
+      },
+      {
+        "command": "cmake -S tests -B build-host -G Ninja",
+        "exit_code": "see native tool output",
+        "event": 10
+      },
+      {
+        "command": "cmake --build build-host",
+        "exit_code": "see native tool output",
+        "event": 12
+      },
+      {
+        "command": "ctest --test-dir build-host --output-on-failure",
+        "exit_code": "see native tool output",
+        "event": 14
+      },
+      {
+        "command": "idf.py -B build-idf build",
+        "exit_code": "see native tool output",
+        "event": 16
+      }
+    ],
+    "tools": [
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "Get-ChildItem -Name"
+        },
+        "event": 2
+      },
+      {
+        "name": "view_file",
+        "input": {
+          "AbsolutePath": "C:\\meter-preflight-20261002\\agy-opus-capabilities-r4\\workspace\\probe-input.txt"
+        },
+        "event": 4
+      },
+      {
+        "name": "write_to_file",
+        "input": {
+          "TargetFile": "C:\\meter-preflight-20261002\\agy-opus-capabilities-r4\\workspace\\probe-output.txt"
+        },
+        "event": 6
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "git status --short"
+        },
+        "event": 8
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "cmake -S tests -B build-host -G Ninja"
+        },
+        "event": 10
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "cmake --build build-host"
+        },
+        "event": 12
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "ctest --test-dir build-host --output-on-failure"
+        },
+        "event": 14
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "idf.py -B build-idf build"
+        },
+        "event": 16
+      },
+      {
+        "name": "view_file",
+        "input": {
+          "AbsolutePath": "C:\\Espressif\\v5.3.2\\esp-idf\\tools\\cmake\\project.cmake"
+        },
+        "event": 18
+      },
+      {
+        "name": "view_file",
+        "input": {
+          "AbsolutePath": "C:\\Espressif\\vendor\\waveshare-esp32-s3-lcd-3.16\\source\\ESP32-S3-LCD-3.16-Demo\\ESP-IDF\\01_ADC_Test\\CMakeLists.txt"
+        },
+        "event": 19
+      },
+      {
+        "name": "schedule",
+        "input": {
+          "DurationSeconds": 120,
+          "Prompt": "Check on the IDF build task status"
+        },
+        "event": 21
+      },
+      {
+        "name": "manage_task",
+        "input": {
+          "Action": "status",
+          "TaskId": "d718a149-b32e-450d-b116-d3bad5d5ccb6/task-16"
+        },
+        "event": 23
+      },
+      {
+        "name": "manage_task",
+        "input": {
+          "Action": "status",
+          "TaskId": "d718a149-b32e-450d-b116-d3bad5d5ccb6/task-16"
+        },
+        "event": 25
+      },
+      {
+        "name": "manage_task",
+        "input": {
+          "Action": "status",
+          "TaskId": "d718a149-b32e-450d-b116-d3bad5d5ccb6/task-16"
+        },
+        "event": 27
+      },
+      {
+        "name": "manage_task",
+        "input": {
+          "Action": "kill",
+          "TaskId": "d718a149-b32e-450d-b116-d3bad5d5ccb6/task-21"
+        },
+        "event": 31
+      },
+      {
+        "name": "schedule",
+        "input": {
+          "DurationSeconds": 90,
+          "Prompt": "Check IDF build completion"
+        },
+        "event": 33
+      },
+      {
+        "name": "manage_task",
+        "input": {
+          "Action": "status",
+          "TaskId": "d718a149-b32e-450d-b116-d3bad5d5ccb6/task-16"
+        },
+        "event": 35
+      }
+    ],
+    "artifact_sha256": {
+      "probe-input.txt": "a6ef72b58854fff1e16526bc4dbdf77f6a49c8d8a68995266ec94990c277fc87",
+      "probe-output.txt": "6a5b45e6e394fa27959c42825f337e4892301825f0ae8fdbbb632e63e457d5ae",
+      "build-host/preparation_host.exe": "a72644f5db315777e121dea3fe794094519c816e1cefd3a880afe5757431f74c",
+      "build-idf/preparation_fixture.bin": "47e43c5ef1470a906098f8276aad4c2e76e7b0a023d5df25cf3eba5298ca068e",
+      "build-idf/preparation_fixture.elf": "3b63a0154ffd662008ada366caeecc59cbd71b3c6d07fad42bead4a579e4b891",
+      "build-idf/preparation_fixture.map": "d99c23a601c72eb2238f0669253fb0ceed7bfb71e7b29766c9c447e857ce1279",
+      "build-idf/bootloader/bootloader.bin": "da86f7c46cc5406e9556952e475a42e8aa7e5bc67acdd968959441e6b4498201",
+      "build-idf/partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+    },
+    "vendor_source_path": "C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/01_ADC_Test/CMakeLists.txt",
+    "vendor_source_sha256": "dabd25d271c91c810333983aa9fdb55a20899db64033af538df12287f977486c",
+    "telemetry": {
+      "input": 27448,
+      "output": 4007,
+      "cached": 433138,
+      "reasoning": 0,
+      "provider_total": 31455,
+      "total": 31455,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    },
+    "native_terminal_usage": [],
+    "normalization_limit": null,
+    "capabilities": {
+      "read": "pass",
+      "write": "pass",
+      "list": "pass",
+      "host_build": "pass",
+      "host_test": "pass",
+      "idf_build": "pass",
+      "vendor_reference": "pass",
+      "telemetry": "pass",
+      "settings": "pass"
+    },
+    "settings_evidence": "common/settings-inventory.json; final profile argv and native catalogs",
+    "extension_invocation_metrics": null,
+    "extension_invocation_metrics_reason": "Complete per-extension activation/call counters are not emitted by these CLI streams; native tool names and effective catalogs are preserved instead."
+  },
+  "codex-sol": {
+    "target": "codex-sol",
+    "selected_probe": "codex-sol-capabilities-r4",
+    "status": "pass",
+    "purpose": "preparation-only",
+    "product_execution": false,
+    "commands": [
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Name'",
+        "exit_code": 0,
+        "event": "item_2"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-Content -Raw -LiteralPath .\\\\probe-input.txt\"",
+        "exit_code": 0,
+        "event": "item_3"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git status --short'",
+        "exit_code": 0,
+        "event": "item_5"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'cmake -S tests -B build-host -G Ninja'",
+        "exit_code": 0,
+        "event": "item_6"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'cmake --build build-host'",
+        "exit_code": 0,
+        "event": "item_8"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'ctest --test-dir build-host --output-on-failure'",
+        "exit_code": 0,
+        "event": "item_9"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'idf.py -B build-idf build'",
+        "exit_code": 0,
+        "event": "item_10"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-Content -LiteralPath 'C:\\\\Espressif\\\\v5.3.2\\\\esp-idf\\\\tools\\\\cmake\\\\project.cmake' -TotalCount 8\"",
+        "exit_code": 0,
+        "event": "item_13"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-Content -LiteralPath 'C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\01_ADC_Test\\\\CMakeLists.txt' -TotalCount 8\"",
+        "exit_code": 0,
+        "event": "item_14"
+      }
+    ],
+    "tools": [],
+    "artifact_sha256": {
+      "probe-input.txt": "cc8a2272f2201e0faa785cf52a738212b39b1284e490e7c730816e10f3593b9a",
+      "probe-output.txt": "94b6b68c7dd9fc0fead2a5dccaad0504f960b12a9a9b971b1ca1bea086a98541",
+      "build-host/preparation_host.exe": "d7d68c7c03579491a6a022f09b7a3098f094de4b8c8cc73691e4da82bcf2b01b",
+      "build-idf/preparation_fixture.bin": "58dba3f35256336043ff14a90379b8a8403a75b723ef0450a573fdb7672c804b",
+      "build-idf/preparation_fixture.elf": "bf161afe054bd4f3a3e8b900ecf5d1130bce05de6dff7d9a20d1671bed096c23",
+      "build-idf/preparation_fixture.map": "8af4c22bece6e3d728d0e8c877bc25f2535738906b1881c6429b6ca96d2a7a7a",
+      "build-idf/bootloader/bootloader.bin": "037012a6dde748eae5455155ca6bbf6605f67ee2d97fd9fa2fcc1e3420937c52",
+      "build-idf/partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+    },
+    "vendor_source_path": "C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/01_ADC_Test/CMakeLists.txt",
+    "vendor_source_sha256": "dabd25d271c91c810333983aa9fdb55a20899db64033af538df12287f977486c",
+    "telemetry": {
+      "input": 328568,
+      "output": 1957,
+      "cached": 280576,
+      "reasoning": null,
+      "provider_total": null,
+      "total": 330525,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "Codex turn.completed usage; cached is included in input; reasoning unavailable."
+    },
+    "native_terminal_usage": [
+      {
+        "input_tokens": 328568,
+        "cached_input_tokens": 280576,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 1957,
+        "reasoning_output_tokens": 494
+      }
+    ],
+    "normalization_limit": "Frozen baseline normalizer does not map new Codex reasoning_output_tokens; native terminal usage above and raw events preserve it.",
+    "capabilities": {
+      "read": "pass",
+      "write": "pass",
+      "list": "pass",
+      "host_build": "pass",
+      "host_test": "pass",
+      "idf_build": "pass",
+      "vendor_reference": "pass",
+      "telemetry": "pass",
+      "settings": "pass"
+    },
+    "settings_evidence": "common/settings-inventory.json; final profile argv and native catalogs",
+    "extension_invocation_metrics": null,
+    "extension_invocation_metrics_reason": "Complete per-extension activation/call counters are not emitted by these CLI streams; native tool names and effective catalogs are preserved instead."
+  },
+  "agy-pro": {
+    "target": "agy-pro",
+    "selected_probe": "agy-pro-capabilities-r4",
+    "status": "pass",
+    "purpose": "preparation-only",
+    "product_execution": false,
+    "commands": [
+      {
+        "command": "Get-ChildItem -Name",
+        "exit_code": "see native tool output",
+        "event": 2
+      },
+      {
+        "command": "git status --short",
+        "exit_code": "see native tool output",
+        "event": 4
+      },
+      {
+        "command": "cmake -S tests -B build-host -G Ninja",
+        "exit_code": "see native tool output",
+        "event": 9
+      },
+      {
+        "command": "cmake --build build-host",
+        "exit_code": "see native tool output",
+        "event": 11
+      },
+      {
+        "command": "ctest --test-dir build-host --output-on-failure",
+        "exit_code": "see native tool output",
+        "event": 13
+      },
+      {
+        "command": "idf.py -B build-idf build",
+        "exit_code": "see native tool output",
+        "event": 15
+      }
+    ],
+    "tools": [
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "Get-ChildItem -Name"
+        },
+        "event": 2
+      },
+      {
+        "name": "view_file",
+        "input": {
+          "AbsolutePath": "C:\\meter-preflight-20261002\\agy-pro-capabilities-r4\\workspace\\probe-input.txt"
+        },
+        "event": 3
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "git status --short"
+        },
+        "event": 4
+      },
+      {
+        "name": "view_file",
+        "input": {
+          "AbsolutePath": "C:\\Espressif\\v5.3.2\\esp-idf\\tools\\cmake\\project.cmake"
+        },
+        "event": 5
+      },
+      {
+        "name": "view_file",
+        "input": {
+          "AbsolutePath": "C:\\Espressif\\vendor\\waveshare-esp32-s3-lcd-3.16\\source\\ESP32-S3-LCD-3.16-Demo\\ESP-IDF\\01_ADC_Test\\CMakeLists.txt"
+        },
+        "event": 6
+      },
+      {
+        "name": "write_to_file",
+        "input": {
+          "TargetFile": "C:\\meter-preflight-20261002\\agy-pro-capabilities-r4\\workspace\\probe-output.txt"
+        },
+        "event": 8
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "cmake -S tests -B build-host -G Ninja"
+        },
+        "event": 9
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "cmake --build build-host"
+        },
+        "event": 11
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "ctest --test-dir build-host --output-on-failure"
+        },
+        "event": 13
+      },
+      {
+        "name": "run_command",
+        "input": {
+          "CommandLine": "idf.py -B build-idf build"
+        },
+        "event": 15
+      }
+    ],
+    "artifact_sha256": {
+      "probe-input.txt": "3734eb1910baa9e5cbfb6b675a24b1015052d36c72056a7dfba216856e1c6494",
+      "probe-output.txt": "6b1f49762ba2030877cd1fdbbbd1256157eef7967d1b86afa6830add1b768c3c",
+      "build-host/preparation_host.exe": "ce0f1068bdfdbeabc108095f369657714c4fa54d19e123142398e3e602d549d5",
+      "build-idf/preparation_fixture.bin": "abfc67d2db84d179d8510a3d26ecfa46698e91f2e4d5e94f061855e6681968e7",
+      "build-idf/preparation_fixture.elf": "0b8851a9ea2c81637e281a606a9a21f6e1b6adaaa75bc19f80e1f3cb72bcf08c",
+      "build-idf/preparation_fixture.map": "463709f18ef8c5605694bfc493fa0840736b7f296b2baafdd73f2a3e8b32c4c6",
+      "build-idf/bootloader/bootloader.bin": "1b1a6d37995c7f4c80c325510142a10b7c38ece8eb0c7f71cfe2fc9c7572adc2",
+      "build-idf/partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+    },
+    "vendor_source_path": "C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/01_ADC_Test/CMakeLists.txt",
+    "vendor_source_sha256": "dabd25d271c91c810333983aa9fdb55a20899db64033af538df12287f977486c",
+    "telemetry": {
+      "input": 59655,
+      "output": 3555,
+      "cached": 101455,
+      "reasoning": 2249,
+      "provider_total": 63210,
+      "total": 63210,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    },
+    "native_terminal_usage": [],
+    "normalization_limit": null,
+    "capabilities": {
+      "read": "pass",
+      "write": "pass",
+      "list": "pass",
+      "host_build": "pass",
+      "host_test": "pass",
+      "idf_build": "pass",
+      "vendor_reference": "pass",
+      "telemetry": "pass",
+      "settings": "pass"
+    },
+    "settings_evidence": "common/settings-inventory.json; final profile argv and native catalogs",
+    "extension_invocation_metrics": null,
+    "extension_invocation_metrics_reason": "Complete per-extension activation/call counters are not emitted by these CLI streams; native tool names and effective catalogs are preserved instead."
+  },
+  "codex-luna": {
+    "target": "codex-luna",
+    "selected_probe": "codex-luna-capabilities-r4",
+    "status": "pass",
+    "purpose": "preparation-only",
+    "product_execution": false,
+    "commands": [
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -File -Name'",
+        "exit_code": 0,
+        "event": "item_2"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Raw probe-input.txt'",
+        "exit_code": 0,
+        "event": "item_3"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git status --short'",
+        "exit_code": 0,
+        "event": "item_5"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'cmake -S tests -B build-host -G Ninja'",
+        "exit_code": 0,
+        "event": "item_6"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'cmake --build build-host'",
+        "exit_code": 0,
+        "event": "item_7"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'ctest --test-dir build-host --output-on-failure'",
+        "exit_code": 0,
+        "event": "item_8"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'idf.py -B build-idf build'",
+        "exit_code": 0,
+        "event": "item_10"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-Content -LiteralPath 'C:\\\\Espressif\\\\v5.3.2\\\\esp-idf\\\\tools\\\\cmake\\\\project.cmake' -TotalCount 8\"",
+        "exit_code": 0,
+        "event": "item_12"
+      },
+      {
+        "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-Content -LiteralPath 'C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\01_ADC_Test\\\\CMakeLists.txt' -TotalCount 8\"",
+        "exit_code": 0,
+        "event": "item_13"
+      }
+    ],
+    "tools": [],
+    "artifact_sha256": {
+      "probe-input.txt": "b18a8d696c3683f3667335a0987959a56188891dd36ba612c6dd94b9b1be83dc",
+      "probe-output.txt": "8d85c62e355b46b3f896920312774bf33074d83c1dd2377988957f8d343edd09",
+      "build-host/preparation_host.exe": "649e1dd87b5990d6b51289bc988991313714b102b70c3c3c272ae4ca7700dba2",
+      "build-idf/preparation_fixture.bin": "5126b50594ccab3efaa5a9a989c4893f143fa6e0a615466d76f1920c7cf14ed5",
+      "build-idf/preparation_fixture.elf": "e395f843e6afdf831d00f4dace4b8b93fa75391e39831619053a675a6e095d30",
+      "build-idf/preparation_fixture.map": "2bdbb7826c4cffa3f544ed733a19007107fa04597645ead351c900523be67d69",
+      "build-idf/bootloader/bootloader.bin": "4ce805c4ce299fefba3b3127ddc9a8543162f55348bdd7c8c432acc1312be72b",
+      "build-idf/partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+    },
+    "vendor_source_path": "C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/01_ADC_Test/CMakeLists.txt",
+    "vendor_source_sha256": "dabd25d271c91c810333983aa9fdb55a20899db64033af538df12287f977486c",
+    "telemetry": {
+      "input": 707287,
+      "output": 6884,
+      "cached": 630784,
+      "reasoning": null,
+      "provider_total": null,
+      "total": 714171,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "Codex turn.completed usage; cached is included in input; reasoning unavailable."
+    },
+    "native_terminal_usage": [
+      {
+        "input_tokens": 707287,
+        "cached_input_tokens": 630784,
+        "cache_write_input_tokens": 0,
+        "output_tokens": 6884,
+        "reasoning_output_tokens": 5264
+      }
+    ],
+    "normalization_limit": "Frozen baseline normalizer does not map new Codex reasoning_output_tokens; native terminal usage above and raw events preserve it.",
+    "capabilities": {
+      "read": "pass",
+      "write": "pass",
+      "list": "pass",
+      "host_build": "pass",
+      "host_test": "pass",
+      "idf_build": "pass",
+      "vendor_reference": "pass",
+      "telemetry": "pass",
+      "settings": "pass"
+    },
+    "settings_evidence": "common/settings-inventory.json; final profile argv and native catalogs",
+    "extension_invocation_metrics": null,
+    "extension_invocation_metrics_reason": "Complete per-extension activation/call counters are not emitted by these CLI streams; native tool names and effective catalogs are preserved instead."
+  }
+}

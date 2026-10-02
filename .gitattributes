@@ -26,3 +26,9 @@ docs/experiments/evidence/r8-baseline-20260925/host-report.json binary
 docs/experiments/evidence/r8-baseline-20260925/ledger.json binary
 docs/experiments/evidence/agy-cli-20260925-v1211.txt binary
 docs/experiments/evidence/agy-models-20260925-v1211.txt binary
+# Preparation receipts hash raw native events, settings and frozen source bytes.
+results/experiment-preparation-20261002/evidence/** binary
+results/experiment-preparation-20261002/receipts/** binary
+results/experiment-preparation-20261002/*.zip binary
+experiments/config/verified-profiles-20261002/*.json binary
+results/experiment-preparation-20261002/*.json binary
