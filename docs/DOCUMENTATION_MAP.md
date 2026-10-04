@@ -46,6 +46,7 @@ main에 문서가 존재한다는 이유로 후보에게 읽도록 제공하지 
 | 평가 baseline·배점·일정 후속 정비 | [정비 계획](plans/2026-10-03-evaluation-baseline-remediation.md) · [재검토](../results/documentation-review-20261003/report.md) |
 | 실험 실행 경계·hook·제한 검토 | [실행 경계 보고서](../results/experiment-execution-review-20261003/report.md) |
 | 2026-10-04 정식 비교 시작 준비·완료 근거 | [선행 작업 계획](plans/2026-10-03-formal-comparison-launch-prerequisites.md) · [실행 준비 완료](../results/experiment-launch-preparation-20261004/report.md) |
+| 정식 비교 실제 실행·재개 | [실행 계획](plans/2026-10-04-formal-comparison-execution.md) · [진행 기록](../results/formal-comparison-20261004/report.md) |
 | 비교 도구 명령·증거 형식 | [도구 안내](experiments/comparison-tooling.md) · [구현 계획](plans/2026-10-02-comparison-tooling.md) · [설계](design/2026-10-02-comparison-tooling.md) |
 | 문제와 근거 | [세 에이전트 평가](experiments/architecture-review-20261002.md) |
 | GUI/F 평가·host seam | [기능 평가](experiments/feature-comparison.md) · [평가 도구](experiments/evaluation-contract.md) |

@@ -1,6 +1,7 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-04. 상태: **정식 비교의 후보 구현 세션 시작 준비 완료. 활성 5개 모델, baseline 동결·당일 예약·독립 복원 검증 완료. COM3의 ESP32 USB 연결 확인. 제품 실험 0회.**
+확인일: 2026-10-04. 상태: **첫 정식 실험 OpenCode Muse 실행 중. 22:47:50 KST 시작, 최초 최대 120분. 활성 5개 모델, baseline 동결·예약·독립 복원과 COM3 연결 확인 완료.**
+실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
 2026-10-02의 6개 모델 준비 완료 판정은 [당시 보고서](../../results/experiment-preparation-20261002/report.md)의 조건에만 적용된다.
@@ -90,7 +91,8 @@ CLI/model/settings/environment를 재확인해 새 run-bound receipt를 연결�
 2026-10-02 ID와 GPT-5.6 receipt는 이번 비교에 재사용하지 않는다.
 
 현재 첫 블록 순서는 **OpenCode Muse→AGY Flash→AGY Pro→Codex Sol→Codex Luna**다.
-5개 예약은 모두 prepared·시작 시각 null·소비 시간 null이다. 실제 제품 모델 호출을 뜻하지 않는다.
+준비 당시 5개 예약은 모두 prepared·시작 시각 null·소비 시간 null이었다.
+현재 첫 OpenCode 예약은 running이며 나머지는 미시작이다. 완료·비용·정책/제품 판정은 실제 종료·관측 후 기록한다.
 현재 증거 문서의 후속 commit과 비교 baseline을 혼동하지 않는다. 다음 날짜의 새 prepare는
 동결된 깨끗한 operator checkout `C:/meter-operator-20261004`에서 수행한다.
 당일 준비 도우미는 10월 4일의 실제 근거를 사용한 기록용이며 다음 날 그대로 실행해 현재 환경 확인을 대신하지 않는다.

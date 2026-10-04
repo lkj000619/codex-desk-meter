@@ -34,7 +34,8 @@ Codex에서 확인된 기능 도달과 전체 제품 합격은 별도로 판정�
 10월 4일에는 Claude를 제외한 활성 5개 모델의 실제 capability, 실행 경계 보완, 새 baseline 동결,
 당일 ID·개별 ledger·receipt 연결과 독립 복원을 완료했다. Codex는 `gpt-6-sol` medium /
 `gpt-6-luna` max다. [새 프로필](experiments/config/next-profiles-20261003/README.md)과
-`comparison-baseline-20261004`를 사용한다. 제품 실험은 아직 0회이며 10월 4일 후속 확인에서 COM3의 ESP32 USB 연결을 확인했다.
+`comparison-baseline-20261004`를 사용한다. 10월 4일 COM3 연결을 확인한 뒤 22:47:50 KST에 첫 정식 실험 OpenCode Muse를 시작했다.
+현재 실행·종료·평가 상태는 [정식 실행 기록](results/formal-comparison-20261004/report.md)을 따른다.
 최신 상태와 보완 도구의 적용 범위는
 [다음 비교 준비 상태](docs/experiments/next-comparison-readiness.md)가 관리한다.
 후보 생산 코드 연결·실물 측정은 후보 실행 이후 수행한다.

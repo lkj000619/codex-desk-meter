@@ -1,0 +1,14 @@
+﻿{
+    "run_id":  "20261004-opencode-cli-opencode-muse-r01",
+    "pid":  10132,
+    "launcher_started_at":  "2026-10-04T13:47:48.0375514Z",
+    "python":  "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+    "operator_checkout":  "C:/meter-operator-20261004",
+    "runner":  "scripts/benchmark.py",
+    "receipt":  "C:/Users/이광진/orca/codex-desk-meter/results/experiment-launch-preparation-20261004/opencode-muse-receipt.json",
+    "timeout_seconds":  7200,
+    "baseline":  "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "execution_mode":  "independent hidden process; no automatic retry",
+    "stdout":  "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/runner-console.txt",
+    "stderr":  "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/runner-console-stderr.txt"
+}
