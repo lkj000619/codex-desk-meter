@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 첫 블록 OpenCode Muse 최초 결과의 화면 실패·기준 미도달을 기록하고 후속 1회차 실행 중. 후속 시작 23:30:48 KST.
-후보 실행 시작 2회(최초 1·후속 1)·종료 1회. 최초 정책은 `invalid_for_comparison`, RM은 미도달, `product_pass`는 false다. 나머지 모델은 미시작이다.
+상태: 2026-10-05 첫 OpenCode series의 최초·후속 최종 평가와 증거 복원 완료. 수정 예산 소진·정책 부적격·기준 미도달로 종료했고 AGY Flash 최초 실험이 03:09:41 KST 실행 중이다.
+후보 실행 시작 3회(최초 2·후속 1)·종료 2회. OpenCode 후속 RM은 RM1·RM5 pass/RM2·RM3·RM4 partial이며 제품 합격은 false다. AGY Pro·Codex Sol/Luna는 미시작이다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -249,3 +249,56 @@ app SHA-256 `8e4eaaab7dd6c66abdc069043583c3805cd942d2afca496e48073bcc0255c75b`�
 촬영 대상이 확인됐을 때 적용할 RM 초안은 RM1 pass/RM2 partial/RM3 partial/RM4 partial/RM5 pass다.
 최종 원본 RM review는 아직 적용하지 않았으며 이 초안은 비용/품질 집계의 최종 판정이 아니다.
 촬영 대상 확인 후 RM·최종 package·series 종료 기록을 보존하고 다음 AGY Flash를 시작한다.
+
+## 2026-10-05 후속 최종 RM·증거 복원·다음 대상 시작
+
+사용자가 “맞음: 처음 후속 업로드 이후 촬영”이라고 확인했다. 영상은 최초 후속 업로드 슬롯의
+관측에 연결했고 02:50 재업로드 뒤의 영상으로 바꾸지 않았다. 정확한 촬영 UTC는 여전히 알 수 없다.
+[확인 기록](review-finalization-20261005/capture-identity-confirmation.json)과
+[최종 영상 검토](review-finalization-20261005/confirmed-video-review.json)를 보존했다.
+
+[최종 RM](review-finalization-20261005/reference-review.json)은 다음과 같다.
+
+| 항목 | 판정 | 근거와 한계 |
+|---|---|---|
+| RM1 | pass | 후보 빌드 성공, 같은 동결 artifact 업로드·실제 receiver 수락. 최종 후보 제출 누락은 별도 유지 |
+| RM2 | partial | encoder·수락 성공, 실제 collector의 공통 stale fixture 거부. 실물 전송은 operator replay |
+| RM3 | partial | 5h 남은 58% 표시, 주간 82% 미표시 |
+| RM4 | partial | 세 종류 화면 표시, 글로벌 리셋 값 누락·stale/관측 시각 부정확 |
+| RM5 | pass | 영상의 STATUS→DASHBOARD→GLOBAL RESET→STATUS와 물리 버튼 조작. 화면 데이터 정확성·300ms 정밀 지연은 별도 |
+
+후속 reference는 fail, 정책은 invalid_for_comparison, 제품 합격은 false다. 한 번만 가능한
+원본 RM review를 적용해 동결 commit·reference-review·source bundle을 연결했다.
+원본 terminal 사본과 review 직후 manifest도 보존했고 종료 후 기록의 추가 evidence만 별도로 연결했다.
+최초·후속의 실제 비용과 실패를 지우지 않았다. [series 종료](review-finalization-20261005/series-completion.json)는
+누적 수정 예산 소진을 이유로 기록한다. 동결 ledger의 active 표시는 잔여 실행 허가를 뜻하지 않으며
+prepare-next의 예산 guard가 추가 회차를 거부한다. 사용자 취소나 새 초기 예산으로 바꾸지 않는다.
+
+최종 package는 `C:/meter-run-packages-20261005/opencode-muse-r02-final`, manifest SHA-256은
+`948261ab0ea75f3742b11664086976816dd353cf5f6cd39394a7270422117fd4`다.
+독립 경로 `C:/meter-run-restores-20261005/opencode-muse-r02-final`에서 430개 파일을 복원했다.
+[동결 validator 감사](review-finalization-20261005/restore-audit.json)는 57개 입력·46개 raw source·9개 artifact·
+원본 비용·영상 원본/hash·확인·최종 RM·정책을 대조했고 원래 후보 경로를 사용하지 않았다.
+최종 제출이 없어 result_valid는 false이며 전체 제품 합격을 뜻하지 않는다.
+
+다음 순서의 AGY Flash `20261005-antigravity-cli-agy-flash-r01`을 03:09:41.487 KST 시작했다.
+모델은 `gemini-3.8-flash-medium`, 최초 한도 7,200초, 동결 baseline·runner·57개 입력·새 receipt를 유지한다.
+[실행 launcher](evidence/20261005-antigravity-cli-agy-flash-r01/launch-20261005/experiment-launch-attempt2.json)의
+PID 19644와 실제 native init의 model/request-review/candidate checkout을 확인했다.
+[실행 직전 확인](evidence/20261005-antigravity-cli-agy-flash-r01/launch-20261005/operator-launch-preflight-r2/current-checks.json)에
+CLI 1.2.14·IDF 5.3.2·native MCP/plugins/custom agents 비어 있음·선택 모델 catalog·private scope를 연결했다.
+전역 지침/hook은 동결 조건에 따라 session 동안 제거하며 종료 후 원본 bytes로 복원한다.
+prompt-and-log·read_isolation:not_enforced·builtin-only-v1이라는 한계는 유지한다.
+
+첫 운영자 런처는 내부 함수 이름인 execute를 CLI 명령에 사용해 parser에서 exit 2로 종료됐다.
+[준비 오류 원본](evidence/20261005-antigravity-cli-agy-flash-r01/launch-20261005/operator-launch-attempt1-review.json)에
+모델 호출 0회·prepared 유지·예산 예약 0초·전역 설정 복원을 확인했다.
+동결 CLI의 실제 `run <directory> --receipt <receipt>` 형식으로 고쳤고 첫 실제 후보를 시작했다.
+두 launcher/console/preflight 원본을 구분해 보존하며 숨은 제품 재시도나 허용 조건 변경이 아니다.
+AGY 실행 중 운영자 구현 피드백과 보드 접근은 제공하지 않는다. 현재 보드에는 관측을 마친 OpenCode 후속 동결본이 유지된다.
+
+[세 번째 비용 snapshot](comparison-checkpoint-03.md)은 OpenCode의 최종 RM 이후 원본 비용과
+새 AGY running 회차를 함께 기록한다. AGY의 최종 비용·제출·정책은 아직 미확정이고 실행 중 policy missing은
+최종 부적격 판정이 아니다. OpenCode의 보고된 정규화 token coverage 2/2도 중단된 요청의 미보고 사용량을 뜻하지 않는다.
+[native 시작 관측](evidence/20261005-antigravity-cli-agy-flash-r01/launch-20261005/native-start-observation.json)에
+지정 모델·request-review·후보 cwd와 raw log prefix의 시점·hash를 연결했다. 진행 중 prefix를 전체 terminal 로그로 보존한 것으로 해석하지 않는다.

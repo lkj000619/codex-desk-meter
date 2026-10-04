@@ -1,0 +1,12 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "recorded_at": "2026-10-04T18:02:45.638109+00:00",
+  "status": "rm_observation_complete",
+  "reviewed_video_hardware_slot": "operator-observation/hardware-slot.json",
+  "second_upload_hardware_slot": "operator-observation/recapture-r2-20261005/hardware-slot.json",
+  "user_video_capture_identity_confirmed": true,
+  "board_currently_has_same_frozen_artifact": true,
+  "serial_closed": true,
+  "board_slot_released_for_next_candidate": true,
+  "next_candidate_initial": "20261005-antigravity-cli-agy-flash-r01"
+}

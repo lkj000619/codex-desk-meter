@@ -1,0 +1,15 @@
+﻿{
+    "run_id":  "20261005-antigravity-cli-agy-flash-r01",
+    "pid":  21656,
+    "launcher_started_at":  "2026-10-04T18:07:48.8656269Z",
+    "operator_checkout":  "C:/meter-operator-20261004",
+    "baseline":  "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "model":  "gemini-3.8-flash-medium",
+    "timeout_seconds":  7200,
+    "entrypoint":  "C:/meter-runs-20261005/launch-agy-flash-r01.ps1",
+    "scoped_runner":  "C:/meter-runs-20261005/launch-agy-flash-r01.py",
+    "receipt":  "C:/meter-preflight-20261005/renewal/agy-flash-receipt.json",
+    "execution_mode":  "independent hidden process; one frozen runner execution; no automatic retry",
+    "stdout":  "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/runner-console.txt",
+    "stderr":  "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/runner-console-stderr.txt"
+}

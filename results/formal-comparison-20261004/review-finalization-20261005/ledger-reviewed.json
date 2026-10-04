@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "comparison_id": "20261004-opencode-cli-opencode-muse-r01",
+  "state": "active",
+  "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "input_bundle_sha256": "5dd98522aeb97c127ab1a490a2e43848fabd6b795eb20f666827c98c5cd17651",
+  "profile_sha256": "207c7c77a51bad131180cdc9b608ef1205279c98067b7dc20770f270402f6513",
+  "limits": {
+    "initial_seconds": 7200,
+    "remediation_seconds": 7200,
+    "remediation_rounds": 3
+  },
+  "reference_inputs": "C:\\meter-runs-20261004\\ledgers\\20261004-opencode-cli-opencode-muse-r01-reference\\reference-inputs.json",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "common_task_sha256": "711f75e5d1b252935fb4760e8636df86c4ebe8720b097d03f91ed2e9024a334f",
+  "common_task_run_id": "20261004-opencode-cli-opencode-muse-r01",
+  "runs": [
+    {
+      "run_id": "20261004-opencode-cli-opencode-muse-r01",
+      "directory": "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01",
+      "round": 0,
+      "starting_commit": "64d2e854684977e7a88bf4031e9e1d6eb8cb7672",
+      "status": "completed",
+      "reserved_seconds": 7200,
+      "elapsed_seconds": 1024.6399999998976,
+      "reference_status": "fail",
+      "reviewed": true,
+      "implementation_commit": "e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db",
+      "feedback_sha256": null,
+      "tokens": {
+        "input": 242001,
+        "output": 64857,
+        "cached": 20034116,
+        "reasoning": 25419,
+        "provider_total": 20366393,
+        "total": 306858,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "OpenCode step_finish provider usage; provider_total preserves the raw total, total is normalized input+output and excludes cache/reasoning; cache write is raw-log-only."
+      },
+      "terminal_manifest_sha256": "104b28c2fb74913019f259ba7b224b39dca7479fc2c59e5482ad885d5644b568",
+      "source_bundle_sha256": "39ba5298c2b09e89a7b86e32eabd14308ef6c5526e5ca1f33f860fa9a52edb8c",
+      "reference_review_sha256": "937a88e72fede9dc2771c9c388d15246b52cfbae8f238f932b3f8b3ba7ec07f4"
+    },
+    {
+      "run_id": "20261004-opencode-cli-opencode-muse-r02",
+      "directory": "C:\\meter-followups-20261004\\20261004-opencode-cli-opencode-muse-r02",
+      "round": 1,
+      "starting_commit": "e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db",
+      "status": "timeout",
+      "reserved_seconds": 7200,
+      "elapsed_seconds": 7200.155999999959,
+      "reference_status": "fail",
+      "reviewed": true,
+      "implementation_commit": "354c6475345cb521c92f92e3dce448b0dc5ef58b",
+      "feedback_sha256": "e3b46da4da743439ea1800098169f4032c19843b92be7c46e4e6aee69e792bd8",
+      "tokens": {
+        "input": 329658,
+        "output": 13117,
+        "cached": 7565060,
+        "reasoning": 11335,
+        "provider_total": 7919170,
+        "total": 342775,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "OpenCode step_finish provider usage; provider_total preserves the raw total, total is normalized input+output and excludes cache/reasoning; cache write is raw-log-only."
+      },
+      "terminal_manifest_sha256": "b755c90492ef34e6056e1654aae4be48b73723e968666d61a720271af15227f5",
+      "source_bundle_sha256": "458d2acaf2b66c2a8bbfdad9c5d6449a9259f131c5493fb618e13a456315e06c",
+      "reference_review_sha256": "98645a6ba2bdfb1d4c7b27ef38966b8596edc54642c5883df8bce2dff2c4b9ff"
+    }
+  ]
+}

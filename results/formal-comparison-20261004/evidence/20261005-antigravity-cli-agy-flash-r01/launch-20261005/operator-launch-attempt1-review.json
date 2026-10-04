@@ -1,0 +1,17 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r01",
+  "operator_launch_attempt": 1,
+  "model_calls": 0,
+  "candidate_budget_reserved_seconds": 0,
+  "reason": "Operator launch helper used execute/--directory; frozen benchmark CLI requires run with positional directory.",
+  "native_preflight": "passed",
+  "runner_argument_parser_exit_code": 2,
+  "candidate_state": "prepared",
+  "candidate_started_at": null,
+  "raw_stdout": "runner-console.txt",
+  "raw_stderr": "runner-console-stderr.txt",
+  "global_files_restored": true,
+  "original_helper_sha256": "1479c171e9bfcd3c2fd6a846dad6069c2042933f0b134885d0e64e1d86f929bc",
+  "corrected_helper_sha256": "d6fb219e8b9d0cc28924d373699b21455af2891e40c71a8262e7a3b0b98124b3",
+  "classification": "Operator preparation error before any product or model execution; preserve separately."
+}

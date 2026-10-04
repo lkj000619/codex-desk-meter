@@ -1,0 +1,797 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "reviewer": "Codex operator",
+  "reviewed_at": "2026-10-04T18:02:42.298292+00:00",
+  "items": {
+    "RM1": {
+      "status": "pass",
+      "reason": "Candidate IDF build completed before timeout; unchanged frozen artifact was uploaded and ran on COM3. Same-app receiver accepted fixed seq 0/1. Final candidate result and selection submissions remain missing.",
+      "evidence": [
+        {
+          "path": "operator-observation/artifact-snapshot/firmware/build/bootloader/bootloader.bin",
+          "sha256": "9aa3f5332f02bfaf62d3c5726b6cc0d9a8d0ffa1235558367a2a9c27bfcea7dc"
+        },
+        {
+          "path": "operator-observation/artifact-snapshot/firmware/build/bootloader/bootloader.elf",
+          "sha256": "b9a053d50750b4a91784d0b58867d8d87f05259fa6203da2a0084cafe008779b"
+        },
+        {
+          "path": "operator-observation/artifact-snapshot/firmware/build/bootloader/bootloader.map",
+          "sha256": "23e7efbd4f90978d452c19df42f157104145b69bdcec7ae620fde19ee965d116"
+        },
+        {
+          "path": "operator-observation/artifact-snapshot/firmware/build/cdm_meter.bin",
+          "sha256": "8e4eaaab7dd6c66abdc069043583c3805cd942d2afca496e48073bcc0255c75b"
+        },
+        {
+          "path": "operator-observation/artifact-snapshot/firmware/build/cdm_meter.elf",
+          "sha256": "9136a03ac402f14ebb92cc28573bf01528c5e1a5420ada1d3c4a3dd72e1e6a80"
+        },
+        {
+          "path": "operator-observation/artifact-snapshot/firmware/build/cdm_meter.map",
+          "sha256": "8e41eac7f0873e64fda44199d2749297aa3cf38943aa9bc257fcb2199e35ec3d"
+        },
+        {
+          "path": "operator-observation/artifact-snapshot/firmware/build/flasher_args.json",
+          "sha256": "ab2265c87e904c5cc5585f70c8db59f4bc97c36d01c3da5b6520a1cbd6f1b56b"
+        },
+        {
+          "path": "operator-observation/artifact-snapshot/firmware/build/partition_table/partition-table.bin",
+          "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+        },
+        {
+          "path": "operator-observation/artifact-snapshot/firmware/sdkconfig",
+          "sha256": "cc2aa90743135831551c293795b40261c8617eaa5c659ba557f10a2a10c2e041"
+        },
+        {
+          "path": "operator-observation/build-source-review.json",
+          "sha256": "8f4b9d3e2b0c06c2ac0e07126d7dfb51b3b73333aa2554b2a5ef3b5786ce07c4"
+        },
+        {
+          "path": "operator-observation/candidate-collector-payload.json",
+          "sha256": "fd55c2195bb19832685e0a57662a5160d93c319ad141aee787330ebc354cbb55"
+        },
+        {
+          "path": "operator-observation/candidate-collector-report.json",
+          "sha256": "b3ead1a793516bc3d433e4534d28b481ae778f91a469bd0418b1f22daba39bc8"
+        },
+        {
+          "path": "operator-observation/common-stimulus-check.json",
+          "sha256": "e63a14779063d87c32802f78f9a5e048cc6744a1ffbd9b5bb00c6347990e16d2"
+        },
+        {
+          "path": "operator-observation/frozen-artifact-upload-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/frozen-artifact-upload-stdout.txt",
+          "sha256": "0a14d7ea7c7e88da3f1442fb2b4c77e9384f053c74d6b08edcc8fba16a32efb8"
+        },
+        {
+          "path": "operator-observation/hardware-slot.json",
+          "sha256": "495e226f8eb8226059c6e4410137085eba63816aef79de18667c6f39dc607b25"
+        },
+        {
+          "path": "operator-observation/host-checks.json",
+          "sha256": "530e45ac1d814245a4ce029669b4905fec0be0d5471160dcf1738221271f1f42"
+        },
+        {
+          "path": "operator-observation/legacy-collector-stderr.txt",
+          "sha256": "b3ead1a793516bc3d433e4534d28b481ae778f91a469bd0418b1f22daba39bc8"
+        },
+        {
+          "path": "operator-observation/legacy-collector-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/nvs-erase-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/nvs-erase-stdout.txt",
+          "sha256": "2300d9bc1730ad02f1e79005b75db7a46925d355249dc02c9a053e83c6954909"
+        },
+        {
+          "path": "operator-observation/python-tests-stderr.txt",
+          "sha256": "e9d77fcf9cd9b8690169fcc57f6fad0764c0fd881f5ba20c6043fbb5c5b8bca7"
+        },
+        {
+          "path": "operator-observation/python-tests-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/recapture-r2-20261005/frozen-artifact-upload-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/recapture-r2-20261005/frozen-artifact-upload-stdout.txt",
+          "sha256": "63a7f1d55b256e8a224d1041e9415c31a2e0d9062791b1014ebb244a69ee3917"
+        },
+        {
+          "path": "operator-observation/recapture-r2-20261005/hardware-slot.json",
+          "sha256": "17f8045bd2fc9280609a9a9a8ea3c83ab9aea12450cff56c50aafc5b3e627e3e"
+        },
+        {
+          "path": "operator-observation/recapture-r2-20261005/nvs-erase-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/recapture-r2-20261005/nvs-erase-stdout.txt",
+          "sha256": "2300d9bc1730ad02f1e79005b75db7a46925d355249dc02c9a053e83c6954909"
+        },
+        {
+          "path": "operator-observation/recapture-r2-20261005/receiver-source-review.json",
+          "sha256": "8304e6f72edfd3913e7aa1320e78b31d8c1d7c45f032b0c593a5c9d564e70faa"
+        },
+        {
+          "path": "operator-observation/recapture-r2-20261005/reference-capture-r1/capture.json",
+          "sha256": "b01e51d2ba9250dc5f8d2e50a1c7dfc99859b13917f6e9e0804258c2055a6739"
+        },
+        {
+          "path": "operator-observation/recapture-r2-20261005/reference-capture-r1/device-serial.bin",
+          "sha256": "6e6178778c712f44f00f08c50abb89290bd27f7ce45f28d51a03f2ca4b37e2ca"
+        },
+        {
+          "path": "operator-observation/recapture-r2-20261005/reference-capture-r1/events.jsonl",
+          "sha256": "0e0c0a169a8cbeb7bbd930f0b8feccee16b9bbb06fe8e98af801b8748443a5e6"
+        },
+        {
+          "path": "operator-observation/recapture-r2-20261005/reference-capture-r1/sent-frames.jsonl",
+          "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd"
+        },
+        {
+          "path": "operator-observation/recapture-r2-20261005/reference-capture-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/recapture-r2-20261005/reference-capture-stdout.txt",
+          "sha256": "ecfea017bdaee957cc0a1a4432d062caa65393364b601d383f88de2d61ae440f"
+        },
+        {
+          "path": "operator-observation/receiver-source-review.json",
+          "sha256": "15e838dca359e9a7ce64a09c6721368717ca5718cf553e0c9a1fee7c72b1148c"
+        },
+        {
+          "path": "operator-observation/reference-capture-r1/capture.json",
+          "sha256": "bf3ba00cf40784313f00e0d3c9b7b6feeeba1071e6eed544ef9c9b69fa12e36f"
+        },
+        {
+          "path": "operator-observation/reference-capture-r1/device-serial.bin",
+          "sha256": "01bf88eec7c98c53b020c268f2845ec4b7b73d0d1ac39c7686c5c0e05f5f9157"
+        },
+        {
+          "path": "operator-observation/reference-capture-r1/events.jsonl",
+          "sha256": "b832b7e370a836b3bdfe6e2f64779175ca6228e1a878b50893f5f173706318e1"
+        },
+        {
+          "path": "operator-observation/reference-capture-r1/sent-frames.jsonl",
+          "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd"
+        },
+        {
+          "path": "operator-observation/reference-capture-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/reference-capture-stdout.txt",
+          "sha256": "ecfea017bdaee957cc0a1a4432d062caa65393364b601d383f88de2d61ae440f"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/CMakeLists.txt",
+          "sha256": "b612c12a021da19dade48829ba02e63d2505951ee4b5def9110d95ca5d79240d"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/bsp_input/CMakeLists.txt",
+          "sha256": "4c6209571caa4b71c88c6f479ef833ef3bfdc28896e7d18302d16af646013f5b"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/bsp_input/bsp_input.c",
+          "sha256": "9b6cbc29122e76ca58fe3c6e0d7138bd2b6464725ef483fbeff93f9c1f4e6f46"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/bsp_input/include/bsp_input.h",
+          "sha256": "962d7e39c38f6c119232d767b99d5a1627ea8439c53955bd55d61c22fb5f498a"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/bsp_lcd/CMakeLists.txt",
+          "sha256": "31eea3958944f6e50c53e7392237e7fa583f9a356fd0b13458dab44e988f9eea"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/bsp_lcd/bsp_lcd.c",
+          "sha256": "db4910335aef264db9f843032d2f7c3a151158b6e4432db98ee340aea0049e72"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/bsp_lcd/include/bsp_lcd.h",
+          "sha256": "f04e7e678ec23e38b7779f644899e18b4838b6508ab7a5db717f8ba87af7f04f"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/feature_auto_dim/CMakeLists.txt",
+          "sha256": "d9f97d283f89f740ff4ff2222ffe2bdf2fc50da912a16b37b581b76d58b798cc"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/feature_auto_dim/feature_auto_dim.c",
+          "sha256": "90af4066a46eb35b8fabf3cab37d55ac1067e65a8a5f3c0053db5ed7e0d15eda"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/feature_auto_dim/include/feature_auto_dim.h",
+          "sha256": "8be24746298ee7cd62215d774549213acc6a578b2a1517873ab56a986229c6c2"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/gui/CMakeLists.txt",
+          "sha256": "90629d3ec58eb174f51440fc522c7272eea5d9f413ad42a920d670641a59df61"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/gui/gui_format.c",
+          "sha256": "fe8a66af81ce152f5afbbfb44bf037027973a976a0a9e274fd9529ceee45ad63"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/gui/include/gui_format.h",
+          "sha256": "9495a6b90275e781a8f58e26075ea7374aaba8798fc8f44218f264851fa264f2"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/meter_core/CMakeLists.txt",
+          "sha256": "d9ed8649d174cb41e832d0302200d318e9b7b5ce2543334bcf4797d341e0b945"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/meter_core/include/meter_crc32.h",
+          "sha256": "1254b3e2563c103e8a4d0bd37993e8f4d0bc8e602dbcf525b54b68f946bc95d0"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/meter_core/include/meter_parser.h",
+          "sha256": "46d97fa50cfce9865cddabce8486e22e9583eb3ce411efc212abd098c15e7e99"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/meter_core/include/meter_state.h",
+          "sha256": "cf7dd41887d319a9b12affb263f334aeaf811a155b7bfd4862417f7e02df3c4d"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/meter_core/include/meter_validate.h",
+          "sha256": "b6b8009ce28ca2783959d9deaff70520341831d72653a901f277e602bcea959d"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/meter_core/meter_crc32.c",
+          "sha256": "7d6d56899b1ef1eb44281dd9d94ff83bc0fbb805ad87040f6c90eacfc91445b7"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/meter_core/meter_parser.c",
+          "sha256": "280e457cd9a7b054c6acb9081c83292226b882cd30ded433c93f6cf3b3d8b14c"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/meter_core/meter_state.c",
+          "sha256": "50edd5aac6592d3a7f31763c9f253d2235299d504d4527150858e7c27cacecff"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/components/meter_core/meter_validate.c",
+          "sha256": "cee582bfb7cbf93d2655fe8ccaca36b32c238284f0d66496bdadab4c15807d90"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/main/CMakeLists.txt",
+          "sha256": "553914f1561040fb70f47ec545bfb375f27f9d227fc57c28ac3ca86fa6a21076"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/main/main.c",
+          "sha256": "a24f4b8f2f61ff1dcff1c958a41f4f01a604c3fcc825894c34d1345140ffd881"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/sdkconfig",
+          "sha256": "cc2aa90743135831551c293795b40261c8617eaa5c659ba557f10a2a10c2e041"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/sdkconfig.defaults",
+          "sha256": "79fd553acc3c914016f16217cad932bb02eaf98fd66fef025fb0202caf1a9f45"
+        },
+        {
+          "path": "operator-observation/source-snapshot/pc_tools/collector.py",
+          "sha256": "fb8f9331b53c047243b7d0db1ea191280193864289df9716e02bd25f374b5ad1"
+        },
+        {
+          "path": "operator-observation/source-snapshot/pc_tools/legacy_adapter.py",
+          "sha256": "d7e1866fdff9df810da960113870ddae52d5c40c8014c33eeac505b9d4f804d8"
+        },
+        {
+          "path": "operator-observation/source-snapshot/pc_tools/sender.py",
+          "sha256": "5d8836ac9b38ce76f5a712e44d4970ef5647adeeeb80278d83fa38cb79974864"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/CMakeLists.txt",
+          "sha256": "4c5128943af57f8aa7d576502d971b3cebc099f55a17d4621edaaa5c3b8f02af"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/host/input_shim.c",
+          "sha256": "b056f2fb149bdafccbc139784ff0966eecacd0018397f02e0da0b2d0aa2691a7"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/host/stubs/driver/gpio.h",
+          "sha256": "2cfaeee88ded311581d5891f6476786161226288cae8d5a65947c8e0538e363f"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/host/stubs/esp_check.h",
+          "sha256": "c3f0c9f7bef447cf4059e400cba514f31494a173a6fbfdbe0e66389bcfce9f61"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/host/stubs/esp_err.h",
+          "sha256": "25a4fd7c2d67a0a14a400799978fbc4f57357a6c18b82cc55a90517ffd1f2162"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/host/stubs/stub_gpio.c",
+          "sha256": "439a6be1fe0da6b01d4d70bfe7eadb6ff77b084d0d33c0035f2cbc7219978855"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/host/test_feature_autodim.c",
+          "sha256": "0a00dc49fc3883830b93e148bf44dc3d569499fd938d816b07db0880745df10a"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/host/test_gui_regression.c",
+          "sha256": "bfe58532adaf5730e01d42800e00a3895171645c0b0f17def625b9d6f2b1c71b"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/host/test_input_debounce.c",
+          "sha256": "1dab5ea7673d27d69033afb99a2a216ff41fc7d2e7c878a85d12a8612a0818a9"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/host/test_meter_parser.c",
+          "sha256": "18b4ff2283f622343d142d202dfb1c88142728ab768a1dea59bcd6d92eb28151"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/host/test_meter_state.c",
+          "sha256": "934f67709bb3607dec73a96bbbf08366f182185a5e529497efade5c71bed5fcd"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/host/test_meter_validate.c",
+          "sha256": "528e9f87f3b99943ba0d33c2e6abe47b3109c55b33c2cf699fc753657bfe6cb4"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_collector.py",
+          "sha256": "be37aaf9aa8932b2080111940dc04d8279afc6327c476a96a2e6e89c71a8dc27"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_e2e_pipeline.py",
+          "sha256": "cd46536a0222bfc49dcb1e0f5ceb48d2baf216d0aecffd0b5b53922fb6ae99e2"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_gui_feature.py",
+          "sha256": "aba309e936792077e3a5b5493a96cbe0f202ecb47ad19e83e9f46332ed59c790"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_legacy_adapter.py",
+          "sha256": "4add9850ecb2dcb92b6b2ae5eae87690aee1832e409fa728a9274d83c1e91e10"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_sender.py",
+          "sha256": "41566dedb1a1dba3859975613cc5d015d6812b299df8ccb733f3ada4d0d61960"
+        },
+        {
+          "path": "operator-observation/test_feature_autodim-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/test_feature_autodim-stdout.txt",
+          "sha256": "803dfc7f6d8d7b41d7a909e6432258fddc0e92a51ce4b53f960c30956d10db1a"
+        },
+        {
+          "path": "operator-observation/test_gui_regression-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/test_gui_regression-stdout.txt",
+          "sha256": "b5c89efaf5e37e5ceaa97d1c4de9ebeef84b0b6f3b9185408efb6b0d186fed36"
+        },
+        {
+          "path": "operator-observation/test_input_debounce-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/test_input_debounce-stdout.txt",
+          "sha256": "382b8700f6315c6e81d1256f2e0448b7fb857e28710fb8d8666b6d9ecf91bfde"
+        },
+        {
+          "path": "operator-observation/test_meter_parser-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/test_meter_parser-stdout.txt",
+          "sha256": "e451d144c38aea597636a002e671908cd34f9ddd332c0d92afbcd5f025870110"
+        },
+        {
+          "path": "operator-observation/test_meter_state-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/test_meter_state-stdout.txt",
+          "sha256": "26eb1a13b5e1af26ef22c24a6749b90e3119d2554f9b0808013dac57952351f9"
+        },
+        {
+          "path": "operator-observation/test_meter_validate-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-observation/test_meter_validate-stdout.txt",
+          "sha256": "c44bb0140740c8b71ad75a492bfdf5b9358a1caa5c0a7c3354a66bdc7b43555e"
+        },
+        {
+          "path": "operator-observation/user-video-01/capture-identity-confirmation.json",
+          "sha256": "be204a06ef6c5658e0f18117062bda9bec625d3f9ab004bffa9d75b6240b57af"
+        },
+        {
+          "path": "operator-observation/user-video-01/confirmed-video-review.json",
+          "sha256": "0c6d7d8a0de93ae0e8706258665a1048569574a5b9ebb7fc8d8aa862957b6d37"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-01.jpg",
+          "sha256": "78a34655cbe142f74e9313634aac2d8e2ed23fe541efa6cb14426e8b221eb9a8"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-02.jpg",
+          "sha256": "2d28b001e44ab7e26577ffeba3a19e3dffdaa4593651588c8c31a49beeb55d1b"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-03.jpg",
+          "sha256": "01f75e15321f05b4806c8faa25327dc301412c3b92e2cb9c154f4caa8571c419"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-04.jpg",
+          "sha256": "776980cbcfb3a8b596612959a0a6a9071da90c336e74553537853b4afde74170"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-05.jpg",
+          "sha256": "7a5565ba034e14082bd3deb5ff6da04f9c61c994b9041ab297bb54c56659a81c"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-06.jpg",
+          "sha256": "8250542e54a6932ed296fb553d5776454ba18c49d86b103bb1710ac4ca78caa3"
+        },
+        {
+          "path": "operator-observation/user-video-01/metadata-raw.txt",
+          "sha256": "187d7f7570591aab575c2bb57978a65a057a1d3c4d4466950bab025de0ede5f0"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-025.jpg",
+          "sha256": "6f8a7f08e996f996aca03df6b5a4e6e4f05c5af6bd6166bc3bcfe4883925d07d"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-029.jpg",
+          "sha256": "051d5e06feab05274e1f53bd38af9ebde7a06d041d87ce9b0606a66501264775"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-031.jpg",
+          "sha256": "624e7f34f507d0157641277e200417bd0e57e810f05112a49eb7cf21fdd3af1d"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-032.jpg",
+          "sha256": "6be4150ddd305c21166bc9c6158809b6b29ecd3f1149e9565b3841406d3cb9ac"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-033.jpg",
+          "sha256": "f2ca98a69f18990508f7f7586dfa65774e34fe2c6d0437e4c011560270e8cf67"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-045.jpg",
+          "sha256": "60ce7bb76eda4d1ef5c4536dc7678a6194dadd277ddc2cbdc4cce2af41120741"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-056.jpg",
+          "sha256": "047d7e0472379644270e46cd99d2278ecdd72871971be712b75689ff9a7f9994"
+        },
+        {
+          "path": "operator-observation/user-video-01/source.mp4",
+          "sha256": "72d18b2e492948ce51f8502f84dd391b0f5ee31d13148e3e7ee7dafcc3f09a4c"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-metadata.json",
+          "sha256": "c4ea8001e68ff728ecf6555beab9f617b3ac1e0e3fac838985d8211cd1329dc5"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-review.json",
+          "sha256": "e6e7d46ada575b2b5baa5aa999559cffbf3fb89b8df117350dff718ebd2185ce"
+        },
+        {
+          "path": "operator-policy-audit.json",
+          "sha256": "faf2018063cbdc18bc52581192aa894a1cf1dcc7731e92e7f34fd3988ac3c96e"
+        },
+        {
+          "path": "operator-source-bundle.json",
+          "sha256": "fb6352172888d7213f97bbfe3f2feb29faa5094de10d80c0549d90c65d0f2e78"
+        },
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "f9febb1f7b96d38c43de96abe5718c5c453fcdd043ae1d8698cf3238035ff4c6"
+        },
+        {
+          "path": "operator-source-snapshot.json",
+          "sha256": "ca2964b43be934aef69a33f8c4d1e6531dd8ab187cf3bc0ac63dada971e7aef3"
+        },
+        {
+          "path": "operator-source.bundle",
+          "sha256": "458d2acaf2b66c2a8bbfdad9c5d6449a9259f131c5493fb618e13a456315e06c"
+        },
+        {
+          "path": "operator-terminal-manifest-original.json",
+          "sha256": "b755c90492ef34e6056e1654aae4be48b73723e968666d61a720271af15227f5"
+        },
+        {
+          "path": "policy-review.json",
+          "sha256": "66fcf6f7554088e26c7a9b8c5fa5f3177ee8cfeb80a5c74255d424d7777b163d"
+        }
+      ]
+    },
+    "RM2": {
+      "status": "partial",
+      "reason": "Encoder matches both fixed frames and real receiver accepts them. Hardware used operator replay. Actual collector rejects the common stale personal-usage fixture with STALE_THRESHOLD_EXCEEDED and exit 2, so collector-to-device conformance is incomplete.",
+      "evidence": [
+        {
+          "path": "operator-observation/common-stimulus-check.json",
+          "sha256": "e63a14779063d87c32802f78f9a5e048cc6744a1ffbd9b5bb00c6347990e16d2"
+        },
+        {
+          "path": "operator-observation/receiver-source-review.json",
+          "sha256": "15e838dca359e9a7ce64a09c6721368717ca5718cf553e0c9a1fee7c72b1148c"
+        },
+        {
+          "path": "operator-observation/reference-capture-r1/capture.json",
+          "sha256": "bf3ba00cf40784313f00e0d3c9b7b6feeeba1071e6eed544ef9c9b69fa12e36f"
+        },
+        {
+          "path": "operator-observation/reference-capture-r1/sent-frames.jsonl",
+          "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd"
+        },
+        {
+          "path": "operator-observation/reference-capture-r1/device-serial.bin",
+          "sha256": "01bf88eec7c98c53b020c268f2845ec4b7b73d0d1ac39c7686c5c0e05f5f9157"
+        }
+      ]
+    },
+    "RM3": {
+      "status": "partial",
+      "reason": "Confirmed video shows openai/five-hour REM 58% around 28.5s. Weekly remaining 82% is absent from the observed usage view. Both required windows are not reproduced.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-video-01/capture-identity-confirmation.json",
+          "sha256": "be204a06ef6c5658e0f18117062bda9bec625d3f9ab004bffa9d75b6240b57af"
+        },
+        {
+          "path": "operator-observation/user-video-01/confirmed-video-review.json",
+          "sha256": "0c6d7d8a0de93ae0e8706258665a1048569574a5b9ebb7fc8d8aa862957b6d37"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-01.jpg",
+          "sha256": "78a34655cbe142f74e9313634aac2d8e2ed23fe541efa6cb14426e8b221eb9a8"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-02.jpg",
+          "sha256": "2d28b001e44ab7e26577ffeba3a19e3dffdaa4593651588c8c31a49beeb55d1b"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-03.jpg",
+          "sha256": "01f75e15321f05b4806c8faa25327dc301412c3b92e2cb9c154f4caa8571c419"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-04.jpg",
+          "sha256": "776980cbcfb3a8b596612959a0a6a9071da90c336e74553537853b4afde74170"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-05.jpg",
+          "sha256": "7a5565ba034e14082bd3deb5ff6da04f9c61c994b9041ab297bb54c56659a81c"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-06.jpg",
+          "sha256": "8250542e54a6932ed296fb553d5776454ba18c49d86b103bb1710ac4ca78caa3"
+        },
+        {
+          "path": "operator-observation/user-video-01/metadata-raw.txt",
+          "sha256": "187d7f7570591aab575c2bb57978a65a057a1d3c4d4466950bab025de0ede5f0"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-025.jpg",
+          "sha256": "6f8a7f08e996f996aca03df6b5a4e6e4f05c5af6bd6166bc3bcfe4883925d07d"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-029.jpg",
+          "sha256": "051d5e06feab05274e1f53bd38af9ebde7a06d041d87ce9b0606a66501264775"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-031.jpg",
+          "sha256": "624e7f34f507d0157641277e200417bd0e57e810f05112a49eb7cf21fdd3af1d"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-032.jpg",
+          "sha256": "6be4150ddd305c21166bc9c6158809b6b29ecd3f1149e9565b3841406d3cb9ac"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-033.jpg",
+          "sha256": "f2ca98a69f18990508f7f7586dfa65774e34fe2c6d0437e4c011560270e8cf67"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-045.jpg",
+          "sha256": "60ce7bb76eda4d1ef5c4536dc7678a6194dadd277ddc2cbdc4cce2af41120741"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-056.jpg",
+          "sha256": "047d7e0472379644270e46cd99d2278ecdd72871971be712b75689ff9a7f9994"
+        },
+        {
+          "path": "operator-observation/user-video-01/source.mp4",
+          "sha256": "72d18b2e492948ce51f8502f84dd391b0f5ee31d13148e3e7ee7dafcc3f09a4c"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-metadata.json",
+          "sha256": "c4ea8001e68ff728ecf6555beab9f617b3ac1e0e3fac838985d8211cd1329dc5"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-review.json",
+          "sha256": "e6e7d46ada575b2b5baa5aa999559cffbf3fb89b8df117350dff718ebd2185ce"
+        }
+      ]
+    },
+    "RM4": {
+      "status": "partial",
+      "reason": "Usage, global-reset and diagnostic views are visible. Global reset incorrectly reports default/no history and obs:n/a despite reference payload having reset dates. STATUS says STALE:NO and LAST-GOOD uses transport sent_at; correctness of all required information is incomplete.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-video-01/capture-identity-confirmation.json",
+          "sha256": "be204a06ef6c5658e0f18117062bda9bec625d3f9ab004bffa9d75b6240b57af"
+        },
+        {
+          "path": "operator-observation/user-video-01/confirmed-video-review.json",
+          "sha256": "0c6d7d8a0de93ae0e8706258665a1048569574a5b9ebb7fc8d8aa862957b6d37"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-01.jpg",
+          "sha256": "78a34655cbe142f74e9313634aac2d8e2ed23fe541efa6cb14426e8b221eb9a8"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-02.jpg",
+          "sha256": "2d28b001e44ab7e26577ffeba3a19e3dffdaa4593651588c8c31a49beeb55d1b"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-03.jpg",
+          "sha256": "01f75e15321f05b4806c8faa25327dc301412c3b92e2cb9c154f4caa8571c419"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-04.jpg",
+          "sha256": "776980cbcfb3a8b596612959a0a6a9071da90c336e74553537853b4afde74170"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-05.jpg",
+          "sha256": "7a5565ba034e14082bd3deb5ff6da04f9c61c994b9041ab297bb54c56659a81c"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-06.jpg",
+          "sha256": "8250542e54a6932ed296fb553d5776454ba18c49d86b103bb1710ac4ca78caa3"
+        },
+        {
+          "path": "operator-observation/user-video-01/metadata-raw.txt",
+          "sha256": "187d7f7570591aab575c2bb57978a65a057a1d3c4d4466950bab025de0ede5f0"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-025.jpg",
+          "sha256": "6f8a7f08e996f996aca03df6b5a4e6e4f05c5af6bd6166bc3bcfe4883925d07d"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-029.jpg",
+          "sha256": "051d5e06feab05274e1f53bd38af9ebde7a06d041d87ce9b0606a66501264775"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-031.jpg",
+          "sha256": "624e7f34f507d0157641277e200417bd0e57e810f05112a49eb7cf21fdd3af1d"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-032.jpg",
+          "sha256": "6be4150ddd305c21166bc9c6158809b6b29ecd3f1149e9565b3841406d3cb9ac"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-033.jpg",
+          "sha256": "f2ca98a69f18990508f7f7586dfa65774e34fe2c6d0437e4c011560270e8cf67"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-045.jpg",
+          "sha256": "60ce7bb76eda4d1ef5c4536dc7678a6194dadd277ddc2cbdc4cce2af41120741"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-056.jpg",
+          "sha256": "047d7e0472379644270e46cd99d2278ecdd72871971be712b75689ff9a7f9994"
+        },
+        {
+          "path": "operator-observation/user-video-01/source.mp4",
+          "sha256": "72d18b2e492948ce51f8502f84dd391b0f5ee31d13148e3e7ee7dafcc3f09a4c"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-metadata.json",
+          "sha256": "c4ea8001e68ff728ecf6555beab9f617b3ac1e0e3fac838985d8211cd1329dc5"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-review.json",
+          "sha256": "e6e7d46ada575b2b5baa5aa999559cffbf3fb89b8df117350dff718ebd2185ce"
+        },
+        {
+          "path": "operator-observation/common-stimulus-check.json",
+          "sha256": "e63a14779063d87c32802f78f9a5e048cc6744a1ffbd9b5bb00c6347990e16d2"
+        }
+      ]
+    },
+    "RM5": {
+      "status": "pass",
+      "reason": "Physical button manipulation in the confirmed video navigates STATUS -> DASHBOARD -> GLOBAL RESET -> STATUS around 24.5/28.5/30.5/32.5s, returning to starting information; earlier transitions also occur. This assesses three-view navigation; RM3/RM4 separately assess data correctness. Exact press count and 300ms latency are unmeasured.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-video-01/capture-identity-confirmation.json",
+          "sha256": "be204a06ef6c5658e0f18117062bda9bec625d3f9ab004bffa9d75b6240b57af"
+        },
+        {
+          "path": "operator-observation/user-video-01/confirmed-video-review.json",
+          "sha256": "0c6d7d8a0de93ae0e8706258665a1048569574a5b9ebb7fc8d8aa862957b6d37"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-01.jpg",
+          "sha256": "78a34655cbe142f74e9313634aac2d8e2ed23fe541efa6cb14426e8b221eb9a8"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-02.jpg",
+          "sha256": "2d28b001e44ab7e26577ffeba3a19e3dffdaa4593651588c8c31a49beeb55d1b"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-03.jpg",
+          "sha256": "01f75e15321f05b4806c8faa25327dc301412c3b92e2cb9c154f4caa8571c419"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-04.jpg",
+          "sha256": "776980cbcfb3a8b596612959a0a6a9071da90c336e74553537853b4afde74170"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-05.jpg",
+          "sha256": "7a5565ba034e14082bd3deb5ff6da04f9c61c994b9041ab297bb54c56659a81c"
+        },
+        {
+          "path": "operator-observation/user-video-01/contact-06.jpg",
+          "sha256": "8250542e54a6932ed296fb553d5776454ba18c49d86b103bb1710ac4ca78caa3"
+        },
+        {
+          "path": "operator-observation/user-video-01/metadata-raw.txt",
+          "sha256": "187d7f7570591aab575c2bb57978a65a057a1d3c4d4466950bab025de0ede5f0"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-025.jpg",
+          "sha256": "6f8a7f08e996f996aca03df6b5a4e6e4f05c5af6bd6166bc3bcfe4883925d07d"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-029.jpg",
+          "sha256": "051d5e06feab05274e1f53bd38af9ebde7a06d041d87ce9b0606a66501264775"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-031.jpg",
+          "sha256": "624e7f34f507d0157641277e200417bd0e57e810f05112a49eb7cf21fdd3af1d"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-032.jpg",
+          "sha256": "6be4150ddd305c21166bc9c6158809b6b29ecd3f1149e9565b3841406d3cb9ac"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-033.jpg",
+          "sha256": "f2ca98a69f18990508f7f7586dfa65774e34fe2c6d0437e4c011560270e8cf67"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-045.jpg",
+          "sha256": "60ce7bb76eda4d1ef5c4536dc7678a6194dadd277ddc2cbdc4cce2af41120741"
+        },
+        {
+          "path": "operator-observation/user-video-01/readable-frame-056.jpg",
+          "sha256": "047d7e0472379644270e46cd99d2278ecdd72871971be712b75689ff9a7f9994"
+        },
+        {
+          "path": "operator-observation/user-video-01/source.mp4",
+          "sha256": "72d18b2e492948ce51f8502f84dd391b0f5ee31d13148e3e7ee7dafcc3f09a4c"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-metadata.json",
+          "sha256": "c4ea8001e68ff728ecf6555beab9f617b3ac1e0e3fac838985d8211cd1329dc5"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-review.json",
+          "sha256": "e6e7d46ada575b2b5baa5aa999559cffbf3fb89b8df117350dff718ebd2185ce"
+        }
+      ]
+    }
+  },
+  "product_pass": false,
+  "policy_status": "invalid_for_comparison",
+  "note": "Timed-out residual implementation, not a complete submission. User confirmed video of first r02 upload. One-second optical samples do not certify flicker-free 30s or precise latency. Intentional USB power removal is separate from powered-link recovery."
+}

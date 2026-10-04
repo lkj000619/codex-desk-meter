@@ -1,0 +1,14 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "recorded_at": "2026-10-04T18:02:42.222713+00:00",
+  "source": "User reply to video capture identity question",
+  "question": "Does this video show the first r02 firmware upload at 01:45 KST, before the later 02:50 reupload?",
+  "answer": "Confirmed: filmed after the first followup upload.",
+  "answer_original": "맞음: 처음 후속 업로드 이후 촬영",
+  "video_sha256": "72d18b2e492948ce51f8502f84dd391b0f5ee31d13148e3e7ee7dafcc3f09a4c",
+  "implementation_commit": "354c6475345cb521c92f92e3dce448b0dc5ef58b",
+  "artifact_sha256": "8e4eaaab7dd6c66abdc069043583c3805cd942d2afca496e48073bcc0255c75b",
+  "hardware_slot": "operator-observation/hardware-slot.json",
+  "capture_time_utc": null,
+  "second_upload_video_claimed": false
+}

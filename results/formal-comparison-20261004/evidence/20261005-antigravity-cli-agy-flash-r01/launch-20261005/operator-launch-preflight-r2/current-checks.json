@@ -1,0 +1,37 @@
+{
+  "checked_at": "2026-10-04T18:09:40.572109+00:00",
+  "run_id": "20261005-antigravity-cli-agy-flash-r01",
+  "cli_version": "1.2.14",
+  "idf_version": "ESP-IDF v5.3.2",
+  "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "candidate_commit": "69da8cfc2c1e882b2d1f57f9898b87ad8cd4c573",
+  "immutable_input_files_verified": 57,
+  "receipt_sha256": "68aa243049ba3750a47b70830e3deef3874c50f03bcc8e526ce66f24f11063cc",
+  "profile_sha256": "5b24fc4e43ee0bf74b1b8a1ddce7e08f5024760c8b9660ce1c5aabbe966668f8",
+  "input_bundle_sha256": "9f4472eb4edb2c9488685b59b2f9a73b5d3f3dc11b002d651bfd37f4dc1d0a51",
+  "scoped_settings_sha256": "f1de07bd72bb5d0b41c246f99427c09359af4fd9f68a37894087fbcb781b61e3",
+  "policy_sha256": "22d6f786ecd1ec4916f182d1caba81cc12dcf0f8758ff457939679610ea9b82d",
+  "instructions_absent": true,
+  "hooks_absent": true,
+  "global_files_before_sha256": {
+    "settings": "a9e7b57b56bb0225448a7068f18264ca3056c5a3c0ee49114f37bf4292ee0d48",
+    "instructions": "12552a5e4b15f1b272fbd85c865e2457f7b045c69136ed9c7731d23314edc512",
+    "hooks": "90d1b998102ca61fac85e85ece8597a264791339135820b20ccb6e5bddfc0c2e"
+  },
+  "mcp_plugins_custom_agents_clear": true,
+  "model_catalog_selected_id_present": true,
+  "model_entitlement_retested": false,
+  "capability_proof_date": "2026-10-04",
+  "read_isolation": "not_enforced",
+  "network_mode": "offline-fixture",
+  "tools": {
+    "cmake": "C:\\Espressif\\user-tools\\tools\\cmake\\3.30.2\\bin\\cmake.EXE",
+    "ninja": "C:\\Espressif\\user-tools\\tools\\ninja\\1.12.1\\ninja.EXE",
+    "git": "C:\\Program Files\\Git\\cmd\\git.EXE",
+    "xtensa-esp32s3-elf-gcc": "C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-gcc.EXE"
+  },
+  "candidate_hardware_access": false,
+  "previous_series_budget_exhausted_and_fully_reviewed": true,
+  "model_invocations_during_preflight": 0,
+  "backup_private_outside_repository": "C:\\meter-private-preflight-20261005\\agy-flash-initial-scope-r2"
+}

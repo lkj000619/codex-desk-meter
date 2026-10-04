@@ -1,0 +1,73 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "files": {
+    "run-manifest-reviewed.json": {
+      "sha256": "6765f2bb943935dcdbf108197846c45390ded1b7599a9465b8be106863915729",
+      "bytes": 54872
+    },
+    "run-manifest-after-reference-review.json": {
+      "sha256": "29e7206dd736bdda5cd63dc2fd7c7b3ad7faff65df5ae7b84f7281c153467a01",
+      "bytes": 54287
+    },
+    "reference-review.json": {
+      "sha256": "98645a6ba2bdfb1d4c7b27ef38966b8596edc54642c5883df8bce2dff2c4b9ff",
+      "bytes": 38741
+    },
+    "ledger-reviewed.json": {
+      "sha256": "661f79235430dffa5af69b7bc551facd678c4742c8583a785cf9c4971c460fda",
+      "bytes": 3609
+    },
+    "series-completion.json": {
+      "sha256": "926fbeaef815f3e87d9bd8385c1652211c22cd904a4205fda646f20d7f772b9d",
+      "bytes": 1397
+    },
+    "post-review-evidence-link.json": {
+      "sha256": "b934db7e7b4038a1b3e8ddec94dbc136e489edf6d8de4d42d569aaa7742d0217",
+      "bytes": 726
+    },
+    "observation-finalization.json": {
+      "sha256": "db6595610b351c7ea6e1ad6f3f3e3ed19f1c10b13458373ad6af72d7a8342a6d",
+      "bytes": 583
+    },
+    "capture-identity-confirmation.json": {
+      "sha256": "be204a06ef6c5658e0f18117062bda9bec625d3f9ab004bffa9d75b6240b57af",
+      "bytes": 813
+    },
+    "confirmed-video-review.json": {
+      "sha256": "0c6d7d8a0de93ae0e8706258665a1048569574a5b9ebb7fc8d8aa862957b6d37",
+      "bytes": 4298
+    },
+    "package-manifest.json": {
+      "sha256": "948261ab0ea75f3742b11664086976816dd353cf5f6cd39394a7270422117fd4",
+      "bytes": 84414
+    },
+    "create-report.json": {
+      "sha256": "31a0e1040172727818771b20342cac6d59a5e54459d2aaa5ab70e8a40cecc60f",
+      "bytes": 431
+    },
+    "restore-report.json": {
+      "sha256": "d88aa5c11c5d4afa5892e3147ea33c7111592452ebd2d7fede29146e387d6178",
+      "bytes": 986
+    },
+    "restore-audit.json": {
+      "sha256": "d01ebb818732c18237cb17588a5621defd676df65b29553fdce58ccf9543bd10",
+      "bytes": 3161
+    },
+    "finalize-review.py": {
+      "sha256": "e532d1bf7391b35bc08b571cd8e3bbc241809ecfb4fb7f0dab9803928b3b0022",
+      "bytes": 9293
+    },
+    "package-final.py": {
+      "sha256": "380fd634e34fa43415decb2682b08faba5b5b0011e9c5fded6b523a5a32d03fe",
+      "bytes": 2125
+    },
+    "audit-final.py": {
+      "sha256": "186283f062599aeca68ba7786200bb372438b1bbb8f7f671f00a4f44a7c63db0",
+      "bytes": 6679
+    },
+    "publish-final.py": {
+      "sha256": "a17c321709319d62b5a4ac5ec9067b850153946f683ed9660ccd53f6db2d3440",
+      "bytes": 6532
+    }
+  }
+}

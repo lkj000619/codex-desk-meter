@@ -1,0 +1,19 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "recorded_at": "2026-10-04T18:04:02.285669+00:00",
+  "reference_review_applied_once": true,
+  "reference_review_manifest_sha256": "29e7206dd736bdda5cd63dc2fd7c7b3ad7faff65df5ae7b84f7281c153467a01",
+  "post_review_changes": [
+    "operator.evidence"
+  ],
+  "added_files": [
+    "run-manifest-after-reference-review.json",
+    "operator-series-completion.json",
+    "operator-observation/observation-finalization.json",
+    "operator-reference-review-input.json"
+  ],
+  "candidate_source_modified": false,
+  "candidate_submission_fabricated": false,
+  "costs_modified": false,
+  "original_terminal_copy": "operator-terminal-manifest-original.json"
+}

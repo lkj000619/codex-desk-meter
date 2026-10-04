@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-05. 상태: **OpenCode 후속 1회차가 01:30:48 KST timeout으로 종료했고 후속 누적 예산을 소진했다. 최종 제출 누락·정책 부적격을 보존했다. 종료 후 남은 구현을 동결해 COM3 업로드·공통 frame 수락을 확인했으며 사용자 LCD·BOOT 관측을 기다린다. 활성 5개 모델·동결 baseline은 유지한다.**
+확인일: 2026-10-05. 상태: **OpenCode 최초·후속 평가와 최종 증거 독립 복원을 완료했고, 후속 예산 소진·제출 누락·정책 부적격·기준 미도달로 첫 series를 종료했다. 다음 AGY Flash 최초 실험을 03:09:41 KST 시작했다. 활성 5개 모델·동결 baseline은 유지한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -92,7 +92,7 @@ CLI/model/settings/environment를 재확인해 새 run-bound receipt를 연결�
 
 현재 첫 블록 순서는 **OpenCode Muse→AGY Flash→AGY Pro→Codex Sol→Codex Luna**다.
 준비 당시 5개 예약은 모두 prepared·시작 시각 null·소비 시간 null이었다.
-현재 첫 OpenCode 실행은 completed(1,024.64초)이며 나머지는 미시작이다. 종료 code 0과 host 시험 통과를 제품 합격으로 해석하지 않는다.
+첫 OpenCode 최초 실행은 completed(1,024.64초)이며 첫 후속은 timeout이다. 현재 AGY Flash 최초가 실행 중이고 AGY Pro·Codex Sol/Luna는 미시작이다. 종료 code 0과 host 시험 통과를 제품 합격으로 해석하지 않는다.
 제출물은 `e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db`에 동결했고, 정책 review는 `invalid_for_comparison`이다.
 COM3의 원본 공통 frame 수신과 실제 성공 로그를 대조했고 사용자 사진에서 값 표시 부재를 확인했다.
 최초 RM은 RM1 pass/RM2 partial/RM3 fail/RM4·RM5 not_run으로 기준 미도달이다. BOOT·연속 유지·정밀 지연은 미측정이다.
@@ -104,8 +104,10 @@ Python 28개·host 실행 파일 6개는 통과했지만 기준 시각의 실제
 legacy 입력을 거부한다. 같은 동결 artifact를 COM3에 업로드하고 seq 0·1 수락을 확인했다.
 2026-10-05 02:50 KST 사용자 요청으로 같은 artifact를 다시 업로드하고 공통 seq 0·1 수락을 확인했다.
 제공된 66.57초 영상은 재업로드 전에 저장된 자료다. 사용량 58%·세 종류 화면 전환을 관측했지만
-주간 82%·실제 글로벌 리셋 값은 보이지 않는다. 최초 후속 업로드 뒤 촬영한 자료인지 확인 대기이며
-최종 후속 RM review는 아직 적용하지 않았다. [영상 검토 원본](../../results/formal-comparison-20261004/evidence/20261004-opencode-cli-opencode-muse-r02/operator-observation/user-video-01/video-review.json)을 따른다.
+주간 82%·실제 글로벌 리셋 값은 보이지 않는다.
+사용자가 최초 후속 업로드 이후 촬영했음을 확인해 최종 RM review를 적용했다.
+RM1·RM5 pass, RM2·RM3·RM4 partial이며 기준 미도달이다. 당시 [영상 검토 초안](../../results/formal-comparison-20261004/evidence/20261004-opencode-cli-opencode-muse-r02/operator-observation/user-video-01/video-review.json)과
+[확인된 최종 검토](../../results/formal-comparison-20261004/review-finalization-20261005/confirmed-video-review.json)를 구분해 보존한다.
 회차·예산을 초기화하거나 최종 제출물을 운영자가 대신 작성하지 않는다.
 이번 전송은 operator replay다. 후보 collector의 공통 fixture 연결 문제와 미측정 광학 지연은 [실행 기록](../../results/formal-comparison-20261004/report.md)에 남긴다.
 현재 증거 문서의 후속 commit과 비교 baseline을 혼동하지 않는다. 다음 날짜의 새 prepare는
@@ -138,3 +140,10 @@ python -X utf8 scripts/benchmark.py check --baseline comparison-baseline-2026100
 변경 필드는 동결 commit·추가 evidence뿐이다. 최종 제출 누락으로 `result_valid: false`이며
 이 보존 검증을 제품 합격이나 최종 RM review 완료로 해석하지 않는다.
 [복구 계획](../plans/2026-10-05-timeout-evidence-recovery.md)과 [복원 감사](../../results/formal-comparison-20261004/timeout-preservation-20261005/restore-audit.json)를 따른다.
+
+영상 확인·최종 RM 판정을 포함한 최종 package 430개 파일도 새 경로에서 독립 복원하고 동결 validator로 재검증했다.
+[최종 복원](../../results/formal-comparison-20261004/review-finalization-20261005/restore-audit.json)은 제출 누락과
+`result_valid: false`·정책 부적격·기준 미도달을 유지한다. [종료 기록](../../results/formal-comparison-20261004/review-finalization-20261005/series-completion.json)의
+derived state는 budget_exhausted다. 동결 도구의 ledger가 fail review 뒤 active를 유지하지만 prepare-next의 예산 guard가 추가 실행을 거부한다.
+다음 AGY Flash는 현재 환경·native 설정·모델 ID·receipt를 재확인해 시작했고 [launch](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r01/launch-20261005/experiment-launch-attempt2.json)를 보존했다.
+모델 호출 전 런처의 CLI 인자 오류 1건은 준비 오류로 구분하며 후보 비용·회차를 초기화한 일이 아니다.
