@@ -1,0 +1,1 @@
+{"failures": [{"adapter_id": "personal-usage.json", "code": "STALE_THRESHOLD_EXCEEDED", "message": "STALE_THRESHOLD_EXCEEDED: personal-usage.json adapted snapshot rejected: STALE_THRESHOLD_EXCEEDED"}], "global_resets": 2, "snapshots": 1, "status": "collected"}

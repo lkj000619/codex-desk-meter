@@ -1,0 +1,10 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "created_at": "2026-10-04T16:52:04.441166+00:00",
+  "implementation_commit": "354c6475345cb521c92f92e3dce448b0dc5ef58b",
+  "source_bundle": "C:\\meter-followups-20261004\\20261004-opencode-cli-opencode-muse-r02\\operator-source.bundle",
+  "sha256": "458d2acaf2b66c2a8bbfdad9c5d6449a9259f131c5493fb618e13a456315e06c",
+  "bytes": 51736600,
+  "git_bundle_verified": true,
+  "scope": "Preservation of remaining timed-out source; final submission is missing and RM review remains pending."
+}

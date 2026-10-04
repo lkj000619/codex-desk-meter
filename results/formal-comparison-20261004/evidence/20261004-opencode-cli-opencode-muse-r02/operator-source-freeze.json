@@ -1,0 +1,59 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "frozen_at": "2026-10-04T16:40:51.014423+00:00",
+  "commit": "354c6475345cb521c92f92e3dce448b0dc5ef58b",
+  "inputs_verified": true,
+  "clean": true,
+  "candidate_ended_at": "2026-10-04T16:30:48.846Z",
+  "terminal_manifest_sha256": "b755c90492ef34e6056e1654aae4be48b73723e968666d61a720271af15227f5",
+  "artifacts": {
+    "firmware/build/cdm_meter.bin": {
+      "sha256": "8e4eaaab7dd6c66abdc069043583c3805cd942d2afca496e48073bcc0255c75b",
+      "bytes": 333248,
+      "operator_copy": "operator-observation/artifact-snapshot/firmware/build/cdm_meter.bin"
+    },
+    "firmware/build/cdm_meter.elf": {
+      "sha256": "9136a03ac402f14ebb92cc28573bf01528c5e1a5420ada1d3c4a3dd72e1e6a80",
+      "bytes": 5083816,
+      "operator_copy": "operator-observation/artifact-snapshot/firmware/build/cdm_meter.elf"
+    },
+    "firmware/build/cdm_meter.map": {
+      "sha256": "8e41eac7f0873e64fda44199d2749297aa3cf38943aa9bc257fcb2199e35ec3d",
+      "bytes": 3431304,
+      "operator_copy": "operator-observation/artifact-snapshot/firmware/build/cdm_meter.map"
+    },
+    "firmware/build/flasher_args.json": {
+      "sha256": "ab2265c87e904c5cc5585f70c8db59f4bc97c36d01c3da5b6520a1cbd6f1b56b",
+      "bytes": 935,
+      "operator_copy": "operator-observation/artifact-snapshot/firmware/build/flasher_args.json"
+    },
+    "firmware/build/bootloader/bootloader.bin": {
+      "sha256": "9aa3f5332f02bfaf62d3c5726b6cc0d9a8d0ffa1235558367a2a9c27bfcea7dc",
+      "bytes": 21648,
+      "operator_copy": "operator-observation/artifact-snapshot/firmware/build/bootloader/bootloader.bin"
+    },
+    "firmware/build/bootloader/bootloader.elf": {
+      "sha256": "b9a053d50750b4a91784d0b58867d8d87f05259fa6203da2a0084cafe008779b",
+      "bytes": 534160,
+      "operator_copy": "operator-observation/artifact-snapshot/firmware/build/bootloader/bootloader.elf"
+    },
+    "firmware/build/bootloader/bootloader.map": {
+      "sha256": "23e7efbd4f90978d452c19df42f157104145b69bdcec7ae620fde19ee965d116",
+      "bytes": 593840,
+      "operator_copy": "operator-observation/artifact-snapshot/firmware/build/bootloader/bootloader.map"
+    },
+    "firmware/build/partition_table/partition-table.bin": {
+      "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "bytes": 3072,
+      "operator_copy": "operator-observation/artifact-snapshot/firmware/build/partition_table/partition-table.bin"
+    },
+    "firmware/sdkconfig": {
+      "sha256": "cc2aa90743135831551c293795b40261c8617eaa5c659ba557f10a2a10c2e041",
+      "bytes": 69721,
+      "operator_copy": "operator-observation/artifact-snapshot/firmware/sdkconfig"
+    }
+  },
+  "candidate_result_json_exists": false,
+  "candidate_selection_document_exists": false,
+  "scope": "Frozen residual timed-out implementation, not a completed submission; operator does not fill missing candidate documents."
+}

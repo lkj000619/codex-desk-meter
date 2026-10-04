@@ -14,8 +14,8 @@
     "configuration_sha256": "8cb468d6cea8285dadc960cb1fe2d3542e364be1ab04b92fbf37f8d5fca70fb1"
   },
   "execution": {
-    "started_at": "2026-10-04T14:30:48.681Z",
-    "ended_at": "2026-10-04T16:30:48.846Z",
+    "started_at": "2026-10-04T14:30:48.680Z",
+    "ended_at": null,
     "timeout_seconds": 7200,
     "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
     "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
@@ -42,17 +42,17 @@
     "baseline_restored": false
   },
   "measurement": {
-    "wall_clock_seconds": 7200.155999999959,
+    "wall_clock_seconds": null,
     "tool_calls": null,
     "failed_commands": null,
     "user_interventions": null,
     "tokens": {
-      "input": 329658,
-      "output": 13117,
-      "cached": 7565060,
-      "reasoning": 11335,
-      "provider_total": 7919170,
-      "total": 342775,
+      "input": null,
+      "output": null,
+      "cached": null,
+      "reasoning": null,
+      "provider_total": null,
+      "total": null,
       "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
       "availability_note": "OpenCode step_finish provider usage; provider_total preserves the raw total, total is normalized input+output and excludes cache/reasoning; cache write is raw-log-only."
     }
@@ -68,12 +68,12 @@
   },
   "operator": {
     "phase": "benchmark",
-    "status": "timeout",
-    "reason": "hard timeout",
+    "status": "running",
+    "reason": null,
     "repetition": 2,
     "cohort": "version-2-end-to-end-v1",
     "seed": 1,
-    "exit_code": 1,
+    "exit_code": null,
     "delivered_prompt_sha256": "f358cb75c6743e7946a313d4222b9b11a86c8240a8c40098d9f30907852d8cf0",
     "local_base_commit": "b421b5ffa417927cfd8904e330017e6d70877977",
     "evidence": {
@@ -293,10 +293,7 @@
       "preflight-evidence/followup-r02-current/current-checks.json": "482f25a22cf10ba2670da612d2e35fcca31f241c89f45955f7d115bc97940521",
       "preflight-evidence/followup-r02-current/opencode-config.json": "fb34d157823c2e73b85a919f55009859e641eb9431f0e68163a67ddb0caf3e04",
       "preflight-evidence/followup-r02-current/opencode-skills.json": "20725ae3aef9499e888e043ae17322c55a80b4e04ae11d9939f486ead2fdc0d9",
-      "execution-preflight.json": "8e24aacc179cfbdb3587a58fbb148b56c1ed73663d6934aa38a0385f7e0e94b7",
-      "stdout.jsonl": "21dede0636e5376a7223728a40d9b38de69e8f793612672c77fa19e110b96799",
-      "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "prompt.txt": "f358cb75c6743e7946a313d4222b9b11a86c8240a8c40098d9f30907852d8cf0"
+      "execution-preflight.json": "8e24aacc179cfbdb3587a58fbb148b56c1ed73663d6934aa38a0385f7e0e94b7"
     },
     "policy_review_required": true,
     "comparison": {

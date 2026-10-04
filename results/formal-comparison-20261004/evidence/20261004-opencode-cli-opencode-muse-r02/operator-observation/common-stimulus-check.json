@@ -1,0 +1,40 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "checked_at": "2026-10-04T16:42:49.118095+00:00",
+  "implementation_commit": "354c6475345cb521c92f92e3dce448b0dc5ef58b",
+  "collector_exit_code": 2,
+  "collector_report": {
+    "failures": [
+      {
+        "adapter_id": "personal-usage.json",
+        "code": "STALE_THRESHOLD_EXCEEDED",
+        "message": "STALE_THRESHOLD_EXCEEDED: personal-usage.json adapted snapshot rejected: STALE_THRESHOLD_EXCEEDED"
+      }
+    ],
+    "global_resets": 2,
+    "snapshots": 1,
+    "status": "collected"
+  },
+  "legacy_values": [
+    {
+      "provider_id": "google",
+      "agent_id": "gemini-cli",
+      "stale": false,
+      "windows": []
+    }
+  ],
+  "normalization_matches_frozen_payload": false,
+  "candidate_sender_emission_check": [
+    {
+      "sequence": 0,
+      "candidate_encoder_matches_frozen_wire": true,
+      "sha256": "46d2381c3a9e7fcef740cfa6dc8ef34061bdf31d3143ea8dd8b69fedbdb1955d"
+    },
+    {
+      "sequence": 1,
+      "candidate_encoder_matches_frozen_wire": true,
+      "sha256": "46b51f55404dbb8ace1b7aa4b548eb33689372663238715897e2a8ad56530df1"
+    }
+  ],
+  "scope": "Actual collector CLI and sender encoder checked without serial. This is host evidence; real receiver and optical results are separate."
+}

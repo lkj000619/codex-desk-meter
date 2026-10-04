@@ -152,3 +152,54 @@ manifest·ledger 상태와 launcher PID의 실행 여부를 먼저 확인한다.
 terminal 상태이면 실제 비용·raw 로그를 검토하고 결과 동결·정책 review·실물/RM 관측으로 이어간다.
 강제 중단이 있었다면 기존 reconcile 절차로 종료 비용을 연결한다.
 다른 날의 미시작 최초 예약은 새 ID·ledger·receipt로 준비하며 기존 기록을 보존한다.
+
+## 2026-10-05 후속 1회차 timeout 확인과 종료 후 관측
+
+01:37 KST 확인에서 OpenCode와 runner 프로세스가 모두 종료됐고 manifest/ledger가
+`timeout`으로 일치함을 확인했다. 시작 10월 4일 23:30:48.681 KST, 종료 10월 5일
+01:30:48.846 KST, 사유 `hard timeout`, 실제 7,200.156초다. runner가 고정 7,200초 후
+자식 process tree를 종료했고 종료 처리의 0.156초도 원본 비용에 포함했다.
+강제 종료된 회차를 completed나 성공으로 바꾸지 않았으며 숨은 재호출은 없다.
+
+- 후속 원본 token: input 329,658, output 13,117, 정규화 합계 342,775.
+  cached 7,565,060, reasoning 11,335, provider total 7,919,170은 별도 필드로 보존한다.
+  이 계측은 provider가 내보낸 완료 step의 usage이며 중단된 마지막 요청의 미보고 token을 0으로 추정하지 않는다.
+- 최초와 후속 실제 시간 합계 8,224.796초, 보고된 정규화 token 합계 649,633.
+  [새 비용 집계](comparison-checkpoint-02.md)는 모든 시도 비용을 보존하고 두 부적격 회차를 품질 표에서 제외한다.
+  표의 token coverage 2/2는 두 manifest에 보고값이 있다는 뜻이며 공급자의 미보고 usage까지 입증하지 않는다.
+- 원본 raw event 257개, native tool event 107개. line 17에서 복합 git 명령이 거부됐고
+  line 20의 새 assistant message에서 작업이 계속됐다. 이후 다른 message의 tool event 96개를 확인했다.
+  [운영자 정책 감사](evidence/20261004-opencode-cli-opencode-muse-r02/operator-policy-audit.json)와
+  [정책 review](evidence/20261004-opencode-cli-opencode-muse-r02/policy-review.json)에 부적격 판정을 연결했다.
+- 최종 result JSON과 선택 문서가 없다. 마지막 native todo는 제출 문서 작성을 in_progress로 남겼다.
+  운영자가 후보의 최종 제출물을 대신 생성하지 않는다.
+- 후속 최대 3회와 누적 120분은 함께 적용한다. 1회차가 누적 예산을 모두 사용했으므로
+  남은 허용 후보 실행 시간은 0초다. 남은 회차 숫자만으로 2·3회차를 시작하지 않는다.
+
+종료 후 57개 입력과 원본 raw/hash·terminal ledger binding을 확인하고 남은 구현을
+`354c6475345cb521c92f92e3dce448b0dc5ef58b`에 동결했다.
+[동결 기록](evidence/20261004-opencode-cli-opencode-muse-r02/operator-source-freeze.json)에
+app/ELF/map/bootloader/partition·sdkconfig·flash 설정의 원본 bytes와 운영자 사본을 연결했다.
+후보 source를 수정하거나 firmware를 다시 빌드하지 않았다.
+[별도 source bundle](evidence/20261004-opencode-cli-opencode-muse-r02/operator-source-bundle.json)을
+생성해 Git 검증과 bytes/hash를 보존했다. 이는 제출 누락 상태의 남은 코드 보존이며 최종 RM·package 완료 판정은 아니다.
+
+독립 Python 28개와 제품 C 모듈을 연결한 host 실행 파일 6개가 통과했다.
+그러나 실제 collector CLI에서 동일한 legacy fixture와 기준 시각 `2026-09-30T18:40:49Z`를
+사용하면 `STALE_THRESHOLD_EXCEEDED`로 personal-usage 입력을 거부하고 exit 2를 반환한다.
+후보 시험의 더 이른 시각에서 통과한 사실과 공통 stale 자극의 실패를 구분한다.
+[실제 경로 확인](evidence/20261004-opencode-cli-opencode-muse-r02/operator-observation/common-stimulus-check.json)을 따른다.
+후보 sender encoder는 고정 seq 0·1 frame과 byte 단위로 일치하지만 collector→장치 연결 합격은 아니다.
+
+01:45 KST 시작한 별도 운영자 슬롯에서 COM3 VID/PID를 재확인하고 NVS 24K만 초기화했다.
+app SHA-256 `8e4eaaab7dd6c66abdc069043583c3805cd942d2afca496e48073bcc0255c75b`의
+동결 artifact를 업로드하고 원본 공통 frame을 전송했다. 전송 bytes hash가 기준과 같고
+장치의 seq 0/CRC `203D8DF3`, seq 1/CRC `C4CAA941` 수락 로그를 확인했다.
+[슬롯 기록](evidence/20261004-opencode-cli-opencode-muse-r02/operator-observation/hardware-slot.json)과
+[receiver source 대조](evidence/20261004-opencode-cli-opencode-muse-r02/operator-observation/receiver-source-review.json)를 보존했다.
+이번에도 `operator_replay`이며 자동 수락 시간/광학 marker의 null은 유지한다.
+
+사용자에게 현재 LCD 값·화면 방향/잘림·BOOT 세 번 탐색/복귀·30초 유지 상태를 요청했다.
+답변 전 RM3~RM5·광학/정밀 시간은 미확인이다. 후속 RM review와 최종 독립 package는
+이 관측을 기록한 뒤 진행한다. 보드는 후속 동결 artifact를 유지하고 serial은 닫혀 있다.
+다음 후보는 AGY Flash이며 현재 슬롯 평가가 끝나기 전 새 후보를 호출하거나 보드를 덮어쓰지 않는다.

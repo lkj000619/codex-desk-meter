@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "status": "captured",
+  "port": "COM3",
+  "sender_kind": "operator_replay",
+  "started_at": "2026-10-04T16:45:38.269289+00:00",
+  "frames": [
+    {
+      "sequence": 0,
+      "frame_sha256": "46d2381c3a9e7fcef740cfa6dc8ef34061bdf31d3143ea8dd8b69fedbdb1955d",
+      "bytes_requested": 1543,
+      "bytes_written": 1543,
+      "accepted_at_seconds": null,
+      "display_marker_at_seconds": null,
+      "write_at_seconds": 0.031999999890103936,
+      "response_sha256": "325d9548a12fe2cc9f805d817134ad50fa8c10de478d97df6b0b685d1ad2a41a",
+      "write_duration_seconds": 0.0
+    },
+    {
+      "sequence": 1,
+      "frame_sha256": "46b51f55404dbb8ace1b7aa4b548eb33689372663238715897e2a8ad56530df1",
+      "bytes_requested": 1543,
+      "bytes_written": 1543,
+      "accepted_at_seconds": null,
+      "display_marker_at_seconds": null,
+      "write_at_seconds": 5.047000000020489,
+      "response_sha256": "ed5615d10afa5371d7adc1534f6dec9b17aeca11d9f770e6c8e4327751dcb2df",
+      "write_duration_seconds": 0.01500000013038516
+    }
+  ],
+  "error_code": null,
+  "optical_status": "not_run",
+  "product_pass": false,
+  "device_accessed": true,
+  "clock": "host monotonic relative to session start; firmware uptime is separate",
+  "evidence": {
+    "events.jsonl": "b832b7e370a836b3bdfe6e2f64779175ca6228e1a878b50893f5f173706318e1",
+    "device-serial.bin": "01bf88eec7c98c53b020c268f2845ec4b7b73d0d1ac39c7686c5c0e05f5f9157",
+    "sent-frames.jsonl": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd"
+  }
+}

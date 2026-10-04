@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-05. 상태: **첫 OpenCode Muse 결과의 화면 표시 실패·RM 미도달·정책 부적격을 기록하고 후속 1회차 실행 중(10월 4일 23:30:48 KST 시작). 일반 package 경로 보완·독립 복원 확인. 활성 5개 모델·동결 baseline·후속 3회/누적 120분 유지.**
+확인일: 2026-10-05. 상태: **OpenCode 후속 1회차가 01:30:48 KST timeout으로 종료했고 후속 누적 예산을 소진했다. 최종 제출 누락·정책 부적격을 보존했다. 종료 후 남은 구현을 동결해 COM3 업로드·공통 frame 수락을 확인했으며 사용자 LCD·BOOT 관측을 기다린다. 활성 5개 모델·동결 baseline은 유지한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -97,6 +97,13 @@ CLI/model/settings/environment를 재확인해 새 run-bound receipt를 연결�
 COM3의 원본 공통 frame 수신과 실제 성공 로그를 대조했고 사용자 사진에서 값 표시 부재를 확인했다.
 최초 RM은 RM1 pass/RM2 partial/RM3 fail/RM4·RM5 not_run으로 기준 미도달이다. BOOT·연속 유지·정밀 지연은 미측정이다.
 자신의 첫 동결 결과에서 후속 `20261004-opencode-cli-opencode-muse-r02`를 시작했고, 최초의 부적격·실패·비용은 보존한다.
+2026-10-05 01:30:48 KST 후속 회차가 고정 한도로 종료됐다. 실제 7,200.156초를 기록해
+후속 누적 7,200초 예산을 소진했으므로 추가 수정 회차는 시작할 수 없다. 최종 result JSON·선택 문서는 없다.
+종료 후 남은 구현을 `354c6475345cb521c92f92e3dce448b0dc5ef58b`에 동결했고 정책은 부적격이다.
+Python 28개·host 실행 파일 6개는 통과했지만 기준 시각의 실제 collector는 `STALE_THRESHOLD_EXCEEDED`로
+legacy 입력을 거부한다. 같은 동결 artifact를 COM3에 업로드하고 seq 0·1 수락을 확인했다.
+실물 LCD·BOOT 관측과 후속 RM review는 대기 중이며 미확인을 합격으로 표시하지 않는다.
+회차·예산을 초기화하거나 최종 제출물을 운영자가 대신 작성하지 않는다.
 이번 전송은 operator replay다. 후보 collector의 공통 fixture 연결 문제와 미측정 광학 지연은 [실행 기록](../../results/formal-comparison-20261004/report.md)에 남긴다.
 현재 증거 문서의 후속 commit과 비교 baseline을 혼동하지 않는다. 다음 날짜의 새 prepare는
 동결된 깨끗한 operator checkout `C:/meter-operator-20261004`에서 수행한다.
@@ -105,7 +112,7 @@ COM3의 원본 공통 frame 수신과 실제 성공 로그를 대조했고 사�
 2026-10-05 00:26 KST에 아직 시작하지 않은 AGY Flash/Pro·Codex Sol/Luna의 예약만 새 날짜로
 갱신했다. [새 예약](../../results/formal-comparison-20261004/reservations-20261005/renewal.json)과
 [현재 환경 확인](../../results/formal-comparison-20261004/reservations-20261005/current/current-checks.json)을 따른다.
-갱신 중 모델/제품 구현 호출은 없으며 기존 OpenCode series·진행 중 후속 예산은 유지한다.
+갱신 중 모델/제품 구현 호출은 없었으며 당시 실행 중이던 OpenCode series·후속 예산은 변경하지 않았다.
 이전 prepared 예약은 보존했고 동결 baseline/profile/입력도 같다. 실제 capability 원본은 10월 4일,
 현재 CLI/SDK/native 설정·AGY 모델 목록과 전역 파일 복원 확인은 10월 5일의 별도 근거다.
 
