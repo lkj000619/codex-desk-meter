@@ -1,0 +1,25 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "recorded_at": "2026-10-04T20:53:17.786342+00:00",
+  "status": "followup_reference_review_complete_user_hold",
+  "video_capture_identity_confirmed": true,
+  "receiver_acceptance_observed": false,
+  "board_slot_released": true,
+  "serial_closed": true,
+  "board_firmware_to_be_retained": true,
+  "source_and_raw_cost_unchanged": true,
+  "rm_items": {
+    "RM1": "pass",
+    "RM2": "partial",
+    "RM3": "fail",
+    "RM4": "partial",
+    "RM5": "partial"
+  },
+  "reference_status": "fail",
+  "policy_status": "invalid_for_comparison",
+  "remaining_followup_seconds": 5710.780999999959,
+  "followups_run": 1,
+  "remaining_followup_rounds": 2,
+  "next_model_start_authorized_now": false,
+  "additional_candidate_round_start_authorized_now": false
+}

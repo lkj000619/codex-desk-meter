@@ -1,0 +1,7 @@
+{
+  "package": "C:\\meter-run-packages-20261005\\agy-flash-r02-final",
+  "files": 501,
+  "package_manifest_sha256": "b0e2880fc7c786ae338b9d1870ccd4c3510bf9afb3f5881089ff4d23515f244c",
+  "final_run_manifest_sha256": "c2c07c3a18b4dff64c5984de55070686b5740e79104b8272ea4397c88534ce11",
+  "scope": "Final r02 evaluation; schema-valid submitted result, policy invalidity, missing real frame acceptance, crash/reboot logs and user video preserved. Explicit user hold; no next model or additional round."
+}

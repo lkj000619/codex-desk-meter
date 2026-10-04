@@ -1,0 +1,295 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "received_at": "2026-10-04T20:49:14.018004+00:00",
+  "source_path": "C:\\Users\\이광진\\Documents\\카카오톡 받은 파일\\KakaoTalk_20261005_054708010.mp4",
+  "source_bytes": 22018701,
+  "source_sha256": "e759b25d693b0d4774e463bfcb60b9b71c9a5b6f067945770ccf5d8c6bc3672b",
+  "preserved_source": "source.mp4",
+  "duration_seconds": 46.3,
+  "source_filesystem_creation_time_utc": "2026-10-04T20:47:11.576694+00:00",
+  "source_filesystem_modified_time_utc": "2026-10-04T20:47:13.911827+00:00",
+  "ffmpeg_binary": "C:\\meter-observer-tools\\video-20261005\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+  "ffmpeg_sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+  "sample_frames": [
+    {
+      "path": "frames/frame-001.png",
+      "sample_index": 0,
+      "nominal_sample_second": 0.5,
+      "sha256": "2fcb8741966ed5d31c37bad8f3c501513a2fe678be5b9aca8a0f3020b511fcc2"
+    },
+    {
+      "path": "frames/frame-002.png",
+      "sample_index": 1,
+      "nominal_sample_second": 1.5,
+      "sha256": "d87ea49d17cf411f5e12d4afe869ab34900ad09005e3fde094097b3723318489"
+    },
+    {
+      "path": "frames/frame-003.png",
+      "sample_index": 2,
+      "nominal_sample_second": 2.5,
+      "sha256": "49df33ba59a0cbe5e5d8e0e01bf3b6b561f1f84df2545b138f6af581b9550409"
+    },
+    {
+      "path": "frames/frame-004.png",
+      "sample_index": 3,
+      "nominal_sample_second": 3.5,
+      "sha256": "57610cfddbf0381fd75d9a168b3e497255e70e1702e463a6f2166569949cac99"
+    },
+    {
+      "path": "frames/frame-005.png",
+      "sample_index": 4,
+      "nominal_sample_second": 4.5,
+      "sha256": "e691a4f3a7ada8087e144c7fa3440a6f8686d93dbeef77976a51cf6d2c44392d"
+    },
+    {
+      "path": "frames/frame-006.png",
+      "sample_index": 5,
+      "nominal_sample_second": 5.5,
+      "sha256": "dcb4e50680c959d2fb9a0183b3d431cd9fecac98877a55dd00d876fd3e465c4c"
+    },
+    {
+      "path": "frames/frame-007.png",
+      "sample_index": 6,
+      "nominal_sample_second": 6.5,
+      "sha256": "dd368e2e4a1638418e7126716563f17a124dd10bf626a27aed5da9d2565caf19"
+    },
+    {
+      "path": "frames/frame-008.png",
+      "sample_index": 7,
+      "nominal_sample_second": 7.5,
+      "sha256": "53cc498addfbd70c070ad76e5db4ee73e469133873d3b75f6bd2129e47f102a5"
+    },
+    {
+      "path": "frames/frame-009.png",
+      "sample_index": 8,
+      "nominal_sample_second": 8.5,
+      "sha256": "db61036815cc400b030bec9be583daa15fc4b053ebeb0372dfb3c16fe1a93f9c"
+    },
+    {
+      "path": "frames/frame-010.png",
+      "sample_index": 9,
+      "nominal_sample_second": 9.5,
+      "sha256": "8ccd4b8a2f5a0a73d12c4f902d8995b5b940e852f793179c4c7e2624dd4084da"
+    },
+    {
+      "path": "frames/frame-011.png",
+      "sample_index": 10,
+      "nominal_sample_second": 10.5,
+      "sha256": "2b9402ee9ec5da80c3f324672669d4028959f1125801570b6a54be23f8b820ca"
+    },
+    {
+      "path": "frames/frame-012.png",
+      "sample_index": 11,
+      "nominal_sample_second": 11.5,
+      "sha256": "c51f8762dcff8ea65339d1264b644f074cafb503568b6196ff74c2f74afaa45c"
+    },
+    {
+      "path": "frames/frame-013.png",
+      "sample_index": 12,
+      "nominal_sample_second": 12.5,
+      "sha256": "5a71b0c056dfa54070e67928d41fd614d9c48a31c5ba77e65ad856ede51f0619"
+    },
+    {
+      "path": "frames/frame-014.png",
+      "sample_index": 13,
+      "nominal_sample_second": 13.5,
+      "sha256": "c3718b294c923a86e8fc97e65d34b4f4b80d9e964864df9d6ecaa3e04482f2c4"
+    },
+    {
+      "path": "frames/frame-015.png",
+      "sample_index": 14,
+      "nominal_sample_second": 14.5,
+      "sha256": "3e399309925bd836f8361645905424244bbf3660ebf22110310de60e5f48a6ae"
+    },
+    {
+      "path": "frames/frame-016.png",
+      "sample_index": 15,
+      "nominal_sample_second": 15.5,
+      "sha256": "56bd4424510ca3e64368ccf8e3e0b5f4f7e9b64dbf994f368af85d4db999c459"
+    },
+    {
+      "path": "frames/frame-017.png",
+      "sample_index": 16,
+      "nominal_sample_second": 16.5,
+      "sha256": "0133532be34ad531e2c8882623250f1923443aeb7cac25f0803d5706485b39b1"
+    },
+    {
+      "path": "frames/frame-018.png",
+      "sample_index": 17,
+      "nominal_sample_second": 17.5,
+      "sha256": "6c552882f34fd62a9305d70f6527c5682e025fbabd4f8fbc302313a24e483ee4"
+    },
+    {
+      "path": "frames/frame-019.png",
+      "sample_index": 18,
+      "nominal_sample_second": 18.5,
+      "sha256": "22d1b336996832e3424bccc1fc5743b0140a77d9f7d507c414675b30ed5df78e"
+    },
+    {
+      "path": "frames/frame-020.png",
+      "sample_index": 19,
+      "nominal_sample_second": 19.5,
+      "sha256": "aed5158c8660d492a31fb93f5dcbccbeffe921bcd46e84817b0f5d5b2b19327c"
+    },
+    {
+      "path": "frames/frame-021.png",
+      "sample_index": 20,
+      "nominal_sample_second": 20.5,
+      "sha256": "526eec9e512c669c01d4d22b46a6b8f110c1ba1aace2ac3b8822fff9e52096d5"
+    },
+    {
+      "path": "frames/frame-022.png",
+      "sample_index": 21,
+      "nominal_sample_second": 21.5,
+      "sha256": "f36e43f667cbb20801ab4c9e436bc6464979aaadfcbcc820de9179c3bb49ea35"
+    },
+    {
+      "path": "frames/frame-023.png",
+      "sample_index": 22,
+      "nominal_sample_second": 22.5,
+      "sha256": "b3d39a2aef91b801a469ae2139b67151652d216a81a7cdf575fdd439d7b3c88a"
+    },
+    {
+      "path": "frames/frame-024.png",
+      "sample_index": 23,
+      "nominal_sample_second": 23.5,
+      "sha256": "1baacf6ca3d01a24c5c67463a79c9146ef4fbda44d1c6a58899231702869518d"
+    },
+    {
+      "path": "frames/frame-025.png",
+      "sample_index": 24,
+      "nominal_sample_second": 24.5,
+      "sha256": "acd1d486176f86b21aceb75037bf05eb205e0abf277dfdabca3a83772e1f79a0"
+    },
+    {
+      "path": "frames/frame-026.png",
+      "sample_index": 25,
+      "nominal_sample_second": 25.5,
+      "sha256": "17c5adbac1426b8cace178c9aa7b3b6969500c6dbaa3dc847a0a40d2fd3ca787"
+    },
+    {
+      "path": "frames/frame-027.png",
+      "sample_index": 26,
+      "nominal_sample_second": 26.5,
+      "sha256": "72ea85721e8f83a2edba14ea642e2608ae38f8fb08fe39e7381b904b249cc55c"
+    },
+    {
+      "path": "frames/frame-028.png",
+      "sample_index": 27,
+      "nominal_sample_second": 27.5,
+      "sha256": "ff8dc3143516d9bbaa830ba72ac13b640c61311dcd38c8be8c4e37d84c2625d1"
+    },
+    {
+      "path": "frames/frame-029.png",
+      "sample_index": 28,
+      "nominal_sample_second": 28.5,
+      "sha256": "1b627d5ddfa724eb2202069029c3a8a52efa89b8adcea49730817083be58e041"
+    },
+    {
+      "path": "frames/frame-030.png",
+      "sample_index": 29,
+      "nominal_sample_second": 29.5,
+      "sha256": "47567fdd409ac61ec3c1de9dacd866e3a45d2739eddb7989582f77ee8063c79d"
+    },
+    {
+      "path": "frames/frame-031.png",
+      "sample_index": 30,
+      "nominal_sample_second": 30.5,
+      "sha256": "2c877f679805333d0690f862d59366a5e8dd4a434e40d3e5768a05c25dfcb34a"
+    },
+    {
+      "path": "frames/frame-032.png",
+      "sample_index": 31,
+      "nominal_sample_second": 31.5,
+      "sha256": "9c8a49c1a18ae962e400da77f6425735ff522650dd07dee232ec428a5178d477"
+    },
+    {
+      "path": "frames/frame-033.png",
+      "sample_index": 32,
+      "nominal_sample_second": 32.5,
+      "sha256": "dec224a2135749fc042e7750030ff03ece22f2c96ea39715d068048653b2285f"
+    },
+    {
+      "path": "frames/frame-034.png",
+      "sample_index": 33,
+      "nominal_sample_second": 33.5,
+      "sha256": "f28afd662a9ef8f10254138b2e22d677f54c98049380972ca69ead44f5164b79"
+    },
+    {
+      "path": "frames/frame-035.png",
+      "sample_index": 34,
+      "nominal_sample_second": 34.5,
+      "sha256": "6400d383b5f1c3a8a438f46c5f79ceb5343695cbf09062733c18212cfee755fe"
+    },
+    {
+      "path": "frames/frame-036.png",
+      "sample_index": 35,
+      "nominal_sample_second": 35.5,
+      "sha256": "3d488e4c1ac2db3f5c4dba636a89987c1e5713cee53c45db9dc5204ea8818639"
+    },
+    {
+      "path": "frames/frame-037.png",
+      "sample_index": 36,
+      "nominal_sample_second": 36.5,
+      "sha256": "ba55a1618b802a05e97fb2a675730dd74e5e6752dc98265a32993de3649a9f4d"
+    },
+    {
+      "path": "frames/frame-038.png",
+      "sample_index": 37,
+      "nominal_sample_second": 37.5,
+      "sha256": "5b14b2bc55c1b4ec6866109675ad6917175ffade1645b3b0fbbeca843d17545a"
+    },
+    {
+      "path": "frames/frame-039.png",
+      "sample_index": 38,
+      "nominal_sample_second": 38.5,
+      "sha256": "086d18f6acd7d0daf5a383122ca0cb3e8ddd9cf71e9c4059bea2ce72da09269f"
+    },
+    {
+      "path": "frames/frame-040.png",
+      "sample_index": 39,
+      "nominal_sample_second": 39.5,
+      "sha256": "753e887734828f9bec5aeed8b265d0e247122ecc248de5addb958919a2e27a43"
+    },
+    {
+      "path": "frames/frame-041.png",
+      "sample_index": 40,
+      "nominal_sample_second": 40.5,
+      "sha256": "c2f12259a0fccd35048d72afd1e8e276a2f71f5a82f1cd1c6b674bd23529f9af"
+    },
+    {
+      "path": "frames/frame-042.png",
+      "sample_index": 41,
+      "nominal_sample_second": 41.5,
+      "sha256": "ecdfe903bc5e1b3308a86709f992c5642533241cda9b7d573f4d71128c9fae66"
+    },
+    {
+      "path": "frames/frame-043.png",
+      "sample_index": 42,
+      "nominal_sample_second": 42.5,
+      "sha256": "2d416055be8ad1129c1cfd2eb29aeb5b34316b07df1cf686c6aaa47c5cf5471f"
+    },
+    {
+      "path": "frames/frame-044.png",
+      "sample_index": 43,
+      "nominal_sample_second": 43.5,
+      "sha256": "48393c16b7aeb98b019188698f433b2b30d1e9f98b15db5b48e725ab7a999e3b"
+    },
+    {
+      "path": "frames/frame-045.png",
+      "sample_index": 44,
+      "nominal_sample_second": 44.5,
+      "sha256": "d270543138d0689f19eefe69a655cab847eb1ff52635e8cc55e53214e5acc3d0"
+    },
+    {
+      "path": "frames/frame-046.png",
+      "sample_index": 45,
+      "nominal_sample_second": 45.5,
+      "sha256": "bdd6757b0fb0ec8d43e8813c35c0b2bddfe64edb19ebee09ff84ae39a7b0bc8a"
+    }
+  ],
+  "capture_identity": "User supplied video in reply to current r02 upload/observation instructions; saved after 05:38:52 KST upload. Exact capture UTC unknown.",
+  "precise_latency": "not_measured",
+  "candidate_execution_repeated": false,
+  "user_hold_recorded": true
+}

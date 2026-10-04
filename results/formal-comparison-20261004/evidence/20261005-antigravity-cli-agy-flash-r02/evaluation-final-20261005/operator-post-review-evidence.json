@@ -1,0 +1,30 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "recorded_at": "2026-10-04T20:54:53.369320+00:00",
+  "reference_review_applied_once": true,
+  "reference_review_manifest_sha256": "6f92a60d20c8abdf075d6658c660393c1181d9cfe68b31429094bed5dc1112d9",
+  "post_review_changes": [
+    "operator.evidence"
+  ],
+  "added_files": [
+    "run-manifest-after-reference-review.json",
+    "operator-review-finalization.json",
+    "operator-reference-review-input.json",
+    "operator-observation/observation-finalization.json",
+    "operator-observation/fresh-host-binary-snapshot/test_meter_parser.exe",
+    "operator-observation/fresh-host-binary-snapshot/test_meter_state.exe",
+    "operator-observation/fresh-host-binary-snapshot/test_feature_imu.exe",
+    "operator-observation/fresh-host-binary-snapshot/test_gui_regression.exe",
+    "operator-observation/fresh-host-binary-snapshot/meter_legacy_adapter.exe",
+    "operator-observation/fresh-host-binary-snapshot/libmeter_core.a",
+    "operator-observation/fresh-host-binary-snapshot/CMakeCache.txt",
+    "operator-observation/fresh-host-binary-snapshot/CTestTestfile.cmake",
+    "operator-observation/fresh-host-binary-snapshot/Testing/Temporary/LastTest.log"
+  ],
+  "candidate_source_modified": false,
+  "candidate_submission_fabricated": false,
+  "costs_modified": false,
+  "original_terminal_copy": "operator-observation/terminal-originals/run-manifest.json",
+  "user_hold_preserved": true,
+  "host_binary_snapshot_scope": "Independent operator host build archived for reproducibility; not submitted firmware and never flashed."
+}

@@ -1,0 +1,173 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "captured_at": "2026-10-04T20:58:03.251355+00:00",
+  "files": {
+    "audit-agy-flash-r02-final.py": {
+      "sha256": "20d9c04696b2e218aa29c4aaf7fa734fb285c631555523944bd4eea1b10d8b4c",
+      "bytes": 8016
+    },
+    "ledger-reviewed.json": {
+      "sha256": "b301c0817d0fd6d56937c52c25b0607d338de581564df2ad560ddcd9e5ea391e",
+      "bytes": 3587
+    },
+    "operator-post-review-evidence.json": {
+      "sha256": "33c62c09cea078be10215c1fcb04a9d29bbeb18f08837ec80e4c7d7733d09c93",
+      "bytes": 1615
+    },
+    "operator-reference-review-input.json": {
+      "sha256": "cbc54349a5029f2bf01ba96d7331bbe53efe9d4621ff9ad9a1152c026cd7576e",
+      "bytes": 45958
+    },
+    "operator-review-finalization.json": {
+      "sha256": "25d22ae4b58e16e3bd8b120643b1bd47e6404bd36519367c63e6f0da44ea2cf6",
+      "bytes": 708
+    },
+    "operator-user-hold.json": {
+      "sha256": "082ac1c2eddbc2907940ef6e882823cffa9e16093f27fbac8d16a69ea6274fa5",
+      "bytes": 568
+    },
+    "package-agy-flash-r02-final.py": {
+      "sha256": "adc39d38c229dc2567d144ac3df581014aae748d69e56a7e40d0218fa650fd19",
+      "bytes": 3896
+    },
+    "package-create.json": {
+      "sha256": "ea3268d1bff30e8458bbaec23813650c2a302be02e282a5ff931eafddad62a79",
+      "bytes": 507
+    },
+    "package-manifest.json": {
+      "sha256": "b0e2880fc7c786ae338b9d1870ccd4c3510bf9afb3f5881089ff4d23515f244c",
+      "bytes": 97608
+    },
+    "publish-agy-flash-r02-final.py": {
+      "sha256": "b9140767f7e9aab8832751623bb422904f4344d9b4a4b3ab5bfe729d853fe30d",
+      "bytes": 4441
+    },
+    "reference-review.json": {
+      "sha256": "cbc54349a5029f2bf01ba96d7331bbe53efe9d4621ff9ad9a1152c026cd7576e",
+      "bytes": 45958
+    },
+    "restore-audit.json": {
+      "sha256": "621d1ab4005ec7eb1a0f5f1131b2547faf4dfa126b727120e4a921566faa221e",
+      "bytes": 2720
+    },
+    "restore-report.json": {
+      "sha256": "3a741b196e28abb19b2cd101273c0b17a6261835a04b886f1dfc6b9ace419cee",
+      "bytes": 956
+    },
+    "run-manifest-after-reference-review.json": {
+      "sha256": "6f92a60d20c8abdf075d6658c660393c1181d9cfe68b31429094bed5dc1112d9",
+      "bytes": 59112
+    },
+    "run-manifest.json": {
+      "sha256": "c2c07c3a18b4dff64c5984de55070686b5740e79104b8272ea4397c88534ce11",
+      "bytes": 61029
+    },
+    "operator-observation/observation-finalization.json": {
+      "sha256": "84ffa31680f51722565a69ab6d26cf3051b647f187a5a3b8702dc4e8fbbd47ee",
+      "bytes": 828
+    },
+    "operator-observation/user-video-01/capture-identity-confirmation.json": {
+      "sha256": "f8663c3c045a161459150fa19c74cddec04a97613a7673ec96e8d3b4613fce7e",
+      "bytes": 803
+    },
+    "operator-observation/user-video-01/contact-01.jpg": {
+      "sha256": "972e1d20dbc4f7bc6b89cfaaa580f4d38d3840dcbeb4dc3eed95af8da5ddc3ea",
+      "bytes": 230537
+    },
+    "operator-observation/user-video-01/contact-02.jpg": {
+      "sha256": "cc2f58b9de931e2ace2eb846e7601febb1900d8c047d56254e76c014da135849",
+      "bytes": 247785
+    },
+    "operator-observation/user-video-01/contact-03.jpg": {
+      "sha256": "451b2e0859eb83fd3d77f0ba8b4fac918df79259367fe91033bc90ce263c6b1a",
+      "bytes": 189646
+    },
+    "operator-observation/user-video-01/contact-04.jpg": {
+      "sha256": "16f92a95541baaca136ffa3e068c415ef4cc41fee442bcd21b44d4a870a30d0f",
+      "bytes": 181543
+    },
+    "operator-observation/user-video-01/extraction-stderr.txt": {
+      "sha256": "8cd4c0f29be471213c029de97dfe7870192f544b2b1e4bfeac932480ec189042",
+      "bytes": 1980
+    },
+    "operator-observation/user-video-01/extraction-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-observation/user-video-01/finalize-video-review.py": {
+      "sha256": "012ce37432b535f263c9d74e5e3d9081b99df194385d66a9091299f2bedb71e4",
+      "bytes": 11617
+    },
+    "operator-observation/user-video-01/inspect-video.py": {
+      "sha256": "9e1172386f8a214fdb02d4ffb18cd8f4f51d73d35ca8f043ed54d5ac245009b5",
+      "bytes": 4472
+    },
+    "operator-observation/user-video-01/metadata-raw.txt": {
+      "sha256": "8ac23995d56093f4d424568a03a54fef61a7d3829bcc97b55d1aa6e99081f1d2",
+      "bytes": 870
+    },
+    "operator-observation/user-video-01/readable-frame-001.png": {
+      "sha256": "2fcb8741966ed5d31c37bad8f3c501513a2fe678be5b9aca8a0f3020b511fcc2",
+      "bytes": 2175676
+    },
+    "operator-observation/user-video-01/readable-frame-004.png": {
+      "sha256": "57610cfddbf0381fd75d9a168b3e497255e70e1702e463a6f2166569949cac99",
+      "bytes": 2457461
+    },
+    "operator-observation/user-video-01/readable-frame-006.png": {
+      "sha256": "dcb4e50680c959d2fb9a0183b3d431cd9fecac98877a55dd00d876fd3e465c4c",
+      "bytes": 2538899
+    },
+    "operator-observation/user-video-01/readable-frame-008.png": {
+      "sha256": "53cc498addfbd70c070ad76e5db4ee73e469133873d3b75f6bd2129e47f102a5",
+      "bytes": 2361089
+    },
+    "operator-observation/user-video-01/readable-frame-009.png": {
+      "sha256": "db61036815cc400b030bec9be583daa15fc4b053ebeb0372dfb3c16fe1a93f9c",
+      "bytes": 2465832
+    },
+    "operator-observation/user-video-01/readable-frame-011.png": {
+      "sha256": "2b9402ee9ec5da80c3f324672669d4028959f1125801570b6a54be23f8b820ca",
+      "bytes": 2524679
+    },
+    "operator-observation/user-video-01/readable-frame-028.png": {
+      "sha256": "ff8dc3143516d9bbaa830ba72ac13b640c61311dcd38c8be8c4e37d84c2625d1",
+      "bytes": 2160499
+    },
+    "operator-observation/user-video-01/readable-frame-029.png": {
+      "sha256": "1b627d5ddfa724eb2202069029c3a8a52efa89b8adcea49730817083be58e041",
+      "bytes": 2228256
+    },
+    "operator-observation/user-video-01/readable-frame-041.png": {
+      "sha256": "c2f12259a0fccd35048d72afd1e8e276a2f71f5a82f1cd1c6b674bd23529f9af",
+      "bytes": 2393557
+    },
+    "operator-observation/user-video-01/readable-frame-043.png": {
+      "sha256": "2d416055be8ad1129c1cfd2eb29aeb5b34316b07df1cf686c6aaa47c5cf5471f",
+      "bytes": 2376772
+    },
+    "operator-observation/user-video-01/readable-frame-044.png": {
+      "sha256": "48393c16b7aeb98b019188698f433b2b30d1e9f98b15db5b48e725ab7a999e3b",
+      "bytes": 2584203
+    },
+    "operator-observation/user-video-01/readable-frame-045.png": {
+      "sha256": "d270543138d0689f19eefe69a655cab847eb1ff52635e8cc55e53214e5acc3d0",
+      "bytes": 2584932
+    },
+    "operator-observation/user-video-01/video-metadata.json": {
+      "sha256": "06a209cf524219c3c5737b1a5f6917c1226148f7deb638966529a461e7affb60",
+      "bytes": 10393
+    },
+    "operator-observation/user-video-01/video-review.json": {
+      "sha256": "837b6ffcab414aea2c4727d24a146e11f5181010ad2a447518370f79f3b6f162",
+      "bytes": 6010
+    }
+  },
+  "original_video": {
+    "operator_path": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-flash-r02\\operator-observation\\user-video-01\\source.mp4",
+    "sha256": "e759b25d693b0d4774e463bfcb60b9b71c9a5b6f067945770ccf5d8c6bc3672b",
+    "bytes": 22018701,
+    "stored_outside_repository": true
+  },
+  "scope": "Final r02 RM, archive and independent frozen-validator restoration. Earlier launch/terminal/evaluation-stage snapshots retained. Explicit user hold prevents candidate progression."
+}

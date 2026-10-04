@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-05. 상태: **AGY Flash 후속 1회차의 동결·정책·독립 host 검증을 마치고 05:38:52 KST 원본 펌웨어를 COM3에 업로드했다. 공통 seq 0·1의 PC 쓰기는 완료됐으나 장치 수락 로그가 없고 LoadProhibited panic·재부팅 2회를 관측했다. 사용자 LCD/BOOT 영상과 최종 RM·독립 복원이 남아 있다. 이전 회차 경로 접근으로 정책은 invalid_for_comparison이다. 최초 실패·판정·비용, 활성 5개·동결 baseline은 유지한다.**
+확인일: 2026-10-05. 상태: **AGY Flash 후속 1회차의 영상·최종 RM 평가와 501개 파일의 독립 복원을 완료했다. 화면 순환은 보이지만 사용량 58%/82%와 실제 리셋 데이터는 표시되지 않아 기준 미도달이다. 정책은 invalid_for_comparison이다. 사용자의 대기 요청으로 추가 AGY 회차와 다음 모델을 보류한다. 현재 원본 펌웨어·잔여 예산·최초 판정·비용·활성 5개·동결 baseline은 유지한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -92,7 +92,7 @@ CLI/model/settings/environment를 재확인해 새 run-bound receipt를 연결�
 
 현재 첫 블록 순서는 **OpenCode Muse→AGY Flash→AGY Pro→Codex Sol→Codex Luna**다.
 준비 당시 5개 예약은 모두 prepared·시작 시각 null·소비 시간 null이었다.
-첫 OpenCode 최초 실행은 completed(1,024.64초)이며 첫 후속은 timeout이다. AGY Flash 최초는 environment_failed(762.813초)로 종료됐고 평가·독립 복원을 마쳤다. 후속 1회차도 completed(1,489.219초)로 종료됐으며 평가 대기다. AGY Pro·Codex Sol/Luna는 미시작이다. 현재 후보 호출은 시작 4회·종료 4회다. 종료 code 0과 host 시험 통과 로그를 제품 합격으로 해석하지 않는다.
+첫 OpenCode 최초 실행은 completed(1,024.64초)이며 첫 후속은 timeout이다. AGY Flash 최초는 environment_failed(762.813초)로 종료됐고 평가·독립 복원을 마쳤다. 후속 1회차도 completed(1,489.219초)로 종료됐으며 최종 평가·독립 복원을 마쳤다. AGY Flash series는 사용자 요청으로 대기 중이며 완료된 series로 집계하지 않는다. AGY Pro·Codex Sol/Luna는 미시작이다. 현재 후보 호출은 시작 4회·종료 4회다. 종료 code 0과 host 시험 통과 로그를 제품 합격으로 해석하지 않는다.
 제출물은 `e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db`에 동결했고, 정책 review는 `invalid_for_comparison`이다.
 COM3의 원본 공통 frame 수신과 실제 성공 로그를 대조했고 사용자 사진에서 값 표시 부재를 확인했다.
 최초 RM은 RM1 pass/RM2 partial/RM3 fail/RM4·RM5 not_run으로 기준 미도달이다. BOOT·연속 유지·정밀 지연은 미측정이다.
@@ -182,4 +182,11 @@ Python 6개와 결과 validator 통과는 후보 로그의 관측이며 아직 �
 - [업로드 슬롯](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/operator-observation/hardware-slot.json)은 05:38:52.012 KST 업로드 완료다. 원본 app/bootloader/partition을 사용했고 firmware를 운영자가 재빌드하지 않았다.
 - [capture](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/operator-observation/reference-capture-r1/capture.json)는 seq 0·1 각각 1,543 bytes_written이다. [실제 오류](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/operator-observation/panic-source-review.json)는 LoadProhibited panic·재부팅 2회와 수락 로그 0건이다. PC 쓰기 완료를 성공 수신이나 화면 표시로 해석하지 않는다.
 
-현재 보드의 후속 원본을 촬영 대상으로 유지하며 serial은 닫았다. 사용자 LCD/BOOT 관측 후 RM review를 한 번 적용하고 최종 package를 독립 복원한다. 같은 회차를 재호출하거나 AGY Pro를 먼저 시작하지 않는다. 후속 잔여 5,710.781초·2회와 최초 판정/원본 비용은 유지한다.
+위 업로드 시점에는 사용자 영상과 최종 평가가 남아 있었다. 다음 기록은 2026-10-05 사용자가 제공한 이번 후속 영상과 대기 지시에만 적용한다.
+
+- `KakaoTalk_20261005_054708010.mp4`의 원본 46.3초·22,018,701 bytes와 SHA-256 `e759b25d693b0d4774e463bfcb60b9b71c9a5b6f067945770ccf5d8c6bc3672b`를 보존했다. [영상 검토](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-final-20261005/operator-observation/user-video-01/video-review.json)에서 세 종류 화면 순환과 대시보드 복귀를 확인했지만 WAITING FOR USB DATA·NO RECENT RESET RECORD·Sequence NONE/cache 0이 남아 있다. 사용량 58%/82%와 실제 리셋 값은 보이지 않는다.
+- 영상의 Uptime은 421초에서 3초로 바뀌지만 보드가 가려진 구간과 조작이 있어 재시작 원인은 미확정이다. 개별 BOOT/IMU trigger, 연속 30초 무깜박임과 정밀 지연을 합격 처리하지 않는다. 업로드 직후 serial의 panic 2회와 영상 관측을 구분한다.
+- [최종 RM](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-final-20261005/reference-review.json)은 한 번 적용했으며 RM1 pass/RM2 partial/RM3 fail/RM4 partial/RM5 partial, reference fail/product_pass false다. 이전 회차 접근의 정책 부적격과 원본 비용은 그대로다.
+- [최종 독립 복원](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-final-20261005/restore-audit.json)은 package 501개 파일·57개 입력·41개 raw source·10개 artifact/설정 원본·영상·최종 판정·비용·대기 지시를 package의 동결 operator ZIP으로 검증했다. `result_valid: true`는 제출 형식과 증거의 검증이며 제품 합격이 아니다. 최종 package manifest SHA-256은 `b0e2880fc7c786ae338b9d1870ccd4c3510bf9afb3f5881089ff4d23515f244c`다.
+
+**사용자 재개 지시를 기다린다.** [대기 원본](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-final-20261005/operator-user-hold.json)에 따라 추가 AGY 회차와 다음 모델을 시작하지 않는다. 현재 후속 원본 펌웨어를 유지하고 serial은 닫았다. 같은 회차 재호출·예산 초기화 없이 후속 잔여 5,710.781초·2회를 보존한다. 전체 비교는 사용자 요청으로 보류이며 현재 회차 평가 완료와 전체 series 완료를 구분한다.

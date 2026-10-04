@@ -1,0 +1,10 @@
+{
+  "recorded_at": "2026-10-04T20:49:14.018004+00:00",
+  "source": "Explicit user instruction while supplying current firmware video",
+  "scope": "Hold candidate progression after current AGY Flash r02 evaluation; no additional AGY round or next model without user resumption.",
+  "current_run": "20261005-antigravity-cli-agy-flash-r02",
+  "next_model_start_authorized_now": false,
+  "additional_candidate_round_start_authorized_now": false,
+  "current_video_preservation_and_evaluation_allowed": true,
+  "board_firmware_replacement_authorized_now": false
+}

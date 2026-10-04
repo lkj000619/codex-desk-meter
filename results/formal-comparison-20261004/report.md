@@ -1,6 +1,6 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-05 AGY Flash 후속 1회차의 동결·정책·독립 host 검증과 COM3 업로드/공통 데이터 전송 기록까지 완료했다. 05:38:52 KST 원본 펌웨어 업로드 후 장치 수락 로그 0건·LoadProhibited panic/재부팅 2회를 관측했으며 사용자 LCD/BOOT 영상과 최종 RM·복원이 남아 있다. 최초 environment_failed·제출 누락·USB write timeout·기준 미도달·eligible 정책은 보존한다. 전체 비교는 진행 중이다.
+상태: 2026-10-05 AGY Flash 후속 1회차의 사용자 영상·최종 RM 평가와 501개 파일의 독립 복원을 완료했다. 화면 순환은 보이지만 사용량·실제 리셋 데이터는 표시되지 않아 기준 미도달이다. 사용자의 대기 요청으로 추가 AGY 회차와 다음 모델을 보류하며 현재 원본 펌웨어를 유지한다. 최초 environment_failed·제출 누락·USB write timeout·기준 미도달·eligible 정책은 보존한다. 전체 비교는 사용자 재개 지시를 기다린다.
 후보 실행 시작 4회·종료 4회(최초 2·후속 2). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. AGY Pro·Codex Sol/Luna는 미시작이다. 독립 series 완료는 OpenCode 1개/예정 15개다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
@@ -448,3 +448,38 @@ PC 쓰기 완료는 장치 수락이나 화면 표시의 증거가 아니다.
 [평가 단계 snapshot](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/snapshot-inventory.json)은 123개 파일/hash를 보존한다.
 공개 사본 복사 중 Windows 260-character 경로 제한 오류 1건이 있었으며 기존 부분 사본의 bytes를 대조하고 extended path로 보완했다.
 오류·복구를 sidecar에 남겼고 모델 호출·제품 수정·업로드 재시도는 없다. 최종 RM와 package의 독립 복원은 영상 이후다.
+
+## 2026-10-05 AGY Flash 후속 1회차 최종 평가·사용자 요청 대기
+
+사용자가 이번 펌웨어의 `KakaoTalk_20261005_054708010.mp4` 영상을 제공하며 다음 모델로 넘어가지 말고 기다리도록 지시했다.
+현재 회차의 평가와 증거 보존만 마쳤으며 추가 AGY 회차·AGY Pro·Codex 호출, 재업로드나 재전송은 하지 않았다.
+이 기록은 위 평가 대기 시점 이후의 상태이며 과거 원본 판정과 snapshot은 유지한다.
+
+영상은 46.3초·22,018,701 bytes, SHA-256 `e759b25d693b0d4774e463bfcb60b9b71c9a5b6f067945770ccf5d8c6bc3672b`다.
+원본은 run의 `operator-observation/user-video-01/source.mp4`에 보존했고 공개 snapshot에는 metadata·검토·contact 4개·읽을 수 있는 frame 12개를 연결했다.
+[영상 검토](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-final-20261005/operator-observation/user-video-01/video-review.json)에서
+대시보드→글로벌 리셋→진단→대시보드 순환이 두 차례 보인다. WAITING FOR USB DATA, NO RECENT RESET RECORD,
+Sequence NONE·사용량/리셋 cache 0이 남아 있고 58%/82%·실제 리셋 값은 표시되지 않는다.
+일부 전환에서 제목과 본문이 서로 다른 화면으로 보인다. 영상 중 Uptime 421초와 뒤의 3초는 재시작을 나타내지만
+가림·조작 구간 때문에 원인은 미확정이다. 이를 자발 재부팅으로 단정하거나 개별 BOOT/IMU trigger와 연속 30초 무깜박임·정밀 지연을 합격 처리하지 않는다.
+
+[최종 RM review](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-final-20261005/reference-review.json)를 한 번 적용했다.
+RM1 pass/RM2 partial/RM3 fail/RM4 partial/RM5 partial이며 reference fail/product_pass false다.
+이전 회차 경로 접근의 invalid_for_comparison 판정은 유지한다. 원본 terminal 비용·실행 상태·후보 제출물은 고치지 않았다.
+추가 operator evidence와 새 host 검증 artifact 9개는 sidecar로 구분해 기록했으며 제품 source/firmware를 수정하지 않았다.
+
+최종 package `C:/meter-run-packages-20261005/agy-flash-r02-final`의 manifest SHA-256은
+`b0e2880fc7c786ae338b9d1870ccd4c3510bf9afb3f5881089ff4d23515f244c`다.
+[독립 복원 감사](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-final-20261005/restore-audit.json)는 원본 checkout을 사용하지 않고
+package의 동결 operator ZIP으로 501개 파일·57개 입력·41개 source·10개 artifact/설정 사본·Git blob·영상·비용·정책·최종 RM·대기 지시를 검증했다.
+복원 경로를 반영한 결과 manifest/JSON 2개 변경과 raw 원본 보존을 구분했다. `result_valid: true`는 제출 형식과 증거 검증이며 제품 합격이 아니다.
+[공개 최종 snapshot](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-final-20261005/snapshot-inventory.json)은 40개 파일의 hash를 연결한다.
+
+[비용 checkpoint 05](comparison-checkpoint-05.md)는 종료된 4회 비용을 포함하고 후속을 독립 반복으로 집계하지 않는다.
+AGY Flash 최초+후속의 실제 시간은 2,252.032초·정규화 token 2,965,922다. 최초 결과와 각 회차 비용은 별도로 보존한다.
+후속 잔여 5,710.781초·2회는 그대로이며 이번 사용자 보류를 series 완료나 예산 소진으로 기록하지 않는다.
+독립 series 완료는 OpenCode 1개/예정 15개, 후보 호출은 시작 4회·종료 4회다.
+
+[대기 지시](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-final-20261005/operator-user-hold.json)와 [현재 계측](progress.json)에 따라
+추가 수정 회차와 다음 모델은 사용자 재개 지시 전까지 시작하지 않는다. 보드는 05:38:52 KST에 올린 동일 원본 펌웨어를 유지하며 serial은 닫았다.
+현재 회차를 재호출하거나 남은 예산을 초기화하지 않는다.

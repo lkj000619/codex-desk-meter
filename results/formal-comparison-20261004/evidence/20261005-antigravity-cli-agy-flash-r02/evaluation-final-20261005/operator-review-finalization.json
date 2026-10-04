@@ -1,0 +1,13 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "recorded_at": "2026-10-04T20:53:17.787341+00:00",
+  "original_terminal_manifest_sha256": "54ee10e9988cb39a07de64bc8528895c9a2b8f0b6693c301ed42019a1c8f1062",
+  "reviewed_manifest_sha256": "6f92a60d20c8abdf075d6658c660393c1181d9cfe68b31429094bed5dc1112d9",
+  "reviewed_ledger_sha256": "b301c0817d0fd6d56937c52c25b0607d338de581564df2ad560ddcd9e5ea391e",
+  "immutable_input_files_verified": 57,
+  "execution_and_measurement_unchanged": true,
+  "candidate_result_submission_missing": false,
+  "candidate_selection_document_present": true,
+  "implementation_commit": "94018f1785a590e1514ef1b5145c40f0c03ffca3",
+  "user_hold_recorded": true
+}

@@ -1,0 +1,31 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:\meter-followups-20261005\20261005-antigravity-cli-agy-flash-r02\operator-observation\user-video-01\source.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2mp41
+    encoder         : Lavf58.45.100
+  Duration: 00:00:46.30, start: 0.000000, bitrate: 3804 kb/s
+  Stream #0:0[0x1](und): Video: hevc (Main) (hvc1 / 0x31637668), yuv420p(tv, bt709), 1080x1920, 3669 kb/s, SAR 1:1 DAR 9:16, 29.98 fps, 30 tbr, 15360 tbn (default)
+      Metadata:
+        handler_name    : VideoHandler
+        vendor_id       : [0][0][0][0]
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s (default)
+      Metadata:
+        handler_name    : SoundHandler
+        vendor_id       : [0][0][0][0]
+Stream mapping:
+  Stream #0:0 -> #0:0 (hevc (native) -> png (native))
+Press [q] to stop, [?] for help
+Output #0, image2, to 'C:\meter-followups-20261005\20261005-antigravity-cli-agy-flash-r02\operator-observation\user-video-01\frames\frame-%03d.png':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2mp41
+    encoder         : Lavf61.7.100
+  Stream #0:0(und): Video: png, rgb24(pc, gbr/bt709/bt709, progressive), 1280x2276 [SAR 5121:5120 DAR 9:16], q=2-31, 200 kb/s, 1 fps, 1 tbn (default)
+      Metadata:
+        handler_name    : VideoHandler
+        vendor_id       : [0][0][0][0]
+        encoder         : Lavc61.19.100 png
+frame=   10 fps=0.0 q=-0.0 size=N/A time=00:00:10.00 bitrate=N/A speed=19.3x    frame=   25 fps= 24 q=-0.0 size=N/A time=00:00:25.00 bitrate=N/A speed=24.5x    frame=   43 fps= 28 q=-0.0 size=N/A time=00:00:43.00 bitrate=N/A speed=27.9x    [out#0/image2 @ 000001d54838dc40] video:89790KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=   46 fps= 29 q=-0.0 Lsize=N/A time=00:00:46.00 bitrate=N/A speed=  29x    
