@@ -1,0 +1,32 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "serial_raw_sha256": "52fc2b7666ece86c4c497217a29d3785228b19562a9b32afa64c8f55b626ac90",
+  "load_prohibited_panic_count": 2,
+  "rebooting_marker_count": 2,
+  "frame_acceptance_count": 0,
+  "backtraces": [
+    "0x40378e5b:0x3fc96b60 0x403778f9:0x3fc96b90 0x400570eb:0x3fcaacb0 0x4200c464:0x3fcaacc0 0x42008d61:0x3fcaad10 0x4200987e:0x3fcb6cd0 0x42008d1f:0x3fcb6df0 0x4037d6f5:0x3fcb6e10",
+    "0x40378e5b:0x3fc96b60 0x403778f9:0x3fc96b90 0x4200c333:0x3fcaac70 0x4200c489:0x3fcaacc0 0x42008d61:0x3fcaad10 0x4200987e:0x3fcb6cd0 0x42008d1f:0x3fcb6df0 0x4037d6f5:0x3fcb6e10"
+  ],
+  "addr2line_argv": [
+    "C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/xtensa-esp32s3-elf-addr2line.exe",
+    "-pfiaC",
+    "-e",
+    "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-flash-r02\\checkout\\build\\meter_esp32s3.elf",
+    "0x40378e5b",
+    "0x403778f9",
+    "0x400570eb",
+    "0x4200c464",
+    "0x42008d61",
+    "0x4200987e",
+    "0x42008d1f",
+    "0x4037d6f5",
+    "0x4200c333",
+    "0x4200c489"
+  ],
+  "addr2line_exit_code": 0,
+  "decoded_backtrace": "0x40378e5b: gdma_default_tx_isr at C:/Espressif/v5.3.2/esp-idf/components/esp_hw_support/dma/gdma.c:836\r\n0x403778f9: _xt_lowint1 at C:/Espressif/v5.3.2/esp-idf/components/xtensa/xtensa_vectors.S:1240\r\n0x400570eb: ?? ??:0\r\n0x4200c464: meter_parse_frame at C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/src/meter_parser.c:346\r\n0x42008d61: on_frame_received at C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/main/main.c:52\r\n0x4200987e: bsp_serial_poll at C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/bsp/src/bsp_serial.c:90\r\n0x42008d1f: serial_rx_task at C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/main/main.c:83\r\n0x4037d6f5: vPortTaskWrapper at C:/Espressif/v5.3.2/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139\r\n0x4200c333: meter_verify_frame_crc at C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/src/meter_parser.c:124\r\n0x4200c489: meter_parse_frame at C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/src/meter_parser.c:349\r\n",
+  "operator_source_edits": false,
+  "operator_firmware_rebuild": false,
+  "scope": "Decode original captured crash with submitted matching ELF; exact defect cause not repaired or attributed beyond captured symbols."
+}

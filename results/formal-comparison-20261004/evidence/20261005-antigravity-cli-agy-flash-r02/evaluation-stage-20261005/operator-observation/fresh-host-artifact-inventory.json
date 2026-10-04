@@ -1,0 +1,52 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "implementation_commit": "94018f1785a590e1514ef1b5145c40f0c03ffca3",
+  "files": {
+    "test_meter_parser.exe": {
+      "path": "C:\\meter-host-evaluations-20261005\\agy-flash-r02\\test_meter_parser.exe",
+      "bytes": 147456,
+      "sha256": "844c285aaf8347e18d4a2592e321735c9ab20ec7ed29994ac448f2979491e80c"
+    },
+    "test_meter_state.exe": {
+      "path": "C:\\meter-host-evaluations-20261005\\agy-flash-r02\\test_meter_state.exe",
+      "bytes": 149504,
+      "sha256": "6502621720e35bbf5cf764e0dea4e43c73ddc8aeadc6d5ee79fb4b17c97a373d"
+    },
+    "test_feature_imu.exe": {
+      "path": "C:\\meter-host-evaluations-20261005\\agy-flash-r02\\test_feature_imu.exe",
+      "bytes": 92160,
+      "sha256": "42a8a2e65e1520030875bb081b1f0aa476ee066dd29e13415e471fcb59dfdb72"
+    },
+    "test_gui_regression.exe": {
+      "path": "C:\\meter-host-evaluations-20261005\\agy-flash-r02\\test_gui_regression.exe",
+      "bytes": 161280,
+      "sha256": "0f6b9379355681fe26b06747578d5607dee300dca24a3c94a7087e02c9ecdb4b"
+    },
+    "meter_legacy_adapter.exe": {
+      "path": "C:\\meter-host-evaluations-20261005\\agy-flash-r02\\meter_legacy_adapter.exe",
+      "bytes": 144384,
+      "sha256": "da35d8713434519580be4a3c517667caf3e7234c79ab11e29a47ae420cd66516"
+    },
+    "libmeter_core.a": {
+      "path": "C:\\meter-host-evaluations-20261005\\agy-flash-r02\\libmeter_core.a",
+      "bytes": 87808,
+      "sha256": "c9c9db591d9fc55b74187d68642bf71d53e06500d4e3131559f4dfd669aa5449"
+    },
+    "CMakeCache.txt": {
+      "path": "C:\\meter-host-evaluations-20261005\\agy-flash-r02\\CMakeCache.txt",
+      "bytes": 18174,
+      "sha256": "b6b3c9c68178f8823cab821466677f4d3febdf04b7213c35da6a6b727d55d059"
+    },
+    "CTestTestfile.cmake": {
+      "path": "C:\\meter-host-evaluations-20261005\\agy-flash-r02\\CTestTestfile.cmake",
+      "bytes": 1834,
+      "sha256": "cc20db1a2e2efa4c1bb51210979872fc67a6930f4520776fea80672989527ac3"
+    },
+    "Testing/Temporary/LastTest.log": {
+      "path": "C:\\meter-host-evaluations-20261005\\agy-flash-r02\\Testing\\Temporary\\LastTest.log",
+      "bytes": 2934,
+      "sha256": "fc9de5d95a25f99458419466dd6f4626d11eec36ab4aa06c4e88f0dc24514be4"
+    }
+  },
+  "scope": "Separate operator host build, never uploaded. Submitted candidate binaries retained unchanged."
+}

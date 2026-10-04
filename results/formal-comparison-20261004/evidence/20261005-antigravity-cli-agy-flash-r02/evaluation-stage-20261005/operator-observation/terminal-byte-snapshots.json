@@ -1,0 +1,261 @@
+{
+  "sources": {
+    "CMakeLists.txt": {
+      "sha256": "fae4f2339efb870b9f5c2f31a6de24f6c195d42fd4ad9c9cb42892fbfbdfe0c7",
+      "bytes": 2164,
+      "path": "operator-observation/source-snapshot/CMakeLists.txt"
+    },
+    "main_host.c": {
+      "sha256": "1d97b17659b2789e8526c9bb8ddea9da32142560b601c74d262f08d30f4a3cef",
+      "bytes": 90,
+      "path": "operator-observation/source-snapshot/main_host.c"
+    },
+    "sdkconfig": {
+      "sha256": "4060cca465a94ee73d34788de27069b0cc29ba19406e18cbeb28305146be2824",
+      "bytes": 69588,
+      "path": "operator-observation/source-snapshot/sdkconfig"
+    },
+    "sdkconfig.defaults": {
+      "sha256": "7fd8a7491855271492cbf3f2e8f599914fcd088f87bd0ea0ede8cf91129c0c67",
+      "bytes": 371,
+      "path": "operator-observation/source-snapshot/sdkconfig.defaults"
+    },
+    "sdkconfig.old": {
+      "sha256": "35108995b8c5d89bc8eca31354440998c365f722d247b0b94bfb7745274c09ae",
+      "bytes": 69721,
+      "path": "operator-observation/source-snapshot/sdkconfig.old"
+    },
+    "components/bsp/CMakeLists.txt": {
+      "sha256": "07c86934d4f3aaeace214c297f40a9b11193ce2b909378876553e89b7fcb65ad",
+      "bytes": 377,
+      "path": "operator-observation/source-snapshot/components/bsp/CMakeLists.txt"
+    },
+    "components/bsp/include/bsp_board.h": {
+      "sha256": "1245ba2e66f3095a836d4a6e66caf021a8137673016c2d12a7f711883fa1373e",
+      "bytes": 1022,
+      "path": "operator-observation/source-snapshot/components/bsp/include/bsp_board.h"
+    },
+    "components/bsp/include/bsp_button.h": {
+      "sha256": "456afe6a4bdce7f5c76bb7df0652afeb3ed69b63cf53c4f5d0ccc07ae5c8be58",
+      "bytes": 465,
+      "path": "operator-observation/source-snapshot/components/bsp/include/bsp_button.h"
+    },
+    "components/bsp/include/bsp_imu.h": {
+      "sha256": "2c7ae24445a2d5be005a337596c9b1b6f8c31f24dc560883e1c5224a6d543606",
+      "bytes": 444,
+      "path": "operator-observation/source-snapshot/components/bsp/include/bsp_imu.h"
+    },
+    "components/bsp/include/bsp_lcd.h": {
+      "sha256": "55aca9ad149a055de3ee423ab9cbd5b991e0f730faaf8a9383eef311efaece05",
+      "bytes": 627,
+      "path": "operator-observation/source-snapshot/components/bsp/include/bsp_lcd.h"
+    },
+    "components/bsp/include/bsp_serial.h": {
+      "sha256": "3f2ed175d7192ef2138344f24da4d35630e4af2ae62930bfb90a4006a107fcc1",
+      "bytes": 506,
+      "path": "operator-observation/source-snapshot/components/bsp/include/bsp_serial.h"
+    },
+    "components/bsp/src/bsp_button.c": {
+      "sha256": "c7fb8c52d7546824164a1a0e5df2ecdcf333883ee2bbbb5e660cba9e8135bf28",
+      "bytes": 1255,
+      "path": "operator-observation/source-snapshot/components/bsp/src/bsp_button.c"
+    },
+    "components/bsp/src/bsp_imu.c": {
+      "sha256": "472555c3333e91a755fe6f86a3966eae3c525887a708f4410326224e98150722",
+      "bytes": 3090,
+      "path": "operator-observation/source-snapshot/components/bsp/src/bsp_imu.c"
+    },
+    "components/bsp/src/bsp_lcd.c": {
+      "sha256": "b29d7297bef2aa3f59076bb6a1d93b6edc3ed209281ae98646836057a3bcd3cd",
+      "bytes": 9596,
+      "path": "operator-observation/source-snapshot/components/bsp/src/bsp_lcd.c"
+    },
+    "components/bsp/src/bsp_serial.c": {
+      "sha256": "6f362bc1c33edec4e6577dbe9137852fb313028fb19910a3a7238e2dfb13f051",
+      "bytes": 2917,
+      "path": "operator-observation/source-snapshot/components/bsp/src/bsp_serial.c"
+    },
+    "components/meter_core/CMakeLists.txt": {
+      "sha256": "3ed2df1f5aa347c9826f40d79eb9c0d1786dbb53575a3647a9a7da97776c5703",
+      "bytes": 332,
+      "path": "operator-observation/source-snapshot/components/meter_core/CMakeLists.txt"
+    },
+    "components/meter_core/include/feature_imu.h": {
+      "sha256": "71d08ce6d09f1cea76d318e658f355a3431cf6f26bdd4c6f65597e33468e1228",
+      "bytes": 1164,
+      "path": "operator-observation/source-snapshot/components/meter_core/include/feature_imu.h"
+    },
+    "components/meter_core/include/meter_crc.h": {
+      "sha256": "d104dfd57f23b682ac9f803ba0536eb7bdf1cca26d7b0e31854d45202f9da8d8",
+      "bytes": 306,
+      "path": "operator-observation/source-snapshot/components/meter_core/include/meter_crc.h"
+    },
+    "components/meter_core/include/meter_gui.h": {
+      "sha256": "98813fa2444c554a6df971234a7548a16779bb47b5b0b1d99b9b1d7a21a9db44",
+      "bytes": 2302,
+      "path": "operator-observation/source-snapshot/components/meter_core/include/meter_gui.h"
+    },
+    "components/meter_core/include/meter_parser.h": {
+      "sha256": "e588d5fedb5740733cbda6ff18545ac3ff5e9d04737ea4949ff4cd39aba83aa8",
+      "bytes": 2029,
+      "path": "operator-observation/source-snapshot/components/meter_core/include/meter_parser.h"
+    },
+    "components/meter_core/include/meter_state.h": {
+      "sha256": "235f5469383acbb3762736481d4148284a51d155a7b7771457019ecafd1d9d60",
+      "bytes": 1841,
+      "path": "operator-observation/source-snapshot/components/meter_core/include/meter_state.h"
+    },
+    "components/meter_core/include/meter_types.h": {
+      "sha256": "d7610b0f133c5c91affe47ef9b9fc3bfe5a5d6a172a3c26d0e8d8ba159f9b8ed",
+      "bytes": 3265,
+      "path": "operator-observation/source-snapshot/components/meter_core/include/meter_types.h"
+    },
+    "components/meter_core/src/feature_imu.c": {
+      "sha256": "35b44c53432b11d4bce62252a789ec8fe3f66bd1cba343f052e57027bd6a48d4",
+      "bytes": 2861,
+      "path": "operator-observation/source-snapshot/components/meter_core/src/feature_imu.c"
+    },
+    "components/meter_core/src/meter_crc.c": {
+      "sha256": "fabc8de85906856782556d45bd763046223d3be45ea3206e5ad7bf66ff2f5479",
+      "bytes": 851,
+      "path": "operator-observation/source-snapshot/components/meter_core/src/meter_crc.c"
+    },
+    "components/meter_core/src/meter_gui.c": {
+      "sha256": "25b2f627172b9e770492bff874a5edc556b808645224b9365b7302c20f2f9ba9",
+      "bytes": 25977,
+      "path": "operator-observation/source-snapshot/components/meter_core/src/meter_gui.c"
+    },
+    "components/meter_core/src/meter_parser.c": {
+      "sha256": "49aace758349b008a7af07aade6e173de0f4f6ac9e1ce429d8cb47fb475ddb16",
+      "bytes": 19941,
+      "path": "operator-observation/source-snapshot/components/meter_core/src/meter_parser.c"
+    },
+    "components/meter_core/src/meter_state.c": {
+      "sha256": "70af531807eecbcd1d0e0cce398c25b6f41e167f76009f2a1a85a97599a5857e",
+      "bytes": 5137,
+      "path": "operator-observation/source-snapshot/components/meter_core/src/meter_state.c"
+    },
+    "docs/agent-runs/20261005-antigravity-cli-agy-flash-r02/hardware-feature-selection.md": {
+      "sha256": "d660adaa2e1088b007767ce0df0f98d4f9512c8c86639931ad84f79abe5e1e88",
+      "bytes": 6063,
+      "path": "operator-observation/source-snapshot/docs/agent-runs/20261005-antigravity-cli-agy-flash-r02/hardware-feature-selection.md"
+    },
+    "main/CMakeLists.txt": {
+      "sha256": "88d7f5fd257efb273668dfeac81eb3eeff9a0f48d6b6cc9a3f7576e47d19b6a4",
+      "bytes": 193,
+      "path": "operator-observation/source-snapshot/main/CMakeLists.txt"
+    },
+    "main/main.c": {
+      "sha256": "1b3786282504f3eab9175179fd3a54b9f9ed965e4b51abb1fcac61ebd3e88bf6",
+      "bytes": 8029,
+      "path": "operator-observation/source-snapshot/main/main.c"
+    },
+    "results/20261005-antigravity-cli-agy-flash-r02/e2e-evaluation-manifest.json": {
+      "sha256": "d4f78994e573009af97e150635a1cdfd2814fdc984cb0d27bea22c67982d619e",
+      "bytes": 432,
+      "path": "operator-observation/source-snapshot/results/20261005-antigravity-cli-agy-flash-r02/e2e-evaluation-manifest.json"
+    },
+    "results/20261005-antigravity-cli-agy-flash-r02/end-to-end-result.json": {
+      "sha256": "ef66f9a0b831116a8e4c25265c21dc3e038ef257731c6eeda1a804144fec7b86",
+      "bytes": 15686,
+      "path": "operator-observation/source-snapshot/results/20261005-antigravity-cli-agy-flash-r02/end-to-end-result.json"
+    },
+    "scripts/pc_collector_sender.py": {
+      "sha256": "45bc86f5e3a04eef5fa405f17333ac68fc468750050379a8a4189c16c3ddc300",
+      "bytes": 10818,
+      "path": "operator-observation/source-snapshot/scripts/pc_collector_sender.py"
+    },
+    "tests/meter_legacy_adapter.c": {
+      "sha256": "71cca692cbf9ceb5b369609dcf9f15b45c413ba82f8521a90115d2a404feb9ac",
+      "bytes": 8510,
+      "path": "operator-observation/source-snapshot/tests/meter_legacy_adapter.c"
+    },
+    "tests/test_evaluation_contract.py": {
+      "sha256": "19653fb21495766210f4e4b0c6da2db87273dbca1c4a1f383d92b6db793fddaf",
+      "bytes": 2796,
+      "path": "operator-observation/source-snapshot/tests/test_evaluation_contract.py"
+    },
+    "tests/test_feature_imu.c": {
+      "sha256": "f1766986ecade14f3d24a9697c4e62a5e65d06ee01bb0ad8862f3dc191fb2c3d",
+      "bytes": 2911,
+      "path": "operator-observation/source-snapshot/tests/test_feature_imu.c"
+    },
+    "tests/test_gui_regression.c": {
+      "sha256": "9704d2cf520375a401add5d9d00c9fe46ef34cc290ed4b3da615743a343eecfd",
+      "bytes": 3154,
+      "path": "operator-observation/source-snapshot/tests/test_gui_regression.c"
+    },
+    "tests/test_legacy_adapter.py": {
+      "sha256": "93e069869ea1223efc91ca8adfd6091e2afaa10e88a0e94fbcddc5be3b47db7a",
+      "bytes": 1337,
+      "path": "operator-observation/source-snapshot/tests/test_legacy_adapter.py"
+    },
+    "tests/test_meter_parser.c": {
+      "sha256": "073fbb2518a13fd2617bba22430910138f1ddfa68b144bdec6009cc624a7639f",
+      "bytes": 3958,
+      "path": "operator-observation/source-snapshot/tests/test_meter_parser.c"
+    },
+    "tests/test_meter_state.c": {
+      "sha256": "e252ab29d2b84f70805d2fae8925ef0d6fdff181369a0ba2921df07e1690a866",
+      "bytes": 4613,
+      "path": "operator-observation/source-snapshot/tests/test_meter_state.c"
+    },
+    "tests/test_pc_collector_sender.py": {
+      "sha256": "f03c03c242a71927a6d9775e39d2daef75e4581397588ca13758276cbbfd1137",
+      "bytes": 5326,
+      "path": "operator-observation/source-snapshot/tests/test_pc_collector_sender.py"
+    }
+  },
+  "artifacts": {
+    "build/meter_esp32s3.bin": {
+      "sha256": "3fe7cc55c2a0af238b869cc635571ce38584145f206e97f47154fb81637ed467",
+      "bytes": 343856,
+      "path": "operator-observation/artifact-snapshot/build/meter_esp32s3.bin"
+    },
+    "build/meter_esp32s3.elf": {
+      "sha256": "13169e137696f508bf78b0b63af751f3e8e99bedda3d21db2e7b51ce663b49b2",
+      "bytes": 4766192,
+      "path": "operator-observation/artifact-snapshot/build/meter_esp32s3.elf"
+    },
+    "build/meter_esp32s3.map": {
+      "sha256": "fcec992d411400a8636c5a58dc6318ffb290bcc94ebe425fafa40c9c023e35ce",
+      "bytes": 3480817,
+      "path": "operator-observation/artifact-snapshot/build/meter_esp32s3.map"
+    },
+    "build/bootloader/bootloader.bin": {
+      "sha256": "adea3cc5765c48bff59d3974ae53dcf399616b71e6599c5d692658e43bc7062f",
+      "bytes": 21504,
+      "path": "operator-observation/artifact-snapshot/build/bootloader/bootloader.bin"
+    },
+    "build/bootloader/bootloader.elf": {
+      "sha256": "1946a3c5a9d6c0a28bd2cd26c3edcc97dcc2ce04840edde6d61c1f5bdcf4f4c3",
+      "bytes": 524828,
+      "path": "operator-observation/artifact-snapshot/build/bootloader/bootloader.elf"
+    },
+    "build/bootloader/bootloader.map": {
+      "sha256": "07af6f39ae4f4074db6e925716fca1f4e796919e57a5af057f412a96336fe451",
+      "bytes": 594749,
+      "path": "operator-observation/artifact-snapshot/build/bootloader/bootloader.map"
+    },
+    "build/partition_table/partition-table.bin": {
+      "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "bytes": 3072,
+      "path": "operator-observation/artifact-snapshot/build/partition_table/partition-table.bin"
+    },
+    "build/flasher_args.json": {
+      "sha256": "391a82de496d1d48b451e3580b50a51a35673310d78b5904aa8101b0d4760e1f",
+      "bytes": 943,
+      "path": "operator-observation/artifact-snapshot/build/flasher_args.json"
+    },
+    "sdkconfig": {
+      "sha256": "4060cca465a94ee73d34788de27069b0cc29ba19406e18cbeb28305146be2824",
+      "bytes": 69588,
+      "path": "operator-observation/artifact-snapshot/sdkconfig"
+    },
+    "sdkconfig.defaults": {
+      "sha256": "7fd8a7491855271492cbf3f2e8f599914fcd088f87bd0ea0ede8cf91129c0c67",
+      "bytes": 371,
+      "path": "operator-observation/artifact-snapshot/sdkconfig.defaults"
+    }
+  }
+}

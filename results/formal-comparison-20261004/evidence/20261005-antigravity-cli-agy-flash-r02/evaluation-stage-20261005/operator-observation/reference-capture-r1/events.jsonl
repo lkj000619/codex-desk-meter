@@ -1,0 +1,23 @@
+{"kind": "port_open", "seconds": 0.0470000000204891, "utc": "2026-10-04T20:38:54.137406+00:00", "baud": 115200, "dtr": false, "rts": false, "note": "backend must set DTR/RTS before open; actual reset/re-enumeration requires observation"}
+{"kind": "write_start", "seconds": 0.0470000000204891, "utc": "2026-10-04T20:38:54.137406+00:00", "sequence": 0, "frame_sha256": "46d2381c3a9e7fcef740cfa6dc8ef34061bdf31d3143ea8dd8b69fedbdb1955d"}
+{"kind": "write_complete", "seconds": 0.06200000015087426, "utc": "2026-10-04T20:38:54.150807+00:00", "sequence": 0, "bytes_written": 1543}
+{"kind": "read", "seconds": 0.1720000000204891, "utc": "2026-10-04T20:38:54.259385+00:00", "bytes_received": 2293, "sha256": "0d10994017b767bbce8f85cfd47caa4e75a2808baaedb910a51b630b030a50e0"}
+{"kind": "read", "seconds": 0.23400000017136335, "utc": "2026-10-04T20:38:54.320712+00:00", "bytes_received": 360, "sha256": "435b7257d645120a18daf4f46dc7fd055b467544130e6f70e42c3caab546487a"}
+{"kind": "read", "seconds": 0.2809999999590218, "utc": "2026-10-04T20:38:54.374078+00:00", "bytes_received": 1111, "sha256": "0135678f9f50e535c39840f3dcf5ebfa4d58d64f43e0c2d21937f0bfdac3de9d"}
+{"kind": "read", "seconds": 0.5779999999795109, "utc": "2026-10-04T20:38:54.674980+00:00", "bytes_received": 55, "sha256": "314fff064bc08d7acb7a882e14cc2ab09e0d5a74578c89465e4744477454dbaf"}
+{"kind": "read", "seconds": 0.6410000000614673, "utc": "2026-10-04T20:38:54.737690+00:00", "bytes_received": 2359, "sha256": "4d05357097daf49e26091b1b81112519ddcfccbb444ec2f167ded0d96660af0e"}
+{"kind": "read", "seconds": 1.047000000020489, "utc": "2026-10-04T20:38:55.137380+00:00", "bytes_received": 169, "sha256": "ee629ab17249c31c3e9fdde830e0ca2b5a4077fcee855c1c8cb37d0509d3593b"}
+{"kind": "read", "seconds": 1.6559999999590218, "utc": "2026-10-04T20:38:55.747917+00:00", "bytes_received": 969, "sha256": "89db43504c6db391184f2ecfce745414f273b136f45af1fd57eaa1462672f72b"}
+{"kind": "write_start", "seconds": 5.109000000171363, "utc": "2026-10-04T20:38:59.197650+00:00", "sequence": 1, "frame_sha256": "46b51f55404dbb8ace1b7aa4b548eb33689372663238715897e2a8ad56530df1"}
+{"kind": "write_complete", "seconds": 5.125, "utc": "2026-10-04T20:38:59.210386+00:00", "sequence": 1, "bytes_written": 1543}
+{"kind": "read", "seconds": 5.187000000150874, "utc": "2026-10-04T20:38:59.275569+00:00", "bytes_received": 1105, "sha256": "fbc84a5db31afe8e5bb1ef5722d33c1e3fa78c3130aedba15ec81611f665082f"}
+{"kind": "read", "seconds": 5.25, "utc": "2026-10-04T20:38:59.337044+00:00", "bytes_received": 1381, "sha256": "023e63ff01db684a59e545db9527890809d15b978d84bd31943202072c690a5f"}
+{"kind": "read", "seconds": 5.312000000150874, "utc": "2026-10-04T20:38:59.398053+00:00", "bytes_received": 1087, "sha256": "ce4fd400625d0e7654d1ca8cffb858cfe9ef26fc1f61b6976134dd8ae0cdae37"}
+{"kind": "read", "seconds": 5.375, "utc": "2026-10-04T20:38:59.459498+00:00", "bytes_received": 191, "sha256": "ebef9963c4c3899d58581aa5ac4563ea8b42c60ee2fc916ebcd00ec1cde1ec4e"}
+{"kind": "read", "seconds": 5.655999999959022, "utc": "2026-10-04T20:38:59.753349+00:00", "bytes_received": 1919, "sha256": "ee92a0f5b34464608a230b8400dd9c669c6d093c505ae74283fba7bc58664f58"}
+{"kind": "read", "seconds": 5.719000000040978, "utc": "2026-10-04T20:38:59.809173+00:00", "bytes_received": 495, "sha256": "1db767c2a8dccd66031c24476968847ed328ed75d9b83993e9057d8fc762fa04"}
+{"kind": "read", "seconds": 6.077999999979511, "utc": "2026-10-04T20:39:00.167025+00:00", "bytes_received": 79, "sha256": "54df20fb4f3c2ef7be34d46fbb67cda105e4f8ba07adeeb8e90186a4e364003c"}
+{"kind": "read", "seconds": 6.141000000061467, "utc": "2026-10-04T20:39:00.230622+00:00", "bytes_received": 90, "sha256": "7e35578b4ba7f21e6d26e5117621acc5a17b6afb5ae0388e015b7aa882d49ac3"}
+{"kind": "read", "seconds": 6.672000000020489, "utc": "2026-10-04T20:39:00.766952+00:00", "bytes_received": 389, "sha256": "6a48c3d72d7f5e1232694c035bcf6f07723e45f7329bff972edfe060b3890205"}
+{"kind": "read", "seconds": 6.734000000171363, "utc": "2026-10-04T20:39:00.829759+00:00", "bytes_received": 580, "sha256": "c7d46ef30ac3625463d986f9639670338f9e3238b19e535ac5e978b028b596d7"}
+{"kind": "port_close", "seconds": 10.125, "utc": "2026-10-04T20:39:04.210694+00:00"}

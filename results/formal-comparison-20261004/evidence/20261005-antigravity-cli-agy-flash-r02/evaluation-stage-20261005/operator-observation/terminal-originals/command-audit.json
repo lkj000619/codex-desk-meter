@@ -1,0 +1,326 @@
+{
+  "source_sha256": "42e4b54ce49cf9c4c5c85b1f3577b94fe653ef7176b5d2367c149d5601cc20ab",
+  "tool_calls": 177,
+  "command_count": 45,
+  "failed_commands": null,
+  "failed_commands_lower_bound": 0,
+  "unknown_exit_commands": 45,
+  "commands": [
+    {
+      "step_index": 20,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 22,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 28,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 36,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 40,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 42,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 44,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 46,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 52,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 56,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 58,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 66,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 74,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 118,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 128,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 134,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 160,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 162,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 166,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 168,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 172,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 176,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 180,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 182,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 188,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 192,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 196,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 201,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 203,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 227,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 255,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 259,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 277,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 279,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 285,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 289,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 291,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 293,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 343,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 351,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 357,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 359,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 361,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 363,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 365,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    }
+  ],
+  "availability_note": "DONE/output text is not an exit status. Total failure count is null when any command exit is unknown; lower bound preserves explicit tool errors/nonzero exits. File-tool errors are not shell commands."
+}

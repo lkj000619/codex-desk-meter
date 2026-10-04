@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-05 OpenCode 첫 series의 예산 소진 종료와 AGY Flash 최초 평가·독립 복원 완료. AGY 최초의 environment_failed·제출 누락·USB write timeout·기준 미도달·eligible 정책은 보존한다. 후속 1회차는 04:59:40 KST completed로 종료됐으며 동결·정책/빌드 근거 검토·실물/RM 평가 대기다. 전체 비교는 진행 중이다.
-후보 실행 시작 4회·종료 4회(최초 2·후속 2). AGY Flash 후속 1회차의 최종 JSON·선택 문서는 있으며 CTest의 이전 회차 실행 파일 참조 문제를 확인했다. AGY Pro·Codex Sol/Luna는 미시작이다. 독립 series 완료는 OpenCode 1개/예정 15개다.
+상태: 2026-10-05 AGY Flash 후속 1회차의 동결·정책·독립 host 검증과 COM3 업로드/공통 데이터 전송 기록까지 완료했다. 05:38:52 KST 원본 펌웨어 업로드 후 장치 수락 로그 0건·LoadProhibited panic/재부팅 2회를 관측했으며 사용자 LCD/BOOT 영상과 최종 RM·복원이 남아 있다. 최초 environment_failed·제출 누락·USB write timeout·기준 미도달·eligible 정책은 보존한다. 전체 비교는 진행 중이다.
+후보 실행 시작 4회·종료 4회(최초 2·후속 2). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. AGY Pro·Codex Sol/Luna는 미시작이다. 독립 series 완료는 OpenCode 1개/예정 15개다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -403,3 +403,48 @@ manifest·ledger·raw 로그·41개 source·10개 artifact/설정 원본을 복�
 다음 단계는 terminal 구현의 Git 동결, 정책 및 빌드/시험 근거 검토, 동결 validator와 공통 fixture의
 독립 검증, 이후 운영자 업로드·실물/RM 평가다. 후속 잔여 5,710.781초·2회를 이번 종료 비용에서 계산하며
 같은 회차를 재시작하지 않는다. 현재 series 평가와 다음 회차 판단 전에 AGY Pro를 시작하지 않는다.
+
+## 2026-10-05 AGY Flash 후속 1회차 동결·독립 검증·업로드
+
+사용자가 현재 진행 단계와 업로드/촬영 절차를 확인해, [후속 평가 계획](../../docs/plans/2026-10-05-agy-flash-followup-evaluation.md)에 따라 평가를 이어갔다.
+종료 raw source 41개·artifact/설정 10개를 기존 사본과 대조하고 구현을
+`94018f1785a590e1514ef1b5145c40f0c03ffca3`으로 동결·bundle 보존했다. terminal manifest/ledger는 변경하지 않았다.
+
+[정책 review](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/policy-review.json)는
+invalid_for_comparison이다. native CTest 3회가 r01의 실행 파일 4개를 호출했고 inherited cache를 사용한
+build가 이전 checkout에 접근했다. 후속 prompt의 이전 run 접근 제한을 충족하지 못했다.
+운영 도구가 추적된 build 출력/절대 경로를 clone에 승계한 기여를 기록하며 후보의 의도를 추정하지 않는다.
+이 회차의 품질을 같은 조건 순위에 넣지 않고 전체 비용·실물 결과는 보존한다.
+누락 파일 오류 3건은 permission denial이 아니며 stop-on-denial 위반으로 분류하지 않는다. 실행 중 운영자 개입 감사는 0회이며 원본 telemetry의 null은 유지한다.
+
+[독립 host 검증](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/operator-observation/host-checks.json)은
+동결 operator validator로 제출 JSON을 검증했고 Python 6개 시험이 통과했다. r02 실행 파일 4개를 직접 실행한 기록도 보존했다.
+원래 CTest는 r01 실행 파일을 사용하므로 이번 source 증거로 쓰지 않는다. 대신 같은 LLVM/MinGW compiler로
+`C:/meter-host-evaluations-20261005/agy-flash-r02`에 host만 새로 빌드해 C 시험 4개를 통과했다.
+이 별도 host 검증은 제출 파일·원본 로그·정책 판정을 수정하지 않는다. firmware를 운영자가 다시 빌드하지 않았다.
+
+ESP-IDF project/compile database가 현재 r02 checkout을 가리키고 마지막 후보 build 이후 firmware source 수정이 없음을 확인했다.
+[실제 collector](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/operator-observation/common-stimulus-check.json)는
+default 5 usage/2 reset, legacy 1 usage/2 reset이며 모두 공통 payload와 다르다. legacy의 percent_remaining은 58%/82%지만
+provider/agent/snapshot identity, stale/error/reset 의미 등이 다르다. 고정 payload를 넣은 encoder의 seq 0·1 wire 일치는 별도다.
+
+[하드웨어 슬롯](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/operator-observation/hardware-slot.json)은
+COM3의 VID303A/PID1001·보드 serial을 확인하고 NVS 0x9000/0x6000만 초기화했다.
+05:38:52.012 KST에 원본 bootloader/partition/app의 업로드와 esptool hash 검증을 마쳤다.
+app 343,856 bytes SHA-256은 `3fe7cc55c2a0af238b869cc635571ce38584145f206e97f47154fb81637ed467`이다.
+
+[공통 capture](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/operator-observation/reference-capture-r1/capture.json)는
+seq 0·1 각각 bytes_written 1,543이며 write timeout은 없었다. 실제 14,632-byte serial에는
+Frame accepted 기록이 없고 [LoadProhibited panic과 Rebooting](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/operator-observation/panic-source-review.json)이 각각 2회 있다.
+원본 ELF로 backtrace를 해석하면 gdma_default_tx_isr와 frame parser/serial 수신 호출 경로가 보인다.
+이 symbol 관측만으로 정확한 원인을 확정하지 않으며 운영자가 후보 source를 고치거나 재시도하지 않았다.
+PC 쓰기 완료는 장치 수락이나 화면 표시의 증거가 아니다.
+
+현재 보드에는 이 후속 원본이 있으며 serial을 닫고 사용자 광학/BOOT 관측을 기다린다.
+촬영 대상·LCD 문구/비율·방향/잘림·30초 유지·BOOT 3회 조작과 복귀를 영상에 연결한다.
+화면이 비거나 깜박임/재부팅·무반응이 있으면 그 결과를 보존한다. 영상 관측 전 RM review를 적용하지 않았다.
+후속 잔여 5,710.781초·2회, 원본 비용과 최초 판정은 유지하며 추가 후보 호출은 하지 않았다.
+
+[평가 단계 snapshot](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/snapshot-inventory.json)은 123개 파일/hash를 보존한다.
+공개 사본 복사 중 Windows 260-character 경로 제한 오류 1건이 있었으며 기존 부분 사본의 bytes를 대조하고 extended path로 보완했다.
+오류·복구를 sidecar에 남겼고 모델 호출·제품 수정·업로드 재시도는 없다. 최종 RM와 package의 독립 복원은 영상 이후다.

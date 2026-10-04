@@ -1,0 +1,28 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "reviewer": "Codex operator",
+  "reviewed_at": "2026-10-04T20:39:04.252542+00:00",
+  "source_commit": "94018f1785a590e1514ef1b5145c40f0c03ffca3",
+  "source": "main/main.c",
+  "source_sha256": "1b3786282504f3eab9175179fd3a54b9f9ed965e4b51abb1fcac61ebd3e88bf6",
+  "serial_source": "components/bsp/src/bsp_serial.c",
+  "serial_source_sha256": "6f362bc1c33edec4e6577dbe9137852fb313028fb19910a3a7238e2dfb13f051",
+  "sdkconfig_sha256": "4060cca465a94ee73d34788de27069b0cc29ba19406e18cbeb28305146be2824",
+  "artifact_sha256": "3fe7cc55c2a0af238b869cc635571ce38584145f206e97f47154fb81637ed467",
+  "raw_log": "operator-observation/reference-capture-r1/device-serial.bin",
+  "raw_log_sha256": "52fc2b7666ece86c4c497217a29d3785228b19562a9b32afa64c8f55b626ac90",
+  "raw_bytes": 14632,
+  "checks": [
+    {
+      "sequence": 0,
+      "literal_acceptance_observed": false
+    },
+    {
+      "sequence": 1,
+      "literal_acceptance_observed": false
+    }
+  ],
+  "meaning": "Frame accepted seq is emitted only after parsing and successful meter_state_process_frame. Optical display and timing remain separate.",
+  "source_transport_observation": "Candidate polls native USB Serial/JTAG RX after install; console USB Serial/JTAG and UART fallback retained.",
+  "transmitted_file_limit": "sent-frames records attempted bytes; use frame bytes_written and actual acceptance log separately to assess delivery."
+}

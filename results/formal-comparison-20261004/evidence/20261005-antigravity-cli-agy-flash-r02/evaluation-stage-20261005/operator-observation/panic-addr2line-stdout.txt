@@ -1,0 +1,10 @@
+0x40378e5b: gdma_default_tx_isr at C:/Espressif/v5.3.2/esp-idf/components/esp_hw_support/dma/gdma.c:836
+0x403778f9: _xt_lowint1 at C:/Espressif/v5.3.2/esp-idf/components/xtensa/xtensa_vectors.S:1240
+0x400570eb: ?? ??:0
+0x4200c464: meter_parse_frame at C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/src/meter_parser.c:346
+0x42008d61: on_frame_received at C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/main/main.c:52
+0x4200987e: bsp_serial_poll at C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/bsp/src/bsp_serial.c:90
+0x42008d1f: serial_rx_task at C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/main/main.c:83
+0x4037d6f5: vPortTaskWrapper at C:/Espressif/v5.3.2/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+0x4200c333: meter_verify_frame_crc at C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/src/meter_parser.c:124
+0x4200c489: meter_parse_frame at C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/src/meter_parser.c:349

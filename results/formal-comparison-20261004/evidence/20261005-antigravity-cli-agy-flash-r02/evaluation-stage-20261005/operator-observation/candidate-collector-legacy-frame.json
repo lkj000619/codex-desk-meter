@@ -1,0 +1,79 @@
+{
+  "protocol": "cdm/1",
+  "sequence": 0,
+  "sent_at": "2026-09-30T18:40:49Z",
+  "payload": {
+    "usage": [
+      {
+        "schema_version": 1,
+        "snapshot_id": "legacy-personal-usage",
+        "provider_id": "codex",
+        "agent_id": "fixture",
+        "host_id": "terminal",
+        "model_id": null,
+        "account_profile_id": "synthetic-example",
+        "source_kind": "fixture",
+        "metric_kind": "quota_window",
+        "unit": "percent",
+        "status": "available",
+        "observed_at": "2026-09-11T00:00:00Z",
+        "windows": [
+          {
+            "window_id": "five-hour",
+            "label": "5-hour window",
+            "used_units": null,
+            "remaining_units": null,
+            "limit_units": null,
+            "unit": "percent",
+            "percent_used": 42.0,
+            "percent_remaining": 58.0,
+            "resets_at": null
+          },
+          {
+            "window_id": "weekly",
+            "label": "Weekly window",
+            "used_units": null,
+            "remaining_units": null,
+            "limit_units": null,
+            "unit": "percent",
+            "percent_used": 18.0,
+            "percent_remaining": 82.0,
+            "resets_at": null
+          }
+        ],
+        "stale": false,
+        "last_good_at": "2026-09-11T00:00:00Z",
+        "error_code": null,
+        "error_reason": null
+      }
+    ],
+    "global_resets": [
+      {
+        "schema_version": 1,
+        "source": "codex-reset.com",
+        "captured_at": "2026-09-10T16:54:07Z",
+        "latest_reset_at": "2026-09-08T04:05:53Z",
+        "forecast_24h_percent": 22,
+        "forecast_48h_percent": 39,
+        "forecast_is_schedule": false,
+        "stale": false,
+        "error_code": null
+      },
+      {
+        "schema_version": 1,
+        "source": "codex-resets.com",
+        "captured_at": "2026-09-10T16:54:07Z",
+        "latest_reset_at": "2026-09-08T01:56:00Z",
+        "forecast_24h_percent": null,
+        "forecast_48h_percent": null,
+        "forecast_is_schedule": false,
+        "stale": false,
+        "error_code": null
+      }
+    ]
+  },
+  "integrity": {
+    "algorithm": "crc32",
+    "value": "C70E9EB2"
+  }
+}

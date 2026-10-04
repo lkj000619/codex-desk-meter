@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-05. 상태: **OpenCode 첫 series의 예산 소진 종료와 AGY Flash 최초 평가·독립 복원 완료. AGY Flash 후속 1회차는 04:59:40 KST completed로 종료됐으며 최종 JSON·선택 문서를 제출했다. 종료 원본은 보존했고 동결·정책/빌드 근거 검토·실물/RM 평가가 남아 있다. CTest가 최초 회차의 실행 파일을 사용한 문제를 확인했으므로 이번 구현의 C 시험 통과로 인정하지 않는다. 최초 실패·판정·비용과 활성 5개·동결 baseline은 유지한다.**
+확인일: 2026-10-05. 상태: **AGY Flash 후속 1회차의 동결·정책·독립 host 검증을 마치고 05:38:52 KST 원본 펌웨어를 COM3에 업로드했다. 공통 seq 0·1의 PC 쓰기는 완료됐으나 장치 수락 로그가 없고 LoadProhibited panic·재부팅 2회를 관측했다. 사용자 LCD/BOOT 영상과 최종 RM·독립 복원이 남아 있다. 이전 회차 경로 접근으로 정책은 invalid_for_comparison이다. 최초 실패·판정·비용, 활성 5개·동결 baseline은 유지한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -173,4 +173,13 @@ Python 6개와 결과 validator 통과는 후보 로그의 관측이며 아직 �
 이전 checkout의 `.ninja_log` 변경은 기록했고 최초 펌웨어/설정 10개 원본 hash는 그대로다. 최초 raw snapshot·bundle·독립 package를 보존한다.
 후속 terminal manifest/ledger·41개 source·10개 artifact/설정을 보존했으며 후보 코드 수정·재빌드·보드 접근은 하지 않았다.
 후속 누적 잔여 시간은 5,710.781초, 잔여 회차는 2회이나 다음 실행 판단은 현재 회차의 동결·정책/빌드 근거 검토·실물/RM 평가 이후다.
-정책과 RM은 미확정이며 같은 최초나 후속을 재호출하지 않는다. AGY Pro는 현재 series 처리 이후다.
+위 04:59 종료 확인 시점의 pending 기록은 원본으로 보존한다. 2026-10-05 후속 평가의 현재 상태는 다음과 같다.
+
+- [평가 계획](../plans/2026-10-05-agy-flash-followup-evaluation.md)에 따라 구현을 `94018f1785a590e1514ef1b5145c40f0c03ffca3`으로 동결했다. app SHA-256은 `3fe7cc55c2a0af238b869cc635571ce38584145f206e97f47154fb81637ed467`이다.
+- [정책 review](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/policy-review.json)는 invalid_for_comparison이다. 이전 회차 실행 파일과 checkout을 실제 사용했으며, 추적된 build 출력의 절대 경로가 후속 clone에 승계된 운영 도구 기여도 함께 기록했다. 누락 파일 오류 3건을 권한 거부로 잘못 분류하지 않는다.
+- [독립 host 검증](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/operator-observation/host-checks.json)은 제출 JSON·Python 6개·별도 새 host build의 C 시험 4개를 통과했다. 원래 CTest 기록의 잘못된 경로를 수정하거나 정식 비교 적격성을 복구한 것이 아니다.
+- 실제 default/legacy collector는 공통 payload와 다르다. legacy는 58%/82%를 만들지만 identity·stale/error/reset 의미가 다르며 encoder-only wire 일치와 구분한다.
+- [업로드 슬롯](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/operator-observation/hardware-slot.json)은 05:38:52.012 KST 업로드 완료다. 원본 app/bootloader/partition을 사용했고 firmware를 운영자가 재빌드하지 않았다.
+- [capture](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/operator-observation/reference-capture-r1/capture.json)는 seq 0·1 각각 1,543 bytes_written이다. [실제 오류](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005/operator-observation/panic-source-review.json)는 LoadProhibited panic·재부팅 2회와 수락 로그 0건이다. PC 쓰기 완료를 성공 수신이나 화면 표시로 해석하지 않는다.
+
+현재 보드의 후속 원본을 촬영 대상으로 유지하며 serial은 닫았다. 사용자 LCD/BOOT 관측 후 RM review를 한 번 적용하고 최종 package를 독립 복원한다. 같은 회차를 재호출하거나 AGY Pro를 먼저 시작하지 않는다. 후속 잔여 5,710.781초·2회와 최초 판정/원본 비용은 유지한다.

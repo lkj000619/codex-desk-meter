@@ -1,0 +1,7 @@
+{
+  "recorded_at": "2026-10-04T20:43:37.905400+00:00",
+  "operation": "First public evidence copy",
+  "error": "Windows 260-character file path limit; target hardware-feature-selection.md path length 265.",
+  "recovery": "Resume same incomplete evidence snapshot with extended Windows paths; verify already copied bytes before continuing. No candidate, hardware, terminal manifest or ledger mutation.",
+  "model_calls": 0
+}

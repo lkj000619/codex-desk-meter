@@ -1,0 +1,118 @@
+[
+  {
+    "case": "personal-usage.json:freshness",
+    "status": "pass"
+  },
+  {
+    "case": "personal-usage.json:invalid-0",
+    "status": "pass"
+  },
+  {
+    "case": "personal-usage.json:invalid-1",
+    "status": "pass"
+  },
+  {
+    "case": "personal-usage.json:invalid-2",
+    "status": "pass"
+  },
+  {
+    "case": "personal-usage.json:invalid-3",
+    "status": "pass"
+  },
+  {
+    "case": "personal-usage.json:invalid-4",
+    "status": "pass"
+  },
+  {
+    "case": "personal-usage.json:invalid-5",
+    "status": "pass"
+  },
+  {
+    "case": "personal-usage.json:dns",
+    "status": "pass"
+  },
+  {
+    "case": "personal-usage.json:tls",
+    "status": "pass"
+  },
+  {
+    "case": "personal-usage.json:http_500",
+    "status": "pass"
+  },
+  {
+    "case": "codex-reset-forecast.json:freshness",
+    "status": "pass"
+  },
+  {
+    "case": "codex-reset-forecast.json:invalid-0",
+    "status": "pass"
+  },
+  {
+    "case": "codex-reset-forecast.json:invalid-1",
+    "status": "pass"
+  },
+  {
+    "case": "codex-reset-forecast.json:invalid-2",
+    "status": "pass"
+  },
+  {
+    "case": "codex-reset-forecast.json:invalid-3",
+    "status": "pass"
+  },
+  {
+    "case": "codex-reset-forecast.json:invalid-4",
+    "status": "pass"
+  },
+  {
+    "case": "codex-reset-forecast.json:invalid-5",
+    "status": "pass"
+  },
+  {
+    "case": "codex-reset-forecast.json:dns",
+    "status": "pass"
+  },
+  {
+    "case": "codex-reset-forecast.json:tls",
+    "status": "pass"
+  },
+  {
+    "case": "codex-reset-forecast.json:http_500",
+    "status": "pass"
+  },
+  {
+    "case": "codex-resets-history.json:freshness",
+    "status": "pass"
+  },
+  {
+    "case": "codex-resets-history.json:invalid-0",
+    "status": "pass"
+  },
+  {
+    "case": "codex-resets-history.json:invalid-1",
+    "status": "pass"
+  },
+  {
+    "case": "codex-resets-history.json:invalid-2",
+    "status": "pass"
+  },
+  {
+    "case": "codex-resets-history.json:invalid-3",
+    "status": "pass"
+  },
+  {
+    "case": "codex-resets-history.json:invalid-4",
+    "status": "pass"
+  },
+  {
+    "case": "codex-resets-history.json:dns",
+    "status": "pass"
+  },
+  {
+    "case": "codex-resets-history.json:tls",
+    "status": "pass"
+  },
+  {
+    "case": "codex-resets-history.json:http_500",
+    "status": "pass"
+  }
+]

@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-04T20:02:54.233187+00:00",
+  "checked_at": "2026-10-04T20:43:38.202012+00:00",
   "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
   "block": 1,
   "seed": 1,
@@ -10,7 +10,7 @@
   "followups_started": 2,
   "product_executions_started": 4,
   "product_executions_completed": 4,
-  "state": "agy_flash_followup_1_terminal_awaiting_evaluation",
+  "state": "agy_flash_followup_1_awaiting_optical_observation",
   "current_run": "20261005-antigravity-cli-agy-flash-r02",
   "current_directory": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-flash-r02",
   "ledger": "C:\\meter-runs-20261005\\ledgers\\20261005-antigravity-cli-agy-flash-r01.json",
@@ -19,16 +19,16 @@
   "started_at": "2026-10-04T19:34:51.469Z",
   "ended_at": "2026-10-04T19:59:40.678Z",
   "timeout_seconds": 7200,
-  "launcher_pid": 30356,
+  "launcher_pid": null,
   "profile_sha256": "5b24fc4e43ee0bf74b1b8a1ddce7e08f5024760c8b9660ce1c5aabbe966668f8",
   "input_bundle_sha256": "9f4472eb4edb2c9488685b59b2f9a73b5d3f3dc11b002d651bfd37f4dc1d0a51",
   "receipt_sha256": "f827db5266b8a27d654c1fdbbd08ef6eedccfb38c2643e2daf544748823ad81b",
   "policy_review_required": true,
-  "policy_status": "pending_terminal_review",
+  "policy_status": "invalid_for_comparison",
   "hardware_access_by_operator_during_candidate": false,
   "user_interventions_reported": null,
   "operator_implementation_feedback_sent_during_run": false,
-  "rm_review": "awaiting_operator_evaluation",
+  "rm_review": "awaiting_user_optical_observation",
   "elapsed_seconds": 1489.219000000041,
   "tokens": {
     "input": 1472560,
@@ -43,7 +43,7 @@
   "candidate_hardware_access": false,
   "launch_operator_errors_before_model": 0,
   "operator_preflight_error_model_calls": 0,
-  "board_state": "Same evaluated AGY Flash r01 frozen artifact; no operator serial/flash during followup execution.",
+  "board_state": "Frozen AGY Flash r02 artifact installed; common capture recorded; user LCD/BOOT observation pending.",
   "current_native_scope": "Original global settings/instructions/hooks restored and independently hash-verified; owner absent.",
   "previous_series": {
     "comparison_id": "20261004-opencode-cli-opencode-muse-r01",
@@ -114,7 +114,7 @@
   },
   "unstarted_models_remaining_in_block": 3,
   "next_after_current_series": "AGY Pro",
-  "restart_instruction": "Do not repeat r02. Preserve and Git-freeze terminal implementation, audit policy/build/test provenance, independently validate submitted result and fixtures, then perform operator hardware evaluation.",
+  "restart_instruction": "Do not rerun r02 or replace firmware before video evaluation. Current r02 original app uploaded 2026-10-05 05:38:52 KST. Match user recording to this slot/artifact, record optical/BOOT findings, apply one RM review, archive/restore, then decide allowed followup with 5710.781 seconds and 2 rounds remaining. Policy invalidity and crash/collector mismatch stay preserved.",
   "native_model_verified": "gemini-3.8-flash-medium",
   "native_permission_mode_verified": "request-review",
   "last_event_count": 775,
@@ -123,8 +123,8 @@
   "native_tool_events_observed": 177,
   "ongoing_usage_not_terminal": false,
   "candidate_terminal_status_observed": "completed",
-  "candidate_current_phase": "Final result and selection submitted; terminal bytes preserved. Git freeze, policy/build provenance review and operator hardware evaluation pending.",
-  "terminal_snapshot": "results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/terminal-status-20261005",
+  "candidate_current_phase": "Frozen and independently checked; submitted original firmware uploaded and common seq 0/1 writes completed. Two LoadProhibited panics/reboots, no acceptance logs. Await user optical/BOOT video and one-time final RM review.",
+  "terminal_snapshot": "results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-stage-20261005",
   "followups_started_for_current_series": 1,
   "remaining_current_series_followup_seconds": 5710.780999999959,
   "current_series_initial": {
@@ -188,5 +188,30 @@
     },
     "previous_raw_snapshots_bundle_and_final_package_preserved": true,
     "scope": "The final r02 CTest configuration explicitly executes r01 binaries. Candidate edited cache/build.ninja paths but did not regenerate this test file. Full policy and artifact provenance review remains pending."
-  }
+  },
+  "implementation_commit": "94018f1785a590e1514ef1b5145c40f0c03ffca3",
+  "source_git_freeze_status": "complete",
+  "hardware_artifact_sha256": "3fe7cc55c2a0af238b869cc635571ce38584145f206e97f47154fb81637ed467",
+  "hardware_upload": "pass",
+  "hardware_upload_completed_at": "2026-10-04T20:38:52.012714+00:00",
+  "hardware_reference_capture": "captured",
+  "receiver_acceptance_observed": false,
+  "receiver_acceptance_sequences": [],
+  "hardware_common_frames_bytes_written": [
+    1543,
+    1543
+  ],
+  "hardware_load_prohibited_panics_observed": 2,
+  "hardware_rebooting_markers_observed": 2,
+  "candidate_host_tests": {
+    "python_passed": 6,
+    "fresh_host_c_tests_passed": 4,
+    "submitted_executables_passed": 4
+  },
+  "candidate_result_independent_schema_validation": "pass",
+  "candidate_collector_common_payload_match": false,
+  "candidate_collector_default_common_payload_match": false,
+  "candidate_collector_legacy_common_payload_match": false,
+  "candidate_encoder_common_wire_match": true,
+  "operator_audited_user_interventions": 0
 }

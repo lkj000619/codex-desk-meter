@@ -1,0 +1,135 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "implementation_commit": "94018f1785a590e1514ef1b5145c40f0c03ffca3",
+  "artifact_sha256": "3fe7cc55c2a0af238b869cc635571ce38584145f206e97f47154fb81637ed467",
+  "owner": "Codex operator",
+  "port": "COM3",
+  "ports": [
+    {
+      "port": "COM1",
+      "vid": null,
+      "pid": null,
+      "hwid": "ACPI\\PNP0501\\0"
+    },
+    {
+      "port": "COM3",
+      "vid": 12346,
+      "pid": 4097,
+      "hwid": "USB VID:PID=303A:1001 SER=28:84:85:B0:85:18"
+    }
+  ],
+  "started_at": "2026-10-04T20:38:38.736007+00:00",
+  "status": "awaiting_user_optical_observation",
+  "candidate_execution_status": "completed",
+  "policy_status": "invalid_for_comparison",
+  "evaluation_scope": "Product observations for preserved attempt; policy invalidity excludes quality ranking but does not erase failures/cost or prohibit operator product evidence.",
+  "operator_source_modification": false,
+  "operator_firmware_rebuild": false,
+  "nvs_reset_scope": {
+    "label": "nvs",
+    "offset": 36864,
+    "bytes": 24576
+  },
+  "partition_sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+  "full_flash_erase": false,
+  "common_fixture_reference": "codex-7923f96",
+  "commands": [
+    {
+      "name": "nvs-erase",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-m",
+        "esptool",
+        "--chip",
+        "esp32s3",
+        "--port",
+        "COM3",
+        "--before",
+        "default_reset",
+        "--after",
+        "hard_reset",
+        "erase_region",
+        "0x9000",
+        "0x6000"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.375
+    },
+    {
+      "name": "frozen-artifact-upload",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-m",
+        "esptool",
+        "--chip",
+        "esp32s3",
+        "--port",
+        "COM3",
+        "--baud",
+        "460800",
+        "--before",
+        "default_reset",
+        "--after",
+        "hard_reset",
+        "write_flash",
+        "--flash_mode",
+        "dio",
+        "--flash_size",
+        "16MB",
+        "--flash_freq",
+        "80m",
+        "0x0",
+        "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-flash-r02\\checkout\\build\\bootloader\\bootloader.bin",
+        "0x8000",
+        "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-flash-r02\\checkout\\build\\partition_table\\partition-table.bin",
+        "0x10000",
+        "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-flash-r02\\checkout\\build\\meter_esp32s3.bin"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.891000000061467
+    },
+    {
+      "name": "reference-capture",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\meter-operator-20261004\\scripts\\observe-product.py",
+        "--frames",
+        "C:\\meter-operator-20261004\\experiments\\reference\\codex-7923f96\\expected-frames.jsonl",
+        "--reference-time",
+        "2026-09-30T18:40:49Z",
+        "--send",
+        "--port",
+        "COM3",
+        "--output",
+        "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-flash-r02\\operator-observation\\reference-capture-r1",
+        "--wait-seconds",
+        "5"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 10.233999999938533
+    }
+  ],
+  "upload_completed": true,
+  "upload_completed_at": "2026-10-04T20:38:52.012714+00:00",
+  "reference_capture_status": "captured",
+  "reference_capture_error": null,
+  "receiver_acceptance_review": [
+    {
+      "sequence": 0,
+      "literal_acceptance_observed": false
+    },
+    {
+      "sequence": 1,
+      "literal_acceptance_observed": false
+    }
+  ],
+  "receiver_acceptance_observed": false,
+  "complete_common_stimulus_transmission_confirmed": true,
+  "serial_closed_after_capture": true,
+  "upload_and_capture_ended_at": "2026-10-04T20:39:04.254048+00:00",
+  "board_state": "Frozen AGY Flash r02 artifact installed; common capture recorded; user LCD/BOOT observation pending.",
+  "recorded_at": "2026-10-04T20:39:04.254048+00:00"
+}
