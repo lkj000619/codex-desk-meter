@@ -125,22 +125,43 @@ def create_package(directory, destination):
         _load_e2e_validator().validate_result(result, manifest=evaluation, evidence_root=checkout,
                                             manifest_root=checkout if (checkout / result["manifest"]["path"]).exists() else directory)
         sources["operator/raw-result.json"] = result_path
-    build = checkout / "build"
-    artifact_names = []
-    if build.is_dir():
-        for source in build.rglob("*"):
-            if source.is_file() and source.suffix in {".bin", ".elf", ".map"}:
-                name = source.relative_to(checkout).as_posix()
-                safe_path(checkout, name)
-                sources["checkout/" + name] = source
-                artifact_names.append(name)
+    build_roots = set()
+    if result is not None:
+        for name in result["build"]["evidence"]:
+            source = safe_path(checkout, name)
+            if source.suffix in {".bin", ".elf", ".map"}:
+                build = source.parent
+                if source.name in {"bootloader.bin", "partition-table.bin"}:
+                    build = build.parent
+                build_roots.add(build)
+    if not build_roots:
+        build_roots.add(checkout / "build")
+    artifact_groups = []
+    for build in sorted(build_roots):
+        group = []
+        if build.is_dir():
+            for source in build.rglob("*"):
+                if source.is_file() and source.suffix in {".bin", ".elf", ".map"}:
+                    name = source.relative_to(checkout).as_posix()
+                    safe_path(checkout, name)
+                    sources["checkout/" + name] = source
+                    group.append(name)
+        artifact_groups.append(group)
+        config = build.parent / "sdkconfig"
+        if config.is_file():
+            name = config.relative_to(checkout).as_posix()
+            safe_path(checkout, name)
+            sources["checkout/" + name] = config
+    artifact_names = sorted({name for group in artifact_groups for name in group})
     if result is not None and result["build"]["status"] == "pass":
-        required = (any(name.endswith(".elf") for name in artifact_names),
-                    any(name.endswith(".map") for name in artifact_names),
-                    any(name.endswith("bootloader.bin") for name in artifact_names),
-                    any(name.endswith("partition-table.bin") for name in artifact_names),
-                    any(name.endswith(".bin") and "/bootloader/" not in name and "/partition_table/" not in name for name in artifact_names))
-        if not all(required):
+        complete_groups = [all((
+            any(name.endswith(".elf") for name in group),
+            any(name.endswith(".map") for name in group),
+            any(name.endswith("bootloader.bin") for name in group),
+            any(name.endswith("partition-table.bin") for name in group),
+            any(name.endswith(".bin") and "/bootloader/" not in name and "/partition_table/" not in name for name in group),
+        )) for group in artifact_groups]
+        if not any(complete_groups):
             raise ValueError("passing firmware build requires app/ELF/map/bootloader/partition artifacts")
     if (checkout / "sdkconfig").is_file():
         sources["checkout/sdkconfig"] = checkout / "sdkconfig"

@@ -1,0 +1,30 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r01",
+  "implementation_commit": "e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db",
+  "policy_eligible": false,
+  "policy_review_status": "invalid_for_comparison",
+  "policy_review_reason": "Frozen delivered prompt line 52 requires failure record and termination on a permission denial. Native OpenCode denied cmake --version at stdout.jsonl line 63 (1791121719837); subsequent assistant message generated a new tool call at line 66 and continued implementation through termination. The rejected version probe was harmless, but continuing violates the predeclared stop rule. No retrospective permission relaxation or replacement run was performed.",
+  "operator_baseline_verified": true,
+  "restored_root": "C:\\meter-run-restores-20261005\\opencode-muse-r01-layout-fixed",
+  "result_valid": true,
+  "manifest_identity_verified": true,
+  "package_manifest_sha256": "c4f845c4a887a91379e293810824f16dda3e8f590d27b45048baa87ad4a854f0",
+  "original_checkout_used": false,
+  "files_verified": 348,
+  "frozen_operator_validators_used": true,
+  "frozen_operator_scripts_root": "C:\\meter-run-restores-20261005\\frozen-operator-source\\scripts",
+  "immutable_input_files_verified": 57,
+  "artifact_sha256": {
+    "firmware/build/bootloader/bootloader.bin": "019fcfe691e106eaf1839ff5f0d01146aee2d0aafc906b4a0b34416f5da6f23a",
+    "firmware/build/bootloader/bootloader.elf": "52e4471bdc4679053501858af7ce85c5ec8c23325a27a1e98e590cc0c21884f5",
+    "firmware/build/bootloader/bootloader.map": "69351ecc8a8874a833990716619faa700934c169dcef57ea77b7f7432ad033e7",
+    "firmware/build/cdm_meter.bin": "f91ff86ea8c80ab5ec03f47948259d7de96bd87e0384ceb3d427eb52d0e72dd9",
+    "firmware/build/cdm_meter.elf": "2fe156d294f222afcf4d17ff67bd045b38a7bf4779d23d171bcbd7a5e37dc0f4",
+    "firmware/build/cdm_meter.map": "28d33177343e6cdd9d5578891c7d321ff4eca550c952c9ca9ac7a4bb8a4f82b6",
+    "firmware/build/partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "sdkconfig_sha256": "cc2aa90743135831551c293795b40261c8617eaa5c659ba557f10a2a10c2e041",
+  "inventory_bytes_verified": true,
+  "original_run_path_used": false,
+  "product_pass": false
+}

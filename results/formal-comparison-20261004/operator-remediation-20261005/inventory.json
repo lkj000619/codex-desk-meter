@@ -1,0 +1,20 @@
+{
+  "files": {
+    "audit-restored-package.py": {
+      "sha256": "44a7b154543c5a523cd17b81d7ebacae598ebfe721d8839d4be64f90a0fe9f49",
+      "bytes": 3430
+    },
+    "package-manifest.json": {
+      "sha256": "c4f845c4a887a91379e293810824f16dda3e8f590d27b45048baa87ad4a854f0",
+      "bytes": 67927
+    },
+    "restore-audit.json": {
+      "sha256": "45c6ceea7e73ac55acdf8178ce1421a381fb11256d17f47c0a1517bd6ab462be",
+      "bytes": 2252
+    },
+    "validation.json": {
+      "sha256": "e8789f66a97ee65b8df3d6ef4ce5ac268f101dd8b7f44dac533be0f61e61fd52",
+      "bytes": 1501
+    }
+  }
+}

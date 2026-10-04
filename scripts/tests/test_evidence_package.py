@@ -81,3 +81,71 @@ class EvidencePackageTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "path"):
             self.package.restore_package(self.path, self.root / "restored")
         self.assertFalse((self.root / "restored").exists())
+
+    def firmware_artifacts(self, directory="firmware/build", missing=None):
+        checkout = self.run / "checkout"
+        names = ("meter.bin", "meter.elf", "meter.map",
+                 "bootloader/bootloader.bin", "partition_table/partition-table.bin")
+        for name in names:
+            if name != missing:
+                path = checkout / directory / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes((directory + "/" + name).encode("utf-8"))
+        return directory + "/meter.bin"
+
+    def claim_firmware_build(self, evidence):
+        checkout = self.run / "checkout"
+        result = read(self.result_path)
+        result["build"].update(status="pass", evidence=[evidence] if isinstance(evidence, str) else evidence, reason=None)
+        save(self.result_path, result)
+        subprocess.run(["git", "add", "--all"], cwd=checkout, check=True, capture_output=True)
+        subprocess.run(["git", "-c", "user.name=Test", "-c", "user.email=test@localhost",
+                        "commit", "-m", "frozen firmware build"], cwd=checkout, check=True, capture_output=True)
+        manifest = read(self.run / "run-manifest.json")
+        manifest["outputs"]["implementation_commit"] = subprocess.check_output(
+            ["git", "rev-parse", "HEAD"], cwd=checkout, text=True).strip()
+        save(self.run / "run-manifest.json", manifest)
+
+    def test_restores_artifacts_from_result_build_directory_without_original_checkout(self):
+        evidence = self.firmware_artifacts()
+        config = self.run / "checkout/firmware/sdkconfig"
+        config.write_bytes(b"CONFIG_IDF_TARGET=esp32s3\n")
+        self.claim_firmware_build(evidence)
+        created = self.package.create_package(self.run, self.path)
+        inventory = read(self.path / "package-manifest.json")
+        self.assertIn("firmware/build/meter.bin", inventory["artifact_paths"])
+        self.assertIn("firmware/build/bootloader/bootloader.bin", inventory["artifact_paths"])
+        (self.run / "checkout").rename(self.run / "unavailable-original")
+        restored = self.package.restore_package(
+            self.path, self.root / "restored", created["package_manifest_sha256"])
+        self.assertTrue(restored["result_valid"])
+        self.assertEqual((self.root / "restored/checkout/firmware/build/meter.bin").read_bytes(),
+                         b"firmware/build/meter.bin")
+        self.assertEqual((self.root / "restored/checkout/firmware/build/bootloader/bootloader.bin").read_bytes(),
+                         b"firmware/build/bootloader/bootloader.bin")
+        self.assertEqual((self.root / "restored/checkout/firmware/sdkconfig").read_bytes(),
+                         b"CONFIG_IDF_TARGET=esp32s3\n")
+
+    def test_missing_referenced_build_artifact_cannot_use_an_unrelated_build_directory(self):
+        evidence = self.firmware_artifacts(missing="meter.map")
+        self.firmware_artifacts("build")
+        self.claim_firmware_build(evidence)
+        with self.assertRaisesRegex(ValueError, "app/ELF/map/bootloader/partition"):
+            self.package.create_package(self.run, self.path)
+        self.assertFalse(self.path.exists())
+
+    def test_complete_artifacts_must_come_from_one_referenced_build(self):
+        first = self.firmware_artifacts("out/first", missing="meter.map")
+        second = self.firmware_artifacts("out/second", missing="bootloader/bootloader.bin")
+        self.claim_firmware_build([first, second])
+        with self.assertRaisesRegex(ValueError, "app/ELF/map/bootloader/partition"):
+            self.package.create_package(self.run, self.path)
+
+    def test_root_build_fallback_preserves_existing_log_evidence(self):
+        self.firmware_artifacts("build")
+        self.claim_firmware_build("experiments/examples/end-to-end-manifest.example.json")
+        created = self.package.create_package(self.run, self.path)
+        restored = self.package.restore_package(
+            self.path, self.root / "restored", created["package_manifest_sha256"])
+        self.assertTrue(restored["result_valid"])
+        self.assertEqual((self.root / "restored/checkout/build/meter.bin").read_bytes(), b"build/meter.bin")

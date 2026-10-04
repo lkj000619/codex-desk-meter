@@ -1,0 +1,44 @@
+{
+  "checked_at": "2026-10-04T15:19:53.358914+00:00",
+  "scope": "Post-terminal operator artifact collection only; frozen runner, profile, candidate inputs and criteria unchanged.",
+  "red_observed": [
+    "Old collector rejected valid firmware/build artifacts.",
+    "Old collector accepted incomplete referenced firmware/build by borrowing unrelated checkout/build artifacts."
+  ],
+  "tests": [
+    {
+      "module": "test_evidence_package",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "exit_code": 0,
+      "seconds": 9.779
+    },
+    {
+      "module": "test_policy_review_package",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "exit_code": 0,
+      "seconds": 11.571
+    },
+    {
+      "module": "test_policy_review",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "exit_code": 0,
+      "seconds": 4.367
+    }
+  ],
+  "packager_sha256": "c3a4f76b00dce90e13447c7582c75b6c73ab874bd0525f543d0419736e938b91",
+  "test_file_sha256": "616e6ae387b3296adeb0da7d981396e61791903f84a58e043cb8f5d22f24756b",
+  "create_exit_code": 0,
+  "restore_exit_code": 0,
+  "frozen_validator_audit_exit_code": 0,
+  "original_failure_retained": true,
+  "original_forensic_archive_retained": true,
+  "implementation_feedback_during_candidate": false,
+  "operator_time_seconds": null,
+  "operator_time_availability_note": "Separate operator actions; aggregate duration was not instrumented. Candidate measurement unchanged."
+}
