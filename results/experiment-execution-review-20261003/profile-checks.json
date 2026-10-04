@@ -1,0 +1,32 @@
+[
+  {
+    "profile": "agy-flash.json",
+    "exit_code": 0,
+    "output_tail": "4e36e96cebe5433c3a8b506bd4d91440ed2452c\",\n      \"scripts/host_device_pipeline.py\": \"bc04def83b72fec838c27e1b03c993b6971942bdf1c94b9320284990ca6d2061\",\n      \"scripts/requirements-benchmark.txt\": \"d74be039c492a217eac4159aaae2db4f0a1eef36d8073f22120d23b49a0b6f40\",\n      \"scripts/run-host-device-pipeline.py\": \"fbb23f1f62a4f9858d8555572a4a6e8ca2b8ab7629caabbdc226142c7c1f262c\",\n      \"scripts/validate-end-to-end-result.py\": \"9723c557fe5b32ea62dbc7669b02e5d2ee1d0cde7f11823cb20f6835e8170731\"\n    }\n  },\n  \"next\": \"freeze baseline, obtain profile-bound receipt and explicit approval, then run prepare\"\n}"
+  },
+  {
+    "profile": "agy-opus.json",
+    "exit_code": 0,
+    "output_tail": "4e36e96cebe5433c3a8b506bd4d91440ed2452c\",\n      \"scripts/host_device_pipeline.py\": \"bc04def83b72fec838c27e1b03c993b6971942bdf1c94b9320284990ca6d2061\",\n      \"scripts/requirements-benchmark.txt\": \"d74be039c492a217eac4159aaae2db4f0a1eef36d8073f22120d23b49a0b6f40\",\n      \"scripts/run-host-device-pipeline.py\": \"fbb23f1f62a4f9858d8555572a4a6e8ca2b8ab7629caabbdc226142c7c1f262c\",\n      \"scripts/validate-end-to-end-result.py\": \"9723c557fe5b32ea62dbc7669b02e5d2ee1d0cde7f11823cb20f6835e8170731\"\n    }\n  },\n  \"next\": \"freeze baseline, obtain profile-bound receipt and explicit approval, then run prepare\"\n}"
+  },
+  {
+    "profile": "agy-pro.json",
+    "exit_code": 0,
+    "output_tail": "4e36e96cebe5433c3a8b506bd4d91440ed2452c\",\n      \"scripts/host_device_pipeline.py\": \"bc04def83b72fec838c27e1b03c993b6971942bdf1c94b9320284990ca6d2061\",\n      \"scripts/requirements-benchmark.txt\": \"d74be039c492a217eac4159aaae2db4f0a1eef36d8073f22120d23b49a0b6f40\",\n      \"scripts/run-host-device-pipeline.py\": \"fbb23f1f62a4f9858d8555572a4a6e8ca2b8ab7629caabbdc226142c7c1f262c\",\n      \"scripts/validate-end-to-end-result.py\": \"9723c557fe5b32ea62dbc7669b02e5d2ee1d0cde7f11823cb20f6835e8170731\"\n    }\n  },\n  \"next\": \"freeze baseline, obtain profile-bound receipt and explicit approval, then run prepare\"\n}"
+  },
+  {
+    "profile": "codex-luna.json",
+    "exit_code": 1,
+    "output_tail": "BLOCKED: replace profile placeholders and unresolved settings with operator-verified values"
+  },
+  {
+    "profile": "codex-sol.json",
+    "exit_code": 1,
+    "output_tail": "BLOCKED: replace profile placeholders and unresolved settings with operator-verified values"
+  },
+  {
+    "profile": "opencode-muse.json",
+    "exit_code": 0,
+    "output_tail": "4e36e96cebe5433c3a8b506bd4d91440ed2452c\",\n      \"scripts/host_device_pipeline.py\": \"bc04def83b72fec838c27e1b03c993b6971942bdf1c94b9320284990ca6d2061\",\n      \"scripts/requirements-benchmark.txt\": \"d74be039c492a217eac4159aaae2db4f0a1eef36d8073f22120d23b49a0b6f40\",\n      \"scripts/run-host-device-pipeline.py\": \"fbb23f1f62a4f9858d8555572a4a6e8ca2b8ab7629caabbdc226142c7c1f262c\",\n      \"scripts/validate-end-to-end-result.py\": \"9723c557fe5b32ea62dbc7669b02e5d2ee1d0cde7f11823cb20f6835e8170731\"\n    }\n  },\n  \"next\": \"freeze baseline, obtain profile-bound receipt and explicit approval, then run prepare\"\n}"
+  }
+]

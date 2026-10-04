@@ -100,13 +100,30 @@ def open_observer_serial(port):
     return connection
 
 
-def capture_frames(wires, port, serial_factory, output, wait_seconds=5, writer=None):
+def capture_frames(wires, port, serial_factory, output, wait_seconds=5, writer=None, receiver_log=None):
     if not 0 < wait_seconds <= 60 or not port:
         raise ValueError("capture requires an explicit port and 0 < wait <= 60")
+    review_bytes = None
+    if receiver_log is not None:
+        template = receiver_log.get("acceptance_template")
+        reviewer = receiver_log.get("reviewer")
+        if (not isinstance(template, str) or template.count("{sequence}") != 1
+                or any(c in template for c in "\r\n")
+                or not isinstance(reviewer, str) or not reviewer.strip()):
+            raise ValueError("receiver log needs one {sequence}, a single-line template and reviewer")
+        review_bytes = Path(receiver_log["evidence_path"]).read_bytes()
+        if not review_bytes or digest(review_bytes) != receiver_log["evidence_sha256"]:
+            raise ValueError("receiver log review evidence hash mismatch or empty evidence")
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=True)
-    if any((output / name).exists() for name in ("capture.json", "events.jsonl", "device-serial.bin", "sent-frames.jsonl")):
+    evidence_names = ["events.jsonl", "device-serial.bin", "sent-frames.jsonl"]
+    if receiver_log is not None:
+        evidence_names += ["receiver-log.json", "receiver-log-review.bin"]
+    if any((output / name).exists() for name in ["capture.json", *evidence_names]):
         raise ValueError("capture output already exists")
+    if receiver_log is not None:
+        save(output / "receiver-log.json", receiver_log)
+        (output / "receiver-log-review.bin").write_bytes(review_bytes)
     report = {"schema_version": 1, "status": "captured", "port": port,
               "sender_kind": "operator_replay" if writer is None else "candidate_writer_adapter",
               "started_at": datetime.now(timezone.utc).isoformat(), "frames": [], "error_code": None,
@@ -124,12 +141,16 @@ def capture_frames(wires, port, serial_factory, output, wait_seconds=5, writer=N
             connection = serial_factory(port)
             report["device_accessed"] = True
             event("port_open", baud=115200, dtr=False, rts=False, note="backend must set DTR/RTS before open; actual reset/re-enumeration requires observation")
+            line_incomplete = False
             for wire in wires:
+                incomplete_prelude = line_incomplete
                 pending = getattr(connection, "in_waiting", 0)
                 if pending:
                     if pending > 65536:
                         raise PipelineError("SERIAL_PRELUDE_TOO_LARGE", "inspect noisy device before sending")
                     prelude = connection.read(pending)
+                    if prelude:
+                        incomplete_prelude = not prelude.endswith(b"\n")
                     raw.write(prelude)
                     raw.flush()
                     event("pre_write_read", bytes_received=len(prelude), sha256=digest(prelude))
@@ -170,9 +191,19 @@ def capture_frames(wires, port, serial_factory, output, wait_seconds=5, writer=N
                         observed = event("read", bytes_received=len(data), sha256=digest(data))
                         text = response.decode("utf-8", errors="replace")
                         for prefix, key in (("CDM_RX", "accepted_at_seconds"), ("CDM_DISPLAY", "display_marker_at_seconds")):
+                            if prefix == "CDM_RX" and receiver_log is not None:
+                                expected = template.replace("{sequence}", str(frame["sequence"]))
+                                complete_lines = response.split(b"\n")[:-1]
+                                if incomplete_prelude:
+                                    complete_lines = complete_lines[1:]
+                                if record[key] is None and any(
+                                        line.removesuffix(b"\r") == expected.encode("utf-8") for line in complete_lines):
+                                    record[key] = observed
+                                continue
                             if record[key] is None and re.search(rf"\b{prefix} sequence={frame['sequence']} result=0\b", text):
                                 record[key] = observed
                         time.sleep(0.001)
+                line_incomplete = not response.endswith(b"\n") if response else incomplete_prelude
                 record["response_sha256"] = digest(response)
                 record["write_duration_seconds"] = record["write_at_seconds"] - wire_start
         except (OSError, ValueError) as error:
@@ -188,8 +219,7 @@ def capture_frames(wires, port, serial_factory, output, wait_seconds=5, writer=N
                 except OSError as error:
                     report["status"], report["error_code"] = "failed", "PORT_CLOSE_FAILED"
                     event("port_close_failed", error=str(error))
-    report["evidence"] = {name: digest((output / name).read_bytes())
-                          for name in ("events.jsonl", "device-serial.bin", "sent-frames.jsonl")}
+    report["evidence"] = {name: digest((output / name).read_bytes()) for name in evidence_names}
     save(output / "capture.json", report)
     return report
 

@@ -37,10 +37,15 @@ main에 문서가 존재한다는 이유로 후보에게 읽도록 제공하지 
 | 용도 | 문서 |
 |---|---|
 | 다음 실험 준비·잔여 조건 | [준비 상태](experiments/next-comparison-readiness.md) |
+| 다음 비교 모델·설정 | [2026-10-03 프로필](../experiments/config/next-profiles-20261003/README.md) · [GPT-6 갱신 계획](plans/2026-10-03-gpt6-comparison-profiles.md) |
 | 실행 준비의 실제 검증·동결 | [준비 계획](plans/2026-10-02-experiment-launch-preparation.md) · [준비 보고서](../results/experiment-preparation-20261002/report.md) |
 | 새 운영 규칙 | [운영 계약](experiments/comparison-operating-contract.md) |
 | Codex 기능 도달 판정 | [RM 목록](experiments/reference-match-matrix.md) |
 | 수정 작업·의존 순서 | [계획](plans/2026-10-02-experiment-contract-remediation.md) |
+| 문서 품질 검토 후속 보완 | [보완 계획](plans/2026-10-02-documentation-remediation.md) · [검토 원본](../results/documentation-assessment-20261002/review.md) |
+| 평가 baseline·배점·일정 후속 정비 | [정비 계획](plans/2026-10-03-evaluation-baseline-remediation.md) · [재검토](../results/documentation-review-20261003/report.md) |
+| 실험 실행 경계·hook·제한 검토 | [실행 경계 보고서](../results/experiment-execution-review-20261003/report.md) |
+| 정식 비교 시작 선행 작업·실행 결과 | [선행 작업 계획](plans/2026-10-03-formal-comparison-launch-prerequisites.md) · [실행 준비 보완](../results/experiment-launch-preparation-20261004/report.md) |
 | 비교 도구 명령·증거 형식 | [도구 안내](experiments/comparison-tooling.md) · [구현 계획](plans/2026-10-02-comparison-tooling.md) · [설계](design/2026-10-02-comparison-tooling.md) |
 | 문제와 근거 | [세 에이전트 평가](experiments/architecture-review-20261002.md) |
 | GUI/F 평가·host seam | [기능 평가](experiments/feature-comparison.md) · [평가 도구](experiments/evaluation-contract.md) |

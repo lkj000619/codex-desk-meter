@@ -1,0 +1,50 @@
+[
+  {
+    "profile": "agy-flash.json",
+    "model": "gemini-3.8-flash-medium",
+    "reasoning": "medium",
+    "schema": "pass",
+    "check": "inputs_valid",
+    "sha256": "cbc857a80605dd3fa7807ea386e25d6f7c7551f63ca4c33ea9e97861a33c80ee"
+  },
+  {
+    "profile": "agy-opus.json",
+    "model": "claude-opus-4-6-thinking",
+    "reasoning": "model-thinking-default",
+    "schema": "pass",
+    "check": "inputs_valid",
+    "sha256": "5bfffebe92f3303b58cb84bcf8a54da04a24d30c9a19fee038147e877a3927e6"
+  },
+  {
+    "profile": "agy-pro.json",
+    "model": "gemini-3.1-pro-high",
+    "reasoning": "high",
+    "schema": "pass",
+    "check": "inputs_valid",
+    "sha256": "cc886b10ce695f8279923b5139e8a6110ea91b6888e71202e99d4ad619e71389"
+  },
+  {
+    "profile": "codex-luna.json",
+    "model": "gpt-6-luna",
+    "reasoning": "max",
+    "schema": "pass",
+    "check": "blocked",
+    "sha256": "5bcd24a7df31d8d215cfe76453de52ff3cb32f17a5ca20fabb728c5f4477dc53"
+  },
+  {
+    "profile": "codex-sol.json",
+    "model": "gpt-6-sol",
+    "reasoning": "medium",
+    "schema": "pass",
+    "check": "blocked",
+    "sha256": "427ca5d92def1587c902e1b3979858f3d5ee6014746668de63502af1826d6c7c"
+  },
+  {
+    "profile": "opencode-muse.json",
+    "model": "opencode/muse-spark-1.3-contributor-free",
+    "reasoning": "provider-default",
+    "schema": "pass",
+    "check": "inputs_valid",
+    "sha256": "18d707b08f09e11620640cda7cb0c133209ed0b41b0b11c09402a98fe284372e"
+  }
+]

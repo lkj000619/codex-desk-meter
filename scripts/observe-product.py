@@ -18,6 +18,7 @@ def main(argv=None):
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--wait-seconds", type=float, default=5)
     parser.add_argument("--writer-adapter", type=Path, help="operator JSON with module_path/module_sha256/function for the candidate writer")
+    parser.add_argument("--receiver-log", type=Path, help="reviewed literal acceptance template and hashed source-review evidence")
     args = parser.parse_args(argv)
     try:
         wires = args.frames.read_bytes().splitlines(keepends=True)
@@ -38,10 +39,15 @@ def main(argv=None):
                 module = importlib.util.module_from_spec(spec)
                 spec.loader.exec_module(module)
                 writer = getattr(module, adapter["function"])
-            report = capture_frames(wires, args.port, open_observer_serial, args.output, args.wait_seconds, writer)
+            receiver_log = None if args.receiver_log is None else read(args.receiver_log)
+            if receiver_log is not None:
+                evidence = Path(receiver_log["evidence_path"])
+                receiver_log["evidence_path"] = str((args.receiver_log.parent / evidence).resolve())
+            report = capture_frames(wires, args.port, open_observer_serial, args.output,
+                                    args.wait_seconds, writer, receiver_log)
         else:
-            if args.writer_adapter:
-                raise ValueError("writer adapter is only used with explicit send")
+            if args.writer_adapter or args.receiver_log:
+                raise ValueError("writer adapter and receiver log are only used with explicit send")
             schedule = None if args.schedule is None else read(args.schedule)["monotonic_offsets"]
             report = replay_frames(wires, args.reference_time, monotonic_offsets=schedule)
             with args.output.open("x", encoding="utf-8") as output:

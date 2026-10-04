@@ -607,6 +607,10 @@ class InputBundleCheckTests(unittest.TestCase):
         source.write_bytes(source.read_bytes() + b"\n# hash sensitivity\n")
         after = benchmark.input_bundle_hashes(root, self.profile_path, "new", "a"*40)
         self.assertNotEqual(before["evaluation_criteria_sha256"], after["evaluation_criteria_sha256"])
+        preserved = root / "scripts/operator_baseline.py"
+        preserved.write_bytes(preserved.read_bytes() + b"\n# hash sensitivity\n")
+        helper_changed = benchmark.input_bundle_hashes(root, self.profile_path, "new", "a"*40)
+        self.assertNotEqual(after["evaluation_criteria_sha256"], helper_changed["evaluation_criteria_sha256"])
         frame = root / "experiments/reference/codex-7923f96/expected-frames.jsonl"
         frame.write_bytes(b"changed")
         with self.assertRaisesRegex(ValueError, "reference hash"):
@@ -699,6 +703,8 @@ class IsolationTests(unittest.TestCase):
                 self.assertNotIn(b"<run-id>", (run / "prompt.txt").read_bytes())
             for index, run in enumerate(runs):
                 m = read(run / "run-manifest.json")
+                self.assertIn("operator-baseline.zip", m["operator"]["evidence"])
+                self.assertFalse((run / "checkout/operator-baseline.zip").exists())
                 fixture_lines = [
                     f"{benchmark.digest(path.read_bytes())}  {path.relative_to(run / 'checkout').as_posix()}"
                     for path in sorted((run / "checkout" / "experiments" / "fixtures").rglob("*.json"))
@@ -720,6 +726,18 @@ class IsolationTests(unittest.TestCase):
                 (run / "run-manifest.json").write_text(json.dumps(m), encoding="utf-8")
                 (run / "checkout" / f"implementation-{index}.txt").write_text("synthetic", encoding="utf-8")
                 benchmark.archive_run(SimpleNamespace(directory=str(run), archive=str(root / "archive.git")))
+                from evidence_package import create_package, restore_package
+                package_path = root / f"package-{index}"
+                package_result = create_package(run, package_path)
+                restored = restore_package(package_path, root / f"restored-{index}",
+                                           package_result["package_manifest_sha256"])
+                self.assertTrue(restored["operator_baseline_verified"])
+                from operator_baseline import verify
+                restored_operator = root / f"restored-{index}" / "operator"
+                wrong_criteria = read(restored_operator / "run-manifest.json")
+                wrong_criteria["execution"]["evaluation_criteria_sha256"] = "0" * 64
+                with self.assertRaisesRegex(ValueError, "input hash mismatch"):
+                    verify(wrong_criteria, restored_operator)
             branch = m["execution"]["branch"]
             files = original_git("ls-tree", "-r", "--name-only", branch, cwd=root / "archive.git")
             self.assertIn(f"results/{runs[0].name}/run-manifest.json", files)

@@ -7,6 +7,7 @@ import statistics
 from pathlib import Path
 
 from benchmark_support import digest, read, validate_operator, validate_schema, verify_evidence
+from policy_review import review_eligibility
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -190,7 +191,7 @@ def _success(manifest, result):
 def collect_records(manifest_paths):
     """Return valid, non-pilot completed records and excluded-input counts."""
     records = []
-    excluded = {"pilot": 0, "incomplete": 0, "invalid": 0, "duplicate": 0, "followup": 0}
+    excluded = {"pilot": 0, "incomplete": 0, "invalid": 0, "duplicate": 0, "followup": 0, "policy": 0}
     seen_paths = set()
     seen_run_ids = set()
     for path in manifest_paths:
@@ -215,6 +216,9 @@ def collect_records(manifest_paths):
                 excluded["incomplete"] += 1
                 continue
             validate_operator(manifest)
+            if not review_eligibility(manifest, path)[0]:
+                excluded["policy"] += 1
+                continue
             result = _load_valid_result(path, manifest)
         except (KeyError, OSError, TypeError, ValueError, json.JSONDecodeError):
             result = None
@@ -282,7 +286,9 @@ def collect_attempts(manifest_paths):
         tokens = manifest["measurement"]["tokens"]
         total = (tokens["input"] + tokens["output"]
                  if tokens["input"] is not None and tokens["output"] is not None else None)
+        policy_eligible, policy_status, policy_reason = review_eligibility(manifest, path)
         attempts.append({"manifest": manifest, "path": path, "group": _comparison_group(manifest),
+                         "policy_eligible": policy_eligible, "policy_status": policy_status, "policy_reason": policy_reason,
                          "group_key": _comparison_key(manifest), "status": manifest["operator"]["status"],
                          "success": None if result is None else _success(manifest, result),
                          "seconds": manifest["measurement"]["wall_clock_seconds"], "tokens": total})
@@ -312,6 +318,15 @@ def render_attempt_summary(attempts, excluded):
                    sum(item["status"] == "completed" and item["success"] is None for item in items)]
         rows.append("| " + " | ".join(map(str, values)) + " |")
     rows.extend(["", "Attempt exclusions: " + "; ".join(f"{key}={value}" for key, value in excluded.items()) + ".", ""])
+    policy_attempts = [item for item in attempts if item["manifest"]["operator"].get("policy_review_required")]
+    if policy_attempts:
+        rows.extend(["### Operator policy review", "",
+                     "Costs and observed product outcomes above remain recorded regardless of policy eligibility. Only eligible reviewed runs enter quality comparisons.", "",
+                     "| Run | Policy status | Quality eligible | Reason |", "|---|---|---|---|"])
+        for item in policy_attempts:
+            values = (item["manifest"]["run_id"], item["policy_status"], "yes" if item["policy_eligible"] else "no", item["policy_reason"])
+            rows.append("| " + " | ".join(str(value).replace("|", "\\|").replace("\n", " ") for value in values) + " |")
+        rows.append("")
     return "\n".join(rows)
 
 
@@ -354,7 +369,8 @@ def comparison_series(attempts):
         cost = lambda values, field: sum(known(values, field)) if known(values, field) else None
         reached = next((index for index, item in enumerate(items) if _reference_reached(item)), None)
         prefix = [] if reached is None else items[:reached+1]
-        complete_prefix = bool(prefix) and rounds[:len(prefix)] == list(range(len(prefix)))
+        complete_prefix = (bool(prefix) and rounds[:len(prefix)] == list(range(len(prefix)))
+                           and all(review_eligibility(item["manifest"], item["path"])[0] for item in prefix))
         results.append({"comparison_id": key[0], "initial_seconds": cost(initial, "seconds"),
                         "followup_seconds": cost(followup, "seconds"), "total_seconds": cost(items, "seconds"),
                         "initial_tokens": cost(initial, "tokens"), "followup_tokens": cost(followup, "tokens"),
@@ -368,7 +384,7 @@ def comparison_series(attempts):
 
 def render_series_summary(attempts):
     rows = ["## First and follow-up comparison costs", "",
-            "Follow-ups remain part of their initial series and do not count as independent repetitions. Reference cost requires a hashed RM1–RM5 pass review, every preceding round, and full measurement coverage. A dash means unknown or not reached.", "",
+            "Follow-ups remain part of their initial series and do not count as independent repetitions. Reference cost requires a hashed RM1–RM5 pass review, every preceding round with its required policy review eligible, and full measurement coverage. A dash means unknown or not reached.", "",
             "| Series | Follow-up rounds | Initial seconds | Follow-up seconds | Total measured seconds | Time coverage | Initial tokens | Follow-up tokens | Total measured tokens | Token coverage | Reference round | Reference seconds | Reference tokens |",
             "|---|---:|---:|---:|---:|---|---:|---:|---:|---|---:|---:|---:|"]
     fields = ("comparison_id", "followup_rounds", "initial_seconds", "followup_seconds", "total_seconds", "time_coverage",
@@ -388,7 +404,7 @@ def render_summary(records, excluded, min_repetitions):
     rows = [
         "# Benchmark results",
         "",
-        "Only completed results that pass the applicable schema and semantic validator are included. Pilot runs are excluded; duplicate run identities are excluded as well.",
+        "Only completed results that pass the applicable schema and semantic validator are included. Runs requiring operator policy review must also have an eligible, verified review. Pilot runs are excluded; duplicate run identities are excluded as well.",
         "",
         "## Valid runs",
         "",
@@ -449,6 +465,7 @@ def render_summary(records, excluded, min_repetitions):
         "",
         f"Pilot: {excluded.get('pilot', 0)}; incomplete: {excluded.get('incomplete', 0)}; invalid or semantically unjoined: {excluded.get('invalid', 0)}; duplicate path/run identity: {excluded.get('duplicate', 0)}.",
         f"Follow-ups excluded from independent repetitions: {excluded.get('followup', 0)}.",
+        f"Required policy review missing, invalid, unverified or ineligible: {excluded.get('policy', 0)}.",
         "",
     ])
     return "\n".join(rows)

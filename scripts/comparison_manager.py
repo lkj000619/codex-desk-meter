@@ -123,6 +123,11 @@ def init_comparison(path, directory, reference_inputs):
     with locked(path):
         if path.exists():
             raise ValueError("comparison already exists")
+        common_task = (directory / "prompt.txt").read_bytes()
+        if digest(common_task) != manifest["operator"]["delivered_prompt_sha256"]:
+            raise ValueError("initial common task does not match delivered prompt")
+        (directory / "common-task.txt").write_bytes(common_task)
+        manifest["operator"]["evidence"]["common-task.txt"] = digest(common_task)
         reference_root = path.with_name(path.stem + "-reference")
         reference_root.mkdir(exist_ok=False)
         for name in reference_files:
@@ -135,6 +140,7 @@ def init_comparison(path, directory, reference_inputs):
                  "input_bundle_sha256": manifest["execution"]["input_bundle_sha256"],
                  "profile_sha256": manifest["execution"]["profile_sha256"], "limits": dict(LIMITS),
                  "reference_inputs": str(reference_copy), "reference_inputs_sha256": digest(reference_copy.read_bytes()),
+                 "common_task_sha256": digest(common_task), "common_task_run_id": manifest["run_id"],
                  "runs": []}
         _connect(state, path, manifest, directory, 0, manifest["operator"]["local_base_commit"])
         save(path, state)
@@ -234,7 +240,7 @@ def review_run(directory, report):
 
 
 def prepare_followup(path, root, feedback):
-    from benchmark import prepare_agent_inputs, git
+    from benchmark import prepare_agent_inputs, verify_agent_inputs, git
     path, root = Path(path).resolve(), Path(root).resolve()
     with locked(path):
         state = _load(path)
@@ -270,6 +276,15 @@ def prepare_followup(path, root, feedback):
         _entry(state, manifest, previous_directory)
         # Verify sidecars against the prior frozen hashes before reusing them.
         verify_evidence(manifest, previous_directory)
+        verify_agent_inputs(previous_directory, manifest)
+        common_task_path = previous_directory / "common-task.txt"
+        if (not state.get("common_task_sha256") or not common_task_path.is_file()
+                or digest(common_task_path.read_bytes()) != state["common_task_sha256"]
+                or manifest["operator"]["evidence"].get("common-task.txt") != state["common_task_sha256"]):
+            raise ValueError("frozen common task missing or changed")
+        if state.get("common_task_run_id") != state["runs"][0]["run_id"]:
+            raise ValueError("frozen common task run identity changed")
+        common_task = common_task_path.read_bytes()
         root.mkdir(parents=True, exist_ok=True)
         date = datetime.now(KST).strftime("%Y%m%d")
         suffix = "-" + manifest["run_id"][9:].rsplit("-r", 1)[0]
@@ -289,11 +304,23 @@ def prepare_followup(path, root, feedback):
         _git("clone", "--quiet", "--no-hardlinks", str(source_bundle), str(checkout), cwd=directory)
         _git("checkout", "--quiet", "--detach", previous["implementation_commit"], cwd=checkout)
         _git("remote", "remove", "origin", cwd=checkout)
+        # A clone can convert line endings according to the host's autocrlf.
+        # Immutable inputs use the verified original working-copy bytes.
+        if "candidate-inputs.json" in manifest["operator"]["evidence"]:
+            from evidence_package import safe_path
+            for name, expected in read(previous_directory / "candidate-inputs.json")["files"].items():
+                source = safe_path(previous_checkout, name)
+                if not source.is_file() or digest(source.read_bytes()) != expected:
+                    raise ValueError(f"immutable candidate input changed: {name}")
+                target = safe_path(checkout, name)
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(source, target)
         for candidate in (checkout / ".benchmark-inputs", checkout / "results" / manifest["run_id"],
                           checkout / "docs/agent-runs" / manifest["run_id"]):
             if candidate.exists() and candidate.resolve().is_relative_to(checkout):
                 shutil.rmtree(candidate)
         shutil.copyfile(previous_directory / "profile.json", directory / "profile.json")
+        (directory / "common-task.txt").write_bytes(common_task)
         inventory = previous_directory / "candidate-inputs.json"
         if inventory.is_file():
             shutil.copyfile(inventory, directory / inventory.name)
@@ -308,10 +335,26 @@ def prepare_followup(path, root, feedback):
             feedback_evidence[name] = value["sha256"]
         feedback["evidence"] = [dict(value, packaged_path=name) for value, name in zip(feedback["evidence"], feedback_evidence)]
         save(directory / "feedback.json", feedback)
-        prompt = ("Continue your own frozen implementation. Preserve the baseline inputs and submit results for <run-id>.\n"
-                  "Operator feedback (observations and expected behavior):\n" + (directory / "feedback.json").read_text(encoding="utf-8"))
+        candidate_feedback = {key: feedback[key] for key in
+                              ("previous_run_id", "previous_commit", "target_ids", "observed", "expected",
+                               "remaining_rounds", "remaining_seconds")}
+        candidate_feedback["run_id"] = directory.name
+        candidate_feedback["evidence"] = [{"path": ".benchmark-inputs/" + name, "sha256": expected}
+                                          for name, expected in feedback_evidence.items()]
+        save(directory / "candidate-feedback.json", candidate_feedback)
+        prompt = (common_task.decode("utf-8").replace(state["common_task_run_id"], directory.name)
+                  .replace("<run-id>", directory.name)
+                  + "\n## Current followup session\n"
+                  "Continue your own frozen implementation under all common task restrictions above. "
+                  "This is a fresh followup session, not a new initial budget. "
+                  "The remaining_seconds and remaining_rounds below include this invocation; "
+                  "do not start another session yourself.\n"
+                  "Use only the supplied local evidence in .benchmark-inputs/feedback.json; "
+                  "do not search previous run directories or other implementations.\n"
+                  "Operator feedback (observations and expected behavior):\n"
+                  + (directory / "candidate-feedback.json").read_text(encoding="utf-8"))
         manifest["run_id"] = directory.name
-        prompt = prompt.replace("<run-id>", directory.name).encode("utf-8")
+        prompt = prompt.encode("utf-8")
         (directory / "prompt.txt").write_bytes(prompt)
         manifest["operator"].update(status="prepared", reason=None, exit_code=None, repetition=repetition,
                                     local_base_commit=None, delivered_prompt_sha256=digest(prompt), evidence={})
@@ -335,8 +378,27 @@ def prepare_followup(path, root, feedback):
         _connect(state, path, manifest, directory, previous["round"] + 1, previous["implementation_commit"],
                  digest((directory / "feedback.json").read_bytes()))
         manifest["operator"]["evidence"].update(feedback_evidence)
+        previous_evidence = read(previous_directory / "run-manifest.json")["operator"]["evidence"]
+        if "operator-baseline.zip" in previous_evidence:
+            shutil.copyfile(previous_directory / "operator-baseline.zip", directory / "operator-baseline.zip")
+            manifest["operator"]["evidence"].update({name: previous_evidence[name]
+                                                   for name in ("operator-baseline.zip", "profile.json")})
         manifest["operator"]["evidence"]["feedback.json"] = digest((directory / "feedback.json").read_bytes())
+        manifest["operator"]["evidence"].update({
+            "common-task.txt": state["common_task_sha256"],
+            "candidate-feedback.json": digest((directory / "candidate-feedback.json").read_bytes()),
+        })
         prepare_agent_inputs(directory, manifest)
+        context = read(directory / "agent-context.json")
+        context["immutable_files"] = {".benchmark-inputs/feedback.json": "candidate-feedback.json",
+                                      **{".benchmark-inputs/" + name: name for name in feedback_evidence}}
+        for target_name, source_name in context["immutable_files"].items():
+            target = checkout / target_name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(directory / source_name, target)
+        save(directory / "agent-context.json", context)
+        shutil.copyfile(directory / "agent-context.json", checkout / ".benchmark-inputs/run-context.json")
+        manifest["operator"]["evidence"]["agent-context.json"] = digest((directory / "agent-context.json").read_bytes())
         git("add", "--all", cwd=checkout)
         git("-c", "user.name=Benchmark", "-c", "user.email=benchmark@localhost", "commit", "-m", "Followup immutable run inputs", cwd=checkout)
         manifest["operator"]["local_base_commit"] = git("rev-parse", "HEAD", cwd=checkout)

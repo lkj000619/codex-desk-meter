@@ -1,80 +1,93 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-02. 상태: **실행 준비 완료·본 실험 시작 전 정지**.
+확인일: 2026-10-04. 상태: **실행 경계 보완과 활성 5개 모델의 실제 준비 검증 완료. 새 baseline 동결·당일 예약·독립 복원 연결 중. 제품 실험 0회.**
 
-이 문서는 다음 실험을 준비할 때의 진입점이다. 제품 전체 합격을 후보 시작의
-전제조건으로 삼지 않는다. 실행 인프라의 준비 상태와 후보 제품 품질을 구분한다.
-문서 반영만으로 새 후보 실행이나 중지된 OpenCode 작업을 시작하지 않는다.
+이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
+2026-10-02의 6개 모델 준비 완료 판정은 [당시 보고서](../../results/experiment-preparation-20261002/report.md)의 조건에만 적용된다.
+2026-10-03의 보류 권고와 E1~E5 원본은 [실행 경계 검토](../../results/experiment-execution-review-20261003/report.md)에 남긴다.
+이번 보완의 실제 근거는 [선행 작업 결과](../../results/experiment-launch-preparation-20261004/report.md)와
+[작업 계획](../plans/2026-10-03-formal-comparison-launch-prerequisites.md)을 따른다.
 
-## 채택한 조건
+## 현재 비교 대상과 공통 조건
 
-- 기준 도달: Codex에서 확인한 기능의 `reference-match`. 전체 `product_pass`는 별도다.
-- 한도: 최초 120분, 후속 최대 3회·후속 누적 120분.
-- 하드웨어: 보드 사실과 고정 제조사 source만 제공하며 BSP 작성도 후보 비용에 포함.
-- 범위: synthetic fixture 기반 Version 2 E2E. 실제 계정 수집은 별도 owner-only 통합.
+사용자 결정에 따라 Claude는 이번 비교에서 제외한다. Claude Code 구독이 없고 AGY의 기존
+Opus 4.6 호출도 거부됐다. 실패 원본과 비용은 보존하며 Opus 5.5로 대체하지 않는다.
+활성 목록의 원본은 [comparison-targets.json](../../experiments/config/next-profiles-20261003/comparison-targets.json)이다.
 
-상세 기준은 [운영 계약](comparison-operating-contract.md),
-[기준 기능 목록](reference-match-matrix.md),
-[정비 계획](../plans/2026-10-02-experiment-contract-remediation.md)을 따른다.
+| 표면 | 모델·effort | 실제 준비 검증 |
+|---|---|---|
+| Codex | `gpt-6-sol` medium | 9개 capability 통과 |
+| Codex | `gpt-6-luna` max | 9개 capability 통과 |
+| OpenCode | `opencode/muse-spark-1.3-contributor-free` | 9개 capability 통과, 최종 권한 수정 후 재확인 |
+| AGY | `gemini-3.8-flash-medium` | 9개 capability 통과 |
+| AGY | `gemini-3.1-pro-high` | 9개 capability 통과 |
 
-## 준비 연결 상태
+- 목표: synthetic fixture 기반 Version 2 E2E. 실제 계정 수집은 별도 owner-only 통합이다.
+- 기준 도달: [reference-match RM1~RM5](reference-match-matrix.md). 전체 `product_pass`는 별도다.
+- 예산: 최초 7,200초, 후속 최대 3회 AND 후속 누적 7,200초. 자기 직전 결과에서만 이어간다.
+- 독립 반복: 5개 조합×3개 블록=15개 최초 series. 후속 최대 45회, 후보 시간 상한 60시간.
+- 접근: `prompt-and-log`, `read_isolation: not_enforced`, `builtin-only-v1`. 후보에게 serial/flash와 다른 후보 구현 접근을 허용하지 않는다.
+- 보드 사실·고정 제조사 source를 동일 제공한다. BSP 작성도 후보 비용에 포함한다.
 
-| 순서 | 상태 | 준비 항목 | 현재 근거·완료 조건 |
-|---|---|---|---|
-| 1 | 완료 | 운영 조건·판정 의미를 문서로 기록 | Q1~Q3 선택과 최초/후속 예산, reference와 전체 합격 구분 |
-| 2 | 복구·동결 완료 | reference 입력 복구 | [기계 목록](../../experiments/reference/codex-7923f96/reference-inputs.json)의 raw fixture/hash·기준 시각·원본 collector 호출·seq 0/1 frame·5초 간격을 baseline `85ba108`에 고정. 영상 58/82의 당시 의미는 유지 |
-| 3 | 도구 완료·실물 미확인 | clock·production·공통 관측 | source/수신 300초 oracle, 실제 production adapter 실행·hash, 단일 포트 capture, 광학 annotation/frame/지연 결합 구현. 실제 후보 코드 연결·시각 anchor·단절/BOOT/화면 측정은 별도 실행 필요 |
-| 4 | 구현 완료 | YAML·최초/후속 prompt 동기화 | 후속 feedback의 직전 run/commit·목표·관측·기대·근거 hash·잔여 회차/초를 manager가 prompt에 고정 |
-| 5 | 구현 완료 | runner의 수정 회차·누적 예산·도달 결과 연결 | 최초 7,200초, 후속 최대 3회/누적 7,200초 적용. 자기 직전 frozen bundle 출발·같은 profile·동시 실행 차단·hashed RM 전체 pass 시 종료. 중단은 reconcile 전 새 실행 차단 |
-| 6 | 실제 검증 완료 | 원래 pilot gate와 새 비교 적용 범위 연결 | 새 입력/profile에 묶인 CLI 6개 실제 infrastructure/capability receipt를 검증. comparison 없는 historical run의 pilot_pass gate 유지 |
-| 7 | 동결 완료 | 새 평가 문서·도구의 입력 hash 연결 | `85ba108`의 operator 도구·reference bytes·criteria hash와 같은 파일 57개/필수 MD 3개를 6개 준비 예약에 연결. 기존 frozen hash 기준 유지 |
-| 8 | 실제 검증 완료 | 표면별 CLI/model/설정·권한·계측 | [새 프로필](../../experiments/config/verified-profiles-20261002/README.md)과 native settings/usage·빌드 근거 확인. Flash SDK 컴파일러의 간헐 오류와 Codex 계측기 한계를 [보고서](../../results/experiment-preparation-20261002/report.md)에 명시 |
-| 9 | 준비 package 검증 완료 | 독립 복구와 조건 동결 | operator source 186개/package 파일 325개, 6개 원래 commit/tree/input/profile/receipt/준비 artifact를 새 root에서 독립 복원 확인. 제품 terminal artifact package는 실제 후보 종료 후 생성 |
-| 10 | 구현 완료 | 전체 시도·실패 비용·도달 비용 집계 | 유효 completed 조건부 표와 별도 전체 시도/실패 비용/coverage, 최초·후속·누적·RM 도달 비용 표시. 후속은 독립 반복 수에서 제외 |
+[운영 계약](comparison-operating-contract.md), [격리 정책](isolation-policy.md),
+[프로필 목록](../../experiments/config/next-profiles-20261003/README.md)이 상세 조건의 원본이다.
+전체 제품 합격을 후보 시작의 전제조건으로 삼지 않는다.
 
-실물 기능 관측과 제품 terminal artifact는 후보 실행 이후의 평가 작업이다.
-준비 package의 범위와 날짜별 예약 재생성은 [실행 준비 보고서](../../results/experiment-preparation-20261002/report.md)를 따른다.
-후보가 실제 실행에서 기능을 구현하지 못한 경우는
-실험 결과이며 이 준비 목록을 다시 제품 합격 gate로 늘리는 이유로 삼지 않는다.
+## 보류 사유의 보완 상태
 
-## 후보 입력 경계: 구현 완료
+| 항목 | 반영한 동작 | 검증 |
+|---|---|---|
+| E1 정책 준수와 비교 적격성 | 신규 benchmark의 필수 `policy-review.json`; eligible만 품질·순위·RM 도달에 인정 | run/profile/input/raw 로그·검토 근거 결합, 변조·누락 제외, 전체 실패 비용 보존 |
+| E2 fresh 후속 과제 연결 | 최초 공통 task 전문·새 ID·잔여 예산 재전달, 자기 증거 상대 경로·hash 고정 | task·증거 변조 차단, 독립 복원, Windows 줄바꿈 변환 시 원본 bytes 보존 |
+| E3 native 권한 | 정상 상대 py_compile 허용, 탭 명령 차단, ref 이력 조회 제거, SDK/vendor edit 거부 | 선언 회귀·native 실효 config·실제 정상 도구 실행 |
+| E4 실행 문법 | `benchmark.py run <directory> --receipt ...`; AGY 옵션을 action 앞에 배치 | 실제 parser와 대조 |
+| E5 AGY 전역 설정 | root 단위 OS lock·owner journal, child 종료 확인 후 원본 복원 | 경합·중단·실패 복구 회귀, 실제 probe 전후 bytes 동일 |
+| 평가 baseline 보존 | operator ZIP/profile을 후보 checkout 밖에 보존, 복원 시 입력·평가 hash 재계산 | package 독립 복원 시험 |
+| Codex hook | 전역 hook inventory 확인 후 비교 profile에서 `--disable hooks` | native `hooks=false`, 최종 조건의 모델 재검증 |
 
-[allowlist](../../experiments/config/agent-inputs.json)는 필수 MD 3개와 기계 입력·지원 도구를
-고정한다. runner는 운영자 snapshot에서 전체 입력을 hash한 뒤 목록의 파일만 candidate
-checkout에 복사한다. 운영·평가·archive·이전 evidence·결과·runner는 복사하지 않는다.
-목록과 각 파일 hash는 run 밖 `candidate-inputs.json`, 후보의
-`.benchmark-inputs/input-files.json`에 기록하며 실행 전/후 변경을 거부한다.
-새 제품 파일 작성은 허용한다. 외부 읽기의 OS 격리 보장은 별도 접근 정책이다.
-과거 policy 없는 frozen baseline의 전달 방식·hash는 변경하지 않는다.
+정책 검토는 운영자의 판단 기록이며 로그가 자동으로 준수를 입증하지 않는다. review digest는 변조 검사다.
+기록 부족은 `unverified`, 위반은 `invalid_for_comparison`으로 품질 비교에서 제외하고 비용·사유를 남긴다.
+과거 flag 없는 실행에는 새 gate를 소급 적용하지 않는다.
+native command map과 지침도 OS 격리를 보장하지 않는다. AGY 공개 SDK view가 요청한 줄 범위보다
+넓었던 사실과 native 비동기 도구 사용은 실제 로그에 남겼으며, 본 비교에서 별도 정책 검토한다.
 
-## 이미 존재하는 준비 검증 명령
+## 동결과 후보 입력
 
-아래 명령은 로컬 도구 시험과 입력 검사다. 후보 실행·보드 접근은 수행하지 않는다.
+새 baseline tag는 `comparison-baseline-20261004`로 정했다. 실제 commit과 준비 기록은 동결 완료 후
+선행 작업 보고서에 연결한다. 이전 `85ba108`과 tag·receipt·package는 변경하지 않는다.
+
+후보 allowlist는 57개/필수 MD 3개다. E3 변경으로 이번 비교의
+`experiments/config/agy-pilot-permissions.json` 1개에서 git log 허용 규칙을 제거했다.
+나머지 56개 archive bytes는 이전 baseline과 동일해야 하며 활성 5개 모두 같은 새 입력을 받는다.
+이 정정은 2026-10-03 계획의 “57개 모두 동일” 조건에만 적용한다. 제품 계약·fixture·공통 과제는 유지한다.
+
+runner는 allowlist만 후보에 복사하고 운영·평가·과거 구현·결과를 제외한다.
+`candidate-inputs.json`과 `.benchmark-inputs/` 사본을 실행 전후 검사한다.
+후속 clone과 package 복원에서는 Git 줄바꿈 변환과 별개로 고정 입력의 원본 bytes를 보존한다.
+새 제품 파일의 작성은 허용한다.
+
+## 실제 시작과 평가 순서
+
+첫 블록은 seed 1로 순서를 고정하고 5개의 개별 ID·ledger·새 receipt를 준비한다.
+블록 2·3은 seed 2·3을 사용하며 실제 시작일에 새 ID를 생성한다. 각 모델/독립 반복의 ledger를 분리한다.
+기본 순서는 series 실행→결과 동결→운영자 실물 관측→RM·정책 review→필요한 후속→다음 대상이다.
+한 보드의 flash·serial·광학 관측은 하나씩 수행한다. provider 사용량과 보드 시간은 시작 직전에 확인한다.
+
+현재 포트 열거에는 COM1만 있고 ESP32의 기존 COM3/VID_303A는 확인되지 않았다.
+후보 구현 세션은 보드 없이 시작할 수 있다. 실물 평가 전에 보드를 연결하고 포트·VID/PID를 확인해야 한다.
+연결·수신·화면·BOOT·단절 복구를 실제 확인하기 전에는 `not_run`을 유지한다.
+후보가 기능을 구현하지 못한 결과는 실패·미도달로 보존한다.
+
+실행과 평가 명령은 [도구 안내](comparison-tooling.md)를 따른다. prepared 상태의 예약은 모델 실행이 아니다.
+예약 ID는 해당 KST 날짜에만 유효하다. 다음 날에는 같은 동결 baseline에서 새 ID·ledger를 만들고
+CLI/model/settings/environment를 재확인해 새 run-bound receipt를 연결한다.
+2026-10-02 ID와 GPT-5.6 receipt는 이번 비교에 재사용하지 않는다.
 
 ```powershell
-python -m unittest discover -s scripts/tests -v
-python scripts/validate-end-to-end-result.py
-python scripts/validate-end-to-end-result.py --matrix experiments/fixtures/provider-fixture-matrix.json
-python scripts/benchmark.py check --baseline <고정한-새-commit> --profile <확인한-profile.json>
+python -X utf8 -m unittest discover -s scripts/tests -v
+python -X utf8 scripts/validate-end-to-end-result.py --matrix experiments/fixtures/provider-fixture-matrix.json
+python -X utf8 scripts/benchmark.py check --baseline comparison-baseline-20261004 --profile experiments/config/next-profiles-20261003/codex-sol.json
 ```
 
-`check`는 선택한 commit의 snapshot에서 입력을 검사하고 run ID를 예약하지 않는다.
-`check`는 입력 검사다. 새 예산·후속·reference 관리는 `comparison.py init`으로 ledger를
-연결한 run에 적용한다. [도구 안내](comparison-tooling.md)의 receipt·평가·복원 절차와
-[구현 계획](../plans/2026-10-02-comparison-tooling.md)의 검증 기록을 따른다.
-
-## 완료 판정과 다음 실행
-
-준비 담당자는 [실행 준비 계획](../plans/2026-10-02-experiment-launch-preparation.md)에
-실제 산출물·검증 근거를 연결한다. 이전 tag를
-덮어쓰지 않고 모든 후보에 같은 새 입력을 제공한다. 첫 결과는 종료 시 동결하고
-후속 수정은 자신의 결과에서 이어서 비용을 기록한다.
-
-실행 시작 시에는 사용할 표면/model·고정 입력·한도·단일 보드 관측 일정을 실제
-실행 지시와 연결한다. 이 준비 문서를 작성한 것 자체는 실행 시작이 아니다.
-전체 제품 합격이 확인되지 않은 후보도 실패·미도달 결과로 보존한다.
-
-현재 후보 6개는 시작 시각 null·소비 시간 0초로 준비됐으며 제품 실험은 0회다.
-예약 ID는 2026-10-02 KST에만 유효하다. 이후 날짜에는 새 ID·ledger를 준비하고
-CLI/설정/환경을 재확인한 뒤 receipt를 다시 연결한다. Flash SDK의 간헐적 컴파일러 오류와
-provider quota·Codex 원본 계측의 한계는 준비 보고서에 보존했다.
+`check`는 동결 입력을 검사하며 모델 호출이나 ID 예약을 수행하지 않는다.
+실제 제품 terminal artifact와 정책·RM 관측 package는 후보 제출 이후 별도로 생성한다.

@@ -41,11 +41,11 @@ class CommandPolicyTests(unittest.TestCase):
             with self.subTest(cmd=cmd):
                 self.assertFalse(self.allowed(cmd))
 
-    def test_bounded_local_preparation_commit_metadata(self):
+    def test_history_reads_are_forbidden_in_comparison(self):
         for cmd in ['git log -n 5', 'git log --oneline -n 2',
                     'git log -n 1 --oneline', 'git log --max-count=5']:
             with self.subTest(cmd=cmd):
-                self.assertTrue(self.allowed(cmd))
+                self.assertFalse(self.allowed(cmd))
         for cmd in ['git log', 'git log -n 6', 'git log -n 0',
                     'git log --all -n 5', 'git log -n 5 HEAD~1',
                     'git log -n 5 -p', 'git log -n 5 --format=raw',

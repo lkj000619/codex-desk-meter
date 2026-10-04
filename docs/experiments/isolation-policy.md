@@ -43,6 +43,10 @@ Docker/VM 미사용 자체는 정량 비교 제외 사유가 아니다.
 다른 branch나 이전 결과를 실제 참조한 run, 실행 중 외부 구현 피드백을 받은 run,
 사람이 같은 실행 코드를 수정한 run은 원본을 보존하고 정량 비교에서 제외한다.
 참조 준수 여부를 로그로 검토할 수 없으면 `unverified`로 표시하고 순위에서 제외한다.
+2026-10-04부터 새 baseline의 benchmark run은 필수 정책 준수 review로 이 제외를 집계에 연결한다.
+run/profile/input/raw 로그와 검토 근거를 결합한 eligible만 품질 비교에 포함하며,
+모든 시도·실패 비용과 제외 사유는 보존한다. 상세 형식은
+[정책 준수 검토](comparison-tooling.md#정책-준수-검토)를 따른다. 과거 실행에 소급 적용하지 않는다.
 runner 밖에서 직접 전달한 수동 실행은 입력·시간·계측 증거 부족에 따라 기존
 `manual pilot; invalid for cross-agent quantitative comparison` 분류를 유지한다.
 수동 실행 분류와 OS sandbox 사용 여부는 별개의 조건이다.
@@ -61,9 +65,10 @@ receipt는 baseline/profile 해시와 증거 파일 SHA-256에 묶는다.
 접근은 별도 조건으로 기록한다. `offline-fixture`는 모델 호출까지 오프라인이라는
 뜻이 아니다. credential 자체를 profile·prompt·저장소·공개 로그에 넣지 않는다.
 
-이 정책 변경은 실행 승인이 아니다. R10의 대상 baseline/profile/surface/phase 승인,
-serial/COM3/ESP32 동작의 별도 승인, host simulation과 hardware 증거의 구분은 유지한다.
-현재 상태는 [readiness gate](benchmark-readiness.md)를 따른다.
+이 정책 변경은 실행 승인이 아니다. 다음 비교의 대상 baseline/profile/surface/phase와 실행 지시는
+[운영 계약](comparison-operating-contract.md), 현재 상태는 [새 비교 준비 상태](next-comparison-readiness.md)를 따른다.
+serial/COM3/ESP32 동작의 실행 범위와 host simulation/hardware 증거의 구분은 유지한다.
+R10과 [기존 readiness gate](benchmark-readiness.md)는 해당 과거 단회 cohort의 승인 기록으로만 참조한다.
 R5는 실제 preflight 증거를 검토한 뒤 갱신하며 문서 수정만으로 pass로 바꾸지 않는다.
 
 ## 스킬·플러그인·MCP 비교 조건 — 채택 정책

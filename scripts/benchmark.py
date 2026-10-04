@@ -153,6 +153,11 @@ def input_bundle_hashes(root, profile_path, baseline_ref, baseline_commit):
             "comparison_manager.py", "comparison.py", "product_observation.py", "observe-product.py",
             "production_evaluation.py", "evaluate-production.py", "evidence_package.py", "package-evidence.py",
             "reference_inputs.py", "summarize-benchmark.py", "benchmark.py", "benchmark_support.py"))
+        if (root / "scripts/operator_baseline.py").is_file():
+            evaluation_paths.append("scripts/operator_baseline.py")
+        if (root / "scripts/policy_review.py").is_file():
+            evaluation_paths.extend(("scripts/policy_review.py", "scripts/review-policy.py",
+                                     "scripts/agy_pilot_environment.py"))
         from reference_inputs import validate_reference
         reference_path = root / "experiments/reference/codex-7923f96/reference-inputs.json"
         _, reference_files = validate_reference(reference_path)
@@ -298,6 +303,17 @@ def verify_agent_inputs(directory, manifest):
         if (not copy.is_file() or not copy.resolve().is_relative_to(checkout.resolve())
                 or copy.read_bytes() != (directory / source).read_bytes()):
             raise ValueError(f"immutable agent input changed: {target}")
+    context = read(directory / "agent-context.json")
+    for target, source in context.get("immutable_files", {}).items():
+        from evidence_package import safe_path
+        if not target.startswith(".benchmark-inputs/"):
+            raise ValueError("immutable follow-up input must be under .benchmark-inputs")
+        original = safe_path(directory, source)
+        candidate = safe_path(checkout, target)
+        expected = manifest["operator"]["evidence"].get(source)
+        if (not expected or not original.is_file() or digest(original.read_bytes()) != expected
+                or not candidate.is_file() or candidate.read_bytes() != original.read_bytes()):
+            raise ValueError(f"immutable agent input changed: {target}")
     if "candidate-inputs.json" in references:
         for relative, expected in read(directory / "candidate-inputs.json")["files"].items():
             path = checkout / relative
@@ -343,7 +359,10 @@ def prepare(a):
         _extract_archive(snapshot, base)
         hashes = input_bundle_hashes(snapshot, directory / "profile.json", a.baseline, base)
         template = (snapshot / "experiments/prompts/version-2-agent-task.md").read_bytes()
+        from operator_baseline import preserve
+        prepared_reference_files.update(preserve(snapshot, directory))
         m = read(snapshot / "experiments/examples/run-manifest.example.json")
+        policy_review_required = (snapshot / "scripts/policy_review.py").is_file()
         reference_path = snapshot / "experiments/reference/codex-7923f96/reference-inputs.json"
         if reference_path.is_file():
             from reference_inputs import validate_reference
@@ -379,6 +398,8 @@ def prepare(a):
     m["operator"] = dict(phase=a.phase, status="prepared", reason=None, repetition=repetition,
                          cohort=profile["cohort"], seed=a.seed, exit_code=None,
                          delivered_prompt_sha256=digest(prompt), local_base_commit=None, evidence=prepared_reference_files)
+    if policy_review_required and a.phase != "pilot":
+        m["operator"]["policy_review_required"] = True
     m["hardware"]["port"] = a.port
     m["measurement"].update(wall_clock_seconds=None, tool_calls=None, failed_commands=None, user_interventions=None)
     m["measurement"]["tokens"]["availability_note"] = "Not yet executed."

@@ -5,6 +5,7 @@ import shutil
 import subprocess
 
 from benchmark_support import digest, read, save, validate_operator, validate_schema, verify_evidence
+from policy_review import REVIEW_NAME, review_eligibility, validate_review
 
 
 def safe_path(root, name):
@@ -40,6 +41,10 @@ def _git(*args, cwd):
 
 
 def verify_report_dependencies(manifest, root):
+    from operator_baseline import verify
+    verify(manifest, root)
+    if (Path(root) / REVIEW_NAME).exists():
+        validate_review(manifest, Path(root) / "run-manifest.json")
     if "execution-preflight.json" in manifest["operator"]["evidence"]:
         receipt = read(Path(root) / "execution-preflight.json")
         verify_evidence({"operator": {"evidence": {"preflight-evidence/" + name: expected
@@ -55,7 +60,7 @@ def verify_report_dependencies(manifest, root):
 
 
 def create_package(directory, destination):
-    from benchmark import _check_e2e_manifest_join, _load_e2e_validator
+    from benchmark import _check_e2e_manifest_join, _load_e2e_validator, verify_agent_inputs
     directory, destination = Path(directory).resolve(), Path(destination).resolve()
     manifest = read(directory / "run-manifest.json")
     validate_schema(manifest, "run-manifest.schema.json")
@@ -73,6 +78,23 @@ def create_package(directory, destination):
     sources = {}
     for name in manifest["operator"]["evidence"]:
         sources["operator/" + name] = safe_path(directory, name)
+    # Git objects do not preserve working-copy line endings. Keep immutable
+    # candidate bytes separately so another host's autocrlf cannot change them.
+    if "agent-context.json" in manifest["operator"]["evidence"]:
+        verify_agent_inputs(directory, manifest)
+        fixed = {".benchmark-inputs/run-context.json"}
+        if manifest["experiment_id"] == "version-2-end-to-end-v1":
+            fixed.add(".benchmark-inputs/e2e-evaluation-manifest.json")
+        if "candidate-inputs.json" in manifest["operator"]["evidence"]:
+            fixed.add(".benchmark-inputs/input-files.json")
+            fixed.update(read(directory / "candidate-inputs.json")["files"])
+        fixed.update(read(directory / "agent-context.json").get("immutable_files", {}))
+        for name in fixed:
+            sources["checkout/" + name] = safe_path(checkout, name)
+    if (directory / REVIEW_NAME).is_file():
+        review = validate_review(manifest, directory / "run-manifest.json")
+        for name in [REVIEW_NAME] + [item["path"] for item in review["decision"]["evidence"]]:
+            sources["operator/" + name] = safe_path(directory, name)
     comparison = manifest["operator"].get("comparison")
     if comparison:
         from comparison_manager import _load
@@ -157,7 +179,7 @@ def create_package(directory, destination):
 
 
 def restore_package(package_root, destination, expected_sha256=None):
-    from benchmark import _check_e2e_manifest_join, _load_e2e_validator
+    from benchmark import _check_e2e_manifest_join, _load_e2e_validator, verify_agent_inputs
     package_root, destination = Path(package_root).resolve(), Path(destination).resolve()
     manifest_path = package_root / "package-manifest.json"
     if expected_sha256 is not None and digest(manifest_path.read_bytes()) != expected_sha256:
@@ -214,8 +236,12 @@ def restore_package(package_root, destination, expected_sha256=None):
     # Keep provenance bytes; expose a usable manifest for later summaries.
     shutil.copyfile(destination / "operator/run-manifest.json", destination / "operator/raw-run-manifest.json")
     operator["execution"]["worktree"] = str(checkout)
+    verify_agent_inputs(destination / "operator", operator)
     save(destination / "operator/run-manifest.json", operator)
+    policy_eligible, policy_status, policy_reason = review_eligibility(operator, destination / "operator/run-manifest.json")
     report = {"run_id": package["run_id"], "implementation_commit": package["implementation_commit"],
+              "policy_eligible": policy_eligible, "policy_review_status": policy_status, "policy_review_reason": policy_reason,
+              "operator_baseline_verified": "operator-baseline.zip" in operator["operator"]["evidence"],
               "restored_root": str(destination), "result_valid": valid,
               "manifest_identity_verified": expected_sha256 is not None,
               "package_manifest_sha256": digest(manifest_path.read_bytes()),

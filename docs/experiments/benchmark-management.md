@@ -165,6 +165,7 @@ historical schema는 과거 결과 형식으로 유지하며 새 E2E 필드를 �
 | 보관 항목 | 식별·복구 조건 |
 |---|---|
 | source | run ID, baseline commit, 최초/직전/구현 commit과 검증 가능한 Git bundle |
+| operator baseline | 신규 run의 `operator-baseline.zip`과 profile을 operator evidence에 hash로 등록. 후보 입력과 분리하며 package 복원 시 평가·입력 hash를 재계산 |
 | artifact | 원본 app·ELF·map·bootloader·partition, 빌드 명령·도구 버전, 파일별 상대 경로·byte 수·SHA-256 |
 | stimulus·관측 | 실제 fixture와 기준 시각, expected/raw frame·sequence, collector/capture 명령·로그·사진/영상과 hash |
 | 결과·계측 | run/evaluation manifest, result, raw telemetry, 최초/후속 연결과 기록별 집계 범위 |

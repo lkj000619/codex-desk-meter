@@ -40,3 +40,6 @@ artifacts/
 # Reviewed empty-app preparation artifacts; original build trees stay ignored.
 !results/experiment-preparation-20261002/receipts/evidence/probes/*/artifacts/
 !results/experiment-preparation-20261002/receipts/evidence/probes/*/artifacts/**
+# Reviewed 2026-10-04 empty-app capability artifacts only.
+!results/experiment-launch-preparation-20261004/evidence/probes/*/artifacts/
+!results/experiment-launch-preparation-20261004/evidence/probes/*/artifacts/**

@@ -15,6 +15,13 @@
 
 | 기록 | 검증 범위 |
 |---|---|
+| [프로젝트 목적·문서 품질 재검토](documentation-assessment-20261002/review.md) | 현재 계약·후보 입력·평가 도구 대조, 링크·회귀 검증, 보완 권고 |
+| [문서 품질 보완 결과](documentation-assessment-20261002/remediation.md) | 2026-10-03 DOC-01~04 반영, 수신 로그 연결·RM5 기준·단계별 완료 조건·검증 |
+| [GPT-6 모델 설정 갱신](gpt6-profile-update-20261003/report.md) | Sol/Luna GPT-6 변경, 모델 목록·profile 검사, 본 실험 전 남은 조건 |
+| [목적·목표 대비 문서 재검증](documentation-review-20261003/report.md) | 현재 문서·도구 대조, 평가 버전/baseline 연결 공백·gate 링크·F9 피드백 |
+| [문서 재검증 피드백 보완](documentation-review-20261003/remediation.md) | R1~R3 및 전체 일정 반영, baseline 보존·독립 복원·회귀 검증과 남은 실행 준비 조건 |
+| [실험 실행 경계·hook·제한 정책 검토](experiment-execution-review-20261003/report.md) | 후속 지침·native 권한·준수 판정/집계·CLI 문법 재현, 시작 조건과 hook 적용 범위 |
+| [정식 비교 시작 선행 작업 실행](experiment-launch-preparation-20261004/report.md) | E1~E5 수정·정책 review 보존·입력 bytes 복원·실제 모델 capability·새 baseline 준비 |
 | [프로젝트 목적·실험 개선 검토](main-purpose-review-20261002/review.md) | 정비 전 발견 사항과 당시 시험 |
 | [문서 수정 기록](main-purpose-review-20261002/document-fixes.md) | 문서·prompt 정비와 당시 남은 구현 |
 | [비교 도구 구현·검증](comparison-tooling-20261002/report.md) | 예산·실패 비용·관측·독립 복원 도구 |

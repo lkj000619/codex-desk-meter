@@ -32,3 +32,10 @@ results/experiment-preparation-20261002/receipts/** binary
 results/experiment-preparation-20261002/*.zip binary
 experiments/config/verified-profiles-20261002/*.json binary
 results/experiment-preparation-20261002/*.json binary
+# New preparation evidence keeps the captured bytes and profile identities.
+results/experiment-launch-preparation-20261004/evidence/** binary
+results/experiment-launch-preparation-20261004/*.json binary
+results/experiment-launch-preparation-20261004/tests*.txt binary
+results/experiment-launch-preparation-20261004/*.zip binary
+results/experiment-launch-preparation-20261004/restore-audit-output.txt binary
+experiments/config/next-profiles-20261003/*.json binary

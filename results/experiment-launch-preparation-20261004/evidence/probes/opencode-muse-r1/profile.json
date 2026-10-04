@@ -1,0 +1,46 @@
+{
+  "interface": "cli",
+  "cohort": "version-2-end-to-end-v1",
+  "sandbox_policy": "prompt-and-log",
+  "network_mode": "offline-fixture",
+  "provider": "opencode",
+  "product": "opencode-cli",
+  "agent_version": "1.18.34",
+  "model": "opencode/muse-spark-1.3-contributor-free",
+  "model_slug": "opencode-muse",
+  "reasoning": "provider-default",
+  "branch_owner": "opencode",
+  "branch_product": "opencode-cli",
+  "adapter": "opencode",
+  "argv": [
+    "C:\\Espressif\\tools\\python\\python.exe",
+    "-c",
+    "import os,subprocess,sys; env=os.environ.copy(); env.update({'XDG_CONFIG_HOME': 'C:\\\\meter-preflight-20261002\\\\frozen-opencode-config', 'OPENCODE_CONFIG_DIR': 'C:\\\\meter-preflight-20261002\\\\frozen-opencode-config\\\\opencode', 'OPENCODE_DISABLE_PROJECT_CONFIG': 'true', 'OPENCODE_DISABLE_EXTERNAL_SKILLS': 'true', 'OPENCODE_DISABLE_CLAUDE_CODE': 'true', 'OPENCODE_DISABLE_AUTOUPDATE': 'true', 'OPENCODE_DISABLE_SHARE': 'true', 'OPENCODE_CONFIG_CONTENT': '{\"plugin\":[],\"mcp\":{},\"instructions\":[],\"autoupdate\":false,\"share\":\"disabled\",\"permission\":{\"*\":\"deny\",\"read\":\"allow\",\"edit\":{\"*\":\"allow\",\"C:/Espressif/v5.3.2/esp-idf/**\":\"deny\",\"C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/**\":\"deny\"},\"glob\":\"allow\",\"grep\":\"allow\",\"list\":\"allow\",\"todowrite\":\"allow\",\"bash\":{\"*\":\"deny\",\"git status*\":\"allow\",\"Get-ChildItem*\":\"allow\",\"Get-Content*\":\"allow\",\"cmake -S tests -B build-host -G Ninja\":\"allow\",\"cmake --build build-host\":\"allow\",\"ctest --test-dir build-host --output-on-failure\":\"allow\",\"idf.py -B build-idf build\":\"allow\",\"git add*\":\"allow\",\"git commit*\":\"allow\",\"cmake -S *\":\"allow\",\"cmake --build *\":\"allow\",\"ctest --test-dir *\":\"allow\",\"python --version\":\"allow\",\"python -m unittest*\":\"allow\",\"python scripts/*\":\"allow\",\"python tests/*\":\"allow\",\"idf.py --version\":\"allow\",\"idf.py build\":\"allow\",\"idf.py reconfigure\":\"allow\",\"idf.py set-target esp32s3\":\"allow\",\"idf.py -B * build\":\"allow\",\"idf.py -B * reconfigure\":\"allow\",\"idf.py size\":\"allow\",\"Get-Location\":\"allow\",\"Get-Item*\":\"allow\",\"Test-Path*\":\"allow\",\"rg *\":\"allow\",\"ninja --version\":\"allow\",\"powershell -NoProfile -ExecutionPolicy Bypass -File scripts/activate-idf.ps1\":\"allow\",\"git diff\":\"allow\",\"git diff -- *\":\"allow\",\"git diff --stat\":\"allow\",\"git diff --stat -- *\":\"allow\",\"git diff --name-only\":\"allow\",\"git diff --name-only -- *\":\"allow\",\"git diff --check\":\"allow\",\"git diff --check -- *\":\"allow\",\"git diff --cached\":\"allow\",\"git diff --cached -- *\":\"allow\",\"git diff --staged\":\"allow\",\"git diff --staged -- *\":\"allow\",\"git diff --no-ext-diff --no-textconv\":\"allow\",\"git diff --no-ext-diff --no-textconv -- *\":\"allow\",\"python -m py_compile *.py\":\"allow\",\"python -m py_compile *..*\":\"deny\",\"python -m py_compile *:*\":\"deny\",\"python -m py_compile /*\":\"deny\",\"python -m py_compile \\\\\\\\*\":\"deny\",\"*;*\":\"deny\",\"*|*\":\"deny\",\"*&*\":\"deny\",\"*`*\":\"deny\",\"*$*\":\"deny\",\"*\\\\n*\":\"deny\",\"*\\\\r*\":\"deny\",\"python -m py_compile * /*\":\"deny\",\"python -m py_compile * \\\\\\\\*\":\"deny\",\"python -m py_compile *\\\\\"/*\":\"deny\",\"python -m py_compile *\\\\\"\\\\\\\\*\":\"deny\",\"python -m py_compile *\\'/*\":\"deny\",\"python -m py_compile *\\'\\\\\\\\*\":\"deny\"},\"external_directory\":{\"*\":\"deny\",\"C:/Espressif/v5.3.2/esp-idf/**\":\"allow\",\"C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/**\":\"allow\"},\"skill\":\"allow\",\"task\":\"allow\",\"webfetch\":\"deny\",\"websearch\":\"deny\"}}'}); sys.exit(subprocess.call(sys.argv[1:], env=env))",
+    "C:\\Users\\이광진\\AppData\\Roaming\\npm\\node_modules\\opencode-ai\\bin\\opencode.exe",
+    "run",
+    "--pure",
+    "--format",
+    "json",
+    "--model",
+    "{model}"
+  ],
+  "version_argv": [
+    "C:\\Users\\이광진\\AppData\\Roaming\\npm\\node_modules\\opencode-ai\\bin\\opencode.exe",
+    "--version"
+  ],
+  "approval_policy": "Native default-deny permission map in semantic profile; no --auto or blanket permission override; later product execution requires user instruction",
+  "settings_inventory": {
+    "skills": "External discovery and Claude Code imports disabled by process environment; native customize-opencode built-in skill retained; isolated config directory has no custom skills.",
+    "mcp": "Effective native mcp object empty in the isolated config; no user/global MCP is loaded from that config root.",
+    "plugins": "--pure and empty plugin list exclude external plugins; native built-in inventory retained.",
+    "memory": "Fresh run, no session continue/resume; original provider cache behavior retained.",
+    "user_instructions": "Isolated XDG_CONFIG_HOME, empty instructions and project config disabled; no Claude Code imports.",
+    "cache": "Provider/session caches neither copied nor disabled; raw step_finish cache read/write fields retained.",
+    "routing": "Explicit opencode/muse-spark-1.3-contributor-free without a variant override or model fallback.",
+    "permissions": "Native default-deny command map; working-tree diff and relative py_compile allowed; reference history reads denied; SDK/vendor external reads allowed with explicit native edit/write/patch deny. Script side effects are not OS-contained; read_isolation remains not_enforced. Native revalidation pending.",
+    "model_network": "Model endpoint used in preparation; product collector inputs remain offline fixtures; webfetch/websearch permissions deny.",
+    "extension_condition": "builtin-only-v1; native settings/skill inventory captured under the exact process environment.",
+    "usage_recording": "Raw JSONL tool_use and step_finish events retained; original tokens.total/input/output/reasoning/cache and cost definitions preserved."
+  },
+  "measurement_notes": "2026-10-03 formal-comparison prerequisites: revised permissions require fresh actual capability evidence; prior preparation receipt does not validate these changes."
+}

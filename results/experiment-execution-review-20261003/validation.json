@@ -1,0 +1,28 @@
+{
+  "head": "681be5315f2b9c3c0e4083527c3ebc38f75b65d6",
+  "scope": "HEAD plus uncommitted remediation; review only, no model/device invocation",
+  "links": {
+    "markdown_files": 116,
+    "local_links": 805,
+    "missing": []
+  },
+  "tests": {
+    "executed": 182,
+    "passed": 181,
+    "skipped": 1,
+    "failed": 0,
+    "elapsed_seconds": 92.12,
+    "skip_reason": "symlink creation unavailable"
+  },
+  "cli_versions": {
+    "codex": "codex-cli 0.159.2",
+    "opencode": "1.18.34",
+    "agy": "1.2.14"
+  },
+  "evidence_sha256": {
+    "reproduce.py": "0a5109c764a3e591021a23b3bc6c0d9f0e0725eb454ae3056fa40d2fef43887f",
+    "probes.json": "a6b778b6f32471f6e5ddf5447ab7e0b350a1320b2ed5ae43fbcbed6070c903a0",
+    "tests.txt": "518a0535a15342fc38a6d18d7cc5a09efe2df5a4b867d1e5c9625e1b991847de",
+    "profile-checks.json": "f4f15c58b23a218af8854ca8ee0d246186a24ec6b2148f05b968571b2f6aaf42"
+  }
+}

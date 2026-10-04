@@ -1,0 +1,14 @@
+{
+  "candidate_inputs_unchanged": true,
+  "baseline": "85ba1089226a2e3198983a42eea375a3fd7e6ed0",
+  "profile": "experiments/config/next-profiles-20261003/opencode-muse.json",
+  "baseline_criteria_hash": "fa10b1febc97ef28bda8f7ad32d1aac98cc4115507f03a3bc2afae91bbdba47e",
+  "updated_criteria_hash": "fc8faa5a8986681f48d8c99be43f326bb32a5022992c6b6057ab798e1efbb6a8",
+  "bundle_hash_changes": true,
+  "overlay_files": [
+    "docs/experiments/reference-match-matrix.md",
+    "docs/experiments/comparison-operating-contract.md",
+    "scripts/product_observation.py",
+    "scripts/observe-product.py"
+  ]
+}
