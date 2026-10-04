@@ -102,6 +102,13 @@ COM3의 원본 공통 frame 수신과 실제 성공 로그를 대조했고 사�
 동결된 깨끗한 operator checkout `C:/meter-operator-20261004`에서 수행한다.
 당일 준비 도우미는 10월 4일의 실제 근거를 사용한 기록용이며 다음 날 그대로 실행해 현재 환경 확인을 대신하지 않는다.
 
+2026-10-05 00:26 KST에 아직 시작하지 않은 AGY Flash/Pro·Codex Sol/Luna의 예약만 새 날짜로
+갱신했다. [새 예약](../../results/formal-comparison-20261004/reservations-20261005/renewal.json)과
+[현재 환경 확인](../../results/formal-comparison-20261004/reservations-20261005/current/current-checks.json)을 따른다.
+갱신 중 모델/제품 구현 호출은 없으며 기존 OpenCode series·진행 중 후속 예산은 유지한다.
+이전 prepared 예약은 보존했고 동결 baseline/profile/입력도 같다. 실제 capability 원본은 10월 4일,
+현재 CLI/SDK/native 설정·AGY 모델 목록과 전역 파일 복원 확인은 10월 5일의 별도 근거다.
+
 ```powershell
 python -X utf8 -m unittest discover -s scripts/tests -v
 python -X utf8 scripts/validate-end-to-end-result.py --matrix experiments/fixtures/provider-fixture-matrix.json

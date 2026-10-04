@@ -131,6 +131,21 @@ SDK 설정 완료 후 새 모델 출력 대기 구간도 [현재 상태](progres
 정책 위반이 있었던 최초 회차의 비교 부적격을 후속 성공으로 지우지 않는다. 미관측을 제품 실패로 바꾸거나 영상·정밀 시간 증거를 만들어 넣지 않는다.
 최초 관측 슬롯은 기록상 종료했고 보드에는 최초 artifact를 유지한다. 다음 업로드는 후속 결과가 동결된 뒤 새 슬롯으로 수행한다. 나머지 4개 최초 예약은 아직 실행하지 않았다.
 
+## 2026-10-05 미시작 예약 갱신
+
+현재 OpenCode series와 후속 회차는 유지하고, 날짜가 지난 나머지 4개 최초 예약만 새 날짜의
+ID·개별 ledger·run-bound receipt로 준비했다. 순서는 AGY Flash→AGY Pro→Codex Sol→Codex Luna다.
+[예약 원본](reservations-20261005/renewal.json)에 이전 미시작 ID와 새 ID·commit/tree·receipt hash를 연결했다.
+10월 4일 예약은 원본 prepared 상태로 보존했다. 갱신 중 제품/모델 구현 호출은 0회다.
+
+동결된 깨끗한 operator checkout에서 준비했으며 기존 baseline/profile·공통 57개 입력을 유지한다.
+현재 CLI는 AGY 1.2.14/Codex 0.159.2, SDK는 ESP-IDF v5.3.2이고 native 설정·skills·feature를
+이전 준비와 byte 단위로 대조했다. AGY의 MCP·plugins·custom agents가 비어 있음을 native 조회했고
+scope 해제 후 전역 파일 원본 bytes 복원을 확인했다. [실행 전 재확인](reservations-20261005/current/current-checks.json)을 따른다.
+모델 목록은 선택한 AGY ID의 노출만 확인한다. 새 모델 호출로 entitlement나 quota를 검증한 것으로
+표현하지 않고 10월 4일의 실제 capability 원본과 10월 5일 환경 재확인을 구분한다.
+실제 시작 직전에도 현재 version·설정·준비 날짜·보드 관측 슬롯을 확인한다.
+
 ## 재개 시 확인 순서
 
 manifest·ledger 상태와 launcher PID의 실행 여부를 먼저 확인한다. running 후보를 다시 실행하지 않는다.

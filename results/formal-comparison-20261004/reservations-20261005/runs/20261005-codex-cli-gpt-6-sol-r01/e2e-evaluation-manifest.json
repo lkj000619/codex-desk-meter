@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "manifest_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "result_reference": "20261005-codex-cli-gpt-6-sol-r01",
+  "baseline_id": "comparison-baseline-20261004",
+  "baseline_ref": "comparison-baseline-20261004",
+  "experiment_id": "version-2-end-to-end-v1",
+  "execution": {
+    "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5"
+  }
+}

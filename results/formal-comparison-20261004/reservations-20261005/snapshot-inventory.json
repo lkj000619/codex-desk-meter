@@ -1,0 +1,193 @@
+{
+  "scope": "Unstarted 2026-10-05 reservations and current native inventory; historical capability files remain at the cited preparation report and receipt root.",
+  "files": {
+    "agy-flash-receipt.json": {
+      "sha256": "68aa243049ba3750a47b70830e3deef3874c50f03bcc8e526ce66f24f11063cc",
+      "bytes": 30087
+    },
+    "agy-pro-receipt.json": {
+      "sha256": "57cb59f9ef2454fe1467df6b12a076ec20ffc2d3689a068c481b8805c0987d74",
+      "bytes": 30067
+    },
+    "codex-luna-receipt.json": {
+      "sha256": "dca0a39d7e5b8ebeca2a6700b713d5c94fd6fff05170ebd9192e33a56699cd9c",
+      "bytes": 30091
+    },
+    "codex-sol-receipt.json": {
+      "sha256": "05e5064723975f3331942fc8ea9f8bf339f8a0997ae529f4666587e7132521fc",
+      "bytes": 30081
+    },
+    "renew-unstarted-series.py": {
+      "sha256": "a323d5a1f938d230c688116bcb4b05fbc442575d8bca1497437710c7a22b0895",
+      "bytes": 9576
+    },
+    "renewal.json": {
+      "sha256": "e12fb121d7d65c1416722010db6b67c0c4fbcbec850d6c2139b5a9c022188e9f",
+      "bytes": 3761
+    },
+    "current/agy-active-scope.json": {
+      "sha256": "7de499273faf0269b9d9ccb4d68b7f12c412d81437d0c86b5e2e69c27c521b4d",
+      "bytes": 333
+    },
+    "current/agy-agents-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/agy-agents.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/agy-mcp-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/agy-mcp.txt": {
+      "sha256": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be",
+      "bytes": 27
+    },
+    "current/agy-models-stderr.txt": {
+      "sha256": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8",
+      "bytes": 29
+    },
+    "current/agy-models.txt": {
+      "sha256": "0fe8eac40fd3a1f2554de5c998412b23e219cda82edd3f980f93f2f526a03bda",
+      "bytes": 824
+    },
+    "current/agy-plugins-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/agy-plugins.txt": {
+      "sha256": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494",
+      "bytes": 21
+    },
+    "current/agy-restoration.json": {
+      "sha256": "180c0e6dfc24d5e7fb4270b29922bc97b6cad188de8c618ca9a5874a2765b832",
+      "bytes": 592
+    },
+    "current/current-checks.json": {
+      "sha256": "e8bd486d856434ae025eec2c37427c2695e689df2f0871ba6c6616b5b268e6ba",
+      "bytes": 608
+    },
+    "current/native/codex-features.txt": {
+      "sha256": "b17861d24fdcfa8cef2b79b5991bdc4190b613f6cb57f694a04aa7ee15c1c83b",
+      "bytes": 10134
+    },
+    "current/native/codex-hook-inventory.json": {
+      "sha256": "4a770c74c9726cf234175105939b277278a86df37f705b8700c58a92b732202f",
+      "bytes": 464
+    },
+    "current/native/codex-server-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/native/codex-skills.json": {
+      "sha256": "7be78a7861033ca9e842f58935b40f6185fe0b37b1809c8440cfae2b0b612342",
+      "bytes": 3007
+    },
+    "current/native/opencode-config-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/native/opencode-config.json": {
+      "sha256": "fb34d157823c2e73b85a919f55009859e641eb9431f0e68163a67ddb0caf3e04",
+      "bytes": 3132
+    },
+    "current/native/opencode-paths-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/native/opencode-paths.txt": {
+      "sha256": "038056ad6418f419241fd8c1e7744f20fe02dbf929752e805f34ef9f4447b49c",
+      "bytes": 461
+    },
+    "current/native/opencode-skills-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "current/native/opencode-skills.json": {
+      "sha256": "20725ae3aef9499e888e043ae17322c55a80b4e04ae11d9939f486ead2fdc0d9",
+      "bytes": 17470
+    },
+    "runs/20261005-antigravity-cli-agy-flash-r01/agent-context.json": {
+      "sha256": "072105c52a7960f048ad5e89f442849fea4bb48239d7c68860bf8d8d2c8dc790",
+      "bytes": 1703
+    },
+    "runs/20261005-antigravity-cli-agy-flash-r01/candidate-inputs.json": {
+      "sha256": "0000c12a7e468cc93796a04b3dff3ceb2e3d63af953a2d80a20ef9e3b48cb839",
+      "bytes": 7435
+    },
+    "runs/20261005-antigravity-cli-agy-flash-r01/comparison-ledger.json": {
+      "sha256": "b678034e5d284fa47974d7c2244222bb46fc7bce286ff6f3a61cff33d2002cd6",
+      "bytes": 1354
+    },
+    "runs/20261005-antigravity-cli-agy-flash-r01/e2e-evaluation-manifest.json": {
+      "sha256": "76f205c59c45c2ade3e81270befe83b26fdefb9bae8daccd1a1a396b7086ec4a",
+      "bytes": 444
+    },
+    "runs/20261005-antigravity-cli-agy-flash-r01/run-manifest.json": {
+      "sha256": "b0cd992959436c536d0cd66989bd33027b56b198443d05c3b4aa821bb3687c56",
+      "bytes": 5070
+    },
+    "runs/20261005-antigravity-cli-agy-pro-r01/agent-context.json": {
+      "sha256": "5f14b758ecd1683cfd6c91dbbc2133de3200a239740bd31ccab3df9aee2d3c4c",
+      "bytes": 1689
+    },
+    "runs/20261005-antigravity-cli-agy-pro-r01/candidate-inputs.json": {
+      "sha256": "0000c12a7e468cc93796a04b3dff3ceb2e3d63af953a2d80a20ef9e3b48cb839",
+      "bytes": 7435
+    },
+    "runs/20261005-antigravity-cli-agy-pro-r01/comparison-ledger.json": {
+      "sha256": "5cf081eb6af3675db3027a7ae4db89a12c36b67a7dafac4e240f7b713797af66",
+      "bytes": 1344
+    },
+    "runs/20261005-antigravity-cli-agy-pro-r01/e2e-evaluation-manifest.json": {
+      "sha256": "0d548784d2f9e201d4df37aa8aa1cb3b66e4bb20155030a0e960a5451efb373f",
+      "bytes": 438
+    },
+    "runs/20261005-antigravity-cli-agy-pro-r01/run-manifest.json": {
+      "sha256": "418da9287a481146ccb024665e16fbdea2678be0a658025f7a03586b432f60a5",
+      "bytes": 5048
+    },
+    "runs/20261005-codex-cli-gpt-6-luna-r01/agent-context.json": {
+      "sha256": "1ac476afc98694da9cb44171f3e3e1b941e549ed522d4969ca3d6d92ad0dbe4d",
+      "bytes": 1672
+    },
+    "runs/20261005-codex-cli-gpt-6-luna-r01/candidate-inputs.json": {
+      "sha256": "0000c12a7e468cc93796a04b3dff3ceb2e3d63af953a2d80a20ef9e3b48cb839",
+      "bytes": 7435
+    },
+    "runs/20261005-codex-cli-gpt-6-luna-r01/comparison-ledger.json": {
+      "sha256": "22159bb5bb9953f6f9a6471e124ebc8052f5f0cb8c1094268f1b511643a8cc99",
+      "bytes": 1329
+    },
+    "runs/20261005-codex-cli-gpt-6-luna-r01/e2e-evaluation-manifest.json": {
+      "sha256": "6905030206560c619a934229ea0da18a1ad5b20f1c07f4d8a0a905f815704e00",
+      "bytes": 429
+    },
+    "runs/20261005-codex-cli-gpt-6-luna-r01/run-manifest.json": {
+      "sha256": "f4ce33464a0c14d239fc76650ea76ed1eec6a6bdb558f5d57b06b184a47c91bc",
+      "bytes": 5112
+    },
+    "runs/20261005-codex-cli-gpt-6-sol-r01/agent-context.json": {
+      "sha256": "d0bc30fde4df8a7a54320d344ea78095613b765749fab70ac73a3e7c76ff034c",
+      "bytes": 1670
+    },
+    "runs/20261005-codex-cli-gpt-6-sol-r01/candidate-inputs.json": {
+      "sha256": "0000c12a7e468cc93796a04b3dff3ceb2e3d63af953a2d80a20ef9e3b48cb839",
+      "bytes": 7435
+    },
+    "runs/20261005-codex-cli-gpt-6-sol-r01/comparison-ledger.json": {
+      "sha256": "7e6bca0729a8756f643a6d287588959049b332517d84f74687014a4e6045ac9f",
+      "bytes": 1324
+    },
+    "runs/20261005-codex-cli-gpt-6-sol-r01/e2e-evaluation-manifest.json": {
+      "sha256": "006519fd3d8fec924445a7eca5e6593b10448cf121454b62c6d37ca9e9f1b2d2",
+      "bytes": 426
+    },
+    "runs/20261005-codex-cli-gpt-6-sol-r01/run-manifest.json": {
+      "sha256": "b33e2d0c9db83133ba38d7627ad3d27b2584d538f5c8bd6e7b7d66f90cff7ebe",
+      "bytes": 5106
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "schema_version": 2,
+  "run_id": "20261005-codex-cli-gpt-6-luna-r01",
+  "experiment_id": "version-2-end-to-end-v1",
+  "baseline_id": "comparison-baseline-20261004",
+  "baseline_ref": "comparison-baseline-20261004",
+  "agent": {
+    "provider": "openai",
+    "product": "codex-cli",
+    "interface": "cli",
+    "agent_version": "codex-cli 0.159.2",
+    "model": "gpt-6-luna",
+    "reasoning": "max",
+    "configuration_sha256": "d7980c28a03fcda158f3831200d7336592f367c93f7cac46c63f5983b5b6bef9"
+  },
+  "execution": {
+    "started_at": null,
+    "ended_at": null,
+    "timeout_seconds": 7200,
+    "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+    "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+    "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+    "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+    "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+    "profile_sha256": "eae4f0ceab072eff32f8f12b423cbdbacf312650817c26825800f83edf9fbb2a",
+    "input_bundle_sha256": "891f33b6a9128e423619c6c59b309cf09b0fe3d634bec9aa04bdfe93297207a1",
+    "network_mode": "offline-fixture",
+    "sandbox_policy": "prompt-and-log",
+    "approval_policy": "--ask-for-approval never, workspace-write, elevated sandbox; product execution requires a later user instruction",
+    "branch": "experiment/openai/codex-cli/gpt-6-luna",
+    "worktree": "C:\\meter-runs-20261005\\20261005-codex-cli-gpt-6-luna-r01\\checkout",
+    "host": "DESKTOP-JCMEN12"
+  },
+  "hardware": {
+    "board": "waveshare-esp32-s3-lcd-3.16",
+    "port": null,
+    "board_revision": null,
+    "tf_card_present": false,
+    "hardware_slot": "none",
+    "baseline_image_sha256": null,
+    "baseline_restored": false
+  },
+  "measurement": {
+    "wall_clock_seconds": null,
+    "tool_calls": null,
+    "failed_commands": null,
+    "user_interventions": null,
+    "tokens": {
+      "input": null,
+      "output": null,
+      "cached": null,
+      "reasoning": null,
+      "provider_total": null,
+      "total": null,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "Not yet executed."
+    }
+  },
+  "outputs": {
+    "selection_document": "docs/agent-runs/20261005-codex-cli-gpt-6-luna-r01/hardware-feature-selection.md",
+    "structured_result": "results/20261005-codex-cli-gpt-6-luna-r01/end-to-end-result.json",
+    "implementation_commit": null,
+    "build_status": "not_run",
+    "automated_test_status": "not_run",
+    "hardware_verification_status": "not_run",
+    "evaluation_manifest": "results/20261005-codex-cli-gpt-6-luna-r01/e2e-evaluation-manifest.json"
+  },
+  "operator": {
+    "phase": "benchmark",
+    "status": "prepared",
+    "reason": null,
+    "repetition": 1,
+    "cohort": "version-2-end-to-end-v1",
+    "seed": 1,
+    "exit_code": null,
+    "delivered_prompt_sha256": "6f2b8095fc8607a9b5b784a8b9742faaced32d47be8552a5a36dfc86b16241fc",
+    "local_base_commit": "5ad42953403fee9cf7ee80f89b1c8ad1f542fc0c",
+    "evidence": {
+      "operator-baseline.zip": "0a34af38b8f99d9c22ec4c90f9349a636ae271500b627a6ee4a4fd1884162e1c",
+      "profile.json": "d7980c28a03fcda158f3831200d7336592f367c93f7cac46c63f5983b5b6bef9",
+      "reference/reference-inputs.json": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+      "reference/schedule.json": "a27082eda1b572286c9328ceadc3590aa06a12ac016f20341ef1e45b83177c78",
+      "reference/experiments/fixtures/personal-usage.json": "738674a3b9e587fc851557630a637bef311020bf587f300c5452beabab575e11",
+      "reference/experiments/fixtures/codex-reset-forecast.json": "71a01e40800baf23407a22b22761f2a73d6ff2fb27e1cdf2adb077be1667d5a4",
+      "reference/experiments/fixtures/codex-resets-history.json": "f3054d15bafa93575b6d1b17ea6738642594dcfb0d45bc31346c2626e577740e",
+      "reference/expected-frames.jsonl": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+      "agent-context.json": "1ac476afc98694da9cb44171f3e3e1b941e549ed522d4969ca3d6d92ad0dbe4d",
+      "e2e-evaluation-manifest.json": "6905030206560c619a934229ea0da18a1ad5b20f1c07f4d8a0a905f815704e00",
+      "candidate-inputs.json": "0000c12a7e468cc93796a04b3dff3ceb2e3d63af953a2d80a20ef9e3b48cb839",
+      "common-task.txt": "6f2b8095fc8607a9b5b784a8b9742faaced32d47be8552a5a36dfc86b16241fc"
+    },
+    "policy_review_required": true,
+    "comparison": {
+      "ledger": "C:\\meter-runs-20261005\\ledgers\\20261005-codex-cli-gpt-6-luna-r01.json",
+      "comparison_id": "20261005-codex-cli-gpt-6-luna-r01",
+      "round": 0,
+      "starting_commit": "5ad42953403fee9cf7ee80f89b1c8ad1f542fc0c",
+      "feedback_sha256": null,
+      "reference_status": "not_run",
+      "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08"
+    }
+  }
+}

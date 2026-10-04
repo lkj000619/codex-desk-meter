@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-04T15:25:20.304080+00:00",
+  "checked_at": "2026-10-04T15:28:34.151914+00:00",
   "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
   "block": 1,
   "seed": 1,
@@ -94,5 +94,8 @@
   "operator_implementation_feedback_sent_during_run": false,
   "last_event_at_utc": "2026-10-04T15:20:05.990000+00:00",
   "candidate_current_phase": "Same native session resumed approved fixture/pipeline reads after firmware build completed. Terminal submission not yet observed.",
-  "operator_retry_started": false
+  "operator_retry_started": false,
+  "new_unstarted_reservations": "reservations-20261005/renewal.json",
+  "new_unstarted_reservations_prepared": 4,
+  "new_candidate_invocations_during_reservation_renewal": 0
 }

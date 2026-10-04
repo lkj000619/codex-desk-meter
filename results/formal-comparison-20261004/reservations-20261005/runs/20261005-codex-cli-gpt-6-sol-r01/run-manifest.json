@@ -1,0 +1,104 @@
+{
+  "schema_version": 2,
+  "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "experiment_id": "version-2-end-to-end-v1",
+  "baseline_id": "comparison-baseline-20261004",
+  "baseline_ref": "comparison-baseline-20261004",
+  "agent": {
+    "provider": "openai",
+    "product": "codex-cli",
+    "interface": "cli",
+    "agent_version": "codex-cli 0.159.2",
+    "model": "gpt-6-sol",
+    "reasoning": "medium",
+    "configuration_sha256": "d67237e4743071773d3b0c5f68cd100e3e75c48649b9a546ccccc5d0e7ce6f53"
+  },
+  "execution": {
+    "started_at": null,
+    "ended_at": null,
+    "timeout_seconds": 7200,
+    "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+    "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+    "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+    "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+    "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+    "profile_sha256": "d39eccf7fad695a4333df6d4b885eb81db96ac70e6dfce13b1e9f61f64ee9926",
+    "input_bundle_sha256": "ced675a80c840d2bb9d467ccf7694a6bbd5c09b058c9887e01110842afdb6e67",
+    "network_mode": "offline-fixture",
+    "sandbox_policy": "prompt-and-log",
+    "approval_policy": "--ask-for-approval never, workspace-write, elevated sandbox; product execution requires a later user instruction",
+    "branch": "experiment/openai/codex-cli/gpt-6-sol",
+    "worktree": "C:\\meter-runs-20261005\\20261005-codex-cli-gpt-6-sol-r01\\checkout",
+    "host": "DESKTOP-JCMEN12"
+  },
+  "hardware": {
+    "board": "waveshare-esp32-s3-lcd-3.16",
+    "port": null,
+    "board_revision": null,
+    "tf_card_present": false,
+    "hardware_slot": "none",
+    "baseline_image_sha256": null,
+    "baseline_restored": false
+  },
+  "measurement": {
+    "wall_clock_seconds": null,
+    "tool_calls": null,
+    "failed_commands": null,
+    "user_interventions": null,
+    "tokens": {
+      "input": null,
+      "output": null,
+      "cached": null,
+      "reasoning": null,
+      "provider_total": null,
+      "total": null,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "Not yet executed."
+    }
+  },
+  "outputs": {
+    "selection_document": "docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/hardware-feature-selection.md",
+    "structured_result": "results/20261005-codex-cli-gpt-6-sol-r01/end-to-end-result.json",
+    "implementation_commit": null,
+    "build_status": "not_run",
+    "automated_test_status": "not_run",
+    "hardware_verification_status": "not_run",
+    "evaluation_manifest": "results/20261005-codex-cli-gpt-6-sol-r01/e2e-evaluation-manifest.json"
+  },
+  "operator": {
+    "phase": "benchmark",
+    "status": "prepared",
+    "reason": null,
+    "repetition": 1,
+    "cohort": "version-2-end-to-end-v1",
+    "seed": 1,
+    "exit_code": null,
+    "delivered_prompt_sha256": "acc4d9b0a862ab94730ed0bcd6bad89ac0722e12288ca8a370549a747798a506",
+    "local_base_commit": "95e7e431cda7dc507668c8b7eea986b41204f57c",
+    "evidence": {
+      "operator-baseline.zip": "b648cb9e6286598c6427c0ea72690c218be0fc1e19d96fbf343956fb463c58fb",
+      "profile.json": "d67237e4743071773d3b0c5f68cd100e3e75c48649b9a546ccccc5d0e7ce6f53",
+      "reference/reference-inputs.json": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+      "reference/schedule.json": "a27082eda1b572286c9328ceadc3590aa06a12ac016f20341ef1e45b83177c78",
+      "reference/experiments/fixtures/personal-usage.json": "738674a3b9e587fc851557630a637bef311020bf587f300c5452beabab575e11",
+      "reference/experiments/fixtures/codex-reset-forecast.json": "71a01e40800baf23407a22b22761f2a73d6ff2fb27e1cdf2adb077be1667d5a4",
+      "reference/experiments/fixtures/codex-resets-history.json": "f3054d15bafa93575b6d1b17ea6738642594dcfb0d45bc31346c2626e577740e",
+      "reference/expected-frames.jsonl": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+      "agent-context.json": "d0bc30fde4df8a7a54320d344ea78095613b765749fab70ac73a3e7c76ff034c",
+      "e2e-evaluation-manifest.json": "006519fd3d8fec924445a7eca5e6593b10448cf121454b62c6d37ca9e9f1b2d2",
+      "candidate-inputs.json": "0000c12a7e468cc93796a04b3dff3ceb2e3d63af953a2d80a20ef9e3b48cb839",
+      "common-task.txt": "acc4d9b0a862ab94730ed0bcd6bad89ac0722e12288ca8a370549a747798a506"
+    },
+    "policy_review_required": true,
+    "comparison": {
+      "ledger": "C:\\meter-runs-20261005\\ledgers\\20261005-codex-cli-gpt-6-sol-r01.json",
+      "comparison_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "round": 0,
+      "starting_commit": "95e7e431cda7dc507668c8b7eea986b41204f57c",
+      "feedback_sha256": null,
+      "reference_status": "not_run",
+      "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08"
+    }
+  }
+}

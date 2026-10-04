@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-10-05T00:26:26.979657+09:00",
+  "versions": {
+    "agy-flash.json": "1.2.14",
+    "agy-pro.json": "1.2.14",
+    "codex-sol.json": "codex-cli 0.159.2",
+    "codex-luna.json": "codex-cli 0.159.2"
+  },
+  "idf_version": "ESP-IDF v5.3.2",
+  "native_settings_match_frozen_preparation": true,
+  "model_catalog_confirms_selected_AGY_ids": true,
+  "model_entitlement_retested": false,
+  "prior_capability_probe_date": "2026-10-04",
+  "model_probe_repeated": false,
+  "product_invocations": 0,
+  "candidate_hardware_access": false,
+  "original_reservations_preserved": true
+}

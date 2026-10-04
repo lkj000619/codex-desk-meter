@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "comparison_id": "20261005-codex-cli-gpt-6-luna-r01",
+  "state": "active",
+  "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "input_bundle_sha256": "891f33b6a9128e423619c6c59b309cf09b0fe3d634bec9aa04bdfe93297207a1",
+  "profile_sha256": "eae4f0ceab072eff32f8f12b423cbdbacf312650817c26825800f83edf9fbb2a",
+  "limits": {
+    "initial_seconds": 7200,
+    "remediation_seconds": 7200,
+    "remediation_rounds": 3
+  },
+  "reference_inputs": "C:\\meter-runs-20261005\\ledgers\\20261005-codex-cli-gpt-6-luna-r01-reference\\reference-inputs.json",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "common_task_sha256": "6f2b8095fc8607a9b5b784a8b9742faaced32d47be8552a5a36dfc86b16241fc",
+  "common_task_run_id": "20261005-codex-cli-gpt-6-luna-r01",
+  "runs": [
+    {
+      "run_id": "20261005-codex-cli-gpt-6-luna-r01",
+      "directory": "C:\\meter-runs-20261005\\20261005-codex-cli-gpt-6-luna-r01",
+      "round": 0,
+      "starting_commit": "5ad42953403fee9cf7ee80f89b1c8ad1f542fc0c",
+      "status": "prepared",
+      "reserved_seconds": 0,
+      "elapsed_seconds": null,
+      "reference_status": "not_run",
+      "reviewed": false,
+      "implementation_commit": null,
+      "feedback_sha256": null
+    }
+  ]
+}
