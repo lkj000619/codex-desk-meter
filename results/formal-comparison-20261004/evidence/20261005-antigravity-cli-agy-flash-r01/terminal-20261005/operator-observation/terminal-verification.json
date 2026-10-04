@@ -1,0 +1,62 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r01",
+  "checked_at": "2026-10-04T19:09:29.670462+00:00",
+  "candidate_processes_remaining": [],
+  "historical_pids_current_observations": [
+    {
+      "ProcessId": 19644,
+      "Name": "svchost.exe",
+      "CommandLine": null
+    }
+  ],
+  "pid_reuse_note": "Historical PID 19644 is now svchost.exe; PID alone is not candidate liveness.",
+  "global_files_sha256": {
+    "settings": "a9e7b57b56bb0225448a7068f18264ca3056c5a3c0ee49114f37bf4292ee0d48",
+    "instructions": "12552a5e4b15f1b272fbd85c865e2457f7b045c69136ed9c7731d23314edc512",
+    "hooks": "90d1b998102ca61fac85e85ece8597a264791339135820b20ccb6e5bddfc0c2e"
+  },
+  "original_global_bytes_restored": true,
+  "owner_journal_present": false,
+  "original_terminal_manifest_sha256": "c41ee83fecbdd890547f777d5d562b320675cdf4b4e5d8b6331e3e29b0f13961",
+  "original_ledger_sha256": "89e2ec137ad67d9caf2484432f5fd4bf07035ee8f6e128085d2be205b4c21be0",
+  "immutable_input_files_verified": 57,
+  "frozen_operator_baseline_verified": true,
+  "terminal_status": "environment_failed",
+  "execution": {
+    "started_at": "2026-10-04T18:09:41.488Z",
+    "ended_at": "2026-10-04T18:22:24.306Z",
+    "timeout_seconds": 7200,
+    "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+    "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+    "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+    "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+    "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+    "profile_sha256": "5b24fc4e43ee0bf74b1b8a1ddce7e08f5024760c8b9660ce1c5aabbe966668f8",
+    "input_bundle_sha256": "9f4472eb4edb2c9488685b59b2f9a73b5d3f3dc11b002d651bfd37f4dc1d0a51",
+    "network_mode": "offline-fixture",
+    "sandbox_policy": "prompt-and-log",
+    "approval_policy": "request-review",
+    "branch": "experiment/antigravity/antigravity-cli/agy-flash",
+    "worktree": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout",
+    "host": "DESKTOP-JCMEN12"
+  },
+  "measurement": {
+    "wall_clock_seconds": 762.813000000082,
+    "tool_calls": 123,
+    "failed_commands": null,
+    "user_interventions": null,
+    "tokens": {
+      "input": 1232914,
+      "output": 120044,
+      "cached": 18738962,
+      "reasoning": 46801,
+      "provider_total": 1352958,
+      "total": 1352958,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    }
+  },
+  "candidate_result_submission_present": false,
+  "candidate_selection_document_present": true
+}

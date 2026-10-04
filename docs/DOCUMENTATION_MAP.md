@@ -50,6 +50,7 @@ main에 문서가 존재한다는 이유로 후보에게 읽도록 제공하지 
 | 종료 후 artifact 보관 경로 보완 | [보완 계획](plans/2026-10-04-evidence-artifact-layout-remediation.md) · [독립 복원](../results/formal-comparison-20261004/operator-remediation-20261005/restore-audit.json) |
 | timeout 재개·관측 전 보존·재업로드 | [복구 계획](plans/2026-10-05-timeout-evidence-recovery.md) · [복원 감사](../results/formal-comparison-20261004/timeout-preservation-20261005/restore-audit.json) |
 | OpenCode 후속 최종 RM·예산 소진 | [최종 판정](../results/formal-comparison-20261004/review-finalization-20261005/reference-review.json) · [최종 복원](../results/formal-comparison-20261004/review-finalization-20261005/restore-audit.json) |
+| AGY Flash 최초 종료 후 평가·관측 대기 | [평가 계획](plans/2026-10-05-agy-flash-initial-evaluation.md) · [종료 증거](../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r01/terminal-20261005/snapshot-inventory.json) |
 | 비교 도구 명령·증거 형식 | [도구 안내](experiments/comparison-tooling.md) · [구현 계획](plans/2026-10-02-comparison-tooling.md) · [설계](design/2026-10-02-comparison-tooling.md) |
 | 문제와 근거 | [세 에이전트 평가](experiments/architecture-review-20261002.md) |
 | GUI/F 평가·host seam | [기능 평가](experiments/feature-comparison.md) · [평가 도구](experiments/evaluation-contract.md) |

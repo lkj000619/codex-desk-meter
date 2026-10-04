@@ -1,0 +1,29 @@
+{
+  "status": "eligible",
+  "reviewer": "Codex operator",
+  "reason": "Captured native accesses stay within own candidate checkout and declared SDK/manufacturer source. Candidate stops immediately at final native Test-Path permission denial, with zero later tool events. No serial/flash, online access, other candidate/ref-history access, scope edits, permission bypass or replacement initial call observed. The environment_failed outcome and missing JSON remain separate execution/submission failures. Scope and review do not enforce OS read isolation.",
+  "user_interventions": 0,
+  "intervention_review": "Audited against one-shot native conversation, scoped launcher and operator session: no user or operator permission grant, prompt message or implementation feedback during execution. Original measurement.user_interventions remains null; the known audited count is recorded only in this review. Native policy denial wording does not establish a human intervention.",
+  "evidence": [
+    {
+      "path": "operator-observation/native-tool-review.json",
+      "sha256": "1cbfc579fb7efc33c454a2e2dac12253c3fead7d04c9f2b70af6fd5e3fdd829d"
+    },
+    {
+      "path": "operator-observation/terminal-verification.json",
+      "sha256": "59e15d1330fb9b4467d61173d16860e3059eb4c49c8df6ddb0e70e6944cd845b"
+    },
+    {
+      "path": "operator-launch-preflight-r2/current-checks.json",
+      "sha256": "fee059cda1720dfd968efc74dc1ca9e0055477ca31e6a8ab2cb9d1e4637b3217"
+    },
+    {
+      "path": "operator-launch-preflight-r2/scope-exit.json",
+      "sha256": "2168f57c0b2cb849c6a748ffb5a1f97541bdb85b99ec1c3a8af65d85ee0642cd"
+    },
+    {
+      "path": "command-audit.json",
+      "sha256": "9a5d7cbbd26839364edc0ac274bc17d54a9227f1e2c95ab2672c2eea21e1469a"
+    }
+  ]
+}

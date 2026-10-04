@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-05. 상태: **OpenCode 최초·후속 평가와 최종 증거 독립 복원을 완료했고, 후속 예산 소진·제출 누락·정책 부적격·기준 미도달로 첫 series를 종료했다. 다음 AGY Flash 최초 실험을 03:09:41 KST 시작했다. 활성 5개 모델·동결 baseline은 유지한다.**
+확인일: 2026-10-05. 상태: **OpenCode 첫 series의 예산 소진 종료와 AGY Flash 최초 실행의 평가·독립 복원을 마쳤다. AGY 최초는 environment_failed·제출 누락·USB write timeout·기준 미도달을 보존하며 정책은 eligible이다. 자기 결과에서 이어가는 후속 예산 7,200초·최대 3회가 남아 있다. 전체 비교는 진행 중이며 활성 5개·동결 baseline은 유지한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -92,7 +92,7 @@ CLI/model/settings/environment를 재확인해 새 run-bound receipt를 연결�
 
 현재 첫 블록 순서는 **OpenCode Muse→AGY Flash→AGY Pro→Codex Sol→Codex Luna**다.
 준비 당시 5개 예약은 모두 prepared·시작 시각 null·소비 시간 null이었다.
-첫 OpenCode 최초 실행은 completed(1,024.64초)이며 첫 후속은 timeout이다. 현재 AGY Flash 최초가 실행 중이고 AGY Pro·Codex Sol/Luna는 미시작이다. 종료 code 0과 host 시험 통과를 제품 합격으로 해석하지 않는다.
+첫 OpenCode 최초 실행은 completed(1,024.64초)이며 첫 후속은 timeout이다. AGY Flash 최초는 environment_failed(762.813초)로 종료됐고 평가·독립 복원을 마쳤다. AGY Pro·Codex Sol/Luna는 미시작이다. 현재 시작·종료한 후보 호출은 각 3회다. 종료 code 0과 host 시험 통과를 제품 합격으로 해석하지 않는다.
 제출물은 `e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db`에 동결했고, 정책 review는 `invalid_for_comparison`이다.
 COM3의 원본 공통 frame 수신과 실제 성공 로그를 대조했고 사용자 사진에서 값 표시 부재를 확인했다.
 최초 RM은 RM1 pass/RM2 partial/RM3 fail/RM4·RM5 not_run으로 기준 미도달이다. BOOT·연속 유지·정밀 지연은 미측정이다.
@@ -147,3 +147,17 @@ python -X utf8 scripts/benchmark.py check --baseline comparison-baseline-2026100
 derived state는 budget_exhausted다. 동결 도구의 ledger가 fail review 뒤 active를 유지하지만 prepare-next의 예산 guard가 추가 실행을 거부한다.
 다음 AGY Flash는 현재 환경·native 설정·모델 ID·receipt를 재확인해 시작했고 [launch](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r01/launch-20261005/experiment-launch-attempt2.json)를 보존했다.
 모델 호출 전 런처의 CLI 인자 오류 1건은 준비 오류로 구분하며 후보 비용·회차를 초기화한 일이 아니다.
+
+2026-10-05 AGY 종료 후 적용 범위: 현재 AGY Flash 최초 실행의 평가 상태만 갱신한다.
+마지막 native `Test-Path build-host/test_meter_parser.exe, build-host/link_evidence.txt`가 거부됐으며
+이후 도구 이벤트 없이 종료했다. [정책 review](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r01/terminal-20261005/policy-review.json)는 eligible이고 environment_failed·최종 JSON 누락은 별도로 유지한다.
+구현 `29e1d7af54a8c9c879e36192ec4ed689e5bbf82d`와 app SHA-256
+`f29c45ff3a570fbc1d2b92aee6ad224f985f1c951821479ca0d901201c3f9c41`를 동결했다.
+Python 5개·C 실행 파일 4개는 통과했지만 실제 collector payload는 공통 기준과 다르다.
+업로드는 hash 검증까지 성공했다. [capture](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r01/terminal-20261005/operator-observation/reference-capture-r1/capture.json)는 seq 0 write timeout·수신 로그 0 bytes이며 seq 1은 시도하지 않았다.
+사용자가 해당 펌웨어의 48.12초 영상을 제공해 촬영 대상을 확인했다. 대시보드는 WAITING FOR USB DATA,
+글로벌 화면은 NO RECENT RESET RECORD, 진단은 Sequence NONE·cache 0이다. 화면 순환은 보이지만
+정상 fixture 수신·실제 사용량 탐색과 개별 BOOT/IMU trigger·연속 30초 무깜박임은 입증되지 않았다.
+[최종 RM](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r01/evaluation-final-20261005/reference-review.json)은 RM1 pass/RM2 partial/RM3 fail/RM4 partial/RM5 partial, 기준 미도달이다.
+[독립 복원](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r01/evaluation-final-20261005/restore-audit.json)은 430개 파일·57개 입력·38개 source·10개 artifact/설정 원본·영상과 비용을 package의 동결 validator로 검증했다.
+원본 terminal/ledger·시작/종료 snapshot·제출 누락은 유지했다. 최초 실행을 다시 시작하지 않으며 후속 준비·현재 실행은 [현재 계측](../../results/formal-comparison-20261004/progress.json)을 따른다.

@@ -1,0 +1,153 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r01",
+  "captured_at": "2026-10-04T19:28:55.252053+00:00",
+  "files": {
+    "audit-agy-flash-r01-final.py": {
+      "sha256": "76924c3a2b8fbb4f384553e5f9ae2e116cade3740fe78e4690c36fe9f7d90f2b",
+      "bytes": 6510
+    },
+    "ledger-reviewed.json": {
+      "sha256": "ab6b32bc3e3d3476f23bad223bff5f124eadf88d528d027cd2332c810da18620",
+      "bytes": 2204
+    },
+    "operator-post-review-evidence.json": {
+      "sha256": "d1fce4b8ca741a7a9361d9e0befb406e6ffaa8d87be568039ca69948a7da7ecf",
+      "bytes": 744
+    },
+    "operator-reference-review-input.json": {
+      "sha256": "b80ea56365a499ed1d7743d09b24290b5658f16b599f174596c8985d8be2e737",
+      "bytes": 38297
+    },
+    "operator-review-finalization.json": {
+      "sha256": "e17870f094bf8bd665c654bc89061f451ad95e4422612490365d938233dc6c0f",
+      "bytes": 676
+    },
+    "package-agy-flash-r01-final.py": {
+      "sha256": "97a48abf97a2acba1e0dab32879617401bfe6067ca0133d1417ea755c8c87fe1",
+      "bytes": 2348
+    },
+    "package-create.json": {
+      "sha256": "709e2215d5a1f4f6abe59fb08027f40592ca322e51f98c8a086098bae4391eb6",
+      "bytes": 463
+    },
+    "package-manifest.json": {
+      "sha256": "c800ac8aabdebc10961d7ae7ac9dd4a5fceb47f13fba984afc45552054b1b426",
+      "bytes": 83993
+    },
+    "publish-agy-flash-r01-final.py": {
+      "sha256": "4e0757df69888774b1afe1d16c9800360a0447eb21e66ff6767c0deae268ad3e",
+      "bytes": 3990
+    },
+    "reference-review.json": {
+      "sha256": "b80ea56365a499ed1d7743d09b24290b5658f16b599f174596c8985d8be2e737",
+      "bytes": 38297
+    },
+    "restore-audit.json": {
+      "sha256": "0b7659d2d3a963db667b1ac0a7d8e54e90d03d8322e93a18a24c5339976f08c2",
+      "bytes": 3845
+    },
+    "restore-report.json": {
+      "sha256": "1335a1912a5ab4dce55176bdddd10a6c9803e4245d92bd211f24b14509cc6bd0",
+      "bytes": 1052
+    },
+    "run-manifest-after-reference-review.json": {
+      "sha256": "26da87be34dccf995d0ed1a20a573c65570f845345c7e712e443fd55fa706a5c",
+      "bytes": 54133
+    },
+    "run-manifest.json": {
+      "sha256": "efdce3fcee68b20592a69165eebd59a412d5e16812134a908dbf6faca7bd33f8",
+      "bytes": 54721
+    },
+    "operator-observation/observation-finalization.json": {
+      "sha256": "b46216020413485455393560c3dbbbae6bf592c36c07a4807a615720612f95cc",
+      "bytes": 668
+    },
+    "operator-observation/user-video-01/capture-identity-confirmation.json": {
+      "sha256": "97f7c30f1acea8402e526f675d2c00c49a0e3001df2238f36586a734319667f0",
+      "bytes": 788
+    },
+    "operator-observation/user-video-01/contact-01.jpg": {
+      "sha256": "44e4258faff283efaf08e63aee8358fc46a597ae39e2d7a7b8b6e1012d3b107e",
+      "bytes": 230477
+    },
+    "operator-observation/user-video-01/contact-02.jpg": {
+      "sha256": "569580ab901c59ba3231e3862bff34a764a8d49a3bbe46845554d7efe936cf67",
+      "bytes": 248306
+    },
+    "operator-observation/user-video-01/contact-03.jpg": {
+      "sha256": "374d383c13b08af2f39c8877ab71d410a8c9abba845090d86fd7e5aacbf5e915",
+      "bytes": 237317
+    },
+    "operator-observation/user-video-01/contact-04.jpg": {
+      "sha256": "f6b82dd67a4820cf771b3e7fdf2b70d0769b1ea016437ec7d2d30f23eb57b6af",
+      "bytes": 259082
+    },
+    "operator-observation/user-video-01/extraction-stderr.txt": {
+      "sha256": "d807320892cacb9076248242f7cec72893ca52be2b5b0fd3966a1e117d018208",
+      "bytes": 1968
+    },
+    "operator-observation/user-video-01/extraction-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-observation/user-video-01/finalize-video-review.py": {
+      "sha256": "219586a3d3ba17b3349dc105d009d4207ec4b8ba30d30779bcda1ee3eaccc0f3",
+      "bytes": 11101
+    },
+    "operator-observation/user-video-01/inspect-video.py": {
+      "sha256": "f2b6a6c5ae9e1caa3cfa2e03e597dad60b7690e3c27de4a25cc2deb2345eb46a",
+      "bytes": 3511
+    },
+    "operator-observation/user-video-01/metadata-raw.txt": {
+      "sha256": "4455fa6a04e5b6ea28e7642ac7535ce38b2fc863d377c299b72ee8e1849ad301",
+      "bytes": 862
+    },
+    "operator-observation/user-video-01/readable-frame-001.png": {
+      "sha256": "21ebf8e10c08b6896daee231d2d56714499192993a5570d240ab95d1f05b6913",
+      "bytes": 2805547
+    },
+    "operator-observation/user-video-01/readable-frame-008.png": {
+      "sha256": "ea366f3ee67babc031b3a86d9ab8200820ee5412bd4ed1bb3cea6488aec94f07",
+      "bytes": 2528721
+    },
+    "operator-observation/user-video-01/readable-frame-017.png": {
+      "sha256": "0163f012abf1b2f469146d0e1e381dedaf03ad38191ed3b5a01a93835b8efae9",
+      "bytes": 3062331
+    },
+    "operator-observation/user-video-01/readable-frame-019.png": {
+      "sha256": "de405448b7cec29c28428b2f56fc8165c91d8d219536dbe7d25bb19adb0c47a9",
+      "bytes": 2908267
+    },
+    "operator-observation/user-video-01/readable-frame-022.png": {
+      "sha256": "5d1f222a3f39b098eef0549d50436090ab75df59798dc6bed5a33bebd862973b",
+      "bytes": 2426257
+    },
+    "operator-observation/user-video-01/readable-frame-028.png": {
+      "sha256": "a90472c63bb95cfc7110f67d73320cbb16dbb2d52c3d6ad22c057f41cee80601",
+      "bytes": 2950823
+    },
+    "operator-observation/user-video-01/readable-frame-042.png": {
+      "sha256": "19212d24e7f1d1a72a9bb3686eeb2f29ec02e8135f142581ac28da2be90ba3d2",
+      "bytes": 2692964
+    },
+    "operator-observation/user-video-01/readable-frame-047.png": {
+      "sha256": "6f66c7dfccd8c45c480cbb6bd121eaba6f98ecbcabf130a9cd9f8226efc961d6",
+      "bytes": 2570665
+    },
+    "operator-observation/user-video-01/video-metadata.json": {
+      "sha256": "350662882fe2b84efab1942eee0e0a5fb9b72cfa899f2c2d35653619dca47c6f",
+      "bytes": 10850
+    },
+    "operator-observation/user-video-01/video-review.json": {
+      "sha256": "caf575f49bdae4030193b4ec1592cfff4d38ea5910ab0c92669e58661bc86901",
+      "bytes": 4940
+    }
+  },
+  "original_video": {
+    "operator_path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\operator-observation\\user-video-01\\source.mp4",
+    "sha256": "7f21cd0b20139ede278a2c75d1e15bd487463d79b6049adbd3f5eb3e93f11aaa",
+    "bytes": 23640439,
+    "stored_outside_repository": true
+  },
+  "scope": "Final initial RM and independent package restoration; original terminal snapshot/manifest/ledger preserved. Missing candidate JSON, environment_failed, failed USB write, and costs remain."
+}

@@ -1,0 +1,7 @@
+{
+  "package": "C:\\meter-run-packages-20261005\\agy-flash-r01-final",
+  "files": 430,
+  "package_manifest_sha256": "c800ac8aabdebc10961d7ae7ac9dd4a5fceb47f13fba984afc45552054b1b426",
+  "final_run_manifest_sha256": "efdce3fcee68b20592a69165eebd59a412d5e16812134a908dbf6faca7bd33f8",
+  "scope": "Final operator evaluation of initial environment_failed attempt; missing candidate JSON and failed USB write preserved. Followup budget remains 7200 seconds."
+}

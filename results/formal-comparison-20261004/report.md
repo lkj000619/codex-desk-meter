@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-05 첫 OpenCode series의 최초·후속 최종 평가와 증거 복원 완료. 수정 예산 소진·정책 부적격·기준 미도달로 종료했고 AGY Flash 최초 실험이 03:09:41 KST 실행 중이다.
-후보 실행 시작 3회(최초 2·후속 1)·종료 2회. OpenCode 후속 RM은 RM1·RM5 pass/RM2·RM3·RM4 partial이며 제품 합격은 false다. AGY Pro·Codex Sol/Luna는 미시작이다.
+상태: 2026-10-05 OpenCode 첫 series의 예산 소진 종료와 AGY Flash 최초 평가·독립 복원 완료. AGY 최초는 03:22:24 KST environment_failed·제출 누락·USB write timeout·기준 미도달이며 정책은 eligible이다. 후속 예산 7,200초·최대 3회가 남아 있다.
+후보 실행 시작·종료 각 3회(최초 2·후속 1). OpenCode 후속 RM은 RM1·RM5 pass/RM2·RM3·RM4 partial이며 제품 합격은 false다. AGY Pro·Codex Sol/Luna는 미시작이다. 전체 비교는 완료되지 않았다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -302,3 +302,54 @@ AGY 실행 중 운영자 구현 피드백과 보드 접근은 제공하지 않�
 최종 부적격 판정이 아니다. OpenCode의 보고된 정규화 token coverage 2/2도 중단된 요청의 미보고 사용량을 뜻하지 않는다.
 [native 시작 관측](evidence/20261005-antigravity-cli-agy-flash-r01/launch-20261005/native-start-observation.json)에
 지정 모델·request-review·후보 cwd와 raw log prefix의 시점·hash를 연결했다. 진행 중 prefix를 전체 terminal 로그로 보존한 것으로 해석하지 않는다.
+
+## 2026-10-05 AGY Flash 최초 종료·실물 평가·독립 복원
+
+위의 AGY running 기록은 시작 시점의 원본이다. 현재 최초 실행은 03:09:41.488~03:22:24.306 KST,
+762.813초에 종료됐다. 마지막 `Test-Path build-host/test_meter_parser.exe, build-host/link_evidence.txt`가
+native 권한 정책에서 거부됐으며 이후 도구 호출은 0개다. adapter의 environment_failed·최종 JSON 누락을
+유지한다. native result SUCCESS/프로세스 exit 0은 제품 완료를 뜻하지 않는다.
+input 1,232,914/output 120,044/정규화 합계 1,352,958, cached 18,738,962/reasoning 46,801/
+provider total 1,352,958을 원본 정의대로 보존했다. native tool 123개·raw event 383개이며
+per-command exit unknown 25개와 failed lower bound 1개를 실패 1개 확정 계측으로 바꾸지 않았다.
+원본 user_interventions null은 유지하고 실행 중 운영자 메시지·권한 grant·피드백 0회를 별도 감사했다.
+
+[별도 종료 snapshot](evidence/20261005-antigravity-cli-agy-flash-r01/terminal-20261005/snapshot-inventory.json)은
+102개 파일과 원본 manifest/ledger·전역 설정 복원·57개 입력을 묶는다. 과거 launch snapshot은 유지한다.
+[정책 review](evidence/20261005-antigravity-cli-agy-flash-r01/terminal-20261005/policy-review.json)는
+접근 범위와 거부 후 즉시 종료를 검토해 eligible이다. prompt-and-log와 OS read 격리 미적용 한계는 유지한다.
+
+남은 구현을 `29e1d7af54a8c9c879e36192ec4ed689e5bbf82d`에 동결했고 Git 변환 전 source 38개와
+artifact/설정 10개를 별도로 보존했다. app은 348,352 bytes, SHA-256
+`f29c45ff3a570fbc1d2b92aee6ad224f985f1c951821479ca0d901201c3f9c41`이다.
+Python 5개·C 실행 파일 4개는 통과했지만 기본 collector의 usage 5개/reset 2개 payload는 공통 기준과 다르다.
+공통 frame encoder는 byte 단위로 일치한다. 마지막 native 성공 build 뒤 firmware 변경이 없으며
+운영자 source 수정·firmware 재빌드는 없다.
+
+04:14 KST COM3의 NVS 24K만 초기화하고 동결 app/bootloader/partition을 업로드해 hash 검증을 마쳤다.
+공통 seq 0 전송은 Write timeout으로 실패했고 bytes_written은 unknown, raw serial은 0 bytes다.
+seq 1은 시도하지 않았다. capture 도구의 sent-frames는 write 이전 시도 bytes이므로 전달 증거가 아니다.
+후보는 UART_NUM_0를 읽으며 기본 UART console을 설정했다. USB COM3 경로와 불일치는 가능한 원인으로
+기록하되 빈 로그만으로 원인을 확정하거나 후보 대신 설정을 고치지 않았다.
+
+사용자가 해당 펌웨어의 `KakaoTalk_20261005_041710515.mp4` 영상을 제공했다.
+48.12초/23,640,439 bytes, SHA-256 `7f21cd0b20139ede278a2c75d1e15bd487463d79b6049adbd3f5eb3e93f11aaa`를
+원본 보존했고 48개 nominal 1fps frame·contact 4개·읽을 수 있는 8개 frame을 검토했다.
+LCD에는 WAITING FOR USB DATA, 글로벌 NO RECENT RESET RECORD, 진단 Sequence NONE/cache 0이 보인다.
+화면 순환·시작 화면 복귀는 보이지만 실제 사용량·reset 데이터와 정상 수신 후 BOOT 탐색은 미입증이다.
+21.5~22.5초 부근 조작 중 화면 공백의 원인은 미확정이며, 31초 부근 USB 제거는 의도적 전원 차단이다.
+이를 연속 30초 무깜박임·자발 재부팅·powered-link 복구·정밀 지연·IMU 합격으로 바꾸지 않는다.
+
+[최종 RM](evidence/20261005-antigravity-cli-agy-flash-r01/evaluation-final-20261005/reference-review.json)은
+RM1 pass/RM2 partial/RM3 fail/RM4 partial/RM5 partial, reference fail/product_pass false다.
+후보 선택 문서는 제출됐으며, 최종 result JSON은 누락 상태를 유지한다.
+최종 package `C:/meter-run-packages-20261005/agy-flash-r01-final`의 manifest SHA-256은
+`c800ac8aabdebc10961d7ae7ac9dd4a5fceb47f13fba984afc45552054b1b426`이다.
+[독립 복원](evidence/20261005-antigravity-cli-agy-flash-r01/evaluation-final-20261005/restore-audit.json)은
+430개 파일·57개 입력·raw source/artifact·동결 Git blob·영상·정책·RM·원본 비용을 package의 operator ZIP
+validator로 검증했다. 원래 run/checkout을 읽지 않았으며 Git 텍스트 줄바꿈 차이는 별도 원본 bytes와 blob으로 확인했다.
+result_valid는 false다. 한 번만 가능한 RM review 뒤 변경은 operator evidence 연결뿐이며 원본 terminal을 보존한다.
+
+[네 번째 비용 snapshot](comparison-checkpoint-04.md)은 종료된 3개 시도의 비용을 모두 포함한다.
+AGY 최초 평가는 완료됐지만 series는 아직 완료되지 않았다. 필요한 후속은 같은 모델/profile/권한에서
+자기 직전 결과의 관측·기대·근거만 제공하고 최대 3회 AND 누적 7,200초 안에서 수행한다.

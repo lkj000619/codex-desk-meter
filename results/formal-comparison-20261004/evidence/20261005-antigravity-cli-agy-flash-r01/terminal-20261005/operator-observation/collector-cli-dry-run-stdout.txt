@@ -1,0 +1,8 @@
+{
+  "status": "success",
+  "sequence": 0,
+  "bytes_written": 3968,
+  "frame_sha256": "70a25638a27e3e1cb0d694f80813ad6edec7deaa3a3df12d88f482be48ee7c58",
+  "mode": "dry_run",
+  "sent_at": "2026-10-04T19:11:58.906909Z"
+}

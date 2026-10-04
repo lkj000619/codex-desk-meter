@@ -1,0 +1,1 @@
+Initialized state for operator-cli at next sequence 0

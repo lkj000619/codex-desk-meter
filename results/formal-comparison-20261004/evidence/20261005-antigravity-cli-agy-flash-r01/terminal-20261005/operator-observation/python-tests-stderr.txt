@@ -1,0 +1,11 @@
+test_evaluate_product_full_gate (test_evaluation_contract.TestEvaluationContract.test_evaluate_product_full_gate) ... ok
+test_all_evaluation_cases (test_legacy_adapter.TestLegacyAdapter.test_all_evaluation_cases) ... ok
+test_contract_7_accept_1_reject_8_accept (test_pc_collector_sender.TestPcCollectorSender.test_contract_7_accept_1_reject_8_accept)
+Contract requirement: 같은 receiver에 7 수락 -> 재시작 뒤 1 거부 -> 영속화한 8 수락 시험. ... ok
+test_persistent_sequence_lifecycle (test_pc_collector_sender.TestPcCollectorSender.test_persistent_sequence_lifecycle) ... ok
+test_sequence_consumed_on_failed_transmission (test_pc_collector_sender.TestPcCollectorSender.test_sequence_consumed_on_failed_transmission) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 2.920s
+
+OK

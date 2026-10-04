@@ -1,0 +1,301 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r01",
+  "implementation_commit": "29e1d7af54a8c9c879e36192ec4ed689e5bbf82d",
+  "firmware_build_events": [
+    {
+      "line": 142,
+      "step_index": 94,
+      "output_contains_build_complete": true,
+      "native_exit_code": null,
+      "output_sha256": "8e87b6a2dbe4b7c1933740131f69d3258dc638ff809c2d49d27cefe549fb0c57",
+      "tail": "1005-antigravity-cli-agy-flash-r01/checkout/build/meter_esp32s3.bin\\\"\\r\\r\\nmeter_esp32s3.bin binary size 0x352e0 bytes. Smallest app partition is 0x100000 bytes. 0xcad20 bytes (79%) free.\\r\\r\\r\\n\\r\\r\\nProject build complete. To flash, run:\\r\\n idf.py flash\\r\\nor\\r\\n idf.py -p PORT flash\\r\\nor\\r\\n python -m esptool --chip esp32s3 -b 460800 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build\\\\bootloader\\\\bootloader.bin 0x8000 build\\\\partition_table\\\\partition-table.bin 0x10000 build\\\\meter_esp32s3.bin\\r\\nor from the \\\"C:\\\\meter-runs-20261005\\\\20261005-antigravity-cli-agy-flash-r01\\\\checkout\\\\build\\\" directory\\r\\n python -m esptool --chip esp32s3 -b 460800 --before default_reset --after hard_reset write_flash \\\"@flash_args\\\"\\r\\n\""
+    },
+    {
+      "line": 279,
+      "step_index": 186,
+      "output_contains_build_complete": false,
+      "native_exit_code": null,
+      "output_sha256": "ac3aa040d11a35273fc6d8d4d8e1488853c6cd91b8c7ea2e3066602611cf98d9",
+      "tail": "esptool_py && C:\\\\Espressif\\\\user-tools\\\\python_env\\\\idf5.3_py3.11_env\\\\Scripts\\\\python.exe C:/Espressif/v5.3.2/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader/bootloader.bin\\\"\\r\\r\\r\\nBootloader binary size 0x5490 bytes. 0x2b70 bytes (34%) free.\\r\\r\\r\\r\\n[11/22] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj\\r\\r\\nninja: build stopped: subcommand failed.\\r\\r\\nninja failed with exit code 1, output of the command is in the C:\\\\meter-runs-20261005\\\\20261005-antigravity-cli-agy-flash-r01\\\\checkout\\\\build\\\\log\\\\idf_py_stderr_output_1840 and C:\\\\meter-runs-20261005\\\\20261005-antigravity-cli-agy-flash-r01\\\\checkout\\\\build\\\\log\\\\idf_py_stdout_output_1840\\r\\n\""
+    },
+    {
+      "line": 300,
+      "step_index": 198,
+      "output_contains_build_complete": true,
+      "native_exit_code": null,
+      "output_sha256": "3035680f2f7642ef3200437587dd3fd337a94a0be11bff16bb1394441a75dee8",
+      "tail": "1005-antigravity-cli-agy-flash-r01/checkout/build/meter_esp32s3.bin\\\"\\r\\r\\nmeter_esp32s3.bin binary size 0x550c0 bytes. Smallest app partition is 0x100000 bytes. 0xaaf40 bytes (67%) free.\\r\\r\\r\\n\\r\\r\\nProject build complete. To flash, run:\\r\\n idf.py flash\\r\\nor\\r\\n idf.py -p PORT flash\\r\\nor\\r\\n python -m esptool --chip esp32s3 -b 460800 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build\\\\bootloader\\\\bootloader.bin 0x8000 build\\\\partition_table\\\\partition-table.bin 0x10000 build\\\\meter_esp32s3.bin\\r\\nor from the \\\"C:\\\\meter-runs-20261005\\\\20261005-antigravity-cli-agy-flash-r01\\\\checkout\\\\build\\\" directory\\r\\n python -m esptool --chip esp32s3 -b 460800 --before default_reset --after hard_reset write_flash \\\"@flash_args\\\"\\r\\n\""
+    }
+  ],
+  "firmware_mutations": [
+    {
+      "line": 100,
+      "step_index": 66,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\CMakeLists.txt"
+    },
+    {
+      "line": 103,
+      "step_index": 68,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\main_host.c"
+    },
+    {
+      "line": 127,
+      "step_index": 84,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\main\\CMakeLists.txt"
+    },
+    {
+      "line": 130,
+      "step_index": 86,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\main\\main.c"
+    },
+    {
+      "line": 133,
+      "step_index": 88,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\sdkconfig.defaults"
+    },
+    {
+      "line": 146,
+      "step_index": 98,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\include\\meter_types.h"
+    },
+    {
+      "line": 149,
+      "step_index": 100,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\include\\meter_crc.h"
+    },
+    {
+      "line": 152,
+      "step_index": 102,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\src\\meter_crc.c"
+    },
+    {
+      "line": 161,
+      "step_index": 108,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\include\\meter_parser.h"
+    },
+    {
+      "line": 164,
+      "step_index": 110,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\src\\meter_parser.c"
+    },
+    {
+      "line": 167,
+      "step_index": 112,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\include\\meter_state.h"
+    },
+    {
+      "line": 170,
+      "step_index": 114,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\src\\meter_state.c"
+    },
+    {
+      "line": 173,
+      "step_index": 116,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\include\\feature_imu.h"
+    },
+    {
+      "line": 176,
+      "step_index": 118,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\src\\feature_imu.c"
+    },
+    {
+      "line": 179,
+      "step_index": 120,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\include\\meter_gui.h"
+    },
+    {
+      "line": 182,
+      "step_index": 122,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\src\\meter_gui.c"
+    },
+    {
+      "line": 185,
+      "step_index": 124,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\CMakeLists.txt"
+    },
+    {
+      "line": 188,
+      "step_index": 126,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\tests\\test_meter_parser.c"
+    },
+    {
+      "line": 191,
+      "step_index": 128,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\tests\\test_meter_state.c"
+    },
+    {
+      "line": 194,
+      "step_index": 130,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\tests\\test_feature_imu.c"
+    },
+    {
+      "line": 197,
+      "step_index": 132,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\tests\\test_gui_regression.c"
+    },
+    {
+      "line": 200,
+      "step_index": 134,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\tests\\meter_legacy_adapter.c"
+    },
+    {
+      "line": 203,
+      "step_index": 136,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\CMakeLists.txt"
+    },
+    {
+      "line": 212,
+      "step_index": 142,
+      "tool": "replace_file_content",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\src\\meter_gui.c"
+    },
+    {
+      "line": 239,
+      "step_index": 160,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\bsp\\include\\bsp_board.h"
+    },
+    {
+      "line": 242,
+      "step_index": 162,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\bsp\\include\\bsp_lcd.h"
+    },
+    {
+      "line": 245,
+      "step_index": 164,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\bsp\\src\\bsp_lcd.c"
+    },
+    {
+      "line": 248,
+      "step_index": 166,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\bsp\\include\\bsp_button.h"
+    },
+    {
+      "line": 251,
+      "step_index": 168,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\bsp\\src\\bsp_button.c"
+    },
+    {
+      "line": 257,
+      "step_index": 172,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\bsp\\include\\bsp_imu.h"
+    },
+    {
+      "line": 260,
+      "step_index": 174,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\bsp\\src\\bsp_imu.c"
+    },
+    {
+      "line": 263,
+      "step_index": 176,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\bsp\\include\\bsp_serial.h"
+    },
+    {
+      "line": 266,
+      "step_index": 178,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\bsp\\src\\bsp_serial.c"
+    },
+    {
+      "line": 269,
+      "step_index": 180,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\bsp\\CMakeLists.txt"
+    },
+    {
+      "line": 272,
+      "step_index": 182,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\main\\main.c"
+    },
+    {
+      "line": 275,
+      "step_index": 184,
+      "tool": "write_to_file",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\main\\CMakeLists.txt"
+    },
+    {
+      "line": 293,
+      "step_index": 194,
+      "tool": "replace_file_content",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\src\\meter_gui.c"
+    },
+    {
+      "line": 296,
+      "step_index": 196,
+      "tool": "replace_file_content",
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\checkout\\components\\meter_core\\src\\meter_gui.c"
+    }
+  ],
+  "last_successful_build_event": {
+    "line": 300,
+    "step_index": 198,
+    "output_contains_build_complete": true,
+    "native_exit_code": null,
+    "output_sha256": "3035680f2f7642ef3200437587dd3fd337a94a0be11bff16bb1394441a75dee8",
+    "tail": "1005-antigravity-cli-agy-flash-r01/checkout/build/meter_esp32s3.bin\\\"\\r\\r\\nmeter_esp32s3.bin binary size 0x550c0 bytes. Smallest app partition is 0x100000 bytes. 0xaaf40 bytes (67%) free.\\r\\r\\r\\n\\r\\r\\nProject build complete. To flash, run:\\r\\n idf.py flash\\r\\nor\\r\\n idf.py -p PORT flash\\r\\nor\\r\\n python -m esptool --chip esp32s3 -b 460800 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_size 16MB --flash_freq 80m 0x0 build\\\\bootloader\\\\bootloader.bin 0x8000 build\\\\partition_table\\\\partition-table.bin 0x10000 build\\\\meter_esp32s3.bin\\r\\nor from the \\\"C:\\\\meter-runs-20261005\\\\20261005-antigravity-cli-agy-flash-r01\\\\checkout\\\\build\\\" directory\\r\\n python -m esptool --chip esp32s3 -b 460800 --before default_reset --after hard_reset write_flash \\\"@flash_args\\\"\\r\\n\""
+  },
+  "firmware_mutations_after_successful_build": [],
+  "artifact_sha256": "f29c45ff3a570fbc1d2b92aee6ad224f985f1c951821479ca0d901201c3f9c41",
+  "source_hashes": {
+    "main_host.c": "33bff361e237f5c31347ad75f63eea9358ccaae954536b7ded90f834c4899e06",
+    "components/bsp/include/bsp_board.h": "45bea89ebc51437ed2e3cfc27d500ff277b31e11a216d2276ceed60ba1b4d852",
+    "components/bsp/include/bsp_button.h": "2cfa505737b20174033c62595b027c4be04bbc94eea63a12fa684f43d0584245",
+    "components/bsp/include/bsp_imu.h": "7cbb2b5956084547929df9fa8ba12c91cc7eecb42209756b3440def4ace678c8",
+    "components/bsp/include/bsp_lcd.h": "7fbeabe4a2b68c303f2b75cae5f781e76d564ae4a62ce6b219eab4bc10b92a01",
+    "components/bsp/include/bsp_serial.h": "4eda058756b62b02eb0b855300c50e9adcbf25e27c428c9b31be16c5204c9d72",
+    "components/bsp/src/bsp_button.c": "44c61215484e2305f57b1d816b2ccc3484d8bd0fcb4cd73563ac63d393950a9b",
+    "components/bsp/src/bsp_imu.c": "3bf66e1ff69a56157608fa0104dd7d104990f32a2b07b18cd4b3539789511a1c",
+    "components/bsp/src/bsp_lcd.c": "3ba12d855cb43f6becf1c9afdb097ab8e2cd3e47129ccd5b268d6f60df0426f0",
+    "components/bsp/src/bsp_serial.c": "50e1e60d09a3c4ae172114fe5420272901ee523c01f3b455dba8c9a69e6f1876",
+    "components/meter_core/include/feature_imu.h": "6641fc4947b55c986758abce200803c3dc28b68fc44b55d7ee8553e41e0f2f6e",
+    "components/meter_core/include/meter_crc.h": "5383e6473a73c23d8d9b184b2e564b34b26ff9b0559c63a4272421422b25d089",
+    "components/meter_core/include/meter_gui.h": "cbc35774fa1d1c4071cd2ba896f14dab1f02bf1fd8b080621a457d8981680eeb",
+    "components/meter_core/include/meter_parser.h": "7a2291b1ac0b7af2d2820e8fc6fd41557cddb314a9ee4a750b1a8149645d5b78",
+    "components/meter_core/include/meter_state.h": "2773a0d66e9c379f0b1e7b5299a1c6e787c5391d6bc674f7311476c8187b5a67",
+    "components/meter_core/include/meter_types.h": "e4c50603d2b199bbd8f24b45a32c043dbb490210517c0bfd00db18cb7c5028ec",
+    "components/meter_core/src/feature_imu.c": "0dacf973ccef545ffd1d7f1f21274d69df9e8c4801933bf981ae056bd4aded49",
+    "components/meter_core/src/meter_crc.c": "3c70acc4ecbc87e05b818be98945ebb76799f6e03141795b99a45c82052d32c2",
+    "components/meter_core/src/meter_gui.c": "2d9c1e0b58f45a0f735ff9d4617aee439b1483ad5e903a6978d5c400e6ab71ed",
+    "components/meter_core/src/meter_parser.c": "27be808992240f5cfa18a3b45319bd112d40e7a900caecf5240bac1df5269ed7",
+    "components/meter_core/src/meter_state.c": "61cdaac56a9eeb85fd0c7c8b2fc50a7cdbcb58f93fc70bf82caf1da3b74e6cb0",
+    "main/main.c": "39050153de3930f9dbdb9c8b920563c6ee980f00c9163debc7a6b8fad3a916c1",
+    "tests/meter_legacy_adapter.c": "1a3db33a53e5ec0c1c2d5f27dbdda3ef08fe01abe88815ca05a06811e5365da9",
+    "tests/test_feature_imu.c": "f2bc18642a447060c1583404efcb4690216da2ea2d8d26a0039ff556eebb027f",
+    "tests/test_gui_regression.c": "d53a0a44c82d0443c188d8183004dac91b27af661103007b5655b740dc6838a7",
+    "tests/test_meter_parser.c": "05e9f7a3c3bc36b1098fdd8f0082d556c3f7adf3da107e29df19a4044a7addcd",
+    "tests/test_meter_state.c": "2638818321762e40f044845d383fd6b663fc4a5367cff715227c2f9817c6f8c8"
+  },
+  "operator_firmware_rebuild": false,
+  "scope": "Native build-complete output and no later firmware mutation bind the preserved artifact to candidate source. Native per-command exit codes are unavailable; original unknown counts retained."
+}
