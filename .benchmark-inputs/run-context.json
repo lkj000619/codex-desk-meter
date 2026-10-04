@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "run_id": "20261005-antigravity-cli-agy-flash-r01",
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
   "experiment_id": "version-2-end-to-end-v1",
   "baseline": {
     "id": "comparison-baseline-20261004",
@@ -26,9 +26,16 @@
     "input_bundle_sha256": "9f4472eb4edb2c9488685b59b2f9a73b5d3f3dc11b002d651bfd37f4dc1d0a51"
   },
   "outputs": {
-    "selection_document": "docs/agent-runs/20261005-antigravity-cli-agy-flash-r01/hardware-feature-selection.md",
-    "structured_result": "results/20261005-antigravity-cli-agy-flash-r01/end-to-end-result.json",
-    "evaluation_manifest": "results/20261005-antigravity-cli-agy-flash-r01/e2e-evaluation-manifest.json"
+    "selection_document": "docs/agent-runs/20261005-antigravity-cli-agy-flash-r02/hardware-feature-selection.md",
+    "structured_result": "results/20261005-antigravity-cli-agy-flash-r02/end-to-end-result.json",
+    "evaluation_manifest": "results/20261005-antigravity-cli-agy-flash-r02/e2e-evaluation-manifest.json"
   },
-  "evaluation_manifest_path": ".benchmark-inputs/e2e-evaluation-manifest.json"
+  "evaluation_manifest_path": ".benchmark-inputs/e2e-evaluation-manifest.json",
+  "immutable_files": {
+    ".benchmark-inputs/feedback.json": "candidate-feedback.json",
+    ".benchmark-inputs/feedback-evidence/000-common-stimulus-check.json": "feedback-evidence/000-common-stimulus-check.json",
+    ".benchmark-inputs/feedback-evidence/001-capture.json": "feedback-evidence/001-capture.json",
+    ".benchmark-inputs/feedback-evidence/002-events.jsonl": "feedback-evidence/002-events.jsonl",
+    ".benchmark-inputs/feedback-evidence/003-video-review.json": "feedback-evidence/003-video-review.json"
+  }
 }

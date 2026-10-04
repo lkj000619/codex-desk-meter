@@ -1,0 +1,36 @@
+{
+  "previous_run_id": "20261005-antigravity-cli-agy-flash-r01",
+  "previous_commit": "29e1d7af54a8c9c879e36192ec4ed689e5bbf82d",
+  "target_ids": [
+    "RM2",
+    "RM3",
+    "RM4",
+    "RM5",
+    "I1",
+    "I2",
+    "F8"
+  ],
+  "observed": "Initial attempt ended environment_failed on native Test-Path denial. No final result JSON was submitted; selection document was present. Host tests passed, encoder matches common reference wires, but actual default collector payload has 5 usage/2 reset entries and differs from common legacy reference. On operator upload of the unchanged artifact to USB COM3, seq 0 write timed out, bytes_written unknown, receiver log empty, seq 1 not attempted. User-confirmed video shows WAITING FOR USB DATA, NO RECENT RESET RECORD, Sequence NONE/caches 0. Views cycle and return to initial view, but populated data navigation and individual BOOT versus IMU triggers are unproven. RM1 pass/RM2 partial/RM3 fail/RM4 partial/RM5 partial. No precise timing, continuous 30s, powered-link recovery or selected IMU hardware pass was established.",
+  "expected": "Meet unchanged common product contract and RM requirements: same fixture normalization and percent_remaining values, valid canonical cdm/1 frames and actual device receipt, visible five-hour remaining 58% and weekly remaining 82% from the common stale input, global reset and diagnostic information, and BOOT navigation through the required information. Submit the complete new-run result JSON and hardware feature selection with truthful linked evidence; candidate hardware observations remain not_run because operator alone owns serial/flash after terminal freeze. All original task restrictions, native permissions and stop-on-denial rule remain in force.",
+  "remaining_rounds": 3,
+  "remaining_seconds": 7200,
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "evidence": [
+    {
+      "path": ".benchmark-inputs/feedback-evidence/000-common-stimulus-check.json",
+      "sha256": "862299b6931a94109669b0d92f63a91a09d2a0611590e2bf4170b42281210c1b"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/001-capture.json",
+      "sha256": "98e1e05e6ae2d63189a36963e8c8a603ef76362966e4c2ac5211e88d1a2a9b24"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/002-events.jsonl",
+      "sha256": "dbc29fb80bf7e4a9e5b37efd18dfaa59c3b8b355f46d7bdd0a17a9157d4f46f8"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/003-video-review.json",
+      "sha256": "caf575f49bdae4030193b4ec1592cfff4d38ea5910ab0c92669e58661bc86901"
+    }
+  ]
+}

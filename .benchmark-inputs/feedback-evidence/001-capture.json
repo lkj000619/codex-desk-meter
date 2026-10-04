@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "status": "failed",
+  "port": "COM3",
+  "sender_kind": "operator_replay",
+  "started_at": "2026-10-04T19:14:15.889719+00:00",
+  "frames": [
+    {
+      "sequence": 0,
+      "frame_sha256": "46d2381c3a9e7fcef740cfa6dc8ef34061bdf31d3143ea8dd8b69fedbdb1955d",
+      "bytes_requested": 1543,
+      "bytes_written": null,
+      "accepted_at_seconds": null,
+      "display_marker_at_seconds": null,
+      "write_at_seconds": null
+    }
+  ],
+  "error_code": "CAPTURE_ERROR",
+  "optical_status": "not_run",
+  "product_pass": false,
+  "device_accessed": true,
+  "clock": "host monotonic relative to session start; firmware uptime is separate",
+  "error": "Write timeout",
+  "evidence": {
+    "events.jsonl": "dbc29fb80bf7e4a9e5b37efd18dfaa59c3b8b355f46d7bdd0a17a9157d4f46f8",
+    "device-serial.bin": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "sent-frames.jsonl": "46d2381c3a9e7fcef740cfa6dc8ef34061bdf31d3143ea8dd8b69fedbdb1955d"
+  }
+}
