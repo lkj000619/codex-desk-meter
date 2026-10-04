@@ -1,0 +1,27 @@
+# ninja log v6
+82	232	8128255584032958	CMakeFiles/input_host.dir/host/stubs/stub_gpio.c.obj	11af8b4e3312b194
+33	163	8128255757471863	CMakeFiles/meter_core_host.dir/C_/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/components/meter_core/meter_parser.c.obj	a48e3a4e346112ad
+55	234	8128255583767437	CMakeFiles/feature_host.dir/C_/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/components/feature_auto_dim/feature_auto_dim.c.obj	4e280846aab29847
+23	242	8128255583436693	CMakeFiles/meter_core_host.dir/C_/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/components/meter_core/meter_crc32.c.obj	1b2feb388c298bcb
+54	140	8128255757681423	CMakeFiles/input_host.dir/C_/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/components/bsp_input/bsp_input.c.obj	7bea593e413ea02e
+48	291	8128255583682203	CMakeFiles/gui_host.dir/C_/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/components/gui/gui_format.c.obj	bd47723e024f1985
+132	281	8128255584533672	CMakeFiles/test_feature_autodim.dir/host/test_feature_autodim.c.obj	a7fef1707608bea9
+113	289	8128255584343376	CMakeFiles/test_gui_regression.dir/host/test_gui_regression.c.obj	708b164a6968cc95
+105	283	8128255584268162	CMakeFiles/test_meter_validate.dir/host/test_meter_validate.c.obj	97d763ffdeddd385
+88	291	8128255584104634	CMakeFiles/test_meter_parser.dir/host/test_meter_parser.c.obj	d81bda3ac27ff721
+97	294	8128255584184700	CMakeFiles/test_meter_state.dir/host/test_meter_state.c.obj	10908eb71650af55
+40	139	8128255757546283	CMakeFiles/meter_core_host.dir/C_/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/components/meter_core/meter_state.c.obj	185ab80897c65dd7
+47	162	8128255757611397	CMakeFiles/meter_core_host.dir/C_/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/components/meter_core/meter_validate.c.obj	29296bdb757d6cfe
+73	174	8128255757872069	CMakeFiles/test_input_debounce.dir/host/test_input_debounce.c.obj	980a68ed48f20c38
+60	249	8128255757741749	libfeature_host.a	36a39e6e05ea1cde
+140	262	8128255758548594	libinput_host.a	7dfb16a182e7791b
+163	276	8128255758774006	libmeter_core_host.a	b297e19c7144f4b6
+276	381	8128255759906205	libgui_host.a	a605915850953438
+390	551	8128255761052734	test_meter_state.exe	b08c38fabe6285c7
+381	555	8128255760957578	test_meter_parser.exe	777b2fed6999645f
+398	573	8128255761125563	test_meter_validate.exe	f4877c5dda489dc
+406	579	8128255761210730	test_gui_regression.exe	e228b6534ff0e51e
+419	587	8128255761342539	test_feature_autodim.exe	c4b7792a85e959c
+429	593	8128255761434558	test_input_debounce.exe	f44c302f082ca204
+33	116	8128256292833722	CMakeFiles/test_meter_parser.dir/host/test_meter_parser.c.obj	d81bda3ac27ff721
+116	241	8128256293663073	test_meter_parser.exe	777b2fed6999645f

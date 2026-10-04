@@ -1,0 +1,8 @@
+CMake Warning (dev) at C:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/GNUInstallDirs.cmake:253 (message):
+  Unable to determine default CMAKE_INSTALL_LIBDIR directory because no
+  target architecture is known.  Please enable at least one language before
+  including GNUInstallDirs.
+Call Stack (most recent call first):
+  C:/Espressif/v5.3.2/esp-idf/components/mbedtls/mbedtls/CMakeLists.txt:52 (include)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+

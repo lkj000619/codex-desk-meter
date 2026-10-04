@@ -1,0 +1,13 @@
+C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/CMakeFiles/meter_core_host.dir
+C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/CMakeFiles/gui_host.dir
+C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/CMakeFiles/feature_host.dir
+C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/CMakeFiles/input_host.dir
+C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/CMakeFiles/test_meter_parser.dir
+C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/CMakeFiles/test_meter_state.dir
+C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/CMakeFiles/test_meter_validate.dir
+C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/CMakeFiles/test_gui_regression.dir
+C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/CMakeFiles/test_feature_autodim.dir
+C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/CMakeFiles/test_input_debounce.dir
+C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/CMakeFiles/test.dir
+C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/CMakeFiles/edit_cache.dir
+C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/CMakeFiles/rebuild_cache.dir

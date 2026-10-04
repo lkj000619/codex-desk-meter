@@ -1,0 +1,99 @@
+Start testing: Oct 04 23:04 ???? ???
+----------------------------------------------------------
+1/6 Testing: test_meter_parser
+1/6 Test: test_meter_parser
+Command: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/test_meter_parser.exe"
+Directory: C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host
+"test_meter_parser" start time: Oct 04 23:04 ???? ???
+Output:
+----------------------------------------------------------
+test_meter_parser: PASS
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"test_meter_parser" end time: Oct 04 23:04 ???? ???
+"test_meter_parser" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/6 Testing: test_meter_state
+2/6 Test: test_meter_state
+Command: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/test_meter_state.exe"
+Directory: C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host
+"test_meter_state" start time: Oct 04 23:04 ???? ???
+Output:
+----------------------------------------------------------
+test_meter_state: PASS
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"test_meter_state" end time: Oct 04 23:04 ???? ???
+"test_meter_state" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/6 Testing: test_meter_validate
+3/6 Test: test_meter_validate
+Command: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/test_meter_validate.exe"
+Directory: C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host
+"test_meter_validate" start time: Oct 04 23:04 ???? ???
+Output:
+----------------------------------------------------------
+test_meter_validate: PASS
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"test_meter_validate" end time: Oct 04 23:04 ???? ???
+"test_meter_validate" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/6 Testing: test_gui_regression
+4/6 Test: test_gui_regression
+Command: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/test_gui_regression.exe"
+Directory: C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host
+"test_gui_regression" start time: Oct 04 23:04 ???? ???
+Output:
+----------------------------------------------------------
+test_gui_regression: PASS
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"test_gui_regression" end time: Oct 04 23:04 ???? ???
+"test_gui_regression" time elapsed: 00:00:00
+----------------------------------------------------------
+
+5/6 Testing: test_feature_autodim
+5/6 Test: test_feature_autodim
+Command: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/test_feature_autodim.exe"
+Directory: C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host
+"test_feature_autodim" start time: Oct 04 23:04 ???? ???
+Output:
+----------------------------------------------------------
+test_feature_autodim: PASS
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"test_feature_autodim" end time: Oct 04 23:04 ???? ???
+"test_feature_autodim" time elapsed: 00:00:00
+----------------------------------------------------------
+
+6/6 Testing: test_input_debounce
+6/6 Test: test_input_debounce
+Command: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host/test_input_debounce.exe"
+Directory: C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/build-host
+"test_input_debounce" start time: Oct 04 23:04 ???? ???
+Output:
+----------------------------------------------------------
+test_input_debounce: PASS
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"test_input_debounce" end time: Oct 04 23:04 ???? ???
+"test_input_debounce" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 04 23:04 ???? ???

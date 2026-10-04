@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/CMakeFiles/bootloader"
+		},
+		{
+			"file" : "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/CMakeFiles/bootloader.rule"
+		},
+		{
+			"file" : "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/CMakeFiles/bootloader-complete.rule"
+		},
+		{
+			"file" : "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule"
+		},
+		{
+			"file" : "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule"
+		},
+		{
+			"file" : "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule"
+		},
+		{
+			"file" : "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule"
+		},
+		{
+			"file" : "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule"
+		},
+		{
+			"file" : "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule"
+		},
+		{
+			"file" : "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"bootloader"
+		],
+		"name" : "bootloader"
+	}
+}
