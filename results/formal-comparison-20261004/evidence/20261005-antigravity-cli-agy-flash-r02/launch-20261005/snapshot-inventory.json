@@ -1,0 +1,131 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "captured_at": "2026-10-04T19:37:01.035692+00:00",
+  "files": {
+    "agent-context.json": {
+      "sha256": "9ab34632e1fc9f2003509f761d3abe6b2b994bb23427414e3063043bb649ca8f",
+      "bytes": 2233
+    },
+    "candidate-feedback.json": {
+      "sha256": "d7cebc93e00edae67e70aa61627f44515c56eb25ede9e3349560a814a4398d80",
+      "bytes": 2595
+    },
+    "candidate-inputs.json": {
+      "sha256": "0000c12a7e468cc93796a04b3dff3ceb2e3d63af953a2d80a20ef9e3b48cb839",
+      "bytes": 7435
+    },
+    "execution-preflight.json": {
+      "sha256": "f827db5266b8a27d654c1fdbbd08ef6eedccfb38c2643e2daf544748823ad81b",
+      "bytes": 31351
+    },
+    "experiment-launch.json": {
+      "sha256": "69d933c8c7d61faf76fd34020f3f4288b97576f3286cd10dbf470554fa36b7ce",
+      "bytes": 251
+    },
+    "feedback.json": {
+      "sha256": "4719a827092290ea56cb3b91fed973b8bf9178d3892adc8d227334fe97787e10",
+      "bytes": 3054
+    },
+    "followup-preparation.json": {
+      "sha256": "5b4ba0f589ace3aa61715bc5c848edbeb911019c8b248d65712b572c07e964ad",
+      "bytes": 1121
+    },
+    "launch-agy-flash-r02.ps1": {
+      "sha256": "246d793d202eaa986bc8167ae6036323c6d46af3701014ce4a2d63b896302012",
+      "bytes": 345
+    },
+    "launch-agy-flash-r02.py": {
+      "sha256": "d0ffcdf8e46bf3845b89be1e8ef40e466b52a751b930d56c46207f560090a6aa",
+      "bytes": 7108
+    },
+    "ledger-at-start.json": {
+      "sha256": "cca12eda501020288c75412beb998b8df009ab0eeae6798f38eeb66eabb72b4f",
+      "bytes": 2747
+    },
+    "native-start-observation-prefix.jsonl": {
+      "sha256": "c797240b6beaff41c9cddd86513c15abf79d0b5cebb1a84d9464c7c3d58413f7",
+      "bytes": 46923
+    },
+    "native-start-observation.json": {
+      "sha256": "6f0ce8f0eeab67c9926da7ba583cb7d5efa5d99eab92731ff063b8304f0593cc",
+      "bytes": 659
+    },
+    "profile.json": {
+      "sha256": "687011864c6b2fc43c27a96a2604159be6719b938db0003f40d35b855ecff2df",
+      "bytes": 3208
+    },
+    "prompt.txt": {
+      "sha256": "73ddddb4a1e71bb00415081162bf29929cfd85e11de5fa91b8868615aec2b555",
+      "bytes": 8247
+    },
+    "publish-agy-flash-r02-start.py": {
+      "sha256": "e7a544393b50f7f01c0a9981e020196cb06f911845b000fec215a02d95ed95b7",
+      "bytes": 6950
+    },
+    "run-manifest.json": {
+      "sha256": "2110e68e88d884c1f8754885a305f2a0cb6ec3ecbb67e3e228e21bb949e3b558",
+      "bytes": 39250
+    },
+    "runner-console-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runner-console.txt": {
+      "sha256": "8021d4e504b570a024d0be46d90c981beadf7d68cc31be5a0a57ea4ac9336578",
+      "bytes": 668
+    },
+    "feedback-evidence/000-common-stimulus-check.json": {
+      "sha256": "862299b6931a94109669b0d92f63a91a09d2a0611590e2bf4170b42281210c1b",
+      "bytes": 1259
+    },
+    "feedback-evidence/001-capture.json": {
+      "sha256": "98e1e05e6ae2d63189a36963e8c8a603ef76362966e4c2ac5211e88d1a2a9b24",
+      "bytes": 1014
+    },
+    "feedback-evidence/002-events.jsonl": {
+      "sha256": "dbc29fb80bf7e4a9e5b37efd18dfaa59c3b8b355f46d7bdd0a17a9157d4f46f8",
+      "bytes": 662
+    },
+    "feedback-evidence/003-video-review.json": {
+      "sha256": "caf575f49bdae4030193b4ec1592cfff4d38ea5910ab0c92669e58661bc86901",
+      "bytes": 4940
+    },
+    "operator-launch-preflight/agents-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/agents-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/current-checks.json": {
+      "sha256": "c8b0e59aed879c5c1a1d0cc346381a665fbca2f78a8b26d0c8946c5699094f1c",
+      "bytes": 2439
+    },
+    "operator-launch-preflight/mcp-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/mcp-stdout.txt": {
+      "sha256": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be",
+      "bytes": 27
+    },
+    "operator-launch-preflight/models-stderr.txt": {
+      "sha256": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8",
+      "bytes": 29
+    },
+    "operator-launch-preflight/models-stdout.txt": {
+      "sha256": "0fe8eac40fd3a1f2554de5c998412b23e219cda82edd3f980f93f2f526a03bda",
+      "bytes": 824
+    },
+    "operator-launch-preflight/plugins-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/plugins-stdout.txt": {
+      "sha256": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494",
+      "bytes": 21
+    }
+  },
+  "scope": "Followup launch snapshot and native prefix; not terminal evidence. Own prior final evidence remains unchanged."
+}

@@ -2,7 +2,7 @@
 
 목표: ESP32-S3-LCD-3.16 제품 구현에서 에이전트의 첫 결과·자기 후속 수정 비용과 RM 도달·제품 품질을 동일 조건으로 비교한다.
 시작 승인: 2026-10-04 사용자 요청 “프로젝트 목적과 목표에 엇나가지않도록 실험 시작”.
-상태: 첫 OpenCode series의 평가·독립 복원·예산 소진 종료와 AGY Flash 최초 평가·독립 복원 완료. AGY 최초는 2026-10-05 03:22:24 KST environment_failed 종료·기준 미도달이며 후속 예산 7,200초·최대 3회가 남아 있다. 전체 비교는 진행 중이다.
+상태: 첫 OpenCode series의 예산 소진 종료와 AGY Flash 최초 평가·독립 복원 완료. AGY 최초는 environment_failed·기준 미도달을 보존하며 후속 1회차가 2026-10-05 04:34:51 KST 실행 중이다. 후속 누적 7,200초·최대 3회 한도에 이번 회차를 포함한다. 전체 비교는 진행 중이다.
 원본: [운영 계약](../experiments/comparison-operating-contract.md), [현재 상태](../experiments/next-comparison-readiness.md),
 [동결 기록](../../results/experiment-launch-preparation-20261004/freeze.json).
 
@@ -30,6 +30,7 @@
 4. 다음 대상: 해당 series 처리 후 다음 대상을 진행한다. 날짜가 바뀐 미시작 예약은 새 ID·ledger·receipt로 준비한다.
    작업 상태: 진행 중. AGY Flash `20261005-antigravity-cli-agy-flash-r01`을 03:09:41 KST 시작했다. 동결 runner와 새 예약·receipt·동일 입력을 유지한다. 모델 호출 전 런처 CLI 인자 오류 1건은 후보 미호출 상태로 보존하고 정정했다. 2026-10-05 일반 포장 도구의 `firmware/build/` 경로 지원을 [별도 운영 계획](2026-10-04-evidence-artifact-layout-remediation.md)에 따라 보완하고 첫 실제 package의 독립 복원을 확인했다. 원본 거부 기록은 유지한다.
    당시 다음 4개 예약은 2026-10-05 새 ID·개별 ledger·receipt와 현재 환경 재확인까지 완료했다. 이 중 AGY Flash 최초 호출은 종료됐으며 나머지 AGY Pro·Codex Sol/Luna 3개는 미시작이다. 준비 중 모델 호출은 0회였으며 다음 시작은 현재 series 평가와 허용 후속 처리 뒤다. AGY 종료 후 작업은 [평가 계획](2026-10-05-agy-flash-initial-evaluation.md)을 따른다.
+   AGY 최초의 종료 후 평가는 완료됐다. 자기 동결 source·관측·기대·근거만 연결한 후속 `20261005-antigravity-cli-agy-flash-r02`가 같은 모델/profile/권한으로 실행 중이다. 새 후속 receipt와 native 시작을 확인했고, 보드는 최초 동결본을 유지한다.
    원래 예약·중단·실패 비용은 보존한다. 전체 비교 완료는 15개 독립 series와 필요한 후속/관측/적격성 집계가 끝난 시점이다.
 
 ## 중단과 재개

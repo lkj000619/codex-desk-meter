@@ -1,0 +1,13 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "observed_at": "2026-10-04T19:37:01.035692+00:00",
+  "status": "running",
+  "native_conversation_id": "632bb1b2-a520-456a-a2f3-548885afb5de",
+  "native_model": "gemini-3.8-flash-medium",
+  "permission_mode": "request-review",
+  "native_cwd": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-flash-r02\\checkout",
+  "raw_log_prefix_events": 89,
+  "raw_log_prefix_bytes": 46923,
+  "raw_log_prefix_sha256": "c797240b6beaff41c9cddd86513c15abf79d0b5cebb1a84d9464c7c3d58413f7",
+  "scope": "Native start only; prefix is not a terminal log, final cost, submission or policy review."
+}

@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-05 OpenCode 첫 series의 예산 소진 종료와 AGY Flash 최초 평가·독립 복원 완료. AGY 최초는 03:22:24 KST environment_failed·제출 누락·USB write timeout·기준 미도달이며 정책은 eligible이다. 후속 예산 7,200초·최대 3회가 남아 있다.
-후보 실행 시작·종료 각 3회(최초 2·후속 1). OpenCode 후속 RM은 RM1·RM5 pass/RM2·RM3·RM4 partial이며 제품 합격은 false다. AGY Pro·Codex Sol/Luna는 미시작이다. 전체 비교는 완료되지 않았다.
+상태: 2026-10-05 OpenCode 첫 series의 예산 소진 종료와 AGY Flash 최초 평가·독립 복원 완료. AGY 최초의 environment_failed·제출 누락·USB write timeout·기준 미도달·eligible 정책은 보존하고, 후속 1회차를 04:34:51 KST 시작했다. 전체 비교는 진행 중이다.
+후보 실행 시작 4회·종료 3회(최초 2·후속 시작 2). AGY Flash 후속 1회차가 실행 중이며 AGY Pro·Codex Sol/Luna는 미시작이다. 독립 series 완료는 OpenCode 1개/예정 15개다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -353,3 +353,24 @@ result_valid는 false다. 한 번만 가능한 RM review 뒤 변경은 operator 
 [네 번째 비용 snapshot](comparison-checkpoint-04.md)은 종료된 3개 시도의 비용을 모두 포함한다.
 AGY 최초 평가는 완료됐지만 series는 아직 완료되지 않았다. 필요한 후속은 같은 모델/profile/권한에서
 자기 직전 결과의 관측·기대·근거만 제공하고 최대 3회 AND 누적 7,200초 안에서 수행한다.
+
+## 2026-10-05 AGY Flash 후속 1회차 시작
+
+`20261005-antigravity-cli-agy-flash-r02`를 04:34:51.469 KST 시작했다. 같은 AGY
+`gemini-3.8-flash-medium`·request-review·profile·공통 입력을 유지한다.
+`C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout`의 독립 Git clone에서
+자기 최초 동결 source만 이어간다. [후속 준비](evidence/20261005-antigravity-cli-agy-flash-r02/launch-20261005/followup-preparation.json)는
+관측·기대·원본 근거 hash·남은 7,200초와 3회를 연결하며 운영자 구현 방법·제품 patch를 포함하지 않는다.
+이번 실행도 후속 누적 예산에 포함하고 최초 environment_failed의 비용·제출 누락·최종 package는 유지한다.
+
+CLI/SDK·clean 준비 checkout·57개 공통 입력/후속 고정 근거·전역 파일·native MCP/plugins/custom agents·
+모델 목록을 재확인했다. 새 receipt SHA-256은
+`f827db5266b8a27d654c1fdbbd08ef6eedccfb38c2643e2daf544748823ad81b`다.
+원본 capability는 10월 4일의 증거이며 이번 preflight의 모델/제품 호출은 0회다.
+[native 시작 관측](evidence/20261005-antigravity-cli-agy-flash-r02/launch-20261005/native-start-observation.json)은
+지정 모델·request-review·새 후보 cwd와 당시 raw prefix를 검증한다.
+[launcher](evidence/20261005-antigravity-cli-agy-flash-r02/launch-20261005/experiment-launch.json)는
+PID 30356이며 대화와 별도로 동결 runner의 한도를 적용한다. 전역 AGY scope는 자식 종료 후 복원한다.
+후보에게 serial/flash 접근이나 실행 중 추가 피드백을 제공하지 않으며, 보드는 평가한 최초 펌웨어를 유지한다.
+실행 중의 policy pending과 비용 null은 최종 판정이 아니다. 재개 시 [현재 계측](progress.json)·원본 manifest/ledger·
+native process/owner부터 확인하고 같은 후속을 다시 호출하지 않는다.
