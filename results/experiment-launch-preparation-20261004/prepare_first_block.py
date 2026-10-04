@@ -81,6 +81,8 @@ def main():
     # Keep the operator repository clean while every prepare checks its HEAD.
     for receipt_path, receipt in receipts:
         save(receipt_path,receipt)
+    for item in freeze['series']:
+        item['receipt_sha256'] = digest(Path(item['receipt']).read_bytes())
     freeze['block_orders'] = {}
     for seed in targets['block_seeds']:
         order = list(targets['active_profiles'])

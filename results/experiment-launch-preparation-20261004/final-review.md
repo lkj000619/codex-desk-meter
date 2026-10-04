@@ -14,3 +14,6 @@
 최종 전체 회귀: 220개 중 219개 통과, Windows symlink 권한 제한 1개 skip, 실패 0개.
 원본은 [tests-final.txt](tests-final.txt), 실행 상태는 [tests-final-status.json](tests-final-status.json)이다.
 동결·당일 receipt·준비 package 복원은 별도 실제 실행 기록으로 확인한다.
+
+후속 독립 재검토: 원본 bytes 복사·AGY 옵션 순서·OpenCode 탭 거부의 세 수정이 모두 닫혔음을 확인했다.
+정상 상대 py_compile은 계속 허용된다. 해당 수정 범위에서 추가 중요한 발견은 없었다.

@@ -1,0 +1,23 @@
+{
+  "attempts": [
+    {
+      "stage": "C:/meter-preparation-package-20261004",
+      "result": "packaging_failed",
+      "reason": "Creating a file at the C drive root was denied; use an artifact subdirectory. No provider call or hardware operation."
+    },
+    {
+      "stage": "C:/meter-preparation-package-20261004-r2",
+      "package": "C:/meter-preparation-archives/20261004/preparation-package.zip",
+      "result": "restore_failed",
+      "reason": "After raw byte restoration, cloned Git index retained cached CRLF classification; normalized diff was empty. Refresh the index and assert identical tree/commit before clean-state checks."
+    },
+    {
+      "stage": "C:/meter-preparation-package-20261004-r2",
+      "package": "C:\\meter-preparation-archives\\20261004\\preparation-package-r2.zip",
+      "result": "pass",
+      "audit": "restore-audit.json",
+      "original_repository_required": false
+    }
+  ],
+  "freeze_correction": "Receipt JSON written by Windows has CRLF. Preserve first freeze, bind current freeze to actual receipt bytes. Receipt identities and candidate inputs unchanged."
+}

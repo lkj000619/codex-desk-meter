@@ -21,16 +21,24 @@ def zip_tree(source,target,skip_git=False):
 
 def main():
     freeze=read(REPORT/'freeze.json')
-    stage=Path('C:/meter-preparation-package-20261004')
-    stage.mkdir(exist_ok=False)
+    stage=Path('C:/meter-preparation-package-20261004-r2')
+    reuse = '--reuse-stage' in sys.argv
+    if reuse:
+        for name, expected in read(stage/'package-inventory.json')['files'].items():
+            assert digest((stage/name).read_bytes()) == expected, name
+        assert (stage/'evidence/freeze.json').read_bytes() == (REPORT/'freeze.json').read_bytes()
+    else:
+        stage.mkdir(exist_ok=False)
     evidence=stage/'evidence'
-    evidence.mkdir()
+    evidence.mkdir(exist_ok=reuse)
     for name in ('freeze.json','capability-summary.json','preparation-attempts.json','tests-final.txt','tests-final-status.json','final-review.md'):
         shutil.copyfile(REPORT/name,evidence/name)
-    shutil.copytree(REPORT/'evidence',evidence/'evidence')
+    shutil.copytree(REPORT/'evidence',evidence/'evidence',dirs_exist_ok=reuse)
     for row in freeze['series']:
         original=Path(row['directory'])
         target=stage/'runs'/Path(row['profile']).stem
+        if reuse:
+            continue
         target.mkdir(parents=True)
         for source in original.iterdir():
             if source.name=='checkout':
@@ -44,17 +52,19 @@ def main():
         zip_tree(original/'checkout',target/'candidate-source.zip',skip_git=True)
         subprocess.run(['git','bundle','create',str(target/'candidate-source.bundle'),'HEAD'],cwd=original/'checkout',check=True,capture_output=True)
     shutil.copyfile(Path(freeze['series'][0]['directory'])/'operator-baseline.zip',stage/'operator-source.zip')
-    inventory={p.relative_to(stage).as_posix():digest(p.read_bytes()) for p in stage.rglob('*') if p.is_file()}
+    shutil.copyfile(REPORT/'audit_preparation.py',stage/'audit_preparation.py')
+    inventory={p.relative_to(stage).as_posix():digest(p.read_bytes()) for p in stage.rglob('*') if p.is_file() and p.name!='package-inventory.json'}
     save(stage/'package-inventory.json',{'schema_version':1,'files':inventory})
-    package=REPORT/'preparation-package.zip'
+    package=Path('C:/meter-preparation-archives/20261004/preparation-package-r2.zip')
+    package.parent.mkdir(parents=True,exist_ok=True)
     zip_tree(stage,package)
-    destination=Path('C:/meter-preparation-restore-20261004')
+    destination=Path('C:/meter-preparation-restore-20261004-r2')
     result=subprocess.run([sys.executable,'-X','utf8',str(REPORT/'audit_preparation.py'),str(package),str(destination)],capture_output=True)
     (REPORT/'restore-audit-output.txt').write_bytes(result.stdout+result.stderr)
     if result.returncode:
         raise RuntimeError('Independent restore failed; see restore-audit-output.txt')
     shutil.copyfile(destination/'audit-result.json',REPORT/'restore-audit.json')
-    save(REPORT/'package-metadata.json',{'package_sha256':digest(package.read_bytes()),'package_bytes':package.stat().st_size,
+    save(REPORT/'package-metadata.json',{'package_path':str(package),'package_sha256':digest(package.read_bytes()),'package_bytes':package.stat().st_size,
         'inventory_sha256':digest((stage/'package-inventory.json').read_bytes()),'restored_at':str(destination),
         'scope':'Prepared series, frozen operator source, exact candidate bytes, receipts and evidence; no product run.'})
     print((REPORT/'restore-audit.json').read_text(encoding='utf-8'))

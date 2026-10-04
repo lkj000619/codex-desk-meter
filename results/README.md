@@ -1,6 +1,6 @@
 # 검증 결과 인덱스
 
-확인일: 2026-10-02. 새 동일 조건 비교의 정식 집계 결과는 아직 게시하지 않았다.
+확인일: 2026-10-04. 새 동일 조건 비교의 정식 집계 결과는 아직 게시하지 않았다. 활성 5개 시작 준비는 완료했고 제품 실험은 0회다.
 아래에는 과거 관측 검토와 운영 도구의 검증 기록이 있다. 각 보고서의 날짜·대상·시험 범위를 확인한다.
 
 ## 과거 관측·비교 검토
@@ -21,7 +21,7 @@
 | [목적·목표 대비 문서 재검증](documentation-review-20261003/report.md) | 현재 문서·도구 대조, 평가 버전/baseline 연결 공백·gate 링크·F9 피드백 |
 | [문서 재검증 피드백 보완](documentation-review-20261003/remediation.md) | R1~R3 및 전체 일정 반영, baseline 보존·독립 복원·회귀 검증과 남은 실행 준비 조건 |
 | [실험 실행 경계·hook·제한 정책 검토](experiment-execution-review-20261003/report.md) | 후속 지침·native 권한·준수 판정/집계·CLI 문법 재현, 시작 조건과 hook 적용 범위 |
-| [정식 비교 시작 선행 작업 실행](experiment-launch-preparation-20261004/report.md) | E1~E5 수정·정책 review 보존·입력 bytes 복원·실제 모델 capability·새 baseline 준비 |
+| [정식 비교 시작 선행 작업 실행](experiment-launch-preparation-20261004/report.md) | E1~E5 수정·활성 5개 실제 capability·baseline 동결·당일 receipt·독립 복원 완료 |
 | [프로젝트 목적·실험 개선 검토](main-purpose-review-20261002/review.md) | 정비 전 발견 사항과 당시 시험 |
 | [문서 수정 기록](main-purpose-review-20261002/document-fixes.md) | 문서·prompt 정비와 당시 남은 구현 |
 | [비교 도구 구현·검증](comparison-tooling-20261002/report.md) | 예산·실패 비용·관측·독립 복원 도구 |

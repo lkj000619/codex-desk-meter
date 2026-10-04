@@ -1,0 +1,13 @@
+{
+  "checked_at": "2026-10-04T13:24:49.302076+00:00",
+  "command": "Get-CimInstance Win32_SerialPort | Select-Object DeviceID,Name,PNPDeviceID",
+  "ports": [
+    {
+      "DeviceID": "COM1",
+      "PNPDeviceID": "ACPI\\PNP0501\\0"
+    }
+  ],
+  "esp32_enumerated": false,
+  "device_opened": false,
+  "scope": "Read-only OS enumeration; no serial/flash/monitor."
+}

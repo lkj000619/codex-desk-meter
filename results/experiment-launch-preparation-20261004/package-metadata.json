@@ -1,0 +1,8 @@
+{
+  "package_path": "C:\\meter-preparation-archives\\20261004\\preparation-package-r2.zip",
+  "package_sha256": "b8de0b77a6dacacf109307587d6a97e2739babb2bdcadcf240556bb6674ee10f",
+  "package_bytes": 1726964416,
+  "inventory_sha256": "29ead26a01cd157a1c5b684bc6685d639d908d1cbd0273726e78a1af70af8e02",
+  "restored_at": "C:\\meter-preparation-restore-20261004-r2",
+  "scope": "Prepared series, frozen operator source, exact candidate bytes, receipts and evidence; no product run."
+}

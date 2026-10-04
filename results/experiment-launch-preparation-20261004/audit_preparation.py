@@ -62,6 +62,11 @@ def audit(package, destination):
         subprocess.run(["git", "clone", "--quiet", str(run/'candidate-source.bundle'), str(checkout)], check=True)
         extract(run / "candidate-source.zip", checkout)
         subprocess.run(["git", "remote", "remove", "origin"], cwd=checkout, check=True)
+        # Refresh Git's cached CRLF classification after restoring raw bytes.
+        # The normalized tree must remain identical to the original commit.
+        subprocess.run(["git", "add", "--all"], cwd=checkout, check=True, capture_output=True)
+        tree = subprocess.check_output(["git", "write-tree"], cwd=checkout, text=True).strip()
+        assert tree == subprocess.check_output(["git", "rev-parse", "HEAD^{tree}"], cwd=checkout, text=True).strip()
         head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=checkout, text=True).strip()
         assert head == original["operator"]["local_base_commit"]
         assert subprocess.check_output(["git", "rev-list", "--count", "HEAD"], cwd=checkout, text=True).strip() == "1"
@@ -96,6 +101,7 @@ def audit(package, destination):
         _entry(_load(recovered_ledger),manifest,run)
         assert sha(run/'common-task.txt') == ledger['common_task_sha256']
         receipt_root = destination / "evidence"
+        assert sha(receipt_root / (target + "-receipt.json")) == row['receipt_sha256']
         receipt = read(receipt_root / (target + "-receipt.json"))
         benchmark.validate_preflight_receipt(receipt, original, profile, receipt_root)
         capability=read(destination / "evidence/capability-summary.json")[target]

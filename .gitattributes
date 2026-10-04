@@ -37,5 +37,5 @@ results/experiment-launch-preparation-20261004/evidence/** binary
 results/experiment-launch-preparation-20261004/*.json binary
 results/experiment-launch-preparation-20261004/tests*.txt binary
 results/experiment-launch-preparation-20261004/*.zip binary
-results/experiment-launch-preparation-20261004/restore-audit-output.txt binary
+results/experiment-launch-preparation-20261004/restore-audit*.txt binary
 experiments/config/next-profiles-20261003/*.json binary

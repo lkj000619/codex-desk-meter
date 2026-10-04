@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-04. 상태: **실행 경계 보완과 활성 5개 모델의 실제 준비 검증 완료. 새 baseline 동결·당일 예약·독립 복원 연결 중. 제품 실험 0회.**
+확인일: 2026-10-04. 상태: **정식 비교의 후보 구현 세션 시작 준비 완료. 활성 5개 모델, baseline 동결·당일 예약·독립 복원 검증 완료. 제품 실험 0회.** 실물 평가 전 ESP32 연결 확인이 필요하다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
 2026-10-02의 6개 모델 준비 완료 판정은 [당시 보고서](../../results/experiment-preparation-20261002/report.md)의 조건에만 적용된다.
@@ -53,12 +53,15 @@ native command map과 지침도 OS 격리를 보장하지 않는다. AGY 공개 
 
 ## 동결과 후보 입력
 
-새 baseline tag는 `comparison-baseline-20261004`로 정했다. 실제 commit과 준비 기록은 동결 완료 후
-선행 작업 보고서에 연결한다. 이전 `85ba108`과 tag·receipt·package는 변경하지 않는다.
+새 baseline tag `comparison-baseline-20261004`는 `272875140d1998d458e26fdb2f6deab5e5d8f7b5`에 동결했다.
+[freeze 기록](../../results/experiment-launch-preparation-20261004/freeze.json)에 5개 준비 ID·독립 ledger·receipt hash·후보 commit/tree·입력/평가 hash를 연결했다.
+전체 회귀 220개 중 219개 통과·symlink 권한 제한 skip 1개·실패 0개다.
+[독립 복원](../../results/experiment-launch-preparation-20261004/restore-audit.json)은 package 294개 파일·동결 source 949개와
+5개 원본 후보 commit·57개 입력·receipt·ledger·operator baseline을 확인했다. 과거 `85ba108`과 tag·receipt·package는 변경하지 않았다.
 
 후보 allowlist는 57개/필수 MD 3개다. E3 변경으로 이번 비교의
 `experiments/config/agy-pilot-permissions.json` 1개에서 git log 허용 규칙을 제거했다.
-나머지 56개 archive bytes는 이전 baseline과 동일해야 하며 활성 5개 모두 같은 새 입력을 받는다.
+나머지 56개 archive bytes가 이전 baseline과 같음을 [대조 기록](../../results/experiment-launch-preparation-20261004/baseline-input-review.json)으로 확인했고 활성 5개 모두 같은 새 입력을 받는다.
 이 정정은 2026-10-03 계획의 “57개 모두 동일” 조건에만 적용한다. 제품 계약·fixture·공통 과제는 유지한다.
 
 runner는 allowlist만 후보에 복사하고 운영·평가·과거 구현·결과를 제외한다.
@@ -68,7 +71,7 @@ runner는 allowlist만 후보에 복사하고 운영·평가·과거 구현·결
 
 ## 실제 시작과 평가 순서
 
-첫 블록은 seed 1로 순서를 고정하고 5개의 개별 ID·ledger·새 receipt를 준비한다.
+첫 블록은 seed 1로 순서를 고정하고 5개의 개별 ID·ledger·새 receipt를 준비했다.
 블록 2·3은 seed 2·3을 사용하며 실제 시작일에 새 ID를 생성한다. 각 모델/독립 반복의 ledger를 분리한다.
 기본 순서는 series 실행→결과 동결→운영자 실물 관측→RM·정책 review→필요한 후속→다음 대상이다.
 한 보드의 flash·serial·광학 관측은 하나씩 수행한다. provider 사용량과 보드 시간은 시작 직전에 확인한다.
@@ -82,6 +85,12 @@ runner는 allowlist만 후보에 복사하고 운영·평가·과거 구현·결
 예약 ID는 해당 KST 날짜에만 유효하다. 다음 날에는 같은 동결 baseline에서 새 ID·ledger를 만들고
 CLI/model/settings/environment를 재확인해 새 run-bound receipt를 연결한다.
 2026-10-02 ID와 GPT-5.6 receipt는 이번 비교에 재사용하지 않는다.
+
+현재 첫 블록 순서는 **OpenCode Muse→AGY Flash→AGY Pro→Codex Sol→Codex Luna**다.
+5개 예약은 모두 prepared·시작 시각 null·소비 시간 null이다. 실제 제품 모델 호출을 뜻하지 않는다.
+현재 증거 문서의 후속 commit과 비교 baseline을 혼동하지 않는다. 다음 날짜의 새 prepare는
+동결된 깨끗한 operator checkout `C:/meter-operator-20261004`에서 수행한다.
+당일 준비 도우미는 10월 4일의 실제 근거를 사용한 기록용이며 다음 날 그대로 실행해 현재 환경 확인을 대신하지 않는다.
 
 ```powershell
 python -X utf8 -m unittest discover -s scripts/tests -v

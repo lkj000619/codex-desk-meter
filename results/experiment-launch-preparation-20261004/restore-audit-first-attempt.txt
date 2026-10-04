@@ -1,0 +1,25 @@
+Note: switching to '64d2e854684977e7a88bf4031e9e1d6eb8cb7672'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+Traceback (most recent call last):
+  File "C:\Users\이광진\orca\codex-desk-meter\results\experiment-launch-preparation-20261004\audit_preparation.py", line 120, in <module>
+    print(json.dumps(audit(args.package.resolve(), args.destination.resolve()), indent=2))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\이광진\orca\codex-desk-meter\results\experiment-launch-preparation-20261004\audit_preparation.py", line 68, in audit
+    assert not subprocess.check_output(["git", "status", "--porcelain"], cwd=checkout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

@@ -1,0 +1,51 @@
+{
+  "scope": "independent preparation restore; no provider execution or hardware operation",
+  "package_sha256": "b8de0b77a6dacacf109307587d6a97e2739babb2bdcadcf240556bb6674ee10f",
+  "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "package_files_checked": 294,
+  "source_files_checked": 949,
+  "runs": [
+    {
+      "target": "opencode-muse",
+      "receipt": "pass",
+      "candidate_input_count": 57,
+      "candidate_commit": "64d2e854684977e7a88bf4031e9e1d6eb8cb7672",
+      "status": "prepared",
+      "product_executed": false
+    },
+    {
+      "target": "agy-flash",
+      "receipt": "pass",
+      "candidate_input_count": 57,
+      "candidate_commit": "6213a08562e80ab8a369b2ebf3e02168309991bc",
+      "status": "prepared",
+      "product_executed": false
+    },
+    {
+      "target": "agy-pro",
+      "receipt": "pass",
+      "candidate_input_count": 57,
+      "candidate_commit": "ab7f740a07fca7529dd04413fd59c912d4be7e3f",
+      "status": "prepared",
+      "product_executed": false
+    },
+    {
+      "target": "codex-sol",
+      "receipt": "pass",
+      "candidate_input_count": 57,
+      "candidate_commit": "bd9aff93bbe5d5ef1737a7fa993b9f1dd58c870b",
+      "status": "prepared",
+      "product_executed": false
+    },
+    {
+      "target": "codex-luna",
+      "receipt": "pass",
+      "candidate_input_count": 57,
+      "candidate_commit": "a3981b2a1c45e7fad0a6cb4400892e0497bf9998",
+      "status": "prepared",
+      "product_executed": false
+    }
+  ],
+  "result": "pass",
+  "original_repository_required": false
+}

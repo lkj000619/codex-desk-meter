@@ -1,6 +1,6 @@
 # 정식 비교 시작 선행 작업 실행 결과
 
-확인일: 2026-10-04. 상태: 코드·문서·활성 5개 실제 모델 검증 완료, baseline 동결·당일 실행 기록 연결 중.
+확인일: 2026-10-04. 상태: **선행 작업 완료. 활성 5개 후보 구현 세션 시작 가능. baseline 동결·당일 예약·독립 복원 통과. 제품 실험 0회.** 실물 평가 전 ESP32 연결을 확인해야 한다.
 작업 원본은 [계획](../../docs/plans/2026-10-03-formal-comparison-launch-prerequisites.md)과
 [E1~E5 검토](../experiment-execution-review-20261003/report.md)다. 토큰 한도 중단 이후 같은 작업을 이어서 수행했다.
 과거 평가 원본·commit/tag·evidence와 2026-10-02 준비 package는 보존한다.
@@ -25,7 +25,7 @@ RM 도달 비용은 앞선 모든 회차가 적격이어야 인정하며 과거 
 
 ## 공통 입력과 동결 범위
 
-새 baseline 예정 tag는 `comparison-baseline-20261004`다. 후보 allowlist 57개/필수 MD 3개를 유지한다.
+새 baseline tag는 `comparison-baseline-20261004`, commit은 `272875140d1998d458e26fdb2f6deab5e5d8f7b5`다. 후보 allowlist 57개/필수 MD 3개를 유지한다.
 2026-10-03 계획의 “57개 bytes 모두 이전과 동일” 조건은 E3 수정으로 다음 비교에 한해 정정한다:
 `experiments/config/agy-pilot-permissions.json`의 git log 허용 규칙을 제거한 1개 파일만 바꾸고
 나머지 56개 archive bytes는 이전 `85ba108`과 같음을 확인한다. 활성 후보 5개에는 같은 새 입력을 제공한다.
@@ -70,8 +70,44 @@ provider 사용량과 보드 관측 시간은 예약으로 보장할 수 없으�
 - 전체 회귀: **220개 중 219개 통과·1개 skip, 실패 0**. [원본](tests-final.txt). skip은 Windows symlink 생성 권한 제한이며 IDF child 환경 시험은 통과했다. [독립 최종 검토](final-review.md)의 추가 3건도 보완했다.
 - 활성 5개 실제 capability: **모두 pass**. [기계 목록](capability-summary.json). raw tool events·CTest 원본·빈 앱 bin/ELF/map/bootloader/partition bytes를 각각 보존했다.
 - 사용자 결정: Claude를 이번 비교에서 제외한다. AGY의 기존 Opus 4.6 호출은 모델 미지원 오류(exit 1, 모델 turn 0)로 실패했다. Opus 5.5를 대신 선택하지 않았다.
-- 모든 준비 모델 시도와 비용은 [전체 시도](preparation-attempts.json)에 보존한다. 원래 probe profile hash와 검토 후 profile hash를 구분한다. argv·model·effort·CLI version·접근 조건은 동일하며 검토된 inventory/설명만 갱신했음을 필드 대조로 확인했다.
+- 모든 준비 모델 시도 8개, 실제 process 시간 합계 821.281초는 [전체 시도](preparation-attempts.json)에 보존한다. 선택 5개·조건 수정 전 성공 2개·제외 Opus 실패 1개다. 준비 비용은 제품 예산 밖이다. 원래 probe profile hash와 검토 후 profile hash를 구분한다. 각 선택 probe의 argv·model·effort·CLI version·접근 조건이 최종 profile과 같고 검토된 inventory/설명만 달라졌음을 필드 대조로 확인했다.
 - AGY native MCP·plugins·custom agents는 비어 있고 wrapper 전후 전역 파일 bytes가 같았다. CLI가 노출하는 browser/MCP/subagent 도구 이름 목록은 사용 허가·실제 호출을 뜻하지 않는다.
 - AGY 두 probe는 공개 SDK를 view_file로 읽으며 요청한 8줄보다 큰 파일 범위를 보고했다. native 비동기 build task와 Flash schedule 사용도 원본에 남겼다. 준비 read capability는 승인 source 접근을 확인한 것이며 모든 지침의 준수나 표면별 내부 흐름이 같음을 보장하지 않는다. 본 비교는 별도 정책 review로 이를 판정한다.
 - Codex IDF build는 SDK Git dubious-ownership 진단을 출력했지만 실제 빌드·artifact 생성은 성공했다. SDK 설정을 변경하지 않았다.
 - 현재 읽기 전용 포트 열거에는 COM1만 있고 원래 ESP32 COM3/VID_303A는 확인되지 않았다. 후보 구현 세션은 보드 접근을 금지한다. flash·serial·광학 평가 전에 실제 보드를 연결하고 포트·VID/PID를 재확인한다. 확인하지 않은 실물 항목은 not_run으로 남긴다.
+
+## 동결·당일 예약·독립 복원 완료
+
+[freeze.json](freeze.json)에 baseline·profile·candidate commit/tree·입력·평가·ZIP·receipt hash와 세 블록 순서를 남겼다.
+첫 블록의 개별 ledger는 `C:/meter-runs-20261004/ledgers/`에 있다.
+
+| 순서 | 모델 | 준비 ID | receipt |
+|---|---|---|---|
+| 1 | OpenCode Muse | `20261004-opencode-cli-opencode-muse-r01` | [근거](opencode-muse-receipt.json) |
+| 2 | AGY Flash | `20261004-antigravity-cli-agy-flash-r01` | [근거](agy-flash-receipt.json) |
+| 3 | AGY Pro | `20261004-antigravity-cli-agy-pro-r01` | [근거](agy-pro-receipt.json) |
+| 4 | Codex Sol | `20261004-codex-cli-gpt-6-sol-r01` | [근거](codex-sol-receipt.json) |
+| 5 | Codex Luna | `20261004-codex-cli-gpt-6-luna-r01` | [근거](codex-luna-receipt.json) |
+
+모두 prepared·started_at null·elapsed null·후보 checkout Git 이력 1개다. 실제 제품 실험은 시작하지 않았다.
+후속 증거 문서를 커밋해도 baseline tag는 이동하지 않는다. 새 날짜의 prepare에는
+깨끗한 동결 operator checkout `C:/meter-operator-20261004`를 사용한다. 10월 4일 ID는 해당 KST 날짜에만 시작할 수 있다.
+다음 날짜에는 실제 CLI/model/settings/environment를 재확인하고 새 ID·개별 ledger·receipt를 생성한다.
+
+준비 package는 전체 frozen operator snapshot을 포함한 1,726,964,416 bytes이며 저장소 밖
+`C:/meter-preparation-archives/20261004/preparation-package-r2.zip`에 보존했다.
+SHA-256은 `b8de0b77a6dacacf109307587d6a97e2739babb2bdcadcf240556bb6674ee10f`다.
+[metadata](package-metadata.json), [독립 복원 결과](restore-audit.json), [원본 출력](restore-audit-output.txt)을 함께 보존한다.
+package 294개 파일과 frozen source 949개, 5개 원본 후보 commit·동일 57개 입력·receipt·ledger·평가 hash를
+새 root에서 검증했다. 원래 저장소의 source를 import하지 않고 복원된 operator source를 사용했다.
+이 package는 준비 상태의 복원 증거이며 제품 terminal artifact를 대신하지 않는다.
+
+패키징 중 C 드라이브 root 파일 쓰기 거부와 복원 후 Git index의 CRLF 분류 cache 차이를 확인했다.
+파일 보관 경로를 별도 폴더로 옮기고 원본 bytes 복원 후 정규화 tree·원래 commit이 같은지 확인하며 index를 갱신했다.
+첫 freeze의 receipt hash는 Windows가 실제 저장한 CRLF bytes로 정정했다. 원본은
+[정정 전 freeze](freeze-before-receipt-byte-correction.json), 실패·정정 범위는 [패키징 시도](preparation-package-attempts.json)에 남겼다.
+이 변경은 준비 기록·패키징 helper에만 적용하며 동결된 후보 입력·profile·평가 도구는 변경하지 않았다.
+
+문서상 정식 후보 구현 시작을 보류했던 E1~E5와 baseline/capability/receipt/복원 조건은 모두 해소했다.
+후보의 실제 과제 수행·provider quota·제품 합격은 아직 검증한 결과가 아니다.
+실물 평가 전 보드 연결·포트 확인이 남아 있으며 [읽기 전용 열거](hardware-presence.json)에는 COM1만 있다.
