@@ -12,6 +12,7 @@ sys.path.insert(0, str(ROOT / "pc_tools"))
 from collector import (  # noqa: E402
     check_snapshot,
     collect_globals,
+    collect_legacy_personal_usage,
     collect_providers,
     normalize_global_reset,
     parse_ts,
@@ -83,6 +84,20 @@ class CollectorTest(unittest.TestCase):
         for path in (ROOT / "experiments/fixtures").rglob("*.json"):
             text = path.read_text(encoding="utf-8-sig")
             self.assertIsNone(key_pattern.search(text), msg=str(path))
+
+    def test_legacy_personal_usage_maps_to_valid_snapshot(self):
+        ref = datetime(2026, 9, 11, 0, 4, 59, tzinfo=timezone.utc)
+        snap = collect_legacy_personal_usage("personal-usage.json", ref)
+        self.assertIsNone(check_snapshot(snap, ref))
+        self.assertEqual(snap["observed_at"], "2026-09-11T00:00:00Z")
+        by_id = {w["window_id"]: w for w in snap["windows"]}
+        self.assertEqual(by_id["five-hour"]["percent_remaining"], 58)
+        self.assertEqual(by_id["weekly"]["percent_remaining"], 82)
+        self.assertEqual(by_id["five-hour"]["percent_used"], 42)
+        self.assertEqual(by_id["weekly"]["percent_used"], 18)
+        # Identity scaffolding is fixed; values are verbatim from the fixture.
+        self.assertEqual(snap["provider_id"], "fixture")
+        self.assertEqual(snap["status"], "available")
 
 
 if __name__ == "__main__":

@@ -97,7 +97,7 @@ static int collect_dashboard(char rows[][65], int max_rows) {
         double pct = 0;
         int is_null = 1;
         char pct_s[16] = {0};
-        if (meter_json_find_number(found, scope_end, "percent_used", &pct, &is_null) && !is_null) {
+        if (meter_json_find_number(found, scope_end, "percent_remaining", &pct, &is_null) && !is_null) {
             snprintf(pct_s, sizeof pct_s, "%g", pct);
         }
         char unit[16] = {0}, resets[32] = {0}, obs[32] = {0};

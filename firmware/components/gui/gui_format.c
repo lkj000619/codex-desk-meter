@@ -17,11 +17,11 @@ static const char *or_na(const char *s) {
 }
 
 void gui_dashboard_line(const char *provider, const char *window,
-                        const char *percent_used, const char *unit,
+                        const char *percent_remaining, const char *unit,
                         char *out, size_t out_sz) {
     char pct[32];
-    if (percent_used && *percent_used) {
-        snprintf(pct, sizeof pct, "%s%%", percent_used);
+    if (percent_remaining && *percent_remaining) {
+        snprintf(pct, sizeof pct, "REM %s%%", percent_remaining);
     } else {
         snprintf(pct, sizeof pct, "n/a");
     }

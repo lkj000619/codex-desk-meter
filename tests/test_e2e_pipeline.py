@@ -15,7 +15,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "pc_tools"))
 
-from collector import collect_globals, collect_providers, parse_ts  # noqa: E402
+from collector import collect_globals, collect_legacy_personal_usage, collect_providers, parse_ts  # noqa: E402
 from sender import SequenceStore, build_frame, encode_frame  # noqa: E402
 
 REFERENCE = "2026-09-10T00:04:59Z"
@@ -55,6 +55,68 @@ class PipelineTest(unittest.TestCase):
         shown = [r for r in body["payload"]["global_resets"]
                  if r["source"] == "codex-resets.com"][0]
         self.assertEqual(shown["latest_reset_at"], "2026-09-08T01:56:00Z")
+
+    def test_legacy_personal_usage_to_frame(self):
+        from datetime import datetime as _dt, timezone as _tz
+        ref = _dt(2026, 9, 11, 0, 4, 59, tzinfo=_tz.utc)
+        snap = collect_legacy_personal_usage("personal-usage.json", ref)
+        resets, gfails = collect_globals(
+            ["codex-reset-forecast.json", "codex-resets-history.json"])
+        self.assertEqual(gfails, [])
+        payload = {"usage": [snap], "global_resets": resets}
+        frame = build_frame(payload, 0, "2026-09-11T00:04:59Z")
+        line = encode_frame(frame)
+        self.assertTrue(line.endswith(b"\n"))
+        self.assertEqual(line.count(b"\n"), 1)
+        self.assertLessEqual(len(line), 65536)
+        body = json.loads(line.decode("utf-8"))
+        by_id = {w["window_id"]: w
+                 for w in body["payload"]["usage"][0]["windows"]}
+        self.assertEqual(by_id["five-hour"]["percent_remaining"], 58)
+        self.assertEqual(by_id["weekly"]["percent_remaining"], 82)
+        shown = [r for r in body["payload"]["global_resets"]
+                 if r["source"] == "codex-resets.com"][0]
+        self.assertEqual(shown["latest_reset_at"], "2026-09-08T01:56:00Z")
+
+    def test_legacy_cli_chain_collector_to_sender(self):
+        """True CLI path: collector --legacy-usage -> sender dry-run bytes."""
+        import subprocess
+        with tempfile.TemporaryDirectory() as tmp:
+            tmpdir = Path(tmp)
+            payload_path = tmpdir / "payload.json"
+            report_path = tmpdir / "collect-report.json"
+            ref = "2026-09-11T00:04:59Z"
+            cmd = [sys.executable, str(ROOT / "pc_tools" / "collector.py"),
+                   "--fixture", "gemini-cli-unsupported.json",
+                   "--legacy-usage", "personal-usage.json",
+                   "--reference-time", ref,
+                   "--out-payload", str(payload_path),
+                   "--out-report", str(report_path)]
+            proc = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+            self.assertEqual(proc.returncode, 0, msg=proc.stderr)
+            payload = json.loads(payload_path.read_text(encoding="utf-8"))
+            by_provider = {s["provider_id"]: s for s in payload["usage"]}
+            self.assertIn("fixture", by_provider)
+            legacy = by_provider["fixture"]
+            by_id = {w["window_id"]: w for w in legacy["windows"]}
+            self.assertEqual(by_id["five-hour"]["percent_remaining"], 58)
+            self.assertEqual(by_id["weekly"]["percent_remaining"], 82)
+            state_dir = tmpdir / "state"
+            out = tmpdir / "frame.bin"
+            sent_at = "2026-09-11T00:04:59Z"
+            cmd = [sys.executable, str(ROOT / "pc_tools" / "sender.py"),
+                   "--payload", str(payload_path), "--sent-at", sent_at,
+                   "--alias", "legacy", "--state-dir", str(state_dir),
+                   "--output", str(out),
+                   "--init-alias", "--receiver-empty-ack"]
+            proc = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+            self.assertEqual(proc.returncode, 0, msg=proc.stderr)
+            line = out.read_bytes()
+            self.assertTrue(line.endswith(b"\n"))
+            self.assertEqual(line.count(b"\n"), 1)
+            self.assertLessEqual(len(line), 65536)
+            expect = encode_frame(build_frame(payload, 1, sent_at))
+            self.assertEqual(line, expect)
 
     def test_sender_cli_dry_run(self):
         import subprocess

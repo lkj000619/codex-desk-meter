@@ -31,7 +31,7 @@ events:
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
       
       The C compiler identification is GNU, found in:
-        C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/3.30.2/CompilerIdC/a.out
+        C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/3.30.2/CompilerIdC/a.out
       
   -
     kind: "message-v1"
@@ -54,7 +54,7 @@ events:
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
       
       The CXX compiler identification is GNU, found in:
-        C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/3.30.2/CompilerIdCXX/a.out
+        C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/3.30.2/CompilerIdCXX/a.out
       
   -
     kind: "message-v1"
@@ -80,8 +80,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-j8huvm"
-      binary: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-j8huvm"
+      source: "C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-gyc2y7"
+      binary: "C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-gyc2y7"
     cmakeVariables:
       CMAKE_C_FLAGS: "-mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy"
       CMAKE_C_FLAGS_DEBUG: "-g"
@@ -91,12 +91,12 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-j8huvm'
+        Change Dir: 'C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-gyc2y7'
         
-        Run Build Command(s): C:/Espressif/user-tools/tools/ninja/1.12.1/ninja.exe -v cmTC_974fe
-        [1/2] C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-gcc.exe   -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy    -v -o CMakeFiles/cmTC_974fe.dir/CMakeCCompilerABI.c.obj -c C:/Users/∞¥┤Ω┤æ∞ºä/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCCompilerABI.c
-        FAILED: CMakeFiles/cmTC_974fe.dir/CMakeCCompilerABI.c.obj 
-        C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-gcc.exe   -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy    -v -o CMakeFiles/cmTC_974fe.dir/CMakeCCompilerABI.c.obj -c C:/Users/∞¥┤Ω┤æ∞ºä/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCCompilerABI.c
+        Run Build Command(s): C:/Espressif/user-tools/tools/ninja/1.12.1/ninja.exe -v cmTC_2052c
+        [1/2] C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-gcc.exe   -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy    -v -o CMakeFiles/cmTC_2052c.dir/CMakeCCompilerABI.c.obj -c C:/Users/∞¥┤Ω┤æ∞ºä/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCCompilerABI.c
+        FAILED: CMakeFiles/cmTC_2052c.dir/CMakeCCompilerABI.c.obj 
+        C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-gcc.exe   -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy    -v -o CMakeFiles/cmTC_2052c.dir/CMakeCCompilerABI.c.obj -c C:/Users/∞¥┤Ω┤æ∞ºä/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCCompilerABI.c
         Using built-in specs.
         COLLECT_GCC=C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp-elf-gcc.exe
         Target: xtensa-esp-elf
@@ -104,8 +104,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib zstd
         gcc version 13.2.0 (crosstool-NG esp-13.2.0_20240530) 
-        COLLECT_GCC_OPTIONS='-mdynconfig=xtensa_esp32s3.so' '-mlongcalls' '-fno-builtin-memcpy' '-fno-builtin-memset' '-fno-builtin-bzero' '-fno-builtin-stpcpy' '-fno-builtin-strncpy' '-v' '-o' 'CMakeFiles/cmTC_974fe.dir/CMakeCCompilerABI.c.obj' '-c' '-dumpdir' 'CMakeFiles/cmTC_974fe.dir/'
-         C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/../libexec/gcc/xtensa-esp-elf/13.2.0/cc1.exe -quiet -v -imultilib esp32s3 -iprefix C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/../lib/gcc/xtensa-esp-elf/13.2.0/ -isysroot C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/../xtensa-esp-elf C:/Users/???/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_974fe.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mdynconfig=xtensa_esp32s3.so -mlongcalls -version -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -o C:\\Espressif\\tmp\\ccM9t0Lx.s
+        COLLECT_GCC_OPTIONS='-mdynconfig=xtensa_esp32s3.so' '-mlongcalls' '-fno-builtin-memcpy' '-fno-builtin-memset' '-fno-builtin-bzero' '-fno-builtin-stpcpy' '-fno-builtin-strncpy' '-v' '-o' 'CMakeFiles/cmTC_2052c.dir/CMakeCCompilerABI.c.obj' '-c' '-dumpdir' 'CMakeFiles/cmTC_2052c.dir/'
+         C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/../libexec/gcc/xtensa-esp-elf/13.2.0/cc1.exe -quiet -v -imultilib esp32s3 -iprefix C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/../lib/gcc/xtensa-esp-elf/13.2.0/ -isysroot C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/../xtensa-esp-elf C:/Users/???/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_2052c.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mdynconfig=xtensa_esp32s3.so -mlongcalls -version -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -o C:\\Espressif\\tmp\\ccdetu2a.s
         GNU C17 (crosstool-NG esp-13.2.0_20240530) version 13.2.0 (xtensa-esp-elf)
         	compiled by GNU C version 6.3.0 20170516, GMP version 6.2.1, MPFR version 4.2.1, MPC version 1.2.1, isl version isl-0.26-GMP
         
@@ -135,8 +135,8 @@ events:
     checks:
       - "Check for working C compiler: C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/xtensa-esp32s3-elf-gcc.exe"
     directories:
-      source: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-509mai"
-      binary: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-509mai"
+      source: "C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-u60hsu"
+      binary: "C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-u60hsu"
     cmakeVariables:
       CMAKE_C_FLAGS: "-mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy"
       CMAKE_C_FLAGS_DEBUG: "-g"
@@ -146,11 +146,11 @@ events:
       variable: "CMAKE_C_COMPILER_WORKS"
       cached: true
       stdout: |
-        Change Dir: 'C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-509mai'
+        Change Dir: 'C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-u60hsu'
         
-        Run Build Command(s): C:/Espressif/user-tools/tools/ninja/1.12.1/ninja.exe -v cmTC_5b9ab
-        [1/2] C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-gcc.exe   -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -o CMakeFiles/cmTC_5b9ab.dir/testCCompiler.c.obj -c C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-509mai/testCCompiler.c
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-gcc.exe -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy  CMakeFiles/cmTC_5b9ab.dir/testCCompiler.c.obj -o cmTC_5b9ab   && cd ."
+        Run Build Command(s): C:/Espressif/user-tools/tools/ninja/1.12.1/ninja.exe -v cmTC_8d46f
+        [1/2] C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-gcc.exe   -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -o CMakeFiles/cmTC_8d46f.dir/testCCompiler.c.obj -c C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-u60hsu/testCCompiler.c
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-gcc.exe -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy  CMakeFiles/cmTC_8d46f.dir/testCCompiler.c.obj -o cmTC_8d46f   && cd ."
         
       exitCode: 0
   -
@@ -163,8 +163,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-3td1kx"
-      binary: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-3td1kx"
+      source: "C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-wbafui"
+      binary: "C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-wbafui"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "-mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy"
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -175,12 +175,12 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-3td1kx'
+        Change Dir: 'C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-wbafui'
         
-        Run Build Command(s): C:/Espressif/user-tools/tools/ninja/1.12.1/ninja.exe -v cmTC_7bc0e
-        [1/2] C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-g++.exe   -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy    -v -o CMakeFiles/cmTC_7bc0e.dir/CMakeCXXCompilerABI.cpp.obj -c C:/Users/∞¥┤Ω┤æ∞ºä/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp
-        FAILED: CMakeFiles/cmTC_7bc0e.dir/CMakeCXXCompilerABI.cpp.obj 
-        C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-g++.exe   -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy    -v -o CMakeFiles/cmTC_7bc0e.dir/CMakeCXXCompilerABI.cpp.obj -c C:/Users/∞¥┤Ω┤æ∞ºä/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp
+        Run Build Command(s): C:/Espressif/user-tools/tools/ninja/1.12.1/ninja.exe -v cmTC_2f58e
+        [1/2] C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-g++.exe   -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy    -v -o CMakeFiles/cmTC_2f58e.dir/CMakeCXXCompilerABI.cpp.obj -c C:/Users/∞¥┤Ω┤æ∞ºä/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp
+        FAILED: CMakeFiles/cmTC_2f58e.dir/CMakeCXXCompilerABI.cpp.obj 
+        C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-g++.exe   -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy    -v -o CMakeFiles/cmTC_2f58e.dir/CMakeCXXCompilerABI.cpp.obj -c C:/Users/∞¥┤Ω┤æ∞ºä/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp
         Using built-in specs.
         COLLECT_GCC=C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp-elf-g++.exe
         Target: xtensa-esp-elf
@@ -188,8 +188,8 @@ events:
         Thread model: posix
         Supported LTO compression algorithms: zlib zstd
         gcc version 13.2.0 (crosstool-NG esp-13.2.0_20240530) 
-        COLLECT_GCC_OPTIONS='-mdynconfig=xtensa_esp32s3.so' '-mlongcalls' '-fno-builtin-memcpy' '-fno-builtin-memset' '-fno-builtin-bzero' '-fno-builtin-stpcpy' '-fno-builtin-strncpy' '-v' '-o' 'CMakeFiles/cmTC_7bc0e.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-dumpdir' 'CMakeFiles/cmTC_7bc0e.dir/'
-         C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/../libexec/gcc/xtensa-esp-elf/13.2.0/cc1plus.exe -quiet -v -imultilib esp32s3 -iprefix C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/../lib/gcc/xtensa-esp-elf/13.2.0/ -isysroot C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/../xtensa-esp-elf C:/Users/???/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_7bc0e.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mdynconfig=xtensa_esp32s3.so -mlongcalls -version -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -o C:\\Espressif\\tmp\\cc9kybgf.s
+        COLLECT_GCC_OPTIONS='-mdynconfig=xtensa_esp32s3.so' '-mlongcalls' '-fno-builtin-memcpy' '-fno-builtin-memset' '-fno-builtin-bzero' '-fno-builtin-stpcpy' '-fno-builtin-strncpy' '-v' '-o' 'CMakeFiles/cmTC_2f58e.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-dumpdir' 'CMakeFiles/cmTC_2f58e.dir/'
+         C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/../libexec/gcc/xtensa-esp-elf/13.2.0/cc1plus.exe -quiet -v -imultilib esp32s3 -iprefix C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/../lib/gcc/xtensa-esp-elf/13.2.0/ -isysroot C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/../xtensa-esp-elf C:/Users/???/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_2f58e.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mdynconfig=xtensa_esp32s3.so -mlongcalls -version -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -o C:\\Espressif\\tmp\\cc9FqJ8W.s
         GNU C++17 (crosstool-NG esp-13.2.0_20240530) version 13.2.0 (xtensa-esp-elf)
         	compiled by GNU C version 6.3.0 20170516, GMP version 6.2.1, MPFR version 4.2.1, MPC version 1.2.1, isl version isl-0.26-GMP
         
@@ -225,8 +225,8 @@ events:
     checks:
       - "Check for working CXX compiler: C:/Espressif/user-tools/tools/xtensa-esp-elf/esp-13.2.0_20240530/xtensa-esp-elf/bin/xtensa-esp32s3-elf-g++.exe"
     directories:
-      source: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-5fc4md"
-      binary: "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-5fc4md"
+      source: "C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-wd98gn"
+      binary: "C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-wd98gn"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "-mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy"
       CMAKE_CXX_FLAGS_DEBUG: "-g"
@@ -237,11 +237,11 @@ events:
       variable: "CMAKE_CXX_COMPILER_WORKS"
       cached: true
       stdout: |
-        Change Dir: 'C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-5fc4md'
+        Change Dir: 'C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-wd98gn'
         
-        Run Build Command(s): C:/Espressif/user-tools/tools/ninja/1.12.1/ninja.exe -v cmTC_e6c58
-        [1/2] C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-g++.exe   -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -o CMakeFiles/cmTC_e6c58.dir/testCXXCompiler.cxx.obj -c C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-5fc4md/testCXXCompiler.cxx
-        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-g++.exe -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy  CMakeFiles/cmTC_e6c58.dir/testCXXCompiler.cxx.obj -o cmTC_e6c58   && cd ."
+        Run Build Command(s): C:/Espressif/user-tools/tools/ninja/1.12.1/ninja.exe -v cmTC_4f554
+        [1/2] C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-g++.exe   -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -o CMakeFiles/cmTC_4f554.dir/testCXXCompiler.cxx.obj -c C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/bootloader/CMakeFiles/CMakeScratch/TryCompile-wd98gn/testCXXCompiler.cxx
+        [2/2] C:\\WINDOWS\\system32\\cmd.exe /C "cd . && C:\\Espressif\\user-tools\\tools\\xtensa-esp-elf\\esp-13.2.0_20240530\\xtensa-esp-elf\\bin\\xtensa-esp32s3-elf-g++.exe -mlongcalls  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy  CMakeFiles/cmTC_4f554.dir/testCXXCompiler.cxx.obj -o cmTC_4f554   && cd ."
         
       exitCode: 0
 ...

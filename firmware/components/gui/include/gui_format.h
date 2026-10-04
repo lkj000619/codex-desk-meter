@@ -21,7 +21,7 @@ typedef struct {
  * provenance row. All strings are verbatim from the frame payload (never
  * invented). Missing values render as "n/a". */
 void gui_dashboard_line(const char *provider, const char *window,
-                        const char *percent_used, const char *unit,
+                        const char *percent_remaining, const char *unit,
                         char *out, size_t out_sz);
 void gui_dashboard_time_line(const char *resets_at, const char *observed_at,
                              char *out, size_t out_sz);

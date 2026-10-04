@@ -1,0 +1,7 @@
+test_meter_parser 1 0.0581667
+test_meter_state 1 0.0563106
+test_meter_validate 1 0.0548286
+test_gui_regression 1 0.0567469
+test_feature_autodim 1 0.0546691
+test_input_debounce 1 0.0542072
+---

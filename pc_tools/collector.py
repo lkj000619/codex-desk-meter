@@ -136,6 +136,100 @@ def collect_providers(names: list[str], reference: datetime):
     return snapshots, failures
 
 
+LEGACY_USAGE_DEFAULT = "personal-usage.json"
+
+
+def collect_legacy_personal_usage(name: str, reference: datetime):
+    """Production adapter: common legacy personal-usage fixture -> cdm usage.
+
+    Maps experiments/fixtures/<name> (legacy shape: source/captured_at/
+    windows[{id,label,percent_used,percent_remaining,resets_at}]) onto one
+    valid usage snapshot without inventing windows or values. Identity
+    scaffolding (snapshot/provider/agent/host/account aliases) is fixed and
+    documented; every percent/window/time comes verbatim from the fixture.
+    """
+    path = (FIXTURE_ROOT / name).resolve()
+    if not str(path).startswith(str(FIXTURE_ROOT.resolve())):
+        raise CollectError("FIXTURE_PATH_UNSAFE",
+                           "legacy fixture must stay under experiments/fixtures/")
+    raw = load_json(path)
+    if not isinstance(raw, dict):
+        raise CollectError("SCHEMA_INVALID", f"{name} must be an object")
+    captured_raw = raw.get("captured_at")
+    if captured_raw is None:
+        raise CollectError("CAPTURED_AT_REQUIRED",
+                           f"{name} captured_at is null: no valid wire")
+    captured = parse_ts(captured_raw, "captured_at")
+    if captured > reference:
+        raise CollectError("FUTURE_TIMESTAMP",
+                           f"{name} captured_at is after reference_time")
+    windows_raw = raw.get("windows")
+    if not isinstance(windows_raw, list) or not windows_raw:
+        raise CollectError("SCHEMA_INVALID", f"{name} windows must be a non-empty list")
+    seen: set[str] = set()
+    windows: list[dict] = []
+    for entry in windows_raw:
+        if not isinstance(entry, dict):
+            raise CollectError("SCHEMA_INVALID", f"{name} window must be an object")
+        wid = entry.get("id")
+        if not isinstance(wid, str) or not wid:
+            raise CollectError("SCHEMA_INVALID", f"{name} window id missing")
+        if wid in seen:
+            raise CollectError("DUPLICATE_WINDOW", f"{name} duplicate window {wid!r}")
+        seen.add(wid)
+        pu = entry.get("percent_used")
+        pr = entry.get("percent_remaining")
+        for value in (pu, pr):
+            if value is not None and (isinstance(value, bool)
+                                      or not isinstance(value, (int, float))
+                                      or not 0 <= value <= 100):
+                raise CollectError("SCHEMA_INVALID",
+                                   f"{name} window {wid!r} percent out of range")
+        if pu is not None and pr is not None and abs((pu + pr) - 100) > 0.01:
+            raise CollectError("SCHEMA_INVALID",
+                               f"{name} window {wid!r} percents must sum to 100")
+        resets_raw = entry.get("resets_at")
+        if resets_raw is not None:
+            parse_ts(resets_raw, f"{name} window {wid!r} resets_at")
+        label = entry.get("label")
+        windows.append({
+            "window_id": wid,
+            "label": label if isinstance(label, str) and label else wid,
+            "used_units": None,
+            "remaining_units": None,
+            "limit_units": None,
+            "unit": "percent",
+            "percent_used": pu,
+            "percent_remaining": pr,
+            "resets_at": resets_raw,
+        })
+    age = (reference - captured).total_seconds()
+    stale = age >= STALE_SECONDS
+    snapshot = {
+        "schema_version": 1,
+        "snapshot_id": "legacy-personal-usage",
+        "provider_id": "fixture",
+        "agent_id": "fixture-agent",
+        "host_id": "fixture-host",
+        "model_id": None,
+        "account_profile_id": "acct-legacy-fixture",
+        "source_kind": "fixture",
+        "metric_kind": "quota_window",
+        "unit": "percent",
+        "status": "available",
+        "observed_at": captured_raw,
+        "windows": windows,
+        "stale": stale,
+        "last_good_at": captured_raw,
+        "error_code": None,
+        "error_reason": None,
+    }
+    code = check_snapshot(snapshot, reference)
+    if code:
+        raise CollectError(code, f"{name} adapted snapshot rejected: {code}")
+    return snapshot
+
+
 def normalize_global_reset(raw: dict) -> dict:
     """Wire model: logical provider->source, fetched_at->captured_at, v1."""
     if not isinstance(raw, dict):
@@ -177,6 +271,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--fixture", action="append", default=None,
                         help="provider fixture file name under experiments/fixtures/providers")
     parser.add_argument("--global-fixture", action="append", default=None)
+    parser.add_argument("--legacy-usage", default=None,
+                        help="legacy personal-usage fixture file name under experiments/fixtures")
     parser.add_argument("--reference-time", default="2026-09-10T00:04:59Z")
     parser.add_argument("--out-payload", type=Path, default=None)
     parser.add_argument("--out-report", type=Path, default=None)
@@ -191,6 +287,12 @@ def main(argv: list[str] | None = None) -> int:
     globals_ = args.global_fixture or DEFAULT_GLOBAL_FIXTURES
     snapshots, pfails = collect_providers(providers, reference)
     resets, gfails = collect_globals(globals_)
+    if args.legacy_usage is not None:
+        try:
+            snapshots.append(collect_legacy_personal_usage(args.legacy_usage, reference))
+        except CollectError as exc:
+            (pfails).append({"adapter_id": args.legacy_usage, "code": exc.code,
+                             "message": str(exc)})
     payload = {"usage": snapshots, "global_resets": resets}
     report = {"status": "collected", "snapshots": len(snapshots),
               "global_resets": len(resets),

@@ -39,11 +39,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/esp-idf/esp_hw_support/port/esp32s3/cmake_install.cmake")
+  include("C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/esp-idf/esp_hw_support/port/esp32s3/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/build/esp-idf/esp_hw_support/lowpower/cmake_install.cmake")
+  include("C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/build/esp-idf/esp_hw_support/lowpower/cmake_install.cmake")
 endif()
 

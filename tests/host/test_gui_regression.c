@@ -24,10 +24,19 @@ int main(void) {
     CHECK(strstr(line, "openai") != NULL);
     CHECK(strstr(line, "five-hour") != NULL);
     CHECK(strstr(line, "20%") != NULL);
+    CHECK(strstr(line, "REM") != NULL);
     CHECK(strstr(tline, "2026-09-10T05:00:00Z") != NULL);
     CHECK(strstr(tline, "2026-09-10T00:00:00Z") != NULL);
     CHECK(strlen(line) <= 64);
     CHECK(strlen(tline) <= 64);
+
+    /* Legacy fixture values render as remaining percentages. */
+    gui_dashboard_line("fixture", "five-hour", "58", "percent", line, sizeof line);
+    CHECK(strstr(line, "58%") != NULL);
+    CHECK(strstr(line, "REM") != NULL);
+    gui_dashboard_line("fixture", "weekly", "82", "percent", line, sizeof line);
+    CHECK(strstr(line, "82%") != NULL);
+    CHECK(strlen(line) <= 64);
 
     /* Nulls render as n/a, never as invented values. */
     gui_dashboard_line(NULL, NULL, NULL, NULL, line, sizeof line);

@@ -1913,7 +1913,7 @@ rule C_STATIC_LIBRARY_LINKER____idf_main_
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = C:\Users\이광진\.espressif\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\meter-runs-20261004\20261004-opencode-cli-opencode-muse-r01\checkout\firmware -BC:\meter-runs-20261004\20261004-opencode-cli-opencode-muse-r01\checkout\firmware\build
+  command = C:\Users\이광진\.espressif\tools\cmake\3.30.2\bin\cmake.exe --regenerate-during-build -SC:\meter-followups-20261004\20261004-opencode-cli-opencode-muse-r02\checkout\firmware -BC:\meter-followups-20261004\20261004-opencode-cli-opencode-muse-r02\checkout\firmware\build
   description = Re-running CMake...
   generator = 1
 

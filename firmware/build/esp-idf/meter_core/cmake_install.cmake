@@ -1,4 +1,4 @@
-# Install script for directory: C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/checkout/firmware/components/meter_core
+# Install script for directory: C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02/checkout/firmware/components/meter_core
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

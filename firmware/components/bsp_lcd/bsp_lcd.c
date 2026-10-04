@@ -97,15 +97,14 @@ static void spi_delay(void) {
     esp_rom_delay_us(1);
 }
 
-static void spi_write_bits(int dc, uint8_t data, int first) {
-    /* 9-bit first byte (DC + 8 data, MSB first), then 8-bit bytes. Mode 0. */
-    if (first) {
-        gpio_set_level(PIN_SDA, dc);
-        gpio_set_level(PIN_SCK, 0);
-        spi_delay();
-        gpio_set_level(PIN_SCK, 1);
-        spi_delay();
-    }
+static void spi_write_byte_9bit(int dc, uint8_t data) {
+    /* ST7701 3-wire 9-bit: EVERY byte carries a DC phase bit first (MSB),
+     * then 8 data bits MSB-first, mode 0. */
+    gpio_set_level(PIN_SDA, dc);
+    gpio_set_level(PIN_SCK, 0);
+    spi_delay();
+    gpio_set_level(PIN_SCK, 1);
+    spi_delay();
     for (int i = 7; i >= 0; i--) {
         gpio_set_level(PIN_SDA, (data >> i) & 1);
         gpio_set_level(PIN_SCK, 0);
@@ -117,7 +116,7 @@ static void spi_write_bits(int dc, uint8_t data, int first) {
 
 static void lcd_cmd(uint8_t cmd) {
     gpio_set_level(PIN_CS, 0);
-    spi_write_bits(0, cmd, 1);
+    spi_write_byte_9bit(0, cmd);
     gpio_set_level(PIN_CS, 1);
     spi_delay();
 }
@@ -128,7 +127,7 @@ static void lcd_data(const uint8_t *data, size_t n) {
     }
     gpio_set_level(PIN_CS, 0);
     for (size_t i = 0; i < n; i++) {
-        spi_write_bits(1, data[i], i == 0);
+        spi_write_byte_9bit(1, data[i]);
     }
     gpio_set_level(PIN_CS, 1);
     spi_delay();
