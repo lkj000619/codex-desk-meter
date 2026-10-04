@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-04T16:50:10.210486+00:00",
+  "checked_at": "2026-10-04T17:57:17.785019+00:00",
   "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
   "block": 1,
   "seed": 1,
@@ -10,8 +10,8 @@
   "current_run": "20261004-opencode-cli-opencode-muse-r02",
   "current_directory": "C:\\meter-followups-20261004\\20261004-opencode-cli-opencode-muse-r02",
   "ledger": "C:\\meter-runs-20261004\\ledgers\\20261004-opencode-cli-opencode-muse-r01.json",
-  "state": "followup_timeout_awaiting_user_optical_observation",
-  "started_at": "2026-10-04T14:30:48.680Z",
+  "state": "followup_timeout_awaiting_video_capture_identity",
+  "started_at": "2026-10-04T14:30:48.681Z",
   "timeout_seconds": 7200,
   "launcher_pid": 1900,
   "profile_sha256": "207c7c77a51bad131180cdc9b608ef1205279c98067b7dc20770f270402f6513",
@@ -41,7 +41,7 @@
   "implementation_commit": "354c6475345cb521c92f92e3dce448b0dc5ef58b",
   "hardware_port": "COM3",
   "automatic_optical_alignment": "not_run",
-  "rm_review": "pending_user_optical_observation",
+  "rm_review": "pending_user_capture_identity_confirmation",
   "followups_started": 1,
   "initial_series_started": 1,
   "round": 1,
@@ -80,7 +80,7 @@
     "standard_package_manifest_sha256": "c4f845c4a887a91379e293810824f16dda3e8f590d27b45048baa87ad4a854f0"
   },
   "current_followup_implementation_feedback_sent_during_run": false,
-  "hardware_slot_state": "Frozen r02 artifact installed; common frames accepted; user LCD/BOOT observation pending; serial closed.",
+  "hardware_slot_state": "Same frozen r02 artifact reuploaded at user request; common frames accepted; manual LCD/BOOT observation pending; serial closed.",
   "permission_denial_events": [
     {
       "line": 17,
@@ -110,5 +110,21 @@
   },
   "series_measured_seconds": 8224.795999999857,
   "series_reported_normalized_tokens": 649633,
-  "remaining_followup_round_limit_after_terminal": 2
+  "remaining_followup_round_limit_after_terminal": 2,
+  "candidate_processes_alive": false,
+  "current_hardware_slot": "C:\\meter-followups-20261004\\20261004-opencode-cli-opencode-muse-r02\\operator-observation\\recapture-r2-20261005\\hardware-slot.json",
+  "hardware_observation_attempt": 2,
+  "last_hardware_capture_ended_at": "2026-10-04T17:50:11.470887+00:00",
+  "provisional_preservation": "timeout-preservation-20261005/validation.json",
+  "provisional_preservation_verified": true,
+  "provisional_package_manifest_sha256": "9a7c506fe8cd3e861184232134dd2127b847d523997b44a51941ad7a9c045fc3",
+  "optical_video_received": true,
+  "video_review": "C:\\Users\\이광진\\orca\\codex-desk-meter\\results\\formal-comparison-20261004\\evidence\\20261004-opencode-cli-opencode-muse-r02\\operator-observation\\user-video-01\\video-review.json",
+  "provisional_video_findings": {
+    "RM1": "pass",
+    "RM2": "partial",
+    "RM3": "partial",
+    "RM4": "partial",
+    "RM5": "pass"
+  }
 }

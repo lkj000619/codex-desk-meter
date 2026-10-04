@@ -1,0 +1,58 @@
+{
+  "scope": "Second operator hardware observation attempt; original attempt preserved.",
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "files": {
+    "frozen-artifact-upload-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "frozen-artifact-upload-stdout.txt": {
+      "sha256": "63a7f1d55b256e8a224d1041e9415c31a2e0d9062791b1014ebb244a69ee3917",
+      "bytes": 1468
+    },
+    "hardware-slot.json": {
+      "sha256": "17f8045bd2fc9280609a9a9a8ea3c83ab9aea12450cff56c50aafc5b3e627e3e",
+      "bytes": 4375
+    },
+    "nvs-erase-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "nvs-erase-stdout.txt": {
+      "sha256": "2300d9bc1730ad02f1e79005b75db7a46925d355249dc02c9a053e83c6954909",
+      "bytes": 395
+    },
+    "receiver-source-review.json": {
+      "sha256": "8304e6f72edfd3913e7aa1320e78b31d8c1d7c45f032b0c593a5c9d564e70faa",
+      "bytes": 1084
+    },
+    "reference-capture-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "reference-capture-stdout.txt": {
+      "sha256": "ecfea017bdaee957cc0a1a4432d062caa65393364b601d383f88de2d61ae440f",
+      "bytes": 72
+    },
+    "reobserve.py": {
+      "sha256": "af28ce9ae48816a8dc8bd6ad27fee96007ced756bb11f36d43e9aac0bb29b7f2",
+      "bytes": 6164
+    },
+    "reference-capture-r1/capture.json": {
+      "sha256": "b01e51d2ba9250dc5f8d2e50a1c7dfc99859b13917f6e9e0804258c2055a6739",
+      "bytes": 1599
+    },
+    "reference-capture-r1/device-serial.bin": {
+      "sha256": "6e6178778c712f44f00f08c50abb89290bd27f7ce45f28d51a03f2ca4b37e2ca",
+      "bytes": 120
+    },
+    "reference-capture-r1/events.jsonl": {
+      "sha256": "0e0c0a169a8cbeb7bbd930f0b8feccee16b9bbb06fe8e98af801b8748443a5e6",
+      "bytes": 1387
+    },
+    "reference-capture-r1/sent-frames.jsonl": {
+      "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+      "bytes": 3086
+    }
+  }
+}

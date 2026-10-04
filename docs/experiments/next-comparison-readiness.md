@@ -102,7 +102,10 @@ COM3의 원본 공통 frame 수신과 실제 성공 로그를 대조했고 사�
 종료 후 남은 구현을 `354c6475345cb521c92f92e3dce448b0dc5ef58b`에 동결했고 정책은 부적격이다.
 Python 28개·host 실행 파일 6개는 통과했지만 기준 시각의 실제 collector는 `STALE_THRESHOLD_EXCEEDED`로
 legacy 입력을 거부한다. 같은 동결 artifact를 COM3에 업로드하고 seq 0·1 수락을 확인했다.
-실물 LCD·BOOT 관측과 후속 RM review는 대기 중이며 미확인을 합격으로 표시하지 않는다.
+2026-10-05 02:50 KST 사용자 요청으로 같은 artifact를 다시 업로드하고 공통 seq 0·1 수락을 확인했다.
+제공된 66.57초 영상은 재업로드 전에 저장된 자료다. 사용량 58%·세 종류 화면 전환을 관측했지만
+주간 82%·실제 글로벌 리셋 값은 보이지 않는다. 최초 후속 업로드 뒤 촬영한 자료인지 확인 대기이며
+최종 후속 RM review는 아직 적용하지 않았다. [영상 검토 원본](../../results/formal-comparison-20261004/evidence/20261004-opencode-cli-opencode-muse-r02/operator-observation/user-video-01/video-review.json)을 따른다.
 회차·예산을 초기화하거나 최종 제출물을 운영자가 대신 작성하지 않는다.
 이번 전송은 operator replay다. 후보 collector의 공통 fixture 연결 문제와 미측정 광학 지연은 [실행 기록](../../results/formal-comparison-20261004/report.md)에 남긴다.
 현재 증거 문서의 후속 commit과 비교 baseline을 혼동하지 않는다. 다음 날짜의 새 prepare는
@@ -129,3 +132,9 @@ python -X utf8 scripts/benchmark.py check --baseline comparison-baseline-2026100
 동결 operator ZIP에서 추출한 validator로 57개 입력·artifact·정책·결과를 재검증했다.
 원본 거부·원본 보존 archive·후보 부적격 판정은 유지한다. 동결 runner·입력·평가 기준은 변경하지 않았다.
 적용 범위와 근거는 [보완 계획](../plans/2026-10-04-evidence-artifact-layout-remediation.md)과 [실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다.
+
+후속 timeout의 관측 전 보존본도 396개 파일·57개 입력·46개 source 사본·9개 artifact 사본을
+동결 validator로 독립 복원 검증했다. 원본 terminal/ledger는 바꾸지 않았고 파생 포장 manifest의
+변경 필드는 동결 commit·추가 evidence뿐이다. 최종 제출 누락으로 `result_valid: false`이며
+이 보존 검증을 제품 합격이나 최종 RM review 완료로 해석하지 않는다.
+[복구 계획](../plans/2026-10-05-timeout-evidence-recovery.md)과 [복원 감사](../../results/formal-comparison-20261004/timeout-preservation-20261005/restore-audit.json)를 따른다.

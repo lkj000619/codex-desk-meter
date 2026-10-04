@@ -43,3 +43,4 @@ results/formal-comparison-20261004/*.json binary
 results/formal-comparison-20261004/evidence/** binary
 results/formal-comparison-20261004/operator-remediation-20261005/** binary
 results/formal-comparison-20261004/reservations-20261005/** binary
+results/formal-comparison-20261004/timeout-preservation-20261005/** binary

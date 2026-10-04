@@ -2,7 +2,7 @@
 
 목표: ESP32-S3-LCD-3.16 제품 구현에서 에이전트의 첫 결과·자기 후속 수정 비용과 RM 도달·제품 품질을 동일 조건으로 비교한다.
 시작 승인: 2026-10-04 사용자 요청 “프로젝트 목적과 목표에 엇나가지않도록 실험 시작”.
-상태: 최초 평가·원본 복원 완료. 후속 1회차가 2026-10-05 01:30:48 KST timeout으로 종료해 수정 예산 소진. 남은 구현 동결·COM3 수락 확인, 사용자 LCD·BOOT 관측과 후속 RM review 대기.
+상태: 최초 평가·원본 복원 완료. 후속 1회차 timeout으로 수정 예산 소진. 남은 구현 보존·396개 파일 독립 복원·COM3 재업로드 완료. 사용자 영상 검토 후 촬영 대상 확인과 후속 RM review 대기.
 원본: [운영 계약](../experiments/comparison-operating-contract.md), [현재 상태](../experiments/next-comparison-readiness.md),
 [동결 기록](../../results/experiment-launch-preparation-20261004/freeze.json).
 
@@ -25,7 +25,7 @@
    작업 상태: 완료. 고정 입력/clean 동결, 독립 Python 25개·host 6개 통과. 정책 위반은 별도 부적격 판정.
    후보의 source를 수정하거나 대신 구현하지 않는다. 정책 검토와 실제 제품 동작 관측을 각각 기록한다.
 3. 관측·RM·후속: 동결된 제출물로 실물 평가하고 RM review·policy review를 연결한다.
-   작업 상태: 진행 중. 최초 COM3 수락·사용자 사진·RM 판정 완료. 후속 round 1 timeout·최종 제출 누락·정책 부적격 보존. 후속 남은 코드 동결·Python 28개/host 6개 통과·COM3 수락 확인, 실물 관측 답변과 RM review 대기. 누적 수정 예산을 소진해 추가 회차는 없다.
+   작업 상태: 진행 중. 최초 COM3 수락·사용자 사진·RM 판정 완료. 후속 round 1 timeout·최종 제출 누락·정책 부적격 보존. 후속 남은 코드 동결·Python 28개/host 6개 통과·COM3 수락과 관측 전 독립 보존 완료. 사용자 요청으로 같은 artifact를 재업로드하고 66.57초 영상을 검토했다. 영상 촬영 대상 확인 후 RM review를 적용한다. 누적 수정 예산을 소진해 추가 회차는 없다.
    미도달이면 자신의 직전 결과와 허용된 관측 근거만 전달하며 잔여 회차/예산 안에서 후속을 시작한다.
 4. 다음 대상: 해당 series 처리 후 다음 대상을 진행한다. 날짜가 바뀐 미시작 예약은 새 ID·ledger·receipt로 준비한다.
    작업 상태: 대기. 첫 series의 허용된 후속 처리 뒤 다음 대상에 진행한다. 2026-10-05 일반 포장 도구의 `firmware/build/` 경로 지원을 [별도 운영 계획](2026-10-04-evidence-artifact-layout-remediation.md)에 따라 보완하고 첫 실제 package의 독립 복원을 확인했다. 원본 거부 기록은 유지한다.

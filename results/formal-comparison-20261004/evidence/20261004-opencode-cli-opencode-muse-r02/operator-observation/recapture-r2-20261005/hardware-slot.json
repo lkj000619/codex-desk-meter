@@ -1,0 +1,136 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "implementation_commit": "354c6475345cb521c92f92e3dce448b0dc5ef58b",
+  "artifact_sha256": "8e4eaaab7dd6c66abdc069043583c3805cd942d2afca496e48073bcc0255c75b",
+  "owner": "Codex operator",
+  "port": "COM3",
+  "ports": [
+    {
+      "port": "COM1",
+      "vid": null,
+      "pid": null,
+      "hwid": "ACPI\\PNP0501\\0"
+    },
+    {
+      "port": "COM3",
+      "vid": 12346,
+      "pid": 4097,
+      "hwid": "USB VID:PID=303A:1001 SER=28:84:85:B0:85:18"
+    }
+  ],
+  "started_at": "2026-10-04T17:49:45.949792+00:00",
+  "status": "awaiting_user_optical_observation",
+  "candidate_result_submission_missing": true,
+  "operator_source_modification": false,
+  "nvs_reset_scope": {
+    "offset": "0x9000",
+    "bytes": 24576,
+    "partition_source": "firmware/build/partition_table/partition-table.bin"
+  },
+  "full_flash_erase": false,
+  "common_fixture_reference": "codex-7923f96",
+  "commands": [
+    {
+      "name": "nvs-erase",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-m",
+        "esptool",
+        "--chip",
+        "esp32s3",
+        "--port",
+        "COM3",
+        "--before",
+        "default_reset",
+        "--after",
+        "hard_reset",
+        "erase_region",
+        "0x9000",
+        "0x6000"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.406999999890104
+    },
+    {
+      "name": "frozen-artifact-upload",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-m",
+        "esptool",
+        "--chip",
+        "esp32s3",
+        "--port",
+        "COM3",
+        "--baud",
+        "460800",
+        "--before",
+        "default_reset",
+        "--after",
+        "hard_reset",
+        "write_flash",
+        "--flash_mode",
+        "dio",
+        "--flash_size",
+        "16MB",
+        "--flash_freq",
+        "80m",
+        "0x0",
+        "C:\\meter-followups-20261004\\20261004-opencode-cli-opencode-muse-r02\\checkout\\firmware\\build\\bootloader\\bootloader.bin",
+        "0x8000",
+        "C:\\meter-followups-20261004\\20261004-opencode-cli-opencode-muse-r02\\checkout\\firmware\\build\\partition_table\\partition-table.bin",
+        "0x10000",
+        "C:\\meter-followups-20261004\\20261004-opencode-cli-opencode-muse-r02\\checkout\\firmware\\build\\cdm_meter.bin"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.827999999979511
+    },
+    {
+      "name": "reference-capture",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\meter-operator-20261004\\scripts\\observe-product.py",
+        "--frames",
+        "C:\\meter-operator-20261004\\experiments\\reference\\codex-7923f96\\expected-frames.jsonl",
+        "--reference-time",
+        "2026-09-30T18:40:49Z",
+        "--send",
+        "--port",
+        "COM3",
+        "--output",
+        "C:\\meter-followups-20261004\\20261004-opencode-cli-opencode-muse-r02\\operator-observation\\recapture-r2-20261005\\reference-capture-r1",
+        "--wait-seconds",
+        "5"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 10.233999999938533
+    }
+  ],
+  "observation_attempt": 2,
+  "user_requested_reupload": true,
+  "previous_hardware_slot": "operator-observation/hardware-slot.json",
+  "candidate_execution_repeated": false,
+  "candidate_budget_changed": false,
+  "original_terminal_manifest_sha256": "b755c90492ef34e6056e1654aae4be48b73723e968666d61a720271af15227f5",
+  "upload_completed": true,
+  "receiver_acceptance_review": [
+    {
+      "sequence": 0,
+      "crc": "203D8DF3",
+      "literal_acceptance_observed": true
+    },
+    {
+      "sequence": 1,
+      "crc": "C4CAA941",
+      "literal_acceptance_observed": true
+    }
+  ],
+  "serial_closed_after_capture": true,
+  "board_state": "Frozen r02 artifact installed; unchanged common frames sent; manual LCD/BOOT observation pending.",
+  "upload_and_capture_ended_at": "2026-10-04T17:50:11.470887+00:00",
+  "sent_frames_sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+  "original_terminal_unchanged": true,
+  "original_ledger_unchanged": true
+}

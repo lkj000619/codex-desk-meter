@@ -1,0 +1,126 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "reviewer": "Codex operator",
+  "reviewed_at": "2026-10-04T17:57:17.688850+00:00",
+  "status": "awaiting_user_capture_identity_confirmation",
+  "video_sha256": "72d18b2e492948ce51f8502f84dd391b0f5ee31d13148e3e7ee7dafcc3f09a4c",
+  "duration_seconds": 66.57,
+  "expected_candidate_commit": "354c6475345cb521c92f92e3dce448b0dc5ef58b",
+  "expected_app_sha256": "8e4eaaab7dd6c66abdc069043583c3805cd942d2afca496e48073bcc0255c75b",
+  "capture_time_utc": null,
+  "capture_identity_note": "Filesystem save precedes second upload. No embedded capture timestamp. User confirmation of first r02 upload is pending.",
+  "nominal_timestamps_are_precision_measurements": false,
+  "visual_findings": [
+    {
+      "at_seconds": 24.5,
+      "frame": "readable-frame-025.jpg",
+      "screen": "STATUS",
+      "text": [
+        "CDM METER STATUS",
+        "LINK:USB-OK STALE:NO",
+        "ERR:n/a",
+        "LAST-GOOD:2026-09-30T18:40:54Z",
+        "RETRY:host-polls-5s"
+      ]
+    },
+    {
+      "at_seconds": 28.5,
+      "frame": "readable-frame-029.jpg",
+      "screen": "DASHBOARD",
+      "text": [
+        "CDM METER DASHBOARD",
+        "openai/five-hour REM 58% percent",
+        "R:n/a O:n/a"
+      ],
+      "weekly_remaining_82_visible": false
+    },
+    {
+      "at_seconds": 30.5,
+      "frame": "readable-frame-031.jpg",
+      "screen": "GLOBAL RESET",
+      "text": [
+        "CDM METER GLOBAL RESET",
+        "GLOBAL RESET: default (no history)",
+        "src:codex-resets.com",
+        "obs:n/a"
+      ],
+      "reference_reset_values_visible": false
+    },
+    {
+      "at_seconds": 32.5,
+      "frame": "readable-frame-033.jpg",
+      "screen": "STATUS",
+      "text": [
+        "CDM METER STATUS",
+        "LINK:USB-LOST STALE:NO",
+        "ERR:n/a",
+        "LAST-GOOD:2026-09-30T18:40:54Z",
+        "RETRY:reopen<=1Hz"
+      ]
+    },
+    {
+      "interval_seconds": [
+        42.5,
+        44.5
+      ],
+      "screen": "blank_then_default_dashboard",
+      "note": "Button manipulation coincides with text disappearing and awaiting-PC-frame screen. RST identity and spontaneous-reboot classification are not proven."
+    },
+    {
+      "interval_seconds": [
+        50.5,
+        55.5
+      ],
+      "screen": "power_removed_then_default_dashboard",
+      "note": "USB cable visibly disconnected and reconnected; display goes dark and boots without payload. This is an intentional power removal, not powered-link recovery proof."
+    }
+  ],
+  "navigation": {
+    "starting_screen": "STATUS",
+    "observed_path": [
+      "STATUS",
+      "DASHBOARD",
+      "GLOBAL RESET",
+      "STATUS"
+    ],
+    "nominal_view_times_seconds": [
+      24.5,
+      28.5,
+      30.5,
+      32.5
+    ],
+    "physical_button_manipulation_visible": true,
+    "same_starting_information_returned": true,
+    "exact_button_press_count": null,
+    "button_response_latency_ms": null,
+    "scope": "Visible cycle between three named views; correctness of displayed data is evaluated separately."
+  },
+  "continuity": {
+    "video_length_seconds": 66.57,
+    "sampled_display_visible_before_reset_seconds": [
+      0.5,
+      41.5
+    ],
+    "sample_interval_seconds": 1,
+    "continuous_30s_no_flicker_certified": false,
+    "note": "One-second samples do not rule out between-sample flicker. The later intentional cable removal is separate."
+  },
+  "data_gaps": [
+    "Weekly remaining 82 is absent in the observed usage view.",
+    "Global reset reports no history despite frozen payload having reset dates.",
+    "STATUS says STALE:NO despite the input observations being stale.",
+    "Usage observation time is n/a and STATUS LAST-GOOD shows transport sent_at rather than source last_good_at."
+  ],
+  "draft_rm_status_if_capture_identity_confirmed": {
+    "RM1": "pass",
+    "RM2": "partial",
+    "RM3": "partial",
+    "RM4": "partial",
+    "RM5": "pass"
+  },
+  "reference_reached": false,
+  "whole_product_pass": false,
+  "policy_status": "invalid_for_comparison",
+  "rm_review_applied": false,
+  "candidate_execution_repeated": false
+}

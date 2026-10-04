@@ -1,0 +1,84 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "files": {
+    "video-metadata.json": {
+      "sha256": "c4ea8001e68ff728ecf6555beab9f617b3ac1e0e3fac838985d8211cd1329dc5",
+      "bytes": 14681
+    },
+    "video-review.json": {
+      "sha256": "e6e7d46ada575b2b5baa5aa999559cffbf3fb89b8df117350dff718ebd2185ce",
+      "bytes": 4203
+    },
+    "metadata-raw.txt": {
+      "sha256": "187d7f7570591aab575c2bb57978a65a057a1d3c4d4466950bab025de0ede5f0",
+      "bytes": 871
+    },
+    "record-video-review.py": {
+      "sha256": "975d7eed790ea28ce2e1e94a8f7061c558e3faab3454c2bacce6f095ec9e6e5d",
+      "bytes": 6164
+    },
+    "inspect-video.py": {
+      "sha256": "1e1258c8e54fd8063a1118a9bf894083dbca03796e21921bc9b16dc6a4afb5e6",
+      "bytes": 3409
+    },
+    "contact-01.jpg": {
+      "sha256": "78a34655cbe142f74e9313634aac2d8e2ed23fe541efa6cb14426e8b221eb9a8",
+      "bytes": 246888
+    },
+    "contact-02.jpg": {
+      "sha256": "2d28b001e44ab7e26577ffeba3a19e3dffdaa4593651588c8c31a49beeb55d1b",
+      "bytes": 257687
+    },
+    "contact-03.jpg": {
+      "sha256": "01f75e15321f05b4806c8faa25327dc301412c3b92e2cb9c154f4caa8571c419",
+      "bytes": 232949
+    },
+    "contact-04.jpg": {
+      "sha256": "776980cbcfb3a8b596612959a0a6a9071da90c336e74553537853b4afde74170",
+      "bytes": 236573
+    },
+    "contact-05.jpg": {
+      "sha256": "7a5565ba034e14082bd3deb5ff6da04f9c61c994b9041ab297bb54c56659a81c",
+      "bytes": 218728
+    },
+    "contact-06.jpg": {
+      "sha256": "8250542e54a6932ed296fb553d5776454ba18c49d86b103bb1710ac4ca78caa3",
+      "bytes": 138256
+    },
+    "readable-frame-025.jpg": {
+      "sha256": "6f8a7f08e996f996aca03df6b5a4e6e4f05c5af6bd6166bc3bcfe4883925d07d",
+      "bytes": 265910
+    },
+    "readable-frame-029.jpg": {
+      "sha256": "051d5e06feab05274e1f53bd38af9ebde7a06d041d87ce9b0606a66501264775",
+      "bytes": 227890
+    },
+    "readable-frame-031.jpg": {
+      "sha256": "624e7f34f507d0157641277e200417bd0e57e810f05112a49eb7cf21fdd3af1d",
+      "bytes": 204391
+    },
+    "readable-frame-032.jpg": {
+      "sha256": "6be4150ddd305c21166bc9c6158809b6b29ecd3f1149e9565b3841406d3cb9ac",
+      "bytes": 207879
+    },
+    "readable-frame-033.jpg": {
+      "sha256": "f2ca98a69f18990508f7f7586dfa65774e34fe2c6d0437e4c011560270e8cf67",
+      "bytes": 225807
+    },
+    "readable-frame-045.jpg": {
+      "sha256": "60ce7bb76eda4d1ef5c4536dc7678a6194dadd277ddc2cbdc4cce2af41120741",
+      "bytes": 248708
+    },
+    "readable-frame-056.jpg": {
+      "sha256": "047d7e0472379644270e46cd99d2278ecdd72871971be712b75689ff9a7f9994",
+      "bytes": 244272
+    }
+  },
+  "original_video": {
+    "operator_path": "C:\\meter-followups-20261004\\20261004-opencode-cli-opencode-muse-r02\\operator-observation\\user-video-01\\source.mp4",
+    "sha256": "72d18b2e492948ce51f8502f84dd391b0f5ee31d13148e3e7ee7dafcc3f09a4c",
+    "bytes": 33013814,
+    "stored_outside_repository": true
+  },
+  "scope": "Video findings pending capture identity; no final RM review yet."
+}

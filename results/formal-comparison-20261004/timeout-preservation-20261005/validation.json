@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-10-04T17:51:43.509442+00:00",
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "terminal_manifest_sha256": "b755c90492ef34e6056e1654aae4be48b73723e968666d61a720271af15227f5",
+  "original_terminal_and_ledger_unchanged": true,
+  "candidate_source_clean_and_unchanged": true,
+  "fixed_operator_baseline_unchanged": true,
+  "immutable_input_files_verified": 57,
+  "policy_status": "invalid_for_comparison",
+  "candidate_processes_alive": false,
+  "candidate_executions_added": 0,
+  "remaining_followup_seconds": 0,
+  "provisional_package_manifest_sha256": "9a7c506fe8cd3e861184232134dd2127b847d523997b44a51941ad7a9c045fc3",
+  "package_files_verified": 396,
+  "frozen_validators_audit": "restore-audit.json",
+  "latest_hardware_attempt": "C:\\meter-followups-20261004\\20261004-opencode-cli-opencode-muse-r02\\operator-observation\\recapture-r2-20261005",
+  "latest_hardware_artifact_sha256": "8e4eaaab7dd6c66abdc069043583c3805cd942d2afca496e48073bcc0255c75b",
+  "latest_receiver_sequences": [
+    0,
+    1
+  ],
+  "latest_hardware_slot_state": "awaiting_user_optical_observation",
+  "latest_hardware_ended_at": "2026-10-04T17:50:11.470887+00:00",
+  "rm_review": "pending_user_optical_observation",
+  "candidate_result_submission": "missing",
+  "candidate_selection_document_submission": "missing",
+  "provisional_package_is_final_rm_record": false
+}

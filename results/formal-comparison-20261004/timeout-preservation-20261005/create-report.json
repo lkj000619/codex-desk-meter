@@ -1,0 +1,14 @@
+{
+  "created_at": "2026-10-04T17:41:49.503078+00:00",
+  "package": "C:\\meter-run-packages-20261005\\opencode-muse-r02-provisional",
+  "files": 396,
+  "package_manifest_sha256": "9a7c506fe8cd3e861184232134dd2127b847d523997b44a51941ad7a9c045fc3",
+  "scope": "Provisional evidence preservation before optical answer and RM review. Authoritative terminal record is unchanged.",
+  "original_terminal_unchanged": true,
+  "original_ledger_unchanged": true,
+  "source_snapshot_files": 46,
+  "candidate_source_unchanged": true,
+  "candidate_result_submission": "missing",
+  "candidate_selection_document_submission": "missing",
+  "packager_sha256": "c3a4f76b00dce90e13447c7582c75b6c73ab874bd0525f543d0419736e938b91"
+}

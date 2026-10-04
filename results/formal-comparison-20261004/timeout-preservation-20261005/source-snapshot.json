@@ -1,0 +1,235 @@
+{
+  "implementation_commit": "354c6475345cb521c92f92e3dce448b0dc5ef58b",
+  "files": {
+    "firmware/CMakeLists.txt": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/CMakeLists.txt",
+      "sha256": "b612c12a021da19dade48829ba02e63d2505951ee4b5def9110d95ca5d79240d",
+      "bytes": 109
+    },
+    "firmware/sdkconfig": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/sdkconfig",
+      "sha256": "cc2aa90743135831551c293795b40261c8617eaa5c659ba557f10a2a10c2e041",
+      "bytes": 69721
+    },
+    "firmware/sdkconfig.defaults": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/sdkconfig.defaults",
+      "sha256": "79fd553acc3c914016f16217cad932bb02eaf98fd66fef025fb0202caf1a9f45",
+      "bytes": 584
+    },
+    "firmware/components/bsp_input/bsp_input.c": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/bsp_input/bsp_input.c",
+      "sha256": "9b6cbc29122e76ca58fe3c6e0d7138bd2b6464725ef483fbeff93f9c1f4e6f46",
+      "bytes": 1592
+    },
+    "firmware/components/bsp_input/CMakeLists.txt": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/bsp_input/CMakeLists.txt",
+      "sha256": "4c6209571caa4b71c88c6f479ef833ef3bfdc28896e7d18302d16af646013f5b",
+      "bytes": 97
+    },
+    "firmware/components/bsp_input/include/bsp_input.h": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/bsp_input/include/bsp_input.h",
+      "sha256": "962d7e39c38f6c119232d767b99d5a1627ea8439c53955bd55d61c22fb5f498a",
+      "bytes": 892
+    },
+    "firmware/components/bsp_lcd/bsp_lcd.c": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/bsp_lcd/bsp_lcd.c",
+      "sha256": "db4910335aef264db9f843032d2f7c3a151158b6e4432db98ee340aea0049e72",
+      "bytes": 15027
+    },
+    "firmware/components/bsp_lcd/CMakeLists.txt": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/bsp_lcd/CMakeLists.txt",
+      "sha256": "31eea3958944f6e50c53e7392237e7fa583f9a356fd0b13458dab44e988f9eea",
+      "bytes": 105
+    },
+    "firmware/components/bsp_lcd/include/bsp_lcd.h": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/bsp_lcd/include/bsp_lcd.h",
+      "sha256": "f04e7e678ec23e38b7779f644899e18b4838b6508ab7a5db717f8ba87af7f04f",
+      "bytes": 1327
+    },
+    "firmware/components/feature_auto_dim/CMakeLists.txt": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/feature_auto_dim/CMakeLists.txt",
+      "sha256": "d9f97d283f89f740ff4ff2222ffe2bdf2fc50da912a16b37b581b76d58b798cc",
+      "bytes": 83
+    },
+    "firmware/components/feature_auto_dim/feature_auto_dim.c": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/feature_auto_dim/feature_auto_dim.c",
+      "sha256": "90af4066a46eb35b8fabf3cab37d55ac1067e65a8a5f3c0053db5ed7e0d15eda",
+      "bytes": 691
+    },
+    "firmware/components/feature_auto_dim/include/feature_auto_dim.h": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/feature_auto_dim/include/feature_auto_dim.h",
+      "sha256": "8be24746298ee7cd62215d774549213acc6a578b2a1517873ab56a986229c6c2",
+      "bytes": 875
+    },
+    "firmware/components/gui/CMakeLists.txt": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/gui/CMakeLists.txt",
+      "sha256": "90629d3ec58eb174f51440fc522c7272eea5d9f413ad42a920d670641a59df61",
+      "bytes": 102
+    },
+    "firmware/components/gui/gui_format.c": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/gui/gui_format.c",
+      "sha256": "fe8a66af81ce152f5afbbfb44bf037027973a976a0a9e274fd9529ceee45ad63",
+      "bytes": 2993
+    },
+    "firmware/components/gui/include/gui_format.h": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/gui/include/gui_format.h",
+      "sha256": "9495a6b90275e781a8f58e26075ea7374aaba8798fc8f44218f264851fa264f2",
+      "bytes": 1923
+    },
+    "firmware/components/meter_core/CMakeLists.txt": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/meter_core/CMakeLists.txt",
+      "sha256": "d9ed8649d174cb41e832d0302200d318e9b7b5ce2543334bcf4797d341e0b945",
+      "bytes": 130
+    },
+    "firmware/components/meter_core/meter_crc32.c": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/meter_core/meter_crc32.c",
+      "sha256": "7d6d56899b1ef1eb44281dd9d94ff83bc0fbb805ad87040f6c90eacfc91445b7",
+      "bytes": 939
+    },
+    "firmware/components/meter_core/meter_parser.c": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/meter_core/meter_parser.c",
+      "sha256": "280e457cd9a7b054c6acb9081c83292226b882cd30ded433c93f6cf3b3d8b14c",
+      "bytes": 13133
+    },
+    "firmware/components/meter_core/meter_state.c": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/meter_core/meter_state.c",
+      "sha256": "50edd5aac6592d3a7f31763c9f253d2235299d504d4527150858e7c27cacecff",
+      "bytes": 2506
+    },
+    "firmware/components/meter_core/meter_validate.c": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/meter_core/meter_validate.c",
+      "sha256": "cee582bfb7cbf93d2655fe8ccaca36b32c238284f0d66496bdadab4c15807d90",
+      "bytes": 3077
+    },
+    "firmware/components/meter_core/include/meter_crc32.h": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/meter_core/include/meter_crc32.h",
+      "sha256": "1254b3e2563c103e8a4d0bd37993e8f4d0bc8e602dbcf525b54b68f946bc95d0",
+      "bytes": 496
+    },
+    "firmware/components/meter_core/include/meter_parser.h": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/meter_core/include/meter_parser.h",
+      "sha256": "46d97fa50cfce9865cddabce8486e22e9583eb3ce411efc212abd098c15e7e99",
+      "bytes": 2567
+    },
+    "firmware/components/meter_core/include/meter_state.h": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/meter_core/include/meter_state.h",
+      "sha256": "cf7dd41887d319a9b12affb263f334aeaf811a155b7bfd4862417f7e02df3c4d",
+      "bytes": 1362
+    },
+    "firmware/components/meter_core/include/meter_validate.h": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/components/meter_core/include/meter_validate.h",
+      "sha256": "b6b8009ce28ca2783959d9deaff70520341831d72653a901f277e602bcea959d",
+      "bytes": 1244
+    },
+    "firmware/main/CMakeLists.txt": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/main/CMakeLists.txt",
+      "sha256": "553914f1561040fb70f47ec545bfb375f27f9d227fc57c28ac3ca86fa6a21076",
+      "bytes": 221
+    },
+    "firmware/main/main.c": {
+      "operator_copy": "operator-observation/source-snapshot/firmware/main/main.c",
+      "sha256": "a24f4b8f2f61ff1dcff1c958a41f4f01a604c3fcc825894c34d1345140ffd881",
+      "bytes": 10731
+    },
+    "pc_tools/collector.py": {
+      "operator_copy": "operator-observation/source-snapshot/pc_tools/collector.py",
+      "sha256": "fb8f9331b53c047243b7d0db1ea191280193864289df9716e02bd25f374b5ad1",
+      "bytes": 13564
+    },
+    "pc_tools/legacy_adapter.py": {
+      "operator_copy": "operator-observation/source-snapshot/pc_tools/legacy_adapter.py",
+      "sha256": "d7e1866fdff9df810da960113870ddae52d5c40c8014c33eeac505b9d4f804d8",
+      "bytes": 7578
+    },
+    "pc_tools/sender.py": {
+      "operator_copy": "operator-observation/source-snapshot/pc_tools/sender.py",
+      "sha256": "5d8836ac9b38ce76f5a712e44d4970ef5647adeeeb80278d83fa38cb79974864",
+      "bytes": 9239
+    },
+    "tests/CMakeLists.txt": {
+      "operator_copy": "operator-observation/source-snapshot/tests/CMakeLists.txt",
+      "sha256": "4c5128943af57f8aa7d576502d971b3cebc099f55a17d4621edaaa5c3b8f02af",
+      "bytes": 1768
+    },
+    "tests/test_collector.py": {
+      "operator_copy": "operator-observation/source-snapshot/tests/test_collector.py",
+      "sha256": "be37aaf9aa8932b2080111940dc04d8279afc6327c476a96a2e6e89c71a8dc27",
+      "bytes": 5051
+    },
+    "tests/test_e2e_pipeline.py": {
+      "operator_copy": "operator-observation/source-snapshot/tests/test_e2e_pipeline.py",
+      "sha256": "cd46536a0222bfc49dcb1e0f5ceb48d2baf216d0aecffd0b5b53922fb6ae99e2",
+      "bytes": 8247
+    },
+    "tests/test_gui_feature.py": {
+      "operator_copy": "operator-observation/source-snapshot/tests/test_gui_feature.py",
+      "sha256": "aba309e936792077e3a5b5493a96cbe0f202ecb47ad19e83e9f46332ed59c790",
+      "bytes": 1381
+    },
+    "tests/test_legacy_adapter.py": {
+      "operator_copy": "operator-observation/source-snapshot/tests/test_legacy_adapter.py",
+      "sha256": "4add9850ecb2dcb92b6b2ae5eae87690aee1832e409fa728a9274d83c1e91e10",
+      "bytes": 4745
+    },
+    "tests/test_sender.py": {
+      "operator_copy": "operator-observation/source-snapshot/tests/test_sender.py",
+      "sha256": "41566dedb1a1dba3859975613cc5d015d6812b299df8ccb733f3ada4d0d61960",
+      "bytes": 3989
+    },
+    "tests/host/input_shim.c": {
+      "operator_copy": "operator-observation/source-snapshot/tests/host/input_shim.c",
+      "sha256": "b056f2fb149bdafccbc139784ff0966eecacd0018397f02e0da0b2d0aa2691a7",
+      "bytes": 347
+    },
+    "tests/host/test_feature_autodim.c": {
+      "operator_copy": "operator-observation/source-snapshot/tests/host/test_feature_autodim.c",
+      "sha256": "0a00dc49fc3883830b93e148bf44dc3d569499fd938d816b07db0880745df10a",
+      "bytes": 1578
+    },
+    "tests/host/test_gui_regression.c": {
+      "operator_copy": "operator-observation/source-snapshot/tests/host/test_gui_regression.c",
+      "sha256": "bfe58532adaf5730e01d42800e00a3895171645c0b0f17def625b9d6f2b1c71b",
+      "bytes": 3331
+    },
+    "tests/host/test_input_debounce.c": {
+      "operator_copy": "operator-observation/source-snapshot/tests/host/test_input_debounce.c",
+      "sha256": "1dab5ea7673d27d69033afb99a2a216ff41fc7d2e7c878a85d12a8612a0818a9",
+      "bytes": 1540
+    },
+    "tests/host/test_meter_parser.c": {
+      "operator_copy": "operator-observation/source-snapshot/tests/host/test_meter_parser.c",
+      "sha256": "18b4ff2283f622343d142d202dfb1c88142728ab768a1dea59bcd6d92eb28151",
+      "bytes": 7497
+    },
+    "tests/host/test_meter_state.c": {
+      "operator_copy": "operator-observation/source-snapshot/tests/host/test_meter_state.c",
+      "sha256": "934f67709bb3607dec73a96bbbf08366f182185a5e529497efade5c71bed5fcd",
+      "bytes": 5676
+    },
+    "tests/host/test_meter_validate.c": {
+      "operator_copy": "operator-observation/source-snapshot/tests/host/test_meter_validate.c",
+      "sha256": "528e9f87f3b99943ba0d33c2e6abe47b3109c55b33c2cf699fc753657bfe6cb4",
+      "bytes": 2389
+    },
+    "tests/host/stubs/esp_check.h": {
+      "operator_copy": "operator-observation/source-snapshot/tests/host/stubs/esp_check.h",
+      "sha256": "c3f0c9f7bef447cf4059e400cba514f31494a173a6fbfdbe0e66389bcfce9f61",
+      "bytes": 395
+    },
+    "tests/host/stubs/esp_err.h": {
+      "operator_copy": "operator-observation/source-snapshot/tests/host/stubs/esp_err.h",
+      "sha256": "25a4fd7c2d67a0a14a400799978fbc4f57357a6c18b82cc55a90517ffd1f2162",
+      "bytes": 202
+    },
+    "tests/host/stubs/stub_gpio.c": {
+      "operator_copy": "operator-observation/source-snapshot/tests/host/stubs/stub_gpio.c",
+      "sha256": "439a6be1fe0da6b01d4d70bfe7eadb6ff77b084d0d33c0035f2cbc7219978855",
+      "bytes": 174
+    },
+    "tests/host/stubs/driver/gpio.h": {
+      "operator_copy": "operator-observation/source-snapshot/tests/host/stubs/driver/gpio.h",
+      "sha256": "2cfaeee88ded311581d5891f6476786161226288cae8d5a65947c8e0538e363f",
+      "bytes": 534
+    }
+  }
+}

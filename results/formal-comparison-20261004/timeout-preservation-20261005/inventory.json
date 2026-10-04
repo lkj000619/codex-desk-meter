@@ -1,0 +1,45 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
+  "files": {
+    "audit-provisional.py": {
+      "sha256": "5d09efde50fe46983a0c411addec8b2ba845f79074d2f7dbdbb325280d6d34da",
+      "bytes": 7764
+    },
+    "create-report.json": {
+      "sha256": "986d81f80bb051205afda29bb04522ff7ce65378c6c164261d26c25df431f189",
+      "bytes": 724
+    },
+    "manifest-derivation.json": {
+      "sha256": "48185db0a44b7a36bd80f7d5b1fb87f6796e374a5cc6b58f4d5a4b0e2daa8529",
+      "bytes": 14368
+    },
+    "package-manifest.json": {
+      "sha256": "9a7c506fe8cd3e861184232134dd2127b847d523997b44a51941ad7a9c045fc3",
+      "bytes": 77797
+    },
+    "prepare-provisional.py": {
+      "sha256": "ad911313e6ca4ccab38ee0e451be704c9d0f2f708ecb2ceab61799a81ad45ce1",
+      "bytes": 5513
+    },
+    "publish-recovery.py": {
+      "sha256": "2ec9b678e8f6ce901c22f5f465cccb53ab574f6fc8da70763b0fbf478653fce7",
+      "bytes": 6775
+    },
+    "restore-audit.json": {
+      "sha256": "04499a92bdc56cee56a0f620d7e139710d8bc1f10e3cfcc01f53a042c5b05522",
+      "bytes": 3348
+    },
+    "restore-report.json": {
+      "sha256": "bc9da1b58dfc777e675e5877f2ddfb748ec68e5e8df03cdc3e4d55c3751ba2be",
+      "bytes": 992
+    },
+    "source-snapshot.json": {
+      "sha256": "ca2964b43be934aef69a33f8c4d1e6531dd8ab187cf3bc0ac63dada971e7aef3",
+      "bytes": 12077
+    },
+    "validation.json": {
+      "sha256": "ec6545c6042862b30d0c70f655b0d665efe5778d189d4ade90a573b2eaafc6b8",
+      "bytes": 1405
+    }
+  }
+}

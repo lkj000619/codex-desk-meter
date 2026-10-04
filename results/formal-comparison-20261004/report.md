@@ -203,3 +203,49 @@ app SHA-256 `8e4eaaab7dd6c66abdc069043583c3805cd942d2afca496e48073bcc0255c75b`�
 답변 전 RM3~RM5·광학/정밀 시간은 미확인이다. 후속 RM review와 최종 독립 package는
 이 관측을 기록한 뒤 진행한다. 보드는 후속 동결 artifact를 유지하고 serial은 닫혀 있다.
 다음 후보는 AGY Flash이며 현재 슬롯 평가가 끝나기 전 새 후보를 호출하거나 보드를 덮어쓰지 않는다.
+
+## 2026-10-05 timeout 재개·독립 보존·사용자 요청 재업로드
+
+세션 만료 뒤 동일한 terminal 상태와 예산 소진을 재확인했다. 원본 manifest SHA-256
+`b755c90492ef34e6056e1654aae4be48b73723e968666d61a720271af15227f5`와 ledger binding,
+동결 source·57개 입력·정책 판정을 다시 검증했고 후보 프로세스는 없다.
+
+실물 관측 전 별도 staging에 운영자 원본을 복사해 보존 package를 생성했다.
+원본 manifest의 implementation commit은 아직 null이며 ledger의 reviewed는 false다.
+포장용 파생본에만 검증한 동결 commit과 추가 evidence hash를 연결했다.
+[변경 필드 기록](timeout-preservation-20261005/manifest-derivation.json)은 두 필드와 원본 hash를 명시한다.
+원본 terminal·ledger·정책·후보 source는 그대로 보존했고 제출 누락을 대신 작성하지 않았다.
+
+- package: `C:/meter-run-packages-20261005/opencode-muse-r02-provisional`.
+- manifest SHA-256: `9a7c506fe8cd3e861184232134dd2127b847d523997b44a51941ad7a9c045fc3`.
+- 독립 복원: `C:/meter-run-restores-20261005/opencode-muse-r02-provisional`.
+- [동결 validator 감사](timeout-preservation-20261005/restore-audit.json): inventory 396개·입력 57개·source 사본 46개·artifact 사본 9개·원본 terminal/ledger 결합·정책 확인.
+  검증에는 원래 후보 경로를 사용하지 않았다. source 사본과 Git blob, artifact 사본과 원본 hash가 일치한다.
+- `result_valid: false`, 정책 부적격과 후속 예산 0초를 유지한다. result가 없어 checkout artifact_paths 목록은 빈 목록이며
+  실제 artifact는 byte 단위의 운영자 사본과 동결 Git source로 보존했다. artifact 소실을 뜻하지 않는다.
+
+사용자의 “다시 업로드해줘” 요청으로 02:50 KST 같은 동결 app/bootloader/partition을 COM3에
+다시 업로드했다. receiver의 sequence를 초기화하기 위해 기존과 같은 NVS 24K만 초기화했고,
+원본 공통 frame seq 0·1을 전송해 두 수락 로그와 wire hash 일치를 확인했다.
+[별도 재관측 슬롯](evidence/20261004-opencode-cli-opencode-muse-r02/operator-observation/recapture-r2-20261005/hardware-slot.json)에
+요청·artifact·명령·실제 종료 시각·수락·serial 종료를 기록했다. 최초 슬롯을 덮어쓰지 않았다.
+이는 운영자 실물 관측 재시도이며 후보 호출·수정 회차·예산 변경·재빌드는 없다.
+관측 전 package는 이 재전송과 이후 영상을 포함하지 않는 당시 snapshot이다.
+
+사용자가 제공한 `KakaoTalk_20261005_014936412.mp4`의 원본을 별도 운영자 경로에 보존했다.
+길이는 66.57초, 33,013,814 bytes, SHA-256은
+`72d18b2e492948ce51f8502f84dd391b0f5ee31d13148e3e7ee7dafcc3f09a4c`다.
+파일은 02:48경 저장돼 02:50 재업로드보다 앞선 자료이며 embedded 촬영 시각은 없다.
+최초 후속 업로드 뒤 촬영한 자료인지 사용자에게 확인을 요청했다. 파일명 시각을 확정 촬영 시각으로 쓰지 않는다.
+
+[영상 검토](evidence/20261004-opencode-cli-opencode-muse-r02/operator-observation/user-video-01/video-review.json)에서
+약 28.5초의 사용량 `openai/five-hour REM 58%`, 30.5초의 글로벌 리셋 `default (no history)`,
+32.5초의 STATUS와 시작 STATUS로 돌아오는 탐색을 확인했다. 주간 82%는 보이지 않으며
+공통 reset 값 대신 no history가 나온다. STATUS의 STALE:NO와 전송 시각을 LAST-GOOD로 표시한 것도
+원본 payload의 stale/관측 시각과 구분해 기록했다. 원본 source의 문자열 검색 범위와 화면 출력도 대조했다.
+50초 부근의 실제 USB 케이블 분리·재연결은 전원 차단이며 powered USB 링크 복구 시험이 아니다.
+1초 간격 영상 표본이나 전체 길이만으로 30초 무깜박임·정밀 지연·정식 GUI 점수를 확정하지 않는다.
+
+촬영 대상이 확인됐을 때 적용할 RM 초안은 RM1 pass/RM2 partial/RM3 partial/RM4 partial/RM5 pass다.
+최종 원본 RM review는 아직 적용하지 않았으며 이 초안은 비용/품질 집계의 최종 판정이 아니다.
+촬영 대상 확인 후 RM·최종 package·series 종료 기록을 보존하고 다음 AGY Flash를 시작한다.
