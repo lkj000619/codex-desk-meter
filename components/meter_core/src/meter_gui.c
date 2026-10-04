@@ -245,7 +245,7 @@ static void render_footer(meter_gui_t *gui, display_orientation_t orient)
 {
     gui_fill_rect(gui, 0, 298, LCD_LANDSCAPE_WIDTH, 22, 0x0185);
     char buf[128];
-    snprintf(buf, sizeof(buf), "BOOT: SWITCH SCREEN | ORIENT: %s | TRANSPORT: USB CDC 115200 8N1",
+    snprintf(buf, sizeof(buf), "BOOT: SWITCH SCREEN | ORIENT: %s | TRANSPORT: USB Serial / JTAG 115200 8N1",
              (orient == ORIENTATION_LANDSCAPE_NORMAL) ? "0 DEG" : "180 DEG");
     gui_draw_string(gui, 16, 304, buf, COLOR_TEXT_MUTED, 0, 1);
 }
@@ -265,9 +265,14 @@ static void render_dashboard(meter_gui_t *gui, const meter_state_t *state, int64
     }
 
     /* Render usage cards */
-    int card_w = (LCD_LANDSCAPE_WIDTH - 32 - (int)(state->usage_count - 1) * 12) / (int)state->usage_count;
-    if (card_w < 220) card_w = 220;
-    if (card_w > 380) card_w = 380;
+    int card_w;
+    if (state->usage_count == 1) {
+        card_w = LCD_LANDSCAPE_WIDTH - 32; /* 788 px for single full-width card */
+    } else {
+        card_w = (LCD_LANDSCAPE_WIDTH - 32 - (int)(state->usage_count - 1) * 12) / (int)state->usage_count;
+        if (card_w < 220) card_w = 220;
+        if (card_w > 380) card_w = 380;
+    }
 
     int card_x = 16;
     for (size_t i = 0; i < state->usage_count && i < 3; ++i) {
@@ -297,21 +302,33 @@ static void render_dashboard(meter_gui_t *gui, const meter_state_t *state, int64
         int win_y = 100;
         for (size_t w = 0; w < snap->window_count && w < 2; ++w) {
             const meter_window_t *win = &snap->windows[w];
+            const char *wtitle = (win->label[0] != '\0') ? win->label : win->window_id;
+
             char wlbl[128];
-            snprintf(wlbl, sizeof(wlbl), "WINDOW: %s", win->window_id);
+            snprintf(wlbl, sizeof(wlbl), "%s", wtitle);
             gui_draw_string(gui, card_x + 12, win_y, wlbl, COLOR_TEXT_PRIMARY, 0, 1);
 
             double pct = win->has_percent ? win->percent_used :
                          (win->has_absolute && win->limit_units > 0) ? (win->used_units / win->limit_units * 100.0) : 0.0;
 
             char pct_str[64];
-            snprintf(pct_str, sizeof(pct_str), "%.1f%% USED", pct);
-            gui_draw_string(gui, card_x + card_w - 110, win_y, pct_str, COLOR_ACCENT_BLUE, 0, 1);
+            if (win->has_percent) {
+                snprintf(pct_str, sizeof(pct_str), "%.0f%% REM (%.0f%% USED)", win->percent_remaining, win->percent_used);
+            } else if (win->has_absolute && win->limit_units > 0) {
+                snprintf(pct_str, sizeof(pct_str), "%.0f%% REM", 100.0 - pct);
+            } else {
+                snprintf(pct_str, sizeof(pct_str), "%.1f%% USED", pct);
+            }
+            gui_draw_string(gui, card_x + card_w - 180, win_y, pct_str, COLOR_ACCENT_BLUE, 0, 1);
 
             uint16_t bar_color = (pct > 90.0) ? COLOR_ACCENT_RED : (pct > 75.0) ? COLOR_ACCENT_AMBER : COLOR_ACCENT_GREEN;
             gui_draw_progress_bar(gui, card_x + 12, win_y + 16, card_w - 24, 18, pct, bar_color, COLOR_BAR_BG);
 
-            if (win->has_absolute) {
+            if (win->has_percent) {
+                char rem_buf[128];
+                snprintf(rem_buf, sizeof(rem_buf), "%s: %.0f%% remaining", wtitle, win->percent_remaining);
+                gui_draw_string(gui, card_x + 12, win_y + 38, rem_buf, COLOR_TEXT_PRIMARY, 0, 1);
+            } else if (win->has_absolute) {
                 char tok_buf[128];
                 snprintf(tok_buf, sizeof(tok_buf), "%.0f / %.0f %s", win->used_units, win->limit_units,
                          (win->unit == UNIT_TOKEN) ? "TOKENS" : "CREDITS");
@@ -348,7 +365,18 @@ static void render_global_resets(meter_gui_t *gui, const meter_state_t *state, i
     gui_draw_string(gui, 32, 60, "SOURCE: codex-resets.com", COLOR_ACCENT_BLUE, 0, 1);
     gui_draw_string(gui, 32, 80, "LATEST GLOBAL RESET", COLOR_TEXT_PRIMARY, 0, 2);
 
-    const meter_global_reset_t *gr = (state->global_reset_count > 0) ? &state->global_resets[0] : NULL;
+    /* Prefer codex-resets.com source per contract */
+    const meter_global_reset_t *gr = NULL;
+    for (size_t i = 0; i < state->global_reset_count; ++i) {
+        if (strcmp(state->global_resets[i].source, "codex-resets.com") == 0) {
+            gr = &state->global_resets[i];
+            break;
+        }
+    }
+    if (!gr && state->global_reset_count > 0) {
+        gr = &state->global_resets[0];
+    }
+
     if (gr && gr->latest_reset_at[0] != '\0') {
         char time_buf[128];
         snprintf(time_buf, sizeof(time_buf), "RESET AT: %s", gr->latest_reset_at);
@@ -377,6 +405,7 @@ static void render_global_resets(meter_gui_t *gui, const meter_state_t *state, i
         gui_draw_string(gui, 32, 160, "Status: Monitoring codex-resets.com", COLOR_TEXT_MUTED, 0, 1);
         gui_draw_string(gui, 32, 185, "Awaiting global reset schedule announcement", COLOR_TEXT_MUTED, 0, 1);
     }
+
 
     /* Right side card: Source details */
     gui_fill_rect(gui, 508, 46, 296, 242, COLOR_CARD_BG);

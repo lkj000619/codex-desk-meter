@@ -10,18 +10,18 @@ if(NOT EXISTS "C:/Espressif/v5.3.2/esp-idf/components/bootloader/subproject")
   file(MAKE_DIRECTORY "C:/Espressif/v5.3.2/esp-idf/components/bootloader/subproject")
 endif()
 file(MAKE_DIRECTORY
-  "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader"
-  "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader-prefix"
-  "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader-prefix/tmp"
-  "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader-prefix/src/bootloader-stamp"
-  "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader-prefix/src"
-  "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader-prefix/src/bootloader-stamp"
+  "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/bootloader"
+  "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/bootloader-prefix"
+  "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/bootloader-prefix/tmp"
+  "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/bootloader-prefix/src/bootloader-stamp"
+  "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/bootloader-prefix/src"
+  "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
 endif()

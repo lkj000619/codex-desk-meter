@@ -90,5 +90,27 @@ class TestPcCollectorSender(unittest.TestCase):
             self.assertTrue(recv_res2.accepted, "Persisted sequence 8 must be accepted")
             self.assertEqual(receiver.state.sequence, 8)
 
+    def test_legacy_collector_mode(self):
+        with tempfile.TemporaryDirectory() as td:
+            sender = PcCollectorSender(
+                device_alias="legacy-dev",
+                state_dir=td,
+                reference_time="2026-09-11T00:00:00Z",
+                use_legacy=True,
+            )
+            sender.seq_manager.initialize_new(0)
+            frame, line = sender.collect_and_build(sequence=0, sent_at="2026-09-11T00:00:00Z")
+            self.assertEqual(len(frame["payload"]["usage"]), 1)
+            self.assertEqual(len(frame["payload"]["global_resets"]), 2)
+            usage = frame["payload"]["usage"][0]
+            self.assertEqual(usage["provider_id"], "codex")
+            self.assertEqual(len(usage["windows"]), 2)
+            self.assertEqual(usage["windows"][0]["percent_remaining"], 58.0)
+            self.assertEqual(usage["windows"][1]["percent_remaining"], 82.0)
+
+
 if __name__ == "__main__":
     unittest.main()
+
+
+

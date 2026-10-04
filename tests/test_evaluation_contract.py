@@ -53,6 +53,7 @@ class TestEvaluationContract(unittest.TestCase):
         
         # Test evaluate() directly with config argv
         results = eval_mod.evaluate(adapter_config["argv"], ROOT)
+        output_path.write_text(json.dumps(results, indent=2), encoding="utf-8")
         self.assertTrue(len(results) > 0)
         for r in results:
             self.assertEqual(r["status"], "pass", f"Case {r.get('case')} failed: {r.get('reason')}")

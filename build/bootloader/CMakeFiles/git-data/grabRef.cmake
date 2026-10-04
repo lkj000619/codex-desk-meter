@@ -15,7 +15,7 @@
 
 set(HEAD_HASH)
 
-file(READ "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader/CMakeFiles/git-data/HEAD" HEAD_CONTENTS LIMIT 1024)
+file(READ "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/bootloader/CMakeFiles/git-data/HEAD" HEAD_CONTENTS LIMIT 1024)
 
 string(STRIP "${HEAD_CONTENTS}" HEAD_CONTENTS)
 set(GIT_DIR "C:/Espressif/v5.3.2/esp-idf/.git")
@@ -34,17 +34,17 @@ if(HEAD_CONTENTS MATCHES "ref")
 	# named branch
 	string(REPLACE "ref: " "" HEAD_REF "${HEAD_CONTENTS}")
 	if(EXISTS "${GIT_DIR}/${HEAD_REF}")
-		configure_file("${GIT_DIR}/${HEAD_REF}" "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader/CMakeFiles/git-data/head-ref" COPYONLY)
+		configure_file("${GIT_DIR}/${HEAD_REF}" "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/bootloader/CMakeFiles/git-data/head-ref" COPYONLY)
 	elseif(EXISTS "${GIT_DIR}/logs/${HEAD_REF}")
-		configure_file("${GIT_DIR}/logs/${HEAD_REF}" "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader/CMakeFiles/git-data/head-ref" COPYONLY)
+		configure_file("${GIT_DIR}/logs/${HEAD_REF}" "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/bootloader/CMakeFiles/git-data/head-ref" COPYONLY)
 		set(HEAD_HASH "${HEAD_REF}")
 	endif()
 else()
 	# detached HEAD
-	configure_file("${GIT_DIR}/HEAD" "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader/CMakeFiles/git-data/head-ref" COPYONLY)
+	configure_file("${GIT_DIR}/HEAD" "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/bootloader/CMakeFiles/git-data/head-ref" COPYONLY)
 endif()
 
 if(NOT HEAD_HASH)
-	file(READ "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/bootloader/CMakeFiles/git-data/head-ref" HEAD_HASH LIMIT 1024)
+	file(READ "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/bootloader/CMakeFiles/git-data/head-ref" HEAD_HASH LIMIT 1024)
 	string(STRIP "${HEAD_HASH}" HEAD_HASH)
 endif()

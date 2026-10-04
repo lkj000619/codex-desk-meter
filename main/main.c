@@ -95,7 +95,10 @@ static void input_sensor_task(void *arg)
         if (bsp_button_poll_press()) {
             if (xSemaphoreTake(s_state_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
                 if (meter_state_cycle_screen(&s_meter_state, now_ms)) {
-                    ESP_LOGI(TAG, "Screen cycled to: %d", s_meter_state.screen_mode);
+                    const char *sname = (s_meter_state.screen_mode == SCREEN_DASHBOARD) ? "DASHBOARD" :
+                                        (s_meter_state.screen_mode == SCREEN_GLOBAL_RESETS) ? "GLOBAL_RESETS" : "STATUS_ERROR";
+                    ESP_LOGI(TAG, "[TRIGGER_BOOT] BOOT button cycled screen to: %d (%s) at %" PRIu32 " ms",
+                             s_meter_state.screen_mode, sname, now_ms);
                 }
                 xSemaphoreGive(s_state_mutex);
             }
@@ -106,7 +109,9 @@ static void input_sensor_task(void *arg)
         if (bsp_imu_read_accel(&ax, &ay, &az) == ESP_OK) {
             if (feature_imu_update(&s_imu_state, ax, ay, az, now_ms)) {
                 display_orientation_t new_orient = feature_imu_get_orientation(&s_imu_state);
-                ESP_LOGI(TAG, "IMU orientation updated: %d", (int)new_orient);
+                ESP_LOGI(TAG, "[TRIGGER_IMU_ROTATE] Orientation updated to %s (%d) at %" PRIu32 " ms",
+                         (new_orient == ORIENTATION_LANDSCAPE_NORMAL) ? "0 DEG (NORMAL)" : "180 DEG (FLIPPED)",
+                         (int)new_orient, now_ms);
                 if (xSemaphoreTake(s_state_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
                     meter_state_set_orientation(&s_meter_state, new_orient);
                     xSemaphoreGive(s_state_mutex);
@@ -114,9 +119,13 @@ static void input_sensor_task(void *arg)
             }
 
             if (feature_imu_consume_shake(&s_imu_state)) {
-                ESP_LOGI(TAG, "IMU shake gesture detected!");
                 if (xSemaphoreTake(s_state_mutex, pdMS_TO_TICKS(50)) == pdTRUE) {
-                    meter_state_cycle_screen(&s_meter_state, now_ms);
+                    if (meter_state_cycle_screen(&s_meter_state, now_ms)) {
+                        const char *sname = (s_meter_state.screen_mode == SCREEN_DASHBOARD) ? "DASHBOARD" :
+                                            (s_meter_state.screen_mode == SCREEN_GLOBAL_RESETS) ? "GLOBAL_RESETS" : "STATUS_ERROR";
+                        ESP_LOGI(TAG, "[TRIGGER_IMU_SHAKE] IMU shake gesture cycled screen to: %d (%s) at %" PRIu32 " ms",
+                                 s_meter_state.screen_mode, sname, now_ms);
+                    }
                     xSemaphoreGive(s_state_mutex);
                 }
             }
@@ -152,7 +161,7 @@ void app_main(void)
 {
     ESP_LOGI(TAG, "==================================================");
     ESP_LOGI(TAG, "Waveshare ESP32-S3-LCD-3.16 Meter Firmware v2");
-    ESP_LOGI(TAG, "Run ID: 20261005-antigravity-cli-agy-flash-r01");
+    ESP_LOGI(TAG, "Run ID: 20261005-antigravity-cli-agy-flash-r02");
     ESP_LOGI(TAG, "==================================================");
 
     s_state_mutex = xSemaphoreCreateMutex();

@@ -34,7 +34,7 @@ include CMakeFiles/rules.ninja
 #############################################
 # Logical path to working directory; prefix for absolute paths.
 
-cmake_ninja_workdir = C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/
+cmake_ninja_workdir = C$:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build-host/
 # =============================================================================
 # Object build statements for STATIC_LIBRARY target meter_core
 
@@ -44,39 +44,39 @@ cmake_ninja_workdir = C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash
 
 build cmake_object_order_depends_target_meter_core: phony || .
 
-build CMakeFiles/meter_core.dir/components/meter_core/src/meter_crc.c.obj: C_COMPILER__meter_core_unscanned_ C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/src/meter_crc.c || cmake_object_order_depends_target_meter_core
+build CMakeFiles/meter_core.dir/components/meter_core/src/meter_crc.c.obj: C_COMPILER__meter_core_unscanned_ C$:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/src/meter_crc.c || cmake_object_order_depends_target_meter_core
   DEP_FILE = CMakeFiles\meter_core.dir\components\meter_core\src\meter_crc.c.obj.d
-  INCLUDES = -IC:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
+  INCLUDES = -IC:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
   OBJECT_DIR = CMakeFiles\meter_core.dir
   OBJECT_FILE_DIR = CMakeFiles\meter_core.dir\components\meter_core\src
 
-build CMakeFiles/meter_core.dir/components/meter_core/src/meter_parser.c.obj: C_COMPILER__meter_core_unscanned_ C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/src/meter_parser.c || cmake_object_order_depends_target_meter_core
+build CMakeFiles/meter_core.dir/components/meter_core/src/meter_parser.c.obj: C_COMPILER__meter_core_unscanned_ C$:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/src/meter_parser.c || cmake_object_order_depends_target_meter_core
   DEP_FILE = CMakeFiles\meter_core.dir\components\meter_core\src\meter_parser.c.obj.d
-  INCLUDES = -IC:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
+  INCLUDES = -IC:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
   OBJECT_DIR = CMakeFiles\meter_core.dir
   OBJECT_FILE_DIR = CMakeFiles\meter_core.dir\components\meter_core\src
 
-build CMakeFiles/meter_core.dir/components/meter_core/src/meter_state.c.obj: C_COMPILER__meter_core_unscanned_ C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/src/meter_state.c || cmake_object_order_depends_target_meter_core
+build CMakeFiles/meter_core.dir/components/meter_core/src/meter_state.c.obj: C_COMPILER__meter_core_unscanned_ C$:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/src/meter_state.c || cmake_object_order_depends_target_meter_core
   DEP_FILE = CMakeFiles\meter_core.dir\components\meter_core\src\meter_state.c.obj.d
-  INCLUDES = -IC:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
+  INCLUDES = -IC:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
   OBJECT_DIR = CMakeFiles\meter_core.dir
   OBJECT_FILE_DIR = CMakeFiles\meter_core.dir\components\meter_core\src
 
-build CMakeFiles/meter_core.dir/components/meter_core/src/feature_imu.c.obj: C_COMPILER__meter_core_unscanned_ C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/src/feature_imu.c || cmake_object_order_depends_target_meter_core
+build CMakeFiles/meter_core.dir/components/meter_core/src/feature_imu.c.obj: C_COMPILER__meter_core_unscanned_ C$:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/src/feature_imu.c || cmake_object_order_depends_target_meter_core
   DEP_FILE = CMakeFiles\meter_core.dir\components\meter_core\src\feature_imu.c.obj.d
-  INCLUDES = -IC:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
+  INCLUDES = -IC:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
   OBJECT_DIR = CMakeFiles\meter_core.dir
   OBJECT_FILE_DIR = CMakeFiles\meter_core.dir\components\meter_core\src
 
-build CMakeFiles/meter_core.dir/components/meter_core/src/meter_gui.c.obj: C_COMPILER__meter_core_unscanned_ C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/src/meter_gui.c || cmake_object_order_depends_target_meter_core
+build CMakeFiles/meter_core.dir/components/meter_core/src/meter_gui.c.obj: C_COMPILER__meter_core_unscanned_ C$:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/src/meter_gui.c || cmake_object_order_depends_target_meter_core
   DEP_FILE = CMakeFiles\meter_core.dir\components\meter_core\src\meter_gui.c.obj.d
-  INCLUDES = -IC:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
+  INCLUDES = -IC:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
   OBJECT_DIR = CMakeFiles\meter_core.dir
   OBJECT_FILE_DIR = CMakeFiles\meter_core.dir\components\meter_core\src
 
 build CMakeFiles/meter_core.dir/C_/Espressif/v5.3.2/esp-idf/components/json/cJSON/cJSON.c.obj: C_COMPILER__meter_core_unscanned_ C$:/Espressif/v5.3.2/esp-idf/components/json/cJSON/cJSON.c || cmake_object_order_depends_target_meter_core
   DEP_FILE = CMakeFiles\meter_core.dir\C_\Espressif\v5.3.2\esp-idf\components\json\cJSON\cJSON.c.obj.d
-  INCLUDES = -IC:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
+  INCLUDES = -IC:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
   OBJECT_DIR = CMakeFiles\meter_core.dir
   OBJECT_FILE_DIR = CMakeFiles\meter_core.dir\C_\Espressif\v5.3.2\esp-idf\components\json\cJSON
 
@@ -104,9 +104,9 @@ build libmeter_core.a: C_STATIC_LIBRARY_LINKER__meter_core_ CMakeFiles/meter_cor
 
 build cmake_object_order_depends_target_test_meter_parser: phony || cmake_object_order_depends_target_meter_core
 
-build CMakeFiles/test_meter_parser.dir/tests/test_meter_parser.c.obj: C_COMPILER__test_meter_parser_unscanned_ C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/tests/test_meter_parser.c || cmake_object_order_depends_target_test_meter_parser
+build CMakeFiles/test_meter_parser.dir/tests/test_meter_parser.c.obj: C_COMPILER__test_meter_parser_unscanned_ C$:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/tests/test_meter_parser.c || cmake_object_order_depends_target_test_meter_parser
   DEP_FILE = CMakeFiles\test_meter_parser.dir\tests\test_meter_parser.c.obj.d
-  INCLUDES = -IC:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
+  INCLUDES = -IC:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
   OBJECT_DIR = CMakeFiles\test_meter_parser.dir
   OBJECT_FILE_DIR = CMakeFiles\test_meter_parser.dir\tests
 
@@ -136,9 +136,9 @@ build test_meter_parser.exe: C_EXECUTABLE_LINKER__test_meter_parser_ CMakeFiles/
 
 build cmake_object_order_depends_target_test_meter_state: phony || cmake_object_order_depends_target_meter_core
 
-build CMakeFiles/test_meter_state.dir/tests/test_meter_state.c.obj: C_COMPILER__test_meter_state_unscanned_ C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/tests/test_meter_state.c || cmake_object_order_depends_target_test_meter_state
+build CMakeFiles/test_meter_state.dir/tests/test_meter_state.c.obj: C_COMPILER__test_meter_state_unscanned_ C$:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/tests/test_meter_state.c || cmake_object_order_depends_target_test_meter_state
   DEP_FILE = CMakeFiles\test_meter_state.dir\tests\test_meter_state.c.obj.d
-  INCLUDES = -IC:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
+  INCLUDES = -IC:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
   OBJECT_DIR = CMakeFiles\test_meter_state.dir
   OBJECT_FILE_DIR = CMakeFiles\test_meter_state.dir\tests
 
@@ -168,9 +168,9 @@ build test_meter_state.exe: C_EXECUTABLE_LINKER__test_meter_state_ CMakeFiles/te
 
 build cmake_object_order_depends_target_test_feature_imu: phony || cmake_object_order_depends_target_meter_core
 
-build CMakeFiles/test_feature_imu.dir/tests/test_feature_imu.c.obj: C_COMPILER__test_feature_imu_unscanned_ C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/tests/test_feature_imu.c || cmake_object_order_depends_target_test_feature_imu
+build CMakeFiles/test_feature_imu.dir/tests/test_feature_imu.c.obj: C_COMPILER__test_feature_imu_unscanned_ C$:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/tests/test_feature_imu.c || cmake_object_order_depends_target_test_feature_imu
   DEP_FILE = CMakeFiles\test_feature_imu.dir\tests\test_feature_imu.c.obj.d
-  INCLUDES = -IC:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
+  INCLUDES = -IC:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
   OBJECT_DIR = CMakeFiles\test_feature_imu.dir
   OBJECT_FILE_DIR = CMakeFiles\test_feature_imu.dir\tests
 
@@ -200,9 +200,9 @@ build test_feature_imu.exe: C_EXECUTABLE_LINKER__test_feature_imu_ CMakeFiles/te
 
 build cmake_object_order_depends_target_test_gui_regression: phony || cmake_object_order_depends_target_meter_core
 
-build CMakeFiles/test_gui_regression.dir/tests/test_gui_regression.c.obj: C_COMPILER__test_gui_regression_unscanned_ C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/tests/test_gui_regression.c || cmake_object_order_depends_target_test_gui_regression
+build CMakeFiles/test_gui_regression.dir/tests/test_gui_regression.c.obj: C_COMPILER__test_gui_regression_unscanned_ C$:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/tests/test_gui_regression.c || cmake_object_order_depends_target_test_gui_regression
   DEP_FILE = CMakeFiles\test_gui_regression.dir\tests\test_gui_regression.c.obj.d
-  INCLUDES = -IC:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
+  INCLUDES = -IC:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
   OBJECT_DIR = CMakeFiles\test_gui_regression.dir
   OBJECT_FILE_DIR = CMakeFiles\test_gui_regression.dir\tests
 
@@ -232,9 +232,9 @@ build test_gui_regression.exe: C_EXECUTABLE_LINKER__test_gui_regression_ CMakeFi
 
 build cmake_object_order_depends_target_meter_legacy_adapter: phony || cmake_object_order_depends_target_meter_core
 
-build CMakeFiles/meter_legacy_adapter.dir/tests/meter_legacy_adapter.c.obj: C_COMPILER__meter_legacy_adapter_unscanned_ C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/tests/meter_legacy_adapter.c || cmake_object_order_depends_target_meter_legacy_adapter
+build CMakeFiles/meter_legacy_adapter.dir/tests/meter_legacy_adapter.c.obj: C_COMPILER__meter_legacy_adapter_unscanned_ C$:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/tests/meter_legacy_adapter.c || cmake_object_order_depends_target_meter_legacy_adapter
   DEP_FILE = CMakeFiles\meter_legacy_adapter.dir\tests\meter_legacy_adapter.c.obj.d
-  INCLUDES = -IC:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
+  INCLUDES = -IC:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/components/meter_core/include -IC:/Espressif/v5.3.2/esp-idf/components/json/cJSON
   OBJECT_DIR = CMakeFiles\meter_legacy_adapter.dir
   OBJECT_FILE_DIR = CMakeFiles\meter_legacy_adapter.dir\tests
 
@@ -325,7 +325,7 @@ build test_meter_state: phony test_meter_state.exe
 # =============================================================================
 
 #############################################
-# Folder: C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host
+# Folder: C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build-host
 
 build all: phony libmeter_core.a test_meter_parser.exe test_meter_state.exe test_feature_imu.exe test_gui_regression.exe meter_legacy_adapter.exe
 
@@ -336,14 +336,14 @@ build all: phony libmeter_core.a test_meter_parser.exe test_meter_state.exe test
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeGenericSystem.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeRCInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-C.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-CXX.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Clang-C.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Clang-CXX.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Clang.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-GNU.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-windres.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/CMakeLists.txt CMakeCache.txt CMakeFiles/3.30.2/CMakeCCompiler.cmake CMakeFiles/3.30.2/CMakeCXXCompiler.cmake CMakeFiles/3.30.2/CMakeRCCompiler.cmake CMakeFiles/3.30.2/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeGenericSystem.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeRCInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-C.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-CXX.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Clang-C.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Clang-CXX.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Clang.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-GNU.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-windres.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake C$:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/CMakeLists.txt CMakeCache.txt CMakeFiles/3.30.2/CMakeCCompiler.cmake CMakeFiles/3.30.2/CMakeCXXCompiler.cmake CMakeFiles/3.30.2/CMakeRCCompiler.cmake CMakeFiles/3.30.2/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeGenericSystem.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeRCInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-C.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-CXX.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Clang-C.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Clang-CXX.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Clang.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-GNU.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-windres.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake C$:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/CMakeLists.txt CMakeCache.txt CMakeFiles/3.30.2/CMakeCCompiler.cmake CMakeFiles/3.30.2/CMakeCXXCompiler.cmake CMakeFiles/3.30.2/CMakeRCCompiler.cmake CMakeFiles/3.30.2/CMakeSystem.cmake: phony
+build C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCXXInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeCommonLanguageInclude.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeGenericSystem.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeLanguageInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeRCInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-C.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang-CXX.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/Clang.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Compiler/GNU.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Clang-C.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Clang-CXX.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Clang.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-GNU.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows-windres.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/Windows.cmake C$:/Users/이광진/.espressif/tools/cmake/3.30.2/share/cmake-3.30/Modules/Platform/WindowsPaths.cmake C$:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/CMakeLists.txt CMakeCache.txt CMakeFiles/3.30.2/CMakeCCompiler.cmake CMakeFiles/3.30.2/CMakeCXXCompiler.cmake CMakeFiles/3.30.2/CMakeRCCompiler.cmake CMakeFiles/3.30.2/CMakeSystem.cmake: phony
 
 
 #############################################

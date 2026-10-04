@@ -1,4 +1,4 @@
-# Install script for directory: C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout
+# Install script for directory: C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/esp-idf/cmake_install.cmake")
+  include("C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/esp-idf/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -57,6 +57,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-  file(WRITE "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build/${CMAKE_INSTALL_MANIFEST}"
+  file(WRITE "C:/meter-followups-20261005/20261005-antigravity-cli-agy-flash-r02/checkout/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
 endif()

@@ -238,7 +238,12 @@ static bool parse_snapshot_obj(const cJSON *item, meter_snapshot_t *snap, char o
             memset(w, 0, sizeof(*w));
 
             const cJSON *wid = cJSON_GetObjectItemCaseSensitive(w_item, "window_id");
+            if (!wid) wid = cJSON_GetObjectItemCaseSensitive(w_item, "id");
             if (wid && cJSON_IsString(wid)) strncpy(w->window_id, wid->valuestring, sizeof(w->window_id)-1);
+
+            const cJSON *wlabel = cJSON_GetObjectItemCaseSensitive(w_item, "label");
+            if (wlabel && cJSON_IsString(wlabel)) strncpy(w->label, wlabel->valuestring, sizeof(w->label)-1);
+            else strncpy(w->label, w->window_id, sizeof(w->label)-1);
 
             const cJSON *wunit = cJSON_GetObjectItemCaseSensitive(w_item, "unit");
             if (wunit && cJSON_IsString(wunit)) w->unit = parse_unit_str(wunit->valuestring);

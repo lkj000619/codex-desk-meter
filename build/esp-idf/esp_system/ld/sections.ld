@@ -1,6 +1,6 @@
 /* Automatically generated file; DO NOT EDIT */
 /* Espressif IoT Development Framework Linker Script */
-/* Generated from: C:\meter-runs-20261005\20261005-antigravity-cli-agy-flash-r01\checkout\build\esp-idf\esp_system\ld\sections.ld.in */
+/* Generated from: C:\meter-followups-20261005\20261005-antigravity-cli-agy-flash-r02\checkout\build\esp-idf\esp_system\ld\sections.ld.in */
 
 /*
  * SPDX-FileCopyrightText: 2021 Espressif Systems (Shanghai) CO LTD

@@ -1,6 +1,6 @@
 meter_host_smoke 1 0.0395815
-test_meter_parser 2 0.0194794
-test_meter_state 2 0.0179521
-test_feature_imu 2 0.0146413
-test_gui_regression 2 0.0219431
+test_meter_parser 5 0.00149948
+test_meter_state 5 0.0014481
+test_feature_imu 5 0.00139076
+test_gui_regression 5 0.0022795
 ---
