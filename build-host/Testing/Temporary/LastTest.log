@@ -1,0 +1,75 @@
+Start testing: Oct 05 03:20 ???? ???
+----------------------------------------------------------
+1/4 Testing: test_meter_parser
+1/4 Test: test_meter_parser
+Command: "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/test_meter_parser.exe"
+Directory: C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host
+"test_meter_parser" start time: Oct 05 03:20 ???? ???
+Output:
+----------------------------------------------------------
+test_rfc3339 passed
+test_sequence_logic passed
+test_crc_and_canonical_frame passed
+ALL METER_PARSER TESTS PASSED!
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"test_meter_parser" end time: Oct 05 03:20 ???? ???
+"test_meter_parser" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/4 Testing: test_meter_state
+2/4 Test: test_meter_state
+Command: "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/test_meter_state.exe"
+Directory: C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host
+"test_meter_state" start time: Oct 05 03:20 ???? ???
+Output:
+----------------------------------------------------------
+test_state_sequence passed
+test_stale_and_recovery passed
+test_screen_cycle_and_debounce passed
+ALL METER_STATE TESTS PASSED!
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"test_meter_state" end time: Oct 05 03:20 ???? ???
+"test_meter_state" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/4 Testing: test_feature_imu
+3/4 Test: test_feature_imu
+Command: "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/test_feature_imu.exe"
+Directory: C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host
+"test_feature_imu" start time: Oct 05 03:20 ???? ???
+Output:
+----------------------------------------------------------
+test_imu_orientation_and_debounce passed
+test_imu_shake_detection passed
+ALL FEATURE_IMU TESTS PASSED!
+<end of output>
+Test time =   0.03 sec
+----------------------------------------------------------
+Test Passed.
+"test_feature_imu" end time: Oct 05 03:20 ???? ???
+"test_feature_imu" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/4 Testing: test_gui_regression
+4/4 Test: test_gui_regression
+Command: "C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/test_gui_regression.exe"
+Directory: C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host
+"test_gui_regression" start time: Oct 05 03:20 ???? ???
+Output:
+----------------------------------------------------------
+ALL GUI REGRESSION TESTS PASSED!
+<end of output>
+Test time =   0.04 sec
+----------------------------------------------------------
+Test Passed.
+"test_gui_regression" end time: Oct 05 03:20 ???? ???
+"test_gui_regression" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Oct 05 03:20 ???? ???

@@ -1,0 +1,17 @@
+{
+  "checkout": ".",
+  "production_files": {
+    "components/meter_core/src/meter_crc.c": "3c70acc4ecbc87e05b818be98945ebb76799f6e03141795b99a45c82052d32c2",
+    "components/meter_core/src/meter_parser.c": "27be808992240f5cfa18a3b45319bd112d40e7a900caecf5240bac1df5269ed7",
+    "components/meter_core/src/meter_state.c": "61cdaac56a9eeb85fd0c7c8b2fc50a7cdbcb58f93fc70bf82caf1da3b74e6cb0",
+    "components/meter_core/src/meter_gui.c": "2d9c1e0b58f45a0f735ff9d4617aee439b1483ad5e903a6978d5c400e6ab71ed",
+    "components/meter_core/src/feature_imu.c": "0dacf973ccef545ffd1d7f1f21274d69df9e8c4801933bf981ae056bd4aded49",
+    "tests/meter_legacy_adapter.c": "1a3db33a53e5ec0c1c2d5f27dbdda3ef08fe01abe88815ca05a06811e5365da9"
+  },
+  "reviewer": "operator",
+  "link_evidence": "build-host/link_evidence.txt",
+  "link_evidence_sha256": "abf21a46c7cdb6acca4f03e12f8abc75ca7ccdbb5546b6f5588a073c0db19ca9",
+  "argv": [
+    "build-host/meter_legacy_adapter.exe"
+  ]
+}

@@ -1,0 +1,10 @@
+C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/CMakeFiles/meter_core.dir
+C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/CMakeFiles/test_meter_parser.dir
+C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/CMakeFiles/test_meter_state.dir
+C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/CMakeFiles/test_feature_imu.dir
+C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/CMakeFiles/test_gui_regression.dir
+C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/CMakeFiles/meter_legacy_adapter.dir
+C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/CMakeFiles/meter-test.dir
+C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/CMakeFiles/test.dir
+C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/CMakeFiles/edit_cache.dir
+C:/meter-runs-20261005/20261005-antigravity-cli-agy-flash-r01/checkout/build-host/CMakeFiles/rebuild_cache.dir

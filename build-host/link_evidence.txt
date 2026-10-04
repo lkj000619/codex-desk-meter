@@ -1,0 +1,4 @@
+Host build evidence:
+Compiler: Clang 22.1.8
+Target: meter_legacy_adapter.exe linked with libmeter_core.a
+Binary SHA-256: 2bcd63721210467119200e26af188cd0c14c546cb469f43705ed96d41891a666

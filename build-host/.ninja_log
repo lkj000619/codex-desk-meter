@@ -1,0 +1,27 @@
+# ninja log v6
+14	115	8128407379375031	CMakeFiles/meter_host_smoke.dir/main_host.c.obj	695b55c9de89b9b4
+116	209	8128407380399965	meter_host_smoke.exe	1f718cfeb0fc6b59
+32	179	8128410147444693	CMakeFiles/meter_core.dir/components/meter_core/src/feature_imu.c.obj	8f9821f0188510f0
+57	180	8128410147698300	CMakeFiles/test_feature_imu.dir/tests/test_feature_imu.c.obj	149b0ce6c27dd8cd
+46	181	8128410147585935	CMakeFiles/test_meter_parser.dir/tests/test_meter_parser.c.obj	b91fb00d79cc9cdd
+20	181	8128410147247645	CMakeFiles/meter_core.dir/components/meter_core/src/meter_crc.c.obj	a07e354e5eb6f1cf
+28	182	8128410147403966	CMakeFiles/meter_core.dir/components/meter_core/src/meter_state.c.obj	9e22ac704186f288
+62	183	8128410147743427	CMakeFiles/test_gui_regression.dir/tests/test_gui_regression.c.obj	20c7b1b6db8f467f
+51	183	8128410147641446	CMakeFiles/test_meter_state.dir/tests/test_meter_state.c.obj	71046ba89c1d1f70
+67	184	8128410147753920	CMakeFiles/meter_legacy_adapter.dir/tests/meter_legacy_adapter.c.obj	4bfdb17198c5f44e
+24	211	8128410147367490	CMakeFiles/meter_core.dir/components/meter_core/src/meter_parser.c.obj	b49c0b258bd01273
+41	252	8128410147530752	CMakeFiles/meter_core.dir/C_/Espressif/v5.3.2/esp-idf/components/json/cJSON/cJSON.c.obj	379c858c3cb3427e
+23	89	8128410279625837	CMakeFiles/meter_core.dir/components/meter_core/src/meter_gui.c.obj	34bb129774f9737f
+90	205	8128410280290979	libmeter_core.a	62c7efa3c095aba8
+205	319	8128410281450039	test_meter_parser.exe	eea6f1f8a9646e7c
+218	324	8128410281579130	test_feature_imu.exe	b4e9960a395e26fd
+212	325	8128410281517153	test_meter_state.exe	93adf819b4ed62f5
+225	326	8128410281644235	test_gui_regression.exe	1cc5300530b085fb
+231	337	8128410281706158	meter_legacy_adapter.exe	c0990eb9553c0ec4
+14	93	8128412048882664	CMakeFiles/meter_core.dir/components/meter_core/src/meter_gui.c.obj	34bb129774f9737f
+93	174	8128412049668914	libmeter_core.a	62c7efa3c095aba8
+174	289	8128412050474785	test_meter_parser.exe	eea6f1f8a9646e7c
+187	292	8128412050597302	test_feature_imu.exe	b4e9960a395e26fd
+181	294	8128412050545173	test_meter_state.exe	93adf819b4ed62f5
+194	310	8128412050674363	test_gui_regression.exe	1cc5300530b085fb
+203	315	8128412050762651	meter_legacy_adapter.exe	c0990eb9553c0ec4
