@@ -1,0 +1,29 @@
+{
+  "checked_at": "2026-10-04T22:37:37.403756+09:00",
+  "command": "Get-CimInstance Win32_SerialPort | Select-Object DeviceID,Name,PNPDeviceID | ConvertTo-Json -Depth 3",
+  "ports": [
+    {
+      "DeviceID": "COM1",
+      "Name": "통신 포트(COM1)",
+      "PNPDeviceID": "ACPI\\PNP0501\\0"
+    },
+    {
+      "DeviceID": "COM3",
+      "Name": "USB 직렬 장치(COM3)",
+      "PNPDeviceID": "USB\\VID_303A&PID_1001&MI_00\\7&1D99460C&0&0000"
+    }
+  ],
+  "com3_esp32_usb_enumerated": true,
+  "pnp_status_observed": "OK",
+  "device_opened": false,
+  "flash_performed": false,
+  "scope": "Read-only OS enumeration; confirms USB presence, not firmware/display behavior.",
+  "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "all_five_prepared_series_revalidated": true,
+  "cli_versions_revalidated": [
+    "opencode 1.18.34",
+    "AGY 1.2.14",
+    "codex-cli 0.159.2"
+  ],
+  "product_executions": 0
+}

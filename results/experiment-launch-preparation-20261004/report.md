@@ -1,6 +1,6 @@
 # 정식 비교 시작 선행 작업 실행 결과
 
-확인일: 2026-10-04. 상태: **선행 작업 완료. 활성 5개 후보 구현 세션 시작 가능. baseline 동결·당일 예약·독립 복원 통과. 제품 실험 0회.** 실물 평가 전 ESP32 연결을 확인해야 한다.
+확인일: 2026-10-04. 상태: **선행 작업 완료. 활성 5개 후보 구현 세션 시작 가능. baseline 동결·당일 예약·독립 복원 통과. 제품 실험 0회.** 22:37 KST 후속 확인에서 COM3의 ESP32 USB 연결을 확인했다.
 작업 원본은 [계획](../../docs/plans/2026-10-03-formal-comparison-launch-prerequisites.md)과
 [E1~E5 검토](../experiment-execution-review-20261003/report.md)다. 토큰 한도 중단 이후 같은 작업을 이어서 수행했다.
 과거 평가 원본·commit/tag·evidence와 2026-10-02 준비 package는 보존한다.
@@ -111,3 +111,13 @@ package 294개 파일과 frozen source 949개, 5개 원본 후보 commit·동일
 문서상 정식 후보 구현 시작을 보류했던 E1~E5와 baseline/capability/receipt/복원 조건은 모두 해소했다.
 후보의 실제 과제 수행·provider quota·제품 합격은 아직 검증한 결과가 아니다.
 실물 평가 전 보드 연결·포트 확인이 남아 있으며 [읽기 전용 열거](hardware-presence.json)에는 COM1만 있다.
+
+## 2026-10-04 COM3 재연결 후 시작 조건 재확인
+
+22:37 KST 후속 확인에서 COM3 `USB VID_303A/PID_1001` 장치와 PnP 정상 상태를 확인했다.
+[재연결 기록](hardware-reconnected-20261004.json)에 원본 포트 식별자를 남겼다.
+앞선 “보드 미열거” 원본은 당시 관측으로 보존하며 현재 USB 연결 상태는 이 후속 기록을 따른다.
+활성 5개 예약의 날짜·prepared 상태·동결 입력·receipt·ledger·CLI version도 모두 재검증했다.
+새 baseline이나 ID 재생성은 현재 10월 4일 시작에 필요하지 않다.
+실물 평가 직전에 포트 점유·재열거를 재확인하며, 이번 확인은 USB 연결에 한정한다.
+serial open·flash·수신·LCD 관측은 수행하지 않았고 제품 실험도 아직 시작하지 않았다.
