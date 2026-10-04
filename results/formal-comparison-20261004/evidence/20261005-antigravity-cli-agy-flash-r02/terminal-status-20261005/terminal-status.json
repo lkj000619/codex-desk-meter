@@ -1,0 +1,82 @@
+{
+  "checked_at": "2026-10-04T20:02:54.233187+00:00",
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "terminal_status": "completed",
+  "execution": {
+    "started_at": "2026-10-04T19:34:51.470Z",
+    "ended_at": "2026-10-04T19:59:40.678Z",
+    "timeout_seconds": 7200,
+    "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+    "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+    "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+    "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+    "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+    "profile_sha256": "5b24fc4e43ee0bf74b1b8a1ddce7e08f5024760c8b9660ce1c5aabbe966668f8",
+    "input_bundle_sha256": "9f4472eb4edb2c9488685b59b2f9a73b5d3f3dc11b002d651bfd37f4dc1d0a51",
+    "network_mode": "offline-fixture",
+    "sandbox_policy": "prompt-and-log",
+    "approval_policy": "request-review",
+    "branch": "experiment/antigravity/antigravity-cli/agy-flash",
+    "worktree": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-flash-r02\\checkout",
+    "host": "DESKTOP-JCMEN12"
+  },
+  "measurement": {
+    "wall_clock_seconds": 1489.219000000041,
+    "tool_calls": 177,
+    "failed_commands": null,
+    "user_interventions": null,
+    "tokens": {
+      "input": 1472560,
+      "output": 140404,
+      "cached": 22864333,
+      "reasoning": 90823,
+      "provider_total": 1612964,
+      "total": 1612964,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    }
+  },
+  "original_terminal_manifest_sha256": "54ee10e9988cb39a07de64bc8528895c9a2b8f0b6693c301ed42019a1c8f1062",
+  "original_ledger_sha256": "94925418bc75e31ca29b7c6a001ccaa4584ef5863f38f7e94b78ecac354b7cdc",
+  "candidate_processes_remaining": [],
+  "global_files_restored_independently_verified": true,
+  "immutable_common_input_files_verified": 57,
+  "candidate_result_submission_present": true,
+  "candidate_selection_document_present": true,
+  "candidate_hardware_status": "not_run",
+  "candidate_product_pass": false,
+  "operator_hardware_evaluation_started": false,
+  "source_git_freeze_status": "pending",
+  "operator_source_edits": false,
+  "operator_firmware_rebuild": false,
+  "native_reported_python_test_count": 6,
+  "native_result_validator_report": "VALID",
+  "native_reported_c_test_count": 4,
+  "c_test_provenance_issue": {
+    "ctest_testfile_points_to_previous_run_executables": true,
+    "current_ctest_success_validates_current_implementation": false,
+    "previous_checkout_changes": [
+      " M build-host/.ninja_log"
+    ],
+    "previous_frozen_firmware_and_config_bytes_unchanged": {
+      "build/meter_esp32s3.bin": true,
+      "build/meter_esp32s3.elf": true,
+      "build/meter_esp32s3.map": true,
+      "build/bootloader/bootloader.bin": true,
+      "build/bootloader/bootloader.elf": true,
+      "build/bootloader/bootloader.map": true,
+      "build/partition_table/partition-table.bin": true,
+      "build/flasher_args.json": true,
+      "sdkconfig": true,
+      "sdkconfig.defaults": true
+    },
+    "previous_raw_snapshots_bundle_and_final_package_preserved": true,
+    "scope": "The final r02 CTest configuration explicitly executes r01 binaries. Candidate edited cache/build.ninja paths but did not regenerate this test file. Full policy and artifact provenance review remains pending."
+  },
+  "policy_status": "pending_terminal_review",
+  "rm_review": "pending_operator_evaluation",
+  "remaining_followup_seconds": 5710.780999999959,
+  "remaining_followup_rounds": 2,
+  "restart_instruction": "Do not repeat r02. Preserve and Git-freeze terminal implementation, audit policy/build/test provenance, independently validate submitted result and fixtures, then perform operator hardware evaluation."
+}

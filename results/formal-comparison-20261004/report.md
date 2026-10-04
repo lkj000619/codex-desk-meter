@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-05 OpenCode 첫 series의 예산 소진 종료와 AGY Flash 최초 평가·독립 복원 완료. AGY 최초의 environment_failed·제출 누락·USB write timeout·기준 미도달·eligible 정책은 보존하고, 후속 1회차를 04:34:51 KST 시작했다. 전체 비교는 진행 중이다.
-후보 실행 시작 4회·종료 3회(최초 2·후속 시작 2). AGY Flash 후속 1회차가 실행 중이며 AGY Pro·Codex Sol/Luna는 미시작이다. 독립 series 완료는 OpenCode 1개/예정 15개다.
+상태: 2026-10-05 OpenCode 첫 series의 예산 소진 종료와 AGY Flash 최초 평가·독립 복원 완료. AGY 최초의 environment_failed·제출 누락·USB write timeout·기준 미도달·eligible 정책은 보존한다. 후속 1회차는 04:59:40 KST completed로 종료됐으며 동결·정책/빌드 근거 검토·실물/RM 평가 대기다. 전체 비교는 진행 중이다.
+후보 실행 시작 4회·종료 4회(최초 2·후속 2). AGY Flash 후속 1회차의 최종 JSON·선택 문서는 있으며 CTest의 이전 회차 실행 파일 참조 문제를 확인했다. AGY Pro·Codex Sol/Luna는 미시작이다. 독립 series 완료는 OpenCode 1개/예정 15개다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -374,3 +374,32 @@ PID 30356이며 대화와 별도로 동결 runner의 한도를 적용한다. 전
 후보에게 serial/flash 접근이나 실행 중 추가 피드백을 제공하지 않으며, 보드는 평가한 최초 펌웨어를 유지한다.
 실행 중의 policy pending과 비용 null은 최종 판정이 아니다. 재개 시 [현재 계측](progress.json)·원본 manifest/ledger·
 native process/owner부터 확인하고 같은 후속을 다시 호출하지 않는다.
+
+## 2026-10-05 AGY Flash 후속 1회차 종료 확인
+
+사용자의 진행 상황 확인 요청 중 04:59:40.678 KST에 `20261005-antigravity-cli-agy-flash-r02`가
+completed·exit code 0으로 종료됐다. 실행 시간은 1,489.219초(24분 49.219초)이며
+input 1,472,560·output 140,404·정규화 합계 1,612,964 token, cached 22,864,333·reasoning 90,823을
+원본 정의대로 보존했다. tool calls 177이며 failed_commands·user_interventions의 원본 null은 유지한다.
+
+[종료 상태](evidence/20261005-antigravity-cli-agy-flash-r02/terminal-status-20261005/terminal-status.json)와
+[제출 JSON](evidence/20261005-antigravity-cli-agy-flash-r02/terminal-status-20261005/candidate-submissions/results/20261005-antigravity-cli-agy-flash-r02/end-to-end-result.json)을 보존했다.
+후보 로그에는 USB Serial/JTAG 수신·legacy collector·화면/입력 로그 보완, firmware build 완료,
+Python 6개 통과와 결과 validator VALID가 있다. 최종 제출물의 hardware는 not_run, product_pass는 false다.
+이 로그를 실물 동작이나 운영자 독립 검증의 근거로 바꾸지 않는다. 새 펌웨어 업로드는 아직 하지 않았다.
+
+**C 시험 근거 문제:** 최종 r02 `build-host/CTestTestfile.cmake`가 r01 checkout의 실행 파일 4개를
+직접 호출한다. cache와 build.ninja의 경로 변경만으로 이 파일은 갱신되지 않았다.
+따라서 r02 로그의 CTest 4/4 통과는 이번 수정 코드의 검증이 아니다.
+이전 cache 경로로 수행한 빌드가 최초 checkout의 `build-host/.ninja_log`를 변경한 것도 기록했다.
+최초 펌웨어/설정 원본 10개의 hash는 그대로이며 기존 raw snapshot·source bundle·독립 package는 보존한다.
+빌드/source/artifact 연결과 접근 범위의 전체 감사는 아직 하지 않았으므로 최종 정책 판정은 pending이다.
+
+종료 원본 manifest SHA-256은 `54ee10e9988cb39a07de64bc8528895c9a2b8f0b6693c301ed42019a1c8f1062`다.
+manifest·ledger·raw 로그·41개 source·10개 artifact/설정 원본을 복사했고 manifest/ledger는 변경하지 않았다.
+실제 AGY process 부재와 전역 settings/instructions/hooks의 복원 hash·owner 부재도 독립 확인했다.
+이번 확인은 운영자 코드 수정·firmware 재빌드·보드 접근 없이 수행했다.
+
+다음 단계는 terminal 구현의 Git 동결, 정책 및 빌드/시험 근거 검토, 동결 validator와 공통 fixture의
+독립 검증, 이후 운영자 업로드·실물/RM 평가다. 후속 잔여 5,710.781초·2회를 이번 종료 비용에서 계산하며
+같은 회차를 재시작하지 않는다. 현재 series 평가와 다음 회차 판단 전에 AGY Pro를 시작하지 않는다.

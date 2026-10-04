@@ -1,0 +1,74 @@
+{
+  "record-agy-flash-r02-terminal-status.py": {
+    "sha256": "f0413390809dc1dc98f3cc860689fde8b22ba1ea6fe90de3d32fd6d2fb1cc9f2",
+    "bytes": 9171
+  },
+  "scope-exit.json": {
+    "sha256": "3101aa5acc22f758cc86aed1d92dd7c02bd0f27881cd1c4d022bf5fecb69a2af",
+    "bytes": 719
+  },
+  "terminal-byte-snapshots.json": {
+    "sha256": "dcadff238318ae18856b4bc4f6015ce97161b14dfba9090eead002a1d6fa2fa4",
+    "bytes": 12557
+  },
+  "terminal-status.json": {
+    "sha256": "cd269a3dc02b4ca136384be0aa6ba44014c1fdbf9bbc15ccef9c8553496017c6",
+    "bytes": 4222
+  },
+  "build-path-observation/build/project_description.json": {
+    "sha256": "383823c00d6fe35238eeaca75632ce7d70e4c7b5e6f4c817466f92ee5044c342",
+    "bytes": 195070
+  },
+  "build-path-observation/build-host/build.ninja": {
+    "sha256": "4e26bbec8d645fc76728518b2c82267be06c6e903db1d94e41ca397a41a343a4",
+    "bytes": 24995
+  },
+  "build-path-observation/build-host/CMakeCache.txt": {
+    "sha256": "103c126a69d230b7282d2f04888d6824a460f9f2c5e5e3a7cb9f6834598c65ab",
+    "bytes": 18330
+  },
+  "build-path-observation/build-host/CTestTestfile.cmake": {
+    "sha256": "6db5951cfa2950211390a7506802f966f1a26064d46b85a5a4e2df43e7736d7c",
+    "bytes": 1954
+  },
+  "build-path-observation/build-host/evaluation-output.json": {
+    "sha256": "1aaf28dc493a08441498928a99d046dbe3507ed84b923fe2dfe0638725e07f3b",
+    "bytes": 2369
+  },
+  "build-path-observation/build-host/link_evidence.txt": {
+    "sha256": "cfcae3d514334c8064f008b052dc3e67cd16bdacdb5946511ebf634ad904cf2b",
+    "bytes": 190
+  },
+  "build-path-observation/build-host/Testing/Temporary/LastTest.log": {
+    "sha256": "73fe77b5a90f80fc46b862c7292ada1b8b454e8b61de43a1948e47abde52d57f",
+    "bytes": 3218
+  },
+  "candidate-submissions/docs/agent-runs/20261005-antigravity-cli-agy-flash-r02/hardware-feature-selection.md": {
+    "sha256": "d660adaa2e1088b007767ce0df0f98d4f9512c8c86639931ad84f79abe5e1e88",
+    "bytes": 6063
+  },
+  "candidate-submissions/results/20261005-antigravity-cli-agy-flash-r02/end-to-end-result.json": {
+    "sha256": "ef66f9a0b831116a8e4c25265c21dc3e038ef257731c6eeda1a804144fec7b86",
+    "bytes": 15686
+  },
+  "terminal-originals/20261005-antigravity-cli-agy-flash-r01.json": {
+    "sha256": "94925418bc75e31ca29b7c6a001ccaa4584ef5863f38f7e94b78ecac354b7cdc",
+    "bytes": 3352
+  },
+  "terminal-originals/command-audit.json": {
+    "sha256": "aae6b14a68ed1b55f240dd7196da20fa5675ba1b15fb25ab67bc4e80d9c52d0b",
+    "bytes": 7313
+  },
+  "terminal-originals/run-manifest.json": {
+    "sha256": "54ee10e9988cb39a07de64bc8528895c9a2b8f0b6693c301ed42019a1c8f1062",
+    "bytes": 39665
+  },
+  "terminal-originals/stderr.txt": {
+    "sha256": "4252389dc0dd043eebb313d37e8857fa3b6d278f87f1f5d22df786c2f5c11d88",
+    "bytes": 63
+  },
+  "terminal-originals/stdout.jsonl": {
+    "sha256": "42e4b54ce49cf9c4c5c85b1f3577b94fe653ef7176b5d2367c149d5601cc20ab",
+    "bytes": 334445
+  }
+}

@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-05. 상태: **OpenCode 첫 series의 예산 소진 종료와 AGY Flash 최초 평가·독립 복원 완료. AGY Flash 후속 1회차를 04:34:51 KST 시작했다. 최초 environment_failed·제출 누락·USB write timeout·기준 미도달·eligible 정책과 비용은 보존한다. 전체 비교는 진행 중이며 활성 5개·동결 baseline은 유지한다.**
+확인일: 2026-10-05. 상태: **OpenCode 첫 series의 예산 소진 종료와 AGY Flash 최초 평가·독립 복원 완료. AGY Flash 후속 1회차는 04:59:40 KST completed로 종료됐으며 최종 JSON·선택 문서를 제출했다. 종료 원본은 보존했고 동결·정책/빌드 근거 검토·실물/RM 평가가 남아 있다. CTest가 최초 회차의 실행 파일을 사용한 문제를 확인했으므로 이번 구현의 C 시험 통과로 인정하지 않는다. 최초 실패·판정·비용과 활성 5개·동결 baseline은 유지한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -92,7 +92,7 @@ CLI/model/settings/environment를 재확인해 새 run-bound receipt를 연결�
 
 현재 첫 블록 순서는 **OpenCode Muse→AGY Flash→AGY Pro→Codex Sol→Codex Luna**다.
 준비 당시 5개 예약은 모두 prepared·시작 시각 null·소비 시간 null이었다.
-첫 OpenCode 최초 실행은 completed(1,024.64초)이며 첫 후속은 timeout이다. AGY Flash 최초는 environment_failed(762.813초)로 종료됐고 평가·독립 복원을 마쳤으며 후속 1회차가 실행 중이다. AGY Pro·Codex Sol/Luna는 미시작이다. 현재 후보 호출은 시작 4회·종료 3회다. 종료 code 0과 host 시험 통과를 제품 합격으로 해석하지 않는다.
+첫 OpenCode 최초 실행은 completed(1,024.64초)이며 첫 후속은 timeout이다. AGY Flash 최초는 environment_failed(762.813초)로 종료됐고 평가·독립 복원을 마쳤다. 후속 1회차도 completed(1,489.219초)로 종료됐으며 평가 대기다. AGY Pro·Codex Sol/Luna는 미시작이다. 현재 후보 호출은 시작 4회·종료 4회다. 종료 code 0과 host 시험 통과 로그를 제품 합격으로 해석하지 않는다.
 제출물은 `e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db`에 동결했고, 정책 review는 `invalid_for_comparison`이다.
 COM3의 원본 공통 frame 수신과 실제 성공 로그를 대조했고 사용자 사진에서 값 표시 부재를 확인했다.
 최초 RM은 RM1 pass/RM2 partial/RM3 fail/RM4·RM5 not_run으로 기준 미도달이다. BOOT·연속 유지·정밀 지연은 미측정이다.
@@ -166,4 +166,11 @@ AGY 후속 `20261005-antigravity-cli-agy-flash-r02`는 별도 checkout에서 자
 [시작 관측](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/launch-20261005/native-start-observation.json)에서
 동일 모델·request-review·새 cwd를 확인했다. 같은 profile·공통 입력·거부 시 종료 규칙을 유지하고,
 자기 관측·기대·hash 근거만 전달했다. 후속 누적 7,200초·최대 3회 한도에 이번 회차를 포함한다.
-진행 중 비용·정책·RM은 미확정이며 같은 최초나 후속을 재호출하지 않는다. AGY Pro는 현재 series 처리 이후다.
+2026-10-05 04:59:40.678 KST 후속이 종료됐다. [종료 확인](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-flash-r02/terminal-status-20261005/terminal-status.json)은
+1,489.219초·정규화 token 1,612,964·177 tool calls와 제출물 존재, 전역 설정/지침/hook 원본 복원을 확인했다.
+Python 6개와 결과 validator 통과는 후보 로그의 관측이며 아직 운영자 독립 검증이 아니다.
+최종 `build-host/CTestTestfile.cmake`가 r01 실행 파일 4개를 가리킨다. r02 CTest 통과를 r02 코드 검증에 사용하지 않는다.
+이전 checkout의 `.ninja_log` 변경은 기록했고 최초 펌웨어/설정 10개 원본 hash는 그대로다. 최초 raw snapshot·bundle·독립 package를 보존한다.
+후속 terminal manifest/ledger·41개 source·10개 artifact/설정을 보존했으며 후보 코드 수정·재빌드·보드 접근은 하지 않았다.
+후속 누적 잔여 시간은 5,710.781초, 잔여 회차는 2회이나 다음 실행 판단은 현재 회차의 동결·정책/빌드 근거 검토·실물/RM 평가 이후다.
+정책과 RM은 미확정이며 같은 최초나 후속을 재호출하지 않는다. AGY Pro는 현재 series 처리 이후다.
