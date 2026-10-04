@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-04. 상태: **첫 OpenCode Muse 결과의 화면 표시 실패·RM 미도달·정책 부적격을 기록하고 후속 1회차 실행 중(23:30:48 KST). COM3 수신과 원본 독립 복원은 확인했다. 활성 5개 모델·동결 baseline·후속 3회/누적 120분 유지.**
+확인일: 2026-10-05. 상태: **첫 OpenCode Muse 결과의 화면 표시 실패·RM 미도달·정책 부적격을 기록하고 후속 1회차 실행 중(10월 4일 23:30:48 KST 시작). 일반 package 경로 보완·독립 복원 확인. 활성 5개 모델·동결 baseline·후속 3회/누적 120분 유지.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -111,4 +111,7 @@ python -X utf8 scripts/benchmark.py check --baseline comparison-baseline-2026100
 `check`는 동결 입력을 검사하며 모델 호출이나 ID 예약을 수행하지 않는다.
 첫 제품 terminal source·정책/RM·사진·계측 원본을 별도 archive에서 독립 복원했다.
 동결 일반 포장 도구는 `firmware/build/`를 수집하지 못해 거부됐으며, 원본 보존 archive의 1,807개 파일·동결 tree·입력·정책·결과 검증 성공과 구분한다.
-경로 지원 보완은 남은 운영 작업이다. 상세 한계와 복원 근거는 [실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다.
+2026-10-05 종료 후 수집 도구의 경로 지원을 보완해 새 일반 package 348개 파일을 독립 복원했다.
+동결 operator ZIP에서 추출한 validator로 57개 입력·artifact·정책·결과를 재검증했다.
+원본 거부·원본 보존 archive·후보 부적격 판정은 유지한다. 동결 runner·입력·평가 기준은 변경하지 않았다.
+적용 범위와 근거는 [보완 계획](../plans/2026-10-04-evidence-artifact-layout-remediation.md)과 [실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다.

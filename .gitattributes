@@ -41,3 +41,4 @@ results/experiment-launch-preparation-20261004/restore-audit*.txt binary
 experiments/config/next-profiles-20261003/*.json binary
 results/formal-comparison-20261004/*.json binary
 results/formal-comparison-20261004/evidence/** binary
+results/formal-comparison-20261004/operator-remediation-20261005/** binary

@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-04T23:34:50.997902+09:00",
+  "checked_at": "2026-10-04T15:25:20.304080+00:00",
   "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
   "block": 1,
   "seed": 1,
@@ -23,7 +23,7 @@
   "operator_optical_observation": "User will directly observe LCD and BOOT after frozen candidate submission.",
   "permission_denials_observed": 1,
   "policy_review_pending_note": "Followup native denied compound git log/status command; subsequent candidate work observed. Terminal review pending; permissions/profile/prompt unchanged.",
-  "last_event_count": 152,
+  "last_event_count": 234,
   "ended_at": null,
   "elapsed_seconds": null,
   "tokens": {
@@ -37,7 +37,7 @@
     "availability_note": "OpenCode step_finish provider usage; provider_total preserves the raw total, total is normalized input+output and excludes cache/reasoning; cache write is raw-log-only."
   },
   "policy_status": "pending",
-  "policy_review_path": "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\policy-review.json",
+  "policy_review_path": null,
   "implementation_commit": null,
   "hardware_port": "COM3",
   "automatic_optical_alignment": "not_run",
@@ -63,7 +63,7 @@
     "lcd_observation": "User/photo confirm no legible values; blue horizontal bands.",
     "product_pass": false,
     "forensic_independent_restore": "verified",
-    "standard_package": "rejected: firmware/build layout unsupported",
+    "standard_package": "layout-fixed package independently restored and checked with frozen validators on 2026-10-05; original rejection preserved",
     "hardware_artifact_sha256": "f91ff86ea8c80ab5ec03f47948259d7de96bd87e0384ceb3d427eb52d0e72dd9",
     "hardware_upload": "pass",
     "receiver_sequences_observed": [
@@ -76,7 +76,8 @@
       "host_executables_passed": 6
     },
     "candidate_collector_reference_fixture_check": "SCHEMA_INVALID",
-    "operator_audited_interventions": 0
+    "operator_audited_interventions": 0,
+    "standard_package_manifest_sha256": "c4f845c4a887a91379e293810824f16dda3e8f590d27b45048baa87ad4a854f0"
   },
   "current_followup_implementation_feedback_sent_during_run": false,
   "hardware_slot_state": "first frozen artifact remains installed; candidate has no access",
@@ -90,5 +91,8 @@
     }
   ],
   "frozen_followup_feedback_delivered": true,
-  "operator_implementation_feedback_sent_during_run": false
+  "operator_implementation_feedback_sent_during_run": false,
+  "last_event_at_utc": "2026-10-04T15:20:05.990000+00:00",
+  "candidate_current_phase": "Same native session resumed approved fixture/pipeline reads after firmware build completed. Terminal submission not yet observed.",
+  "operator_retry_started": false
 }

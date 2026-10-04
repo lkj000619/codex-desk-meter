@@ -80,6 +80,29 @@ SHA-256 `0f57722acd65288fa84b0fa5f4c52bece841c36fba05e3b342eb37116e242fc4`다.
 [복원 기록](evidence/20261004-opencode-cli-opencode-muse-r01/forensic-restore-report.json)은 일반 package 거부와
 별도 원본 보존·독립 검증 성공을 구분한다. 일반 포장 도구의 layout 지원 보완은 남은 운영 작업이다.
 
+### 2026-10-05 운영자 보관 도구 보완
+
+종료 후 artifact 수집 단계에 한정해 `scripts/evidence_package.py`를 보완했다.
+도구 변경 commit은 `87fe032`이며 실제 사용 파일의 SHA-256과 검증 결과는
+[검증 기록](operator-remediation-20261005/validation.json)에 보존했다.
+result의 build artifact 경로에서 빌드 폴더를 찾아 수집하고, 한 폴더에 필수 다섯 종류가
+모두 있어야 한다. 무관한 root build로 부족한 artifact를 대신 채우지 않는다.
+`sdkconfig` 원본 bytes도 함께 보관한다. 관련 회귀 21개가 통과했다.
+
+새 일반 package는 `C:/meter-run-packages-20261005/opencode-muse-r01-layout-fixed`이며,
+manifest SHA-256은 `c4f845c4a887a91379e293810824f16dda3e8f590d27b45048baa87ad4a854f0`이다.
+독립 경로 `C:/meter-run-restores-20261005/opencode-muse-r01-layout-fixed`에서 348개 inventory 파일,
+57개 입력·source commit·7개 artifact·`firmware/sdkconfig` bytes를 확인했다.
+package의 operator ZIP에서 추출한 동결 validator로 정책·평가·결과를 다시 검증했다.
+[복원 원본](operator-remediation-20261005/restore-audit.json)은 원래 후보 경로를 사용하지 않았음을 기록한다.
+
+원본 일반 package 거부와 별도 원본 보존 archive는 유지한다. 이번 정정은 보관 경로 지원에만
+적용하며 최초 정책 부적격·화면 실패·RM 미도달·계측을 바꾸지 않는다.
+실행 중 runner·profile·후보 입력·평가 기준·후보 source는 변경하지 않았고 같은 수집 규칙을
+이후 모든 후보에 적용한다. [보완 계획과 완료 조건](../../docs/plans/2026-10-04-evidence-artifact-layout-remediation.md)을 따른다.
+첫 보완 commit의 Git text 정규화가 감사 JSON의 CRLF bytes를 LF로 저장한 사실을 확인했다.
+후속 commit에서 이 감사 디렉터리의 binary 속성을 지정해 원본 bytes를 보존하고 inventory와 Git blob을 재대조했다.
+
 ## 후속 1회차
 
 - run `20261004-opencode-cli-opencode-muse-r02`, round 1. 2026-10-04 23:30:48 KST 시작, 최대 7,200초.
@@ -92,6 +115,17 @@ SHA-256 `0f57722acd65288fa84b0fa5f4c52bece841c36fba05e3b342eb37116e242fc4`다.
 후속에서도 `git log --oneline -8; echo ---; git status --short | head -n 50` 복합 명령이
 native 권한에서 거부됐고 이후 작업이 계속되는 것을 관측했다. 중간 기록은 [현재 상태](progress.json)에 보존한다.
 첫 실행 때와 같은 종료 규칙으로 terminal policy review를 수행하며, 권한 완화나 숨은 재시도를 하지 않는다.
+
+[중간 비용 집계](comparison-checkpoint-01.md)는 최초의 실제 1,024.64초·306,858 정규화 token을
+전체 시도 비용으로 보존하고 정책 부적격 회차를 품질 표에서 제외한다. 후속 실행 중의 미확정 시간/token은
+미측정이며 최초·후속 2개 중 coverage 1/2인 시점의 기록이다. 전체 15개 독립 series의 완료 집계가 아니다.
+SDK 설정 완료 후 새 모델 출력 대기 구간도 [현재 상태](progress.json)에 기록한다. 후보 프로세스가 살아 있다고
+빌드가 실행 중이거나 제품이 통과한 것으로 간주하지 않으며, 중간 재호출 없이 고정 timeout을 적용한다.
+
+2026-10-05 재개 시 같은 PID/회차가 실행 중임을 확인했다. 23:55:56 KST 펌웨어 빌드 완료 후
+23:56:04 KST의 native `Tool execution aborted`를 관측했지만, 00:18 KST 이후 같은 session의
+새 read event가 이어졌다. 중간 무응답을 종료나 성공으로 간주하지 않고 기존 회차를 유지한다.
+사용자의 `try again` 요청에 따라 운영 작업을 재개했으며 후보를 중복 호출하거나 회차/예산을 초기화하지 않았다.
 
 남은 순서는 후속 종료→새 제출물 동결·정책 review→운영자 업로드·실물/RM 관측→남은 회차/시간 내 판단이다.
 정책 위반이 있었던 최초 회차의 비교 부적격을 후속 성공으로 지우지 않는다. 미관측을 제품 실패로 바꾸거나 영상·정밀 시간 증거를 만들어 넣지 않는다.
