@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-04T18:15:24.304305+00:00",
+  "checked_at": "2026-10-04T18:20:40.507000+00:00",
   "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
   "block": 1,
   "seed": 1,
@@ -117,9 +117,11 @@
   "restart_instruction": "Read manifest, ledger, active AGY root owner and launcher process; do not invoke another candidate while this run is running.",
   "native_model_verified": "gemini-3.8-flash-medium",
   "native_permission_mode_verified": "request-review",
-  "last_event_count": 177,
+  "last_event_count": 317,
   "last_step_type": "tool",
-  "last_step_state": "DONE",
+  "last_step_state": "ACTIVE",
   "native_tool_events_observed": 57,
-  "ongoing_usage_not_terminal": true
+  "ongoing_usage_not_terminal": true,
+  "candidate_terminal_status_observed": "running",
+  "candidate_current_phase": "Candidate implementation and build iterations in the same initial session; final result not received."
 }
