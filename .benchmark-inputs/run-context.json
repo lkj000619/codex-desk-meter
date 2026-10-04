@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "run_id": "20261005-antigravity-cli-agy-pro-r01",
+  "experiment_id": "version-2-end-to-end-v1",
+  "baseline": {
+    "id": "comparison-baseline-20261004",
+    "ref": "comparison-baseline-20261004",
+    "commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5"
+  },
+  "agent": {
+    "provider": "google",
+    "product": "antigravity-cli",
+    "interface": "cli",
+    "agent_version": "1.2.14",
+    "model": "gemini-3.1-pro-high",
+    "reasoning": "high",
+    "configuration_sha256": "b240460652feff0c0acaf49c561ac3b3d92abb87dbac4218bc06afa6e4096ab0"
+  },
+  "input_hashes": {
+    "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+    "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+    "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+    "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+    "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+    "profile_sha256": "eeedee05c3f1004df8d6883f8a0dca520cbf70665cff283397fa1f8dc1065b01",
+    "input_bundle_sha256": "62fb20a50ebf174f96e072e0f2958921d21e43b7a7e5dee84dfe69445a125a4d"
+  },
+  "outputs": {
+    "selection_document": "docs/agent-runs/20261005-antigravity-cli-agy-pro-r01/hardware-feature-selection.md",
+    "structured_result": "results/20261005-antigravity-cli-agy-pro-r01/end-to-end-result.json",
+    "evaluation_manifest": "results/20261005-antigravity-cli-agy-pro-r01/e2e-evaluation-manifest.json"
+  },
+  "evaluation_manifest_path": ".benchmark-inputs/e2e-evaluation-manifest.json"
+}

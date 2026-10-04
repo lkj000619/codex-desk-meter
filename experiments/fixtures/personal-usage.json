@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "source": "fixture",
+  "captured_at": "2026-09-11T00:00:00Z",
+  "account_scope": "synthetic-example",
+  "windows": [
+    {
+      "id": "five-hour",
+      "label": "5-hour window",
+      "percent_used": 42,
+      "percent_remaining": 58,
+      "resets_at": null
+    },
+    {
+      "id": "weekly",
+      "label": "Weekly window",
+      "percent_used": 18,
+      "percent_remaining": 82,
+      "resets_at": null
+    }
+  ],
+  "stale": false,
+  "error_code": null,
+  "notes": "Synthetic values only. No account token, cookie, or personal usage export is included."
+}
