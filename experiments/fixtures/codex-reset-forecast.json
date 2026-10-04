@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "source": "codex-reset.com",
+  "captured_at": "2026-09-10T16:54:07Z",
+  "last_reset_at": "2026-09-08T04:05:53Z",
+  "forecast_24h_percent": 22,
+  "forecast_48h_percent": 39,
+  "forecast_is_schedule": false,
+  "confidence": "low",
+  "stale": false,
+  "error_code": null,
+  "source_url": "https://codex-reset.com/api/forecast"
+}
