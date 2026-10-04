@@ -1,0 +1,18 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r01",
+  "recorded_at": "2026-10-04T14:21:41.102227+00:00",
+  "observer": "user",
+  "method": "direct board observation plus supplied photograph",
+  "user_statement": "현재 다음과 같이 화면의 값이 없음.",
+  "original_photo_path": "C:\\Users\\이광진\\AppData\\Local\\Temp\\orca-paste-1791123460142-a73501df-54e5-42a9-a5fe-7343ffd6da11.png",
+  "photo_sha256": "d6cf73887d5141da937b804f89bf6dbee888e584301a8fac30453ac86b5d162b",
+  "operator_image_review": "Panel photographed in landscape physical position. Blue horizontal bands near the top; no legible usage digits, labels, global-reset information or diagnostic text visible. This corroborates the user statement of absent screen values.",
+  "photo_capture_time": "unknown",
+  "clock_alignment": "not_run",
+  "boot_operations_reported": null,
+  "continuous_30_second_observation": null,
+  "precise_latency": "not_run",
+  "source_commit": "e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db",
+  "artifact_sha256": "f91ff86ea8c80ab5ec03f47948259d7de96bd87e0384ceb3d427eb52d0e72dd9",
+  "scope_note": "Photo associated by user with the current COM3 frozen-artifact slot after the operator reported reference transmission. No video clock alignment, prior screen contents, BOOT cycle or duration is inferred."
+}

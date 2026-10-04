@@ -1,0 +1,24 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r01",
+  "reviewer": "Codex operator",
+  "reviewed_at": "2026-10-04T14:15:53.396863+00:00",
+  "source": "firmware/main/main.c",
+  "source_sha256": "a2e25b36f403d2488549046ef15641b882bfda7007290d2393d796b221f1bbc2",
+  "source_commit": "e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db",
+  "artifact_sha256": "f91ff86ea8c80ab5ec03f47948259d7de96bd87e0384ceb3d427eb52d0e72dd9",
+  "raw_log": "reference-capture-r1/device-serial.bin",
+  "raw_log_sha256": "b82bf83a8107c08acf030eaa90e0b9074fdc719fbd7efa4fdd688ec7f2c75dc0",
+  "checks": [
+    {
+      "sequence": 0,
+      "crc": "203D8DF3",
+      "literal_acceptance_observed": true
+    },
+    {
+      "sequence": 1,
+      "crc": "C4CAA941",
+      "literal_acceptance_observed": true
+    }
+  ],
+  "meaning": "The firmware logs accepted seq and CRC only after meter_receiver_accept returns METER_FRAME_OK and after copying to last-good/persisting sequence. Both seq/CRC match frozen transmitted frames. This is source-reviewed receiver acceptance, not protocol ACK or optical/timing proof. ESP_LOG timestamps/colors prevent the generic literal capture adapter from assigning accepted_at_seconds; those null fields remain untouched."
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "run_id": "20261004-opencode-cli-opencode-muse-r01",
+  "run_id": "20261004-opencode-cli-opencode-muse-r02",
   "experiment_id": "version-2-end-to-end-v1",
   "baseline": {
     "id": "comparison-baseline-20261004",
@@ -26,9 +26,19 @@
     "input_bundle_sha256": "5dd98522aeb97c127ab1a490a2e43848fabd6b795eb20f666827c98c5cd17651"
   },
   "outputs": {
-    "selection_document": "docs/agent-runs/20261004-opencode-cli-opencode-muse-r01/hardware-feature-selection.md",
-    "structured_result": "results/20261004-opencode-cli-opencode-muse-r01/end-to-end-result.json",
-    "evaluation_manifest": "results/20261004-opencode-cli-opencode-muse-r01/e2e-evaluation-manifest.json"
+    "selection_document": "docs/agent-runs/20261004-opencode-cli-opencode-muse-r02/hardware-feature-selection.md",
+    "structured_result": "results/20261004-opencode-cli-opencode-muse-r02/end-to-end-result.json",
+    "evaluation_manifest": "results/20261004-opencode-cli-opencode-muse-r02/e2e-evaluation-manifest.json"
   },
-  "evaluation_manifest_path": ".benchmark-inputs/e2e-evaluation-manifest.json"
+  "evaluation_manifest_path": ".benchmark-inputs/e2e-evaluation-manifest.json",
+  "immutable_files": {
+    ".benchmark-inputs/feedback.json": "candidate-feedback.json",
+    ".benchmark-inputs/feedback-evidence/000-user-lcd-photo-01.png": "feedback-evidence/000-user-lcd-photo-01.png",
+    ".benchmark-inputs/feedback-evidence/001-user-observation-01.json": "feedback-evidence/001-user-observation-01.json",
+    ".benchmark-inputs/feedback-evidence/002-receiver-source-review.json": "feedback-evidence/002-receiver-source-review.json",
+    ".benchmark-inputs/feedback-evidence/003-device-serial.bin": "feedback-evidence/003-device-serial.bin",
+    ".benchmark-inputs/feedback-evidence/004-capture.json": "feedback-evidence/004-capture.json",
+    ".benchmark-inputs/feedback-evidence/005-common-stimulus-check.json": "feedback-evidence/005-common-stimulus-check.json",
+    ".benchmark-inputs/feedback-evidence/006-reference-review.json": "feedback-evidence/006-reference-review.json"
+  }
 }
