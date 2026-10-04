@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "fixture-duplicate-provider-window",
+  "provider_id": "openai",
+  "agent_id": "codex-cli",
+  "host_id": "terminal",
+  "model_id": "codex-demo",
+  "account_profile_id": "acct-demo-openai",
+  "source_kind": "fixture",
+  "metric_kind": "quota_window",
+  "unit": "percent",
+  "status": "available",
+  "observed_at": "2026-09-10T00:00:00Z",
+  "windows": [
+    {
+      "window_id": "five-hour",
+      "label": "5h",
+      "used_units": null,
+      "remaining_units": null,
+      "limit_units": null,
+      "unit": "percent",
+      "percent_used": 20,
+      "percent_remaining": 80,
+      "resets_at": "2026-09-10T05:00:00Z"
+    },
+    {
+      "window_id": "five-hour",
+      "label": "duplicate 5h",
+      "used_units": null,
+      "remaining_units": null,
+      "limit_units": null,
+      "unit": "percent",
+      "percent_used": 20,
+      "percent_remaining": 80,
+      "resets_at": "2026-09-10T05:00:00Z"
+    }
+  ],
+  "stale": false,
+  "last_good_at": "2026-09-10T00:00:00Z",
+  "error_code": null,
+  "error_reason": null
+}

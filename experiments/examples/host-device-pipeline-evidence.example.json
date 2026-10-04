@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "classification": {
+    "F1": "host_fixture_pipeline",
+    "F2": "host_fixture_pipeline",
+    "F3": "host_simulated",
+    "F4": "reference_model_only",
+    "I1": "host_fixture_pipeline",
+    "I2": "host_fixture_pipeline",
+    "I3": "not_run",
+    "I4": "not_run"
+  },
+  "golden_frame": {
+    "path": "experiments/examples/cdm-frame.example.json",
+    "frame_line_sha256": "2de9f9efc97bf02890db977c7a2cd9ec893206114813450c3d7168552965acb0",
+    "file_sha256": "1082eb9d05267d242e61dec8786a9d13d2bc58aebf2a7feb4195958584afa537"
+  },
+  "fixture_sha256": {
+    "experiments/fixtures/providers/codex-percent-window.json": "15ce0d7dfc8b5e7156ef05cc0dbf11c18555539f4b915e4181e2a5eebbb2d35f",
+    "experiments/fixtures/providers/claude-code-windows.json": "d40e6cff99403c1c4d88d5d5fd245e98f10626fec7a49a03945bb322d7d2b682",
+    "experiments/fixtures/providers/gemini-cli-unsupported.json": "d4dc5119f78a188783582de8a8a2e56c6b15cbc10395a1184dea3f98f11e448b",
+    "experiments/fixtures/providers/orca-host-claude-code.json": "2c0ba0b85869bbb641a5d114ea82be8c676847e020811aa721ce82836e352307"
+  },
+  "loopback": {
+    "tested": true,
+    "device_accessed": false,
+    "device_ack": false,
+    "com3_opened": false
+  },
+  "firmware": {
+    "built": false,
+    "flashed": false,
+    "lcd_evaluated": false
+  },
+  "product_pass": false
+}
