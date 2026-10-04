@@ -1,0 +1,24 @@
+﻿{
+    "run_id":  "20261004-opencode-cli-opencode-muse-r02",
+    "phase":  "followup",
+    "round":  1,
+    "launcher_pid":  1900,
+    "launch_requested_at":  "2026-10-04T14:30:46.8124160+00:00",
+    "working_directory":  "C:/meter-operator-20261004",
+    "executable":  "C:/Espressif/user-tools/python_env/idf5.3_py3.11_env/Scripts/python.exe",
+    "arguments":  [
+                      "-B",
+                      "-X",
+                      "utf8",
+                      "scripts/benchmark.py",
+                      "run",
+                      "C:/meter-followups-20261004/20261004-opencode-cli-opencode-muse-r02",
+                      "--receipt",
+                      "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/preflight-evidence/opencode-followup-r02-receipt.json"
+                  ],
+    "receipt":  "C:/meter-runs-20261004/20261004-opencode-cli-opencode-muse-r01/preflight-evidence/opencode-followup-r02-receipt.json",
+    "parent_comparison":  "20261004-opencode-cli-opencode-muse-r01",
+    "timeout_seconds":  7200,
+    "auto_retry":  false,
+    "hardware_access_during_candidate":  false
+}

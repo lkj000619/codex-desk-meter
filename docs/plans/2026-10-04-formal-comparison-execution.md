@@ -2,7 +2,7 @@
 
 목표: ESP32-S3-LCD-3.16 제품 구현에서 에이전트의 첫 결과·자기 후속 수정 비용과 RM 도달·제품 품질을 동일 조건으로 비교한다.
 시작 승인: 2026-10-04 사용자 요청 “프로젝트 목적과 목표에 엇나가지않도록 실험 시작”.
-상태: 첫 블록 OpenCode Muse 최초 실행 시작 중.
+상태: 첫 OpenCode Muse 결과의 정책 부적격·화면 표시 실패·RM 미도달 기록, 원본 독립 복원 확인. 후속 1회차 실행 중(23:30:48 KST).
 원본: [운영 계약](../experiments/comparison-operating-contract.md), [현재 상태](../experiments/next-comparison-readiness.md),
 [동결 기록](../../results/experiment-launch-preparation-20261004/freeze.json).
 
@@ -19,12 +19,16 @@
 ## 실행과 완료 조건
 
 1. 최초 호출: OpenCode Muse `20261004-opencode-cli-opencode-muse-r01`을 독립 process로 실행한다.
+   작업 상태: 완료. 22:47:50~23:04:54 KST, 1,024.64초, 원본 계측·terminal ledger 보존.
    완료 조건: 실제 시작 시각·상태·원본 stdout/stderr·실제 경과 시간·provider usage가 manifest와 ledger에 연결됨.
 2. 운영자 검토: 제출물·고정 입력·자체 시험·빌드 artifact를 확인하고 원본 구현을 동결한다.
+   작업 상태: 완료. 고정 입력/clean 동결, 독립 Python 25개·host 6개 통과. 정책 위반은 별도 부적격 판정.
    후보의 source를 수정하거나 대신 구현하지 않는다. 정책 검토와 실제 제품 동작 관측을 각각 기록한다.
 3. 관측·RM·후속: 동결된 제출물로 실물 평가하고 RM review·policy review를 연결한다.
+   작업 상태: 진행 중. 최초 COM3 수락·사용자 사진·RM 판정 완료, BOOT/정밀 시간 미측정. 후속 round 1 실행 중.
    미도달이면 자신의 직전 결과와 허용된 관측 근거만 전달하며 잔여 회차/예산 안에서 후속을 시작한다.
 4. 다음 대상: 해당 series 처리 후 다음 대상을 진행한다. 날짜가 바뀐 미시작 예약은 새 ID·ledger·receipt로 준비한다.
+   작업 상태: 대기. 첫 series의 허용된 후속 처리 뒤 다음 대상에 진행한다. 일반 포장 도구의 `firmware/build/` 경로 지원 문제를 별도 운영 작업으로 남기며 실제 artifact·원본 보존 복원 결과와 구분한다.
    원래 예약·중단·실패 비용은 보존한다. 전체 비교 완료는 15개 독립 series와 필요한 후속/관측/적격성 집계가 끝난 시점이다.
 
 ## 중단과 재개

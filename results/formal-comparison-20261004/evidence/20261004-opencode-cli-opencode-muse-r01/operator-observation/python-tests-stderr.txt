@@ -1,0 +1,31 @@
+test_default_registry_collects_without_abort (test_collector.CollectorTest.test_default_registry_collects_without_abort) ... ok
+test_global_null_captured_at_rejected (test_collector.CollectorTest.test_global_null_captured_at_rejected) ... ok
+test_global_wire_mapping (test_collector.CollectorTest.test_global_wire_mapping) ... ok
+test_matrix_expectations (test_collector.CollectorTest.test_matrix_expectations) ... ok
+test_no_credentials_in_fixtures (test_collector.CollectorTest.test_no_credentials_in_fixtures) ... ok
+test_windows_preserved_verbatim (test_collector.CollectorTest.test_windows_preserved_verbatim) ... ok
+test_collector_to_frame_roundtrip (test_e2e_pipeline.PipelineTest.test_collector_to_frame_roundtrip) ... ok
+test_no_device_access_without_send (test_e2e_pipeline.PipelineTest.test_no_device_access_without_send) ... ok
+test_sender_cli_dry_run (test_e2e_pipeline.PipelineTest.test_sender_cli_dry_run) ... ok
+test_thresholds (test_gui_feature.AutoDimContractTest.test_thresholds) ... ok
+test_dashboard_line_budget (test_gui_feature.GuiBudgetTest.test_dashboard_line_budget) ... ok
+test_screen_cycle_count (test_gui_feature.GuiBudgetTest.test_screen_cycle_count) ... ok
+test_error_recovery (test_legacy_adapter.LegacyAdapterTest.test_error_recovery) ... ok
+test_fixture_freshness (test_legacy_adapter.LegacyAdapterTest.test_fixture_freshness) ... ok
+test_forecast_mapping (test_legacy_adapter.LegacyAdapterTest.test_forecast_mapping) ... ok
+test_global_freshness_and_mapping (test_legacy_adapter.LegacyAdapterTest.test_global_freshness_and_mapping) ... ok
+test_invalid_recovery (test_legacy_adapter.LegacyAdapterTest.test_invalid_recovery) ... ok
+test_canonical_matches_spec (test_sender.CanonicalTest.test_canonical_matches_spec) ... ok
+test_crc_hex_format (test_sender.CanonicalTest.test_crc_hex_format) ... ok
+test_crc_mismatch_detected (test_sender.CanonicalTest.test_crc_mismatch_detected) ... ok
+test_nan_rejected (test_sender.CanonicalTest.test_nan_rejected) ... ok
+test_restart_recovery_procedure (test_sender.CanonicalTest.test_restart_recovery_procedure)
+Same receiver: 7 accepted, restart, 1 rejected, persisted 8 accepted. ... ok
+test_seq_persistence_and_failed_write_consumes (test_sender.CanonicalTest.test_seq_persistence_and_failed_write_consumes) ... ok
+test_sequence_novelty (test_sender.CanonicalTest.test_sequence_novelty) ... ok
+test_state_corruption_stops (test_sender.CanonicalTest.test_state_corruption_stops) ... ok
+
+----------------------------------------------------------------------
+Ran 25 tests in 1.033s
+
+OK

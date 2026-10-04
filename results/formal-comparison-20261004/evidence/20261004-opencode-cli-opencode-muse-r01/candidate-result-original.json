@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "result_id": "20261004-opencode-cli-opencode-muse-r01",
+  "run_id": "20261004-opencode-cli-opencode-muse-r01",
+  "manifest_id": "20261004-opencode-cli-opencode-muse-r01",
+  "baseline_id": "comparison-baseline-20261004",
+  "experiment_id": "version-2-end-to-end-v1",
+  "manifest": {
+    "id": "20261004-opencode-cli-opencode-muse-r01",
+    "experiment_id": "version-2-end-to-end-v1",
+    "baseline_id": "comparison-baseline-20261004",
+    "path": ".benchmark-inputs/e2e-evaluation-manifest.json"
+  },
+  "baseline": {
+    "id": "comparison-baseline-20261004",
+    "experiment_id": "version-2-end-to-end-v1",
+    "commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "ref": "comparison-baseline-20261004"
+  },
+  "feature_results": {
+    "F1": {
+      "status": "pass",
+      "scope": "PC fixture collector preserves source/time/unit/error without credentials",
+      "evidence": ["pc_tools/collector.py", "tests/test_collector.py"],
+      "reason": null
+    },
+    "F2": {
+      "status": "pass",
+      "scope": "provider normalization and global wire mapping with source separation",
+      "evidence": ["pc_tools/collector.py", "tests/test_collector.py", "experiments/schema/usage-snapshot.schema.json"],
+      "reason": null
+    },
+    "F3": {
+      "status": "partial",
+      "scope": "cdm/1 framing, CRC, sequence persistence, raw log (real USB send unobserved)",
+      "evidence": ["pc_tools/sender.py", "tests/test_sender.py", "tests/test_e2e_pipeline.py"],
+      "reason": "Canonical form, CRC, seq persistence/wrap, and raw logging are host-verified; bytes were never placed on a real serial port in this run."
+    },
+    "F4": {
+      "status": "partial",
+      "scope": "firmware receiver cache/stale/recovery (host-linked product C modules; LCD unobserved)",
+      "evidence": ["firmware/components/meter_core/meter_parser.c", "firmware/components/meter_core/meter_state.c", "tests/host/test_meter_state.c"],
+      "reason": "Accept/dup/reverse/half-range/wrap, last-good preservation, and 0/299/300 s receive-age staleness pass on host; on-panel reflection awaits the operator procedure."
+    },
+    "F5": {
+      "status": "partial",
+      "scope": "landscape GUI text with verbatim provenance (host layout regression; LCD unobserved)",
+      "evidence": ["firmware/components/gui/gui_format.c", "tests/host/test_gui_regression.c"],
+      "reason": "Dashboard/global/status text, default screens, and the 64-char 820 px budget pass on host; no LCD capture exists in this run."
+    },
+    "F6": {
+      "status": "partial",
+      "scope": "BOOT cycles 3 screens, manual refresh is a PC command (debounce host-tested; device unobserved)",
+      "evidence": ["firmware/components/bsp_input/bsp_input.c", "tests/host/test_input_debounce.c", "docs/agent-runs/20261004-opencode-cli-opencode-muse-r01/firmware-manual.md"],
+      "reason": "50 ms debounce and screen-cycle logic are host-verified and documented; physical BOOT timing awaits the operator."
+    },
+    "F7": {
+      "status": "partial",
+      "scope": "global reset adapters: codex-reset.com compat vs codex-resets.com display (display unobserved)",
+      "evidence": ["pc_tools/collector.py", "tests/test_collector.py", "experiments/fixtures/codex-resets-history.json"],
+      "reason": "Wire mapping and single-source display rule are host-verified; the global screen awaits operator observation."
+    },
+    "F8": {
+      "status": "partial",
+      "scope": "firmware build passes with memory budget; on-device log capture pending",
+      "evidence": ["firmware/build/cdm_meter.bin", "firmware/sdkconfig.defaults", "docs/agent-runs/20261004-opencode-cli-opencode-muse-r01/firmware-manual.md"],
+      "reason": "idf.py set-target esp32s3 and idf.py build succeed (333128 B image, DIRAM 21.5%); UART log capture is operator scope."
+    },
+    "F9": {
+      "status": "partial",
+      "scope": "selected onboard feature: link/idle-aware backlight auto-dim (host-verified; panel dim unobserved)",
+      "evidence": ["firmware/components/feature_auto_dim/feature_auto_dim.c", "tests/host/test_feature_autodim.c", "docs/agent-runs/20261004-opencode-cli-opencode-muse-r01/hardware-feature-selection.md"],
+      "reason": "Feature logic passes on host and is separated from the core path; visible dimming awaits operator observation.",
+      "details": {
+        "candidate_count": 3,
+        "candidates": [
+          {
+            "id": "F-A-autodim",
+            "name": "Link/idle-aware backlight auto-dim",
+            "user_value": "Readable by day, glare-free at night; a dead USB link is visible as a dimmed panel from across the room.",
+            "implementation_cost": "40 lines of pure logic plus one GUI call; no new pins, tasks, or drivers (GPIO6 PWM already owned by core BSP).",
+            "risk": "Low: wrong brightness at worst; core meter path never branches on it; active-low polarity per vendor BSP fact.",
+            "verification_method": "Host C test of production file (normal/dim thresholds, link loss, activity restore) plus operator unplug-and-watch procedure.",
+            "selection_status": "selected",
+            "selection_reason": "Only candidate using an already proven actuator with no new failure surface and full host verifiability.",
+            "selection_document": "docs/agent-runs/20261004-opencode-cli-opencode-muse-r01/hardware-feature-selection.md",
+            "evidence": ["firmware/components/feature_auto_dim/feature_auto_dim.c", "tests/host/test_feature_autodim.c"]
+          },
+          {
+            "id": "F-B-imu-tilt",
+            "name": "IMU tilt page-turn",
+            "user_value": "Flip screens by tilting the board when it sits behind a monitor.",
+            "implementation_cost": "New I2C BSP plus sensor driver port and gesture tuning, about 300 lines.",
+            "risk": "Medium-high: new I2C boot-path failure surface and accidental flips from desk vibration disturb the core reading task.",
+            "verification_method": "Host tilt-classifier unit test plus operator tilt-left/right/idle procedure (planned, not built).",
+            "selection_status": "rejected",
+            "selection_reason": "Highest integration risk; deferred until the core USB-to-LCD path is observed passing on hardware.",
+            "selection_document": "docs/agent-runs/20261004-opencode-cli-opencode-muse-r01/hardware-feature-selection.md",
+            "evidence": ["docs/hardware/version-2-capabilities.md"]
+          },
+          {
+            "id": "F-C-rtc-clock",
+            "name": "RTC-backed last-good clock",
+            "user_value": "Wall-clock last-good time and true source-age on the status screen.",
+            "implementation_cost": "I2C BSP plus time-base arbitration and a clock-invalid UI state, about 200 lines.",
+            "risk": "Medium: backup-cell presence is unconfirmed, so the clock could show confidently wrong times, violating the unknown-until-determined rule.",
+            "verification_method": "RTC present/absent host matrix plus operator power-cycle retention check (planned, not built).",
+            "selection_status": "rejected",
+            "selection_reason": "Depends on the unconfirmed backup-power fact; an unreliable clock is worse than the honest unknown display.",
+            "selection_document": "docs/agent-runs/20261004-opencode-cli-opencode-muse-r01/hardware-feature-selection.md",
+            "evidence": ["docs/hardware/version-2-capabilities.md"]
+          }
+        ],
+        "selected_candidate": "F-A-autodim",
+        "score_breakdown": {
+          "hardware_understanding": 4,
+          "user_value": 4,
+          "selection_logic": 4,
+          "implementation_completeness": 7,
+          "separation_portability": 4,
+          "total": 23
+        }
+      }
+    }
+  },
+  "core_results": {
+    "C1": {
+      "status": "pass",
+      "scope": "idf.py set-target esp32s3 and idf.py build succeed",
+      "evidence": ["firmware/build/cdm_meter.bin", "firmware/sdkconfig.defaults"],
+      "reason": null
+    },
+    "C2": {
+      "status": "blocked",
+      "scope": "LCD lit 30 s with unclipped landscape UI",
+      "evidence": [],
+      "reason": "No physical panel access in this run; 30 s soak and clipping check await the operator procedure against frozen artifacts."
+    },
+    "C3": {
+      "status": "partial",
+      "scope": "provider/window usage display data path (LCD unobserved)",
+      "evidence": ["pc_tools/collector.py", "firmware/main/main.c", "tests/test_e2e_pipeline.py"],
+      "reason": "Usage values, units, and stamps flow collector-to-frame host-verified; on-panel rendering awaits the operator."
+    },
+    "C4": {
+      "status": "partial",
+      "scope": "codex-resets.com recent-reset display data path (LCD unobserved)",
+      "evidence": ["pc_tools/collector.py", "firmware/main/main.c", "experiments/fixtures/codex-resets-history.json"],
+      "reason": "Global adapter and single-source rule host-verified; elapsed display awaits the operator."
+    },
+    "C5": {
+      "status": "partial",
+      "scope": "empty-history default screen (LCD unobserved)",
+      "evidence": ["firmware/components/gui/gui_format.c", "tests/host/test_gui_regression.c"],
+      "reason": "Default global text is implemented and host-tested; panel confirmation awaits the operator."
+    },
+    "C6": {
+      "status": "partial",
+      "scope": "global source and captured-at display data path (LCD unobserved)",
+      "evidence": ["firmware/components/gui/gui_format.c", "tests/host/test_gui_regression.c"],
+      "reason": "Source/captured rendering is implemented and host-tested; panel confirmation awaits the operator."
+    },
+    "C7": {
+      "status": "partial",
+      "scope": "error/stale/last-good preservation and recovery (device run unobserved)",
+      "evidence": ["firmware/components/meter_core/meter_state.c", "tests/host/test_meter_state.c", "tests/test_legacy_adapter.py"],
+      "reason": "Rejection matrix, last-good retention, and recovery pass on host; device-side behavior awaits the operator."
+    },
+    "C8": {
+      "status": "partial",
+      "scope": "BOOT screen cycle, auto refresh, PC manual refresh (device run unobserved)",
+      "evidence": ["firmware/components/bsp_input/bsp_input.c", "firmware/main/main.c", "docs/agent-runs/20261004-opencode-cli-opencode-muse-r01/firmware-manual.md"],
+      "reason": "Debounce, 300 ms screen cycle, 1 Hz refresh, and the PC-refresh procedure are implemented and documented; physical timing awaits the operator."
+    }
+  },
+  "integration_results": {
+    "I1": {
+      "status": "pass",
+      "scope": "credential-free fixture collection preserving source/time/unit/error",
+      "evidence": ["pc_tools/collector.py", "tests/test_collector.py"],
+      "reason": null
+    },
+    "I2": {
+      "status": "pass",
+      "scope": "normalization with separated global sources",
+      "evidence": ["pc_tools/collector.py", "tests/test_collector.py", "pc_tools/legacy_adapter.py"],
+      "reason": null
+    },
+    "I3": {
+      "status": "partial",
+      "scope": "framing/length/CRC/sequence/reconnect with raw log (no device receipt)",
+      "evidence": ["pc_tools/sender.py", "tests/test_sender.py"],
+      "reason": "All transport rules except physical USB receipt are host-verified; host write receipts are not claimed as device ACKs."
+    },
+    "I4": {
+      "status": "partial",
+      "scope": "firmware cache/stale/LCD reflection (LCD unobserved)",
+      "evidence": ["firmware/components/meter_core/meter_state.c", "firmware/main/main.c", "tests/host/test_meter_state.c"],
+      "reason": "Validated-frame to state transition is host-verified against the production C modules; LCD reflection awaits the operator."
+    }
+  },
+  "gui_scores": {
+    "G1": {"score": null, "evidence": [], "reason": "No LCD capture; layout scored by operator."},
+    "G2": {"score": null, "evidence": [], "reason": "No LCD capture; readability scored by operator."},
+    "G3": {"score": null, "evidence": [], "reason": "No LCD capture; source/status scored by operator."},
+    "G4": {"score": null, "evidence": [], "reason": "No LCD capture; error/null states scored by operator."},
+    "G5": {"score": null, "evidence": [], "reason": "No device run; interaction scored by operator."},
+    "G6": {"score": null, "evidence": [], "reason": "No hardware display capture; board optimization scored by operator."}
+  },
+  "provider_matrix": [
+    {
+      "provider_id": "openai",
+      "agent_id": "codex-cli",
+      "host_id": "terminal",
+      "model_id": "codex-demo",
+      "account_profile_id": "acct-demo-openai",
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "codex-percent-window",
+      "window_ids": ["five-hour"],
+      "capabilities": {"quota_windows": true, "absolute_tokens": false, "credits": false, "reset_time": true, "session_telemetry": false},
+      "status": "available",
+      "snapshot_paths": ["experiments/fixtures/providers/codex-percent-window.json"],
+      "evidence": ["experiments/fixtures/providers/codex-percent-window.json"],
+      "reason": null
+    },
+    {
+      "provider_id": "anthropic",
+      "agent_id": "claude-code",
+      "host_id": "terminal",
+      "model_id": "claude-sonnet-demo",
+      "account_profile_id": "acct-demo-anthropic",
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "claude-code-windows",
+      "window_ids": ["five-hour", "weekly", "model-sub-limit"],
+      "capabilities": {"quota_windows": true, "absolute_tokens": false, "credits": false, "reset_time": true, "session_telemetry": false},
+      "status": "available",
+      "snapshot_paths": ["experiments/fixtures/providers/claude-code-windows.json"],
+      "evidence": ["experiments/fixtures/providers/claude-code-windows.json"],
+      "reason": null
+    },
+    {
+      "provider_id": "anthropic",
+      "agent_id": "claude-code",
+      "host_id": "orca",
+      "model_id": "claude-sonnet-demo",
+      "account_profile_id": "acct-demo-anthropic",
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "orca-host-claude-code",
+      "window_ids": ["five-hour"],
+      "capabilities": {"quota_windows": true, "absolute_tokens": false, "credits": false, "reset_time": true, "session_telemetry": false},
+      "status": "available",
+      "snapshot_paths": ["experiments/fixtures/providers/orca-host-claude-code.json"],
+      "evidence": ["experiments/fixtures/providers/orca-host-claude-code.json"],
+      "reason": null
+    },
+    {
+      "provider_id": "google",
+      "agent_id": "gemini-cli",
+      "host_id": "terminal",
+      "model_id": "gemini-demo",
+      "account_profile_id": null,
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "gemini-cli-unsupported",
+      "window_ids": [],
+      "capabilities": {"quota_windows": false, "absolute_tokens": false, "credits": false, "reset_time": false, "session_telemetry": false},
+      "status": "unsupported",
+      "snapshot_paths": ["experiments/fixtures/providers/gemini-cli-unsupported.json"],
+      "evidence": ["experiments/fixtures/providers/gemini-cli-unsupported.json"],
+      "reason": "The synthetic Gemini CLI surface exposes no quota source."
+    },
+    {
+      "provider_id": "google",
+      "agent_id": "antigravity-cli",
+      "host_id": "terminal",
+      "model_id": null,
+      "account_profile_id": null,
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "antigravity-cli-unsupported",
+      "window_ids": [],
+      "capabilities": {"quota_windows": false, "absolute_tokens": false, "credits": false, "reset_time": false, "session_telemetry": false},
+      "status": "unsupported",
+      "snapshot_paths": ["experiments/fixtures/providers/antigravity-cli-unsupported.json"],
+      "evidence": ["experiments/fixtures/providers/antigravity-cli-unsupported.json"],
+      "reason": "Synthetic unavailable quota adapter; no live capability claim."
+    }
+  ],
+  "build": {
+    "status": "pass",
+    "target": "esp32s3",
+    "evidence": ["firmware/build/cdm_meter.bin", "firmware/sdkconfig.defaults", "docs/agent-runs/20261004-opencode-cli-opencode-muse-r01/firmware-manual.md"],
+    "reason": null
+  },
+  "host": {
+    "status": "pass",
+    "host_id": "terminal",
+    "evidence": ["tests/host/test_meter_parser.c", "tests/host/test_meter_state.c", "build-host/test_meter_parser.exe"],
+    "reason": null
+  },
+  "transport": {
+    "status": "partial",
+    "choice": "usb-serial",
+    "evidence": ["pc_tools/sender.py", "tests/test_sender.py", "tests/test_e2e_pipeline.py"],
+    "reason": "115200 8N1 framing, persistence, and raw logging host-verified; no real port was opened in this run."
+  },
+  "hardware": {
+    "status": "blocked",
+    "board": "waveshare-esp32-s3-lcd-3.16",
+    "evidence": [],
+    "reason": "Candidate runs no serial/flash/reset; physical observation runs against frozen artifacts per the manual."
+  },
+  "telemetry": {
+    "wall_clock_seconds": null,
+    "agent_tokens": {"input": null, "output": null, "cached": null, "reasoning": null, "provider_total": null, "total": null},
+    "token_total_definition": "input_plus_output_excludes_cached_and_reasoning",
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+    "availability_reason": "Runner token telemetry is written by the operator after the run; candidate-side measurement is not available.",
+    "evidence": []
+  },
+  "product_pass": false
+}

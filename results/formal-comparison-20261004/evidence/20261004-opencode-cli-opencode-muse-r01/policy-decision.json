@@ -1,0 +1,25 @@
+{
+  "status": "invalid_for_comparison",
+  "reviewer": "Codex operator",
+  "reason": "Frozen delivered prompt line 52 requires failure record and termination on a permission denial. Native OpenCode denied cmake --version at stdout.jsonl line 63 (1791121719837); subsequent assistant message generated a new tool call at line 66 and continued implementation through termination. The rejected version probe was harmless, but continuing violates the predeclared stop rule. No retrospective permission relaxation or replacement run was performed.",
+  "user_interventions": 0,
+  "intervention_review": "Operator audited zero extra candidate prompts, implementation feedback, permission changes or candidate hardware access. Runner-reported null remains unchanged. User hardware-observation preference was discussed outside the candidate session.",
+  "evidence": [
+    {
+      "path": "stdout.jsonl",
+      "sha256": "617ff4fa5624cb0716339d5febc10c0cbd6ee6fbc66e9631e332e05ad3ed1abf"
+    },
+    {
+      "path": "prompt.txt",
+      "sha256": "711f75e5d1b252935fb4760e8636df86c4ebe8720b097d03f91ed2e9024a334f"
+    },
+    {
+      "path": "profile.json",
+      "sha256": "8cb468d6cea8285dadc960cb1fe2d3542e364be1ab04b92fbf37f8d5fca70fb1"
+    },
+    {
+      "path": "operator-policy-audit.json",
+      "sha256": "377d88eff66e1574871c55eb34822f486059c1184e912c5a33d392e34a754be3"
+    }
+  ]
+}

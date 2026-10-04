@@ -1,0 +1,87 @@
+[
+  {
+    "name": "result-validator",
+    "argv": [
+      "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "scripts/validate-end-to-end-result.py",
+      "--result",
+      "results/20261004-opencode-cli-opencode-muse-r01/end-to-end-result.json",
+      "--manifest",
+      ".benchmark-inputs/e2e-evaluation-manifest.json",
+      "--evidence-root",
+      ".",
+      "--matrix",
+      "experiments/fixtures/provider-fixture-matrix.json"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.6400000001303852
+  },
+  {
+    "name": "python-tests",
+    "argv": [
+      "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.172000000020489
+  },
+  {
+    "name": "test_feature_autodim",
+    "argv": [
+      "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\checkout\\build-host\\test_feature_autodim.exe"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.015999999828636646
+  },
+  {
+    "name": "test_gui_regression",
+    "argv": [
+      "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\checkout\\build-host\\test_gui_regression.exe"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.0
+  },
+  {
+    "name": "test_input_debounce",
+    "argv": [
+      "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\checkout\\build-host\\test_input_debounce.exe"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.01600000006146729
+  },
+  {
+    "name": "test_meter_parser",
+    "argv": [
+      "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\checkout\\build-host\\test_meter_parser.exe"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.014999999897554517
+  },
+  {
+    "name": "test_meter_state",
+    "argv": [
+      "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\checkout\\build-host\\test_meter_state.exe"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.01600000006146729
+  },
+  {
+    "name": "test_meter_validate",
+    "argv": [
+      "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\checkout\\build-host\\test_meter_validate.exe"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.0
+  }
+]

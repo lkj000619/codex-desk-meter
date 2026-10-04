@@ -1,0 +1,20 @@
+{
+  "checked_at": "2026-10-04T14:30:11.272344+00:00",
+  "cli_version": "1.18.34",
+  "profile_bytes_sha256": "8cb468d6cea8285dadc960cb1fe2d3542e364be1ab04b92fbf37f8d5fca70fb1",
+  "semantic_profile_sha256": "207c7c77a51bad131180cdc9b608ef1205279c98067b7dc20770f270402f6513",
+  "common_task_sha256": "711f75e5d1b252935fb4760e8636df86c4ebe8720b097d03f91ed2e9024a334f",
+  "feedback_sha256": "e3b46da4da743439ea1800098169f4032c19843b92be7c46e4e6aee69e792bd8",
+  "source_commit": "b421b5ffa417927cfd8904e330017e6d70877977",
+  "starting_implementation_commit": "e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db",
+  "candidate_inputs_verified": true,
+  "operator_baseline_verified": true,
+  "native_config_and_skills_match_initial": true,
+  "idf_version": "ESP-IDF v5.3.2",
+  "hardware_candidate_access": false,
+  "operator_preparation_errors_preserved": [
+    "Operator Python path concatenation TypeError; corrected expression.",
+    "Operator direct CreateProcess of idf.py raised Windows error 193; explicit Python interpreter invocation verified SDK version."
+  ],
+  "candidate_invocations_during_preparation_errors": 0
+}

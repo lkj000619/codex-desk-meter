@@ -1,0 +1,35 @@
+{
+  "run_id": "20261004-opencode-cli-opencode-muse-r01",
+  "frozen_at": "2026-10-04T14:09:35.075072+00:00",
+  "commit": "e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db",
+  "inputs_verified": true,
+  "clean": true,
+  "candidate_ended_at": "2026-10-04T14:04:54.997Z",
+  "terminal_manifest_sha256": "104b28c2fb74913019f259ba7b224b39dca7479fc2c59e5482ad885d5644b568",
+  "artifacts": {
+    "firmware/build/cdm_meter.bin": {
+      "sha256": "f91ff86ea8c80ab5ec03f47948259d7de96bd87e0384ceb3d427eb52d0e72dd9",
+      "bytes": 333232
+    },
+    "firmware/build/cdm_meter.elf": {
+      "sha256": "2fe156d294f222afcf4d17ff67bd045b38a7bf4779d23d171bcbd7a5e37dc0f4",
+      "bytes": 5083764
+    },
+    "firmware/build/cdm_meter.map": {
+      "sha256": "28d33177343e6cdd9d5578891c7d321ff4eca550c952c9ca9ac7a4bb8a4f82b6",
+      "bytes": 3431134
+    },
+    "firmware/build/bootloader/bootloader.bin": {
+      "sha256": "019fcfe691e106eaf1839ff5f0d01146aee2d0aafc906b4a0b34416f5da6f23a",
+      "bytes": 21648
+    },
+    "firmware/build/partition_table/partition-table.bin": {
+      "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "bytes": 3072
+    },
+    "firmware/build/flasher_args.json": {
+      "sha256": "ab2265c87e904c5cc5585f70c8db59f4bc97c36d01c3da5b6520a1cbd6f1b56b",
+      "bytes": 935
+    }
+  }
+}

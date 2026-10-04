@@ -1,0 +1,51 @@
+{
+  "previous_run_id": "20261004-opencode-cli-opencode-muse-r01",
+  "previous_commit": "e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db",
+  "target_ids": [
+    "RM2",
+    "RM3",
+    "RM4",
+    "C2"
+  ],
+  "observed": "The frozen firmware was uploaded to COM3; exact common reference seq 0/1 were sent about 5 seconds apart. Device logs confirm accepted seq 0 CRC 203D8DF3 and seq 1 CRC C4CAA941. User states the LCD has no values; supplied photo shows blue horizontal bands and no legible numbers or labels. This is a qualitative photo observation, not an aligned timing measurement. Candidate sender build/encode functions exactly reproduce both frozen reference wires from their payloads. Actual collector check_snapshot on the unchanged common personal-usage.json returns SCHEMA_INVALID, and the documented provider fixture collector path does not establish common legacy fixture-to-device linkage. Physical transmission used operator replay. BOOT cycles and continuous 30 seconds were not reported, so those remain not_run. Initial candidate also continued after native cmake --version permission denial; policy review marks that attempt invalid_for_comparison, preserved independently of product behavior.",
+  "expected": "Meet the unchanged common task and product contract. From the common legacy personal-usage/global-reset fixtures, produce valid cdm/1 frames through the actual candidate collector/sender path. Under the frozen reference stimulus, LCD must visibly show remaining five-hour 58% and weekly 82% linked to percent_remaining, plus accessible usage/global-reset/diagnostic information. The LCD must render readable landscape UI and satisfy C2; physical BOOT and timing remain operator-observed. Obey all unchanged restrictions including recording a permission denial and terminating, without bypass or extra session. Provide updated required submission paths for this run; do not claim hardware observation or product pass yourself.",
+  "evidence": [
+    {
+      "path": "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\operator-observation\\user-lcd-photo-01.png",
+      "sha256": "d6cf73887d5141da937b804f89bf6dbee888e584301a8fac30453ac86b5d162b",
+      "packaged_path": "feedback-evidence/000-user-lcd-photo-01.png"
+    },
+    {
+      "path": "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\operator-observation\\user-observation-01.json",
+      "sha256": "d29f0bcbe8b531eb376348cab8bc87e9662e4a9c20012938dc9e903e14ddb107",
+      "packaged_path": "feedback-evidence/001-user-observation-01.json"
+    },
+    {
+      "path": "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\operator-observation\\receiver-source-review.json",
+      "sha256": "bbe68f0c1a998787c1ca81145b01010162796b033e4e1722c39eb68861357def",
+      "packaged_path": "feedback-evidence/002-receiver-source-review.json"
+    },
+    {
+      "path": "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\operator-observation\\reference-capture-r1\\device-serial.bin",
+      "sha256": "b82bf83a8107c08acf030eaa90e0b9074fdc719fbd7efa4fdd688ec7f2c75dc0",
+      "packaged_path": "feedback-evidence/003-device-serial.bin"
+    },
+    {
+      "path": "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\operator-observation\\reference-capture-r1\\capture.json",
+      "sha256": "6d8f7b71b4569d3a4fb386e8a9ddc1cc35f8c79549bb68d14a6deece38e7f000",
+      "packaged_path": "feedback-evidence/004-capture.json"
+    },
+    {
+      "path": "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\operator-observation\\common-stimulus-check.json",
+      "sha256": "feb0c4d5ff956fa286c936aaafeb3b5df052937b92d33b027d625b3e0812a883",
+      "packaged_path": "feedback-evidence/005-common-stimulus-check.json"
+    },
+    {
+      "path": "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\reference-review.json",
+      "sha256": "937a88e72fede9dc2771c9c388d15246b52cfbae8f238f932b3f8b3ba7ec07f4",
+      "packaged_path": "feedback-evidence/006-reference-review.json"
+    }
+  ],
+  "remaining_rounds": 3,
+  "remaining_seconds": 7200
+}

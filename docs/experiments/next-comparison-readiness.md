@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-04. 상태: **첫 정식 실험 OpenCode Muse 실행 중. 22:47:50 KST 시작, 최초 최대 120분. 활성 5개 모델, baseline 동결·예약·독립 복원과 COM3 연결 확인 완료.**
+확인일: 2026-10-04. 상태: **첫 OpenCode Muse 결과의 화면 표시 실패·RM 미도달·정책 부적격을 기록하고 후속 1회차 실행 중(23:30:48 KST). COM3 수신과 원본 독립 복원은 확인했다. 활성 5개 모델·동결 baseline·후속 3회/누적 120분 유지.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -92,7 +92,12 @@ CLI/model/settings/environment를 재확인해 새 run-bound receipt를 연결�
 
 현재 첫 블록 순서는 **OpenCode Muse→AGY Flash→AGY Pro→Codex Sol→Codex Luna**다.
 준비 당시 5개 예약은 모두 prepared·시작 시각 null·소비 시간 null이었다.
-현재 첫 OpenCode 예약은 running이며 나머지는 미시작이다. 완료·비용·정책/제품 판정은 실제 종료·관측 후 기록한다.
+현재 첫 OpenCode 실행은 completed(1,024.64초)이며 나머지는 미시작이다. 종료 code 0과 host 시험 통과를 제품 합격으로 해석하지 않는다.
+제출물은 `e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db`에 동결했고, 정책 review는 `invalid_for_comparison`이다.
+COM3의 원본 공통 frame 수신과 실제 성공 로그를 대조했고 사용자 사진에서 값 표시 부재를 확인했다.
+최초 RM은 RM1 pass/RM2 partial/RM3 fail/RM4·RM5 not_run으로 기준 미도달이다. BOOT·연속 유지·정밀 지연은 미측정이다.
+자신의 첫 동결 결과에서 후속 `20261004-opencode-cli-opencode-muse-r02`를 시작했고, 최초의 부적격·실패·비용은 보존한다.
+이번 전송은 operator replay다. 후보 collector의 공통 fixture 연결 문제와 미측정 광학 지연은 [실행 기록](../../results/formal-comparison-20261004/report.md)에 남긴다.
 현재 증거 문서의 후속 commit과 비교 baseline을 혼동하지 않는다. 다음 날짜의 새 prepare는
 동결된 깨끗한 operator checkout `C:/meter-operator-20261004`에서 수행한다.
 당일 준비 도우미는 10월 4일의 실제 근거를 사용한 기록용이며 다음 날 그대로 실행해 현재 환경 확인을 대신하지 않는다.
@@ -104,4 +109,6 @@ python -X utf8 scripts/benchmark.py check --baseline comparison-baseline-2026100
 ```
 
 `check`는 동결 입력을 검사하며 모델 호출이나 ID 예약을 수행하지 않는다.
-실제 제품 terminal artifact와 정책·RM 관측 package는 후보 제출 이후 별도로 생성한다.
+첫 제품 terminal source·정책/RM·사진·계측 원본을 별도 archive에서 독립 복원했다.
+동결 일반 포장 도구는 `firmware/build/`를 수집하지 못해 거부됐으며, 원본 보존 archive의 1,807개 파일·동결 tree·입력·정책·결과 검증 성공과 구분한다.
+경로 지원 보완은 남은 운영 작업이다. 상세 한계와 복원 근거는 [실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다.
