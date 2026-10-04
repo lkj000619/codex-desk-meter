@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "fixture-antigravity-cli-unsupported",
+  "provider_id": "google",
+  "agent_id": "antigravity-cli",
+  "host_id": "terminal",
+  "model_id": null,
+  "account_profile_id": null,
+  "source_kind": "fixture",
+  "metric_kind": "quota_window",
+  "unit": "unknown",
+  "status": "unsupported",
+  "observed_at": "2026-09-10T00:00:00Z",
+  "windows": [],
+  "stale": false,
+  "last_good_at": null,
+  "error_code": "UNSUPPORTED_USAGE_SOURCE",
+  "error_reason": "Synthetic unavailable quota adapter; this fixture makes no claim about live Antigravity capabilities."
+}

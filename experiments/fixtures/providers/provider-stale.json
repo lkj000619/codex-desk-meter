@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "fixture-provider-stale",
+  "provider_id": "anthropic",
+  "agent_id": "claude-code",
+  "host_id": "terminal",
+  "model_id": "claude-sonnet-demo",
+  "account_profile_id": "acct-demo-anthropic",
+  "source_kind": "fixture",
+  "metric_kind": "quota_window",
+  "unit": "percent",
+  "status": "stale",
+  "observed_at": "2026-09-08T00:00:00Z",
+  "windows": [
+    {
+      "window_id": "five-hour",
+      "label": "5h",
+      "used_units": null,
+      "remaining_units": null,
+      "limit_units": null,
+      "unit": "percent",
+      "percent_used": 25,
+      "percent_remaining": 75,
+      "resets_at": "2026-09-08T05:00:00Z",
+      "reset_status": "expired"
+    }
+  ],
+  "stale": true,
+  "last_good_at": "2026-09-08T00:00:00Z",
+  "error_code": "SOURCE_TIMEOUT",
+  "error_reason": "The last successful snapshot is retained after a synthetic timeout."
+}

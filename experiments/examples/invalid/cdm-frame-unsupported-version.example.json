@@ -1,0 +1,13 @@
+{
+  "integrity": {
+    "algorithm": "crc32",
+    "value": "BE8028D7"
+  },
+  "payload": {
+    "global_resets": [],
+    "usage": []
+  },
+  "protocol": "cdm/2",
+  "sent_at": "2026-09-10T00:00:00Z",
+  "sequence": 1
+}

@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://codex-desk-meter.local/schema/usage-snapshot.schema.json",
+  "title": "Codex Desk Meter normalized provider usage snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "snapshot_id",
+    "provider_id",
+    "agent_id",
+    "host_id",
+    "model_id",
+    "account_profile_id",
+    "source_kind",
+    "metric_kind",
+    "unit",
+    "status",
+    "observed_at",
+    "windows",
+    "stale",
+    "last_good_at",
+    "error_code",
+    "error_reason"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "snapshot_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]*$"
+    },
+    "provider_id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "agent_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "host_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "model_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    },
+    "account_profile_id": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$"
+    },
+    "source_kind": {
+      "enum": [
+        "fixture",
+        "local_runtime",
+        "provider_api",
+        "ide_telemetry",
+        "unknown"
+      ]
+    },
+    "metric_kind": {
+      "enum": [
+        "quota_window",
+        "token_balance",
+        "credits",
+        "session_telemetry"
+      ]
+    },
+    "unit": {
+      "enum": [
+        "percent",
+        "token",
+        "credit",
+        "unknown"
+      ]
+    },
+    "status": {
+      "enum": [
+        "available",
+        "unavailable",
+        "unsupported",
+        "unauthorized",
+        "error",
+        "stale"
+      ]
+    },
+    "observed_at": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "windows": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/quotaWindow"
+      }
+    },
+    "stale": {
+      "type": "boolean"
+    },
+    "last_good_at": {
+      "$ref": "#/$defs/timestamp"
+    },
+    "error_code": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1,
+      "pattern": "^[A-Z][A-Z0-9_.-]*$"
+    },
+    "error_reason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "minLength": 1
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+            "unsupported",
+            "unauthorized",
+            "unavailable",
+            "error",
+              "stale"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "error_code",
+          "error_reason"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "stale"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "stale": {
+            "const": true
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "numberOrNull": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "percentOrNull": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 100
+    },
+    "quotaWindow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "window_id",
+        "label",
+        "used_units",
+        "remaining_units",
+        "limit_units",
+        "unit",
+        "percent_used",
+        "percent_remaining",
+        "resets_at"
+      ],
+      "properties": {
+        "window_id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._:-]*$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "used_units": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "remaining_units": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "limit_units": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "unit": {
+          "enum": [
+            "percent",
+            "token",
+            "credit",
+            "unknown"
+          ]
+        },
+        "percent_used": {
+          "$ref": "#/$defs/percentOrNull"
+        },
+        "percent_remaining": {
+          "$ref": "#/$defs/percentOrNull"
+        },
+        "resets_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "reset_status": {
+          "enum": [
+            "unknown",
+            "scheduled",
+            "expired"
+          ]
+        }
+      }
+    }
+  }
+}

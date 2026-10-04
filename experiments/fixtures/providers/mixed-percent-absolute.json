@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "fixture-mixed-percent-absolute",
+  "provider_id": "openai",
+  "agent_id": "codex-cli",
+  "host_id": "terminal",
+  "model_id": "codex-demo",
+  "account_profile_id": "acct-demo-openai",
+  "source_kind": "fixture",
+  "metric_kind": "quota_window",
+  "unit": "unknown",
+  "status": "available",
+  "observed_at": "2026-09-10T00:00:00Z",
+  "windows": [
+    {
+      "window_id": "subscription-percent",
+      "label": "subscription window",
+      "used_units": null,
+      "remaining_units": null,
+      "limit_units": null,
+      "unit": "percent",
+      "percent_used": 30,
+      "percent_remaining": 70,
+      "resets_at": "2026-09-10T05:00:00Z"
+    },
+    {
+      "window_id": "absolute-token-window",
+      "label": "absolute token window",
+      "used_units": 100,
+      "remaining_units": 900,
+      "limit_units": 1000,
+      "unit": "token",
+      "percent_used": 10,
+      "percent_remaining": 90,
+      "resets_at": "2026-09-10T05:00:00Z"
+    }
+  ],
+  "stale": false,
+  "last_good_at": "2026-09-10T00:00:00Z",
+  "error_code": null,
+  "error_reason": null
+}

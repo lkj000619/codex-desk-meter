@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "fixture-orca-host-claude-code",
+  "provider_id": "anthropic",
+  "agent_id": "claude-code",
+  "host_id": "orca",
+  "model_id": "claude-sonnet-demo",
+  "account_profile_id": "acct-demo-anthropic",
+  "source_kind": "fixture",
+  "metric_kind": "quota_window",
+  "unit": "percent",
+  "status": "available",
+  "observed_at": "2026-09-10T00:00:00Z",
+  "windows": [
+    {
+      "window_id": "five-hour",
+      "label": "5h",
+      "used_units": null,
+      "remaining_units": null,
+      "limit_units": null,
+      "unit": "percent",
+      "percent_used": 15,
+      "percent_remaining": 85,
+      "resets_at": "2026-09-10T05:00:00Z"
+    }
+  ],
+  "stale": false,
+  "last_good_at": "2026-09-10T00:00:00Z",
+  "error_code": null,
+  "error_reason": null
+}

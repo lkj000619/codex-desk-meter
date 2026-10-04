@@ -1,0 +1,773 @@
+{
+  "schema_version": 1,
+  "source_root": "C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF",
+  "scope": "Only manufacturer source files; operator build outputs and backups are outside the declared read scope. This is a path inventory, not a product solution.",
+  "files": {
+    "01_ADC_Test": [
+      {
+        "path": "01_ADC_Test/CMakeLists.txt",
+        "sha256": "dabd25d271c91c810333983aa9fdb55a20899db64033af538df12287f977486c"
+      },
+      {
+        "path": "01_ADC_Test/components/adc_bsp/adc_bsp.c",
+        "sha256": "1514ccf70f399f787a372b93928e646dc4d33e888146d457f329bcf2e8594d81"
+      },
+      {
+        "path": "01_ADC_Test/components/adc_bsp/adc_bsp.h",
+        "sha256": "4c5e8b0fa6da38bf2b61642c76e274142800b152a44d1ae717248a4beeacd19e"
+      },
+      {
+        "path": "01_ADC_Test/components/adc_bsp/CMakeLists.txt",
+        "sha256": "39683ad78e89dcc7f24e17410b7c6f622c02aa53c13bcec6589726cd2ee89d48"
+      },
+      {
+        "path": "01_ADC_Test/components/user_app/CMakeLists.txt",
+        "sha256": "2e430ad2fd77688b42b26f97a5487ec977abdefa7dd5d31600500f52c4ac2bfa"
+      },
+      {
+        "path": "01_ADC_Test/components/user_app/user_app.c",
+        "sha256": "948d303c91715f6680f43039c96cf1486fc9799402f47a8057a0b5650d3bd777"
+      },
+      {
+        "path": "01_ADC_Test/components/user_app/user_app.h",
+        "sha256": "be25993aac9b934ab83e8c77f316c137fad732f3a684a541c73dca8571b79305"
+      },
+      {
+        "path": "01_ADC_Test/main/CMakeLists.txt",
+        "sha256": "4dc0761cf956649158a61de7be787532fbc027685e2685ead5bb058bf66151b4"
+      },
+      {
+        "path": "01_ADC_Test/main/main.c",
+        "sha256": "bb24ff1685af09cc1dccd6fbae8fdac4a5f1310c8d956e92ccaa689b20f5e250"
+      },
+      {
+        "path": "01_ADC_Test/sdkconfig",
+        "sha256": "a4328c0449bfd9e18162af68e9ae3af10a3d7ad831660161a8968f7f9252385b"
+      },
+      {
+        "path": "01_ADC_Test/sdkconfig.defaults",
+        "sha256": "2ec0b0599887ce426bed659ffc64236e7e4ac2919e67800f9a02fa8f1f38e208"
+      }
+    ],
+    "02_I2C_PCF85063": [
+      {
+        "path": "02_I2C_PCF85063/CMakeLists.txt",
+        "sha256": "4607b5b4884e4eb90f0de8d443b773c41f057a9e9d9860a4e76737395e41c25f"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/i2c_bsp/CMakeLists.txt",
+        "sha256": "094727d6fa499fd09e9f3e1766b8553ef87393101bfde796ff4b4ef4c8fadb39"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/i2c_bsp/i2c_bsp.c",
+        "sha256": "924bfa33a471fbec73c1b6059fa0424df4ce8bde1be619e0e9e50c144fba4f4d"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/i2c_bsp/i2c_bsp.h",
+        "sha256": "d3d174c744542f448dce62a6db3bfec5c54626b09917bc1ff80ca5131c068c09"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/i2c_equipment/CMakeLists.txt",
+        "sha256": "676f83e5ea0a4837fcb685540bb0c85683b4c0fed3644390faeafc924b5d8ec3"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/i2c_equipment/i2c_equipment.cpp",
+        "sha256": "de40b9534ddf057461f0dbf95951a201cd937716109368f6d4ee8905e9b61120"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/i2c_equipment/i2c_equipment.h",
+        "sha256": "a5e2ebd8f5cdb1276da4110a8116e92ffad781601a865083034e73f20e2034cf"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/CMakeLists.txt",
+        "sha256": "4d5f0ba96dd92851fb8c98bf5716e8d80f2056426204e9ce09c539770c56e16d"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/BoschFirmware.h",
+        "sha256": "fa5a2d7f19d07d266931fde025d2d1cbe8ba611cb1b9c27a0b35798bf15c2858"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/DevicesPins.h",
+        "sha256": "5370d3510db11823f40a63f6ebc28f85780f611e6159300be19fed79fbb78245"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/SensorBHI260AP.cpp",
+        "sha256": "4da539835da0ac9e74eb36e5ef9f8acb427ba83fa33d092a1d46a7ad3fcdb872"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/SensorBHI260AP_Klio.cpp",
+        "sha256": "a73a5f84d273663483840de3a59fb59e9084d7ec6732f80e674d92bd29deaed6"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/SensorBMA423.cpp",
+        "sha256": "78f6091ccc0ee158ef69d20813aed8f493fdfb9013681fdb484329e3f200d323"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/SensorLib.h",
+        "sha256": "4ef98ec46cc5d6beb67d09f2df87a3266ae5cb58d111b7f5956b8137f0c0e50f"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/SensorLib_Version.h",
+        "sha256": "1172b8b74130f18ff700acf8e7c56c69f436ad9a04f368da0eb0e79c775ce44e"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/SensorRTC.h",
+        "sha256": "88739cd0dcf7f89d357da9912dcf1a0c71257dc3b45227e28ed68369346bb860"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/SensorRtcHelper.cpp",
+        "sha256": "274ef68f5c835ad8be8b138056f73f63724d5aaaa828cbfce1f16bf2c50745ff"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/SensorWireHelper.cpp",
+        "sha256": "6c158ac08a41af41a57f0750e01704f02f155043686fd860e62dcfca099a424b"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/SensorWireHelper.h",
+        "sha256": "13ffaca10e9ae24d5feba8e4b14d81754c20940a7717077721f82faab7458317"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/TouchDrvCSTXXX.cpp",
+        "sha256": "87a67aace227ec0e33561e6c6c473b247fe8959d68cdc36d84c303eda93cc47d"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/TouchDrvGT9895.cpp",
+        "sha256": "bc14b9ff1e939ec5caa0763c2a0687821f7719dbdbdad129bf5b8e33e44f2a0a"
+      },
+      {
+        "path": "02_I2C_PCF85063/components/SensorLib/src/TouchDrvInterface.cpp",
+        "sha256": "54cf788367542375ab86554ec997fab5af9336b6faee3fdcd50ca9ded08f5f4e"
+      },
+      {
+        "path": "02_I2C_PCF85063/main/CMakeLists.txt",
+        "sha256": "0c607663af1be6ee85a96e88f77ec28a98ac150ac5defb0302568b16b67579ae"
+      },
+      {
+        "path": "02_I2C_PCF85063/main/idf_component.yml",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "path": "02_I2C_PCF85063/main/main.cpp",
+        "sha256": "5f1b0c26d862f45baf22ffaf05f74c2e876fe43a279d458c74ee86efb82bb7df"
+      },
+      {
+        "path": "02_I2C_PCF85063/main/user_config.h",
+        "sha256": "d7ac09a95fd8413284e97c28a4bbe11b080bb0a79fa9cf6018a3e00e2f5f2343"
+      },
+      {
+        "path": "02_I2C_PCF85063/sdkconfig",
+        "sha256": "4b3314e6772e9d9d88a5754dd7008dd8971a71e540c263bf38ebdbca35ea8e00"
+      },
+      {
+        "path": "02_I2C_PCF85063/sdkconfig.defaults",
+        "sha256": "b455024d99e5cdb7b95eaa07f927767e1c8a8f2a1d1424e0628676bf456e5645"
+      }
+    ],
+    "03_I2C_QMI8658": [
+      {
+        "path": "03_I2C_QMI8658/CMakeLists.txt",
+        "sha256": "c0a9bd12f9089821e69f0f7e0aea541c5672ad014bc06a53358923182331c4c9"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/i2c_bsp/CMakeLists.txt",
+        "sha256": "094727d6fa499fd09e9f3e1766b8553ef87393101bfde796ff4b4ef4c8fadb39"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/i2c_bsp/i2c_bsp.c",
+        "sha256": "924bfa33a471fbec73c1b6059fa0424df4ce8bde1be619e0e9e50c144fba4f4d"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/i2c_bsp/i2c_bsp.h",
+        "sha256": "d3d174c744542f448dce62a6db3bfec5c54626b09917bc1ff80ca5131c068c09"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/i2c_equipment/CMakeLists.txt",
+        "sha256": "676f83e5ea0a4837fcb685540bb0c85683b4c0fed3644390faeafc924b5d8ec3"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/i2c_equipment/i2c_equipment.cpp",
+        "sha256": "1180dc418059ae62d8851d1812df042828ce0f6acdbc0b880b1d7163a1d041fc"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/i2c_equipment/i2c_equipment.h",
+        "sha256": "51135e72aa2522fd902d675639e88bb5ce4e2b09601338a9f67ab5cd0aae29db"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/CMakeLists.txt",
+        "sha256": "4d5f0ba96dd92851fb8c98bf5716e8d80f2056426204e9ce09c539770c56e16d"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/BoschFirmware.h",
+        "sha256": "fa5a2d7f19d07d266931fde025d2d1cbe8ba611cb1b9c27a0b35798bf15c2858"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/DevicesPins.h",
+        "sha256": "5370d3510db11823f40a63f6ebc28f85780f611e6159300be19fed79fbb78245"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/SensorBHI260AP.cpp",
+        "sha256": "4da539835da0ac9e74eb36e5ef9f8acb427ba83fa33d092a1d46a7ad3fcdb872"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/SensorBHI260AP_Klio.cpp",
+        "sha256": "a73a5f84d273663483840de3a59fb59e9084d7ec6732f80e674d92bd29deaed6"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/SensorBMA423.cpp",
+        "sha256": "78f6091ccc0ee158ef69d20813aed8f493fdfb9013681fdb484329e3f200d323"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/SensorLib.h",
+        "sha256": "4ef98ec46cc5d6beb67d09f2df87a3266ae5cb58d111b7f5956b8137f0c0e50f"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/SensorLib_Version.h",
+        "sha256": "1172b8b74130f18ff700acf8e7c56c69f436ad9a04f368da0eb0e79c775ce44e"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/SensorRTC.h",
+        "sha256": "88739cd0dcf7f89d357da9912dcf1a0c71257dc3b45227e28ed68369346bb860"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/SensorRtcHelper.cpp",
+        "sha256": "274ef68f5c835ad8be8b138056f73f63724d5aaaa828cbfce1f16bf2c50745ff"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/SensorWireHelper.cpp",
+        "sha256": "6c158ac08a41af41a57f0750e01704f02f155043686fd860e62dcfca099a424b"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/SensorWireHelper.h",
+        "sha256": "13ffaca10e9ae24d5feba8e4b14d81754c20940a7717077721f82faab7458317"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/TouchDrvCSTXXX.cpp",
+        "sha256": "87a67aace227ec0e33561e6c6c473b247fe8959d68cdc36d84c303eda93cc47d"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/TouchDrvGT9895.cpp",
+        "sha256": "bc14b9ff1e939ec5caa0763c2a0687821f7719dbdbdad129bf5b8e33e44f2a0a"
+      },
+      {
+        "path": "03_I2C_QMI8658/components/SensorLib/src/TouchDrvInterface.cpp",
+        "sha256": "54cf788367542375ab86554ec997fab5af9336b6faee3fdcd50ca9ded08f5f4e"
+      },
+      {
+        "path": "03_I2C_QMI8658/main/CMakeLists.txt",
+        "sha256": "0c607663af1be6ee85a96e88f77ec28a98ac150ac5defb0302568b16b67579ae"
+      },
+      {
+        "path": "03_I2C_QMI8658/main/idf_component.yml",
+        "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "path": "03_I2C_QMI8658/main/main.cpp",
+        "sha256": "5176c61753cd8d1a96e03c8c6c6442de363edbda06cb799d5533477894f41c8a"
+      },
+      {
+        "path": "03_I2C_QMI8658/main/user_config.h",
+        "sha256": "d7ac09a95fd8413284e97c28a4bbe11b080bb0a79fa9cf6018a3e00e2f5f2343"
+      },
+      {
+        "path": "03_I2C_QMI8658/sdkconfig",
+        "sha256": "4b3314e6772e9d9d88a5754dd7008dd8971a71e540c263bf38ebdbca35ea8e00"
+      },
+      {
+        "path": "03_I2C_QMI8658/sdkconfig.defaults",
+        "sha256": "b455024d99e5cdb7b95eaa07f927767e1c8a8f2a1d1424e0628676bf456e5645"
+      }
+    ],
+    "08_LVGL_V9_Test": [
+      {
+        "path": "08_LVGL_V9_Test/CMakeLists.txt",
+        "sha256": "3168736b4db84aa5275ba50d53e911cb95f926ae4298aa5821e5224be022dbc7"
+      },
+      {
+        "path": "08_LVGL_V9_Test/components/lcd_bl_pwm_bsp/CMakeLists.txt",
+        "sha256": "48aed2bece02e5312bbcb73a5c86908cc6fcf351b666ac424f4257758c34cb6a"
+      },
+      {
+        "path": "08_LVGL_V9_Test/components/lcd_bl_pwm_bsp/lcd_bl_pwm_bsp.c",
+        "sha256": "d841ce25e9c12fe8c7b75326feac086864b4105cbe5661201d443daf8cf5b5b5"
+      },
+      {
+        "path": "08_LVGL_V9_Test/components/lcd_bl_pwm_bsp/lcd_bl_pwm_bsp.h",
+        "sha256": "64474f6badb72b4020861367849eb894760ceb65bf24db14174e502d5543bd66"
+      },
+      {
+        "path": "08_LVGL_V9_Test/dependencies.lock",
+        "sha256": "a9105c2c74ea99608a052af9724629613537a5f3929b92269b64bd6fbd60dd79"
+      },
+      {
+        "path": "08_LVGL_V9_Test/main/CMakeLists.txt",
+        "sha256": "4dc0761cf956649158a61de7be787532fbc027685e2685ead5bb058bf66151b4"
+      },
+      {
+        "path": "08_LVGL_V9_Test/main/idf_component.yml",
+        "sha256": "332c381a18c7af1f4b0b4164c5dfbd9c5a6f4b321f913ffba75dea1972ef703e"
+      },
+      {
+        "path": "08_LVGL_V9_Test/main/main.c",
+        "sha256": "a45a6e3529262c15b8be1e563c94a7fd38a5c6d6b6b13e53d87c243488a3b99c"
+      },
+      {
+        "path": "08_LVGL_V9_Test/main/user_config.h",
+        "sha256": "3a5ee74a2dfd143d8ae78ae7a3aeea9bb7394c0a229975aeb343d03df2a1d98c"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_io_expander/CMakeLists.txt",
+        "sha256": "9c43958847f220d1e30326cd0d2d4ea14c64f5c1c6892a7bc1960e6c9031cbab"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_io_expander/esp_io_expander.c",
+        "sha256": "f02ce47e55fae9ab0848c3aa1baa583595e45dbcdecf1bcf361db16caa301eb7"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_io_expander/esp_io_expander_gpio_wrapper.c",
+        "sha256": "7438947a92b74c185bac1105ef3bf4012195d6e54d246edf87f73cf093d419b7"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_io_expander/esp_io_expander_gpio_wrapper_weak.c",
+        "sha256": "e90b8c3bf5816c06782227b26373053a26b98d9abac33c2751efd3a06029269f"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_io_expander/idf_component.yml",
+        "sha256": "5aa5ed672c9c6337886a77536841433791a3dfb93f1835515f67e8de34c0e6ce"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_io_expander/include/esp_io_expander.h",
+        "sha256": "8cdeb71aafe73fe00c6bcd847aa268c1c3b42343d626a0ee9bf85511343e2d8d"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_io_expander/include/esp_io_expander_gpio_wrapper.h",
+        "sha256": "acc7b808701abb05e2afd922463fe2981837cf9e62ca03a33c8cb7a16089ea54"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_io_expander/priv_include/esp_io_expander_gpio_wrapper_priv.h",
+        "sha256": "7fc2fcc9e4e2cf92dc08dd281a4b51059061e8b5fbdfdceb99b2714b7f3d9f93"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_panel_io_additions/CMakeLists.txt",
+        "sha256": "5388d6f9259c00b95ea4b584a778cc41c9dd9b747d0c2568a70479cb3a567a9b"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c",
+        "sha256": "b19823115d8a337cb9c45b512e86c035ba4ac99f273714286d87b3462ca62092"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_panel_io_additions/idf_component.yml",
+        "sha256": "ac781cc30945e91b413617d92ab3ccd5ed7bc82112f8d97291a8c942242c7e2a"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_panel_io_additions/include/esp_lcd_panel_io_additions.h",
+        "sha256": "a3a676a725f7ffc7b7fdf5d652c28861900c85fa2ee9b68e1d24eed66918db55"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_panel_io_additions/test_apps/CMakeLists.txt",
+        "sha256": "5dcc2e4addad34135e2b6ed66f4a7a44da6b4c7ff5ce5188293e38d7d7c68d50"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_panel_io_additions/test_apps/sdkconfig.defaults",
+        "sha256": "b3f9660085595b907f7411e205468220c2dfb867de4de5d7fb3cbb406651dcab"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_st7701/CMakeLists.txt",
+        "sha256": "25a76e50bd067333b9143a1b36c837f03c901751318c574e014114f2c082d22a"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_st7701/esp_lcd_st7701.c",
+        "sha256": "ce356f0d44bce2cebd380d0fb7974b377a2bb686d843fe2636f6bba87dd19ef3"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_st7701/esp_lcd_st7701_mipi.c",
+        "sha256": "eb96b129b51ce78c090551bc53da2b0e8e4a2f9e3069dabda3750c583b88ab99"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_st7701/esp_lcd_st7701_rgb.c",
+        "sha256": "486572aabd1c05be15a9aa1bdcceeacfbfa55329aec65778cb530ef19e785a0f"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_st7701/idf_component.yml",
+        "sha256": "a518254f3ab7287cac9fb8182d99e65a9febf86bd3e1b1e61ca16169b6a13515"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_st7701/include/esp_lcd_st7701.h",
+        "sha256": "9572718e64d329e296e474e188e3b8eaa254f6655166c2a19846565058453aab"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_st7701/priv_include/esp_lcd_st7701_interface.h",
+        "sha256": "aae70a54994b6963f6b9e432b4ea53a5a414448c072734f580caa3b3c0181a62"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_st7701/test_apps/CMakeLists.txt",
+        "sha256": "6cebc7df98fd96125dbf3524b0454965e77452dd109e99c8b49828d9bdd9f7ea"
+      },
+      {
+        "path": "08_LVGL_V9_Test/managed_components/espressif__esp_lcd_st7701/test_apps/sdkconfig.defaults",
+        "sha256": "369ed8067086d97516736b6a52e53b38e7237e34e717d36bcc60e3d764f661b5"
+      },
+      {
+        "path": "08_LVGL_V9_Test/sdkconfig",
+        "sha256": "164e324b0dbd9c46ade32a361bda30526e2998fe451fefb43d49ee30c554ed6a"
+      },
+      {
+        "path": "08_LVGL_V9_Test/sdkconfig.defaults",
+        "sha256": "e4f71c7a1c7aee69b26d47e5467617f1d4423a67c54b1a797305a5428de99839"
+      }
+    ],
+    "09_FactoryProgram": [
+      {
+        "path": "09_FactoryProgram/CMakeLists.txt",
+        "sha256": "dfd20b357a8b29bea1b9b37a4b62cea4c3fefa4bea53f1da77661e30b0b0a789"
+      },
+      {
+        "path": "09_FactoryProgram/components/adc_bsp/adc_bsp.c",
+        "sha256": "a733e17efff91784c04d052d078a828e04bd5da953156d1ea270da9766ade89a"
+      },
+      {
+        "path": "09_FactoryProgram/components/adc_bsp/adc_bsp.h",
+        "sha256": "caa7c89fd9e1fa17f857ed43c8875cf78b2933238ab822731aa294f169e9a8e3"
+      },
+      {
+        "path": "09_FactoryProgram/components/adc_bsp/CMakeLists.txt",
+        "sha256": "39683ad78e89dcc7f24e17410b7c6f622c02aa53c13bcec6589726cd2ee89d48"
+      },
+      {
+        "path": "09_FactoryProgram/components/ble_scan_bsp/ble_scan_bsp.c",
+        "sha256": "e0295b2221f733300b99e37bdaa4ded9a7a73e3c048fa23bda263cac6a173534"
+      },
+      {
+        "path": "09_FactoryProgram/components/ble_scan_bsp/ble_scan_bsp.h",
+        "sha256": "5f6fe4f487c5d776437521108912e8f6b11ba02ebf41df13fa3e6e2a84cb3519"
+      },
+      {
+        "path": "09_FactoryProgram/components/ble_scan_bsp/CMakeLists.txt",
+        "sha256": "8e3bce32c036d6a0ff34e86232e8d7953a606ffedc58926316c11aaecb85d62f"
+      },
+      {
+        "path": "09_FactoryProgram/components/button_bsp/button_bsp.c",
+        "sha256": "374310396dddeda6cfd979e060737f73dda03ed4e7c31352005e73f1eb8cd8f3"
+      },
+      {
+        "path": "09_FactoryProgram/components/button_bsp/button_bsp.h",
+        "sha256": "78d5c4878e91da1d7bb3b742a0cf8a55e1e5543d28825cf852ceac2a7d04971f"
+      },
+      {
+        "path": "09_FactoryProgram/components/button_bsp/CMakeLists.txt",
+        "sha256": "8aaf46ff663a57c2aebd569ec53e8b63bd3a5bceb7a64fc835ce67c2a79351c8"
+      },
+      {
+        "path": "09_FactoryProgram/components/button_bsp/multi_button.c",
+        "sha256": "d6da9c446faf4173e2c13718a4c0f75b1378707081546ac8ff1447dd17d4124c"
+      },
+      {
+        "path": "09_FactoryProgram/components/button_bsp/multi_button.h",
+        "sha256": "cc23058be945db3a252b89461fcefd688ad2d8f7078564811cb68a51f838af9c"
+      },
+      {
+        "path": "09_FactoryProgram/components/esp_wifi_bsp/CMakeLists.txt",
+        "sha256": "597e5aed6261e8b0e357979bc3283b65e2170f8bd5bfdf2f2709f73db40ef9bd"
+      },
+      {
+        "path": "09_FactoryProgram/components/esp_wifi_bsp/esp_wifi_bsp.c",
+        "sha256": "2b6710a7ed90bbbc470146b3e625b5a4e310547ab4d8b1f229c4f0411b9efac4"
+      },
+      {
+        "path": "09_FactoryProgram/components/esp_wifi_bsp/esp_wifi_bsp.h",
+        "sha256": "872e0f44d34c68a93db26417221421275a8f1a640b10bd1db35805e5de227942"
+      },
+      {
+        "path": "09_FactoryProgram/components/i2c_bsp/CMakeLists.txt",
+        "sha256": "094727d6fa499fd09e9f3e1766b8553ef87393101bfde796ff4b4ef4c8fadb39"
+      },
+      {
+        "path": "09_FactoryProgram/components/i2c_bsp/i2c_bsp.c",
+        "sha256": "9a9d0ad73747a881b4bcd5b58559b60941ac9d0127ae20d8e19ffff0b343fbc7"
+      },
+      {
+        "path": "09_FactoryProgram/components/i2c_bsp/i2c_bsp.h",
+        "sha256": "256f6cc6a6479c8e248596c068ec0c9a76172bf0e863b597cbde5a073808b4e5"
+      },
+      {
+        "path": "09_FactoryProgram/components/i2c_equipment/CMakeLists.txt",
+        "sha256": "676f83e5ea0a4837fcb685540bb0c85683b4c0fed3644390faeafc924b5d8ec3"
+      },
+      {
+        "path": "09_FactoryProgram/components/i2c_equipment/i2c_equipment.cpp",
+        "sha256": "b9650e3a728291b2f652412f66f0ad8a2d130e3f9192ca2b67aebe6999c18a50"
+      },
+      {
+        "path": "09_FactoryProgram/components/i2c_equipment/i2c_equipment.h",
+        "sha256": "1389f3ccbe1fa1297bb52dcc192ddc7e551321080434c08761d36e294e1803ef"
+      },
+      {
+        "path": "09_FactoryProgram/components/lcd_bl_pwm_bsp/CMakeLists.txt",
+        "sha256": "48aed2bece02e5312bbcb73a5c86908cc6fcf351b666ac424f4257758c34cb6a"
+      },
+      {
+        "path": "09_FactoryProgram/components/lcd_bl_pwm_bsp/lcd_bl_pwm_bsp.c",
+        "sha256": "1f6e4214730365fea9c56dafe92e820ee011287fd968485c646fbac246f5aca6"
+      },
+      {
+        "path": "09_FactoryProgram/components/lcd_bl_pwm_bsp/lcd_bl_pwm_bsp.h",
+        "sha256": "64474f6badb72b4020861367849eb894760ceb65bf24db14174e502d5543bd66"
+      },
+      {
+        "path": "09_FactoryProgram/components/lvgl/CMakeLists.txt",
+        "sha256": "edd80227a3af0a883d2f8bd096c03d0916f78f0ab20f8f021dd9e2a14d68a2cf"
+      },
+      {
+        "path": "09_FactoryProgram/components/lvgl/tests/CMakeLists.txt",
+        "sha256": "912861497d99ed21002ed721718b6ae0633a895ed5d5da9e58d7122834188208"
+      },
+      {
+        "path": "09_FactoryProgram/components/sdcard_bsp/CMakeLists.txt",
+        "sha256": "b5f11a571f47b79ed8a63499b64564a7ed7236aa83a6e21e24f812fbb58312e3"
+      },
+      {
+        "path": "09_FactoryProgram/components/sdcard_bsp/sdcard_bsp.c",
+        "sha256": "ef297b626d8af0a5c7856b84ac0d1651bf3a28210f217bc2c7711aae3327b568"
+      },
+      {
+        "path": "09_FactoryProgram/components/sdcard_bsp/sdcard_bsp.h",
+        "sha256": "f1af21f3b954924856bc79d287d41e08a27d30257e27c0448d9353b2c8407e3a"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/CMakeLists.txt",
+        "sha256": "4d5f0ba96dd92851fb8c98bf5716e8d80f2056426204e9ce09c539770c56e16d"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/BoschFirmware.h",
+        "sha256": "fa5a2d7f19d07d266931fde025d2d1cbe8ba611cb1b9c27a0b35798bf15c2858"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/DevicesPins.h",
+        "sha256": "5370d3510db11823f40a63f6ebc28f85780f611e6159300be19fed79fbb78245"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/SensorBHI260AP.cpp",
+        "sha256": "4da539835da0ac9e74eb36e5ef9f8acb427ba83fa33d092a1d46a7ad3fcdb872"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/SensorBHI260AP_Klio.cpp",
+        "sha256": "a73a5f84d273663483840de3a59fb59e9084d7ec6732f80e674d92bd29deaed6"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/SensorBMA423.cpp",
+        "sha256": "78f6091ccc0ee158ef69d20813aed8f493fdfb9013681fdb484329e3f200d323"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/SensorLib.h",
+        "sha256": "4ef98ec46cc5d6beb67d09f2df87a3266ae5cb58d111b7f5956b8137f0c0e50f"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/SensorLib_Version.h",
+        "sha256": "1172b8b74130f18ff700acf8e7c56c69f436ad9a04f368da0eb0e79c775ce44e"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/SensorRTC.h",
+        "sha256": "88739cd0dcf7f89d357da9912dcf1a0c71257dc3b45227e28ed68369346bb860"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/SensorRtcHelper.cpp",
+        "sha256": "274ef68f5c835ad8be8b138056f73f63724d5aaaa828cbfce1f16bf2c50745ff"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/SensorWireHelper.cpp",
+        "sha256": "6c158ac08a41af41a57f0750e01704f02f155043686fd860e62dcfca099a424b"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/SensorWireHelper.h",
+        "sha256": "13ffaca10e9ae24d5feba8e4b14d81754c20940a7717077721f82faab7458317"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/TouchDrvCSTXXX.cpp",
+        "sha256": "87a67aace227ec0e33561e6c6c473b247fe8959d68cdc36d84c303eda93cc47d"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/TouchDrvGT9895.cpp",
+        "sha256": "bc14b9ff1e939ec5caa0763c2a0687821f7719dbdbdad129bf5b8e33e44f2a0a"
+      },
+      {
+        "path": "09_FactoryProgram/components/SensorLib/src/TouchDrvInterface.cpp",
+        "sha256": "54cf788367542375ab86554ec997fab5af9336b6faee3fdcd50ca9ded08f5f4e"
+      },
+      {
+        "path": "09_FactoryProgram/components/ui_bsp/CMakeLists.txt",
+        "sha256": "5d07511c9d74536be2efca8d010f4c0d4410c52d847689003187406977f48595"
+      },
+      {
+        "path": "09_FactoryProgram/components/ui_bsp/custom/custom.c",
+        "sha256": "c202213a1ce736a4f43deffa3568bbbfa147c43ba55aea50624b6e36866cc734"
+      },
+      {
+        "path": "09_FactoryProgram/components/ui_bsp/custom/custom.h",
+        "sha256": "af9c450a3910560c018811e08efb811b9b4a3e2dc1c8b6795a7fb48037437f20"
+      },
+      {
+        "path": "09_FactoryProgram/components/ui_bsp/custom/lv_conf_ext.h",
+        "sha256": "0e5b8ffa5d5de260d21f796c4c9fa85e496054a8d5c46c8a5c6dbcf106d61b6a"
+      },
+      {
+        "path": "09_FactoryProgram/components/ui_bsp/generated/events_init.c",
+        "sha256": "ec7b626ee60eb3dba5ca256fd3ecaacc9edc01afe578bd72b309517bbba2e37c"
+      },
+      {
+        "path": "09_FactoryProgram/components/ui_bsp/generated/events_init.h",
+        "sha256": "d69f1d83361e38db87c405f6a9f1ba629c72dc7784aa2fc27026dc9da96ca8e6"
+      },
+      {
+        "path": "09_FactoryProgram/components/ui_bsp/generated/gui_guider.c",
+        "sha256": "c0defd68338989b3bdbf58985350573c0d08d0bc579422191bb5a7e1c0679523"
+      },
+      {
+        "path": "09_FactoryProgram/components/ui_bsp/generated/gui_guider.h",
+        "sha256": "48c085fb13851bec4847ab22256940fb4b7b7bba6ab8e9cc2ff5b041aae4872b"
+      },
+      {
+        "path": "09_FactoryProgram/components/ui_bsp/generated/setup_scr_screen.c",
+        "sha256": "0b18a9e37670901d6cc7ad22b18ea84b630987904cb838b553e4d8a384014735"
+      },
+      {
+        "path": "09_FactoryProgram/components/ui_bsp/generated/widgets_init.c",
+        "sha256": "c5bda7ce1fbdf3d7cfc6aa207027b1fa08781869fb4178eebbd6da28a43eb340"
+      },
+      {
+        "path": "09_FactoryProgram/components/ui_bsp/generated/widgets_init.h",
+        "sha256": "34797b7e8c8e089b201ec1bc68fd828a323fdc2152200b9c391e0f768c90c236"
+      },
+      {
+        "path": "09_FactoryProgram/components/user_app/CMakeLists.txt",
+        "sha256": "1508d82cd716e193b7a5707df650ee8b2b78e0c0a6e828e1aca123f95cce1ca8"
+      },
+      {
+        "path": "09_FactoryProgram/components/user_app/user_app.cpp",
+        "sha256": "28caa0e5a73254f7f94d9888cbc17b08d28223978a8a7e48e71b18ad58442bbb"
+      },
+      {
+        "path": "09_FactoryProgram/components/user_app/user_app.h",
+        "sha256": "8b6877cd454ebbaa0a99e6ede11ac191eedbbd1499bbbeedb4ab1d7333de55a4"
+      },
+      {
+        "path": "09_FactoryProgram/dependencies.lock",
+        "sha256": "374079692a2ac3c8ec5ee69ff631c8e201c69d33459c4245a4ca509427a14ce9"
+      },
+      {
+        "path": "09_FactoryProgram/main/CMakeLists.txt",
+        "sha256": "0c607663af1be6ee85a96e88f77ec28a98ac150ac5defb0302568b16b67579ae"
+      },
+      {
+        "path": "09_FactoryProgram/main/idf_component.yml",
+        "sha256": "860db8eac866d6300af38f20b4617a1c2ba320d03e12cd9b2af6d91e9ddb2ef8"
+      },
+      {
+        "path": "09_FactoryProgram/main/main.cpp",
+        "sha256": "f4d77ecb33568b0ad78b0b5eae86ad6c404cc5b500d54687928b8e8b0d746b32"
+      },
+      {
+        "path": "09_FactoryProgram/main/user_config.h",
+        "sha256": "97a26c977fe5af98eab143bb7d1851ee6541dbd565829d62133fc80dcbd5e1b3"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_io_expander/CMakeLists.txt",
+        "sha256": "9c43958847f220d1e30326cd0d2d4ea14c64f5c1c6892a7bc1960e6c9031cbab"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_io_expander/esp_io_expander.c",
+        "sha256": "f02ce47e55fae9ab0848c3aa1baa583595e45dbcdecf1bcf361db16caa301eb7"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_io_expander/esp_io_expander_gpio_wrapper.c",
+        "sha256": "7438947a92b74c185bac1105ef3bf4012195d6e54d246edf87f73cf093d419b7"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_io_expander/esp_io_expander_gpio_wrapper_weak.c",
+        "sha256": "e90b8c3bf5816c06782227b26373053a26b98d9abac33c2751efd3a06029269f"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_io_expander/idf_component.yml",
+        "sha256": "5aa5ed672c9c6337886a77536841433791a3dfb93f1835515f67e8de34c0e6ce"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_io_expander/include/esp_io_expander.h",
+        "sha256": "8cdeb71aafe73fe00c6bcd847aa268c1c3b42343d626a0ee9bf85511343e2d8d"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_io_expander/include/esp_io_expander_gpio_wrapper.h",
+        "sha256": "acc7b808701abb05e2afd922463fe2981837cf9e62ca03a33c8cb7a16089ea54"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_io_expander/priv_include/esp_io_expander_gpio_wrapper_priv.h",
+        "sha256": "7fc2fcc9e4e2cf92dc08dd281a4b51059061e8b5fbdfdceb99b2714b7f3d9f93"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/CMakeLists.txt",
+        "sha256": "5388d6f9259c00b95ea4b584a778cc41c9dd9b747d0c2568a70479cb3a567a9b"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c",
+        "sha256": "b19823115d8a337cb9c45b512e86c035ba4ac99f273714286d87b3462ca62092"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/idf_component.yml",
+        "sha256": "ac781cc30945e91b413617d92ab3ccd5ed7bc82112f8d97291a8c942242c7e2a"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/include/esp_lcd_panel_io_additions.h",
+        "sha256": "a3a676a725f7ffc7b7fdf5d652c28861900c85fa2ee9b68e1d24eed66918db55"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/test_apps/CMakeLists.txt",
+        "sha256": "5dcc2e4addad34135e2b6ed66f4a7a44da6b4c7ff5ce5188293e38d7d7c68d50"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/test_apps/sdkconfig.defaults",
+        "sha256": "b3f9660085595b907f7411e205468220c2dfb867de4de5d7fb3cbb406651dcab"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_st7701/CMakeLists.txt",
+        "sha256": "25a76e50bd067333b9143a1b36c837f03c901751318c574e014114f2c082d22a"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_st7701/esp_lcd_st7701.c",
+        "sha256": "ce356f0d44bce2cebd380d0fb7974b377a2bb686d843fe2636f6bba87dd19ef3"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_st7701/esp_lcd_st7701_mipi.c",
+        "sha256": "eb96b129b51ce78c090551bc53da2b0e8e4a2f9e3069dabda3750c583b88ab99"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_st7701/esp_lcd_st7701_rgb.c",
+        "sha256": "486572aabd1c05be15a9aa1bdcceeacfbfa55329aec65778cb530ef19e785a0f"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_st7701/idf_component.yml",
+        "sha256": "a518254f3ab7287cac9fb8182d99e65a9febf86bd3e1b1e61ca16169b6a13515"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_st7701/include/esp_lcd_st7701.h",
+        "sha256": "9572718e64d329e296e474e188e3b8eaa254f6655166c2a19846565058453aab"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_st7701/priv_include/esp_lcd_st7701_interface.h",
+        "sha256": "aae70a54994b6963f6b9e432b4ea53a5a414448c072734f580caa3b3c0181a62"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_st7701/test_apps/CMakeLists.txt",
+        "sha256": "6cebc7df98fd96125dbf3524b0454965e77452dd109e99c8b49828d9bdd9f7ea"
+      },
+      {
+        "path": "09_FactoryProgram/managed_components/espressif__esp_lcd_st7701/test_apps/sdkconfig.defaults",
+        "sha256": "369ed8067086d97516736b6a52e53b38e7237e34e717d36bcc60e3d764f661b5"
+      },
+      {
+        "path": "09_FactoryProgram/sdkconfig",
+        "sha256": "0e331395ff0b4425842aa0839b5e45d0ca46e476970ce29927ec468f53fd2030"
+      },
+      {
+        "path": "09_FactoryProgram/sdkconfig.defaults",
+        "sha256": "6ae2b94c9f8bdba95e85f810e38c245de7438fa549ad30283357ad94e334872e"
+      }
+    ]
+  }
+}
