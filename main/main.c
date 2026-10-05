@@ -30,7 +30,9 @@ static const char *str(const cJSON *o,const char *key,const char *fallback) {
 static void clipped(char *dst,size_t cap,const char *src,size_t count) { snprintf(dst,cap,"%.*s",(int)count,src); }
 static void draw_header(const char *title,uint64_t ms) {
     board_clear(BG); board_rect(0,0,820,48,0x1148); board_text(18,13,title,FG,3);
-    char top[64]; snprintf(top,sizeof(top),"%s  SEQ %lu",cdm_stale(&state,ms)?"STALE":"LIVE",(unsigned long)state.sequence);
+    char top[64];
+    if(state.has_sequence) snprintf(top,sizeof(top),"%s  SEQ %lu",cdm_stale(&state,ms)?"STALE":"LIVE",(unsigned long)state.sequence);
+    else snprintf(top,sizeof(top),"WAITING");
     board_text(560,17,top,cdm_stale(&state,ms)?WARN:ACCENT,2);
 }
 static void draw_usage(uint64_t ms) {
@@ -43,7 +45,8 @@ static void draw_usage(uint64_t ms) {
         int n=cJSON_GetArraySize(wins); total+=n?n:1;
     }
     if(!total) { board_text(30,95,"NO PROVIDER DATA",WARN,3); return; }
-    usage_offset%=total;
+    if(total<=3) usage_offset=0;
+    else usage_offset%=total;
     int index=0,shown=0,y=60; char row[170];
     for(cJSON *s=usage->child;s && shown<3;s=s->next) {
         const char *provider=str(s,"provider_id","unknown"), *status=str(s,"status","unknown");
@@ -126,7 +129,12 @@ void app_main(void) {
         ms=esp_timer_get_time()/1000; receive_bytes(ms);
         bool pressed=board_boot_pressed();
         if(pressed!=button_prev) { button_changed=ms; button_prev=pressed; if(!pressed) button_consumed=false; }
-        if(pressed && !button_consumed && ms-button_changed>=40) { page=(page+1)%3; redraw(ms); button_consumed=true; }
+        if(pressed && !button_consumed && ms-button_changed>=40) {
+            page=(page+1)%3;
+            ESP_LOGI(TAG,"BOOT page=%d",page);
+            redraw(ms);
+            button_consumed=true;
+        }
         feature_idle_dimming(ms,state.received_ms,state.has_sequence);
         if(page==0 && state.has_sequence && ms-last_usage_advance>=5000) { usage_offset+=3; last_usage_advance=ms; redraw(ms); }
         if(ms-last_paint>=1000) redraw(ms);

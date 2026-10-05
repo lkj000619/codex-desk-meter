@@ -14,9 +14,23 @@ static esp_lcd_panel_handle_t panel;
 static uint16_t *pixels;
 static void serial_bit(int v) { gpio_set_level(1,v); gpio_set_level(2,0); esp_rom_delay_us(1); gpio_set_level(2,1); esp_rom_delay_us(1); }
 static void serial_byte(uint8_t b) { for(int i=7;i>=0;i--) serial_bit((b>>i)&1); }
+static void serial_package(int dc,uint8_t value) {
+    // ST7701 three-wire SPI uses a fresh D/C bit and CS pulse for every byte.
+    // A single D/C bit followed by all parameters corrupts the init sequence.
+    gpio_set_level(2,0);
+    gpio_set_level(0,0);
+    esp_rom_delay_us(1);
+    serial_bit(dc);
+    serial_byte(value);
+    gpio_set_level(2,0);
+    gpio_set_level(1,0);
+    esp_rom_delay_us(1);
+    gpio_set_level(0,1);
+    esp_rom_delay_us(1);
+}
 static void command(uint8_t cmd,const uint8_t *data,int n,int delay) {
-    gpio_set_level(0,0); serial_bit(0); serial_byte(cmd); gpio_set_level(0,1);
-    if(n) { gpio_set_level(0,0); serial_bit(1); for(int i=0;i<n;i++) serial_byte(data[i]); gpio_set_level(0,1); }
+    serial_package(0,cmd);
+    for(int i=0;i<n;i++) serial_package(1,data[i]);
     if(delay) vTaskDelay(pdMS_TO_TICKS(delay));
 }
 #define CMD(c,ms,...) do { const uint8_t d[]={__VA_ARGS__}; command(c,d,sizeof(d),ms); } while(0)

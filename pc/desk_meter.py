@@ -201,14 +201,14 @@ def collect(reference_time, fixture_dir=FIXTURES, transition_stale=False, fixtur
         try:
             forecast = forecast_adapter(json.loads(forecast_path.read_text(encoding="utf-8")))
             if (reference_time - timestamp(forecast["captured_at"])).total_seconds() >= 300:
-                forecast.update(stale=True, error_code="SOURCE_STALE")
+                forecast["stale"] = True
             forecasts = [forecast]
         except (OSError, json.JSONDecodeError, ValueError, KeyError, TypeError) as exc:
             errors.append({"source": "codex-reset.com", "error": str(exc)})
     try:
         global_reset = global_adapter(json.loads((fixture_dir / "codex-resets-history.json").read_text(encoding="utf-8")))
         if (reference_time - timestamp(global_reset["captured_at"])).total_seconds() >= 300:
-            global_reset.update(stale=True, error_code="SOURCE_STALE")
+            global_reset["stale"] = True
         globals_ = forecasts + [global_reset]
         if cache is not None:
             cache["codex-resets.com"] = copy.deepcopy(global_reset)
