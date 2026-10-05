@@ -1,0 +1,3 @@
+C:/meter-followups-20261005/20261005-antigravity-cli-agy-pro-r04/checkout/build-host/CMakeFiles/test_meter_parser.dir
+C:/meter-followups-20261005/20261005-antigravity-cli-agy-pro-r04/checkout/build-host/CMakeFiles/edit_cache.dir
+C:/meter-followups-20261005/20261005-antigravity-cli-agy-pro-r04/checkout/build-host/CMakeFiles/rebuild_cache.dir
