@@ -1,0 +1,49 @@
+{
+  "previous_run_id": "20261006-codex-cli-gpt-6-sol-r01",
+  "previous_commit": "3a09f26f2f375f4f45bebb79eb5902667a3ccb1a",
+  "target_ids": [
+    "RM2",
+    "RM3",
+    "RM4",
+    "RM5"
+  ],
+  "observed": "Own followup1 completed. RM1 pass; RM2 partial: encoder exactly matches fixed frames and production C host plus actual device accept seq0/1. Legacy collector payload differs only in global reset error_code at two locations (SOURCE_STALE instead of reference null); all other values, including remaining58/82, match. Device stimulus used common operator replay; full own collector-to-device path unproven. User photograph has dark panel and horizontal color bands with no legible title/numbers/text. User reports no information change with any button; manual RESET reboots to same image. This is deliberate reset, not evidence of spontaneous reboot.30s continuity, exact navigation count and timing unmeasured. Four explicit shell pipelines in own prior commands violate existing common-task restriction; final Git permission denial was respected with no later tool action.",
+  "expected": "Under unchanged product/reference contract and common task restrictions, collect/encode correct fixed fixture data and visibly display remaining58%/82% with stale/provenance meaning, usage/global-reset/diagnostic information and working BOOT information navigation/return. Preserve already achieved normal seq0/1 acceptance. Mark unobserved physical/timing behavior honestly. All predeclared shell/access/permission restrictions remain in force; no real account access, serial/flash, other implementation inputs or permission bypass.",
+  "remaining_rounds": 2,
+  "remaining_seconds": 6750.312999999849,
+  "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+  "evidence": [
+    {
+      "path": ".benchmark-inputs/feedback-evidence/000-common-stimulus-check.json",
+      "sha256": "952182b36eb439512d4bc3e0ab07075c00d0929a83714472434d71d9b9c3c673"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/001-legacy-collector-payload-differences.json",
+      "sha256": "f94c805af8904428115d2518f12e7315c3a83208e72fcf84f889e4776d3b9cdc"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/002-receiver-source-review.json",
+      "sha256": "385c26ae2f4a79a47a0e39557cc928226d06325369c54a8ba09d423acd786fb2"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/003-sent-frames.jsonl",
+      "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/004-device-serial.bin",
+      "sha256": "a6045f81430f07185e661e900ac7773a1078b034ad70204425a6bc1b06c74b11"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/005-photo-review.json",
+      "sha256": "d3b7978d2e304590223014bb4db2e7147bc7caa737e54ed3a4a07d98e799f5a9"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/006-capture-identity-confirmation.json",
+      "sha256": "e7750a3732c0e5dc267e0c8848ffe117f2fd03f71de411fa9d7e1acdb2dde9f6"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/007-shell-command-policy-audit.json",
+      "sha256": "64d1382e4dd398bd2dd90e344e9ddb88052296f1a31b2fa4297bd9a41bd42422"
+    }
+  ]
+}

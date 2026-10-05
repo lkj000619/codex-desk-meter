@@ -1,0 +1,16 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+  "round": 2,
+  "observed_at": "2026-10-05T19:09:45.869943+00:00",
+  "status": "running",
+  "native_thread_id": "01a10d78-0ba5-7ff3-8dd5-260f62b6ea53",
+  "native_candidate_pid": 31768,
+  "actual_process_argv_matches_frozen_profile": true,
+  "explicit_model": "gpt-6-sol",
+  "explicit_reasoning": "medium",
+  "effective_model_verified": null,
+  "effective_model_cwd_emitted_by_jsonl": false,
+  "raw_log_prefix_events": 37,
+  "raw_log_prefix_sha256": "9a63ee366f7580fd9b145a3c49674585c07b7739333275b289501fa440030bed",
+  "scope": "Thread/actual argv/runner cwd only. No implementation or product completion claim; series quality invalid remains in force."
+}

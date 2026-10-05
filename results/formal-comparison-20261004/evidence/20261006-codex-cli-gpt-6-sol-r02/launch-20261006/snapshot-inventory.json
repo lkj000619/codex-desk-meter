@@ -1,0 +1,148 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+  "round": 2,
+  "captured_at": "2026-10-05T19:09:45.869943+00:00",
+  "files": {
+    "agent-context.json": {
+      "sha256": "2f161c60ba5b22348b6504bd289e4eeb4dcdd2475ed46fbd0f93aaa72ef33046",
+      "bytes": 2786
+    },
+    "candidate-feedback.json": {
+      "sha256": "e93ccf4b99a429b77193dbf4dbad581249cd1f735c1fd1d30370f035c7fffd30",
+      "bytes": 3258
+    },
+    "candidate-inputs.json": {
+      "sha256": "0000c12a7e468cc93796a04b3dff3ceb2e3d63af953a2d80a20ef9e3b48cb839",
+      "bytes": 7435
+    },
+    "execution-preflight.json": {
+      "sha256": "c48f1673534bd1eb274892e5fb3dbc7cfeb452b5a9f952ebc08759d8717d0707",
+      "bytes": 31155
+    },
+    "experiment-launch.json": {
+      "sha256": "29a11decce9c982a0780e92a5947983db87fc3f18fefff5a3f54a88587394e0f",
+      "bytes": 391
+    },
+    "feedback.json": {
+      "sha256": "49bfcbcca9d9cfb751886ae6559d90af82a34dfdc4931cf382f3a476b2686771",
+      "bytes": 4311
+    },
+    "launch-codex-sol-followup-02.ps1": {
+      "sha256": "6781c0e754ba328fd7d4fad804dfd1656d5f0ba0cc05e91217fd8de77aa8bfa9",
+      "bytes": 316
+    },
+    "launch-codex-sol-followup-02.py": {
+      "sha256": "7cf25ff6bcbb35cc745cb42363755d80a8df2fbd81c6ac337f75ae2fabbc8c08",
+      "bytes": 9761
+    },
+    "ledger-at-start.json": {
+      "sha256": "e4e49380fc2d6f670b34d96de7188f92b551ae850273b42f229c1e6111f45c17",
+      "bytes": 3911
+    },
+    "make-followup02-launcher.py": {
+      "sha256": "dc86343b338ca46b284335f0bf2fe4798d7d640c99777f7889faf25b852acd9b",
+      "bytes": 2555
+    },
+    "native-start-observation-prefix.jsonl": {
+      "sha256": "9a63ee366f7580fd9b145a3c49674585c07b7739333275b289501fa440030bed",
+      "bytes": 106139
+    },
+    "native-start-observation.json": {
+      "sha256": "d64ef74ed7aaf81d673a1ddd16016ac5a9ec1d5f8d4fca6f0c21ba8c9eadcbac",
+      "bytes": 722
+    },
+    "operator-generated-output-cleanup.json": {
+      "sha256": "ccb3cfa9023d8fd52fcc9ab0e4f8b5cf2885bf68781cab318f2e7dad0f724004",
+      "bytes": 7476
+    },
+    "operator-next-model-decision.json": {
+      "sha256": "6d307337d1ae24adc06c3e0c3a3d898e0ed18664f911e32449d911f797ebf272",
+      "bytes": 817
+    },
+    "prepare-codex-sol-followup-02.py": {
+      "sha256": "caf7b1f7ff345d65e8b72d815e6d8d562f3e83f4641d4c87914fb0564afb398e",
+      "bytes": 7788
+    },
+    "previous-progress-at-transition.json": {
+      "sha256": "56f56b9936c3cf9cbb83c5f1e23c565f33963a807e6adbfaad6a8784d6afa0dc",
+      "bytes": 15312
+    },
+    "process-at-start.json": {
+      "sha256": "29398ad1d05dd90b6a16e23649bd52aca78dcee514e94773f574412762764d39",
+      "bytes": 3219
+    },
+    "profile.json": {
+      "sha256": "d67237e4743071773d3b0c5f68cd100e3e75c48649b9a546ccccc5d0e7ce6f53",
+      "bytes": 5467
+    },
+    "prompt.txt": {
+      "sha256": "55147280e36aa6c939575fbc3e6402ae6951e62e8caea12f5805217d50f72d8f",
+      "bytes": 8879
+    },
+    "publish-codex-sol-followup-02-start.py": {
+      "sha256": "7e83e993f32b55354cf25e77ff7a88ef7a7eb280cbcafe594501086e69adebd1",
+      "bytes": 7694
+    },
+    "run-manifest.json": {
+      "sha256": "9c665ce7fec4b247926403cfbb659de78e2132818d56eb06f7c5b8b89be8e793",
+      "bytes": 39676
+    },
+    "feedback-evidence/000-common-stimulus-check.json": {
+      "sha256": "952182b36eb439512d4bc3e0ab07075c00d0929a83714472434d71d9b9c3c673",
+      "bytes": 4760
+    },
+    "feedback-evidence/001-legacy-collector-payload-differences.json": {
+      "sha256": "f94c805af8904428115d2518f12e7315c3a83208e72fcf84f889e4776d3b9cdc",
+      "bytes": 891
+    },
+    "feedback-evidence/002-receiver-source-review.json": {
+      "sha256": "385c26ae2f4a79a47a0e39557cc928226d06325369c54a8ba09d423acd786fb2",
+      "bytes": 1211
+    },
+    "feedback-evidence/003-sent-frames.jsonl": {
+      "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+      "bytes": 3086
+    },
+    "feedback-evidence/004-device-serial.bin": {
+      "sha256": "a6045f81430f07185e661e900ac7773a1078b034ad70204425a6bc1b06c74b11",
+      "bytes": 194
+    },
+    "feedback-evidence/005-photo-review.json": {
+      "sha256": "d3b7978d2e304590223014bb4db2e7147bc7caa737e54ed3a4a07d98e799f5a9",
+      "bytes": 1413
+    },
+    "feedback-evidence/006-capture-identity-confirmation.json": {
+      "sha256": "e7750a3732c0e5dc267e0c8848ffe117f2fd03f71de411fa9d7e1acdb2dde9f6",
+      "bytes": 1201
+    },
+    "feedback-evidence/007-shell-command-policy-audit.json": {
+      "sha256": "64d1382e4dd398bd2dd90e344e9ddb88052296f1a31b2fa4297bd9a41bd42422",
+      "bytes": 2763
+    },
+    "operator-launch-preflight/codex-features-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/codex-features.txt": {
+      "sha256": "b17861d24fdcfa8cef2b79b5991bdc4190b613f6cb57f694a04aa7ee15c1c83b",
+      "bytes": 10134
+    },
+    "operator-launch-preflight/codex-hook-inventory.json": {
+      "sha256": "4a770c74c9726cf234175105939b277278a86df37f705b8700c58a92b732202f",
+      "bytes": 464
+    },
+    "operator-launch-preflight/codex-server-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/codex-skills.json": {
+      "sha256": "7be78a7861033ca9e842f58935b40f6185fe0b37b1809c8440cfae2b0b612342",
+      "bytes": 3007
+    },
+    "operator-launch-preflight/current-checks.json": {
+      "sha256": "91114de119248d6f36fa80dc16265def8cff28d3a0c020a8ccf57d11c3693c69",
+      "bytes": 1765
+    }
+  },
+  "scope": "Immutable own-source round2 launch; three tracked generated bytecode files removed only in newcopy; prior first/followup packages/cost/policy originals preserved."
+}

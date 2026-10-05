@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-06. 상태: **Codex Sol(`gpt-6-sol`·medium) 후속 1회차의 구현·제출·실물 평가와 459개 파일의 독립 복원을 완료했다. RM1 pass/RM2 partial/RM3~RM5 fail, reference fail/product_pass false다. 03:50 KST 업로드한 동결 펌웨어가 공통 frame 0·1을 수락했지만 사용자 사진에는 읽을 수 있는 값이 없고 버튼 탐색도 없다. 사용자 RESET은 수동 재부팅이며 30초 연속 유지·자동 재부팅은 미검증이다. 최초 정책 eligible 원본은 보존하고, 기존 과제의 파이프 금지 위반 누락을 날짜 있는 정정으로 반영해 최초·후속 1회차 및 Sol series의 현재 품질 적격성은 invalid_for_comparison이다. 비용·제품 판정·원본 commit/package는 바꾸지 않는다. 후속 잔여 6,750.313초·2회이며 새 사본의 생성 bytecode까지 제외한 뒤 후속 2회차를 진행한다. 후보 시작·종료 각 10회, 독립 series 종료 2개/15개다. Pro 종료·Flash 보류·Luna 미시작을 유지한다.**
+확인일: 2026-10-06. 상태: **Codex Sol(`gpt-6-sol`·medium) 후속 2회차가 04:08:53.442 KST에 시작돼 구현 중이다. 최대 6,750초는 후속 잔여 6,750.313초 안의 이번 호출 한도다. 새 준비 사본에서 추적된 Python bytecode3개만 제외하고 제품 source18개·고정 입력57개·profile 동일성·새 receipt·실제 thread/argv를 확인했다. 후속 1회차의 구현·제출·실물 평가·459개 파일 보존과 RM1 pass/RM2 partial/RM3~RM5 fail을 유지하며 보드는 그 artifact다. 최초 정책 eligible 원본과 날짜 있는 정정을 함께 보존하고 현재 Sol series 품질 적격성 invalid_for_comparison을 유지한다. 현재 회차 비용·제품·RM는 pending이다. 후보 시작11회·종료10회, 독립 series 종료2개/15개이며 추가 회차는 현재 호출 후 최대1회다. Pro 종료·Flash 보류·Luna 미시작을 유지한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -268,3 +268,11 @@ RM1 pass/RM2 partial/RM3~RM5 fail, reference fail/product_pass false다. 종료�
 기존 공통 과제가 금지한 shell pipeline을 최초 7건·후속 4건 확인했다. 최초 운영자 검토에서 이 항목을 놓쳤다.
 정책 부적격이어도 실패 비용과 제품 관측은 남긴다. [비용 checkpoint09](../../results/formal-comparison-20261004/comparison-checkpoint-09.md)는
 checkpoint08의 원본을 보존한 후속 집계다. [남은 후속 계획](../plans/2026-10-06-codex-sol-remaining-followups.md)에 따라 잔여 6,750.313초·2회 안에서 자신의 직전 결과만 이어간다.
+
+## 2026-10-06 Sol 후속 2회차 실제 시작
+
+[시작 snapshot](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r02/launch-20261006/snapshot-inventory.json)은 run `20261006-codex-cli-gpt-6-sol-r02`/round2,
+04:08:53.442 KST 시작·thread `01a10d78-0ba5-7ff3-8dd5-260f62b6ea53`·같은 explicit gpt-6-sol/medium actual argv·새 receipt를 보존한다.
+새 사본에서 생성 bytecode3개만 제외하고 제품 source18개의 Git blob/내용·고정 입력57개·profile 동일성을 검증했다. 새 prepared commit은 `e2a741d6360304c8d5e1542bc4444fc9a0fac2da`다.
+이번 최대6,750초·현재 호출 후 추가 최대1회이며 실제 시간은 종료 후 차감한다. 현재 회차의 제품·비용·RM는 pending이고 series 품질 invalid는 유지한다.
+현재 보드는 후속1 artifact이며 현재 후속2 성공 근거로 사용하지 않는다. 이전 두 회차를 재실행하거나 실행 중 구현 피드백·serial/flash를 제공하지 않는다.
