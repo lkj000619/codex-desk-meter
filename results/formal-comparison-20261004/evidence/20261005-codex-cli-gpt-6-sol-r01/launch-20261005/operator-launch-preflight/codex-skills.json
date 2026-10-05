@@ -1,0 +1,103 @@
+{
+  "source": "native skills/list, same skills/feature overrides; app-server config layer differs from exec --ignore-user-config",
+  "skills": [
+    {
+      "name": "archify",
+      "scope": "user",
+      "enabled": false,
+      "path": "C:\\Users\\이광진\\.agents\\skills\\archify\\SKILL.md",
+      "pluginId": null
+    },
+    {
+      "name": "computer-use",
+      "scope": "user",
+      "enabled": false,
+      "path": "C:\\Users\\이광진\\.agents\\skills\\computer-use\\SKILL.md",
+      "pluginId": null
+    },
+    {
+      "name": "find-skills",
+      "scope": "user",
+      "enabled": false,
+      "path": "C:\\Users\\이광진\\.agents\\skills\\find-skills\\SKILL.md",
+      "pluginId": null
+    },
+    {
+      "name": "humanize-text",
+      "scope": "user",
+      "enabled": false,
+      "path": "C:\\Users\\이광진\\.codex\\skills\\humanize\\SKILL.md",
+      "pluginId": null
+    },
+    {
+      "name": "job-application-editor",
+      "scope": "user",
+      "enabled": false,
+      "path": "C:\\Users\\이광진\\.codex\\skills\\job-application-editor\\SKILL.md",
+      "pluginId": null
+    },
+    {
+      "name": "orca-cli",
+      "scope": "user",
+      "enabled": false,
+      "path": "C:\\Users\\이광진\\.agents\\skills\\orca-cli\\SKILL.md",
+      "pluginId": null
+    },
+    {
+      "name": "orchestration",
+      "scope": "user",
+      "enabled": false,
+      "path": "C:\\Users\\이광진\\.agents\\skills\\orchestration\\SKILL.md",
+      "pluginId": null
+    },
+    {
+      "name": "product-development",
+      "scope": "user",
+      "enabled": false,
+      "path": "C:\\Users\\이광진\\.agents\\skills\\product-development\\SKILL.md",
+      "pluginId": null
+    },
+    {
+      "name": "requirement-review",
+      "scope": "user",
+      "enabled": false,
+      "path": "C:\\Users\\이광진\\.agents\\skills\\requirement-review\\SKILL.md",
+      "pluginId": null
+    },
+    {
+      "name": "imagegen",
+      "scope": "system",
+      "enabled": true,
+      "path": "C:\\Users\\이광진\\.codex\\skills\\.system\\imagegen\\SKILL.md",
+      "pluginId": null
+    },
+    {
+      "name": "openai-docs",
+      "scope": "system",
+      "enabled": true,
+      "path": "C:\\Users\\이광진\\.codex\\skills\\.system\\openai-docs\\SKILL.md",
+      "pluginId": null
+    },
+    {
+      "name": "review-agent",
+      "scope": "system",
+      "enabled": true,
+      "path": "C:\\Users\\이광진\\.codex\\skills\\.system\\review-agent\\SKILL.md",
+      "pluginId": null
+    },
+    {
+      "name": "skill-creator",
+      "scope": "system",
+      "enabled": true,
+      "path": "C:\\Users\\이광진\\.codex\\skills\\.system\\skill-creator\\SKILL.md",
+      "pluginId": null
+    },
+    {
+      "name": "skill-installer",
+      "scope": "system",
+      "enabled": true,
+      "path": "C:\\Users\\이광진\\.codex\\skills\\.system\\skill-installer\\SKILL.md",
+      "pluginId": null
+    }
+  ]
+}

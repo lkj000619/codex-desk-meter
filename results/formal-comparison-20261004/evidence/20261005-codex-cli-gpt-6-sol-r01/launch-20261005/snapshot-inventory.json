@@ -1,0 +1,95 @@
+{
+  "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "captured_at": "2026-10-05T14:58:20.968671+00:00",
+  "files": {
+    "agent-context.json": {
+      "sha256": "d0bc30fde4df8a7a54320d344ea78095613b765749fab70ac73a3e7c76ff034c",
+      "bytes": 1670
+    },
+    "candidate-inputs.json": {
+      "sha256": "0000c12a7e468cc93796a04b3dff3ceb2e3d63af953a2d80a20ef9e3b48cb839",
+      "bytes": 7435
+    },
+    "execution-preflight.json": {
+      "sha256": "293133d0da30b36dbc3c9a5644cbb617c38567422243615a7e52c6bfa6dc725c",
+      "bytes": 31127
+    },
+    "experiment-launch.json": {
+      "sha256": "251ce1151499bcb61cca1b23af5aa23cb001711e3e668087e47ad425e2339fe6",
+      "bytes": 683
+    },
+    "launch-codex-sol-r01.ps1": {
+      "sha256": "9a26f8f8e2b7c098d95cfb4b3dd0348b58923a8899e31e56059bb4554764e672",
+      "bytes": 298
+    },
+    "launch-codex-sol-r01.py": {
+      "sha256": "d29e38f6e3662e9d5b3b6a0c340e72c653cd8fde1d56ef967ec51375d8c8c22a",
+      "bytes": 9044
+    },
+    "ledger-at-start.json": {
+      "sha256": "8108b676bffb57a50d976fb11c40a20605cc608b2113cb675784a004127d3189",
+      "bytes": 1326
+    },
+    "native-start-observation-prefix.jsonl": {
+      "sha256": "d5f11554dd1a57640550eb187e07eaabf5ac817e335cc57425924a36ac421ef0",
+      "bytes": 174119
+    },
+    "native-start-observation.json": {
+      "sha256": "aea1534f0ea475ea6f591caa5dc5449276507c5bf3b3076b02884f2e566d40ce",
+      "bytes": 852
+    },
+    "operator-next-model-decision.json": {
+      "sha256": "f0afb9ea95d6ec7831a5ddc7acc996f24eb5686be58a678dfde14f931c8c12cf",
+      "bytes": 2894
+    },
+    "previous-progress-at-transition.json": {
+      "sha256": "94691745fc92c4378bd8a2dd691b0965c1eaf99478588d22dc79ea0578d21806",
+      "bytes": 12619
+    },
+    "process-at-start.json": {
+      "sha256": "81d9bd50767c511861040bbff1445de5a6557855d7664754de20e247dfb1371e",
+      "bytes": 3377
+    },
+    "profile.json": {
+      "sha256": "d67237e4743071773d3b0c5f68cd100e3e75c48649b9a546ccccc5d0e7ce6f53",
+      "bytes": 5467
+    },
+    "prompt.txt": {
+      "sha256": "acc4d9b0a862ab94730ed0bcd6bad89ac0722e12288ca8a370549a747798a506",
+      "bytes": 5192
+    },
+    "publish-codex-sol-r01-start.py": {
+      "sha256": "abbc20639e18a441d96f104df59fef2994bea89e09a2ad94e9aac34b50ba4c01",
+      "bytes": 7651
+    },
+    "run-manifest.json": {
+      "sha256": "c65358d7f5e1572cfd904540298e006f2e344780721ccd0e1c8d4101e414eb95",
+      "bytes": 38911
+    },
+    "operator-launch-preflight/codex-features-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/codex-features.txt": {
+      "sha256": "b17861d24fdcfa8cef2b79b5991bdc4190b613f6cb57f694a04aa7ee15c1c83b",
+      "bytes": 10134
+    },
+    "operator-launch-preflight/codex-hook-inventory.json": {
+      "sha256": "4a770c74c9726cf234175105939b277278a86df37f705b8700c58a92b732202f",
+      "bytes": 464
+    },
+    "operator-launch-preflight/codex-server-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/codex-skills.json": {
+      "sha256": "7be78a7861033ca9e842f58935b40f6185fe0b37b1809c8440cfae2b0b612342",
+      "bytes": 3007
+    },
+    "operator-launch-preflight/current-checks.json": {
+      "sha256": "0f7761412169f841d7d25af902dcbaa7ae536d5417589069a45a668d6c8ccbff",
+      "bytes": 1765
+    }
+  },
+  "scope": "Immutable first-run start snapshot. Thread and process argv are observed; product implementation/evaluation remain pending. Previous Pro closure and Flash deferred budget retained."
+}

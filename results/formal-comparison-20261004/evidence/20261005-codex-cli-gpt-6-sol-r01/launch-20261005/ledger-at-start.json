@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "comparison_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "state": "active",
+  "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "input_bundle_sha256": "ced675a80c840d2bb9d467ccf7694a6bbd5c09b058c9887e01110842afdb6e67",
+  "profile_sha256": "d39eccf7fad695a4333df6d4b885eb81db96ac70e6dfce13b1e9f61f64ee9926",
+  "limits": {
+    "initial_seconds": 7200,
+    "remediation_seconds": 7200,
+    "remediation_rounds": 3
+  },
+  "reference_inputs": "C:\\meter-runs-20261005\\ledgers\\20261005-codex-cli-gpt-6-sol-r01-reference\\reference-inputs.json",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "common_task_sha256": "acc4d9b0a862ab94730ed0bcd6bad89ac0722e12288ca8a370549a747798a506",
+  "common_task_run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "runs": [
+    {
+      "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "directory": "C:\\meter-runs-20261005\\20261005-codex-cli-gpt-6-sol-r01",
+      "round": 0,
+      "starting_commit": "95e7e431cda7dc507668c8b7eea986b41204f57c",
+      "status": "running",
+      "reserved_seconds": 7200,
+      "elapsed_seconds": null,
+      "reference_status": "not_run",
+      "reviewed": false,
+      "implementation_commit": null,
+      "feedback_sha256": null
+    }
+  ]
+}

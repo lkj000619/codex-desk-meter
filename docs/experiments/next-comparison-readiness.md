@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-05. 상태: **AGY Pro 최초 1회·후속 3회를 마쳤다. 네 회차 모두 native command 거부로 environment_failed이며 정책 eligible·RM1 fail/RM2~RM5 not_run과 비용·독립 복원을 보존했다. 마지막 r04는 22:58:07 KST 종료됐다. 최종 펌웨어·제출물이 없어 제품 기준 미도달이고, 후속 3회 한도에 도달해 추가 Pro 회차는 없다. 누적 677.5초·정규화 660,989 token이다. Flash 남은 예산·현재 보드 펌웨어·baseline은 유지하며 다음 Codex Sol/Luna는 미시작이다.**
+확인일: 2026-10-05. 상태: **Codex Sol(`gpt-6-sol`·medium) 최초 실험이 23:56:01 KST에 시작돼 구현 중이다. 제품 완성·최종 평가·업로드는 아직 아니다. 별도 깨끗한 checkout·공통 입력 57개·새 receipt·실제 thread/process argv를 확인했다. Pro는 후속 3회 한도로 종료했고 구현 미완료·기준 미도달·원본 비용을 보존한다. Flash 남은 예산·현재 보드 firmware·baseline은 유지한다. 후보 호출 시작 9회·종료 8회, 독립 series 종료 2개/15개이며 Codex Luna는 미시작이다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -214,3 +214,11 @@ Python 6개와 결과 validator 통과는 후보 로그의 관측이며 아직 �
 [별도 host 검증](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-pro-r04/evaluation-final-20261005/post-package-host-runtime-check.json)은 독립 복원본의 같은 executable과 기록된 compiler DLL 경로로 29개 중 12 pass/17 fail이다. 최초 운영자 PATH의 DLL loader 오류 29건을 보존하며 이를 의미 검사 실패로 집계하지 않는다. 이 검증은 partial C state와 mock normalizer이며 실제 firmware·collector·device 합격을 뜻하지 않는다.
 [Series 종료](../../results/formal-comparison-20261004/evidence/20261005-antigravity-cli-agy-pro-r04/evaluation-final-20261005/operator-series-completion.json)는 `remediation_round_limit_reached`다. 후속 누적 609.297초·잔여 6,590.703초지만 잔여 회차 0으로 추가 실행은 없다. Native scope/owner는 복원·해제됐다. Pro 업로드를 하지 않아 보드는 기존 Flash 원본으로 기록하며 다음 Codex Sol/Luna는 아직 시작하지 않았다.
 총 677.5초·정규화 660,989 token은 [비용 checkpoint 07](../../results/formal-comparison-20261004/comparison-checkpoint-07.md)에 모든 실패와 함께 남긴다. 환경 실패를 모델의 일반 코딩 품질 순위로 해석하지 않는다. 전체 비교는 15개 독립 series 중 2개 종료이며 미완료다.
+
+2026-10-05 다음 모델 갱신: 사용자의 “그럼 다음 모델로 넘어가자”에 따라 [Codex Sol 계획](../plans/2026-10-05-codex-sol-initial-launch.md)으로 진행했다.
+`20261005-codex-cli-gpt-6-sol-r01`의 [시작 snapshot](../../results/formal-comparison-20261004/evidence/20261005-codex-cli-gpt-6-sol-r01/launch-20261005/snapshot-inventory.json)은 22개 파일의 원본 bytes/hash를 보존한다.
+동결 profile·CLI 0.159.2·ESP-IDF 5.3.2·공통 입력·native feature/skill inventory를 재확인했으며 준비 중 모델 호출은 0회다.
+실제 최초 시작은 23:56:01.520 KST, launcher PID 10236·candidate PID 22140·thread `01a10c90-8a40-7f00-98e5-d8627a20ba62`다.
+실제 process argv는 explicit `-m gpt-6-sol`·medium·동결 권한/확장 비활성화와 일치한다. Codex JSONL은 resolved model/cwd를 방출하지 않으므로 별도 native 확인으로 추정하지 않는다. Native inventory도 exec의 ignore-user-config와 설정 계층이 다르다는 범위를 유지한다.
+최초 7,200초의 독립 runner가 실행 중이며 종료 후 source·제출·원본 비용을 동결하고 정책·host·제품/RM를 검토한다. Genuine ESP32 firmware가 있어야 COM3 업로드·실물 평가로 이어간다. 후보 실행 중 구현 피드백·source 수정·serial/flash는 없다.
+현재 제품·정책·RM 판정은 pending이며 앞선 Pro/Flash 결과를 Sol 결과로 쓰지 않는다. 재개할 때 [현재 계측](../../results/formal-comparison-20261004/progress.json)·개별 manifest/ledger·실제 process부터 확인하고 같은 최초 호출을 반복하지 않는다.

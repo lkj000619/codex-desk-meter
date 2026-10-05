@@ -2,7 +2,7 @@
 
 목표: ESP32-S3-LCD-3.16 제품 구현에서 에이전트의 첫 결과·자기 후속 수정 비용과 RM 도달·제품 품질을 동일 조건으로 비교한다.
 시작 승인: 2026-10-04 사용자 요청 “프로젝트 목적과 목표에 엇나가지않도록 실험 시작”.
-상태: OpenCode series는 예산 소진으로 종료했고 Flash 최초·후속 1회차의 최종 평가·복원은 완료했다. Flash 추가 회차는 사용자 요청으로 보류한다. 다음 모델 진행 지시로 Pro 최초+후속 3회를 마쳤으며 environment_failed·비용·정책/RM·각 독립 복원을 보존했다. Pro는 최대 후속 3회로 종료했고 firmware·최종 제출물이 없다. 현재 독립 series 종료 2개/예정 15개, 전체 후보 호출 시작·종료 각 8회다. Codex Sol/Luna는 미시작이다.
+상태: Codex Sol 최초가 2026-10-05 23:56:01 KST에 시작돼 구현 중이다. 제품 완성·평가·업로드는 pending이다. OpenCode는 예산 소진, Pro는 후속 3회 한도로 종료했고 Pro firmware·최종 제출물이 없다. Flash 추가 회차는 보류한다. 현재 독립 series 종료 2개/예정 15개, 후보 호출 시작 9회·종료 8회다. Codex Luna는 미시작이며 이전 판정·비용·보드 상태는 보존한다.
 원본: [운영 계약](../experiments/comparison-operating-contract.md), [현재 상태](../experiments/next-comparison-readiness.md),
 [동결 기록](../../results/experiment-launch-preparation-20261004/freeze.json).
 
@@ -34,6 +34,7 @@
    2026-10-05 다음 모델 재개 지시로 Pro 최초를 시작하고 첫 command 거부로 종료한 환경 실패를 보존했다. 코드·펌웨어·제출물은 없으며 정책 eligible·RM1 fail/RM2~RM5 not_run, 338개 파일의 독립 복원을 확인했다. 자기 직전 결과의 고정 근거만 전달한 Pro 후속 `20261005-antigravity-cli-agy-pro-r02`가 실행 중이다. 새 receipt·native model/cwd/request-review를 확인했으며 보드는 Flash 후속 원본을 유지한다. [Pro 최초 계획](2026-10-05-agy-pro-initial-launch.md)과 [Pro 후속 계획](2026-10-05-agy-pro-followup-execution.md)을 따른다.
    위 r02 시작 시점 이후 r02·r03도 native command 거부로 종료했고 정책/RM·원본 비용·각 독립 복원을 마쳤다. [남은 후속 계획](2026-10-05-agy-pro-remaining-followups.md)의 마지막 r04가 실행 중이다. 새 회차마다 자기 직전 source와 고정 관측만 전달하며 원본 권한·baseline·공통 입력은 유지한다.
    22:58:07 KST 마지막 r04도 거부 후 종료했고 최종 평가·361개 파일의 독립 복원과 partial host 보완 검증을 마쳤다. 후속 최대 3회에 도달해 Pro series는 종료다. Pro 누적 677.5초·정규화 660,989 token과 정책 eligible·RM1 fail/RM2~RM5 not_run, 최종 제출·firmware 누락을 보존한다. 다음 Codex Sol/Luna는 아직 시작하지 않았다.
+   이후 사용자 지시로 [Codex Sol 최초 계획](2026-10-05-codex-sol-initial-launch.md)의 독립 호출을 23:56:01.520 KST에 시작했다. 실제 thread/process argv와 같은 날짜 미실행 예약·현재 도구/native inventory를 확인했다. 실행 중 제품 source를 운영자가 고치거나 피드백·serial/flash를 제공하지 않는다. 최초 종료 후 동결·평가하며 firmware가 있으면 업로드·실물 관측으로 이어간다. Codex Luna는 함께 실행하지 않는다.
    원래 예약·중단·실패 비용은 보존한다. 전체 비교 완료는 15개 독립 series와 필요한 후속/관측/적격성 집계가 끝난 시점이다.
 
 ## 중단과 재개

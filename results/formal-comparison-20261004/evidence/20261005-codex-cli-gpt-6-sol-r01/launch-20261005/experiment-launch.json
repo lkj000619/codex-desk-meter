@@ -1,0 +1,13 @@
+{
+    "launcher_pid":  10236,
+    "independent_of_chat_turn":  true,
+    "launched_at":  "2026-10-05T14:55:48.1732123+00:00",
+    "timeout_seconds":  7200,
+    "launcher":  "C:/meter-runs-20261005/launch-codex-sol-r01.ps1",
+    "stderr":  "C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/runner-console-stderr.txt",
+    "reasoning":  "medium",
+    "candidate_model":  "gpt-6-sol",
+    "run_id":  "20261005-codex-cli-gpt-6-sol-r01",
+    "scope":  "Independent initial candidate invocation; preserve terminal result; no parallel candidate or operator firmware changes.",
+    "console":  "C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/runner-console.txt"
+}

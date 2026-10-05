@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-05 AGY Pro 최초 1회·후속 3회를 마쳤다. 모두 native command 거부로 environment_failed이며 정책 eligible·RM1 fail/RM2~RM5 not_run과 원본 비용·독립 복원을 보존했다. 마지막 후속은 22:58:07 KST 종료됐고 최종 펌웨어·제출물은 없다. 누적 677.5초·정규화 660,989 token이다. 후속 3회 한도에 도달해 Pro의 추가 회차는 없으며 Flash 추가 후속·남은 예산과 보드 펌웨어는 보존한다.
-후보 실행 시작 8회·종료 8회(최초 3·후속 5). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. Codex Sol/Luna는 미시작이다. 독립 series 완료는 OpenCode·Pro 2개/예정 15개다. 전체 비교는 미완료다.
+상태: 2026-10-05 Codex Sol(`gpt-6-sol`·medium) 최초 실험이 23:56:01 KST에 시작돼 구현 중이다. 제품 완성·평가·보드 업로드는 pending이다. 앞선 Pro 최초+후속 3회의 environment_failed·정책 eligible·기준 미도달·원본 비용·독립 복원을 보존한다. Pro는 회차 한도로 종료했고 동작 firmware가 없다. Flash 추가 후속·잔여 예산·보드 firmware는 유지한다.
+후보 실행 시작 9회·종료 8회(최초 시작 4·후속 5). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. Codex Luna는 미시작이다. 독립 series 완료는 OpenCode·Pro 2개/예정 15개다. 전체 비교는 미완료다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -599,3 +599,29 @@ process-local PATH만 보완해 29개 중 12 pass/17 fail이며 executable/sourc
 Pro의 네 environment_failed를 일반 모델 코딩 능력의 품질 순위로 해석하지 않는다. 후속은 독립 반복으로 집계하지 않는다.
 현재 독립 series 종료는 OpenCode·Pro 2개/예정 15개이며 Flash는 남은 5,710.781초·2회를 보류 상태로 보존한다.
 이번 사용자 지시의 다음 대상 Pro 처리는 마쳤고 다음 순서 Codex Sol/Luna는 미시작이다. 현재 board upload는 Flash r02 원본 그대로이며 serial을 열지 않았다.
+
+## 2026-10-05 Codex Sol 최초 실험 시작
+
+사용자의 “그럼 다음 모델로 넘어가자”로 다음 `gpt-6-sol`·medium의 독립 최초 실험을 시작했다.
+[실행 계획](../../docs/plans/2026-10-05-codex-sol-initial-launch.md)의 시작 완료는 제품 구현 완료가 아니다.
+같은 날짜의 미실행 run `20261005-codex-cli-gpt-6-sol-r01`과 별도 ledger·브랜치
+`experiment/openai/codex-cli/gpt-6-sol`·clean commit `95e7e431cda7dc507668c8b7eea986b41204f57c`를 검증했다.
+제품 코드 없는 공통 입력 57개·baseline `272875140d1998d458e26fdb2f6deab5e5d8f7b5`·동결 profile을 유지한다.
+Pro/Flash의 구현·결과·피드백은 후보에게 제공하지 않는다.
+
+CLI `codex-cli 0.159.2`·ESP-IDF 5.3.2·compiler/ninja/git·native skills/features와 hook 비활성화를 현재 재확인했다.
+새 run-bound receipt SHA-256은 `293133d0da30b36dbc3c9a5644cbb617c38567422243615a7e52c6bfa6dc725c`다.
+2026-10-04 capability 증거를 보존하고 현재 준비에서 모델 turn은 0회였다.
+Native app-server inventory는 같은 확장 override를 쓰지만 exec `--ignore-user-config`와 설정 계층이 다르다는 범위를 기록한다.
+외부 plugin/app/memory/hook과 발견된 사용자 skill은 동결 profile대로 비활성화하고 global 설정은 바꾸지 않는다.
+
+[실제 시작](evidence/20261005-codex-cli-gpt-6-sol-r01/launch-20261005/native-start-observation.json)은
+23:56:01.520 KST·launcher PID 10236·candidate PID 22140·thread `01a10c90-8a40-7f00-98e5-d8627a20ba62`다.
+[실제 process](evidence/20261005-codex-cli-gpt-6-sol-r01/launch-20261005/process-at-start.json)의 argv가
+명시된 `gpt-6-sol`·medium·권한·확장 비활성화와 정확히 일치한다. JSONL이 resolved model/cwd를 방출하지 않으므로 이를 native 검증했다고 추정하지 않는다. Runner의 Popen cwd와 explicit argv만 기록한다.
+[공개 snapshot](evidence/20261005-codex-cli-gpt-6-sol-r01/launch-20261005/snapshot-inventory.json)은 22개 파일의 원본 bytes/hash를 보존한다.
+
+최초 최대 7,200초의 runner는 대화와 독립해 실행 중이다. 이후 날짜 변경은 시작된 이 회차를 재예약하거나 중복 호출할 이유가 아니다.
+종료 후 원본 source·계측·제출을 동결하고 정책·host·제품/RM를 평가한다. 업로드 가능한 ESP32 artifact가 있어야 COM3와 사용자 영상 관측으로 이어간다. 실행 중 운영자 구현 수정·피드백·serial/flash는 없다.
+현재 제품·정책·RM·최종 비용은 미판정이며 성공으로 집계하지 않는다. 호출 시작 9회·종료 8회, 독립 series 종료 2개/15개다.
+Pro 종료와 Flash 잔여 5,710.781초·2회·보드 원본은 보존하고 Codex Luna는 함께 시작하지 않는다.

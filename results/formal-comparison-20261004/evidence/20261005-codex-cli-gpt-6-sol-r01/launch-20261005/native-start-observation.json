@@ -1,0 +1,17 @@
+{
+  "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "observed_at": "2026-10-05T14:58:20.968671+00:00",
+  "status": "running",
+  "native_thread_id": "01a10c90-8a40-7f00-98e5-d8627a20ba62",
+  "explicit_profile_model": "gpt-6-sol",
+  "explicit_reasoning": "medium",
+  "actual_native_process_pid": 22140,
+  "actual_process_argv_matches_frozen_profile": true,
+  "raw_log_prefix_events": 35,
+  "raw_log_prefix_bytes": 174119,
+  "raw_log_prefix_sha256": "d5f11554dd1a57640550eb187e07eaabf5ac817e335cc57425924a36ac421ef0",
+  "effective_model_emitted_by_jsonl": false,
+  "effective_model_verified": null,
+  "effective_cwd_emitted_by_jsonl": false,
+  "scope": "Native thread and actual process command line only. JSONL does not emit the resolved model or cwd; runner Popen cwd and explicit argv are preserved. No completion or product claim."
+}
