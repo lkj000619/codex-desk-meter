@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
-  "manifest_id": "20261005-antigravity-cli-agy-pro-r01",
-  "run_id": "20261005-antigravity-cli-agy-pro-r01",
-  "result_reference": "20261005-antigravity-cli-agy-pro-r01",
+  "manifest_id": "20261005-antigravity-cli-agy-pro-r02",
+  "run_id": "20261005-antigravity-cli-agy-pro-r02",
+  "result_reference": "20261005-antigravity-cli-agy-pro-r02",
   "baseline_id": "comparison-baseline-20261004",
   "baseline_ref": "comparison-baseline-20261004",
   "experiment_id": "version-2-end-to-end-v1",

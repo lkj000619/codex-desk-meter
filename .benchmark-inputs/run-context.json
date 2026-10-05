@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "run_id": "20261005-antigravity-cli-agy-pro-r01",
+  "run_id": "20261005-antigravity-cli-agy-pro-r02",
   "experiment_id": "version-2-end-to-end-v1",
   "baseline": {
     "id": "comparison-baseline-20261004",
@@ -26,9 +26,16 @@
     "input_bundle_sha256": "62fb20a50ebf174f96e072e0f2958921d21e43b7a7e5dee84dfe69445a125a4d"
   },
   "outputs": {
-    "selection_document": "docs/agent-runs/20261005-antigravity-cli-agy-pro-r01/hardware-feature-selection.md",
-    "structured_result": "results/20261005-antigravity-cli-agy-pro-r01/end-to-end-result.json",
-    "evaluation_manifest": "results/20261005-antigravity-cli-agy-pro-r01/e2e-evaluation-manifest.json"
+    "selection_document": "docs/agent-runs/20261005-antigravity-cli-agy-pro-r02/hardware-feature-selection.md",
+    "structured_result": "results/20261005-antigravity-cli-agy-pro-r02/end-to-end-result.json",
+    "evaluation_manifest": "results/20261005-antigravity-cli-agy-pro-r02/e2e-evaluation-manifest.json"
   },
-  "evaluation_manifest_path": ".benchmark-inputs/e2e-evaluation-manifest.json"
+  "evaluation_manifest_path": ".benchmark-inputs/e2e-evaluation-manifest.json",
+  "immutable_files": {
+    ".benchmark-inputs/feedback.json": "candidate-feedback.json",
+    ".benchmark-inputs/feedback-evidence/000-terminal-verification.json": "feedback-evidence/000-terminal-verification.json",
+    ".benchmark-inputs/feedback-evidence/001-reference-review.json": "feedback-evidence/001-reference-review.json",
+    ".benchmark-inputs/feedback-evidence/002-stdout.jsonl": "feedback-evidence/002-stdout.jsonl",
+    ".benchmark-inputs/feedback-evidence/003-stderr.txt": "feedback-evidence/003-stderr.txt"
+  }
 }
