@@ -1,13 +1,18 @@
 {
-  "run_id": "20261005-antigravity-cli-agy-pro-r02",
-  "commit": "5e1b658783da67995f4330ed1fafa98b842270cc",
-  "frozen_at": "2026-10-05T13:38:40.176751+00:00",
-  "original_terminal_manifest_sha256": "d5739be8e8bdce5194ab815c264567acc78c64aa82b009b3d207e387605427dc",
+  "run_id": "20261005-antigravity-cli-agy-pro-r03",
+  "commit": "8059dbf481d7a394a985d8757b0b331fc625b40a",
+  "frozen_at": "2026-10-05T13:48:11.494049+00:00",
+  "original_terminal_manifest_sha256": "07753e8d8ff11eaed77396db7841ff6745abcb338fb40ae2bf5fcba964a13e86",
   "sources": {
     "firmware/CMakeLists.txt": {
-      "bytes": 446,
-      "sha256": "4337c4a35c682abc702219775f5e9784bad91d44d0e277b9defe8a89d12c3c79",
+      "bytes": 457,
+      "sha256": "9bb181b92c0be5860d0f4d8b5238ba3f6d7e7ed172f1141c59a72df0fb5a7b86",
       "operator_raw_copy": "operator-observation/source-snapshot/firmware/CMakeLists.txt"
+    },
+    "firmware/sdkconfig.defaults": {
+      "bytes": 905,
+      "sha256": "95baa532529f74d4acfc52be48596d97a36145da7de7415d7aee85e046494354",
+      "operator_raw_copy": "operator-observation/source-snapshot/firmware/sdkconfig.defaults"
     }
   },
   "artifacts": {},

@@ -1,7 +1,7 @@
 {
-  "run_id": "20261005-antigravity-cli-agy-pro-r02",
+  "run_id": "20261005-antigravity-cli-agy-pro-r03",
   "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
-  "reviewed_at": "2026-10-05T13:38:40.281680+00:00",
+  "reviewed_at": "2026-10-05T13:48:11.633472+00:00",
   "reviewer": "Codex operator",
   "product_pass": false,
   "items": {
@@ -10,35 +10,39 @@
       "evidence": [
         {
           "path": "operator-source-freeze.json",
-          "sha256": "90f2b21a60f37a41514af615134ebefff355947db38a2182b6ee6ad2e775dd29"
+          "sha256": "70dfdd9c18b313eff5218250e21ee50e9a2dbd5f00ed17549351a93a9844d9c1"
         },
         {
           "path": "operator-policy-decision.json",
-          "sha256": "9a264c42e8ad8ceb416ee6f0fba85d74df488f372d1aa19dd0081858ca8415b6"
+          "sha256": "2296225e90af4e2c8cacdbc878e1e93b8fa4728b80a6f1e0f1474b3cc9fec4de"
         },
         {
           "path": "operator-observation/policy-notes.json",
-          "sha256": "d3b38eb76a3f828768688efa90a269f097409b4123af4a8916a93881f14362f4"
+          "sha256": "9c708749a09ac03b308d28e594475401ee78a401726e07e478ebae946d7cd40c"
         },
         {
           "path": "operator-observation/terminal-verification.json",
-          "sha256": "52a9cfe8f4fb8ebd530a207683aed8948fa625b010aed7a5514c24005be9cbfc"
+          "sha256": "9d458030b647ca5468e297350e4c59ca09d77dceb074d007ef422ff1051cf6bc"
         },
         {
           "path": "operator-observation/source-snapshot/firmware/CMakeLists.txt",
-          "sha256": "4337c4a35c682abc702219775f5e9784bad91d44d0e277b9defe8a89d12c3c79"
+          "sha256": "9bb181b92c0be5860d0f4d8b5238ba3f6d7e7ed172f1141c59a72df0fb5a7b86"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/sdkconfig.defaults",
+          "sha256": "95baa532529f74d4acfc52be48596d97a36145da7de7415d7aee85e046494354"
         },
         {
           "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-pro-r01.json",
-          "sha256": "09dc403e0b081fd00147bbbaf7ff28b9981f839e2af14d73a1358d94419ce8da"
+          "sha256": "e95f8bff0b137ff92151abb141c5a408a8233e3c74ef952ec9fb1ec457f2e5ee"
         },
         {
           "path": "operator-observation/terminal-originals/command-audit.json",
-          "sha256": "e51929e611154ab6b20ddb7a5566df35a858965bbd7b95acd06ad97a9dc23077"
+          "sha256": "dc7091fcbb974b87da0e3ad93798659805395f41cffbf64de737b6a85bc620a0"
         },
         {
           "path": "operator-observation/terminal-originals/run-manifest.json",
-          "sha256": "d5739be8e8bdce5194ab815c264567acc78c64aa82b009b3d207e387605427dc"
+          "sha256": "07753e8d8ff11eaed77396db7841ff6745abcb338fb40ae2bf5fcba964a13e86"
         },
         {
           "path": "operator-observation/terminal-originals/stderr.txt",
@@ -46,7 +50,7 @@
         },
         {
           "path": "operator-observation/terminal-originals/stdout.jsonl",
-          "sha256": "fbaf76820505024ef7f30ba753df799058c640791e9ffe28004f0f50866efd30"
+          "sha256": "54e4cadd86a079583c2ca20cedd4d11501d883fedd566871f4d67c31d96e6934"
         },
         {
           "path": "operator-launch-preflight/agents-stderr.txt",
@@ -58,7 +62,7 @@
         },
         {
           "path": "operator-launch-preflight/current-checks.json",
-          "sha256": "f89a2812b27fcbb806441a05f06e34f1ff05490c9f46ee22a92132abd79077e7"
+          "sha256": "a8f915c96a3ce0700aab65ea8dd7ef97a0cea995b2583cac35b46411f44d9be4"
         },
         {
           "path": "operator-launch-preflight/mcp-stderr.txt",
@@ -86,19 +90,19 @@
         },
         {
           "path": "operator-launch-preflight/scope-exit.json",
-          "sha256": "c197fbed52a8e55618e0b9db4d68bf35c535f6f4964fc3b221340ee8f778b535"
+          "sha256": "4bc9d21d35b0b324c22257be37a4a3f789a22ab150b4fff3d88ef388be3f10d7"
         },
         {
           "path": "experiment-launch.json",
-          "sha256": "6c646bf3a99dee1b16fdcd5e8a49f39d416d11b023d6c1ca9a2858ef959183e8"
+          "sha256": "8f8d65f94920210b01d968622b0a2452d23a6aeea1cf378830c0ad3b98b8623f"
         },
         {
           "path": "native-start-observation.json",
-          "sha256": "cec33464ed1500a5c06fa8a926f4a54134ece44bac551c6e1f04f22b25a12ee0"
+          "sha256": "61fdc3a0a91a7ad928a39a277157b0dcdb492bffe9c4d5ba29d8e4f7a8d4ad40"
         },
         {
           "path": "native-start-observation-prefix.jsonl",
-          "sha256": "0b5a01c066a9e56f2b99df06bcc470561e5aa2e86aba87af0aa9817dc059ca07"
+          "sha256": "175a54b972cd75cae84821699f7b38699ba1a19e26a4c50fa7cb37bac8981173"
         }
       ],
       "reason": "No completed firmware build or submitted implementation result."
@@ -108,35 +112,39 @@
       "evidence": [
         {
           "path": "operator-source-freeze.json",
-          "sha256": "90f2b21a60f37a41514af615134ebefff355947db38a2182b6ee6ad2e775dd29"
+          "sha256": "70dfdd9c18b313eff5218250e21ee50e9a2dbd5f00ed17549351a93a9844d9c1"
         },
         {
           "path": "operator-policy-decision.json",
-          "sha256": "9a264c42e8ad8ceb416ee6f0fba85d74df488f372d1aa19dd0081858ca8415b6"
+          "sha256": "2296225e90af4e2c8cacdbc878e1e93b8fa4728b80a6f1e0f1474b3cc9fec4de"
         },
         {
           "path": "operator-observation/policy-notes.json",
-          "sha256": "d3b38eb76a3f828768688efa90a269f097409b4123af4a8916a93881f14362f4"
+          "sha256": "9c708749a09ac03b308d28e594475401ee78a401726e07e478ebae946d7cd40c"
         },
         {
           "path": "operator-observation/terminal-verification.json",
-          "sha256": "52a9cfe8f4fb8ebd530a207683aed8948fa625b010aed7a5514c24005be9cbfc"
+          "sha256": "9d458030b647ca5468e297350e4c59ca09d77dceb074d007ef422ff1051cf6bc"
         },
         {
           "path": "operator-observation/source-snapshot/firmware/CMakeLists.txt",
-          "sha256": "4337c4a35c682abc702219775f5e9784bad91d44d0e277b9defe8a89d12c3c79"
+          "sha256": "9bb181b92c0be5860d0f4d8b5238ba3f6d7e7ed172f1141c59a72df0fb5a7b86"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/sdkconfig.defaults",
+          "sha256": "95baa532529f74d4acfc52be48596d97a36145da7de7415d7aee85e046494354"
         },
         {
           "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-pro-r01.json",
-          "sha256": "09dc403e0b081fd00147bbbaf7ff28b9981f839e2af14d73a1358d94419ce8da"
+          "sha256": "e95f8bff0b137ff92151abb141c5a408a8233e3c74ef952ec9fb1ec457f2e5ee"
         },
         {
           "path": "operator-observation/terminal-originals/command-audit.json",
-          "sha256": "e51929e611154ab6b20ddb7a5566df35a858965bbd7b95acd06ad97a9dc23077"
+          "sha256": "dc7091fcbb974b87da0e3ad93798659805395f41cffbf64de737b6a85bc620a0"
         },
         {
           "path": "operator-observation/terminal-originals/run-manifest.json",
-          "sha256": "d5739be8e8bdce5194ab815c264567acc78c64aa82b009b3d207e387605427dc"
+          "sha256": "07753e8d8ff11eaed77396db7841ff6745abcb338fb40ae2bf5fcba964a13e86"
         },
         {
           "path": "operator-observation/terminal-originals/stderr.txt",
@@ -144,7 +152,7 @@
         },
         {
           "path": "operator-observation/terminal-originals/stdout.jsonl",
-          "sha256": "fbaf76820505024ef7f30ba753df799058c640791e9ffe28004f0f50866efd30"
+          "sha256": "54e4cadd86a079583c2ca20cedd4d11501d883fedd566871f4d67c31d96e6934"
         },
         {
           "path": "operator-launch-preflight/agents-stderr.txt",
@@ -156,7 +164,7 @@
         },
         {
           "path": "operator-launch-preflight/current-checks.json",
-          "sha256": "f89a2812b27fcbb806441a05f06e34f1ff05490c9f46ee22a92132abd79077e7"
+          "sha256": "a8f915c96a3ce0700aab65ea8dd7ef97a0cea995b2583cac35b46411f44d9be4"
         },
         {
           "path": "operator-launch-preflight/mcp-stderr.txt",
@@ -184,19 +192,19 @@
         },
         {
           "path": "operator-launch-preflight/scope-exit.json",
-          "sha256": "c197fbed52a8e55618e0b9db4d68bf35c535f6f4964fc3b221340ee8f778b535"
+          "sha256": "4bc9d21d35b0b324c22257be37a4a3f789a22ab150b4fff3d88ef388be3f10d7"
         },
         {
           "path": "experiment-launch.json",
-          "sha256": "6c646bf3a99dee1b16fdcd5e8a49f39d416d11b023d6c1ca9a2858ef959183e8"
+          "sha256": "8f8d65f94920210b01d968622b0a2452d23a6aeea1cf378830c0ad3b98b8623f"
         },
         {
           "path": "native-start-observation.json",
-          "sha256": "cec33464ed1500a5c06fa8a926f4a54134ece44bac551c6e1f04f22b25a12ee0"
+          "sha256": "61fdc3a0a91a7ad928a39a277157b0dcdb492bffe9c4d5ba29d8e4f7a8d4ad40"
         },
         {
           "path": "native-start-observation-prefix.jsonl",
-          "sha256": "0b5a01c066a9e56f2b99df06bcc470561e5aa2e86aba87af0aa9817dc059ca07"
+          "sha256": "175a54b972cd75cae84821699f7b38699ba1a19e26a4c50fa7cb37bac8981173"
         }
       ],
       "reason": "No firmware to upload; hardware behavior untested."
@@ -206,35 +214,39 @@
       "evidence": [
         {
           "path": "operator-source-freeze.json",
-          "sha256": "90f2b21a60f37a41514af615134ebefff355947db38a2182b6ee6ad2e775dd29"
+          "sha256": "70dfdd9c18b313eff5218250e21ee50e9a2dbd5f00ed17549351a93a9844d9c1"
         },
         {
           "path": "operator-policy-decision.json",
-          "sha256": "9a264c42e8ad8ceb416ee6f0fba85d74df488f372d1aa19dd0081858ca8415b6"
+          "sha256": "2296225e90af4e2c8cacdbc878e1e93b8fa4728b80a6f1e0f1474b3cc9fec4de"
         },
         {
           "path": "operator-observation/policy-notes.json",
-          "sha256": "d3b38eb76a3f828768688efa90a269f097409b4123af4a8916a93881f14362f4"
+          "sha256": "9c708749a09ac03b308d28e594475401ee78a401726e07e478ebae946d7cd40c"
         },
         {
           "path": "operator-observation/terminal-verification.json",
-          "sha256": "52a9cfe8f4fb8ebd530a207683aed8948fa625b010aed7a5514c24005be9cbfc"
+          "sha256": "9d458030b647ca5468e297350e4c59ca09d77dceb074d007ef422ff1051cf6bc"
         },
         {
           "path": "operator-observation/source-snapshot/firmware/CMakeLists.txt",
-          "sha256": "4337c4a35c682abc702219775f5e9784bad91d44d0e277b9defe8a89d12c3c79"
+          "sha256": "9bb181b92c0be5860d0f4d8b5238ba3f6d7e7ed172f1141c59a72df0fb5a7b86"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/sdkconfig.defaults",
+          "sha256": "95baa532529f74d4acfc52be48596d97a36145da7de7415d7aee85e046494354"
         },
         {
           "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-pro-r01.json",
-          "sha256": "09dc403e0b081fd00147bbbaf7ff28b9981f839e2af14d73a1358d94419ce8da"
+          "sha256": "e95f8bff0b137ff92151abb141c5a408a8233e3c74ef952ec9fb1ec457f2e5ee"
         },
         {
           "path": "operator-observation/terminal-originals/command-audit.json",
-          "sha256": "e51929e611154ab6b20ddb7a5566df35a858965bbd7b95acd06ad97a9dc23077"
+          "sha256": "dc7091fcbb974b87da0e3ad93798659805395f41cffbf64de737b6a85bc620a0"
         },
         {
           "path": "operator-observation/terminal-originals/run-manifest.json",
-          "sha256": "d5739be8e8bdce5194ab815c264567acc78c64aa82b009b3d207e387605427dc"
+          "sha256": "07753e8d8ff11eaed77396db7841ff6745abcb338fb40ae2bf5fcba964a13e86"
         },
         {
           "path": "operator-observation/terminal-originals/stderr.txt",
@@ -242,7 +254,7 @@
         },
         {
           "path": "operator-observation/terminal-originals/stdout.jsonl",
-          "sha256": "fbaf76820505024ef7f30ba753df799058c640791e9ffe28004f0f50866efd30"
+          "sha256": "54e4cadd86a079583c2ca20cedd4d11501d883fedd566871f4d67c31d96e6934"
         },
         {
           "path": "operator-launch-preflight/agents-stderr.txt",
@@ -254,7 +266,7 @@
         },
         {
           "path": "operator-launch-preflight/current-checks.json",
-          "sha256": "f89a2812b27fcbb806441a05f06e34f1ff05490c9f46ee22a92132abd79077e7"
+          "sha256": "a8f915c96a3ce0700aab65ea8dd7ef97a0cea995b2583cac35b46411f44d9be4"
         },
         {
           "path": "operator-launch-preflight/mcp-stderr.txt",
@@ -282,19 +294,19 @@
         },
         {
           "path": "operator-launch-preflight/scope-exit.json",
-          "sha256": "c197fbed52a8e55618e0b9db4d68bf35c535f6f4964fc3b221340ee8f778b535"
+          "sha256": "4bc9d21d35b0b324c22257be37a4a3f789a22ab150b4fff3d88ef388be3f10d7"
         },
         {
           "path": "experiment-launch.json",
-          "sha256": "6c646bf3a99dee1b16fdcd5e8a49f39d416d11b023d6c1ca9a2858ef959183e8"
+          "sha256": "8f8d65f94920210b01d968622b0a2452d23a6aeea1cf378830c0ad3b98b8623f"
         },
         {
           "path": "native-start-observation.json",
-          "sha256": "cec33464ed1500a5c06fa8a926f4a54134ece44bac551c6e1f04f22b25a12ee0"
+          "sha256": "61fdc3a0a91a7ad928a39a277157b0dcdb492bffe9c4d5ba29d8e4f7a8d4ad40"
         },
         {
           "path": "native-start-observation-prefix.jsonl",
-          "sha256": "0b5a01c066a9e56f2b99df06bcc470561e5aa2e86aba87af0aa9817dc059ca07"
+          "sha256": "175a54b972cd75cae84821699f7b38699ba1a19e26a4c50fa7cb37bac8981173"
         }
       ],
       "reason": "No firmware to upload; hardware behavior untested."
@@ -304,35 +316,39 @@
       "evidence": [
         {
           "path": "operator-source-freeze.json",
-          "sha256": "90f2b21a60f37a41514af615134ebefff355947db38a2182b6ee6ad2e775dd29"
+          "sha256": "70dfdd9c18b313eff5218250e21ee50e9a2dbd5f00ed17549351a93a9844d9c1"
         },
         {
           "path": "operator-policy-decision.json",
-          "sha256": "9a264c42e8ad8ceb416ee6f0fba85d74df488f372d1aa19dd0081858ca8415b6"
+          "sha256": "2296225e90af4e2c8cacdbc878e1e93b8fa4728b80a6f1e0f1474b3cc9fec4de"
         },
         {
           "path": "operator-observation/policy-notes.json",
-          "sha256": "d3b38eb76a3f828768688efa90a269f097409b4123af4a8916a93881f14362f4"
+          "sha256": "9c708749a09ac03b308d28e594475401ee78a401726e07e478ebae946d7cd40c"
         },
         {
           "path": "operator-observation/terminal-verification.json",
-          "sha256": "52a9cfe8f4fb8ebd530a207683aed8948fa625b010aed7a5514c24005be9cbfc"
+          "sha256": "9d458030b647ca5468e297350e4c59ca09d77dceb074d007ef422ff1051cf6bc"
         },
         {
           "path": "operator-observation/source-snapshot/firmware/CMakeLists.txt",
-          "sha256": "4337c4a35c682abc702219775f5e9784bad91d44d0e277b9defe8a89d12c3c79"
+          "sha256": "9bb181b92c0be5860d0f4d8b5238ba3f6d7e7ed172f1141c59a72df0fb5a7b86"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/sdkconfig.defaults",
+          "sha256": "95baa532529f74d4acfc52be48596d97a36145da7de7415d7aee85e046494354"
         },
         {
           "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-pro-r01.json",
-          "sha256": "09dc403e0b081fd00147bbbaf7ff28b9981f839e2af14d73a1358d94419ce8da"
+          "sha256": "e95f8bff0b137ff92151abb141c5a408a8233e3c74ef952ec9fb1ec457f2e5ee"
         },
         {
           "path": "operator-observation/terminal-originals/command-audit.json",
-          "sha256": "e51929e611154ab6b20ddb7a5566df35a858965bbd7b95acd06ad97a9dc23077"
+          "sha256": "dc7091fcbb974b87da0e3ad93798659805395f41cffbf64de737b6a85bc620a0"
         },
         {
           "path": "operator-observation/terminal-originals/run-manifest.json",
-          "sha256": "d5739be8e8bdce5194ab815c264567acc78c64aa82b009b3d207e387605427dc"
+          "sha256": "07753e8d8ff11eaed77396db7841ff6745abcb338fb40ae2bf5fcba964a13e86"
         },
         {
           "path": "operator-observation/terminal-originals/stderr.txt",
@@ -340,7 +356,7 @@
         },
         {
           "path": "operator-observation/terminal-originals/stdout.jsonl",
-          "sha256": "fbaf76820505024ef7f30ba753df799058c640791e9ffe28004f0f50866efd30"
+          "sha256": "54e4cadd86a079583c2ca20cedd4d11501d883fedd566871f4d67c31d96e6934"
         },
         {
           "path": "operator-launch-preflight/agents-stderr.txt",
@@ -352,7 +368,7 @@
         },
         {
           "path": "operator-launch-preflight/current-checks.json",
-          "sha256": "f89a2812b27fcbb806441a05f06e34f1ff05490c9f46ee22a92132abd79077e7"
+          "sha256": "a8f915c96a3ce0700aab65ea8dd7ef97a0cea995b2583cac35b46411f44d9be4"
         },
         {
           "path": "operator-launch-preflight/mcp-stderr.txt",
@@ -380,19 +396,19 @@
         },
         {
           "path": "operator-launch-preflight/scope-exit.json",
-          "sha256": "c197fbed52a8e55618e0b9db4d68bf35c535f6f4964fc3b221340ee8f778b535"
+          "sha256": "4bc9d21d35b0b324c22257be37a4a3f789a22ab150b4fff3d88ef388be3f10d7"
         },
         {
           "path": "experiment-launch.json",
-          "sha256": "6c646bf3a99dee1b16fdcd5e8a49f39d416d11b023d6c1ca9a2858ef959183e8"
+          "sha256": "8f8d65f94920210b01d968622b0a2452d23a6aeea1cf378830c0ad3b98b8623f"
         },
         {
           "path": "native-start-observation.json",
-          "sha256": "cec33464ed1500a5c06fa8a926f4a54134ece44bac551c6e1f04f22b25a12ee0"
+          "sha256": "61fdc3a0a91a7ad928a39a277157b0dcdb492bffe9c4d5ba29d8e4f7a8d4ad40"
         },
         {
           "path": "native-start-observation-prefix.jsonl",
-          "sha256": "0b5a01c066a9e56f2b99df06bcc470561e5aa2e86aba87af0aa9817dc059ca07"
+          "sha256": "175a54b972cd75cae84821699f7b38699ba1a19e26a4c50fa7cb37bac8981173"
         }
       ],
       "reason": "No firmware to upload; hardware behavior untested."
@@ -402,35 +418,39 @@
       "evidence": [
         {
           "path": "operator-source-freeze.json",
-          "sha256": "90f2b21a60f37a41514af615134ebefff355947db38a2182b6ee6ad2e775dd29"
+          "sha256": "70dfdd9c18b313eff5218250e21ee50e9a2dbd5f00ed17549351a93a9844d9c1"
         },
         {
           "path": "operator-policy-decision.json",
-          "sha256": "9a264c42e8ad8ceb416ee6f0fba85d74df488f372d1aa19dd0081858ca8415b6"
+          "sha256": "2296225e90af4e2c8cacdbc878e1e93b8fa4728b80a6f1e0f1474b3cc9fec4de"
         },
         {
           "path": "operator-observation/policy-notes.json",
-          "sha256": "d3b38eb76a3f828768688efa90a269f097409b4123af4a8916a93881f14362f4"
+          "sha256": "9c708749a09ac03b308d28e594475401ee78a401726e07e478ebae946d7cd40c"
         },
         {
           "path": "operator-observation/terminal-verification.json",
-          "sha256": "52a9cfe8f4fb8ebd530a207683aed8948fa625b010aed7a5514c24005be9cbfc"
+          "sha256": "9d458030b647ca5468e297350e4c59ca09d77dceb074d007ef422ff1051cf6bc"
         },
         {
           "path": "operator-observation/source-snapshot/firmware/CMakeLists.txt",
-          "sha256": "4337c4a35c682abc702219775f5e9784bad91d44d0e277b9defe8a89d12c3c79"
+          "sha256": "9bb181b92c0be5860d0f4d8b5238ba3f6d7e7ed172f1141c59a72df0fb5a7b86"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/sdkconfig.defaults",
+          "sha256": "95baa532529f74d4acfc52be48596d97a36145da7de7415d7aee85e046494354"
         },
         {
           "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-pro-r01.json",
-          "sha256": "09dc403e0b081fd00147bbbaf7ff28b9981f839e2af14d73a1358d94419ce8da"
+          "sha256": "e95f8bff0b137ff92151abb141c5a408a8233e3c74ef952ec9fb1ec457f2e5ee"
         },
         {
           "path": "operator-observation/terminal-originals/command-audit.json",
-          "sha256": "e51929e611154ab6b20ddb7a5566df35a858965bbd7b95acd06ad97a9dc23077"
+          "sha256": "dc7091fcbb974b87da0e3ad93798659805395f41cffbf64de737b6a85bc620a0"
         },
         {
           "path": "operator-observation/terminal-originals/run-manifest.json",
-          "sha256": "d5739be8e8bdce5194ab815c264567acc78c64aa82b009b3d207e387605427dc"
+          "sha256": "07753e8d8ff11eaed77396db7841ff6745abcb338fb40ae2bf5fcba964a13e86"
         },
         {
           "path": "operator-observation/terminal-originals/stderr.txt",
@@ -438,7 +458,7 @@
         },
         {
           "path": "operator-observation/terminal-originals/stdout.jsonl",
-          "sha256": "fbaf76820505024ef7f30ba753df799058c640791e9ffe28004f0f50866efd30"
+          "sha256": "54e4cadd86a079583c2ca20cedd4d11501d883fedd566871f4d67c31d96e6934"
         },
         {
           "path": "operator-launch-preflight/agents-stderr.txt",
@@ -450,7 +470,7 @@
         },
         {
           "path": "operator-launch-preflight/current-checks.json",
-          "sha256": "f89a2812b27fcbb806441a05f06e34f1ff05490c9f46ee22a92132abd79077e7"
+          "sha256": "a8f915c96a3ce0700aab65ea8dd7ef97a0cea995b2583cac35b46411f44d9be4"
         },
         {
           "path": "operator-launch-preflight/mcp-stderr.txt",
@@ -478,19 +498,19 @@
         },
         {
           "path": "operator-launch-preflight/scope-exit.json",
-          "sha256": "c197fbed52a8e55618e0b9db4d68bf35c535f6f4964fc3b221340ee8f778b535"
+          "sha256": "4bc9d21d35b0b324c22257be37a4a3f789a22ab150b4fff3d88ef388be3f10d7"
         },
         {
           "path": "experiment-launch.json",
-          "sha256": "6c646bf3a99dee1b16fdcd5e8a49f39d416d11b023d6c1ca9a2858ef959183e8"
+          "sha256": "8f8d65f94920210b01d968622b0a2452d23a6aeea1cf378830c0ad3b98b8623f"
         },
         {
           "path": "native-start-observation.json",
-          "sha256": "cec33464ed1500a5c06fa8a926f4a54134ece44bac551c6e1f04f22b25a12ee0"
+          "sha256": "61fdc3a0a91a7ad928a39a277157b0dcdb492bffe9c4d5ba29d8e4f7a8d4ad40"
         },
         {
           "path": "native-start-observation-prefix.jsonl",
-          "sha256": "0b5a01c066a9e56f2b99df06bcc470561e5aa2e86aba87af0aa9817dc059ca07"
+          "sha256": "175a54b972cd75cae84821699f7b38699ba1a19e26a4c50fa7cb37bac8981173"
         }
       ],
       "reason": "No firmware to upload; hardware behavior untested."
