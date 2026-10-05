@@ -1,0 +1,26 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-pro-r01",
+  "reviewed_at": "2026-10-05T13:21:20.285636+00:00",
+  "raw_stdout_sha256": "61e0b1743dc88629c61d4fdf559923010b54ad7a1b0f1aaecb85d798f48fbf74",
+  "raw_stderr_sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713",
+  "accesses": [
+    "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\checkout\\.benchmark-inputs\\run-context.json",
+    "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\checkout\\docs\\PRODUCT_CONTRACT.md",
+    "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\checkout\\docs\\hardware\\version-2-capabilities.md",
+    "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\checkout\\.benchmark-inputs\\input-files.json",
+    "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\checkout\\docs\\hardware\\vendor-source-index.json",
+    "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\checkout\\experiments\\schema\\usage-snapshot.schema.json",
+    "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\checkout\\experiments\\schema\\cdm-frame.schema.json",
+    "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\checkout\\experiments\\schema\\end-to-end-result.schema.json",
+    "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\checkout\\experiments\\examples\\cdm-frame.example.json",
+    "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\checkout\\scripts\\evaluate-product.py"
+  ],
+  "stop_on_denial": {
+    "raw_line": 29,
+    "step_index": 16,
+    "command": "mkdir -p firmware/main pc firmware/components/state_machine scripts tests",
+    "later_tool_calls": 0
+  },
+  "finding": "All ten reads were declared candidate inputs within its own checkout. The only shell command was denied and no later assistant or tool action occurred. No serial, flash, online access, earlier candidate source, scope change, retry or operator implementation feedback.",
+  "denial_scope": "Native headless permission matching denied the command. No permission relaxation, alternate tool for the denied action or replacement initial invocation was made."
+}

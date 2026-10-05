@@ -1,0 +1,166 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-pro-r04",
+  "scope": "Operator evaluation of submitted partial C state module plus candidate mocked normalizer; no real firmware, collector or device conformance claim. Original candidate has no result JSON and no firmware artifact.",
+  "operator_firmware_rebuild": false,
+  "submitted_host_executable_sha256": "b50ae82aba282eaa67f5584946e3cc6c7072ec60b4c7b4d695533c440efe4dce",
+  "submitted_host_executable_bytes": 177664,
+  "frozen_evaluator_sha256": "6fa43ae800784aeb3ede855bb4e36e96cebe5433c3a8b506bd4d91440ed2452c",
+  "cases": [
+    {
+      "case": "personal-usage.json:freshness",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "personal-usage.json:invalid-0",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "personal-usage.json:invalid-1",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "personal-usage.json:invalid-2",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "personal-usage.json:invalid-3",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "personal-usage.json:invalid-4",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "personal-usage.json:invalid-5",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "personal-usage.json:dns",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "personal-usage.json:tls",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "personal-usage.json:http_500",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-reset-forecast.json:freshness",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-reset-forecast.json:invalid-0",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-reset-forecast.json:invalid-1",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-reset-forecast.json:invalid-2",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-reset-forecast.json:invalid-3",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-reset-forecast.json:invalid-4",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-reset-forecast.json:invalid-5",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-reset-forecast.json:dns",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-reset-forecast.json:tls",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-reset-forecast.json:http_500",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-resets-history.json:freshness",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-resets-history.json:invalid-0",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-resets-history.json:invalid-1",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-resets-history.json:invalid-2",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-resets-history.json:invalid-3",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-resets-history.json:invalid-4",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-resets-history.json:dns",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-resets-history.json:tls",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    },
+    {
+      "case": "codex-resets-history.json:http_500",
+      "status": "fail",
+      "reason": "Command '['C:\\\\meter-followups-20261005\\\\20261005-antigravity-cli-agy-pro-r04\\\\checkout\\\\build-host\\\\test_meter_parser.exe']' returned non-zero exit status 3221225781."
+    }
+  ],
+  "passed": 0,
+  "failed": 29,
+  "hardware_status": "not_run",
+  "product_pass": false,
+  "source_hashes": {
+    "firmware/main/meter_state.c": "89eeb10ab411d64cb233f0a9cf4b4222787b73fc5fb0911e7de2c3d3822e64bf",
+    "firmware/main/meter_state.h": "75f490fdff53be87b468bfd01bb966f7fac1a06d383cc7069ded86a8524d0d38",
+    "build-host/test_meter_parser.cpp": "245f69d8447e62646cac62154a68c890c79887aa39bdaf9017c4aa702490441f",
+    "build-host/CMakeLists.txt": "a0142eb8f5cd00debf1b9542dd4134e416f9eecda8b086818d4b3307696e455d",
+    "docs/compile-link-evidence.md": "4eff210facaf14de48c6db0490133efa18fe7ebd107ae08596e9513f500ae29f"
+  }
+}

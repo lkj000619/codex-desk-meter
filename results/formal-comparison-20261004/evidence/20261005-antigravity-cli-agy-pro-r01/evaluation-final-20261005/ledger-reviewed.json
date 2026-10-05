@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "comparison_id": "20261005-antigravity-cli-agy-pro-r01",
+  "state": "active",
+  "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "input_bundle_sha256": "62fb20a50ebf174f96e072e0f2958921d21e43b7a7e5dee84dfe69445a125a4d",
+  "profile_sha256": "eeedee05c3f1004df8d6883f8a0dca520cbf70665cff283397fa1f8dc1065b01",
+  "limits": {
+    "initial_seconds": 7200,
+    "remediation_seconds": 7200,
+    "remediation_rounds": 3
+  },
+  "reference_inputs": "C:\\meter-runs-20261005\\ledgers\\20261005-antigravity-cli-agy-pro-r01-reference\\reference-inputs.json",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "common_task_sha256": "f8b9369cd48f610ff0bcaf17d5065df36293e561ef069fe4965f8002fcb15145",
+  "common_task_run_id": "20261005-antigravity-cli-agy-pro-r01",
+  "runs": [
+    {
+      "run_id": "20261005-antigravity-cli-agy-pro-r01",
+      "directory": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01",
+      "round": 0,
+      "starting_commit": "ba5609db6fbf6392166586e50341c6e14a26112f",
+      "status": "environment_failed",
+      "reserved_seconds": 7200,
+      "elapsed_seconds": 68.20299999997951,
+      "reference_status": "fail",
+      "reviewed": true,
+      "implementation_commit": "ba5609db6fbf6392166586e50341c6e14a26112f",
+      "feedback_sha256": null,
+      "tokens": {
+        "input": 84301,
+        "output": 5560,
+        "cached": 167271,
+        "reasoning": 4593,
+        "provider_total": 89861,
+        "total": 89861,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+      },
+      "terminal_manifest_sha256": "6b79d3b216cf827763bc4ba81449a114b4332360b07995eb82fbb10b0e2e1979",
+      "source_bundle_sha256": "c9049f03487ed5e4488968113e131ae2d34c101afd79f5edddca802e636318f4",
+      "reference_review_sha256": "fdb7a2f8158687de30d9118a526552259ec47321f6bc56cbfbd87a6fd2580a59"
+    }
+  ]
+}

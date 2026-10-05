@@ -1,0 +1,15 @@
+{
+    "run_id":  "20261005-antigravity-cli-agy-pro-r04",
+    "round":  3,
+    "launcher_pid":  30748,
+    "launcher_started_at":  "2026-10-05T13:49:53.3724972Z",
+    "baseline":  "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "model":  "gemini-3.1-pro-high",
+    "timeout_seconds":  7066,
+    "entrypoint":  "C:/meter-followups-20261005/launch-agy-pro-r04.ps1",
+    "scoped_runner":  "C:/meter-followups-20261005/launch-agy-pro-r04.py",
+    "receipt":  "C:/meter-preflight-20261005/renewal/agy-pro-followup-r04-receipt.json",
+    "execution_mode":  "independent hidden process, final third formal followup, unchanged runner/profile/permissions",
+    "remaining_followup_seconds_before_run":  7066.5,
+    "remaining_followup_rounds_including_this":  1
+}

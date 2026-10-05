@@ -1,0 +1,77 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-pro-r04",
+  "commit": "ef6aa727fa3539454708f223d965a1cb40197a56",
+  "frozen_at": "2026-10-05T14:04:52.205123+00:00",
+  "original_terminal_manifest_sha256": "d12b1cacaad1896254dd69512bac3cca3770769d81cad65900c1bdd76f4eb1ef",
+  "sources": {
+    "docs/compile-link-evidence.md": {
+      "bytes": 415,
+      "sha256": "4eff210facaf14de48c6db0490133efa18fe7ebd107ae08596e9513f500ae29f",
+      "operator_raw_copy": "operator-observation/source-snapshot/docs/compile-link-evidence.md"
+    },
+    "firmware/CMakeLists.txt": {
+      "bytes": 457,
+      "sha256": "9bb181b92c0be5860d0f4d8b5238ba3f6d7e7ed172f1141c59a72df0fb5a7b86",
+      "operator_raw_copy": "operator-observation/source-snapshot/firmware/CMakeLists.txt"
+    },
+    "firmware/sdkconfig.defaults": {
+      "bytes": 936,
+      "sha256": "95aa9f8305d694f44209fcd3593727c519296396bcd090fc1e33b20657fc421b",
+      "operator_raw_copy": "operator-observation/source-snapshot/firmware/sdkconfig.defaults"
+    },
+    "firmware/main/meter_state.c": {
+      "bytes": 8177,
+      "sha256": "89eeb10ab411d64cb233f0a9cf4b4222787b73fc5fb0911e7de2c3d3822e64bf",
+      "operator_raw_copy": "operator-observation/source-snapshot/firmware/main/meter_state.c"
+    },
+    "firmware/main/meter_state.h": {
+      "bytes": 1674,
+      "sha256": "75f490fdff53be87b468bfd01bb966f7fac1a06d383cc7069ded86a8524d0d38",
+      "operator_raw_copy": "operator-observation/source-snapshot/firmware/main/meter_state.h"
+    },
+    "build-host/CMakeLists.txt": {
+      "bytes": 338,
+      "sha256": "a0142eb8f5cd00debf1b9542dd4134e416f9eecda8b086818d4b3307696e455d",
+      "operator_raw_copy": "operator-observation/source-snapshot/build-host/CMakeLists.txt"
+    },
+    "build-host/test_meter_parser.cpp": {
+      "bytes": 9484,
+      "sha256": "245f69d8447e62646cac62154a68c890c79887aa39bdaf9017c4aa702490441f",
+      "operator_raw_copy": "operator-observation/source-snapshot/build-host/test_meter_parser.cpp"
+    }
+  },
+  "artifacts": {
+    "build-host/test_meter_parser.exe": {
+      "bytes": 177664,
+      "sha256": "b50ae82aba282eaa67f5584946e3cc6c7072ec60b4c7b4d695533c440efe4dce",
+      "operator_raw_copy": "operator-observation/host-artifact-snapshot/build-host/test_meter_parser.exe"
+    },
+    "build-host/libtest_meter_parser.dll.a": {
+      "bytes": 19736,
+      "sha256": "b9e36783fbe352d3474e324ee292a0ce24d820cefcb4f6a1ad14c56558048178",
+      "operator_raw_copy": "operator-observation/host-artifact-snapshot/build-host/libtest_meter_parser.dll.a"
+    },
+    "build-host/CMakeCache.txt": {
+      "bytes": 18340,
+      "sha256": "ffcb0c44fb1893d5bd0a9c28a5a6c1e85b6eb376c6a3101f6c4198b248beef0e",
+      "operator_raw_copy": "operator-observation/host-artifact-snapshot/build-host/CMakeCache.txt"
+    },
+    "build-host/build.ninja": {
+      "bytes": 31405,
+      "sha256": "dbf1356de4a8678a64245c9d58a20dcd79a96c137bbc569bcd6c57e62f8ffa01",
+      "operator_raw_copy": "operator-observation/host-artifact-snapshot/build-host/build.ninja"
+    },
+    "build-host/.ninja_log": {
+      "bytes": 498,
+      "sha256": "f1b6db8f42d4a7da2a631723a2d3bf63ca93e6b97cf9447bc063ac43089413bf",
+      "operator_raw_copy": "operator-observation/host-artifact-snapshot/build-host/.ninja_log"
+    },
+    "build-host/.ninja_deps": {
+      "bytes": 82056,
+      "sha256": "13aad4208eb5eed52c835271bf891bcf80ba20237c15876d78eb7a9d759ec193",
+      "operator_raw_copy": "operator-observation/host-artifact-snapshot/build-host/.ninja_deps"
+    }
+  },
+  "operator_product_source_modifications": false,
+  "operator_firmware_rebuild": false
+}

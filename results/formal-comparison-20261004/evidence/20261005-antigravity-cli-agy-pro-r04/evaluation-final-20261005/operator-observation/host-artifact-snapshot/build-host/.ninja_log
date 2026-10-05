@@ -1,0 +1,5 @@
+# ninja log v6
+34	308	8129118642182625	CMakeFiles/test_meter_parser.dir/C_/meter-followups-20261005/20261005-antigravity-cli-agy-pro-r04/checkout/firmware/main/meter_state.c.obj	2bcf9fd0bebcd19d
+42	410	8129118642253606	CMakeFiles/test_meter_parser.dir/C_/Espressif/v5.3.2/esp-idf/components/json/cJSON/cJSON.c.obj	6dd30832c511747d
+24	5600	8129118642077294	CMakeFiles/test_meter_parser.dir/test_meter_parser.cpp.obj	41533e2ce1194f5f
+5606	5737	8129118697897070	test_meter_parser.exe	f155e51ab99817f7

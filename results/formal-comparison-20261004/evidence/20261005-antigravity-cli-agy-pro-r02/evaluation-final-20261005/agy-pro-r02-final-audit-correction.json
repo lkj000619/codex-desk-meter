@@ -1,0 +1,9 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-pro-r02",
+  "first_audit": "agy-pro-r02-final-audit.py",
+  "first_failure": "Raw source LF bytes differed from Git-restored CRLF bytes; no content or frozen Git blob difference.",
+  "replacement_audit": "agy-pro-r02-final-audit-v2.py",
+  "original_audit_and_package_preserved": true,
+  "candidate_or_cost_changed": false,
+  "model_calls": 0
+}

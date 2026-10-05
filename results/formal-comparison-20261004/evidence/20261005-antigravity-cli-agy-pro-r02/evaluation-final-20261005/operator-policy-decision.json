@@ -1,0 +1,17 @@
+{
+  "status": "eligible",
+  "reviewer": "Codex operator",
+  "reason": "Reviewed all native events: only own checkout inputs/feedback and declared SDK/manufacturer source, plus own built-in task management. The final native tool was denied and no later tool or assistant action followed. Stop-on-denial respected. Preserve environment_failed, partial files, absent firmware/submissions and all cost separately.",
+  "user_interventions": 0,
+  "intervention_review": "No source repair, permissions changes, serial/flash or execution-time implementation feedback. Global files restored and native process/owner absent.",
+  "evidence": [
+    {
+      "path": "operator-observation/policy-notes.json",
+      "sha256": "d3b38eb76a3f828768688efa90a269f097409b4123af4a8916a93881f14362f4"
+    },
+    {
+      "path": "operator-observation/terminal-verification.json",
+      "sha256": "52a9cfe8f4fb8ebd530a207683aed8948fa625b010aed7a5514c24005be9cbfc"
+    }
+  ]
+}

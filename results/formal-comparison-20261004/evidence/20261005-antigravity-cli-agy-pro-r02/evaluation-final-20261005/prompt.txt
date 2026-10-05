@@ -1,0 +1,110 @@
+# Version 2 구현 과제
+
+목표: Waveshare ESP32-S3-LCD-3.16에서 **PC fixture → USB serial → 실제 firmware
+receiver → LCD**를 연결하는 ESP-IDF v5.3.2 제품을 구현한다. 이번 실행 ID는 `20261005-antigravity-cli-agy-pro-r02`다.
+
+## 먼저 읽을 입력
+
+1. `.benchmark-inputs/run-context.json`: 식별자·baseline·결과 경로·입력 hash.
+2. `docs/PRODUCT_CONTRACT.md`: 구현 동작과 합격 조건의 유일한 원본.
+3. `docs/hardware/version-2-capabilities.md`: 보드 사실과 제조사 source 범위.
+
+이 과제·제품 계약·보드 자료가 필수 MD 전부다. JSON schema·fixture·예제는
+구현할 계층에 필요한 것만 읽는다. `.benchmark-inputs/input-files.json`은 runner가
+제공한 파일 목록·hash다. 제공 입력과 identity 사본을 수정하지 않는다.
+운영 manifest·profile·receipt·과거 실험 자료는 checkout 밖에서 운영자가 관리한다.
+결과 예제는 필드 형식 설명이다. 예제의 운영자 evidence 경로는 후보에게 제공되지 않으며
+자신의 증거로 복사하지 않는다. validator에는 자신의 result·고정 manifest·evidence root를 전달한다.
+
+## 실행 범위
+
+- 최초 실행은 최대 120분, 실행 중 질문·외부 구현 피드백 없이 수행한다.
+  종료 후 수정은 운영자가 별도로 시작하며 최대 3회·누적 120분이다.
+  이번 호출만 수행하고 스스로 후속 session을 시작하지 않는다.
+- 제품 C1~C8·I1~I4·F1~F9를 구현·검증한다. Codex에서 확인된 기능 도달과
+  전체 제품 합격은 운영자가 별도로 판정한다. 기능 도달만으로 `product_pass`를 참으로 쓰지 않는다.
+- 동일한 보드 사실·제조사 source를 제공하며 BSP 구현도 작업 범위다.
+  제공 host oracle은 시험 도구이며 candidate firmware를 대신하지 않는다.
+- checkout 내부와 선언된 SDK·제조사 source만 사용한다. 상위 폴더, 다른 ref/worktree,
+  과거 구현·결과·대화·사용자 파일·credential을 탐색하지 않는다.
+  `git status`, `git diff`로 자신의 변경을 확인한다. 다른 ref 조회·전환은 금지한다.
+- 개인 계정/API key/cookie를 요청하거나 기록하지 않는다. 제품 입력은 offline fixture다.
+  네트워크·MCP·모델 호출은 실행 전에 선언된 정책 범위에서만 사용한다.
+- serial port 열기·flash·reset·`erase_flash`는 수행하지 않는다. 실물 시험은 운영자가
+  동결된 artifact로 수행한다. 실행할 명령과 관측할 결과를 제출한다.
+
+## 빌드와 시험
+
+운영자가 SDK·Python·C/C++ compiler·CMake·Ninja를 준비한다. 없거나 실행되지 않으면
+환경 실패와 근거를 남기고 종료한다. 설치 폴더 검색이나 도구 설치로 우회하지 않는다.
+
+- `idf.py --version`, `idf.py set-target esp32s3`, `idf.py build`
+- `python -m unittest discover -s tests -v`, `python tests/<시험 파일>.py`
+- `python -m py_compile <상대 파일>`
+- `cmake -S <상대 경로> -B build-host -G Ninja`, `cmake --build build-host`
+- `ctest --test-dir build-host --output-on-failure`
+
+셸 명령은 한 호출에 하나만 실행한다. `;`, `&&`, 파이프·명령 치환·shell wrapper로
+결합하지 않는다. 파일 작성은 native 파일 도구를 사용한다. 제공된
+`experiments/config/agy-pilot-permissions.json`은 명령 규칙의 참조 자료다.
+각 실행 표면의 실효 권한·도구 설정은 운영자가 사전에 확인해 고정한다.
+이 파일의 존재만으로 모든 표면의 권한 강제가 같다고 가정하지 않는다.
+권한 거부는 실패로 기록하고 종료하며 다른 도구로 우회하거나 권한 추가를 요청하지 않는다.
+정책에 없는 `pytest`·삭제·인라인 Python을 실행하지 않는다.
+
+실제 제품 파서·상태 전이 C 모듈을 compile/link해 호출하는 host 시험을 제공한다.
+Python 모방 구현의 성공을 firmware 검증으로 제출하지 않는다. 제공 validator·host
+oracle의 성공과 실제 USB 수신·LCD 성공을 구분한다.
+
+## 제출
+
+- ESP-IDF 프로젝트, PC collector·sender, firmware receiver·GUI와 자체 시험.
+- `docs/agent-runs/20261005-antigravity-cli-agy-pro-r02/hardware-feature-selection.md`: 보드 기능 후보 정확히 3개,
+  각각의 사용자 가치·자원·비용·위험·시험, 선택 1개와 나머지 2개의 탈락 이유.
+  선택 기능을 핵심과 분리해 구현한다. 제조사 데모 반복은 추가 기능으로 인정하지 않는다.
+- `results/20261005-antigravity-cli-agy-pro-r02/end-to-end-result.json`: 제공 result schema의 C/F/I/G·build/host/
+  transport/hardware 상태와 증거 경로. 새 JSON 필드를 만들지 않는다.
+- 빌드·시험 재현 명령, 오류/stale/복구 시험, 실물 업로드·관측 절차와 남은 문제.
+
+identity와 evaluation manifest 참조는 `.benchmark-inputs/`의 사본을 사용한다.
+실행 시간·token·운영자 실물 판정은 운영자가 종료 후 작성한다. 미측정은 허용된
+null·`not_run`·`blocked`와 사유로 남기고, 자체 시험을 독립 평가로 표현하지 않는다.
+
+## Current followup session
+Continue your own frozen implementation under all common task restrictions above. This is a fresh followup session, not a new initial budget. The remaining_seconds and remaining_rounds below include this invocation; do not start another session yourself.
+Use only the supplied local evidence in .benchmark-inputs/feedback.json; do not search previous run directories or other implementations.
+Operator feedback (observations and expected behavior):
+{
+  "previous_run_id": "20261005-antigravity-cli-agy-pro-r01",
+  "previous_commit": "ba5609db6fbf6392166586e50341c6e14a26112f",
+  "target_ids": [
+    "RM1",
+    "RM2",
+    "RM3",
+    "RM4",
+    "RM5"
+  ],
+  "observed": "Initial independent Pro attempt ended environment_failed after 68.203 seconds. Ten file reads were within its own declared inputs. The first native run_command, mkdir -p firmware/main pc firmware/components/state_machine scripts tests, was permission-denied; no later tool or assistant action occurred. Candidate Git checkout remained unchanged. No product implementation, host build/test, firmware, selection document or final result JSON was produced. RM1 fail; RM2-RM5 not_run. No board upload or observation was performed for this run. Policy eligible because candidate stopped on denial. All original costs and the failed initial attempt are preserved.",
+  "expected": "Complete the unchanged common task and product contract with truthful linked submission, build/test evidence and the required RM1-RM5 behavior. Candidate hardware status remains not_run until operator evaluation after terminal freeze. Same fixed profile, native permissions, checkout/access boundary and stop-on-denial rule apply; do not relax permissions, bypass a denial or access prior run directories. This is the first predeclared own-source followup, not a replacement initial call; manager enforces cumulative followup time and round limits.",
+  "remaining_rounds": 3,
+  "remaining_seconds": 7200,
+  "run_id": "20261005-antigravity-cli-agy-pro-r02",
+  "evidence": [
+    {
+      "path": ".benchmark-inputs/feedback-evidence/000-terminal-verification.json",
+      "sha256": "43c6ccee80ee2af69ab0148a71cac98bd5ab6be37bc0ef3c0677015f00f60e1d"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/001-reference-review.json",
+      "sha256": "fdb7a2f8158687de30d9118a526552259ec47321f6bc56cbfbd87a6fd2580a59"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/002-stdout.jsonl",
+      "sha256": "61e0b1743dc88629c61d4fdf559923010b54ad7a1b0f1aaecb85d798f48fbf74"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/003-stderr.txt",
+      "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713"
+    }
+  ]
+}

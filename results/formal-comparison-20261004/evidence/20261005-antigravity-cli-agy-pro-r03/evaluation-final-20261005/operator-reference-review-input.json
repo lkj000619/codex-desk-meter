@@ -1,0 +1,519 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-pro-r03",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "reviewed_at": "2026-10-05T13:48:11.633472+00:00",
+  "reviewer": "Codex operator",
+  "product_pass": false,
+  "items": {
+    "RM1": {
+      "status": "fail",
+      "evidence": [
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "70dfdd9c18b313eff5218250e21ee50e9a2dbd5f00ed17549351a93a9844d9c1"
+        },
+        {
+          "path": "operator-policy-decision.json",
+          "sha256": "2296225e90af4e2c8cacdbc878e1e93b8fa4728b80a6f1e0f1474b3cc9fec4de"
+        },
+        {
+          "path": "operator-observation/policy-notes.json",
+          "sha256": "9c708749a09ac03b308d28e594475401ee78a401726e07e478ebae946d7cd40c"
+        },
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "9d458030b647ca5468e297350e4c59ca09d77dceb074d007ef422ff1051cf6bc"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/CMakeLists.txt",
+          "sha256": "9bb181b92c0be5860d0f4d8b5238ba3f6d7e7ed172f1141c59a72df0fb5a7b86"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/sdkconfig.defaults",
+          "sha256": "95baa532529f74d4acfc52be48596d97a36145da7de7415d7aee85e046494354"
+        },
+        {
+          "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-pro-r01.json",
+          "sha256": "e95f8bff0b137ff92151abb141c5a408a8233e3c74ef952ec9fb1ec457f2e5ee"
+        },
+        {
+          "path": "operator-observation/terminal-originals/command-audit.json",
+          "sha256": "dc7091fcbb974b87da0e3ad93798659805395f41cffbf64de737b6a85bc620a0"
+        },
+        {
+          "path": "operator-observation/terminal-originals/run-manifest.json",
+          "sha256": "07753e8d8ff11eaed77396db7841ff6745abcb338fb40ae2bf5fcba964a13e86"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stderr.txt",
+          "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stdout.jsonl",
+          "sha256": "54e4cadd86a079583c2ca20cedd4d11501d883fedd566871f4d67c31d96e6934"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/current-checks.json",
+          "sha256": "a8f915c96a3ce0700aab65ea8dd7ef97a0cea995b2583cac35b46411f44d9be4"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stdout.txt",
+          "sha256": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be"
+        },
+        {
+          "path": "operator-launch-preflight/models-stderr.txt",
+          "sha256": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8"
+        },
+        {
+          "path": "operator-launch-preflight/models-stdout.txt",
+          "sha256": "0fe8eac40fd3a1f2554de5c998412b23e219cda82edd3f980f93f2f526a03bda"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stdout.txt",
+          "sha256": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494"
+        },
+        {
+          "path": "operator-launch-preflight/scope-exit.json",
+          "sha256": "4bc9d21d35b0b324c22257be37a4a3f789a22ab150b4fff3d88ef388be3f10d7"
+        },
+        {
+          "path": "experiment-launch.json",
+          "sha256": "8f8d65f94920210b01d968622b0a2452d23a6aeea1cf378830c0ad3b98b8623f"
+        },
+        {
+          "path": "native-start-observation.json",
+          "sha256": "61fdc3a0a91a7ad928a39a277157b0dcdb492bffe9c4d5ba29d8e4f7a8d4ad40"
+        },
+        {
+          "path": "native-start-observation-prefix.jsonl",
+          "sha256": "175a54b972cd75cae84821699f7b38699ba1a19e26a4c50fa7cb37bac8981173"
+        }
+      ],
+      "reason": "No completed firmware build or submitted implementation result."
+    },
+    "RM2": {
+      "status": "not_run",
+      "evidence": [
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "70dfdd9c18b313eff5218250e21ee50e9a2dbd5f00ed17549351a93a9844d9c1"
+        },
+        {
+          "path": "operator-policy-decision.json",
+          "sha256": "2296225e90af4e2c8cacdbc878e1e93b8fa4728b80a6f1e0f1474b3cc9fec4de"
+        },
+        {
+          "path": "operator-observation/policy-notes.json",
+          "sha256": "9c708749a09ac03b308d28e594475401ee78a401726e07e478ebae946d7cd40c"
+        },
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "9d458030b647ca5468e297350e4c59ca09d77dceb074d007ef422ff1051cf6bc"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/CMakeLists.txt",
+          "sha256": "9bb181b92c0be5860d0f4d8b5238ba3f6d7e7ed172f1141c59a72df0fb5a7b86"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/sdkconfig.defaults",
+          "sha256": "95baa532529f74d4acfc52be48596d97a36145da7de7415d7aee85e046494354"
+        },
+        {
+          "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-pro-r01.json",
+          "sha256": "e95f8bff0b137ff92151abb141c5a408a8233e3c74ef952ec9fb1ec457f2e5ee"
+        },
+        {
+          "path": "operator-observation/terminal-originals/command-audit.json",
+          "sha256": "dc7091fcbb974b87da0e3ad93798659805395f41cffbf64de737b6a85bc620a0"
+        },
+        {
+          "path": "operator-observation/terminal-originals/run-manifest.json",
+          "sha256": "07753e8d8ff11eaed77396db7841ff6745abcb338fb40ae2bf5fcba964a13e86"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stderr.txt",
+          "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stdout.jsonl",
+          "sha256": "54e4cadd86a079583c2ca20cedd4d11501d883fedd566871f4d67c31d96e6934"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/current-checks.json",
+          "sha256": "a8f915c96a3ce0700aab65ea8dd7ef97a0cea995b2583cac35b46411f44d9be4"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stdout.txt",
+          "sha256": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be"
+        },
+        {
+          "path": "operator-launch-preflight/models-stderr.txt",
+          "sha256": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8"
+        },
+        {
+          "path": "operator-launch-preflight/models-stdout.txt",
+          "sha256": "0fe8eac40fd3a1f2554de5c998412b23e219cda82edd3f980f93f2f526a03bda"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stdout.txt",
+          "sha256": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494"
+        },
+        {
+          "path": "operator-launch-preflight/scope-exit.json",
+          "sha256": "4bc9d21d35b0b324c22257be37a4a3f789a22ab150b4fff3d88ef388be3f10d7"
+        },
+        {
+          "path": "experiment-launch.json",
+          "sha256": "8f8d65f94920210b01d968622b0a2452d23a6aeea1cf378830c0ad3b98b8623f"
+        },
+        {
+          "path": "native-start-observation.json",
+          "sha256": "61fdc3a0a91a7ad928a39a277157b0dcdb492bffe9c4d5ba29d8e4f7a8d4ad40"
+        },
+        {
+          "path": "native-start-observation-prefix.jsonl",
+          "sha256": "175a54b972cd75cae84821699f7b38699ba1a19e26a4c50fa7cb37bac8981173"
+        }
+      ],
+      "reason": "No firmware to upload; hardware behavior untested."
+    },
+    "RM3": {
+      "status": "not_run",
+      "evidence": [
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "70dfdd9c18b313eff5218250e21ee50e9a2dbd5f00ed17549351a93a9844d9c1"
+        },
+        {
+          "path": "operator-policy-decision.json",
+          "sha256": "2296225e90af4e2c8cacdbc878e1e93b8fa4728b80a6f1e0f1474b3cc9fec4de"
+        },
+        {
+          "path": "operator-observation/policy-notes.json",
+          "sha256": "9c708749a09ac03b308d28e594475401ee78a401726e07e478ebae946d7cd40c"
+        },
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "9d458030b647ca5468e297350e4c59ca09d77dceb074d007ef422ff1051cf6bc"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/CMakeLists.txt",
+          "sha256": "9bb181b92c0be5860d0f4d8b5238ba3f6d7e7ed172f1141c59a72df0fb5a7b86"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/sdkconfig.defaults",
+          "sha256": "95baa532529f74d4acfc52be48596d97a36145da7de7415d7aee85e046494354"
+        },
+        {
+          "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-pro-r01.json",
+          "sha256": "e95f8bff0b137ff92151abb141c5a408a8233e3c74ef952ec9fb1ec457f2e5ee"
+        },
+        {
+          "path": "operator-observation/terminal-originals/command-audit.json",
+          "sha256": "dc7091fcbb974b87da0e3ad93798659805395f41cffbf64de737b6a85bc620a0"
+        },
+        {
+          "path": "operator-observation/terminal-originals/run-manifest.json",
+          "sha256": "07753e8d8ff11eaed77396db7841ff6745abcb338fb40ae2bf5fcba964a13e86"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stderr.txt",
+          "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stdout.jsonl",
+          "sha256": "54e4cadd86a079583c2ca20cedd4d11501d883fedd566871f4d67c31d96e6934"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/current-checks.json",
+          "sha256": "a8f915c96a3ce0700aab65ea8dd7ef97a0cea995b2583cac35b46411f44d9be4"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stdout.txt",
+          "sha256": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be"
+        },
+        {
+          "path": "operator-launch-preflight/models-stderr.txt",
+          "sha256": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8"
+        },
+        {
+          "path": "operator-launch-preflight/models-stdout.txt",
+          "sha256": "0fe8eac40fd3a1f2554de5c998412b23e219cda82edd3f980f93f2f526a03bda"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stdout.txt",
+          "sha256": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494"
+        },
+        {
+          "path": "operator-launch-preflight/scope-exit.json",
+          "sha256": "4bc9d21d35b0b324c22257be37a4a3f789a22ab150b4fff3d88ef388be3f10d7"
+        },
+        {
+          "path": "experiment-launch.json",
+          "sha256": "8f8d65f94920210b01d968622b0a2452d23a6aeea1cf378830c0ad3b98b8623f"
+        },
+        {
+          "path": "native-start-observation.json",
+          "sha256": "61fdc3a0a91a7ad928a39a277157b0dcdb492bffe9c4d5ba29d8e4f7a8d4ad40"
+        },
+        {
+          "path": "native-start-observation-prefix.jsonl",
+          "sha256": "175a54b972cd75cae84821699f7b38699ba1a19e26a4c50fa7cb37bac8981173"
+        }
+      ],
+      "reason": "No firmware to upload; hardware behavior untested."
+    },
+    "RM4": {
+      "status": "not_run",
+      "evidence": [
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "70dfdd9c18b313eff5218250e21ee50e9a2dbd5f00ed17549351a93a9844d9c1"
+        },
+        {
+          "path": "operator-policy-decision.json",
+          "sha256": "2296225e90af4e2c8cacdbc878e1e93b8fa4728b80a6f1e0f1474b3cc9fec4de"
+        },
+        {
+          "path": "operator-observation/policy-notes.json",
+          "sha256": "9c708749a09ac03b308d28e594475401ee78a401726e07e478ebae946d7cd40c"
+        },
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "9d458030b647ca5468e297350e4c59ca09d77dceb074d007ef422ff1051cf6bc"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/CMakeLists.txt",
+          "sha256": "9bb181b92c0be5860d0f4d8b5238ba3f6d7e7ed172f1141c59a72df0fb5a7b86"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/sdkconfig.defaults",
+          "sha256": "95baa532529f74d4acfc52be48596d97a36145da7de7415d7aee85e046494354"
+        },
+        {
+          "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-pro-r01.json",
+          "sha256": "e95f8bff0b137ff92151abb141c5a408a8233e3c74ef952ec9fb1ec457f2e5ee"
+        },
+        {
+          "path": "operator-observation/terminal-originals/command-audit.json",
+          "sha256": "dc7091fcbb974b87da0e3ad93798659805395f41cffbf64de737b6a85bc620a0"
+        },
+        {
+          "path": "operator-observation/terminal-originals/run-manifest.json",
+          "sha256": "07753e8d8ff11eaed77396db7841ff6745abcb338fb40ae2bf5fcba964a13e86"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stderr.txt",
+          "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stdout.jsonl",
+          "sha256": "54e4cadd86a079583c2ca20cedd4d11501d883fedd566871f4d67c31d96e6934"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/current-checks.json",
+          "sha256": "a8f915c96a3ce0700aab65ea8dd7ef97a0cea995b2583cac35b46411f44d9be4"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stdout.txt",
+          "sha256": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be"
+        },
+        {
+          "path": "operator-launch-preflight/models-stderr.txt",
+          "sha256": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8"
+        },
+        {
+          "path": "operator-launch-preflight/models-stdout.txt",
+          "sha256": "0fe8eac40fd3a1f2554de5c998412b23e219cda82edd3f980f93f2f526a03bda"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stdout.txt",
+          "sha256": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494"
+        },
+        {
+          "path": "operator-launch-preflight/scope-exit.json",
+          "sha256": "4bc9d21d35b0b324c22257be37a4a3f789a22ab150b4fff3d88ef388be3f10d7"
+        },
+        {
+          "path": "experiment-launch.json",
+          "sha256": "8f8d65f94920210b01d968622b0a2452d23a6aeea1cf378830c0ad3b98b8623f"
+        },
+        {
+          "path": "native-start-observation.json",
+          "sha256": "61fdc3a0a91a7ad928a39a277157b0dcdb492bffe9c4d5ba29d8e4f7a8d4ad40"
+        },
+        {
+          "path": "native-start-observation-prefix.jsonl",
+          "sha256": "175a54b972cd75cae84821699f7b38699ba1a19e26a4c50fa7cb37bac8981173"
+        }
+      ],
+      "reason": "No firmware to upload; hardware behavior untested."
+    },
+    "RM5": {
+      "status": "not_run",
+      "evidence": [
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "70dfdd9c18b313eff5218250e21ee50e9a2dbd5f00ed17549351a93a9844d9c1"
+        },
+        {
+          "path": "operator-policy-decision.json",
+          "sha256": "2296225e90af4e2c8cacdbc878e1e93b8fa4728b80a6f1e0f1474b3cc9fec4de"
+        },
+        {
+          "path": "operator-observation/policy-notes.json",
+          "sha256": "9c708749a09ac03b308d28e594475401ee78a401726e07e478ebae946d7cd40c"
+        },
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "9d458030b647ca5468e297350e4c59ca09d77dceb074d007ef422ff1051cf6bc"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/CMakeLists.txt",
+          "sha256": "9bb181b92c0be5860d0f4d8b5238ba3f6d7e7ed172f1141c59a72df0fb5a7b86"
+        },
+        {
+          "path": "operator-observation/source-snapshot/firmware/sdkconfig.defaults",
+          "sha256": "95baa532529f74d4acfc52be48596d97a36145da7de7415d7aee85e046494354"
+        },
+        {
+          "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-pro-r01.json",
+          "sha256": "e95f8bff0b137ff92151abb141c5a408a8233e3c74ef952ec9fb1ec457f2e5ee"
+        },
+        {
+          "path": "operator-observation/terminal-originals/command-audit.json",
+          "sha256": "dc7091fcbb974b87da0e3ad93798659805395f41cffbf64de737b6a85bc620a0"
+        },
+        {
+          "path": "operator-observation/terminal-originals/run-manifest.json",
+          "sha256": "07753e8d8ff11eaed77396db7841ff6745abcb338fb40ae2bf5fcba964a13e86"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stderr.txt",
+          "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stdout.jsonl",
+          "sha256": "54e4cadd86a079583c2ca20cedd4d11501d883fedd566871f4d67c31d96e6934"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/current-checks.json",
+          "sha256": "a8f915c96a3ce0700aab65ea8dd7ef97a0cea995b2583cac35b46411f44d9be4"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stdout.txt",
+          "sha256": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be"
+        },
+        {
+          "path": "operator-launch-preflight/models-stderr.txt",
+          "sha256": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8"
+        },
+        {
+          "path": "operator-launch-preflight/models-stdout.txt",
+          "sha256": "0fe8eac40fd3a1f2554de5c998412b23e219cda82edd3f980f93f2f526a03bda"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stdout.txt",
+          "sha256": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494"
+        },
+        {
+          "path": "operator-launch-preflight/scope-exit.json",
+          "sha256": "4bc9d21d35b0b324c22257be37a4a3f789a22ab150b4fff3d88ef388be3f10d7"
+        },
+        {
+          "path": "experiment-launch.json",
+          "sha256": "8f8d65f94920210b01d968622b0a2452d23a6aeea1cf378830c0ad3b98b8623f"
+        },
+        {
+          "path": "native-start-observation.json",
+          "sha256": "61fdc3a0a91a7ad928a39a277157b0dcdb492bffe9c4d5ba29d8e4f7a8d4ad40"
+        },
+        {
+          "path": "native-start-observation-prefix.jsonl",
+          "sha256": "175a54b972cd75cae84821699f7b38699ba1a19e26a4c50fa7cb37bac8981173"
+        }
+      ],
+      "reason": "No firmware to upload; hardware behavior untested."
+    }
+  }
+}

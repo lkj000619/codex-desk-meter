@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-10-05T13:15:21.561576+00:00",
+  "user_instruction": "다음 모델 ㄱㄱ",
+  "authorized_next_model": "gemini-3.1-pro-high",
+  "authorized_run_id": "20261005-antigravity-cli-agy-pro-r01",
+  "previous_run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "previous_final_package_manifest_sha256": "b0e2880fc7c786ae338b9d1870ccd4c3510bf9afb3f5881089ff4d23515f244c",
+  "previous_reviewed_manifest_sha256": "c2c07c3a18b4dff64c5984de55070686b5740e79104b8272ea4397c88534ce11",
+  "previous_ledger_sha256": "b301c0817d0fd6d56937c52c25b0607d338de581564df2ad560ddcd9e5ea391e",
+  "previous_followup_seconds_retained": 5710.780999999959,
+  "previous_followup_rounds_retained": 2,
+  "scope": "User resumes progression to AGY Pro only. Flash additional rounds remain deferred; preserve all previous immutable hold, evaluation and cost records. No previous implementation or result is provided to the independent candidate."
+}

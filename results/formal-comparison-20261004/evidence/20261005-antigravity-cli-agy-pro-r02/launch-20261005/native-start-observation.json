@@ -1,0 +1,13 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-pro-r02",
+  "observed_at": "2026-10-05T13:29:58.283641+00:00",
+  "status": "running",
+  "native_conversation_id": "8a67d3ee-181d-4c63-93d1-76b11a25e972",
+  "native_model": "gemini-3.1-pro-high",
+  "permission_mode": "request-review",
+  "native_cwd": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r02\\checkout",
+  "raw_log_prefix_events": 17,
+  "raw_log_prefix_bytes": 15046,
+  "raw_log_prefix_sha256": "0b5a01c066a9e56f2b99df06bcc470561e5aa2e86aba87af0aa9817dc059ca07",
+  "scope": "Native start only; prefix is not a terminal log, final cost, submission or policy review."
+}

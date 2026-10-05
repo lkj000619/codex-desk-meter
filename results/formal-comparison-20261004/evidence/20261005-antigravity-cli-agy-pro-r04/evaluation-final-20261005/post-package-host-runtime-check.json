@@ -1,0 +1,157 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-pro-r04",
+  "recorded_at": "2026-10-05T14:07:41.691381+00:00",
+  "source_package_manifest_sha256": "aaf375f63861eb47e9e65ce71429e52badb13936cf2e22dba0556e3218048da3",
+  "original_run_or_checkout_used": false,
+  "packaged_frozen_evaluator_used": true,
+  "source_executable_sha256": "b50ae82aba282eaa67f5584946e3cc6c7072ec60b4c7b4d695533c440efe4dce",
+  "source_executable_bytes": 177664,
+  "recorded_compiler": "C:\\Espressif\\benchmark-host-tools\\llvm-mingw-20260616-ucrt-x86_64\\bin\\c++.exe",
+  "initial_operator_check": "29 loader errors with exit 0xC0000135 (3221225781); default operator PATH lacked recorded compiler DLL directory. Those are environment errors, not conformance failures.",
+  "original_operator_check_preserved_in_package": true,
+  "environment_correction": "Recorded compiler runtime directory added only to this evaluation process PATH.",
+  "cases": [
+    {
+      "case": "personal-usage.json:freshness",
+      "status": "fail",
+      "reason": "usage values/nulls not preserved"
+    },
+    {
+      "case": "personal-usage.json:invalid-0",
+      "status": "fail",
+      "reason": "usage values/nulls not preserved"
+    },
+    {
+      "case": "personal-usage.json:invalid-1",
+      "status": "fail",
+      "reason": "usage values/nulls not preserved"
+    },
+    {
+      "case": "personal-usage.json:invalid-2",
+      "status": "fail",
+      "reason": "usage values/nulls not preserved"
+    },
+    {
+      "case": "personal-usage.json:invalid-3",
+      "status": "fail",
+      "reason": "usage values/nulls not preserved"
+    },
+    {
+      "case": "personal-usage.json:invalid-4",
+      "status": "fail",
+      "reason": "usage values/nulls not preserved"
+    },
+    {
+      "case": "personal-usage.json:invalid-5",
+      "status": "fail",
+      "reason": "usage values/nulls not preserved"
+    },
+    {
+      "case": "personal-usage.json:dns",
+      "status": "fail",
+      "reason": "usage values/nulls not preserved"
+    },
+    {
+      "case": "personal-usage.json:tls",
+      "status": "fail",
+      "reason": "usage values/nulls not preserved"
+    },
+    {
+      "case": "personal-usage.json:http_500",
+      "status": "fail",
+      "reason": "usage values/nulls not preserved"
+    },
+    {
+      "case": "codex-reset-forecast.json:freshness",
+      "status": "pass"
+    },
+    {
+      "case": "codex-reset-forecast.json:invalid-0",
+      "status": "fail",
+      "reason": "stale mismatch at event 1"
+    },
+    {
+      "case": "codex-reset-forecast.json:invalid-1",
+      "status": "fail",
+      "reason": "error/recovery mismatch at event 1"
+    },
+    {
+      "case": "codex-reset-forecast.json:invalid-2",
+      "status": "fail",
+      "reason": "stale mismatch at event 1"
+    },
+    {
+      "case": "codex-reset-forecast.json:invalid-3",
+      "status": "pass"
+    },
+    {
+      "case": "codex-reset-forecast.json:invalid-4",
+      "status": "pass"
+    },
+    {
+      "case": "codex-reset-forecast.json:invalid-5",
+      "status": "fail",
+      "reason": "error/recovery mismatch at event 1"
+    },
+    {
+      "case": "codex-reset-forecast.json:dns",
+      "status": "pass"
+    },
+    {
+      "case": "codex-reset-forecast.json:tls",
+      "status": "pass"
+    },
+    {
+      "case": "codex-reset-forecast.json:http_500",
+      "status": "pass"
+    },
+    {
+      "case": "codex-resets-history.json:freshness",
+      "status": "pass"
+    },
+    {
+      "case": "codex-resets-history.json:invalid-0",
+      "status": "fail",
+      "reason": "stale mismatch at event 1"
+    },
+    {
+      "case": "codex-resets-history.json:invalid-1",
+      "status": "fail",
+      "reason": "error/recovery mismatch at event 1"
+    },
+    {
+      "case": "codex-resets-history.json:invalid-2",
+      "status": "fail",
+      "reason": "stale mismatch at event 1"
+    },
+    {
+      "case": "codex-resets-history.json:invalid-3",
+      "status": "pass"
+    },
+    {
+      "case": "codex-resets-history.json:invalid-4",
+      "status": "pass"
+    },
+    {
+      "case": "codex-resets-history.json:dns",
+      "status": "pass"
+    },
+    {
+      "case": "codex-resets-history.json:tls",
+      "status": "pass"
+    },
+    {
+      "case": "codex-resets-history.json:http_500",
+      "status": "pass"
+    }
+  ],
+  "passed": 12,
+  "failed": 17,
+  "scope": "Submitted partial C state module plus mocked normalizer. No real firmware or collector/device conformance claim.",
+  "candidate_source_or_cost_changed": false,
+  "operator_firmware_rebuild": false,
+  "candidate_result_submission": "missing",
+  "candidate_selection_document_submission": "missing",
+  "hardware_status": "not_run_no_firmware",
+  "product_pass": false
+}

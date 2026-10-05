@@ -1,0 +1,255 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-pro-r04",
+  "reviewed_at": "2026-10-05T14:04:52.206124+00:00",
+  "actions": [
+    {
+      "index": 2,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\.benchmark-inputs\\run-context.json"
+      }
+    },
+    {
+      "index": 3,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\docs\\PRODUCT_CONTRACT.md"
+      }
+    },
+    {
+      "index": 4,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\docs\\hardware\\version-2-capabilities.md"
+      }
+    },
+    {
+      "index": 5,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\experiments\\config\\agy-pilot-permissions.json"
+      }
+    },
+    {
+      "index": 7,
+      "name": "run_command",
+      "parameters": {
+        "CommandLine": "Get-ChildItem -Force"
+      }
+    },
+    {
+      "index": 8,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\.benchmark-inputs\\feedback.json"
+      }
+    },
+    {
+      "index": 10,
+      "name": "run_command",
+      "parameters": {
+        "CommandLine": "Get-ChildItem -Path firmware -Recurse"
+      }
+    },
+    {
+      "index": 12,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\firmware\\CMakeLists.txt"
+      }
+    },
+    {
+      "index": 13,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\firmware\\sdkconfig.defaults"
+      }
+    },
+    {
+      "index": 15,
+      "name": "run_command",
+      "parameters": {
+        "CommandLine": "Get-ChildItem -Path experiments -Recurse"
+      }
+    },
+    {
+      "index": 16,
+      "name": "run_command",
+      "parameters": {
+        "CommandLine": "Get-ChildItem -Path scripts -Recurse"
+      }
+    },
+    {
+      "index": 17,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\.benchmark-inputs\\input-files.json"
+      }
+    },
+    {
+      "index": 19,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\scripts\\evaluate-product.py"
+      }
+    },
+    {
+      "index": 20,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\experiments\\schema\\cdm-frame.schema.json"
+      }
+    },
+    {
+      "index": 21,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\experiments\\schema\\usage-snapshot.schema.json"
+      }
+    },
+    {
+      "index": 23,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\docs\\PRODUCT_CONTRACT.md"
+      }
+    },
+    {
+      "index": 25,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\experiments\\config\\host-toolchain.json"
+      }
+    },
+    {
+      "index": 27,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\scripts\\run-host-device-pipeline.py"
+      }
+    },
+    {
+      "index": 28,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\scripts\\validate-end-to-end-result.py"
+      }
+    },
+    {
+      "index": 30,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\experiments\\examples\\cdm-frame.example.json"
+      }
+    },
+    {
+      "index": 31,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\experiments\\examples\\end-to-end-hardware-not-run-manifest.example.json"
+      }
+    },
+    {
+      "index": 33,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\experiments\\schema\\end-to-end-result.schema.json"
+      }
+    },
+    {
+      "index": 36,
+      "name": "run_command",
+      "parameters": {
+        "CommandLine": "New-Item -ItemType Directory -Force -Path build-host"
+      }
+    },
+    {
+      "index": 37,
+      "name": "run_command",
+      "parameters": {
+        "CommandLine": "New-Item -ItemType Directory -Force -Path firmware/main"
+      }
+    },
+    {
+      "index": 39,
+      "name": "write_to_file",
+      "parameters": {
+        "TargetFile": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\build-host\\CMakeLists.txt"
+      }
+    },
+    {
+      "index": 40,
+      "name": "write_to_file",
+      "parameters": {
+        "TargetFile": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\firmware\\main\\meter_state.h"
+      }
+    },
+    {
+      "index": 42,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\experiments\\fixtures\\personal-usage.json"
+      }
+    },
+    {
+      "index": 43,
+      "name": "view_file",
+      "parameters": {
+        "AbsolutePath": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\experiments\\fixtures\\codex-reset-forecast.json"
+      }
+    },
+    {
+      "index": 45,
+      "name": "write_to_file",
+      "parameters": {
+        "TargetFile": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\firmware\\main\\meter_state.c"
+      }
+    },
+    {
+      "index": 47,
+      "name": "write_to_file",
+      "parameters": {
+        "TargetFile": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\build-host\\test_meter_parser.cpp"
+      }
+    },
+    {
+      "index": 49,
+      "name": "run_command",
+      "parameters": {
+        "CommandLine": "cmake -S build-host -B build-host -G Ninja"
+      }
+    },
+    {
+      "index": 51,
+      "name": "run_command",
+      "parameters": {
+        "CommandLine": "cmake --build build-host --target test_meter_parser"
+      }
+    },
+    {
+      "index": 53,
+      "name": "manage_task",
+      "parameters": {
+        "Action": "status",
+        "TaskId": "be3be9b2-28a7-451f-b1e7-13ed3f415ec6/task-51"
+      }
+    },
+    {
+      "index": 56,
+      "name": "write_to_file",
+      "parameters": {
+        "TargetFile": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\checkout\\docs\\compile-link-evidence.md"
+      }
+    },
+    {
+      "index": 58,
+      "name": "run_command",
+      "parameters": {
+        "CommandLine": "Get-FileHash -Algorithm SHA256 firmware/main/meter_state.c, firmware/main/meter_state.h, docs/compile-link-evidence.md"
+      }
+    }
+  ],
+  "denial_raw_line": 95,
+  "later_tool_or_assistant_events": 0,
+  "finding": "Operator inspected all native events. Accesses were own declared checkout inputs/feedback and declared SDK/manufacturer source; built-in task status used its own conversation. No other candidate source, serial/flash, online access, permission change or operator implementation feedback. The last tool denial ended the attempt; ordinary missing-argument errors are separate."
+}

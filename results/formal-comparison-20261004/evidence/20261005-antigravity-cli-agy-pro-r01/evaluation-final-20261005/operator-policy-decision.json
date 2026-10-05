@@ -1,0 +1,17 @@
+{
+  "status": "eligible",
+  "reviewer": "Codex operator",
+  "reason": "All ten native file reads were within its own declared candidate inputs. The first command, mkdir -p firmware/main pc firmware/components/state_machine scripts tests, was denied at raw line 29 and no later tool or assistant action followed. Candidate respected stop-on-denial. Preserve environment_failed, zero implementation, missing submissions and full cost as separate outcomes.",
+  "user_interventions": 0,
+  "intervention_review": "Reviewed all 30 events, clean candidate Git status, scoped native inventories and scope-exit restoration. No operator source edits, implementation feedback or hardware access during the candidate.",
+  "evidence": [
+    {
+      "path": "operator-observation/policy-notes.json",
+      "sha256": "15b382eab82605fb88367504292bcefd9c0b73318a7bb893229faec38f4ce868"
+    },
+    {
+      "path": "operator-observation/terminal-verification.json",
+      "sha256": "43c6ccee80ee2af69ab0148a71cac98bd5ab6be37bc0ef3c0677015f00f60e1d"
+    }
+  ]
+}

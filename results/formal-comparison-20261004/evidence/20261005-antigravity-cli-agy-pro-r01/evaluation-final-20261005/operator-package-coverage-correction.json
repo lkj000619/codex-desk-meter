@@ -1,0 +1,41 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-pro-r01",
+  "recorded_at": "2026-10-05T13:25:46.640156+00:00",
+  "original_package_manifest_sha256": "8b1e5e2f2d369d4d765f4bfc0e7574651ef0fa2dae84b1e8199d5aa80762fae6",
+  "original_package_files": 315,
+  "original_package_and_restore_preserved": true,
+  "original_audit_failure": "FileNotFoundError: operator/operator-observation/terminal-originals/run-manifest.json",
+  "cause": "Frozen packager collects registered operator.evidence and review dependencies. Terminal-originals and restoration sidecars had been preserved outside the package but not registered in operator.evidence.",
+  "post_review_changes": [
+    "operator.evidence"
+  ],
+  "review_applied_again": false,
+  "before_manifest_sha256": "217c6d4ba6612ee317c48a3dac0a6ddf8c5df25b0426410999c74f73a77429a1",
+  "added_files": [
+    "run-manifest-before-package-coverage-correction.json",
+    "operator-source-freeze.json",
+    "operator-review-finalization.json",
+    "operator-reference-review-input.json",
+    "operator-policy-decision.json",
+    "operator-next-model-decision.json",
+    "previous-progress-at-transition.json",
+    "operator-observation/terminal-originals/20261005-antigravity-cli-agy-pro-r01.json",
+    "operator-observation/terminal-originals/command-audit.json",
+    "operator-observation/terminal-originals/run-manifest.json",
+    "operator-observation/terminal-originals/stderr.txt",
+    "operator-observation/terminal-originals/stdout.jsonl",
+    "operator-launch-preflight/agents-stderr.txt",
+    "operator-launch-preflight/agents-stdout.txt",
+    "operator-launch-preflight/current-checks.json",
+    "operator-launch-preflight/mcp-stderr.txt",
+    "operator-launch-preflight/mcp-stdout.txt",
+    "operator-launch-preflight/models-stderr.txt",
+    "operator-launch-preflight/models-stdout.txt",
+    "operator-launch-preflight/plugins-stderr.txt",
+    "operator-launch-preflight/plugins-stdout.txt",
+    "operator-launch-preflight/scope-exit.json"
+  ],
+  "candidate_source_or_permissions_changed": false,
+  "model_calls": 0,
+  "costs_changed": false
+}

@@ -1,0 +1,15 @@
+{
+    "run_id":  "20261005-antigravity-cli-agy-pro-r01",
+    "launcher_pid":  32948,
+    "launcher_started_at":  "2026-10-05T13:14:59.9050254Z",
+    "baseline":  "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "model":  "gemini-3.1-pro-high",
+    "timeout_seconds":  7200,
+    "entrypoint":  "C:/meter-runs-20261005/launch-agy-pro-r01.ps1",
+    "scoped_runner":  "C:/meter-runs-20261005/launch-agy-pro-r01.py",
+    "receipt":  "C:/meter-preflight-20261005/renewal/agy-pro-launch-20261005-receipt.json",
+    "execution_mode":  "independent hidden process, unchanged frozen runner, one initial invocation",
+    "user_authorization":  "next model requested on 2026-10-05",
+    "stdout":  "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\runner-console.txt",
+    "stderr":  "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\runner-console-stderr.txt"
+}

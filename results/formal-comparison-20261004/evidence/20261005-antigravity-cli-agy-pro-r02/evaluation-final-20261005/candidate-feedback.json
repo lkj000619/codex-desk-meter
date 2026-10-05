@@ -1,0 +1,34 @@
+{
+  "previous_run_id": "20261005-antigravity-cli-agy-pro-r01",
+  "previous_commit": "ba5609db6fbf6392166586e50341c6e14a26112f",
+  "target_ids": [
+    "RM1",
+    "RM2",
+    "RM3",
+    "RM4",
+    "RM5"
+  ],
+  "observed": "Initial independent Pro attempt ended environment_failed after 68.203 seconds. Ten file reads were within its own declared inputs. The first native run_command, mkdir -p firmware/main pc firmware/components/state_machine scripts tests, was permission-denied; no later tool or assistant action occurred. Candidate Git checkout remained unchanged. No product implementation, host build/test, firmware, selection document or final result JSON was produced. RM1 fail; RM2-RM5 not_run. No board upload or observation was performed for this run. Policy eligible because candidate stopped on denial. All original costs and the failed initial attempt are preserved.",
+  "expected": "Complete the unchanged common task and product contract with truthful linked submission, build/test evidence and the required RM1-RM5 behavior. Candidate hardware status remains not_run until operator evaluation after terminal freeze. Same fixed profile, native permissions, checkout/access boundary and stop-on-denial rule apply; do not relax permissions, bypass a denial or access prior run directories. This is the first predeclared own-source followup, not a replacement initial call; manager enforces cumulative followup time and round limits.",
+  "remaining_rounds": 3,
+  "remaining_seconds": 7200,
+  "run_id": "20261005-antigravity-cli-agy-pro-r02",
+  "evidence": [
+    {
+      "path": ".benchmark-inputs/feedback-evidence/000-terminal-verification.json",
+      "sha256": "43c6ccee80ee2af69ab0148a71cac98bd5ab6be37bc0ef3c0677015f00f60e1d"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/001-reference-review.json",
+      "sha256": "fdb7a2f8158687de30d9118a526552259ec47321f6bc56cbfbd87a6fd2580a59"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/002-stdout.jsonl",
+      "sha256": "61e0b1743dc88629c61d4fdf559923010b54ad7a1b0f1aaecb85d798f48fbf74"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/003-stderr.txt",
+      "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713"
+    }
+  ]
+}

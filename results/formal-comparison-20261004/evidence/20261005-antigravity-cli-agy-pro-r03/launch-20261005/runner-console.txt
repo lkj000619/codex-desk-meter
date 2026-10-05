@@ -1,0 +1,9 @@
+Python requirements are satisfied.
+Constraint file: C:\Espressif\user-tools\espidf.constraints.v5.3.txt
+Requirement files:
+ - C:\Espressif\v5.3.2\esp-idf\tools\requirements\requirements.core.txt
+Python being checked: C:\Espressif\user-tools\python_env\idf5.3_py3.11_env\Scripts\python.exe
+
+Codex Desk Meter ESP-IDF environment is ready (ESP-IDF 5.3.2).
+Use an ASCII-only project alias or clone path when running idf.py.
+{"launch_preflight": "passed", "run_id": "20261005-antigravity-cli-agy-pro-r03", "model": "gemini-3.1-pro-high", "round": 2, "timeout_seconds": 7118, "receipt_sha256": "052cd17851667c0fa935389c26f6e66e2472c640cc41ed3635ea4e6fa17e76c3"}

@@ -1,0 +1,60 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-pro-r01",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "reviewed_at": "2026-10-05T13:21:20.339231+00:00",
+  "reviewer": "Codex operator",
+  "items": {
+    "RM1": {
+      "status": "fail",
+      "evidence": [
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "43c6ccee80ee2af69ab0148a71cac98bd5ab6be37bc0ef3c0677015f00f60e1d"
+        }
+      ],
+      "reason": "No submitted implementation or firmware; build prerequisite failed."
+    },
+    "RM2": {
+      "status": "not_run",
+      "evidence": [
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "43c6ccee80ee2af69ab0148a71cac98bd5ab6be37bc0ef3c0677015f00f60e1d"
+        }
+      ],
+      "reason": "Not tested because no implementation or firmware was produced."
+    },
+    "RM3": {
+      "status": "not_run",
+      "evidence": [
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "43c6ccee80ee2af69ab0148a71cac98bd5ab6be37bc0ef3c0677015f00f60e1d"
+        }
+      ],
+      "reason": "Not tested because no implementation or firmware was produced."
+    },
+    "RM4": {
+      "status": "not_run",
+      "evidence": [
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "43c6ccee80ee2af69ab0148a71cac98bd5ab6be37bc0ef3c0677015f00f60e1d"
+        }
+      ],
+      "reason": "Not tested because no implementation or firmware was produced."
+    },
+    "RM5": {
+      "status": "not_run",
+      "evidence": [
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "43c6ccee80ee2af69ab0148a71cac98bd5ab6be37bc0ef3c0677015f00f60e1d"
+        }
+      ],
+      "reason": "Not tested because no implementation or firmware was produced."
+    }
+  },
+  "product_pass": false,
+  "scope": "No Pro firmware exists to upload or observe. The installed Flash firmware is not evidence for this independent Pro run."
+}

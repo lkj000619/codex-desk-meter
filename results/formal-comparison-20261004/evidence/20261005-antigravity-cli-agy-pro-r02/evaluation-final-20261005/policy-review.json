@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "binding": {
+    "run_id": "20261005-antigravity-cli-agy-pro-r02",
+    "experiment_id": "version-2-end-to-end-v1",
+    "baseline_id": "comparison-baseline-20261004",
+    "baseline_ref": "comparison-baseline-20261004",
+    "agent": {
+      "provider": "google",
+      "product": "antigravity-cli",
+      "interface": "cli",
+      "agent_version": "1.2.14",
+      "model": "gemini-3.1-pro-high",
+      "reasoning": "high",
+      "configuration_sha256": "b240460652feff0c0acaf49c561ac3b3d92abb87dbac4218bc06afa6e4096ab0"
+    },
+    "execution": {
+      "started_at": "2026-10-05T13:29:17.277Z",
+      "ended_at": "2026-10-05T13:30:38.899Z",
+      "timeout_seconds": 7200,
+      "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+      "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+      "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+      "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+      "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+      "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+      "profile_sha256": "eeedee05c3f1004df8d6883f8a0dca520cbf70665cff283397fa1f8dc1065b01",
+      "input_bundle_sha256": "62fb20a50ebf174f96e072e0f2958921d21e43b7a7e5dee84dfe69445a125a4d",
+      "network_mode": "offline-fixture",
+      "sandbox_policy": "prompt-and-log",
+      "approval_policy": "request-review",
+      "branch": "experiment/antigravity/antigravity-cli/agy-pro",
+      "host": "DESKTOP-JCMEN12"
+    },
+    "status": "environment_failed",
+    "exit_code": 0,
+    "delivered_prompt_sha256": "a38f585dd40d4c6d5a50fd42bf3396af60dc5cbcfad08e621f2a538bf5a0ed0c",
+    "local_base_commit": "00391b0662b7bf5c367435a4eb46d4ad16faa847",
+    "user_interventions": null,
+    "raw_evidence": {
+      "stdout.jsonl": "fbaf76820505024ef7f30ba753df799058c640791e9ffe28004f0f50866efd30",
+      "stderr.txt": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713",
+      "prompt.txt": "a38f585dd40d4c6d5a50fd42bf3396af60dc5cbcfad08e621f2a538bf5a0ed0c",
+      "profile.json": "b240460652feff0c0acaf49c561ac3b3d92abb87dbac4218bc06afa6e4096ab0"
+    },
+    "raw_evidence_sha256": "3baa03acfedccb504d2f6a18e97dc150e118f4726743b16f1d86a790386f111e"
+  },
+  "reviewed_at": "2026-10-05T13:38:40.235463Z",
+  "decision": {
+    "status": "eligible",
+    "reviewer": "Codex operator",
+    "reason": "Reviewed all native events: only own checkout inputs/feedback and declared SDK/manufacturer source, plus own built-in task management. The final native tool was denied and no later tool or assistant action followed. Stop-on-denial respected. Preserve environment_failed, partial files, absent firmware/submissions and all cost separately.",
+    "user_interventions": 0,
+    "intervention_review": "No source repair, permissions changes, serial/flash or execution-time implementation feedback. Global files restored and native process/owner absent.",
+    "evidence": [
+      {
+        "path": "operator-observation/policy-notes.json",
+        "sha256": "d3b38eb76a3f828768688efa90a269f097409b4123af4a8916a93881f14362f4"
+      },
+      {
+        "path": "operator-observation/terminal-verification.json",
+        "sha256": "52a9cfe8f4fb8ebd530a207683aed8948fa625b010aed7a5514c24005be9cbfc"
+      }
+    ]
+  },
+  "review_sha256": "33c5b0a1cfd2d22ba71c754ebb439db517488d94c140e79c57c5486b7db73878"
+}

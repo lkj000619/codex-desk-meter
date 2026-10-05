@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-05 AGY Flash 후속 1회차의 사용자 영상·최종 RM 평가와 501개 파일의 독립 복원을 완료했다. 화면 순환은 보이지만 사용량·실제 리셋 데이터는 표시되지 않아 기준 미도달이다. 사용자의 대기 요청으로 추가 AGY 회차와 다음 모델을 보류하며 현재 원본 펌웨어를 유지한다. 최초 environment_failed·제출 누락·USB write timeout·기준 미도달·eligible 정책은 보존한다. 전체 비교는 사용자 재개 지시를 기다린다.
-후보 실행 시작 4회·종료 4회(최초 2·후속 2). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. AGY Pro·Codex Sol/Luna는 미시작이다. 독립 series 완료는 OpenCode 1개/예정 15개다.
+상태: 2026-10-05 AGY Pro 최초 1회·후속 3회를 마쳤다. 모두 native command 거부로 environment_failed이며 정책 eligible·RM1 fail/RM2~RM5 not_run과 원본 비용·독립 복원을 보존했다. 마지막 후속은 22:58:07 KST 종료됐고 최종 펌웨어·제출물은 없다. 누적 677.5초·정규화 660,989 token이다. 후속 3회 한도에 도달해 Pro의 추가 회차는 없으며 Flash 추가 후속·남은 예산과 보드 펌웨어는 보존한다.
+후보 실행 시작 8회·종료 8회(최초 3·후속 5). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. Codex Sol/Luna는 미시작이다. 독립 series 완료는 OpenCode·Pro 2개/예정 15개다. 전체 비교는 미완료다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -483,3 +483,119 @@ AGY Flash 최초+후속의 실제 시간은 2,252.032초·정규화 token 2,965,
 [대기 지시](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-final-20261005/operator-user-hold.json)와 [현재 계측](progress.json)에 따라
 추가 수정 회차와 다음 모델은 사용자 재개 지시 전까지 시작하지 않는다. 보드는 05:38:52 KST에 올린 동일 원본 펌웨어를 유지하며 serial은 닫았다.
 현재 회차를 재호출하거나 남은 예산을 초기화하지 않는다.
+
+## 2026-10-05 다음 모델 진행 재개·AGY Pro 최초 실패와 후속 1회차
+
+사용자의 “다음 모델 ㄱㄱ”에 따라 첫 블록의 다음 `gemini-3.1-pro-high`로 진행했다.
+이는 위 Flash 대기의 후속 지시이며 [기존 대기 원본](evidence/20261005-antigravity-cli-agy-flash-r02/evaluation-final-20261005/operator-user-hold.json)은 유지한다.
+Flash 후속 잔여 5,710.781초·2회는 보류하고 다음 [독립 Pro 예약](reservations-20261005/renewal.json)을 사용했다.
+별도 브랜치 `experiment/antigravity/antigravity-cli/agy-pro`에는 공통 입력 57개와 실행 문맥만 있으며 Flash 구현·결과를 제공하지 않았다.
+같은 날짜의 미시작 예약·개별 ledger·baseline/profile/receipt·CLI 1.2.14·ESP-IDF 5.3.2·native inventory와 scope를 재검증했다.
+제품 호출 전 model catalog는 확인했으며 새 connectivity/entitlement probe로 별도 모델 호출을 하지 않았다.
+
+Pro 최초 `20261005-antigravity-cli-agy-pro-r01`은 22:15:28.585~22:16:36.793 KST, 68.203초다.
+input 84,301·output 5,560·정규화 89,861 token, cached 167,271·reasoning 4,593은 원본 필드대로 보존했다.
+실제 [native 로그](evidence/20261005-antigravity-cli-agy-pro-r01/evaluation-final-20261005/stdout.jsonl)는 지정 모델·request-review·Pro cwd,
+자기 입력 파일 읽기 10회와 첫 command의 거부를 기록한다. 거부된 명령은 `mkdir -p firmware/main pc firmware/components/state_machine scripts tests`다.
+raw line 29의 denial 뒤에는 native result 외 새 assistant/tool 행동이 없으며 Git 작업 트리도 변경되지 않았다.
+native result의 SUCCESS/exit 0과 달리 동결 runner는 environment_failed로 판정했다.
+실행 중 운영자 구현 피드백·후보 대신 source 수정·권한 완화·동일 최초 재호출은 없었다.
+
+[정책 review](evidence/20261005-antigravity-cli-agy-pro-r01/evaluation-final-20261005/policy-review.json)는 eligible이며
+[RM review](evidence/20261005-antigravity-cli-agy-pro-r01/evaluation-final-20261005/reference-review.json)는 RM1 fail/RM2~RM5 not_run, reference fail/product_pass false다.
+코드·host 시험·firmware·선택 문서·최종 JSON은 없고 Pro 업로드도 없다. 후보 local baseline commit
+`ba5609db6fbf6392166586e50341c6e14a26112f`를 그대로 동결·bundle로 보존했다. 설치된 Flash 화면을 Pro 동작으로 평가하지 않는다.
+global settings/instructions/hooks 원본 hash 복원·owner/native process 부재도 확인했다.
+
+최초 315개 package는 등록된 evidence만 수집하므로 별도 보존했던 terminal-originals가 없어 확장 복원 감사에서 FileNotFoundError가 발생했다.
+원본 package/restore/오류를 보존하고 [운영 보관 정정](evidence/20261005-antigravity-cli-agy-pro-r01/evaluation-final-20261005/operator-package-coverage-correction.json)으로
+operator.evidence에 원본·복원 sidecar만 추가했다. RM review를 다시 적용하거나 비용·제품·권한·baseline을 바꾸지 않았다.
+최종 `C:/meter-run-packages-20261005/agy-pro-r01-final-v2` manifest SHA-256은
+`66d9141c9c1945fb214587680c3d84e9b1dd20eae2163f4aec372bafb98ff746`이다.
+[독립 복원 감사](evidence/20261005-antigravity-cli-agy-pro-r01/evaluation-final-20261005/restore-audit.json)는 338개 파일·57개 입력·raw terminal/비용·정책/RM·동결 Git를
+package의 자체 operator ZIP에서 추출한 validator로 검증했다. 최종 제출 누락과 `result_valid: false`를 유지한다.
+[공개 최초 snapshot](evidence/20261005-antigravity-cli-agy-pro-r01/evaluation-final-20261005/snapshot-inventory.json)은 50개 파일/hash를 보존한다.
+
+기존 허용 후속 절차로 `20261005-antigravity-cli-agy-pro-r02`를 자기 직전 source와 실패 기록만 연결해 준비했다.
+[시작 근거](evidence/20261005-antigravity-cli-agy-pro-r02/launch-20261005/native-start-observation.json)는 22:29:17.275 KST의 실제
+동일 Pro model·request-review·후속 cwd를 확인한다. launcher PID는 15328이며 대화와 독립된 process가 최대 시간을 적용한다.
+새 receipt SHA-256은 `758da98249d099b97aa7752ed6d2f4f57ea606d829f47b933f38811586f2e7a3`다.
+후속 최대 3회 AND 누적 7,200초에 이번 회차를 포함한다. 원본 최초 비용과 정책 적격성은 그대로이고
+후속 terminal 정책·제품/RM·최종 비용은 아직 미판정이다. Native 시작 prefix를 최종 성공 로그로 사용하지 않는다.
+
+보드는 Flash r02의 같은 원본 펌웨어를 유지한다. 현재 후보에게 serial/flash·실행 중 구현 피드백을 제공하지 않는다.
+Pro 종료 후 동결·제출·정책·host·실물/RM 순서로 평가하며 그전에 Codex를 함께 시작하지 않는다.
+재개 시 [현재 계측](progress.json)·Pro manifest/ledger·scope owner·실제 launcher/child부터 확인하고 같은 후보를 재호출하지 않는다.
+
+## 2026-10-05 AGY Pro 후속 1·2회차 평가·마지막 후속 시작
+
+후속 1회차 r02는 22:30:38.899 KST에 native `Copy-Item`의 제조사 sdkconfig.defaults 복사 요청이 거부돼 종료했다.
+40개 raw event를 검토했으며 일반 write_to_file 인자 누락 오류를 권한 거부로 분류하지 않는다. 허용된 own checkout·SDK/manufacturer 참조와 own built-in task status만 사용했고 마지막 거부 뒤에는 새 assistant/tool 행동이 없다.
+81.625초·정규화 94,452 token, input 90,024·output 4,428·cached 456,502·reasoning 2,842를 원본으로 보존했다.
+firmware/CMakeLists.txt의 raw 446 bytes를 Git 동결 `5e1b658783da67995f4330ed1fafa98b842270cc`와 연결했다.
+정책 eligible·RM1 fail/RM2~RM5 not_run이며 펌웨어·최종 JSON·선택 문서는 없다.
+[346개 파일의 독립 복원](evidence/20261005-antigravity-cli-agy-pro-r02/evaluation-final-20261005/restore-audit.json)은 package manifest
+`fe266ea2f3bfd5a81fec10158a82f0c290ec1909d976ee169d467e27c8a2947d`와 원본 비용·57개 입력·raw source·Git blob을 확인했다.
+최초 audit의 raw LF/복원 CRLF byte 비교 실패는 [정정 기록](evidence/20261005-antigravity-cli-agy-pro-r02/evaluation-final-20261005/agy-pro-r02-final-audit-correction.json)으로 보존한다.
+446-byte raw와 457-byte Git 복원은 11개 줄바꿈만 다르며 내용과 동결 Git blob `96c31fa432e7adcb909d75d44ab9c29f1e552056`이 같다. 원본 candidate source나 비용을 고친 것이 아니다.
+
+후속 2회차 r03는 22:45:47.858 KST 시작 후 51.875초에 native `Get-ChildItem -Path <자기 firmware 경로> -Recurse`가 거부돼 종료했다.
+31개 raw event에는 declared manufacturer source view와 own file write, 기존 CMakeLists overwrite 인자 오류가 있다.
+마지막 거부 후 새 행동은 없으며 정책 eligible·RM1 fail/RM2~RM5 not_run이다.
+정규화 70,679 token, input 67,351·output 3,328·cached 199,768·reasoning 1,682를 보존했다.
+partial source는 CMakeLists와 sdkconfig.defaults 2개이며 commit `8059dbf481d7a394a985d8757b0b331fc625b40a`에 동결했다.
+[349개 파일의 독립 복원](evidence/20261005-antigravity-cli-agy-pro-r03/evaluation-final-20261005/restore-audit.json)은 manifest
+`5318af334e9a71af67c29c111d64a820ce99330a79183dbce9d2de94c0ebfce6`와 57개 입력·원본 비용·raw partial source/Git를 검증했다.
+두 회차 모두 최종 제출물·펌웨어가 없어 `result_valid: false`이며 Pro 업로드/광학 관측은 없다.
+
+종료 전 마지막 단계만 추적하던 startup 문서는 위 시점별 종료 원본과 구분한다.
+Windows 준비 helper stderr의 Git LF/CRLF 경고가 PowerShell에서 exit 1로 표시돼도 새 prepared run·ledger·launcher AST를 검사해 성공한 예약을 다시 생성하지 않았다.
+r02 공개 사본 수집 중 변수 누락은 partial bytes를 대조한 뒤 보완했으며 모델 호출·RM review를 반복하지 않았다.
+이 운영 기록의 오류·보완은 제품 코드·권한·baseline·후보 비용과 별개다.
+
+[남은 후속 계획](../../docs/plans/2026-10-05-agy-pro-remaining-followups.md)에 따라 마지막 r04를 자기 직전 source·관측만 연결해 준비했다.
+[Native 시작](evidence/20261005-antigravity-cli-agy-pro-r04/launch-20261005/native-start-observation.json)은 22:50:11.286 KST에
+동일 Pro model·request-review·r04 cwd를 확인한다. launcher PID 30748, 새 receipt SHA-256
+`87f324a701a3f6dd1caa25c9c76d55817dcc91841042abb275e2f2317a4a8522`다.
+후속 잔여 7,066.5초·1회에서 timeout 7,066초를 적용했다. r04 종료 후에는 남는 시간과 무관하게 최대 3회에 도달해 추가 회차를 생성하지 않는다.
+현재 terminal 비용·정책/RM·제출·하드웨어 결과는 미판정이다. 현재 native log prefix는 최종 성공 증거가 아니다.
+
+## 2026-10-05 AGY Pro 최종 회차 평가·회차 한도 종료
+
+위 r04 시작 이후 22:58:07.087 KST에 마지막 회차가 종료됐다. 실제 475.797초·정규화 405,997 token이며
+input 378,169·output 27,828·cached 1,198,725·reasoning 18,184를 원본으로 보존했다.
+96개 raw event를 모두 검토했다. 같은 Pro model·request-review·자기 checkout/고정 입력만 사용했고
+마지막 `Get-FileHash -Algorithm SHA256 firmware/main/meter_state.c, firmware/main/meter_state.h, docs/compile-link-evidence.md`가 거부됐다.
+그 뒤 새 assistant/tool 행동은 없으므로 정책은 eligible이다. 권한·profile·task를 바꾸거나 구현을 대신 수정하지 않았다.
+
+후보는 C state module·header·host driver와 빌드/링크 설명을 작성했고 `test_meter_parser.exe` 177,664 bytes를 빌드했다.
+이는 partial host adapter이며 CMake의 compiler ABI `.bin` 2개도 firmware artifact로 분류하지 않는다.
+실제 firmware app/ELF·PC collector/sender·최종 result JSON·선택 문서가 없어 Pro 업로드와 광학/BOOT 관측은 없다.
+자신의 source 7개와 host build artifact/config 6개를 raw bytes로 보존하고 commit
+`ef6aa727fa3539454708f223d965a1cb40197a56`에 동결했다. RM review는 한 번 적용했고 RM1 fail/RM2~RM5 not_run,
+reference fail/product_pass false다. 이미 설치된 Flash 펌웨어는 Pro 결과로 평가하지 않는다.
+
+[최종 독립 복원](evidence/20261005-antigravity-cli-agy-pro-r04/evaluation-final-20261005/restore-audit.json)은
+`C:/meter-run-packages-20261005/agy-pro-r04-final`의 361개 파일을 자체 operator ZIP의 동결 validator로 검사했다.
+manifest SHA-256은 `aaf375f63861eb47e9e65ce71429e52badb13936cf2e22dba0556e3218048da3`다.
+57개 입력·raw source/host artifact·Git blob·원본 terminal/비용·정책/RM·제출 누락과 `result_valid: false`를 유지한다.
+
+최초 운영자 host 시험 29건은 기본 PATH에 LLVM/MinGW runtime DLL 경로가 없어 모두 exit `0xC0000135`였다.
+그 [초기 기록](evidence/20261005-antigravity-cli-agy-pro-r04/evaluation-final-20261005/operator-host-checks.json)은 원본 package에 보존했다.
+이 loader 오류를 candidate 의미 검사 29건 실패로 해석하지 않는다.
+[보완 host 검증](evidence/20261005-antigravity-cli-agy-pro-r04/evaluation-final-20261005/post-package-host-runtime-check.json)은
+원본 checkout을 사용하지 않고 독립 복원된 같은 executable·동결 fixture/evaluator와 CMakeCache에 기록된 compiler DLL 경로로 실행했다.
+process-local PATH만 보완해 29개 중 12 pass/17 fail이며 executable/source/후보 비용은 그대로다.
+검증 대상은 partial state module와 mock normalizer다. 실제 firmware·collector·device의 동작으로 확장하지 않는다.
+이 보완 시험과 series 종료 metadata는 main package의 hash를 연결한 별도 후속 operator 근거이며 원본 package를 다시 쓰지 않았다.
+
+[Series 종료](evidence/20261005-antigravity-cli-agy-pro-r04/evaluation-final-20261005/operator-series-completion.json)는
+최초 1회+후속 3회, 총 677.5초(11분 17.5초)·정규화 660,989 token, 후속 누적 609.297초다.
+후속 시간은 6,590.703초 남지만 회차가 0이므로 derived state는 remediation_round_limit_reached다.
+동결 manager가 fail-reviewed ledger를 active로 두는 원본은 유지하며 최대 3회 guard 때문에 추가 prepare는 허용하지 않는다.
+회차/예산 초기화·대체 최초 호출·권한 완화는 없다. 전역 settings/instructions/hooks 복원과 native owner/process 부재를 확인했다.
+
+[비용 checkpoint 07](comparison-checkpoint-07.md)은 전체 종료 8회와 모든 실패 비용을 포함한다.
+Pro의 네 environment_failed를 일반 모델 코딩 능력의 품질 순위로 해석하지 않는다. 후속은 독립 반복으로 집계하지 않는다.
+현재 독립 series 종료는 OpenCode·Pro 2개/예정 15개이며 Flash는 남은 5,710.781초·2회를 보류 상태로 보존한다.
+이번 사용자 지시의 다음 대상 Pro 처리는 마쳤고 다음 순서 Codex Sol/Luna는 미시작이다. 현재 board upload는 Flash r02 원본 그대로이며 serial을 열지 않았다.

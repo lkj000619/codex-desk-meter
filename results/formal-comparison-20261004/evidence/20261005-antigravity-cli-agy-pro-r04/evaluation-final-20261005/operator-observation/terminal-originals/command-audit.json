@@ -1,0 +1,74 @@
+{
+  "source_sha256": "6be6c655c3d285581d1c8e3b14aaa398c87967d6b36f02f94679aa2266ff5b59",
+  "tool_calls": 35,
+  "command_count": 9,
+  "failed_commands": null,
+  "failed_commands_lower_bound": 1,
+  "unknown_exit_commands": 8,
+  "commands": [
+    {
+      "step_index": 7,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 10,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 15,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 16,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 36,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 37,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 49,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 51,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 58,
+      "state": "ERROR",
+      "exit_code": null,
+      "outcome": "failed",
+      "tool_error": true
+    }
+  ],
+  "availability_note": "DONE/output text is not an exit status. Total failure count is null when any command exit is unknown; lower bound preserves explicit tool errors/nonzero exits. File-tool errors are not shell commands."
+}

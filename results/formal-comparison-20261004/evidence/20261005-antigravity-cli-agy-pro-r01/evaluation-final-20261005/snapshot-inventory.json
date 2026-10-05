@@ -1,0 +1,207 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-pro-r01",
+  "captured_at": "2026-10-05T13:28:07.720022+00:00",
+  "files": {
+    "agent-context.json": {
+      "sha256": "5f14b758ecd1683cfd6c91dbbc2133de3200a239740bd31ccab3df9aee2d3c4c",
+      "bytes": 1689
+    },
+    "audit-agy-pro-r01-final-v2.py": {
+      "sha256": "e9d2ddf6549422a44775d0ae07c2e5a02413426d69725dd53887f3ae539b1c80",
+      "bytes": 4523
+    },
+    "candidate-inputs.json": {
+      "sha256": "0000c12a7e468cc93796a04b3dff3ceb2e3d63af953a2d80a20ef9e3b48cb839",
+      "bytes": 7435
+    },
+    "command-audit.json": {
+      "sha256": "db4c18836357cecfb85b410b5f12351e1d7a3933b9659098d4cfd32f00d16ed0",
+      "bytes": 625
+    },
+    "correct-agy-pro-r01-package-coverage.py": {
+      "sha256": "9ea7de37fcccc2bd92d1a234fc0178027a2f095fa9500611d1bf6164a131d28b",
+      "bytes": 2848
+    },
+    "execution-preflight.json": {
+      "sha256": "2eb9f0cb9b9d5029eaa60713f95993fa4caeb11d2cca78c4b004ef3677e0f561",
+      "bytes": 31454
+    },
+    "experiment-launch.json": {
+      "sha256": "f8d50ac95466602e866e9ede1b6b8c8850e42f9710eea62502cbef39f25228b1",
+      "bytes": 891
+    },
+    "finalize-agy-pro-r01.py": {
+      "sha256": "1d8c0b53fb3a0f7ec776485cfe4524c2695ac3756d4c29680ab974970aa9cd39",
+      "bytes": 10209
+    },
+    "launch-agy-pro-r01.ps1": {
+      "sha256": "195359454092101139b19110298ad563d149c7af54e89736d22749d62f156e73",
+      "bytes": 338
+    },
+    "launch-agy-pro-r01.py": {
+      "sha256": "6f447f2dd43e664646d0a6b7103ab24d9d6946580c505b2f15a66fbb2aa39b3c",
+      "bytes": 9071
+    },
+    "ledger-reviewed.json": {
+      "sha256": "790f3f37b2697350ac8576075041e2866ea42d00f7745e5615ba82318f27d58a",
+      "bytes": 2184
+    },
+    "operator-next-model-decision.json": {
+      "sha256": "a97fd2498a2754f9bbf6f12ca28258190331894c511b6aeb0ce5954026c5d364",
+      "bytes": 950
+    },
+    "operator-package-coverage-correction.json": {
+      "sha256": "0bd8b687b52399bef6a4bfaf20d53e51eb62fbafb886089085aa916143c34669",
+      "bytes": 2124
+    },
+    "operator-policy-decision.json": {
+      "sha256": "aad8c75f091fd296fd5fbec2974c90f2cd060a29236d5dfd170a7f6c2957c7dc",
+      "bytes": 1059
+    },
+    "operator-reference-review-input.json": {
+      "sha256": "fdb7a2f8158687de30d9118a526552259ec47321f6bc56cbfbd87a6fd2580a59",
+      "bytes": 2140
+    },
+    "operator-review-finalization.json": {
+      "sha256": "60f3df113960f9dfb71070b3e71a9d12fac7446aea1802ed652b65659cf76a91",
+      "bytes": 520
+    },
+    "operator-source-freeze.json": {
+      "sha256": "b1b9d22fbdacaf5c1a9611add15f6ecc20044deb6b5e354d719dceea43d69d99",
+      "bytes": 498
+    },
+    "package-create.json": {
+      "sha256": "3a5c23679ca695261346dc19548a2a20dc671fdf972ef1fa27a8757ff62fa07c",
+      "bytes": 191
+    },
+    "package-manifest.json": {
+      "sha256": "66d9141c9c1945fb214587680c3d84e9b1dd20eae2163f4aec372bafb98ff746",
+      "bytes": 66085
+    },
+    "policy-review.json": {
+      "sha256": "26cd9338ce67c1ad2a3e9546264cd348914f19ef17049c2165abc9c8ae77d684",
+      "bytes": 3681
+    },
+    "previous-progress-at-transition.json": {
+      "sha256": "fc6ee1141233fcaf8e9d7adb542f417a094cfbf5c3dd6606c56ef0c941f45322",
+      "bytes": 11772
+    },
+    "profile.json": {
+      "sha256": "b240460652feff0c0acaf49c561ac3b3d92abb87dbac4218bc06afa6e4096ab0",
+      "bytes": 3200
+    },
+    "prompt.txt": {
+      "sha256": "f8b9369cd48f610ff0bcaf17d5065df36293e561ef069fe4965f8002fcb15145",
+      "bytes": 5204
+    },
+    "publish-agy-pro-r01-terminal.py": {
+      "sha256": "badef9914fd534e3ff2d2c768faac03bc674c76cb827d33639f513d6532ae78f",
+      "bytes": 7922
+    },
+    "reference-review.json": {
+      "sha256": "fdb7a2f8158687de30d9118a526552259ec47321f6bc56cbfbd87a6fd2580a59",
+      "bytes": 2140
+    },
+    "restore-audit.json": {
+      "sha256": "bb6b9661a495c51eeda2dfd42d1a746a627d5ae59a66e773a8cf25bb89eeb891",
+      "bytes": 1765
+    },
+    "restore-report.json": {
+      "sha256": "047c303130022ccd379c8ef2caf794d117b653a0a73eacd8ade1cd5277515760",
+      "bytes": 951
+    },
+    "run-manifest-before-package-coverage-correction.json": {
+      "sha256": "217c6d4ba6612ee317c48a3dac0a6ddf8c5df25b0426410999c74f73a77429a1",
+      "bytes": 40211
+    },
+    "run-manifest.json": {
+      "sha256": "9812e34b2642a816d72f1728ddf73b3980416f06a49b3f303a50f1b8389d956b",
+      "bytes": 43039
+    },
+    "runner-console-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "runner-console.txt": {
+      "sha256": "e169a89d1e2af7288f2ae573efe846d9279b1c10ea7767c53fea771e4c32bdee",
+      "bytes": 921
+    },
+    "stderr.txt": {
+      "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713",
+      "bytes": 303
+    },
+    "stdout.jsonl": {
+      "sha256": "61e0b1743dc88629c61d4fdf559923010b54ad7a1b0f1aaecb85d798f48fbf74",
+      "bytes": 12104
+    },
+    "operator-launch-preflight/agents-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/agents-stdout.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/current-checks.json": {
+      "sha256": "77d7dff8a3da8b0b029cbab6d123642dd19fee1f2e85a16c9565e7ac4dbf8ffd",
+      "bytes": 2066
+    },
+    "operator-launch-preflight/mcp-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/mcp-stdout.txt": {
+      "sha256": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be",
+      "bytes": 27
+    },
+    "operator-launch-preflight/models-stderr.txt": {
+      "sha256": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8",
+      "bytes": 29
+    },
+    "operator-launch-preflight/models-stdout.txt": {
+      "sha256": "0fe8eac40fd3a1f2554de5c998412b23e219cda82edd3f980f93f2f526a03bda",
+      "bytes": 824
+    },
+    "operator-launch-preflight/plugins-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/plugins-stdout.txt": {
+      "sha256": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494",
+      "bytes": 21
+    },
+    "operator-launch-preflight/scope-exit.json": {
+      "sha256": "c384fc794c6f4ea6cf9b8fe78aa28b0005e2b7b27bd13703881d4c0ae1131be5",
+      "bytes": 719
+    },
+    "operator-observation/policy-notes.json": {
+      "sha256": "15b382eab82605fb88367504292bcefd9c0b73318a7bb893229faec38f4ce868",
+      "bytes": 2189
+    },
+    "operator-observation/terminal-verification.json": {
+      "sha256": "43c6ccee80ee2af69ab0148a71cac98bd5ab6be37bc0ef3c0677015f00f60e1d",
+      "bytes": 3472
+    },
+    "operator-observation/terminal-originals/20261005-antigravity-cli-agy-pro-r01.json": {
+      "sha256": "0736122e77f0c94107d74387043f426d961e961cac5317b707b8e0bf1f603f0b",
+      "bytes": 1949
+    },
+    "operator-observation/terminal-originals/command-audit.json": {
+      "sha256": "db4c18836357cecfb85b410b5f12351e1d7a3933b9659098d4cfd32f00d16ed0",
+      "bytes": 625
+    },
+    "operator-observation/terminal-originals/run-manifest.json": {
+      "sha256": "6b79d3b216cf827763bc4ba81449a114b4332360b07995eb82fbb10b0e2e1979",
+      "bytes": 39847
+    },
+    "operator-observation/terminal-originals/stderr.txt": {
+      "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713",
+      "bytes": 303
+    },
+    "operator-observation/terminal-originals/stdout.jsonl": {
+      "sha256": "61e0b1743dc88629c61d4fdf559923010b54ad7a1b0f1aaecb85d798f48fbf74",
+      "bytes": 12104
+    }
+  },
+  "scope": "Actual first Pro call terminated before implementation. Native identity, failed command, original cost, policy/RM, previous immutable hold and independent restore preserved. No Pro firmware was uploaded."
+}

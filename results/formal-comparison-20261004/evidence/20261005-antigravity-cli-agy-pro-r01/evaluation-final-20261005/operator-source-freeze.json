@@ -1,0 +1,12 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-pro-r01",
+  "frozen_at": "2026-10-05T13:21:20.215900+00:00",
+  "commit": "ba5609db6fbf6392166586e50341c6e14a26112f",
+  "candidate_branch": "master",
+  "original_terminal_manifest_sha256": "6b79d3b216cf827763bc4ba81449a114b4332360b07995eb82fbb10b0e2e1979",
+  "candidate_source_changes": false,
+  "new_product_source_files": 0,
+  "firmware_artifacts": 0,
+  "operator_product_source_modifications": false,
+  "operator_firmware_rebuild": false
+}
