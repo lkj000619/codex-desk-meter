@@ -1,0 +1,2 @@
+[0;32mI (103) boot: Loaded app from partition at offset 0x10000[0;32mI (2331) cdm: frame rejected seq=0 error=SCHEMA_INVALID bytes=1543[0m
+[0;32mI (7391) cdm: frame rejected seq=0 error=SCHEMA_INVALID bytes=1543[0m

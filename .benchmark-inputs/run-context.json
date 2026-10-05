@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "run_id": "20261006-codex-cli-gpt-6-sol-r01",
   "experiment_id": "version-2-end-to-end-v1",
   "baseline": {
     "id": "comparison-baseline-20261004",
@@ -26,9 +26,18 @@
     "input_bundle_sha256": "ced675a80c840d2bb9d467ccf7694a6bbd5c09b058c9887e01110842afdb6e67"
   },
   "outputs": {
-    "selection_document": "docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/hardware-feature-selection.md",
-    "structured_result": "results/20261005-codex-cli-gpt-6-sol-r01/end-to-end-result.json",
-    "evaluation_manifest": "results/20261005-codex-cli-gpt-6-sol-r01/e2e-evaluation-manifest.json"
+    "selection_document": "docs/agent-runs/20261006-codex-cli-gpt-6-sol-r01/hardware-feature-selection.md",
+    "structured_result": "results/20261006-codex-cli-gpt-6-sol-r01/end-to-end-result.json",
+    "evaluation_manifest": "results/20261006-codex-cli-gpt-6-sol-r01/e2e-evaluation-manifest.json"
   },
-  "evaluation_manifest_path": ".benchmark-inputs/e2e-evaluation-manifest.json"
+  "evaluation_manifest_path": ".benchmark-inputs/e2e-evaluation-manifest.json",
+  "immutable_files": {
+    ".benchmark-inputs/feedback.json": "candidate-feedback.json",
+    ".benchmark-inputs/feedback-evidence/000-common-stimulus-check.json": "feedback-evidence/000-common-stimulus-check.json",
+    ".benchmark-inputs/feedback-evidence/001-receiver-source-review.json": "feedback-evidence/001-receiver-source-review.json",
+    ".benchmark-inputs/feedback-evidence/002-sent-frames.jsonl": "feedback-evidence/002-sent-frames.jsonl",
+    ".benchmark-inputs/feedback-evidence/003-device-serial.bin": "feedback-evidence/003-device-serial.bin",
+    ".benchmark-inputs/feedback-evidence/004-video-review.json": "feedback-evidence/004-video-review.json",
+    ".benchmark-inputs/feedback-evidence/005-capture-identity-confirmation.json": "feedback-evidence/005-capture-identity-confirmation.json"
+  }
 }

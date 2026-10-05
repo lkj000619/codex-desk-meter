@@ -1,0 +1,58 @@
+{
+  "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "reviewer": "Codex operator",
+  "reviewed_at": "2026-10-05T16:08:21.826409+00:00",
+  "video_sha256": "af49e2ea86ad0cd0576dc1669095d698b061801a0f0faa67d21a370ac5f88fa4",
+  "duration_seconds": 12.9,
+  "source_bytes": 6424763,
+  "implementation_commit": "2257fffaa5316773d08fe3353356112c7002159d",
+  "artifact_sha256": "cefa0a2be742f4260ffcc8f3b83e2d35314e4caf8fb2a915a10a9a552fde6d78",
+  "contact_sheets_reviewed": 2,
+  "sample_frames_reviewed": 13,
+  "individual_readable_frames_reviewed": [
+    1,
+    5,
+    8,
+    13
+  ],
+  "findings": [
+    {
+      "interval_seconds": [
+        0.5,
+        3.5
+      ],
+      "screen": "Blue/dark illuminated panel; no legible title, numbers or text."
+    },
+    {
+      "interval_seconds": [
+        4.5,
+        11.5
+      ],
+      "screen": "Horizontal cyan/blue/red bands; no legible usage, global reset or diagnostic information."
+    },
+    {
+      "at_seconds": 12.5,
+      "screen": "Blue/dark panel again; no readable title or numeric information."
+    }
+  ],
+  "orientation_and_clipping": "Board is held horizontally. Text layout/orientation/clipping cannot be assessed because no readable text exists.",
+  "navigation": {
+    "starting_information": null,
+    "short_boot_presses_user_confirmed": 3,
+    "long_press_user_confirmed": true,
+    "user_reported_response": "none",
+    "information_views_reached": [],
+    "visual_band_changes_are_page_navigation_proof": false,
+    "returned_to_initial_information": false
+  },
+  "continuity": {
+    "continuous_30s_verified": false,
+    "duration_seconds": 12.9,
+    "spontaneous_reboot_verified": false,
+    "precise_latency_measured": false,
+    "scope": "Video is shorter than 30 seconds; one-second samples cannot certify no flicker. Band changes alone do not prove a reboot."
+  },
+  "reference_reached": false,
+  "product_pass": false,
+  "candidate_execution_repeated": false
+}
