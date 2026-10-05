@@ -1,0 +1,386 @@
+[
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 6,
+    "body": "Get-Content .benchmark-inputs/run-context.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content .benchmark-inputs/run-context.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 8,
+    "body": "Get-Content docs/PRODUCT_CONTRACT.md",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content docs/PRODUCT_CONTRACT.md'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 10,
+    "body": "Get-Content -Encoding utf8 docs/hardware/version-2-capabilities.md",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 docs/hardware/version-2-capabilities.md'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 12,
+    "body": "git status --short",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git status --short'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 14,
+    "body": "rg --files -g '\"'!build*'\"' -g '\"'!managed_components/**'\"'",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"rg --files -g '\"'!build*'\"' -g '\"'!managed_components/**'\"'\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 16,
+    "body": "Get-ChildItem -Recurse -File -Name",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Recurse -File -Name'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 21,
+    "body": "Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/001-legacy-collector-payload-differences.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/001-legacy-collector-payload-differences.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 22,
+    "body": "Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/005-photo-review.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/005-photo-review.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 23,
+    "body": "Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/000-common-stimulus-check.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/000-common-stimulus-check.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 24,
+    "body": "Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/002-receiver-source-review.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/002-receiver-source-review.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 30,
+    "body": "Get-Content -Encoding utf8 main/feature.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 main/feature.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 31,
+    "body": "Get-Content -Encoding utf8 main/board.h",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 main/board.h'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 32,
+    "body": "Get-Content -Encoding utf8 main/receiver.h",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 main/receiver.h'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 33,
+    "body": "Get-Content -Encoding utf8 main/board.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 main/board.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 34,
+    "body": "Get-Content -Encoding utf8 main/main.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 main/main.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 37,
+    "body": "Get-Content -Encoding utf8 docs/hardware/vendor-source-index.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 docs/hardware/vendor-source-index.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 39,
+    "body": "Get-Content -Encoding utf8 -LiteralPath 'C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\main.cpp'",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-Content -Encoding utf8 -LiteralPath 'C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\main.cpp'\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 41,
+    "body": "Select-String -Path C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c -Pattern 'get_frame_buffer|draw_bitmap|bounce_buffer|cache_msync' -Context 2,8",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c -Pattern 'get_frame_buffer|draw_bitmap|bounce_buffer|cache_msync' -Context 2,8\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 43,
+    "body": "Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 915 -First 40",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 915 -First 40'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 45,
+    "body": "Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 740 -First 75",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 740 -First 75'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 47,
+    "body": "Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 680 -First 75",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 680 -First 75'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 49,
+    "body": "Select-String -Path pc/desk_meter.py -Pattern 'SOURCE_STALE|global_reset|error_code' -Context 4,6",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path pc/desk_meter.py -Pattern 'SOURCE_STALE|global_reset|error_code' -Context 4,6\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 53,
+    "body": "Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 125 -First 90",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 125 -First 90'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 55,
+    "body": "Select-String -Path C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c -Pattern 'static esp_err_t spi_write_package' -Context 0,80",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c -Pattern 'static esp_err_t spi_write_package' -Context 0,80\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 57,
+    "body": "Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 379 -First 70",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 379 -First 70'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 59,
+    "body": "Select-String -Path C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_st7701/include/esp_lcd_st7701.h -Pattern 'ST7701_PANEL_IO_3WIRE_SPI_CONFIG' -Context 0,35",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_st7701/include/esp_lcd_st7701.h -Pattern 'ST7701_PANEL_IO_3WIRE_SPI_CONFIG' -Context 0,35\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 61,
+    "body": "Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 107 -First 18",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 107 -First 18'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 63,
+    "body": "Get-Content -Encoding utf8 main/receiver.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 main/receiver.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 68,
+    "body": "idf.py --version",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'idf.py --version'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 70,
+    "body": "Get-Content -Encoding utf8 experiments/fixtures/personal-usage.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/fixtures/personal-usage.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 74,
+    "body": "idf.py set-target esp32s3",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'idf.py set-target esp32s3'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 76,
+    "body": "idf.py build",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'idf.py build'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 78,
+    "body": "python -m unittest discover -s tests -v",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m unittest discover -s tests -v'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 80,
+    "body": "cmake -S host -B build-host -G Ninja",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'cmake -S host -B build-host -G Ninja'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 82,
+    "body": "cmake --build build-host",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'cmake --build build-host'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 84,
+    "body": "ctest --test-dir build-host --output-on-failure",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'ctest --test-dir build-host --output-on-failure'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 88,
+    "body": "Get-Content -Encoding utf8 tests/test_pc.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 tests/test_pc.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 89,
+    "body": "Get-Content -Encoding utf8 tests/test_pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 tests/test_pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 90,
+    "body": "Get-Content -Encoding utf8 host/CMakeLists.txt",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 host/CMakeLists.txt'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 94,
+    "body": "ctest --test-dir build-host --output-on-failure",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'ctest --test-dir build-host --output-on-failure'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 96,
+    "body": "Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/003-sent-frames.jsonl",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/003-sent-frames.jsonl'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 100,
+    "body": "ctest --test-dir build-host --output-on-failure",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'ctest --test-dir build-host --output-on-failure'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 106,
+    "body": "Get-Content -Encoding utf8 experiments/examples/end-to-end-hardware-not-run.example.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/examples/end-to-end-hardware-not-run.example.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 107,
+    "body": "Get-Content -Encoding utf8 .benchmark-inputs/e2e-evaluation-manifest.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 .benchmark-inputs/e2e-evaluation-manifest.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 108,
+    "body": "Get-Content -Encoding utf8 experiments/examples/end-to-end-result.example.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/examples/end-to-end-result.example.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 109,
+    "body": "Get-Content -Encoding utf8 experiments/schema/end-to-end-result.schema.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/schema/end-to-end-result.schema.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 111,
+    "body": "git status --short",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git status --short'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 113,
+    "body": "Get-Content -Encoding utf8 scripts/validate-end-to-end-result.py | Select-Object -Last 75",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 scripts/validate-end-to-end-result.py | Select-Object -Last 75'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 115,
+    "body": "Select-String -Path scripts/validate-end-to-end-result.py -Pattern 'def validate_result' -Context 0,135",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path scripts/validate-end-to-end-result.py -Pattern 'def validate_result' -Context 0,135\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 117,
+    "body": "Get-Content -Encoding utf8 scripts/validate-end-to-end-result.py | Select-Object -Skip 250 -First 240",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 scripts/validate-end-to-end-result.py | Select-Object -Skip 250 -First 240'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 119,
+    "body": "Get-Content -Encoding utf8 host/test_feature.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 host/test_feature.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 121,
+    "body": "Get-Content -Encoding utf8 pc/desk_meter.py | Select-Object -Skip 220 -First 140",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 pc/desk_meter.py | Select-Object -Skip 220 -First 140'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 125,
+    "body": "Get-Content -Encoding utf8 experiments/fixtures/providers/codex-percent-window.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/fixtures/providers/codex-percent-window.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 127,
+    "body": "Get-Content -Encoding utf8 experiments/fixtures/providers/multi-provider-healthy.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/fixtures/providers/multi-provider-healthy.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 131,
+    "body": "python scripts/validate-end-to-end-result.py --result results/20261006-codex-cli-gpt-6-sol-r02/end-to-end-result.json --manifest .benchmark-inputs/e2e-evaluation-manifest.json --evidence-root .",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python scripts/validate-end-to-end-result.py --result results/20261006-codex-cli-gpt-6-sol-r02/end-to-end-result.json --manifest .benchmark-inputs/e2e-evaluation-manifest.json --evidence-root .'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 133,
+    "body": "python -m py_compile pc/desk_meter.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile pc/desk_meter.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 135,
+    "body": "python -m py_compile tests/test_pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile tests/test_pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 137,
+    "body": "python tests/test_pc.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python tests/test_pc.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 141,
+    "body": "python tests/test_pc.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python tests/test_pc.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 144,
+    "body": "git diff --check",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git diff --check'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 146,
+    "body": "Get-ChildItem -Force -Name",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Force -Name'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 150,
+    "body": "idf.py build",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'idf.py build'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 154,
+    "body": "git diff --stat",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git diff --stat'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+    "raw_line": 156,
+    "body": "git status --short",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git status --short'"
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+  "round": 2,
+  "recorded_at": "2026-10-05T19:22:59.243904+00:00",
+  "candidate_implementation_and_submission_terminal": true,
+  "host_checks_complete": true,
+  "hardware_upload_complete": true,
+  "operator_product_pass": null,
+  "rm_review_applied": false,
+  "reference_status": "not_run",
+  "optical_observation": "awaiting_user",
+  "question_identifies_upload_at_kst": "2026-10-06 04:21",
+  "artifact_sha256": "486cd84ba91af26fd86ea8642c166c4708b7e3537806cf18f93d9579c23c0377",
+  "receiver_accepted_sequences": [
+    0,
+    1
+  ],
+  "serial_closed": true,
+  "remaining_followup_seconds": 6127.750999999698,
+  "remaining_followup_rounds": 1,
+  "additional_candidate_call_before_optical_evaluation": false,
+  "old_user_photo_is_current_artifact_evidence": false
+}

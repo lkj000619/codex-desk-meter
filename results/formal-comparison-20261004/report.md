@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-06 Codex Sol(`gpt-6-sol`·medium) 후속 2회차가 04:08:53.442 KST에 시작돼 구현 중이다. 이번 최대 6,750초는 후속 잔여 6,750.313초 안이며 최종 실제 시간을 종료 후 차감한다. 준비 사본의 bytecode3개 제외·source18/입력57·동일 profile·새 receipt·thread/argv를 검증했다. 후속 1회차의 최종 RM1 pass/RM2 partial/RM3~RM5 fail·459개 파일 독립 보존·보드 artifact는 유지한다. 최초 eligible 원본과 날짜 있는 정책 정정을 보존하며 현재 Sol series 품질 적격성은 invalid_for_comparison이다. 현재 회차 비용·제품·RM는 pending이다.
-후보 실행 시작11회·종료10회(최초 시작4·후속7). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. Pro 종료·Flash 보류·Codex Luna 미시작을 유지한다. 독립 series 종료는 OpenCode·Pro 2개/예정15개다. 전체 비교는 미완료다.
+상태: 2026-10-06 Codex Sol 후속2의 구현·제출은 04:19:16.016 KST에 종료됐다. 원본622.562초·정규화6,510,153 token과 418개 파일의 독립 복원을 보존했다. Python6개·생산 C 시험과 collector/common payload 동일성 확인 후 04:21:15 KST 같은 artifact를 COM3에 업로드했고 실제 frame0·1을 수락했다. LCD/BOOT/30초 유지와 정식 RM/최종 package는 사용자 관측 대기다. 정책은 파이프9건 위반으로 invalid_for_comparison이며 최초 eligible 원본·날짜 있는 정정·기존 후속1 판정을 보존한다. 후속 잔여6,127.751초·1회는 이번 평가 뒤에만 처리한다.
+후보 실행 시작·종료 각11회(최초 시작4·후속7). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. Pro 종료·Flash 보류·Codex Luna 미시작을 유지한다. 독립 series 종료는 OpenCode·Pro 2개/예정15개다. 전체 비교는 미완료다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -755,3 +755,24 @@ Local Git exclude에 생성 build/build-host/bytecode만 추가했으며 기존 
 같은 CLI/SDK/native inventory와 actual argv의 explicit gpt-6-sol/medium을 확인했다. Receipt SHA-256 `c48f1673534bd1eb274892e5fb3dbc7cfeb452b5a9f952ebc08759d8717d0707`과
 [35개 파일 시작 목록](evidence/20261006-codex-cli-gpt-6-sol-r02/launch-20261006/snapshot-inventory.json)을 보존한다. Resolved model/cwd를 native JSONL이 방출하지 않는 한계는 그대로다.
 이번 최대6,750초/누적 후속7,200초/최대3회를 유지한다. 현재 호출 이후 추가 회차는 최대1회이며 시간은 종료 시 차감한다. 현재 보드는 후속1이다. 후보 실행 중 구현 피드백·serial/flash를 제공하지 않는다.
+
+## 2026-10-06 Sol 후속 2회차 종료·독립 검증·실물 관측 대기
+
+04:19:16.016 KST completed/exit0으로 구현·제출이 종료됐다. 원본622.562초·75도구 호출(64명령·11파일변경)·실패 명령4개를 기록한다.
+Input6,489,180·output20,973·정규화합계6,510,153 token, cached6,330,752은 input에 포함된다. Raw reasoning_output_tokens7,547과 adapter reasoning/provider_total null을 각각 보존한다.
+동결 commit `09ecdaf1645511033b4efda40bb2a9e3b96ae8f7`, 마지막 성공 build raw line150 이후 firmware source 변경은 없다.
+공통 과제의 파이프 금지 위반9건으로 정책 invalid_for_comparison이다. 권한 거부는 없으며 자체 인계 문서도 파이프 위반을 인정한다. 원본 실행·비용·제품 관측은 유지한다.
+
+[관측 전 package의 독립 감사](evidence/20261006-codex-cli-gpt-6-sol-r02/post-terminal-awaiting-optical-20261006/restore-audit.json)는418개 파일·source22/artifact21·입력57과 raw cost를 검증했다.
+Package SHA-256 `4c7d8e5093983f7b180ed02c911eac2d6682d5b8ccf558f5515543a71ef5ff43`다. 자체 format validator의 result_valid true는 제품 합격이 아니다.
+독립 Python6개·생산 C state/CRC·idle backlight·collector→production C 시험이 통과했고 collector payload도 고정 common payload와 이제 동일하다.
+Modern17개 validity 확인은 full29개 oracle이나 정식 GUI 점수가 아니다. 원본 실패 CTest2건과 직접 Python import 실패, rg 부재도 유지한다.
+
+[실물 기록](evidence/20261006-codex-cli-gpt-6-sol-r02/post-terminal-awaiting-optical-20261006/operator-observation/hardware-slot.json)은04:21:15.401963 KST 같은 artifact를 COM3에 업로드하고 frame0·1 수락을 확인한다.
+App SHA-256 `486cd84ba91af26fd86ea8642c166c4708b7e3537806cf18f93d9579c23c0377`, NVS0x9000/0x6000만 초기화, 전체 flash erase·운영자 rebuild는 없었다. Serial은 닫았다.
+현재 LCD·BOOT·30초 유지 관측을 요청했고 [광학 대기](evidence/20261006-codex-cli-gpt-6-sol-r02/post-terminal-awaiting-optical-20261006/operator-observation/optical-observation-pending.json)로 기록한다.
+후속1 사진·수동 RESET 보고는 새 firmware 증거가 아니다. 정식 RM review·최종 package/평가와 Sol series 종료는 아직 미완료다.
+
+[76개 파일 snapshot](evidence/20261006-codex-cli-gpt-6-sol-r02/post-terminal-awaiting-optical-20261006/snapshot-inventory.json)과 [checkpoint10](comparison-checkpoint-10.md)을 보존했다.
+후보11회 정규화합계26,689,957 token, Sol 최초+후속2회 누적3,532.405초·22,413,413 token, 남은 후속6,127.751초·1회다.
+비용과 정책 부적격을 유지하고 이번 관측·RM 완료 전 후속3이나 Luna를 시작하지 않는다. 과거 snapshot·원본 판정·동결 ref는 변경하지 않았다.

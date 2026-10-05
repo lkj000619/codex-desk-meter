@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-06. 상태: **Codex Sol(`gpt-6-sol`·medium) 후속 2회차가 04:08:53.442 KST에 시작돼 구현 중이다. 최대 6,750초는 후속 잔여 6,750.313초 안의 이번 호출 한도다. 새 준비 사본에서 추적된 Python bytecode3개만 제외하고 제품 source18개·고정 입력57개·profile 동일성·새 receipt·실제 thread/argv를 확인했다. 후속 1회차의 구현·제출·실물 평가·459개 파일 보존과 RM1 pass/RM2 partial/RM3~RM5 fail을 유지하며 보드는 그 artifact다. 최초 정책 eligible 원본과 날짜 있는 정정을 함께 보존하고 현재 Sol series 품질 적격성 invalid_for_comparison을 유지한다. 현재 회차 비용·제품·RM는 pending이다. 후보 시작11회·종료10회, 독립 series 종료2개/15개이며 추가 회차는 현재 호출 후 최대1회다. Pro 종료·Flash 보류·Luna 미시작을 유지한다.**
+확인일: 2026-10-06. 상태: **Codex Sol 후속 2회차는 04:19:16.016 KST에 구현·제출을 마치고 종료됐다. 원본 비용622.562초·정규화6,510,153 token과 source/artifact를 보존했고 418개 파일을 독립 복원·검증했다. Python6개·생산 C receiver 시험 통과, 후보 collector payload·encoder가 공통 기준과 일치한다. 04:21:15 KST 같은 원본 artifact를 COM3에 업로드했고 실제 frame0·1을 수락했다. 현재 LCD·BOOT·30초 유지 관측과 정식 RM/최종 package는 사용자 관측 대기다. 정책은 파이프9건 위반으로 invalid_for_comparison이며 날짜 있는 최초 정정과 series 품질 부적격을 유지한다. 남은 후속6,127.751초·1회는 이번 평가 완료 전 시작하지 않는다. 후보 시작·종료 각11회, 독립 series 종료2개/15개, Pro 종료·Flash 보류·Luna 미시작이다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -276,3 +276,13 @@ checkpoint08의 원본을 보존한 후속 집계다. [남은 후속 계획](../
 새 사본에서 생성 bytecode3개만 제외하고 제품 source18개의 Git blob/내용·고정 입력57개·profile 동일성을 검증했다. 새 prepared commit은 `e2a741d6360304c8d5e1542bc4444fc9a0fac2da`다.
 이번 최대6,750초·현재 호출 후 추가 최대1회이며 실제 시간은 종료 후 차감한다. 현재 회차의 제품·비용·RM는 pending이고 series 품질 invalid는 유지한다.
 현재 보드는 후속1 artifact이며 현재 후속2 성공 근거로 사용하지 않는다. 이전 두 회차를 재실행하거나 실행 중 구현 피드백·serial/flash를 제공하지 않는다.
+
+## 2026-10-06 Sol 후속 2회차 제출·업로드 완료, 광학 대기
+
+위 시작 이후 후속2가 04:19:16.016 KST 종료됐고 [관측 대기 snapshot](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r02/post-terminal-awaiting-optical-20261006/snapshot-inventory.json)에
+원본 비용·정책·동결 source·host 시험·업로드/수신 근거76개 파일을 보존했다. [독립 복원](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r02/post-terminal-awaiting-optical-20261006/restore-audit.json)은
+418개 파일과 source22/artifact21·고정 입력57·실행 원본을 검증했다. Commit `09ecdaf1645511033b4efda40bb2a9e3b96ae8f7`, app SHA-256 `486cd84ba91af26fd86ea8642c166c4708b7e3537806cf18f93d9579c23c0377`다.
+실제 보드는 후속2로 바뀌었으며 04:21:15 KST 업로드 후 공통 frame0·1을 수락했다. 이전 사진·RESET 보고를 새 artifact 판정으로 재사용하지 않는다.
+새 LCD/BOOT/연속 유지 관측을 요청했으며 RM review는 아직 적용하지 않았다. 구현·제출 완료와 평가 완료는 다르다.
+[Checkpoint10](../../results/formal-comparison-20261004/comparison-checkpoint-10.md)은 후보11회·정규화26,689,957 token을 기록한다. Sol 누적3,532.405초·22,413,413 token과
+후속 잔여6,127.751초·1회를 유지하고 관측/정식 평가 전 추가 호출을 시작하지 않는다. 전체 비교·제품 합격·Sol series 종료를 선언하지 않는다.

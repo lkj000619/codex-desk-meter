@@ -1,0 +1,2 @@
+accepted 0 ok
+accepted 1 ok
