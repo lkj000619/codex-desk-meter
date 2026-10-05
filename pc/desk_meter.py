@@ -120,6 +120,53 @@ def global_adapter(raw):
             "stale": bool(raw.get("stale", False)), "error_code": raw.get("error_code")}
 
 
+def legacy_personal_adapter(raw, reference_time):
+    """Map the older percent-only fixture without inventing absolute balances."""
+    if (not isinstance(raw, dict) or raw.get("schema_version") != 1 or
+            raw.get("source") != "fixture" or not isinstance(raw.get("windows"), list)):
+        raise ValueError("SCHEMA_INVALID")
+    observed_at = raw["captured_at"]
+    age = (reference_time - timestamp(observed_at)).total_seconds()
+    if age < 0:
+        raise ValueError("FUTURE_TIMESTAMP")
+    stale = bool(raw.get("stale")) or age >= 300
+    windows = []
+    for window in raw["windows"]:
+        if set(window) != {"id", "label", "percent_used", "percent_remaining", "resets_at"}:
+            raise ValueError("SCHEMA_INVALID")
+        windows.append({"window_id": window["id"], "label": window["label"],
+                        "used_units": None, "remaining_units": None, "limit_units": None,
+                        "unit": "percent", "percent_used": window["percent_used"],
+                        "percent_remaining": window["percent_remaining"],
+                        "resets_at": window["resets_at"]})
+    snapshot = {"schema_version": 1, "snapshot_id": "fixture-personal-usage",
+                "provider_id": "openai", "agent_id": "codex-cli", "host_id": "terminal",
+                "model_id": None, "account_profile_id": None, "source_kind": "fixture",
+                "metric_kind": "quota_window", "unit": "percent",
+                "status": "stale" if stale else "available", "observed_at": observed_at,
+                "windows": windows, "stale": stale, "last_good_at": observed_at,
+                "error_code": "SOURCE_STALE" if stale else raw.get("error_code"),
+                "error_reason": "The source observation is at least 300 seconds old; its value is retained as stale." if stale else None}
+    return usage_adapter(snapshot, reference_time)
+
+
+def forecast_adapter(raw):
+    if raw.get("source") != "codex-reset.com" or raw.get("captured_at") is None:
+        raise ValueError("GLOBAL_CAPTURE_MISSING")
+    timestamp(raw["captured_at"])
+    if raw.get("last_reset_at") is not None:
+        timestamp(raw["last_reset_at"])
+    for key in ("forecast_24h_percent", "forecast_48h_percent"):
+        if raw.get(key) is not None and not valid_number(raw[key], 100):
+            raise ValueError("SCHEMA_INVALID")
+    return {"schema_version": 1, "source": "codex-reset.com", "captured_at": raw["captured_at"],
+            "latest_reset_at": raw.get("last_reset_at"),
+            "forecast_24h_percent": raw.get("forecast_24h_percent"),
+            "forecast_48h_percent": raw.get("forecast_48h_percent"),
+            "forecast_is_schedule": False, "stale": bool(raw.get("stale", False)),
+            "error_code": raw.get("error_code")}
+
+
 def collect(reference_time, fixture_dir=FIXTURES, transition_stale=False, fixture_paths=None, cache=None):
     matrix = json.loads((fixture_dir / "provider-fixture-matrix.json").read_text(encoding="utf-8"))
     usage, errors = [], []
@@ -132,6 +179,9 @@ def collect(reference_time, fixture_dir=FIXTURES, transition_stale=False, fixtur
             validated = []
             for snapshot in snapshots:
                 snapshot = copy.deepcopy(snapshot)
+                if snapshot.get("source") == "fixture" and "captured_at" in snapshot:
+                    validated.append(legacy_personal_adapter(snapshot, reference_time))
+                    continue
                 if transition_stale and snapshot.get("status") == "available" and snapshot.get("observed_at"):
                     if (reference_time - timestamp(snapshot["observed_at"])).total_seconds() >= 300:
                         snapshot.update(status="stale", stale=True, error_code="SOURCE_STALE", error_reason="Fixture observation is at least 300 seconds old")
@@ -145,17 +195,27 @@ def collect(reference_time, fixture_dir=FIXTURES, transition_stale=False, fixtur
                 retained = copy.deepcopy(previous)
                 retained.update(status="error", stale=True, error_code="COLLECT_ERROR", error_reason=str(exc))
                 usage.append(retained)
+    forecasts = []
+    forecast_path = fixture_dir / "codex-reset-forecast.json"
+    if forecast_path.exists():
+        try:
+            forecast = forecast_adapter(json.loads(forecast_path.read_text(encoding="utf-8")))
+            if (reference_time - timestamp(forecast["captured_at"])).total_seconds() >= 300:
+                forecast.update(stale=True, error_code="SOURCE_STALE")
+            forecasts = [forecast]
+        except (OSError, json.JSONDecodeError, ValueError, KeyError, TypeError) as exc:
+            errors.append({"source": "codex-reset.com", "error": str(exc)})
     try:
         global_reset = global_adapter(json.loads((fixture_dir / "codex-resets-history.json").read_text(encoding="utf-8")))
-        if transition_stale and (reference_time - timestamp(global_reset["captured_at"])).total_seconds() >= 300:
+        if (reference_time - timestamp(global_reset["captured_at"])).total_seconds() >= 300:
             global_reset.update(stale=True, error_code="SOURCE_STALE")
-        globals_ = [global_reset]
+        globals_ = forecasts + [global_reset]
         if cache is not None:
             cache["codex-resets.com"] = copy.deepcopy(global_reset)
     except (OSError, json.JSONDecodeError, ValueError, KeyError, TypeError) as exc:
         errors.append({"source": "codex-resets.com", "error": str(exc)})
         previous = cache.get("codex-resets.com") if cache is not None else None
-        globals_ = [dict(previous, stale=True, error_code="COLLECT_ERROR")] if previous else []
+        globals_ = forecasts + ([dict(previous, stale=True, error_code="COLLECT_ERROR")] if previous else [])
     return {"usage": usage, "global_resets": globals_}, errors
 
 

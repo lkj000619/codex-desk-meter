@@ -28,7 +28,16 @@ class ProductPcTests(unittest.TestCase):
         self.assertTrue(payload["usage"])
         self.assertTrue(payload["global_resets"])
         self.assertTrue(any(e["error"] == "ABSOLUTE_BALANCE_MISMATCH" for e in errors))
-        self.assertTrue(all(g["source"] == "codex-resets.com" for g in payload["global_resets"]))
+        self.assertEqual({g["source"] for g in payload["global_resets"]},
+                         {"codex-reset.com", "codex-resets.com"})
+
+    def test_legacy_personal_usage_reference(self):
+        reference = timestamp("2026-09-30T18:40:49Z")
+        payload, errors = collect(reference, fixture_paths=["personal-usage.json"])
+        self.assertFalse(errors)
+        self.assertEqual([w["percent_remaining"] for w in payload["usage"][0]["windows"]], [58, 82])
+        self.assertEqual(payload["usage"][0]["status"], "stale")
+        self.assertEqual(payload["usage"][0]["observed_at"], "2026-09-11T00:00:00Z")
 
     def test_stale_boundary(self):
         raw = json.loads((FIXTURES / "providers/codex-percent-window.json").read_text())

@@ -22,6 +22,18 @@ def main(executable):
     assert output[1].startswith("rejected 7 SEQUENCE_OLD"), output
     assert output[2].startswith("rejected 7 "), output
     assert output[3].startswith("accepted 8 "), output
+    reference = timestamp("2026-09-30T18:40:49Z")
+    legacy_payload, errors = collect(reference, fixture_paths=["personal-usage.json"])
+    assert not errors, errors
+    assert [w["percent_remaining"] for w in legacy_payload["usage"][0]["windows"]] == [58, 82]
+    common_lines = frame(0, legacy_payload, "2026-09-30T18:40:49Z") + frame(1, legacy_payload, "2026-09-30T18:40:49Z")
+    common = subprocess.run([executable], input=common_lines, capture_output=True, check=True)
+    accepted = common.stdout.decode().splitlines()
+    assert len(accepted) == 2 and accepted[0].startswith("accepted 0 ") and accepted[1].startswith("accepted 1 "), accepted
+    supplied = Path(__file__).resolve().parents[1] / ".benchmark-inputs/feedback-evidence/002-sent-frames.jsonl"
+    observed = subprocess.run([executable], input=supplied.read_bytes(), capture_output=True, check=True)
+    observed_lines = observed.stdout.decode().splitlines()
+    assert len(observed_lines) == 2 and all(line.startswith(f"accepted {number} ") for number, line in enumerate(observed_lines)), observed_lines
     print("PC canonical fixture frame -> production C receiver -> recovery: PASS")
 
 

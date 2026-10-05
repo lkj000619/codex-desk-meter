@@ -167,7 +167,11 @@ static bool validate_payload(const cJSON *p,int64_t sent_epoch) {
         for (cJSON *w=windows->child;w;w=w->next) if (!validate_window(w)) return false;
     }
     for (cJSON *g=global->child;g;g=g->next) {
-        if (!cJSON_IsObject(g) || cJSON_GetArraySize(g)!=9 || !field(g,"source",cJSON_String) || strcmp(cJSON_GetObjectItemCaseSensitive(g,"source")->valuestring,"codex-resets.com") || !field(g,"captured_at",cJSON_String) || !cdm_timestamp(cJSON_GetObjectItemCaseSensitive(g,"captured_at")->valuestring,NULL) || !time_or_null(g,"latest_reset_at") || !nullable_number(g,"forecast_24h_percent",100) || !nullable_number(g,"forecast_48h_percent",100) || !field(g,"forecast_is_schedule",cJSON_False)) return false;
+        const cJSON *source_item=cJSON_GetObjectItemCaseSensitive(g,"source");
+        const char *source=cJSON_IsString(source_item)?source_item->valuestring:NULL;
+        if (!cJSON_IsObject(g) || cJSON_GetArraySize(g)!=9 || !field(g,"source",cJSON_String) ||
+            (!source || (strcmp(source,"codex-resets.com") && strcmp(source,"codex-reset.com"))) ||
+            !field(g,"captured_at",cJSON_String) || !cdm_timestamp(cJSON_GetObjectItemCaseSensitive(g,"captured_at")->valuestring,NULL) || !time_or_null(g,"latest_reset_at") || !nullable_number(g,"forecast_24h_percent",100) || !nullable_number(g,"forecast_48h_percent",100) || !field(g,"forecast_is_schedule",cJSON_False)) return false;
         if(!only_keys(g,global_keys,9) || !field(g,"schema_version",cJSON_Number) || cJSON_GetObjectItemCaseSensitive(g,"schema_version")->valuedouble!=1 || !optional_string(g,"error_code") || (!field(g,"stale",cJSON_True) && !field(g,"stale",cJSON_False))) return false;
     }
     return true;

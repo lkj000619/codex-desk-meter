@@ -1,7 +1,6 @@
 #include "board.h"
 #include <stdlib.h>
 #include <string.h>
-#include "esp_heap_caps.h"
 #include "esp_lcd_panel_rgb.h"
 #include "esp_lcd_panel_ops.h"
 #include "driver/gpio.h"
@@ -47,12 +46,15 @@ bool board_start(void) {
     c.timings.hsync_back_porch=30; c.timings.hsync_front_porch=30; c.timings.hsync_pulse_width=6;
     c.timings.vsync_back_porch=20; c.timings.vsync_front_porch=20; c.timings.vsync_pulse_width=40;
     c.data_width=16; c.bits_per_pixel=16; c.num_fbs=1; c.flags.fb_in_psram=1; c.psram_trans_align=64;
+    // The manufacturer's RGB example uses DRAM bounce buffers for PSRAM scanout.
+    c.bounce_buffer_size_px=10*320;
     c.hsync_gpio_num=38; c.vsync_gpio_num=39; c.de_gpio_num=40; c.pclk_gpio_num=41; c.disp_gpio_num=-1;
     const int data[]={21,5,45,48,47,14,13,12,11,10,9,17,46,3,8,18};
     for(int i=0;i<16;i++) c.data_gpio_nums[i]=data[i];
     if(esp_lcd_new_rgb_panel(&c,&panel)!=ESP_OK || esp_lcd_panel_reset(panel)!=ESP_OK || esp_lcd_panel_init(panel)!=ESP_OK) return false;
-    pixels=heap_caps_malloc(320*820*2,MALLOC_CAP_SPIRAM|MALLOC_CAP_8BIT);
-    if(!pixels) return false;
+    // Draw into the buffer scanned by RGB DMA. A separate full-screen buffer
+    // plus draw_bitmap produced torn color bands on the physical panel.
+    if(esp_lcd_rgb_panel_get_frame_buffer(panel,1,(void **)&pixels)!=ESP_OK || !pixels) return false;
     memset(pixels,0,320*820*2);
     ledc_timer_config_t timer={.speed_mode=LEDC_LOW_SPEED_MODE,.duty_resolution=LEDC_TIMER_8_BIT,.timer_num=LEDC_TIMER_3,.freq_hz=50000,.clk_cfg=LEDC_AUTO_CLK};
     ledc_channel_config_t channel={.gpio_num=6,.speed_mode=LEDC_LOW_SPEED_MODE,.channel=LEDC_CHANNEL_0,.timer_sel=LEDC_TIMER_3,.duty=255};
@@ -78,5 +80,5 @@ void board_text(int x,int y,const char *s,uint16_t color,int scale) {
         x+=6*scale;
     }
 }
-void board_present(void) { if(panel&&pixels) esp_lcd_panel_draw_bitmap(panel,0,0,320,820,pixels); }
+void board_present(void) { __asm__ __volatile__("" ::: "memory"); }
 bool board_boot_pressed(void) { return gpio_get_level(0)==0; }

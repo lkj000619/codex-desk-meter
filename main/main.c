@@ -76,7 +76,9 @@ static void draw_usage(uint64_t ms) {
 static void draw_global(uint64_t ms) {
     draw_header("GLOBAL RESET",ms);
     cJSON *globals=state.payload?cJSON_GetObjectItemCaseSensitive(state.payload,"global_resets"):NULL;
-    cJSON *g=globals?globals->child:NULL;
+    cJSON *g=NULL;
+    for(cJSON *item=globals?globals->child:NULL;item;item=item->next)
+        if(!strcmp(str(item,"source",""),"codex-resets.com")) { g=item; break; }
     if(!g) { board_text(30,100,"NO RESET HISTORY",WARN,3); board_text(30,155,"SOURCE: codex-resets.com",MUTED,2); return; }
     char row[180];
     snprintf(row,sizeof(row),"SOURCE %s",str(g,"source","unknown")); board_text(30,85,row,FG,3);
