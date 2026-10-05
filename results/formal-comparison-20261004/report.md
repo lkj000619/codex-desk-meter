@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-06 Codex Sol(`gpt-6-sol`·medium) 최초 구현·제출 종료와 평가·COM3 업로드를 마쳤다. 정책 eligible·RM1 pass/RM2~RM5 fail·reference fail/product_pass false다. 공통 데이터 거부·LCD 글자/숫자 부재·사용자 BOOT 무반응을 보존하고 자기 후속 준비를 진행한다. 후속 잔여는 7,200초·3회다. 앞선 Pro는 회차 한도 종료이며 구현 미완료·원본 비용·독립 복원을 보존한다. Flash 추가 후속·잔여 예산·과거 업로드 근거를 보존하며 현재 보드는 Sol 최초다.
-후보 실행 시작·종료 각각 9회(최초 시작 4·후속 5). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. Codex Luna는 미시작이다. 독립 series 종료는 OpenCode·Pro 2개/예정 15개다. 전체 비교는 미완료다.
+상태: 2026-10-06 Codex Sol(`gpt-6-sol`·medium) 후속 1회차가 03:34:01 KST에 시작돼 구현 중이다. 최초 정책 eligible·RM1 pass/RM2~RM5 fail·reference fail/product_pass false·원본 비용·453개 파일의 독립 보존은 그대로다. 새 준비 사본의 generated build 출력을 제외하고 source/입력/profile/권한 동일성·실제 시작을 확인했다. 이번 최대 7,200초와 후속 누적/회차 한도를 유지하며 현재 최종 비용·제품·평가는 pending이다. Pro 종료와 Flash 보류 예산·과거 근거를 보존하며 현재 보드는 Sol 최초다.
+후보 실행 시작 10회·종료 9회(최초 시작 4·후속 6). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. Codex Luna는 미시작이다. 독립 series 종료는 OpenCode·Pro 2개/예정 15개다. 전체 비교는 미완료다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -696,3 +696,24 @@ Reference fail/product_pass false이며 completed·유효 제출·정책 eligibl
 동결 commit에는 생성 build/build-host 파일 1,413개가 추적돼 있다. 다음 준비 사본에서만 출력을 제외하고
 입력·자기 source 동일성·현재 receipt를 확인한 뒤 후속을 시작한다. 원본 freeze/package는 수정하지 않는다.
 후속은 아직 0회·잔여 7,200초·3회다. User keep going은 이 series 처리를 계속하며 Pro 종료·Flash 보류·Luna 미시작은 유지한다.
+
+## 2026-10-06 Codex Sol 후속 1회차 시작
+
+[후속 계획](../../docs/plans/2026-10-06-codex-sol-followup-execution.md)에 따라 `20261006-codex-cli-gpt-6-sol-r01`을
+ledger round 1로 준비했다. 날짜 뒤 r01은 당일 예약 번호이며 자기 최초 `20261005-codex-cli-gpt-6-sol-r01`에 이어지는 후속이다.
+피드백은 자기 직전 commit·RM2~RM5 관측·고정 기대·evidence 6개·남은 7,200초/3회만 제공한다.
+다른 구현이나 운영자 제품 patch·해결 방법은 제공하지 않았다.
+
+[새 사본 보완](evidence/20261006-codex-cli-gpt-6-sol-r01/launch-20261006/operator-generated-output-cleanup.json)은
+추적된 build/build-host 출력 1,413개를 새 checkout에서만 제외했다.
+남은 product source 18개는 직전 Git blob과 줄바꿈 정규화 내용이 동일하고 고정 입력 57개를 검증했다.
+새 prepared commit `3a01a5012180cec2b32bba18fa4287a79a35de69`와 local Git exclude를 기록하며 이전 freeze/package·판정·비용·global 설정·profile·권한은 바꾸지 않는다.
+이는 기존 Flash 캐시 승계의 운영 도구 문제를 다음 사본에서 방지하는 정정이며 과거 부적격 판정을 소급 복구하지 않는다.
+
+[실제 시작](evidence/20261006-codex-cli-gpt-6-sol-r01/launch-20261006/native-start-observation.json)은
+03:34:01.746 KST·launcher PID 7656·candidate PID 14396·thread `01a10d58-20e1-7eb2-93f7-97fb84a5eb89`다.
+동일 CLI/SDK/native inventory·explicit gpt-6-sol/medium/process argv를 확인했다. Native resolved model/cwd 미방출 한계는 유지한다.
+Receipt SHA-256 `16c93563e8187b59c6488c00a33209adbd38ebc8e26448e73067bb2cb6007132`와
+[시작 snapshot](evidence/20261006-codex-cli-gpt-6-sol-r01/launch-20261006/snapshot-inventory.json)의 32개 raw 파일을 보존한다.
+최대 7,200초 독립 runner로 구현 중이며 최종 실제 시간으로 후속 예산을 차감한다.
+추가 회차는 2회 남지만 현재 회차 종료·평가 전에는 시작하지 않는다. 현재 보드는 최초 artifact이며 후보 실행 중 serial/flash·구현 피드백은 없다.

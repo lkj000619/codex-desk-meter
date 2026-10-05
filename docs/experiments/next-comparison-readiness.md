@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-06. 상태: **Codex Sol(`gpt-6-sol`·medium) 최초 구현·제출 종료와 평가·COM3 업로드를 마쳤다. 정책 eligible·RM1 pass/RM2~RM5 fail·reference fail/product_pass false다. 공통 데이터는 SCHEMA_INVALID로 거부됐고 LCD에 글자·숫자가 없으며 사용자 BOOT 3회·길게 누르기에도 반응이 없다. 453개 파일의 최종 독립 감사를 마쳤으며 자기 후속 준비가 남았다. 후속 예산 7,200초·3회, Pro 회차 한도 종료와 Flash 보류 예산·원본 판정·baseline을 보존한다. 현재 보드는 Sol 최초 동결 펌웨어다. 후보 호출 시작·종료 각각 9회, 독립 series 종료 2개/15개이며 Codex Luna는 미시작이다.**
+확인일: 2026-10-06. 상태: **Codex Sol(`gpt-6-sol`·medium) 후속 1회차가 03:34:01 KST에 시작돼 구현 중이다. 새 준비 사본의 이전 build 출력 1,413개를 제외하고 product source 18개·고정 입력 57개·같은 profile/권한·새 receipt·실제 thread/process argv를 확인했다. 최초 정책 eligible·RM1 pass/RM2~RM5 fail·reference fail/product_pass false와 453개 파일의 최종 독립 보존을 유지한다. 현재 회차의 최종 비용·제품·평가는 pending이며 최초 펌웨어가 보드에 남아 있다. 후속 누적 시간은 종료 시 차감하고 추가 회차는 현재 실행을 포함한 최대 3회 한도를 따른다. Pro 종료·Flash 보류 예산·원본·baseline을 보존한다. 후보 호출 시작 10회·종료 9회, 독립 series 종료 2개/15개이며 Codex Luna는 미시작이다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -242,3 +242,15 @@ Commit `2257fffaa5316773d08fe3353356112c7002159d`, package manifest SHA-256 `93a
 동결 commit에 생성된 build/build-host 출력 1,413개가 추적돼 있어 새 후속 준비 사본에서만 제거하고 source 동일성을 검증해야 한다.
 후속은 0회·잔여 7,200초·3회이며 현재 보드는 Sol 최초다. User keep going에 따라 해당 series를 계속한다.
 Pro 회차 한도·Flash 잔여 5,710.781초/2회 보류·기존 결과는 보존하고 Codex Luna는 아직 시작하지 않는다.
+
+2026-10-06 후속 1회차 시작 갱신: [후속 계획](../plans/2026-10-06-codex-sol-followup-execution.md)의
+`20261006-codex-cli-gpt-6-sol-r01`은 ledger round 1이다. 날짜 뒤 r01은 당일 예약 번호이며 새로운 최초 호출이 아니다.
+자기 최초 commit `2257fffaa5316773d08fe3353356112c7002159d`와 관측 6개만 전달했다.
+[새 사본 보완](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r01/launch-20261006/operator-generated-output-cleanup.json)은
+build/build-host 출력 1,413개만 제외하고 제품 source 18개의 Git blob·내용/입력 동일성을 증명한다.
+Local Git exclude만 보완했고 원본 freeze/package·공통 입력·권한·global 설정은 바꾸지 않았다.
+[실제 시작](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r01/launch-20261006/native-start-observation.json)은
+03:34:01.746 KST, thread `01a10d58-20e1-7eb2-93f7-97fb84a5eb89`와 explicit gpt-6-sol/medium의 process argv를 확인한다.
+같은 CLI/SDK/native inventory를 재확인했고 receipt SHA-256은 `16c93563e8187b59c6488c00a33209adbd38ebc8e26448e73067bb2cb6007132`다.
+이번 예약은 최대 7,200초이며 최종 실제 시간으로 후속 누적 예산을 차감한다. 남은 추가 회차는 2회지만 현재 회차 종료·평가 전에는 시작하지 않는다.
+후속 구현 중 피드백·serial/flash는 없고 최초 보드를 후속 성공 근거로 쓰지 않는다. 재개 시 현재 manifest/ledger/process를 먼저 확인한다.
