@@ -1,0 +1,6 @@
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build-host/CMakeFiles/receiver_test.dir
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build-host/CMakeFiles/receiver_cli.dir
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build-host/CMakeFiles/feature_test.dir
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build-host/CMakeFiles/test.dir
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build-host/CMakeFiles/edit_cache.dir
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build-host/CMakeFiles/rebuild_cache.dir

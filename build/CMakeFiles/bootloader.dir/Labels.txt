@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build/CMakeFiles/bootloader
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build/CMakeFiles/bootloader.rule
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build/CMakeFiles/bootloader-complete.rule
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01/checkout/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
