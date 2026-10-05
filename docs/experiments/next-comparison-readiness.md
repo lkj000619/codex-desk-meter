@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-05. 상태: **Codex Sol(`gpt-6-sol`·medium) 최초 실험이 23:56:01 KST에 시작돼 구현 중이다. 제품 완성·최종 평가·업로드는 아직 아니다. 별도 깨끗한 checkout·공통 입력 57개·새 receipt·실제 thread/process argv를 확인했다. Pro는 후속 3회 한도로 종료했고 구현 미완료·기준 미도달·원본 비용을 보존한다. Flash 남은 예산·현재 보드 firmware·baseline은 유지한다. 후보 호출 시작 9회·종료 8회, 독립 series 종료 2개/15개이며 Codex Luna는 미시작이다.**
+확인일: 2026-10-06. 상태: **Codex Sol(`gpt-6-sol`·medium) 최초 구현·제출 종료와 평가·COM3 업로드를 마쳤다. 정책 eligible·RM1 pass/RM2~RM5 fail·reference fail/product_pass false다. 공통 데이터는 SCHEMA_INVALID로 거부됐고 LCD에 글자·숫자가 없으며 사용자 BOOT 3회·길게 누르기에도 반응이 없다. 453개 파일의 최종 독립 감사를 마쳤으며 자기 후속 준비가 남았다. 후속 예산 7,200초·3회, Pro 회차 한도 종료와 Flash 보류 예산·원본 판정·baseline을 보존한다. 현재 보드는 Sol 최초 동결 펌웨어다. 후보 호출 시작·종료 각각 9회, 독립 series 종료 2개/15개이며 Codex Luna는 미시작이다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -222,3 +222,23 @@ Python 6개와 결과 validator 통과는 후보 로그의 관측이며 아직 �
 실제 process argv는 explicit `-m gpt-6-sol`·medium·동결 권한/확장 비활성화와 일치한다. Codex JSONL은 resolved model/cwd를 방출하지 않으므로 별도 native 확인으로 추정하지 않는다. Native inventory도 exec의 ignore-user-config와 설정 계층이 다르다는 범위를 유지한다.
 최초 7,200초의 독립 runner가 실행 중이며 종료 후 source·제출·원본 비용을 동결하고 정책·host·제품/RM를 검토한다. Genuine ESP32 firmware가 있어야 COM3 업로드·실물 평가로 이어간다. 후보 실행 중 구현 피드백·source 수정·serial/flash는 없다.
 현재 제품·정책·RM 판정은 pending이며 앞선 Pro/Flash 결과를 Sol 결과로 쓰지 않는다. 재개할 때 [현재 계측](../../results/formal-comparison-20261004/progress.json)·개별 manifest/ledger·실제 process부터 확인하고 같은 최초 호출을 반복하지 않는다.
+
+2026-10-06 최초 종료·평가 갱신: 위 시작 시점의 pending은 당시 기록이다.
+[평가 계획](../plans/2026-10-06-codex-sol-initial-evaluation.md)에 따라 completed·2,460.156초·원본 계측을 보존했다.
+정책 eligible이며 자체 host 시험 통과와 공통 collector/host/device의 SCHEMA_INVALID 실패를 구분한다.
+같은 동결 app을 00:57:03 KST에 COM3에 올렸고 공통 seq 0/1 수락은 0건이다.
+12.9초 영상은 글자·숫자 없이 색 띠가 나타나며 사용자는 BOOT 짧게 3회·길게 누르기에도 무반응이라고 확인했다.
+[최초 RM](../../results/formal-comparison-20261004/evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/reference-review.json)은 RM1 pass/RM2~RM5 fail·reference fail/product_pass false다.
+30초 연속 유지와 정밀 지연은 미측정이다.
+
+[최종 독립 감사](../../results/formal-comparison-20261004/evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/restore-audit.json)는
+453개 파일·57개 입력·source 22개·artifact/config 21개·원본 비용·영상·판정을 검증했다.
+Commit `2257fffaa5316773d08fe3353356112c7002159d`, package manifest SHA-256 `93a87074e0f324da7c95e237244870d0a8deebc6be4f3e89b52fb95095acb60e`다.
+제출 형식 `result_valid: true`와 제품 합격은 다르다. Input 11,987,074에는 cached 11,815,680이 포함되며 output 54,062를 합친
+정규화 12,041,136을 모두 uncached 소비나 provider 간 금전 순위로 해석하지 않는다.
+
+2026-10-06 운영 정정은 최초 원본을 보존한다. Manifest experiment branch label과 실제 별도 저장소 local branch master를 구분한다.
+이전 operator 감사의 경로 remap/조기 검사 오류를 원본·보완 sidecar로 남겼고 후보 source·비용·실행을 바꾸지 않았다.
+동결 commit에 생성된 build/build-host 출력 1,413개가 추적돼 있어 새 후속 준비 사본에서만 제거하고 source 동일성을 검증해야 한다.
+후속은 0회·잔여 7,200초·3회이며 현재 보드는 Sol 최초다. User keep going에 따라 해당 series를 계속한다.
+Pro 회차 한도·Flash 잔여 5,710.781초/2회 보류·기존 결과는 보존하고 Codex Luna는 아직 시작하지 않는다.

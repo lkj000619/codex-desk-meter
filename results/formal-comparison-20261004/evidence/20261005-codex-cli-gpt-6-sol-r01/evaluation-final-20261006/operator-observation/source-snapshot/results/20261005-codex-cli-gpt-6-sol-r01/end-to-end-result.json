@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "result_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "manifest_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "baseline_id": "comparison-baseline-20261004",
+  "experiment_id": "version-2-end-to-end-v1",
+  "manifest": {"id": "20261005-codex-cli-gpt-6-sol-r01", "experiment_id": "version-2-end-to-end-v1", "baseline_id": "comparison-baseline-20261004", "path": ".benchmark-inputs/e2e-evaluation-manifest.json"},
+  "baseline": {"id": "comparison-baseline-20261004", "experiment_id": "version-2-end-to-end-v1", "commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5", "ref": "comparison-baseline-20261004"},
+  "feature_results": {
+    "F1": {"status": "partial", "scope": "offline fixture collector", "evidence": ["pc/desk_meter.py", "docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/verification.md"], "reason": "PC collector self-tested; physical fixture delivery unobserved."},
+    "F2": {"status": "partial", "scope": "provider and global adapters", "evidence": ["pc/desk_meter.py", "tests/test_pc.py"], "reason": "Fixture matrix self-tested; full independent schema assessment pending."},
+    "F3": {"status": "partial", "scope": "USB serial cdm/1 transport", "evidence": ["pc/desk_meter.py", "tests/test_pipeline.py"], "reason": "Canonical frame reached linked C receiver in host test; real serial port not opened."},
+    "F4": {"status": "partial", "scope": "firmware receiver state", "evidence": ["main/receiver.c", "build-host/Testing/Temporary/LastTest.log"], "reason": "Actual production C compiled and host-tested; board execution pending."},
+    "F5": {"status": "partial", "scope": "LCD dashboard, global reset and status screens", "evidence": ["main/main.c", "main/board.c"], "reason": "Firmware built; no LCD observation."},
+    "F6": {"status": "partial", "scope": "BOOT page switching and PC refresh", "evidence": ["main/main.c", "pc/desk_meter.py"], "reason": "Implemented; BOOT debounce and manual refresh timing require hardware observation."},
+    "F7": {"status": "partial", "scope": "codex-resets.com global reset", "evidence": ["pc/desk_meter.py", "main/main.c"], "reason": "Fixture mapping and elapsed computation implemented; board view unobserved."},
+    "F8": {"status": "partial", "scope": "build and observability", "evidence": ["build/codex_desk_meter.bin", "docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/verification.md"], "reason": "Firmware build succeeded; runtime serial and LCD logs unavailable."},
+    "F9": {
+      "status": "partial", "scope": "on-board idle backlight dimming", "evidence": ["main/feature.c", "build-host/Testing/Temporary/LastTest.log", "docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/hardware-feature-selection.md"], "reason": "Boundary and restore host test passed; physical PWM observation pending.",
+      "details": {
+        "candidate_count": 3,
+        "candidates": [
+          {"id": "F9-A", "name": "Idle backlight dimming", "user_value": "Reduce power and glare while retaining data visibility", "implementation_cost": "Small LEDC state module", "risk": "Incorrect active-low duty may darken the display", "verification_method": "Host 60-second boundary and physical brightness observation", "selection_status": "selected", "selection_reason": "No extra parts; isolated from core parser and GUI", "selection_document": "docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/hardware-feature-selection.md", "evidence": ["main/feature.c", "host/test_feature.c"]},
+          {"id": "F9-B", "name": "IMU rotation", "user_value": "Adapt view to desk orientation", "implementation_cost": "I2C driver, debounce and layout transform", "risk": "Jitter and framebuffer orientation conflict", "verification_method": "Physical four-orientation and shake tests", "selection_status": "rejected", "selection_reason": "Landscape stability must be established first", "selection_document": "docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/hardware-feature-selection.md", "evidence": ["docs/hardware/version-2-capabilities.md"]},
+          {"id": "F9-C", "name": "RTC local clock", "user_value": "Keep elapsed time across USB interruption", "implementation_cost": "I2C RTC setup and clock trust management", "risk": "Backup power state unknown", "verification_method": "Power-loss and backup tests", "selection_status": "rejected", "selection_reason": "Unverified clock could mislabel stale data", "selection_document": "docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/hardware-feature-selection.md", "evidence": ["docs/hardware/version-2-capabilities.md"]}
+        ],
+        "selected_candidate": "F9-A",
+        "score_breakdown": {"hardware_understanding": 0, "user_value": 0, "selection_logic": 0, "implementation_completeness": 0, "separation_portability": 0, "total": 0}
+      }
+    }
+  },
+  "core_results": {
+    "C1": {"status": "pass", "scope": "ESP-IDF target and build", "evidence": ["build/codex_desk_meter.bin", "docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/verification.md"], "reason": null},
+    "C2": {"status": "not_run", "scope": "30-second LCD boot and landscape layout", "evidence": ["docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/reproduction.md"], "reason": "Physical board was not accessed."},
+    "C3": {"status": "partial", "scope": "provider/window display", "evidence": ["main/main.c", "tests/test_pipeline.py"], "reason": "Payload reaches C receiver in host test; LCD values unobserved."},
+    "C4": {"status": "partial", "scope": "global reset and elapsed", "evidence": ["main/main.c", "pc/desk_meter.py"], "reason": "Implemented from codex-resets.com fixture; LCD unobserved."},
+    "C5": {"status": "partial", "scope": "missing reset default", "evidence": ["main/main.c"], "reason": "Implemented; physical default screen unobserved."},
+    "C6": {"status": "partial", "scope": "global provenance and captured time", "evidence": ["main/main.c"], "reason": "Firmware text implementation built; LCD unobserved."},
+    "C7": {"status": "partial", "scope": "error, stale, last-good and recovery", "evidence": ["main/receiver.c", "pc/desk_meter.py", "build-host/Testing/Temporary/LastTest.log"], "reason": "C state tests passed; physical disconnect and source error recovery not observed."},
+    "C8": {"status": "partial", "scope": "BOOT and automatic/manual refresh", "evidence": ["main/main.c", "pc/desk_meter.py", "docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/reproduction.md"], "reason": "Implemented; timing and input not measured on board."}
+  },
+  "integration_results": {
+    "I1": {"status": "partial", "scope": "fixture collection and provenance", "evidence": ["pc/desk_meter.py", "tests/test_pc.py"], "reason": "Offline tests passed; hardware transport unobserved."},
+    "I2": {"status": "partial", "scope": "provider and global normalization", "evidence": ["pc/desk_meter.py", "tests/test_pc.py"], "reason": "Adapters self-tested across fixture matrix; independent evaluation pending."},
+    "I3": {"status": "partial", "scope": "frame, length, CRC, sequence, reconnect", "evidence": ["tests/test_pipeline.py", "build-host/Testing/Temporary/LastTest.log"], "reason": "Host pipeline passed; no COM port opened or raw physical log recorded."},
+    "I4": {"status": "partial", "scope": "firmware receive-to-LCD", "evidence": ["main/main.c", "main/receiver.c", "build/codex_desk_meter.bin"], "reason": "Firmware linked; device-to-LCD behavior not physically tested."}
+  },
+  "gui_scores": {
+    "G1": {"score": null, "evidence": [], "reason": "Operator LCD layout observation pending."},
+    "G2": {"score": null, "evidence": [], "reason": "Operator readability observation pending."},
+    "G3": {"score": null, "evidence": [], "reason": "Operator provenance/status observation pending."},
+    "G4": {"score": null, "evidence": [], "reason": "Operator error/null observation pending."},
+    "G5": {"score": null, "evidence": [], "reason": "Operator interaction observation pending."},
+    "G6": {"score": null, "evidence": [], "reason": "Operator board optimization observation pending."}
+  },
+  "provider_matrix": [
+    {"provider_id": "openai", "agent_id": "codex-cli", "host_id": "terminal", "model_id": "codex-demo", "account_profile_id": "acct-demo-openai", "metric_kind": "quota_window", "source_kind": "fixture", "source_id": "multi-provider-healthy", "window_ids": ["five-hour"], "capabilities": {"quota_windows": true, "absolute_tokens": false, "credits": false, "reset_time": true, "session_telemetry": false}, "status": "available", "snapshot_paths": ["experiments/fixtures/providers/multi-provider-healthy.json"], "evidence": ["tests/test_pipeline.py"], "reason": "Fixed reference_time fixture; live sender marks old observations stale."},
+    {"provider_id": "anthropic", "agent_id": "claude-code", "host_id": "terminal", "model_id": "claude-sonnet-demo", "account_profile_id": "acct-demo-anthropic", "metric_kind": "quota_window", "source_kind": "fixture", "source_id": "multi-provider-healthy", "window_ids": ["five-hour"], "capabilities": {"quota_windows": true, "absolute_tokens": false, "credits": false, "reset_time": true, "session_telemetry": false}, "status": "available", "snapshot_paths": ["experiments/fixtures/providers/multi-provider-healthy.json"], "evidence": ["tests/test_pipeline.py"], "reason": "Fixed reference_time fixture; live sender marks old observations stale."},
+    {"provider_id": "google", "agent_id": "gemini-cli", "host_id": "terminal", "model_id": "gemini-demo", "account_profile_id": "acct-demo-google", "metric_kind": "quota_window", "source_kind": "fixture", "source_id": "multi-provider-healthy", "window_ids": ["daily"], "capabilities": {"quota_windows": true, "absolute_tokens": false, "credits": false, "reset_time": true, "session_telemetry": false}, "status": "available", "snapshot_paths": ["experiments/fixtures/providers/multi-provider-healthy.json"], "evidence": ["tests/test_pipeline.py"], "reason": "Fixed reference_time fixture; live sender marks old observations stale."}
+  ],
+  "build": {"status": "pass", "target": "esp32s3", "evidence": ["build/codex_desk_meter.bin", "docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/verification.md"], "reason": null},
+  "host": {"status": "pass", "host_id": "terminal", "evidence": ["build-host/Testing/Temporary/LastTest.log", "docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/verification.md"], "reason": "Candidate self-test only; not independent product evaluation."},
+  "transport": {"status": "partial", "choice": "usb-serial", "evidence": ["pc/desk_meter.py", "tests/test_pipeline.py"], "reason": "Frame-to-receiver host path tested; physical serial link not run."},
+  "hardware": {"status": "not_run", "board": "waveshare-esp32-s3-lcd-3.16", "evidence": ["docs/agent-runs/20261005-codex-cli-gpt-6-sol-r01/reproduction.md"], "reason": "Candidate was prohibited from opening port, flashing or resetting board."},
+  "telemetry": {"wall_clock_seconds": null, "agent_tokens": {"input": null, "output": null, "cached": null, "reasoning": null, "provider_total": null, "total": null}, "token_total_definition": "input_plus_output_excludes_cached_and_reasoning", "provider_total_definition": "provider_reported_total_preserved_without_recomputation", "availability_reason": "Runner execution time and model tokens are operator-owned and unavailable to candidate.", "evidence": []},
+  "product_pass": false
+}

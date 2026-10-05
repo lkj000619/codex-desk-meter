@@ -2,7 +2,7 @@
 
 목표: ESP32-S3-LCD-3.16 제품 구현에서 에이전트의 첫 결과·자기 후속 수정 비용과 RM 도달·제품 품질을 동일 조건으로 비교한다.
 시작 승인: 2026-10-04 사용자 요청 “프로젝트 목적과 목표에 엇나가지않도록 실험 시작”.
-상태: Codex Sol 최초가 2026-10-05 23:56:01 KST에 시작돼 구현 중이다. 제품 완성·평가·업로드는 pending이다. OpenCode는 예산 소진, Pro는 후속 3회 한도로 종료했고 Pro firmware·최종 제출물이 없다. Flash 추가 회차는 보류한다. 현재 독립 series 종료 2개/예정 15개, 후보 호출 시작 9회·종료 8회다. Codex Luna는 미시작이며 이전 판정·비용·보드 상태는 보존한다.
+상태: 2026-10-06 Codex Sol 최초의 구현·제출 종료와 평가·동결 펌웨어 업로드를 마쳤다. 정책 eligible·RM1 pass/RM2~RM5 fail이며 제품 완성이 아니다. 자기 후속 준비가 남아 있고 후속 예산 7,200초·3회를 보존한다. OpenCode는 예산 소진, Pro는 후속 3회 한도로 종료했고 Pro firmware·최종 제출물이 없다. Flash 추가 회차는 보류한다. 현재 독립 series 종료 2개/예정 15개, 후보 호출 시작·종료 각각 9회다. Codex Luna는 미시작이며 이전 판정·비용·업로드 근거는 보존한다.
 원본: [운영 계약](../experiments/comparison-operating-contract.md), [현재 상태](../experiments/next-comparison-readiness.md),
 [동결 기록](../../results/experiment-launch-preparation-20261004/freeze.json).
 
@@ -35,6 +35,7 @@
    위 r02 시작 시점 이후 r02·r03도 native command 거부로 종료했고 정책/RM·원본 비용·각 독립 복원을 마쳤다. [남은 후속 계획](2026-10-05-agy-pro-remaining-followups.md)의 마지막 r04가 실행 중이다. 새 회차마다 자기 직전 source와 고정 관측만 전달하며 원본 권한·baseline·공통 입력은 유지한다.
    22:58:07 KST 마지막 r04도 거부 후 종료했고 최종 평가·361개 파일의 독립 복원과 partial host 보완 검증을 마쳤다. 후속 최대 3회에 도달해 Pro series는 종료다. Pro 누적 677.5초·정규화 660,989 token과 정책 eligible·RM1 fail/RM2~RM5 not_run, 최종 제출·firmware 누락을 보존한다. 다음 Codex Sol/Luna는 아직 시작하지 않았다.
    이후 사용자 지시로 [Codex Sol 최초 계획](2026-10-05-codex-sol-initial-launch.md)의 독립 호출을 23:56:01.520 KST에 시작했다. 실제 thread/process argv와 같은 날짜 미실행 예약·현재 도구/native inventory를 확인했다. 실행 중 제품 source를 운영자가 고치거나 피드백·serial/flash를 제공하지 않는다. 최초 종료 후 동결·평가하며 firmware가 있으면 업로드·실물 관측으로 이어간다. Codex Luna는 함께 실행하지 않는다.
+   2026-10-06 00:37:01.691 KST Sol 최초가 completed로 종료됐다. [최초 평가](2026-10-06-codex-sol-initial-evaluation.md)는 정책 eligible·RM1 pass/RM2~RM5 fail다. 공통 frame 0·1을 host/실제 장치가 SCHEMA_INVALID로 거부했고, 영상과 BOOT 무반응 보고를 연결했다. 453개 파일의 최종 독립 감사를 마쳤다. 추적된 build 출력은 새 후속 준비 사본에서만 제거하고 source 동일성을 확인해야 하며 원본 commit·비용·판정은 보존한다.
    원래 예약·중단·실패 비용은 보존한다. 전체 비교 완료는 15개 독립 series와 필요한 후속/관측/적격성 집계가 끝난 시점이다.
 
 ## 중단과 재개

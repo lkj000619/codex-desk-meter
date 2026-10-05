@@ -1,0 +1,97 @@
+{
+  "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "received_at": "2026-10-05T16:04:19.001894+00:00",
+  "source_path": "C:\\Users\\이광진\\Documents\\카카오톡 받은 파일\\KakaoTalk_20261006_010228392.mp4",
+  "source_bytes": 6424763,
+  "source_sha256": "af49e2ea86ad0cd0576dc1669095d698b061801a0f0faa67d21a370ac5f88fa4",
+  "preserved_source": "source.mp4",
+  "source_filesystem_creation_time_utc": "2026-10-05T16:02:36.268889+00:00",
+  "source_filesystem_modified_time_utc": "2026-10-05T16:02:36.942719+00:00",
+  "duration_seconds": 12.9,
+  "ffmpeg_binary": "C:\\meter-observer-tools\\video-20261005\\imageio_ffmpeg\\binaries\\ffmpeg-win-x86_64-v7.1.exe",
+  "ffmpeg_sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+  "operator_tools_root": "C:/meter-observer-tools/video-20261005",
+  "sample_frames": [
+    {
+      "path": "frames/frame-001.png",
+      "sample_index": 0,
+      "nominal_sample_second": 0.5,
+      "sha256": "8423c14acaa2a841f79d73c509acd8f016054673c2e31785c38ac38f3f51dd63"
+    },
+    {
+      "path": "frames/frame-002.png",
+      "sample_index": 1,
+      "nominal_sample_second": 1.5,
+      "sha256": "2d9b3358fbf51523ada76970a11cf3d5de7650c29859a042388aab47659cb56e"
+    },
+    {
+      "path": "frames/frame-003.png",
+      "sample_index": 2,
+      "nominal_sample_second": 2.5,
+      "sha256": "37e6a6b9fc6c38f6e389df33de03a7fa58f60406976b69d55b778e01f154bc20"
+    },
+    {
+      "path": "frames/frame-004.png",
+      "sample_index": 3,
+      "nominal_sample_second": 3.5,
+      "sha256": "1622083aa9d7d75c6e94ec11c597a9d245d4d8d3499e381e53000d10b3b895c6"
+    },
+    {
+      "path": "frames/frame-005.png",
+      "sample_index": 4,
+      "nominal_sample_second": 4.5,
+      "sha256": "5c1ec56c48f1ab27e900ddb33db3ebd71fce3c05b0882f83c32d0969a43dd4f0"
+    },
+    {
+      "path": "frames/frame-006.png",
+      "sample_index": 5,
+      "nominal_sample_second": 5.5,
+      "sha256": "14a02b33fdf3df02b750b1957e5d7b56bc061b63c37ebfb1b829617b0d0dcf49"
+    },
+    {
+      "path": "frames/frame-007.png",
+      "sample_index": 6,
+      "nominal_sample_second": 6.5,
+      "sha256": "06d1e8457c3815eaf126d6c3e6fb448040f17ca68c26aa5682d0f2a330cd5c31"
+    },
+    {
+      "path": "frames/frame-008.png",
+      "sample_index": 7,
+      "nominal_sample_second": 7.5,
+      "sha256": "ab174f00e43adc5ef2d176de9b32af15837ea8ee3dcdc7305b6298f051ca07c8"
+    },
+    {
+      "path": "frames/frame-009.png",
+      "sample_index": 8,
+      "nominal_sample_second": 8.5,
+      "sha256": "d95f0d68eac4c405897308aea1639e3c4cd1670b6a38255869c305734ae51fe8"
+    },
+    {
+      "path": "frames/frame-010.png",
+      "sample_index": 9,
+      "nominal_sample_second": 9.5,
+      "sha256": "0834850f08de4f2ebbc42e939618657b9ed4fcca560ccb5685aafebd3462ebfb"
+    },
+    {
+      "path": "frames/frame-011.png",
+      "sample_index": 10,
+      "nominal_sample_second": 10.5,
+      "sha256": "92c7a70bbb7601aeb2ba78749e23ff5010abc1ad28b139c70e5074f718ed5f25"
+    },
+    {
+      "path": "frames/frame-012.png",
+      "sample_index": 11,
+      "nominal_sample_second": 11.5,
+      "sha256": "c43524fea2863f82ee4f4d350250b91ab8ea138fd82f6dd9c44b0f378d2f2f08"
+    },
+    {
+      "path": "frames/frame-013.png",
+      "sample_index": 12,
+      "nominal_sample_second": 12.5,
+      "sha256": "86456bc098a4aacbe88de8d106420514fb30d9b3dd638858fb3308e7e10b74f0"
+    }
+  ],
+  "capture_identity": "User supplied this as the current Codex Sol firmware video; filesystem save is after upload. Precise capture UTC is unknown.",
+  "exact_input_to_display_or_button_latency": "not_measured",
+  "candidate_execution_repeated": false
+}

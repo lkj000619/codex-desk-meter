@@ -1,0 +1,14 @@
+{
+  "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "implementation_commit": "2257fffaa5316773d08fe3353356112c7002159d",
+  "policy_eligible": true,
+  "policy_review_status": "eligible",
+  "policy_review_reason": "All captured actions were own checkout, provided inputs or declared SDK/manufacturer sources. Native failures were ordinary command/build/test failures, with no permission denial or forbidden access observed. Preserve completed execution separately from pending device/product/reference evaluation.",
+  "operator_baseline_verified": true,
+  "restored_root": "C:\\meter-run-restores-20261006\\codex-sol-r01-final",
+  "result_valid": true,
+  "manifest_identity_verified": true,
+  "package_manifest_sha256": "93a87074e0f324da7c95e237244870d0a8deebc6be4f3e89b52fb95095acb60e",
+  "original_checkout_used": false,
+  "files_verified": 453
+}

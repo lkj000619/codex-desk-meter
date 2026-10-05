@@ -1,0 +1,9 @@
+{
+  "date": "2026-10-06",
+  "scope": "Operator audit only; no model replay or source/execution/cost change.",
+  "original_audit_script": "verify-codex-sol-r01-pre-observation.py",
+  "original_error": "AssertionError: operator/run-manifest.json; first audit incorrectly expected byte-identical restored runtime metadata.",
+  "correction": "Verify original package inventory bytes against package; verify transformed restore metadata through frozen validators and original execution/measurement identities. Restorer intentionally remaps worktree/ledger/reference paths.",
+  "original_script_and_extracted_audit_baseline_preserved": true,
+  "package_manifest_sha256": "11bb5064a5b1f8ee2ae237a2886c14144b98c9b4ea8972bc3a95bf0e0da36364"
+}

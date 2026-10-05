@@ -1,0 +1,24 @@
+{
+  "payload": {
+    "usage": [],
+    "global_resets": [
+      {
+        "schema_version": 1,
+        "source": "codex-resets.com",
+        "captured_at": "2026-09-10T16:54:07Z",
+        "latest_reset_at": "2026-09-08T01:56:00Z",
+        "forecast_24h_percent": null,
+        "forecast_48h_percent": null,
+        "forecast_is_schedule": false,
+        "stale": true,
+        "error_code": "SOURCE_STALE"
+      }
+    ]
+  },
+  "errors": [
+    {
+      "source": "personal-usage.json",
+      "error": "SCHEMA_INVALID"
+    }
+  ]
+}

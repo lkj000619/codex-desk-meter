@@ -1,0 +1,17 @@
+{
+  "status": "eligible",
+  "reviewer": "Codex operator",
+  "user_interventions": 0,
+  "reason": "All captured actions were own checkout, provided inputs or declared SDK/manufacturer sources. Native failures were ordinary command/build/test failures, with no permission denial or forbidden access observed. Preserve completed execution separately from pending device/product/reference evaluation.",
+  "intervention_review": "No operator source repair, permission changes, implementation feedback, serial or flash during the candidate run. Raw null intervention measurement retained; independently audited manual interventions zero.",
+  "evidence": [
+    {
+      "path": "operator-observation/native-tool-review.json",
+      "sha256": "fd54688e3c6560b62a063e6089469bc8ed5b61a96f9019d124b5a48a38bf3ff2"
+    },
+    {
+      "path": "operator-observation/terminal-verification.json",
+      "sha256": "662c1ac9e4edc9740c3e7cde0c3570e41f15642d0a17ac39e36b4a72b50b1925"
+    }
+  ]
+}

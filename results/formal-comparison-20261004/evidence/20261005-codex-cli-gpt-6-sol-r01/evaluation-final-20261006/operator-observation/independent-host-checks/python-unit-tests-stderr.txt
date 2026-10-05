@@ -1,0 +1,10 @@
+test_collector_last_good_error_and_recovery (test_pc.ProductPcTests.test_collector_last_good_error_and_recovery) ... ok
+test_fixture_collection_and_errors (test_pc.ProductPcTests.test_fixture_collection_and_errors) ... ok
+test_fixture_matrix_contract (test_pc.ProductPcTests.test_fixture_matrix_contract) ... ok
+test_frame_and_persistent_reservation (test_pc.ProductPcTests.test_frame_and_persistent_reservation) ... ok
+test_stale_boundary (test_pc.ProductPcTests.test_stale_boundary) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.025s
+
+OK

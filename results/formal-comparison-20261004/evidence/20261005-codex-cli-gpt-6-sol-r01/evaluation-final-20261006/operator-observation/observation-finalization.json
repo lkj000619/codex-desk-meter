@@ -1,0 +1,21 @@
+{
+  "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "recorded_at": "2026-10-05T16:08:21.826409+00:00",
+  "status": "initial_reference_review_complete",
+  "source_and_raw_cost_unchanged": true,
+  "serial_closed": true,
+  "board_state": "Frozen Codex Sol initial artifact retained; no new firmware rebuild or upload after this observation.",
+  "rm_items": {
+    "RM1": "pass",
+    "RM2": "fail",
+    "RM3": "fail",
+    "RM4": "fail",
+    "RM5": "fail"
+  },
+  "reference_status": "fail",
+  "policy_status": "eligible",
+  "product_pass": false,
+  "followups_run": 0,
+  "remaining_followup_seconds": 7200,
+  "remaining_followup_rounds": 3
+}

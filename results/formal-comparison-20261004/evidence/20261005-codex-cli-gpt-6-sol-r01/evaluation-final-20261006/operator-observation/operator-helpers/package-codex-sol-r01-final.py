@@ -1,0 +1,22 @@
+"""Create and restore final first-result evidence without rebuilding/replaying."""
+from pathlib import Path
+import json,shutil,sys
+BASE=Path('C:/meter-operator-20261004');RUN=Path('C:/meter-runs-20261005/20261005-codex-cli-gpt-6-sol-r01')
+PACK=Path('C:/meter-run-packages-20261006/codex-sol-r01-final')
+REST=Path('C:/meter-run-restores-20261006/codex-sol-r01-final')
+sys.path.insert(0,str(BASE/'scripts'))
+import benchmark
+from benchmark_support import read,save,digest,verify_evidence
+from policy_review import validate_review
+from evidence_package import create_package,restore_package
+m=read(RUN/'run-manifest.json');f=read(RUN/'operator-source-freeze.json');ledger=read(Path(m['operator']['comparison']['ledger']))
+assert ledger['runs'][0]['reviewed'] and ledger['runs'][0]['reference_status']=='fail'
+assert benchmark.git('rev-parse','HEAD',cwd=RUN/'checkout')==f['commit'] and not benchmark.git('status','--porcelain',cwd=RUN/'checkout')
+assert validate_review(m,RUN/'run-manifest.json')['decision']['status']=='eligible'
+for source in [Path(__file__),RUN.parent/'preserve-codex-sol-r01.py',RUN.parent/'package-codex-sol-r01-pre-observation.py',RUN.parent/'observe-codex-sol-r01.py']:
+    target=RUN/'operator-observation/operator-helpers'/source.name;target.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(source,target)
+    m['operator']['evidence'][target.relative_to(RUN).as_posix()]=digest(target.read_bytes())
+save(RUN/'run-manifest.json',m);verify_evidence(m,RUN)
+created=create_package(RUN,PACK);save(PACK.parent/'codex-sol-r01-final-create.json',created)
+restored=restore_package(PACK,REST,created['package_manifest_sha256'])
+print(json.dumps({'package':created,'restore':restored}))

@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-06",
+  "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "pre_package_assertion": "First helper substring esptool also matched harmless CONFIG_ESPTOOLPY_FLASHSIZE. It failed before metadata/package writes and any new model call. Corrected to command-word regex; all 81 captured commands manually reviewed.",
+  "restore_audit_correction": "Original package bytes are verified at package; intentionally rewritten restored paths are validated by frozen validators and preserved execution/measurement identity. Original failed audit retained.",
+  "execution_branch_field": "experiment/openai/codex-cli/gpt-6-sol",
+  "actual_local_branch_at_freeze": "master",
+  "branch_note": "Manifest experiment branch label and actual local Git branch master differ. Isolation is a separate candidate repository and frozen commit, not a claim that local branch has the label. Preserve original metadata and record this distinction.",
+  "tracked_generated_output_files": 1413,
+  "followup_prerequisite": "Exclude generated build/build-host outputs from only the newly prepared followup working copy and prove product source/input equivalence before invocation. Never rewrite original freeze/package.",
+  "operator_source_or_cost_change": false,
+  "additional_model_calls": 0
+}

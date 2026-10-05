@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-05 Codex Sol(`gpt-6-sol`·medium) 최초 실험이 23:56:01 KST에 시작돼 구현 중이다. 제품 완성·평가·보드 업로드는 pending이다. 앞선 Pro 최초+후속 3회의 environment_failed·정책 eligible·기준 미도달·원본 비용·독립 복원을 보존한다. Pro는 회차 한도로 종료했고 동작 firmware가 없다. Flash 추가 후속·잔여 예산·보드 firmware는 유지한다.
-후보 실행 시작 9회·종료 8회(최초 시작 4·후속 5). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. Codex Luna는 미시작이다. 독립 series 완료는 OpenCode·Pro 2개/예정 15개다. 전체 비교는 미완료다.
+상태: 2026-10-06 Codex Sol(`gpt-6-sol`·medium) 최초 구현·제출 종료와 평가·COM3 업로드를 마쳤다. 정책 eligible·RM1 pass/RM2~RM5 fail·reference fail/product_pass false다. 공통 데이터 거부·LCD 글자/숫자 부재·사용자 BOOT 무반응을 보존하고 자기 후속 준비를 진행한다. 후속 잔여는 7,200초·3회다. 앞선 Pro는 회차 한도 종료이며 구현 미완료·원본 비용·독립 복원을 보존한다. Flash 추가 후속·잔여 예산·과거 업로드 근거를 보존하며 현재 보드는 Sol 최초다.
+후보 실행 시작·종료 각각 9회(최초 시작 4·후속 5). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. Codex Luna는 미시작이다. 독립 series 종료는 OpenCode·Pro 2개/예정 15개다. 전체 비교는 미완료다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -625,3 +625,74 @@ Native app-server inventory는 같은 확장 override를 쓰지만 exec `--ignor
 종료 후 원본 source·계측·제출을 동결하고 정책·host·제품/RM를 평가한다. 업로드 가능한 ESP32 artifact가 있어야 COM3와 사용자 영상 관측으로 이어간다. 실행 중 운영자 구현 수정·피드백·serial/flash는 없다.
 현재 제품·정책·RM·최종 비용은 미판정이며 성공으로 집계하지 않는다. 호출 시작 9회·종료 8회, 독립 series 종료 2개/15개다.
 Pro 종료와 Flash 잔여 5,710.781초·2회·보드 원본은 보존하고 Codex Luna는 함께 시작하지 않는다.
+
+## 2026-10-06 Codex Sol 최초 평가·실물 관측 완료
+
+위 시작 기록 이후 최초가 00:37:01.691 KST에 completed·exit 0으로 종료됐다.
+실제 2,460.156초(41분 0.156초), tool 124개(명령 81·파일 변경 43), 일반 명령/빌드/시험 오류 5개다.
+260개 raw event를 검토했고 권한 거부·serial/flash·온라인 접근·다른 후보 구현 접근·실행 중 구현 피드백은 관측되지 않았다.
+정책은 [eligible](evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/policy-review.json)이다.
+원본 개입 계측 null과 운영자 감사 0회를 구분한다. OS 읽기 격리는 미강제이며 native resolved model/cwd 미방출 한계는 유지한다.
+
+원본 token은 input 11,987,074·output 54,062·cached 11,815,680이다. Codex cached는 input에 포함되며
+고정 정규화 total은 input+output=12,041,136이다. Reasoning/provider total은 null이다.
+이 수치를 전부 새로 소비한 uncached token이나 금전 비용으로 해석하지 않으며 AGY의 cache 정의와 직접 비용 순위를 만들지 않는다.
+[비용 checkpoint 08](comparison-checkpoint-08.md)은 종료 9회의 실패·timeout·환경 실패 비용도 모두 포함한다.
+독립 반복은 아직 모델별 3개를 충족하지 않았고 후속 5회는 반복 수에 포함하지 않는다.
+
+[Source 동결](evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/operator-source-freeze.json)은
+`2257fffaa5316773d08fe3353356112c7002159d`이며 raw source 22개·artifact/config 21개를 보존했다.
+마지막 firmware build raw line 248 뒤 firmware source 변경이 없다. App 309,936 bytes,
+SHA-256 `cefa0a2be742f4260ffcc8f3b83e2d35314e4caf8fb2a915a10a9a552fde6d78`와 ELF/map/bootloader/partition이 존재한다.
+후보의 최종 JSON·선택 문서가 있으며 제출 형식 검증은 통과한다. 운영자는 후보 JSON을 실물 판정으로 덮어쓰지 않았다.
+
+별도 복원본의 [host 검사](evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/operator-observation/independent-host-checks/host-checks.json)는
+Python 5개·C receiver/state·idle backlight·Python frame→production C 자체 시험을 통과했다.
+기록된 compiler runtime만 process-local PATH에 넣고 보관 executable을 직접 실행했으며 CTest의 이전 절대 경로를 사용하거나 firmware를 재빌드하지 않았다.
+[공통 입력 검사](evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/operator-observation/independent-host-checks/common-stimulus-check.json)는
+encoder가 기준 wire와 byte 단위로 일치하지만 C receiver가 두 frame을 SCHEMA_INVALID로 거부함을 보여준다.
+Legacy personal-usage collector도 SCHEMA_INVALID이며 공통 payload와 다르다. Modern provider fixture의 valid/invalid 17건 일치는
+공통 입력 실패나 legacy 29건 oracle 통과를 대신하지 않는다. Source 생성 시각을 새 fixture freshness로 해석하지 않는다.
+
+[업로드](evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/operator-observation/hardware-slot.json)는
+00:57:03.118 KST에 완료됐다. 독립 복원된 동일 binary를 COM3에 올리고 NVS 0x9000/0x6000만 초기화했다.
+같은 reference UTC·seq 0/1·5초 간격을 유지했고 [raw 장치 로그 검토](evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/operator-observation/receiver-source-review.json)에서
+두 frame의 SCHEMA_INVALID 거부와 수락 0건을 확인했다. `rejected seq=0`의 0은 유지된 state이며 수락 sequence가 아니다.
+PC 쓰기/프로세스 exit 0을 장치 수락으로 표시하지 않는다. 현재 보드는 이 Sol 최초 artifact이며 이전 Flash 펌웨어가 아니다.
+
+사용자가 제공한 `KakaoTalk_20261006_010228392.mp4`는 12.9초·6,424,763 bytes,
+SHA-256 `af49e2ea86ad0cd0576dc1669095d698b061801a0f0faa67d21a370ac5f88fa4`다.
+[영상 검토](evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/operator-observation/user-video-01/video-review.json)는
+파란/어두운 패널과 가로 cyan/blue/red 띠, 읽을 수 있는 제목·숫자·정보 화면 부재를 확인했다.
+[사용자 관측](evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/operator-observation/user-video-01/capture-identity-confirmation.json)은
+BOOT를 짧게 3번과 길게 눌러도 반응이 없었다는 보고다. 영상 저장은 업로드 이후이며 정확한 촬영 UTC는 미확정이다.
+짧은 영상으로 30초 연속 유지·정밀 지연·자발적 재부팅·선택 backlight 기능을 합격 처리하지 않는다.
+
+| 최초 RM | 판정 | 근거 |
+|---|---|---|
+| RM1 | pass | 실제 IDF build·동일 artifact 업로드·장치 receiver 실행 |
+| RM2 | fail | 공통 collector 오류와 host/실제 장치의 두 frame 거부 |
+| RM3 | fail | 58%/82%를 포함한 글자·숫자 부재 |
+| RM4 | fail | 사용량·글로벌 리셋·진단 정보 화면 부재 |
+| RM5 | fail | 사용자 BOOT 3회·길게 누르기 무반응, 정보 탐색·복귀 부재 |
+
+[최종 RM](evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/reference-review.json)은 한 번 적용했다.
+Reference fail/product_pass false이며 completed·유효 제출·정책 eligible과 구분한다.
+[최종 독립 감사](evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/restore-audit.json)는
+453개 파일·57개 입력·raw source/artifact·원본 비용·정책/RM·영상·BOOT 보고를 package의 동결 validator로 검증했다.
+최종 package manifest SHA-256은 `93a87074e0f324da7c95e237244870d0a8deebc6be4f3e89b52fb95095acb60e`다.
+`result_valid: true`는 제출 형식/증거 연결이며 제품 합격이 아니다. 관측 전 395개 package와 시작 snapshot도 원본 그대로다.
+
+2026-10-06 운영 정정은 이 Sol 최초 보존·다음 후속 준비에만 적용한다.
+[Audit 기록](evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/operator-observation/pre-observation-preservation/operator-audit-notes.json)은
+무해한 CONFIG_ESPTOOLPY를 command esptool로 잘못 매칭했던 helper assertion과 restored metadata 경로 remap 감사 오류를 보존한다.
+[최종 감사 정정](evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/final-audit-correction.json)은
+복원 종료 전 조기 감사의 FileNotFoundError를 보존하고 종료 후 새 extraction directory에서 같은 검증을 통과했음을 기록한다.
+원본 terminal guard로 RM를 적용하기 위한 [metadata 연결](evidence/20261005-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/operator-observation/reference-review-binding/binding-note.json)은
+보존된 terminal bytes와 평가 전 operator metadata를 따로 유지하며 execution/measurement·ledger terminal hash·source를 바꾸지 않았다.
+
+실험 manifest의 branch label `experiment/openai/codex-cli/gpt-6-sol`과 실제 local Git branch `master`는 구분한다.
+후보는 root 운영 저장소와 별도 저장소에서 동결 commit으로 격리했으며 이름만으로 named branch를 확인했다고 추정하지 않는다.
+동결 commit에는 생성 build/build-host 파일 1,413개가 추적돼 있다. 다음 준비 사본에서만 출력을 제외하고
+입력·자기 source 동일성·현재 receipt를 확인한 뒤 후속을 시작한다. 원본 freeze/package는 수정하지 않는다.
+후속은 아직 0회·잔여 7,200초·3회다. User keep going은 이 series 처리를 계속하며 Pro 종료·Flash 보류·Luna 미시작은 유지한다.
