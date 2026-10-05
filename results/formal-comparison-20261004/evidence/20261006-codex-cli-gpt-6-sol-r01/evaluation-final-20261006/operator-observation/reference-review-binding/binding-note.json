@@ -1,0 +1,7 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+  "recorded_at": "2026-10-05T19:00:51.135152+00:00",
+  "original_terminal_manifest_sha256": "dc76db9d36de25e26060a06eb810e6ab4a1903cc6531ebb0b99297613ae2224e",
+  "pre_review_operator_metadata_sha256": "cd08c26c0039392022dd8be38777899bae711cfdf560eb91fef97194c83e770a",
+  "scope": "Preserved original terminal bytes satisfy unchanged frozen review guard. Reattach operator sidecars afterward; no ledger terminal hash, execution, measurement or source mutation."
+}

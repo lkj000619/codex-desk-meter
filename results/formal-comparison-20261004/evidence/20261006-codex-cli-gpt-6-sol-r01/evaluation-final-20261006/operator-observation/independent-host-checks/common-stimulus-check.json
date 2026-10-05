@@ -1,0 +1,165 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+  "common_frames_sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+  "encoder_matches_exact_common_frames": true,
+  "receiver_output": [
+    "accepted 0 ok",
+    "accepted 1 ok"
+  ],
+  "receiver_exit_code": 0,
+  "legacy_collector": {
+    "input_fixture": "personal-usage.json",
+    "reference_time": "2026-09-30T18:40:49Z",
+    "usage_entries": 1,
+    "global_reset_entries": 2,
+    "errors": [],
+    "matches_common_reference_payload": false
+  },
+  "provider_fixture_checks": [
+    {
+      "fixture": "providers/codex-percent-window.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/claude-code-windows.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/antigravity-cli-unsupported.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/gemini-cli-unsupported.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/orca-host-claude-code.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/multi-provider-healthy.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/provider-stale.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/provider-error.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/reset-time-omitted.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/mixed-percent-absolute.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/absolute-token-balance.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/absolute-token-balance-inconsistent.json",
+      "expected": "invalid",
+      "observed_invalid": true,
+      "matches_expected_validity": true,
+      "errors": [
+        {
+          "source": "providers/absolute-token-balance-inconsistent.json",
+          "error": "ABSOLUTE_BALANCE_MISMATCH"
+        }
+      ]
+    },
+    {
+      "fixture": "providers/unsupported-provider.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/duplicate-provider-window.json",
+      "expected": "invalid",
+      "observed_invalid": true,
+      "matches_expected_validity": true,
+      "errors": [
+        {
+          "source": "providers/duplicate-provider-window.json",
+          "error": "DUPLICATE_WINDOW"
+        }
+      ]
+    },
+    {
+      "fixture": "providers/future-observed-reset.json",
+      "expected": "invalid",
+      "observed_invalid": true,
+      "matches_expected_validity": true,
+      "errors": [
+        {
+          "source": "providers/future-observed-reset.json",
+          "error": "FUTURE_TIMESTAMP"
+        }
+      ]
+    },
+    {
+      "fixture": "providers/available-over-stale-threshold.json",
+      "expected": "invalid",
+      "observed_invalid": true,
+      "matches_expected_validity": true,
+      "errors": [
+        {
+          "source": "providers/available-over-stale-threshold.json",
+          "error": "STALE_THRESHOLD_EXCEEDED"
+        }
+      ]
+    },
+    {
+      "fixture": "providers/out-of-range-percent.json",
+      "expected": "invalid",
+      "observed_invalid": true,
+      "matches_expected_validity": true,
+      "errors": [
+        {
+          "source": "providers/out-of-range-percent.json",
+          "error": "SCHEMA_INVALID"
+        }
+      ]
+    }
+  ],
+  "scope": "Host source/encoded frame/production C checks. Device acceptance and optical results remain unmeasured."
+}

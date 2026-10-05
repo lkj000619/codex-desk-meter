@@ -1,0 +1,124 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+  "implementation_commit": "3a09f26f2f375f4f45bebb79eb5902667a3ccb1a",
+  "artifact_sha256": "78bb997794c7a30534f90d9eadb1cafd061de2338c06832f88ebb63d8e4098eb",
+  "owner": "Codex operator",
+  "port": "COM3",
+  "ports": [
+    {
+      "port": "COM1",
+      "vid": null,
+      "pid": null,
+      "hwid": "ACPI\\PNP0501\\0"
+    },
+    {
+      "port": "COM3",
+      "vid": 12346,
+      "pid": 4097,
+      "hwid": "USB VID:PID=303A:1001 SER=28:84:85:B0:85:18"
+    }
+  ],
+  "started_at": "2026-10-05T18:49:56.964415+00:00",
+  "status": "awaiting_user_optical_observation",
+  "candidate_execution_status": "completed",
+  "operator_source_modification": false,
+  "operator_firmware_rebuild": false,
+  "source_restore": "C:\\meter-run-restores-20261006\\codex-sol-followup01-pre-observation",
+  "package_manifest_sha256": "977c78b8ffa43db29f84da76c8f825ccd8a50c3209b8427c5612be089adbc34e",
+  "nvs_reset_scope": {
+    "offset": 36864,
+    "bytes": 24576
+  },
+  "full_flash_erase": false,
+  "common_fixture_reference": "codex-7923f96",
+  "host_common_frame_result": "Host accepts both common frames0/1; hardware acceptance and optical outcome require separate capture.",
+  "commands": [
+    {
+      "name": "nvs-erase",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-m",
+        "esptool",
+        "--chip",
+        "esp32s3",
+        "--port",
+        "COM3",
+        "--before",
+        "default_reset",
+        "--after",
+        "hard_reset",
+        "erase_region",
+        "0x9000",
+        "0x6000"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.3899999998975545
+    },
+    {
+      "name": "frozen-artifact-upload",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-m",
+        "esptool",
+        "--chip",
+        "esp32s3",
+        "--port",
+        "COM3",
+        "--baud",
+        "460800",
+        "--before",
+        "default_reset",
+        "--after",
+        "hard_reset",
+        "write_flash",
+        "--flash_mode",
+        "dio",
+        "--flash_size",
+        "16MB",
+        "--flash_freq",
+        "80m",
+        "0x0",
+        "C:\\meter-run-restores-20261006\\codex-sol-followup01-pre-observation\\checkout\\build\\bootloader\\bootloader.bin",
+        "0x8000",
+        "C:\\meter-run-restores-20261006\\codex-sol-followup01-pre-observation\\checkout\\build\\partition_table\\partition-table.bin",
+        "0x10000",
+        "C:\\meter-run-restores-20261006\\codex-sol-followup01-pre-observation\\checkout\\build\\codex_desk_meter.bin"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 8.735000000102445
+    },
+    {
+      "name": "reference-capture",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\meter-operator-20261004\\scripts\\observe-product.py",
+        "--frames",
+        "C:\\meter-run-restores-20261006\\codex-sol-followup01-pre-observation\\operator\\reference\\expected-frames.jsonl",
+        "--reference-time",
+        "2026-09-30T18:40:49Z",
+        "--send",
+        "--port",
+        "COM3",
+        "--output",
+        "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-sol-r01\\operator-observation\\reference-capture-r1",
+        "--wait-seconds",
+        "5"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 10.155999999959022
+    }
+  ],
+  "upload_completed": true,
+  "upload_completed_at": "2026-10-05T18:50:10.087464+00:00",
+  "receiver_accepted_sequences": [
+    0,
+    1
+  ],
+  "receiver_rejected_errors": [],
+  "serial_closed_after_capture": true,
+  "upload_and_capture_ended_at": "2026-10-05T18:50:22.254409+00:00",
+  "board_state": "Frozen Codex Sol followup01 artifact installed; common fixture frames sent; manual LCD/BOOT/stability observation pending."
+}

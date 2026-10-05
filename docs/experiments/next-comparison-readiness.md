@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-06. 상태: **Codex Sol(`gpt-6-sol`·medium) 후속 1회차가 03:34:01 KST에 시작돼 구현 중이다. 새 준비 사본의 이전 build 출력 1,413개를 제외하고 product source 18개·고정 입력 57개·같은 profile/권한·새 receipt·실제 thread/process argv를 확인했다. 최초 정책 eligible·RM1 pass/RM2~RM5 fail·reference fail/product_pass false와 453개 파일의 최종 독립 보존을 유지한다. 현재 회차의 최종 비용·제품·평가는 pending이며 최초 펌웨어가 보드에 남아 있다. 후속 누적 시간은 종료 시 차감하고 추가 회차는 현재 실행을 포함한 최대 3회 한도를 따른다. Pro 종료·Flash 보류 예산·원본·baseline을 보존한다. 후보 호출 시작 10회·종료 9회, 독립 series 종료 2개/15개이며 Codex Luna는 미시작이다.**
+확인일: 2026-10-06. 상태: **Codex Sol(`gpt-6-sol`·medium) 후속 1회차의 구현·제출·실물 평가와 459개 파일의 독립 복원을 완료했다. RM1 pass/RM2 partial/RM3~RM5 fail, reference fail/product_pass false다. 03:50 KST 업로드한 동결 펌웨어가 공통 frame 0·1을 수락했지만 사용자 사진에는 읽을 수 있는 값이 없고 버튼 탐색도 없다. 사용자 RESET은 수동 재부팅이며 30초 연속 유지·자동 재부팅은 미검증이다. 최초 정책 eligible 원본은 보존하고, 기존 과제의 파이프 금지 위반 누락을 날짜 있는 정정으로 반영해 최초·후속 1회차 및 Sol series의 현재 품질 적격성은 invalid_for_comparison이다. 비용·제품 판정·원본 commit/package는 바꾸지 않는다. 후속 잔여 6,750.313초·2회이며 새 사본의 생성 bytecode까지 제외한 뒤 후속 2회차를 진행한다. 후보 시작·종료 각 10회, 독립 series 종료 2개/15개다. Pro 종료·Flash 보류·Luna 미시작을 유지한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -254,3 +254,17 @@ Local Git exclude만 보완했고 원본 freeze/package·공통 입력·권한·
 같은 CLI/SDK/native inventory를 재확인했고 receipt SHA-256은 `16c93563e8187b59c6488c00a33209adbd38ebc8e26448e73067bb2cb6007132`다.
 이번 예약은 최대 7,200초이며 최종 실제 시간으로 후속 누적 예산을 차감한다. 남은 추가 회차는 2회지만 현재 회차 종료·평가 전에는 시작하지 않는다.
 후속 구현 중 피드백·serial/flash는 없고 최초 보드를 후속 성공 근거로 쓰지 않는다. 재개 시 현재 manifest/ledger/process를 먼저 확인한다.
+
+## 2026-10-06 Sol 후속 1회차 완료와 정책 정정
+
+[최종 RM](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/reference-review.json)은
+RM1 pass/RM2 partial/RM3~RM5 fail, reference fail/product_pass false다. 종료는 03:41:31.431 KST, 449.687초·정규화 3,862,124 token이다.
+03:50 KST 같은 동결 artifact 업로드 후 실제 frame 0·1 수락을 확인했다. [사진 관측](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/operator-observation/user-photo-01/photo-review.json)은
+값·정보·버튼 탐색 부재를 확인한다. 사용자 RESET은 수동 재부팅이며 30초 유지·자동 재부팅은 미검증이다.
+[독립 감사](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/restore-audit.json)는 459개 파일·source22/artifact21·입력57·원본 비용을 검증했다.
+
+적용 범위가 최초와 Sol series의 동일 조건 품질·reference-cost 집계인 [정책 정정](../../results/formal-comparison-20261004/evidence/20261005-codex-cli-gpt-6-sol-r01/policy-correction-20261006/correction-note.json)은
+최초 원본 eligible·commit/package·RM·비용을 보존하고 현재 적격성만 invalid_for_comparison으로 정정한다.
+기존 공통 과제가 금지한 shell pipeline을 최초 7건·후속 4건 확인했다. 최초 운영자 검토에서 이 항목을 놓쳤다.
+정책 부적격이어도 실패 비용과 제품 관측은 남긴다. [비용 checkpoint09](../../results/formal-comparison-20261004/comparison-checkpoint-09.md)는
+checkpoint08의 원본을 보존한 후속 집계다. [남은 후속 계획](../plans/2026-10-06-codex-sol-remaining-followups.md)에 따라 잔여 6,750.313초·2회 안에서 자신의 직전 결과만 이어간다.

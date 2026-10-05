@@ -1,0 +1,1 @@
+{"status": "captured", "device_accessed": true, "product_pass": false}

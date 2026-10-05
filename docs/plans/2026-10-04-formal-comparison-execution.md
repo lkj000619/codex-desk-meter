@@ -2,7 +2,7 @@
 
 목표: ESP32-S3-LCD-3.16 제품 구현에서 에이전트의 첫 결과·자기 후속 수정 비용과 RM 도달·제품 품질을 동일 조건으로 비교한다.
 시작 승인: 2026-10-04 사용자 요청 “프로젝트 목적과 목표에 엇나가지않도록 실험 시작”.
-상태: 2026-10-06 Codex Sol 최초 평가·보존 후 후속 1회차를 03:34:01 KST에 시작했고 현재 구현 중이다. 최초 정책 eligible·RM1 pass/RM2~RM5 fail·원본 비용·453개 파일의 보존본은 그대로다. 이번 최대 7,200초와 후속 최대 3회/누적 7,200초를 유지하며 종료 후 실제 시간을 차감한다. OpenCode는 예산 소진, Pro는 후속 3회 한도로 종료했고 Pro firmware·최종 제출물이 없다. Flash 추가 회차는 보류한다. 현재 독립 series 종료 2개/예정 15개, 후보 호출 시작 10회·종료 9회다. Codex Luna는 미시작이며 현재 보드는 Sol 최초 동결 펌웨어다.
+상태: 2026-10-06 Codex Sol 후속 1회차 평가·459개 파일 독립 복원을 마쳤다. RM1 pass/RM2 partial/RM3~RM5 fail이며 후속 잔여 6,750.313초·2회다. 최초 eligible 원본은 보존하고 날짜 있는 파이프 위반 정정으로 현재 Sol series 품질 적격성은 invalid_for_comparison이다. 현재 보드는 후속 1회차다. 새 준비 사본의 생성 bytecode까지 제외하고 후속 2회차를 진행한다. OpenCode는 예산 소진, Pro는 후속 3회 한도로 종료, Flash는 보류다. 독립 series 종료 2개/예정 15개, 후보 시작·종료 각 10회, Luna 미시작이다.
 원본: [운영 계약](../experiments/comparison-operating-contract.md), [현재 상태](../experiments/next-comparison-readiness.md),
 [동결 기록](../../results/experiment-launch-preparation-20261004/freeze.json).
 

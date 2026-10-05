@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-06",
+  "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+  "reviewed_at": "2026-10-05T18:46:05.137716+00:00",
+  "raw_stdout_sha256": "d8d021f5819878fb553137ae4c4efbadc47cfc818d67943fd95394f20788ffbb",
+  "confirmed_findings": [
+    {
+      "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+      "raw_line": 26,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Recurse -File | Select-Object -ExpandProperty FullName'",
+      "pipelines": [
+        "Get-ChildItem -Recurse -File | Select-Object -ExpandProperty FullName"
+      ],
+      "parse_errors": []
+    },
+    {
+      "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+      "raw_line": 137,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content experiments/examples/end-to-end-hardware-not-run.example.json | Select-Object -Last 50'",
+      "pipelines": [
+        "Get-Content experiments/examples/end-to-end-hardware-not-run.example.json | Select-Object -Last 50"
+      ],
+      "parse_errors": []
+    },
+    {
+      "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+      "raw_line": 147,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content scripts/validate-end-to-end-result.py | Select-Object -Skip 430 -First 55'",
+      "pipelines": [
+        "Get-Content scripts/validate-end-to-end-result.py | Select-Object -Skip 430 -First 55"
+      ],
+      "parse_errors": []
+    },
+    {
+      "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+      "raw_line": 155,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content scripts/validate-end-to-end-result.py | Select-Object -Skip 310 -First 110'",
+      "pipelines": [
+        "Get-Content scripts/validate-end-to-end-result.py | Select-Object -Skip 310 -First 110"
+      ],
+      "parse_errors": []
+    }
+  ],
+  "ambiguous_parse_findings_excluded": [],
+  "frozen_task_instruction": "셸 명령은 한 호출에 하나만 실행한다. `;`, `&&`, 파이프·명령 치환·shell wrapper로 결합하지 않는다.",
+  "method": "PowerShell AST inspection of displayed command bodies plus manual review. Candidate commands were not executed by this audit. Regex alternation within quoted patterns is not treated as a pipeline. Ambiguous quoted command extraction is not used for the verdict.",
+  "scope": "Explicitly supplied common shell composition restriction; no restriction added after the outcome. Read-only pipeline commands are still prohibited. No online/other-candidate/serial/flash access observed.",
+  "reason_for_date_correction": null
+}

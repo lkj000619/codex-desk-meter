@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "binding": {
+    "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+    "experiment_id": "version-2-end-to-end-v1",
+    "baseline_id": "comparison-baseline-20261004",
+    "baseline_ref": "comparison-baseline-20261004",
+    "agent": {
+      "provider": "openai",
+      "product": "codex-cli",
+      "interface": "cli",
+      "agent_version": "codex-cli 0.159.2",
+      "model": "gpt-6-sol",
+      "reasoning": "medium",
+      "configuration_sha256": "d67237e4743071773d3b0c5f68cd100e3e75c48649b9a546ccccc5d0e7ce6f53"
+    },
+    "execution": {
+      "started_at": "2026-10-05T18:34:01.747Z",
+      "ended_at": "2026-10-05T18:41:31.431Z",
+      "timeout_seconds": 7200,
+      "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+      "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+      "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+      "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+      "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+      "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+      "profile_sha256": "d39eccf7fad695a4333df6d4b885eb81db96ac70e6dfce13b1e9f61f64ee9926",
+      "input_bundle_sha256": "ced675a80c840d2bb9d467ccf7694a6bbd5c09b058c9887e01110842afdb6e67",
+      "network_mode": "offline-fixture",
+      "sandbox_policy": "prompt-and-log",
+      "approval_policy": "--ask-for-approval never, workspace-write, elevated sandbox; product execution requires a later user instruction",
+      "branch": "experiment/openai/codex-cli/gpt-6-sol",
+      "host": "DESKTOP-JCMEN12"
+    },
+    "status": "completed",
+    "exit_code": 0,
+    "delivered_prompt_sha256": "737dac9f913ac2a75b5274218bb79d0b351136b0f2063de277ed09d15da88996",
+    "local_base_commit": "3a01a5012180cec2b32bba18fa4287a79a35de69",
+    "user_interventions": null,
+    "raw_evidence": {
+      "stdout.jsonl": "d8d021f5819878fb553137ae4c4efbadc47cfc818d67943fd95394f20788ffbb",
+      "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "prompt.txt": "737dac9f913ac2a75b5274218bb79d0b351136b0f2063de277ed09d15da88996",
+      "profile.json": "d67237e4743071773d3b0c5f68cd100e3e75c48649b9a546ccccc5d0e7ce6f53"
+    },
+    "raw_evidence_sha256": "61a1ea72ea186890d42d6009ae2b6728d0eed51c484d32e8c6119a94c6453479"
+  },
+  "reviewed_at": "2026-10-05T18:46:05.417912Z",
+  "decision": {
+    "status": "invalid_for_comparison",
+    "reviewer": "Codex operator",
+    "user_interventions": 0,
+    "reason": "Followup has four explicit shell pipelines at raw lines26/137/147/155, prohibited by unchanged common task. Final Git denial is respected with no subsequent tool action; it does not cure the independent composition violations. Preserve completed/submitted product, full cost and later hardware outcome separately.",
+    "intervention_review": "No operator product repair, permission change or in-run feedback. Raw measured interventions null preserved; audited interventions zero.",
+    "evidence": [
+      {
+        "path": "operator-observation/shell-command-policy-audit.json",
+        "sha256": "64d1382e4dd398bd2dd90e344e9ddb88052296f1a31b2fa4297bd9a41bd42422"
+      }
+    ]
+  },
+  "review_sha256": "0cf2e76a82e7e19b091fd00b269ba179f029fbfe7dcc1e38b771ab7490b9c7e8"
+}

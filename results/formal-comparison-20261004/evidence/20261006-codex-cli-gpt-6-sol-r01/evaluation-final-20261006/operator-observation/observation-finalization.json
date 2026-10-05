@@ -1,0 +1,27 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+  "round": 1,
+  "recorded_at": "2026-10-05T19:00:51.135152+00:00",
+  "status": "followup_reference_review_complete",
+  "source_and_raw_cost_unchanged": true,
+  "serial_closed": true,
+  "board_state": "Frozen followup1 artifact retained; user reports manual RESET after upload. No operator rebuild/reupload after observation.",
+  "rm_items": {
+    "RM1": "pass",
+    "RM2": "partial",
+    "RM3": "fail",
+    "RM4": "fail",
+    "RM5": "fail"
+  },
+  "reference_status": "fail",
+  "policy_status": "invalid_for_comparison",
+  "product_pass": false,
+  "remaining_followup_seconds": 6750.312999999849,
+  "remaining_followup_rounds": 2,
+  "continuous_30s_verified": false,
+  "spontaneous_reboot_verified": false,
+  "user_initiated_reset_confirmed": true,
+  "raw_reasoning_output_tokens": 2880,
+  "frozen_normalized_reasoning_tokens": null,
+  "cost_note": "Raw native reasoning_output_tokens retained separately; frozen adapter reports reasoning null. No cost reinterpretation."
+}

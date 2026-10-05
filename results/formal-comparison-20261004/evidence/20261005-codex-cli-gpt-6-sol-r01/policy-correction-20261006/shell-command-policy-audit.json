@@ -1,0 +1,93 @@
+{
+  "date": "2026-10-06",
+  "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "reviewed_at": "2026-10-05T18:46:05.137716+00:00",
+  "raw_stdout_sha256": "f1013577edd85d009d346ccd6c8c88a1bfcc435e8363b67784193fb0ce89ddd0",
+  "confirmed_findings": [
+    {
+      "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "raw_line": 22,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem experiments -Recurse -File | Select-Object -ExpandProperty FullName'",
+      "pipelines": [
+        "Get-ChildItem experiments -Recurse -File | Select-Object -ExpandProperty FullName"
+      ],
+      "parse_errors": []
+    },
+    {
+      "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "raw_line": 35,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem C:/Espressif/v5.3.2/esp-idf/components/json -Recurse -File | Select-Object -ExpandProperty FullName'",
+      "pipelines": [
+        "Get-ChildItem C:/Espressif/v5.3.2/esp-idf/components/json -Recurse -File | Select-Object -ExpandProperty FullName"
+      ],
+      "parse_errors": []
+    },
+    {
+      "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "raw_line": 95,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/schema/end-to-end-result.schema.json | Select-Object -Skip 360 -First 95'",
+      "pipelines": [
+        "Get-Content -Encoding utf8 experiments/schema/end-to-end-result.schema.json | Select-Object -Skip 360 -First 95"
+      ],
+      "parse_errors": []
+    },
+    {
+      "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "raw_line": 97,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/schema/end-to-end-result.schema.json | Select-Object -Skip 455 -First 85'",
+      "pipelines": [
+        "Get-Content -Encoding utf8 experiments/schema/end-to-end-result.schema.json | Select-Object -Skip 455 -First 85"
+      ],
+      "parse_errors": []
+    },
+    {
+      "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "raw_line": 128,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/schema/end-to-end-result.schema.json | Select-Object -Skip 90 -First 220'",
+      "pipelines": [
+        "Get-Content -Encoding utf8 experiments/schema/end-to-end-result.schema.json | Select-Object -Skip 90 -First 220"
+      ],
+      "parse_errors": []
+    },
+    {
+      "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "raw_line": 152,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 scripts/validate-end-to-end-result.py | Select-Object -Last 85'",
+      "pipelines": [
+        "Get-Content -Encoding utf8 scripts/validate-end-to-end-result.py | Select-Object -Last 85"
+      ],
+      "parse_errors": []
+    },
+    {
+      "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "raw_line": 161,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 build-host/Testing/Temporary/LastTest.log | Select-Object -Last 35'",
+      "pipelines": [
+        "Get-Content -Encoding utf8 build-host/Testing/Temporary/LastTest.log | Select-Object -Last 35"
+      ],
+      "parse_errors": []
+    }
+  ],
+  "ambiguous_parse_findings_excluded": [
+    {
+      "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "raw_line": 175,
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path sdkconfig -Pattern '\"'^CONFIG_SPIRAM|''^CONFIG_ESPTOOLPY_FLASHSIZE|''^CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG'\"' | Select-Object -ExpandProperty Line\"",
+      "pipelines": [
+        "Select-String -Path sdkconfig -Pattern '\"'^CONFIG_SPIRAM|''",
+        "^CONFIG_ESPTOOLPY_FLASHSIZE|''",
+        "^CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG'\"' | Select-Object -ExpandProperty Line"
+      ],
+      "parse_errors": [
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^CONFIG_ESPTOOLPY_FLASHSIZE' in expression or statement.",
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG'\"'' in expression or statement."
+      ]
+    }
+  ],
+  "frozen_task_instruction": "셸 명령은 한 호출에 하나만 실행한다. `;`, `&&`, 파이프·명령 치환·shell wrapper로 결합하지 않는다.",
+  "method": "PowerShell AST inspection of displayed command bodies plus manual review. Candidate commands were not executed by this audit. Regex alternation within quoted patterns is not treated as a pipeline. Ambiguous quoted command extraction is not used for the verdict.",
+  "scope": "Explicitly supplied common shell composition restriction; no restriction added after the outcome. Read-only pipeline commands are still prohibited. No online/other-candidate/serial/flash access observed.",
+  "reason_for_date_correction": "Initial scope review checked paths/denials/interventions but missed the shell composition prohibition. Original eligible review/package/commit/cost preserved; corrected effective quality status invalid_for_comparison."
+}

@@ -1,0 +1,67 @@
+{
+  "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "captured_at": "2026-10-05T19:03:11.096412+00:00",
+  "files": {
+    "common-task.txt": {
+      "sha256": "acc4d9b0a862ab94730ed0bcd6bad89ac0722e12288ca8a370549a747798a506",
+      "bytes": 5192
+    },
+    "correction-note.json": {
+      "sha256": "4a8f950b0955f764d21f41aa76b6f4ad96217a7fc335edb0aa10fc0715b2962e",
+      "bytes": 870
+    },
+    "original-policy-review.json": {
+      "sha256": "1d7cd7ae0bbf868222ebd72c9c01e64e06b230d7e9a0e289ea4a233bf89eac92",
+      "bytes": 3686
+    },
+    "original-reviewed-manifest.json": {
+      "sha256": "5f533491294df85870544db2173265614c016578a00c8335223084d2262b1cf8",
+      "bytes": 56278
+    },
+    "policy-review.json": {
+      "sha256": "5ece4fc63d4c7d1b7edae36f5b62c05c9176286d8b4b91e05864e24e656b17b0",
+      "bytes": 3484
+    },
+    "profile.json": {
+      "sha256": "d67237e4743071773d3b0c5f68cd100e3e75c48649b9a546ccccc5d0e7ce6f53",
+      "bytes": 5467
+    },
+    "prompt.txt": {
+      "sha256": "acc4d9b0a862ab94730ed0bcd6bad89ac0722e12288ca8a370549a747798a506",
+      "bytes": 5192
+    },
+    "publication-scope.json": {
+      "sha256": "87cff0849001c92c9b6b722010fe8dd881ed789aa19b47d9ab298645e0501b48",
+      "bytes": 677
+    },
+    "review-codex-sol-shell-policy.py": {
+      "sha256": "16176e6925e8057bd7dce3e9648855c5415339358c2de83c0f87c7b2cb865016",
+      "bytes": 7148
+    },
+    "run-manifest.json": {
+      "sha256": "48eef20f5b345193b6adf86fdee0a78af9b6d0b27fc2d4298cf5feca4022d4e3",
+      "bytes": 56377
+    },
+    "shell-command-audit-input.json": {
+      "sha256": "527674c771ade4b0d453f521de0141b5b986f67222b2975de5d99c574908f846",
+      "bytes": 48103
+    },
+    "shell-command-pipeline-findings.json": {
+      "sha256": "4941bf4455250f615883946063e58242b0bb68c3918da4909228e9aab56ab59c",
+      "bytes": 7329
+    },
+    "shell-command-policy-audit.json": {
+      "sha256": "08bc05874c40534f75d76a8cddbbdd9d3e428b0e4d2087ddafb3a7c62a7ad9dc",
+      "bytes": 5515
+    },
+    "stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "stdout.jsonl": {
+      "sha256": "f1013577edd85d009d346ccd6c8c88a1bfcc435e8363b67784193fb0ce89ddd0",
+      "bytes": 461230
+    }
+  },
+  "scope": "Dated first-run and Sol-series policy correction; original eligible review and453-file package retained without byte changes. Policy-only metadata copy, not portable full candidate package."
+}

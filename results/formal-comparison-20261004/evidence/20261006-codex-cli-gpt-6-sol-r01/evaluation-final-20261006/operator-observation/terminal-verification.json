@@ -1,0 +1,52 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+  "checked_at": "2026-10-05T18:42:17.650457+00:00",
+  "terminal_status": "completed",
+  "execution": {
+    "started_at": "2026-10-05T18:34:01.747Z",
+    "ended_at": "2026-10-05T18:41:31.431Z",
+    "timeout_seconds": 7200,
+    "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+    "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+    "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+    "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+    "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+    "profile_sha256": "d39eccf7fad695a4333df6d4b885eb81db96ac70e6dfce13b1e9f61f64ee9926",
+    "input_bundle_sha256": "ced675a80c840d2bb9d467ccf7694a6bbd5c09b058c9887e01110842afdb6e67",
+    "network_mode": "offline-fixture",
+    "sandbox_policy": "prompt-and-log",
+    "approval_policy": "--ask-for-approval never, workspace-write, elevated sandbox; product execution requires a later user instruction",
+    "branch": "experiment/openai/codex-cli/gpt-6-sol",
+    "worktree": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-sol-r01\\checkout",
+    "host": "DESKTOP-JCMEN12"
+  },
+  "measurement": {
+    "wall_clock_seconds": 449.6870000001509,
+    "tool_calls": 78,
+    "failed_commands": 4,
+    "user_interventions": null,
+    "tokens": {
+      "input": 3847656,
+      "output": 14468,
+      "cached": 3694208,
+      "reasoning": null,
+      "provider_total": null,
+      "total": 3862124,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "Codex turn.completed usage; cached is included in input; reasoning unavailable."
+    }
+  },
+  "original_terminal_manifest_sha256": "dc76db9d36de25e26060a06eb810e6ab4a1903cc6531ebb0b99297613ae2224e",
+  "original_ledger_sha256": "15a66d4392343729515b21bc1608916ee741299c23998d1bcfe6feeac04bf6e0",
+  "candidate_processes_remaining": [],
+  "immutable_input_files_verified": 57,
+  "frozen_operator_baseline_verified": true,
+  "raw_native_events": 165,
+  "candidate_result_submission_present": true,
+  "candidate_selection_document_present": true,
+  "operator_audited_user_interventions": 0,
+  "operator_source_modifications": false,
+  "operator_firmware_rebuild": false,
+  "serial_opened": false
+}

@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-06",
+  "original_review_and_package_unchanged": true,
+  "effective_policy_status": "invalid_for_comparison",
+  "initial_confirmed_pipeline_count": 7,
+  "followup1_confirmed_pipeline_count": 4,
+  "policy_audit_method": "PowerShell AST inspection of captured command bodies; commands not executed. Quoted regex pipes excluded; ambiguous parse at first-run line175 excluded from confirmed count.",
+  "portable_full_package": false,
+  "scope": "Dated policy reassessment and cost-summary metadata copy. Use the original453-file package for full source/artifact restoration. This copy is not a new candidate invocation or replacement first result."
+}

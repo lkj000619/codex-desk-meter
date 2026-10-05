@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-06 Codex Sol(`gpt-6-sol`·medium) 후속 1회차가 03:34:01 KST에 시작돼 구현 중이다. 최초 정책 eligible·RM1 pass/RM2~RM5 fail·reference fail/product_pass false·원본 비용·453개 파일의 독립 보존은 그대로다. 새 준비 사본의 generated build 출력을 제외하고 source/입력/profile/권한 동일성·실제 시작을 확인했다. 이번 최대 7,200초와 후속 누적/회차 한도를 유지하며 현재 최종 비용·제품·평가는 pending이다. Pro 종료와 Flash 보류 예산·과거 근거를 보존하며 현재 보드는 Sol 최초다.
-후보 실행 시작 10회·종료 9회(최초 시작 4·후속 6). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. Codex Luna는 미시작이다. 독립 series 종료는 OpenCode·Pro 2개/예정 15개다. 전체 비교는 미완료다.
+상태: 2026-10-06 Codex Sol(`gpt-6-sol`·medium) 후속 1회차의 구현·제출·평가·459개 파일 독립 복원을 마쳤다. RM1 pass/RM2 partial/RM3~RM5 fail·reference fail/product_pass false다. 보드는 03:50 KST 업로드한 후속 1회차이며 공통 frame 0·1 수락, LCD 값 부재·BOOT 무반응을 확인했다. 최초 정책 eligible 원본은 유지하며, 아래 날짜 있는 파이프 위반 정정으로 최초·후속 및 Sol series의 현재 품질 적격성은 invalid_for_comparison이다. 원본 비용·commit·package는 바꾸지 않는다. 후속 잔여 6,750.313초·2회로 후속 2회차를 준비한다.
+후보 실행 시작·종료 각 10회(최초 시작 4·후속 6). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. Pro 종료·Flash 보류·Codex Luna 미시작을 유지한다. 독립 series 종료는 OpenCode·Pro 2개/예정 15개다. 전체 비교는 미완료다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -717,3 +717,31 @@ Receipt SHA-256 `16c93563e8187b59c6488c00a33209adbd38ebc8e26448e73067bb2cb600713
 [시작 snapshot](evidence/20261006-codex-cli-gpt-6-sol-r01/launch-20261006/snapshot-inventory.json)의 32개 raw 파일을 보존한다.
 최대 7,200초 독립 runner로 구현 중이며 최종 실제 시간으로 후속 예산을 차감한다.
 추가 회차는 2회 남지만 현재 회차 종료·평가 전에는 시작하지 않는다. 현재 보드는 최초 artifact이며 후보 실행 중 serial/flash·구현 피드백은 없다.
+
+## 2026-10-06 Sol 후속 1회차 최종 평가와 최초 정책 정정
+
+후속 1회차는 03:41:31.431 KST에 completed/exit0으로 종료됐다. 원본 비용 449.687초, 78도구 호출(62명령·16파일변경), 실패 명령4개를 보존한다.
+Input 3,847,656·output14,468·정규화 합계3,862,124 token이며 cached3,694,208은 input에 포함된다.
+Raw JSONL의 reasoning_output_tokens2,880은 별도 보존하고 동결 adapter의 reasoning/provider_total null을 변경하지 않는다.
+동결 commit `3a09f26f2f375f4f45bebb79eb5902667a3ccb1a`, app SHA-256 `78bb997794c7a30534f90d9eadb1cafd061de2338c06832f88ebb63d8e4098eb`다.
+
+독립 복원에서 기존 Python6개·C receiver/state/CRC·idle backlight·Python→production C 시험이 통과했다.
+Encoder는 고정 frame과 동일하며 host 및 03:50 KST 업로드한 실제 장치 모두 frame0·1을 수락했다.
+수집 payload의 글로벌 리셋 오류 코드 두 곳만 SOURCE_STALE/reference null로 다르고 나머지 값은 동일하다.
+실물 송신은 operator_replay이므로 전체 후보 collector→device 경로 통과로 확대하지 않는다. Modern17개는 validity 확인이며 full29개 oracle이나 정식 GUI 채점과 다르다.
+
+사용자의 [원본 사진·보고](evidence/20261006-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/operator-observation/user-photo-01/capture-identity-confirmation.json)를 이번 artifact에 연결했다.
+어두운 화면에 가로 색 띠만 있고 읽을 수 있는 제목·숫자·문구가 없다. 버튼으로 정보가 바뀌지 않는다.
+사용자가 RESET을 눌러 같은 화면으로 재부팅했으며 자동 재부팅·30초 연속 유지·정밀 지연은 입증되지 않았다.
+[최종 RM](evidence/20261006-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/reference-review.json)은 RM1 pass/RM2 partial/RM3~RM5 fail·reference fail/product_pass false다.
+[459개 파일 독립 감사](evidence/20261006-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/restore-audit.json)와
+[87개 파일 공개 목록](evidence/20261006-codex-cli-gpt-6-sol-r01/evaluation-final-20261006/snapshot-inventory.json)을 보존한다. Package SHA-256은 `3deaa018dfebcec8d81b8be8f1a94439fd2c68e9bdec4ab0393a94204f408540`다.
+
+정책은 기존 과제의 shell pipeline 금지 위반4건으로 invalid_for_comparison이다. Final Git 권한 거부 뒤 추가 도구 조작은 없어 종료 규칙을 지켰지만 별도의 파이프 위반이 남는다.
+최초에도 명백한 파이프7건이 있으며 운영자 최초 검토에서 누락했다. [2026-10-06 정정](evidence/20261005-codex-cli-gpt-6-sol-r01/policy-correction-20261006/correction-note.json)과
+[15개 파일 목록](evidence/20261005-codex-cli-gpt-6-sol-r01/policy-correction-20261006/snapshot-inventory.json)으로 현재 최초 및 Sol series의 품질·reference-cost 적격성을 invalid로 정정했다.
+최초 eligible review·453개 파일 package·commit·RM·원본 비용은 그대로다. AST는 조회 명령의 실제 pipeline만 판별하고 따옴표 안 regex의 `|`와 해석이 불명확한 최초 line175는 확정 건수에서 제외했다. 캡처한 명령을 실행하지 않았다.
+
+[Checkpoint09](comparison-checkpoint-09.md)는 후보10회와 정규화 총20,179,804 token을 기록하며 checkpoint08의 원본과 비용 정의를 보존한다.
+Sol 최초+후속 누적2,909.843초·15,903,260 token은 비용 기록이며 품질 순위를 뜻하지 않는다.
+후속 잔여6,750.313초·2회로 [남은 후속 계획](../../docs/plans/2026-10-06-codex-sol-remaining-followups.md)을 따른다. 다음 새 사본에서는 추적된 생성 bytecode도 제외하고 실제 source·입력·profile 동일성을 검증한다.

@@ -1,0 +1,13 @@
+{
+  "status": "invalid_for_comparison",
+  "reviewer": "Codex operator",
+  "user_interventions": 0,
+  "reason": "Followup has four explicit shell pipelines at raw lines26/137/147/155, prohibited by unchanged common task. Final Git denial is respected with no subsequent tool action; it does not cure the independent composition violations. Preserve completed/submitted product, full cost and later hardware outcome separately.",
+  "intervention_review": "No operator product repair, permission change or in-run feedback. Raw measured interventions null preserved; audited interventions zero.",
+  "evidence": [
+    {
+      "path": "operator-observation/shell-command-policy-audit.json",
+      "sha256": "64d1382e4dd398bd2dd90e344e9ddb88052296f1a31b2fa4297bd9a41bd42422"
+    }
+  ]
+}

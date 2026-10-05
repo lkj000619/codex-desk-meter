@@ -1,0 +1,235 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+  "frozen_at": "2026-10-05T18:42:17.651484+00:00",
+  "commit": "3a09f26f2f375f4f45bebb79eb5902667a3ccb1a",
+  "candidate_branch": "",
+  "separate_repository": true,
+  "original_terminal_manifest_sha256": "dc76db9d36de25e26060a06eb810e6ab4a1903cc6531ebb0b99297613ae2224e",
+  "terminal_manifest_unchanged": true,
+  "original_ledger_unchanged": true,
+  "source_bundle": "operator-terminal-source.bundle",
+  "source_bundle_sha256": "e20dcd192c07b8afa9f0688db9380872e10233738a482c6d167d14e058c0115b",
+  "sources": {
+    "CMakeLists.txt": {
+      "bytes": 116,
+      "sha256": "99161b7d0e8dd5a8b9c1513140dd29abec07f5fc841e10f02d96f57e0e43ad21",
+      "operator_raw_copy": "operator-observation/source-snapshot/CMakeLists.txt"
+    },
+    "sdkconfig": {
+      "bytes": 69609,
+      "sha256": "e5053d80f855437d53b6c809103090ab6845bf9660d008cfca393cc07a2bc184",
+      "operator_raw_copy": "operator-observation/source-snapshot/sdkconfig"
+    },
+    "sdkconfig.defaults": {
+      "bytes": 200,
+      "sha256": "3ddfebc9b8c3b133d91100a0ab0973fe08ff2ae56e6245e4607c851c86bca7f9",
+      "operator_raw_copy": "operator-observation/source-snapshot/sdkconfig.defaults"
+    },
+    "docs/agent-runs/20261006-codex-cli-gpt-6-sol-r01/hardware-feature-selection.md": {
+      "bytes": 1681,
+      "sha256": "5e625486e0df23022a1d75856c90e4d345ab5d96f2d6be15f244331a856727ac",
+      "operator_raw_copy": "operator-observation/source-snapshot/docs/agent-runs/20261006-codex-cli-gpt-6-sol-r01/hardware-feature-selection.md"
+    },
+    "docs/agent-runs/20261006-codex-cli-gpt-6-sol-r01/verification.md": {
+      "bytes": 3390,
+      "sha256": "c856080d3c47b33aed83338d29d1559c615592130ac4544e014b07b720805178",
+      "operator_raw_copy": "operator-observation/source-snapshot/docs/agent-runs/20261006-codex-cli-gpt-6-sol-r01/verification.md"
+    },
+    "host/CMakeLists.txt": {
+      "bytes": 1217,
+      "sha256": "33486a61549f57479da3cf770926e4e81b181e898d6cb9d856690a31f5e937df",
+      "operator_raw_copy": "operator-observation/source-snapshot/host/CMakeLists.txt"
+    },
+    "host/receiver_cli.c": {
+      "bytes": 543,
+      "sha256": "8ac8d7a0a124134b1b44a0beaf1ff674bed9eeff5582d2a9a9d37d6ecce31ff8",
+      "operator_raw_copy": "operator-observation/source-snapshot/host/receiver_cli.c"
+    },
+    "host/test_feature.c": {
+      "bytes": 471,
+      "sha256": "b3f58ecb5274982af86f3190084a3ae258b64b8761b9088e7e3a1ff5d446b60b",
+      "operator_raw_copy": "operator-observation/source-snapshot/host/test_feature.c"
+    },
+    "host/test_receiver.c": {
+      "bytes": 1867,
+      "sha256": "1208d13270b6273159cff175c1c7196064aed4d679bed7a4a3ff12842587a11a",
+      "operator_raw_copy": "operator-observation/source-snapshot/host/test_receiver.c"
+    },
+    "main/board.c": {
+      "bytes": 7551,
+      "sha256": "2caf2aa720dbbe1ef5124b54c2ea32323fafa3314f2d901b7ee5a422b7c9b765",
+      "operator_raw_copy": "operator-observation/source-snapshot/main/board.c"
+    },
+    "main/board.h": {
+      "bytes": 343,
+      "sha256": "a23c94d97159f67d29828cd612f09b88d5ac9a517305af54191ad6b4d27e3fff",
+      "operator_raw_copy": "operator-observation/source-snapshot/main/board.h"
+    },
+    "main/CMakeLists.txt": {
+      "bytes": 140,
+      "sha256": "20a83302f3b36f488d60638e86739441301f08cff2f5f50983f54e572247e816",
+      "operator_raw_copy": "operator-observation/source-snapshot/main/CMakeLists.txt"
+    },
+    "main/feature.c": {
+      "bytes": 380,
+      "sha256": "50f56909e1b888511aa2644cdfa4ae97dfbb2eeff326e1f6df15e3d75258d2fc",
+      "operator_raw_copy": "operator-observation/source-snapshot/main/feature.c"
+    },
+    "main/feature.h": {
+      "bytes": 140,
+      "sha256": "b7a5072959edf35a7aa2976fc61e6b1f02b1470b44242b804905883e90170816",
+      "operator_raw_copy": "operator-observation/source-snapshot/main/feature.h"
+    },
+    "main/main.c": {
+      "bytes": 8404,
+      "sha256": "8ca3f00b7ed13a3fdcd190ddcda626148de85b0ba654f7d84954bb3e5c4e60e5",
+      "operator_raw_copy": "operator-observation/source-snapshot/main/main.c"
+    },
+    "main/receiver.c": {
+      "bytes": 15723,
+      "sha256": "2689390d1eb6173640e8ca7f9495fabc64bed93b6419151b5b533c9643fbf226",
+      "operator_raw_copy": "operator-observation/source-snapshot/main/receiver.c"
+    },
+    "main/receiver.h": {
+      "bytes": 628,
+      "sha256": "5ace48a46f412f62f242ac99cdee21dc092691da0f63a53b417f3bdcbc87a6dd",
+      "operator_raw_copy": "operator-observation/source-snapshot/main/receiver.h"
+    },
+    "pc/desk_meter.py": {
+      "bytes": 17921,
+      "sha256": "6883d65b88399905ed7ba9c09fd6f62cc0f3acc14090395021936d7a12a0cb0c",
+      "operator_raw_copy": "operator-observation/source-snapshot/pc/desk_meter.py"
+    },
+    "results/20261006-codex-cli-gpt-6-sol-r01/end-to-end-result.json": {
+      "bytes": 9085,
+      "sha256": "e92ba09e2c6b0f2ba1cff25b256fe0e0dcfa5f85ab7fa1f1d16b124a40baeee3",
+      "operator_raw_copy": "operator-observation/source-snapshot/results/20261006-codex-cli-gpt-6-sol-r01/end-to-end-result.json"
+    },
+    "results/20261006-codex-cli-gpt-6-sol-r01/normalized-personal-usage.json": {
+      "bytes": 1022,
+      "sha256": "8c50e76d2d92d778ead00a85afef52231c1b0da2eef997cebefcd22126642374",
+      "operator_raw_copy": "operator-observation/source-snapshot/results/20261006-codex-cli-gpt-6-sol-r01/normalized-personal-usage.json"
+    },
+    "tests/test_pc.py": {
+      "bytes": 4631,
+      "sha256": "ac2cb57ce30ae7811b34a51b8aa88257ae4fd6157b85fca214bc6c295cd25651",
+      "operator_raw_copy": "operator-observation/source-snapshot/tests/test_pc.py"
+    },
+    "tests/test_pipeline.py": {
+      "bytes": 2284,
+      "sha256": "3d6def216b249acc2e443b644718dde638621b2a5beb733e713fe75d43c42e36",
+      "operator_raw_copy": "operator-observation/source-snapshot/tests/test_pipeline.py"
+    }
+  },
+  "artifacts": {
+    "build-host/.ninja_deps": {
+      "bytes": 7348,
+      "sha256": "c9e6a4f26382fdd6fdc16324e6858fdbb796efa023b25a4556b54c06b693b4c6",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/.ninja_deps"
+    },
+    "build-host/.ninja_log": {
+      "bytes": 1197,
+      "sha256": "b739ebc3f5d2a18a24985b0ef92cee9c20dabf24dde44c3e97a06a37ae931e9d",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/.ninja_log"
+    },
+    "build-host/CMakeCache.txt": {
+      "bytes": 17020,
+      "sha256": "8b3cf28001963bdd18ef9c94dc552cff990fbc8ad6acb5ece95657a4bca466e8",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/CMakeCache.txt"
+    },
+    "build-host/build.ninja": {
+      "bytes": 33681,
+      "sha256": "2034215672b67dcb62a11c7da9bb229833dd68f19bc8d8e9e95dc04ae641f143",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/build.ninja"
+    },
+    "build-host/feature_test.exe": {
+      "bytes": 88064,
+      "sha256": "5380576df241d4bb726b6ae65e2ec92b824054d6be6349917d069ec715142e18",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/feature_test.exe"
+    },
+    "build-host/libreceiver_cli.dll.a": {
+      "bytes": 19308,
+      "sha256": "4164e735bfa565308b26073d5a6c27893213d9f983b006f960e39b5a5bfbcae4",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/libreceiver_cli.dll.a"
+    },
+    "build-host/libreceiver_test.dll.a": {
+      "bytes": 19388,
+      "sha256": "04616ebbdf338977dc08e66c0322890c2d0931bea6c8bf7631bd3104fadeec8b",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/libreceiver_test.dll.a"
+    },
+    "build-host/receiver_cli.exe": {
+      "bytes": 143360,
+      "sha256": "f3e8ec1ad86b9cda261fae46fd6806ee8e63089e596def4315fe004bdd7cbe08",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/receiver_cli.exe"
+    },
+    "build-host/receiver_test.exe": {
+      "bytes": 145920,
+      "sha256": "be89c07885fb8fd762e95da4dc60361f4138dc2d061ceef227a7525c7c60443b",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/receiver_test.exe"
+    },
+    "build/.ninja_deps": {
+      "bytes": 693540,
+      "sha256": "9078d69eab244e8557fcd136b10c8b139c20ca81b55d8f3ac1890175fb5c4acf",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/.ninja_deps"
+    },
+    "build/.ninja_log": {
+      "bytes": 123387,
+      "sha256": "3c6a54be32cd6e09b41c2db249186fa25cc6937f17733e957715f74265f327b9",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/.ninja_log"
+    },
+    "build/CMakeCache.txt": {
+      "bytes": 26542,
+      "sha256": "3707316993c6b39ea22f352bfaa531a92af513026fefecf4dabb8e15c48247fa",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/CMakeCache.txt"
+    },
+    "build/bootloader/bootloader.bin": {
+      "bytes": 21504,
+      "sha256": "92d57df970dac50f50fdcd00fbb95ba8aa3ed17ae39bbb6089d84d62b8666cd0",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/bootloader/bootloader.bin"
+    },
+    "build/build.ninja": {
+      "bytes": 5741120,
+      "sha256": "30ab1835af418ada000a4cbc355744620ee6e146494c03c322b826b95dbaf203",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/build.ninja"
+    },
+    "build/codex_desk_meter.bin": {
+      "bytes": 309936,
+      "sha256": "78bb997794c7a30534f90d9eadb1cafd061de2338c06832f88ebb63d8e4098eb",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/codex_desk_meter.bin"
+    },
+    "build/codex_desk_meter.elf": {
+      "bytes": 4310940,
+      "sha256": "bca5eb0146a1123ff75810c3bf323266fbbfb2f9db0eeaf89ca3483625294007",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/codex_desk_meter.elf"
+    },
+    "build/codex_desk_meter.map": {
+      "bytes": 3314800,
+      "sha256": "4ff6d9bcf1d4924fb424437fa30e9a1d9d8ac6982a31a1afc96f0d8a20a4557f",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/codex_desk_meter.map"
+    },
+    "build/flasher_args.json": {
+      "bytes": 949,
+      "sha256": "769166e82cee00d6da9e7b3708d9b0691980764a05ffe3b042b3f47df9997998",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/flasher_args.json"
+    },
+    "build/partition_table/partition-table.bin": {
+      "bytes": 3072,
+      "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/partition_table/partition-table.bin"
+    },
+    "sdkconfig": {
+      "bytes": 69609,
+      "sha256": "e5053d80f855437d53b6c809103090ab6845bf9660d008cfca393cc07a2bc184",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/sdkconfig"
+    },
+    "sdkconfig.defaults": {
+      "bytes": 200,
+      "sha256": "3ddfebc9b8c3b133d91100a0ab0973fe08ff2ae56e6245e4607c851c86bca7f9",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/sdkconfig.defaults"
+    }
+  },
+  "last_successful_firmware_build_raw_line": 120,
+  "firmware_source_mutations_after_last_build": [],
+  "operator_product_source_modifications": false,
+  "operator_firmware_rebuild": false
+}

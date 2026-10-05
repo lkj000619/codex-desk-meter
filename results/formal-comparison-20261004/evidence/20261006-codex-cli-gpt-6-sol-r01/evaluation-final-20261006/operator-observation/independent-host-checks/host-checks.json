@@ -1,0 +1,65 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+  "checked_at": "2026-10-05T18:49:18.771825+00:00",
+  "checks": [
+    {
+      "name": "python-unit-tests",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.75
+    },
+    {
+      "name": "receiver-state-and-crc",
+      "argv": [
+        "C:\\meter-run-restores-20261006\\codex-sol-followup01-pre-observation\\operator\\operator-observation\\artifact-snapshot\\build-host\\receiver_test.exe"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.03100000019185245
+    },
+    {
+      "name": "idle-backlight-feature",
+      "argv": [
+        "C:\\meter-run-restores-20261006\\codex-sol-followup01-pre-observation\\operator\\operator-observation\\artifact-snapshot\\build-host\\feature_test.exe"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.031999999890103936
+    },
+    {
+      "name": "python-frame-to-production-c",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\meter-run-restores-20261006\\codex-sol-followup01-pre-observation\\checkout\\tests\\test_pipeline.py",
+        "C:\\meter-run-restores-20261006\\codex-sol-followup01-pre-observation\\operator\\operator-observation\\artifact-snapshot\\build-host\\receiver_cli.exe"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.2029999999795109
+    },
+    {
+      "name": "common-reference-c-receiver",
+      "argv": [
+        "C:\\meter-run-restores-20261006\\codex-sol-followup01-pre-observation\\operator\\operator-observation\\artifact-snapshot\\build-host\\receiver_cli.exe"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.01500000013038516
+    }
+  ],
+  "source_executables_unchanged": true,
+  "operator_firmware_rebuild": false,
+  "original_checkout_used": false,
+  "recorded_compiler_runtime": "C:\\Espressif\\benchmark-host-tools\\llvm-mingw-20260616-ucrt-x86_64\\bin",
+  "scope": "Existing archived executables and restored Python source; no CTest cache paths or original checkout used."
+}

@@ -14,3 +14,5 @@
 완료 조건: 최초 원본과 최종 판정의 연결이 검증돼 있으며 미관측 항목을 합격으로 채우지 않는다. 구현·제출 종료, 평가 완료, reference 도달, 전체 제품 합격, series 종료를 구분한다. 최초 2,460.156초와 cache 포함 정규화 token은 보존하며 후속 예산을 최초 시간으로 차감하지 않는다.
 
 후속 선행 조건: 동결 commit `2257fffaa5316773d08fe3353356112c7002159d`에는 생성된 `build/`·`build-host/` 출력이 추적돼 있다. 이전 회차 절대 경로와 executable이 후속 checkout에 승계되지 않도록 **새 후속 준비 사본에서만** 생성 출력을 제외하고 날짜·범위·source 동일성 근거를 기록해야 한다. 최초 commit/tag·package·판정은 수정하지 않는다. 자신의 직전 고정 관측만 전달하고 동일 profile·입력·권한, 후속 최대 3회 AND 누적 7,200초를 유지한다. Codex Luna는 이 평가와 필요한 후속 처리를 마치기 전에 시작하지 않는다.
+
+2026-10-06 후속 정정: 위 최초 정책 eligible은 당시 원본 판정이다. 기존 공통 과제가 금지한 shell pipeline7건을 최초 검토에서 놓쳤으며 [날짜 있는 정책 정정](../../results/formal-comparison-20261004/evidence/20261005-codex-cli-gpt-6-sol-r01/policy-correction-20261006/correction-note.json)으로 현재 최초와 Sol series의 동일 조건 품질/reference-cost 적격성을 invalid_for_comparison으로 반영한다. 최초 RM·비용·source commit·453개 파일 package와 eligible review 원본 bytes는 변경하지 않는다. 후속 1회차도4건 위반이며 이후 제품 관측·실패 비용은 계속 보존한다.

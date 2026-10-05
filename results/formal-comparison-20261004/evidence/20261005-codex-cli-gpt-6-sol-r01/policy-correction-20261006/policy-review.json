@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "binding": {
+    "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+    "experiment_id": "version-2-end-to-end-v1",
+    "baseline_id": "comparison-baseline-20261004",
+    "baseline_ref": "comparison-baseline-20261004",
+    "agent": {
+      "provider": "openai",
+      "product": "codex-cli",
+      "interface": "cli",
+      "agent_version": "codex-cli 0.159.2",
+      "model": "gpt-6-sol",
+      "reasoning": "medium",
+      "configuration_sha256": "d67237e4743071773d3b0c5f68cd100e3e75c48649b9a546ccccc5d0e7ce6f53"
+    },
+    "execution": {
+      "started_at": "2026-10-05T14:56:01.521Z",
+      "ended_at": "2026-10-05T15:37:01.691Z",
+      "timeout_seconds": 7200,
+      "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+      "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+      "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+      "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+      "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+      "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+      "profile_sha256": "d39eccf7fad695a4333df6d4b885eb81db96ac70e6dfce13b1e9f61f64ee9926",
+      "input_bundle_sha256": "ced675a80c840d2bb9d467ccf7694a6bbd5c09b058c9887e01110842afdb6e67",
+      "network_mode": "offline-fixture",
+      "sandbox_policy": "prompt-and-log",
+      "approval_policy": "--ask-for-approval never, workspace-write, elevated sandbox; product execution requires a later user instruction",
+      "branch": "experiment/openai/codex-cli/gpt-6-sol",
+      "host": "DESKTOP-JCMEN12"
+    },
+    "status": "completed",
+    "exit_code": 0,
+    "delivered_prompt_sha256": "acc4d9b0a862ab94730ed0bcd6bad89ac0722e12288ca8a370549a747798a506",
+    "local_base_commit": "95e7e431cda7dc507668c8b7eea986b41204f57c",
+    "user_interventions": null,
+    "raw_evidence": {
+      "stdout.jsonl": "f1013577edd85d009d346ccd6c8c88a1bfcc435e8363b67784193fb0ce89ddd0",
+      "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "prompt.txt": "acc4d9b0a862ab94730ed0bcd6bad89ac0722e12288ca8a370549a747798a506",
+      "profile.json": "d67237e4743071773d3b0c5f68cd100e3e75c48649b9a546ccccc5d0e7ce6f53"
+    },
+    "raw_evidence_sha256": "a1eb59d328e37e215028594f2fbb3e12152d25d67053dc76104ba0190e5bb1a6"
+  },
+  "reviewed_at": "2026-10-05T18:46:05.362872Z",
+  "decision": {
+    "status": "invalid_for_comparison",
+    "reviewer": "Codex operator",
+    "user_interventions": 0,
+    "reason": "2026-10-06 dated reassessment: at least seven explicit read-only shell pipelines violate frozen common task one-command/no-pipeline rule. Original eligible verdict and first-result package retained. Exclude first run and series from identical-condition quality/reference-cost comparisons; preserve all execution/product/cost observations.",
+    "intervention_review": "No operator product repair, permission change or in-run feedback. Raw measured interventions null preserved; audited interventions zero.",
+    "evidence": [
+      {
+        "path": "shell-command-policy-audit.json",
+        "sha256": "08bc05874c40534f75d76a8cddbbdd9d3e428b0e4d2087ddafb3a7c62a7ad9dc"
+      }
+    ]
+  },
+  "review_sha256": "c51f6ba800889dc9fcaa2a4dd1014192faf643f20f6c1c65db3a8a73d4e78572"
+}
