@@ -1,4 +1,0 @@
-receiver_state_and_crc 9 0.00382224
-python_frame_to_firmware_receiver 7 0.0139368
-idle_backlight_feature 5 0.00155594
----
