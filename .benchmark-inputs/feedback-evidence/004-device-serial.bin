@@ -1,0 +1,2 @@
+[0;32mI (104) boot: Loaded app from partition at offset 0x10000[0;32mI (2312) cdm: frame accepted seq=0 error= bytes=1543[0m
+[0;32mI (7432) cdm: frame accepted seq=1 error= bytes=1543[0m

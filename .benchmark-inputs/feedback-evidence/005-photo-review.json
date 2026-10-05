@@ -1,0 +1,31 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+  "reviewer": "Codex operator",
+  "reviewed_at": "2026-10-05T19:00:51.135152+00:00",
+  "photo_sha256": "5ef2dadcea19b73f9dbb87564036e2235b460b549770daff364deb1e3edd120e",
+  "source_bytes": 9247670,
+  "implementation_commit": "3a09f26f2f375f4f45bebb79eb5902667a3ccb1a",
+  "artifact_sha256": "78bb997794c7a30534f90d9eadb1cafd061de2338c06832f88ebb63d8e4098eb",
+  "visible": "Dark blue panel with one horizontal red band and one horizontal pale blue band near the bottom. No legible titles, numbers or text.",
+  "orientation_and_clipping": "Board held horizontally; readable text absent, so text orientation and clipping cannot be assessed.",
+  "navigation": {
+    "user_reported_response": "none",
+    "information_views_reached": [],
+    "returned_to_initial_information": false,
+    "exact_press_count_verified": false
+  },
+  "reset": {
+    "user_initiated_reset_confirmed": true,
+    "same_image_after_reset_reported": true,
+    "spontaneous_reboot_verified": false
+  },
+  "continuity": {
+    "continuous_30s_verified": false,
+    "no_flicker_certified": false,
+    "precise_latency_measured": false,
+    "scope": "One still photograph and a button/reset report cannot certify30s continuity, flicker absence or response latency."
+  },
+  "reference_reached": false,
+  "product_pass": false,
+  "candidate_execution_repeated": false
+}

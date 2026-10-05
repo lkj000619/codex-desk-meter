@@ -1,0 +1,24 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+  "compared_at": "2026-10-05T19:00:51.135152+00:00",
+  "candidate_frame_sha256": "4e2a99d4176dbbc5cc90861152e151b8e8f10d702356aa6d4bf6052ea653b7d5",
+  "reference_wire_sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+  "differences": [
+    {
+      "path": "payload.global_resets[0].error_code",
+      "candidate": "SOURCE_STALE",
+      "reference": null
+    },
+    {
+      "path": "payload.global_resets[1].error_code",
+      "candidate": "SOURCE_STALE",
+      "reference": null
+    }
+  ],
+  "all_other_payload_values_equal": true,
+  "collector_usage_remaining": [
+    58,
+    82
+  ],
+  "scope": "Existing independent host results, no candidate execution rerun. Physical stimulus was common operator replay, not candidate collector output; no complete collector-to-device path inferred."
+}
