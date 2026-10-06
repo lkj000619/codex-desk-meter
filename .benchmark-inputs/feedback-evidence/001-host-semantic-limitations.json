@@ -1,0 +1,58 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "legacy_payload_differences": [
+    {
+      "path": "payload.global_resets[0].error_code",
+      "expected": null,
+      "actual": "SOURCE_STALE"
+    },
+    {
+      "path": "payload.global_resets[1].error_code",
+      "expected": null,
+      "actual": "SOURCE_STALE"
+    },
+    {
+      "path": "payload.usage[0].account_profile_id",
+      "expected": null,
+      "actual": "synthetic-example"
+    },
+    {
+      "path": "payload.usage[0].error_reason",
+      "expected": "The source observation is at least 300 seconds old; its value is retained as stale.",
+      "actual": "Source capture is at least 300 seconds old"
+    },
+    {
+      "path": "payload.usage[0].model_id",
+      "expected": null,
+      "actual": "codex-fixture"
+    },
+    {
+      "path": "payload.usage[0].snapshot_id",
+      "expected": "fixture-personal-usage",
+      "actual": "personal-usage-legacy"
+    },
+    {
+      "path": "payload.usage[0].windows[0].reset_status",
+      "expected": "unknown",
+      "actual": null
+    },
+    {
+      "path": "payload.usage[0].windows[1].reset_status",
+      "expected": "unknown",
+      "actual": null
+    }
+  ],
+  "provider_validity_mismatches": [
+    {
+      "fixture": "providers/available-over-stale-threshold.json",
+      "expected": "invalid",
+      "observed_invalid": false,
+      "matches_expected_validity": false,
+      "errors": []
+    }
+  ],
+  "exact_common_wire_encoder_pass": true,
+  "full29_oracle_completed": false,
+  "common_production_c_input_seam_submitted": false,
+  "note": "Original behavior preserved; own Python11/C3 passing tests do not certify all collector semantics, physical receipt, optical output or full product success."
+}

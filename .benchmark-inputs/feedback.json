@@ -1,0 +1,74 @@
+{
+  "previous_run_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "previous_commit": "c0d5d61160664923e0494302fae180089d02d247",
+  "target_ids": [
+    "RM1",
+    "RM2",
+    "RM3",
+    "RM4",
+    "RM5"
+  ],
+  "observed": "Initial completed; original review RM1/RM2 partial, RM3 fail, RM4/RM5 not_run. Frozen original app was reuploaded on COM3 with verified image hashes; user reports LCD remains black. Separate dated observations after operator native hard reset: normal boot, PSRAM memory test OK, LCD initialization returned, USB receiver ready. One later common-data capture contains actual accepted cdm/1 sequence=0; frame1 host write timed out. A second reset/capture completed both host writes but contains no accepted/rejected frame logs; latest receipt remains unconfirmed. User continued-black report applies to first diagnostic reset. No BOOT-count or 30-second optical observation was supplied. Common wire encoder exactly matches; production collector payload has eight reported differences in identity/reset-status/error fields and 16/17 provider validity cases match (available-over-stale-threshold accepted after coercion). Full 29-case production C pipeline oracle was not completed. Initial command audit also found eight piped calls and one three-statement semicolon call contrary to unchanged shell restrictions.",
+  "expected": "Meet the unchanged fixed product and RM contract using the same fixture/reference UTC and production collector/encoder/receiver. Correctly collect/encode and accept normal common seq0/1; visibly display five-hour remaining58% and weekly remaining82% retaining stale/provenance meaning, and make usage/global-reset/diagnostic information reachable with BOOT navigation and return. Preserve fixed provider semantics and schema validation. Keep 30-second continuity as a separate product requirement and honestly mark unobserved hardware/timing. All common task restrictions remain: one command per shell call, no pipelines or composed statements, no real accounts/network, serial/flash, other implementation or operator directories. Diagnose and implement using your own source and already fixed inputs; no operator repair method is supplied.",
+  "remaining_rounds": 3,
+  "remaining_seconds": 7200,
+  "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+  "evidence": [
+    {
+      "path": ".benchmark-inputs/feedback-evidence/000-user-black-screen-report.json",
+      "sha256": "eff17239cf65bed5dcc19a869980d6b1602e86c5684a4b21914150b1b4a09732"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/001-host-semantic-limitations.json",
+      "sha256": "ece617ad8457ef1851a88b28664d384b7156a501b655fd10c205ff9d254417a1"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/002-common-stimulus-check.json",
+      "sha256": "09a59780e3bf1b1944ab7fbc159c735f5dd4615db77178345df9737669e0782c"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/003-user-after-diagnostic-reset.json",
+      "sha256": "0a9a1b2541fd84b1fbc79d037bffc2ec7391003ba0f740d38e56f63293adb18b"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/004-hard-reset-capture.json",
+      "sha256": "1325a96ff03092e35d754588f0c50f216722e0862ce94c7219c8dae3d59abec9"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/005-hard-reset-serial.bin",
+      "sha256": "7ac08dbe50f8072d7330860095787430095e904d63d2aec4302d67bf846fdfd8"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/006-capture.json",
+      "sha256": "60165bd32a7b667d3c59cc477a4fe3c783a918748b157293fc8d6c796e28ad72"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/007-device-serial.bin",
+      "sha256": "7edac44e99c6769053a32f626aebcb58879864fe77866d9bf09e7769f51f9bb4"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/008-sent-frames.jsonl",
+      "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/009-reset-and-frames-session.json",
+      "sha256": "3945abdf89be3466a47326257674a63aaa47d9f380c4da542ea9f06b154a3c0d"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/010-capture.json",
+      "sha256": "3f53b499c7cd61c7a2c955fbd0402b416c9b4a4c48b8ec67e57cea3670b30fde"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/011-device-serial.bin",
+      "sha256": "0edb85415ec2fbe7630f1f7a85f005f570e292c928a9645daf2a52d6042acc0a"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/012-sent-frames.jsonl",
+      "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/013-observation-origin.json",
+      "sha256": "ef5b6e86625c9719fc880aec595bf7fd213af392afecad4939b8e3fe28636b17"
+    }
+  ]
+}

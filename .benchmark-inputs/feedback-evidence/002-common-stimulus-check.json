@@ -1,0 +1,160 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "common_frames_sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+  "encoder_matches_exact_common_frames": true,
+  "legacy_collector": {
+    "input_fixture": "experiments/fixtures/personal-usage.json",
+    "reference_time": "2026-09-30T18:40:49Z",
+    "usage_entries": 1,
+    "global_reset_entries": 2,
+    "errors": [],
+    "matches_common_reference_payload": false
+  },
+  "provider_fixture_checks": [
+    {
+      "fixture": "providers/codex-percent-window.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/claude-code-windows.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/antigravity-cli-unsupported.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/gemini-cli-unsupported.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/orca-host-claude-code.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/multi-provider-healthy.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/provider-stale.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/provider-error.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/reset-time-omitted.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/mixed-percent-absolute.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/absolute-token-balance.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/absolute-token-balance-inconsistent.json",
+      "expected": "invalid",
+      "observed_invalid": true,
+      "matches_expected_validity": true,
+      "errors": [
+        {
+          "adapter_id": "absolute-token-balance-inconsistent",
+          "code": "ABSOLUTE_BALANCE_MISMATCH",
+          "message": "ABSOLUTE_BALANCE_MISMATCH: used plus remaining differs from limit"
+        }
+      ]
+    },
+    {
+      "fixture": "providers/unsupported-provider.json",
+      "expected": "valid",
+      "observed_invalid": false,
+      "matches_expected_validity": true,
+      "errors": []
+    },
+    {
+      "fixture": "providers/duplicate-provider-window.json",
+      "expected": "invalid",
+      "observed_invalid": true,
+      "matches_expected_validity": true,
+      "errors": [
+        {
+          "adapter_id": "duplicate-provider-window",
+          "code": "DUPLICATE_WINDOW",
+          "message": "DUPLICATE_WINDOW: window_id is empty or duplicated"
+        }
+      ]
+    },
+    {
+      "fixture": "providers/future-observed-reset.json",
+      "expected": "invalid",
+      "observed_invalid": true,
+      "matches_expected_validity": true,
+      "errors": [
+        {
+          "adapter_id": "future-observed-reset",
+          "code": "FUTURE_TIMESTAMP",
+          "message": "FUTURE_TIMESTAMP: observed_at is after collection reference"
+        }
+      ]
+    },
+    {
+      "fixture": "providers/available-over-stale-threshold.json",
+      "expected": "invalid",
+      "observed_invalid": false,
+      "matches_expected_validity": false,
+      "errors": []
+    },
+    {
+      "fixture": "providers/out-of-range-percent.json",
+      "expected": "invalid",
+      "observed_invalid": true,
+      "matches_expected_validity": true,
+      "errors": [
+        {
+          "adapter_id": "out-of-range-percent",
+          "code": "PERCENT_INVALID",
+          "message": "PERCENT_INVALID: percent_used is outside [0, 100]"
+        }
+      ]
+    }
+  ],
+  "arbitrary_common_frame_production_c_receiver": "not_run: candidate submitted no executable input seam; production C own tests passed. Device common-frame acceptance will be measured on COM3.",
+  "scope": "Host tests and exact wire encoding only; partial provider validity checks do not imply full29 oracle/device/optical pass."
+}
