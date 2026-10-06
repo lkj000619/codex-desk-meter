@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+  "run_id": "20261006-codex-cli-gpt-6-luna-r03",
   "experiment_id": "version-2-end-to-end-v1",
   "baseline": {
     "id": "comparison-baseline-20261004",
@@ -26,26 +26,21 @@
     "input_bundle_sha256": "891f33b6a9128e423619c6c59b309cf09b0fe3d634bec9aa04bdfe93297207a1"
   },
   "outputs": {
-    "selection_document": "docs/agent-runs/20261006-codex-cli-gpt-6-luna-r02/hardware-feature-selection.md",
-    "structured_result": "results/20261006-codex-cli-gpt-6-luna-r02/end-to-end-result.json",
-    "evaluation_manifest": "results/20261006-codex-cli-gpt-6-luna-r02/e2e-evaluation-manifest.json"
+    "selection_document": "docs/agent-runs/20261006-codex-cli-gpt-6-luna-r03/hardware-feature-selection.md",
+    "structured_result": "results/20261006-codex-cli-gpt-6-luna-r03/end-to-end-result.json",
+    "evaluation_manifest": "results/20261006-codex-cli-gpt-6-luna-r03/e2e-evaluation-manifest.json"
   },
   "evaluation_manifest_path": ".benchmark-inputs/e2e-evaluation-manifest.json",
   "immutable_files": {
     ".benchmark-inputs/feedback.json": "candidate-feedback.json",
     ".benchmark-inputs/feedback-evidence/000-user-black-screen-report.json": "feedback-evidence/000-user-black-screen-report.json",
-    ".benchmark-inputs/feedback-evidence/001-host-semantic-limitations.json": "feedback-evidence/001-host-semantic-limitations.json",
+    ".benchmark-inputs/feedback-evidence/001-host-semantic-review.json": "feedback-evidence/001-host-semantic-review.json",
     ".benchmark-inputs/feedback-evidence/002-common-stimulus-check.json": "feedback-evidence/002-common-stimulus-check.json",
-    ".benchmark-inputs/feedback-evidence/003-user-after-diagnostic-reset.json": "feedback-evidence/003-user-after-diagnostic-reset.json",
-    ".benchmark-inputs/feedback-evidence/004-hard-reset-capture.json": "feedback-evidence/004-hard-reset-capture.json",
-    ".benchmark-inputs/feedback-evidence/005-hard-reset-serial.bin": "feedback-evidence/005-hard-reset-serial.bin",
+    ".benchmark-inputs/feedback-evidence/003-runtime-source-binding.json": "feedback-evidence/003-runtime-source-binding.json",
+    ".benchmark-inputs/feedback-evidence/004-runtime-observation-correction.json": "feedback-evidence/004-runtime-observation-correction.json",
+    ".benchmark-inputs/feedback-evidence/005-device-serial.bin": "feedback-evidence/005-device-serial.bin",
     ".benchmark-inputs/feedback-evidence/006-capture.json": "feedback-evidence/006-capture.json",
-    ".benchmark-inputs/feedback-evidence/007-device-serial.bin": "feedback-evidence/007-device-serial.bin",
-    ".benchmark-inputs/feedback-evidence/008-sent-frames.jsonl": "feedback-evidence/008-sent-frames.jsonl",
-    ".benchmark-inputs/feedback-evidence/009-reset-and-frames-session.json": "feedback-evidence/009-reset-and-frames-session.json",
-    ".benchmark-inputs/feedback-evidence/010-capture.json": "feedback-evidence/010-capture.json",
-    ".benchmark-inputs/feedback-evidence/011-device-serial.bin": "feedback-evidence/011-device-serial.bin",
-    ".benchmark-inputs/feedback-evidence/012-sent-frames.jsonl": "feedback-evidence/012-sent-frames.jsonl",
-    ".benchmark-inputs/feedback-evidence/013-observation-origin.json": "feedback-evidence/013-observation-origin.json"
+    ".benchmark-inputs/feedback-evidence/007-sent-frames.jsonl": "feedback-evidence/007-sent-frames.jsonl",
+    ".benchmark-inputs/feedback-evidence/008-operator-policy-decision.json": "feedback-evidence/008-operator-policy-decision.json"
   }
 }

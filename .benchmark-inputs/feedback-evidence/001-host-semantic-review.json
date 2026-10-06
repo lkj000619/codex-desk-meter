@@ -1,0 +1,17 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+  "common_collector_payload_matches_reference": true,
+  "exact_common_wire_encoder_matches": true,
+  "production_c_common_accepted_sequences": [
+    0,
+    1
+  ],
+  "provider_validity_cases": 17,
+  "provider_validity_passed": 17,
+  "independently_observed_python_tests": 22,
+  "candidate_final_response_reported_python_tests": 21,
+  "archived_c_executables_passed": 3,
+  "candidate_wire_schema_cases": 29,
+  "frozen_operator29_pipeline_completed": false,
+  "scope": "Candidate29 C wire/schema tests differ from frozen operator29 pipeline scenarios. Source/artifacts/cost unchanged; runtime device acceptance and optical behavior require separate observations."
+}

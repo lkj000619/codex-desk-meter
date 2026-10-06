@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "status": "failed",
+  "status": "captured",
   "port": "COM3",
   "sender_kind": "operator_replay",
-  "started_at": "2026-10-06T12:23:39.493590+00:00",
+  "started_at": "2026-10-06T13:54:32.160560+00:00",
   "frames": [
     {
       "sequence": 0,
@@ -12,29 +12,30 @@
       "bytes_written": 1543,
       "accepted_at_seconds": null,
       "display_marker_at_seconds": null,
-      "write_at_seconds": 0.0470000000204891,
-      "response_sha256": "7edac44e99c6769053a32f626aebcb58879864fe77866d9bf09e7769f51f9bb4",
-      "write_duration_seconds": 0.01600000006146729
+      "write_at_seconds": 2.4369999999180436,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "write_duration_seconds": 0.014999999897554517
     },
     {
       "sequence": 1,
       "frame_sha256": "46b51f55404dbb8ace1b7aa4b548eb33689372663238715897e2a8ad56530df1",
       "bytes_requested": 1543,
-      "bytes_written": null,
+      "bytes_written": 1543,
       "accepted_at_seconds": null,
       "display_marker_at_seconds": null,
-      "write_at_seconds": null
+      "write_at_seconds": 7.468000000109896,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "write_duration_seconds": 0.01500000013038516
     }
   ],
-  "error_code": "CAPTURE_ERROR",
+  "error_code": null,
   "optical_status": "not_run",
   "product_pass": false,
   "device_accessed": true,
   "clock": "host monotonic relative to session start; firmware uptime is separate",
-  "error": "Write timeout",
   "evidence": {
-    "events.jsonl": "b416c87d5aadb51655ba65236815d74def432e88bd7dde9197ab1d9620e50e72",
-    "device-serial.bin": "7edac44e99c6769053a32f626aebcb58879864fe77866d9bf09e7769f51f9bb4",
+    "events.jsonl": "58043d0bf3a3117f31f8716d5220159869b27b9c638a998d00c0c7a5f3eb8bf2",
+    "device-serial.bin": "0e464aef271564d5b0f2c0037cf01690428d5d6e2464d1f78a7d3a0397470193",
     "sent-frames.jsonl": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd"
   }
 }
