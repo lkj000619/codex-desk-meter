@@ -1,0 +1,195 @@
+{
+  "run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "reviewer": "Codex operator",
+  "reviewed_at": "2026-10-04T20:53:13.755082+00:00",
+  "status": "capture_identity_confirmed",
+  "video_sha256": "e759b25d693b0d4774e463bfcb60b9b71c9a5b6f067945770ccf5d8c6bc3672b",
+  "duration_seconds": 46.3,
+  "source_bytes": 22018701,
+  "implementation_commit": "94018f1785a590e1514ef1b5145c40f0c03ffca3",
+  "artifact_sha256": "3fe7cc55c2a0af238b869cc635571ce38584145f206e97f47154fb81637ed467",
+  "nominal_timestamps_are_precision_measurements": false,
+  "contact_sheets_reviewed": 4,
+  "sample_frames_reviewed": 46,
+  "individual_readable_frames_reviewed": [
+    1,
+    4,
+    6,
+    8,
+    9,
+    11,
+    28,
+    29,
+    41,
+    43,
+    44,
+    45
+  ],
+  "visual_findings": [
+    {
+      "at_seconds": 0.5,
+      "frame": "readable-frame-001.png",
+      "screen": "CODEX METER dashboard",
+      "text": [
+        "WAITING FOR USB DATA...",
+        "Connect host sender to stream cdm/1 frames",
+        "BOOT: SWITCH SCREEN",
+        "TRANSPORT: USB Serial / JTAG 115200 8N1"
+      ],
+      "remaining_58_or_82_visible": false
+    },
+    {
+      "at_seconds": 3.5,
+      "frame": "readable-frame-004.png",
+      "screen": "GLOBAL RESETS",
+      "text": [
+        "LATEST GLOBAL RESET",
+        "NO RECENT RESET RECORD",
+        "Provider: codex-resets.com",
+        "Status: FRESH"
+      ]
+    },
+    {
+      "at_seconds": 5.5,
+      "frame": "readable-frame-006.png",
+      "screen": "SYSTEM STATUS",
+      "text": [
+        "Protocol: cdm/1",
+        "Sequence: NONE",
+        "Cached Snapshots: 0",
+        "Cached Resets: 0",
+        "No Active Errors",
+        "Auto Recovery: READY",
+        "Uptime: 421 sec"
+      ],
+      "default_labels_are_successful_receipt_evidence": false
+    },
+    {
+      "at_seconds": 7.5,
+      "frame": "readable-frame-008.png",
+      "screen": "mixed transition",
+      "note": "Header shows CODEX METER while body retains SYSTEM STATUS information; transient mixed rendering is visible."
+    },
+    {
+      "at_seconds": 8.5,
+      "frame": "readable-frame-009.png",
+      "screen": "dashboard waiting",
+      "returned_to_start": true
+    },
+    {
+      "at_seconds": 10.5,
+      "frame": "readable-frame-011.png",
+      "screen": "mixed transition",
+      "note": "SYSTEM STATUS heading coexists with GLOBAL RESETS body in the sample."
+    },
+    {
+      "interval_seconds": [
+        14.5,
+        26.5
+      ],
+      "screen": "physical board rotation and camera movement",
+      "note": "No extra IMU conformance or calibrated rotation/latency claim from movement alone."
+    },
+    {
+      "interval_seconds": [
+        27.5,
+        29.5
+      ],
+      "frames": [
+        "readable-frame-028.png",
+        "readable-frame-029.png"
+      ],
+      "screen": "blank/dim then header returns then dashboard",
+      "note": "Glare and hand/button manipulation present. Reset cause and spontaneous-vs-manual behavior cannot be assigned from these samples."
+    },
+    {
+      "interval_seconds": [
+        30.5,
+        39.5
+      ],
+      "screen": "board occluded or outside camera",
+      "note": "Continuous LCD stability and exact input/USB operations cannot be assessed in this interval."
+    },
+    {
+      "at_seconds": 40.5,
+      "frame": "readable-frame-041.png",
+      "screen": "dashboard waiting"
+    },
+    {
+      "at_seconds": 42.5,
+      "frame": "readable-frame-043.png",
+      "screen": "GLOBAL RESETS default"
+    },
+    {
+      "at_seconds": 43.5,
+      "frame": "readable-frame-044.png",
+      "screen": "SYSTEM STATUS",
+      "text": [
+        "Sequence: NONE",
+        "Cached Snapshots: 0",
+        "Cached Resets: 0",
+        "Uptime: 3 sec"
+      ],
+      "note": "Uptime decreased from 421 to 3; a restart occurred during the recording interval, but off-camera manipulation prevents cause attribution."
+    },
+    {
+      "at_seconds": 44.5,
+      "frame": "readable-frame-045.png",
+      "screen": "dashboard waiting",
+      "returned_to_start": true
+    }
+  ],
+  "navigation": {
+    "starting_screen": "dashboard waiting",
+    "observed_paths": [
+      [
+        "dashboard waiting",
+        "GLOBAL RESETS default",
+        "SYSTEM STATUS empty",
+        "dashboard waiting"
+      ],
+      [
+        "dashboard waiting",
+        "GLOBAL RESETS default",
+        "SYSTEM STATUS empty",
+        "dashboard waiting"
+      ]
+    ],
+    "first_path_nominal_times_seconds": [
+      0.5,
+      3.5,
+      5.5,
+      8.5
+    ],
+    "last_path_nominal_times_seconds": [
+      40.5,
+      42.5,
+      43.5,
+      44.5
+    ],
+    "physical_button_manipulation_visible": true,
+    "exact_boot_press_count": null,
+    "individual_boot_vs_imu_transition_trigger": null,
+    "populated_reference_information_navigation_proven": false
+  },
+  "continuity": {
+    "continuous_30s_no_flicker_certified": false,
+    "note": "Blank/mixed samples, off-camera interval, uptime restart and one-second sampling do not certify 30s continuous stable rendering."
+  },
+  "reference_reached": false,
+  "product_pass": false,
+  "policy_status": "invalid_for_comparison",
+  "candidate_execution_repeated": false,
+  "next_model_started": false,
+  "additional_candidate_round_started": false,
+  "user_hold": {
+    "recorded_at": "2026-10-04T20:49:14.018004+00:00",
+    "source": "Explicit user instruction while supplying current firmware video",
+    "scope": "Hold candidate progression after current AGY Flash r02 evaluation; no additional AGY round or next model without user resumption.",
+    "current_run": "20261005-antigravity-cli-agy-flash-r02",
+    "next_model_start_authorized_now": false,
+    "additional_candidate_round_start_authorized_now": false,
+    "current_video_preservation_and_evaluation_allowed": true,
+    "board_firmware_replacement_authorized_now": false
+  }
+}
