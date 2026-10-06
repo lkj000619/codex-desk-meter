@@ -72,8 +72,10 @@ static const st7701_lcd_init_cmd_t panel_commands[] = {
     CMD(0xE8, ((uint8_t[]){0x00,0x0C}), 10), CMD(0xE8, ((uint8_t[]){0x00,0x00}), 0),
     CMD(0xFF, ((uint8_t[]){0x77,0x01,0x00,0x00,0x00}), 0),
     CMD(0x3A, ((uint8_t[]){0x55}), 0),
-    /* MV rotates the native 320x820 panel scan to the product's 820x320 landscape surface. */
-    CMD(0x36, ((uint8_t[]){0x20}), 0),
+    /* The RGB timing is already configured as 820x320 landscape. Keep MADCTL
+       at the manufacturer's non-swapped orientation; MV here rotates the
+       rendered content a second time and clips it on the wide surface. */
+    CMD(0x36, ((uint8_t[]){0x00}), 0),
     CMD(0x35, ((uint8_t[]){0x00}), 0), CMD0(0x29, 20),
 };
 
@@ -183,13 +185,6 @@ static bool json_number(cJSON *object, const char *name, double *value)
     return true;
 }
 
-static void number_text(char *buffer, size_t length, bool present, double value,
-                        const char *suffix)
-{
-    if (!present) snprintf(buffer, length, "UNKNOWN");
-    else snprintf(buffer, length, "%.0f%s", value, suffix ? suffix : "");
-}
-
 static size_t dashboard_row_count(cJSON *usage)
 {
     size_t count = 0;
@@ -202,48 +197,96 @@ static size_t dashboard_row_count(cJSON *usage)
     return count;
 }
 
-static void draw_usage_row(int row, cJSON *snapshot, cJSON *window, const char *sent_at,
-                           uint64_t frame_age_ms)
+static bool dashboard_item_at(cJSON *usage, size_t wanted, cJSON **snapshot_out,
+                              cJSON **window_out)
 {
-    char text[192], used[24], remaining[24], reset[28];
+    size_t index = 0;
+    cJSON *snapshot;
+    cJSON_ArrayForEach(snapshot, usage) {
+        cJSON *windows = cJSON_GetObjectItemCaseSensitive(snapshot, "windows");
+        int count = cJSON_IsArray(windows) ? cJSON_GetArraySize(windows) : 0;
+        if (count == 0) {
+            if (index++ == wanted) {
+                *snapshot_out = snapshot;
+                *window_out = NULL;
+                return true;
+            }
+            continue;
+        }
+        cJSON *window;
+        cJSON_ArrayForEach(window, windows) {
+            if (index++ == wanted) {
+                *snapshot_out = snapshot;
+                *window_out = window;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+static void draw_usage_card(int x, cJSON *snapshot, cJSON *window,
+                            const char *sent_at, uint64_t frame_age_ms)
+{
+    char metric[32], used[48], line[96];
     const char *provider = json_string(snapshot, "provider_id");
     const char *source = json_string(snapshot, "source_kind");
-    const char *label = window ? json_string(window, "label") : NULL;
-    const char *unit = window ? json_string(window, "unit") : json_string(snapshot, "unit");
-    const char *resets_at = window ? json_string(window, "resets_at") : NULL;
-    const char *observed_at = json_string(snapshot, "observed_at");
-    if (window) {
-        double value;
-        bool used_ok = json_number(window, "percent_used", &value);
-        number_text(used, sizeof(used), used_ok, value, "%");
-        bool remaining_ok = json_number(window, "percent_remaining", &value);
-        number_text(remaining, sizeof(remaining), remaining_ok, value, "%");
-        if ((!used_ok || !remaining_ok) && json_number(window, "used_units", &value)) {
-            double limit;
-            bool has_limit = json_number(window, "limit_units", &limit);
-            snprintf(used, sizeof(used), "%.0f/%s", value, has_limit ? "LIMIT" : "?");
-            if (has_limit) snprintf(used, sizeof(used), "%.0f/%.0f", value, limit);
-            bool has_remaining = json_number(window, "remaining_units", &value);
-            if (has_remaining) snprintf(remaining, sizeof(remaining), "%.0f %s", value, unit ? unit : "UNITS");
-        }
-        const char *reset_string = resets_at ? resets_at : "UNKNOWN";
-        snprintf(reset, sizeof(reset), "%.24s", reset_string);
-    } else {
-        snprintf(used, sizeof(used), "NO WINDOWS");
-        snprintf(remaining, sizeof(remaining), "STATUS %.14s", json_string(snapshot, "status") ? json_string(snapshot, "status") : "UNKNOWN");
-        snprintf(reset, sizeof(reset), "UNKNOWN");
-    }
-    bool source_stale = false;
+    const char *status = json_string(snapshot, "status");
     const char *observed = json_string(snapshot, "observed_at");
-    if (sent_at && observed) source_stale = meter_source_is_stale(sent_at, observed, frame_age_ms);
-    snprintf(text, sizeof(text), "%.12s/%.8s %.12s U%s L%s %s O%.20s R%.20s%s",
-             provider ? provider : "UNKNOWN", source ? source : "UNKNOWN",
-             label ? label : "STATUS", used, remaining, unit ? unit : "UNKNOWN",
-             observed_at ? observed_at : "UNKNOWN", reset,
-             source_stale ? " SOURCE-STALE" : "");
-    int y = 55 + row * 18;
-    fill_rect(18, y - 2, LCD_WIDTH - 36, 17, (row & 1) ? 0x10A4 : 0x18E6);
-    draw_text(24, y, text, source_stale ? 0xFD20 : 0xFFFF, 1, 126);
+    const char *last_good = json_string(snapshot, "last_good_at");
+    const char *error = json_string(snapshot, "error_code");
+    const char *label = window ? json_string(window, "label") : status;
+    const char *unit = window ? json_string(window, "unit") : json_string(snapshot, "unit");
+    const char *reset = window ? json_string(window, "resets_at") : NULL;
+    bool source_stale = cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(snapshot, "stale"));
+    bool source_age_known = sent_at && observed;
+    double value = 0;
+    bool remaining_percent = window && json_number(window, "percent_remaining", &value);
+    if (remaining_percent) {
+        snprintf(metric, sizeof(metric), "%.0f%%", value);
+    } else if (window && json_number(window, "remaining_units", &value)) {
+        snprintf(metric, sizeof(metric), "%.0f", value);
+    } else if (window) {
+        snprintf(metric, sizeof(metric), "UNKNOWN");
+    } else {
+        snprintf(metric, sizeof(metric), "NO VALUE");
+    }
+
+    bool used_percent = window && json_number(window, "percent_used", &value);
+    if (used_percent) {
+        snprintf(used, sizeof(used), "USED %.0f%%", value);
+    } else if (window && json_number(window, "used_units", &value)) {
+        snprintf(used, sizeof(used), "USED %.0f %s", value, unit ? unit : "UNKNOWN");
+    } else {
+        snprintf(used, sizeof(used), "USED UNKNOWN");
+    }
+
+    if (source_age_known && meter_source_is_stale(sent_at, observed, frame_age_ms)) source_stale = true;
+    uint16_t value_color = (source_stale || error) ? 0xFD20 : 0xFFFF;
+    fill_rect(x, 55, 388, 232, 0x10A4);
+    draw_text(x + 12, 66, provider ? provider : "UNKNOWN PROVIDER", 0x7FEF, 1, 60);
+    snprintf(line, sizeof(line), "SOURCE %.16s", source ? source : "UNKNOWN");
+    draw_text(x + 198, 66, line, 0xC618, 1, 31);
+    draw_text(x + 12, 84, label ? label : "UNKNOWN WINDOW", 0xFFFF, 2, 30);
+    draw_text(x + 12, 119, metric, value_color, remaining_percent ? 6 : 4, 10);
+    snprintf(line, sizeof(line), "%s REMAINING", remaining_percent ? "PERCENT" : (unit ? unit : "VALUE"));
+    draw_text(x + 12, 164, line, 0x7FEF, 1, 60);
+    draw_text(x + 12, 184, used, 0xC618, 2, 30);
+    snprintf(line, sizeof(line), "LOOKUP %.24s", observed ? observed : "UNKNOWN");
+    draw_text(x + 12, 218, line, 0xC618, 1, 60);
+    snprintf(line, sizeof(line), "RESET %.24s", reset ? reset : "UNKNOWN");
+    draw_text(x + 12, 236, line, 0xC618, 1, 60);
+    if (source_stale) {
+        snprintf(line, sizeof(line), "SOURCE STALE  LAST GOOD %.20s", last_good ? last_good : "UNKNOWN");
+        draw_text(x + 12, 259, line, 0xFD20, 1, 60);
+    } else if (!source_age_known) {
+        draw_text(x + 12, 259, "SOURCE AGE UNKNOWN", 0xFFE0, 1, 60);
+    } else if (error) {
+        snprintf(line, sizeof(line), "SOURCE ERROR %.20s", error);
+        draw_text(x + 12, 259, line, 0xFD20, 1, 60);
+    } else {
+        draw_text(x + 12, 259, "SOURCE AGE FRESH", 0x07E0, 1, 60);
+    }
 }
 
 static void render_dashboard(cJSON *payload, uint32_t sequence, bool receive_stale,
@@ -251,34 +294,32 @@ static void render_dashboard(cJSON *payload, uint32_t sequence, bool receive_sta
 {
     cJSON *usage = cJSON_GetObjectItemCaseSensitive(payload, "usage");
     size_t total = cJSON_IsArray(usage) ? dashboard_row_count(usage) : 0;
-    const size_t visible = 13;
-    size_t offset = total ? (size_t)(scroll_offset % total) : 0;
     clear_canvas(0x0861);
-    draw_text(22, 16, "CODEX DESK METER  /  PROVIDER WINDOWS", 0x7FEF, 3, 65);
-    char heading[96];
-    snprintf(heading, sizeof(heading), "FRAME %" PRIu32 "   RX %s   SOURCE TIMES PRESERVED",
+    draw_text(22, 16, "USAGE WINDOWS", 0x7FEF, 2, 36);
+    char heading[64];
+    snprintf(heading, sizeof(heading), "FRAME %" PRIu32 "  RECEIVE %s",
              sequence, receive_stale ? "STALE" : "OK");
-    draw_text(24, 39, heading, receive_stale ? 0xFD20 : 0xC618, 2, 65);
-    size_t index = 0, shown = 0;
-    cJSON *snapshot;
-    cJSON_ArrayForEach(snapshot, usage) {
-        cJSON *windows = cJSON_GetObjectItemCaseSensitive(snapshot, "windows");
-        int count = cJSON_IsArray(windows) ? cJSON_GetArraySize(windows) : 0;
-        if (!count) {
-            if (index >= offset && shown < visible) draw_usage_row((int)shown++, snapshot, NULL, sent_at, frame_age_ms);
-            index++;
-        } else {
-            cJSON *window;
-            cJSON_ArrayForEach(window, windows) {
-                if (index >= offset && shown < visible) draw_usage_row((int)shown++, snapshot, window, sent_at, frame_age_ms);
-                index++;
+    draw_text(394, 22, heading, receive_stale ? 0xFD20 : 0xC618, 1, 70);
+
+    size_t offset = total ? ((size_t)(scroll_offset * 2u) % total) : 0;
+    if (!total) {
+        draw_text(170, 126, "NO USAGE SNAPSHOTS IN FRAME", 0xFFE0, 3, 65);
+    } else {
+        for (size_t card = 0; card < 2; card++) {
+            size_t index = (offset + card) % total;
+            cJSON *snapshot = NULL;
+            cJSON *window = NULL;
+            if (dashboard_item_at(usage, index, &snapshot, &window)) {
+                draw_usage_card(card == 0 ? 16 : 416, snapshot, window, sent_at, frame_age_ms);
             }
         }
     }
     char footer[96];
-    snprintf(footer, sizeof(footer), "WINDOWS %u-%u / %u    BOOT: NEXT SCREEN",
-             total ? (unsigned)(offset + 1) : 0, (unsigned)(offset + shown), (unsigned)total);
-    draw_text(24, 300, footer, 0x7FEF, 2, 65);
+    snprintf(footer, sizeof(footer), "BOOT NEXT SCREEN   AUTO GROUP %u OF %u   RECEIVE AGE %" PRIu64 " SEC",
+             total ? (unsigned)(offset / 2u + 1u) : 0u,
+             total ? (unsigned)((total + 1u) / 2u) : 0u,
+             frame_age_ms / 1000u);
+    draw_text(22, 299, footer, 0x7FEF, 2, 65);
 }
 
 static void render_global(cJSON *payload, const char *sent_at, uint64_t frame_age_ms)
@@ -346,7 +387,8 @@ static void render_status(cJSON *payload, uint32_t sequence, bool has_frame,
         const char *status = json_string(snapshot, "status");
         const char *error = json_string(snapshot, "error_code");
         const char *observed = json_string(snapshot, "observed_at");
-        bool source_stale = observed && sent_at && meter_source_is_stale(sent_at, observed, frame_age_ms);
+        bool source_stale = cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(snapshot, "stale"));
+        if (observed && sent_at && meter_source_is_stale(sent_at, observed, frame_age_ms)) source_stale = true;
         const char *last_good = json_string(snapshot, "last_good_at");
         const char *source = json_string(snapshot, "source_kind");
         snprintf(line, sizeof(line), "%.12s/%.8s %.8s OBS %.20s LAST GOOD %.20s ERR %.10s",
