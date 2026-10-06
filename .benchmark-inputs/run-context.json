@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "run_id": "20261006-codex-cli-gpt-6-luna-r03",
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
   "experiment_id": "version-2-end-to-end-v1",
   "baseline": {
     "id": "comparison-baseline-20261004",
@@ -26,21 +26,25 @@
     "input_bundle_sha256": "891f33b6a9128e423619c6c59b309cf09b0fe3d634bec9aa04bdfe93297207a1"
   },
   "outputs": {
-    "selection_document": "docs/agent-runs/20261006-codex-cli-gpt-6-luna-r03/hardware-feature-selection.md",
-    "structured_result": "results/20261006-codex-cli-gpt-6-luna-r03/end-to-end-result.json",
-    "evaluation_manifest": "results/20261006-codex-cli-gpt-6-luna-r03/e2e-evaluation-manifest.json"
+    "selection_document": "docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/hardware-feature-selection.md",
+    "structured_result": "results/20261007-codex-cli-gpt-6-luna-r01/end-to-end-result.json",
+    "evaluation_manifest": "results/20261007-codex-cli-gpt-6-luna-r01/e2e-evaluation-manifest.json"
   },
   "evaluation_manifest_path": ".benchmark-inputs/e2e-evaluation-manifest.json",
   "immutable_files": {
     ".benchmark-inputs/feedback.json": "candidate-feedback.json",
-    ".benchmark-inputs/feedback-evidence/000-user-black-screen-report.json": "feedback-evidence/000-user-black-screen-report.json",
-    ".benchmark-inputs/feedback-evidence/001-host-semantic-review.json": "feedback-evidence/001-host-semantic-review.json",
-    ".benchmark-inputs/feedback-evidence/002-common-stimulus-check.json": "feedback-evidence/002-common-stimulus-check.json",
-    ".benchmark-inputs/feedback-evidence/003-runtime-source-binding.json": "feedback-evidence/003-runtime-source-binding.json",
-    ".benchmark-inputs/feedback-evidence/004-runtime-observation-correction.json": "feedback-evidence/004-runtime-observation-correction.json",
+    ".benchmark-inputs/feedback-evidence/000-user-observation-confirmation.json": "feedback-evidence/000-user-observation-confirmation.json",
+    ".benchmark-inputs/feedback-evidence/001-video-review.json": "feedback-evidence/001-video-review.json",
+    ".benchmark-inputs/feedback-evidence/002-host-semantic-review.json": "feedback-evidence/002-host-semantic-review.json",
+    ".benchmark-inputs/feedback-evidence/003-common-stimulus-check.json": "feedback-evidence/003-common-stimulus-check.json",
+    ".benchmark-inputs/feedback-evidence/004-runtime-source-binding.json": "feedback-evidence/004-runtime-source-binding.json",
     ".benchmark-inputs/feedback-evidence/005-device-serial.bin": "feedback-evidence/005-device-serial.bin",
     ".benchmark-inputs/feedback-evidence/006-capture.json": "feedback-evidence/006-capture.json",
     ".benchmark-inputs/feedback-evidence/007-sent-frames.jsonl": "feedback-evidence/007-sent-frames.jsonl",
-    ".benchmark-inputs/feedback-evidence/008-operator-policy-decision.json": "feedback-evidence/008-operator-policy-decision.json"
+    ".benchmark-inputs/feedback-evidence/008-frame-001.png": "feedback-evidence/008-frame-001.png",
+    ".benchmark-inputs/feedback-evidence/009-frame-009.png": "feedback-evidence/009-frame-009.png",
+    ".benchmark-inputs/feedback-evidence/010-frame-016.png": "feedback-evidence/010-frame-016.png",
+    ".benchmark-inputs/feedback-evidence/011-frame-037.png": "feedback-evidence/011-frame-037.png",
+    ".benchmark-inputs/feedback-evidence/012-operator-policy-decision.json": "feedback-evidence/012-operator-policy-decision.json"
   }
 }

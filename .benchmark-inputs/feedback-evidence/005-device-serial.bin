@@ -10,7 +10,7 @@ load:0x403c8704,len:0xce8
 load:0x403cb700,len:0x2ed8
 entry 0x403c8918
 [0;32mI (26) boot: ESP-IDF HEAD-HASH-NOTFOUND 2nd stage bootloader[0m
-[0;32mI (27) boot: compile time Oct  6 2026 21:56:43[0m
+[0;32mI (27) boot: compile time Oct  7 2026 00:00:24[0m
 [0;32mI (27) boot: Multicore bootloader[0m
 [0;32mI (31) boot: chip revision: v0.2[0m
 [0;32mI (35) boot: efuse block revision: v1.4[0m
@@ -24,11 +24,11 @@ entry 0x403c8918
 [0;32mI (77) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
 [0;32mI (85) boot:  2 factory          factory app      00 00 00010000 00100000[0m
 [0;32mI (92) boot: End of partition table[0m
-[0;32mI (96) esp_image: segment 0: paddr=00010020 vaddr=3c030020 size=0f848h ( 63560) map[0m
-[0;32mI (116) esp_image: segment 1: paddr=0001f870 vaddr=3fc95300 size=007a8h (  1960) load[0m
-[0;32mI (117) esp_image: segment 2: paddr=00020020 vaddr=42000020 size=29564h (169316) map[0m
-[0;32mI (152) esp_image: segment 3: paddr=0004958c vaddr=3fc95aa8 size=02cb4h ( 11444) load[0m
-[0;32mI (155) esp_image: segment 4: paddr=0004c248 vaddr=40374000 size=112a4h ( 70308) load[0m
+[0;32mI (96) esp_image: segment 0: paddr=00010020 vaddr=3c030020 size=0f888h ( 63624) map[0m
+[0;32mI (116) esp_image: segment 1: paddr=0001f8b0 vaddr=3fc95300 size=00768h (  1896) load[0m
+[0;32mI (117) esp_image: segment 2: paddr=00020020 vaddr=42000020 size=295c4h (169412) map[0m
+[0;32mI (152) esp_image: segment 3: paddr=000495ec vaddr=3fc95a68 size=02cf4h ( 11508) load[0m
+[0;32mI (155) esp_image: segment 4: paddr=0004c2e8 vaddr=40374000 size=112a4h ( 70308) load[0m
 [0;32mI (180) boot: Loaded app from partition at offset 0x10000[0m
 [0;32mI (180) boot: Disabling RNG early entropy source...[0m
 [0;32mI (192) octal_psram: vendor id    : 0x0d (AP)[0m
@@ -51,9 +51,9 @@ entry 0x403c8918
 [0;32mI (713) cpu_start: cpu freq: 240000000 Hz[0m
 [0;32mI (714) app_init: Application information:[0m
 [0;32mI (716) app_init: Project name:     codex_desk_meter[0m
-[0;32mI (722) app_init: App version:      2c5b001[0m
-[0;32mI (727) app_init: Compile time:     Oct  6 2026 21:56:26[0m
-[0;32mI (733) app_init: ELF file SHA256:  81c1bd1d2...[0m
+[0;32mI (722) app_init: App version:      deb77b3[0m
+[0;32mI (727) app_init: Compile time:     Oct  7 2026 00:00:10[0m
+[0;32mI (733) app_init: ELF file SHA256:  217445082...[0m
 [0;32mI (738) app_init: ESP-IDF:          HEAD-HASH-NOTFOUND[0m
 [0;32mI (744) efuse_init: Min chip rev:     v0.0[0m
 [0;32mI (749) efuse_init: Max chip rev:     v0.99 [0m
@@ -63,10 +63,10 @@ entry 0x403c8918
 [0;32mI (772) heap_init: At 3FCE9710 len 00005724 (21 KiB): RAM[0m
 [0;32mI (778) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
 [0;32mI (784) heap_init: At 600FE100 len 00001EE8 (7 KiB): RTCRAM[0m
-[0;32mI (790) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
+[0;32mI (791) esp_psram: Adding pool of 8192K of PSRAM memory to heap allocator[0m
 [0;32mI (799) spi_flash: detected chip: generic[0m
 [0;32mI (802) spi_flash: flash io: dio[0m
-[0;32mI (806) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (807) sleep: Configure to isolate all GPIO pins in sleep state[0m
 [0;32mI (813) sleep: Enable automatic switching of GPIO sleep configuration[0m
 [0;32mI (821) main_task: Started on CPU0[0m
 [0;32mI (831) esp_psram: Reserving pool of 32K of internal memory for DMA/internal allocations[0m
@@ -77,13 +77,11 @@ entry 0x403c8918
 [0;32mI (871) lcd_panel.io.3wire_spi: Panel IO create success, version: 1.0.1[0m
 [0;32mI (871) st7701: version: 1.1.5[0m
 [0;32mI (881) gpio: GPIO[16]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 0| Pulldown: 0| Intr:0 [0m
-[0;33mW (1251) st7701_rgb: The 3Ah command has been used and will be overwritten by external initialization sequence[0m
-[0;33mW (1251) st7701_rgb: The 36h command has been used and will be overwritten by external initialization sequence[0m
-[0;33mW (1281) lcd_panel.io.3wire_spi: Delete but keep CS line inactive[0m
-[0;32mI (1281) gpio: GPIO[2]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
-[0;32mI (1281) gpio: GPIO[1]| InputEn: 0| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
-[0;32mI (1451) gpio: GPIO[0]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
-[0;32mI (1481) meter_lcd: LCD 820x320 RGB565; one 524800-byte canvas in PSRAM; RGB panel framebuffers=2[0m
-[0;32mI (1481) meter_lcd: free PSRAM=6810988 bytes, internal=340691 bytes[0m
-[0;32mI (1561) meter_app: boot screen submitted before USB receiver setup[0m
-[0;32mI (1561) meter_app: USB Serial/JTAG receiver ready: 115200 8N1 host settings, no ACK/retry protocol[0m
+[0;33mW (1281) st7701_rgb: The 3Ah command has been used and will be overwritten by external initialization sequence[0m
+[0;33mW (1281) st7701_rgb: The 36h command has been used and will be overwritten by external initialization sequence[0m
+[0;32mI (1311) gpio: GPIO[0]| InputEn: 1| OutputEn: 0| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0 [0m
+[0;32mI (1341) meter_lcd: LCD 820x320 RGB565; one 524800-byte canvas in PSRAM; RGB panel framebuffers=2[0m
+[0;32mI (1341) meter_lcd: free PSRAM=6810988 bytes, internal=340631 bytes[0m
+[0;32mI (1421) meter_app: boot screen submitted before USB receiver setup[0m
+[0;32mI (1421) meter_app: USB Serial/JTAG receiver ready: 115200 8N1 host settings, no ACK/retry protocol[0m
+[0;32mI (2401) meter_app: USB Serial/JTAG receive path observed data (64 bytes)[0m
