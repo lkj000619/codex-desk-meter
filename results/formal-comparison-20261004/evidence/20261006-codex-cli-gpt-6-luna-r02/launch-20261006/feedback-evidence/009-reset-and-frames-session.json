@@ -1,0 +1,16 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "port": "COM3",
+  "started_at": "2026-10-06T12:25:36.563483+00:00",
+  "flash_write": false,
+  "candidate_invocation": false,
+  "reset_strategy": "esptool HardReset uses_usb=True",
+  "scope": "Second post-evaluation diagnostic capture; single connection, reset before sending.",
+  "frames_path": "C:\\meter-run-restores-20261006\\codex-luna-r01-evaluation\\operator\\reference\\expected-frames.jsonl",
+  "reset_requested_at": "2026-10-06T12:25:36.590375+00:00",
+  "reset_sequence_completed_at": "2026-10-06T12:25:36.993867+00:00",
+  "ended_at": "2026-10-06T12:25:41.122176+00:00",
+  "capture_status": "captured",
+  "serial_closed": true,
+  "wait_seconds_per_frame": 1
+}

@@ -1,0 +1,205 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+  "date": "2026-10-06",
+  "recorded_at": "2026-10-06T12:51:15.523064+00:00",
+  "previous_run_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "previous_frozen_commit": "c0d5d61160664923e0494302fae180089d02d247",
+  "prepared_commit": "2c5b001777c395f68b879dc7649e208cc4e9f050",
+  "product_source_verified": {
+    ".gitignore": {
+      "original_raw_sha256": "960531d3a5108419b834575774f193ad4f3e527a91c90ba69e6fd556350411ab",
+      "new_working_copy_sha256": "0bd6f40d2c30b94433598307b4f62d89e4512baf7c292211bc00fba9857015b6",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "CMakeLists.txt": {
+      "original_raw_sha256": "3a653b2c279b5fcae8beb2f0ac30e40f0905e4ecaa860d161364af788cf0ec0f",
+      "new_working_copy_sha256": "40b17b7874de8ffc0c88956dbd1251ef332adc1e223154b2bd90d01f3d5f4e56",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "requirements-product.txt": {
+      "original_raw_sha256": "95fdad543f34e4a191cd17219e1a73b4ab4b0b5ad9806a25c3b49e7b48ab8ca0",
+      "new_working_copy_sha256": "1f9cd0f05c4f38521c72b1465fdbcda66d71bda860e3adde9a1e2c214e6a17ff",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "sdkconfig.defaults": {
+      "original_raw_sha256": "0bfb88ef65123c18757dd25b2f06122b04240342e5a6b6536874df5701dac808",
+      "new_working_copy_sha256": "7ff34c0c4d187cf53456321b9a965d6391df2629938f8e66682d882931425484",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "components/idle_dim_policy/CMakeLists.txt": {
+      "original_raw_sha256": "88c504009648f41e779e75a03091908cae774fbf342c4500c87778a6a27980d7",
+      "new_working_copy_sha256": "d5cfa134422762555649d1c2094baa2b54332824f5b0daff91a83e99d96c4d07",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "components/idle_dim_policy/idle_dim_policy.c": {
+      "original_raw_sha256": "a072e59ccae202e422528d9aa8d575bf217d690e8a7286e76e0d39b931fcda87",
+      "new_working_copy_sha256": "15a099ba135654da2a0a77490b3f1cf89a955ea35835194fd44dc880579b72d0",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "components/idle_dim_policy/include/idle_dim_policy.h": {
+      "original_raw_sha256": "978316392378301f1cf3256684b9090da9597aa1a8e19822020df8c682b0a0ee",
+      "new_working_copy_sha256": "ef6b4d2fd0ed3e2507c8bce653b6dc41d39343ea61a16ca1e93c3735da867ef8",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "components/meter_core/CMakeLists.txt": {
+      "original_raw_sha256": "a7b67125aa02aa0e49e44413c219a7f3e384d6165a554acb606ed6c3f6369481",
+      "new_working_copy_sha256": "869101334497a4067e7c298a4b4de7036738ed9137979d472dec9a4b516f8caa",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "components/meter_core/meter_core.c": {
+      "original_raw_sha256": "8162132707e65276b5ceda4f46e8b438057f4b69a57e2ab771d6559cfd30c0b1",
+      "new_working_copy_sha256": "6818446d371bf1614d28800f3fe6b9b312b8d3515e2bbf102f5ab2e912708032",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "components/meter_core/include/meter_core.h": {
+      "original_raw_sha256": "01de72d043f1500b5f2c7c2c509dbf4a522735ed1d02c5133fcec15fc12b9756",
+      "new_working_copy_sha256": "0756b8086662e8a7f6d363ec0301ab1bb89b0754637a91b860f3268674cacbb1",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "components/vendor_io_expander/CMakeLists.txt": {
+      "original_raw_sha256": "31b668d177ae012cd693cc9caf32bc96e0d1d4b51b0c0a323b8a6aa8317cdc4c",
+      "new_working_copy_sha256": "72b0d5f1b95faa40abf9a593aab3fcdbd59ab0870a234c938c2f193ccfd94073",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "components/vendor_panel_io_additions/CMakeLists.txt": {
+      "original_raw_sha256": "f08160b31c05cd109dfcd53a2c38f9627100c4ddcc934fa228d7c3e48259e130",
+      "new_working_copy_sha256": "d7ac599ccb704d70fc47f821654568c595f98925fc8e9191c30258cd566665ff",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "components/vendor_st7701/CMakeLists.txt": {
+      "original_raw_sha256": "55fade2f26306f3e548d4ff7f313da82350a54bd7fbe59372193595d3a600ded",
+      "new_working_copy_sha256": "a1015efc9e229c2f4de5d675a501f8e312f2f3233e3a9778784bb0a0ae9302ab",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "main/app_main.c": {
+      "original_raw_sha256": "524871601435479fb4eac11a6575ff0166c7ff5abb76156d744202380efa6b44",
+      "new_working_copy_sha256": "8e81b649c311fb4453990257085639697931fd16ece08f6ed9a92c46841bbb02",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "main/board_lcd.c": {
+      "original_raw_sha256": "3f2e7fa8f0c2bcc012c0bf2f5aaff1738cc9ba79ded22a157b8b8ef5bfe98de7",
+      "new_working_copy_sha256": "01fafa8c6a06277d431cb55ec677ebc9e61c7f07b177b1f453edda59b2b674d7",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "main/board_lcd.h": {
+      "original_raw_sha256": "2dac41273f589a8768aea420939bdd61115795bccb5d460c06993d0ac3bb1244",
+      "new_working_copy_sha256": "e772a037ca9cc332465d44669dd84b62adfb85ea62d3fba0e7e1ac4e460c16ee",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "main/CMakeLists.txt": {
+      "original_raw_sha256": "b3abe379ae266d8587066dd361047892ab4d4a709106f11a7e742a1a18a334ee",
+      "new_working_copy_sha256": "fa02e2f86701668f0b7daee3ef0315c0363f7ee2c7e503862d5e06aa792f592e",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "pc/collector.py": {
+      "original_raw_sha256": "9596b81d4b5054705bfd2b63ea5b7f4a5c0e5565011a52cd104c7842e2cca0b8",
+      "new_working_copy_sha256": "64bd31c455f4e9a2f70ac1f5f40217689b4317c7d121ae663414a9eb81694a4d",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "pc/fixture-set.json": {
+      "original_raw_sha256": "c07700833cad40dadd79617e36feb33326b4cb08a652b545622ce77859df26af",
+      "new_working_copy_sha256": "548c4509191c88a96c67af042a7fad87b86795d6644512801c04f6c404a216b5",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "pc/gui.py": {
+      "original_raw_sha256": "64be92b75ccc6aaf1955dcff3f590252d482146ddddb91c5ed35ad9721571622",
+      "new_working_copy_sha256": "0c49e6e03dba1b297f729e62248dd590e052086ae7296a87cb54e265a83e5182",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "pc/pipeline.py": {
+      "original_raw_sha256": "82a83baadf93bb5cc30d04926a603a2c4c2960435833b328f0881ab8021fdcea",
+      "new_working_copy_sha256": "f2f7f837f4347d751c772ff43de105ab70bfe6df0e053bcf43b5aa8ee3991ea5",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "pc/sender.py": {
+      "original_raw_sha256": "d82f279a950c9778738920fc2eab26441db330eb910734aad6182f4177ca3046",
+      "new_working_copy_sha256": "dff6b693e587374f8cd9e35af7f5b1e8bdb960b74a7ba30d7b9d33fc4f775143",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "pc/serial_sender.py": {
+      "original_raw_sha256": "bf0fae4dc5edc503c447a392c51a45c886c6b01a3cbc1b96ae3e407de833d5e7",
+      "new_working_copy_sha256": "39457d1e955b0fe094c3977a6ca034bb22c2fba99b205406f855da7b6db28b76",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "pc/__init__.py": {
+      "original_raw_sha256": "539717651a9af6c6c903a2d4966ccbc551e47081d2ebb2507cbe94059ba9e74a",
+      "new_working_copy_sha256": "fea52126ef30c47a1e135809aa7099770340b04312e274248c38143dba6fd9b1",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "tests/test_pc_pipeline.py": {
+      "original_raw_sha256": "3e14bf599a8f84fb2f42000e9fedc9d4b8fcd5e2a9628fa1eeb16ae4acea3e97",
+      "new_working_copy_sha256": "02fdf5e1557f4c39aa38f99f8968cb106419123f9d108cd40aad1bd6422b0139",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "tests/host/CMakeLists.txt": {
+      "original_raw_sha256": "dbbc258845767f944ce9eb81cf71e58cb00a75f6e117f2791d5732d322d10174",
+      "new_working_copy_sha256": "419acc025f27e8d27ea3ec5495a8ff27148dc27f019fcac23c7c4e2cd8f573df",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "tests/host/test_idle_dim.c": {
+      "original_raw_sha256": "af9a1e41f371efef457f8b260965fc44c3f9bebd6b2684c1862c1efd5a1f998e",
+      "new_working_copy_sha256": "cca6a8c9e039a1e027368fc5d8db23fab2ec7db5efbb4a01381a200e747a2756",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "tests/host/test_meter_parser.c": {
+      "original_raw_sha256": "4aa4d44cecce4dc564d01bb6a8e7b5cd823024251433b06d2e719ee4443751a2",
+      "new_working_copy_sha256": "b51cae7621ee76e79a9219385a770f33bcfd3d565427162105442f60334fb8af",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    },
+    "tests/host/test_meter_state.c": {
+      "original_raw_sha256": "acc149866b6e7b60d12b4a22fae112875721df3108dc60457dbb0c851a46adb0",
+      "new_working_copy_sha256": "dae60ab075507cce0fdd7fa5da737b55e3a5d4592ef2a800a43092153a7e45d4",
+      "git_blob_unchanged": true,
+      "line_ending_normalized_content_unchanged": true
+    }
+  },
+  "omitted_prior_outputs": {
+    "sdkconfig": "Ignored generated sdkconfig not inherited; fixed defaults preserved",
+    "docs/agent-runs/20261006-codex-cli-gpt-6-luna-r01/hardware-feature-selection.md": "Previous submission intentionally removed by frozen followup manager",
+    "docs/agent-runs/20261006-codex-cli-gpt-6-luna-r01/verification-record.md": "Previous submission intentionally removed by frozen followup manager",
+    "results/20261006-codex-cli-gpt-6-luna-r01/end-to-end-result.json": "Previous submission intentionally removed by frozen followup manager"
+  },
+  "inherited_generated_files": 0,
+  "immutable_input_files_verified": 57,
+  "previous_frozen_files_unchanged": {
+    "run-manifest.json": "e0f05a5bbe566ac840cdcb2ccb6c3b79181dc32398ebfcbf74a62c3fda9623bd",
+    "reference-review.json": "e6856810152ae881284e2e6a8ffd7c7145889d676622440596c1f239260c5007",
+    "comparison-source.bundle": "cfdfb6d451e3b98e4fefa13840fe2a0d1e719dfdf94723e64f5fa9b96d7e3136",
+    "operator-source-freeze.json": "97f2a0ec15bb1070179fb8f3fdc56b0521b579e5fed361946fab8e28d7ff6329"
+  },
+  "original_candidate_commit_unchanged": true,
+  "scope": "Own tracked source equivalence and no inherited generated output; no product source or frozen input modification. Observations only, no diagnostic implementation methods.",
+  "preparation_seconds": 8.577999999979511,
+  "model_calls_during_preparation": 0,
+  "round": 1,
+  "reserved_seconds": 7200,
+  "remaining_rounds_including_this": 3
+}
