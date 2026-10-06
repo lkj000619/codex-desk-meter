@@ -852,3 +852,12 @@ BOOT 조작·RESET·30초 연속 유지·자동 재부팅·검은 화면의 원�
 [최종 독립 감사](evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/restore-audit.json)는464개 inventory 파일·source33/artifact19·입력57·원본 비용·정책/RM·현재 업로드·사용자 보고 결합을 확인했다. Package SHA-256은 `57ad97f136d462b95093bd562d8a9af176e91bfee20e6ae826c36d68cebd0764`다.
 [125개 파일 공개 목록](evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/snapshot-inventory.json)은 원본 bytes/hash를 보존한다. 이전404/435/454개 package·launch/terminal snapshot·과거 판정·동결 ref는 그대로다.
 [Checkpoint12](comparison-checkpoint-12.md)는 실제12회·정규화44,103,444 token을 기록하며 모든 실패/부적격 비용과 checkpoint11까지의 원본을 유지한다. 전체 series 종료3/15·Sol/Pro 종료·Flash 보류는 유지한다.
+
+## 2026-10-06 Luna 검은 화면 추가 원인 분석 완료
+
+사용자의 “원인 분석 시작”에 따라 [진단 계획](../../docs/plans/2026-10-06-codex-luna-black-screen-diagnosis.md)을 수행하고 [분석 보고서](luna-black-screen-diagnosis-20261006.md)에 결과를 기록했다.
+같은 COM3·MAC과 원본 app/ELF 결합을 확인했다. Native reset부터5,859 bytes를 받아 정상 flash boot·PSRAM 검사·LCD 초기화 함수 완료·USB 수신 준비를 확인했으며, 첫 진단 전송에서는 생산 수신기의 frame0 수락 로그도 확보했다. 사용자는 첫 리셋 후 계속 검은 화면이라고 확인했다.
+제조사 드라이버/원본 ELF에서 초기 명령 전송·IO 삭제 이후 LCD를 다시 물리 리셋하고 명령을 재전송하지 않는 결함을 확인했다. ST7701S MADCTL의 지원 근거 없는 D5 축 교환 가정과 물리 RGB timing320×820→820×320 변경도 확인했다. 첫 결함은 유력 원인이며 각각의 수정 후 인과 검증은 미실행이다.
+첫 capture의 frame1은 Write timeout, 두 번째 리셋 후 capture는 두 host write 완료·수락 로그 부재다. Frame1·전송 불안정 원인·BOOT·30초 실물 유지의 미확인을 보존한다. 원래 공통 평가의0-byte capture나 기존 최초 RM를 덮어쓰지 않았다.
+[별도 진단 snapshot](evidence/20261006-codex-cli-gpt-6-luna-r01/diagnosis-20261006/snapshot-inventory.json)에 source/hash·ELF disassembly·로그·stimulus·진단 reset2회·사용자 보고를 보존한다. Source 수정·rebuild·flash write·후보 호출0회이며 마지막 serial은 닫았다. 같은 Luna 최초 펌웨어가 남아 있고 마지막 전송의 실제 수락은 미확인이다.
+기존 최초 reference fail·product_pass false·policy invalid·원본 package와12회/44,103,444 token·series3/15·Luna 후속0회/잔여7,200초·3회는 그대로다. 정식 후보 후속에는 운영자 patch/수정 방법을 중립 관측처럼 전달하지 않는다. 다음 작업은 별도로 식별한 수정과 실물 검증이며 이번 분석에서 시작하지 않았다.

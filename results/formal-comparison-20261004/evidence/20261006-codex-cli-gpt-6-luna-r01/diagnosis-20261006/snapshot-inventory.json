@@ -1,0 +1,171 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "created_at": "2026-10-06T12:32:13.021457+00:00",
+  "scope": "Post-evaluation operator diagnosis; original frozen review/package unaffected.",
+  "files": {
+    "capture-hard-reset.py": {
+      "bytes": 2099,
+      "sha256": "b9aae75e6df073ccaf3f2e1cc3aaae7233ad410ebc16f312cc30294dd84d3675"
+    },
+    "capture-passive.py": {
+      "bytes": 1644,
+      "sha256": "ae513851ba708ddeb61c4fa3d432733da7fed62790f3bf07516be80e3aa4708b"
+    },
+    "capture-reset-and-frames.py": {
+      "bytes": 1954,
+      "sha256": "97da7a300135691ab81a4e55148d0f6a7c69db2a1a03f23ae1b3a861efc89d3a"
+    },
+    "collect-source-evidence.py": {
+      "bytes": 5137,
+      "sha256": "65c4bbd1e72b398d58a1238dd86fbe48378275710745e7841c70178baac51fb6"
+    },
+    "comparison-state-before-diagnosis.json": {
+      "bytes": 20498,
+      "sha256": "9aa423f7a6a87b4fc444b49b0d43b8f12dd89b86c06093b60f17c93e220a4db5"
+    },
+    "datasheet-reference.json": {
+      "bytes": 887,
+      "sha256": "49a7356231be6690cd01ecaeb1c27189385e5e88e9d8421acdafb6e5506a33cf"
+    },
+    "diagnostic-findings.json": {
+      "bytes": 3783,
+      "sha256": "dd7357e8914fe0a8de25f5b36b9d8d1a991056c600a34cd746435a5e054bca76"
+    },
+    "elf-board_lcd_init.txt": {
+      "bytes": 19625,
+      "sha256": "3eb2484083ec8c7f5205f6b8fd90e286a014df4419a5287dde6565bcbc9f059d"
+    },
+    "elf-esp_lcd_new_panel_st7701_rgb.txt": {
+      "bytes": 18985,
+      "sha256": "3eeae3640b3bede398c87fa1f76dc723fedff5649f252089345d25aeb2c2e305"
+    },
+    "elf-panel_st7701_init.txt": {
+      "bytes": 2725,
+      "sha256": "dd8fc79ba79d8e6439aeb2b2a5020a0b9a63ec66b39d8319280f0a4badd757ed"
+    },
+    "elf-panel_st7701_reset.txt": {
+      "bytes": 3782,
+      "sha256": "2f4313253535f86ba2c526f81bdf0475a3145a11a834d7f1f80a0dd0750d4b9a"
+    },
+    "hard-reset-capture.json": {
+      "bytes": 6584,
+      "sha256": "1325a96ff03092e35d754588f0c50f216722e0862ce94c7219c8dae3d59abec9"
+    },
+    "hard-reset-serial.bin": {
+      "bytes": 5859,
+      "sha256": "7ac08dbe50f8072d7330860095787430095e904d63d2aec4302d67bf846fdfd8"
+    },
+    "passive-capture.json": {
+      "bytes": 824,
+      "sha256": "dbbdf3476429a1074383b6449d84fd83caa4b27ce716e42fa4839c7c314db665"
+    },
+    "passive-serial.bin": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "post-reset-reference-capture/capture.json": {
+      "bytes": 1476,
+      "sha256": "60165bd32a7b667d3c59cc477a4fe3c783a918748b157293fc8d6c796e28ad72"
+    },
+    "post-reset-reference-capture/device-serial.bin": {
+      "bytes": 65,
+      "sha256": "7edac44e99c6769053a32f626aebcb58879864fe77866d9bf09e7769f51f9bb4"
+    },
+    "post-reset-reference-capture/events.jsonl": {
+      "bytes": 1193,
+      "sha256": "b416c87d5aadb51655ba65236815d74def432e88bd7dde9197ab1d9620e50e72"
+    },
+    "post-reset-reference-capture/sent-frames.jsonl": {
+      "bytes": 3086,
+      "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd"
+    },
+    "probe-rom-no-reset.py": {
+      "bytes": 1490,
+      "sha256": "dc768440eed1f95e85e7ad7544774438a9ed34557012dd44822b581e47244e70"
+    },
+    "publish-diagnosis.py": {
+      "bytes": 3021,
+      "sha256": "d81e5618e38bdf7a38f36c1dd0f2b0849c2e891f2979356a9dd546321790fabe"
+    },
+    "reset-and-frames-capture/capture.json": {
+      "bytes": 1584,
+      "sha256": "3f53b499c7cd61c7a2c955fbd0402b416c9b4a4c48b8ec67e57cea3670b30fde"
+    },
+    "reset-and-frames-capture/device-serial.bin": {
+      "bytes": 5858,
+      "sha256": "0edb85415ec2fbe7630f1f7a85f005f570e292c928a9645daf2a52d6042acc0a"
+    },
+    "reset-and-frames-capture/events.jsonl": {
+      "bytes": 1200,
+      "sha256": "a4a0d4fe8f956c3df80ddd5490330b1730844cd6d5e170c62f7e587f3437231d"
+    },
+    "reset-and-frames-capture/sent-frames.jsonl": {
+      "bytes": 3086,
+      "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd"
+    },
+    "reset-and-frames-session.json": {
+      "bytes": 738,
+      "sha256": "3945abdf89be3466a47326257674a63aaa47d9f380c4da542ea9f06b154a3c0d"
+    },
+    "rom-no-reset-probe.json": {
+      "bytes": 950,
+      "sha256": "5f4a79406cfbdfdee275a1f77288bfed01f768757e211e47e065e566904d16dd"
+    },
+    "rom-no-reset-stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rom-no-reset-stdout.txt": {
+      "bytes": 382,
+      "sha256": "000a70bd551bd7ef03cd5fe42fcaa7ba669f2df90ea0963116b6ae8d68c6f7b3"
+    },
+    "source-evidence/candidate/components/vendor_st7701/CMakeLists.txt": {
+      "bytes": 788,
+      "sha256": "55fade2f26306f3e548d4ff7f313da82350a54bd7fbe59372193595d3a600ded"
+    },
+    "source-evidence/candidate/main/app_main.c": {
+      "bytes": 5614,
+      "sha256": "524871601435479fb4eac11a6575ff0166c7ff5abb76156d744202380efa6b44"
+    },
+    "source-evidence/candidate/main/board_lcd.c": {
+      "bytes": 23115,
+      "sha256": "3f2e7fa8f0c2bcc012c0bf2f5aaff1738cc9ba79ded22a157b8b8ef5bfe98de7"
+    },
+    "source-evidence/candidate/sdkconfig": {
+      "bytes": 69742,
+      "sha256": "a1208d9e4a3fb9170d4761a4079eb4dd45b34e56ce4283a38815e1a07449402e"
+    },
+    "source-evidence/sdk/components/esp_lcd/include/esp_lcd_panel_commands.h": {
+      "bytes": 3648,
+      "sha256": "71ffc578e6039c1de384ed5c8116f87042ddd1422c4958ef226bb7a059ac1689"
+    },
+    "source-evidence/vendor/09_FactoryProgram/main/main.cpp": {
+      "bytes": 11246,
+      "sha256": "f4d77ecb33568b0ad78b0b5eae86ad6c404cc5b500d54687928b8e8b0d746b32"
+    },
+    "source-evidence/vendor/09_FactoryProgram/main/user_config.h": {
+      "bytes": 1792,
+      "sha256": "97a26c977fe5af98eab143bb7d1851ee6541dbd565829d62133fc80dcbd5e1b3"
+    },
+    "source-evidence/vendor/09_FactoryProgram/managed_components/espressif__esp_lcd_st7701/esp_lcd_st7701_rgb.c": {
+      "bytes": 16351,
+      "sha256": "486572aabd1c05be15a9aa1bdcceeacfbfa55329aec65778cb530ef19e785a0f"
+    },
+    "source-evidence/vendor/09_FactoryProgram/managed_components/espressif__esp_lcd_st7701/include/esp_lcd_st7701.h": {
+      "bytes": 9232,
+      "sha256": "9572718e64d329e296e474e188e3b8eaa254f6655166c2a19846565058453aab"
+    },
+    "source-review.json": {
+      "bytes": 4184,
+      "sha256": "65bcd897af7abe45a47cdeaf8b7532c2b7d9cd2da7b9209b48d1d9148223a965"
+    },
+    "user-after-diagnostic-reset.json": {
+      "bytes": 650,
+      "sha256": "0a9a1b2541fd84b1fbc79d037bffc2ec7391003ba0f740d38e56f63293adb18b"
+    },
+    "vendor-build-binding.txt": {
+      "bytes": 439,
+      "sha256": "77af76b925ce9e474d11a206bff29fe0558c91a50d45fb61ada3c64422f80896"
+    }
+  }
+}

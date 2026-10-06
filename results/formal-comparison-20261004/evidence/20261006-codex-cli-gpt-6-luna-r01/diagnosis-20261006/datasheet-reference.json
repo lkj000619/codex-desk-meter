@@ -1,0 +1,11 @@
+{
+  "source": "Sitronix ST7701S Datasheet v1.4,2019/04, distributed by Waveshare",
+  "url": "https://files.waveshare.com/wiki/common/ST7701S_SPEC_V1.4.pdf",
+  "consulted_on": "2026-10-06",
+  "sections": [
+    {"section": "7.5.5 Reset Timing", "printed_pages": [54,55], "claim": "Hardware reset blanks display and restores hardware-reset defaults; register loading occurs on reset release."},
+    {"section": "12.2.27 MADCTL", "printed_page": 214, "claim": "The bit table defines ML atD4 andBGR atD3; D5 is unspecified, with no MV axis-swap function."}
+  ],
+  "scope": "Operator diagnostic supporting source, consulted after candidate termination; not added to frozen candidate inputs.",
+  "limits": "This specifies controller behavior, not measured panel registers or a successful corrected-firmware test. Actual bound vendor driver source and ELF remain the implementation evidence."
+}

@@ -1,0 +1,45 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "date": "2026-10-06",
+  "scope": "Post-evaluation operator diagnosis of the same frozen Luna initial firmware. Not a new candidate execution or retrospective RM review.",
+  "status": "review_complete_with_causal_validation_remaining",
+  "confirmed_code_defects": [
+    {
+      "id": "LCD-INIT-RESET",
+      "candidate_location": "main/board_lcd.c:407-417",
+      "sequence": ["multiplex constructor resets LCD", "constructor sends panel commands including sleep-out/display-on", "constructor deletes SPI IO", "candidate calls panel reset, toggling LCD GPIO16 again", "multiplex init skips panel command resend"],
+      "finding": "The panel is reset after configuration, without reconfiguration. Provided driver code and original ELF implement the physical reset, despite the manufacturer example comment saying RGB-only reset for multiplex mode.",
+      "causal_status": "Strong explanation for black screen, based on executed init path, source/ELF trace and datasheet reset behavior. No corrected-firmware A/B test or panel register readback."
+    },
+    {
+      "id": "LCD-NATIVE-TIMING",
+      "candidate_location": "main/board_lcd.c:23-24,75-76,398",
+      "finding": "Logical landscape 820x320 is also used as physical RGB h_res/v_res. Candidate assumes MADCTL D5=0x20 swaps axes; ST7701S MADCTL defines ML/BGR, not MV. Manufacturer uses physical 320x820 timing.",
+      "causal_status": "Unsupported rotation assumption and manufacturer timing mismatch confirmed. Its independent optical effect is unmeasured because the post-configuration reset defect is also present."
+    }
+  ],
+  "runtime_observations": {
+    "port": "COM3",
+    "mac": "28:84:85:B0:85:18",
+    "reset_only_boot_capture_bytes": 5859,
+    "normal_flash_boot": true,
+    "psram_memory_test_ok": true,
+    "lcd_init_returned_success": true,
+    "usb_receiver_ready": true,
+    "first_post_reset_capture": "Sequence0 accepted in production receiver log; sequence1 write timed out. Exact diagnostic log does not use the generic CDM_RX marker, so capture.json acceptance fields remain null.",
+    "second_post_reset_capture": "Same-port reset,2s boot wait,1s wait per frame: host wrote both frames; no accepted/rejected frame logs. Not proof of either receipt.",
+    "optical": "User confirmed continued black screen after first diagnostic reset; no BOOT/30s/new image facts supplied."
+  },
+  "unresolved": ["Panel register state and RESET waveform not directly measured", "Corrected firmware optical result untested", "Physical timing/rotation correction untested", "Intermittent write/receiver-log behavior and frame1 acceptance unconfirmed", "BOOT navigation and30s optical stability unmeasured"],
+  "next_validation": ["In a separately identified correction, change only the post-configuration physical reset sequence; confirm output with the same fixture", "Validate native320x820 RGB timing separately from logical820x320 rendering; do not assume MADCTL D5 implements rotation", "Verify both frame receipts, readable58/82,three pages,BOOT cycle and30s stability; record any reset", "Formal candidate followup must use its own frozen result and contract feedback; do not supply an operator patch or this proposed implementation sequence as neutral observations"],
+  "candidate_source_modified": false,
+  "firmware_rebuilt": false,
+  "flash_written_during_diagnosis": false,
+  "candidate_invocations_during_diagnosis": 0,
+  "original_rm_review_modified": false,
+  "original_policy_review_modified": false,
+  "candidate_followup_seconds_remaining": 7200,
+  "candidate_followup_rounds_remaining": 3,
+  "implementation_commit": "c0d5d61160664923e0494302fae180089d02d247",
+  "app_sha256": "3af7fd933b743ea7b16ba02627617e3adb3be0d5273eb9deb184f1be9c9d51d6"
+}

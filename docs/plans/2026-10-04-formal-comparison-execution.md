@@ -2,7 +2,7 @@
 
 목표: ESP32-S3-LCD-3.16 제품 구현에서 에이전트의 첫 결과·자기 후속 수정 비용과 RM 도달·제품 품질을 동일 조건으로 비교한다.
 시작 승인: 2026-10-04 사용자 요청 “프로젝트 목적과 목표에 엇나가지않도록 실험 시작”.
-상태: 2026-10-06 Luna 최초의 동결·독립 검증·COM3 재업로드와 사용자 검은 화면 보고를 반영한 제한된 최초 평가를 마쳤다. RM1/2 partial·RM3 fail·RM4/5 not_run, reference fail·product_pass false·정책 invalid_for_comparison이다. 실제 수신·BOOT·30초 유지와 원인은 미확인이다. 후속0회·잔여7,200초/3회, 독립 series 종료3개/예정15개·후보 시작/종료 각12회다. 원본 비용·Sol/Pro 종료·Flash 보류·과거 판정은 보존한다. 아래 실행 과정은 각 시점의 기록이다.
+상태: 2026-10-06 Luna 최초 평가 후 [검은 화면 원인 분석](../../results/formal-comparison-20261004/luna-black-screen-diagnosis-20261006.md)을 마쳤다. 추가 진단에서 정상 부팅·PSRAM·USB 준비·frame0 수락과 LCD 재리셋/회전·물리 timing 결함을 확인했다. 수정 후 인과 검증·frame1 수락·BOOT·30초 유지는 미확인이다. 기존 최초 RM1/2 partial·RM3 fail·RM4/5 not_run, reference fail·product_pass false·정책 invalid_for_comparison을 보존한다. 후속0회·잔여7,200초/3회, 독립 series 종료3개/예정15개·후보 시작/종료 각12회다. 원본 비용·Sol/Pro 종료·Flash 보류·과거 판정은 유지한다. 아래 실행 과정은 각 시점의 기록이다.
 원본: [운영 계약](../experiments/comparison-operating-contract.md), [현재 상태](../experiments/next-comparison-readiness.md),
 [동결 기록](../../results/experiment-launch-preparation-20261004/freeze.json).
 

@@ -1,0 +1,361 @@
+
+C:\meter-runs-20261006\20261006-codex-cli-gpt-6-luna-r01\checkout\build-idf\codex_desk_meter.elf:     file format elf32-xtensa-le
+
+
+Disassembly of section .iram0.vectors:
+
+Disassembly of section .iram0.text:
+
+Disassembly of section .flash.text:
+
+4200eb50 <esp_lcd_new_panel_st7701_rgb>:
+4200eb50:	00a136        	entry	a1, 80
+4200eb53:	026d      	mov.n	a6, a2
+4200eb55:	180c      	movi.n	a8, 1
+4200eb57:	0a0c      	movi.n	a10, 0
+4200eb59:	0a9d      	mov.n	a9, a10
+4200eb5b:	839820        	moveqz	a9, a8, a2
+4200eb5e:	938a30        	movnez	a8, a10, a3
+4200eb61:	208980        	or	a8, a9, a8
+4200eb64:	18cc      	bnez.n	a8, 4200eb69 <esp_lcd_new_panel_st7701_rgb+0x19>
+4200eb66:	024456        	bnez	a4, 4200eb8e <esp_lcd_new_panel_st7701_rgb+0x3e>
+4200eb69:	c53d81        	l32r	a8, 42000060 <_stext+0x40> (40383060 <esp_log_timestamp>)
+4200eb6c:	0008e0        	callx8	a8
+4200eb6f:	c8f0b1        	l32r	a11, 42000f30 <_stext+0xf10> (3c03665c <_flash_rodata_start+0x653c>)
+4200eb72:	783c      	movi.n	a8, 55
+4200eb74:	0189      	s32i.n	a8, a1, 0
+4200eb76:	c901f1        	l32r	a15, 42000f7c <_stext+0xf5c> (3c03cd60 <__FUNCTION__$6>)
+4200eb79:	0bed      	mov.n	a14, a11
+4200eb7b:	0add      	mov.n	a13, a10
+4200eb7d:	c900c1        	l32r	a12, 42000f80 <_stext+0xf60> (3c0368ec <_flash_rodata_start+0x67cc>)
+4200eb80:	1a0c      	movi.n	a10, 1
+4200eb82:	c54481        	l32r	a8, 42000094 <_stext+0x74> (40382fc0 <esp_log_write>)
+4200eb85:	0008e0        	callx8	a8
+4200eb88:	02a122        	movi	a2, 0x102
+4200eb8b:	00d2c6        	j	4200eeda <esp_lcd_new_panel_st7701_rgb+0x38a>
+4200eb8e:	5358      	l32i.n	a5, a3, 20
+4200eb90:	458c      	beqz.n	a5, 4200eb98 <esp_lcd_new_panel_st7701_rgb+0x48>
+4200eb92:	022582        	l32i	a8, a5, 8
+4200eb95:	027856        	bnez	a8, 4200ebc0 <esp_lcd_new_panel_st7701_rgb+0x70>
+4200eb98:	c53281        	l32r	a8, 42000060 <_stext+0x40> (40383060 <esp_log_timestamp>)
+4200eb9b:	0008e0        	callx8	a8
+4200eb9e:	c8e4b1        	l32r	a11, 42000f30 <_stext+0xf10> (3c03665c <_flash_rodata_start+0x653c>)
+4200eba1:	983c      	movi.n	a8, 57
+4200eba3:	0189      	s32i.n	a8, a1, 0
+4200eba5:	c8f5f1        	l32r	a15, 42000f7c <_stext+0xf5c> (3c03cd60 <__FUNCTION__$6>)
+4200eba8:	0bed      	mov.n	a14, a11
+4200ebaa:	0add      	mov.n	a13, a10
+4200ebac:	c8f6c1        	l32r	a12, 42000f84 <_stext+0xf64> (3c036920 <_flash_rodata_start+0x6800>)
+4200ebaf:	01a0a2        	movi	a10, 1
+4200ebb2:	c53881        	l32r	a8, 42000094 <_stext+0x74> (40382fc0 <esp_log_write>)
+4200ebb5:	0008e0        	callx8	a8
+4200ebb8:	02a122        	movi	a2, 0x102
+4200ebbb:	00c6c6        	j	4200eeda <esp_lcd_new_panel_st7701_rgb+0x38a>
+4200ebbe:	820000        	mull	a0, a0, a0
+4200ebc1:	071005        	call0	42015cc4 <ledc_timer_set+0x4c>
+4200ebc4:	3368      	l32i.n	a6, a3, 12
+4200ebc6:	0c0582        	l8ui	a8, a5, 12
+4200ebc9:	290c      	movi.n	a9, 2
+4200ebcb:	108890        	and	a8, a8, a9
+4200ebce:	748080        	extui	a8, a8, 0, 8
+4200ebd1:	58ac      	beqz.n	a8, 4200ebfa <esp_lcd_new_panel_st7701_rgb+0xaa>
+4200ebd3:	c52381        	l32r	a8, 42000060 <_stext+0x40> (40383060 <esp_log_timestamp>)
+4200ebd6:	0008e0        	callx8	a8
+4200ebd9:	c8d5b1        	l32r	a11, 42000f30 <_stext+0xf10> (3c03665c <_flash_rodata_start+0x653c>)
+4200ebdc:	a83c      	movi.n	a8, 58
+4200ebde:	0189      	s32i.n	a8, a1, 0
+4200ebe0:	c8e7f1        	l32r	a15, 42000f7c <_stext+0xf5c> (3c03cd60 <__FUNCTION__$6>)
+4200ebe3:	0bed      	mov.n	a14, a11
+4200ebe5:	20daa0        	or	a13, a10, a10
+4200ebe8:	c8e8c1        	l32r	a12, 42000f88 <_stext+0xf68> (3c036970 <_flash_rodata_start+0x6850>)
+4200ebeb:	01a0a2        	movi	a10, 1
+4200ebee:	c52981        	l32r	a8, 42000094 <_stext+0x74> (40382fc0 <esp_log_write>)
+4200ebf1:	0008e0        	callx8	a8
+4200ebf4:	02a122        	movi	a2, 0x102
+4200ebf7:	00b7c6        	j	4200eeda <esp_lcd_new_panel_st7701_rgb+0x38a>
+4200ebfa:	cb2c      	movi.n	a11, 44
+4200ebfc:	1a0c      	movi.n	a10, 1
+4200ebfe:	c86681        	l32r	a8, 42000d98 <_stext+0xd78> (403832fc <calloc>)
+4200ec01:	0008e0        	callx8	a8
+4200ec04:	207aa0        	or	a7, a10, a10
+4200ec07:	025a56        	bnez	a10, 4200ec30 <esp_lcd_new_panel_st7701_rgb+0xe0>
+4200ec0a:	c51581        	l32r	a8, 42000060 <_stext+0x40> (40383060 <esp_log_timestamp>)
+4200ec0d:	0008e0        	callx8	a8
+4200ec10:	c8c8b1        	l32r	a11, 42000f30 <_stext+0xf10> (3c03665c <_flash_rodata_start+0x653c>)
+4200ec13:	f83c      	movi.n	a8, 63
+4200ec15:	0189      	s32i.n	a8, a1, 0
+4200ec17:	c8d9f1        	l32r	a15, 42000f7c <_stext+0xf5c> (3c03cd60 <__FUNCTION__$6>)
+4200ec1a:	0bed      	mov.n	a14, a11
+4200ec1c:	0add      	mov.n	a13, a10
+4200ec1e:	c8dbc1        	l32r	a12, 42000f8c <_stext+0xf6c> (3c0369d0 <_flash_rodata_start+0x68b0>)
+4200ec21:	1a0c      	movi.n	a10, 1
+4200ec23:	c51c81        	l32r	a8, 42000094 <_stext+0x74> (40382fc0 <esp_log_write>)
+4200ec26:	0008e0        	callx8	a8
+4200ec29:	01a122        	movi	a2, 0x101
+4200ec2c:	00aa86        	j	4200eeda <esp_lcd_new_panel_st7701_rgb+0x38a>
+4200ec2f:	00          	.byte	00
+4200ec30:	0388      	l32i.n	a8, a3, 0
+4200ec32:	05a896        	bltz	a8, 4200ec90 <esp_lcd_new_panel_st7701_rgb+0x140>
+4200ec35:	8c1c      	movi.n	a12, 24
+4200ec37:	0b0c      	movi.n	a11, 0
+4200ec39:	10c1a2        	addi	a10, a1, 16
+4200ec3c:	c5a581        	l32r	a8, 420002d0 <_stext+0x2b0> (400011e8 <memset>)
+4200ec3f:	0008e0        	callx8	a8
+4200ec42:	03b8      	l32i.n	a11, a3, 0
+4200ec44:	092c      	movi.n	a9, 32
+4200ec46:	109b90        	and	a9, a11, a9
+4200ec49:	0a0c      	movi.n	a10, 0
+4200ec4b:	180c      	movi.n	a8, 1
+4200ec4d:	401b00        	ssl	a11
+4200ec50:	a18800        	sll	a8, a8
+4200ec53:	08bd      	mov.n	a11, a8
+4200ec55:	83ba90        	moveqz	a11, a10, a9
+4200ec58:	938a90        	movnez	a8, a10, a9
+4200ec5b:	4189      	s32i.n	a8, a1, 16
+4200ec5d:	51b9      	s32i.n	a11, a1, 20
+4200ec5f:	280c      	movi.n	a8, 2
+4200ec61:	066182        	s32i	a8, a1, 24
+4200ec64:	10c1a2        	addi	a10, a1, 16
+4200ec67:	041865        	call8	42012dec <gpio_config>
+4200ec6a:	0a2d      	mov.n	a2, a10
+4200ec6c:	0aac      	beqz.n	a10, 4200ec90 <esp_lcd_new_panel_st7701_rgb+0x140>
+4200ec6e:	c4fc81        	l32r	a8, 42000060 <_stext+0x40> (40383060 <esp_log_timestamp>)
+4200ec71:	0008e0        	callx8	a8
+4200ec74:	c8afb1        	l32r	a11, 42000f30 <_stext+0xf10> (3c03665c <_flash_rodata_start+0x653c>)
+4200ec77:	684c      	movi.n	a8, 70
+4200ec79:	0189      	s32i.n	a8, a1, 0
+4200ec7b:	c8c0f1        	l32r	a15, 42000f7c <_stext+0xf5c> (3c03cd60 <__FUNCTION__$6>)
+4200ec7e:	0bed      	mov.n	a14, a11
+4200ec80:	0add      	mov.n	a13, a10
+4200ec82:	c8c3c1        	l32r	a12, 42000f90 <_stext+0xf70> (3c036a08 <_flash_rodata_start+0x68e8>)
+4200ec85:	1a0c      	movi.n	a10, 1
+4200ec87:	c50381        	l32r	a8, 42000094 <_stext+0x74> (40382fc0 <esp_log_write>)
+4200ec8a:	0008e0        	callx8	a8
+4200ec8d:	008e46        	j	4200eeca <esp_lcd_new_panel_st7701_rgb+0x37a>
+4200ec90:	1388      	l32i.n	a8, a3, 4
+4200ec92:	488c      	beqz.n	a8, 4200ec9a <esp_lcd_new_panel_st7701_rgb+0x14a>
+4200ec94:	0c1826        	beqi	a8, 1, 4200eca4 <esp_lcd_new_panel_st7701_rgb+0x154>
+4200ec97:	0005c6        	j	4200ecb2 <esp_lcd_new_panel_st7701_rgb+0x162>
+4200ec9a:	080c      	movi.n	a8, 0
+4200ec9c:	084782        	s8i	a8, a7, 8
+4200ec9f:	000d06        	j	4200ecd7 <esp_lcd_new_panel_st7701_rgb+0x187>
+4200eca2:	820000        	mull	a0, a0, a0
+4200eca5:	0c0807        	bnone	a8, a0, 4200ecb5 <esp_lcd_new_panel_st7701_rgb+0x165>
+4200eca8:	9089      	s32i.n	a8, a0, 36
+4200ecaa:	2088      	l32i.n	a8, a0, 8
+4200ecac:	084782        	s8i	a8, a7, 8
+4200ecaf:	000906        	j	4200ecd7 <esp_lcd_new_panel_st7701_rgb+0x187>
+4200ecb2:	c4eb81        	l32r	a8, 42000060 <_stext+0x40> (40383060 <esp_log_timestamp>)
+4200ecb5:	0008e0        	callx8	a8
+4200ecb8:	c89eb1        	l32r	a11, 42000f30 <_stext+0xf10> (3c03665c <_flash_rodata_start+0x653c>)
+4200ecbb:	185c      	movi.n	a8, 81
+4200ecbd:	0189      	s32i.n	a8, a1, 0
+4200ecbf:	c8aff1        	l32r	a15, 42000f7c <_stext+0xf5c> (3c03cd60 <__FUNCTION__$6>)
+4200ecc2:	0bed      	mov.n	a14, a11
+4200ecc4:	0add      	mov.n	a13, a10
+4200ecc6:	c8b3c1        	l32r	a12, 42000f94 <_stext+0xf74> (3c036a4c <_flash_rodata_start+0x692c>)
+4200ecc9:	1a0c      	movi.n	a10, 1
+4200eccb:	c4f281        	l32r	a8, 42000094 <_stext+0x74> (40382fc0 <esp_log_write>)
+4200ecce:	0008e0        	callx8	a8
+4200ecd1:	06a122        	movi	a2, 0x106
+4200ecd4:	007c86        	j	4200eeca <esp_lcd_new_panel_st7701_rgb+0x37a>
+4200ecd7:	080c      	movi.n	a8, 0
+4200ecd9:	094782        	s8i	a8, a7, 9
+4200ecdc:	3388      	l32i.n	a8, a3, 12
+4200ecde:	291c      	movi.n	a9, 18
+4200ece0:	101897        	beq	a8, a9, 4200ecf4 <esp_lcd_new_panel_st7701_rgb+0x1a4>
+4200ece3:	891c      	movi.n	a9, 24
+4200ece5:	141897        	beq	a8, a9, 4200ecfd <esp_lcd_new_panel_st7701_rgb+0x1ad>
+4200ece8:	1cb866        	bnei	a8, 16, 4200ed08 <esp_lcd_new_panel_st7701_rgb+0x1b8>
+4200eceb:	085c      	movi.n	a8, 80
+4200eced:	094782        	s8i	a8, a7, 9
+4200ecf0:	000e86        	j	4200ed2e <esp_lcd_new_panel_st7701_rgb+0x1de>
+4200ecf3:	a08200        	addx4	a8, a2, a0
+4200ecf6:	478260        	ee.stf.64.xp	f8, f4, a6, a2
+4200ecf9:	0609      	s32i.n	a0, a6, 0
+4200ecfb:	000c      	movi.n	a0, 0
+4200ecfd:	70a082        	movi	a8, 112
+4200ed00:	094782        	s8i	a8, a7, 9
+4200ed03:	0009c6        	j	4200ed2e <esp_lcd_new_panel_st7701_rgb+0x1de>
+4200ed06:	810000        	src	a0, a0, a0
+4200ed09:	e0c4d6        	bgez	a4, 4200eb19 <panel_st7701_del+0x15>
+4200ed0c:	0008      	l32i.n	a0, a0, 0
+4200ed0e:	c888b1        	l32r	a11, 42000f30 <_stext+0xf10> (3c03665c <_flash_rodata_start+0x653c>)
+4200ed11:	61a082        	movi	a8, 97
+4200ed14:	0189      	s32i.n	a8, a1, 0
+4200ed16:	c899f1        	l32r	a15, 42000f7c <_stext+0xf5c> (3c03cd60 <__FUNCTION__$6>)
+4200ed19:	0bed      	mov.n	a14, a11
+4200ed1b:	0add      	mov.n	a13, a10
+4200ed1d:	c89ec1        	l32r	a12, 42000f98 <_stext+0xf78> (3c036a8c <_flash_rodata_start+0x696c>)
+4200ed20:	1a0c      	movi.n	a10, 1
+4200ed22:	c4dc81        	l32r	a8, 42000094 <_stext+0x74> (40382fc0 <esp_log_write>)
+4200ed25:	0008e0        	callx8	a8
+4200ed28:	06a122        	movi	a2, 0x106
+4200ed2b:	0066c6        	j	4200eeca <esp_lcd_new_panel_st7701_rgb+0x37a>
+4200ed2e:	0769      	s32i.n	a6, a7, 0
+4200ed30:	0588      	l32i.n	a8, a5, 0
+4200ed32:	3789      	s32i.n	a8, a7, 12
+4200ed34:	021582        	l16ui	a8, a5, 4
+4200ed37:	085782        	s16i	a8, a7, 16
+4200ed3a:	03a8      	l32i.n	a10, a3, 0
+4200ed3c:	17a9      	s32i.n	a10, a7, 4
+4200ed3e:	3598      	l32i.n	a9, a5, 12
+4200ed40:	049190        	extui	a9, a9, 1, 1
+4200ed43:	140782        	l8ui	a8, a7, 20
+4200ed46:	eb7c      	movi.n	a11, -2
+4200ed48:	1088b0        	and	a8, a8, a11
+4200ed4b:	208890        	or	a8, a8, a9
+4200ed4e:	144782        	s8i	a8, a7, 20
+4200ed51:	2598      	l32i.n	a9, a5, 8
+4200ed53:	152992        	l32i	a9, a9, 84
+4200ed56:	059f90        	extui	a9, a9, 31, 1
+4200ed59:	1199e0        	slli	a9, a9, 2
+4200ed5c:	bb7c      	movi.n	a11, -5
+4200ed5e:	1088b0        	and	a8, a8, a11
+4200ed61:	208890        	or	a8, a8, a9
+4200ed64:	144782        	s8i	a8, a7, 20
+4200ed67:	4598      	l32i.n	a9, a5, 16
+4200ed69:	049090        	extui	a9, a9, 0, 1
+4200ed6c:	999a      	add.n	a9, a9, a9
+4200ed6e:	db7c      	movi.n	a11, -3
+4200ed70:	1088b0        	and	a8, a8, a11
+4200ed73:	208890        	or	a8, a8, a9
+4200ed76:	144782        	s8i	a8, a7, 20
+4200ed79:	4398      	l32i.n	a9, a3, 16
+4200ed7b:	04b090        	extui	a11, a9, 0, 1
+4200ed7e:	119bd0        	slli	a9, a11, 3
+4200ed81:	7c7c      	movi.n	a12, -9
+4200ed83:	1088c0        	and	a8, a8, a12
+4200ed86:	208890        	or	a8, a8, a9
+4200ed89:	144782        	s8i	a8, a7, 20
+4200ed8c:	290c      	movi.n	a9, 2
+4200ed8e:	108890        	and	a8, a8, a9
+4200ed91:	748080        	extui	a8, a8, 0, 8
+4200ed94:	0c4816        	beqz	a8, 4200ee5c <esp_lcd_new_panel_st7701_rgb+0x30c>
+4200ed97:	021a96        	bltz	a10, 4200edbc <esp_lcd_new_panel_st7701_rgb+0x26c>
+4200ed9a:	03eba5        	call8	42012c54 <gpio_set_level>
+4200ed9d:	1a0c      	movi.n	a10, 1
+4200ed9f:	c75781        	l32r	a8, 42000afc <_stext+0xadc> (4037eb38 <vTaskDelay>)
+4200eda2:	0008e0        	callx8	a8
+4200eda5:	1407b2        	l8ui	a11, a7, 20
+4200eda8:	41b3b0        	srli	a11, a11, 3
+4200edab:	180c      	movi.n	a8, 1
+4200edad:	30bb80        	xor	a11, a11, a8
+4200edb0:	04b0b0        	extui	a11, a11, 0, 1
+4200edb3:	17a8      	l32i.n	a10, a7, 4
+4200edb5:	03e9e5        	call8	42012c54 <gpio_set_level>
+4200edb8:	000d86        	j	4200edf2 <esp_lcd_new_panel_st7701_rgb+0x2a2>
+4200edbb:	00          	.byte	00
+4200edbc:	0d0c      	movi.n	a13, 0
+4200edbe:	0dcd      	mov.n	a12, a13
+4200edc0:	1b0c      	movi.n	a11, 1
+4200edc2:	06ad      	mov.n	a10, a6
+4200edc4:	00b925        	call8	4200f958 <esp_lcd_panel_io_tx_param>
+4200edc7:	0a2d      	mov.n	a2, a10
+4200edc9:	5aac      	beqz.n	a10, 4200edf2 <esp_lcd_new_panel_st7701_rgb+0x2a2>
+4200edcb:	c4a581        	l32r	a8, 42000060 <_stext+0x40> (40383060 <esp_log_timestamp>)
+4200edce:	0008e0        	callx8	a8
+4200edd1:	c857b1        	l32r	a11, 42000f30 <_stext+0xf10> (3c03665c <_flash_rodata_start+0x653c>)
+4200edd4:	74a082        	movi	a8, 116
+4200edd7:	0189      	s32i.n	a8, a1, 0
+4200edd9:	c868f1        	l32r	a15, 42000f7c <_stext+0xf5c> (3c03cd60 <__FUNCTION__$6>)
+4200eddc:	0bed      	mov.n	a14, a11
+4200edde:	0add      	mov.n	a13, a10
+4200ede0:	c856c1        	l32r	a12, 42000f38 <_stext+0xf18> (3c0366b4 <_flash_rodata_start+0x6594>)
+4200ede3:	01a0a2        	movi	a10, 1
+4200ede6:	c4ab81        	l32r	a8, 42000094 <_stext+0x74> (40382fc0 <esp_log_write>)
+4200ede9:	0008e0        	callx8	a8
+4200edec:	003686        	j	4200eeca <esp_lcd_new_panel_st7701_rgb+0x37a>
+4200edef:	000000        	ill
+4200edf2:	ca0c      	movi.n	a10, 12
+4200edf4:	c74281        	l32r	a8, 42000afc <_stext+0xadc> (4037eb38 <vTaskDelay>)
+4200edf7:	0008e0        	callx8	a8
+4200edfa:	07ad      	mov.n	a10, a7
+4200edfc:	ffade5        	call8	4200e8dc <panel_st7701_send_init_cmds>
+4200edff:	0a2d      	mov.n	a2, a10
+4200ee01:	2aac      	beqz.n	a10, 4200ee27 <esp_lcd_new_panel_st7701_rgb+0x2d7>
+4200ee03:	c49781        	l32r	a8, 42000060 <_stext+0x40> (40383060 <esp_log_timestamp>)
+4200ee06:	0008e0        	callx8	a8
+4200ee09:	c849b1        	l32r	a11, 42000f30 <_stext+0xf10> (3c03665c <_flash_rodata_start+0x653c>)
+4200ee0c:	7da082        	movi	a8, 125
+4200ee0f:	0189      	s32i.n	a8, a1, 0
+4200ee11:	c85af1        	l32r	a15, 42000f7c <_stext+0xf5c> (3c03cd60 <__FUNCTION__$6>)
+4200ee14:	0bed      	mov.n	a14, a11
+4200ee16:	0add      	mov.n	a13, a10
+4200ee18:	c855c1        	l32r	a12, 42000f6c <_stext+0xf4c> (3c036840 <_flash_rodata_start+0x6720>)
+4200ee1b:	01a0a2        	movi	a10, 1
+4200ee1e:	c49d81        	l32r	a8, 42000094 <_stext+0x74> (40382fc0 <esp_log_write>)
+4200ee21:	0008e0        	callx8	a8
+4200ee24:	002886        	j	4200eeca <esp_lcd_new_panel_st7701_rgb+0x37a>
+4200ee27:	06ad      	mov.n	a10, a6
+4200ee29:	00b6e5        	call8	4200f998 <esp_lcd_panel_io_del>
+4200ee2c:	202aa0        	or	a2, a10, a10
+4200ee2f:	025a16        	beqz	a10, 4200ee58 <esp_lcd_new_panel_st7701_rgb+0x308>
+4200ee32:	c48b81        	l32r	a8, 42000060 <_stext+0x40> (40383060 <esp_log_timestamp>)
+4200ee35:	0008e0        	callx8	a8
+4200ee38:	c83eb1        	l32r	a11, 42000f30 <_stext+0xf10> (3c03665c <_flash_rodata_start+0x653c>)
+4200ee3b:	7fa082        	movi	a8, 127
+4200ee3e:	0189      	s32i.n	a8, a1, 0
+4200ee40:	c84ff1        	l32r	a15, 42000f7c <_stext+0xf5c> (3c03cd60 <__FUNCTION__$6>)
+4200ee43:	0bed      	mov.n	a14, a11
+4200ee45:	20daa0        	or	a13, a10, a10
+4200ee48:	c855c1        	l32r	a12, 42000f9c <_stext+0xf7c> (3c036ac4 <_flash_rodata_start+0x69a4>)
+4200ee4b:	01a0a2        	movi	a10, 1
+4200ee4e:	c49181        	l32r	a8, 42000094 <_stext+0x74> (40382fc0 <esp_log_write>)
+4200ee51:	0008e0        	callx8	a8
+4200ee54:	001c86        	j	4200eeca <esp_lcd_new_panel_st7701_rgb+0x37a>
+4200ee57:	080c00        	lsx	f0, a12, a0
+4200ee5a:	0789      	s32i.n	a8, a7, 0
+4200ee5c:	04bd      	mov.n	a11, a4
+4200ee5e:	25a8      	l32i.n	a10, a5, 8
+4200ee60:	025525        	call8	420113b4 <esp_lcd_new_rgb_panel>
+4200ee63:	0a2d      	mov.n	a2, a10
+4200ee65:	3aac      	beqz.n	a10, 4200ee8c <esp_lcd_new_panel_st7701_rgb+0x33c>
+4200ee67:	c47e81        	l32r	a8, 42000060 <_stext+0x40> (40383060 <esp_log_timestamp>)
+4200ee6a:	0008e0        	callx8	a8
+4200ee6d:	c830b1        	l32r	a11, 42000f30 <_stext+0xf10> (3c03665c <_flash_rodata_start+0x653c>)
+4200ee70:	85a082        	movi	a8, 133
+4200ee73:	0189      	s32i.n	a8, a1, 0
+4200ee75:	c841f1        	l32r	a15, 42000f7c <_stext+0xf5c> (3c03cd60 <__FUNCTION__$6>)
+4200ee78:	0bed      	mov.n	a14, a11
+4200ee7a:	0add      	mov.n	a13, a10
+4200ee7c:	c849c1        	l32r	a12, 42000fa0 <_stext+0xf80> (3c036afc <_flash_rodata_start+0x69dc>)
+4200ee7f:	01a0a2        	movi	a10, 1
+4200ee82:	c48481        	l32r	a8, 42000094 <_stext+0x74> (40382fc0 <esp_log_write>)
+4200ee85:	0008e0        	callx8	a8
+4200ee88:	000f86        	j	4200eeca <esp_lcd_new_panel_st7701_rgb+0x37a>
+4200ee8b:	048800        	extui	a8, a0, 8, 1
+4200ee8e:	1898      	l32i.n	a9, a8, 4
+4200ee90:	6799      	s32i.n	a9, a7, 24
+4200ee92:	2898      	l32i.n	a9, a8, 8
+4200ee94:	7799      	s32i.n	a9, a7, 28
+4200ee96:	0898      	l32i.n	a9, a8, 0
+4200ee98:	8799      	s32i.n	a9, a7, 32
+4200ee9a:	4898      	l32i.n	a9, a8, 16
+4200ee9c:	9799      	s32i.n	a9, a7, 36
+4200ee9e:	8898      	l32i.n	a9, a8, 32
+4200eea0:	a799      	s32i.n	a9, a7, 40
+4200eea2:	c84091        	l32r	a9, 42000fa4 <_stext+0xf84> (4200ea90 <panel_st7701_init>)
+4200eea5:	1899      	s32i.n	a9, a8, 4
+4200eea7:	0488      	l32i.n	a8, a4, 0
+4200eea9:	c83f91        	l32r	a9, 42000fa8 <_stext+0xf88> (4200eb04 <panel_st7701_del>)
+4200eeac:	2899      	s32i.n	a9, a8, 8
+4200eeae:	0488      	l32i.n	a8, a4, 0
+4200eeb0:	c83f91        	l32r	a9, 42000fac <_stext+0xf8c> (4200e82c <panel_st7701_reset>)
+4200eeb3:	0899      	s32i.n	a9, a8, 0
+4200eeb5:	0488      	l32i.n	a8, a4, 0
+4200eeb7:	c83e91        	l32r	a9, 42000fb0 <_stext+0xf90> (4200e690 <panel_st7701_mirror>)
+4200eeba:	4899      	s32i.n	a9, a8, 16
+4200eebc:	0488      	l32i.n	a8, a4, 0
+4200eebe:	c83d91        	l32r	a9, 42000fb4 <_stext+0xf94> (4200e5e4 <panel_st7701_disp_on_off>)
+4200eec1:	8899      	s32i.n	a9, a8, 32
+4200eec3:	0488      	l32i.n	a8, a4, 0
+4200eec5:	a879      	s32i.n	a7, a8, 40
+4200eec7:	0003c6        	j	4200eeda <esp_lcd_new_panel_st7701_rgb+0x38a>
+4200eeca:	03a8      	l32i.n	a10, a3, 0
+4200eecc:	002a96        	bltz	a10, 4200eed2 <esp_lcd_new_panel_st7701_rgb+0x382>
+4200eecf:	040b25        	call8	42012f80 <gpio_reset_pin>
+4200eed2:	07ad      	mov.n	a10, a7
+4200eed4:	c58181        	l32r	a8, 420004d8 <_stext+0x4b8> (40383298 <cfree>)
+4200eed7:	0008e0        	callx8	a8
+4200eeda:	f01d      	retw.n

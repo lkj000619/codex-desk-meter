@@ -1,0 +1,55 @@
+
+C:\meter-runs-20261006\20261006-codex-cli-gpt-6-luna-r01\checkout\build-idf\codex_desk_meter.elf:     file format elf32-xtensa-le
+
+
+Disassembly of section .iram0.vectors:
+
+Disassembly of section .iram0.text:
+
+Disassembly of section .flash.text:
+
+4200ea90 <panel_st7701_init>:
+4200ea90:	006136        	entry	a1, 48
+4200ea93:	027d      	mov.n	a7, a2
+4200ea95:	a268      	l32i.n	a6, a2, 40
+4200ea97:	140682        	l8ui	a8, a6, 20
+4200ea9a:	290c      	movi.n	a9, 2
+4200ea9c:	108890        	and	a8, a8, a9
+4200ea9f:	748080        	extui	a8, a8, 0, 8
+4200eaa2:	f8ec      	bnez.n	a8, 4200ead5 <panel_st7701_init+0x45>
+4200eaa4:	20a660        	or	a10, a6, a6
+4200eaa7:	ffe365        	call8	4200e8dc <panel_st7701_send_init_cmds>
+4200eaaa:	0a2d      	mov.n	a2, a10
+4200eaac:	5aac      	beqz.n	a10, 4200ead5 <panel_st7701_init+0x45>
+4200eaae:	c56c81        	l32r	a8, 42000060 <_stext+0x40> (40383060 <esp_log_timestamp>)
+4200eab1:	0008e0        	callx8	a8
+4200eab4:	c91fb1        	l32r	a11, 42000f30 <_stext+0xf10> (3c03665c <_flash_rodata_start+0x653c>)
+4200eab7:	17a182        	movi	a8, 0x117
+4200eaba:	0189      	s32i.n	a8, a1, 0
+4200eabc:	c92bf1        	l32r	a15, 42000f68 <_stext+0xf48> (3c03ccf4 <__FUNCTION__$1>)
+4200eabf:	0bed      	mov.n	a14, a11
+4200eac1:	20daa0        	or	a13, a10, a10
+4200eac4:	c92ac1        	l32r	a12, 42000f6c <_stext+0xf4c> (3c036840 <_flash_rodata_start+0x6720>)
+4200eac7:	01a0a2        	movi	a10, 1
+4200eaca:	c57281        	l32r	a8, 42000094 <_stext+0x74> (40382fc0 <esp_log_write>)
+4200eacd:	0008e0        	callx8	a8
+4200ead0:	000b86        	j	4200eb02 <panel_st7701_init+0x72>
+4200ead3:	820000        	mull	a0, a0, a0
+4200ead6:	700626        	beqi	a6, -1, 4200eb4a <panel_st7701_del+0x46>
+4200ead9:	e020a7        	blt	a0, a10, 4200eabd <panel_st7701_init+0x2d>
+4200eadc:	0008      	l32i.n	a0, a0, 0
+4200eade:	0a2d      	mov.n	a2, a10
+4200eae0:	ea9c      	beqz.n	a10, 4200eb02 <panel_st7701_init+0x72>
+4200eae2:	c55f81        	l32r	a8, 42000060 <_stext+0x40> (40383060 <esp_log_timestamp>)
+4200eae5:	0008e0        	callx8	a8
+4200eae8:	c912b1        	l32r	a11, 42000f30 <_stext+0xf10> (3c03665c <_flash_rodata_start+0x653c>)
+4200eaeb:	1aa182        	movi	a8, 0x11a
+4200eaee:	0189      	s32i.n	a8, a1, 0
+4200eaf0:	c91ef1        	l32r	a15, 42000f68 <_stext+0xf48> (3c03ccf4 <__FUNCTION__$1>)
+4200eaf3:	0bed      	mov.n	a14, a11
+4200eaf5:	0add      	mov.n	a13, a10
+4200eaf7:	c91ec1        	l32r	a12, 42000f70 <_stext+0xf50> (3c03687c <_flash_rodata_start+0x675c>)
+4200eafa:	1a0c      	movi.n	a10, 1
+4200eafc:	c56681        	l32r	a8, 42000094 <_stext+0x74> (40382fc0 <esp_log_write>)
+4200eaff:	0008e0        	callx8	a8
+4200eb02:	f01d      	retw.n

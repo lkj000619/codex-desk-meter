@@ -1,0 +1,7 @@
+{"kind": "port_open", "seconds": 2.4379999998491257, "utc": "2026-10-06T12:25:38.994322+00:00", "baud": 115200, "dtr": false, "rts": false, "note": "backend must set DTR/RTS before open; actual reset/re-enumeration requires observation"}
+{"kind": "pre_write_read", "seconds": 2.4379999998491257, "utc": "2026-10-06T12:25:38.994322+00:00", "bytes_received": 5858, "sha256": "0edb85415ec2fbe7630f1f7a85f005f570e292c928a9645daf2a52d6042acc0a"}
+{"kind": "write_start", "seconds": 2.4379999998491257, "utc": "2026-10-06T12:25:38.994322+00:00", "sequence": 0, "frame_sha256": "46d2381c3a9e7fcef740cfa6dc8ef34061bdf31d3143ea8dd8b69fedbdb1955d"}
+{"kind": "write_complete", "seconds": 2.452999999979511, "utc": "2026-10-06T12:25:39.006835+00:00", "sequence": 0, "bytes_written": 1543}
+{"kind": "write_start", "seconds": 3.484999999869615, "utc": "2026-10-06T12:25:40.044513+00:00", "sequence": 1, "frame_sha256": "46b51f55404dbb8ace1b7aa4b548eb33689372663238715897e2a8ad56530df1"}
+{"kind": "write_complete", "seconds": 3.5, "utc": "2026-10-06T12:25:40.057022+00:00", "sequence": 1, "bytes_written": 1543}
+{"kind": "port_close", "seconds": 4.5469999997876585, "utc": "2026-10-06T12:25:41.106820+00:00"}

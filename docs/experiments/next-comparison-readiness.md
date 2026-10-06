@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-06. 상태: **Luna 최초의 원본 동결·독립 복원·host 검증과 COM3 재업로드를 마쳤다. 현재21:03:05 KST 업로드 펌웨어에 대해 사용자가 검은 LCD 화면만 보인다고 보고했다. RM1/2 partial·RM3 fail·RM4/5 not_run, reference fail·product_pass false다. 공통 shell 결합 제한 위반으로 정책 invalid_for_comparison이며 비용·제품 관측은 보존한다. 실제 수신·BOOT·30초 유지·검은 화면 원인은 미확인이다. 후속0회·잔여7,200초/3회, 후보 시작·종료 각12회·독립 series 종료3/15다. Sol/Pro 종료·Flash 보류·과거 원본을 보존한다.**
+확인일: 2026-10-06. 상태: **Luna 최초 검은 화면의 추가 원인 분석을 마쳤다. 같은 COM3 펌웨어에서 정상 부팅·PSRAM 검사·USB 준비와 진단 frame0 수락을 확인했고, 사용자는 리셋 후에도 검은 화면이라고 확인했다. 설정 후 LCD 재리셋과 지원 근거 없는 축 교환/물리 timing 결함을 찾았다. 수정 펌웨어의 실물 인과 검증·frame1 수락·BOOT·30초 유지는 미확인이다. 기존 최초 RM1/2 partial·RM3 fail·RM4/5 not_run, reference fail·product_pass false·policy invalid와 원본 비용을 유지한다. 후속0회·잔여7,200초/3회, 후보 시작·종료 각12회·독립 series 종료3/15다. Sol/Pro 종료·Flash 보류를 유지한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -339,3 +339,12 @@ Input17,277,453·output136,034·정규화17,413,487 token이며 cached16,845,056
 [사용자 현재 화면 보고](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/operator-observation/hardware-attempt-02/user-black-screen-report.json)는 검은 화면만 보인다는 내용이다. 영상/사진 확인이나 BOOT 조작·RESET·30초 유지 사실은 제공되지 않았다.
 [최초 RM](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/reference-review.json)은 한 번 적용했다. 빌드/업로드가 확인되어도 application 실행·장치 수락이 미확인이므로 RM1/2는partial, 값 표시RM3는fail, 페이지/BOOT RM4/5는not_run이다. Reference fail·product_pass false와 품질 부적격을 각각 유지한다.
 [Checkpoint12](../../results/formal-comparison-20261004/comparison-checkpoint-12.md)는 전체12회 정규화44,103,444 token을 기록하며 과거 checkpoint11까지·Sol/Pro 종료·Flash 보류를 보존한다. 후속이나 다른 모델을 시작하지 않았다. 보드는 이번 Luna 원본 artifact이며 serial은 닫았다.
+
+## 2026-10-06 Luna 검은 화면의 추가 원인 분석
+
+[진단 계획](../plans/2026-10-06-codex-luna-black-screen-diagnosis.md)과 [분석 보고서](../../results/formal-comparison-20261004/luna-black-screen-diagnosis-20261006.md)에 실패 경계·두 코드 결함·남은 검증을 기록했다.
+COM3·MAC `28:84:85:B0:85:18`은 재업로드와 같고,21:22:24 KST native reset부터 받은5,859 bytes는 정상 flash boot·PSRAM 검사·LCD 초기화 함수 완료·USB 수신 준비를 확인한다.
+첫 진단 전송에서 공통 frame0 수락을 확인했지만 frame1 write는 timeout이었다. 두 번째 리셋 후 재시험은 두 host write만 완료됐고 수락 로그는 없었다. 최초의0-byte 평가 원본과 이 추가 진단을 구분한다.
+사용자는 첫 진단 리셋 후에도 계속 검은 화면이라고 답했다. Multiplex 생성 중 명령 전송/IO 해제 뒤 LCD를 물리 리셋하고 명령을 재전송하지 않는 순서가 가장 유력한 원인이다. MADCTL D5를 축 교환으로 가정해 물리 RGB timing까지820×320으로 바꾼 결함도 확인했다. 각각의 수정 후 실물 효과는 아직 시험하지 않았다.
+[진단 raw 목록](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r01/diagnosis-20261006/snapshot-inventory.json)은 원본 source/ELF 흐름과 조작·사용자 보고를 보존한다. Source 수정·rebuild·flash write·후보 호출0회, 진단 reset2회이며 끝난 뒤 serial을 닫았다. 마지막 보드는 동일 Luna 원본·두 host write 후 실제 수락 미확인 상태다.
+원본 RM/정책·464개 평가 package·후보12회/44,103,444 token·series3/15·후속 예산은 유지했다. 정식 후속 피드백은 운영 계약의 자기 관측/요구/근거/예산 범위를 따르며, 이 보고서의 구현 수정 방향은 운영자 진단으로 구분한다. 추가 후보 실행은 시작하지 않았다.
