@@ -1,0 +1,26 @@
+{
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "recorded_at": "2026-10-06T18:19:02.167284+00:00",
+  "status": "followup03_final_reference_review_complete_with_unmeasured_items",
+  "source_and_raw_cost_unchanged": true,
+  "serial_closed": true,
+  "current_upload_at": "2026-10-06T17:57:24.390835+00:00",
+  "board_state": "Same final Luna followup3 app onCOM3; current video has duplicated/rotated/clipped content. User BOOT+RESET confirmed; required58/82 and three views are absent; complete frame receipt unconfirmed.",
+  "rm_items": {
+    "RM1": "pass",
+    "RM2": "partial",
+    "RM3": "fail",
+    "RM4": "fail",
+    "RM5": "not_run"
+  },
+  "reference_status": "fail",
+  "policy_status": "eligible",
+  "series_policy_status": "invalid_for_comparison",
+  "product_pass": false,
+  "followups_run": 3,
+  "remaining_followup_seconds": 1773.1419999997597,
+  "remaining_followup_rounds": 0,
+  "additional_candidate_call_started": false,
+  "lcd_output_present": true,
+  "normal_readable_screen_observed": false
+}

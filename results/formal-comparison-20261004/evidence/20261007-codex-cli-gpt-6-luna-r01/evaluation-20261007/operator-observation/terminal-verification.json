@@ -1,0 +1,52 @@
+{
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "checked_at": "2026-10-06T17:55:16.575869+00:00",
+  "terminal_status": "completed",
+  "execution": {
+    "started_at": "2026-10-06T17:33:32.911Z",
+    "ended_at": "2026-10-06T17:53:25.512Z",
+    "timeout_seconds": 2965,
+    "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+    "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+    "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+    "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+    "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+    "profile_sha256": "eae4f0ceab072eff32f8f12b423cbdbacf312650817c26825800f83edf9fbb2a",
+    "input_bundle_sha256": "891f33b6a9128e423619c6c59b309cf09b0fe3d634bec9aa04bdfe93297207a1",
+    "network_mode": "offline-fixture",
+    "sandbox_policy": "prompt-and-log",
+    "approval_policy": "--ask-for-approval never, workspace-write, elevated sandbox; product execution requires a later user instruction",
+    "branch": "experiment/openai/codex-cli/gpt-6-luna",
+    "worktree": "C:\\meter-followups-20261007\\20261007-codex-cli-gpt-6-luna-r01\\checkout",
+    "host": "DESKTOP-JCMEN12"
+  },
+  "measurement": {
+    "wall_clock_seconds": 1192.59300000011,
+    "tool_calls": 109,
+    "failed_commands": 3,
+    "user_interventions": null,
+    "tokens": {
+      "input": 4032791,
+      "output": 58187,
+      "cached": 3772672,
+      "reasoning": null,
+      "provider_total": null,
+      "total": 4090978,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "Codex turn.completed usage; cached is included in input; reasoning unavailable."
+    }
+  },
+  "original_terminal_manifest_sha256": "b784a19c9c7cf0a477e85efb0cce31cb0921a369de7638beab3fdb1601e3ea8d",
+  "original_ledger_sha256": "49cd4d85e624e43266be3e404ddc24bc7ef962f101bf4fcec826bef919d4ac56",
+  "candidate_processes_remaining": [],
+  "immutable_input_files_verified": 57,
+  "frozen_operator_baseline_verified": true,
+  "raw_native_events": 229,
+  "candidate_result_submission_present": true,
+  "candidate_selection_document_present": true,
+  "operator_audited_user_interventions": 0,
+  "operator_source_modifications": false,
+  "operator_firmware_rebuild": false,
+  "serial_opened": false
+}

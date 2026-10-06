@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "result_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "manifest_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "baseline_id": "comparison-baseline-20261004",
+  "experiment_id": "version-2-end-to-end-v1",
+  "manifest": {
+    "id": "20261007-codex-cli-gpt-6-luna-r01",
+    "experiment_id": "version-2-end-to-end-v1",
+    "baseline_id": "comparison-baseline-20261004",
+    "path": ".benchmark-inputs/e2e-evaluation-manifest.json"
+  },
+  "baseline": {
+    "id": "comparison-baseline-20261004",
+    "experiment_id": "version-2-end-to-end-v1",
+    "commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "ref": "comparison-baseline-20261004"
+  },
+  "feature_results": {
+    "F1": {
+      "status": "pass",
+      "scope": "Offline fixture collector and per-source isolation",
+      "evidence": ["pc/collector.py", "pc/pipeline.py", "tests/test_pc_pipeline.py", "docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/reproduction-and-hardware-check.md"],
+      "reason": null
+    },
+    "F2": {
+      "status": "pass",
+      "scope": "UsageSnapshot normalization and source age validation",
+      "evidence": ["pc/pipeline.py", "tests/test_pc_pipeline.py", "experiments/schema/usage-snapshot.schema.json"],
+      "reason": null
+    },
+    "F3": {
+      "status": "partial",
+      "scope": "USB Serial/JTAG sender and cdm/1 receiver framing",
+      "evidence": ["pc/serial_sender.py", "pc/sender.py", "main/app_main.c", "build-host/meter_receiver_cli.exe", "docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/reproduction-and-hardware-check.md"],
+      "reason": "Common sequence 0 and 1 frames were accepted by the production C host receiver, but USB transmission to a board was not performed."
+    },
+    "F4": {
+      "status": "partial",
+      "scope": "Production firmware receiver, cache, and stale state",
+      "evidence": ["components/meter_core/meter_core.c", "main/app_main.c", "tests/test_production_receiver.py", "tests/host/test_meter_parser.c", "tests/host/test_meter_state.c"],
+      "reason": "The firmware C module was compiled and exercised on the host; on-device receive and cache behavior remain unobserved."
+    },
+    "F5": {
+      "status": "partial",
+      "scope": "Firmware dashboard, global reset, and status GUI",
+      "evidence": ["main/board_lcd.c", "main/board_lcd.h", "build/codex_desk_meter.bin", "docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/reproduction-and-hardware-check.md"],
+      "reason": "The orientation correction and large quota cards compile, but no current-binary LCD capture was made."
+    },
+    "F6": {
+      "status": "partial",
+      "scope": "BOOT navigation, automatic refresh, and PC manual refresh",
+      "evidence": ["main/app_main.c", "pc/gui.py", "pc/serial_sender.py", "tests/host/test_idle_dim.c"],
+      "reason": "The code paths are present and the optional policy is host-tested; physical BOOT timing and GUI-to-board refresh were not exercised."
+    },
+    "F7": {
+      "status": "partial",
+      "scope": "codex-resets.com global reset history display",
+      "evidence": ["main/board_lcd.c", "pc/pipeline.py", "tests/test_pc_pipeline.py", "experiments/fixtures/codex-resets-history.json", "experiments/fixtures/codex-reset-forecast.json"],
+      "reason": "Fixture source separation and firmware rendering code are covered locally; the physical global-reset page was not observed."
+    },
+    "F8": {
+      "status": "partial",
+      "scope": "ESP-IDF build and host test observability",
+      "evidence": ["build/codex_desk_meter.bin", "build-host/meter_receiver_cli.exe", "docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/reproduction-and-hardware-check.md"],
+      "reason": "The firmware and host C modules build and test successfully; runtime PSRAM, boot, and accepted-frame logs from this device were not observed."
+    },
+    "F9": {
+      "status": "partial",
+      "scope": "Selected optional idle backlight dimming feature",
+      "evidence": ["components/idle_dim_policy/idle_dim_policy.c", "tests/host/test_idle_dim.c", "docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/hardware-feature-selection.md"],
+      "reason": "The separated policy and C boundary test pass; visible brightness and readability on this board were not physically checked.",
+      "details": {
+        "candidate_count": 3,
+        "candidates": [
+          {
+            "id": "idle_dimming",
+            "name": "Idle backlight dimming",
+            "user_value": "Reduces light and power while leaving the meter illuminated.",
+            "implementation_cost": "Low; a small independent monotonic-time C policy drives existing GPIO6 LEDC.",
+            "risk": "A low duty could make the values difficult to read.",
+            "verification_method": "Host C boundary checks at 59,999 and 60,000 ms plus an operator readability check before and after idle.",
+            "selection_status": "selected",
+            "selection_reason": "Small, independently tested use of an existing board resource with no new device dependency.",
+            "selection_document": "docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/hardware-feature-selection.md",
+            "evidence": ["components/idle_dim_policy/idle_dim_policy.c", "tests/host/test_idle_dim.c"]
+          },
+          {
+            "id": "imu_orientation",
+            "name": "QMI8658 orientation navigation",
+            "user_value": "Keeps content upright when the device is physically turned.",
+            "implementation_cost": "Medium/high; requires I2C startup, orientation filtering, debounce, coordinate remap, and return behavior.",
+            "risk": "Sensor noise could unexpectedly rotate or clip the dashboard.",
+            "verification_method": "Exercise each orientation, debounce, return, USB activity, and recovery after turning the board back.",
+            "selection_status": "rejected",
+            "selection_reason": "The fixed landscape coordinates first need physical confirmation; sensor-driven rotation adds risk to the core display path.",
+            "selection_document": "docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/hardware-feature-selection.md",
+            "evidence": ["docs/hardware/version-2-capabilities.md"]
+          },
+          {
+            "id": "rtc_timebase",
+            "name": "PCF85063 time continuity",
+            "user_value": "Could preserve a wall-clock reference across a board restart.",
+            "implementation_cost": "Medium; requires RTC validity and backup-power checks plus a defined unknown-time fallback.",
+            "risk": "Backup power is unconfirmed, so an invalid RTC could present stale data as current.",
+            "verification_method": "Check RTC validity and backup retention; invalidate the input and confirm the display reports unknown time.",
+            "selection_status": "rejected",
+            "selection_reason": "The required backup supply and RTC validity are unconfirmed, while the contract requires unknown time when the reference is uncertain.",
+            "selection_document": "docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/hardware-feature-selection.md",
+            "evidence": ["docs/hardware/version-2-capabilities.md"]
+          }
+        ],
+        "selected_candidate": "idle_dimming",
+        "score_breakdown": {
+          "hardware_understanding": 4,
+          "user_value": 4,
+          "selection_logic": 4,
+          "implementation_completeness": 4,
+          "separation_portability": 4,
+          "total": 20
+        }
+      }
+    }
+  },
+  "core_results": {
+    "C1": {"status": "pass", "scope": "ESP-IDF v5.3.2 esp32s3 target build", "evidence": ["build/codex_desk_meter.bin", "docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/reproduction-and-hardware-check.md"], "reason": null},
+    "C2": {"status": "not_run", "scope": "30-second LCD uptime and landscape clipping", "evidence": [], "reason": "No physical board observation was performed for this binary."},
+    "C3": {"status": "partial", "scope": "Provider and window values, lookup time, and reset display", "evidence": ["main/board_lcd.c", "experiments/fixtures/personal-usage.json", "build/codex_desk_meter.bin"], "reason": "The UI is build-tested and uses received snapshots dynamically; no LCD output was observed."},
+    "C4": {"status": "partial", "scope": "codex-resets.com latest reset and elapsed time", "evidence": ["main/board_lcd.c", "experiments/fixtures/codex-resets-history.json"], "reason": "Source selection and rendering are implemented, but the physical page was not observed."},
+    "C5": {"status": "partial", "scope": "Global reset default when history is absent", "evidence": ["main/board_lcd.c", "experiments/schema/cdm-frame.schema.json"], "reason": "The explicit no-history branch compiles but has not been checked on the board."},
+    "C6": {"status": "partial", "scope": "Global reset source and lookup time", "evidence": ["main/board_lcd.c", "experiments/fixtures/codex-resets-history.json"], "reason": "Rendering code names codex-resets.com and captured_at; physical visibility is unmeasured."},
+    "C7": {"status": "partial", "scope": "Malformed input, stale state, last-good retention, and recovery", "evidence": ["components/meter_core/meter_core.c", "tests/test_production_receiver.py", "tests/test_pc_pipeline.py", "tests/host/test_meter_state.c"], "reason": "Host tests cover parser/state and collector recovery; USB disconnect and recovery on the device were not run."},
+    "C8": {"status": "partial", "scope": "BOOT navigation and independent PC/automatic refresh", "evidence": ["main/app_main.c", "pc/gui.py", "pc/serial_sender.py"], "reason": "Implementation is present, but BOOT timing and board refresh timing were not measured."}
+  },
+  "integration_results": {
+    "I1": {"status": "pass", "scope": "Offline collection preserving source times and adapter errors", "evidence": ["pc/pipeline.py", "tests/test_pc_pipeline.py"], "reason": null},
+    "I2": {"status": "pass", "scope": "Provider-specific normalization and separate global sources", "evidence": ["pc/pipeline.py", "tests/test_pc_pipeline.py", "experiments/fixtures/codex-reset-forecast.json", "experiments/fixtures/codex-resets-history.json"], "reason": null},
+    "I3": {"status": "partial", "scope": "USB cdm/1 framing, CRC, sequence, and reconnect-safe sender state", "evidence": ["pc/sender.py", "components/meter_core/meter_core.c", "tests/test_production_receiver.py", "tests/test_pc_pipeline.py"], "reason": "Offline host tests pass, but physical USB receive and reconnect behavior were not exercised."},
+    "I4": {"status": "partial", "scope": "Firmware verified frame to cache, stale state, and LCD path", "evidence": ["main/app_main.c", "main/board_lcd.c", "components/meter_core/meter_core.c", "build/codex_desk_meter.bin"], "reason": "The production module is linked and host-tested; no frame was sent to this firmware on a physical board."}
+  },
+  "gui_scores": {
+    "G1": {"score": null, "evidence": [], "reason": "No current-binary LCD capture; operator layout score not_run."},
+    "G2": {"score": null, "evidence": [], "reason": "No current-binary LCD capture; operator readability score not_run."},
+    "G3": {"score": null, "evidence": [], "reason": "No current-binary LCD capture; operator provenance and status score not_run."},
+    "G4": {"score": null, "evidence": [], "reason": "No current-binary LCD capture; operator error and null score not_run."},
+    "G5": {"score": null, "evidence": [], "reason": "No current-binary LCD capture; operator interaction score not_run."},
+    "G6": {"score": null, "evidence": [], "reason": "No current-binary LCD capture; operator board optimization score not_run."}
+  },
+  "provider_matrix": [
+    {
+      "provider_id": "openai",
+      "agent_id": "codex-cli",
+      "host_id": "terminal",
+      "model_id": "codex-demo",
+      "account_profile_id": "acct-demo-openai",
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "codex-percent-window",
+      "window_ids": ["five-hour"],
+      "capabilities": {"quota_windows": true, "absolute_tokens": false, "credits": false, "reset_time": true, "session_telemetry": false},
+      "status": "available",
+      "snapshot_paths": ["experiments/fixtures/providers/codex-percent-window.json"],
+      "evidence": ["experiments/fixtures/providers/codex-percent-window.json"],
+      "reason": null
+    },
+    {
+      "provider_id": "anthropic",
+      "agent_id": "claude-code",
+      "host_id": "terminal",
+      "model_id": "claude-sonnet-demo",
+      "account_profile_id": "acct-demo-anthropic",
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "claude-code-windows",
+      "window_ids": ["five-hour", "weekly", "model-sub-limit"],
+      "capabilities": {"quota_windows": true, "absolute_tokens": false, "credits": false, "reset_time": true, "session_telemetry": false},
+      "status": "available",
+      "snapshot_paths": ["experiments/fixtures/providers/claude-code-windows.json"],
+      "evidence": ["experiments/fixtures/providers/claude-code-windows.json"],
+      "reason": null
+    },
+    {
+      "provider_id": "google",
+      "agent_id": "gemini-cli",
+      "host_id": "terminal",
+      "model_id": "gemini-demo",
+      "account_profile_id": null,
+      "metric_kind": "quota_window",
+      "source_kind": "local_runtime",
+      "source_id": "gemini-cli-unsupported",
+      "window_ids": [],
+      "capabilities": {"quota_windows": false, "absolute_tokens": false, "credits": false, "reset_time": false, "session_telemetry": false},
+      "status": "unsupported",
+      "snapshot_paths": ["experiments/fixtures/providers/gemini-cli-unsupported.json"],
+      "evidence": ["experiments/fixtures/providers/gemini-cli-unsupported.json"],
+      "reason": "The synthetic CLI surface exposes no quota source."
+    },
+    {
+      "provider_id": "google",
+      "agent_id": "antigravity-cli",
+      "host_id": "terminal",
+      "model_id": null,
+      "account_profile_id": null,
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "antigravity-cli-unsupported",
+      "window_ids": [],
+      "capabilities": {"quota_windows": false, "absolute_tokens": false, "credits": false, "reset_time": false, "session_telemetry": false},
+      "status": "unsupported",
+      "snapshot_paths": ["experiments/fixtures/providers/antigravity-cli-unsupported.json"],
+      "evidence": ["experiments/fixtures/providers/antigravity-cli-unsupported.json"],
+      "reason": "Synthetic unavailable quota adapter; this fixture makes no claim about live Antigravity capabilities."
+    },
+    {
+      "provider_id": "anthropic",
+      "agent_id": "claude-code",
+      "host_id": "orca",
+      "model_id": "claude-sonnet-demo",
+      "account_profile_id": "acct-demo-anthropic",
+      "metric_kind": "quota_window",
+      "source_kind": "fixture",
+      "source_id": "orca-host-claude-code",
+      "window_ids": ["five-hour"],
+      "capabilities": {"quota_windows": true, "absolute_tokens": false, "credits": false, "reset_time": true, "session_telemetry": false},
+      "status": "available",
+      "snapshot_paths": ["experiments/fixtures/providers/orca-host-claude-code.json"],
+      "evidence": ["experiments/fixtures/providers/orca-host-claude-code.json"],
+      "reason": null
+    }
+  ],
+  "build": {
+    "status": "pass",
+    "target": "esp32s3",
+    "evidence": ["build/codex_desk_meter.bin", "docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/reproduction-and-hardware-check.md"],
+    "reason": null
+  },
+  "host": {
+    "status": "pass",
+    "host_id": "terminal",
+    "evidence": ["build-host/meter_receiver_cli.exe", "tests/test_production_receiver.py", "tests/host/test_meter_parser.c", "tests/host/test_meter_state.c", "tests/host/test_idle_dim.c", "docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/reproduction-and-hardware-check.md"],
+    "reason": null
+  },
+  "transport": {
+    "status": "partial",
+    "choice": "usb-serial",
+    "evidence": ["pc/serial_sender.py", "pc/sender.py", "main/app_main.c", "docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/reproduction-and-hardware-check.md"],
+    "reason": "USB Serial/JTAG settings and host/device code are implemented; no physical port was opened in this run."
+  },
+  "hardware": {
+    "status": "not_run",
+    "board": "waveshare-esp32-s3-lcd-3.16",
+    "evidence": [],
+    "reason": "No serial access, reset, flash, or physical observation was performed in this run."
+  },
+  "telemetry": {
+    "wall_clock_seconds": null,
+    "agent_tokens": {"input": null, "output": null, "cached": null, "reasoning": null, "provider_total": null, "total": null},
+    "token_total_definition": "input_plus_output_excludes_cached_and_reasoning",
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+    "availability_reason": "This invocation did not expose measured wall time or token telemetry; no values are inferred.",
+    "evidence": []
+  },
+  "product_pass": false
+}

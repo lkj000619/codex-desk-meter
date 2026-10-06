@@ -1,0 +1,13 @@
+{
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "recorded_at": "2026-10-06T18:21:54.963870+00:00",
+  "scope": "Independent operator audit procedure only; original584-file package and all candidate/source/artifact/native-cost/physical records preserved.",
+  "original_auditor_sha256": "a92d5d9a82fd7ba1fa052cad7c02c0f23437be4baab041da172304022de95f18",
+  "corrected_auditor_sha256": "952c3db423f12b85a4a425cf3f58d69d26beb962a1d102be5e99213439c648e8",
+  "original_error": "Line45 literal d404366963 required10 hash characters; the original ESP boot log prints the correct9-character prefix d40436696...",
+  "correction": "Extract the actual printed prefix, require at least9 characters and match it against the preserved full ELF hash. Reuse the already extracted frozen validator directory and the same immutable package.",
+  "candidate_execution_repeated": false,
+  "source_or_firmware_modified": false,
+  "host_tests_repeated": false,
+  "hardware_operation_repeated": false
+}

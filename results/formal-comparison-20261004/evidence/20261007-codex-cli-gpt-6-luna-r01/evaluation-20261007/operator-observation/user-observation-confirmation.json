@@ -1,0 +1,17 @@
+{
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "recorded_at": "2026-10-06T18:19:02.167284+00:00",
+  "video_answer_original": "\"C:\\Users\\이광진\\Documents\\카카오톡 받은 파일\\KakaoTalk_20261007_031533792.mp4\"",
+  "button_question_item_id": "[\"request_user_input_async\",\"call_DTK3R3fX9yO5ihIe8wMUChXE\",0]",
+  "button_answer_original": "BOOT와 RESET 모두",
+  "user_manual_reset": true,
+  "boot_manipulation_reported": true,
+  "exact_button_press_times_or_count": null,
+  "automatic_reboot_observed": null,
+  "implementation_commit": "88b2bbc61047242afb22f272c419b3a57d30bb49",
+  "artifact_sha256": "60e267b3685628e3079196a7c87a645c159b9cd95165d58ef145ac45e50c2a64",
+  "current_upload_at": "2026-10-06T17:57:24.390835+00:00",
+  "supplemental_reset_at": "2026-10-06T17:58:22.517516+00:00",
+  "video_sha256": "c21d3386a3772b7f38bf4ae7eb2a740df3043220691e222c3aba6b6e9f051343",
+  "scope": "User supplied this video in response to current final followup3 observation request and confirms both BOOT and RESET in this video. Exact button sequence, counts and times remain unknown; prior followup2 response is not reused."
+}

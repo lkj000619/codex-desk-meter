@@ -1,0 +1,14 @@
+{
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "recorded_at": "2026-10-06T17:55:57.985006+00:00",
+  "tool": "operator-helpers/artifact-collector-evidence_package.py",
+  "tool_sha256": "c3a4f76b00dce90e13447c7582c75b6c73ab874bd0525f543d0419736e938b91",
+  "existing_remediation": "docs/plans/2026-10-04-evidence-artifact-layout-remediation.md",
+  "root_git_head": "bf23ab4901713fadb60678eb00bbb6aa0cab3a22",
+  "actual_build_root": "build",
+  "method": "Existing result.build.evidence artifact-directory collector; all five firmware artifact kinds required in one directory.",
+  "frozen_dependencies_root": "C:\\meter-operator-20261004",
+  "frozen_validators_unchanged": true,
+  "candidate_inputs_source_artifacts_unchanged": true,
+  "operator_preparation_error": null
+}

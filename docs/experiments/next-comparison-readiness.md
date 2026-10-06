@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-07. 상태: **2026-10-07 마지막 Luna 후속3 `20261007-codex-cli-gpt-6-luna-r01`는02:53:25.503 KST 정상 completed 종료했다. Ledger round3이며 새 최초가 아니다. 원본 source commit `88b2bbc61047242afb22f272c419b3a57d30bb49`와37source/20artifact를 동결하고462파일 독립 복원·Python22/C3/provider17·공통 host 경로를 확인했다. COM3에02:57 KST 원본 업로드,02:58 KST 같은 app 리셋·공통 frame0/1 재전송을 완료했고 ELF 일치 boot·PSRAM·USB 첫64byte 수신을 확인했다. 완전한 frame 수락과 LCD/BOOT/30초는 미확인으로 사용자 실물 관측과 RM을 기다린다. 실제1,192.593초·정규화4,090,978 token, 전체15회 coverage14/15·알려진61,608,453 token·전체 합계 미상(null), Luna series coverage3/4·알려진34,918,496 token이다. 잔여1,773.142초(29분33.142초)는 있으나 후속3회 한도를 사용해 추가 호출은 불가하다. 이번 정책 eligible·과거 series invalid를 유지한다. Sol/Pro 종료·Flash 보류·과거 판정/비용은 보존한다. 독립 series 종료3/15로 전체 비교는 미완료다.**
+확인일: 2026-10-07. 상태: **2026-10-07 Luna 마지막 후속3 평가·series 종료 완료. 48.17초 영상에서 글자/블록이 회전·중복·잘림 상태이며 일부 문구는 읽히지만58%/82%와 세 정보 화면은 보이지 않아 정상 가독 화면에 도달하지 못했다. 사용자는 이번 영상에서도 BOOT와 RESET 모두 눌렀다고 확인했고 정확한 순서/횟수/시점이 없어 자동 재부팅과 분리된 BOOT 순환은 확인되지 않았다. RM1 pass·RM2 partial·RM3/RM4 fail·RM5 not_run, reference fail·product_pass false다. 최종584파일 package 독립 복원·원본 hash/source/artifact/비용/정책/영상/RM 연결 검증을 완료했다. 이번 정책 eligible·과거 series invalid를 유지한다. 최초1회+후속3회로 한도 종료, 잔여1,773.142초(29분33.142초)와 관계없이 추가 호출은 없다. 전체15회 비용 coverage14/15·알려진61,608,453 token·전체 합계 미상, Luna coverage3/4·알려진34,918,496 token·8,521.280초를 보존한다. 독립 series 종료4/15로 전체 비교는 미완료이며 Sol/Pro 종료·Flash 보류와 과거 원본 판정을 유지한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -396,3 +396,9 @@ COM3·MAC `28:84:85:B0:85:18`은 재업로드와 같고,21:22:24 KST native rese
 2026-10-07 [관측 대기 snapshot의 회차 메타데이터 정정](../../results/formal-comparison-20261004/evidence/20261007-codex-cli-gpt-6-luna-r01/publication-correction-20261007/correction-note.json): 원본 inventory의 템플릿 잔존 round2는 실제 ledger round3으로 읽는다. 원본 bytes와 실패한 문서 검사 절차를 보존하고 미완료 문서 반영만 이어서 마쳤다. 후보 호출·펌웨어·계측·판정 변화는 없다.
 
 2026-10-07 [관측 대기 파일 목록 보완](../../results/formal-comparison-20261004/evidence/20261007-codex-cli-gpt-6-luna-r01/publication-correction-20261007/inventory-supplement.json): Windows 긴 경로 검사로 원본 inventory에서 빠진 재현 문서1개의 hash·크기를 동결 source와 대조해 추가 목록에 보존했다. 원본 inventory·문서 bytes·펌웨어·계측·판정은 유지한다.
+
+## 2026-10-07 Luna 마지막 영상 평가·회차 한도 종료
+
+2026-10-07 Luna 마지막 후속3 평가·series 종료 완료. 48.17초 영상에서 글자/블록이 회전·중복·잘림 상태이며 일부 문구는 읽히지만58%/82%와 세 정보 화면은 보이지 않아 정상 가독 화면에 도달하지 못했다. 사용자는 이번 영상에서도 BOOT와 RESET 모두 눌렀다고 확인했고 정확한 순서/횟수/시점이 없어 자동 재부팅과 분리된 BOOT 순환은 확인되지 않았다. RM1 pass·RM2 partial·RM3/RM4 fail·RM5 not_run, reference fail·product_pass false다. 최종584파일 package 독립 복원·원본 hash/source/artifact/비용/정책/영상/RM 연결 검증을 완료했다. 이번 정책 eligible·과거 series invalid를 유지한다. 최초1회+후속3회로 한도 종료, 잔여1,773.142초(29분33.142초)와 관계없이 추가 호출은 없다. 전체15회 비용 coverage14/15·알려진61,608,453 token·전체 합계 미상, Luna coverage3/4·알려진34,918,496 token·8,521.280초를 보존한다. 독립 series 종료4/15로 전체 비교는 미완료이며 Sol/Pro 종료·Flash 보류와 과거 원본 판정을 유지한다.
+
+[후속3 최종 RM](../../results/formal-comparison-20261004/evidence/20261007-codex-cli-gpt-6-luna-r01/evaluation-20261007/reference-review.json) · [최종 독립 복원](../../results/formal-comparison-20261004/evidence/20261007-codex-cli-gpt-6-luna-r01/evaluation-20261007/restore-audit.json) · [회차 한도 종료](../../results/formal-comparison-20261004/evidence/20261007-codex-cli-gpt-6-luna-r01/evaluation-20261007/operator-observation/operator-series-completion.json)

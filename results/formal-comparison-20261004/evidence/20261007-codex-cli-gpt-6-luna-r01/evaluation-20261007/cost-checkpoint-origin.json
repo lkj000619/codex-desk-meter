@@ -1,0 +1,11 @@
+{
+  "scope": "Checkpoint15 preserves the15 terminal attempts before this final optical review. No new candidate invocation or cost change; latest RM verdict is in this final snapshot.",
+  "checkpoint": "results/formal-comparison-20261004/comparison-checkpoint-15.md",
+  "checkpoint_sha256": "87d8f27ba1c442077785bfe0d64153d27af81384a80f907641077846d30e76fc",
+  "input_snapshot_directory": "results/formal-comparison-20261004/evidence/20261007-codex-cli-gpt-6-luna-r01/observation-awaiting-20261007",
+  "input_inventory": "results/formal-comparison-20261004/evidence/20261007-codex-cli-gpt-6-luna-r01/observation-awaiting-20261007/cost-checkpoint-inputs.json",
+  "input_inventory_sha256": "61c88c4999e708046d1be66dcf312c13a3046082e874f2f96879e0035834bc28",
+  "token_measurement_coverage": "14/15",
+  "known_normalized_tokens": 61608453,
+  "total_normalized_tokens": null
+}

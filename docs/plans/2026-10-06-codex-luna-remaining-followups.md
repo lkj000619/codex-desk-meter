@@ -2,7 +2,7 @@
 
 목표: 사용자의 추가 실행 요청에 따라 LCD의 실제 가시 출력을 확인할 때까지, 남은 후보 실행4,213초·최대2회 안에서 자기 구현을 이어서 시험한다.
 
-상태: 2026-10-07 마지막 후속3 종료·동결·독립 검증·COM3 원본 업로드 완료, 사용자 실물 관측/RM 대기. 실제1,192.593초·정규화4,090,978 token, 잔여1,773.142초이나 남은 회차0으로 추가 실행 불가.
+상태: 2026-10-07 마지막 후속3 영상/RM·최종584파일 독립 검증 완료. 정상 가독 화면 미도달·후속3회 한도 종료, 잔여1,773.142초·남은 회차0·추가 실행 없음.
 
 사용자 지시: “추가 실험 진행 요청. lcd 화면이 나올 때까지. 하지만 남은 후속 70분13초·최대2회 안에서”. 이번 지시는 남은 두 회차의 순차 실행·원본 업로드·평가를 허용한다. 기준 도달·LCD 가시 출력·제품 합격은 각각 구분한다. LCD 출력만 확인되어 사용자의 중지 조건을 만족해도 미측정 RM을 pass로 만들지 않는다.
 
@@ -12,8 +12,8 @@
 - [x] 현재 CLI/SDK/native 설정을 확인하고 새 run-bound receipt로 한 번 시작. 현재 누적 잔여4,213초를 이번 timeout 상한으로 사용하며 시작 시각·thread·실제 argv·원시 로그36개 파일을 보존.
 - [x] 종료 뒤 후보 source/artifact·원시 비용·정책을 동결하고 별도 복원에서 제출·빌드 결합·생산 collector/receiver와 필요한 host 시험 확인. 운영자 제품 수정·재빌드는 하지 않음.
 - [x] 같은 COM3·MAC과 원본 artifact hash를 확인해 업로드, 동일 공통 frame0/1·5초 간격 전송. 사용자 LCD/BOOT/30초 관측을 이번 run에 연결하고 가능한 RM만 평가.
-- [ ] LCD 출력이 미도달이고 예산이 남으면 같은 절차로 후속3회차를 자동 진행. 새 timeout은 `floor(7,200 - 종료한 후속 실제 경과 시간 합)`이며 마지막 한 회를 넘기지 않음. 광학 관측이 없으면 다음 회차의 실패를 추정하지 않고 관측 대기로 기록.
-- [ ] 가시 출력·reference 도달·시간/회차 소진·사용자 중지 중 실제 종료 사유와 모든 비용/실패를 보존. [현재 상태](../experiments/next-comparison-readiness.md)·[진행 기록](../../results/formal-comparison-20261004/report.md)·문서 지도·계측 갱신.
+- [x] LCD 출력이 미도달이고 예산이 남으면 같은 절차로 후속3회차를 자동 진행. 새 timeout은 `floor(7,200 - 종료한 후속 실제 경과 시간 합)`이며 마지막 한 회를 넘기지 않음. 광학 관측이 없으면 다음 회차의 실패를 추정하지 않고 관측 대기로 기록.
+- [x] 가시 출력·reference 도달·시간/회차 소진·사용자 중지 중 실제 종료 사유와 모든 비용/실패를 보존. [현재 상태](../experiments/next-comparison-readiness.md)·[진행 기록](../../results/formal-comparison-20261004/report.md)·문서 지도·계측 갱신.
 
 검증: 기존 동결 comparison manager의 직전 review·bundle·evidence guard와 예산 계산을 재사용한다. Package 원본 bytes/hash·동결 validator·source/artifact·비용/정책/RM 결합을 독립 복원에서 검증하고 문서 링크·staged evidence bytes를 확인한다. 과거 첫 판정·동결 commit/tag·package와 Sol/Pro 종료·Flash 보류는 유지한다.
 
@@ -27,7 +27,7 @@
 - [x] 같은 COM3/MAC·원본 artifact 확인 후02:19 KST 업로드;02:20 KST 같은 app 단일 리셋·고정 frame0/1 재전송. ELF/PSRAM/USB 첫64byte 수신 확인, 완전한 수락은 미확인.
 - [x] 종료14회 비용 집계: token coverage13/14·전체 합계 미상, 알려진57,517,475 token. 이번 실제 시간 차감·정책 eligible과 과거 series invalid 분리.
 - [x] 현재 LCD/BOOT/30초 사용자 관측을 원본에 연결하고 한번만 RM review·최종 독립 package 확정.
-- [ ] LCD 출력이 없으면 기존 승인 범위의 마지막 후속3: 현재 잔여floor2,965초·최대1회, 자기 동결 source에서 준비. 출력 관측 없이는 실패를 추정해 새 호출하지 않음.
+- [x] LCD 출력이 없으면 기존 승인 범위의 마지막 후속3: 현재 잔여floor2,965초·최대1회, 자기 동결 source에서 준비. 출력 관측 없이는 실패를 추정해 새 호출하지 않음.
 
 [현재 원본](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r03/observation-awaiting-20261007/snapshot-inventory.json) · [비용14](../../results/formal-comparison-20261004/comparison-checkpoint-14.md).
 
@@ -41,8 +41,8 @@
 
 - [x] 후속2 동결·독립 검증·영상/RM 완료 뒤 자기 source33개·입력57개 확인, 새 날짜 run/receipt로 마지막 회차 한 번 시작.
 - [x] 마지막 후보 종료·실제 시간/원시 비용·정책·source/artifact 동결.
-- [ ] 유효 build가 있으면 같은 원본 artifact 업로드·사용자 관측·RM·독립 package 검증. 없으면 원본 실패와 미실행 범위 보존.
-- [ ] 정상 가독 화면 도달 여부·남은 시간과 무관한 회차 한도 종료를 기록하고 후속을 닫음.
+- [x] 유효 build가 있으면 같은 원본 artifact 업로드·사용자 관측·RM·독립 package 검증. 없으면 원본 실패와 미실행 범위 보존.
+- [x] 정상 가독 화면 도달 여부·남은 시간과 무관한 회차 한도 종료를 기록하고 후속을 닫음.
 
 2026-10-07 02:33:32.910 KST 마지막 Luna 후속3회차 `20261007-codex-cli-gpt-6-luna-r01` 실행 중. 날짜가 바뀌어 run suffix가r01이지만 ledger round3이며 새 최초 실행이 아니다. 자기 직전 동결 commit `91f7de60328b7db9a9d04acef60ac45eafb3685a`에서 별도 checkout을 준비하고 제품 source33개·고정 입력57개·build/sdkconfig 미상속을 확인했다. Native PID30400·thread `01a11247-1dc1-74f2-aab0-c60b8252cb72`, gpt-6-luna/max·CLI0.159.2·ESP-IDF5.3.2·원본 설정과 새 receipt를 유지하며 timeout2,965초다. 자신의 회전/중복/잘림 영상·부분 수신·host 검증과 고정 기대만 전달했다. 후보 시작15회·종료14회, 현재 비용/정책/제출/제품/RM은 미확정이다. 종료 뒤 동결·독립 검증·원본 업로드·평가하며 일찍 종료해도 추가 회차는 없다. 보드는02:19 KST 업로드한 후속2 원본이다. 과거 source/evidence/실패 비용·token null·후속2 최종575파일 package·Sol/Pro 종료·Flash 보류를 보존한다. 독립 series 종료3/15로 전체 비교는 미완료다.
 
@@ -51,6 +51,12 @@
 - [x] 정상 종료·원시 비용·source37/artifact20 동결,462파일 독립 복원·Python22 skip0/C3/provider17·공통 host 경로 확인.
 - [x] 같은 COM3/MAC·원본 artifact 확인 후02:57 KST 업로드,02:58 KST 같은 app 리셋·고정 frame0/1 재전송. Matching ELF boot·PSRAM·USB 첫64byte 확인, 완전한 수락 미확인.
 - [x] 종료15회 비용 집계: token coverage14/15·알려진61,608,453 token, 후속2 null과 원본 판정 보존.
-- [ ] 현재 사용자 LCD/BOOT/30초 관측을 연결하고 마지막 RM review·최종 독립 package 확정·series 종료.
+- [x] 현재 사용자 LCD/BOOT/30초 관측을 연결하고 마지막 RM review·최종 독립 package 확정·series 종료.
 
 남은 시간1,773.142초와 관계없이 후속 회차는0으로 추가 호출하지 않는다.
+
+## 2026-10-07 마지막 후속3 완료·종료 사유
+
+2026-10-07 Luna 마지막 후속3 평가·series 종료 완료. 48.17초 영상에서 글자/블록이 회전·중복·잘림 상태이며 일부 문구는 읽히지만58%/82%와 세 정보 화면은 보이지 않아 정상 가독 화면에 도달하지 못했다. 사용자는 이번 영상에서도 BOOT와 RESET 모두 눌렀다고 확인했고 정확한 순서/횟수/시점이 없어 자동 재부팅과 분리된 BOOT 순환은 확인되지 않았다. RM1 pass·RM2 partial·RM3/RM4 fail·RM5 not_run, reference fail·product_pass false다. 최종584파일 package 독립 복원·원본 hash/source/artifact/비용/정책/영상/RM 연결 검증을 완료했다. 이번 정책 eligible·과거 series invalid를 유지한다. 최초1회+후속3회로 한도 종료, 잔여1,773.142초(29분33.142초)와 관계없이 추가 호출은 없다. 전체15회 비용 coverage14/15·알려진61,608,453 token·전체 합계 미상, Luna coverage3/4·알려진34,918,496 token·8,521.280초를 보존한다. 독립 series 종료4/15로 전체 비교는 미완료이며 Sol/Pro 종료·Flash 보류와 과거 원본 판정을 유지한다.
+
+[후속3 최종 RM](../../results/formal-comparison-20261004/evidence/20261007-codex-cli-gpt-6-luna-r01/evaluation-20261007/reference-review.json) · [최종 독립 복원](../../results/formal-comparison-20261004/evidence/20261007-codex-cli-gpt-6-luna-r01/evaluation-20261007/restore-audit.json) · [회차 한도 종료](../../results/formal-comparison-20261004/evidence/20261007-codex-cli-gpt-6-luna-r01/evaluation-20261007/operator-observation/operator-series-completion.json)

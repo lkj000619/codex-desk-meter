@@ -1,0 +1,6 @@
+{
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "original_terminal_manifest_sha256": "b784a19c9c7cf0a477e85efb0cce31cb0921a369de7638beab3fdb1601e3ea8d",
+  "pre_review_operator_metadata_sha256": "49b1df25ce1cd5811a7cd1e373044e3641feb32ed907de9ba75f96fc5418609a",
+  "scope": "Apply frozen review once using exact preserved terminal bytes, then reattach operator evidence. Source, execution, normalized4090978 token cost and original terminal ledger hash are preserved."
+}

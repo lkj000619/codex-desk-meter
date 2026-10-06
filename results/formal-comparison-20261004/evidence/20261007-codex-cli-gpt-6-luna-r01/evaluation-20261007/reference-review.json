@@ -1,0 +1,121 @@
+{
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "reviewer": "Codex operator",
+  "reviewed_at": "2026-10-06T18:19:02.167284+00:00",
+  "items": {
+    "RM1": {
+      "status": "pass",
+      "reason": "Original ESP-IDF5.3.2 build and same archived ESP32-S3 artifact verified. Three COM3 image hashes, matching d404366963 ELF prefix and normal boot/PSRAM/USB are observed. The candidate completed normally.",
+      "evidence": [
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "7008d1e46b2dd14d0a91bf803d610cba0e114bd5d13cf318abded1305d4078f4"
+        },
+        {
+          "path": "operator-observation/hardware-slot.json",
+          "sha256": "92b5d0f763cc83bef012aab8b3bcf96232d4330475c53d33951cc6fd340901eb"
+        },
+        {
+          "path": "operator-observation/frozen-artifact-upload-stdout.txt",
+          "sha256": "3fd3d6f7b4fdb1d79258bda22c5d632eef4561a09ae77089f2eb53e56cfeb6a7"
+        },
+        {
+          "path": "operator-observation/hardware-post-upload-reset/runtime-source-binding.json",
+          "sha256": "9c0276e250f7bb58a9691a5128f7ed4f99f9587335c6ecc8391fde13dc67223d"
+        }
+      ]
+    },
+    "RM2": {
+      "status": "partial",
+      "reason": "Declared collector/encoder match exact fixed common frames and archived production C receiver accepts0/1 on host. Physical host writes1543 bytes each and first64-byte USB chunk are observed; complete device accepted/rejected markers remain absent and actual frame acceptance is unconfirmed.",
+      "evidence": [
+        {
+          "path": "operator-observation/host-semantic-review.json",
+          "sha256": "1df1eecb808e3aac06a9e971db80a055a52574c288008f5404e0c16aeb077e44"
+        },
+        {
+          "path": "operator-observation/independent-host-checks/common-stimulus-check.json",
+          "sha256": "fd0b00f5c5f3e46fbafbd40a5db7cd4980fa0df0e5574754fd4d93e0d35f841a"
+        },
+        {
+          "path": "operator-observation/reference-capture-r1/capture.json",
+          "sha256": "59976c5a4fa279cf6acf4dc8df828c3976d2e963d306e386278644a137831b4c"
+        },
+        {
+          "path": "operator-observation/hardware-post-upload-reset/runtime-source-binding.json",
+          "sha256": "9c0276e250f7bb58a9691a5128f7ed4f99f9587335c6ecc8391fde13dc67223d"
+        }
+      ]
+    },
+    "RM3": {
+      "status": "fail",
+      "reason": "Current48.17-second video has duplicated, rotated and clipped text/blue blocks. Some WINDOW/SOURCE STALE/receive-age fragments can be read when physically rotated; the required58% five-hour and82% weekly remaining values are absent. Normal readable usage display is not reached.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-observation-confirmation.json",
+          "sha256": "faebeec0c07b2a912c564d9544f0bdeff24d2aad65286f132ede54158b4350bd"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-review.json",
+          "sha256": "796cbd9ee30cbeab2895fe6b7e85550cccef4461fd37e983a4e1e8f8a9d69701"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-metadata.json",
+          "sha256": "8f0adfbc174ec2625d355ba5a332908db1fbfc9e21ab4af3bf702016d47f7314"
+        },
+        {
+          "path": "operator-observation/user-video-01/source.mp4",
+          "sha256": "c21d3386a3772b7f38bf4ae7eb2a740df3043220691e222c3aba6b6e9f051343"
+        }
+      ]
+    },
+    "RM4": {
+      "status": "fail",
+      "reason": "The current recording does not show three complete visible usage/global-reset/diagnostic information views. Duplicated fragments and near-empty edge glyphs do not provide the required three kinds of information.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-observation-confirmation.json",
+          "sha256": "faebeec0c07b2a912c564d9544f0bdeff24d2aad65286f132ede54158b4350bd"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-review.json",
+          "sha256": "796cbd9ee30cbeab2895fe6b7e85550cccef4461fd37e983a4e1e8f8a9d69701"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-metadata.json",
+          "sha256": "8f0adfbc174ec2625d355ba5a332908db1fbfc9e21ab4af3bf702016d47f7314"
+        },
+        {
+          "path": "operator-observation/user-video-01/source.mp4",
+          "sha256": "c21d3386a3772b7f38bf4ae7eb2a740df3043220691e222c3aba6b6e9f051343"
+        }
+      ]
+    },
+    "RM5": {
+      "status": "not_run",
+      "reason": "User confirms both BOOT and RESET in this current video without exact sequence, counts or timing. Separate BOOT navigation to the three information views and return cannot be verified. RST changes are not counted as navigation; button hardware failure is not inferred.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-observation-confirmation.json",
+          "sha256": "faebeec0c07b2a912c564d9544f0bdeff24d2aad65286f132ede54158b4350bd"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-review.json",
+          "sha256": "796cbd9ee30cbeab2895fe6b7e85550cccef4461fd37e983a4e1e8f8a9d69701"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-metadata.json",
+          "sha256": "8f0adfbc174ec2625d355ba5a332908db1fbfc9e21ab4af3bf702016d47f7314"
+        },
+        {
+          "path": "operator-observation/user-video-01/source.mp4",
+          "sha256": "c21d3386a3772b7f38bf4ae7eb2a740df3043220691e222c3aba6b6e9f051343"
+        }
+      ]
+    }
+  },
+  "product_pass": false,
+  "policy_status": "eligible",
+  "note": "Final authorized followup3. Current eligible policy is separate from earlier invalid series; quality/reference cost remains ineligible. Host22/C3/provider17 and own wire checks differ from full frozen operator29/device/GUI validation. Exact timing, full acceptance and30-second readable stability remain unmeasured. Round allowance exhausted; no additional invocation."
+}
