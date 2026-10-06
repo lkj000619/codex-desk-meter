@@ -1,0 +1,38 @@
+{
+  "model": "gpt-6-luna",
+  "executed_profile_sha256": "84c7abcb683d7640750c1e47cf5c486a8ecbf32c548f67f10b09631d48db9a8f",
+  "probe": "codex-luna-r1",
+  "process_seconds": 145.81300000008196,
+  "artifact_sha256": {
+    "probe-input.txt": "cc8a2272f2201e0faa785cf52a738212b39b1284e490e7c730816e10f3593b9a",
+    "probe-output.txt": "94b6b68c7dd9fc0fead2a5dccaad0504f960b12a9a9b971b1ca1bea086a98541",
+    "tests/probe.py": "226569ac684b548e3d3fb45d2b73487ba53895187f1a799d5dcdb77026fc8653",
+    "build-host/preparation_host.exe": "1b33803563c031d8849c8be4a31ed9aab3a568a1cb03ff34b174542cfe8c6d9b",
+    "build-host/Testing/Temporary/LastTest.log": "5c6c79c0916be5735b85d0758122fe0faba8360734c263ae98fd6d8f06d0d364",
+    "build-idf/preparation_fixture.bin": "cdfe929f1c69dd5962c313ec06b32c1cc988c64a7406c362f91f8339a29bfab5",
+    "build-idf/preparation_fixture.elf": "f84dd62c4d4d380b2503a6306f76631479f68ff7b51690ade06b38dda9643af7",
+    "build-idf/preparation_fixture.map": "b2883af725ac75239cd343a6ddef58041051a7186461cb5dd4065b26181d20c2",
+    "build-idf/bootloader/bootloader.bin": "41257bca31f1097ba08b146e76aeac3efb9087cf16e1852b689ca475e749023d",
+    "build-idf/partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "status": "pass",
+  "operator_review_required": false,
+  "reviewer": "preparation-operator",
+  "current_profile_sha256": "eae4f0ceab072eff32f8f12b423cbdbacf312650817c26825800f83edf9fbb2a",
+  "execution_conditions_equal": true,
+  "changed_metadata_fields": [
+    "settings_inventory",
+    "measurement_notes"
+  ],
+  "capabilities": {
+    "read": "pass",
+    "write": "pass",
+    "list": "pass",
+    "host_build": "pass",
+    "host_test": "pass",
+    "idf_build": "pass",
+    "vendor_reference": "pass",
+    "telemetry": "pass",
+    "settings": "pass"
+  }
+}

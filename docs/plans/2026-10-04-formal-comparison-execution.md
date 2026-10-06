@@ -2,7 +2,7 @@
 
 목표: ESP32-S3-LCD-3.16 제품 구현에서 에이전트의 첫 결과·자기 후속 수정 비용과 RM 도달·제품 품질을 동일 조건으로 비교한다.
 시작 승인: 2026-10-04 사용자 요청 “프로젝트 목적과 목표에 엇나가지않도록 실험 시작”.
-상태: 2026-10-06 Luna 최초 평가 후 [검은 화면 원인 분석](../../results/formal-comparison-20261004/luna-black-screen-diagnosis-20261006.md)을 마쳤다. 추가 진단에서 정상 부팅·PSRAM·USB 준비·frame0 수락과 LCD 재리셋/회전·물리 timing 결함을 확인했다. 수정 후 인과 검증·frame1 수락·BOOT·30초 유지는 미확인이다. 기존 최초 RM1/2 partial·RM3 fail·RM4/5 not_run, reference fail·product_pass false·정책 invalid_for_comparison을 보존한다. 후속0회·잔여7,200초/3회, 독립 series 종료3개/예정15개·후보 시작/종료 각12회다. 원본 비용·Sol/Pro 종료·Flash 보류·과거 판정은 유지한다. 아래 실행 과정은 각 시점의 기록이다.
+상태: 2026-10-07 AGY Flash 후속2 실행 중. 사용자 요청으로 기존 보류를 해제하고 자기 마지막 동결 구현에서 재개했다. 03:38:00.978 KST native 시작, gemini-3.8-flash-medium/medium·request-review·새 checkout을 확인했다. 잔여5,710.781초·최대2회 중 이번 runner 한도5,710초다. 새 사본 생성 파일1,434개 제거·제품 소스36개와 공통 입력57개 동일성을 검증했다. 전체 호출 시작16회·종료15회, 독립 series 종료4/15다. 현재 비용·정책·RM·실물 결과는 종료 후 평가하며 이전15회 비용 coverage14/15·알려진61,608,453 token·전체 합계 미상과 과거 부적격을 보존한다. 보드는 Luna 마지막 후속3 원본을 유지한다.
 원본: [운영 계약](../experiments/comparison-operating-contract.md), [현재 상태](../experiments/next-comparison-readiness.md),
 [동결 기록](../../results/experiment-launch-preparation-20261004/freeze.json).
 
@@ -49,3 +49,10 @@
 재개 시 manifest·ledger·process부터 확인하고 running 후보를 다시 실행하지 않는다.
 강제 종료 후 running 기록이 남으면 자식 종료·원본 로그·실제 경과 시간을 확인하고 기존 reconcile 절차를 따른다.
 모델/도구 오류와 관측 불가능 사유를 감추거나 자동으로 완료·적격 처리하지 않는다.
+
+## 2026-10-07 AGY Flash 잔여 후속 재개
+
+- 실행: `20261007-antigravity-cli-agy-flash-r01`, 기존 Flash ledger의 후속2. 새로운 최초 실험이 아니다.
+- 계획: [잔여 후속 계획](2026-10-07-agy-flash-remaining-followups.md).
+- 실제 시작: [native 시작 원본](../../results/formal-comparison-20261004/evidence/20261007-antigravity-cli-agy-flash-r01/launch-20261007/native-start-observation.json).
+- 기존 Flash 후속1의 부적격·관측·비용과 Luna/Sol/Pro/Muse 종료 기록을 보존한다. 이번 종료 후 source/artifact·정책·독립 복원·COM3 관측을 평가한다.

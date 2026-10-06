@@ -1,0 +1,49 @@
+{
+  "series": [
+    {
+      "profile": "agy-flash.json",
+      "run_id": "20261005-antigravity-cli-agy-flash-r01",
+      "directory": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01",
+      "ledger": "C:\\meter-runs-20261005\\ledgers\\20261005-antigravity-cli-agy-flash-r01.json",
+      "old_unstarted_run_id": "20261004-antigravity-cli-agy-flash-r01",
+      "candidate_commit": "69da8cfc2c1e882b2d1f57f9898b87ad8cd4c573",
+      "candidate_tree": "4f8fbc9c1b361b80088119d572e278cd5a8723d2",
+      "profile_sha256": "5b24fc4e43ee0bf74b1b8a1ddce7e08f5024760c8b9660ce1c5aabbe966668f8",
+      "input_bundle_sha256": "9f4472eb4edb2c9488685b59b2f9a73b5d3f3dc11b002d651bfd37f4dc1d0a51"
+    },
+    {
+      "profile": "agy-pro.json",
+      "run_id": "20261005-antigravity-cli-agy-pro-r01",
+      "directory": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01",
+      "ledger": "C:\\meter-runs-20261005\\ledgers\\20261005-antigravity-cli-agy-pro-r01.json",
+      "old_unstarted_run_id": "20261004-antigravity-cli-agy-pro-r01",
+      "candidate_commit": "ba5609db6fbf6392166586e50341c6e14a26112f",
+      "candidate_tree": "05cba50f759049efe2b53fad9f76781690d95bc2",
+      "profile_sha256": "eeedee05c3f1004df8d6883f8a0dca520cbf70665cff283397fa1f8dc1065b01",
+      "input_bundle_sha256": "62fb20a50ebf174f96e072e0f2958921d21e43b7a7e5dee84dfe69445a125a4d"
+    },
+    {
+      "profile": "codex-sol.json",
+      "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "directory": "C:\\meter-runs-20261005\\20261005-codex-cli-gpt-6-sol-r01",
+      "ledger": "C:\\meter-runs-20261005\\ledgers\\20261005-codex-cli-gpt-6-sol-r01.json",
+      "old_unstarted_run_id": "20261004-codex-cli-gpt-6-sol-r01",
+      "candidate_commit": "95e7e431cda7dc507668c8b7eea986b41204f57c",
+      "candidate_tree": "88266e4b94318ade00961c6998b38a4207277cc7",
+      "profile_sha256": "d39eccf7fad695a4333df6d4b885eb81db96ac70e6dfce13b1e9f61f64ee9926",
+      "input_bundle_sha256": "ced675a80c840d2bb9d467ccf7694a6bbd5c09b058c9887e01110842afdb6e67"
+    },
+    {
+      "profile": "codex-luna.json",
+      "run_id": "20261005-codex-cli-gpt-6-luna-r01",
+      "directory": "C:\\meter-runs-20261005\\20261005-codex-cli-gpt-6-luna-r01",
+      "ledger": "C:\\meter-runs-20261005\\ledgers\\20261005-codex-cli-gpt-6-luna-r01.json",
+      "old_unstarted_run_id": "20261004-codex-cli-gpt-6-luna-r01",
+      "candidate_commit": "5ad42953403fee9cf7ee80f89b1c8ad1f542fc0c",
+      "candidate_tree": "0fd0d2a3bbd96e51a68645b9f041d4158727f562",
+      "profile_sha256": "eae4f0ceab072eff32f8f12b423cbdbacf312650817c26825800f83edf9fbb2a",
+      "input_bundle_sha256": "891f33b6a9128e423619c6c59b309cf09b0fe3d634bec9aa04bdfe93297207a1"
+    }
+  ],
+  "product_invocations_during_preparation": 0
+}

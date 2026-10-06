@@ -1,0 +1,37 @@
+{
+  "model": "gemini-3.8-flash-medium",
+  "executed_profile_sha256": "da601e83a0da32d45d21121bcf399630a64f004a50f7ea1e14f166cc139f0d75",
+  "probe": "agy-flash-r1",
+  "process_seconds": 100.96900000004098,
+  "artifact_sha256": {
+    "probe-input.txt": "cc8a2272f2201e0faa785cf52a738212b39b1284e490e7c730816e10f3593b9a",
+    "probe-output.txt": "94b6b68c7dd9fc0fead2a5dccaad0504f960b12a9a9b971b1ca1bea086a98541",
+    "tests/probe.py": "226569ac684b548e3d3fb45d2b73487ba53895187f1a799d5dcdb77026fc8653",
+    "build-host/preparation_host.exe": "557ba6687ceb57aecdb30273e7022e38743a1bcac89262e80e01932a1660b83f",
+    "build-host/Testing/Temporary/LastTest.log": "30267a1c2c1b62e51a46395af16f374e4f370671470409d6225c0d4743f412b5",
+    "build-idf/preparation_fixture.bin": "65a19c9fae905e0dd10b65b28d04d091a8df4ebc3c97cfd1bc78a5cca46513b2",
+    "build-idf/preparation_fixture.elf": "ccf39e25a0ff347e619f4f4c29eb3741ffada3f1ec970f47b3e10998792f324c",
+    "build-idf/preparation_fixture.map": "8b0848e5f1f047729e78f00575b5b10595566dfc5cbfa1cf71dc73536e4e3ff0",
+    "build-idf/bootloader/bootloader.bin": "ed1dc14ad8148a6e1c86203177e5d669d8576b44b6e97317f8e670d708511aab",
+    "build-idf/partition_table/partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+  },
+  "status": "pass",
+  "operator_review_required": false,
+  "reviewer": "preparation-operator",
+  "current_profile_sha256": "5b24fc4e43ee0bf74b1b8a1ddce7e08f5024760c8b9660ce1c5aabbe966668f8",
+  "execution_conditions_equal": true,
+  "changed_metadata_fields": [
+    "measurement_notes"
+  ],
+  "capabilities": {
+    "read": "pass",
+    "write": "pass",
+    "list": "pass",
+    "host_build": "pass",
+    "host_test": "pass",
+    "idf_build": "pass",
+    "vendor_reference": "pass",
+    "telemetry": "pass",
+    "settings": "pass"
+  }
+}

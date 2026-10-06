@@ -1,6 +1,6 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-07 Luna 마지막 후속3 평가·series 종료 완료. 48.17초 영상에서 글자/블록이 회전·중복·잘림 상태이며 일부 문구는 읽히지만58%/82%와 세 정보 화면은 보이지 않아 정상 가독 화면에 도달하지 못했다. 사용자는 이번 영상에서도 BOOT와 RESET 모두 눌렀다고 확인했고 정확한 순서/횟수/시점이 없어 자동 재부팅과 분리된 BOOT 순환은 확인되지 않았다. RM1 pass·RM2 partial·RM3/RM4 fail·RM5 not_run, reference fail·product_pass false다. 최종584파일 package 독립 복원·원본 hash/source/artifact/비용/정책/영상/RM 연결 검증을 완료했다. 이번 정책 eligible·과거 series invalid를 유지한다. 최초1회+후속3회로 한도 종료, 잔여1,773.142초(29분33.142초)와 관계없이 추가 호출은 없다. 전체15회 비용 coverage14/15·알려진61,608,453 token·전체 합계 미상, Luna coverage3/4·알려진34,918,496 token·8,521.280초를 보존한다. 독립 series 종료4/15로 전체 비교는 미완료이며 Sol/Pro 종료·Flash 보류와 과거 원본 판정을 유지한다.
+상태: 2026-10-07 AGY Flash 후속2 실행 중. 사용자 요청으로 기존 보류를 해제하고 자기 마지막 동결 구현에서 재개했다. 03:38:00.978 KST native 시작, gemini-3.8-flash-medium/medium·request-review·새 checkout을 확인했다. 잔여5,710.781초·최대2회 중 이번 runner 한도5,710초다. 새 사본 생성 파일1,434개 제거·제품 소스36개와 공통 입력57개 동일성을 검증했다. 전체 호출 시작16회·종료15회, 독립 series 종료4/15다. 현재 비용·정책·RM·실물 결과는 종료 후 평가하며 이전15회 비용 coverage14/15·알려진61,608,453 token·전체 합계 미상과 과거 부적격을 보존한다. 보드는 Luna 마지막 후속3 원본을 유지한다.
 독립 series 종료4/15이며 전체 비교는 미완료다. 아래 기록은 각 당시 관측이며 최신 상태는 위 상태와 마지막 갱신을 따른다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
@@ -935,3 +935,10 @@ Timeout4,213초는 이 호출을 포함한 누적 잔여다. 후속2회차 시�
 2026-10-07 독립 감사의 [boot hash 검사 정정](evidence/20261007-codex-cli-gpt-6-luna-r01/evaluation-20261007/operator-audit-procedure-correction.json): 원본 로그는9자리 ELF hash prefix를 출력하므로10자리 고정 문자열 검사를 실제 prefix/full ELF hash 대조로 바꿨다. 원본584파일 package·실패한 감사 절차를 보존하고 v2로 같은 package를 검증했다. 후보 재호출·source 수정·재빌드·추가 업로드·host 재시험은 없다.
 
 2026-10-07 [비용15 원문 byte 보존](evidence/20261007-codex-cli-gpt-6-luna-r01/evaluation-20261007/cost-checkpoint-document-binding.json): 저장소 Markdown의 Git 줄바꿈 정규화와 별개로 당시 hash의 원문을 evidence에 보존했다. 문서 내용·원시 계측·15개 입력 manifest·기존 inventory·판정은 유지한다.
+
+## 2026-10-07 AGY Flash 잔여 후속 재개
+
+- 실행: `20261007-antigravity-cli-agy-flash-r01`, 기존 Flash ledger의 후속2. 새로운 최초 실험이 아니다.
+- 계획: [잔여 후속 계획](../../docs/plans/2026-10-07-agy-flash-remaining-followups.md).
+- 실제 시작: [native 시작 원본](evidence/20261007-antigravity-cli-agy-flash-r01/launch-20261007/native-start-observation.json).
+- 기존 Flash 후속1의 부적격·관측·비용과 Luna/Sol/Pro/Muse 종료 기록을 보존한다. 이번 종료 후 source/artifact·정책·독립 복원·COM3 관측을 평가한다.

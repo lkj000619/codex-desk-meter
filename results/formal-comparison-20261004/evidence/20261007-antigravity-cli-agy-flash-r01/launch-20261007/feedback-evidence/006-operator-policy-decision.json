@@ -1,0 +1,21 @@
+{
+  "status": "invalid_for_comparison",
+  "reviewer": "Codex operator",
+  "user_interventions": 0,
+  "reason": "The followup explicitly restricts previous run directory access, but native CTest invoked four executables in r01 and a cache-driven host build touched its checkout. The tracked inherited build cache is a harness contribution. Preserve this attempt and its full cost, exclude its quality from identical-condition comparison; evaluate submitted product behavior separately.",
+  "intervention_review": "Operator audited zero in-run human/source/permission interventions; original telemetry null remains unchanged. Scope invalidity is separate from candidate exit 0 and product quality.",
+  "evidence": [
+    {
+      "path": "operator-observation/native-tool-review.json",
+      "sha256": "c4ea79b9588da2b759c813ed174c642d7f456abb3d91f96d8f08f02fbb0d00b1"
+    },
+    {
+      "path": "operator-observation/terminal-status.json",
+      "sha256": "cd269a3dc02b4ca136384be0aa6ba44014c1fdbf9bbc15ccef9c8553496017c6"
+    },
+    {
+      "path": "operator-observation/build-path-observation/build-host/CTestTestfile.cmake",
+      "sha256": "6db5951cfa2950211390a7506802f966f1a26064d46b85a5a4e2df43e7736d7c"
+    }
+  ]
+}

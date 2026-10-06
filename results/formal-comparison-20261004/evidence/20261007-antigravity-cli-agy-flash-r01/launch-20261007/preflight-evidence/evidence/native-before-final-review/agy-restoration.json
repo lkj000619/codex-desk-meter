@@ -1,0 +1,13 @@
+{
+  "before_sha256": {
+    "settings": "a9e7b57b56bb0225448a7068f18264ca3056c5a3c0ee49114f37bf4292ee0d48",
+    "instructions": "12552a5e4b15f1b272fbd85c865e2457f7b045c69136ed9c7731d23314edc512",
+    "hooks": "90d1b998102ca61fac85e85ece8597a264791339135820b20ccb6e5bddfc0c2e"
+  },
+  "after_sha256": {
+    "settings": "a9e7b57b56bb0225448a7068f18264ca3056c5a3c0ee49114f37bf4292ee0d48",
+    "instructions": "12552a5e4b15f1b272fbd85c865e2457f7b045c69136ed9c7731d23314edc512",
+    "hooks": "90d1b998102ca61fac85e85ece8597a264791339135820b20ccb6e5bddfc0c2e"
+  },
+  "restored": true
+}
