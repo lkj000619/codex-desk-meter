@@ -1,0 +1,10 @@
+﻿{
+    "recorded_at":  "2026-10-06T14:51:53.5458362Z",
+    "run_id":  "20261006-codex-cli-gpt-6-luna-r03",
+    "scope":  "Operator start-publication generator only; candidate is already running and unchanged",
+    "error":  "Substring guard matched equality assertion as though it were first-result assignment",
+    "candidate_invocations_added":  0,
+    "candidate_source_changed":  false,
+    "native_execution_interrupted":  false,
+    "correction":  "Remove redundant substring guard; retain AST parse and runtime first-result preservation assertion"
+}

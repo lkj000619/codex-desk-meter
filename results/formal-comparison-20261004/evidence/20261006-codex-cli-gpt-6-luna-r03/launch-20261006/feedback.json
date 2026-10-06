@@ -1,0 +1,62 @@
+{
+  "previous_run_id": "20261006-codex-cli-gpt-6-luna-r02",
+  "previous_commit": "e68356829715793dc31dd188bc2a9f528f6fcbd2",
+  "target_ids": [
+    "RM1",
+    "RM2",
+    "RM3",
+    "RM4",
+    "RM5"
+  ],
+  "observed": "Followup1 completed after2987 seconds. Original review RM1 pass, RM2 partial, RM3 fail, RM4/RM5 not_run. Original archived firmware was uploaded to the same COM3 ESP32-S3 with three image hashes verified. Supplemental native reset captured matching ELF SHA prefix81c1bd1d2, normal boot, SPI SRAM memory test OK, LCD initialization returned, boot-screen-submitted log and USB Serial/JTAG receiver ready. The boot-screen-submitted log is not evidence of readable LCD. Current user reply after this upload/reset: continued black screen. Both common seq0/1 host writes completed1543 bytes each at fixed5-second intervals, but device accepted/rejected frame markers were absent; actual receipt remains unconfirmed. BOOT manipulation/count/return and30-second optical continuity were not reported. Independent restored host tests22 Python/3 original C executables passed; candidate final response reported21, preserved separately. Declared common collector payload and wire encoder now exactly match common reference; archived production C CLI accepts both frames, and17/17 provider validity cases match. Candidate29 wire/schema cases passed but frozen operator29 pipeline remains not_run. Own command review found two forbidden pipeline calls at raw39 and288; no in-run operator feedback or source repair.",
+  "expected": "Meet unchanged product and RM contract using your own current implementation and fixed inputs. Visibly display the common five-hour remaining58% and weekly remaining82% with stale/provenance semantics, accept normal common seq0/1, and expose usage/global-reset/diagnostics with BOOT navigation and return. Preserve confirmed host collector/encoder/provider correctness and honest unobserved hardware/timing reporting. Keep one command per shell call, no pipelines or composed statements, no account/network or serial/flash access, no other candidate or operator directories. Diagnose and implement from your own source and fixed board/vendor inputs; no operator repair method or new board facts supplied. Remaining4213seconds and2rounds include this invocation; do not launch another session yourself.",
+  "evidence": [
+    {
+      "path": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r02\\operator-observation\\user-black-screen-report.json",
+      "sha256": "1b161bf975dea513acff849c2f9638c5f979f096ee656836c1a94b25e0d6a9be",
+      "packaged_path": "feedback-evidence/000-user-black-screen-report.json"
+    },
+    {
+      "path": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r02\\operator-observation\\host-semantic-review.json",
+      "sha256": "1663b1fdf896c019643f466d817c1025d7ecc59b8dc24ea7e9c33f93437d6815",
+      "packaged_path": "feedback-evidence/001-host-semantic-review.json"
+    },
+    {
+      "path": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r02\\operator-observation\\independent-host-checks\\common-stimulus-check.json",
+      "sha256": "9d5126aa06bb035756b8fae5210ceb6f84bb9236cdffbc516222281ba6cfeafd",
+      "packaged_path": "feedback-evidence/002-common-stimulus-check.json"
+    },
+    {
+      "path": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r02\\operator-observation\\hardware-post-upload-reset\\runtime-source-binding.json",
+      "sha256": "726c278f0ba03210267722d65743dd6145cbf1ecf9bde87141b27536eb01ca2a",
+      "packaged_path": "feedback-evidence/003-runtime-source-binding.json"
+    },
+    {
+      "path": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r02\\operator-observation\\hardware-post-upload-reset\\runtime-observation-correction.json",
+      "sha256": "542efe48fd908f27f8e49aba5b1684e4cb454fd37c581976615b80993f582de8",
+      "packaged_path": "feedback-evidence/004-runtime-observation-correction.json"
+    },
+    {
+      "path": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r02\\operator-observation\\hardware-post-upload-reset\\reset-and-frames-capture\\device-serial.bin",
+      "sha256": "0e464aef271564d5b0f2c0037cf01690428d5d6e2464d1f78a7d3a0397470193",
+      "packaged_path": "feedback-evidence/005-device-serial.bin"
+    },
+    {
+      "path": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r02\\operator-observation\\hardware-post-upload-reset\\reset-and-frames-capture\\capture.json",
+      "sha256": "3d0e73558237b82c16aabdf1f06732d9185d08d1d41ae37fa1ce4b691aefbcc2",
+      "packaged_path": "feedback-evidence/006-capture.json"
+    },
+    {
+      "path": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r02\\operator-observation\\hardware-post-upload-reset\\reset-and-frames-capture\\sent-frames.jsonl",
+      "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+      "packaged_path": "feedback-evidence/007-sent-frames.jsonl"
+    },
+    {
+      "path": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r02\\operator-policy-decision.json",
+      "sha256": "15c21d70aca1bcacf701869635265d16a18f04ce021248e3338b643ad2ef6f8a",
+      "packaged_path": "feedback-evidence/008-operator-policy-decision.json"
+    }
+  ],
+  "remaining_rounds": 2,
+  "remaining_seconds": 4213.0
+}

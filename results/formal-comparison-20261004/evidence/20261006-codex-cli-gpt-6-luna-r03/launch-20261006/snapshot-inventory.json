@@ -1,0 +1,152 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r03",
+  "round": 2,
+  "captured_at": "2026-10-06T14:51:55.797150+00:00",
+  "files": {
+    "agent-context.json": {
+      "sha256": "8708989090ae2490cbbb83317c9dbe735bb68a7102fe928ab84506e0e13242d8",
+      "bytes": 2877
+    },
+    "candidate-feedback.json": {
+      "sha256": "1c5041a147c8d83a320ecb280d57bb9e671c871b837a62838cd3dc1f6d0d6c75",
+      "bytes": 4122
+    },
+    "candidate-inputs.json": {
+      "sha256": "0000c12a7e468cc93796a04b3dff3ceb2e3d63af953a2d80a20ef9e3b48cb839",
+      "bytes": 7435
+    },
+    "execution-preflight.json": {
+      "sha256": "2a3354ace86633ffab436c8518ca5b33ba3ffdef903c4390a0ef8c4d380073cb",
+      "bytes": 32194
+    },
+    "experiment-launch.json": {
+      "sha256": "18d7d5f8fea8aa38efd8be4b002d7c798bfba9c4a7a03d2e897aba6ea9d7d564",
+      "bytes": 321
+    },
+    "feedback.json": {
+      "sha256": "31f91972550b1d6c39f1a995714532c299523a33fee92f5d970dd6982c40cf3a",
+      "bytes": 5383
+    },
+    "launch-codex-luna-followup-02.ps1": {
+      "sha256": "a67f598714e4fabad8eb5b51d3ff351f90b6ff805b9dd1eba87d34c5f326e7dd",
+      "bytes": 317
+    },
+    "launch-codex-luna-followup-02.py": {
+      "sha256": "00c02bc2cbb155d94d4f2681506d6a74670aef5ec11e567ec5dbd8b546c4649b",
+      "bytes": 9858
+    },
+    "ledger-at-start.json": {
+      "sha256": "ded634cdf22983ad300f2d7e0c30754210b7e6ed2403938fc2afab42086c5ce1",
+      "bytes": 3915
+    },
+    "native-start-observation-prefix.jsonl": {
+      "sha256": "e3cdf75149d0b799a3db46d6fe594589195c0755299dc0ed4280ec78890fde67",
+      "bytes": 218369
+    },
+    "native-start-observation.json": {
+      "sha256": "a32044a423f0da3ac498fb9a18353fd7600356ca5b50c45cb85edeabb7386d92",
+      "bytes": 680
+    },
+    "operator-next-model-decision.json": {
+      "sha256": "3b0756b541d4c5d1c72518969bfd52beb9735de83d08c9e7f928be185120b3d1",
+      "bytes": 1127
+    },
+    "operator-publisher-guard-correction.json": {
+      "sha256": "3c60433e1ada4f2d261d90cfb56bcf4ee93643f1c8426a4077be2f0eec4820fa",
+      "bytes": 569
+    },
+    "operator-source-preparation.json": {
+      "sha256": "ffe9fe9047ccf1448bff276a928de8640eeb272d3e055531726c8d458e772259",
+      "bytes": 12948
+    },
+    "prepare-codex-luna-followup-02.py": {
+      "sha256": "ccc582405507785b414ab3517653c7bd8fb96f9b0b5a6d6ed8e87ee59b303a85",
+      "bytes": 7200
+    },
+    "previous-progress-at-transition.json": {
+      "sha256": "985b222856cb5441fb4353c8fcdae4022f7a85161a1d201c9d8afa57f342df65",
+      "bytes": 24352
+    },
+    "process-at-start.json": {
+      "sha256": "b443e90146cd9869b93123a83daf36710eac369f4102993741c1d691f11c060f",
+      "bytes": 3216
+    },
+    "profile.json": {
+      "sha256": "d7980c28a03fcda158f3831200d7336592f367c93f7cac46c63f5983b5b6bef9",
+      "bytes": 5463
+    },
+    "prompt.txt": {
+      "sha256": "4b194186d257ad8a99087d72bfb4b31d3dae6ef695baee49c6b63de3a9d3026c",
+      "bytes": 9741
+    },
+    "publish-codex-luna-followup-02-start.py": {
+      "sha256": "760bbc5a80438e0f0644357cc3559d39fb6b3fbba4cff29477c717b3a7645fb1",
+      "bytes": 10998
+    },
+    "run-manifest.json": {
+      "sha256": "26e0effb4cc5bcd3a4a54040c679675070925e9d3766f990df014ab9bc03a966",
+      "bytes": 40882
+    },
+    "feedback-evidence/000-user-black-screen-report.json": {
+      "sha256": "1b161bf975dea513acff849c2f9638c5f979f096ee656836c1a94b25e0d6a9be",
+      "bytes": 1152
+    },
+    "feedback-evidence/001-host-semantic-review.json": {
+      "sha256": "1663b1fdf896c019643f466d817c1025d7ecc59b8dc24ea7e9c33f93437d6815",
+      "bytes": 731
+    },
+    "feedback-evidence/002-common-stimulus-check.json": {
+      "sha256": "9d5126aa06bb035756b8fae5210ceb6f84bb9236cdffbc516222281ba6cfeafd",
+      "bytes": 5943
+    },
+    "feedback-evidence/003-runtime-source-binding.json": {
+      "sha256": "726c278f0ba03210267722d65743dd6145cbf1ecf9bde87141b27536eb01ca2a",
+      "bytes": 1047
+    },
+    "feedback-evidence/004-runtime-observation-correction.json": {
+      "sha256": "542efe48fd908f27f8e49aba5b1684e4cb454fd37c581976615b80993f582de8",
+      "bytes": 634
+    },
+    "feedback-evidence/005-device-serial.bin": {
+      "sha256": "0e464aef271564d5b0f2c0037cf01690428d5d6e2464d1f78a7d3a0397470193",
+      "bytes": 5938
+    },
+    "feedback-evidence/006-capture.json": {
+      "sha256": "3d0e73558237b82c16aabdf1f06732d9185d08d1d41ae37fa1ce4b691aefbcc2",
+      "bytes": 1600
+    },
+    "feedback-evidence/007-sent-frames.jsonl": {
+      "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+      "bytes": 3086
+    },
+    "feedback-evidence/008-operator-policy-decision.json": {
+      "sha256": "15c21d70aca1bcacf701869635265d16a18f04ce021248e3338b643ad2ef6f8a",
+      "bytes": 950
+    },
+    "operator-launch-preflight/codex-features-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/codex-features.txt": {
+      "sha256": "b17861d24fdcfa8cef2b79b5991bdc4190b613f6cb57f694a04aa7ee15c1c83b",
+      "bytes": 10134
+    },
+    "operator-launch-preflight/codex-hook-inventory.json": {
+      "sha256": "4a770c74c9726cf234175105939b277278a86df37f705b8700c58a92b732202f",
+      "bytes": 464
+    },
+    "operator-launch-preflight/codex-server-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/codex-skills.json": {
+      "sha256": "7be78a7861033ca9e842f58935b40f6185fe0b37b1809c8440cfae2b0b612342",
+      "bytes": 3007
+    },
+    "operator-launch-preflight/current-checks.json": {
+      "sha256": "e44f7c72a7546f91341d9e645c821726e02fcde1cc7dddd0fff97fc34377d02c",
+      "bytes": 1764
+    }
+  },
+  "scope": "Immutable own-source followup start snapshot; generated-output cleanup and source equivalence proof retained. Previous initial original verdict/cost/464-file package and separate dated diagnosis unchanged."
+}

@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-06 Luna 후속 1회차 `20261006-codex-cli-gpt-6-luna-r02`의 구현·제출·동결·독립 검증·COM3 업로드·평가 완료. 2,987초·정규화13,414,031 token, source38개/artifact20개·최종 package535개 파일을 보존했다. 정상 부팅은 확인했지만 사용자는 계속 검은 화면이라고 답했다. RM1 pass·RM2 partial·RM3 fail·RM4/5 not_run, reference fail·product_pass false이며 파이프2호출로 정책 부적격이다. 장치 수락·BOOT·30초 유지는 미확인이다. 최초 판정·진단·동결·독립 복원·비용은 보존했다.
-후보 실행 시작13회·종료13회(최초 시작5·후속8). Luna 잔여 후속4,213초/최대2회이며 추가 호출은 미시작이다. Sol 기준 도달로 종료·품질 부적격·제품 미합격, Pro 종료·Flash 보류를 보존한다. 독립 series 종료는 OpenCode·Pro·Sol 3개/예정15개다. 전체 비교는 미완료다. 아래 시작·대기 표현은 당시 기록이며 마지막 갱신이 최신 판정이다.
+상태: 2026-10-06 23:50:45.750 KST Luna 후속2회차 `20261006-codex-cli-gpt-6-luna-r03` 실행 중. `gpt-6-luna/max`·고정 조건·자기 직전 동결 source를 유지하며 timeout4,213초다. 사용자 요청으로 LCD 가시 출력 또는 남은 시간/회차 한도까지 진행한다. 종료 뒤 원본 펌웨어를 동결·독립 검증·업로드·평가한다. 보드는 기존 후속1 artifact이며 이번 결과/원시 비용/정책/RM은 아직 미확정이다.
+후보 실행 시작14회·종료13회(최초 시작5·후속9). 이번 후속2 포함 잔여4,213초·이번 뒤 최대1회이며 종료 시 실제 시간으로 차감한다. 최초·후속1의 검은 화면 판정·진단·package·원시 비용과 Sol 기준 도달로 종료·품질 부적격·제품 미합격, Pro 종료·Flash 보류를 보존한다. 독립 series 종료는 OpenCode·Pro·Sol 3개/예정15개다. 전체 비교는 미완료다. 아래 시작·대기 표현은 당시 기록이며 마지막 갱신이 최신 판정이다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -887,3 +887,13 @@ BOOT 조작·RESET·30초 연속 유지·자동 재부팅·검은 화면의 원�
 [최종 독립 감사](evidence/20261006-codex-cli-gpt-6-luna-r02/evaluation-20261006/restore-audit.json)는535개 inventory 파일·입력57개·원본 source/artifact/비용·정책/RM·현재 업로드와 사용자 보고를 package의 동결 validator로 확인했다. Package SHA-256 `28d3acfcf1c888850d1892710b5420ca52dea706f0542f0b462d19aeb3d68ede`이며 [공개 snapshot](evidence/20261006-codex-cli-gpt-6-luna-r02/evaluation-20261006/snapshot-inventory.json)은131개 파일을 원본 bytes/hash로 보존한다. 관측 전470개 package·시작43개 snapshot·최초464개 package·진단과 과거 판정/commit/tag는 유지한다.
 
 [Checkpoint13](comparison-checkpoint-13.md)은13회·정규화57,517,475 token의 실패·부적격 비용을 포함한다. Luna series30,827,518 token·6,081.422초, 후속1회2,987초를 차감해4,213초(70분13초)/최대2회가 남았다. Ledger active는 기준 미도달에 대한 frozen manager 원래 상태다. 추가 호출은 준비·시작하지 않았으며 다음 자기 후속은 관측 피드백·source·fresh preflight의 정상 gate가 필요하다. Series 종료3/15·Sol/Pro 종료·Flash 보류와 checkpoint12까지를 보존한다.
+
+## 2026-10-06 Luna 후속2회차 시작
+
+사용자는 LCD 화면이 나올 때까지 잔여70분13초·최대2회 안에서 추가 실험을 요청했다. [남은 후속 계획](../../docs/plans/2026-10-06-codex-luna-remaining-followups.md)에 따라 자기 직전 commit `e68356829715793dc31dd188bc2a9f528f6fcbd2`에서 별도 checkout을 준비했다. 제품 source33개 Git blob·입력57개와 생성 build/sdkconfig 미상속을 확인했다. 관측 피드백은 정상 boot/USB ready·계속 검은 화면·장치 수락 미확인·host 개선·자기 파이프 위반으로 제한했고 운영자 진단의 수정 방법은 제공하지 않았다.
+
+[실제 시작](evidence/20261006-codex-cli-gpt-6-luna-r03/launch-20261006/native-start-observation.json)은23:50:45.750 KST, native PID34648·thread `01a111b2-14c5-7ab3-97a7-54b3b4de34ff`다. Frozen gpt-6-luna/max argv·CLI0.159.2·ESP-IDF5.3.2·native 설정을 확인하고 새 run-bound receipt로 호출했다. [시작 snapshot](evidence/20261006-codex-cli-gpt-6-luna-r03/launch-20261006/snapshot-inventory.json)은36개 파일과 관측 피드백·원시 시작 로그를 보존한다. 시작 snapshot 생성기의 문자열 guard 오탐만 수정했으며 실행 중 후보 재호출·source 변경·구현 피드백은 없다.
+
+Timeout4,213초는 이 호출을 포함한 누적 잔여다. 후속2회차 시작 뒤 마지막 최대1회가 남으며 실제 종료 시간을 차감한 뒤만 사용할 수 있다. 이번 회차를 먼저 동결·독립 검증·원본 업로드·평가한다. LCD 출력이 미도달이고 시간이 남으면 마지막 회차를 이어가는 것까지 사용자 지시에 포함된다. LCD 가시 출력과 전체 RM/product 합격을 구분하고 관측 없이 다음 실패를 추정하지 않는다.
+
+후보 시작14회·종료13회, 비용 checkpoint13은 이전13회57,517,475 token만 포함한다. 현재 비용·정책·제출·제품/RM은 아직 미확정이다. 보드는22:51 KST 업로드한 후속1 원본이며 실행 중 serial/flash를 사용하지 않는다. 최초와 후속1의 모든 판정·535/464개 package·진단·과거 비용과 series 종료3/15·Sol/Pro 종료·Flash 보류를 보존한다.

@@ -1,0 +1,17 @@
+{
+  "status": "invalid_for_comparison",
+  "reviewer": "Codex operator",
+  "user_interventions": 0,
+  "reason": "Luna followup1 contains two confirmed forbidden pipeline calls at raw lines39 and288. Preserve own source, firmware, all cost and product/RM observations; exclude this run from policy-eligible quality/reference-cost comparison. Initial invalid policy remains separately preserved.",
+  "intervention_review": "No operator candidate repair, replacement model call, in-run feedback or permission relaxation. Original measured intervention null retained; audited intervention0.",
+  "evidence": [
+    {
+      "path": "operator-observation/shell-command-policy-audit.json",
+      "sha256": "ec7d6266865321be0f251a3e9d0ad4ebab28d02f485c3fd041ff5a952bdf96e0"
+    },
+    {
+      "path": "operator-observation/native-tool-review.json",
+      "sha256": "431719f52d189af7f46c79995d066311ee49ec2947ae0e229765f7f185c966ef"
+    }
+  ]
+}
