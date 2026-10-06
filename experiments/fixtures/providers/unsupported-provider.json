@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "fixture-unsupported-provider",
+  "provider_id": "unsupported-vendor",
+  "agent_id": "unknown-cli",
+  "host_id": "terminal",
+  "model_id": null,
+  "account_profile_id": null,
+  "source_kind": "unknown",
+  "metric_kind": "quota_window",
+  "unit": "unknown",
+  "status": "unsupported",
+  "observed_at": "2026-09-10T00:00:00Z",
+  "windows": [],
+  "stale": false,
+  "last_good_at": null,
+  "error_code": "UNSUPPORTED_PROVIDER",
+  "error_reason": "No provider adapter is registered for this synthetic vendor."
+}
