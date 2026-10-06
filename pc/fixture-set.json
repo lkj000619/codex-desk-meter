@@ -1,5 +1,6 @@
 {
   "schema_version": 1,
+  "common_usage_fixture": "experiments/fixtures/personal-usage.json",
   "provider_fixtures": [
     "experiments/fixtures/providers/codex-percent-window.json",
     "experiments/fixtures/providers/claude-code-windows.json",

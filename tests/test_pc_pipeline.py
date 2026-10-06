@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from pc.pipeline import (
     CollectionError, FixtureCollector, build_frame, canonical_json,
     crc32_hex, encode_frame, normalize_global_reset, normalize_legacy_usage,
+    parse_time, validate_snapshot,
 )
 from pc.sender import SequenceStateError, SequenceStore, send_payload
 
@@ -22,6 +23,66 @@ REFERENCE = datetime(2026, 9, 10, 0, 0, 0, tzinfo=timezone.utc)
 
 
 class FixturePipelineTests(unittest.TestCase):
+    def test_common_profile_matches_fixed_payload_and_exact_seq_zero_one_frames(self):
+        reference = parse_time("2026-09-30T18:40:49Z", "reference_time")
+        collected = FixtureCollector().collect_common(reference)
+        self.assertEqual(len(collected.usage), 1)
+        usage = collected.usage[0]
+        self.assertEqual(usage["snapshot_id"], "fixture-personal-usage")
+        self.assertIsNone(usage["model_id"])
+        self.assertIsNone(usage["account_profile_id"])
+        self.assertEqual(usage["error_reason"], "The source observation is at least 300 seconds old; its value is retained as stale.")
+        self.assertEqual([window["percent_remaining"] for window in usage["windows"]], [58, 82])
+        self.assertEqual([window["reset_status"] for window in usage["windows"]], ["unknown", "unknown"])
+        self.assertEqual(len(collected.global_resets), 2)
+        self.assertTrue(all(reset["stale"] and reset["error_code"] is None for reset in collected.global_resets))
+
+        expected_lines = (ROOT / ".benchmark-inputs/feedback-evidence/008-sent-frames.jsonl").read_bytes().splitlines(keepends=True)
+        self.assertEqual(len(expected_lines), 2)
+        payload = collected.payload
+        first = encode_frame(build_frame(payload, 0, "2026-09-30T18:40:49Z"))
+        second = encode_frame(build_frame(payload, 1, "2026-09-30T18:40:54Z"))
+        self.assertEqual(first, expected_lines[0])
+        self.assertEqual(second, expected_lines[1])
+
+    def test_available_snapshot_over_stale_threshold_is_rejected_without_coercion(self):
+        body = json.loads((ROOT / "experiments/fixtures/providers/available-over-stale-threshold.json").read_text(encoding="utf-8"))
+        reference = parse_time("2026-09-10T00:04:59Z", "reference_time")
+        with self.assertRaises(CollectionError) as error:
+            validate_snapshot(body, reference)
+        self.assertEqual(error.exception.code, "STALE_THRESHOLD_EXCEEDED")
+
+    def test_available_requires_agent_and_host_but_error_status_allows_null_identity(self):
+        available = json.loads((ROOT / "experiments/fixtures/providers/codex-percent-window.json").read_text(encoding="utf-8"))
+        available["agent_id"] = None
+        with self.assertRaises(CollectionError) as error:
+            validate_snapshot(available, REFERENCE)
+        self.assertEqual(error.exception.code, "IDENTITY_REQUIRED")
+
+        unsupported = json.loads((ROOT / "experiments/fixtures/providers/antigravity-cli-unsupported.json").read_text(encoding="utf-8"))
+        unsupported["agent_id"] = None
+        unsupported["host_id"] = None
+        validate_snapshot(unsupported, REFERENCE)
+
+    def test_all_provider_fixture_matrix_expectations(self):
+        matrix = json.loads((ROOT / "experiments/fixtures/provider-fixture-matrix.json").read_text(encoding="utf-8"))
+        reference = parse_time(matrix["reference_time"], "reference_time")
+        for entry in matrix["fixtures"]:
+            path = ROOT / "experiments/fixtures" / entry["path"]
+            value = json.loads(path.read_text(encoding="utf-8"))
+            items = value if isinstance(value, list) else [value]
+            errors = []
+            for item in items:
+                try:
+                    validate_snapshot(item, reference)
+                except CollectionError as error:
+                    errors.append(error)
+            with self.subTest(fixture=entry["path"]):
+                if entry["expected"] == "valid":
+                    self.assertFalse(errors)
+                else:
+                    self.assertTrue(errors)
+
     def test_legacy_usage_maps_original_values_and_keeps_observation_time(self):
         body = json.loads((ROOT / "experiments/fixtures/personal-usage.json").read_text(encoding="utf-8"))
         captured = datetime.fromisoformat(body["captured_at"].replace("Z", "+00:00"))
@@ -59,16 +120,16 @@ class FixturePipelineTests(unittest.TestCase):
         self.assertFalse(normalized_forecast["forecast_is_schedule"])
         self.assertNotEqual(normalized_history["source"], normalized_forecast["source"])
 
-    def test_fixture_registry_collects_each_adapter_and_marks_old_values_stale(self):
-        result = FixtureCollector().collect(REFERENCE + timedelta(days=26))
+    def test_fixture_registry_collects_each_adapter_at_the_fixed_reference(self):
+        result = FixtureCollector().collect(REFERENCE + timedelta(seconds=299))
         self.assertGreaterEqual(len(result.usage), 5)
-        self.assertEqual({reset["source"] for reset in result.global_resets}, {"codex-reset.com", "codex-resets.com"})
         self.assertTrue(all(snapshot["observed_at"] is not None for snapshot in result.usage))
-        self.assertTrue(any(snapshot["status"] == "stale" for snapshot in result.usage))
+        self.assertFalse(any(snapshot["status"] == "stale" for snapshot in result.usage))
+        self.assertEqual(len(result.failures), 2)
 
     def test_one_adapter_failure_keeps_last_good_and_does_not_stop_others(self):
         collector = FixtureCollector()
-        initial = collector.collect(REFERENCE + timedelta(days=26))
+        initial = collector.collect(REFERENCE + timedelta(seconds=299))
         original = collector._load
 
         def failing_first(relative):
@@ -77,7 +138,7 @@ class FixturePipelineTests(unittest.TestCase):
             return original(relative)
 
         with patch.object(collector, "_load", side_effect=failing_first):
-            recovered_result = collector.collect(REFERENCE + timedelta(days=26))
+            recovered_result = collector.collect(REFERENCE + timedelta(seconds=299))
         self.assertTrue(initial.usage)
         self.assertTrue(any(entry["adapter_id"] == "codex-percent-window" for entry in recovered_result.failures))
         first = next(snapshot for snapshot in recovered_result.usage if snapshot["provider_id"] == "openai")
@@ -108,8 +169,8 @@ class SenderStateTests(unittest.TestCase):
             store = SequenceStore(Path(temporary) / "sender-state.json")
             with self.assertRaises(SequenceStateError):
                 store.reserve("board-1")
-            self.assertEqual(store.reserve("board-1", initialize_empty_receiver=True), 1)
-            self.assertEqual(store.reserve("board-1"), 2)
+            self.assertEqual(store.reserve("board-1", initialize_empty_receiver=True), 0)
+            self.assertEqual(store.reserve("board-1"), 1)
 
     def test_corrupt_state_stops_sender_even_with_initialization_flag(self):
         with tempfile.TemporaryDirectory(dir=ROOT) as temporary:
@@ -137,7 +198,7 @@ class SenderStateTests(unittest.TestCase):
                 send_payload({"usage": [], "global_resets": []}, "COM9", "board-2", failed_state, raw_log,
                              initialize_empty_receiver=True,
                              serial_factory=lambda *args, **kwargs: FailedSerial())
-            self.assertEqual(SequenceStore(failed_state).reserve("board-2"), 2)
+            self.assertEqual(SequenceStore(failed_state).reserve("board-2"), 1)
             self.assertTrue(raw_log.read_bytes().endswith(b"\n"))
 
     def test_successful_host_write_is_not_reported_as_device_ack(self):
@@ -162,6 +223,33 @@ class SenderStateTests(unittest.TestCase):
             self.assertEqual(receipt["status"], "written")
             self.assertFalse(receipt["device_ack"])
             self.assertEqual(raw_log.read_bytes(), serial.writes[0])
+
+    def test_optional_device_logs_are_diagnostic_and_never_an_ack(self):
+        with tempfile.TemporaryDirectory(dir=ROOT) as temporary:
+            log_path = Path(temporary) / "device.log"
+
+            class LoggedSerial:
+                def __init__(self):
+                    self.lines = [b"I meter_app: accepted cdm/1 frame sequence=0\r\n", b""]
+
+                def write(self, data):
+                    return len(data)
+
+                def readline(self):
+                    return self.lines.pop(0) if self.lines else b""
+
+                def close(self):
+                    pass
+
+            receipt = send_payload(
+                {"usage": [], "global_resets": []}, "COM9", "board-logs",
+                Path(temporary) / "state.json", Path(temporary) / "raw.log", True,
+                serial_factory=lambda *args, **kwargs: LoggedSerial(),
+                capture_device_logs_seconds=0.01, device_log_path=log_path,
+            )
+            self.assertEqual(receipt["device_log_lines"], ["I meter_app: accepted cdm/1 frame sequence=0"])
+            self.assertFalse(receipt["device_ack"])
+            self.assertEqual(log_path.read_text(encoding="utf-8"), "I meter_app: accepted cdm/1 frame sequence=0\n")
 
 
 if __name__ == "__main__":

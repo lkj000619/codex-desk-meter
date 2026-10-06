@@ -205,11 +205,13 @@ static size_t dashboard_row_count(cJSON *usage)
 static void draw_usage_row(int row, cJSON *snapshot, cJSON *window, const char *sent_at,
                            uint64_t frame_age_ms)
 {
-    char text[132], used[24], remaining[24], reset[28];
+    char text[192], used[24], remaining[24], reset[28];
     const char *provider = json_string(snapshot, "provider_id");
+    const char *source = json_string(snapshot, "source_kind");
     const char *label = window ? json_string(window, "label") : NULL;
     const char *unit = window ? json_string(window, "unit") : json_string(snapshot, "unit");
     const char *resets_at = window ? json_string(window, "resets_at") : NULL;
+    const char *observed_at = json_string(snapshot, "observed_at");
     if (window) {
         double value;
         bool used_ok = json_number(window, "percent_used", &value);
@@ -234,12 +236,14 @@ static void draw_usage_row(int row, cJSON *snapshot, cJSON *window, const char *
     bool source_stale = false;
     const char *observed = json_string(snapshot, "observed_at");
     if (sent_at && observed) source_stale = meter_source_is_stale(sent_at, observed, frame_age_ms);
-    snprintf(text, sizeof(text), "%.14s / %.10s  USED %s LEFT %s  RST %.18s%s",
-             provider ? provider : "UNKNOWN", label ? label : "STATUS", used, remaining,
-             reset, source_stale ? " STALE" : "");
+    snprintf(text, sizeof(text), "%.12s/%.8s %.12s U%s L%s %s O%.20s R%.20s%s",
+             provider ? provider : "UNKNOWN", source ? source : "UNKNOWN",
+             label ? label : "STATUS", used, remaining, unit ? unit : "UNKNOWN",
+             observed_at ? observed_at : "UNKNOWN", reset,
+             source_stale ? " SOURCE-STALE" : "");
     int y = 55 + row * 18;
     fill_rect(18, y - 2, LCD_WIDTH - 36, 17, (row & 1) ? 0x10A4 : 0x18E6);
-    draw_text(24, y, text, source_stale ? 0xFD20 : 0xFFFF, 2, 65);
+    draw_text(24, y, text, source_stale ? 0xFD20 : 0xFFFF, 1, 126);
 }
 
 static void render_dashboard(cJSON *payload, uint32_t sequence, bool receive_stale,
@@ -343,10 +347,15 @@ static void render_status(cJSON *payload, uint32_t sequence, bool has_frame,
         const char *error = json_string(snapshot, "error_code");
         const char *observed = json_string(snapshot, "observed_at");
         bool source_stale = observed && sent_at && meter_source_is_stale(sent_at, observed, frame_age_ms);
-        snprintf(line, sizeof(line), "%.16s  %.12s  %.18s  %s",
-                 provider ? provider : "UNKNOWN", status ? status : "UNKNOWN",
-                 error ? error : "NO ERROR", source_stale ? "SOURCE STALE" : "SOURCE AGE OK");
-        draw_text(28, 130 + row * 22, line, source_stale ? 0xFD20 : 0xFFFF, 2, 65);
+        const char *last_good = json_string(snapshot, "last_good_at");
+        const char *source = json_string(snapshot, "source_kind");
+        snprintf(line, sizeof(line), "%.12s/%.8s %.8s OBS %.20s LAST GOOD %.20s ERR %.10s",
+                 provider ? provider : "UNKNOWN", source ? source : "UNKNOWN",
+                 status ? status : "UNKNOWN",
+                 observed ? observed : "UNKNOWN", last_good ? last_good : "UNKNOWN",
+                 error ? error : "NONE");
+        draw_text(28, 130 + row * 22, line,
+                  (source_stale || error) ? 0xFD20 : 0xFFFF, 1, 126);
         row++;
     }
     if (!has_frame) draw_text(28, 180, "LAST-GOOD CACHE IS EMPTY; LCD REMAINS ACTIVE", 0xC618, 2, 65);

@@ -9,6 +9,12 @@ if(NOT MSVC)
 endif()
 add_test(NAME meter_parser COMMAND test_meter_parser)
 
+add_executable(meter_receiver_cli meter_receiver_cli.c ../../components/meter_core/meter_core.c)
+target_include_directories(meter_receiver_cli PRIVATE ../../components/meter_core/include)
+if(NOT MSVC)
+  target_link_libraries(meter_receiver_cli PRIVATE m)
+endif()
+
 add_executable(test_meter_state test_meter_state.c ../../components/meter_core/meter_core.c)
 target_include_directories(test_meter_state PRIVATE ../../components/meter_core/include)
 if(NOT MSVC)

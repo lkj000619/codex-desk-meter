@@ -647,6 +647,9 @@ static bool validate_snapshot(jdoc_t *doc, int snapshot, int64_t sent_epoch)
     bool is_error = string_is(doc, status, "error") || string_is(doc, status, "unavailable") ||
                     string_is(doc, status, "unsupported") || string_is(doc, status, "unauthorized");
     if (!(is_available || is_stale || is_error)) return false;
+    if (is_available &&
+        (!valid_identity(doc, object_get(doc, snapshot, "agent_id"), false) ||
+         !valid_identity(doc, object_get(doc, snapshot, "host_id"), false))) return false;
     int stale_node = object_get(doc, snapshot, "stale");
     if (stale_node < 0 || doc->nodes[stale_node].type != J_BOOL) return false;
     bool stale_value = doc->nodes[stale_node].text_length != 0;

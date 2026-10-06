@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import os
 import re
 import tempfile
@@ -121,10 +122,9 @@ class SequenceStore:
             if alias not in devices:
                 if not initialize_empty_receiver:
                     raise SequenceStateError(f"device alias {alias!r} is not initialized; confirm its receiver is empty")
-                last_reserved = 0
+                sequence = 0
             else:
-                last_reserved = devices[alias]
-            sequence = (last_reserved + 1) & 0xFFFFFFFF
+                sequence = (devices[alias] + 1) & 0xFFFFFFFF
             devices[alias] = sequence
             self._write_atomic(value)
             return sequence
@@ -145,15 +145,23 @@ def send_payload(payload: dict[str, Any], port: str, device_alias: str,
                  serial_factory: Callable[..., Any] = _pyserial_factory,
                  wait_fn: Callable[[float], None] = time.sleep,
                  clock_fn: Callable[[], float] = time.monotonic,
-                 open_timeout_seconds: float = 5.0) -> dict[str, Any]:
+                 open_timeout_seconds: float = 5.0,
+                 sent_at: str | None = None,
+                 capture_device_logs_seconds: float = 0.0,
+                 device_log_path: Path | str | None = None) -> dict[str, Any]:
     if not isinstance(port, str) or not port.strip():
         raise ValueError("an operator-selected COM port is required")
+    if (isinstance(capture_device_logs_seconds, bool) or
+            not isinstance(capture_device_logs_seconds, (int, float)) or
+            not math.isfinite(capture_device_logs_seconds) or
+            capture_device_logs_seconds < 0 or capture_device_logs_seconds > 10):
+        raise ValueError("device log capture window must be between 0 and 10 seconds")
     alias = _safe_alias(device_alias)
     store = SequenceStore(state_path)
     with _exclusive_lock(store.path.with_name(store.path.name + ".device-" + alias + ".lock")):
         sequence = store.reserve(alias, initialize_empty_receiver=initialize_empty_receiver)
-        sent_at = timestamp(utc_now().astimezone(timezone.utc))
-        frame = build_frame(payload, sequence, sent_at)
+        frame_sent_at = sent_at or timestamp(utc_now().astimezone(timezone.utc))
+        frame = build_frame(payload, sequence, frame_sent_at)
         line = encode_frame(frame)
         raw_path = Path(raw_log_path) if raw_log_path else store.path.with_name("raw-cdm-frames.log")
         raw_path.parent.mkdir(parents=True, exist_ok=True)
@@ -178,6 +186,29 @@ def send_payload(payload: dict[str, Any], port: str, device_alias: str,
             written = serial.write(line)
             if written != len(line):
                 raise RuntimeError(f"incomplete serial write {written}/{len(line)} bytes; sequence {sequence} remains consumed")
+            device_log_lines: list[str] = []
+            device_log_error: str | None = None
+            deadline = clock_fn() + max(0.0, capture_device_logs_seconds)
+            readline = getattr(serial, "readline", None)
+            while readline and clock_fn() < deadline:
+                try:
+                    raw = readline()
+                except Exception as exc:
+                    device_log_error = f"serial diagnostic read failed: {exc}"
+                    break
+                if raw:
+                    device_log_lines.append(raw.decode("utf-8", errors="replace").rstrip("\r\n"))
+            if device_log_path is not None:
+                device_path = Path(device_log_path)
+                try:
+                    device_path.parent.mkdir(parents=True, exist_ok=True)
+                    with device_path.open("a", encoding="utf-8", newline="\n") as device_log:
+                        for log_line in device_log_lines:
+                            device_log.write(log_line + "\n")
+                        device_log.flush()
+                        os.fsync(device_log.fileno())
+                except OSError as exc:
+                    device_log_error = f"device diagnostic log write failed: {exc}"
         finally:
             close = getattr(serial, "close", None)
             if close:
@@ -185,5 +216,8 @@ def send_payload(payload: dict[str, Any], port: str, device_alias: str,
         return {
             "status": "written", "sequence": sequence, "bytes": len(line),
             "raw_log": raw_path.as_posix(), "device_ack": False,
+            "device_log_lines": device_log_lines,
+            "device_log": Path(device_log_path).as_posix() if device_log_path else None,
+            "device_log_error": device_log_error,
             "message": "host write completed; cdm/1 defines no device ACK",
         }

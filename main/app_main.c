@@ -66,6 +66,9 @@ void app_main(void)
 {
     meter_receiver_init(&receiver);
     ESP_ERROR_CHECK(board_lcd_init());
+    ESP_ERROR_CHECK(board_lcd_present(NULL, 0, false, false, NULL,
+                                      METER_PAGE_DASHBOARD, 0, 0, 0, false));
+    ESP_LOGI(TAG, "boot screen submitted before USB receiver setup");
     usb_serial_jtag_driver_config_t usb_config = {
         .tx_buffer_size = 256,
         .rx_buffer_size = 2048,

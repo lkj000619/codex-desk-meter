@@ -6,15 +6,24 @@ import argparse
 import json
 from pathlib import Path
 
-from .pipeline import FixtureCollector, timestamp, utc_now
+from .pipeline import FixtureCollector, parse_time, timestamp, utc_now
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--registry", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--profile", choices=("all", "common"), default="all")
+    parser.add_argument("--reference-time", help="fixed RFC3339 UTC for reproducible fixture collection")
     args = parser.parse_args()
-    collected = FixtureCollector(args.registry).collect()
+    reference = parse_time(args.reference_time, "reference_time") if args.reference_time else None
+    collector = FixtureCollector(args.registry)
+    if args.profile == "common":
+        if reference is None:
+            parser.error("--profile common requires --reference-time")
+        collected = collector.collect_common(reference)
+    else:
+        collected = collector.collect(reference)
     result = {
         "captured_at": timestamp(utc_now()),
         "payload": collected.payload,
