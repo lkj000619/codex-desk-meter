@@ -1,0 +1,14 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+  "implementation_commit": "09ecdaf1645511033b4efda40bb2a9e3b96ae8f7",
+  "policy_eligible": false,
+  "policy_review_status": "invalid_for_comparison",
+  "policy_review_reason": "Followup2 has 9 confirmed shell pipeline commands at raw lines[43, 45, 47, 53, 57, 61, 113, 117, 121], violating unchanged common task. Preserve terminal/submission/product observations and full raw cost; Sol-series quality invalid remains in force.",
+  "operator_baseline_verified": true,
+  "restored_root": "C:\\meter-run-restores-20261006\\codex-sol-followup02-final",
+  "result_valid": true,
+  "manifest_identity_verified": true,
+  "package_manifest_sha256": "a72afc82d487005b05a403940419a5f0bdabcf0e1e79b4953d7eb56784b29a82",
+  "original_checkout_used": false,
+  "files_verified": 483
+}

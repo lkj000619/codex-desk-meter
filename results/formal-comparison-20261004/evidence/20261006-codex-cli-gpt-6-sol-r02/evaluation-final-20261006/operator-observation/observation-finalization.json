@@ -1,0 +1,28 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+  "round": 2,
+  "recorded_at": "2026-10-05T19:30:31.323110+00:00",
+  "status": "reference_review_complete",
+  "source_and_raw_cost_unchanged": true,
+  "serial_closed": true,
+  "rm_items": {
+    "RM1": "pass",
+    "RM2": "pass",
+    "RM3": "pass",
+    "RM4": "pass",
+    "RM5": "pass"
+  },
+  "reference_status": "pass",
+  "policy_status": "invalid_for_comparison",
+  "product_pass": false,
+  "user_initiated_reset_confirmed": true,
+  "continuous_30s_readable_data_certified": false,
+  "spontaneous_reboot_verified": false,
+  "remaining_followup_seconds": 6127.750999999698,
+  "remaining_followup_rounds": 1,
+  "additional_followup_allowed": false,
+  "reason_no_more_calls": "Frozen ledger reached observed reference; unused budget/round is not authorization for another call. Series quality remains invalid.",
+  "quality_reference_cost_eligible": false,
+  "raw_reasoning_output_tokens": 7547,
+  "frozen_normalized_reasoning_tokens": null
+}

@@ -1,0 +1,102 @@
+{
+  "date": "2026-10-06",
+  "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+  "reviewed_at": "2026-10-05T19:20:02.652970+00:00",
+  "raw_stdout_sha256": "a467f9cdea07ce53df462f721d7740f0035cfc97dd847ca7baa13943894e7910",
+  "confirmed_findings": [
+    {
+      "body": "Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 915 -First 40",
+      "raw_line": 43,
+      "pipeline_extents": [
+        "Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 915 -First 40"
+      ],
+      "parse_errors": [],
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 915 -First 40'",
+      "run_id": "20261006-codex-cli-gpt-6-sol-r02"
+    },
+    {
+      "body": "Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 740 -First 75",
+      "raw_line": 45,
+      "pipeline_extents": [
+        "Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 740 -First 75"
+      ],
+      "parse_errors": [],
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 740 -First 75'",
+      "run_id": "20261006-codex-cli-gpt-6-sol-r02"
+    },
+    {
+      "body": "Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 680 -First 75",
+      "raw_line": 47,
+      "pipeline_extents": [
+        "Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 680 -First 75"
+      ],
+      "parse_errors": [],
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 C:/Espressif/v5.3.2/esp-idf/components/esp_lcd/rgb/esp_lcd_panel_rgb.c | Select-Object -Skip 680 -First 75'",
+      "run_id": "20261006-codex-cli-gpt-6-sol-r02"
+    },
+    {
+      "body": "Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 125 -First 90",
+      "raw_line": 53,
+      "pipeline_extents": [
+        "Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 125 -First 90"
+      ],
+      "parse_errors": [],
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 125 -First 90'",
+      "run_id": "20261006-codex-cli-gpt-6-sol-r02"
+    },
+    {
+      "body": "Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 379 -First 70",
+      "raw_line": 57,
+      "pipeline_extents": [
+        "Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 379 -First 70"
+      ],
+      "parse_errors": [],
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 379 -First 70'",
+      "run_id": "20261006-codex-cli-gpt-6-sol-r02"
+    },
+    {
+      "body": "Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 107 -First 18",
+      "raw_line": 61,
+      "pipeline_extents": [
+        "Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 107 -First 18"
+      ],
+      "parse_errors": [],
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions/esp_lcd_panel_io_3wire_spi.c | Select-Object -Skip 107 -First 18'",
+      "run_id": "20261006-codex-cli-gpt-6-sol-r02"
+    },
+    {
+      "body": "Get-Content -Encoding utf8 scripts/validate-end-to-end-result.py | Select-Object -Last 75",
+      "raw_line": 113,
+      "pipeline_extents": [
+        "Get-Content -Encoding utf8 scripts/validate-end-to-end-result.py | Select-Object -Last 75"
+      ],
+      "parse_errors": [],
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 scripts/validate-end-to-end-result.py | Select-Object -Last 75'",
+      "run_id": "20261006-codex-cli-gpt-6-sol-r02"
+    },
+    {
+      "body": "Get-Content -Encoding utf8 scripts/validate-end-to-end-result.py | Select-Object -Skip 250 -First 240",
+      "raw_line": 117,
+      "pipeline_extents": [
+        "Get-Content -Encoding utf8 scripts/validate-end-to-end-result.py | Select-Object -Skip 250 -First 240"
+      ],
+      "parse_errors": [],
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 scripts/validate-end-to-end-result.py | Select-Object -Skip 250 -First 240'",
+      "run_id": "20261006-codex-cli-gpt-6-sol-r02"
+    },
+    {
+      "body": "Get-Content -Encoding utf8 pc/desk_meter.py | Select-Object -Skip 220 -First 140",
+      "raw_line": 121,
+      "pipeline_extents": [
+        "Get-Content -Encoding utf8 pc/desk_meter.py | Select-Object -Skip 220 -First 140"
+      ],
+      "parse_errors": [],
+      "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 pc/desk_meter.py | Select-Object -Skip 220 -First 140'",
+      "run_id": "20261006-codex-cli-gpt-6-sol-r02"
+    }
+  ],
+  "ambiguous_parse_findings_excluded": [],
+  "frozen_task_instruction": "셸 명령은 한 호출에 하나만 실행한다. `;`, `&&`, 파이프·명령 치환·shell wrapper로 결합하지 않는다.",
+  "method": "PowerShell AST inspection and manual review of captured commands. Quoted regex alternation is not a pipeline. Commands are not executed by this audit.",
+  "scope": "Previously supplied common restriction; no retrospective new rule or permission change. Current series quality is already invalid by dated first-run correction."
+}

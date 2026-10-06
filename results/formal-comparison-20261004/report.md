@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-06 Codex Sol 후속2의 구현·제출은 04:19:16.016 KST에 종료됐다. 원본622.562초·정규화6,510,153 token과 418개 파일의 독립 복원을 보존했다. Python6개·생산 C 시험과 collector/common payload 동일성 확인 후 04:21:15 KST 같은 artifact를 COM3에 업로드했고 실제 frame0·1을 수락했다. LCD/BOOT/30초 유지와 정식 RM/최종 package는 사용자 관측 대기다. 정책은 파이프9건 위반으로 invalid_for_comparison이며 최초 eligible 원본·날짜 있는 정정·기존 후속1 판정을 보존한다. 후속 잔여6,127.751초·1회는 이번 평가 뒤에만 처리한다.
-후보 실행 시작·종료 각11회(최초 시작4·후속7). AGY Flash 후속 정책은 invalid_for_comparison이며 원래 CTest 기록과 별도 새 host source 검증을 구분한다. Pro 종료·Flash 보류·Codex Luna 미시작을 유지한다. 독립 series 종료는 OpenCode·Pro 2개/예정15개다. 전체 비교는 미완료다.
+상태: 2026-10-06 Codex Sol 후속2의 구현·제출·실물 관측·정식 RM·최종 독립 감사를 완료했다. RM1~RM5 pass이며 ledger reached로 Sol series를 종료했다. 정책 invalid_for_comparison으로 품질·적격 reference-cost 집계에서는 제외하고 product_pass false를 유지한다. 최종483개 파일을 독립 복원해 원본 비용622.562초·정규화6,510,153 token과 source/artifact·영상을 검증했다. 미사용 후속6,127.751초·1회가 있어도 추가 호출은 허용되지 않는다.
+후보 실행 시작·종료 각11회(최초 시작4·후속7). Pro 종료·Flash 보류·Codex Luna 미시작을 유지한다. 독립 series 종료는 OpenCode·Pro·Sol 3개/예정15개다. 전체 비교는 미완료다. 아래 시작·대기 표현은 당시 기록이며 마지막 갱신이 최신 판정이다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -776,3 +776,26 @@ App SHA-256 `486cd84ba91af26fd86ea8642c166c4708b7e3537806cf18f93d9579c23c0377`, 
 [76개 파일 snapshot](evidence/20261006-codex-cli-gpt-6-sol-r02/post-terminal-awaiting-optical-20261006/snapshot-inventory.json)과 [checkpoint10](comparison-checkpoint-10.md)을 보존했다.
 후보11회 정규화합계26,689,957 token, Sol 최초+후속2회 누적3,532.405초·22,413,413 token, 남은 후속6,127.751초·1회다.
 비용과 정책 부적격을 유지하고 이번 관측·RM 완료 전 후속3이나 Luna를 시작하지 않는다. 과거 snapshot·원본 판정·동결 ref는 변경하지 않았다.
+
+## 2026-10-06 Sol 후속 2회차 최종 평가·series 종료
+
+위 광학 대기는 당시 상태다. 사용자가 제공한 `KakaoTalk_20261006_042359926.mp4`의63.3초·30,937,062 bytes와 SHA-256
+`556c295353c13fa061c7da118ee007891c4b82a42f9aff66eb410557aca779ac`를04:21 업로드 원본 artifact에 연결했다.
+[영상 검토](evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/operator-observation/user-video-01/video-review.json)는 전체63개 표본·6개 contact sheet와 선택 원본을 검토한 근거다.
+수동 RESET 전에는 USED42/LEFT58·USED18/LEFT82, 글로벌 리셋 timestamp·elapsed·출처와 진단 정보를 읽을 수 있다.
+BOOT 조작으로 GLOBAL RESET→STATUS→USAGE→GLOBAL RESET의 세 화면 순환·복귀를 확인했고 RESET 뒤 빈 상태에서도 탐색이 이어진다.
+약18초의 WAITING 전환은 사용자가 직접 RST를 눌렀다고 확인했다. 자동 재부팅이나 BOOT 탐색 실패로 집계하지 않는다.
+20.5~30.5초 표본은 켜진 화면에 읽을 수 있는 글자가 없으며 원인은 미확정이다. 영상 길이를30초 연속 정상 표시의 증명으로 사용하지 않는다.
+
+[최종 RM](evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/reference-review.json)은 한 번 적용했으며 RM1~RM5 pass·reference pass다.
+정책 파이프9건과 최초/후속1의 위반으로 series 품질 invalid_for_comparison·적격 reference-cost 제외를 유지한다.
+전체29개 oracle·정식 GUI/선택 기능·정밀 지연·30초 연속 정상 데이터 표시는 미검증으로 남겨 product_pass false다.
+[483개 파일 독립 감사](evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/restore-audit.json)는57개 입력·source22/artifact21·동결 commit·원본 비용·영상·정책/RM를 검증했다.
+Package manifest SHA-256은 `a72afc82d487005b05a403940419a5f0bdabcf0e1e79b4953d7eb56784b29a82`이며 [공개 목록](evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/snapshot-inventory.json)은109개 파일의 원본 bytes/hash를 보존한다.
+기존418개 관측 전 package·76개 pending snapshot·최초/후속1 판정·동결 ref는 변경하지 않았다. 후보 재호출·재빌드·추가 업로드는 없다.
+
+[Series 종료](evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/operator-series-completion.json)는 ledger reached다.
+최초1회·후속2회 누적3,532.405초·22,413,413 token이며 후속 누적1,072.249초다. 미사용6,127.751초·1회로 추가 호출을 만들지 않는다.
+[Checkpoint11](comparison-checkpoint-11.md)은 실제11회 정규화26,689,957 token과 모든 실패·부적격 비용을 유지한다. Cached는input에 포함되며 원본reasoning과 adapter null의 정의를 변경하지 않는다.
+마지막 관측 보드는 수동 RESET 뒤 WAITING 상태이며 이후 데이터 재전송은 없다. Serial은 닫았고 영상 이후 현재 화면을 새로 관측하지 않았다.
+전체 비교는 종료3/15 series로 미완료다. Pro 종료·Flash 보류·Luna 미시작을 유지한다.

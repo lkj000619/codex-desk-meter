@@ -1,9 +1,10 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-06. 상태: **Codex Sol 후속 2회차는 04:19:16.016 KST에 구현·제출을 마치고 종료됐다. 원본 비용622.562초·정규화6,510,153 token과 source/artifact를 보존했고 418개 파일을 독립 복원·검증했다. Python6개·생산 C receiver 시험 통과, 후보 collector payload·encoder가 공통 기준과 일치한다. 04:21:15 KST 같은 원본 artifact를 COM3에 업로드했고 실제 frame0·1을 수락했다. 현재 LCD·BOOT·30초 유지 관측과 정식 RM/최종 package는 사용자 관측 대기다. 정책은 파이프9건 위반으로 invalid_for_comparison이며 날짜 있는 최초 정정과 series 품질 부적격을 유지한다. 남은 후속6,127.751초·1회는 이번 평가 완료 전 시작하지 않는다. 후보 시작·종료 각11회, 독립 series 종료2개/15개, Pro 종료·Flash 보류·Luna 미시작이다.**
+확인일: 2026-10-06. 상태: **Codex Sol 후속 2회차의 구현·제출·관측·정식 RM·최종 보존 검증을 완료했다. RM1~RM5는 관측상 pass이며 ledger reached로 Sol series를 종료했다. 정책 invalid_for_comparison으로 품질·적격 reference-cost 집계에서는 제외하고 product_pass false를 유지한다. 최종483개 파일의 독립 복원으로 원본 source·artifact·비용·영상을 검증했다. 남은6,127.751초·1회는 미사용 예산이며 추가 호출은 허용되지 않는다. 후보 시작·종료 각11회, 독립 series 종료3개/15개다. Pro 종료·Flash 보류·Luna 미시작을 유지한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
+아래 시작·대기·남은 작업 표현은 각 관측 시점의 기록이며 최신 상태는 위 상태와 마지막 갱신을 따른다.
 2026-10-02의 6개 모델 준비 완료 판정은 [당시 보고서](../../results/experiment-preparation-20261002/report.md)의 조건에만 적용된다.
 2026-10-03의 보류 권고와 E1~E5 원본은 [실행 경계 검토](../../results/experiment-execution-review-20261003/report.md)에 남긴다.
 이번 보완의 실제 근거는 [선행 작업 결과](../../results/experiment-launch-preparation-20261004/report.md)와
@@ -286,3 +287,16 @@ checkpoint08의 원본을 보존한 후속 집계다. [남은 후속 계획](../
 새 LCD/BOOT/연속 유지 관측을 요청했으며 RM review는 아직 적용하지 않았다. 구현·제출 완료와 평가 완료는 다르다.
 [Checkpoint10](../../results/formal-comparison-20261004/comparison-checkpoint-10.md)은 후보11회·정규화26,689,957 token을 기록한다. Sol 누적3,532.405초·22,413,413 token과
 후속 잔여6,127.751초·1회를 유지하고 관측/정식 평가 전 추가 호출을 시작하지 않는다. 전체 비교·제품 합격·Sol series 종료를 선언하지 않는다.
+
+## 2026-10-06 Sol 후속 2회차 평가 완료·series 종료
+
+위 광학 대기는 당시 기록이다. 새63.3초 영상과 사용자의 “RESET(RST)을 직접 누름” 확인을 이번04:21 업로드 artifact에 연결했다.
+[최종 RM](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/reference-review.json)은 RM1~RM5 pass다.
+5시간 남은58%·주간 남은82%, 실제 글로벌 리셋·진단 정보와 BOOT로 세 화면 순환·복귀를 확인했다.
+약18초의 데이터 소실은 수동 RESET 이후이며 자동 재부팅으로 판정하지 않는다. 이후20.5~30.5초 표본에는 읽을 수 있는 글자가 없고 원인은 미확정이다.
+30초 연속 정상 데이터 표시·정밀 지연·전체29개 oracle·정식 GUI/선택 기능 검증은 미완료이므로 product_pass false를 유지한다.
+[최종 독립 감사](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/restore-audit.json)는483개 파일·입력57개·source22/artifact21·원본 비용·정책·영상·RM를 검증했다.
+Package SHA-256은 `a72afc82d487005b05a403940419a5f0bdabcf0e1e79b4953d7eb56784b29a82`다. 재빌드·후보 재호출·추가 업로드 없이 검증했다.
+[종료 기록](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/operator-series-completion.json)은 ledger reached이며 추가 후속을 허용하지 않는다.
+[Checkpoint11](../../results/formal-comparison-20261004/comparison-checkpoint-11.md)은 실제11회 비용과 Sol 관측 도달 누적3,532.405초·22,413,413 token을 보존한다. 이는 정책 적격 도달 비용이 아니다.
+Sol series 품질 invalid·최초 날짜 있는 정정·과거 원본 판정을 유지한다. 독립 series 종료3/15로 전체 비교는 미완료이며 Codex Luna는 시작하지 않았다.

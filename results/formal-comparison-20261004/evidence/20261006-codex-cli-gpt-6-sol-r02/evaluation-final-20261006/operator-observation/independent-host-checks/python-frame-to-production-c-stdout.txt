@@ -1,0 +1,1 @@
+PC canonical fixture frame -> production C receiver -> recovery: PASS

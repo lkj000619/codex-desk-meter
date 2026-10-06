@@ -1,0 +1,16 @@
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'C:\meter-followups-20261006\20261006-codex-cli-gpt-6-sol-r02\operator-observation\user-video-01\source.mp4':
+  Metadata:
+    major_brand     : isom
+    minor_version   : 512
+    compatible_brands: isomiso2mp41
+    encoder         : Lavf58.45.100
+  Duration: 00:01:03.30, start: 0.000000, bitrate: 3909 kb/s
+  Stream #0:0[0x1](und): Video: hevc (Main) (hvc1 / 0x31637668), yuv420p(tv, bt709), 1080x1920, 3771 kb/s, SAR 1:1 DAR 9:16, 29.97 fps, 30 tbr, 15360 tbn (default)
+      Metadata:
+        handler_name    : VideoHandler
+        vendor_id       : [0][0][0][0]
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 128 kb/s (default)
+      Metadata:
+        handler_name    : SoundHandler
+        vendor_id       : [0][0][0][0]
+At least one output file must be specified

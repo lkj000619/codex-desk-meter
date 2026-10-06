@@ -1,0 +1,110 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+  "round": 2,
+  "reviewer": "Codex operator",
+  "reviewed_at": "2026-10-05T19:30:31.323110+00:00",
+  "video_sha256": "556c295353c13fa061c7da118ee007891c4b82a42f9aff66eb410557aca779ac",
+  "duration_seconds": 63.3,
+  "source_bytes": 30937062,
+  "implementation_commit": "09ecdaf1645511033b4efda40bb2a9e3b96ae8f7",
+  "artifact_sha256": "486cd84ba91af26fd86ea8642c166c4708b7e3537806cf18f93d9579c23c0377",
+  "contact_sheets_reviewed": 6,
+  "one_second_sample_frames_reviewed": 63,
+  "individual_readable_frames_reviewed": [
+    1,
+    5,
+    7,
+    10,
+    20,
+    21,
+    34,
+    35,
+    53
+  ],
+  "findings": [
+    {
+      "approximate_seconds": 0.5,
+      "screen": "GLOBAL RESET; LIVE SEQ1; SOURCE codex-resets.com, fetched timestamp, STALE, last reset2026-09-08T01:56:00Z and elapsed time."
+    },
+    {
+      "approximate_seconds": 4.5,
+      "screen": "STATUS; LIVE SEQ1; RECEIVER CONNECTED DATA, FRAME ERROR NONE, last good receive68sec ago; BOOT NEXT PAGE and PC REFRESH."
+    },
+    {
+      "approximate_seconds": 6.5,
+      "screen": "USAGE DASHBOARD; five-hour USED42.0% LEFT58.0%, weekly USED18.0% LEFT82.0%, source observed2026-09-11T00:00:00Z, stale/SOURCE STALE and reset unknown."
+    },
+    {
+      "approximate_seconds": 7.5,
+      "screen": "Returned to GLOBAL RESET with same input data and sequence1."
+    },
+    {
+      "approximate_seconds": 18,
+      "screen": "User explicitly confirms pressing RESET; subsequent WAITING/empty receiver state."
+    },
+    {
+      "interval_seconds": [
+        20.5,
+        30.5
+      ],
+      "screen": "Samples show backlit blue panel/header without legible text. Cause not established; do not certify uninterrupted30s readable display."
+    },
+    {
+      "interval_seconds": [
+        31.5,
+        42.5
+      ],
+      "screen": "BOOT manipulation again reaches GLOBAL RESET/NO RESET HISTORY, STATUS/RECEIVER NO DATA, USAGE DASHBOARD/WAITING FOR PC FIXTURE and repeats."
+    },
+    {
+      "interval_seconds": [
+        47.5,
+        62.5
+      ],
+      "screen": "WAITING FOR PC FIXTURE remains visible in selected frames while board is held/rotated; some views are obscured or out of frame."
+    }
+  ],
+  "orientation_and_clipping": "Readable landscape layout before RESET; no material clipping of the required58/82, global reset or diagnostic content in selected frames. Later physical rotation does not establish automatic orientation.",
+  "navigation": {
+    "starting_information": "global reset with valid seq1",
+    "observed_initial_information_path": [
+      {
+        "approximate_second": 0.5,
+        "view": "global reset"
+      },
+      {
+        "approximate_second": 4.5,
+        "view": "diagnostics"
+      },
+      {
+        "approximate_second": 5.5,
+        "view": "usage"
+      },
+      {
+        "approximate_second": 7.5,
+        "view": "global reset"
+      }
+    ],
+    "three_information_views_reached": true,
+    "returned_to_starting_information": true,
+    "repeatable_navigation_observed_after_reset": true,
+    "exact_physical_press_count_separately_confirmed": false,
+    "precise_latency_measured": false
+  },
+  "reset": {
+    "user_initiated_reset_confirmed": true,
+    "approximate_reset_second": 18,
+    "spontaneous_reboot_verified": false,
+    "scope": "Data disappearance after18s attributed to explicitly confirmed manual RESET, not an autonomous reboot. No fresh stimulus was sent after the user reset."
+  },
+  "continuity": {
+    "continuous_30s_readable_valid_data_certified": false,
+    "no_flicker_certified": false,
+    "scope": "Valid-data portion is shorter than30s before manual RESET. Post-reset text-free sample interval and obstruction/rotation prevent full C2/no-flicker certification. One-second samples cannot exclude short events."
+  },
+  "reference_reached": true,
+  "product_pass": false,
+  "policy_status": "invalid_for_comparison",
+  "quality_reference_cost_eligible": false,
+  "candidate_execution_repeated": false
+}

@@ -2,7 +2,7 @@
 
 목표: ESP32-S3-LCD-3.16 제품 구현에서 에이전트의 첫 결과·자기 후속 수정 비용과 RM 도달·제품 품질을 동일 조건으로 비교한다.
 시작 승인: 2026-10-04 사용자 요청 “프로젝트 목적과 목표에 엇나가지않도록 실험 시작”.
-상태: 2026-10-06 Codex Sol 후속2는 04:19:16 KST 구현·제출 종료, 622.562초·418개 파일 독립 복원/host 검증 완료다. 04:21:15 KST COM3에 같은 artifact를 올리고 공통 frame0·1 수락을 확인했다. LCD/BOOT/연속 유지와 정식 RM/최종 package는 사용자 관측 대기다. 후속 잔여6,127.751초·1회는 이 평가 뒤에만 처리한다. 날짜 있는 최초 정정과 현재 후속2 파이프9건 정책 invalid_for_comparison·과거 원본을 보존한다. OpenCode 예산 소진·Pro 회차 종료·Flash 보류를 유지한다. 독립 series 종료2개/예정15개, 후보 시작·종료 각11회, Luna 미시작이다.
+상태: 2026-10-06 Sol 후속2의 관측·정식 RM·최종483개 파일 독립 감사를 완료했다. RM1~RM5 pass·ledger reached로 Sol series 종료이며 정책 invalid_for_comparison·product_pass false를 유지한다. 미사용 후속6,127.751초·1회가 있어도 추가 호출은 없다. 독립 series 종료3개/예정15개, 후보 시작·종료 각11회다. OpenCode 예산 소진·Pro 회차 종료·Flash 보류·Luna 미시작과 과거 원본을 보존한다. 아래 실행 과정은 각 시점의 기록이다.
 원본: [운영 계약](../experiments/comparison-operating-contract.md), [현재 상태](../experiments/next-comparison-readiness.md),
 [동결 기록](../../results/experiment-launch-preparation-20261004/freeze.json).
 
@@ -38,6 +38,7 @@
    2026-10-06 00:37:01.691 KST Sol 최초가 completed로 종료됐다. [최초 평가](2026-10-06-codex-sol-initial-evaluation.md)는 정책 eligible·RM1 pass/RM2~RM5 fail다. 공통 frame 0·1을 host/실제 장치가 SCHEMA_INVALID로 거부했고, 영상과 BOOT 무반응 보고를 연결했다. 453개 파일의 최종 독립 감사를 마쳤다. 추적된 build 출력은 새 후속 준비 사본에서만 제거하고 source 동일성을 확인해야 하며 원본 commit·비용·판정은 보존한다.
    위 선행 조건을 새 사본에서 검증하고 [Sol 후속 1회차](2026-10-06-codex-sol-followup-execution.md)를 03:34:01.746 KST 시작했다. 자기 source 18개/입력 57개·동일 profile/권한·새 receipt·실제 argv를 확인했다. 현재 비용·제품·정책/RM는 pending이며 기존 보드/원본 판정을 현재 후속 결과로 쓰지 않는다.
    원래 예약·중단·실패 비용은 보존한다. 전체 비교 완료는 15개 독립 series와 필요한 후속/관측/적격성 집계가 끝난 시점이다.
+   2026-10-06 후속2 종료 뒤 새63.3초 영상과 수동 RESET 확인을 연결해 Sol RM1~RM5 pass를 판정하고 [최종 독립 감사](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/restore-audit.json)·[series 종료](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/operator-series-completion.json)를 마쳤다. 품질/적격 reference-cost 부적격과30초 연속 표시 등 전체 제품 미검증을 유지한다. 후속3과 Luna는 시작하지 않는다.
 
 ## 중단과 재개
 

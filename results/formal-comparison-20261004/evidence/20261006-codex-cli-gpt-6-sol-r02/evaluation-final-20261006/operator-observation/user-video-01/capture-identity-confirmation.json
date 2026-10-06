@@ -1,0 +1,21 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+  "round": 2,
+  "recorded_at": "2026-10-05T19:30:31.323110+00:00",
+  "video_answer_original": "\"C:\\Users\\이광진\\Documents\\카카오톡 받은 파일\\KakaoTalk_20261006_042359926.mp4\"",
+  "video_question_item_id": "[\"request_user_input_async\",\"call_fJL4nggN6PHB9ZUlmy3u4by0\",0]",
+  "reset_answer_original": "RESET(RST)을 직접 누름",
+  "reset_question_item_id": "[\"request_user_input_async\",\"call_9Ic9p4lmCNVC2UvsOcXZ0iLX\",0]",
+  "source": "User replies identifying current followup2 upload and confirms manual RESET near18s in its video.",
+  "video_sha256": "556c295353c13fa061c7da118ee007891c4b82a42f9aff66eb410557aca779ac",
+  "implementation_commit": "09ecdaf1645511033b4efda40bb2a9e3b96ae8f7",
+  "artifact_sha256": "486cd84ba91af26fd86ea8642c166c4708b7e3537806cf18f93d9579c23c0377",
+  "hardware_slot": "operator-observation/hardware-slot.json",
+  "filesystem_save_after_upload": true,
+  "capture_time_utc": null,
+  "user_initiated_reset_confirmed": true,
+  "approximate_reset_second": 18,
+  "post_reset_no_data_is_spontaneous_reboot_evidence": false,
+  "button_type_for_navigation": "BOOT per requested procedure, visual button manipulation and matching submitted page sequence; no separate exact-count reply required for equivalent navigation.",
+  "feedback_delivered_to_terminal_candidate": false
+}

@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "comparison_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "state": "reached",
+  "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "input_bundle_sha256": "ced675a80c840d2bb9d467ccf7694a6bbd5c09b058c9887e01110842afdb6e67",
+  "profile_sha256": "d39eccf7fad695a4333df6d4b885eb81db96ac70e6dfce13b1e9f61f64ee9926",
+  "limits": {
+    "initial_seconds": 7200,
+    "remediation_seconds": 7200,
+    "remediation_rounds": 3
+  },
+  "reference_inputs": "C:\\meter-runs-20261005\\ledgers\\20261005-codex-cli-gpt-6-sol-r01-reference\\reference-inputs.json",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "common_task_sha256": "acc4d9b0a862ab94730ed0bcd6bad89ac0722e12288ca8a370549a747798a506",
+  "common_task_run_id": "20261005-codex-cli-gpt-6-sol-r01",
+  "runs": [
+    {
+      "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "directory": "C:\\meter-runs-20261005\\20261005-codex-cli-gpt-6-sol-r01",
+      "round": 0,
+      "starting_commit": "95e7e431cda7dc507668c8b7eea986b41204f57c",
+      "status": "completed",
+      "reserved_seconds": 7200,
+      "elapsed_seconds": 2460.156000000192,
+      "reference_status": "fail",
+      "reviewed": true,
+      "implementation_commit": "2257fffaa5316773d08fe3353356112c7002159d",
+      "feedback_sha256": null,
+      "tokens": {
+        "input": 11987074,
+        "output": 54062,
+        "cached": 11815680,
+        "reasoning": null,
+        "provider_total": null,
+        "total": 12041136,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "Codex turn.completed usage; cached is included in input; reasoning unavailable."
+      },
+      "terminal_manifest_sha256": "b163204742b5bf9f8afd92e76b6ce9ba49621c9fce83d45fb292d3831710277d",
+      "source_bundle_sha256": "3ddf10dc4d61468fab9a578403e10de4cad6e85bee85d933bd82ac6b59397cea",
+      "reference_review_sha256": "5829c8f07bfc7d4ef626b47d03de096260bf0967880c557a83d2dfbad9a9cad1"
+    },
+    {
+      "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+      "directory": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-sol-r01",
+      "round": 1,
+      "starting_commit": "2257fffaa5316773d08fe3353356112c7002159d",
+      "status": "completed",
+      "reserved_seconds": 7200,
+      "elapsed_seconds": 449.6870000001509,
+      "reference_status": "fail",
+      "reviewed": true,
+      "implementation_commit": "3a09f26f2f375f4f45bebb79eb5902667a3ccb1a",
+      "feedback_sha256": "b7d3b246072bbab5872b81514cc4dd52f1ecdc59911eb3e2d3a33723db2770ca",
+      "tokens": {
+        "input": 3847656,
+        "output": 14468,
+        "cached": 3694208,
+        "reasoning": null,
+        "provider_total": null,
+        "total": 3862124,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "Codex turn.completed usage; cached is included in input; reasoning unavailable."
+      },
+      "terminal_manifest_sha256": "dc76db9d36de25e26060a06eb810e6ab4a1903cc6531ebb0b99297613ae2224e",
+      "source_bundle_sha256": "e20dcd192c07b8afa9f0688db9380872e10233738a482c6d167d14e058c0115b",
+      "reference_review_sha256": "e3d53d80ce39842eae7c185a4c07890768ed4340dd1f61b3cdf6971d3967fb3e"
+    },
+    {
+      "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+      "directory": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-sol-r02",
+      "round": 2,
+      "starting_commit": "3a09f26f2f375f4f45bebb79eb5902667a3ccb1a",
+      "status": "completed",
+      "reserved_seconds": 6750,
+      "elapsed_seconds": 622.5620000001509,
+      "reference_status": "pass",
+      "reviewed": true,
+      "implementation_commit": "09ecdaf1645511033b4efda40bb2a9e3b96ae8f7",
+      "feedback_sha256": "49bfcbcca9d9cfb751886ae6559d90af82a34dfdc4931cf382f3a476b2686771",
+      "tokens": {
+        "input": 6489180,
+        "output": 20973,
+        "cached": 6330752,
+        "reasoning": null,
+        "provider_total": null,
+        "total": 6510153,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "Codex turn.completed usage; cached is included in input; reasoning unavailable."
+      },
+      "terminal_manifest_sha256": "30256d55127e253242b77ade80969ed2d67716ddff9678cf25441bc9cc7365f0",
+      "source_bundle_sha256": "d5a696cd35e4c875ac710004f9b7d59355e27d4c0a77815de0d1fbcc82fb76d6",
+      "reference_review_sha256": "3f6796ec0c48a7e3e6537977f8bd0fdb614b49bb7423702d85df1413b6a05e9d"
+    }
+  ]
+}
