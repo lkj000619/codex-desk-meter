@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-06 Codex Sol 후속2의 구현·제출·실물 관측·정식 RM·최종 독립 감사를 완료했다. RM1~RM5 pass이며 ledger reached로 Sol series를 종료했다. 정책 invalid_for_comparison으로 품질·적격 reference-cost 집계에서는 제외하고 product_pass false를 유지한다. 최종483개 파일을 독립 복원해 원본 비용622.562초·정규화6,510,153 token과 source/artifact·영상을 검증했다. 미사용 후속6,127.751초·1회가 있어도 추가 호출은 허용되지 않는다.
-후보 실행 시작·종료 각11회(최초 시작4·후속7). Pro 종료·Flash 보류·Codex Luna 미시작을 유지한다. 독립 series 종료는 OpenCode·Pro·Sol 3개/예정15개다. 전체 비교는 미완료다. 아래 시작·대기 표현은 당시 기록이며 마지막 갱신이 최신 판정이다.
+상태: 2026-10-06 사용자 지시로 Codex Luna `gpt-6-luna`·max의 독립 최초 실험을10:10:26.658 KST 시작했다. 새 날짜 예약·입력57개·동결 profile/권한·새 receipt·실제 thread/process argv를 확인했고 최대7,200초로 구현 중이다. 현재 제품·정책/RM·최종 비용은 미판정이다.
+후보 실행 시작12회·종료11회(최초 시작5·후속7). Sol 기준 도달로 종료·품질 부적격·제품 미합격, Pro 종료·Flash 보류를 보존한다. 독립 series 종료는 OpenCode·Pro·Sol 3개/예정15개다. 전체 비교는 미완료다. 아래 시작·대기 표현은 당시 기록이며 마지막 갱신이 최신 판정이다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -799,3 +799,17 @@ Package manifest SHA-256은 `a72afc82d487005b05a403940419a5f0bdabcf0e1e79b4953d7
 [Checkpoint11](comparison-checkpoint-11.md)은 실제11회 정규화26,689,957 token과 모든 실패·부적격 비용을 유지한다. Cached는input에 포함되며 원본reasoning과 adapter null의 정의를 변경하지 않는다.
 마지막 관측 보드는 수동 RESET 뒤 WAITING 상태이며 이후 데이터 재전송은 없다. Serial은 닫았고 영상 이후 현재 화면을 새로 관측하지 않았다.
 전체 비교는 종료3/15 series로 미완료다. Pro 종료·Flash 보류·Luna 미시작을 유지한다.
+
+## 2026-10-06 Codex Luna 최초 실험 시작
+
+사용자의 “luna 시작하자”에 따라 block1/seed1의 마지막 대상 Luna를 시작했다. [계획](../../docs/plans/2026-10-06-codex-luna-initial-launch.md)과
+[25개 파일 시작 목록](evidence/20261006-codex-cli-gpt-6-luna-r01/launch-20261006/snapshot-inventory.json)에 준비·실제 시작 원본을 보존했다.
+10월5일의 미실행 예약은 유지하고 `20261006-codex-cli-gpt-6-luna-r01`·새 ledger·단일 최초 commit의 독립 저장소를 생성했다.
+준비 commit `d9579af28c8952b963454e9e2d32b8322d7ed472`, manifest branch label `experiment/openai/codex-cli/gpt-6-luna`와 local master를 구분한다. 제품 구현·build 출력·다른 후보 Git 이력이 없는57개 입력을 확인했다.
+[현재 확인](evidence/20261006-codex-cli-gpt-6-luna-r01/launch-20261006/operator-launch-preflight/current-checks.json)은 CLI0.159.2·ESP-IDF5.3.2·기존 native 설정·hook 비활성화와 모델 호출0회를 기록한다.
+Capability 원본은10월4일이며 model entitlement를 새 probe로 재검증했다고 표시하지 않는다. 같은 frozen profile의 fresh receipt SHA-256은 `44ba7ad2e5ad8c6f01784531cfbea792b783f58e1df4201cb2c350d9eff7204b`다.
+[실제 시작](evidence/20261006-codex-cli-gpt-6-luna-r01/launch-20261006/native-start-observation.json)은10:10:26.658 KST·thread `01a10ec3-0ebc-75f1-8060-d2ee9aff0262`·candidate PID7052·launcher PID8376다.
+Process argv의 explicit gpt-6-luna/max·권한·확장 비활성화가 profile과 일치한다. JSONL에 없는 실효 model/cwd를 검증했다고 추정하지 않는다.
+별도 runner의 최초 최대7,200초를 적용하며 대화의 토큰 만료로 같은 후보를 재실행하지 않는다. 종료 후 source·비용·제출·정책·host·제품/RM를 평가하고 genuine 원본 artifact가 있으면 업로드·실물 관측한다.
+현재 제품·정책·RM·최종 비용은 pending이다. [Checkpoint11](comparison-checkpoint-11.md)은 이전 종료11회만 집계한다. 후보 실행 중 운영자 구현 수정·피드백·serial/flash는 없으며 이전 Sol 화면은 Luna 근거가 아니다.
+Sol·Pro 종료와 Flash 보류 예산·과거 판정·원본 비용은 유지한다. 다음 독립 series나 모델을 동시에 시작하지 않는다.

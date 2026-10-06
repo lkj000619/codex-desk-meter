@@ -1,0 +1,20 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "directory": "C:\\meter-runs-20261006\\20261006-codex-cli-gpt-6-luna-r01",
+  "ledger": "C:\\meter-runs-20261006\\ledgers\\20261006-codex-cli-gpt-6-luna-r01.json",
+  "block": 1,
+  "seed": 1,
+  "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "candidate_commit": "d9579af28c8952b963454e9e2d32b8322d7ed472",
+  "candidate_tree": "59550f8f3be9e446589db038c9f35fb1174d82b5",
+  "local_branch": "master",
+  "manifest_branch_label": "experiment/openai/codex-cli/gpt-6-luna",
+  "profile_sha256": "eae4f0ceab072eff32f8f12b423cbdbacf312650817c26825800f83edf9fbb2a",
+  "input_bundle_sha256": "891f33b6a9128e423619c6c59b309cf09b0fe3d634bec9aa04bdfe93297207a1",
+  "immutable_input_files_verified": 57,
+  "old_unstarted_reservation": "20261005-codex-cli-gpt-6-luna-r01",
+  "old_reservation_bytes_unchanged": true,
+  "model_calls_during_preparation": 0,
+  "candidate_product_code_present": false,
+  "scope": "Independent fresh initial input repository, one baseline commit only; no previous product implementation or generated build artifacts."
+}

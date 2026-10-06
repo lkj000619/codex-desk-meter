@@ -1,0 +1,58 @@
+{
+  "captured_at": "2026-10-06T01:11:34.920685+00:00",
+  "processes": [
+    {
+      "ProcessId": 7052,
+      "ParentProcessId": 8372,
+      "CommandLine": "C:\\Users\\이광진\\AppData\\Local\\Programs\\OpenAI\\Codex\\bin\\codex.exe --ask-for-approval never exec --json --ignore-user-config --ignore-rules --ephemeral --strict-config --sandbox workspace-write --enable skip_host_skill_discovery --disable plugins --disable remote_plugin --disable apps --disable memories -c project_doc_max_bytes=0 -c windows.sandbox=\\\"elevated\\\" -c shell_environment_policy.experimental_use_profile=false --add-dir C:/Espressif/tmp -c model_reasoning_effort=\\\"max\\\" -m gpt-6-luna - -c skills.config=[{path=\\\"C:/Users/이광진/.agents/skills/archify/SKILL.md\\\",enabled=false},{path=\\\"C:/Users/이광진/.agents/skills/computer-use/SKILL.md\\\",enabled=false},{path=\\\"C:/Users/이광진/.agents/skills/find-skills/SKILL.md\\\",enabled=false},{path=\\\"C:/Users/이광진/.codex/skills/humanize/SKILL.md\\\",enabled=false},{path=\\\"C:/Users/이광진/.codex/skills/job-application-editor/SKILL.md\\\",enabled=false},{path=\\\"C:/Users/이광진/.agents/skills/orca-cli/SKILL.md\\\",enabled=false},{path=\\\"C:/Users/이광진/.agents/skills/orchestration/SKILL.md\\\",enabled=false},{path=\\\"C:/Users/이광진/.agents/skills/product-development/SKILL.md\\\",enabled=false},{path=\\\"C:/Users/이광진/.agents/skills/requirement-review/SKILL.md\\\",enabled=false}] --disable hooks"
+    }
+  ],
+  "expected_argv": [
+    "C:\\Users\\이광진\\AppData\\Local\\Programs\\OpenAI\\Codex\\bin\\codex.exe",
+    "--ask-for-approval",
+    "never",
+    "exec",
+    "--json",
+    "--ignore-user-config",
+    "--ignore-rules",
+    "--ephemeral",
+    "--strict-config",
+    "--sandbox",
+    "workspace-write",
+    "--enable",
+    "skip_host_skill_discovery",
+    "--disable",
+    "plugins",
+    "--disable",
+    "remote_plugin",
+    "--disable",
+    "apps",
+    "--disable",
+    "memories",
+    "-c",
+    "project_doc_max_bytes=0",
+    "-c",
+    "windows.sandbox=\"elevated\"",
+    "-c",
+    "shell_environment_policy.experimental_use_profile=false",
+    "--add-dir",
+    "C:/Espressif/tmp",
+    "-c",
+    "model_reasoning_effort=\"max\"",
+    "-m",
+    "gpt-6-luna",
+    "-",
+    "-c",
+    "skills.config=[{path=\"C:/Users/이광진/.agents/skills/archify/SKILL.md\",enabled=false},{path=\"C:/Users/이광진/.agents/skills/computer-use/SKILL.md\",enabled=false},{path=\"C:/Users/이광진/.agents/skills/find-skills/SKILL.md\",enabled=false},{path=\"C:/Users/이광진/.codex/skills/humanize/SKILL.md\",enabled=false},{path=\"C:/Users/이광진/.codex/skills/job-application-editor/SKILL.md\",enabled=false},{path=\"C:/Users/이광진/.agents/skills/orca-cli/SKILL.md\",enabled=false},{path=\"C:/Users/이광진/.agents/skills/orchestration/SKILL.md\",enabled=false},{path=\"C:/Users/이광진/.agents/skills/product-development/SKILL.md\",enabled=false},{path=\"C:/Users/이광진/.agents/skills/requirement-review/SKILL.md\",enabled=false}]",
+    "--disable",
+    "hooks"
+  ],
+  "runner_cwd": "C:\\meter-runs-20261006\\20261006-codex-cli-gpt-6-luna-r01\\checkout",
+  "explicit_permission_arguments": [
+    "--ask-for-approval",
+    "never",
+    "--sandbox",
+    "workspace-write",
+    "windows.sandbox=\"elevated\""
+  ]
+}

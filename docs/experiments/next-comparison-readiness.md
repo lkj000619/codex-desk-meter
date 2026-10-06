@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-06. 상태: **Codex Sol 후속 2회차의 구현·제출·관측·정식 RM·최종 보존 검증을 완료했다. RM1~RM5는 관측상 pass이며 ledger reached로 Sol series를 종료했다. 정책 invalid_for_comparison으로 품질·적격 reference-cost 집계에서는 제외하고 product_pass false를 유지한다. 최종483개 파일의 독립 복원으로 원본 source·artifact·비용·영상을 검증했다. 남은6,127.751초·1회는 미사용 예산이며 추가 호출은 허용되지 않는다. 후보 시작·종료 각11회, 독립 series 종료3개/15개다. Pro 종료·Flash 보류·Luna 미시작을 유지한다.**
+확인일: 2026-10-06. 상태: **사용자의 “luna 시작하자”에 따라 `gpt-6-luna`·max 최초 실험을10:10:26.658 KST 시작했다. 새 날짜 ID·독립 입력 저장소·ledger·receipt와 실제 thread/process argv를 검증했다. 같은 baseline·입력57개·profile·권한을 유지하고 최초 최대7,200초로 실행 중이다. 제품·정책·RM·최종 비용은 미판정이다. 후보 시작12회·종료11회, 독립 series 종료3개/15개다. Sol 종료·품질 부적격·제품 미합격, Pro 종료·Flash 보류와 과거 원본을 보존한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -300,3 +300,16 @@ Package SHA-256은 `a72afc82d487005b05a403940419a5f0bdabcf0e1e79b4953d7eb56784b2
 [종료 기록](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/operator-series-completion.json)은 ledger reached이며 추가 후속을 허용하지 않는다.
 [Checkpoint11](../../results/formal-comparison-20261004/comparison-checkpoint-11.md)은 실제11회 비용과 Sol 관측 도달 누적3,532.405초·22,413,413 token을 보존한다. 이는 정책 적격 도달 비용이 아니다.
 Sol series 품질 invalid·최초 날짜 있는 정정·과거 원본 판정을 유지한다. 독립 series 종료3/15로 전체 비교는 미완료이며 Codex Luna는 시작하지 않았다.
+
+## 2026-10-06 Codex Luna 최초 실험 실제 시작
+
+위 Sol 종료 시점의 Luna 미시작은 당시 상태다. [Luna 시작 계획](../plans/2026-10-06-codex-luna-initial-launch.md)에 따라
+`20261006-codex-cli-gpt-6-luna-r01`의 [시작 snapshot](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r01/launch-20261006/snapshot-inventory.json)25개 파일을 보존했다.
+10월5일 미실행 예약은 그대로 두고 오늘 날짜 ID·독립 ledger·제품 코드 없는 새 입력 저장소를 생성했다.
+CLI0.159.2·ESP-IDF5.3.2·동결 native feature/skill 설정과 hook 비활성화를 모델 호출 없이 재확인했다. Capability 원본은10월4일 증거이며 오늘 다시 모델 probe를 실행한 것은 아니다.
+Thread `01a10ec3-0ebc-75f1-8060-d2ee9aff0262`와 actual argv의 explicit gpt-6-luna/max를 확인했고 receipt SHA-256은 `44ba7ad2e5ad8c6f01784531cfbea792b783f58e1df4201cb2c350d9eff7204b`다.
+JSONL은 실효 model/cwd를 방출하지 않으며 app-server inventory는 exec의 user-config 계층과 다르다는 범위를 유지한다.
+최초 최대7,200초, 후속 최대3회 AND 누적7,200초를 유지한다. 후보에게 Sol이나 다른 모델의 구현·관측을 제공하지 않았고 실행 중 피드백·serial/flash를 하지 않는다.
+종료 후 source·제출·원본 비용을 동결하고 정책·host·제품/RM를 평가한다. 업로드 가능한 원본 firmware가 있으면 당시 포트 확인 후 실물 관측으로 이어간다.
+[Checkpoint11](../../results/formal-comparison-20261004/comparison-checkpoint-11.md)은 종료한11회 비용 집계이며 실행 중 Luna의 최종 비용을 포함하지 않는다.
+재개 시 [현재 계측](../../results/formal-comparison-20261004/progress.json)과 Luna manifest·ledger·실제 process부터 확인하고 같은 최초 호출을 반복하지 않는다. 보드는 이전 Sol 관측 상태이며 Luna 성공 증거가 아니다.

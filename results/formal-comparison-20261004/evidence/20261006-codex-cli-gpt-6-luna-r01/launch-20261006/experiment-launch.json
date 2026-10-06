@@ -1,0 +1,13 @@
+{
+    "launcher_pid":  8376,
+    "independent_of_chat_turn":  true,
+    "launched_at":  "2026-10-06T01:10:17.7141389+00:00",
+    "timeout_seconds":  7200,
+    "launcher":  "C:/meter-runs-20261006/launch-codex-luna-r01.ps1",
+    "stderr":  "C:/meter-runs-20261006/20261006-codex-cli-gpt-6-luna-r01/runner-console-stderr.txt",
+    "reasoning":  "max",
+    "candidate_model":  "gpt-6-luna",
+    "run_id":  "20261006-codex-cli-gpt-6-luna-r01",
+    "scope":  "Independent Luna block1 seed1 initial call; fresh dated reservation, frozen conditions; Sol closure and prior series preserved; no parallel candidate or operator product changes.",
+    "console":  "C:/meter-runs-20261006/20261006-codex-cli-gpt-6-luna-r01/runner-console.txt"
+}

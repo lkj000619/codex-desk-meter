@@ -1,0 +1,107 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "captured_at": "2026-10-06T01:11:34.920685+00:00",
+  "files": {
+    "agent-context.json": {
+      "sha256": "d4ea19f4f247522854b05d74118eb3998e33dd7863b615662374847614b2b010",
+      "bytes": 1672
+    },
+    "candidate-inputs.json": {
+      "sha256": "0000c12a7e468cc93796a04b3dff3ceb2e3d63af953a2d80a20ef9e3b48cb839",
+      "bytes": 7435
+    },
+    "execution-preflight.json": {
+      "sha256": "44ba7ad2e5ad8c6f01784531cfbea792b783f58e1df4201cb2c350d9eff7204b",
+      "bytes": 31222
+    },
+    "experiment-launch.json": {
+      "sha256": "d24aeaa4baa5d576cfdedc5e6be4c13f0f110ddc5e7e49dc77016f6379d1c085",
+      "bytes": 743
+    },
+    "launch-codex-luna-r01.ps1": {
+      "sha256": "d5dacb1f8d04360f30bf06178c596f1016c47dc5634044d54ac5167c97beafa3",
+      "bytes": 304
+    },
+    "launch-codex-luna-r01.py": {
+      "sha256": "fa94129faeed38dc5396f1b98af5aafd9306da0a0f08f34a859acc7d8769080c",
+      "bytes": 9298
+    },
+    "ledger-at-start.json": {
+      "sha256": "8f33f8280f1c3732341f24adf0e28f3a4aa7b35167ae15595ecb4f8c1f82ade9",
+      "bytes": 1331
+    },
+    "luna-preparation.json": {
+      "sha256": "40545e91ef5380bb063c6a41c6eae92ef97ed69b0c3647f64f8736ba4dbe50c6",
+      "bytes": 1119
+    },
+    "make-luna-launcher.py": {
+      "sha256": "3a541acbcb811685459cfdc6ef8a98c72ae952e9433ed16d71c74098b5697273",
+      "bytes": 2922
+    },
+    "native-start-observation-prefix.jsonl": {
+      "sha256": "67b96e5a94aa23b7189b884a10637cc665f51829b10a4e19ba66b5ad5e000e2a",
+      "bytes": 110129
+    },
+    "native-start-observation.json": {
+      "sha256": "1a9706c9367ee911c9a83689464a91d6cb2405e5b16054ca4293deaaebf7cccc",
+      "bytes": 825
+    },
+    "operator-next-model-decision.json": {
+      "sha256": "3b330732e4df92a0c39d86752813cc19982ccffbbd4c8505030c590caa3abeb0",
+      "bytes": 2281
+    },
+    "prepare-codex-luna-r01.py": {
+      "sha256": "ae2488c41fc1b5e284e1e985bd90aba3084fdd6593ad71153a25b1e719d0d212",
+      "bytes": 4734
+    },
+    "previous-progress-at-transition.json": {
+      "sha256": "218e8dbed7a06ce6b14fac8e408ee7866d38178566d7900323bc80aa5ffb12f2",
+      "bytes": 19797
+    },
+    "process-at-start.json": {
+      "sha256": "028cd63c1ed137a72f28447c83bc0a995d168f7393dc3d27af1338f4d090f110",
+      "bytes": 3372
+    },
+    "profile.json": {
+      "sha256": "d7980c28a03fcda158f3831200d7336592f367c93f7cac46c63f5983b5b6bef9",
+      "bytes": 5463
+    },
+    "prompt.txt": {
+      "sha256": "597bec4d9b8e7d7ea35eb7d8acf2fa3c146210a9db246c817c52a62c5244cfe3",
+      "bytes": 5195
+    },
+    "publish-codex-luna-r01-start.py": {
+      "sha256": "e0b072aabdc4f1a3c4786aaa457a70749f5486cb1f10caf13cdc66c5ae7d432a",
+      "bytes": 8973
+    },
+    "run-manifest.json": {
+      "sha256": "5d787680b1f31ed355c44cfffce0747e9dc1ba7a86ba3325e7eb7989116dc993",
+      "bytes": 38924
+    },
+    "operator-launch-preflight/codex-features-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/codex-features.txt": {
+      "sha256": "b17861d24fdcfa8cef2b79b5991bdc4190b613f6cb57f694a04aa7ee15c1c83b",
+      "bytes": 10134
+    },
+    "operator-launch-preflight/codex-hook-inventory.json": {
+      "sha256": "4a770c74c9726cf234175105939b277278a86df37f705b8700c58a92b732202f",
+      "bytes": 464
+    },
+    "operator-launch-preflight/codex-server-stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "operator-launch-preflight/codex-skills.json": {
+      "sha256": "7be78a7861033ca9e842f58935b40f6185fe0b37b1809c8440cfae2b0b612342",
+      "bytes": 3007
+    },
+    "operator-launch-preflight/current-checks.json": {
+      "sha256": "34c254535de47ffb9ec1d3542f5089fdf78736e5a70226a8edc1bae5a12b141b",
+      "bytes": 1812
+    }
+  },
+  "scope": "Immutable Luna first-run actual start snapshot. New dated isolated input repository; no previous implementation. Sol closure, Pro limit and Flash deferral preserved; implementation/evaluation pending."
+}

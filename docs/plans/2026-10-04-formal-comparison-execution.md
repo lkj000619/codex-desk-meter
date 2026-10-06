@@ -2,7 +2,7 @@
 
 목표: ESP32-S3-LCD-3.16 제품 구현에서 에이전트의 첫 결과·자기 후속 수정 비용과 RM 도달·제품 품질을 동일 조건으로 비교한다.
 시작 승인: 2026-10-04 사용자 요청 “프로젝트 목적과 목표에 엇나가지않도록 실험 시작”.
-상태: 2026-10-06 Sol 후속2의 관측·정식 RM·최종483개 파일 독립 감사를 완료했다. RM1~RM5 pass·ledger reached로 Sol series 종료이며 정책 invalid_for_comparison·product_pass false를 유지한다. 미사용 후속6,127.751초·1회가 있어도 추가 호출은 없다. 독립 series 종료3개/예정15개, 후보 시작·종료 각11회다. OpenCode 예산 소진·Pro 회차 종료·Flash 보류·Luna 미시작과 과거 원본을 보존한다. 아래 실행 과정은 각 시점의 기록이다.
+상태: 2026-10-06 사용자 지시로 Luna 최초 실험을10:10:26.658 KST 시작했다. gpt-6-luna/max·동결 baseline/profile·입력57개·새 날짜 예약/receipt와 실제 thread/argv를 확인했다. 최초 최대7,200초로 실행 중이며 제품·정책/RM·최종 비용은 pending이다. 독립 series 종료3개/예정15개, 후보 시작12회·종료11회다. Sol 종료·품질 부적격·제품 미합격, OpenCode 예산 소진·Pro 회차 종료·Flash 보류와 과거 원본을 보존한다. 아래 실행 과정은 각 시점의 기록이다.
 원본: [운영 계약](../experiments/comparison-operating-contract.md), [현재 상태](../experiments/next-comparison-readiness.md),
 [동결 기록](../../results/experiment-launch-preparation-20261004/freeze.json).
 
@@ -39,6 +39,7 @@
    위 선행 조건을 새 사본에서 검증하고 [Sol 후속 1회차](2026-10-06-codex-sol-followup-execution.md)를 03:34:01.746 KST 시작했다. 자기 source 18개/입력 57개·동일 profile/권한·새 receipt·실제 argv를 확인했다. 현재 비용·제품·정책/RM는 pending이며 기존 보드/원본 판정을 현재 후속 결과로 쓰지 않는다.
    원래 예약·중단·실패 비용은 보존한다. 전체 비교 완료는 15개 독립 series와 필요한 후속/관측/적격성 집계가 끝난 시점이다.
    2026-10-06 후속2 종료 뒤 새63.3초 영상과 수동 RESET 확인을 연결해 Sol RM1~RM5 pass를 판정하고 [최종 독립 감사](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/restore-audit.json)·[series 종료](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/operator-series-completion.json)를 마쳤다. 품질/적격 reference-cost 부적격과30초 연속 표시 등 전체 제품 미검증을 유지한다. 후속3과 Luna는 시작하지 않는다.
+   이후 사용자 “luna 시작하자”로 [Luna 최초 시작 계획](2026-10-06-codex-luna-initial-launch.md)을 수행하고10:10:26.658 KST 새 독립 최초를 시작했다. 이전 미실행 예약을 보존하고 새 날짜 ID/ledger·제품 코드 없는57개 입력·동일 gpt-6-luna/max profile·receipt·native 시작을 확인했다. 현재 호출을 반복하거나 실행 중 구현 피드백·serial/flash를 제공하지 않는다.
 
 ## 중단과 재개
 
