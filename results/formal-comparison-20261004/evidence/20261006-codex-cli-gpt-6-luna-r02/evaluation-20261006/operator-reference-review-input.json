@@ -1,0 +1,89 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "reviewer": "Codex operator",
+  "reviewed_at": "2026-10-06T14:04:15.969059+00:00",
+  "items": {
+    "RM1": {
+      "status": "pass",
+      "reason": "Unchanged original ESP-IDF5.3.2 ESP32-S3 build and COM3 upload verified. All three flash hashes verify, and supplemental boot log ELF SHA prefix matches the frozen ELF; application reaches USB receiver ready. This establishes execution, not readable LCD.",
+      "evidence": [
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "05e94307c0fbe6d39daf6af4e64399556e17a38038761b0e8c69b2874c611f4a"
+        },
+        {
+          "path": "operator-observation/hardware-slot.json",
+          "sha256": "9052dcc7c53ac8ab9b66c0ef9a781fafc557b6ae877db88f89b01619022ae7d2"
+        },
+        {
+          "path": "operator-observation/frozen-artifact-upload-stdout.txt",
+          "sha256": "43a40928823103e5e8f51f8da28fa4e7813d3321e0580b4213414b71a48915e2"
+        },
+        {
+          "path": "operator-observation/hardware-post-upload-reset/runtime-source-binding.json",
+          "sha256": "726c278f0ba03210267722d65743dd6145cbf1ecf9bde87141b27536eb01ca2a"
+        },
+        {
+          "path": "operator-observation/hardware-post-upload-reset/runtime-observation-correction.json",
+          "sha256": "542efe48fd908f27f8e49aba5b1684e4cb454fd37c581976615b80993f582de8"
+        }
+      ]
+    },
+    "RM2": {
+      "status": "partial",
+      "reason": "Independently restored declared common collector/encoder exactly match common fixture and frames0/1; archived production C CLI accepts both. Both physical host writes complete1543 bytes, but neither capture has accepted/rejected device markers. Actual device acceptance remains unconfirmed.",
+      "evidence": [
+        {
+          "path": "operator-observation/independent-host-checks/common-stimulus-check.json",
+          "sha256": "9d5126aa06bb035756b8fae5210ceb6f84bb9236cdffbc516222281ba6cfeafd"
+        },
+        {
+          "path": "operator-observation/host-semantic-review.json",
+          "sha256": "1663b1fdf896c019643f466d817c1025d7ecc59b8dc24ea7e9c33f93437d6815"
+        },
+        {
+          "path": "operator-observation/reference-capture-r1/capture.json",
+          "sha256": "2ffa936f37d87125defc1a8a3cedfcba5cac55bcf9be4995f57e60c90134b93b"
+        },
+        {
+          "path": "operator-observation/hardware-post-upload-reset/runtime-source-binding.json",
+          "sha256": "726c278f0ba03210267722d65743dd6145cbf1ecf9bde87141b27536eb01ca2a"
+        }
+      ]
+    },
+    "RM3": {
+      "status": "fail",
+      "reason": "User reports continued black screen on current followup1 firmware after upload and supplemental reset. Required58% five-hour and82% weekly remaining values are not displayed in this report. Cause and actual frame receipt remain unconfirmed.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-black-screen-report.json",
+          "sha256": "1b161bf975dea513acff849c2f9638c5f979f096ee656836c1a94b25e0d6a9be"
+        }
+      ]
+    },
+    "RM4": {
+      "status": "not_run",
+      "reason": "No selected-page/three-information-view observations were supplied. Do not infer unseen alternate views from the black current screen.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-black-screen-report.json",
+          "sha256": "1b161bf975dea513acff849c2f9638c5f979f096ee656836c1a94b25e0d6a9be"
+        }
+      ]
+    },
+    "RM5": {
+      "status": "not_run",
+      "reason": "BOOT press count, response and cycle/return were not reported. No navigation success or button-failure claim inferred.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-black-screen-report.json",
+          "sha256": "1b161bf975dea513acff849c2f9638c5f979f096ee656836c1a94b25e0d6a9be"
+        }
+      ]
+    }
+  },
+  "product_pass": false,
+  "policy_status": "invalid_for_comparison",
+  "note": "Bounded followup1 assessment. Own Python22/C3 and candidate29 wire cases do not establish frozen operator29 pipeline, GUI, physical optional feature or BOOT/30s pass. Prior first verdict/evidence/cost/freeze remain unchanged."
+}

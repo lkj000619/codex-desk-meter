@@ -1,0 +1,190 @@
+[
+    {
+        "body":  "Get-ChildItem -Force | Select-Object Mode,Name",
+        "raw_line":  39,
+        "parse_errors":  [
+
+                         ],
+        "pipeline_extents":  [
+                                 "Get-ChildItem -Force | Select-Object Mode,Name"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r02"
+    },
+    {
+        "body":  "Select-String -Path scripts/host_device_pipeline.py -Pattern \u0027\"\u0027^def |\u0027\u0027^class |\u0027\u0027^if __name__|argparse|Popen|subprocess\u0027\"\u0027 -Context 1,3",
+        "raw_line":  100,
+        "parse_errors":  [
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^class\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^if\u0027 in expression or statement."
+                         ],
+        "pipeline_extents":  [
+                                 "Select-String -Path scripts/host_device_pipeline.py -Pattern \u0027\"\u0027^def |\u0027\u0027",
+                                 "^class |\u0027\u0027",
+                                 "^if __name__|argparse|Popen|subprocess\u0027\"\u0027 -Context 1,3"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r02"
+    },
+    {
+        "body":  "Select-String -Path main/board_lcd.c -Pattern \u0027\"\u0027^esp_err_t board_lcd_present|\u0027\u0027^static void render_\u0027\"\u0027 -Context 0,38",
+        "raw_line":  101,
+        "parse_errors":  [
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^static\u0027 in expression or statement."
+                         ],
+        "pipeline_extents":  [
+                                 "Select-String -Path main/board_lcd.c -Pattern \u0027\"\u0027^esp_err_t board_lcd_present|\u0027\u0027"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r02"
+    },
+    {
+        "body":  "Select-String -Path components/meter_core/meter_core.c -Pattern \u0027\"\u0027^void meter_receiver_init|\u0027\u0027^bool meter_receiver_receive|\u0027\u0027^void meter_receiver_poll|\u0027\u0027^bool meter_source_is_stale|\u0027\u0027^static bool validate_snapshot|\u0027\u0027^static bool validate_window|\u0027\u0027^static bool validate_global_reset\u0027\"\u0027 -Context 0,45",
+        "raw_line":  103,
+        "parse_errors":  [
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^bool\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^void\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^bool\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^static\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^static\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^static\u0027 in expression or statement."
+                         ],
+        "pipeline_extents":  [
+                                 "Select-String -Path components/meter_core/meter_core.c -Pattern \u0027\"\u0027^void meter_receiver_init|\u0027\u0027",
+                                 "^bool meter_receiver_receive|\u0027\u0027",
+                                 "^void meter_receiver_poll|\u0027\u0027",
+                                 "^bool meter_source_is_stale|\u0027\u0027",
+                                 "^static bool validate_snapshot|\u0027\u0027",
+                                 "^static bool validate_window|\u0027\u0027"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r02"
+    },
+    {
+        "body":  "Select-String -Path pc/pipeline.py -Pattern \u0027\"\u0027^def utc_now|\u0027\u0027^def validate_snapshot|\u0027\u0027^def normalize_legacy_usage|\u0027\u0027^def normalize_global_reset|\u0027\u0027^    def collect\u0027\"\\\\(\u0027 -Context 0,65",
+        "raw_line":  162,
+        "parse_errors":  [
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^def\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^def\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^def\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^\u0027 in expression or statement."
+                         ],
+        "pipeline_extents":  [
+                                 "Select-String -Path pc/pipeline.py -Pattern \u0027\"\u0027^def utc_now|\u0027\u0027",
+                                 "^def validate_snapshot|\u0027\u0027",
+                                 "^def normalize_legacy_usage|\u0027\u0027",
+                                 "^def normalize_global_reset|\u0027\u0027"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r02"
+    },
+    {
+        "body":  "Select-String -Path main/board_lcd.c -Pattern \u0027\"\u0027^static void render_global|\u0027\u0027^static void render_status\u0027\"\u0027 -Context 0,70",
+        "raw_line":  177,
+        "parse_errors":  [
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^static\u0027 in expression or statement."
+                         ],
+        "pipeline_extents":  [
+                                 "Select-String -Path main/board_lcd.c -Pattern \u0027\"\u0027^static void render_global|\u0027\u0027"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r02"
+    },
+    {
+        "body":  "Select-String -Path components/meter_core/meter_core.c -Pattern \u0027\"\u0027^static bool copy_raw_utf8|\u0027\u0027^static bool validate_snapshot|\u0027\u0027^static bool validate_window|\u0027\u0027^static bool validate_global_reset\u0027\"\u0027 -Context 0,34",
+        "raw_line":  184,
+        "parse_errors":  [
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^static\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^static\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^static\u0027 in expression or statement."
+                         ],
+        "pipeline_extents":  [
+                                 "Select-String -Path components/meter_core/meter_core.c -Pattern \u0027\"\u0027^static bool copy_raw_utf8|\u0027\u0027",
+                                 "^static bool validate_snapshot|\u0027\u0027",
+                                 "^static bool validate_window|\u0027\u0027"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r02"
+    },
+    {
+        "body":  "Select-String -Path scripts/validate-end-to-end-result.py -Pattern \u0027\"\u0027^def check_evidence|\u0027\u0027^def check_status_entry\u0027\"\u0027 -Context 0,55",
+        "raw_line":  268,
+        "parse_errors":  [
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^def\u0027 in expression or statement."
+                         ],
+        "pipeline_extents":  [
+                                 "Select-String -Path scripts/validate-end-to-end-result.py -Pattern \u0027\"\u0027^def check_evidence|\u0027\u0027"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r02"
+    },
+    {
+        "body":  "Select-String -Path scripts/validate-end-to-end-result.py -Pattern \u0027\"\u0027^def _check_join|\u0027\u0027^def _check_provider_matrix|\u0027\u0027^def _check_telemetry|\u0027\u0027^def _check_product_pass\u0027\"\u0027 -Context 0,95",
+        "raw_line":  269,
+        "parse_errors":  [
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^def\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^def\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^def\u0027 in expression or statement."
+                         ],
+        "pipeline_extents":  [
+                                 "Select-String -Path scripts/validate-end-to-end-result.py -Pattern \u0027\"\u0027^def _check_join|\u0027\u0027",
+                                 "^def _check_provider_matrix|\u0027\u0027",
+                                 "^def _check_telemetry|\u0027\u0027"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r02"
+    },
+    {
+        "body":  "rg --files | rg \"schema|provider-fixture-matrix|usage-snapshot\"",
+        "raw_line":  288,
+        "parse_errors":  [
+
+                         ],
+        "pipeline_extents":  [
+                                 "rg --files | rg \"schema|provider-fixture-matrix|usage-snapshot\""
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r02"
+    }
+]

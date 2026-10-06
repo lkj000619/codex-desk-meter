@@ -1,0 +1,76 @@
+{
+  "captured_at": "2026-10-06T13:50:00Z",
+  "failures": [],
+  "payload": {
+    "global_resets": [
+      {
+        "captured_at": "2026-09-10T16:54:07Z",
+        "error_code": null,
+        "forecast_24h_percent": 22,
+        "forecast_48h_percent": 39,
+        "forecast_is_schedule": false,
+        "latest_reset_at": "2026-09-08T04:05:53Z",
+        "schema_version": 1,
+        "source": "codex-reset.com",
+        "stale": true
+      },
+      {
+        "captured_at": "2026-09-10T16:54:07Z",
+        "error_code": null,
+        "forecast_24h_percent": null,
+        "forecast_48h_percent": null,
+        "forecast_is_schedule": false,
+        "latest_reset_at": "2026-09-08T01:56:00Z",
+        "schema_version": 1,
+        "source": "codex-resets.com",
+        "stale": true
+      }
+    ],
+    "usage": [
+      {
+        "account_profile_id": null,
+        "agent_id": "codex-cli",
+        "error_code": "SOURCE_STALE",
+        "error_reason": "The source observation is at least 300 seconds old; its value is retained as stale.",
+        "host_id": "terminal",
+        "last_good_at": "2026-09-11T00:00:00Z",
+        "metric_kind": "quota_window",
+        "model_id": null,
+        "observed_at": "2026-09-11T00:00:00Z",
+        "provider_id": "openai",
+        "schema_version": 1,
+        "snapshot_id": "fixture-personal-usage",
+        "source_kind": "fixture",
+        "stale": true,
+        "status": "stale",
+        "unit": "percent",
+        "windows": [
+          {
+            "label": "5-hour window",
+            "limit_units": null,
+            "percent_remaining": 58,
+            "percent_used": 42,
+            "remaining_units": null,
+            "reset_status": "unknown",
+            "resets_at": null,
+            "unit": "percent",
+            "used_units": null,
+            "window_id": "five-hour"
+          },
+          {
+            "label": "Weekly window",
+            "limit_units": null,
+            "percent_remaining": 82,
+            "percent_used": 18,
+            "remaining_units": null,
+            "reset_status": "unknown",
+            "resets_at": null,
+            "unit": "percent",
+            "used_units": null,
+            "window_id": "weekly"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "recorded_at": "2026-10-06T13:49:48.374012+00:00",
+  "scope": "Operator expected-count guard only; no product/test failure or candidate source/result changes.",
+  "original_audit_sha256": "14066e9a7417afabd6ecb635bce96f230d32a68ca6bb0e5f2874fa330fba7764",
+  "failure": "Operator expected Ran21, actual preserved unittest log Ran22/OK without skip. Four host subprocess exit codes passed the original all-exit0 assertion before this guard.",
+  "original_host_logs": {
+    "candidate-encoded-common-frames.jsonl": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+    "candidate-legacy-collector-frame.json": "44239c8eb3a99bb145671ff6b3da3dc03cbd9b59e063caad632a43a74190cd7c",
+    "python-unit-tests-stderr.txt": "ead03ee833d7dcbdc36aaece7ac90505bc3d372a541b41ee5cf905397271185e",
+    "python-unit-tests-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test_idle_dim-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test_idle_dim-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test_meter_parser-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test_meter_parser-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test_meter_state-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "test_meter_state-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "continuation": "Reuse original Python22 and C3 passing logs with recorded inferred exit0; retain elapsed unknown; execute remaining CLI/collector checks once."
+}

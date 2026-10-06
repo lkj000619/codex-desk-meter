@@ -1,0 +1,1376 @@
+[
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 7,
+    "body": "git status --short --branch",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'git status --short --branch'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 8,
+    "body": "Get-Content -Raw docs/PRODUCT_CONTRACT.md",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw docs/PRODUCT_CONTRACT.md'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 10,
+    "body": "Get-Content -Raw .benchmark-inputs/input-files.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw .benchmark-inputs/input-files.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 12,
+    "body": "Get-Content -Raw docs/hardware/version-2-capabilities.md",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw docs/hardware/version-2-capabilities.md'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 14,
+    "body": "Get-Content -Raw .benchmark-inputs/run-context.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw .benchmark-inputs/run-context.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 23,
+    "body": "Get-Content -Raw -Encoding utf8 docs/PRODUCT_CONTRACT.md",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 docs/PRODUCT_CONTRACT.md'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 24,
+    "body": "Get-Content -Raw -Encoding utf8 docs/hardware/version-2-capabilities.md",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 docs/hardware/version-2-capabilities.md'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 25,
+    "body": "Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/002-common-stimulus-check.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/002-common-stimulus-check.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 26,
+    "body": "Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 27,
+    "body": "Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/001-host-semantic-limitations.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/001-host-semantic-limitations.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 28,
+    "body": "Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/013-observation-origin.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/013-observation-origin.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 29,
+    "body": "Get-Content -Raw -Encoding utf8 .benchmark-inputs/e2e-evaluation-manifest.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 .benchmark-inputs/e2e-evaluation-manifest.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 30,
+    "body": "rg --files",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'rg --files'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 38,
+    "body": "Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/010-capture.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/010-capture.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 39,
+    "body": "Get-ChildItem -Force | Select-Object Mode,Name",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-ChildItem -Force | Select-Object Mode,Name'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 40,
+    "body": "Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/009-reset-and-frames-session.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/009-reset-and-frames-session.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 41,
+    "body": "Get-Content -Raw -Encoding utf8 experiments/schema/end-to-end-result.schema.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 experiments/schema/end-to-end-result.schema.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 42,
+    "body": "Get-Content -Raw -Encoding utf8 experiments/examples/end-to-end-result.example.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 experiments/examples/end-to-end-result.example.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 43,
+    "body": "Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/006-capture.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/006-capture.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 44,
+    "body": "idf.py --version",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'idf.py --version'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 52,
+    "body": "Get-ChildItem -Recurse -File docs/agent-runs/20261006-codex-cli-gpt-6-luna-r02,results/20261006-codex-cli-gpt-6-luna-r02",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-ChildItem -Recurse -File docs/agent-runs/20261006-codex-cli-gpt-6-luna-r02,results/20261006-codex-cli-gpt-6-luna-r02'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 53,
+    "body": "Get-ChildItem -Recurse -File components",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-ChildItem -Recurse -File components'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 54,
+    "body": "Get-ChildItem -Recurse -File tests",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-ChildItem -Recurse -File tests'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 55,
+    "body": "Get-ChildItem -Recurse -File pc",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-ChildItem -Recurse -File pc'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 56,
+    "body": "Get-ChildItem -Recurse -File main",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-ChildItem -Recurse -File main'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 57,
+    "body": "Get-ChildItem -Recurse -File scripts",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-ChildItem -Recurse -File scripts'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 65,
+    "body": "Get-Content -Raw -Encoding utf8 tests/test_pc_pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 tests/test_pc_pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 67,
+    "body": "Get-Content -Raw -Encoding utf8 tests/host/test_meter_parser.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 tests/host/test_meter_parser.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 68,
+    "body": "Get-Content -Raw -Encoding utf8 main/board_lcd.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 main/board_lcd.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 69,
+    "body": "Get-Content -Raw -Encoding utf8 pc/collector.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 pc/collector.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 70,
+    "body": "Get-Content -Raw -Encoding utf8 pc/gui.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 pc/gui.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 71,
+    "body": "Get-Content -Raw -Encoding utf8 components/meter_core/include/meter_core.h",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 components/meter_core/include/meter_core.h'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 72,
+    "body": "Get-Content -Raw -Encoding utf8 pc/pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 pc/pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 73,
+    "body": "Get-Content -Raw -Encoding utf8 main/app_main.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 main/app_main.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 81,
+    "body": "Get-Content -Raw -Encoding utf8 scripts/validate-end-to-end-result.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 scripts/validate-end-to-end-result.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 82,
+    "body": "Get-Content -Raw -Encoding utf8 scripts/run-host-device-pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 scripts/run-host-device-pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 83,
+    "body": "Select-String -Path main/board_lcd.c -Pattern 'board_lcd_init|board_backlight_set|esp_lcd_new_panel|esp_lcd_panel_draw_bitmap|rgb_panel_config|backlight' -Context 5,12",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path main/board_lcd.c -Pattern 'board_lcd_init|board_backlight_set|esp_lcd_new_panel|esp_lcd_panel_draw_bitmap|rgb_panel_config|backlight' -Context 5,12\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 84,
+    "body": "Get-Content -Raw -Encoding utf8 scripts/host_device_pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 scripts/host_device_pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 85,
+    "body": "Get-Content -Raw -Encoding utf8 CMakeLists.txt",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 CMakeLists.txt'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 86,
+    "body": "Get-Content -Raw -Encoding utf8 tests/host/CMakeLists.txt",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 tests/host/CMakeLists.txt'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 87,
+    "body": "Select-String -Path components/meter_core/meter_core.c -Pattern 'meter_receiver_receive|meter_source_is_stale|validate|parse|reset_status|snapshot_id|error_reason|SOURCE_STALE' -Context 2,4",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path components/meter_core/meter_core.c -Pattern 'meter_receiver_receive|meter_source_is_stale|validate|parse|reset_status|snapshot_id|error_reason|SOURCE_STALE' -Context 2,4\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 95,
+    "body": "Get-Content -Encoding utf8 scripts/host_device_pipeline.py -TotalCount 200",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Encoding utf8 scripts/host_device_pipeline.py -TotalCount 200'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 97,
+    "body": "Get-Content -Raw -Encoding utf8 docs/hardware/vendor-source-index.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 docs/hardware/vendor-source-index.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 98,
+    "body": "Get-Content -Raw -Encoding utf8 tests/host/CMakeLists.txt",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 tests/host/CMakeLists.txt'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 99,
+    "body": "Get-Content -Raw -Encoding utf8 scripts/run-host-device-pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 scripts/run-host-device-pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 100,
+    "body": "Select-String -Path scripts/host_device_pipeline.py -Pattern '\"'^def |''^class |''^if __name__|argparse|Popen|subprocess'\"' -Context 1,3",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path scripts/host_device_pipeline.py -Pattern '\"'^def |''^class |''^if __name__|argparse|Popen|subprocess'\"' -Context 1,3\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 101,
+    "body": "Select-String -Path main/board_lcd.c -Pattern '\"'^esp_err_t board_lcd_present|''^static void render_'\"' -Context 0,38",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path main/board_lcd.c -Pattern '\"'^esp_err_t board_lcd_present|''^static void render_'\"' -Context 0,38\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 102,
+    "body": "Select-String -Path main/board_lcd.c -Pattern '\"'^esp_err_t board_lcd_init'\"' -Context 0,100",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path main/board_lcd.c -Pattern '\"'^esp_err_t board_lcd_init'\"' -Context 0,100\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 103,
+    "body": "Select-String -Path components/meter_core/meter_core.c -Pattern '\"'^void meter_receiver_init|''^bool meter_receiver_receive|''^void meter_receiver_poll|''^bool meter_source_is_stale|''^static bool validate_snapshot|''^static bool validate_window|''^static bool validate_global_reset'\"' -Context 0,45",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path components/meter_core/meter_core.c -Pattern '\"'^void meter_receiver_init|''^bool meter_receiver_receive|''^void meter_receiver_poll|''^bool meter_source_is_stale|''^static bool validate_snapshot|''^static bool validate_window|''^static bool validate_global_reset'\"' -Context 0,45\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 105,
+    "body": "Get-Content -Raw -Encoding utf8 pc/pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 pc/pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 107,
+    "body": "idf.py set-target esp32s3",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'idf.py set-target esp32s3'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 114,
+    "body": "Select-String -Path main/board_lcd.c -Pattern 'rgb\\\\.clk_src|rgb\\\\.psram_trans_align|rgb\\\\.bounce_buffer_size_px|rgb\\\\.num_fbs|rgb\\\\.data_width|rgb\\\\.bits_per_pixel|rgb\\\\.de_gpio_num|rgb\\\\.hsync_gpio_num|rgb\\\\.timings|rgb\\\\.flags|st7701_vendor_config_t|config\\\\.' -Context 1,4",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path main/board_lcd.c -Pattern 'rgb\\\\.clk_src|rgb\\\\.psram_trans_align|rgb\\\\.bounce_buffer_size_px|rgb\\\\.num_fbs|rgb\\\\.data_width|rgb\\\\.bits_per_pixel|rgb\\\\.de_gpio_num|rgb\\\\.hsync_gpio_num|rgb\\\\.timings|rgb\\\\.flags|st7701_vendor_config_t|config\\\\.' -Context 1,4\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 115,
+    "body": "Select-String -Path \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\components\\\\lcd_bl_pwm_bsp\\\\lcd_bl_pwm_bsp.c\\\" -Pattern 'gpio_num|active|duty|ledc|init|brightness' -Context 3,8",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\components\\\\lcd_bl_pwm_bsp\\\\lcd_bl_pwm_bsp.c\\\" -Pattern 'gpio_num|active|duty|ledc|init|brightness' -Context 3,8\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 116,
+    "body": "Select-String -Path \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\main.cpp\\\" -Pattern 'esp_lcd_rgb_panel_config_t|pix_clk_hz|rgb_panel_config|esp_lcd_new_panel_st7701|esp_lcd_panel_draw_bitmap|esp_lcd_panel_disp_on_off|lcd_bl_pwm|panel_handle' -Context 4,10",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\main.cpp\\\" -Pattern 'esp_lcd_rgb_panel_config_t|pix_clk_hz|rgb_panel_config|esp_lcd_new_panel_st7701|esp_lcd_panel_draw_bitmap|esp_lcd_panel_disp_on_off|lcd_bl_pwm|panel_handle' -Context 4,10\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 117,
+    "body": "idf.py build",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'idf.py build'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 118,
+    "body": "Get-FileHash \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\main.cpp\\\",\\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\user_config.h\\\",\\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\components\\\\lcd_bl_pwm_bsp\\\\lcd_bl_pwm_bsp.c\\\",\\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\components\\\\button_bsp\\\\button_bsp.c\\\",\\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\sdkconfig.defaults\\\"",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Get-FileHash \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\main.cpp\\\",\\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\user_config.h\\\",\\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\components\\\\lcd_bl_pwm_bsp\\\\lcd_bl_pwm_bsp.c\\\",\\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\components\\\\button_bsp\\\\button_bsp.c\\\",\\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\sdkconfig.defaults\\\"\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 119,
+    "body": "Select-String -Path \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\components\\\\button_bsp\\\\button_bsp.c\\\" -Pattern 'GPIO_NUM_0|BOOT|pull_up|button' -Context 3,7",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\components\\\\button_bsp\\\\button_bsp.c\\\" -Pattern 'GPIO_NUM_0|BOOT|pull_up|button' -Context 3,7\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 127,
+    "body": "Get-Content -Raw -Encoding utf8 experiments/fixtures/personal-usage.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 experiments/fixtures/personal-usage.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 129,
+    "body": "Get-Content -Raw -Encoding utf8 pc/fixture-set.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 pc/fixture-set.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 130,
+    "body": "Get-Content -Raw -Encoding utf8 tests/host/test_meter_state.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 tests/host/test_meter_state.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 131,
+    "body": "Get-Content -Raw -Encoding utf8 experiments/fixtures/provider-fixture-matrix.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 experiments/fixtures/provider-fixture-matrix.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 132,
+    "body": "Get-Content -Raw -Encoding utf8 components/meter_core/include/meter_core.h",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 components/meter_core/include/meter_core.h'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 133,
+    "body": "Select-String -Path main/board_lcd.c -Pattern '\"'^esp_err_t board_lcd_present'\"' -Context 0,28",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path main/board_lcd.c -Pattern '\"'^esp_err_t board_lcd_present'\"' -Context 0,28\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 134,
+    "body": "Select-String -Path \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\main.cpp\\\" -Pattern 'pclk_hz|hsync_back_porch|hsync_front_porch|hsync_pulse_width|vsync_back_porch|vsync_front_porch|vsync_pulse_width|rgb_ele_order|MADCTL|0x36|EXAMPLE_LCD_H_RES|EXAMPLE_LCD_V_RES' -Context 2,6",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\main.cpp\\\" -Pattern 'pclk_hz|hsync_back_porch|hsync_front_porch|hsync_pulse_width|vsync_back_porch|vsync_front_porch|vsync_pulse_width|rgb_ele_order|MADCTL|0x36|EXAMPLE_LCD_H_RES|EXAMPLE_LCD_V_RES' -Context 2,6\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 135,
+    "body": "Select-String -Path \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\user_config.h\\\" -Pattern 'EXAMPLE_LCD_H_RES|EXAMPLE_LCD_V_RES|EXAMPLE_LCD_IO_RGB|LCD_H_RES|LCD_V_RES' -Context 1,2",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\user_config.h\\\" -Pattern 'EXAMPLE_LCD_H_RES|EXAMPLE_LCD_V_RES|EXAMPLE_LCD_IO_RGB|LCD_H_RES|LCD_V_RES' -Context 1,2\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 138,
+    "body": "Select-String -Path main/board_lcd.c -Pattern 'pclk_hz|hsync_back_porch|hsync_front_porch|hsync_pulse_width|vsync_back_porch|vsync_front_porch|vsync_pulse_width' -Context 1,2",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path main/board_lcd.c -Pattern 'pclk_hz|hsync_back_porch|hsync_front_porch|hsync_pulse_width|vsync_back_porch|vsync_front_porch|vsync_pulse_width' -Context 1,2\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 139,
+    "body": "Select-String -Path \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\main.cpp\\\" -Pattern 'pclk_hz|hsync_back_porch|hsync_front_porch|hsync_pulse_width|vsync_back_porch|vsync_front_porch|vsync_pulse_width' -Context 1,2",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path \\\"C:\\\\Espressif\\\\vendor\\\\waveshare-esp32-s3-lcd-3.16\\\\source\\\\ESP32-S3-LCD-3.16-Demo\\\\ESP-IDF\\\\09_FactoryProgram\\\\main\\\\main.cpp\\\" -Pattern 'pclk_hz|hsync_back_porch|hsync_front_porch|hsync_pulse_width|vsync_back_porch|vsync_front_porch|vsync_pulse_width' -Context 1,2\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 147,
+    "body": "Get-Content -Raw -Encoding utf8 tests/host/test_meter_parser.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 tests/host/test_meter_parser.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 148,
+    "body": "Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/000-user-black-screen-report.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/000-user-black-screen-report.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 149,
+    "body": "Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/008-sent-frames.jsonl",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/008-sent-frames.jsonl'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 150,
+    "body": "Get-Content -Raw -Encoding utf8 scripts/evaluate-product.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 scripts/evaluate-product.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 151,
+    "body": "Get-Content -Raw -Encoding utf8 scripts/benchmark_support.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 scripts/benchmark_support.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 152,
+    "body": "Get-Content -Raw -Encoding utf8 experiments/schema/usage-snapshot.schema.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 experiments/schema/usage-snapshot.schema.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 153,
+    "body": "Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/003-user-after-diagnostic-reset.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 .benchmark-inputs/feedback-evidence/003-user-after-diagnostic-reset.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 156,
+    "body": "Get-Content -Raw -Encoding utf8 pc/sender.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 pc/sender.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 158,
+    "body": "Get-Content -Raw -Encoding utf8 requirements-product.txt",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 requirements-product.txt'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 162,
+    "body": "Select-String -Path pc/pipeline.py -Pattern '\"'^def utc_now|''^def validate_snapshot|''^def normalize_legacy_usage|''^def normalize_global_reset|''^    def collect'\"\\\\(' -Context 0,65",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path pc/pipeline.py -Pattern '\"'^def utc_now|''^def validate_snapshot|''^def normalize_legacy_usage|''^def normalize_global_reset|''^    def collect'\"\\\\(' -Context 0,65\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 177,
+    "body": "Select-String -Path main/board_lcd.c -Pattern '\"'^static void render_global|''^static void render_status'\"' -Context 0,70",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path main/board_lcd.c -Pattern '\"'^static void render_global|''^static void render_status'\"' -Context 0,70\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 178,
+    "body": "Select-String -Path components/meter_core/meter_core.c -Pattern '\"'^static bool validate_global_reset'\"' -Context 0,42",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path components/meter_core/meter_core.c -Pattern '\"'^static bool validate_global_reset'\"' -Context 0,42\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 179,
+    "body": "Select-String -Path components/meter_core/meter_core.c -Pattern '\"'^bool meter_source_is_stale'\"' -Context 0,45",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path components/meter_core/meter_core.c -Pattern '\"'^bool meter_source_is_stale'\"' -Context 0,45\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 180,
+    "body": "Select-String -Path components/meter_core/meter_core.c -Pattern '\"'^static bool parse_string'\"' -Context 0,70",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path components/meter_core/meter_core.c -Pattern '\"'^static bool parse_string'\"' -Context 0,70\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 184,
+    "body": "Select-String -Path components/meter_core/meter_core.c -Pattern '\"'^static bool copy_raw_utf8|''^static bool validate_snapshot|''^static bool validate_window|''^static bool validate_global_reset'\"' -Context 0,34",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path components/meter_core/meter_core.c -Pattern '\"'^static bool copy_raw_utf8|''^static bool validate_snapshot|''^static bool validate_window|''^static bool validate_global_reset'\"' -Context 0,34\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 201,
+    "body": "Get-Content -Raw -Encoding utf8 experiments/fixtures/codex-resets-history.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 experiments/fixtures/codex-resets-history.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 203,
+    "body": "Get-Content -Raw -Encoding utf8 experiments/fixtures/providers/antigravity-cli-unsupported.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 experiments/fixtures/providers/antigravity-cli-unsupported.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 204,
+    "body": "Get-Content -Raw -Encoding utf8 experiments/fixtures/providers/gemini-cli-unsupported.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 experiments/fixtures/providers/gemini-cli-unsupported.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 205,
+    "body": "Get-Content -Raw -Encoding utf8 experiments/fixtures/codex-reset-forecast.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 experiments/fixtures/codex-reset-forecast.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 206,
+    "body": "Get-Content -Raw -Encoding utf8 experiments/fixtures/providers/claude-code-windows.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 experiments/fixtures/providers/claude-code-windows.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 207,
+    "body": "Get-Content -Raw -Encoding utf8 experiments/fixtures/providers/codex-percent-window.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 experiments/fixtures/providers/codex-percent-window.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 208,
+    "body": "Get-Content -Raw -Encoding utf8 experiments/fixtures/providers/orca-host-claude-code.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 experiments/fixtures/providers/orca-host-claude-code.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 220,
+    "body": "Get-Content -Raw -Encoding utf8 pc/serial_sender.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 pc/serial_sender.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 225,
+    "body": "cmake -S tests/host -B build-host -G Ninja",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'cmake -S tests/host -B build-host -G Ninja'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 227,
+    "body": "cmake --build build-host",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'cmake --build build-host'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 229,
+    "body": "ctest --test-dir build-host --output-on-failure",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'ctest --test-dir build-host --output-on-failure'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 231,
+    "body": "python tests/test_production_receiver.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'python tests/test_production_receiver.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 235,
+    "body": "python tests/test_production_receiver.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'python tests/test_production_receiver.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 243,
+    "body": "python -m py_compile pc/gui.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'python -m py_compile pc/gui.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 245,
+    "body": "python -m py_compile tests/test_pc_pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'python -m py_compile tests/test_pc_pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 246,
+    "body": "python -m py_compile pc/legacy_adapter.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'python -m py_compile pc/legacy_adapter.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 248,
+    "body": "python -m py_compile pc/sender.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'python -m py_compile pc/sender.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 249,
+    "body": "python -m py_compile tests/test_production_receiver.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'python -m py_compile tests/test_production_receiver.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 250,
+    "body": "python -m py_compile pc/serial_sender.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'python -m py_compile pc/serial_sender.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 251,
+    "body": "python -m py_compile pc/collector.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'python -m py_compile pc/collector.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 252,
+    "body": "python -m py_compile pc/pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'python -m py_compile pc/pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 253,
+    "body": "python -m py_compile tests/test_legacy_adapter.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'python -m py_compile tests/test_legacy_adapter.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 255,
+    "body": "python -m unittest discover -s tests -v",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'python -m unittest discover -s tests -v'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 266,
+    "body": "Get-Content -Raw -Encoding utf8 experiments/schema/end-to-end-manifest.schema.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command 'Get-Content -Raw -Encoding utf8 experiments/schema/end-to-end-manifest.schema.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 267,
+    "body": "Select-String -Path experiments/schema/end-to-end-result.schema.json -Pattern '\\\"resultEntry\\\"|\\\"f9ResultEntry\\\"|\\\"status\\\"\\\\s*:\\\\s*\\\\{|\\\"providerResult\\\"|\\\"validationBlock\\\"' -Context 0,65",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path experiments/schema/end-to-end-result.schema.json -Pattern '\\\"resultEntry\\\"|\\\"f9ResultEntry\\\"|\\\"status\\\"\\\\s*:\\\\s*\\\\{|\\\"providerResult\\\"|\\\"validationBlock\\\"' -Context 0,65\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 268,
+    "body": "Select-String -Path scripts/validate-end-to-end-result.py -Pattern '\"'^def check_evidence|''^def check_status_entry'\"' -Context 0,55",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path scripts/validate-end-to-end-result.py -Pattern '\"'^def check_evidence|''^def check_status_entry'\"' -Context 0,55\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 269,
+    "body": "Select-String -Path scripts/validate-end-to-end-result.py -Pattern '\"'^def _check_join|''^def _check_provider_matrix|''^def _check_telemetry|''^def _check_product_pass'\"' -Context 0,95",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -NoProfile -Command \"Select-String -Path scripts/validate-end-to-end-result.py -Pattern '\"'^def _check_join|''^def _check_provider_matrix|''^def _check_telemetry|''^def _check_product_pass'\"' -Context 0,95\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 276,
+    "body": "python scripts/validate-end-to-end-result.py --help",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python scripts/validate-end-to-end-result.py --help'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 277,
+    "body": "python tests/test_production_receiver.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python tests/test_production_receiver.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 278,
+    "body": "python tests/test_pc_pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python tests/test_pc_pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 279,
+    "body": "python tests/test_legacy_adapter.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python tests/test_legacy_adapter.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 280,
+    "body": "python -m unittest discover -s tests -v",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m unittest discover -s tests -v'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 286,
+    "body": "Get-Content -Encoding utf8 tests/test_production_receiver.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 tests/test_production_receiver.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 287,
+    "body": "rg -n \"f9|candidates|provider_matrix|fixture_matrix|details\" scripts/validate-end-to-end-result.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'rg -n \"f9|candidates|provider_matrix|fixture_matrix|details\" scripts/validate-end-to-end-result.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 288,
+    "body": "rg --files | rg \"schema|provider-fixture-matrix|usage-snapshot\"",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'rg --files | rg \"schema|provider-fixture-matrix|usage-snapshot\"'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 289,
+    "body": "rg -n \"integrity|agent|available|schema|usage\" docs/PRODUCT_CONTRACT.md main components",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'rg -n \"integrity|agent|available|schema|usage\" docs/PRODUCT_CONTRACT.md main components'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 290,
+    "body": "rg -n \"integrity|agent|available|SOURCE_STALE|usage\" main components",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'rg -n \"integrity|agent|available|SOURCE_STALE|usage\" main components'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 297,
+    "body": "Select-String -Path docs/PRODUCT_CONTRACT.md -Pattern 'integrity','agent_id','agent','available','stale','schema'",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path docs/PRODUCT_CONTRACT.md -Pattern 'integrity','agent_id','agent','available','stale','schema'\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 298,
+    "body": "Select-String -Path main/meter_core.c,main/meter_core.h -Pattern 'integrity','agent_id','available','stale','schema'",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path main/meter_core.c,main/meter_core.h -Pattern 'integrity','agent_id','available','stale','schema'\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 299,
+    "body": "Get-ChildItem -Path . -Recurse -File -Filter '*schema*.json'",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-ChildItem -Path . -Recurse -File -Filter '*schema*.json'\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 300,
+    "body": "Select-String -Path scripts/validate-end-to-end-result.py -Pattern 'f9','candidates','provider_matrix','fixture_matrix','details'",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path scripts/validate-end-to-end-result.py -Pattern 'f9','candidates','provider_matrix','fixture_matrix','details'\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 301,
+    "body": "Get-ChildItem -Path .benchmark-inputs,schemas,experiments/fixtures -Recurse -File",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Path .benchmark-inputs,schemas,experiments/fixtures -Recurse -File'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 304,
+    "body": "Get-ChildItem -Path . -Recurse -File -Filter '*meter*core*.c'",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Get-ChildItem -Path . -Recurse -File -Filter '*meter*core*.c'\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 305,
+    "body": "Get-Content -Encoding utf8 docs/PRODUCT_CONTRACT.md",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 docs/PRODUCT_CONTRACT.md'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 307,
+    "body": "Get-ChildItem -Path main -Recurse -File",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Path main -Recurse -File'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 309,
+    "body": "Select-String -Path experiments/schema/cdm-frame.schema.json,experiments/schema/usage-snapshot.schema.json -Pattern 'agent_id','integrity','algorithm','required','additionalProperties' -Context 2,3",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path experiments/schema/cdm-frame.schema.json,experiments/schema/usage-snapshot.schema.json -Pattern 'agent_id','integrity','algorithm','required','additionalProperties' -Context 2,3\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 315,
+    "body": "Get-Content -Encoding utf8 experiments/schema/usage-snapshot.schema.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/schema/usage-snapshot.schema.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 316,
+    "body": "Get-Content -Encoding utf8 components/meter_core/meter_core.h",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 components/meter_core/meter_core.h'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 317,
+    "body": "Get-Content -Encoding utf8 experiments/schema/cdm-frame.schema.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/schema/cdm-frame.schema.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 318,
+    "body": "Get-Content -Encoding utf8 experiments/schema/end-to-end-result.schema.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/schema/end-to-end-result.schema.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 319,
+    "body": "Select-String -Path components/meter_core/meter_core.c -Pattern 'integrity','agent_id','algorithm','validate','schema','REJECT' -Context 3,8",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path components/meter_core/meter_core.c -Pattern 'integrity','agent_id','algorithm','validate','schema','REJECT' -Context 3,8\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 325,
+    "body": "Select-String -Path experiments/schema/usage-snapshot.schema.json -Pattern 'if','then','status','agent_id','host_id' -Context 1,5",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path experiments/schema/usage-snapshot.schema.json -Pattern 'if','then','status','agent_id','host_id' -Context 1,5\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 326,
+    "body": "Get-Content -Encoding utf8 experiments/fixtures/provider-fixture-matrix.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/fixtures/provider-fixture-matrix.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 327,
+    "body": "Get-Content -Encoding utf8 pc/pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 pc/pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 328,
+    "body": "Select-String -Path scripts/validate-end-to-end-result.py -Pattern 'def _check_provider_matrix','def _check_f9_details','def validate_fixture_matrix' -Context 0,38",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path scripts/validate-end-to-end-result.py -Pattern 'def _check_provider_matrix','def _check_f9_details','def validate_fixture_matrix' -Context 0,38\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 329,
+    "body": "Select-String -Path components/meter_core/meter_core.c -Pattern 'status\\\\\\\"','agent_id','available' -Context 2,5",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path components/meter_core/meter_core.c -Pattern 'status\\\\\\\"','agent_id','available' -Context 2,5\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 337,
+    "body": "Get-Content -Encoding utf8 main/app_main.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 main/app_main.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 338,
+    "body": "Get-ChildItem -Path components/idle_dim_policy,tests/host -Recurse -File",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Path components/idle_dim_policy,tests/host -Recurse -File'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 339,
+    "body": "Get-ChildItem -Path tests -Recurse -File",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Path tests -Recurse -File'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 340,
+    "body": "python tests/test_production_receiver.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python tests/test_production_receiver.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 341,
+    "body": "python scripts/validate-end-to-end-result.py --matrix experiments/fixtures/provider-fixture-matrix.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python scripts/validate-end-to-end-result.py --matrix experiments/fixtures/provider-fixture-matrix.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 348,
+    "body": "Get-Content -Encoding utf8 pc/serial_sender.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 pc/serial_sender.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 349,
+    "body": "Get-Content -Encoding utf8 pc/gui.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 pc/gui.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 350,
+    "body": "Get-Content -Encoding utf8 pc/sender.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 pc/sender.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 351,
+    "body": "Get-Content -Encoding utf8 pc/collector.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 pc/collector.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 352,
+    "body": "Get-Content -Encoding utf8 docs/hardware/version-2-capabilities.md",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 docs/hardware/version-2-capabilities.md'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 357,
+    "body": "Select-String -Path docs/PRODUCT_CONTRACT.md,experiments/schema/usage-snapshot.schema.json -Pattern 'available source','agent_id','host_id' -Context 2,4",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path docs/PRODUCT_CONTRACT.md,experiments/schema/usage-snapshot.schema.json -Pattern 'available source','agent_id','host_id' -Context 2,4\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 358,
+    "body": "Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/001-host-semantic-limitations.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/001-host-semantic-limitations.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 359,
+    "body": "Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/002-common-stimulus-check.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 .benchmark-inputs/feedback-evidence/002-common-stimulus-check.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 360,
+    "body": "Select-String -Path components/meter_core/meter_core.c -Pattern 'static bool validate_snapshot' -Context 0,72",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path components/meter_core/meter_core.c -Pattern 'static bool validate_snapshot' -Context 0,72\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 364,
+    "body": "Select-String -Path tests/test_production_receiver.py -Pattern 'missing-available-agent','missing-agent-field' -Context 1,1",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path tests/test_production_receiver.py -Pattern 'missing-available-agent','missing-agent-field' -Context 1,1\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 365,
+    "body": "Select-String -Path components/meter_core/meter_core.c -Pattern 'bool is_available' -Context 0,8",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path components/meter_core/meter_core.c -Pattern 'bool is_available' -Context 0,8\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 366,
+    "body": "Select-String -Path tests/test_pc_pipeline.py -Pattern 'available_snapshot','stale_threshold','class FixturePipelineTests' -Context 0,20",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path tests/test_pc_pipeline.py -Pattern 'available_snapshot','stale_threshold','class FixturePipelineTests' -Context 0,20\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 372,
+    "body": "Get-Content -Encoding utf8 experiments/fixtures/providers/codex-percent-window.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/fixtures/providers/codex-percent-window.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 373,
+    "body": "Get-Content -Encoding utf8 tests/test_pc_pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 tests/test_pc_pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 374,
+    "body": "Get-Content -Encoding utf8 experiments/fixtures/providers/antigravity-cli-unsupported.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/fixtures/providers/antigravity-cli-unsupported.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 381,
+    "body": "git status --short --branch",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git status --short --branch'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 382,
+    "body": "git diff --check",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git diff --check'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 383,
+    "body": "cmake --build build-host",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'cmake --build build-host'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 384,
+    "body": "idf.py build",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'idf.py build'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 397,
+    "body": "python -m py_compile tests/test_pc_pipeline.py tests/test_legacy_adapter.py tests/test_production_receiver.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile tests/test_pc_pipeline.py tests/test_legacy_adapter.py tests/test_production_receiver.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 400,
+    "body": "python -m py_compile pc/serial_sender.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile pc/serial_sender.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 401,
+    "body": "python -m py_compile pc/collector.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile pc/collector.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 402,
+    "body": "python -m py_compile pc/pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile pc/pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 403,
+    "body": "python -m py_compile pc/sender.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile pc/sender.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 404,
+    "body": "python -m py_compile pc/gui.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile pc/gui.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 405,
+    "body": "python -m py_compile pc/legacy_adapter.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile pc/legacy_adapter.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 406,
+    "body": "ctest --test-dir build-host --output-on-failure",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'ctest --test-dir build-host --output-on-failure'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 407,
+    "body": "python tests/test_production_receiver.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python tests/test_production_receiver.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 408,
+    "body": "python tests/test_pc_pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python tests/test_pc_pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 409,
+    "body": "python tests/test_legacy_adapter.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python tests/test_legacy_adapter.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 410,
+    "body": "python -m unittest discover -s tests -v",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m unittest discover -s tests -v'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 411,
+    "body": "idf.py --version",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'idf.py --version'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 413,
+    "body": "Select-String -Path components/meter_core/meter_core.c -Pattern 'static bool valid_identity' -Context 0,20",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path components/meter_core/meter_core.c -Pattern 'static bool valid_identity' -Context 0,20\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 417,
+    "body": "Select-String -Path components/meter_core/meter_core.c -Pattern 'if \\\\(is_available' -Context 2,4",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path components/meter_core/meter_core.c -Pattern 'if \\\\(is_available' -Context 2,4\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 418,
+    "body": "Get-Item build-host/meter_receiver_cli.exe",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Item build-host/meter_receiver_cli.exe'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 419,
+    "body": "Select-String -Path tests/test_production_receiver.py -Pattern 'missing-available-agent','integrity =','signed\\\\[\\\"integrity\\\"\\\\]' -Context 2,3",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path tests/test_production_receiver.py -Pattern 'missing-available-agent','integrity =','signed\\\\[\\\"integrity\\\"\\\\]' -Context 2,3\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 424,
+    "body": "python tests/test_production_receiver.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python tests/test_production_receiver.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 425,
+    "body": "python -m unittest discover -s tests -v",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m unittest discover -s tests -v'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 429,
+    "body": "Get-ChildItem -Path results -Force",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Path results -Force'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 430,
+    "body": "Get-Content -Encoding utf8 .benchmark-inputs/run-context.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 .benchmark-inputs/run-context.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 432,
+    "body": "Get-Content -Encoding utf8 .benchmark-inputs/e2e-evaluation-manifest.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 .benchmark-inputs/e2e-evaluation-manifest.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 434,
+    "body": "Get-ChildItem -Path docs/agent-runs -Force",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-ChildItem -Path docs/agent-runs -Force'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 436,
+    "body": "Select-String -Path scripts/validate-end-to-end-result.py -Pattern 'def check_entry','def check_status','product_pass','def _check_fixture_snapshot_join' -Context 0,45",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path scripts/validate-end-to-end-result.py -Pattern 'def check_entry','def check_status','product_pass','def _check_fixture_snapshot_join' -Context 0,45\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 442,
+    "body": "Get-Content -Encoding utf8 experiments/fixtures/providers/provider-error.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/fixtures/providers/provider-error.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 443,
+    "body": "Select-String -Path scripts/validate-end-to-end-result.py -Pattern 'HOST_IDS','PROVIDER_IDS' -Context 0,5",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path scripts/validate-end-to-end-result.py -Pattern 'HOST_IDS','PROVIDER_IDS' -Context 0,5\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 444,
+    "body": "Get-Content -Encoding utf8 experiments/fixtures/providers/absolute-token-balance.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/fixtures/providers/absolute-token-balance.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 445,
+    "body": "Get-Content -Encoding utf8 experiments/fixtures/providers/provider-stale.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/fixtures/providers/provider-stale.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 446,
+    "body": "Get-Content -Encoding utf8 experiments/fixtures/providers/claude-code-windows.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 experiments/fixtures/providers/claude-code-windows.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 456,
+    "body": "New-Item -ItemType Directory -Path docs/agent-runs/20261006-codex-cli-gpt-6-luna-r02 -Force",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'New-Item -ItemType Directory -Path docs/agent-runs/20261006-codex-cli-gpt-6-luna-r02 -Force'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 457,
+    "body": "New-Item -ItemType Directory -Path results/20261006-codex-cli-gpt-6-luna-r02 -Force",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'New-Item -ItemType Directory -Path results/20261006-codex-cli-gpt-6-luna-r02 -Force'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 461,
+    "body": "Get-FileHash -LiteralPath build/codex_desk_meter.bin -Algorithm SHA256",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-FileHash -LiteralPath build/codex_desk_meter.bin -Algorithm SHA256'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 468,
+    "body": "ctest --test-dir build-host --output-on-failure",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'ctest --test-dir build-host --output-on-failure'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 469,
+    "body": "python -m pc.serial_sender --help",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m pc.serial_sender --help'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 471,
+    "body": "python -m pc.collector --profile common --reference-time 2026-09-30T18:40:49Z",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m pc.collector --profile common --reference-time 2026-09-30T18:40:49Z'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 473,
+    "body": "python scripts/validate-end-to-end-result.py --result results/20261006-codex-cli-gpt-6-luna-r02/end-to-end-result.json --manifest .benchmark-inputs/e2e-evaluation-manifest.json --evidence-root . --matrix experiments/fixtures/provider-fixture-matrix.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python scripts/validate-end-to-end-result.py --result results/20261006-codex-cli-gpt-6-luna-r02/end-to-end-result.json --manifest .benchmark-inputs/e2e-evaluation-manifest.json --evidence-root . --matrix experiments/fixtures/provider-fixture-matrix.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 478,
+    "body": "Get-Content -Encoding utf8 tests/host/test_idle_dim.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 tests/host/test_idle_dim.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 479,
+    "body": "Get-Content -Encoding utf8 components/idle_dim_policy/idle_dim_policy.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 components/idle_dim_policy/idle_dim_policy.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 480,
+    "body": "Select-String -Path main/board_lcd.c -Pattern 'board_lcd_init','board_backlight_set','lcd_init','present\\\\(' -Context 0,35",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path main/board_lcd.c -Pattern 'board_lcd_init','board_backlight_set','lcd_init','present\\\\(' -Context 0,35\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 481,
+    "body": "Select-String -Path main/board_lcd.c -Pattern 'DASHBOARD','source_kind','STALE','window_id','global_resets' -Context 4,7",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path main/board_lcd.c -Pattern 'DASHBOARD','source_kind','STALE','window_id','global_resets' -Context 4,7\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 486,
+    "body": "Select-String -Path docs/hardware/version-2-capabilities.md -Pattern 'button_bsp','GPIO0','LCD CS' -Context 1,3",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path docs/hardware/version-2-capabilities.md -Pattern 'button_bsp','GPIO0','LCD CS' -Context 1,3\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 487,
+    "body": "Select-String -Path main/board_lcd.c -Pattern 'esp_lcd_panel_init','PIN_LCD_CS','gpio_reset_pin','gpio_set_direction' -Context 3,8",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command \"Select-String -Path main/board_lcd.c -Pattern 'esp_lcd_panel_init','PIN_LCD_CS','gpio_reset_pin','gpio_set_direction' -Context 3,8\""
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 488,
+    "body": "Get-Content -Encoding utf8 docs/hardware/vendor-source-index.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-Content -Encoding utf8 docs/hardware/vendor-source-index.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 495,
+    "body": "python -m py_compile tests/test_pc_pipeline.py tests/test_legacy_adapter.py tests/test_production_receiver.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile tests/test_pc_pipeline.py tests/test_legacy_adapter.py tests/test_production_receiver.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 499,
+    "body": "python -m py_compile pc/sender.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile pc/sender.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 500,
+    "body": "python -m py_compile pc/serial_sender.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile pc/serial_sender.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 501,
+    "body": "python -m py_compile pc/gui.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m py_compile pc/gui.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 502,
+    "body": "python tests/test_production_receiver.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python tests/test_production_receiver.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 503,
+    "body": "python tests/test_legacy_adapter.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python tests/test_legacy_adapter.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 504,
+    "body": "python tests/test_pc_pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python tests/test_pc_pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 505,
+    "body": "python -m unittest discover -s tests -v",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m unittest discover -s tests -v'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 513,
+    "body": "git diff -- pc/pipeline.py pc/sender.py pc/collector.py pc/gui.py pc/serial_sender.py pc/fixture-set.json requirements-product.txt",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git diff -- pc/pipeline.py pc/sender.py pc/collector.py pc/gui.py pc/serial_sender.py pc/fixture-set.json requirements-product.txt'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 515,
+    "body": "git diff --stat",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git diff --stat'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 516,
+    "body": "git diff --check",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git diff --check'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 517,
+    "body": "git diff -- components/meter_core/meter_core.c main/app_main.c main/board_lcd.c",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git diff -- components/meter_core/meter_core.c main/app_main.c main/board_lcd.c'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 518,
+    "body": "git diff -- tests/host/CMakeLists.txt tests/test_pc_pipeline.py",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git diff -- tests/host/CMakeLists.txt tests/test_pc_pipeline.py'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 519,
+    "body": "git status --short --branch",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git status --short --branch'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 529,
+    "body": "git diff --check",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git diff --check'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 530,
+    "body": "cmake -S tests/host -B build-host -G Ninja",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'cmake -S tests/host -B build-host -G Ninja'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 531,
+    "body": "python scripts/validate-end-to-end-result.py --result results/20261006-codex-cli-gpt-6-luna-r02/end-to-end-result.json --manifest .benchmark-inputs/e2e-evaluation-manifest.json --evidence-root . --matrix experiments/fixtures/provider-fixture-matrix.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python scripts/validate-end-to-end-result.py --result results/20261006-codex-cli-gpt-6-luna-r02/end-to-end-result.json --manifest .benchmark-inputs/e2e-evaluation-manifest.json --evidence-root . --matrix experiments/fixtures/provider-fixture-matrix.json'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 532,
+    "body": "python -m unittest discover -s tests -v",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python -m unittest discover -s tests -v'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 533,
+    "body": "idf.py build",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'idf.py build'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 535,
+    "body": "cmake --build build-host",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'cmake --build build-host'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 540,
+    "body": "ctest --test-dir build-host --output-on-failure",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'ctest --test-dir build-host --output-on-failure'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 541,
+    "body": "git status --short --branch",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'git status --short --branch'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 542,
+    "body": "Get-FileHash -LiteralPath build/codex_desk_meter.bin -Algorithm SHA256",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'Get-FileHash -LiteralPath build/codex_desk_meter.bin -Algorithm SHA256'"
+  },
+  {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+    "raw_line": 543,
+    "body": "python scripts/validate-end-to-end-result.py --result results/20261006-codex-cli-gpt-6-luna-r02/end-to-end-result.json --manifest .benchmark-inputs/e2e-evaluation-manifest.json --evidence-root . --matrix experiments/fixtures/provider-fixture-matrix.json",
+    "command": "\"C:\\\\WINDOWS\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\" -Command 'python scripts/validate-end-to-end-result.py --result results/20261006-codex-cli-gpt-6-luna-r02/end-to-end-result.json --manifest .benchmark-inputs/e2e-evaluation-manifest.json --evidence-root . --matrix experiments/fixtures/provider-fixture-matrix.json'"
+  }
+]

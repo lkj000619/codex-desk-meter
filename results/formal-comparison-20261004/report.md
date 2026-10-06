@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-06 21:52:33.768 KST Luna 후속 1회차 `20261006-codex-cli-gpt-6-luna-r02`를 시작했다. `gpt-6-luna / max`와 고정 조건을 유지하며 자신의 동결 source를 별도 checkout에서 보완한다. 구현·제출·비용·정책·제품/RM 평가는 종료 후 확인한다. 새 후속 펌웨어 업로드는 아직 없다. 최초 실행의 검은 화면 판정·동결·독립 복원·정책 부적격·비용은 보존됐다.
-후보 실행 시작13회·종료12회(최초 시작5·후속8). Sol 기준 도달로 종료·품질 부적격·제품 미합격, Pro 종료·Flash 보류를 보존한다. 독립 series 종료는 OpenCode·Pro·Sol 3개/예정15개다. 전체 비교는 미완료다. 아래 시작·대기 표현은 당시 기록이며 마지막 갱신이 최신 판정이다.
+상태: 2026-10-06 Luna 후속 1회차 `20261006-codex-cli-gpt-6-luna-r02`의 구현·제출·동결·독립 검증·COM3 업로드·평가 완료. 2,987초·정규화13,414,031 token, source38개/artifact20개·최종 package535개 파일을 보존했다. 정상 부팅은 확인했지만 사용자는 계속 검은 화면이라고 답했다. RM1 pass·RM2 partial·RM3 fail·RM4/5 not_run, reference fail·product_pass false이며 파이프2호출로 정책 부적격이다. 장치 수락·BOOT·30초 유지는 미확인이다. 최초 판정·진단·동결·독립 복원·비용은 보존했다.
+후보 실행 시작13회·종료13회(최초 시작5·후속8). Luna 잔여 후속4,213초/최대2회이며 추가 호출은 미시작이다. Sol 기준 도달로 종료·품질 부적격·제품 미합격, Pro 종료·Flash 보류를 보존한다. 독립 series 종료는 OpenCode·Pro·Sol 3개/예정15개다. 전체 비교는 미완료다. 아래 시작·대기 표현은 당시 기록이며 마지막 갱신이 최신 판정이다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -862,12 +862,28 @@ BOOT 조작·RESET·30초 연속 유지·자동 재부팅·검은 화면의 원�
 [별도 진단 snapshot](evidence/20261006-codex-cli-gpt-6-luna-r01/diagnosis-20261006/snapshot-inventory.json)에 source/hash·ELF disassembly·로그·stimulus·진단 reset2회·사용자 보고를 보존한다. Source 수정·rebuild·flash write·후보 호출0회이며 마지막 serial은 닫았다. 같은 Luna 최초 펌웨어가 남아 있고 마지막 전송의 실제 수락은 미확인이다.
 기존 최초 reference fail·product_pass false·policy invalid·원본 package와12회/44,103,444 token·series3/15·Luna 후속0회/잔여7,200초·3회는 그대로다. 정식 후보 후속에는 운영자 patch/수정 방법을 중립 관측처럼 전달하지 않는다. 다음 작업은 별도로 식별한 수정과 실물 검증이며 이번 분석에서 시작하지 않았다.
 
-## 2026-10-06 Luna ?? 1?? ??
+## 2026-10-06 Luna 후속 1회차 시작
 
-??? `codex luna ?? ?? ?? ??` ???? 21:52:33.768 KST? ? ??? ????. ?? ?? `c0d5d61160664923e0494302fae180089d02d247`? ?? clone?? ?? branch? detached?. ? run ID? r02? ?? ID ????? ledger round1? ?? ??? ???.
+2026-10-06 문서 정정: 이 시작 단락의 한글 인코딩 깨짐을 수정했다. 당시 시작 시각·source·호출 수·예산은 바꾸지 않았다. 이전 문구는 Git 이력에 보존한다.
 
-? ?? 57??profile??? ???operator baseline? ??? ?? source 29? ???? ????. ??? build/build-idf/build-host/sdkconfig? ???? ???. ?? ???bundle??? checkout?464? ?? ???? ????. ??? ?? ???????? ??? host ?? ??? ????? ???? ?? ??? source ????? ????? datasheet? ???? ???.
+사용자의 “codex luna 후속 조치 진행 ㄱㄱ”에 따라21:52:33.768 KST에 시작했다. 자기 동결 commit `c0d5d61160664923e0494302fae180089d02d247`을 별도 clone에서 이어받았고 로컬 branch는 detached다. run ID의r02와 ledger round1을 구분한다. 제품 source29개와 고정 입력57개·profile·원본 runner/operator baseline을 확인했으며 이전 build/build-idf/build-host/sdkconfig를 상속하지 않았다. 자신의 관측·고정 요구사항만 제공했고 운영자 진단의 수정 방법·새 datasheet·다른 후보 source는 전달하지 않았다.
 
-[?? ??](evidence/20261006-codex-cli-gpt-6-luna-r02/launch-20261006/native-start-observation.json)? native PID14732?thread? ?? argv? gpt-6-luna/max? ????. CLI0.159.2?ESP-IDF5.3.2?native ???hooks ????fresh ephemeral ??? ?????. resolved model? JSONL?? ???? ?? ????? ????. [?? ??](evidence/20261006-codex-cli-gpt-6-luna-r02/launch-20261006/snapshot-inventory.json)? 43? ??? ????.
+[시작 증거](evidence/20261006-codex-cli-gpt-6-luna-r02/launch-20261006/snapshot-inventory.json)는43개 파일로 native PID14732·thread·gpt-6-luna/max argv·CLI0.159.2·ESP-IDF5.3.2·fresh ephemeral 권한을 보존한다. 첫 launcher 경로 누락 오류는 모델 호출 전에 발생했다. 오류를 보존하고 올바른 경로로 재시작했으며 실제 후보 호출은1회다. 시작 당시 잔여 시간7,200초·후속1회 사용/추가 최대2회, 보드는 이전 Luna 최초 artifact였고 실행 중 serial/flash·구현 피드백은 없었다.
 
-?? ? ??? launcher ?? ??? ?? ?? ? PowerShell ??? ? ? ???? ?? ??? ????. ? ???? ?? ??? 0?, ?? launcher? ?? ??? 1??. ?? ?? ??? ?? ??? ??? ??? series ?? ?? ???? ????. ?? ?? ?? ??7,200? ? ?? ???? ?? ? ???? ?? ??2?? ?? ???? ???. ?? COM3?? ?? Luna ???? ?? ??? ?? ?? ? ???? serial/flash/?? ???? ???? ???.
+## 2026-10-06 Luna 후속 1회차 평가 완료
+
+[계획](../../docs/plans/2026-10-06-codex-luna-followup-execution.md)의 구현·제출·동결·독립 복원·가능한 실물 관측을 완료했다. 실제 terminal21:52:33.769~22:42:20.773 KST, 2,987초·exit0이다. 시작 snapshot과 terminal의1ms 차이를 원본대로 보존했다. Raw545 events·명령229개·파일변경35개, 계측 tool264/실패명령13을 기록한다. 원시 input13,274,009·output140,022·정규화13,414,031 token이며 cached12,811,008은 input에 포함된다. Raw reasoning94,200과 frozen adapter null은 별개로 유지한다. 실행 중 운영자 개입은 감사상0회이며 원래 계측 null을 바꾸지 않았다.
+
+동결 commit `e68356829715793dc31dd188bc2a9f528f6fcbd2`, source38개/artifact20개, 마지막 성공 build raw533행 뒤 firmware source 변경은 없다. [정책 검토](evidence/20261006-codex-cli-gpt-6-luna-r02/evaluation-20261006/policy-review.json)는 실제 파이프2호출(raw39/288)로 invalid_for_comparison이다. 따옴표 안 regex alternation·native wrapper·실행되지 않은 parse error를 실제 결합 호출로 세지 않았다. 원본 비용·제품 관측을 보존하고 적격 품질/reference-cost에서 제외한다.
+
+[Host 검증](evidence/20261006-codex-cli-gpt-6-luna-r02/evaluation-20261006/operator-observation/host-semantic-review.json)은 독립 복원의 Python22개·원본 C 실행 파일3개를 확인한다. 후보의21개 보고는 원본대로 보존한다. Common collector payload/encoder frame0/1이 정확히 일치하고 production C CLI가 두 frame을 수락한다. Provider validity17/17도 기대와 같다. 자체29개 wire/schema 시험은 고정 operator29 pipeline 시험과 구분하며 후자·정식 GUI·실물 idle-dim은 미실행이다. 최초 audit의21개 예상 guard 오류·통과 로그는 보존하고 추가 suite 실행 없이 실제22개를 검증했다.
+
+[COM3 업로드](evidence/20261006-codex-cli-gpt-6-luna-r02/evaluation-20261006/operator-observation/hardware-slot.json)는22:51:05.542647 KST에 MAC `28:84:85:B0:85:18` 보드의 세 이미지 해시를 확인했다. App SHA-256 `8861e741f3acdb3c511b399f2e92b96f70904f7000faf01b43266016ecea9fd5`이며 원본 `build/` artifact를 사용했다. NVS0x9000/0x6000만 초기화했고 운영자 source 변경·rebuild·전체 flash erase는 없다. 첫 capture0 bytes를 보존했다.
+
+[추가 reset capture](evidence/20261006-codex-cli-gpt-6-luna-r02/evaluation-20261006/operator-observation/hardware-post-upload-reset/runtime-source-binding.json)는22:54:32.187074 KST의 native reset1회 후5,938 bytes를 받았다. 원본 ELF SHA prefix81c1bd1d2·정상 boot·PSRAM 검사·USB ready를 확인했다. PSRAM marker를 false로 잘못 기록한 것은 [날짜 있는 정정](evidence/20261006-codex-cli-gpt-6-luna-r02/evaluation-20261006/operator-observation/hardware-post-upload-reset/runtime-observation-correction.json)으로 원본 로그와 연결했다. 두 공통 frame의 host 쓰기는 각각1,543 bytes/5초 간격 완료됐지만 accepted/rejected 로그가 없어 장치 수락은 미확인이다. Serial은 닫았다.
+
+사용자의 [“검은 화면이 계속됨”](evidence/20261006-codex-cli-gpt-6-luna-r02/evaluation-20261006/operator-observation/user-black-screen-report.json)을 현재 followup1 upload/reset에 연결했다. [한 번 적용한 후속 RM](evidence/20261006-codex-cli-gpt-6-luna-r02/evaluation-20261006/reference-review.json)은 RM1 pass·RM2 partial·RM3 fail·RM4/5 not_run, reference fail·product_pass false다. BOOT 조작·30초 유지·수동 RESET·자동 재부팅·검은 화면 원인은 보고되지 않아 추정하지 않는다. 최초 진단 결함을 후속 source의 원인으로 자동 이월하지 않는다.
+
+[최종 독립 감사](evidence/20261006-codex-cli-gpt-6-luna-r02/evaluation-20261006/restore-audit.json)는535개 inventory 파일·입력57개·원본 source/artifact/비용·정책/RM·현재 업로드와 사용자 보고를 package의 동결 validator로 확인했다. Package SHA-256 `28d3acfcf1c888850d1892710b5420ca52dea706f0542f0b462d19aeb3d68ede`이며 [공개 snapshot](evidence/20261006-codex-cli-gpt-6-luna-r02/evaluation-20261006/snapshot-inventory.json)은131개 파일을 원본 bytes/hash로 보존한다. 관측 전470개 package·시작43개 snapshot·최초464개 package·진단과 과거 판정/commit/tag는 유지한다.
+
+[Checkpoint13](comparison-checkpoint-13.md)은13회·정규화57,517,475 token의 실패·부적격 비용을 포함한다. Luna series30,827,518 token·6,081.422초, 후속1회2,987초를 차감해4,213초(70분13초)/최대2회가 남았다. Ledger active는 기준 미도달에 대한 frozen manager 원래 상태다. 추가 호출은 준비·시작하지 않았으며 다음 자기 후속은 관측 피드백·source·fresh preflight의 정상 gate가 필요하다. Series 종료3/15·Sol/Pro 종료·Flash 보류와 checkpoint12까지를 보존한다.

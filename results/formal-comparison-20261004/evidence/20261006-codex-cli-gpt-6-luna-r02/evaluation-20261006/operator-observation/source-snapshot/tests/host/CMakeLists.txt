@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 3.16)
+project(meter_host_tests C)
+
+enable_testing()
+add_executable(test_meter_parser test_meter_parser.c ../../components/meter_core/meter_core.c)
+target_include_directories(test_meter_parser PRIVATE ../../components/meter_core/include)
+if(NOT MSVC)
+  target_link_libraries(test_meter_parser PRIVATE m)
+endif()
+add_test(NAME meter_parser COMMAND test_meter_parser)
+
+add_executable(meter_receiver_cli meter_receiver_cli.c ../../components/meter_core/meter_core.c)
+target_include_directories(meter_receiver_cli PRIVATE ../../components/meter_core/include)
+if(NOT MSVC)
+  target_link_libraries(meter_receiver_cli PRIVATE m)
+endif()
+
+add_executable(test_meter_state test_meter_state.c ../../components/meter_core/meter_core.c)
+target_include_directories(test_meter_state PRIVATE ../../components/meter_core/include)
+if(NOT MSVC)
+  target_link_libraries(test_meter_state PRIVATE m)
+endif()
+add_test(NAME meter_state COMMAND test_meter_state)
+
+add_executable(test_idle_dim test_idle_dim.c ../../components/idle_dim_policy/idle_dim_policy.c)
+target_include_directories(test_idle_dim PRIVATE ../../components/idle_dim_policy/include)
+add_test(NAME idle_dim COMMAND test_idle_dim)

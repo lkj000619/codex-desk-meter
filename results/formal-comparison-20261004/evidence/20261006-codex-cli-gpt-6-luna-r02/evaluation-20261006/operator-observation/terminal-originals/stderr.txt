@@ -1,0 +1,12 @@
+2026-10-06T13:05:15.586932Z ERROR codex_core::tools::router: error=apply_patch verification failed: Failed to find expected lines in C:\meter-followups-20261006\20261006-codex-cli-gpt-6-luna-r02\checkout\pc\pipeline.py:
+    for name in ("forecast_24h_percent", "forecast_48h_percent"):
+        _require_number(body.get(name), name, nullable=True, maximum=100)
+    if not isinstance(source, str) or not source:
+        raise CollectionError("GLOBAL_RESET_INVALID", "global source is missing")
+    reference = (reference_time or utc_now()).astimezone(timezone.utc)
+2026-10-06T13:24:41.675082Z ERROR codex_core::tools::router: error=apply_patch verification failed: Failed to find expected lines in C:\meter-followups-20261006\20261006-codex-cli-gpt-6-luna-r02\checkout\tests\test_pc_pipeline.py:
+    def test_available_snapshot_over_stale_threshold_is_rejected_without_coercion(self):
+        fixture = load_json(ROOT / "experiments/fixtures/providers/available-over-stale-threshold.json")
+        result = FixtureCollector._normalize_provider_fixture(fixture, reference_time=parse_time(MATRIX_REFERENCE, "reference"))
+        self.assertIsNone(result)
+        self.assertIn("STALE_THRESHOLD_EXCEEDED", FixtureCollector._last_test_error)

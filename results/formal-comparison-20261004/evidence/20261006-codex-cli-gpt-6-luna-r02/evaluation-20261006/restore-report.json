@@ -1,0 +1,14 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+  "implementation_commit": "e68356829715793dc31dd188bc2a9f528f6fcbd2",
+  "policy_eligible": false,
+  "policy_review_status": "invalid_for_comparison",
+  "policy_review_reason": "Luna followup1 contains two confirmed forbidden pipeline calls at raw lines39 and288. Preserve own source, firmware, all cost and product/RM observations; exclude this run from policy-eligible quality/reference-cost comparison. Initial invalid policy remains separately preserved.",
+  "operator_baseline_verified": true,
+  "restored_root": "C:\\meter-run-restores-20261006\\codex-luna-followup01-evaluation",
+  "result_valid": true,
+  "manifest_identity_verified": true,
+  "package_manifest_sha256": "28d3acfcf1c888850d1892710b5420ca52dea706f0542f0b462d19aeb3d68ede",
+  "original_checkout_used": false,
+  "files_verified": 535
+}

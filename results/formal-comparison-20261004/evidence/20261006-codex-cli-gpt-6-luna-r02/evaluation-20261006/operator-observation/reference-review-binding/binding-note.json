@@ -1,0 +1,6 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+  "original_terminal_manifest_sha256": "fbd7b046552e248fe7eb6dd160c82a5ff95d156f84fc29357cb23ad0d69ec95c",
+  "pre_review_operator_metadata_sha256": "a28f6f849c7f29f48ff75a2767fe0c8632d73b8ddb03ec0dc2c7b6d28e3c9a29",
+  "scope": "Use preserved original terminal bytes for frozen review guard once, then reattach operator records. No candidate source/execution/cost or ledger terminal-hash change."
+}

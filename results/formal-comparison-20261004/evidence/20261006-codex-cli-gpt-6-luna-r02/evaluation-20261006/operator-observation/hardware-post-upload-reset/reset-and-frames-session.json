@@ -1,0 +1,16 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+  "port": "COM3",
+  "started_at": "2026-10-06T13:54:32.152049+00:00",
+  "flash_write": false,
+  "candidate_invocation": false,
+  "reset_strategy": "esptool HardReset uses_usb=True",
+  "scope": "Post-upload supplemental observation of same frozen followup1 app; first zero-byte capture preserved. One native USB reset, single connection, common 5-second frame interval; no source/build/flash/model change.",
+  "frames_path": "C:\\meter-run-restores-20261006\\codex-luna-followup01-pre-observation\\operator\\reference\\expected-frames.jsonl",
+  "reset_requested_at": "2026-10-06T13:54:32.187074+00:00",
+  "reset_sequence_completed_at": "2026-10-06T13:54:32.590420+00:00",
+  "ended_at": "2026-10-06T13:54:44.653264+00:00",
+  "capture_status": "captured",
+  "serial_closed": true,
+  "wait_seconds_per_frame": 5
+}

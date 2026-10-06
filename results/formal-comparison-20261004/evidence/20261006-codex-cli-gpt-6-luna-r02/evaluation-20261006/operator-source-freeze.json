@@ -1,0 +1,310 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+  "frozen_at": "2026-10-06T13:43:20.916865+00:00",
+  "commit": "e68356829715793dc31dd188bc2a9f528f6fcbd2",
+  "candidate_branch": "",
+  "separate_repository": true,
+  "original_terminal_manifest_sha256": "fbd7b046552e248fe7eb6dd160c82a5ff95d156f84fc29357cb23ad0d69ec95c",
+  "terminal_manifest_unchanged": true,
+  "original_ledger_unchanged": true,
+  "source_bundle": "operator-terminal-source.bundle",
+  "source_bundle_sha256": "6f063bef5bf1e92f6220c10fd4b955d9082c9846b0b8607ca98db0af7be9a2e4",
+  "sources": {
+    ".gitignore": {
+      "bytes": 68,
+      "sha256": "0bd6f40d2c30b94433598307b4f62d89e4512baf7c292211bc00fba9857015b6",
+      "operator_raw_copy": "operator-observation/source-snapshot/.gitignore"
+    },
+    "CMakeLists.txt": {
+      "bytes": 614,
+      "sha256": "40b17b7874de8ffc0c88956dbd1251ef332adc1e223154b2bd90d01f3d5f4e56",
+      "operator_raw_copy": "operator-observation/source-snapshot/CMakeLists.txt"
+    },
+    "requirements-product.txt": {
+      "bytes": 37,
+      "sha256": "1442c407f7f282d2c44d06931746f0c8977ef33460285002a13f17f1b8444c61",
+      "operator_raw_copy": "operator-observation/source-snapshot/requirements-product.txt"
+    },
+    "sdkconfig": {
+      "bytes": 69742,
+      "sha256": "a1208d9e4a3fb9170d4761a4079eb4dd45b34e56ce4283a38815e1a07449402e",
+      "operator_raw_copy": "operator-observation/source-snapshot/sdkconfig"
+    },
+    "sdkconfig.defaults": {
+      "bytes": 173,
+      "sha256": "7ff34c0c4d187cf53456321b9a965d6391df2629938f8e66682d882931425484",
+      "operator_raw_copy": "operator-observation/source-snapshot/sdkconfig.defaults"
+    },
+    "components/idle_dim_policy/CMakeLists.txt": {
+      "bytes": 73,
+      "sha256": "d5cfa134422762555649d1c2094baa2b54332824f5b0daff91a83e99d96c4d07",
+      "operator_raw_copy": "operator-observation/source-snapshot/components/idle_dim_policy/CMakeLists.txt"
+    },
+    "components/idle_dim_policy/idle_dim_policy.c": {
+      "bytes": 268,
+      "sha256": "15a099ba135654da2a0a77490b3f1cf89a955ea35835194fd44dc880579b72d0",
+      "operator_raw_copy": "operator-observation/source-snapshot/components/idle_dim_policy/idle_dim_policy.c"
+    },
+    "components/idle_dim_policy/include/idle_dim_policy.h": {
+      "bytes": 353,
+      "sha256": "ef6b4d2fd0ed3e2507c8bce653b6dc41d39343ea61a16ca1e93c3735da867ef8",
+      "operator_raw_copy": "operator-observation/source-snapshot/components/idle_dim_policy/include/idle_dim_policy.h"
+    },
+    "components/meter_core/CMakeLists.txt": {
+      "bytes": 92,
+      "sha256": "869101334497a4067e7c298a4b4de7036738ed9137979d472dec9a4b516f8caa",
+      "operator_raw_copy": "operator-observation/source-snapshot/components/meter_core/CMakeLists.txt"
+    },
+    "components/meter_core/meter_core.c": {
+      "bytes": 41908,
+      "sha256": "b810253e56b913a3d631406774f072ce7723e86f40915227af4b98f800358427",
+      "operator_raw_copy": "operator-observation/source-snapshot/components/meter_core/meter_core.c"
+    },
+    "components/meter_core/include/meter_core.h": {
+      "bytes": 1393,
+      "sha256": "0756b8086662e8a7f6d363ec0301ab1bb89b0754637a91b860f3268674cacbb1",
+      "operator_raw_copy": "operator-observation/source-snapshot/components/meter_core/include/meter_core.h"
+    },
+    "components/vendor_io_expander/CMakeLists.txt": {
+      "bytes": 366,
+      "sha256": "72b0d5f1b95faa40abf9a593aab3fcdbd59ab0870a234c938c2f193ccfd94073",
+      "operator_raw_copy": "operator-observation/source-snapshot/components/vendor_io_expander/CMakeLists.txt"
+    },
+    "components/vendor_panel_io_additions/CMakeLists.txt": {
+      "bytes": 694,
+      "sha256": "d7ac599ccb704d70fc47f821654568c595f98925fc8e9191c30258cd566665ff",
+      "operator_raw_copy": "operator-observation/source-snapshot/components/vendor_panel_io_additions/CMakeLists.txt"
+    },
+    "components/vendor_st7701/CMakeLists.txt": {
+      "bytes": 799,
+      "sha256": "a1015efc9e229c2f4de5d675a501f8e312f2f3233e3a9778784bb0a0ae9302ab",
+      "operator_raw_copy": "operator-observation/source-snapshot/components/vendor_st7701/CMakeLists.txt"
+    },
+    "docs/agent-runs/20261006-codex-cli-gpt-6-luna-r02/hardware-feature-selection.md": {
+      "bytes": 3205,
+      "sha256": "1a9d7746847c0b795379beea1ec3279c298a81286b52b99b33e9a790d8aa038e",
+      "operator_raw_copy": "operator-observation/source-snapshot/docs/agent-runs/20261006-codex-cli-gpt-6-luna-r02/hardware-feature-selection.md"
+    },
+    "docs/agent-runs/20261006-codex-cli-gpt-6-luna-r02/implementation-and-hardware.md": {
+      "bytes": 7880,
+      "sha256": "874ce160c35980d5a3894e90f4a32bade0c1ceb7e8245d299f80e4ff4978d2c4",
+      "operator_raw_copy": "operator-observation/source-snapshot/docs/agent-runs/20261006-codex-cli-gpt-6-luna-r02/implementation-and-hardware.md"
+    },
+    "main/app_main.c": {
+      "bytes": 5971,
+      "sha256": "ca26d8324921e6f1b49f935b5a29e55114fbde718b42196930b5294add9f91bd",
+      "operator_raw_copy": "operator-observation/source-snapshot/main/app_main.c"
+    },
+    "main/board_lcd.c": {
+      "bytes": 24113,
+      "sha256": "ef238ddbc5bc3b00da4475a9dd60a37e7c26608d3d63f3b9ef5dee7932b2a2ba",
+      "operator_raw_copy": "operator-observation/source-snapshot/main/board_lcd.c"
+    },
+    "main/board_lcd.h": {
+      "bytes": 872,
+      "sha256": "e772a037ca9cc332465d44669dd84b62adfb85ea62d3fba0e7e1ac4e460c16ee",
+      "operator_raw_copy": "operator-observation/source-snapshot/main/board_lcd.h"
+    },
+    "main/CMakeLists.txt": {
+      "bytes": 307,
+      "sha256": "fa02e2f86701668f0b7daee3ef0315c0363f7ee2c7e503862d5e06aa792f592e",
+      "operator_raw_copy": "operator-observation/source-snapshot/main/CMakeLists.txt"
+    },
+    "pc/collector.py": {
+      "bytes": 1567,
+      "sha256": "e01d32431793546ceccb6364c4da594b834616764a544453350ab31ff3a898e2",
+      "operator_raw_copy": "operator-observation/source-snapshot/pc/collector.py"
+    },
+    "pc/fixture-set.json": {
+      "bytes": 607,
+      "sha256": "7f43a62e0fe292d8784c3f483245b5f846514c9c99054644927ad9ffd9909afc",
+      "operator_raw_copy": "operator-observation/source-snapshot/pc/fixture-set.json"
+    },
+    "pc/gui.py": {
+      "bytes": 8838,
+      "sha256": "343002b0412e47211024aea7358fa480c278e9f613b79b6b4a249e9ee7c650da",
+      "operator_raw_copy": "operator-observation/source-snapshot/pc/gui.py"
+    },
+    "pc/legacy_adapter.py": {
+      "bytes": 4972,
+      "sha256": "70255260aa5e50036e91a1c79eacb88ebe7a5179d3ac776b2bacde4bceef8d2a",
+      "operator_raw_copy": "operator-observation/source-snapshot/pc/legacy_adapter.py"
+    },
+    "pc/pipeline.py": {
+      "bytes": 24216,
+      "sha256": "642ad576fbdf0b48ffc8fb61f03fff44ea969fda93baa7fc346a26cadf7c3d95",
+      "operator_raw_copy": "operator-observation/source-snapshot/pc/pipeline.py"
+    },
+    "pc/sender.py": {
+      "bytes": 10070,
+      "sha256": "aa71d5ead1c63e7754e50c51bc031ba1b0c773197b910d391a28f1b7a50f05f8",
+      "operator_raw_copy": "operator-observation/source-snapshot/pc/sender.py"
+    },
+    "pc/serial_sender.py": {
+      "bytes": 2662,
+      "sha256": "0f83d7a601cc8f3b9be28b7de932caeef94794b5f1d40fbf008a29a9138f59cd",
+      "operator_raw_copy": "operator-observation/source-snapshot/pc/serial_sender.py"
+    },
+    "pc/__init__.py": {
+      "bytes": 51,
+      "sha256": "fea52126ef30c47a1e135809aa7099770340b04312e274248c38143dba6fd9b1",
+      "operator_raw_copy": "operator-observation/source-snapshot/pc/__init__.py"
+    },
+    "results/20261006-codex-cli-gpt-6-luna-r02/end-to-end-result.json": {
+      "bytes": 19250,
+      "sha256": "b73ad8ad6baff1cd9b41c94183fdc90d88856a7960b1c48e410ecc3742895b86",
+      "operator_raw_copy": "operator-observation/source-snapshot/results/20261006-codex-cli-gpt-6-luna-r02/end-to-end-result.json"
+    },
+    "results/20261006-codex-cli-gpt-6-luna-r02/validation.md": {
+      "bytes": 1479,
+      "sha256": "6bdef5bf89a55d2331737c050d755931472de32b47c7e15dedf1fbb27ff7f1c5",
+      "operator_raw_copy": "operator-observation/source-snapshot/results/20261006-codex-cli-gpt-6-luna-r02/validation.md"
+    },
+    "tests/test_legacy_adapter.py": {
+      "bytes": 2840,
+      "sha256": "bec354b86bd97fe97f234fbbe28b9aa4195487a7c4daef2b32ea54881751bfe6",
+      "operator_raw_copy": "operator-observation/source-snapshot/tests/test_legacy_adapter.py"
+    },
+    "tests/test_pc_pipeline.py": {
+      "bytes": 13656,
+      "sha256": "c19b2b34c85c889e8b78a36f5b213db419e52ccc5b1456b27e6b6417e29f322e",
+      "operator_raw_copy": "operator-observation/source-snapshot/tests/test_pc_pipeline.py"
+    },
+    "tests/test_production_receiver.py": {
+      "bytes": 7593,
+      "sha256": "cac18ef44795317b4451651e676b655d6dc90f089c03fb31b290bf85f058bcf2",
+      "operator_raw_copy": "operator-observation/source-snapshot/tests/test_production_receiver.py"
+    },
+    "tests/host/CMakeLists.txt": {
+      "bytes": 1223,
+      "sha256": "3232dd52530cf1928b881ee93105360cc7fe4cdba196cbf43aad6094357727dc",
+      "operator_raw_copy": "operator-observation/source-snapshot/tests/host/CMakeLists.txt"
+    },
+    "tests/host/meter_receiver_cli.c": {
+      "bytes": 1932,
+      "sha256": "097db00f317038b26ca73226e8ce08b9e62f69f70fabf9ba8e4228ec2e0867f4",
+      "operator_raw_copy": "operator-observation/source-snapshot/tests/host/meter_receiver_cli.c"
+    },
+    "tests/host/test_idle_dim.c": {
+      "bytes": 367,
+      "sha256": "cca6a8c9e039a1e027368fc5d8db23fab2ec7db5efbb4a01381a200e747a2756",
+      "operator_raw_copy": "operator-observation/source-snapshot/tests/host/test_idle_dim.c"
+    },
+    "tests/host/test_meter_parser.c": {
+      "bytes": 2741,
+      "sha256": "b51cae7621ee76e79a9219385a770f33bcfd3d565427162105442f60334fb8af",
+      "operator_raw_copy": "operator-observation/source-snapshot/tests/host/test_meter_parser.c"
+    },
+    "tests/host/test_meter_state.c": {
+      "bytes": 1874,
+      "sha256": "dae60ab075507cce0fdd7fa5da737b55e3a5d4592ef2a800a43092153a7e45d4",
+      "operator_raw_copy": "operator-observation/source-snapshot/tests/host/test_meter_state.c"
+    }
+  },
+  "artifacts": {
+    "build-host/.ninja_deps": {
+      "bytes": 7652,
+      "sha256": "82e13faf9b518bdd389b7651b5e85469b439414088a0cf7d4062bea82463f51f",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/.ninja_deps"
+    },
+    "build-host/.ninja_log": {
+      "bytes": 1393,
+      "sha256": "3f71a657f01c95b5c3c3a9a8b3ca60b3bccf644a50a9d2759560ddccbdaa9a07",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/.ninja_log"
+    },
+    "build-host/CMakeCache.txt": {
+      "bytes": 15992,
+      "sha256": "ba8e62ca464ccbbd1d9badd4c917fd898b7c08f494dccca0104d5269e29e1b4d",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/CMakeCache.txt"
+    },
+    "build-host/build.ninja": {
+      "bytes": 19440,
+      "sha256": "c9e0e132c57273de2f26bed15a6702b68fe16020c7f52563df3fc30e7f0d3694",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/build.ninja"
+    },
+    "build-host/meter_receiver_cli.exe": {
+      "bytes": 119808,
+      "sha256": "12ef3b4a9927a573d961452d4aa266b7ab7627f71f6567748204fc649d529ad1",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/meter_receiver_cli.exe"
+    },
+    "build-host/test_idle_dim.exe": {
+      "bytes": 88064,
+      "sha256": "2151bb7f7a0358f6935ec267f6a78b8beb0905bb7f5d322c10df5496e9368b6e",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/test_idle_dim.exe"
+    },
+    "build-host/test_meter_parser.exe": {
+      "bytes": 122880,
+      "sha256": "ddc1f589fa9324e0dfde34f0c9c4b311599395a776698d73cb5a8c516bc06c58",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/test_meter_parser.exe"
+    },
+    "build-host/test_meter_state.exe": {
+      "bytes": 120832,
+      "sha256": "1da9969a7f5bbe7b01ea3a099b24fb91ee8e36dbedfcd1ccc2dfb8a46e69fa3e",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build-host/test_meter_state.exe"
+    },
+    "build/.ninja_deps": {
+      "bytes": 698912,
+      "sha256": "505e6c6f7db0d9d667cf34c5c520fc55dd3440f6a60eca96256ceab2f199aa09",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/.ninja_deps"
+    },
+    "build/.ninja_log": {
+      "bytes": 129878,
+      "sha256": "d0c192fcf08b3779123b6109d472fc4e2a84d76d365ef783b65ce2059058eb11",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/.ninja_log"
+    },
+    "build/CMakeCache.txt": {
+      "bytes": 26550,
+      "sha256": "483d5396a315d8f11f68dfd1ae743c381894cc0de0cb6de8b119384df043b068",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/CMakeCache.txt"
+    },
+    "build/bootloader/bootloader.bin": {
+      "bytes": 21648,
+      "sha256": "304525f3db31ce786ded2f8c4f802a46fe182a4344c277f5f09d052e458df83d",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/bootloader/bootloader.bin"
+    },
+    "build/build.ninja": {
+      "bytes": 5812246,
+      "sha256": "42f388686a8dd96bb79746c00727f20fef167ddfc8534a13eeb12c0559aaf81b",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/build.ninja"
+    },
+    "build/codex_desk_meter.bin": {
+      "bytes": 316688,
+      "sha256": "8861e741f3acdb3c511b399f2e92b96f70904f7000faf01b43266016ecea9fd5",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/codex_desk_meter.bin"
+    },
+    "build/codex_desk_meter.elf": {
+      "bytes": 4540520,
+      "sha256": "81c1bd1d2cfd797f8a33737c2874ec8b20f8ed41671c20d16b674c028deb0e5c",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/codex_desk_meter.elf"
+    },
+    "build/codex_desk_meter.map": {
+      "bytes": 3458717,
+      "sha256": "cdd0a55085ee7f3bdc85e2538d326de6d9c89de5d892a6620f6230177047ebba",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/codex_desk_meter.map"
+    },
+    "build/flasher_args.json": {
+      "bytes": 949,
+      "sha256": "769166e82cee00d6da9e7b3708d9b0691980764a05ffe3b042b3f47df9997998",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/flasher_args.json"
+    },
+    "build/partition_table/partition-table.bin": {
+      "bytes": 3072,
+      "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/build/partition_table/partition-table.bin"
+    },
+    "sdkconfig": {
+      "bytes": 69742,
+      "sha256": "a1208d9e4a3fb9170d4761a4079eb4dd45b34e56ce4283a38815e1a07449402e",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/sdkconfig"
+    },
+    "sdkconfig.defaults": {
+      "bytes": 173,
+      "sha256": "7ff34c0c4d187cf53456321b9a965d6391df2629938f8e66682d882931425484",
+      "operator_raw_copy": "operator-observation/artifact-snapshot/sdkconfig.defaults"
+    }
+  },
+  "last_successful_firmware_build_raw_line": 533,
+  "firmware_source_mutations_after_last_build": [],
+  "operator_product_source_modifications": false,
+  "operator_firmware_rebuild": false
+}
