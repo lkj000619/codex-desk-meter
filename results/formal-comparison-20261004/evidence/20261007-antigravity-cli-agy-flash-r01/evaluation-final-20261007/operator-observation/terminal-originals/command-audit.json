@@ -1,0 +1,32 @@
+{
+  "source_sha256": "90311a7d4c8915c42b046227d3ae492346ced5bd20fc3fe69e2d56e583c4eb04",
+  "tool_calls": 36,
+  "command_count": 3,
+  "failed_commands": null,
+  "failed_commands_lower_bound": 1,
+  "unknown_exit_commands": 2,
+  "commands": [
+    {
+      "step_index": 14,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 16,
+      "state": "DONE",
+      "exit_code": null,
+      "outcome": "unknown_exit",
+      "tool_error": false
+    },
+    {
+      "step_index": 72,
+      "state": "ERROR",
+      "exit_code": null,
+      "outcome": "failed",
+      "tool_error": true
+    }
+  ],
+  "availability_note": "DONE/output text is not an exit status. Total failure count is null when any command exit is unknown; lower bound preserves explicit tool errors/nonzero exits. File-tool errors are not shell commands."
+}

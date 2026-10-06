@@ -1,0 +1,16 @@
+{
+  "source_path": "C:\\Users\\이광진\\AppData\\Roaming\\orca\\codex-runtime-home\\home\\hooks.json",
+  "exists": true,
+  "source_sha256": "c428ce1c713e10c158aaef461552e23afa3f6c566a2413bbe65282c1d3c32734",
+  "configured_events": [
+    "SessionStart",
+    "UserPromptSubmit",
+    "PreToolUse",
+    "PermissionRequest",
+    "PostToolUse",
+    "SubagentStart",
+    "SubagentStop",
+    "Stop"
+  ],
+  "comparison_override": "features.hooks=false"
+}

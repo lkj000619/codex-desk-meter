@@ -1,0 +1,121 @@
+# Version 2 구현 과제
+
+목표: Waveshare ESP32-S3-LCD-3.16에서 **PC fixture → USB serial → 실제 firmware
+receiver → LCD**를 연결하는 ESP-IDF v5.3.2 제품을 구현한다. 이번 실행 ID는 `20261007-antigravity-cli-agy-flash-r01`다.
+
+## 먼저 읽을 입력
+
+1. `.benchmark-inputs/run-context.json`: 식별자·baseline·결과 경로·입력 hash.
+2. `docs/PRODUCT_CONTRACT.md`: 구현 동작과 합격 조건의 유일한 원본.
+3. `docs/hardware/version-2-capabilities.md`: 보드 사실과 제조사 source 범위.
+
+이 과제·제품 계약·보드 자료가 필수 MD 전부다. JSON schema·fixture·예제는
+구현할 계층에 필요한 것만 읽는다. `.benchmark-inputs/input-files.json`은 runner가
+제공한 파일 목록·hash다. 제공 입력과 identity 사본을 수정하지 않는다.
+운영 manifest·profile·receipt·과거 실험 자료는 checkout 밖에서 운영자가 관리한다.
+결과 예제는 필드 형식 설명이다. 예제의 운영자 evidence 경로는 후보에게 제공되지 않으며
+자신의 증거로 복사하지 않는다. validator에는 자신의 result·고정 manifest·evidence root를 전달한다.
+
+## 실행 범위
+
+- 최초 실행은 최대 120분, 실행 중 질문·외부 구현 피드백 없이 수행한다.
+  종료 후 수정은 운영자가 별도로 시작하며 최대 3회·누적 120분이다.
+  이번 호출만 수행하고 스스로 후속 session을 시작하지 않는다.
+- 제품 C1~C8·I1~I4·F1~F9를 구현·검증한다. Codex에서 확인된 기능 도달과
+  전체 제품 합격은 운영자가 별도로 판정한다. 기능 도달만으로 `product_pass`를 참으로 쓰지 않는다.
+- 동일한 보드 사실·제조사 source를 제공하며 BSP 구현도 작업 범위다.
+  제공 host oracle은 시험 도구이며 candidate firmware를 대신하지 않는다.
+- checkout 내부와 선언된 SDK·제조사 source만 사용한다. 상위 폴더, 다른 ref/worktree,
+  과거 구현·결과·대화·사용자 파일·credential을 탐색하지 않는다.
+  `git status`, `git diff`로 자신의 변경을 확인한다. 다른 ref 조회·전환은 금지한다.
+- 개인 계정/API key/cookie를 요청하거나 기록하지 않는다. 제품 입력은 offline fixture다.
+  네트워크·MCP·모델 호출은 실행 전에 선언된 정책 범위에서만 사용한다.
+- serial port 열기·flash·reset·`erase_flash`는 수행하지 않는다. 실물 시험은 운영자가
+  동결된 artifact로 수행한다. 실행할 명령과 관측할 결과를 제출한다.
+
+## 빌드와 시험
+
+운영자가 SDK·Python·C/C++ compiler·CMake·Ninja를 준비한다. 없거나 실행되지 않으면
+환경 실패와 근거를 남기고 종료한다. 설치 폴더 검색이나 도구 설치로 우회하지 않는다.
+
+- `idf.py --version`, `idf.py set-target esp32s3`, `idf.py build`
+- `python -m unittest discover -s tests -v`, `python tests/<시험 파일>.py`
+- `python -m py_compile <상대 파일>`
+- `cmake -S <상대 경로> -B build-host -G Ninja`, `cmake --build build-host`
+- `ctest --test-dir build-host --output-on-failure`
+
+셸 명령은 한 호출에 하나만 실행한다. `;`, `&&`, 파이프·명령 치환·shell wrapper로
+결합하지 않는다. 파일 작성은 native 파일 도구를 사용한다. 제공된
+`experiments/config/agy-pilot-permissions.json`은 명령 규칙의 참조 자료다.
+각 실행 표면의 실효 권한·도구 설정은 운영자가 사전에 확인해 고정한다.
+이 파일의 존재만으로 모든 표면의 권한 강제가 같다고 가정하지 않는다.
+권한 거부는 실패로 기록하고 종료하며 다른 도구로 우회하거나 권한 추가를 요청하지 않는다.
+정책에 없는 `pytest`·삭제·인라인 Python을 실행하지 않는다.
+
+실제 제품 파서·상태 전이 C 모듈을 compile/link해 호출하는 host 시험을 제공한다.
+Python 모방 구현의 성공을 firmware 검증으로 제출하지 않는다. 제공 validator·host
+oracle의 성공과 실제 USB 수신·LCD 성공을 구분한다.
+
+## 제출
+
+- ESP-IDF 프로젝트, PC collector·sender, firmware receiver·GUI와 자체 시험.
+- `docs/agent-runs/20261007-antigravity-cli-agy-flash-r01/hardware-feature-selection.md`: 보드 기능 후보 정확히 3개,
+  각각의 사용자 가치·자원·비용·위험·시험, 선택 1개와 나머지 2개의 탈락 이유.
+  선택 기능을 핵심과 분리해 구현한다. 제조사 데모 반복은 추가 기능으로 인정하지 않는다.
+- `results/20261007-antigravity-cli-agy-flash-r01/end-to-end-result.json`: 제공 result schema의 C/F/I/G·build/host/
+  transport/hardware 상태와 증거 경로. 새 JSON 필드를 만들지 않는다.
+- 빌드·시험 재현 명령, 오류/stale/복구 시험, 실물 업로드·관측 절차와 남은 문제.
+
+identity와 evaluation manifest 참조는 `.benchmark-inputs/`의 사본을 사용한다.
+실행 시간·token·운영자 실물 판정은 운영자가 종료 후 작성한다. 미측정은 허용된
+null·`not_run`·`blocked`와 사유로 남기고, 자체 시험을 독립 평가로 표현하지 않는다.
+
+## Current followup session
+Continue your own frozen implementation under all common task restrictions above. This is a fresh followup session, not a new initial budget. The remaining_seconds and remaining_rounds below include this invocation; do not start another session yourself.
+Use only the supplied local evidence in .benchmark-inputs/feedback.json; do not search previous run directories or other implementations.
+Operator feedback (observations and expected behavior):
+{
+  "previous_run_id": "20261005-antigravity-cli-agy-flash-r02",
+  "previous_commit": "94018f1785a590e1514ef1b5145c40f0c03ffca3",
+  "target_ids": [
+    "RM2",
+    "RM3",
+    "RM4",
+    "RM5"
+  ],
+  "observed": "Own followup1 completed after1489.219seconds. RM1 pass/RM2 partial/RM3 fail/RM4 partial/RM5 partial. Encoder matches unchanged common seq0/1 wires. Default and legacy collectors differ from common payload/provenance/stale semantics. Each host write completed1543bytes, but real serial capture contains two LoadProhibited panics/reboots and no frame acceptance. Confirmed46.3-second video shows WAITING FOR USB DATA, Sequence NONE/cache0, no58%/82%, global NO RECENT RESET RECORD/default FRESH and empty diagnostics. Three view categories appear and dashboard/global/diagnostic/dashboard cycles are visible, but separate BOOT versus IMU trigger/count unknown. Mixed header/body, blank or occluded intervals prevent certifying30-second readable populated continuity; uptime restart cause unknown. Prior policy invalid_for_comparison because inherited generated CTest cache ran own prior-run executables and host build touched prior checkout; the harness contribution and all original results/cost remain preserved. The new copy starts with generated build/cache/config removed; retained product source unchanged.",
+  "expected": "Meet unchanged product/RM requirements using own source and fixed inputs: correct collector common fixture semantics, accept normal seq0/1, visibly show legible five-hour remaining58% and weekly remaining82% with stale/provenance meaning, populated usage/global-reset/diagnostic information and BOOT navigation returning to the first view. Preserve common task restrictions and honestly report unmeasured hardware/timing. Diagnose from own source and fixed board/vendor references. No other implementation, prior checkout access, account/network, serial/flash, global settings change or another model/session. One shell command per tool call; no composed commands/pipelines. Remaining followup budget5710.781seconds, at most2 calls including this round2, timeout floor5710seconds. No operator repair method or extra board facts supplied.",
+  "remaining_rounds": 2,
+  "remaining_seconds": 5710.780999999959,
+  "run_id": "20261007-antigravity-cli-agy-flash-r01",
+  "evidence": [
+    {
+      "path": ".benchmark-inputs/feedback-evidence/000-common-stimulus-check.json",
+      "sha256": "e89598dbcafd5cb94c9be4084ff23446b77ec6f29b76e9904684939f5392afbd"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/001-capture.json",
+      "sha256": "8a76c1712177ceb2b86c9838e33759a922c6786b2be2c19e7ec661fa4b353772"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/002-device-serial.bin",
+      "sha256": "52fc2b7666ece86c4c497217a29d3785228b19562a9b32afa64c8f55b626ac90"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/003-sent-frames.jsonl",
+      "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/004-video-review.json",
+      "sha256": "837b6ffcab414aea2c4727d24a146e11f5181010ad2a447518370f79f3b6f162"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/005-capture-identity-confirmation.json",
+      "sha256": "f8663c3c045a161459150fa19c74cddec04a97613a7673ec96e8d3b4613fce7e"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/006-operator-policy-decision.json",
+      "sha256": "0977a5234df959f4af96dbaafd92028eae398f1761c503b633020755db7cabd7"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-07 AGY Flash 후속2 실행 중. 사용자 요청으로 기존 보류를 해제하고 자기 마지막 동결 구현에서 재개했다. 03:38:00.978 KST native 시작, gemini-3.8-flash-medium/medium·request-review·새 checkout을 확인했다. 잔여5,710.781초·최대2회 중 이번 runner 한도5,710초다. 새 사본 생성 파일1,434개 제거·제품 소스36개와 공통 입력57개 동일성을 검증했다. 전체 호출 시작16회·종료15회, 독립 series 종료4/15다. 현재 비용·정책·RM·실물 결과는 종료 후 평가하며 이전15회 비용 coverage14/15·알려진61,608,453 token·전체 합계 미상과 과거 부적격을 보존한다. 보드는 Luna 마지막 후속3 원본을 유지한다.
+상태: 2026-10-07 AGY Flash 마지막 후속3 실행 중. 후속2는265.500초·213,498 token 뒤 git log 권한 거부로 종료됐고 제품 수정·새 펌웨어·최종 제출이 없어 RM1 fail/RM2~RM5 not_run이다. 거부 즉시 종료 규칙을 지켜 이번 정책 eligible, 과거 series invalid는 유지한다. 388개 파일의 독립 복원·원본/비용/source 검증을 완료했다. 자기 직전 source36개와 공통 입력57개를 유지해 마지막 후속3을 시작했다. 잔여5,445.281초 중 runner 한도5,445초, 추가 회차는0이다. 전체 시작17회·종료16회, 비용 coverage15/16·알려진61,821,951 token·전체 합계 미상. 독립 series 종료4/15이며 보드는 Luna 마지막 원본을 유지한다. 현재 구현·정책·RM는 종료 후 평가한다.
 독립 series 종료4/15이며 전체 비교는 미완료다. 아래 기록은 각 당시 관측이며 최신 상태는 위 상태와 마지막 갱신을 따른다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
@@ -942,3 +942,9 @@ Timeout4,213초는 이 호출을 포함한 누적 잔여다. 후속2회차 시�
 - 계획: [잔여 후속 계획](../../docs/plans/2026-10-07-agy-flash-remaining-followups.md).
 - 실제 시작: [native 시작 원본](evidence/20261007-antigravity-cli-agy-flash-r01/launch-20261007/native-start-observation.json).
 - 기존 Flash 후속1의 부적격·관측·비용과 Luna/Sol/Pro/Muse 종료 기록을 보존한다. 이번 종료 후 source/artifact·정책·독립 복원·COM3 관측을 평가한다.
+
+## 2026-10-07 Flash 후속2 평가·마지막 후속3 시작
+
+2026-10-07 AGY Flash 마지막 후속3 실행 중. 후속2는265.500초·213,498 token 뒤 git log 권한 거부로 종료됐고 제품 수정·새 펌웨어·최종 제출이 없어 RM1 fail/RM2~RM5 not_run이다. 거부 즉시 종료 규칙을 지켜 이번 정책 eligible, 과거 series invalid는 유지한다. 388개 파일의 독립 복원·원본/비용/source 검증을 완료했다. 자기 직전 source36개와 공통 입력57개를 유지해 마지막 후속3을 시작했다. 잔여5,445.281초 중 runner 한도5,445초, 추가 회차는0이다. 전체 시작17회·종료16회, 비용 coverage15/16·알려진61,821,951 token·전체 합계 미상. 독립 series 종료4/15이며 보드는 Luna 마지막 원본을 유지한다. 현재 구현·정책·RM는 종료 후 평가한다.
+
+[후속2 독립 감사](evidence/20261007-antigravity-cli-agy-flash-r01/evaluation-final-20261007/restore-audit.json) · [후속3 native 시작](evidence/20261007-antigravity-cli-agy-flash-r02/launch-20261007/native-start-observation.json) · [종료16회 비용](comparison-checkpoint-16.md).

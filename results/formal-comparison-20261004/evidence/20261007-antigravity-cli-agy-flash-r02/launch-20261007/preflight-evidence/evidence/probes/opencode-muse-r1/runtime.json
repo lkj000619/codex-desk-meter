@@ -1,0 +1,11 @@
+{
+  "version": "1.18.34",
+  "version_stderr": "",
+  "version_exit": 0,
+  "executable_sha256": "184f196ec97c843a64b2e1a2b49165f25e73a5d6993e2f842c9958c2b1f7a5b2",
+  "IDF_PATH": "C:\\Espressif\\v5.3.2\\esp-idf",
+  "IDF_TOOLS_PATH": "C:\\Espressif\\user-tools",
+  "TEMP": "C:\\Espressif\\tmp",
+  "TMP": "C:\\Espressif\\tmp",
+  "ccache": "0"
+}

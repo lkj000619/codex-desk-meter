@@ -1,0 +1,8 @@
+{
+  "start": "2026-10-04T12:39:51.326Z",
+  "end": "2026-10-04T12:39:56.235Z",
+  "elapsed": 4.906999999890104,
+  "status": "environment_failed",
+  "reason": "agent exited with code 1; inspect evidence",
+  "code": 1
+}

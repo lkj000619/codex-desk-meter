@@ -1,0 +1,48 @@
+{
+  "interface": "cli",
+  "cohort": "version-2-end-to-end-v1",
+  "sandbox_policy": "prompt-and-log",
+  "network_mode": "offline-fixture",
+  "provider": "google",
+  "product": "antigravity-cli",
+  "agent_version": "1.2.14",
+  "model": "gemini-3.8-flash-medium",
+  "model_slug": "agy-flash",
+  "reasoning": "medium",
+  "branch_owner": "antigravity",
+  "branch_product": "antigravity-cli",
+  "adapter": "antigravity",
+  "argv": [
+    "C:\\Espressif\\tools\\python\\python.exe",
+    "-c",
+    "import subprocess,sys; prompt=sys.stdin.buffer.read().decode(\"utf-8\"); sys.exit(subprocess.call([sys.argv[1], *sys.argv[2:], \"--print=\"+prompt], stdin=subprocess.DEVNULL))",
+    "C:\\meter-cli-frozen-20261002\\agy-1.2.14\\agy.exe",
+    "--input-format",
+    "text",
+    "--output-format",
+    "stream-json",
+    "--print-timeout",
+    "120m",
+    "--model",
+    "{model}"
+  ],
+  "version_argv": [
+    "C:\\meter-cli-frozen-20261002\\agy-1.2.14\\agy.exe",
+    "--version"
+  ],
+  "approval_policy": "request-review",
+  "settings_inventory": {
+    "skills": "Global custom skill directories must be empty under the existing scoped wrapper; built-in slash/skill expansion retained.",
+    "mcp": "Native mcp list empty; scoped wrapper refuses any newly configured global MCP server.",
+    "plugins": "Native plugin and agent lists empty; recheck before launch. Built-in tools retained.",
+    "memory": "Fresh headless session without resume; global GEMINI.md and hooks temporarily removed and original bytes restored; provider memory isolation is not claimed.",
+    "user_instructions": "Run only inside the existing scoped wrapper; global instructions/hooks removed for the session and restored, private backups excluded from public evidence.",
+    "cache": "Provider cache not disabled; original AGY input/output/thinking/cache-read/total usage retained without redefining total.",
+    "routing": "Explicit model ID includes the selected effort/Thinking variant; no fallback. Native init.model and result usage retained.",
+    "permissions": "Existing hashed agy-pilot-permissions.json policy, request-review, non-workspace access false, checkout-only writes; benchmark verifies the active scope before launch.",
+    "model_network": "Model endpoint used in preparation; offline-fixture refers to product inputs. No model connectivity or entitlement inferred from catalog alone.",
+    "extension_condition": "builtin-only-v1; custom global skills absent, MCP/plugins/custom agents empty, instructions/hooks scoped. Native built-ins retained.",
+    "usage_recording": "Raw stream-json init, step updates, tool outputs and final result usage retained; non-emitted extension metrics stay null with reason."
+  },
+  "measurement_notes": "2026-10-02 preparation profile. Common product input baseline 85ba1089226a2e3198983a42eea375a3fd7e6ed0. Preparation outcomes and limitations are recorded separately; this profile alone is not a passed receipt or authorization to run the product experiment."
+}
