@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "provider_fixtures": [
+    "experiments/fixtures/providers/codex-percent-window.json",
+    "experiments/fixtures/providers/claude-code-windows.json",
+    "experiments/fixtures/providers/gemini-cli-unsupported.json",
+    "experiments/fixtures/providers/antigravity-cli-unsupported.json",
+    "experiments/fixtures/providers/orca-host-claude-code.json"
+  ],
+  "global_reset_fixtures": [
+    "experiments/fixtures/codex-reset-forecast.json",
+    "experiments/fixtures/codex-resets-history.json"
+  ]
+}
