@@ -1,0 +1,9 @@
+{
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "archived_sha256": "3d96eb544931223b20306f1aa1e40cd315a487daac84dea42f3bc14f3528b325",
+  "destination": "checkout/build-host/meter_receiver_cli.exe",
+  "already_present": true,
+  "operator_product_source_modified": false,
+  "rebuild": false,
+  "scope": "Same preserved binary at the path required by own tests; no substitute receiver."
+}

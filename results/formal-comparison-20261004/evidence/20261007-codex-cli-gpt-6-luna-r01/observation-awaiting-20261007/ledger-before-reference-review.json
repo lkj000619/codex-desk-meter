@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "comparison_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "state": "active",
+  "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "input_bundle_sha256": "891f33b6a9128e423619c6c59b309cf09b0fe3d634bec9aa04bdfe93297207a1",
+  "profile_sha256": "eae4f0ceab072eff32f8f12b423cbdbacf312650817c26825800f83edf9fbb2a",
+  "limits": {
+    "initial_seconds": 7200,
+    "remediation_seconds": 7200,
+    "remediation_rounds": 3
+  },
+  "reference_inputs": "C:\\meter-runs-20261006\\ledgers\\20261006-codex-cli-gpt-6-luna-r01-reference\\reference-inputs.json",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "common_task_sha256": "597bec4d9b8e7d7ea35eb7d8acf2fa3c146210a9db246c817c52a62c5244cfe3",
+  "common_task_run_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "runs": [
+    {
+      "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+      "directory": "C:\\meter-runs-20261006\\20261006-codex-cli-gpt-6-luna-r01",
+      "round": 0,
+      "starting_commit": "d9579af28c8952b963454e9e2d32b8322d7ed472",
+      "status": "completed",
+      "reserved_seconds": 7200,
+      "elapsed_seconds": 3094.4220000000205,
+      "reference_status": "fail",
+      "reviewed": true,
+      "implementation_commit": "c0d5d61160664923e0494302fae180089d02d247",
+      "feedback_sha256": null,
+      "tokens": {
+        "input": 17277453,
+        "output": 136034,
+        "cached": 16845056,
+        "reasoning": null,
+        "provider_total": null,
+        "total": 17413487,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "Codex turn.completed usage; cached is included in input; reasoning unavailable."
+      },
+      "terminal_manifest_sha256": "7c69320c21b9bb8e2aee762ffce9fc1f4cec6065b0ce65fc46212f8dd971ded6",
+      "source_bundle_sha256": "cfdfb6d451e3b98e4fefa13840fe2a0d1e719dfdf94723e64f5fa9b96d7e3136",
+      "reference_review_sha256": "e6856810152ae881284e2e6a8ffd7c7145889d676622440596c1f239260c5007"
+    },
+    {
+      "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+      "directory": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r02",
+      "round": 1,
+      "starting_commit": "c0d5d61160664923e0494302fae180089d02d247",
+      "status": "completed",
+      "reserved_seconds": 7200,
+      "elapsed_seconds": 2987.0,
+      "reference_status": "fail",
+      "reviewed": true,
+      "implementation_commit": "e68356829715793dc31dd188bc2a9f528f6fcbd2",
+      "feedback_sha256": "5281b8ee92e81496d7dd6b55556ed150b564fab3ad8314e8720588c1b6e0abda",
+      "tokens": {
+        "input": 13274009,
+        "output": 140022,
+        "cached": 12811008,
+        "reasoning": null,
+        "provider_total": null,
+        "total": 13414031,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "Codex turn.completed usage; cached is included in input; reasoning unavailable."
+      },
+      "terminal_manifest_sha256": "fbd7b046552e248fe7eb6dd160c82a5ff95d156f84fc29357cb23ad0d69ec95c",
+      "source_bundle_sha256": "6f063bef5bf1e92f6220c10fd4b955d9082c9846b0b8607ca98db0af7be9a2e4",
+      "reference_review_sha256": "1d4fb0c2d0cfc636c9c9bdec9e4db1ebcb2e1b9034b327508fcb4ad8f7ecbfc0"
+    },
+    {
+      "run_id": "20261006-codex-cli-gpt-6-luna-r03",
+      "directory": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r03",
+      "round": 2,
+      "starting_commit": "e68356829715793dc31dd188bc2a9f528f6fcbd2",
+      "status": "environment_failed",
+      "reserved_seconds": 4213,
+      "elapsed_seconds": 1247.2650000001304,
+      "reference_status": "fail",
+      "reviewed": true,
+      "implementation_commit": "91f7de60328b7db9a9d04acef60ac45eafb3685a",
+      "feedback_sha256": "31f91972550b1d6c39f1a995714532c299523a33fee92f5d970dd6982c40cf3a",
+      "tokens": {
+        "input": null,
+        "output": null,
+        "cached": null,
+        "reasoning": null,
+        "provider_total": null,
+        "total": null,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "No supported usage event; see raw stdout."
+      },
+      "terminal_manifest_sha256": "732dd18db5f18ca8cfb315e757b76ff80eb2b9ca70f0e24e42a3bfb4bd6cc54a",
+      "source_bundle_sha256": "62341247662a07411f7883aba2b85e9edaddd1b30f4c3b32788c32d0f91c9298",
+      "reference_review_sha256": "0fc827aec4600f5aa7f4789623f2c603deee3079dead61808315d1b130ddeb86"
+    },
+    {
+      "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+      "directory": "C:\\meter-followups-20261007\\20261007-codex-cli-gpt-6-luna-r01",
+      "round": 3,
+      "starting_commit": "91f7de60328b7db9a9d04acef60ac45eafb3685a",
+      "status": "completed",
+      "reserved_seconds": 2965,
+      "elapsed_seconds": 1192.59300000011,
+      "reference_status": "not_run",
+      "reviewed": false,
+      "implementation_commit": null,
+      "feedback_sha256": "ff6ff7becb85f95f9fccb01a983ae8ee9f220816af88dcad2c19efa081fb3ed5",
+      "tokens": {
+        "input": 4032791,
+        "output": 58187,
+        "cached": 3772672,
+        "reasoning": null,
+        "provider_total": null,
+        "total": 4090978,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "Codex turn.completed usage; cached is included in input; reasoning unavailable."
+      },
+      "terminal_manifest_sha256": "b784a19c9c7cf0a477e85efb0cce31cb0921a369de7638beab3fdb1601e3ea8d"
+    }
+  ]
+}

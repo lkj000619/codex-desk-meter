@@ -1,0 +1,14 @@
+{
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "implementation_commit": "88b2bbc61047242afb22f272c419b3a57d30bb49",
+  "policy_eligible": true,
+  "policy_review_status": "eligible",
+  "policy_review_reason": "Luna followup3 has no confirmed forbidden shell composition, out-of-scope source/hardware/global changes or operator repair in the104 manually reviewed commands. Current run eligible; prior initial/followup1 invalid policy remains, so series quality/reference-cost remains ineligible. Normal completed exit and measured token usage preserved separately; previous followup2 native usage-limit failure and null tokens remain unchanged.",
+  "operator_baseline_verified": true,
+  "restored_root": "C:\\meter-run-restores-20261007\\codex-luna-followup03-pre-observation",
+  "result_valid": true,
+  "manifest_identity_verified": true,
+  "package_manifest_sha256": "229200337fc3c1e7308e87db887bcf5185d1eaa8c7c5c4baeb131f647c9f0a99",
+  "original_checkout_used": false,
+  "files_verified": 462
+}

@@ -1,6 +1,6 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-07 02:33:32.910 KST 마지막 Luna 후속3회차 `20261007-codex-cli-gpt-6-luna-r01` 실행 중. 날짜가 바뀌어 run suffix가r01이지만 ledger round3이며 새 최초 실행이 아니다. 자기 직전 동결 commit `91f7de60328b7db9a9d04acef60ac45eafb3685a`에서 별도 checkout을 준비하고 제품 source33개·고정 입력57개·build/sdkconfig 미상속을 확인했다. Native PID30400·thread `01a11247-1dc1-74f2-aab0-c60b8252cb72`, gpt-6-luna/max·CLI0.159.2·ESP-IDF5.3.2·원본 설정과 새 receipt를 유지하며 timeout2,965초다. 자신의 회전/중복/잘림 영상·부분 수신·host 검증과 고정 기대만 전달했다. 후보 시작15회·종료14회, 현재 비용/정책/제출/제품/RM은 미확정이다. 종료 뒤 동결·독립 검증·원본 업로드·평가하며 일찍 종료해도 추가 회차는 없다. 보드는02:19 KST 업로드한 후속2 원본이다. 과거 source/evidence/실패 비용·token null·후속2 최종575파일 package·Sol/Pro 종료·Flash 보류를 보존한다. 독립 series 종료3/15로 전체 비교는 미완료다.
+상태: 2026-10-07 마지막 Luna 후속3 `20261007-codex-cli-gpt-6-luna-r01`는02:53:25.503 KST 정상 completed 종료했다. Ledger round3이며 새 최초가 아니다. 원본 source commit `88b2bbc61047242afb22f272c419b3a57d30bb49`와37source/20artifact를 동결하고462파일 독립 복원·Python22/C3/provider17·공통 host 경로를 확인했다. COM3에02:57 KST 원본 업로드,02:58 KST 같은 app 리셋·공통 frame0/1 재전송을 완료했고 ELF 일치 boot·PSRAM·USB 첫64byte 수신을 확인했다. 완전한 frame 수락과 LCD/BOOT/30초는 미확인으로 사용자 실물 관측과 RM을 기다린다. 실제1,192.593초·정규화4,090,978 token, 전체15회 coverage14/15·알려진61,608,453 token·전체 합계 미상(null), Luna series coverage3/4·알려진34,918,496 token이다. 잔여1,773.142초(29분33.142초)는 있으나 후속3회 한도를 사용해 추가 호출은 불가하다. 이번 정책 eligible·과거 series invalid를 유지한다. Sol/Pro 종료·Flash 보류·과거 판정/비용은 보존한다. 독립 series 종료3/15로 전체 비교는 미완료다.
 독립 series 종료3/15이며 전체 비교는 미완료다. 아래 기록은 각 당시 관측이며 최신 상태는 위 상태와 마지막 갱신을 따른다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
@@ -915,3 +915,13 @@ Timeout4,213초는 이 호출을 포함한 누적 잔여다. 후속2회차 시�
 2026-10-07 02:33:32.910 KST 마지막 Luna 후속3회차 `20261007-codex-cli-gpt-6-luna-r01` 실행 중. 날짜가 바뀌어 run suffix가r01이지만 ledger round3이며 새 최초 실행이 아니다. 자기 직전 동결 commit `91f7de60328b7db9a9d04acef60ac45eafb3685a`에서 별도 checkout을 준비하고 제품 source33개·고정 입력57개·build/sdkconfig 미상속을 확인했다. Native PID30400·thread `01a11247-1dc1-74f2-aab0-c60b8252cb72`, gpt-6-luna/max·CLI0.159.2·ESP-IDF5.3.2·원본 설정과 새 receipt를 유지하며 timeout2,965초다. 자신의 회전/중복/잘림 영상·부분 수신·host 검증과 고정 기대만 전달했다. 후보 시작15회·종료14회, 현재 비용/정책/제출/제품/RM은 미확정이다. 종료 뒤 동결·독립 검증·원본 업로드·평가하며 일찍 종료해도 추가 회차는 없다. 보드는02:19 KST 업로드한 후속2 원본이다. 과거 source/evidence/실패 비용·token null·후속2 최종575파일 package·Sol/Pro 종료·Flash 보류를 보존한다. 독립 series 종료3/15로 전체 비교는 미완료다.
 
 [시작 원본](evidence/20261007-codex-cli-gpt-6-luna-r01/launch-20261007/native-start-observation.json) · [시작 목록](evidence/20261007-codex-cli-gpt-6-luna-r01/launch-20261007/snapshot-inventory.json) · [관측 피드백](evidence/20261007-codex-cli-gpt-6-luna-r01/launch-20261007/candidate-feedback.json). 잔여 정확한2,965.735초에서 내림2,965초만 예약하며 실제 종료 시간을 기록한다. 현재 결과는 아직 판정하지 않는다.
+
+## 2026-10-07 Luna 마지막 후속3 종료·원본 업로드
+
+2026-10-07 마지막 Luna 후속3 `20261007-codex-cli-gpt-6-luna-r01`는02:53:25.503 KST 정상 completed 종료했다. Ledger round3이며 새 최초가 아니다. 원본 source commit `88b2bbc61047242afb22f272c419b3a57d30bb49`와37source/20artifact를 동결하고462파일 독립 복원·Python22/C3/provider17·공통 host 경로를 확인했다. COM3에02:57 KST 원본 업로드,02:58 KST 같은 app 리셋·공통 frame0/1 재전송을 완료했고 ELF 일치 boot·PSRAM·USB 첫64byte 수신을 확인했다. 완전한 frame 수락과 LCD/BOOT/30초는 미확인으로 사용자 실물 관측과 RM을 기다린다. 실제1,192.593초·정규화4,090,978 token, 전체15회 coverage14/15·알려진61,608,453 token·전체 합계 미상(null), Luna series coverage3/4·알려진34,918,496 token이다. 잔여1,773.142초(29분33.142초)는 있으나 후속3회 한도를 사용해 추가 호출은 불가하다. 이번 정책 eligible·과거 series invalid를 유지한다. Sol/Pro 종료·Flash 보류·과거 판정/비용은 보존한다. 독립 series 종료3/15로 전체 비교는 미완료다.
+
+[동결 원본과 관측](evidence/20261007-codex-cli-gpt-6-luna-r01/observation-awaiting-20261007/snapshot-inventory.json) · [원본 native 종료 사유](evidence/20261007-codex-cli-gpt-6-luna-r01/observation-awaiting-20261007/operator-observation/terminal-verification.json) · [비용15](comparison-checkpoint-15.md).
+
+2026-10-07 [관측 대기 snapshot의 회차 메타데이터 정정](evidence/20261007-codex-cli-gpt-6-luna-r01/publication-correction-20261007/correction-note.json): 원본 inventory의 템플릿 잔존 round2는 실제 ledger round3으로 읽는다. 원본 bytes와 실패한 문서 검사 절차를 보존하고 미완료 문서 반영만 이어서 마쳤다. 후보 호출·펌웨어·계측·판정 변화는 없다.
+
+2026-10-07 [관측 대기 파일 목록 보완](evidence/20261007-codex-cli-gpt-6-luna-r01/publication-correction-20261007/inventory-supplement.json): Windows 긴 경로 검사로 원본 inventory에서 빠진 재현 문서1개의 hash·크기를 동결 source와 대조해 추가 목록에 보존했다. 원본 inventory·문서 bytes·펌웨어·계측·판정은 유지한다.

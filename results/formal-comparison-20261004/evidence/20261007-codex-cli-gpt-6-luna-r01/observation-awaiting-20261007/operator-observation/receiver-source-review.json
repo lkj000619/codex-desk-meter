@@ -1,0 +1,17 @@
+{
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "reviewed_at": "2026-10-06T17:57:36.628171+00:00",
+  "source_commit": "88b2bbc61047242afb22f272c419b3a57d30bb49",
+  "source": "main/app_main.c",
+  "source_sha256": "d4b4e7b7d1570902681912a8fd51ee36036a50cf6e1c52b052fc7151e5f9d91e",
+  "receiver_source": "components/meter_core/meter_core.c",
+  "receiver_source_sha256": "22649d57878c17ed14276d4d8d6b26ab258e7a8060a313bc76739a03c21b04f7",
+  "artifact_sha256": "60e267b3685628e3079196a7c87a645c159b9cd95165d58ef145ac45e50c2a64",
+  "raw_log": "operator-observation/reference-capture-r1/device-serial.bin",
+  "raw_log_sha256": "4d4a179746d6af2ae766fb9f51da895bf0f3c2a305dddff726048e0c21499bf3",
+  "raw_bytes": 150,
+  "accepted": [],
+  "rejected": [],
+  "meaning": "finish_line logs accepted only when production meter_receiver_receive returns true. A rejected last-good sequence is retained state, not successful receipt. No LCD readability, precise latency or stability inferred.",
+  "transport": "Direct USB Serial/JTAG input. COM3 VID303A/PID1001; same frozen operator wire bytes; no collector or receiver repair."
+}
