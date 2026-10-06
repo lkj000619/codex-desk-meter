@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-06 사용자 지시로 Codex Luna `gpt-6-luna`·max의 독립 최초 실험을10:10:26.658 KST 시작했다. 새 날짜 예약·입력57개·동결 profile/권한·새 receipt·실제 thread/process argv를 확인했고 최대7,200초로 구현 중이다. 현재 제품·정책/RM·최종 비용은 미판정이다.
-후보 실행 시작12회·종료11회(최초 시작5·후속7). Sol 기준 도달로 종료·품질 부적격·제품 미합격, Pro 종료·Flash 보류를 보존한다. 독립 series 종료는 OpenCode·Pro·Sol 3개/예정15개다. 전체 비교는 미완료다. 아래 시작·대기 표현은 당시 기록이며 마지막 갱신이 최신 판정이다.
+상태: 2026-10-06 Luna 최초는11:02:01.091 KST에 completed/exit0으로 종료됐다. 실제3,094.422초·정규화17,413,487 token과 결과JSON·선택 문서·펌웨어 존재를 확인하고 원본 종료·비용·제출물을 보존했다. Source/artifact 동결과 독립 host·정책·제품/RM 평가는 대기이며 Luna 업로드는 하지 않았다.
+후보 실행 시작·종료 각12회(최초 시작5·후속7). Sol 기준 도달로 종료·품질 부적격·제품 미합격, Pro 종료·Flash 보류를 보존한다. 독립 series 종료는 OpenCode·Pro·Sol 3개/예정15개다. 전체 비교는 미완료다. 아래 시작·대기 표현은 당시 기록이며 마지막 갱신이 최신 판정이다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -813,3 +813,15 @@ Process argv의 explicit gpt-6-luna/max·권한·확장 비활성화가 profile�
 별도 runner의 최초 최대7,200초를 적용하며 대화의 토큰 만료로 같은 후보를 재실행하지 않는다. 종료 후 source·비용·제출·정책·host·제품/RM를 평가하고 genuine 원본 artifact가 있으면 업로드·실물 관측한다.
 현재 제품·정책·RM·최종 비용은 pending이다. [Checkpoint11](comparison-checkpoint-11.md)은 이전 종료11회만 집계한다. 후보 실행 중 운영자 구현 수정·피드백·serial/flash는 없으며 이전 Sol 화면은 Luna 근거가 아니다.
 Sol·Pro 종료와 Flash 보류 예산·과거 판정·원본 비용은 유지한다. 다음 독립 series나 모델을 동시에 시작하지 않는다.
+
+## 2026-10-06 Luna 최초 종료 확인
+
+상태 요청에 따라 manifest·ledger·실제 process·raw final response·제출 파일을 확인했다.11:02:01.091 KST completed/exit0이며 실행 중인 Luna process는 없다.
+[종료 snapshot](evidence/20261006-codex-cli-gpt-6-luna-r01/terminal-status-20261006/snapshot-inventory.json)의12개 파일은 원본 manifest/ledger·stdout/stderr·command audit·제출 문서와 비용을 보존한다.
+같은 최초를 다시 호출하거나 원본 manifest·ledger를 덮어쓰지 않았다. 최종 runner 시작 시각01:10:26.660Z와 기존 launch 기록01:10:26.658Z의2ms 차이도 원본 그대로 구분한다.
+실제 실행3,094.422초·157도구 호출·실패 명령11개, input17,277,453/output136,034/정규화17,413,487 token이다. Cached16,845,056은input에 포함되며 raw reasoning67,420과 동결 adapter reasoning/provider_total null을 유지한다.
+결과JSON·선택 문서·검증 기록이 있으며 결과가 참조하는 `.benchmark-inputs/e2e-evaluation-manifest.json`도 존재한다. Manifest 기본 outputs 경로의 별도 evaluation file 누락을 실제 참조 파일의 누락으로 해석하지 않는다.
+App `build-idf/codex_desk_meter.bin`은316,272 bytes, SHA-256 `3af7fd933b743ea7b16ba02627617e3adb3be0d5273eb9deb184f1be9c9d51d6`로 후보 제출 해시와 일치한다.
+후보는 Python11개/CTest3개·validator 통과를 보고했으며 실물 시험 not_run·product_pass false를 제출했다. 읽기 명령결합 제한의 예외1건도 자체 보고했으므로 정식 정책 검토가 필요하다. 자체 시험 보고와 독립 평가를 구분한다.
+현재 source/artifact 동결·독립 host·정책·제품/RM는 미완료다. Luna 펌웨어 업로드와 serial 전송은 없으며 보드의 Sol 화면은 Luna 근거가 아니다.
+후속0회·잔여7,200초/3회를 유지하되 최초 평가 전 추가 호출은 하지 않는다. 현재 실행 종료12회와 checkpoint11의 종료11회 집계 범위를 구분한다. Sol/Pro 종료·Flash 보류·과거 원본은 보존한다.

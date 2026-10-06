@@ -1,0 +1,55 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "captured_at": "2026-10-06T02:11:29.683765+00:00",
+  "files": {
+    "candidate-final-response.json": {
+      "sha256": "5118433949893cc508216780bc6f69e7d56c11768e6386838b30f9714f59742e",
+      "bytes": 1920
+    },
+    "ledger-at-terminal.json": {
+      "sha256": "208cd258f2ff1ac00f855ad569386d328876cca4c355df6e0e86e2ee318d24a6",
+      "bytes": 1861
+    },
+    "record-codex-luna-r01-terminal-status.py": {
+      "sha256": "d952f2b19c26bd8b77ec8130555052bdd739f2960e827e7986c7cb8c08c0c22f",
+      "bytes": 7455
+    },
+    "run-manifest.json": {
+      "sha256": "7c69320c21b9bb8e2aee762ffce9fc1f4cec6065b0ce65fc46212f8dd971ded6",
+      "bytes": 39301
+    },
+    "stderr.txt": {
+      "sha256": "930962c7dcf877af2074972bb6b0cf3f6a4968b42dd637c02a1e655a90e2c126",
+      "bytes": 206
+    },
+    "stdout.jsonl": {
+      "sha256": "7778aaee9b58aaf9f41821fc118311e4fe3d83fb88f5b342e31180d28a849239",
+      "bytes": 989532
+    },
+    "terminal-status.json": {
+      "sha256": "37b3bfa94dbaf491edf91be724ef20a3ce3af77399a6affaaecbd59df6a1a4b2",
+      "bytes": 3444
+    },
+    "candidate-submission/.benchmark-inputs/e2e-evaluation-manifest.json": {
+      "sha256": "361b5fc40eeb13e4d68425c4063460e2398d755c718c737c3de4f65ffc904ed8",
+      "bytes": 429
+    },
+    "candidate-submission/docs/agent-runs/20261006-codex-cli-gpt-6-luna-r01/hardware-feature-selection.md": {
+      "sha256": "a32ed7e04e399c661a8cdd3b6cee6c09105b6ca409a491ff2206d373ded2edc1",
+      "bytes": 3434
+    },
+    "candidate-submission/docs/agent-runs/20261006-codex-cli-gpt-6-luna-r01/verification-record.md": {
+      "sha256": "79f6990ca469968d10e94a37b029ad011f72dd6178010f8fab075e36f5b3ef4a",
+      "bytes": 8019
+    },
+    "candidate-submission/results/20261006-codex-cli-gpt-6-luna-r01/end-to-end-result.json": {
+      "sha256": "4d994802b55bd23e335f63bb33e81baf9269592256ff33bbab08c82d983e42bc",
+      "bytes": 12649
+    },
+    "operator-launch-preflight/runner-exit.json": {
+      "sha256": "63f64c93d1cbccaad076d972f54730aa8ed6338ad73cadcc928e621822f1b986",
+      "bytes": 119
+    }
+  },
+  "scope": "Immutable post-terminal raw status/submission/cost snapshot. Source freeze, independent evaluation and upload remain pending."
+}

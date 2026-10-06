@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-06. 상태: **사용자의 “luna 시작하자”에 따라 `gpt-6-luna`·max 최초 실험을10:10:26.658 KST 시작했다. 새 날짜 ID·독립 입력 저장소·ledger·receipt와 실제 thread/process argv를 검증했다. 같은 baseline·입력57개·profile·권한을 유지하고 최초 최대7,200초로 실행 중이다. 제품·정책·RM·최종 비용은 미판정이다. 후보 시작12회·종료11회, 독립 series 종료3개/15개다. Sol 종료·품질 부적격·제품 미합격, Pro 종료·Flash 보류와 과거 원본을 보존한다.**
+확인일: 2026-10-06. 상태: **Luna 최초는11:02:01.091 KST에 completed/exit0으로 종료됐다. 실제3,094.422초·정규화17,413,487 token과 결과JSON·선택 문서·펌웨어 존재를 확인했다. 원본 비용·제출물·종료 기록을 보존했으며 source/artifact 동결·독립 host/정책·제품/RM 평가는 대기다. 후보 자체 시험 통과 보고를 독립 평가 합격으로 표시하지 않는다. Luna 업로드는 하지 않았고 보드는 이전 Sol 관측 상태다. 후보 시작·종료 각12회, 독립 series 종료3개/15개다. Sol·Pro 종료·Flash 보류와 과거 원본을 보존한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -313,3 +313,14 @@ JSONL은 실효 model/cwd를 방출하지 않으며 app-server inventory는 exec
 종료 후 source·제출·원본 비용을 동결하고 정책·host·제품/RM를 평가한다. 업로드 가능한 원본 firmware가 있으면 당시 포트 확인 후 실물 관측으로 이어간다.
 [Checkpoint11](../../results/formal-comparison-20261004/comparison-checkpoint-11.md)은 종료한11회 비용 집계이며 실행 중 Luna의 최종 비용을 포함하지 않는다.
 재개 시 [현재 계측](../../results/formal-comparison-20261004/progress.json)과 Luna manifest·ledger·실제 process부터 확인하고 같은 최초 호출을 반복하지 않는다. 보드는 이전 Sol 관측 상태이며 Luna 성공 증거가 아니다.
+
+## 2026-10-06 Luna 최초 종료 확인·평가 대기
+
+위 실행 중은 당시 상태다. [종료 기록](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r01/terminal-status-20261006/terminal-status.json)과12개 파일의 원본 snapshot을 보존했다.
+실제 process는 종료됐고 ledger 최초1회는 completed·미검토 상태다. 같은 최초를 재호출하지 않는다.
+결과JSON은 `.benchmark-inputs/e2e-evaluation-manifest.json`을 참조하며 해당 파일과 선택 문서·검증 기록이 존재한다.
+`build-idf/codex_desk_meter.bin`은316,272 bytes·SHA-256 `3af7fd933b743ea7b16ba02627617e3adb3be0d5273eb9deb184f1be9c9d51d6`이며 제출된 해시와 일치한다. Source/artifact 결합·독립 시험은 아직 검토하지 않았다.
+후보는 Python11개·CTest3개 통과와 명령결합 제한의 예외1건을 보고했다. 이는 자체 보고이며 정책 적격성·제품/RM 판정은 독립 검토 뒤 기록한다.
+Input17,277,453·output136,034·정규화17,413,487 token이며 cached16,845,056은input에 포함된다. Raw reasoning67,420과 adapter null을 구분해 보존한다.
+후속은0회·잔여7,200초/3회지만 최초 평가 전 추가 호출은 시작하지 않는다. [현재 계측](../../results/formal-comparison-20261004/progress.json)은 종료12회로 갱신했으며 checkpoint11은 기존 종료11회 비용만 포함한다.
+다음 단계는 자기 source/artifact 동결·정책/독립 host 검토·공통 실물/RM 평가다. 이 종료 확인에서 후보 코드 수정·rebuild·serial/flash는 수행하지 않았다.

@@ -1,7 +1,7 @@
 # Codex Luna 최초 실험
 
 목표: 사용자 지시 “luna 시작하자”에 따라 block1/seed1의 다음 순서 `gpt-6-luna`·max 최초 실험을 같은 동결 조건으로 한 번 시작한다.
-상태: 시작 작업 완료. `20261006-codex-cli-gpt-6-luna-r01` 최초 실행을2026-10-06 10:10:26.658 KST에 시작했고 후보 구현은 실행 중이다. Sol series 종료·원본 보존을 확인했으며 전날의 미실행 Luna 예약은 보존했다.
+상태: 시작 작업 완료. `20261006-codex-cli-gpt-6-luna-r01` 최초는11:02:01.091 KST에 completed/exit0으로 종료됐다.3,094.422초·원본 비용·결과JSON/선택 문서/app 존재를 확인했다. Source 동결·독립 평가·Luna 업로드는 대기다. Sol series 종료·원본 보존과 전날 미실행 예약을 유지한다.
 원본: [운영 계약](../experiments/comparison-operating-contract.md) · [현재 상태](../experiments/next-comparison-readiness.md) · [전체 실행 계획](2026-10-04-formal-comparison-execution.md).
 
 - [x] 깨끗한 baseline `272875140d1998d458e26fdb2f6deab5e5d8f7b5`에서 오늘 날짜의 새 ID·독립 후보 저장소·ledger를 준비하고 입력57개·동결 profile·제품 코드 없는 최초 상태를 검증했다.
@@ -18,3 +18,5 @@
 [현재 설정 확인](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r01/launch-20261006/operator-launch-preflight/current-checks.json)을 연결했다.
 Thread `01a10ec3-0ebc-75f1-8060-d2ee9aff0262`·candidate PID7052·launcher PID8376, receipt SHA-256 `44ba7ad2e5ad8c6f01784531cfbea792b783f58e1df4201cb2c350d9eff7204b`다.
 독립 저장소의 준비 commit은 `d9579af28c8952b963454e9e2d32b8322d7ed472`다. Manifest branch label은 `experiment/openai/codex-cli/gpt-6-luna`이며 실제 local branch는 master로 구분한다. 다른 후보와 저장소·Git 이력을 공유하지 않는다.
+
+2026-10-06 상태 확인 갱신: [종료 근거](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r01/terminal-status-20261006/terminal-status.json)를 보존했다. 후보 자체 시험 보고는 독립 평가 합격이 아니며 다음 단계는 자기 source/artifact 동결·정책/host 검토·실물/RM 평가다. 이 갱신에서 모델 재호출·source 수정·rebuild·serial/flash는 없다.
