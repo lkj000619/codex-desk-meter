@@ -11,7 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RECEIVER = ROOT / "build-host" / ("meter_receiver_cli.exe" if os.name == "nt" else "meter_receiver_cli")
-COMMON_FRAMES = ROOT / ".benchmark-inputs" / "feedback-evidence" / "008-sent-frames.jsonl"
+COMMON_FRAMES = ROOT / ".benchmark-inputs" / "feedback-evidence" / "007-sent-frames.jsonl"
 
 
 class ProductionCReceiverTests(unittest.TestCase):

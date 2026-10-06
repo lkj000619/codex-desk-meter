@@ -413,8 +413,10 @@ esp_err_t board_lcd_init(void)
     vendor.rgb_config = &rgb;
     vendor.init_cmds = panel_commands;
     vendor.init_cmds_size = sizeof(panel_commands) / sizeof(panel_commands[0]);
-    vendor.flags.enable_io_multiplex = 1;
-    vendor.flags.mirror_by_cmd = 0;
+    /* The LCD SPI pins are separate from the RGB bus on this board. Keep the
+       panel IO alive through RGB startup, as in the manufacturer's factory BSP. */
+    vendor.flags.enable_io_multiplex = 0;
+    vendor.flags.mirror_by_cmd = 1;
     esp_lcd_panel_dev_config_t config = {
         .reset_gpio_num = PIN_LCD_RESET,
         .rgb_ele_order = LCD_RGB_ELEMENT_ORDER_RGB,
@@ -434,7 +436,7 @@ esp_err_t board_lcd_init(void)
 
     ledc_timer_config_t timer = {
         .speed_mode = LEDC_LOW_SPEED_MODE, .duty_resolution = LEDC_TIMER_8_BIT,
-        .timer_num = LEDC_TIMER_3, .freq_hz = 50000, .clk_cfg = LEDC_AUTO_CLK,
+        .timer_num = LEDC_TIMER_3, .freq_hz = 50000, .clk_cfg = LEDC_SLOW_CLK_RC_FAST,
     };
     ESP_RETURN_ON_ERROR(ledc_timer_config(&timer), TAG, "backlight PWM timer");
     ledc_channel_config_t channel = {

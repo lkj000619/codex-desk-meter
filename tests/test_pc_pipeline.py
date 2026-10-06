@@ -37,7 +37,7 @@ class FixturePipelineTests(unittest.TestCase):
         self.assertEqual(len(collected.global_resets), 2)
         self.assertTrue(all(reset["stale"] and reset["error_code"] is None for reset in collected.global_resets))
 
-        expected_lines = (ROOT / ".benchmark-inputs/feedback-evidence/008-sent-frames.jsonl").read_bytes().splitlines(keepends=True)
+        expected_lines = (ROOT / ".benchmark-inputs/feedback-evidence/007-sent-frames.jsonl").read_bytes().splitlines(keepends=True)
         self.assertEqual(len(expected_lines), 2)
         payload = collected.payload
         first = encode_frame(build_frame(payload, 0, "2026-09-30T18:40:49Z"))

@@ -66,8 +66,12 @@ void app_main(void)
 {
     meter_receiver_init(&receiver);
     ESP_ERROR_CHECK(board_lcd_init());
-    ESP_ERROR_CHECK(board_lcd_present(NULL, 0, false, false, NULL,
-                                      METER_PAGE_DASHBOARD, 0, 0, 0, false));
+    esp_err_t boot_draw_error = board_lcd_present(NULL, 0, false, false, NULL,
+        METER_PAGE_DASHBOARD, 0, 0, 0, false);
+    if (boot_draw_error != ESP_OK) {
+        ESP_LOGE(TAG, "initial LCD frame submit failed: %s", esp_err_to_name(boot_draw_error));
+        return;
+    }
     ESP_LOGI(TAG, "boot screen submitted before USB receiver setup");
     usb_serial_jtag_driver_config_t usb_config = {
         .tx_buffer_size = 256,
@@ -98,10 +102,15 @@ void app_main(void)
     uint64_t scroll_offset = 0;
     meter_page_t page = METER_PAGE_DASHBOARD;
     bool needs_draw = true;
+    bool first_usb_rx_logged = false;
 
     for (;;) {
         int bytes = usb_serial_jtag_read_bytes(incoming, sizeof(incoming), pdMS_TO_TICKS(10));
         uint64_t now_ms = (uint64_t)esp_timer_get_time() / 1000u;
+        if (bytes > 0 && !first_usb_rx_logged) {
+            ESP_LOGI(TAG, "USB Serial/JTAG receive path observed data (%d bytes)", bytes);
+            first_usb_rx_logged = true;
+        }
         if (bytes > 0) needs_draw |= consume_usb_bytes(incoming, bytes, line, &line_length,
             &overflow, &pending_lf, &pending_lf_ms, now_ms);
         if (pending_lf && now_ms - pending_lf_ms >= 50u) {
