@@ -825,3 +825,30 @@ App `build-idf/codex_desk_meter.bin`은316,272 bytes, SHA-256 `3af7fd933b743ea7b
 후보는 Python11개/CTest3개·validator 통과를 보고했으며 실물 시험 not_run·product_pass false를 제출했다. 읽기 명령결합 제한의 예외1건도 자체 보고했으므로 정식 정책 검토가 필요하다. 자체 시험 보고와 독립 평가를 구분한다.
 현재 source/artifact 동결·독립 host·정책·제품/RM는 미완료다. Luna 펌웨어 업로드와 serial 전송은 없으며 보드의 Sol 화면은 Luna 근거가 아니다.
 후속0회·잔여7,200초/3회를 유지하되 최초 평가 전 추가 호출은 하지 않는다. 현재 실행 종료12회와 checkpoint11의 종료11회 집계 범위를 구분한다. Sol/Pro 종료·Flash 보류·과거 원본은 보존한다.
+
+## 2026-10-06 Luna 최초 원본 검증·COM3 재업로드·검은 화면 평가
+
+사용자의 업로드 지시에 따라 [평가 계획](../../docs/plans/2026-10-06-codex-luna-initial-evaluation.md)을 수행했다.
+동결 commit `c0d5d61160664923e0494302fae180089d02d247`의 source33개/artifact19개·original terminal manifest/ledger·raw333 events·비용을 보존했다.
+마지막 성공 IDF build는raw line292이며 이후 firmware source 변경이 없다. 원본 app316,272 bytes·SHA-256 `3af7fd933b743ea7b16ba02627617e3adb3be0d5273eb9deb184f1be9c9d51d6`를 그대로 사용했다.
+전체134개 명령·23개 파일변경을 검토하고 [정책 판정](evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/policy-review.json)을 연결했다.
+파이프8호출(raw16/202/239/241/284/311/313/321)과 세미콜론 결합1호출(raw266·조회3문장)이 변경 없는 common task를 위반해 invalid_for_comparison이다. 따옴표 안 regex alternation·native 실행 wrapper를 위반 건수로 세지 않았으며 캡처한 명령은 실행하지 않았다.
+실패11명령에는 rg 부재·process267·offline registry 의존성·컴파일·직접 Python import 문제가 있다. Original failures, raw reasoning67,420과 adapter null·cached input 포함 정의를 그대로 보존했다.
+
+기존 운영자 artifact-path 수집 보완을 재사용해 후보가 선언한 `build-idf/`의 app/ELF/map/bootloader/partition을 같은 디렉터리에서 보관했다. 동결 operator checkout·validators·후보 입력·source·profile·권한을 바꾸지 않았다.
+404개 관측 전 package를 독립 복원하고 package ZIP의 동결 validator로 재검증했다. Restored Python11개·archived 생산 C parser/state/idle-dim 실행 파일3개가 통과했으며 CTest의 원본 경로나 후보 checkout을 사용하지 않았다.
+공통 frame0/1의 candidate encoder bytes는 정확히 일치한다. [수집기 한계](evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/operator-observation/host-semantic-limitations.json)에 common legacy payload8개 필드 차이와 modern validity16/17을 남겼다.
+`available-over-stale-threshold.json`을 collector가 stale로 보정해 허용하는 기존 동작과 frozen invalid 기대의 차이를 보존했다. Full29 oracle·임의 common-frame 생산 C 입력 seam·실물 idle-dim·PC GUI의 통과를 주장하지 않는다.
+
+11:27:50.352863 KST COM3 최초 기록 쓰기가 성공했다. 사용자가 “esp32 com3에 연결하지않았었음”이라고 재업로드를 요청해, 그 로그를 보존하면서 당시 관측 대상과의 물리적 연결을 미확인으로 기록했다.
+[재업로드 원본](evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/operator-observation/hardware-attempt-02/frozen-artifact-upload-stdout.txt)은21:03:05.479794 KST COM3·ESP32-S3 rev0.2·USB Serial/JTAG·MAC `28:84:85:B0:85:18`과 세 이미지의 `Hash of data verified.`를 기록한다.
+두 번 모두 같은 동결 펌웨어이며 NVS0x9000/0x6000만 공통 초기화했다. 전체 flash erase·후보 재호출·운영자 source 수정·rebuild는 없다.
+[현재 capture](evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/operator-observation/hardware-attempt-02/reference-capture-r1/capture.json)는 공통 seq0/1을 각1,543 bytes 쓰고 serial을 닫았다. Capture0 bytes·수락/거부 marker 부재로 실제 수신 여부는 미확인이다. UART0 primary·USB Serial/JTAG secondary 설정은 함께 남겼고 무응답 원인은 확정하지 않는다.
+
+사용자는 재업로드 관측 질문에 [“lcd에서는 검은 화면만 나옴”](evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/operator-observation/hardware-attempt-02/user-black-screen-report.json)이라고 답했다. COM3 업로드 성공은 로그로 확인하지만 application 정상 기동이나 LCD 정상 출력은 이 기록에서 확인되지 않는다.
+[제한된 최초 RM](evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/reference-review.json)은 원본 terminal digest를 사용하는 frozen guard로 한 번 적용했다. RM1/2 partial·RM3 fail·RM4/5 not_run, reference fail·product_pass false다.
+BOOT 조작·RESET·30초 연속 유지·자동 재부팅·검은 화면의 원인·영상/사진 관측을 만들어내지 않는다. Ledger active·후속0회·잔여7,200초/3회로 유지하며 후속이나 다른 모델을 시작하지 않았다.
+
+[최종 독립 감사](evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/restore-audit.json)는464개 inventory 파일·source33/artifact19·입력57·원본 비용·정책/RM·현재 업로드·사용자 보고 결합을 확인했다. Package SHA-256은 `57ad97f136d462b95093bd562d8a9af176e91bfee20e6ae826c36d68cebd0764`다.
+[125개 파일 공개 목록](evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/snapshot-inventory.json)은 원본 bytes/hash를 보존한다. 이전404/435/454개 package·launch/terminal snapshot·과거 판정·동결 ref는 그대로다.
+[Checkpoint12](comparison-checkpoint-12.md)는 실제12회·정규화44,103,444 token을 기록하며 모든 실패/부적격 비용과 checkpoint11까지의 원본을 유지한다. 전체 series 종료3/15·Sol/Pro 종료·Flash 보류는 유지한다.

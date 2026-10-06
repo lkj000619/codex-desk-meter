@@ -1,0 +1,85 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "reviewer": "Codex operator",
+  "reviewed_at": "2026-10-06T12:07:03.962530+00:00",
+  "items": {
+    "RM1": {
+      "status": "partial",
+      "reason": "Original ESP-IDF5.3.2 ESP32-S3 build and unchanged archived artifact verified; COM3 upload writes all three flash images and verifies their hashes. No runtime-ready/receipt marker or legible panel output was captured, so successful application execution is unconfirmed.",
+      "evidence": [
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "97f2a0ec15bb1070179fb8f3fdc56b0521b579e5fed361946fab8e28d7ff6329"
+        },
+        {
+          "path": "operator-observation/hardware-attempt-02/hardware-slot.json",
+          "sha256": "355622bdc38dde9be0bf3792ce87a49cd01408d62c12479cc7004fcc499da12d"
+        },
+        {
+          "path": "operator-observation/hardware-attempt-02/frozen-artifact-upload-stdout.txt",
+          "sha256": "39c1c9dd5cd827585c0f3205edd9bc13909181063c6c3a5397a856a048fe4c4b"
+        },
+        {
+          "path": "operator-observation/hardware-attempt-02/console-source-review.json",
+          "sha256": "8d331ddee224c2c9947edc63375e1174616b53f31532d14f457ed715b08d5934"
+        }
+      ]
+    },
+    "RM2": {
+      "status": "partial",
+      "reason": "Restored candidate encoder exactly reproduces common frame0/1 and host serial writes complete1543 bytes each. No accepted or rejected device marker appears in zero-byte captures; device receipt is unconfirmed. Candidate legacy collector differs in eight fields and one of17 provider validity cases differs. No receiver success inferred from write completion.",
+      "evidence": [
+        {
+          "path": "operator-observation/independent-host-checks/common-stimulus-check.json",
+          "sha256": "09a59780e3bf1b1944ab7fbc159c735f5dd4615db77178345df9737669e0782c"
+        },
+        {
+          "path": "operator-observation/host-semantic-limitations.json",
+          "sha256": "ece617ad8457ef1851a88b28664d384b7156a501b655fd10c205ff9d254417a1"
+        },
+        {
+          "path": "operator-observation/hardware-attempt-02/reference-capture-r1/capture.json",
+          "sha256": "4aeeda37dae4b96539845b4df4356c964fc196a187851cd262fe5a5a123ca3ee"
+        },
+        {
+          "path": "operator-observation/hardware-attempt-02/receiver-source-review.json",
+          "sha256": "0d3c247a10c9e44a958f13391941d16fa69a72ced65d9a8e9e047d4bdaaf9707"
+        }
+      ]
+    },
+    "RM3": {
+      "status": "fail",
+      "reason": "User reports the current21:03 KST Luna artifact shows only a black screen. Required58% five-hour and82% weekly remaining values are not displayed in this report. Exact receiver state and black-screen cause remain unconfirmed.",
+      "evidence": [
+        {
+          "path": "operator-observation/hardware-attempt-02/user-black-screen-report.json",
+          "sha256": "eff17239cf65bed5dcc19a869980d6b1602e86c5684a4b21914150b1b4a09732"
+        }
+      ]
+    },
+    "RM4": {
+      "status": "not_run",
+      "reason": "User reports the current screen is black, but no page-selection/three-information-view observations were supplied. Do not infer unseen alternate views.",
+      "evidence": [
+        {
+          "path": "operator-observation/hardware-attempt-02/user-black-screen-report.json",
+          "sha256": "eff17239cf65bed5dcc19a869980d6b1602e86c5684a4b21914150b1b4a09732"
+        }
+      ]
+    },
+    "RM5": {
+      "status": "not_run",
+      "reason": "BOOT press count, response and cycle/return were not reported. No button-failure or navigation success inferred.",
+      "evidence": [
+        {
+          "path": "operator-observation/hardware-attempt-02/user-black-screen-report.json",
+          "sha256": "eff17239cf65bed5dcc19a869980d6b1602e86c5684a4b21914150b1b4a09732"
+        }
+      ]
+    }
+  },
+  "product_pass": false,
+  "policy_status": "invalid_for_comparison",
+  "note": "Bounded initial assessment from preserved build/upload/host records and user current-screen report. BOOT/30s continuity/physical optional feature/GUI/full29 oracle remain unmeasured. Earlier11:27 target association remains unconfirmed by user; all logs and cost preserved."
+}

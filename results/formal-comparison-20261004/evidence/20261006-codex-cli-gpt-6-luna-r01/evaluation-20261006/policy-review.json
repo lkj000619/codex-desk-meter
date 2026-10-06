@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "binding": {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+    "experiment_id": "version-2-end-to-end-v1",
+    "baseline_id": "comparison-baseline-20261004",
+    "baseline_ref": "comparison-baseline-20261004",
+    "agent": {
+      "provider": "openai",
+      "product": "codex-cli",
+      "interface": "cli",
+      "agent_version": "codex-cli 0.159.2",
+      "model": "gpt-6-luna",
+      "reasoning": "max",
+      "configuration_sha256": "d7980c28a03fcda158f3831200d7336592f367c93f7cac46c63f5983b5b6bef9"
+    },
+    "execution": {
+      "started_at": "2026-10-06T01:10:26.660Z",
+      "ended_at": "2026-10-06T02:02:01.091Z",
+      "timeout_seconds": 7200,
+      "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+      "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+      "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+      "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+      "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+      "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+      "profile_sha256": "eae4f0ceab072eff32f8f12b423cbdbacf312650817c26825800f83edf9fbb2a",
+      "input_bundle_sha256": "891f33b6a9128e423619c6c59b309cf09b0fe3d634bec9aa04bdfe93297207a1",
+      "network_mode": "offline-fixture",
+      "sandbox_policy": "prompt-and-log",
+      "approval_policy": "--ask-for-approval never, workspace-write, elevated sandbox; product execution requires a later user instruction",
+      "branch": "experiment/openai/codex-cli/gpt-6-luna",
+      "host": "DESKTOP-JCMEN12"
+    },
+    "status": "completed",
+    "exit_code": 0,
+    "delivered_prompt_sha256": "597bec4d9b8e7d7ea35eb7d8acf2fa3c146210a9db246c817c52a62c5244cfe3",
+    "local_base_commit": "d9579af28c8952b963454e9e2d32b8322d7ed472",
+    "user_interventions": null,
+    "raw_evidence": {
+      "stdout.jsonl": "7778aaee9b58aaf9f41821fc118311e4fe3d83fb88f5b342e31180d28a849239",
+      "stderr.txt": "930962c7dcf877af2074972bb6b0cf3f6a4968b42dd637c02a1e655a90e2c126",
+      "prompt.txt": "597bec4d9b8e7d7ea35eb7d8acf2fa3c146210a9db246c817c52a62c5244cfe3",
+      "profile.json": "d7980c28a03fcda158f3831200d7336592f367c93f7cac46c63f5983b5b6bef9"
+    },
+    "raw_evidence_sha256": "f0f10837843a7be034ebd8fb31db2541a81579fa5f81b7caf0b088e1059f4507"
+  },
+  "reviewed_at": "2026-10-06T02:25:44.234274Z",
+  "decision": {
+    "status": "invalid_for_comparison",
+    "reviewer": "Codex operator",
+    "user_interventions": 0,
+    "reason": "Initial Luna has eight confirmed pipe calls at raw lines16,202,239,241,284,311,313,321 and one semicolon-composed call containing three Get-Content statements at line266. These violate the unchanged common shell rule. Preserve source, original firmware, product observations and all raw cost; exclude this run from policy-eligible quality/reference-cost comparison.",
+    "intervention_review": "No operator code repair, replacement model call, in-run feedback or permission relaxation. Raw measured intervention null preserved; audited interventions0.",
+    "evidence": [
+      {
+        "path": "operator-observation/shell-command-policy-audit.json",
+        "sha256": "8fdd586077a04859c7322dcb986df10d867c7d4e5643b9f4dd963cf3b1fefc46"
+      },
+      {
+        "path": "operator-observation/native-tool-review.json",
+        "sha256": "aed9ef878d3d7ebee1ff7b70a0b75dc06ff31b66a844d72cef96555798f73730"
+      }
+    ]
+  },
+  "review_sha256": "dd88e15b549f95ffd36a1413d473add83bbc2c8743e29cda2f324830a9169363"
+}

@@ -1,0 +1,16 @@
+test_fixture_registry_collects_each_adapter_and_marks_old_values_stale (test_pc_pipeline.FixturePipelineTests.test_fixture_registry_collects_each_adapter_and_marks_old_values_stale) ... ok
+test_frame_is_sorted_crc_signed_and_lf_terminated (test_pc_pipeline.FixturePipelineTests.test_frame_is_sorted_crc_signed_and_lf_terminated) ... ok
+test_global_capture_time_must_not_be_missing (test_pc_pipeline.FixturePipelineTests.test_global_capture_time_must_not_be_missing) ... ok
+test_global_reset_aliases_are_normalized_and_sources_stay_separate (test_pc_pipeline.FixturePipelineTests.test_global_reset_aliases_are_normalized_and_sources_stay_separate) ... ok
+test_legacy_usage_maps_original_values_and_keeps_observation_time (test_pc_pipeline.FixturePipelineTests.test_legacy_usage_maps_original_values_and_keeps_observation_time) ... ok
+test_one_adapter_failure_keeps_last_good_and_does_not_stop_others (test_pc_pipeline.FixturePipelineTests.test_one_adapter_failure_keeps_last_good_and_does_not_stop_others) ... ok
+test_source_age_boundary_299_and_300_seconds (test_pc_pipeline.FixturePipelineTests.test_source_age_boundary_299_and_300_seconds) ... ok
+test_corrupt_state_stops_sender_even_with_initialization_flag (test_pc_pipeline.SenderStateTests.test_corrupt_state_stops_sender_even_with_initialization_flag) ... ok
+test_explicit_empty_receiver_initialization_then_durable_increment (test_pc_pipeline.SenderStateTests.test_explicit_empty_receiver_initialization_then_durable_increment) ... ok
+test_successful_host_write_is_not_reported_as_device_ack (test_pc_pipeline.SenderStateTests.test_successful_host_write_is_not_reported_as_device_ack) ... ok
+test_wrap_and_failed_write_consume_sequence (test_pc_pipeline.SenderStateTests.test_wrap_and_failed_write_consume_sequence) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.054s
+
+OK

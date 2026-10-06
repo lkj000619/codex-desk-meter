@@ -1,0 +1,93 @@
+"""Fresh frozen-validator audit and host tests using the independent restoration."""
+from datetime import datetime,timezone
+from pathlib import Path
+import copy,importlib.util,json,os,re,subprocess,sys,time,zipfile
+
+PACK=Path('C:/meter-run-packages-20261006/codex-luna-r01-pre-observation')
+REST=Path('C:/meter-run-restores-20261006/codex-luna-r01-pre-observation')
+OP=REST/'operator';CO=REST/'checkout';FROZEN=REST/'frozen-operator-audit-v1';OUT=REST/'post-restore-host-checks'
+trusted=json.loads((PACK.parent/'codex-luna-r01-pre-observation-create.json').read_text(encoding='utf-8'))['package_manifest_sha256']
+FROZEN.mkdir(exist_ok=False)
+with zipfile.ZipFile(OP/'operator-baseline.zip') as z:z.extractall(FROZEN)
+sys.path.insert(0,str(FROZEN/'scripts'))
+import benchmark
+from benchmark_support import digest,read,save,verify_evidence
+from operator_baseline import verify
+from policy_review import validate_review
+from evidence_package import verify_report_dependencies
+assert digest((PACK/'package-manifest.json').read_bytes())==trusted
+package=read(PACK/'package-manifest.json');m=read(OP/'run-manifest.json');f=read(OP/'operator-source-freeze.json')
+for name,item in package['files'].items():
+    p=PACK/name;b=Path('\\\\?\\'+str(p.resolve())).read_bytes()
+    assert len(b)==item['bytes'] and digest(b)==item['sha256'],name
+verify(m,OP);verify_evidence(m,OP);benchmark.verify_agent_inputs(OP,m);verify_report_dependencies(m,OP)
+assert validate_review(m,OP/'run-manifest.json')['decision']['status']=='invalid_for_comparison'
+assert benchmark.git('rev-parse','HEAD',cwd=CO)==f['commit']
+original=read(OP/'operator-observation/terminal-originals/run-manifest.json')
+assert digest((OP/'operator-observation/terminal-originals/run-manifest.json').read_bytes())==f['original_terminal_manifest_sha256']
+assert original['measurement']==m['measurement']
+for key,value in original['execution'].items():
+    if key!='worktree':assert value==m['execution'][key],key
+for name,item in f['sources'].items():
+    raw=(OP/item['operator_raw_copy']).read_bytes();assert digest(raw)==item['sha256'] and len(raw)==item['bytes']
+    if name!=m['outputs']['structured_result']:assert (CO/name).read_bytes().replace(b'\r\n',b'\n')==raw.replace(b'\r\n',b'\n'),name
+for name,item in f['artifacts'].items():
+    raw=(OP/item['operator_raw_copy']).read_bytes();assert len(raw)==item['bytes'] and digest(raw)==item['sha256'],name
+    if name.endswith(('.bin','.elf')):assert (CO/name).read_bytes()==raw,name
+assert not f['firmware_source_mutations_after_last_build'] and (CO/'build-idf/codex_desk_meter.elf').read_bytes()[:4]==b'\x7fELF'
+OUT.mkdir(exist_ok=False);env=os.environ.copy();env['PYTHONDONTWRITEBYTECODE']='1'
+sys.pycache_prefix=str(REST/'unused-host-bytecode-cache');env['PYTHONPYCACHEPREFIX']=sys.pycache_prefix
+assert not Path(sys.pycache_prefix).exists()
+cache=(OP/'operator-observation/artifact-snapshot/build-host/CMakeCache.txt').read_text(encoding='utf-8')
+compiler=next(line.split('=',1)[1] for line in cache.splitlines() if line.startswith('CMAKE_C_COMPILER:FILEPATH='))
+runtime=Path(compiler).parent;assert runtime.is_dir();env['PATH']=str(runtime)+os.pathsep+env.get('PATH','')
+checks=[]
+def check(name,argv,input_data=None):
+    tick=time.monotonic();p=subprocess.run([str(x) for x in argv],cwd=CO,env=env,input=input_data,capture_output=True,timeout=120)
+    (OUT/(name+'-stdout.txt')).write_bytes(p.stdout);(OUT/(name+'-stderr.txt')).write_bytes(p.stderr)
+    checks.append({'name':name,'argv':[str(x) for x in argv],'exit_code':p.returncode,'elapsed_seconds':time.monotonic()-tick})
+    return p
+
+check('python-unit-tests',[sys.executable,'-B','-X','utf8','-m','unittest','discover','-s','tests','-v'])
+for name in ['test_meter_parser','test_meter_state','test_idle_dim']:
+    check(name,[OP/'operator-observation/artifact-snapshot/build-host'/(name+'.exe')])
+assert all(item['exit_code']==0 for item in checks),checks
+sys.path.insert(0,str(CO))
+from pc import pipeline as module
+import tempfile
+reference=OP/'reference';wire=(reference/'expected-frames.jsonl').read_bytes();frames=[json.loads(s) for s in wire.splitlines()]
+encoded=[module.encode_frame(module.build_frame(frame['payload'],frame['sequence'],frame['sent_at'])) for frame in frames]
+encoder_matches=b''.join(encoded)==wire
+(OUT/'candidate-encoded-common-frames.jsonl').write_bytes(b''.join(encoded))
+with tempfile.TemporaryDirectory(dir=CO) as temporary:
+    registry=Path(temporary)/'operator-fixtures.json'
+    save(registry,{'provider_fixtures':['experiments/fixtures/personal-usage.json'],
+        'global_reset_fixtures':['experiments/fixtures/codex-reset-forecast.json','experiments/fixtures/codex-resets-history.json']})
+    collected=module.FixtureCollector(registry).collect(module.parse_time('2026-09-30T18:40:49Z','reference'))
+    collector={'input_fixture':'experiments/fixtures/personal-usage.json','reference_time':'2026-09-30T18:40:49Z',
+        'usage_entries':len(collected.usage),'global_reset_entries':len(collected.global_resets),'errors':collected.failures,
+        'matches_common_reference_payload':collected.payload==frames[0]['payload']}
+    save(OUT/'candidate-legacy-collector-frame.json',{'payload':collected.payload,'errors':collected.failures})
+    matrix=read(CO/'experiments/fixtures/provider-fixture-matrix.json');provider_checks=[]
+    for entry in matrix['fixtures']:
+        save(registry,{'provider_fixtures':['experiments/fixtures/'+entry['path']],'global_reset_fixtures':[]})
+        actual=module.FixtureCollector(registry).collect(module.parse_time(matrix['reference_time'],'reference'))
+        invalid=bool(actual.failures)
+        provider_checks.append({'fixture':entry['path'],'expected':entry['expected'],'observed_invalid':invalid,
+            'matches_expected_validity':invalid==(entry['expected']=='invalid'),'errors':actual.failures})
+save(OUT/'host-checks.json',{'run_id':m['run_id'],'checked_at':datetime.now(timezone.utc).isoformat(),'checks':checks,
+    'source_executables_unchanged':True,'operator_firmware_rebuild':False,'original_checkout_used':False,
+    'recorded_compiler_runtime':str(runtime),'scope':'Restored Python11 tests and three original archived C executables; no CTest cached original paths or rebuild.'})
+save(OUT/'common-stimulus-check.json',{'run_id':m['run_id'],'common_frames_sha256':digest(wire),
+    'encoder_matches_exact_common_frames':encoder_matches,'legacy_collector':collector,'provider_fixture_checks':provider_checks,
+    'arbitrary_common_frame_production_c_receiver':'not_run: candidate submitted no executable input seam; production C own tests passed. Device common-frame acceptance will be measured on COM3.',
+    'scope':'Host tests and exact wire encoding only; partial provider validity checks do not imply full29 oracle/device/optical pass.'})
+audit=dict(read(REST/'restore-report.json'),frozen_operator_validators_used=True,original_run_or_checkout_path_used=False,
+    inventory_bytes_verified=True,immutable_input_files_verified=57,original_terminal_and_cost_preserved=True,
+    raw_candidate_source_files_verified=len(f['sources']),raw_candidate_artifacts_verified=len(f['artifacts']),
+    candidate_artifact_source_binding_verified=True,host_checks_completed=True,generated_bytecode_cache_not_loaded=True,
+    hardware_status='not_run',reference_review_applied=False,product_pass=False)
+save(REST/'frozen-validator-audit.json',audit)
+print(json.dumps({'audit':audit,'host_checks':checks,'encoder_matches_exact_common_frames':encoder_matches,
+    'legacy_collector':collector,'provider_fixture_checks_passed':sum(x['matches_expected_validity'] for x in provider_checks),
+    'provider_fixture_cases':len(provider_checks)}))

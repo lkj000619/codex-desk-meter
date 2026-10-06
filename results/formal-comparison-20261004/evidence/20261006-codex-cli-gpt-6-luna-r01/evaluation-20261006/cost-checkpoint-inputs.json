@@ -1,0 +1,69 @@
+{
+  "unique_attempts": 12,
+  "total_normalized_tokens": 44103444,
+  "input_manifests": [
+    {
+      "path": "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\run-manifest.json",
+      "run_id": "20261004-opencode-cli-opencode-muse-r01",
+      "sha256": "b9a4117336e79ffe6e1d5605090c136ee107ff45d24a34209497967d62b3eec0"
+    },
+    {
+      "path": "C:\\meter-followups-20261004\\20261004-opencode-cli-opencode-muse-r02\\run-manifest.json",
+      "run_id": "20261004-opencode-cli-opencode-muse-r02",
+      "sha256": "6765f2bb943935dcdbf108197846c45390ded1b7599a9465b8be106863915729"
+    },
+    {
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\run-manifest.json",
+      "run_id": "20261005-antigravity-cli-agy-flash-r01",
+      "sha256": "efdce3fcee68b20592a69165eebd59a412d5e16812134a908dbf6faca7bd33f8"
+    },
+    {
+      "path": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-flash-r02\\run-manifest.json",
+      "run_id": "20261005-antigravity-cli-agy-flash-r02",
+      "sha256": "c2c07c3a18b4dff64c5984de55070686b5740e79104b8272ea4397c88534ce11"
+    },
+    {
+      "path": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\run-manifest.json",
+      "run_id": "20261005-antigravity-cli-agy-pro-r01",
+      "sha256": "9812e34b2642a816d72f1728ddf73b3980416f06a49b3f303a50f1b8389d956b"
+    },
+    {
+      "path": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r02\\run-manifest.json",
+      "run_id": "20261005-antigravity-cli-agy-pro-r02",
+      "sha256": "a535d5fd444b2219f82533db097bd3a8e861a24f572b63e050171dc3ed2ac323"
+    },
+    {
+      "path": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r03\\run-manifest.json",
+      "run_id": "20261005-antigravity-cli-agy-pro-r03",
+      "sha256": "db669854a4fde34c97b91e347c524088183734f781055af9be4e3cae2724659a"
+    },
+    {
+      "path": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\run-manifest.json",
+      "run_id": "20261005-antigravity-cli-agy-pro-r04",
+      "sha256": "b70b0f365f17addbdadc530805b65289ecfeea7edf56596eecc33c795cfae27d"
+    },
+    {
+      "path": "C:\\meter-policy-corrections-20261006\\codex-sol-initial\\run-manifest.json",
+      "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "sha256": "48eef20f5b345193b6adf86fdee0a78af9b6d0b27fc2d4298cf5feca4022d4e3"
+    },
+    {
+      "path": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-sol-r01\\run-manifest.json",
+      "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+      "sha256": "7cc40ea58b5d17b0785ee41b4cc530f2dbe2c29b122918bac4cdde0f729529a4"
+    },
+    {
+      "path": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-sol-r02\\run-manifest.json",
+      "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+      "sha256": "499759c1604d07a5294bc0a0b1d4120532b7954a6077b615ab72f4db1778f44d"
+    },
+    {
+      "path": "C:\\meter-runs-20261006\\20261006-codex-cli-gpt-6-luna-r01\\run-manifest.json",
+      "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+      "sha256": "e0f05a5bbe566ac840cdcb2ccb6c3b79181dc32398ebfcbf74a62c3fda9623bd"
+    }
+  ],
+  "checkpoint": "results/formal-comparison-20261004/comparison-checkpoint-12.md",
+  "checkpoint_sha256": "ef653cad70cdea27cce43918245e173f7ee6123d75bc6ff3d7b5d4365a7b6dbc",
+  "original_cost_definitions_unchanged": true
+}

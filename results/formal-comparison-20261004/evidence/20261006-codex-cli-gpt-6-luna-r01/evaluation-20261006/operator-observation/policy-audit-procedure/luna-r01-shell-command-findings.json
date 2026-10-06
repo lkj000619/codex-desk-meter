@@ -1,0 +1,129 @@
+[
+    {
+        "body":  "Get-ChildItem -Recurse -File | ForEach-Object { $_.FullName.Substring((Get-Location).Path.Length + 1) }",
+        "raw_line":  16,
+        "parse_errors":  [
+
+                         ],
+        "pipeline_extents":  [
+                                 "Get-ChildItem -Recurse -File | ForEach-Object { $_.FullName.Substring((Get-Location).Path.Length + 1) }"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r01"
+    },
+    {
+        "body":  "Get-ChildItem -Path C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions -Recurse -File | Select-String -Pattern \u0027ESP_LCD_PANEL_IO_ADDITIONS_VER|VER_MAJOR|version\u0027 | Select-Object -First 20",
+        "raw_line":  202,
+        "parse_errors":  [
+
+                         ],
+        "pipeline_extents":  [
+                                 "Get-ChildItem -Path C:/Espressif/vendor/waveshare-esp32-s3-lcd-3.16/source/ESP32-S3-LCD-3.16-Demo/ESP-IDF/09_FactoryProgram/managed_components/espressif__esp_lcd_panel_io_additions -Recurse -File | Select-String -Pattern \u0027ESP_LCD_PANEL_IO_ADDITIONS_VER|VER_MAJOR|version\u0027 | Select-Object -First 20"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r01"
+    },
+    {
+        "body":  "Get-Content main/board_lcd.c | Select-Object -Skip 120 -First 300",
+        "raw_line":  239,
+        "parse_errors":  [
+
+                         ],
+        "pipeline_extents":  [
+                                 "Get-Content main/board_lcd.c | Select-Object -Skip 120 -First 300"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r01"
+    },
+    {
+        "body":  "Get-ChildItem tests -File -Filter *.py | Select-Object -ExpandProperty Name",
+        "raw_line":  241,
+        "parse_errors":  [
+
+                         ],
+        "pipeline_extents":  [
+                                 "Get-ChildItem tests -File -Filter *.py | Select-Object -ExpandProperty Name"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r01"
+    },
+    {
+        "body":  "Get-Content -Raw -Encoding utf8 main/CMakeLists.txt; Get-Content -Raw -Encoding utf8 tests/host/CMakeLists.txt; Get-Content -Raw -Encoding utf8 components/meter_core/include/meter_core.h",
+        "raw_line":  266,
+        "parse_errors":  [
+
+                         ],
+        "pipeline_extents":  [
+
+                             ],
+        "separator_extents":  [
+                                  ";",
+                                  ";"
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r01"
+    },
+    {
+        "body":  "Get-ChildItem -File | Select-Object -ExpandProperty Name",
+        "raw_line":  284,
+        "parse_errors":  [
+
+                         ],
+        "pipeline_extents":  [
+                                 "Get-ChildItem -File | Select-Object -ExpandProperty Name"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r01"
+    },
+    {
+        "body":  "Get-Content main/board_lcd.c | Select-Object -Skip 300 -First 120",
+        "raw_line":  311,
+        "parse_errors":  [
+
+                         ],
+        "pipeline_extents":  [
+                                 "Get-Content main/board_lcd.c | Select-Object -Skip 300 -First 120"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r01"
+    },
+    {
+        "body":  "Get-Content main/board_lcd.c | Select-Object -Skip 420 -First 120",
+        "raw_line":  313,
+        "parse_errors":  [
+
+                         ],
+        "pipeline_extents":  [
+                                 "Get-Content main/board_lcd.c | Select-Object -Skip 420 -First 120"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r01"
+    },
+    {
+        "body":  "Get-FileHash -Algorithm SHA256 build-idf/codex_desk_meter.bin | Format-List",
+        "raw_line":  321,
+        "parse_errors":  [
+
+                         ],
+        "pipeline_extents":  [
+                                 "Get-FileHash -Algorithm SHA256 build-idf/codex_desk_meter.bin | Format-List"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r01"
+    }
+]

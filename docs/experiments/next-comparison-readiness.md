@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-06. 상태: **Luna 최초는11:02:01.091 KST에 completed/exit0으로 종료됐다. 실제3,094.422초·정규화17,413,487 token과 결과JSON·선택 문서·펌웨어 존재를 확인했다. 원본 비용·제출물·종료 기록을 보존했으며 source/artifact 동결·독립 host/정책·제품/RM 평가는 대기다. 후보 자체 시험 통과 보고를 독립 평가 합격으로 표시하지 않는다. Luna 업로드는 하지 않았고 보드는 이전 Sol 관측 상태다. 후보 시작·종료 각12회, 독립 series 종료3개/15개다. Sol·Pro 종료·Flash 보류와 과거 원본을 보존한다.**
+확인일: 2026-10-06. 상태: **Luna 최초의 원본 동결·독립 복원·host 검증과 COM3 재업로드를 마쳤다. 현재21:03:05 KST 업로드 펌웨어에 대해 사용자가 검은 LCD 화면만 보인다고 보고했다. RM1/2 partial·RM3 fail·RM4/5 not_run, reference fail·product_pass false다. 공통 shell 결합 제한 위반으로 정책 invalid_for_comparison이며 비용·제품 관측은 보존한다. 실제 수신·BOOT·30초 유지·검은 화면 원인은 미확인이다. 후속0회·잔여7,200초/3회, 후보 시작·종료 각12회·독립 series 종료3/15다. Sol/Pro 종료·Flash 보류·과거 원본을 보존한다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -324,3 +324,18 @@ JSONL은 실효 model/cwd를 방출하지 않으며 app-server inventory는 exec
 Input17,277,453·output136,034·정규화17,413,487 token이며 cached16,845,056은input에 포함된다. Raw reasoning67,420과 adapter null을 구분해 보존한다.
 후속은0회·잔여7,200초/3회지만 최초 평가 전 추가 호출은 시작하지 않는다. [현재 계측](../../results/formal-comparison-20261004/progress.json)은 종료12회로 갱신했으며 checkpoint11은 기존 종료11회 비용만 포함한다.
 다음 단계는 자기 source/artifact 동결·정책/독립 host 검토·공통 실물/RM 평가다. 이 종료 확인에서 후보 코드 수정·rebuild·serial/flash는 수행하지 않았다.
+
+## 2026-10-06 Luna 최초 검증·재업로드·검은 화면 보고 반영
+
+[평가·업로드 계획](../plans/2026-10-06-codex-luna-initial-evaluation.md)을 수행했다. 동결 commit은 `c0d5d61160664923e0494302fae180089d02d247`이며 source33개/artifact19개·입력57개·원본 비용을 보존했다.
+[독립 감사](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/restore-audit.json)는 최종 package464개 파일의 원본 bytes·동결 validator·source/artifact·정책/RM 결합을 확인한다. 자체 result_valid true는 제품 합격을 뜻하지 않는다.
+독립 Python11개/C 실행 파일3개와 공통 frame0/1의 정확한 인코딩은 통과했다. Legacy collector의8개 필드 차이와 modern validity16/17은 원본대로 남긴다. Full29개 oracle·실물 선택 기능·PC GUI는 미검증이다.
+
+[정책 검토](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/policy-review.json)는 실제 파이프8호출·세미콜론 결합1호출로 invalid_for_comparison이다. 이전부터 제공한 제한을 적용했으며 후보 source·권한·profile을 변경하지 않았다.
+11:27 최초 COM3 쓰기 성공 기록은 보존하되 사용자가 당시 관측 대상 보드를 연결하지 않았다고 보고했으므로 실물 연결은 미확인이다.
+사용자 요청으로 [21:03 재업로드](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/operator-observation/hardware-attempt-02/hardware-slot.json)를 수행했다. COM3·ESP32-S3·MAC `28:84:85:B0:85:18`과 app/bootloader/partition 기록 해시를 확인했다. 같은 원본 app이며 운영자 재빌드나 후보 재호출은 없다.
+공통 frame0/1의 host 쓰기는 각각1,543 bytes 완료됐지만 serial capture는0 bytes로 실제 수락·거부는 미확인이다. UART0 primary와 USB Serial/JTAG secondary 설정을 함께 보존하며 무응답의 원인을 단정하지 않는다.
+
+[사용자 현재 화면 보고](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/operator-observation/hardware-attempt-02/user-black-screen-report.json)는 검은 화면만 보인다는 내용이다. 영상/사진 확인이나 BOOT 조작·RESET·30초 유지 사실은 제공되지 않았다.
+[최초 RM](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r01/evaluation-20261006/reference-review.json)은 한 번 적용했다. 빌드/업로드가 확인되어도 application 실행·장치 수락이 미확인이므로 RM1/2는partial, 값 표시RM3는fail, 페이지/BOOT RM4/5는not_run이다. Reference fail·product_pass false와 품질 부적격을 각각 유지한다.
+[Checkpoint12](../../results/formal-comparison-20261004/comparison-checkpoint-12.md)는 전체12회 정규화44,103,444 token을 기록하며 과거 checkpoint11까지·Sol/Pro 종료·Flash 보류를 보존한다. 후속이나 다른 모델을 시작하지 않았다. 보드는 이번 Luna 원본 artifact이며 serial은 닫았다.

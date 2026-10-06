@@ -1,0 +1,6 @@
+{"kind": "port_open", "seconds": 0.030999999959021807, "utc": "2026-10-06T12:03:07.612474+00:00", "baud": 115200, "dtr": false, "rts": false, "note": "backend must set DTR/RTS before open; actual reset/re-enumeration requires observation"}
+{"kind": "write_start", "seconds": 0.030999999959021807, "utc": "2026-10-06T12:03:07.612474+00:00", "sequence": 0, "frame_sha256": "46d2381c3a9e7fcef740cfa6dc8ef34061bdf31d3143ea8dd8b69fedbdb1955d"}
+{"kind": "write_complete", "seconds": 0.0470000000204891, "utc": "2026-10-06T12:03:07.623973+00:00", "sequence": 0, "bytes_written": 1543}
+{"kind": "write_start", "seconds": 5.094000000040978, "utc": "2026-10-06T12:03:12.667088+00:00", "sequence": 1, "frame_sha256": "46b51f55404dbb8ace1b7aa4b548eb33689372663238715897e2a8ad56530df1"}
+{"kind": "write_complete", "seconds": 5.109000000171363, "utc": "2026-10-06T12:03:12.678660+00:00", "sequence": 1, "bytes_written": 1543}
+{"kind": "port_close", "seconds": 10.141000000061467, "utc": "2026-10-06T12:03:17.711815+00:00"}

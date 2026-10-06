@@ -1,0 +1,11 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+  "recorded_at": "2026-10-06T12:02:52.234312+00:00",
+  "user_report": "다시 업로드 요청 esp32 com3에 연결하지않았었음",
+  "first_attempt_record": "operator-observation/hardware-slot.json",
+  "scope": "Earlier esptool success/VID303A PID1001 MAC28:84:85:B0:85:18 logs retained. User reports intended board was not connected; physical association of attempt1 is unconfirmed. Do not count attempt1 as user optical observation.",
+  "same_original_firmware": true,
+  "candidate_model_rerun": false,
+  "operator_rebuild": false,
+  "new_attempt_directory": "operator-observation/hardware-attempt-02"
+}

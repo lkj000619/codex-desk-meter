@@ -2,7 +2,7 @@
 
 목표: ESP32-S3-LCD-3.16 제품 구현에서 에이전트의 첫 결과·자기 후속 수정 비용과 RM 도달·제품 품질을 동일 조건으로 비교한다.
 시작 승인: 2026-10-04 사용자 요청 “프로젝트 목적과 목표에 엇나가지않도록 실험 시작”.
-상태: 2026-10-06 Luna 최초는11:02:01.091 KST에 completed/exit0으로 종료됐다.3,094.422초·정규화17,413,487 token과 결과JSON·선택 문서/app 존재를 확인했고 원본 종료·제출물·비용을 보존했다. Source 동결·독립 host/정책·제품/RM 평가와 Luna 업로드는 대기다. 독립 series 종료3개/예정15개, 후보 시작·종료 각12회다. Sol 종료·품질 부적격·제품 미합격, OpenCode 예산 소진·Pro 회차 종료·Flash 보류와 과거 원본을 보존한다. 아래 실행 과정은 각 시점의 기록이다.
+상태: 2026-10-06 Luna 최초의 동결·독립 검증·COM3 재업로드와 사용자 검은 화면 보고를 반영한 제한된 최초 평가를 마쳤다. RM1/2 partial·RM3 fail·RM4/5 not_run, reference fail·product_pass false·정책 invalid_for_comparison이다. 실제 수신·BOOT·30초 유지와 원인은 미확인이다. 후속0회·잔여7,200초/3회, 독립 series 종료3개/예정15개·후보 시작/종료 각12회다. 원본 비용·Sol/Pro 종료·Flash 보류·과거 판정은 보존한다. 아래 실행 과정은 각 시점의 기록이다.
 원본: [운영 계약](../experiments/comparison-operating-contract.md), [현재 상태](../experiments/next-comparison-readiness.md),
 [동결 기록](../../results/experiment-launch-preparation-20261004/freeze.json).
 
@@ -41,6 +41,7 @@
    2026-10-06 후속2 종료 뒤 새63.3초 영상과 수동 RESET 확인을 연결해 Sol RM1~RM5 pass를 판정하고 [최종 독립 감사](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/restore-audit.json)·[series 종료](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-sol-r02/evaluation-final-20261006/operator-series-completion.json)를 마쳤다. 품질/적격 reference-cost 부적격과30초 연속 표시 등 전체 제품 미검증을 유지한다. 후속3과 Luna는 시작하지 않는다.
    이후 사용자 “luna 시작하자”로 [Luna 최초 시작 계획](2026-10-06-codex-luna-initial-launch.md)을 수행하고10:10:26.658 KST 새 독립 최초를 시작했다. 이전 미실행 예약을 보존하고 새 날짜 ID/ledger·제품 코드 없는57개 입력·동일 gpt-6-luna/max profile·receipt·native 시작을 확인했다. 현재 호출을 반복하거나 실행 중 구현 피드백·serial/flash를 제공하지 않는다.
    11:02:01.091 KST 종료 뒤 [종료 기록](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r01/terminal-status-20261006/terminal-status.json)에서 원본 비용·제출물·app 존재를 확인했다. 독립 source 동결·정책/host·실물/RM 평가는 대기이며 후보 자체 시험 보고를 합격으로 확대하지 않는다.
+   이후 사용자 업로드 지시로 [Luna 평가·업로드 계획](2026-10-06-codex-luna-initial-evaluation.md)을 수행했다. 최종464개 파일의 독립 검증과21:03 KST 같은 원본 COM3 재업로드를 마치고 사용자 검은 화면 보고로 값 표시 실패를 기록했다. 실제 수신·BOOT·30초 유지·원인은 미확인으로 남겼으며 RM1/2 partial·RM3 fail·RM4/5 not_run, 정책 부적격·제품 미합격이다. 최초 평가를 한 번 적용했고 후속·다른 모델 호출은 없다.
 
 ## 중단과 재개
 
