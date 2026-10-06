@@ -1,0 +1,146 @@
+# Version 2 구현 과제
+
+목표: Waveshare ESP32-S3-LCD-3.16에서 **PC fixture → USB serial → 실제 firmware
+receiver → LCD**를 연결하는 ESP-IDF v5.3.2 제품을 구현한다. 이번 실행 ID는 `20261007-codex-cli-gpt-6-luna-r01`다.
+
+## 먼저 읽을 입력
+
+1. `.benchmark-inputs/run-context.json`: 식별자·baseline·결과 경로·입력 hash.
+2. `docs/PRODUCT_CONTRACT.md`: 구현 동작과 합격 조건의 유일한 원본.
+3. `docs/hardware/version-2-capabilities.md`: 보드 사실과 제조사 source 범위.
+
+이 과제·제품 계약·보드 자료가 필수 MD 전부다. JSON schema·fixture·예제는
+구현할 계층에 필요한 것만 읽는다. `.benchmark-inputs/input-files.json`은 runner가
+제공한 파일 목록·hash다. 제공 입력과 identity 사본을 수정하지 않는다.
+운영 manifest·profile·receipt·과거 실험 자료는 checkout 밖에서 운영자가 관리한다.
+결과 예제는 필드 형식 설명이다. 예제의 운영자 evidence 경로는 후보에게 제공되지 않으며
+자신의 증거로 복사하지 않는다. validator에는 자신의 result·고정 manifest·evidence root를 전달한다.
+
+## 실행 범위
+
+- 최초 실행은 최대 120분, 실행 중 질문·외부 구현 피드백 없이 수행한다.
+  종료 후 수정은 운영자가 별도로 시작하며 최대 3회·누적 120분이다.
+  이번 호출만 수행하고 스스로 후속 session을 시작하지 않는다.
+- 제품 C1~C8·I1~I4·F1~F9를 구현·검증한다. Codex에서 확인된 기능 도달과
+  전체 제품 합격은 운영자가 별도로 판정한다. 기능 도달만으로 `product_pass`를 참으로 쓰지 않는다.
+- 동일한 보드 사실·제조사 source를 제공하며 BSP 구현도 작업 범위다.
+  제공 host oracle은 시험 도구이며 candidate firmware를 대신하지 않는다.
+- checkout 내부와 선언된 SDK·제조사 source만 사용한다. 상위 폴더, 다른 ref/worktree,
+  과거 구현·결과·대화·사용자 파일·credential을 탐색하지 않는다.
+  `git status`, `git diff`로 자신의 변경을 확인한다. 다른 ref 조회·전환은 금지한다.
+- 개인 계정/API key/cookie를 요청하거나 기록하지 않는다. 제품 입력은 offline fixture다.
+  네트워크·MCP·모델 호출은 실행 전에 선언된 정책 범위에서만 사용한다.
+- serial port 열기·flash·reset·`erase_flash`는 수행하지 않는다. 실물 시험은 운영자가
+  동결된 artifact로 수행한다. 실행할 명령과 관측할 결과를 제출한다.
+
+## 빌드와 시험
+
+운영자가 SDK·Python·C/C++ compiler·CMake·Ninja를 준비한다. 없거나 실행되지 않으면
+환경 실패와 근거를 남기고 종료한다. 설치 폴더 검색이나 도구 설치로 우회하지 않는다.
+
+- `idf.py --version`, `idf.py set-target esp32s3`, `idf.py build`
+- `python -m unittest discover -s tests -v`, `python tests/<시험 파일>.py`
+- `python -m py_compile <상대 파일>`
+- `cmake -S <상대 경로> -B build-host -G Ninja`, `cmake --build build-host`
+- `ctest --test-dir build-host --output-on-failure`
+
+셸 명령은 한 호출에 하나만 실행한다. `;`, `&&`, 파이프·명령 치환·shell wrapper로
+결합하지 않는다. 파일 작성은 native 파일 도구를 사용한다. 제공된
+`experiments/config/agy-pilot-permissions.json`은 명령 규칙의 참조 자료다.
+각 실행 표면의 실효 권한·도구 설정은 운영자가 사전에 확인해 고정한다.
+이 파일의 존재만으로 모든 표면의 권한 강제가 같다고 가정하지 않는다.
+권한 거부는 실패로 기록하고 종료하며 다른 도구로 우회하거나 권한 추가를 요청하지 않는다.
+정책에 없는 `pytest`·삭제·인라인 Python을 실행하지 않는다.
+
+실제 제품 파서·상태 전이 C 모듈을 compile/link해 호출하는 host 시험을 제공한다.
+Python 모방 구현의 성공을 firmware 검증으로 제출하지 않는다. 제공 validator·host
+oracle의 성공과 실제 USB 수신·LCD 성공을 구분한다.
+
+## 제출
+
+- ESP-IDF 프로젝트, PC collector·sender, firmware receiver·GUI와 자체 시험.
+- `docs/agent-runs/20261007-codex-cli-gpt-6-luna-r01/hardware-feature-selection.md`: 보드 기능 후보 정확히 3개,
+  각각의 사용자 가치·자원·비용·위험·시험, 선택 1개와 나머지 2개의 탈락 이유.
+  선택 기능을 핵심과 분리해 구현한다. 제조사 데모 반복은 추가 기능으로 인정하지 않는다.
+- `results/20261007-codex-cli-gpt-6-luna-r01/end-to-end-result.json`: 제공 result schema의 C/F/I/G·build/host/
+  transport/hardware 상태와 증거 경로. 새 JSON 필드를 만들지 않는다.
+- 빌드·시험 재현 명령, 오류/stale/복구 시험, 실물 업로드·관측 절차와 남은 문제.
+
+identity와 evaluation manifest 참조는 `.benchmark-inputs/`의 사본을 사용한다.
+실행 시간·token·운영자 실물 판정은 운영자가 종료 후 작성한다. 미측정은 허용된
+null·`not_run`·`blocked`와 사유로 남기고, 자체 시험을 독립 평가로 표현하지 않는다.
+
+## Current followup session
+Continue your own frozen implementation under all common task restrictions above. This is a fresh followup session, not a new initial budget. The remaining_seconds and remaining_rounds below include this invocation; do not start another session yourself.
+Use only the supplied local evidence in .benchmark-inputs/feedback.json; do not search previous run directories or other implementations.
+Operator feedback (observations and expected behavior):
+{
+  "previous_run_id": "20261006-codex-cli-gpt-6-luna-r03",
+  "previous_commit": "91f7de60328b7db9a9d04acef60ac45eafb3685a",
+  "target_ids": [
+    "RM1",
+    "RM2",
+    "RM3",
+    "RM4",
+    "RM5"
+  ],
+  "observed": "Followup2 ended environment_failed after1247.265seconds: native usage-limit error during remote compact, with firmware build and valid result JSON preserved. Native token usage unavailable/null. Own original firmware uploaded to same COM3 ESP32-S3 with three hashes verified, matching ELF217445082 prefix boot, SPI SRAM memory test OK, boot-screen submitted and USB Serial/JTAG ready. First64-byte USB receive chunk observed. Both common seq0/1 host writes completed1543bytes at unchanged5-second intervals, but no complete accepted/rejected frame markers; actual device acceptance unconfirmed. User supplied38.55-second current video: LCD now emits colored glyphs/bars. Around0.5-1.5 and8.5-9.5seconds a rotated/clipped ER WINDOWS heading fragment appears twice with SOURCE STALE fragments. Other samples show isolated rotated/clipped edge glyphs;12.5-13.5seconds have almost no text. Physical rotation near34.5-36.5seconds still shows duplicated fragmented text. No legible58%/82% or three complete information views. User confirms both BOOT and RESET pressed; exact times/order/count unknown, so changes are not attributed to BOOT alone or automatic restart. Review RM1 pass/RM2 partial/RM3 fail/RM4 fail/RM5 not_run. Independent restored Python22 with no skips, three original C checks and17provider validity cases passed. Common declared collector/encoder exactly match fixed reference and archived production C CLI accepts0/1. Own wire/schema tests differ from frozen operator29, which remains not_run. Current policy eligible: no confirmed forbidden shell composition among129 commands; previous invalid policy remains separate.",
+  "expected": "Meet the unchanged product/RM requirements from your own current implementation and fixed inputs. Display complete legible five-hour remaining58% and weekly remaining82% with stale/provenance semantics; accept normal common seq0/1; expose usage/global-reset/diagnostic information through BOOT navigation and return. Preserve confirmed host collector/encoder/provider correctness. Diagnose and implement from own source and fixed board/vendor references. Do not access operator or other candidate directories, accounts/network, serial/flash, global settings or launch another model/session. One command per shell call; no pipelines or composed statements. This is the final authorized followup round3: remaining2965.735seconds, runner timeout floor2965seconds, at most this one invocation. No operator repair method, new board facts or replacement reference supplied. Report actual unmeasured hardware and token fields honestly.",
+  "remaining_rounds": 1,
+  "remaining_seconds": 2965.7349999998696,
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "evidence": [
+    {
+      "path": ".benchmark-inputs/feedback-evidence/000-user-observation-confirmation.json",
+      "sha256": "560b336d1fc44f7ed8d4458817716db55536e5a17bbb00317ac967d292fa1252"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/001-video-review.json",
+      "sha256": "60feaca3817c6fa88d4bd97795f7171e7c13310eac807d14a5eaee108e479c02"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/002-host-semantic-review.json",
+      "sha256": "462931719bbb5738b2476faddf6b523298c2dd198d3faa7d7bcdb189564edf65"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/003-common-stimulus-check.json",
+      "sha256": "d36526aa09196f5f83e19d2e7a4acb62092759ea73d7439cd9b1b0f9801fe7bb"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/004-runtime-source-binding.json",
+      "sha256": "e16ccd8df73313165744e4abd3b882b34d57641d5c3b16bf49f776cc0a8c410c"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/005-device-serial.bin",
+      "sha256": "7e8d1b42b2d80205b80720c2ecf314303649c9dd8f5d716b4a2e77c35873825a"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/006-capture.json",
+      "sha256": "ab16b7927a0dbaa13dc1958cc2b3cb56cb2f743fe170c69fdc681ee573e4ed80"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/007-sent-frames.jsonl",
+      "sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/008-frame-001.png",
+      "sha256": "fe267f481dcf6051ab0221e817cc844cea475b4f7b500415cc73715751d12c40"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/009-frame-009.png",
+      "sha256": "28a3a781e89904e3bf9fe90f7764e669d3c3ebe9e8f7d72449d80d742d3912ae"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/010-frame-016.png",
+      "sha256": "685caf347957ea2175d0c360c2f418d421d09c2c2cbadeffbcc6f9e3776d1c37"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/011-frame-037.png",
+      "sha256": "5adaf45dc27326f507be4c3ecf05041ecf5849147b07cfd81d4f8a29305cf88f"
+    },
+    {
+      "path": ".benchmark-inputs/feedback-evidence/012-operator-policy-decision.json",
+      "sha256": "2da1783442eb5cafb03ace801e596ab2eb7a33756b29edc0e64f703072c244a2"
+    }
+  ]
+}

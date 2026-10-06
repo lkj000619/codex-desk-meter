@@ -1,0 +1,16 @@
+{
+  "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+  "round": 3,
+  "observed_at": "2026-10-06T17:34:59.054587+00:00",
+  "status": "running",
+  "native_thread_id": "01a11247-1dc1-74f2-aab0-c60b8252cb72",
+  "native_candidate_pid": 30400,
+  "actual_process_argv_matches_frozen_profile": true,
+  "explicit_model": "gpt-6-luna",
+  "explicit_reasoning": "max",
+  "effective_model_verified": null,
+  "effective_model_cwd_emitted_by_jsonl": false,
+  "raw_log_prefix_events": 55,
+  "raw_log_prefix_sha256": "41d514e3991b837d1b184455e8823f9d7129a677e39be68e64450b77ce965b62",
+  "scope": "Thread/actual argv/runner cwd only; no implementation or product completion claim."
+}

@@ -1,0 +1,22 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r03",
+  "reviewed_at": "2026-10-06T17:22:02.597958+00:00",
+  "source_commit": "91f7de60328b7db9a9d04acef60ac45eafb3685a",
+  "python_tests_passed": 22,
+  "python_skipped_subcases_after_materialization": 0,
+  "host_c_executables_passed": 3,
+  "provider_validity_cases_passed": 17,
+  "collector_matches_common_reference_payload": true,
+  "encoder_matches_common_frames": true,
+  "production_c_accepts_common_sequences": [
+    0,
+    1
+  ],
+  "candidate_wire_schema_cases": "Own wire/schema coverage passed via restored suite; exact cases per archived source, distinct from frozen operator29 pipeline scenarios.",
+  "frozen_operator29_pipeline_completed": false,
+  "original_partial_audit_preserved": true,
+  "materialized_archived_cli_without_rebuild": true,
+  "three_original_passing_c_checks_reused": true,
+  "operator_product_source_modified": false,
+  "scope": "Independent host verification only; device receipt, LCD, BOOT and stability remain separate observations."
+}

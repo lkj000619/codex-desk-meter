@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-07. 상태: **2026-10-07 Luna 후속2 평가 완료: build·COM3 원본 실행은 RM1 pass, 공통 host 경로·USB 첫 수신과 완전한 수락 미확인을 구분해 RM2 partial이다. 38.55초 영상에서 글자 출력은 생겼지만 회전·중복·잘림으로58%/82%와 세 정보 화면을 읽을 수 없어 RM3/RM4 fail이다. 사용자는 BOOT와 RESET 모두 눌렀다고 확인했으며 정확한 조작 시점/횟수가 없어 분리된 BOOT 순환은 RM5 not_run이다. 화면 변화가 자동 재부팅이라는 추정은 하지 않는다. Reference fail·product_pass false, 이번 정책 eligible·과거 series invalid를 유지한다. 최종575파일 package 독립 검증 완료; native 사용량 한도 종료·token null·전체 coverage13/14·알려진57,517,475 token을 보존한다. 정상 가독 화면 미도달이므로 기존 승인 범위의 마지막 후속3을 준비할 수 있다. 잔여2,965.735초·최대1회이며 timeout 상한floor2,965초다. 아직 마지막 후보 호출은 없다.**
+확인일: 2026-10-07. 상태: **2026-10-07 02:33:32.910 KST 마지막 Luna 후속3회차 `20261007-codex-cli-gpt-6-luna-r01` 실행 중. 날짜가 바뀌어 run suffix가r01이지만 ledger round3이며 새 최초 실행이 아니다. 자기 직전 동결 commit `91f7de60328b7db9a9d04acef60ac45eafb3685a`에서 별도 checkout을 준비하고 제품 source33개·고정 입력57개·build/sdkconfig 미상속을 확인했다. Native PID30400·thread `01a11247-1dc1-74f2-aab0-c60b8252cb72`, gpt-6-luna/max·CLI0.159.2·ESP-IDF5.3.2·원본 설정과 새 receipt를 유지하며 timeout2,965초다. 자신의 회전/중복/잘림 영상·부분 수신·host 검증과 고정 기대만 전달했다. 후보 시작15회·종료14회, 현재 비용/정책/제출/제품/RM은 미확정이다. 종료 뒤 동결·독립 검증·원본 업로드·평가하며 일찍 종료해도 추가 회차는 없다. 보드는02:19 KST 업로드한 후속2 원본이다. 과거 source/evidence/실패 비용·token null·후속2 최종575파일 package·Sol/Pro 종료·Flash 보류를 보존한다. 독립 series 종료3/15로 전체 비교는 미완료다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -380,3 +380,9 @@ COM3·MAC `28:84:85:B0:85:18`은 재업로드와 같고,21:22:24 KST native rese
 2026-10-07 Luna 후속2 평가 완료: build·COM3 원본 실행은 RM1 pass, 공통 host 경로·USB 첫 수신과 완전한 수락 미확인을 구분해 RM2 partial이다. 38.55초 영상에서 글자 출력은 생겼지만 회전·중복·잘림으로58%/82%와 세 정보 화면을 읽을 수 없어 RM3/RM4 fail이다. 사용자는 BOOT와 RESET 모두 눌렀다고 확인했으며 정확한 조작 시점/횟수가 없어 분리된 BOOT 순환은 RM5 not_run이다. 화면 변화가 자동 재부팅이라는 추정은 하지 않는다. Reference fail·product_pass false, 이번 정책 eligible·과거 series invalid를 유지한다. 최종575파일 package 독립 검증 완료; native 사용량 한도 종료·token null·전체 coverage13/14·알려진57,517,475 token을 보존한다. 정상 가독 화면 미도달이므로 기존 승인 범위의 마지막 후속3을 준비할 수 있다. 잔여2,965.735초·최대1회이며 timeout 상한floor2,965초다. 아직 마지막 후보 호출은 없다.
 
 [후속2 최종 RM](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r03/evaluation-20261007/reference-review.json) · [독립 복원](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r03/evaluation-20261007/restore-audit.json)
+
+## 2026-10-07 Luna 마지막 후속3회차 시작
+
+2026-10-07 02:33:32.910 KST 마지막 Luna 후속3회차 `20261007-codex-cli-gpt-6-luna-r01` 실행 중. 날짜가 바뀌어 run suffix가r01이지만 ledger round3이며 새 최초 실행이 아니다. 자기 직전 동결 commit `91f7de60328b7db9a9d04acef60ac45eafb3685a`에서 별도 checkout을 준비하고 제품 source33개·고정 입력57개·build/sdkconfig 미상속을 확인했다. Native PID30400·thread `01a11247-1dc1-74f2-aab0-c60b8252cb72`, gpt-6-luna/max·CLI0.159.2·ESP-IDF5.3.2·원본 설정과 새 receipt를 유지하며 timeout2,965초다. 자신의 회전/중복/잘림 영상·부분 수신·host 검증과 고정 기대만 전달했다. 후보 시작15회·종료14회, 현재 비용/정책/제출/제품/RM은 미확정이다. 종료 뒤 동결·독립 검증·원본 업로드·평가하며 일찍 종료해도 추가 회차는 없다. 보드는02:19 KST 업로드한 후속2 원본이다. 과거 source/evidence/실패 비용·token null·후속2 최종575파일 package·Sol/Pro 종료·Flash 보류를 보존한다. 독립 series 종료3/15로 전체 비교는 미완료다.
+
+[실제 시작](../../results/formal-comparison-20261004/evidence/20261007-codex-cli-gpt-6-luna-r01/launch-20261007/native-start-observation.json) · [자신의 관측 피드백](../../results/formal-comparison-20261004/evidence/20261007-codex-cli-gpt-6-luna-r01/launch-20261007/candidate-feedback.json). 비용 checkpoint14는 종료된14회만 포함한다. 마지막 후보의 비용을0으로 간주하지 않는다.
