@@ -1,0 +1,1219 @@
+{
+  "run_id": "20261007-antigravity-cli-agy-flash-r01",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "reviewed_at": "2026-10-06T18:44:33.351713+00:00",
+  "reviewer": "Codex operator",
+  "product_pass": false,
+  "items": {
+    "RM1": {
+      "status": "fail",
+      "evidence": [
+        {
+          "path": "operator-source-preparation.json",
+          "sha256": "444452fe9fda5010a24f5b0ab37b1fc7be0a305177cc9c6d04cc876d8c8f8069"
+        },
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "794dee40ee0366abc1f46930c02b9c310d824c9ffaf5b8856fe8060ba73c778f"
+        },
+        {
+          "path": "operator-policy-decision.json",
+          "sha256": "e6761ee4a6181bf654e4ab41e4587d818c767257da12acda0b73777ec9e9157c"
+        },
+        {
+          "path": "operator-observation/policy-notes.json",
+          "sha256": "4ae1bce86595c4635a02fa6867d0ea6a5385599f7a4cac0e78e25f77b2bf9f47"
+        },
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "f0c6be918245797e8485551ffe3080821bd48fbcd7430783bd76808dfa8180a3"
+        },
+        {
+          "path": "operator-observation/source-snapshot/CMakeLists.txt",
+          "sha256": "fae4f2339efb870b9f5c2f31a6de24f6c195d42fd4ad9c9cb42892fbfbdfe0c7"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main_host.c",
+          "sha256": "1d97b17659b2789e8526c9bb8ddea9da32142560b601c74d262f08d30f4a3cef"
+        },
+        {
+          "path": "operator-observation/source-snapshot/sdkconfig.defaults",
+          "sha256": "7fd8a7491855271492cbf3f2e8f599914fcd088f87bd0ea0ede8cf91129c0c67"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/CMakeLists.txt",
+          "sha256": "07c86934d4f3aaeace214c297f40a9b11193ce2b909378876553e89b7fcb65ad"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_board.h",
+          "sha256": "1245ba2e66f3095a836d4a6e66caf021a8137673016c2d12a7f711883fa1373e"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_button.h",
+          "sha256": "456afe6a4bdce7f5c76bb7df0652afeb3ed69b63cf53c4f5d0ccc07ae5c8be58"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_imu.h",
+          "sha256": "2c7ae24445a2d5be005a337596c9b1b6f8c31f24dc560883e1c5224a6d543606"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_lcd.h",
+          "sha256": "55aca9ad149a055de3ee423ab9cbd5b991e0f730faaf8a9383eef311efaece05"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_serial.h",
+          "sha256": "3f2ed175d7192ef2138344f24da4d35630e4af2ae62930bfb90a4006a107fcc1"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_button.c",
+          "sha256": "c7fb8c52d7546824164a1a0e5df2ecdcf333883ee2bbbb5e660cba9e8135bf28"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_imu.c",
+          "sha256": "472555c3333e91a755fe6f86a3966eae3c525887a708f4410326224e98150722"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_lcd.c",
+          "sha256": "b29d7297bef2aa3f59076bb6a1d93b6edc3ed209281ae98646836057a3bcd3cd"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_serial.c",
+          "sha256": "6f362bc1c33edec4e6577dbe9137852fb313028fb19910a3a7238e2dfb13f051"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/CMakeLists.txt",
+          "sha256": "3ed2df1f5aa347c9826f40d79eb9c0d1786dbb53575a3647a9a7da97776c5703"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/feature_imu.h",
+          "sha256": "71d08ce6d09f1cea76d318e658f355a3431cf6f26bdd4c6f65597e33468e1228"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_crc.h",
+          "sha256": "d104dfd57f23b682ac9f803ba0536eb7bdf1cca26d7b0e31854d45202f9da8d8"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_gui.h",
+          "sha256": "98813fa2444c554a6df971234a7548a16779bb47b5b0b1d99b9b1d7a21a9db44"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_parser.h",
+          "sha256": "e588d5fedb5740733cbda6ff18545ac3ff5e9d04737ea4949ff4cd39aba83aa8"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_state.h",
+          "sha256": "235f5469383acbb3762736481d4148284a51d155a7b7771457019ecafd1d9d60"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_types.h",
+          "sha256": "d7610b0f133c5c91affe47ef9b9fc3bfe5a5d6a172a3c26d0e8d8ba159f9b8ed"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/feature_imu.c",
+          "sha256": "35b44c53432b11d4bce62252a789ec8fe3f66bd1cba343f052e57027bd6a48d4"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_crc.c",
+          "sha256": "fabc8de85906856782556d45bd763046223d3be45ea3206e5ad7bf66ff2f5479"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_gui.c",
+          "sha256": "25b2f627172b9e770492bff874a5edc556b808645224b9365b7302c20f2f9ba9"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_parser.c",
+          "sha256": "49aace758349b008a7af07aade6e173de0f4f6ac9e1ce429d8cb47fb475ddb16"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_state.c",
+          "sha256": "70af531807eecbcd1d0e0cce398c25b6f41e167f76009f2a1a85a97599a5857e"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main/CMakeLists.txt",
+          "sha256": "88d7f5fd257efb273668dfeac81eb3eeff9a0f48d6b6cc9a3f7576e47d19b6a4"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main/main.c",
+          "sha256": "1b3786282504f3eab9175179fd3a54b9f9ed965e4b51abb1fcac61ebd3e88bf6"
+        },
+        {
+          "path": "operator-observation/source-snapshot/scripts/pc_collector_sender.py",
+          "sha256": "45bc86f5e3a04eef5fa405f17333ac68fc468750050379a8a4189c16c3ddc300"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/meter_legacy_adapter.c",
+          "sha256": "71cca692cbf9ceb5b369609dcf9f15b45c413ba82f8521a90115d2a404feb9ac"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_evaluation_contract.py",
+          "sha256": "19653fb21495766210f4e4b0c6da2db87273dbca1c4a1f383d92b6db793fddaf"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_feature_imu.c",
+          "sha256": "f1766986ecade14f3d24a9697c4e62a5e65d06ee01bb0ad8862f3dc191fb2c3d"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_gui_regression.c",
+          "sha256": "9704d2cf520375a401add5d9d00c9fe46ef34cc290ed4b3da615743a343eecfd"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_legacy_adapter.py",
+          "sha256": "93e069869ea1223efc91ca8adfd6091e2afaa10e88a0e94fbcddc5be3b47db7a"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_meter_parser.c",
+          "sha256": "073fbb2518a13fd2617bba22430910138f1ddfa68b144bdec6009cc624a7639f"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_meter_state.c",
+          "sha256": "e252ab29d2b84f70805d2fae8925ef0d6fdff181369a0ba2921df07e1690a866"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_pc_collector_sender.py",
+          "sha256": "f03c03c242a71927a6d9775e39d2daef75e4581397588ca13758276cbbfd1137"
+        },
+        {
+          "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-flash-r01.json",
+          "sha256": "9ce6d6047e0ce92e5ea9950afa09924d2b60471dee2ee181c769e923aaa4be91"
+        },
+        {
+          "path": "operator-observation/terminal-originals/command-audit.json",
+          "sha256": "ca1bb70483a5cdd57369372386f875df6582a4dd525de7736437dd862c1f0dab"
+        },
+        {
+          "path": "operator-observation/terminal-originals/run-manifest.json",
+          "sha256": "ac622b4f8291e0f8bbe6b4e2c8219f5a0daba2f7e5081e9db951c22e6973b51a"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stderr.txt",
+          "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stdout.jsonl",
+          "sha256": "90311a7d4c8915c42b046227d3ae492346ced5bd20fc3fe69e2d56e583c4eb04"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/current-checks.json",
+          "sha256": "dfbab9b4dc6885f1b0965546e8d369815a8ac1629e7c818b599c01f531cef418"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stdout.txt",
+          "sha256": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be"
+        },
+        {
+          "path": "operator-launch-preflight/models-stderr.txt",
+          "sha256": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8"
+        },
+        {
+          "path": "operator-launch-preflight/models-stdout.txt",
+          "sha256": "0fe8eac40fd3a1f2554de5c998412b23e219cda82edd3f980f93f2f526a03bda"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stdout.txt",
+          "sha256": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494"
+        },
+        {
+          "path": "operator-launch-preflight/scope-exit.json",
+          "sha256": "6dfd42314f1b1cfa1704b011e750e0dda7031351e494f1336971cef67ee391a7"
+        },
+        {
+          "path": "experiment-launch.json",
+          "sha256": "26f70fad5dd67f0e0fceca46f79944de57c0e7854ff6ff436d59a6a317cc5265"
+        },
+        {
+          "path": "native-start-observation.json",
+          "sha256": "098c49da9922994d1c12dcc050f6332a95f0aa180d710bf323c957828e252457"
+        },
+        {
+          "path": "native-start-observation-prefix.jsonl",
+          "sha256": "7e45e4b1b1f662611d31c14bfa3e1f1fdf4f8d39908a789bd62a1448b8c7fb2c"
+        }
+      ],
+      "reason": "No completed firmware build or submitted implementation result."
+    },
+    "RM2": {
+      "status": "not_run",
+      "evidence": [
+        {
+          "path": "operator-source-preparation.json",
+          "sha256": "444452fe9fda5010a24f5b0ab37b1fc7be0a305177cc9c6d04cc876d8c8f8069"
+        },
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "794dee40ee0366abc1f46930c02b9c310d824c9ffaf5b8856fe8060ba73c778f"
+        },
+        {
+          "path": "operator-policy-decision.json",
+          "sha256": "e6761ee4a6181bf654e4ab41e4587d818c767257da12acda0b73777ec9e9157c"
+        },
+        {
+          "path": "operator-observation/policy-notes.json",
+          "sha256": "4ae1bce86595c4635a02fa6867d0ea6a5385599f7a4cac0e78e25f77b2bf9f47"
+        },
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "f0c6be918245797e8485551ffe3080821bd48fbcd7430783bd76808dfa8180a3"
+        },
+        {
+          "path": "operator-observation/source-snapshot/CMakeLists.txt",
+          "sha256": "fae4f2339efb870b9f5c2f31a6de24f6c195d42fd4ad9c9cb42892fbfbdfe0c7"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main_host.c",
+          "sha256": "1d97b17659b2789e8526c9bb8ddea9da32142560b601c74d262f08d30f4a3cef"
+        },
+        {
+          "path": "operator-observation/source-snapshot/sdkconfig.defaults",
+          "sha256": "7fd8a7491855271492cbf3f2e8f599914fcd088f87bd0ea0ede8cf91129c0c67"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/CMakeLists.txt",
+          "sha256": "07c86934d4f3aaeace214c297f40a9b11193ce2b909378876553e89b7fcb65ad"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_board.h",
+          "sha256": "1245ba2e66f3095a836d4a6e66caf021a8137673016c2d12a7f711883fa1373e"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_button.h",
+          "sha256": "456afe6a4bdce7f5c76bb7df0652afeb3ed69b63cf53c4f5d0ccc07ae5c8be58"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_imu.h",
+          "sha256": "2c7ae24445a2d5be005a337596c9b1b6f8c31f24dc560883e1c5224a6d543606"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_lcd.h",
+          "sha256": "55aca9ad149a055de3ee423ab9cbd5b991e0f730faaf8a9383eef311efaece05"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_serial.h",
+          "sha256": "3f2ed175d7192ef2138344f24da4d35630e4af2ae62930bfb90a4006a107fcc1"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_button.c",
+          "sha256": "c7fb8c52d7546824164a1a0e5df2ecdcf333883ee2bbbb5e660cba9e8135bf28"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_imu.c",
+          "sha256": "472555c3333e91a755fe6f86a3966eae3c525887a708f4410326224e98150722"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_lcd.c",
+          "sha256": "b29d7297bef2aa3f59076bb6a1d93b6edc3ed209281ae98646836057a3bcd3cd"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_serial.c",
+          "sha256": "6f362bc1c33edec4e6577dbe9137852fb313028fb19910a3a7238e2dfb13f051"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/CMakeLists.txt",
+          "sha256": "3ed2df1f5aa347c9826f40d79eb9c0d1786dbb53575a3647a9a7da97776c5703"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/feature_imu.h",
+          "sha256": "71d08ce6d09f1cea76d318e658f355a3431cf6f26bdd4c6f65597e33468e1228"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_crc.h",
+          "sha256": "d104dfd57f23b682ac9f803ba0536eb7bdf1cca26d7b0e31854d45202f9da8d8"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_gui.h",
+          "sha256": "98813fa2444c554a6df971234a7548a16779bb47b5b0b1d99b9b1d7a21a9db44"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_parser.h",
+          "sha256": "e588d5fedb5740733cbda6ff18545ac3ff5e9d04737ea4949ff4cd39aba83aa8"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_state.h",
+          "sha256": "235f5469383acbb3762736481d4148284a51d155a7b7771457019ecafd1d9d60"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_types.h",
+          "sha256": "d7610b0f133c5c91affe47ef9b9fc3bfe5a5d6a172a3c26d0e8d8ba159f9b8ed"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/feature_imu.c",
+          "sha256": "35b44c53432b11d4bce62252a789ec8fe3f66bd1cba343f052e57027bd6a48d4"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_crc.c",
+          "sha256": "fabc8de85906856782556d45bd763046223d3be45ea3206e5ad7bf66ff2f5479"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_gui.c",
+          "sha256": "25b2f627172b9e770492bff874a5edc556b808645224b9365b7302c20f2f9ba9"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_parser.c",
+          "sha256": "49aace758349b008a7af07aade6e173de0f4f6ac9e1ce429d8cb47fb475ddb16"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_state.c",
+          "sha256": "70af531807eecbcd1d0e0cce398c25b6f41e167f76009f2a1a85a97599a5857e"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main/CMakeLists.txt",
+          "sha256": "88d7f5fd257efb273668dfeac81eb3eeff9a0f48d6b6cc9a3f7576e47d19b6a4"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main/main.c",
+          "sha256": "1b3786282504f3eab9175179fd3a54b9f9ed965e4b51abb1fcac61ebd3e88bf6"
+        },
+        {
+          "path": "operator-observation/source-snapshot/scripts/pc_collector_sender.py",
+          "sha256": "45bc86f5e3a04eef5fa405f17333ac68fc468750050379a8a4189c16c3ddc300"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/meter_legacy_adapter.c",
+          "sha256": "71cca692cbf9ceb5b369609dcf9f15b45c413ba82f8521a90115d2a404feb9ac"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_evaluation_contract.py",
+          "sha256": "19653fb21495766210f4e4b0c6da2db87273dbca1c4a1f383d92b6db793fddaf"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_feature_imu.c",
+          "sha256": "f1766986ecade14f3d24a9697c4e62a5e65d06ee01bb0ad8862f3dc191fb2c3d"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_gui_regression.c",
+          "sha256": "9704d2cf520375a401add5d9d00c9fe46ef34cc290ed4b3da615743a343eecfd"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_legacy_adapter.py",
+          "sha256": "93e069869ea1223efc91ca8adfd6091e2afaa10e88a0e94fbcddc5be3b47db7a"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_meter_parser.c",
+          "sha256": "073fbb2518a13fd2617bba22430910138f1ddfa68b144bdec6009cc624a7639f"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_meter_state.c",
+          "sha256": "e252ab29d2b84f70805d2fae8925ef0d6fdff181369a0ba2921df07e1690a866"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_pc_collector_sender.py",
+          "sha256": "f03c03c242a71927a6d9775e39d2daef75e4581397588ca13758276cbbfd1137"
+        },
+        {
+          "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-flash-r01.json",
+          "sha256": "9ce6d6047e0ce92e5ea9950afa09924d2b60471dee2ee181c769e923aaa4be91"
+        },
+        {
+          "path": "operator-observation/terminal-originals/command-audit.json",
+          "sha256": "ca1bb70483a5cdd57369372386f875df6582a4dd525de7736437dd862c1f0dab"
+        },
+        {
+          "path": "operator-observation/terminal-originals/run-manifest.json",
+          "sha256": "ac622b4f8291e0f8bbe6b4e2c8219f5a0daba2f7e5081e9db951c22e6973b51a"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stderr.txt",
+          "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stdout.jsonl",
+          "sha256": "90311a7d4c8915c42b046227d3ae492346ced5bd20fc3fe69e2d56e583c4eb04"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/current-checks.json",
+          "sha256": "dfbab9b4dc6885f1b0965546e8d369815a8ac1629e7c818b599c01f531cef418"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stdout.txt",
+          "sha256": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be"
+        },
+        {
+          "path": "operator-launch-preflight/models-stderr.txt",
+          "sha256": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8"
+        },
+        {
+          "path": "operator-launch-preflight/models-stdout.txt",
+          "sha256": "0fe8eac40fd3a1f2554de5c998412b23e219cda82edd3f980f93f2f526a03bda"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stdout.txt",
+          "sha256": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494"
+        },
+        {
+          "path": "operator-launch-preflight/scope-exit.json",
+          "sha256": "6dfd42314f1b1cfa1704b011e750e0dda7031351e494f1336971cef67ee391a7"
+        },
+        {
+          "path": "experiment-launch.json",
+          "sha256": "26f70fad5dd67f0e0fceca46f79944de57c0e7854ff6ff436d59a6a317cc5265"
+        },
+        {
+          "path": "native-start-observation.json",
+          "sha256": "098c49da9922994d1c12dcc050f6332a95f0aa180d710bf323c957828e252457"
+        },
+        {
+          "path": "native-start-observation-prefix.jsonl",
+          "sha256": "7e45e4b1b1f662611d31c14bfa3e1f1fdf4f8d39908a789bd62a1448b8c7fb2c"
+        }
+      ],
+      "reason": "No firmware to upload; hardware behavior untested."
+    },
+    "RM3": {
+      "status": "not_run",
+      "evidence": [
+        {
+          "path": "operator-source-preparation.json",
+          "sha256": "444452fe9fda5010a24f5b0ab37b1fc7be0a305177cc9c6d04cc876d8c8f8069"
+        },
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "794dee40ee0366abc1f46930c02b9c310d824c9ffaf5b8856fe8060ba73c778f"
+        },
+        {
+          "path": "operator-policy-decision.json",
+          "sha256": "e6761ee4a6181bf654e4ab41e4587d818c767257da12acda0b73777ec9e9157c"
+        },
+        {
+          "path": "operator-observation/policy-notes.json",
+          "sha256": "4ae1bce86595c4635a02fa6867d0ea6a5385599f7a4cac0e78e25f77b2bf9f47"
+        },
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "f0c6be918245797e8485551ffe3080821bd48fbcd7430783bd76808dfa8180a3"
+        },
+        {
+          "path": "operator-observation/source-snapshot/CMakeLists.txt",
+          "sha256": "fae4f2339efb870b9f5c2f31a6de24f6c195d42fd4ad9c9cb42892fbfbdfe0c7"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main_host.c",
+          "sha256": "1d97b17659b2789e8526c9bb8ddea9da32142560b601c74d262f08d30f4a3cef"
+        },
+        {
+          "path": "operator-observation/source-snapshot/sdkconfig.defaults",
+          "sha256": "7fd8a7491855271492cbf3f2e8f599914fcd088f87bd0ea0ede8cf91129c0c67"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/CMakeLists.txt",
+          "sha256": "07c86934d4f3aaeace214c297f40a9b11193ce2b909378876553e89b7fcb65ad"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_board.h",
+          "sha256": "1245ba2e66f3095a836d4a6e66caf021a8137673016c2d12a7f711883fa1373e"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_button.h",
+          "sha256": "456afe6a4bdce7f5c76bb7df0652afeb3ed69b63cf53c4f5d0ccc07ae5c8be58"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_imu.h",
+          "sha256": "2c7ae24445a2d5be005a337596c9b1b6f8c31f24dc560883e1c5224a6d543606"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_lcd.h",
+          "sha256": "55aca9ad149a055de3ee423ab9cbd5b991e0f730faaf8a9383eef311efaece05"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_serial.h",
+          "sha256": "3f2ed175d7192ef2138344f24da4d35630e4af2ae62930bfb90a4006a107fcc1"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_button.c",
+          "sha256": "c7fb8c52d7546824164a1a0e5df2ecdcf333883ee2bbbb5e660cba9e8135bf28"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_imu.c",
+          "sha256": "472555c3333e91a755fe6f86a3966eae3c525887a708f4410326224e98150722"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_lcd.c",
+          "sha256": "b29d7297bef2aa3f59076bb6a1d93b6edc3ed209281ae98646836057a3bcd3cd"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_serial.c",
+          "sha256": "6f362bc1c33edec4e6577dbe9137852fb313028fb19910a3a7238e2dfb13f051"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/CMakeLists.txt",
+          "sha256": "3ed2df1f5aa347c9826f40d79eb9c0d1786dbb53575a3647a9a7da97776c5703"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/feature_imu.h",
+          "sha256": "71d08ce6d09f1cea76d318e658f355a3431cf6f26bdd4c6f65597e33468e1228"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_crc.h",
+          "sha256": "d104dfd57f23b682ac9f803ba0536eb7bdf1cca26d7b0e31854d45202f9da8d8"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_gui.h",
+          "sha256": "98813fa2444c554a6df971234a7548a16779bb47b5b0b1d99b9b1d7a21a9db44"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_parser.h",
+          "sha256": "e588d5fedb5740733cbda6ff18545ac3ff5e9d04737ea4949ff4cd39aba83aa8"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_state.h",
+          "sha256": "235f5469383acbb3762736481d4148284a51d155a7b7771457019ecafd1d9d60"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_types.h",
+          "sha256": "d7610b0f133c5c91affe47ef9b9fc3bfe5a5d6a172a3c26d0e8d8ba159f9b8ed"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/feature_imu.c",
+          "sha256": "35b44c53432b11d4bce62252a789ec8fe3f66bd1cba343f052e57027bd6a48d4"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_crc.c",
+          "sha256": "fabc8de85906856782556d45bd763046223d3be45ea3206e5ad7bf66ff2f5479"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_gui.c",
+          "sha256": "25b2f627172b9e770492bff874a5edc556b808645224b9365b7302c20f2f9ba9"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_parser.c",
+          "sha256": "49aace758349b008a7af07aade6e173de0f4f6ac9e1ce429d8cb47fb475ddb16"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_state.c",
+          "sha256": "70af531807eecbcd1d0e0cce398c25b6f41e167f76009f2a1a85a97599a5857e"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main/CMakeLists.txt",
+          "sha256": "88d7f5fd257efb273668dfeac81eb3eeff9a0f48d6b6cc9a3f7576e47d19b6a4"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main/main.c",
+          "sha256": "1b3786282504f3eab9175179fd3a54b9f9ed965e4b51abb1fcac61ebd3e88bf6"
+        },
+        {
+          "path": "operator-observation/source-snapshot/scripts/pc_collector_sender.py",
+          "sha256": "45bc86f5e3a04eef5fa405f17333ac68fc468750050379a8a4189c16c3ddc300"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/meter_legacy_adapter.c",
+          "sha256": "71cca692cbf9ceb5b369609dcf9f15b45c413ba82f8521a90115d2a404feb9ac"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_evaluation_contract.py",
+          "sha256": "19653fb21495766210f4e4b0c6da2db87273dbca1c4a1f383d92b6db793fddaf"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_feature_imu.c",
+          "sha256": "f1766986ecade14f3d24a9697c4e62a5e65d06ee01bb0ad8862f3dc191fb2c3d"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_gui_regression.c",
+          "sha256": "9704d2cf520375a401add5d9d00c9fe46ef34cc290ed4b3da615743a343eecfd"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_legacy_adapter.py",
+          "sha256": "93e069869ea1223efc91ca8adfd6091e2afaa10e88a0e94fbcddc5be3b47db7a"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_meter_parser.c",
+          "sha256": "073fbb2518a13fd2617bba22430910138f1ddfa68b144bdec6009cc624a7639f"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_meter_state.c",
+          "sha256": "e252ab29d2b84f70805d2fae8925ef0d6fdff181369a0ba2921df07e1690a866"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_pc_collector_sender.py",
+          "sha256": "f03c03c242a71927a6d9775e39d2daef75e4581397588ca13758276cbbfd1137"
+        },
+        {
+          "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-flash-r01.json",
+          "sha256": "9ce6d6047e0ce92e5ea9950afa09924d2b60471dee2ee181c769e923aaa4be91"
+        },
+        {
+          "path": "operator-observation/terminal-originals/command-audit.json",
+          "sha256": "ca1bb70483a5cdd57369372386f875df6582a4dd525de7736437dd862c1f0dab"
+        },
+        {
+          "path": "operator-observation/terminal-originals/run-manifest.json",
+          "sha256": "ac622b4f8291e0f8bbe6b4e2c8219f5a0daba2f7e5081e9db951c22e6973b51a"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stderr.txt",
+          "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stdout.jsonl",
+          "sha256": "90311a7d4c8915c42b046227d3ae492346ced5bd20fc3fe69e2d56e583c4eb04"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/current-checks.json",
+          "sha256": "dfbab9b4dc6885f1b0965546e8d369815a8ac1629e7c818b599c01f531cef418"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stdout.txt",
+          "sha256": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be"
+        },
+        {
+          "path": "operator-launch-preflight/models-stderr.txt",
+          "sha256": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8"
+        },
+        {
+          "path": "operator-launch-preflight/models-stdout.txt",
+          "sha256": "0fe8eac40fd3a1f2554de5c998412b23e219cda82edd3f980f93f2f526a03bda"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stdout.txt",
+          "sha256": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494"
+        },
+        {
+          "path": "operator-launch-preflight/scope-exit.json",
+          "sha256": "6dfd42314f1b1cfa1704b011e750e0dda7031351e494f1336971cef67ee391a7"
+        },
+        {
+          "path": "experiment-launch.json",
+          "sha256": "26f70fad5dd67f0e0fceca46f79944de57c0e7854ff6ff436d59a6a317cc5265"
+        },
+        {
+          "path": "native-start-observation.json",
+          "sha256": "098c49da9922994d1c12dcc050f6332a95f0aa180d710bf323c957828e252457"
+        },
+        {
+          "path": "native-start-observation-prefix.jsonl",
+          "sha256": "7e45e4b1b1f662611d31c14bfa3e1f1fdf4f8d39908a789bd62a1448b8c7fb2c"
+        }
+      ],
+      "reason": "No firmware to upload; hardware behavior untested."
+    },
+    "RM4": {
+      "status": "not_run",
+      "evidence": [
+        {
+          "path": "operator-source-preparation.json",
+          "sha256": "444452fe9fda5010a24f5b0ab37b1fc7be0a305177cc9c6d04cc876d8c8f8069"
+        },
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "794dee40ee0366abc1f46930c02b9c310d824c9ffaf5b8856fe8060ba73c778f"
+        },
+        {
+          "path": "operator-policy-decision.json",
+          "sha256": "e6761ee4a6181bf654e4ab41e4587d818c767257da12acda0b73777ec9e9157c"
+        },
+        {
+          "path": "operator-observation/policy-notes.json",
+          "sha256": "4ae1bce86595c4635a02fa6867d0ea6a5385599f7a4cac0e78e25f77b2bf9f47"
+        },
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "f0c6be918245797e8485551ffe3080821bd48fbcd7430783bd76808dfa8180a3"
+        },
+        {
+          "path": "operator-observation/source-snapshot/CMakeLists.txt",
+          "sha256": "fae4f2339efb870b9f5c2f31a6de24f6c195d42fd4ad9c9cb42892fbfbdfe0c7"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main_host.c",
+          "sha256": "1d97b17659b2789e8526c9bb8ddea9da32142560b601c74d262f08d30f4a3cef"
+        },
+        {
+          "path": "operator-observation/source-snapshot/sdkconfig.defaults",
+          "sha256": "7fd8a7491855271492cbf3f2e8f599914fcd088f87bd0ea0ede8cf91129c0c67"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/CMakeLists.txt",
+          "sha256": "07c86934d4f3aaeace214c297f40a9b11193ce2b909378876553e89b7fcb65ad"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_board.h",
+          "sha256": "1245ba2e66f3095a836d4a6e66caf021a8137673016c2d12a7f711883fa1373e"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_button.h",
+          "sha256": "456afe6a4bdce7f5c76bb7df0652afeb3ed69b63cf53c4f5d0ccc07ae5c8be58"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_imu.h",
+          "sha256": "2c7ae24445a2d5be005a337596c9b1b6f8c31f24dc560883e1c5224a6d543606"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_lcd.h",
+          "sha256": "55aca9ad149a055de3ee423ab9cbd5b991e0f730faaf8a9383eef311efaece05"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_serial.h",
+          "sha256": "3f2ed175d7192ef2138344f24da4d35630e4af2ae62930bfb90a4006a107fcc1"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_button.c",
+          "sha256": "c7fb8c52d7546824164a1a0e5df2ecdcf333883ee2bbbb5e660cba9e8135bf28"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_imu.c",
+          "sha256": "472555c3333e91a755fe6f86a3966eae3c525887a708f4410326224e98150722"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_lcd.c",
+          "sha256": "b29d7297bef2aa3f59076bb6a1d93b6edc3ed209281ae98646836057a3bcd3cd"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_serial.c",
+          "sha256": "6f362bc1c33edec4e6577dbe9137852fb313028fb19910a3a7238e2dfb13f051"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/CMakeLists.txt",
+          "sha256": "3ed2df1f5aa347c9826f40d79eb9c0d1786dbb53575a3647a9a7da97776c5703"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/feature_imu.h",
+          "sha256": "71d08ce6d09f1cea76d318e658f355a3431cf6f26bdd4c6f65597e33468e1228"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_crc.h",
+          "sha256": "d104dfd57f23b682ac9f803ba0536eb7bdf1cca26d7b0e31854d45202f9da8d8"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_gui.h",
+          "sha256": "98813fa2444c554a6df971234a7548a16779bb47b5b0b1d99b9b1d7a21a9db44"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_parser.h",
+          "sha256": "e588d5fedb5740733cbda6ff18545ac3ff5e9d04737ea4949ff4cd39aba83aa8"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_state.h",
+          "sha256": "235f5469383acbb3762736481d4148284a51d155a7b7771457019ecafd1d9d60"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_types.h",
+          "sha256": "d7610b0f133c5c91affe47ef9b9fc3bfe5a5d6a172a3c26d0e8d8ba159f9b8ed"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/feature_imu.c",
+          "sha256": "35b44c53432b11d4bce62252a789ec8fe3f66bd1cba343f052e57027bd6a48d4"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_crc.c",
+          "sha256": "fabc8de85906856782556d45bd763046223d3be45ea3206e5ad7bf66ff2f5479"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_gui.c",
+          "sha256": "25b2f627172b9e770492bff874a5edc556b808645224b9365b7302c20f2f9ba9"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_parser.c",
+          "sha256": "49aace758349b008a7af07aade6e173de0f4f6ac9e1ce429d8cb47fb475ddb16"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_state.c",
+          "sha256": "70af531807eecbcd1d0e0cce398c25b6f41e167f76009f2a1a85a97599a5857e"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main/CMakeLists.txt",
+          "sha256": "88d7f5fd257efb273668dfeac81eb3eeff9a0f48d6b6cc9a3f7576e47d19b6a4"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main/main.c",
+          "sha256": "1b3786282504f3eab9175179fd3a54b9f9ed965e4b51abb1fcac61ebd3e88bf6"
+        },
+        {
+          "path": "operator-observation/source-snapshot/scripts/pc_collector_sender.py",
+          "sha256": "45bc86f5e3a04eef5fa405f17333ac68fc468750050379a8a4189c16c3ddc300"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/meter_legacy_adapter.c",
+          "sha256": "71cca692cbf9ceb5b369609dcf9f15b45c413ba82f8521a90115d2a404feb9ac"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_evaluation_contract.py",
+          "sha256": "19653fb21495766210f4e4b0c6da2db87273dbca1c4a1f383d92b6db793fddaf"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_feature_imu.c",
+          "sha256": "f1766986ecade14f3d24a9697c4e62a5e65d06ee01bb0ad8862f3dc191fb2c3d"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_gui_regression.c",
+          "sha256": "9704d2cf520375a401add5d9d00c9fe46ef34cc290ed4b3da615743a343eecfd"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_legacy_adapter.py",
+          "sha256": "93e069869ea1223efc91ca8adfd6091e2afaa10e88a0e94fbcddc5be3b47db7a"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_meter_parser.c",
+          "sha256": "073fbb2518a13fd2617bba22430910138f1ddfa68b144bdec6009cc624a7639f"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_meter_state.c",
+          "sha256": "e252ab29d2b84f70805d2fae8925ef0d6fdff181369a0ba2921df07e1690a866"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_pc_collector_sender.py",
+          "sha256": "f03c03c242a71927a6d9775e39d2daef75e4581397588ca13758276cbbfd1137"
+        },
+        {
+          "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-flash-r01.json",
+          "sha256": "9ce6d6047e0ce92e5ea9950afa09924d2b60471dee2ee181c769e923aaa4be91"
+        },
+        {
+          "path": "operator-observation/terminal-originals/command-audit.json",
+          "sha256": "ca1bb70483a5cdd57369372386f875df6582a4dd525de7736437dd862c1f0dab"
+        },
+        {
+          "path": "operator-observation/terminal-originals/run-manifest.json",
+          "sha256": "ac622b4f8291e0f8bbe6b4e2c8219f5a0daba2f7e5081e9db951c22e6973b51a"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stderr.txt",
+          "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stdout.jsonl",
+          "sha256": "90311a7d4c8915c42b046227d3ae492346ced5bd20fc3fe69e2d56e583c4eb04"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/current-checks.json",
+          "sha256": "dfbab9b4dc6885f1b0965546e8d369815a8ac1629e7c818b599c01f531cef418"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stdout.txt",
+          "sha256": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be"
+        },
+        {
+          "path": "operator-launch-preflight/models-stderr.txt",
+          "sha256": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8"
+        },
+        {
+          "path": "operator-launch-preflight/models-stdout.txt",
+          "sha256": "0fe8eac40fd3a1f2554de5c998412b23e219cda82edd3f980f93f2f526a03bda"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stdout.txt",
+          "sha256": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494"
+        },
+        {
+          "path": "operator-launch-preflight/scope-exit.json",
+          "sha256": "6dfd42314f1b1cfa1704b011e750e0dda7031351e494f1336971cef67ee391a7"
+        },
+        {
+          "path": "experiment-launch.json",
+          "sha256": "26f70fad5dd67f0e0fceca46f79944de57c0e7854ff6ff436d59a6a317cc5265"
+        },
+        {
+          "path": "native-start-observation.json",
+          "sha256": "098c49da9922994d1c12dcc050f6332a95f0aa180d710bf323c957828e252457"
+        },
+        {
+          "path": "native-start-observation-prefix.jsonl",
+          "sha256": "7e45e4b1b1f662611d31c14bfa3e1f1fdf4f8d39908a789bd62a1448b8c7fb2c"
+        }
+      ],
+      "reason": "No firmware to upload; hardware behavior untested."
+    },
+    "RM5": {
+      "status": "not_run",
+      "evidence": [
+        {
+          "path": "operator-source-preparation.json",
+          "sha256": "444452fe9fda5010a24f5b0ab37b1fc7be0a305177cc9c6d04cc876d8c8f8069"
+        },
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "794dee40ee0366abc1f46930c02b9c310d824c9ffaf5b8856fe8060ba73c778f"
+        },
+        {
+          "path": "operator-policy-decision.json",
+          "sha256": "e6761ee4a6181bf654e4ab41e4587d818c767257da12acda0b73777ec9e9157c"
+        },
+        {
+          "path": "operator-observation/policy-notes.json",
+          "sha256": "4ae1bce86595c4635a02fa6867d0ea6a5385599f7a4cac0e78e25f77b2bf9f47"
+        },
+        {
+          "path": "operator-observation/terminal-verification.json",
+          "sha256": "f0c6be918245797e8485551ffe3080821bd48fbcd7430783bd76808dfa8180a3"
+        },
+        {
+          "path": "operator-observation/source-snapshot/CMakeLists.txt",
+          "sha256": "fae4f2339efb870b9f5c2f31a6de24f6c195d42fd4ad9c9cb42892fbfbdfe0c7"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main_host.c",
+          "sha256": "1d97b17659b2789e8526c9bb8ddea9da32142560b601c74d262f08d30f4a3cef"
+        },
+        {
+          "path": "operator-observation/source-snapshot/sdkconfig.defaults",
+          "sha256": "7fd8a7491855271492cbf3f2e8f599914fcd088f87bd0ea0ede8cf91129c0c67"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/CMakeLists.txt",
+          "sha256": "07c86934d4f3aaeace214c297f40a9b11193ce2b909378876553e89b7fcb65ad"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_board.h",
+          "sha256": "1245ba2e66f3095a836d4a6e66caf021a8137673016c2d12a7f711883fa1373e"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_button.h",
+          "sha256": "456afe6a4bdce7f5c76bb7df0652afeb3ed69b63cf53c4f5d0ccc07ae5c8be58"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_imu.h",
+          "sha256": "2c7ae24445a2d5be005a337596c9b1b6f8c31f24dc560883e1c5224a6d543606"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_lcd.h",
+          "sha256": "55aca9ad149a055de3ee423ab9cbd5b991e0f730faaf8a9383eef311efaece05"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/include/bsp_serial.h",
+          "sha256": "3f2ed175d7192ef2138344f24da4d35630e4af2ae62930bfb90a4006a107fcc1"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_button.c",
+          "sha256": "c7fb8c52d7546824164a1a0e5df2ecdcf333883ee2bbbb5e660cba9e8135bf28"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_imu.c",
+          "sha256": "472555c3333e91a755fe6f86a3966eae3c525887a708f4410326224e98150722"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_lcd.c",
+          "sha256": "b29d7297bef2aa3f59076bb6a1d93b6edc3ed209281ae98646836057a3bcd3cd"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/bsp/src/bsp_serial.c",
+          "sha256": "6f362bc1c33edec4e6577dbe9137852fb313028fb19910a3a7238e2dfb13f051"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/CMakeLists.txt",
+          "sha256": "3ed2df1f5aa347c9826f40d79eb9c0d1786dbb53575a3647a9a7da97776c5703"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/feature_imu.h",
+          "sha256": "71d08ce6d09f1cea76d318e658f355a3431cf6f26bdd4c6f65597e33468e1228"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_crc.h",
+          "sha256": "d104dfd57f23b682ac9f803ba0536eb7bdf1cca26d7b0e31854d45202f9da8d8"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_gui.h",
+          "sha256": "98813fa2444c554a6df971234a7548a16779bb47b5b0b1d99b9b1d7a21a9db44"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_parser.h",
+          "sha256": "e588d5fedb5740733cbda6ff18545ac3ff5e9d04737ea4949ff4cd39aba83aa8"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_state.h",
+          "sha256": "235f5469383acbb3762736481d4148284a51d155a7b7771457019ecafd1d9d60"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/include/meter_types.h",
+          "sha256": "d7610b0f133c5c91affe47ef9b9fc3bfe5a5d6a172a3c26d0e8d8ba159f9b8ed"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/feature_imu.c",
+          "sha256": "35b44c53432b11d4bce62252a789ec8fe3f66bd1cba343f052e57027bd6a48d4"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_crc.c",
+          "sha256": "fabc8de85906856782556d45bd763046223d3be45ea3206e5ad7bf66ff2f5479"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_gui.c",
+          "sha256": "25b2f627172b9e770492bff874a5edc556b808645224b9365b7302c20f2f9ba9"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_parser.c",
+          "sha256": "49aace758349b008a7af07aade6e173de0f4f6ac9e1ce429d8cb47fb475ddb16"
+        },
+        {
+          "path": "operator-observation/source-snapshot/components/meter_core/src/meter_state.c",
+          "sha256": "70af531807eecbcd1d0e0cce398c25b6f41e167f76009f2a1a85a97599a5857e"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main/CMakeLists.txt",
+          "sha256": "88d7f5fd257efb273668dfeac81eb3eeff9a0f48d6b6cc9a3f7576e47d19b6a4"
+        },
+        {
+          "path": "operator-observation/source-snapshot/main/main.c",
+          "sha256": "1b3786282504f3eab9175179fd3a54b9f9ed965e4b51abb1fcac61ebd3e88bf6"
+        },
+        {
+          "path": "operator-observation/source-snapshot/scripts/pc_collector_sender.py",
+          "sha256": "45bc86f5e3a04eef5fa405f17333ac68fc468750050379a8a4189c16c3ddc300"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/meter_legacy_adapter.c",
+          "sha256": "71cca692cbf9ceb5b369609dcf9f15b45c413ba82f8521a90115d2a404feb9ac"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_evaluation_contract.py",
+          "sha256": "19653fb21495766210f4e4b0c6da2db87273dbca1c4a1f383d92b6db793fddaf"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_feature_imu.c",
+          "sha256": "f1766986ecade14f3d24a9697c4e62a5e65d06ee01bb0ad8862f3dc191fb2c3d"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_gui_regression.c",
+          "sha256": "9704d2cf520375a401add5d9d00c9fe46ef34cc290ed4b3da615743a343eecfd"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_legacy_adapter.py",
+          "sha256": "93e069869ea1223efc91ca8adfd6091e2afaa10e88a0e94fbcddc5be3b47db7a"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_meter_parser.c",
+          "sha256": "073fbb2518a13fd2617bba22430910138f1ddfa68b144bdec6009cc624a7639f"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_meter_state.c",
+          "sha256": "e252ab29d2b84f70805d2fae8925ef0d6fdff181369a0ba2921df07e1690a866"
+        },
+        {
+          "path": "operator-observation/source-snapshot/tests/test_pc_collector_sender.py",
+          "sha256": "f03c03c242a71927a6d9775e39d2daef75e4581397588ca13758276cbbfd1137"
+        },
+        {
+          "path": "operator-observation/terminal-originals/20261005-antigravity-cli-agy-flash-r01.json",
+          "sha256": "9ce6d6047e0ce92e5ea9950afa09924d2b60471dee2ee181c769e923aaa4be91"
+        },
+        {
+          "path": "operator-observation/terminal-originals/command-audit.json",
+          "sha256": "ca1bb70483a5cdd57369372386f875df6582a4dd525de7736437dd862c1f0dab"
+        },
+        {
+          "path": "operator-observation/terminal-originals/run-manifest.json",
+          "sha256": "ac622b4f8291e0f8bbe6b4e2c8219f5a0daba2f7e5081e9db951c22e6973b51a"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stderr.txt",
+          "sha256": "6f9b232ca1f3b43aa72e2ba63698c09b0796b612d5a17cf05efee31e6c79b713"
+        },
+        {
+          "path": "operator-observation/terminal-originals/stdout.jsonl",
+          "sha256": "90311a7d4c8915c42b046227d3ae492346ced5bd20fc3fe69e2d56e583c4eb04"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/agents-stdout.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/current-checks.json",
+          "sha256": "dfbab9b4dc6885f1b0965546e8d369815a8ac1629e7c818b599c01f531cef418"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/mcp-stdout.txt",
+          "sha256": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be"
+        },
+        {
+          "path": "operator-launch-preflight/models-stderr.txt",
+          "sha256": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8"
+        },
+        {
+          "path": "operator-launch-preflight/models-stdout.txt",
+          "sha256": "0fe8eac40fd3a1f2554de5c998412b23e219cda82edd3f980f93f2f526a03bda"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stderr.txt",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "operator-launch-preflight/plugins-stdout.txt",
+          "sha256": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494"
+        },
+        {
+          "path": "operator-launch-preflight/scope-exit.json",
+          "sha256": "6dfd42314f1b1cfa1704b011e750e0dda7031351e494f1336971cef67ee391a7"
+        },
+        {
+          "path": "experiment-launch.json",
+          "sha256": "26f70fad5dd67f0e0fceca46f79944de57c0e7854ff6ff436d59a6a317cc5265"
+        },
+        {
+          "path": "native-start-observation.json",
+          "sha256": "098c49da9922994d1c12dcc050f6332a95f0aa180d710bf323c957828e252457"
+        },
+        {
+          "path": "native-start-observation-prefix.jsonl",
+          "sha256": "7e45e4b1b1f662611d31c14bfa3e1f1fdf4f8d39908a789bd62a1448b8c7fb2c"
+        }
+      ],
+      "reason": "No firmware to upload; hardware behavior untested."
+    }
+  }
+}
