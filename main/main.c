@@ -27,6 +27,7 @@ static meter_state_t s_meter_state;
 static meter_gui_t s_meter_gui;
 static imu_feature_state_t s_imu_state;
 static SemaphoreHandle_t s_state_mutex = NULL;
+static meter_frame_t s_rx_frame;
 
 /* Reference clock tracking */
 static int64_t s_base_epoch_sec = 0;
@@ -45,11 +46,10 @@ static int64_t get_current_epoch_seconds(void)
 
 static void on_frame_received(const char *line, size_t len)
 {
-    meter_frame_t frame;
     char err_code[32] = {0};
 
     int64_t now_sec = get_current_epoch_seconds();
-    bool parse_ok = meter_parse_frame(line, len, &frame, err_code);
+    bool parse_ok = meter_parse_frame(line, len, &s_rx_frame, err_code);
 
     if (xSemaphoreTake(s_state_mutex, pdMS_TO_TICKS(100)) == pdTRUE) {
         if (!parse_ok) {
@@ -58,18 +58,18 @@ static void on_frame_received(const char *line, size_t len)
         } else {
             /* Sync clock to valid sent_at */
             int64_t sent_sec = 0;
-            if (meter_parse_rfc3339(frame.sent_at, &sent_sec)) {
+            if (meter_parse_rfc3339(s_rx_frame.sent_at, &sent_sec)) {
                 s_base_epoch_sec = sent_sec;
                 s_base_uptime_us = esp_timer_get_time();
                 now_sec = sent_sec;
             }
 
             char proc_err[32] = {0};
-            if (!meter_state_process_frame(&s_meter_state, &frame, now_sec, proc_err)) {
+            if (!meter_state_process_frame(&s_meter_state, &s_rx_frame, now_sec, proc_err)) {
                 ESP_LOGW(TAG, "Frame state update rejected: %s", proc_err);
             } else {
                 ESP_LOGI(TAG, "Frame accepted: seq=%" PRIu32 ", usage=%" PRIu32 ", resets=%" PRIu32,
-                         frame.sequence, (uint32_t)frame.usage_count, (uint32_t)frame.global_reset_count);
+                         s_rx_frame.sequence, (uint32_t)s_rx_frame.usage_count, (uint32_t)s_rx_frame.global_reset_count);
             }
         }
         xSemaphoreGive(s_state_mutex);
@@ -161,7 +161,7 @@ void app_main(void)
 {
     ESP_LOGI(TAG, "==================================================");
     ESP_LOGI(TAG, "Waveshare ESP32-S3-LCD-3.16 Meter Firmware v2");
-    ESP_LOGI(TAG, "Run ID: 20261005-antigravity-cli-agy-flash-r02");
+    ESP_LOGI(TAG, "Run ID: 20261007-antigravity-cli-agy-flash-r02");
     ESP_LOGI(TAG, "==================================================");
 
     s_state_mutex = xSemaphoreCreateMutex();
@@ -201,10 +201,10 @@ void app_main(void)
     /* Initialize USB Serial Receiver */
     bsp_serial_init(on_frame_received);
 
-    /* Create background worker tasks */
-    xTaskCreatePinnedToCore(serial_rx_task, "serial_rx", 4096, NULL, 5, NULL, 0);
-    xTaskCreatePinnedToCore(input_sensor_task, "input_sensor", 3072, NULL, 3, NULL, 0);
-    xTaskCreatePinnedToCore(gui_render_task, "gui_render", 6144, NULL, 4, NULL, 1);
+    /* Create background worker tasks with ample stack memory */
+    xTaskCreatePinnedToCore(serial_rx_task, "serial_rx", 8192, NULL, 5, NULL, 0);
+    xTaskCreatePinnedToCore(input_sensor_task, "input_sensor", 4096, NULL, 3, NULL, 0);
+    xTaskCreatePinnedToCore(gui_render_task, "gui_render", 8192, NULL, 4, NULL, 1);
 
     ESP_LOGI(TAG, "All subsystems running");
 }

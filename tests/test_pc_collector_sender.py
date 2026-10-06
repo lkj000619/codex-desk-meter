@@ -103,10 +103,36 @@ class TestPcCollectorSender(unittest.TestCase):
             self.assertEqual(len(frame["payload"]["usage"]), 1)
             self.assertEqual(len(frame["payload"]["global_resets"]), 2)
             usage = frame["payload"]["usage"][0]
-            self.assertEqual(usage["provider_id"], "codex")
+            self.assertEqual(usage["provider_id"], "openai")
             self.assertEqual(len(usage["windows"]), 2)
-            self.assertEqual(usage["windows"][0]["percent_remaining"], 58.0)
-            self.assertEqual(usage["windows"][1]["percent_remaining"], 82.0)
+            self.assertEqual(usage["windows"][0]["percent_remaining"], 58)
+            self.assertEqual(usage["windows"][1]["percent_remaining"], 82)
+
+    def test_exact_common_wire_match(self):
+        """Verifies exact byte-for-byte sha256 match with operator common benchmark stimulus."""
+        import hashlib
+        # Mode 1: Default mode
+        sender_def = PcCollectorSender(
+            device_alias="common-default",
+            reference_time="2026-09-30T18:40:49Z",
+        )
+        frame0_def, line0_def = sender_def.collect_and_build(sequence=0, sent_at="2026-09-30T18:40:49Z")
+        sha0_def = hashlib.sha256(line0_def).hexdigest()
+        self.assertEqual(sha0_def, "46d2381c3a9e7fcef740cfa6dc8ef34061bdf31d3143ea8dd8b69fedbdb1955d")
+
+        frame1_def, line1_def = sender_def.collect_and_build(sequence=1, sent_at="2026-09-30T18:40:54Z")
+        sha1_def = hashlib.sha256(line1_def).hexdigest()
+        self.assertEqual(sha1_def, "46b51f55404dbb8ace1b7aa4b548eb33689372663238715897e2a8ad56530df1")
+
+        # Mode 2: Legacy mode
+        sender_leg = PcCollectorSender(
+            device_alias="common-legacy",
+            reference_time="2026-09-30T18:40:49Z",
+            use_legacy=True,
+        )
+        frame0_leg, line0_leg = sender_leg.collect_and_build(sequence=0, sent_at="2026-09-30T18:40:49Z")
+        sha0_leg = hashlib.sha256(line0_leg).hexdigest()
+        self.assertEqual(sha0_leg, "46d2381c3a9e7fcef740cfa6dc8ef34061bdf31d3143ea8dd8b69fedbdb1955d")
 
 
 if __name__ == "__main__":

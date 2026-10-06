@@ -228,28 +228,42 @@ esp_err_t bsp_lcd_init(void)
     return ESP_OK;
 }
 
+#define FLUSH_TILE_SIZE 32
+
 void bsp_lcd_flush(const uint16_t *canvas_820x320, display_orientation_t orientation)
 {
     if (!s_fb0 || !canvas_820x320) return;
 
-    /* Flush 820x320 canvas to 320x820 native framebuffer */
+    /* Flush 820x320 canvas to 320x820 native framebuffer using cache-blocked tiles */
     if (orientation == ORIENTATION_LANDSCAPE_NORMAL) {
-        for (int ly = 0; ly < 320; ++ly) {
-            const uint16_t *src = &canvas_820x320[ly * 820];
-            int px = ly;
-            for (int lx = 0; lx < 820; ++lx) {
-                int py = 819 - lx;
-                s_fb0[py * 320 + px] = src[lx];
+        for (int ty = 0; ty < 320; ty += FLUSH_TILE_SIZE) {
+            int max_ly = (ty + FLUSH_TILE_SIZE > 320) ? 320 : (ty + FLUSH_TILE_SIZE);
+            for (int tx = 0; tx < 820; tx += FLUSH_TILE_SIZE) {
+                int max_lx = (tx + FLUSH_TILE_SIZE > 820) ? 820 : (tx + FLUSH_TILE_SIZE);
+                for (int ly = ty; ly < max_ly; ++ly) {
+                    const uint16_t *src_row = &canvas_820x320[ly * 820];
+                    int px = ly;
+                    for (int lx = tx; lx < max_lx; ++lx) {
+                        int py = 819 - lx;
+                        s_fb0[py * 320 + px] = src_row[lx];
+                    }
+                }
             }
         }
     } else {
         /* Inverted landscape (180 deg) */
-        for (int ly = 0; ly < 320; ++ly) {
-            const uint16_t *src = &canvas_820x320[ly * 820];
-            int px = 319 - ly;
-            for (int lx = 0; lx < 820; ++lx) {
-                int py = lx;
-                s_fb0[py * 320 + px] = src[lx];
+        for (int ty = 0; ty < 320; ty += FLUSH_TILE_SIZE) {
+            int max_ly = (ty + FLUSH_TILE_SIZE > 320) ? 320 : (ty + FLUSH_TILE_SIZE);
+            for (int tx = 0; tx < 820; tx += FLUSH_TILE_SIZE) {
+                int max_lx = (tx + FLUSH_TILE_SIZE > 820) ? 820 : (tx + FLUSH_TILE_SIZE);
+                for (int ly = ty; ly < max_ly; ++ly) {
+                    const uint16_t *src_row = &canvas_820x320[ly * 820];
+                    int px = 319 - ly;
+                    for (int lx = tx; lx < max_lx; ++lx) {
+                        int py = lx;
+                        s_fb0[py * 320 + px] = src_row[lx];
+                    }
+                }
             }
         }
     }

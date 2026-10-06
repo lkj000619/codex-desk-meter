@@ -58,38 +58,38 @@ esp_err_t bsp_serial_init(bsp_serial_line_cb_t callback)
 
 void bsp_serial_poll(void)
 {
-    uint8_t chunk[256];
-    int len = 0;
-
-    /* Read native USB-Serial-JTAG endpoint first */
-    if (s_usj_installed) {
-        len = usb_serial_jtag_read_bytes(chunk, sizeof(chunk), pdMS_TO_TICKS(5));
-    }
-
-    /* Fallback to UART0 if no USB data */
-    if (len <= 0) {
-        len = uart_read_bytes(UART_PORT, chunk, sizeof(chunk), 0);
-    }
-
-    if (len <= 0) return;
-
-    for (int i = 0; i < len; ++i) {
-        char c = (char)chunk[i];
-        if (s_line_len < MAX_LINE_SIZE - 1) {
-            s_line_buf[s_line_len++] = c;
-        } else {
-            /* Overflow: reset line buffer */
-            ESP_LOGW(TAG, "Line buffer overflow, resetting");
-            s_line_len = 0;
-            continue;
+    uint8_t chunk[512];
+    while (1) {
+        int len = 0;
+        /* Read native USB-Serial-JTAG endpoint first */
+        if (s_usj_installed) {
+            len = usb_serial_jtag_read_bytes(chunk, sizeof(chunk), pdMS_TO_TICKS(5));
+        }
+        /* Fallback to UART0 if no USB data */
+        if (len <= 0) {
+            len = uart_read_bytes(UART_PORT, chunk, sizeof(chunk), 0);
         }
 
-        if (c == '\n') {
-            s_line_buf[s_line_len] = '\0';
-            if (s_callback) {
-                s_callback(s_line_buf, s_line_len);
+        if (len <= 0) break;
+
+        for (int i = 0; i < len; ++i) {
+            char c = (char)chunk[i];
+            if (s_line_len < MAX_LINE_SIZE - 1) {
+                s_line_buf[s_line_len++] = c;
+            } else {
+                /* Overflow: reset line buffer */
+                ESP_LOGW(TAG, "Line buffer overflow, resetting");
+                s_line_len = 0;
+                continue;
             }
-            s_line_len = 0;
+
+            if (c == '\n') {
+                s_line_buf[s_line_len] = '\0';
+                if (s_callback) {
+                    s_callback(s_line_buf, s_line_len);
+                }
+                s_line_len = 0;
+            }
         }
     }
 }

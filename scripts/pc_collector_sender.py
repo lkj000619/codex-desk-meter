@@ -26,10 +26,13 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from host_device_pipeline import (
     DEFAULT_SENT_AT,
     MAX_SEQUENCE,
+    STALE_THRESHOLD_SECONDS,
     FixtureRegistry,
     LoopbackSerial,
     PipelineError,
     SerialBridge,
+    _as_of,
+    _parse_timestamp,
     build_frame,
     canonical_json,
     encode_frame,
@@ -93,14 +96,14 @@ class PersistentSequenceManager:
         return self._load_state()["last_reserved_sequence"]
 
 
-class LegacyUsageFixtureAdapter:
-    """Adapter for legacy personal-usage.json fixture conforming to usage-snapshot schema."""
+class CommonUsageFixtureAdapter:
+    """Standard adapter for personal-usage.json fixture conforming to usage-snapshot schema."""
 
     def __init__(self, path: Path | str = ROOT / "experiments" / "fixtures" / "personal-usage.json", reference_time: str | None = None):
         self.path = Path(path)
         self.adapter_id = "personal-usage"
-        self.provider_id = "codex"
-        self.agent_id = "fixture"
+        self.provider_id = "openai"
+        self.agent_id = "codex-cli"
         self.host_id = "terminal"
         self.reference_time = reference_time
 
@@ -108,41 +111,115 @@ class LegacyUsageFixtureAdapter:
         if not self.path.exists():
             return []
         data = json.loads(self.path.read_text(encoding="utf-8"))
+        captured_at = data.get("captured_at")
+
+        # Check staleness against reference_time
+        ref_dt = _as_of(self.reference_time)
+        obs_dt = _parse_timestamp(captured_at, "captured_at") if captured_at else ref_dt
+        age_seconds = (ref_dt - obs_dt).total_seconds()
+        is_stale = bool(data.get("stale", False)) or (age_seconds >= STALE_THRESHOLD_SECONDS)
+
         windows = []
         for w in data.get("windows", []):
-            pu = float(w["percent_used"]) if "percent_used" in w and w["percent_used"] is not None else None
-            pr = float(w["percent_remaining"]) if "percent_remaining" in w and w["percent_remaining"] is not None else (100.0 - pu if pu is not None else None)
+            pu = w.get("percent_used")
+            pr = w.get("percent_remaining")
+            if pu is not None:
+                pu = int(pu) if isinstance(pu, int) or float(pu).is_integer() else float(pu)
+            if pr is not None:
+                pr = int(pr) if isinstance(pr, int) or float(pr).is_integer() else float(pr)
+            elif pu is not None:
+                pr = 100 - pu
+
+            resets_at = w.get("resets_at")
+            if resets_at is None:
+                reset_status = "unknown"
+            else:
+                rst_dt = _parse_timestamp(resets_at, "resets_at")
+                reset_status = "expired" if rst_dt <= ref_dt else "scheduled"
+
             windows.append({
-                "window_id": w.get("id", w.get("window_id")),
                 "label": w.get("label", w.get("id")),
-                "used_units": None,
-                "remaining_units": None,
                 "limit_units": None,
-                "unit": "percent",
-                "percent_used": pu,
                 "percent_remaining": pr,
-                "resets_at": w.get("resets_at"),
+                "percent_used": pu,
+                "remaining_units": None,
+                "reset_status": reset_status,
+                "resets_at": resets_at,
+                "unit": "percent",
+                "used_units": None,
+                "window_id": w.get("id", w.get("window_id")),
             })
+
+        status = "stale" if is_stale else "available"
+        error_code = "SOURCE_STALE" if is_stale else data.get("error_code")
+        error_reason = (
+            "The source observation is at least 300 seconds old; its value is retained as stale."
+            if is_stale
+            else None
+        )
+
         snapshot = {
-            "schema_version": 1,
-            "snapshot_id": "legacy-personal-usage",
-            "provider_id": "codex",
-            "agent_id": "fixture",
-            "host_id": "terminal",
-            "model_id": None,
-            "account_profile_id": data.get("account_scope", "synthetic-example"),
-            "source_kind": "fixture",
+            "account_profile_id": None,
+            "agent_id": self.agent_id,
+            "error_code": error_code,
+            "error_reason": error_reason,
+            "host_id": self.host_id,
+            "last_good_at": captured_at,
             "metric_kind": "quota_window",
+            "model_id": None,
+            "observed_at": captured_at,
+            "provider_id": self.provider_id,
+            "schema_version": 1,
+            "snapshot_id": "fixture-personal-usage",
+            "source_kind": "fixture",
+            "stale": is_stale,
+            "status": status,
             "unit": "percent",
-            "status": "available",
-            "observed_at": data.get("captured_at"),
             "windows": windows,
-            "stale": bool(data.get("stale", False)),
-            "last_good_at": data.get("captured_at"),
-            "error_code": data.get("error_code"),
-            "error_reason": None,
         }
         return [snapshot]
+
+
+class CommonGlobalResetFixtureAdapter:
+    """Adapter for global reset fixture evaluating stale against reference time."""
+
+    def __init__(self, adapter_id: str, path: Path | str, reference_time: str | None = None):
+        self.adapter_id = adapter_id
+        self.path = Path(path)
+        self.reference_time = reference_time
+
+    def collect(self) -> dict[str, Any]:
+        data = json.loads(self.path.read_text(encoding="utf-8"))
+        captured_at = data.get("captured_at", data.get("fetched_at"))
+        ref_dt = _as_of(self.reference_time)
+        cap_dt = _parse_timestamp(captured_at, "captured_at") if captured_at else ref_dt
+        age_seconds = (ref_dt - cap_dt).total_seconds()
+        is_stale = bool(data.get("stale", False)) or (age_seconds >= STALE_THRESHOLD_SECONDS)
+
+        latest_reset = data.get("latest_reset_at", data.get("last_reset_at"))
+        f24 = data.get("forecast_24h_percent")
+        if f24 is not None and (isinstance(f24, int) or float(f24).is_integer()):
+            f24 = int(f24)
+        f48 = data.get("forecast_48h_percent")
+        if f48 is not None and (isinstance(f48, int) or float(f48).is_integer()):
+            f48 = int(f48)
+
+        normalized = {
+            "captured_at": captured_at,
+            "error_code": data.get("error_code"),
+            "forecast_24h_percent": f24,
+            "forecast_48h_percent": f48,
+            "forecast_is_schedule": bool(data.get("forecast_is_schedule", False)),
+            "latest_reset_at": latest_reset,
+            "schema_version": 1,
+            "source": data.get("source", data.get("provider")),
+            "stale": is_stale,
+        }
+        return normalized
+
+
+# Backward compatibility alias
+LegacyUsageFixtureAdapter = CommonUsageFixtureAdapter
 
 
 class PcCollectorSender:
@@ -168,16 +245,18 @@ class PcCollectorSender:
     def collect_and_build(self, sequence: int, sent_at: str | None = None) -> tuple[dict[str, Any], bytes]:
         if self.registry is not None:
             registry = self.registry
-        elif self.use_legacy:
-            from host_device_pipeline import GlobalResetFixtureAdapter
-            reset_root = ROOT / "experiments" / "fixtures"
-            resets = [
-                GlobalResetFixtureAdapter("codex-reset-forecast", reset_root / "codex-reset-forecast.json"),
-                GlobalResetFixtureAdapter("codex-resets-history", reset_root / "codex-resets-history.json"),
-            ]
-            registry = FixtureRegistry([LegacyUsageFixtureAdapter(reference_time=self.reference_time)], resets, reference_time=self.reference_time)
         else:
-            registry = FixtureRegistry.with_defaults(ROOT, reference_time=self.reference_time)
+            # Common stimulus: personal-usage fixture + 2 global resets
+            reset_root = ROOT / "experiments" / "fixtures"
+            usage_adapter = CommonUsageFixtureAdapter(
+                path=reset_root / "personal-usage.json",
+                reference_time=self.reference_time,
+            )
+            resets = [
+                CommonGlobalResetFixtureAdapter("codex-reset-forecast", reset_root / "codex-reset-forecast.json", reference_time=self.reference_time),
+                CommonGlobalResetFixtureAdapter("codex-resets-history", reset_root / "codex-resets-history.json", reference_time=self.reference_time),
+            ]
+            registry = FixtureRegistry([usage_adapter], resets, reference_time=self.reference_time)
         collected = registry.collect()
         if sent_at is None:
             sent_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")

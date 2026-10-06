@@ -300,53 +300,50 @@ static void render_dashboard(meter_gui_t *gui, const meter_state_t *state, int64
 
         /* Windows */
         int win_y = 100;
+        int win_step = (snap->window_count <= 2) ? 74 : 64;
         for (size_t w = 0; w < snap->window_count && w < 2; ++w) {
             const meter_window_t *win = &snap->windows[w];
             const char *wtitle = (win->label[0] != '\0') ? win->label : win->window_id;
 
             char wlbl[128];
-            snprintf(wlbl, sizeof(wlbl), "%s", wtitle);
-            gui_draw_string(gui, card_x + 12, win_y, wlbl, COLOR_TEXT_PRIMARY, 0, 1);
+            if (win->has_percent) {
+                snprintf(wlbl, sizeof(wlbl), "%s: %.0f%% REMAINING", wtitle, win->percent_remaining);
+            } else {
+                snprintf(wlbl, sizeof(wlbl), "%s", wtitle);
+            }
+            /* Prominent header in scale 2 for card_w > 400 (single card) */
+            gui_draw_string(gui, card_x + 12, win_y, wlbl, COLOR_TEXT_PRIMARY, 0, (card_w > 400) ? 2 : 1);
 
             double pct = win->has_percent ? win->percent_used :
                          (win->has_absolute && win->limit_units > 0) ? (win->used_units / win->limit_units * 100.0) : 0.0;
 
-            char pct_str[64];
-            if (win->has_percent) {
-                snprintf(pct_str, sizeof(pct_str), "%.0f%% REM (%.0f%% USED)", win->percent_remaining, win->percent_used);
-            } else if (win->has_absolute && win->limit_units > 0) {
-                snprintf(pct_str, sizeof(pct_str), "%.0f%% REM", 100.0 - pct);
-            } else {
-                snprintf(pct_str, sizeof(pct_str), "%.1f%% USED", pct);
-            }
-            gui_draw_string(gui, card_x + card_w - 180, win_y, pct_str, COLOR_ACCENT_BLUE, 0, 1);
-
             uint16_t bar_color = (pct > 90.0) ? COLOR_ACCENT_RED : (pct > 75.0) ? COLOR_ACCENT_AMBER : COLOR_ACCENT_GREEN;
-            gui_draw_progress_bar(gui, card_x + 12, win_y + 16, card_w - 24, 18, pct, bar_color, COLOR_BAR_BG);
+            gui_draw_progress_bar(gui, card_x + 12, win_y + 22, card_w - 24, 18, pct, bar_color, COLOR_BAR_BG);
 
+            char detail_buf[256];
             if (win->has_percent) {
-                char rem_buf[128];
-                snprintf(rem_buf, sizeof(rem_buf), "%s: %.0f%% remaining", wtitle, win->percent_remaining);
-                gui_draw_string(gui, card_x + 12, win_y + 38, rem_buf, COLOR_TEXT_PRIMARY, 0, 1);
+                snprintf(detail_buf, sizeof(detail_buf), "Used: %.0f%% | Remaining: %.0f%% | Status: %s",
+                         win->percent_used, win->percent_remaining, (snap->status == SNAPSHOT_STATUS_STALE) ? "STALE" : "LIVE");
             } else if (win->has_absolute) {
-                char tok_buf[128];
-                snprintf(tok_buf, sizeof(tok_buf), "%.0f / %.0f %s", win->used_units, win->limit_units,
-                         (win->unit == UNIT_TOKEN) ? "TOKENS" : "CREDITS");
-                gui_draw_string(gui, card_x + 12, win_y + 38, tok_buf, COLOR_TEXT_MUTED, 0, 1);
-            } else if (win->resets_at[0] != '\0') {
-                char res_buf[128];
-                snprintf(res_buf, sizeof(res_buf), "RESETS: %s", win->resets_at);
-                gui_draw_string(gui, card_x + 12, win_y + 38, res_buf, COLOR_TEXT_MUTED, 0, 1);
+                snprintf(detail_buf, sizeof(detail_buf), "%.0f / %.0f %s (%.0f%% remaining)",
+                         win->used_units, win->limit_units, (win->unit == UNIT_TOKEN) ? "TOKENS" : "CREDITS", 100.0 - pct);
+            } else {
+                snprintf(detail_buf, sizeof(detail_buf), "Used: %.1f%%", pct);
             }
-            win_y += 68;
+            gui_draw_string(gui, card_x + 12, win_y + 45, detail_buf, COLOR_TEXT_MUTED, 0, 1);
+            win_y += win_step;
         }
 
-        /* Observed timestamp */
+        /* Observed timestamp & provenance */
+        char obs_buf[256] = {0};
         if (snap->observed_at[0] != '\0') {
-            char obs_buf[128];
-            snprintf(obs_buf, sizeof(obs_buf), "OBS: %s", snap->observed_at);
-            gui_draw_string(gui, card_x + 12, 268, obs_buf, COLOR_TEXT_MUTED, 0, 1);
+            snprintf(obs_buf, sizeof(obs_buf), "PROVENANCE: %s | OBSERVED: %s | STATUS: %s",
+                     snap->source_kind, snap->observed_at, (snap->stale) ? "STALE" : "LIVE");
+        } else {
+            snprintf(obs_buf, sizeof(obs_buf), "PROVENANCE: %s | STATUS: %s",
+                     snap->source_kind, (snap->stale) ? "STALE" : "LIVE");
         }
+        gui_draw_string(gui, card_x + 12, 266, obs_buf, COLOR_TEXT_MUTED, 0, 1);
 
         card_x += card_w + 12;
     }
