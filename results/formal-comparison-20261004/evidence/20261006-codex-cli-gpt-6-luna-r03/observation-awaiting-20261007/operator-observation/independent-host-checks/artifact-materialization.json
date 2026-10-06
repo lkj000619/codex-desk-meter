@@ -1,0 +1,7 @@
+{
+  "path": "build-host/meter_receiver_cli.exe",
+  "sha256": "d3bca8a5f9c21e9aa8e2546b47329ce2fea611f2e2853d1c823fe89b23df9ed4",
+  "source": "operator/operator-observation/artifact-snapshot/build-host/meter_receiver_cli.exe",
+  "candidate_source_modified": false,
+  "rebuild": false
+}

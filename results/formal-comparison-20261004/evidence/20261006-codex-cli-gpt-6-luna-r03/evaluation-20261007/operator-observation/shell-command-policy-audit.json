@@ -1,0 +1,110 @@
+{
+  "date": "2026-10-07",
+  "run_id": "20261006-codex-cli-gpt-6-luna-r03",
+  "reviewed_at": "2026-10-06T17:10:37.649945+00:00",
+  "raw_stdout_sha256": "adb2195d623f015ef533d31df6a7ca707515c5af3e9722b152d2e744f4e91da4",
+  "confirmed_findings": [],
+  "ambiguous_parse_findings_excluded": [
+    {
+      "body": "Select-String -Path main/board_lcd.c -Pattern '\"'^esp_err_t board_lcd_init|''^esp_err_t board_lcd_present|''^esp_err_t board_backlight_set|static esp_err_t|rgb_panel_config|data_gpio_nums|disp_gpio_num|bits_per_pixel|bounce_buffer|fb_in_psram|esp_lcd_new_rgb_panel|esp_lcd_new_panel_st7701|esp_lcd_panel_reset|esp_lcd_panel_init|esp_lcd_panel_disp_on_off|esp_lcd_panel_draw_bitmap|canvas =|ledc_.*config|gpio_set_level'\"'",
+      "raw_line": 82,
+      "parse_errors": [
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^esp_err_t' in expression or statement.",
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^esp_err_t' in expression or statement."
+      ],
+      "pipeline_extents": [
+        "Select-String -Path main/board_lcd.c -Pattern '\"'^esp_err_t board_lcd_init|''",
+        "^esp_err_t board_lcd_present|''",
+        "^esp_err_t board_backlight_set|static esp_err_t|rgb_panel_config|data_gpio_nums|disp_gpio_num|bits_per_pixel|bounce_buffer|fb_in_psram|esp_lcd_new_rgb_panel|esp_lcd_new_panel_st7701|esp_lcd_panel_reset|esp_lcd_panel_init|esp_lcd_panel_disp_on_off|esp_lcd_panel_draw_bitmap|canvas =|ledc_.*config|gpio_set_level'\"'"
+      ],
+      "separator_extents": [],
+      "run_id": "20261006-codex-cli-gpt-6-luna-r03"
+    },
+    {
+      "body": "Select-String -Path main/board_lcd.c -Pattern '\"'^static void render_global|''^static void render_status|''^static void render_dashboard|''^static void render_fixture|''^static esp_err_t update_framebuffer'\"' -Context 0,90",
+      "raw_line": 93,
+      "parse_errors": [
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^static' in expression or statement.",
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^static' in expression or statement.",
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^static' in expression or statement.",
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^static' in expression or statement."
+      ],
+      "pipeline_extents": [
+        "Select-String -Path main/board_lcd.c -Pattern '\"'^static void render_global|''",
+        "^static void render_status|''",
+        "^static void render_dashboard|''",
+        "^static void render_fixture|''"
+      ],
+      "separator_extents": [],
+      "run_id": "20261006-codex-cli-gpt-6-luna-r03"
+    },
+    {
+      "body": "Select-String -Path main/board_lcd.c -Pattern '\"'^esp_err_t board_backlight_set|''^esp_err_t board_lcd_init|''^esp_err_t board_lcd_present|''^int board_boot_level'\"' -Context 0,110",
+      "raw_line": 95,
+      "parse_errors": [
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^esp_err_t' in expression or statement.",
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^esp_err_t' in expression or statement.",
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^int' in expression or statement."
+      ],
+      "pipeline_extents": [
+        "Select-String -Path main/board_lcd.c -Pattern '\"'^esp_err_t board_backlight_set|''",
+        "^esp_err_t board_lcd_init|''",
+        "^esp_err_t board_lcd_present|''"
+      ],
+      "separator_extents": [],
+      "run_id": "20261006-codex-cli-gpt-6-luna-r03"
+    },
+    {
+      "body": "Select-String -Path scripts/validate-end-to-end-result.py -Pattern '\"'^def _check_manifest|''^def validate_result|''^def _check_f9_details|''^def _check_provider_matrix'\"' -Context 0,48",
+      "raw_line": 243,
+      "parse_errors": [
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^def' in expression or statement.",
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^def' in expression or statement.",
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^def' in expression or statement."
+      ],
+      "pipeline_extents": [
+        "Select-String -Path scripts/validate-end-to-end-result.py -Pattern '\"'^def _check_manifest|''",
+        "^def validate_result|''",
+        "^def _check_f9_details|''"
+      ],
+      "separator_extents": [],
+      "run_id": "20261006-codex-cli-gpt-6-luna-r03"
+    },
+    {
+      "body": "Select-String -Path scripts/validate-end-to-end-result.py -Pattern '\"'^def check_status_entry|''^def _check_join|''^def _check_telemetry|''^def check_evidence'\"' -Context 0,36",
+      "raw_line": 247,
+      "parse_errors": [
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^def' in expression or statement.",
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^def' in expression or statement.",
+        "Expressions are only allowed as the first element of a pipeline.",
+        "Unexpected token '^def' in expression or statement."
+      ],
+      "pipeline_extents": [
+        "Select-String -Path scripts/validate-end-to-end-result.py -Pattern '\"'^def check_status_entry|''",
+        "^def _check_join|''",
+        "^def _check_telemetry|''"
+      ],
+      "separator_extents": [],
+      "run_id": "20261006-codex-cli-gpt-6-luna-r03"
+    }
+  ],
+  "frozen_task_instruction": "셸 명령은 한 호출에 하나만 실행한다. `;`, `&&`, 파이프·명령 치환·shell wrapper로 결합하지 않는다.",
+  "method": "Inert PowerShell AST/token inspection and manual review of all 129 captured command bodies. Quoted regex alternation and native launcher wrapper excluded.",
+  "confirmed_pipeline_calls": 0,
+  "confirmed_semicolon_composition_calls": 0,
+  "scope": "Unchanged supplied task restriction. Five quoted-regex parse ambiguities at raw82/93/95/243/247 were manually reviewed and are inert quoting artifacts; no actual pipeline or composed statement identified. No retrospective permission change."
+}

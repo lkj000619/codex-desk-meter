@@ -1,0 +1,6 @@
+/build/
+/build-idf/
+/build-host/
+sdkconfig
+__pycache__/
+*.pyc

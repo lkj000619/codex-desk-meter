@@ -1,0 +1,52 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r03",
+  "checked_at": "2026-10-06T17:09:17.044549+00:00",
+  "terminal_status": "environment_failed",
+  "execution": {
+    "started_at": "2026-10-06T14:50:45.750Z",
+    "ended_at": "2026-10-06T15:11:33.017Z",
+    "timeout_seconds": 4213,
+    "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+    "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+    "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+    "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+    "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+    "profile_sha256": "eae4f0ceab072eff32f8f12b423cbdbacf312650817c26825800f83edf9fbb2a",
+    "input_bundle_sha256": "891f33b6a9128e423619c6c59b309cf09b0fe3d634bec9aa04bdfe93297207a1",
+    "network_mode": "offline-fixture",
+    "sandbox_policy": "prompt-and-log",
+    "approval_policy": "--ask-for-approval never, workspace-write, elevated sandbox; product execution requires a later user instruction",
+    "branch": "experiment/openai/codex-cli/gpt-6-luna",
+    "worktree": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r03\\checkout",
+    "host": "DESKTOP-JCMEN12"
+  },
+  "measurement": {
+    "wall_clock_seconds": 1247.2650000001304,
+    "tool_calls": 136,
+    "failed_commands": 7,
+    "user_interventions": null,
+    "tokens": {
+      "input": null,
+      "output": null,
+      "cached": null,
+      "reasoning": null,
+      "provider_total": null,
+      "total": null,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "No supported usage event; see raw stdout."
+    }
+  },
+  "original_terminal_manifest_sha256": "732dd18db5f18ca8cfb315e757b76ff80eb2b9ca70f0e24e42a3bfb4bd6cc54a",
+  "original_ledger_sha256": "e80c65069af9ebbb04e065a0c7b2e9c51349530d77192ef34aa72e1e3118cc22",
+  "candidate_processes_remaining": [],
+  "immutable_input_files_verified": 57,
+  "frozen_operator_baseline_verified": true,
+  "raw_native_events": 284,
+  "candidate_result_submission_present": true,
+  "candidate_selection_document_present": true,
+  "operator_audited_user_interventions": 0,
+  "operator_source_modifications": false,
+  "operator_firmware_rebuild": false,
+  "serial_opened": false
+}

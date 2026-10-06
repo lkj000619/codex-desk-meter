@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "binding": {
+    "run_id": "20261006-codex-cli-gpt-6-luna-r03",
+    "experiment_id": "version-2-end-to-end-v1",
+    "baseline_id": "comparison-baseline-20261004",
+    "baseline_ref": "comparison-baseline-20261004",
+    "agent": {
+      "provider": "openai",
+      "product": "codex-cli",
+      "interface": "cli",
+      "agent_version": "codex-cli 0.159.2",
+      "model": "gpt-6-luna",
+      "reasoning": "max",
+      "configuration_sha256": "d7980c28a03fcda158f3831200d7336592f367c93f7cac46c63f5983b5b6bef9"
+    },
+    "execution": {
+      "started_at": "2026-10-06T14:50:45.750Z",
+      "ended_at": "2026-10-06T15:11:33.017Z",
+      "timeout_seconds": 4213,
+      "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+      "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+      "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+      "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+      "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+      "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+      "profile_sha256": "eae4f0ceab072eff32f8f12b423cbdbacf312650817c26825800f83edf9fbb2a",
+      "input_bundle_sha256": "891f33b6a9128e423619c6c59b309cf09b0fe3d634bec9aa04bdfe93297207a1",
+      "network_mode": "offline-fixture",
+      "sandbox_policy": "prompt-and-log",
+      "approval_policy": "--ask-for-approval never, workspace-write, elevated sandbox; product execution requires a later user instruction",
+      "branch": "experiment/openai/codex-cli/gpt-6-luna",
+      "host": "DESKTOP-JCMEN12"
+    },
+    "status": "environment_failed",
+    "exit_code": 1,
+    "delivered_prompt_sha256": "4b194186d257ad8a99087d72bfb4b31d3dae6ef695baee49c6b63de3a9d3026c",
+    "local_base_commit": "deb77b393debc7e1bb9ca6caaccccbe3ec792267",
+    "user_interventions": null,
+    "raw_evidence": {
+      "stdout.jsonl": "adb2195d623f015ef533d31df6a7ca707515c5af3e9722b152d2e744f4e91da4",
+      "stderr.txt": "e095979eb0025b29b3770efe686f306fe31c2eea1d27a38554f742e706249357",
+      "prompt.txt": "4b194186d257ad8a99087d72bfb4b31d3dae6ef695baee49c6b63de3a9d3026c",
+      "profile.json": "d7980c28a03fcda158f3831200d7336592f367c93f7cac46c63f5983b5b6bef9"
+    },
+    "raw_evidence_sha256": "467d10709c576ffd8d1c7101ec0216bcd0484c3dffa8d182d6ead8e3f6c95966"
+  },
+  "reviewed_at": "2026-10-06T17:10:37.894443Z",
+  "decision": {
+    "status": "eligible",
+    "reviewer": "Codex operator",
+    "user_interventions": 0,
+    "reason": "Luna followup2 has no confirmed forbidden shell composition, out-of-scope source/hardware/global changes or operator repair in the129 manually reviewed commands. Current run eligible; prior initial/followup1 invalid policy remains, so series quality/reference-cost remains ineligible. Native usage-limit environment failure and unknown tokens are preserved separately.",
+    "intervention_review": "No operator candidate repair, replacement model call, in-run feedback or permission relaxation. Original measured intervention null retained; audited intervention0.",
+    "evidence": [
+      {
+        "path": "operator-observation/shell-command-policy-audit.json",
+        "sha256": "abaec08d33bafd75a6a193d02d295e94378f87ae73e91eccb2d230007c034f01"
+      },
+      {
+        "path": "operator-observation/native-tool-review.json",
+        "sha256": "eb9ab164337dca70b6036edd5b4ac818f8353e445b5dfe42f8872ddeb98fc2d2"
+      }
+    ]
+  },
+  "review_sha256": "328efc38d9789a8d5838b1a226c7a47b67c571f41d560faa11a483e6be5e7f6a"
+}

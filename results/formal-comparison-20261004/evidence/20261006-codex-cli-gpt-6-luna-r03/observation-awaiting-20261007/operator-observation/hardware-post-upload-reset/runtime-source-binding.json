@@ -1,0 +1,24 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r03",
+  "source_commit": "91f7de60328b7db9a9d04acef60ac45eafb3685a",
+  "app_sha256": "6298fbd63f86baf11b870bf7689852bae4bf85b5e05bd748c71939db339cf469",
+  "elf_sha256": "2174450821f1f9ab2bb09e85a556d11f09f3b173089e71320ad1c520799c2a69",
+  "boot_elf_sha_prefix_matches": true,
+  "boot_observed": true,
+  "psram_memory_test_ok": true,
+  "boot_screen_submitted_log_observed": true,
+  "usb_receiver_ready_observed": true,
+  "usb_data_chunk_observed": true,
+  "raw_log_sha256": "7e8d1b42b2d80205b80720c2ecf314303649c9dd8f5d716b4a2e77c35873825a",
+  "serial_capture_bytes": 5732,
+  "reset_requested_at": "2026-10-06T17:20:23.750560+00:00",
+  "receiver_accepted_sequences": [],
+  "receiver_rejected_errors": [],
+  "host_writes_completed_sequences": [
+    0,
+    1
+  ],
+  "serial_closed": true,
+  "wait_seconds_per_frame": 5,
+  "scope": "Same archived ELF boot and first USB chunk observed. Full frame acceptance and readable LCD are unconfirmed; first 86-byte capture preserved."
+}

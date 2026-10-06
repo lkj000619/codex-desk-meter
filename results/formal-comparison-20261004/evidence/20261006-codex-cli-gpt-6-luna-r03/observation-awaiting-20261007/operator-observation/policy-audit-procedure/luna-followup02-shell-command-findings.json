@@ -1,0 +1,108 @@
+[
+    {
+        "body":  "Select-String -Path main/board_lcd.c -Pattern \u0027\"\u0027^esp_err_t board_lcd_init|\u0027\u0027^esp_err_t board_lcd_present|\u0027\u0027^esp_err_t board_backlight_set|static esp_err_t|rgb_panel_config|data_gpio_nums|disp_gpio_num|bits_per_pixel|bounce_buffer|fb_in_psram|esp_lcd_new_rgb_panel|esp_lcd_new_panel_st7701|esp_lcd_panel_reset|esp_lcd_panel_init|esp_lcd_panel_disp_on_off|esp_lcd_panel_draw_bitmap|canvas =|ledc_.*config|gpio_set_level\u0027\"\u0027",
+        "raw_line":  82,
+        "parse_errors":  [
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^esp_err_t\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^esp_err_t\u0027 in expression or statement."
+                         ],
+        "pipeline_extents":  [
+                                 "Select-String -Path main/board_lcd.c -Pattern \u0027\"\u0027^esp_err_t board_lcd_init|\u0027\u0027",
+                                 "^esp_err_t board_lcd_present|\u0027\u0027",
+                                 "^esp_err_t board_backlight_set|static esp_err_t|rgb_panel_config|data_gpio_nums|disp_gpio_num|bits_per_pixel|bounce_buffer|fb_in_psram|esp_lcd_new_rgb_panel|esp_lcd_new_panel_st7701|esp_lcd_panel_reset|esp_lcd_panel_init|esp_lcd_panel_disp_on_off|esp_lcd_panel_draw_bitmap|canvas =|ledc_.*config|gpio_set_level\u0027\"\u0027"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r03"
+    },
+    {
+        "body":  "Select-String -Path main/board_lcd.c -Pattern \u0027\"\u0027^static void render_global|\u0027\u0027^static void render_status|\u0027\u0027^static void render_dashboard|\u0027\u0027^static void render_fixture|\u0027\u0027^static esp_err_t update_framebuffer\u0027\"\u0027 -Context 0,90",
+        "raw_line":  93,
+        "parse_errors":  [
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^static\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^static\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^static\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^static\u0027 in expression or statement."
+                         ],
+        "pipeline_extents":  [
+                                 "Select-String -Path main/board_lcd.c -Pattern \u0027\"\u0027^static void render_global|\u0027\u0027",
+                                 "^static void render_status|\u0027\u0027",
+                                 "^static void render_dashboard|\u0027\u0027",
+                                 "^static void render_fixture|\u0027\u0027"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r03"
+    },
+    {
+        "body":  "Select-String -Path main/board_lcd.c -Pattern \u0027\"\u0027^esp_err_t board_backlight_set|\u0027\u0027^esp_err_t board_lcd_init|\u0027\u0027^esp_err_t board_lcd_present|\u0027\u0027^int board_boot_level\u0027\"\u0027 -Context 0,110",
+        "raw_line":  95,
+        "parse_errors":  [
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^esp_err_t\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^esp_err_t\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^int\u0027 in expression or statement."
+                         ],
+        "pipeline_extents":  [
+                                 "Select-String -Path main/board_lcd.c -Pattern \u0027\"\u0027^esp_err_t board_backlight_set|\u0027\u0027",
+                                 "^esp_err_t board_lcd_init|\u0027\u0027",
+                                 "^esp_err_t board_lcd_present|\u0027\u0027"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r03"
+    },
+    {
+        "body":  "Select-String -Path scripts/validate-end-to-end-result.py -Pattern \u0027\"\u0027^def _check_manifest|\u0027\u0027^def validate_result|\u0027\u0027^def _check_f9_details|\u0027\u0027^def _check_provider_matrix\u0027\"\u0027 -Context 0,48",
+        "raw_line":  243,
+        "parse_errors":  [
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^def\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^def\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^def\u0027 in expression or statement."
+                         ],
+        "pipeline_extents":  [
+                                 "Select-String -Path scripts/validate-end-to-end-result.py -Pattern \u0027\"\u0027^def _check_manifest|\u0027\u0027",
+                                 "^def validate_result|\u0027\u0027",
+                                 "^def _check_f9_details|\u0027\u0027"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r03"
+    },
+    {
+        "body":  "Select-String -Path scripts/validate-end-to-end-result.py -Pattern \u0027\"\u0027^def check_status_entry|\u0027\u0027^def _check_join|\u0027\u0027^def _check_telemetry|\u0027\u0027^def check_evidence\u0027\"\u0027 -Context 0,36",
+        "raw_line":  247,
+        "parse_errors":  [
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^def\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^def\u0027 in expression or statement.",
+                             "Expressions are only allowed as the first element of a pipeline.",
+                             "Unexpected token \u0027^def\u0027 in expression or statement."
+                         ],
+        "pipeline_extents":  [
+                                 "Select-String -Path scripts/validate-end-to-end-result.py -Pattern \u0027\"\u0027^def check_status_entry|\u0027\u0027",
+                                 "^def _check_join|\u0027\u0027",
+                                 "^def _check_telemetry|\u0027\u0027"
+                             ],
+        "separator_extents":  [
+
+                              ],
+        "run_id":  "20261006-codex-cli-gpt-6-luna-r03"
+    }
+]

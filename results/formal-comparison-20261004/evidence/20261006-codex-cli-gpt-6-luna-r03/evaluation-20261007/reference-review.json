@@ -1,0 +1,121 @@
+{
+  "run_id": "20261006-codex-cli-gpt-6-luna-r03",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "reviewer": "Codex operator",
+  "reviewed_at": "2026-10-06T17:27:26.808734+00:00",
+  "items": {
+    "RM1": {
+      "status": "pass",
+      "reason": "Original ESP-IDF5.3.2 build and same archived ESP32-S3 artifact verified. COM3 three image hashes verified, matching ELF SHA217445082 prefix and normal app/PSRAM/USB boot observed. Native usage-limit exit is preserved separately.",
+      "evidence": [
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "6506f4d67a3f8211ea912b147a59af85f8593913640ed0720c514038dfdebb1c"
+        },
+        {
+          "path": "operator-observation/hardware-slot.json",
+          "sha256": "3bf623750a0a2dc0ee751d073749fa70cc1a6d7d44a7b59fe1f94817190e79da"
+        },
+        {
+          "path": "operator-observation/frozen-artifact-upload-stdout.txt",
+          "sha256": "d0fc6dc38c8f2e0517bfe576056e2cfc12053c5751f5033bdcbc3a5e3738beb8"
+        },
+        {
+          "path": "operator-observation/hardware-post-upload-reset/runtime-source-binding.json",
+          "sha256": "e16ccd8df73313165744e4abd3b882b34d57641d5c3b16bf49f776cc0a8c410c"
+        }
+      ]
+    },
+    "RM2": {
+      "status": "partial",
+      "reason": "Declared common collector/encoder exactly match fixed frames and archived production C CLI accepts0/1. Physical host writes1543 bytes each and first64-byte USB chunk observed, but no complete accepted/rejected markers. Actual device frame acceptance remains unconfirmed.",
+      "evidence": [
+        {
+          "path": "operator-observation/host-semantic-review.json",
+          "sha256": "462931719bbb5738b2476faddf6b523298c2dd198d3faa7d7bcdb189564edf65"
+        },
+        {
+          "path": "operator-observation/independent-host-checks/common-stimulus-check.json",
+          "sha256": "d36526aa09196f5f83e19d2e7a4acb62092759ea73d7439cd9b1b0f9801fe7bb"
+        },
+        {
+          "path": "operator-observation/reference-capture-r1/capture.json",
+          "sha256": "0edd3d2aa2cb5afe3e9dd293cc935e0d11c19294837215e9c7b92662ed079200"
+        },
+        {
+          "path": "operator-observation/hardware-post-upload-reset/runtime-source-binding.json",
+          "sha256": "e16ccd8df73313165744e4abd3b882b34d57641d5c3b16bf49f776cc0a8c410c"
+        }
+      ]
+    },
+    "RM3": {
+      "status": "fail",
+      "reason": "Current38.55-second video shows duplicated, rotated and clipped title/glyph fragments. Required58% five-hour and82% weekly remaining values are not legibly displayed. LCD emits output but normal readable usage screen is not reached.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-observation-confirmation.json",
+          "sha256": "560b336d1fc44f7ed8d4458817716db55536e5a17bbb00317ac967d292fa1252"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-review.json",
+          "sha256": "60feaca3817c6fa88d4bd97795f7171e7c13310eac807d14a5eaee108e479c02"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-metadata.json",
+          "sha256": "956973b4fc58310f4360eb7ef6407bd27b119e5ba2162a3e5fdb571418925c51"
+        },
+        {
+          "path": "operator-observation/user-video-01/source.mp4",
+          "sha256": "7baf9ab4392df557422f8928b6110346ad11749035cb411c04599a0ddfcbbc56"
+        }
+      ]
+    },
+    "RM4": {
+      "status": "fail",
+      "reason": "Current video and reported button trials do not show three legible usage/global-reset/diagnostic information views. Fragmented edge glyphs and partial heading are not functional information screens.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-observation-confirmation.json",
+          "sha256": "560b336d1fc44f7ed8d4458817716db55536e5a17bbb00317ac967d292fa1252"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-review.json",
+          "sha256": "60feaca3817c6fa88d4bd97795f7171e7c13310eac807d14a5eaee108e479c02"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-metadata.json",
+          "sha256": "956973b4fc58310f4360eb7ef6407bd27b119e5ba2162a3e5fdb571418925c51"
+        },
+        {
+          "path": "operator-observation/user-video-01/source.mp4",
+          "sha256": "7baf9ab4392df557422f8928b6110346ad11749035cb411c04599a0ddfcbbc56"
+        }
+      ]
+    },
+    "RM5": {
+      "status": "not_run",
+      "reason": "User confirms both BOOT and RESET, exact order/times/count unspecified. Visual changes cannot establish separated BOOT navigation to the three information views and return. RST changes are not counted as BOOT navigation; button hardware failure is not inferred.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-observation-confirmation.json",
+          "sha256": "560b336d1fc44f7ed8d4458817716db55536e5a17bbb00317ac967d292fa1252"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-review.json",
+          "sha256": "60feaca3817c6fa88d4bd97795f7171e7c13310eac807d14a5eaee108e479c02"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-metadata.json",
+          "sha256": "956973b4fc58310f4360eb7ef6407bd27b119e5ba2162a3e5fdb571418925c51"
+        },
+        {
+          "path": "operator-observation/user-video-01/source.mp4",
+          "sha256": "7baf9ab4392df557422f8928b6110346ad11749035cb411c04599a0ddfcbbc56"
+        }
+      ]
+    }
+  },
+  "product_pass": false,
+  "policy_status": "eligible",
+  "note": "Current bounded review. Host22/C3/17 and own wire coverage differ from frozen operator29 and device/GUI proof. Prior original/round1 invalid policy and costs preserved; current eligible does not make series quality/reference cost eligible. Native environment_failed and all token null preserved. Readable LCD objective unmet, one authorized last followup remains."
+}

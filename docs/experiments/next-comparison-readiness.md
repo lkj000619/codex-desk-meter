@@ -1,6 +1,6 @@
 # 다음 동일 조건 비교 준비 상태
 
-확인일: 2026-10-06. 상태: **사용자 추가 요청으로 Luna 후속2회차 `20261006-codex-cli-gpt-6-luna-r03`를23:50:45.750 KST 시작했다. 자신의 직전 동결 commit `e68356829715793dc31dd188bc2a9f528f6fcbd2`의 별도 checkout이며 고정 입력57개·기존 gpt-6-luna/max·runner를 유지한다. 이번 timeout은 잔여4,213초다. 종료 뒤 동결·독립 검증·원본 업로드·실물 평가하며 LCD 가시 출력 또는 예산/회차 한도까지 이어간다. 일찍 종료해 예산이 남고 LCD가 미도달이면 마지막 후속3회차도 이번 사용자 지시로 허용됐다. 구현·제출·제품/RM은 아직 진행 중이며 보드는 기존 후속1 원본이다. 최초·후속1 판정/package·진단·과거 비용은 보존한다. 후보 시작14회·종료13회, 독립 series 종료3/15. Sol/Pro 종료·Flash 보류는 유지한다.**
+확인일: 2026-10-07. 상태: **2026-10-07 Luna 후속2 평가 완료: build·COM3 원본 실행은 RM1 pass, 공통 host 경로·USB 첫 수신과 완전한 수락 미확인을 구분해 RM2 partial이다. 38.55초 영상에서 글자 출력은 생겼지만 회전·중복·잘림으로58%/82%와 세 정보 화면을 읽을 수 없어 RM3/RM4 fail이다. 사용자는 BOOT와 RESET 모두 눌렀다고 확인했으며 정확한 조작 시점/횟수가 없어 분리된 BOOT 순환은 RM5 not_run이다. 화면 변화가 자동 재부팅이라는 추정은 하지 않는다. Reference fail·product_pass false, 이번 정책 eligible·과거 series invalid를 유지한다. 최종575파일 package 독립 검증 완료; native 사용량 한도 종료·token null·전체 coverage13/14·알려진57,517,475 token을 보존한다. 정상 가독 화면 미도달이므로 기존 승인 범위의 마지막 후속3을 준비할 수 있다. 잔여2,965.735초·최대1회이며 timeout 상한floor2,965초다. 아직 마지막 후보 호출은 없다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 
 이 문서는 다음 비교의 현재 상태를 관리한다. 과거 판정·evidence·동결 commit/tag는 보존한다.
@@ -368,3 +368,15 @@ COM3·MAC `28:84:85:B0:85:18`은 재업로드와 같고,21:22:24 KST native rese
 ## 2026-10-06 Luna 남은 후속2/3 실행 승인·후속2 시작
 
 사용자 추가 요청으로 남은4,213초·최대2회 안에서 LCD 가시 출력을 확인할 때까지 진행한다. [계획](../plans/2026-10-06-codex-luna-remaining-followups.md)과 [실제 시작](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r03/launch-20261006/native-start-observation.json)을 따른다. 후속2는23:50:45.750 KST·timeout4,213초이며 자기 직전 source33개·입력57개·원본 설정을 확인했다. 운영자 수정 방법은 전달하지 않았다. 후보 시작14회·종료13회, 구현/제출/비용/정책/RM은 진행 중이다. 보드는 기존 후속1 원본이며 새로운 후속2 펌웨어를 아직 업로드하지 않았다. 종료 뒤 실제 시간을 차감하고 같은 artifact의 실물 평가 후 필요한 마지막 회차만 진행한다. LCD 출력과 reference/product 합격은 구분한다. 최초·후속1 판정/package·diagnosis·checkpoint13과 Sol/Pro 종료·Flash 보류는 보존한다.
+
+## 2026-10-07 Luna 후속2 종료·업로드·관측 대기
+
+2026-10-07: Luna 후속2 `20261006-codex-cli-gpt-6-luna-r03`는00:11:33.017 KST native 사용량 한도로 environment_failed 종료했다. 제출 JSON·빌드가 남아 source commit `91f7de60328b7db9a9d04acef60ac45eafb3685a`를 동결하고455파일 독립 복원·Python22/C3·공통 host 경로를 확인했다. COM3에02:19 KST 원본 업로드,02:20 KST 같은 app 리셋·재전송을 완료했고 ELF 일치 boot·PSRAM·USB 첫64byte 수신을 확인했다. 완전한 frame0/1 수락·LCD/BOOT/30초는 미확인으로 사용자 실물 관측과 RM 평가를 기다린다. 실제1,247.265초 차감 후 잔여2,965.735초(49분25.735초)·최대1회, 다음 호출은 관측 후 LCD 출력 미도달일 때만 가능하다. 이번 정책은 eligible이나 series는 과거 invalid 판정 때문에 품질·reference-cost 부적격이다. 후보 시작/종료14회·token coverage13/14, 알려진 합계57,517,475 token·전체 합계 미상(null), Luna series coverage2/3·알려진30,827,518 token이다. Sol/Pro 종료·Flash 보류·과거 판정/비용을 보존한다.
+
+[종료/관측 원본](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r03/observation-awaiting-20261007/snapshot-inventory.json) · [독립 검증](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r03/observation-awaiting-20261007/restore-audit.json) · [비용14](../../results/formal-comparison-20261004/comparison-checkpoint-14.md). 정책 helper 출력의 이전 숫자 잔존과 독립 복원의 CLI 배치 누락은 날짜 있는 정정으로 남겼다. 원본 실패/skip 로그·도구를 보존하며 후보 source 수정이나 재빌드는 없다.
+
+## 2026-10-07 Luna 후속2 영상 평가 완료
+
+2026-10-07 Luna 후속2 평가 완료: build·COM3 원본 실행은 RM1 pass, 공통 host 경로·USB 첫 수신과 완전한 수락 미확인을 구분해 RM2 partial이다. 38.55초 영상에서 글자 출력은 생겼지만 회전·중복·잘림으로58%/82%와 세 정보 화면을 읽을 수 없어 RM3/RM4 fail이다. 사용자는 BOOT와 RESET 모두 눌렀다고 확인했으며 정확한 조작 시점/횟수가 없어 분리된 BOOT 순환은 RM5 not_run이다. 화면 변화가 자동 재부팅이라는 추정은 하지 않는다. Reference fail·product_pass false, 이번 정책 eligible·과거 series invalid를 유지한다. 최종575파일 package 독립 검증 완료; native 사용량 한도 종료·token null·전체 coverage13/14·알려진57,517,475 token을 보존한다. 정상 가독 화면 미도달이므로 기존 승인 범위의 마지막 후속3을 준비할 수 있다. 잔여2,965.735초·최대1회이며 timeout 상한floor2,965초다. 아직 마지막 후보 호출은 없다.
+
+[후속2 최종 RM](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r03/evaluation-20261007/reference-review.json) · [독립 복원](../../results/formal-comparison-20261004/evidence/20261006-codex-cli-gpt-6-luna-r03/evaluation-20261007/restore-audit.json)

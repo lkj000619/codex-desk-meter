@@ -1,0 +1,2 @@
+{"accepted":true,"has_sequence":true,"has_good_frame":true,"sequence":0,"receive_stale":false,"last_error":"","last_good_length":1543}
+{"accepted":true,"has_sequence":true,"has_good_frame":true,"sequence":1,"receive_stale":false,"last_error":"","last_good_length":1543}

@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-06 23:50:45.750 KST Luna 후속2회차 `20261006-codex-cli-gpt-6-luna-r03` 실행 중. `gpt-6-luna/max`·고정 조건·자기 직전 동결 source를 유지하며 timeout4,213초다. 사용자 요청으로 LCD 가시 출력 또는 남은 시간/회차 한도까지 진행한다. 종료 뒤 원본 펌웨어를 동결·독립 검증·업로드·평가한다. 보드는 기존 후속1 artifact이며 이번 결과/원시 비용/정책/RM은 아직 미확정이다.
-후보 실행 시작14회·종료13회(최초 시작5·후속9). 이번 후속2 포함 잔여4,213초·이번 뒤 최대1회이며 종료 시 실제 시간으로 차감한다. 최초·후속1의 검은 화면 판정·진단·package·원시 비용과 Sol 기준 도달로 종료·품질 부적격·제품 미합격, Pro 종료·Flash 보류를 보존한다. 독립 series 종료는 OpenCode·Pro·Sol 3개/예정15개다. 전체 비교는 미완료다. 아래 시작·대기 표현은 당시 기록이며 마지막 갱신이 최신 판정이다.
+상태: 2026-10-07 Luna 후속2 평가 완료: build·COM3 원본 실행은 RM1 pass, 공통 host 경로·USB 첫 수신과 완전한 수락 미확인을 구분해 RM2 partial이다. 38.55초 영상에서 글자 출력은 생겼지만 회전·중복·잘림으로58%/82%와 세 정보 화면을 읽을 수 없어 RM3/RM4 fail이다. 사용자는 BOOT와 RESET 모두 눌렀다고 확인했으며 정확한 조작 시점/횟수가 없어 분리된 BOOT 순환은 RM5 not_run이다. 화면 변화가 자동 재부팅이라는 추정은 하지 않는다. Reference fail·product_pass false, 이번 정책 eligible·과거 series invalid를 유지한다. 최종575파일 package 독립 검증 완료; native 사용량 한도 종료·token null·전체 coverage13/14·알려진57,517,475 token을 보존한다. 정상 가독 화면 미도달이므로 기존 승인 범위의 마지막 후속3을 준비할 수 있다. 잔여2,965.735초·최대1회이며 timeout 상한floor2,965초다. 아직 마지막 후보 호출은 없다.
+독립 series 종료3/15이며 전체 비교는 미완료다. 아래 기록은 각 당시 관측이며 최신 상태는 위 상태와 마지막 갱신을 따른다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -897,3 +897,15 @@ BOOT 조작·RESET·30초 연속 유지·자동 재부팅·검은 화면의 원�
 Timeout4,213초는 이 호출을 포함한 누적 잔여다. 후속2회차 시작 뒤 마지막 최대1회가 남으며 실제 종료 시간을 차감한 뒤만 사용할 수 있다. 이번 회차를 먼저 동결·독립 검증·원본 업로드·평가한다. LCD 출력이 미도달이고 시간이 남으면 마지막 회차를 이어가는 것까지 사용자 지시에 포함된다. LCD 가시 출력과 전체 RM/product 합격을 구분하고 관측 없이 다음 실패를 추정하지 않는다.
 
 후보 시작14회·종료13회, 비용 checkpoint13은 이전13회57,517,475 token만 포함한다. 현재 비용·정책·제출·제품/RM은 아직 미확정이다. 보드는22:51 KST 업로드한 후속1 원본이며 실행 중 serial/flash를 사용하지 않는다. 최초와 후속1의 모든 판정·535/464개 package·진단·과거 비용과 series 종료3/15·Sol/Pro 종료·Flash 보류를 보존한다.
+
+## 2026-10-07 Luna 후속2 종료·원본 업로드
+
+2026-10-07: Luna 후속2 `20261006-codex-cli-gpt-6-luna-r03`는00:11:33.017 KST native 사용량 한도로 environment_failed 종료했다. 제출 JSON·빌드가 남아 source commit `91f7de60328b7db9a9d04acef60ac45eafb3685a`를 동결하고455파일 독립 복원·Python22/C3·공통 host 경로를 확인했다. COM3에02:19 KST 원본 업로드,02:20 KST 같은 app 리셋·재전송을 완료했고 ELF 일치 boot·PSRAM·USB 첫64byte 수신을 확인했다. 완전한 frame0/1 수락·LCD/BOOT/30초는 미확인으로 사용자 실물 관측과 RM 평가를 기다린다. 실제1,247.265초 차감 후 잔여2,965.735초(49분25.735초)·최대1회, 다음 호출은 관측 후 LCD 출력 미도달일 때만 가능하다. 이번 정책은 eligible이나 series는 과거 invalid 판정 때문에 품질·reference-cost 부적격이다. 후보 시작/종료14회·token coverage13/14, 알려진 합계57,517,475 token·전체 합계 미상(null), Luna series coverage2/3·알려진30,827,518 token이다. Sol/Pro 종료·Flash 보류·과거 판정/비용을 보존한다.
+
+[동결 원본과 관측](evidence/20261006-codex-cli-gpt-6-luna-r03/observation-awaiting-20261007/snapshot-inventory.json) · [원본 native 종료 사유](evidence/20261006-codex-cli-gpt-6-luna-r03/observation-awaiting-20261007/operator-observation/native-terminal-failure-review.json) · [비용14](comparison-checkpoint-14.md).
+
+## 2026-10-07 Luna 후속2 영상 평가·마지막 후속 조건
+
+2026-10-07 Luna 후속2 평가 완료: build·COM3 원본 실행은 RM1 pass, 공통 host 경로·USB 첫 수신과 완전한 수락 미확인을 구분해 RM2 partial이다. 38.55초 영상에서 글자 출력은 생겼지만 회전·중복·잘림으로58%/82%와 세 정보 화면을 읽을 수 없어 RM3/RM4 fail이다. 사용자는 BOOT와 RESET 모두 눌렀다고 확인했으며 정확한 조작 시점/횟수가 없어 분리된 BOOT 순환은 RM5 not_run이다. 화면 변화가 자동 재부팅이라는 추정은 하지 않는다. Reference fail·product_pass false, 이번 정책 eligible·과거 series invalid를 유지한다. 최종575파일 package 독립 검증 완료; native 사용량 한도 종료·token null·전체 coverage13/14·알려진57,517,475 token을 보존한다. 정상 가독 화면 미도달이므로 기존 승인 범위의 마지막 후속3을 준비할 수 있다. 잔여2,965.735초·최대1회이며 timeout 상한floor2,965초다. 아직 마지막 후보 호출은 없다.
+
+[최종 RM](evidence/20261006-codex-cli-gpt-6-luna-r03/evaluation-20261007/reference-review.json) · [독립 복원](evidence/20261006-codex-cli-gpt-6-luna-r03/evaluation-20261007/restore-audit.json). 전체14회 후보 종료·독립 series 종료3/15로 비교는 미완료다.
