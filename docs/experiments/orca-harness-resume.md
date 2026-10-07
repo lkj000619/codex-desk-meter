@@ -80,7 +80,9 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   삭제는 없었다. worker check/ack는 `--terminal <자신의 handle> --json`만 사용하며 `--run`을
   붙이지 않는다. 기존 완성 보고서를 다시 작성하지 않고 제출 절차만 마무리한다.
 - GUI 독립 검증·비교 화면 `task_c0ecb13ae179`는 위 두 GUI와 Luna 보고 수락에 의존한다.
-  6개가 준비되면 이 Task를 dispatch하고, 검증/필요 수정 후 사용자 선택을 받는다.
+  세 보고 모두 수락 후 `ctx_28254a047a7d`로 시작했다. 같은 실제 Luna 터미널을 재사용했다.
+  `ctx_a4f395e58ecc`의 요구 검토는 `msg_6760a8fcc0e4`로 수락 완료다.
+  현재 browser 검증·비교 화면을 기다리고, 검증/필요 수정 후 사용자 선택을 받는다.
 
 첫 native launch는 cmd.exe의 작은따옴표 처리 오류로 종료되어 원인·시도 ID를 보존했고,
 PowerShell에서 같은 agent/model을 시작해 기존 Task에 retry-of로 연결했다.

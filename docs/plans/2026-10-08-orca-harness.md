@@ -10,7 +10,7 @@
 |---|---|---|
 | 별도 Orca worktree·입력 보존 | 완료 | 실제 branch 생성, 57개 입력 바이트/hash 일치, 과거 제품 제거는 새 checkout에만 적용 |
 | 사용자 범위·역할 확정 | 완료 | Sol/Flash/Luna, GUI는 AGY Gemini 3개+Codex CLI gpt-6.1-sol 3개, 세션 토큰+quota 확인 |
-| 역할별 기술 검토·DAG | 진행 중 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
+| 역할별 기술 검토·DAG | 초기 요구·인터페이스 보고 수락 완료 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
 | LCD UX/UI·OpenDesign | 두 모델 각 3개 제출 완료; 독립 검증·선택 대기 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
 | PC 프로그램 구현 | 예정 | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
 | firmware·통합 | 예정 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
@@ -33,7 +33,8 @@
 - [x] AGY Gemini 후보 3개·handoff 제출 수락 (독립 GUI 검증은 별도)
 - [x] Codex Sol 6.1 후보 3개·handoff 제출 수락; 실제 행동 검사 재실행 통과
 - [x] Luna의 요구·검증 검토 시작
-- [ ] Luna의 요구·검증 보고서 수락
+- [x] Luna의 요구·검증 보고서 수락; 인터페이스 질문 해결·조건별 acceptance 기록
+- [x] GUI 독립 브라우저 검증·비교 화면 Task 시작
 - [ ] GUI 후보 6개 자체/독립 검증·사용자 비교 화면 제시
 - [ ] 사용자 선택과 구현 인터페이스 확정
 - [ ] PC·firmware 구현 및 host 통합 검증
