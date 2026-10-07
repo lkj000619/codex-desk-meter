@@ -1,6 +1,6 @@
 # Orca 협업 실험 설계
 
-상태: 사용자 요청·시작 입력·무제한 별도 예산·PC 수집 범위 확정. 역할별 기술 검토 예정.
+상태: 사용자 요청·시작 입력·무제한 별도 예산·PC 수집 범위 확정. GUI 작성과 독립 검토 진행 중.
 2026-10-08 사용자 변경: OpenCode 대신 AGY Gemini와 Codex CLI `gpt-6.1-sol`이
 각각 GUI 후보 3개, 총 6개를 만든다. 사용자가 선택한 뒤 제품 구현에 반영한다.
 
@@ -71,6 +71,23 @@ PC 프로그램의 첫 결과물은 Windows에서 실행하는 CLI 수집·watch
 quota 공식 원본: [Codex App Server](https://learn.chatgpt.com/docs/app-server).
 로컬 로그 구조는 현재 설치된 CLI `0.159.2`에서 관측한 형식이며 고정된 공개 API로 단정하지 않는다.
 수집기는 지원 형식을 검사하고 변경 시 명시적으로 실패해야 한다.
+
+2026-10-08 인터페이스 결정 (`msg_1a0585d74a22` 질문 / `msg_5d56c1876c49` 답변):
+동결 schema의 `session_telemetry` snapshot에서 `windows`를 토큰 구성요소 채널로 사용한다.
+`window_id`는 `input`, `output`, `cached_input`, `reasoning_output`, `source_total`,
+`normalized_total`을 구분하고, 각 채널의 `used_units`는 해당 토큰 수다. quota 창과 혼동하지
+않도록 `metric_kind`를 먼저 분기하며 limit/remaining/percent/reset은 모두 null로 둔다.
+cache는 input에, reasoning은 output에 포함된다. 두 부분 수치를 합계에서 더하거나 빼지 않는다.
+세션 식별자는 snapshot 식별자와 로컬 metadata에 보존한다.
+
+quota 창은 제공된 duration을 정확한 초로 보존하고 `primary-18000s` 같은 안정적인 ID와
+정확한 duration label로 전송한다. typed duration은 로컬 metadata에 둔다. duration 미제공은
+unknown이며 5시간/주간으로 추정하지 않는다. available source의 `agent_id=codex-cli`,
+`host_id`는 안정적인 비식별 수집 PC alias다. 이 둘은 수집 맥락이며 계정 quota의 범위를
+세션별 quota로 바꾸지 않는다. 계정 식별 가능 시 `account_profile_id`로 구분한다.
+로컬 JSONL과 native app-server RPC는 모두 `source_kind=local_runtime`으로 표시하고
+정확한 입력 경로 종류는 로컬 provenance에 구분한다. synthetic 입력은 `fixture`다.
+이 결정은 이번 cohort에만 적용하며 동결 입력은 변경하지 않는다.
 
 ## LCD 디자인과 하드웨어
 

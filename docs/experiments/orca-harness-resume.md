@@ -62,9 +62,19 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
 
 ## 현재 다음 행동
 
-OpenDesign 준비 `task_1a7eaeade56c`는 AGY `ctx_3827dfbe5be1`, Luna 검토
-`task_c4c03e6d2c02`는 `ctx_85d922e4b68d`에서 진행 중이다. GUI Task는 Gemini
-`task_b4a978f1fe36`, Sol 6.1 `task_871ad3d94f9f`이며 viewer 준비 완료에 의존한다.
+2026-10-08 02:31 KST 체크포인트:
+
+- OpenDesign 준비 `task_1a7eaeade56c` / `ctx_3827dfbe5be1`는 수락 완료다.
+  viewer 원본 SHA-256은 `997514c7e099015531f64ab7e6fc267eecd8577f1379cfb7d06a386943d5b5f9`다.
+- Gemini GUI `task_b4a978f1fe36` / `ctx_7cc34b44b75e`는 3개 후보·handoff 제출 수락 완료다.
+  `worker-release` 결과는 `retained/external_terminal`, processAction=none이다.
+  제출 완료와 독립 검증 통과를 구분한다.
+- Sol 6.1 GUI `task_871ad3d94f9f` / `ctx_43a32c7bf49d`는 작성 중이다.
+- Luna 계약 검토 `task_c4c03e6d2c02` / `ctx_85d922e4b68d`는 진행 중이다.
+  인터페이스 질문 `msg_1a0585d74a22`는 답변 `msg_5d56c1876c49`로 해결했으며 설계에 반영했다.
+- GUI 독립 검증·비교 화면 `task_c0ecb13ae179`는 위 두 GUI와 Luna 보고 수락에 의존한다.
+  6개가 준비되면 이 Task를 dispatch하고, 검증/필요 수정 후 사용자 선택을 받는다.
+
 첫 native launch는 cmd.exe의 작은따옴표 처리 오류로 종료되어 원인·시도 ID를 보존했고,
 PowerShell에서 같은 agent/model을 시작해 기존 Task에 retry-of로 연결했다.
 모델 header와 실제 native 상태에서 Luna/AGY가 working인 것을 확인했다.
@@ -75,4 +85,7 @@ PowerShell에서 같은 agent/model을 시작해 기존 Task에 retry-of로 연�
 시작해 동일 Task에 재연결했다. 두 시작은 native turn_start=observed이며
 이전 파일·실패 기록은 보존했다. 이후 모든 launch에도 이 옵션을 적용한다.
 재개할 때 이 문장만 믿지 말고 live runtime와 checkpoint를 다시 확인한다.
+AGY GUI의 실효 CLI는 1.3.1, Gemini 3.8 Flash Medium이며 모델은 argv/header로 확인했다.
+Codex CLI는 0.159.2이며 Sol 6.1/Luna는 실제 header와 native hook에서 확인했다.
+coordinator가 CLI를 설치하거나 업데이트한 것은 아니다. 버전 차이는 실행 기록으로 보존한다.
 제품 구현·COM3 업로드는 아직 시작하지 않았다. 사용자에게 필요한 다음 결정은 6개 GUI 중 선택이다.

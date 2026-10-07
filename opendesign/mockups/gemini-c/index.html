@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Candidate C - Industrial Field Gauge (820x320 LCD)</title>
+<style>
+  /* Reset & Host Container Styling (Outside LCD) */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: #121314;
+    color: #e5e5e5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    min-height: 100vh;
+  }
+  header {
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #f59e0b;
+    text-transform: uppercase;
+  }
+  .preview-note {
+    font-size: 12px;
+    color: #a3a3a3;
+    margin-top: 4px;
+  }
+
+  /* Preview Controls (Outside LCD Screen) */
+  .preview-toolbar {
+    background: #1c1d1f;
+    border: 1px solid #383a3e;
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+  .preview-toolbar label {
+    font-weight: 600;
+    color: #f5f5f5;
+  }
+  .preview-toolbar select, .preview-toolbar button {
+    background: #2b2d31;
+    color: #e5e5e5;
+    border: 1px solid #4a4d53;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .btn-boot {
+    background: #d97706 !important;
+    color: #ffffff !important;
+    font-weight: bold;
+    border: 1px solid #b45309 !important;
+  }
+  .btn-boot:active {
+    background: #b45309 !important;
+    transform: translateY(1px);
+  }
+
+  /* Physical LCD Bezel Frame */
+  .lcd-bezel {
+    background: #1e2022;
+    border: 4px solid #383b40;
+    border-radius: 6px;
+    padding: 16px;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.85);
+    position: relative;
+  }
+  .lcd-bezel::before {
+    content: "HEAVY-DUTY INDUSTRIAL FIELD MONITOR · 820×320 LCD · RGB565";
+    position: absolute;
+    top: 4px;
+    left: 20px;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: #737373;
+    font-family: monospace;
+    font-weight: bold;
+  }
+
+  /* Exact 820x320 LCD Active Area (Industrial Amber Monospace Theme) */
+  #lcd-screen {
+    width: 820px;
+    height: 320px;
+    background-color: #0d0e10;
+    color: #e2e8f0;
+    overflow: hidden;
+    position: relative;
+    font-family: "Courier New", Courier, monospace, monospace;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #292b2f;
+  }
+
+  /* CRT / Phosphor Glow Effect Simulation */
+  #lcd-screen::after {
+    content: " ";
+    position: absolute;
+    top: 0; left: 0; width: 820px; height: 320px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.03) 0%, rgba(0, 0, 0, 0.4) 100%);
+    pointer-events: none;
+    z-index: 99;
+  }
+
+  /* Header Annunciator Bar (30px) */
+  .top-annunciator {
+    height: 30px;
+    background: #141619;
+    border-bottom: 2px solid #2a2d32;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    font-size: 11px;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  .inst-id {
+    color: #f59e0b;
+    letter-spacing: 0.08em;
+  }
+  .channel-selector {
+    display: flex;
+    gap: 8px;
+  }
+  .channel-box {
+    padding: 2px 8px;
+    background: #1c1e22;
+    border: 1px solid #36393f;
+    color: #737373;
+    font-size: 10px;
+  }
+  .channel-box.active {
+    background: #b45309;
+    color: #ffffff;
+    border-color: #f59e0b;
+  }
+  .alert-flag {
+    padding: 2px 8px;
+    font-size: 9px;
+    font-weight: 900;
+    background: #064e3b;
+    color: #6ee7b7;
+    border: 1px solid #059669;
+  }
+  .alert-flag.stale { background: #78350f; color: #fde68a; border-color: #d97706; }
+  .alert-flag.fault { background: #7f1d1d; color: #fca5a5; border-color: #ef4444; }
+
+  /* Screen Views (262px) */
+  .screen-view {
+    height: 262px;
+    display: none;
+    position: relative;
+    padding: 10px 14px;
+  }
+  .screen-view.active {
+    display: flex;
+  }
+
+  /* Bottom Telemetry Stamp (28px) */
+  .bottom-telemetry {
+    height: 28px;
+    background: #141619;
+    border-top: 2px solid #2a2d32;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    font-size: 10px;
+    color: #737373;
+    flex-shrink: 0;
+  }
+
+  /* SCREEN 1: USAGE (Heavy-Duty 3-Zone Compartment) */
+  #view-usage {
+    width: 100%;
+    gap: 12px;
+  }
+
+  /* Compartment 1: Primary 5H Quota Gauge (280px) */
+  .gauge-box-5h {
+    width: 270px;
+    background: #131518;
+    border: 2px solid #f59e0b;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .gauge-title {
+    font-size: 11px;
+    font-weight: 900;
+    color: #f59e0b;
+    border-bottom: 1px solid #451a03;
+    padding-bottom: 4px;
+  }
+  .gauge-dial-center {
+    text-align: center;
+    margin: 8px 0;
+  }
+  .gauge-val-big {
+    font-size: 54px;
+    font-weight: 900;
+    color: #fbbf24;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+  .gauge-val-unit {
+    font-size: 14px;
+    color: #d97706;
+  }
+  .gauge-meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 10px;
+    gap: 4px;
+    background: #1a1c20;
+    padding: 6px;
+    border: 1px solid #2a2d32;
+  }
+
+  /* Compartment 2: Weekly Quota Gauge (180px) */
+  .gauge-box-weekly {
+    width: 180px;
+    background: #131518;
+    border: 1px solid #36393f;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .weekly-num-row {
+    margin: 10px 0;
+    text-align: center;
+  }
+  .weekly-num {
+    font-size: 32px;
+    font-weight: 900;
+    color: #e5e5e5;
+  }
+
+  /* Segmented Bar (Industrial block style) */
+  .meter-blocks {
+    display: flex;
+    gap: 2px;
+    height: 14px;
+    background: #0d0e10;
+    border: 1px solid #2a2d32;
+    padding: 1px;
+  }
+  .meter-block {
+    flex: 1;
+    background: #23252a;
+  }
+  .meter-block.amber {
+    background: #f59e0b;
+    box-shadow: 0 0 2px #f59e0b;
+  }
+
+  /* Compartment 3: Telemetry Stream Ledger (326px) */
+  .ledger-compartment {
+    flex: 1;
+    background: #131518;
+    border: 1px solid #36393f;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .ledger-title-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #2a2d32;
+    padding-bottom: 4px;
+  }
+  .tok-total-big {
+    font-size: 20px;
+    font-weight: 900;
+    color: #f59e0b;
+  }
+  .token-entry-list {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 11px;
+    margin: 6px 0;
+  }
+  .token-line {
+    display: flex;
+    justify-content: space-between;
+    background: #17191d;
+    padding: 3px 6px;
+    border-left: 2px solid #525252;
+  }
+  .token-line.highlight {
+    border-left-color: #f59e0b;
+  }
+
+  /* SCREEN 2: GLOBAL RESET */
+  #view-global {
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px 20px;
+  }
+  .global-panel {
+    background: #131518;
+    border: 2px solid #f59e0b;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .elapsed-ticker {
+    font-size: 58px;
+    font-weight: 900;
+    color: #fbbf24;
+    letter-spacing: -0.02em;
+  }
+  .global-field-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  /* SCREEN 3: HARDWARE / TRANSPORT */
+  #view-status {
+    width: 100%;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .stat-block-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .stat-block {
+    background: #131518;
+    border: 1px solid #36393f;
+    padding: 8px 10px;
+  }
+  .stat-block-title {
+    font-size: 9px;
+    color: #737373;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .stat-block-val {
+    font-size: 14px;
+    font-weight: bold;
+    color: #f59e0b;
+    margin-top: 2px;
+  }
+  .terminal-box {
+    background: #08090a;
+    border: 1px solid #2a2d32;
+    padding: 8px;
+    font-size: 10px;
+    height: 90px;
+    line-height: 1.4;
+    color: #a3a3a3;
+    overflow-y: auto;
+  }
+
+  /* Status message banner inside LCD */
+  .screen-banner {
+    display: none;
+    background: #451a03;
+    border: 1px solid #f59e0b;
+    color: #fef3c7;
+    padding: 3px 10px;
+    font-size: 10px;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+  .screen-banner.danger {
+    background: #7f1d1d;
+    border-color: #ef4444;
+    color: #fee2e2;
+  }
+
+  /* Embedded Specs Footnote */
+  .handoff-summary {
+    max-width: 860px;
+    margin-top: 24px;
+    background: #1c1d1f;
+    border: 1px solid #383a3e;
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #d4d4d8;
+  }
+  .handoff-summary h3 {
+    color: #f59e0b;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .tag-badge {
+    display: inline-block;
+    background: #2b2d31;
+    color: #f5f5f5;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 11px;
+    margin-right: 4px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Candidate C: Industrial Field Gauge</h1>
+  <div class="preview-note">ESP32-S3 ST7701 820×320 | Rugged Amber Monospace Field Instrument</div>
+</header>
+
+<!-- Preview Control Bar (Outside LCD) -->
+<div class="preview-toolbar">
+  <button id="btn-boot-cycle" class="btn-boot" onclick="cycleScreen()">🔘 PRESS BOOT [GPIO0] (Cycle Screen)</button>
+  
+  <div>
+    <label for="state-selector">Simulate State: </label>
+    <select id="state-selector" onchange="applyState(this.value)">
+      <option value="normal">Normal (Live Synthetic Stream)</option>
+      <option value="source_stale">Source Stale (Timestamp age > 5m)</option>
+      <option value="disconnected">Disconnected / Receive Stale (Link drop)</option>
+      <option value="unknown">Unknown / Null (Missing values)</option>
+      <option value="error">Error / Last-Good Retained</option>
+      <option value="waiting">Waiting Initial (Syncing)</option>
+      <option value="recovery">Recovery (Re-link)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="screen-direct">Screen: </label>
+    <select id="screen-direct" onchange="setScreen(parseInt(this.value))">
+      <option value="0">CH-1: Usage Gauges</option>
+      <option value="1">CH-2: Global Reset Station</option>
+      <option value="2">CH-3: Link & Transceiver</option>
+    </select>
+  </div>
+</div>
+
+<!-- Physical LCD Display Housing (820x320) -->
+<div class="lcd-bezel">
+  <div id="lcd-screen">
+    
+    <!-- Top Annunciator Bar (30px) -->
+    <div class="top-annunciator">
+      <div class="inst-id">
+        ▶ CDM-820 FIELD GAUGE
+      </div>
+      <div class="channel-selector">
+        <span id="ch-0" class="channel-box active">CH-1:USAGE</span>
+        <span id="ch-1" class="channel-box">CH-2:GLOBAL</span>
+        <span id="ch-2" class="channel-box">CH-3:LINK</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span id="flag-status" class="alert-flag">NOMINAL</span>
+        <span style="font-size:10px; color:#a3a3a3;" id="clock-txt">17:10:00Z</span>
+      </div>
+    </div>
+
+    <!-- Alert / Fault Banner -->
+    <div id="screen-banner" class="screen-banner"></div>
+
+    <!-- SCREEN 1: USAGE (3-Zone Industrial Compartment) -->
+    <div id="view-usage" class="screen-view active">
+      
+      <!-- Zone 1: Primary 5H Quota (270px) -->
+      <div class="gauge-box-5h">
+        <div class="gauge-title">PRIMARY LIMIT: 5H WINDOW</div>
+        
+        <div class="gauge-dial-center">
+          <div class="gauge-val-big" id="q5-val">42<span class="gauge-val-unit">%</span></div>
+          <div style="font-size:10px; color:#f59e0b; margin-top:2px;">QUOTA CAPACITY USED</div>
+        </div>
+
+        <div>
+          <div class="meter-blocks" id="meter-5h">
+            <!-- 15 blocks generated in JS -->
+          </div>
+        </div>
+
+        <div class="gauge-meta-grid">
+          <div>REM: <strong style="color:#fbbf24;" id="q5-rem">58%</strong></div>
+          <div>DUR: <strong>300M</strong></div>
+          <div style="grid-column: span 2;">RST: <span id="q5-rst">18:20:00Z (70M)</span></div>
+        </div>
+      </div>
+
+      <!-- Zone 2: Weekly Limit (180px) -->
+      <div class="gauge-box-weekly">
+        <div class="gauge-title" style="color:#a3a3a3; border-color:#2a2d32;">WEEKLY ROLLING</div>
+
+        <div class="weekly-num-row">
+          <div class="weekly-num" id="qw-val">18%</div>
+          <div style="font-size:9px; color:#737373;">7-DAY ACCUMULATOR</div>
+        </div>
+
+        <div>
+          <div class="meter-blocks" id="meter-wk">
+            <!-- 15 blocks generated in JS -->
+          </div>
+        </div>
+
+        <div style="font-size:9px; color:#a3a3a3; line-height:1.4; background:#1a1c20; padding:4px;">
+          <div>REMAINING: <strong style="color:#fff;" id="qw-rem">82%</strong></div>
+          <div id="qw-rst">OCT 12 17:10Z</div>
+        </div>
+      </div>
+
+      <!-- Zone 3: Session Ledger (326px) -->
+      <div class="ledger-compartment">
+        <div class="ledger-title-strip">
+          <span style="font-size:10px; font-weight:bold; color:#a3a3a3;">SESSION METADATA</span>
+          <span class="tok-total-big" id="s-total">141,200</span>
+        </div>
+
+        <div class="token-entry-list">
+          <div class="token-line highlight">
+            <span>INPUT PROMPT:</span>
+            <strong id="s-in">124,800</strong>
+          </div>
+          <div class="token-line highlight">
+            <span>OUTPUT TOKENS:</span>
+            <strong id="s-out">16,400</strong>
+          </div>
+          <div class="token-line">
+            <span style="color:#f59e0b;">* CACHED INPUT:</span>
+            <span id="s-cached">89,600</span>
+          </div>
+          <div class="token-line">
+            <span style="color:#f59e0b;">* REASONING OUT:</span>
+            <span id="s-reason">2,300</span>
+          </div>
+        </div>
+
+        <div style="font-size:8px; color:#737373; border-top:1px dashed #2a2d32; padding-top:4px;">
+          * LIMIT IS UNKNOWN. LOCAL TELEMETRY SUM IS NOT SUBTRACTED FROM ROLLING QUOTA.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SCREEN 2: GLOBAL RESET -->
+    <div id="view-global" class="screen-view">
+      <div class="global-panel">
+        <div>
+          <div style="font-size:11px; color:#f59e0b; font-weight:bold;">CODEX-RESETS.COM OBSERVER</div>
+          <div class="elapsed-ticker" id="g-elapsed">7h 10m</div>
+          <div style="font-size:11px; color:#a3a3a3;">ELAPSED SINCE GLOBAL CLUSTER SYNC</div>
+        </div>
+
+        <div class="global-field-list">
+          <div>LAST GLOBAL RESET: <strong style="color:#f59e0b;" id="g-last">2026-10-07 10:00:00Z</strong></div>
+          <div>STATION OBSERVED: <span>2026-10-07 17:10:00Z</span></div>
+          <div>CADENCE: <span>PLATFORM TIER DISPATCH</span></div>
+        </div>
+      </div>
+
+      <div style="font-size:9px; color:#737373; background:#141619; padding:8px; border:1px solid #2a2d32;">
+        ALERT: GLOBAL RESET TRACKS PUBLIC CLUSTER REFRESH ANNOUNCEMENTS. IT DOES NOT PREDICT OR ALTER INDIVIDUAL 5H QUOTA CYCLES.
+      </div>
+    </div>
+
+    <!-- SCREEN 3: LINK & TRANSCEIVER -->
+    <div id="view-status" class="screen-view">
+      <div class="stat-block-grid">
+        <div class="stat-block">
+          <div class="stat-block-title">PHYSICAL LINK</div>
+          <div class="stat-block-val" id="st-link">USB CDC ACM</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-block-title">SOURCE AGE</div>
+          <div class="stat-block-val" id="st-src">0 SECONDS</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-block-title">RECEIVE AGE</div>
+          <div class="stat-block-val" id="st-rcv">1 SECOND</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-block-title">MEMORY</div>
+          <div class="stat-block-val">8MB PSRAM</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-block-title">BACKLIGHT</div>
+          <div class="stat-block-val">ACTIVE-LOW G6</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-block-title">CACHE STATE</div>
+          <div class="stat-block-val" id="st-cache">RETAINED OK</div>
+        </div>
+      </div>
+
+      <div class="terminal-box" id="term-box">
+        [CDM-HOST] Handshake ok. Packet framing verified.<br>
+        [CDM-DATA] 5h Quota: 42% used (300m), Week: 18% used (10080m)<br>
+        [CDM-DATA] Session: input=124,800 output=16,400 total=141,200<br>
+        [CDM-DIAG] ST7701 RGB565 controller running at 820x320 60Hz
+      </div>
+    </div>
+
+    <!-- Bottom Telemetry Stamp (28px) -->
+    <div class="bottom-telemetry">
+      <div>DATA PROVENANCE: SYNTHETIC SNAPSHOT #4209</div>
+      <div>BOOT PIN: GPIO0 [PRESS TO CYCLE]</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Implementation & Hardware Handoff Specs -->
+<div class="handoff-summary">
+  <h3>Candidate C: Implementation & Embedded Handoff Notes</h3>
+  <p><strong>Design Intent:</strong> Industrial Field Gauge — Rugged monospace aesthetic built for durability, harsh environments, and instant glances. Strong physical compartment framing gives tactile solidity on the 3.16" wide form-factor.</p>
+  <p style="margin-top:6px;">
+    <span class="tag-badge">RGB565 Palette</span> Deep Charcoal: <code>#0d0e10</code> (0x0862), Amber Primary: <code>#f59e0b</code> (0xFD41), Bright Amber: <code>#fbbf24</code> (0xFDE4), Border Gray: <code>#36393f</code> (0x39E7), Block Off: <code>#23252a</code> (0x2125).
+  </p>
+  <p style="margin-top:6px;">
+    <span class="tag-badge">Font Strategy</span> Big Gauge: 54px (38×54 rasterized numbers, 2.8KB total for digits 0-9), Section Headers: 11px bold (8×11 ASCII bitmap), Metadata lines: 9px (6×9 compact font).
+  </p>
+  <p style="margin-top:6px;">
+    <span class="tag-badge">Segmented Rendering</span> 15-block progress meters are pre-calculated as 15 small solid rectangles (14×12px), eliminating floating point anti-aliased gauge rendering on the MCU. Direct framebuffer blitting takes under 150 microseconds.
+  </p>
+</div>
+
+<script>
+  let currentScreen = 0;
+  const baseData = {
+    q5: { used: 42, rem: 58, rst: "18:20:00Z (70M)" },
+    qw: { used: 18, rem: 82, rst: "OCT 12 17:10Z" },
+    sess: { in: "124,800", out: "16,400", cached: "89,600", reason: "2,300", total: "141,200" },
+    glob: { elapsed: "7h 10m", last: "2026-10-07 10:00:00Z" }
+  };
+
+  function renderBlocks(containerId, percent) {
+    const el = document.getElementById(containerId);
+    el.innerHTML = "";
+    const total = 15;
+    const filled = Math.round((percent / 100) * total);
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement("div");
+      d.className = "meter-block" + (i < filled ? " amber" : "");
+      el.appendChild(d);
+    }
+  }
+
+  function setScreen(idx) {
+    currentScreen = idx;
+    document.querySelectorAll(".channel-box").forEach((el, i) => {
+      el.classList.toggle("active", i === idx);
+    });
+    document.querySelectorAll(".screen-view").forEach((el, i) => {
+      el.classList.toggle("active", i === idx);
+    });
+    document.getElementById("screen-direct").value = idx;
+  }
+
+  function cycleScreen() {
+    setScreen((currentScreen + 1) % 3);
+  }
+
+  function applyState(state) {
+    const flag = document.getElementById("flag-status");
+    const banner = document.getElementById("screen-banner");
+    flag.className = "alert-flag";
+    flag.textContent = state.toUpperCase().replace("_", " ");
+    banner.style.display = "none";
+    banner.className = "screen-banner";
+
+    renderBlocks("meter-5h", baseData.q5.used);
+    renderBlocks("meter-wk", baseData.qw.used);
+
+    if (state === "normal") {
+      updateDOM(baseData.q5.used, baseData.q5.rem, baseData.qw.used, baseData.qw.rem, baseData.sess.in, baseData.sess.out, baseData.sess.cached, baseData.sess.reason, baseData.sess.total);
+      document.getElementById("st-link").textContent = "USB CDC ACM";
+      document.getElementById("st-src").textContent = "0 SECONDS";
+      document.getElementById("st-rcv").textContent = "1 SECOND";
+    }
+    else if (state === "source_stale") {
+      flag.classList.add("stale");
+      banner.style.display = "block";
+      banner.textContent = "ALARM: SOURCE TELEMETRY STALE (> 5 MIN). MAINTAINING LAST MEASUREMENT.";
+      document.getElementById("st-src").textContent = "384 SEC (STALE)";
+    }
+    else if (state === "disconnected") {
+      flag.classList.add("fault");
+      banner.style.display = "block";
+      banner.classList.add("danger");
+      banner.textContent = "LINK FAULT: USB CARRIER LOST. DISPLAYING RETAINED LAST-GOOD FRAME.";
+      document.getElementById("st-link").textContent = "DISCONNECTED";
+      document.getElementById("st-rcv").textContent = "580S (DROP)";
+    }
+    else if (state === "unknown") {
+      banner.style.display = "block";
+      banner.textContent = "WARNING: METRIC PARAMETERS REPORTED AS NULL OR UNKNOWN.";
+      updateDOM("--", "--", "--", "--", "--", "--", "--", "--", "--");
+      renderBlocks("meter-5h", 0);
+      renderBlocks("meter-wk", 0);
+      document.getElementById("st-src").textContent = "UNKNOWN";
+    }
+    else if (state === "error") {
+      flag.classList.add("fault");
+      banner.style.display = "block";
+      banner.classList.add("danger");
+      banner.textContent = "CRC CHECKSUM FAULT: DECODE REJECTED. FALLBACK TO CACHE.";
+      document.getElementById("st-link").textContent = "CRC FAULT";
+    }
+    else if (state === "waiting") {
+      banner.style.display = "block";
+      banner.textContent = "SYNCING: WAITING FOR FIRST CDM PACKET...";
+      updateDOM("...", "...", "...", "...", "...", "...", "...", "...", "...");
+      renderBlocks("meter-5h", 0);
+      renderBlocks("meter-wk", 0);
+      document.getElementById("st-link").textContent = "WAITING";
+    }
+    else if (state === "recovery") {
+      banner.style.display = "block";
+      banner.textContent = "LINK RESTORED: RESYNCHRONIZING TO ACTIVE TELEMETRY STREAM.";
+      updateDOM(baseData.q5.used, baseData.q5.rem, baseData.qw.used, baseData.qw.rem, baseData.sess.in, baseData.sess.out, baseData.sess.cached, baseData.sess.reason, baseData.sess.total);
+      document.getElementById("st-link").textContent = "RESTORED";
+    }
+  }
+
+  function updateDOM(q5u, q5r, qwu, qwr, sin, sout, scached, sreason, stot) {
+    document.getElementById("q5-val").innerHTML = q5u + (q5u !== "--" && q5u !== "..." ? "<span class=\"gauge-val-unit\">%</span>" : "");
+    document.getElementById("q5-rem").textContent = q5r + (q5r !== "--" && q5r !== "..." ? "%" : "");
+    document.getElementById("qw-val").textContent = qwu + (qwu !== "--" && qwu !== "..." ? "%" : "");
+    document.getElementById("qw-rem").textContent = qwr + (qwr !== "--" && qwr !== "..." ? "%" : "");
+
+    document.getElementById("s-in").textContent = sin;
+    document.getElementById("s-out").textContent = sout;
+    document.getElementById("s-cached").textContent = scached;
+    document.getElementById("s-reason").textContent = sreason;
+    document.getElementById("s-total").textContent = stot;
+  }
+
+  // Initialize
+  renderBlocks("meter-5h", baseData.q5.used);
+  renderBlocks("meter-wk", baseData.qw.used);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Candidate A - Telemetry Matrix (820x320 LCD)</title>
+<style>
+  /* Reset & Host Container Styling (Outside LCD) */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: #0c0f14;
+    color: #c5cdd8;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    min-height: 100vh;
+  }
+  header {
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #58a6ff;
+    text-transform: uppercase;
+  }
+  .preview-note {
+    font-size: 12px;
+    color: #8b949e;
+    margin-top: 4px;
+  }
+
+  /* Preview Controls (Outside LCD Screen) */
+  .preview-toolbar {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+  .preview-toolbar label {
+    font-weight: 500;
+    color: #f0f6fc;
+  }
+  .preview-toolbar select, .preview-toolbar button {
+    background: #21262d;
+    color: #c9d1d9;
+    border: 1px solid #363d47;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .preview-toolbar button:hover {
+    background: #30363d;
+    border-color: #8b949e;
+  }
+  .btn-boot {
+    background: #238636 !important;
+    color: #ffffff !important;
+    font-weight: bold;
+    border: 1px solid #2ea043 !important;
+  }
+  .btn-boot:active {
+    background: #2ea043 !important;
+    transform: translateY(1px);
+  }
+
+  /* Physical LCD Bezel Frame */
+  .lcd-bezel {
+    background: #1f242c;
+    border: 3px solid #3a424d;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 0 10px rgba(0,0,0,0.5);
+    position: relative;
+  }
+  .lcd-bezel::before {
+    content: "WAVESHARE 3.16\" ESP32-S3 RGB-565 [820×320]";
+    position: absolute;
+    top: 3px;
+    left: 18px;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: #525c68;
+    font-family: monospace;
+  }
+
+  /* Exact 820x320 LCD Active Area */
+  #lcd-screen {
+    width: 820px;
+    height: 320px;
+    background-color: #05080c;
+    color: #d1d5db;
+    overflow: hidden;
+    position: relative;
+    font-family: monospace;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #111720;
+  }
+
+  /* Scanline / LCD Pixel Texture Overlay (Hardware emulation) */
+  #lcd-screen::after {
+    content: " ";
+    position: absolute;
+    top: 0; left: 0; width: 820px; height: 320px;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+    background-size: 100% 2px;
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: 99;
+  }
+
+  /* Top Bar (28px height) */
+  .top-status-bar {
+    height: 28px;
+    background: #090e15;
+    border-bottom: 1px solid #1f2937;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    font-size: 11px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .system-brand {
+    font-weight: 700;
+    color: #38bdf8;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .screen-tabs {
+    display: flex;
+    gap: 8px;
+  }
+  .tab-item {
+    padding: 2px 8px;
+    border-radius: 2px;
+    color: #64748b;
+    font-size: 10px;
+    font-weight: 600;
+    border: 1px solid transparent;
+  }
+  .tab-item.active {
+    color: #38bdf8;
+    background: #0d1b2a;
+    border-color: #0284c7;
+  }
+  .top-telemetry-meta {
+    display: flex;
+    gap: 12px;
+    color: #94a3b8;
+    font-size: 10px;
+  }
+  .badge-state {
+    padding: 1px 6px;
+    border-radius: 2px;
+    font-weight: bold;
+    font-size: 9px;
+  }
+  .badge-state.normal { background: #064e3b; color: #34d399; }
+  .badge-state.source_stale { background: #713f12; color: #fde047; }
+  .badge-state.disconnected { background: #7f1d1d; color: #fca5a5; }
+  .badge-state.error { background: #881337; color: #fda4af; }
+  .badge-state.waiting { background: #1e293b; color: #94a3b8; }
+  .badge-state.recovery { background: #14532d; color: #86efac; }
+  .badge-state.unknown { background: #374151; color: #d1d5db; }
+
+  /* Main Viewport Container (268px height) */
+  .screen-view {
+    height: 268px;
+    display: none;
+    position: relative;
+    padding: 10px 14px;
+  }
+  .screen-view.active {
+    display: flex;
+  }
+
+  /* Bottom Ticker / Diagnostic Bar (24px height) */
+  .bottom-status-bar {
+    height: 24px;
+    background: #070b10;
+    border-top: 1px solid #1e293b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    font-size: 10px;
+    color: #64748b;
+    flex-shrink: 0;
+  }
+
+  /* SCREEN 1: USAGE (Matrix Cockpit) */
+  #view-usage {
+    gap: 14px;
+    width: 100%;
+  }
+
+  /* Left Column: Account Quotas (5h & Weekly) - Width 420px */
+  .quota-cluster {
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .panel-box {
+    background: #0a0f18;
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+    padding: 8px 12px;
+    position: relative;
+  }
+  .panel-box.primary {
+    border-color: #0284c7;
+    background: #071322;
+  }
+  .panel-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+  }
+  .panel-label {
+    font-size: 10px;
+    color: #7dd3fc;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+  .panel-time {
+    font-size: 10px;
+    color: #94a3b8;
+  }
+  .quota-metric-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .quota-large-number {
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1;
+    color: #f0f6fc;
+    letter-spacing: -0.02em;
+  }
+  .quota-large-number span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #38bdf8;
+    margin-left: 2px;
+  }
+  .quota-substats {
+    text-align: right;
+    font-size: 10px;
+    color: #94a3b8;
+    line-height: 1.3;
+  }
+  .quota-substats strong {
+    color: #38bdf8;
+  }
+
+  /* Hardware-friendly Segmented Progress Bar */
+  .segmented-bar {
+    height: 10px;
+    background: #111827;
+    border: 1px solid #1f2937;
+    border-radius: 2px;
+    overflow: hidden;
+    display: flex;
+    gap: 2px;
+    padding: 1px;
+  }
+  .segmented-bar .segment {
+    flex: 1;
+    height: 100%;
+    background: #1f2937;
+    border-radius: 1px;
+  }
+  .segmented-bar .segment.fill-cyan {
+    background: #0284c7;
+    box-shadow: 0 0 3px #0284c7;
+  }
+  .segmented-bar .segment.fill-amber {
+    background: #d97706;
+  }
+  .segmented-bar .segment.fill-crit {
+    background: #e11d48;
+  }
+
+  /* Right Column: Session Telemetry Ledger - Width 358px */
+  .session-cluster {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .session-header {
+    background: #09131f;
+    border: 1px solid #1e293b;
+    border-left: 3px solid #38bdf8;
+    padding: 6px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .session-header-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #e2e8f0;
+  }
+  .session-header-total {
+    font-size: 18px;
+    font-weight: 800;
+    color: #38bdf8;
+  }
+  .session-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .ledger-cell {
+    background: #090e17;
+    border: 1px solid #1e293b;
+    padding: 6px 8px;
+    border-radius: 3px;
+  }
+  .ledger-tag {
+    font-size: 9px;
+    color: #64748b;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .ledger-val {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f1f5f9;
+  }
+  .ledger-extra {
+    font-size: 9px;
+    color: #94a3b8;
+    margin-top: 1px;
+  }
+  .session-caveat-box {
+    background: #050b13;
+    border: 1px dashed #1e293b;
+    padding: 5px 8px;
+    font-size: 9px;
+    color: #64748b;
+    line-height: 1.25;
+  }
+
+  /* SCREEN 2: GLOBAL RESET (codex-resets.com) */
+  #view-global {
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px 20px;
+  }
+  .global-header-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 8px;
+  }
+  .global-source-badge {
+    font-size: 12px;
+    color: #38bdf8;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .global-big-center {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 16px 0;
+  }
+  .global-timer-card {
+    text-align: center;
+    background: #09111c;
+    border: 1px solid #0284c7;
+    padding: 14px 28px;
+    border-radius: 6px;
+  }
+  .global-timer-num {
+    font-size: 46px;
+    font-weight: 900;
+    color: #38bdf8;
+    letter-spacing: -0.02em;
+  }
+  .global-timer-sub {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+  .global-meta-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 12px;
+    color: #cbd5e1;
+  }
+  .global-meta-item {
+    background: #0b1320;
+    border: 1px solid #1e293b;
+    padding: 8px 14px;
+    border-radius: 4px;
+  }
+  .global-warning-footer {
+    font-size: 10px;
+    color: #94a3b8;
+    background: #080e18;
+    border: 1px solid #1e293b;
+    padding: 6px 12px;
+  }
+
+  /* SCREEN 3: HARDWARE / LINK STATUS */
+  #view-status {
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px 18px;
+  }
+  #view-status.active { display: flex; }
+  .status-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .status-card {
+    background: #090e17;
+    border: 1px solid #1e293b;
+    padding: 8px 10px;
+    border-radius: 4px;
+  }
+  .status-card-title {
+    font-size: 10px;
+    color: #64748b;
+    font-weight: 700;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .status-card-val {
+    font-size: 14px;
+    font-weight: bold;
+    color: #f8fafc;
+  }
+  .status-card-sub {
+    font-size: 9px;
+    color: #94a3b8;
+    margin-top: 2px;
+  }
+  .diag-terminal-log {
+    background: #03060a;
+    border: 1px solid #1e293b;
+    padding: 8px;
+    font-size: 10px;
+    height: 90px;
+    overflow-y: auto;
+    color: #38bdf8;
+    line-height: 1.4;
+  }
+
+  /* State Overlay Banners inside screen */
+  .alert-banner {
+    display: none;
+    background: #450a0a;
+    border: 1px solid #b91c1c;
+    color: #fecaca;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    border-radius: 2px;
+  }
+  .alert-banner.warn {
+    background: #422006;
+    border-color: #d97706;
+    color: #fef3c7;
+  }
+  .alert-banner.info {
+    background: #0c2d48;
+    border-color: #0284c7;
+    color: #bae6fd;
+  }
+
+  /* Embedded Specs Footnote */
+  .handoff-summary {
+    max-width: 860px;
+    margin-top: 24px;
+    background: #11161d;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #8b949e;
+  }
+  .handoff-summary h3 {
+    color: #58a6ff;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .tag-badge {
+    display: inline-block;
+    background: #21262d;
+    color: #c9d1d9;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 11px;
+    margin-right: 4px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Candidate A: HUD Telemetry Matrix</h1>
+  <div class="preview-note">ESP32-S3 ST7701 820×320 Active Matrix Display Simulation | High-Density Cybernetic Dark</div>
+</header>
+
+<!-- Preview Control Bar (Outside LCD) -->
+<div class="preview-toolbar">
+  <button id="btn-boot-cycle" class="btn-boot" onclick="cycleScreen()">🔘 PRESS BOOT [GPIO0] (Cycle Screen)</button>
+  
+  <div>
+    <label for="state-selector">Simulate State: </label>
+    <select id="state-selector" onchange="applyState(this.value)">
+      <option value="normal">Normal (Live Synthetic Feed)</option>
+      <option value="source_stale">Source Stale (Token event > 5m old)</option>
+      <option value="disconnected">Disconnected / Receive Stale (PC Link Down)</option>
+      <option value="unknown">Unknown / Null (Missing Fields)</option>
+      <option value="error">Error / Last-Good Retained</option>
+      <option value="waiting">Waiting Initial (Boot Sync)</option>
+      <option value="recovery">Recovery (Reconnecting)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="screen-direct">Screen: </label>
+    <select id="screen-direct" onchange="setScreen(parseInt(this.value))">
+      <option value="0">1. Usage (Quota & Session)</option>
+      <option value="1">2. Global Reset (codex-resets)</option>
+      <option value="2">3. Hardware & Transport Status</option>
+    </select>
+  </div>
+
+  <span style="font-size: 11px; color: #8b949e;">Synthetic Data Only</span>
+</div>
+
+<!-- Physical LCD Display Housing (820x320) -->
+<div class="lcd-bezel">
+  <div id="lcd-screen">
+    
+    <!-- Top System Header (28px) -->
+    <div class="top-status-bar">
+      <div class="system-brand">
+        <span style="display:inline-block; width:8px; height:8px; background:#38bdf8; border-radius:50%;"></span>
+        <span>CODEX DESK METER</span>
+        <span style="color:#64748b; font-size:9px;">V2</span>
+      </div>
+      <div class="screen-tabs">
+        <div id="tab-0" class="tab-item active">[1] USAGE</div>
+        <div id="tab-1" class="tab-item">[2] GLOBAL RESET</div>
+        <div id="tab-2" class="tab-item">[3] STATUS</div>
+      </div>
+      <div class="top-telemetry-meta">
+        <span id="label-state-badge" class="badge-state normal">NORMAL</span>
+        <span id="label-link-mode">USB-CDC 115200</span>
+        <span id="label-clock">17:10:00Z</span>
+      </div>
+    </div>
+
+    <!-- State Alert Banner (if degraded/error) -->
+    <div id="banner-alert" class="alert-banner"></div>
+
+    <!-- VIEW 1: USAGE (Quota Windows + Session Ledger) -->
+    <div id="view-usage" class="screen-view active">
+      
+      <!-- Quota Cluster (Left, 420px) -->
+      <div class="quota-cluster">
+        
+        <!-- Primary Window: 5-Hour Rolling Quota -->
+        <div class="panel-box primary">
+          <div class="panel-title-row">
+            <span class="panel-label">⚡ PRIMARY QUOTA (5H WINDOW)</span>
+            <span class="panel-time" id="quota-5h-reset">RESETS 18:20:00Z (70m)</span>
+          </div>
+          <div class="quota-metric-row">
+            <div>
+              <div class="quota-large-number" id="quota-5h-used">42<span>% USED</span></div>
+            </div>
+            <div class="quota-substats">
+              <div>REMAINING: <strong id="quota-5h-rem">58%</strong></div>
+              <div>DURATION: <strong>300m</strong></div>
+            </div>
+          </div>
+          <!-- 20-segment hardware progress bar -->
+          <div class="segmented-bar" id="bar-5h">
+            <!-- 20 segments generated via JS -->
+          </div>
+        </div>
+
+        <!-- Secondary Window: Weekly Quota -->
+        <div class="panel-box">
+          <div class="panel-title-row">
+            <span class="panel-label" style="color:#94a3b8;">📅 WEEKLY ROLLING QUOTA</span>
+            <span class="panel-time" id="quota-week-reset">RESETS OCT 12 17:10Z</span>
+          </div>
+          <div class="quota-metric-row">
+            <div>
+              <div class="quota-large-number" style="font-size:28px;" id="quota-week-used">18<span>% USED</span></div>
+            </div>
+            <div class="quota-substats">
+              <div>REMAINING: <strong id="quota-week-rem">82%</strong></div>
+              <div>DURATION: <strong>10080m (7d)</strong></div>
+            </div>
+          </div>
+          <div class="segmented-bar" id="bar-week">
+            <!-- 20 segments generated via JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Session Telemetry Cluster (Right, 358px) -->
+      <div class="session-cluster">
+        
+        <div class="session-header">
+          <div>
+            <div class="session-header-title">CURRENT SESSION TELEMETRY</div>
+            <div style="font-size:9px; color:#64748b;" id="session-src-time">SOURCE OBS: 17:10:00Z</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="session-header-total" id="sess-total">141,200</div>
+            <div style="font-size:8px; color:#64748b;">SOURCE TOTAL TOKENS</div>
+          </div>
+        </div>
+
+        <div class="session-grid">
+          <div class="ledger-cell">
+            <span class="ledger-tag">INPUT PROMPT</span>
+            <div class="ledger-val" id="sess-in">124,800</div>
+            <div class="ledger-extra" id="sess-cached-sub">incl 89.6k cached</div>
+          </div>
+          <div class="ledger-cell">
+            <span class="ledger-tag">OUTPUT COMPLETION</span>
+            <div class="ledger-val" id="sess-out">16,400</div>
+            <div class="ledger-extra" id="sess-reason-sub">incl 2.3k reasoning</div>
+          </div>
+          <div class="ledger-cell">
+            <span class="ledger-tag">CACHED INPUT SUBSET</span>
+            <div class="ledger-val" style="color:#38bdf8;" id="sess-cached">89,600</div>
+            <div class="ledger-extra">No extra rate impact</div>
+          </div>
+          <div class="ledger-cell">
+            <span class="ledger-tag">REASONING TOKENS</span>
+            <div class="ledger-val" style="color:#a855f7;" id="sess-reason">2,300</div>
+            <div class="ledger-extra">Deep reasoning count</div>
+          </div>
+        </div>
+
+        <div class="session-caveat-box">
+          ℹ️ <strong>Scope Isolation:</strong> Session tokens are unconstrained local stream sums. Remaining limit & session % are UNKNOWN (not coupled to account quota).
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- VIEW 2: GLOBAL RESET -->
+    <div id="view-global" class="screen-view">
+      <div class="global-header-row">
+        <div class="global-source-badge">
+          🌐 SOURCE: CODEX-RESETS.COM
+        </div>
+        <div style="font-size:11px; color:#94a3b8;" id="global-captured">
+          CAPTURED AT: 2026-10-07 17:10:00Z
+        </div>
+      </div>
+
+      <div class="global-big-center">
+        <div class="global-timer-card">
+          <div class="global-timer-num" id="global-elapsed-val">7h 10m</div>
+          <div class="global-timer-sub">ELAPSED SINCE GLOBAL RESET</div>
+        </div>
+
+        <div class="global-meta-list">
+          <div class="global-meta-item">
+            <span style="color:#64748b; font-size:10px;">LATEST GLOBAL RESET ANNOUNCED:</span><br>
+            <strong style="color:#38bdf8; font-size:14px;" id="global-last-reset">2026-10-07 10:00:00Z</strong>
+          </div>
+          <div class="global-meta-item">
+            <span style="color:#64748b; font-size:10px;">CURRENT SYNTHETIC REF TIME:</span><br>
+            <strong style="color:#f8fafc; font-size:14px;">2026-10-07 17:10:00Z (KST 02:10)</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="global-warning-footer">
+        ⚠️ <strong>Notice:</strong> Global reset indicates cluster-wide refresh windows from codex-resets.com. This is distinct from your personal 5h rolling quota reset.
+      </div>
+    </div>
+
+    <!-- VIEW 3: HARDWARE / TRANSPORT STATUS -->
+    <div id="view-status" class="screen-view">
+      <div style="font-size:12px; font-weight:bold; color:#38bdf8; border-bottom:1px solid #1e293b; padding-bottom:4px;">
+        HARDWARE SUBSYSTEM & CDM/1 PROTOCOL TELEMETRY
+      </div>
+      
+      <div class="status-grid">
+        <div class="status-card">
+          <div class="status-card-title">Transport Link</div>
+          <div class="status-card-val" id="stat-transport">USB CDC ACM</div>
+          <div class="status-card-sub">Baud: 115200 | CRC-16 OK</div>
+        </div>
+        <div class="status-card">
+          <div class="status-card-title">Source Age / Latency</div>
+          <div class="status-card-val" id="stat-src-age">0s (Fresh)</div>
+          <div class="status-card-sub" id="stat-rcv-age">Receive Age: 1s</div>
+        </div>
+        <div class="status-card">
+          <div class="status-card-title">Memory & Display</div>
+          <div class="status-card-val">8MB PSRAM</div>
+          <div class="status-card-sub">ST7701 RGB565 (524KB FB)</div>
+        </div>
+        <div class="status-card">
+          <div class="status-card-title">BOOT Key (GPIO0)</div>
+          <div class="status-card-val">Normal Mode</div>
+          <div class="status-card-sub">Cycle: Usage → Global → Status</div>
+        </div>
+        <div class="status-card">
+          <div class="status-card-title">Last-Good Snapshot</div>
+          <div class="status-card-val" id="stat-last-good">Retained (17:10Z)</div>
+          <div class="status-card-sub">Cache valid: 100%</div>
+        </div>
+        <div class="status-card">
+          <div class="status-card-title">PC Telemetry Agent</div>
+          <div class="status-card-val" id="stat-pc-agent">ONLINE (Synthetic)</div>
+          <div class="status-card-sub">JSONL Parser Active</div>
+        </div>
+      </div>
+
+      <div class="diag-terminal-log" id="diag-log">
+        [CDM-001] Link initialized over USB Serial<br>
+        [CDM-002] Frame sync acquired: sequence #4209, CRC16: 0x9B14 valid<br>
+        [CDM-003] Received session_telemetry: in=124.8k out=16.4k total=141.2k<br>
+        [CDM-004] Received quota_window: 5h=42% (300m), week=18% (10080m)<br>
+        [CDM-005] Global reset source codex-resets.com confirmed (last: 10:00Z)
+      </div>
+    </div>
+
+    <!-- Bottom Ticker / Footnote (24px) -->
+    <div class="bottom-status-bar">
+      <div>
+        <span style="color:#38bdf8;">PROV:</span> SYNTHETIC CDM/1 SNAPSHOT | OBS: 2026-10-07 17:10:00Z
+      </div>
+      <div>
+        <span>BOOT: CYCLE [GPIO0]</span> | <span>DISP: 820×320 RGB565</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Implementation & Hardware Handoff Specs -->
+<div class="handoff-summary">
+  <h3>Candidate A: Implementation & Embedded Handoff Notes</h3>
+  <p><strong>Design Intent:</strong> HUD Telemetry Matrix — Extreme high-density cockpit aesthetic for engineers desiring immediate insight into rate limiting, rolling windows, and uncoupled session token activity without visual ambiguity.</p>
+  <p style="margin-top:6px;">
+    <span class="tag-badge">RGB565 Palette</span> Dark BG: <code>#05080c</code> (0x0841), Panel BG: <code>#071322</code> (0x08A4), Cyan Accent: <code>#38bdf8</code> (0x3DF7), Blue Primary: <code>#0284c7</code> (0x0438), Slate Muted: <code>#64748b</code> (0x63B1), White Text: <code>#f0f6fc</code> (0xF7BE).
+  </p>
+  <p style="margin-top:6px;">
+    <span class="tag-badge">Font Scaling</span> Large Numbers: 38px (ASCII 28×38 glyph bitmap, ~1KB per glyph), Medium: 18px (12×18), Labels/Body: 10px–11px (8×12 standard monospaced font ROM).
+  </p>
+  <p style="margin-top:6px;">
+    <span class="tag-badge">Redraw Optimization</span> Top and Bottom bars are static 28px/24px rows. Central 820×268px is subdivided into dirty rects: 5h Quota Box (420×120), Weekly Quota Box (420×110), Session Ledger (358×240). Partial PSRAM dirty rect DMA transfers minimize bus load on ST7701.
+  </p>
+</div>
+
+<script>
+  let currentScreen = 0; // 0: Usage, 1: Global, 2: Status
+  let currentState = "normal";
+
+  // Synthetic Baseline Data
+  const baseData = {
+    refTime: "2026-10-07T17:10:00Z",
+    quota5h: { used: 42, rem: 58, dur: 300, reset: "18:20:00Z (70m)" },
+    quotaWeek: { used: 18, rem: 82, dur: 10080, reset: "OCT 12 17:10Z" },
+    session: { in: "124,800", out: "16,400", cached: "89,600", reasoning: "2,300", total: "141,200" },
+    global: { source: "codex-resets.com", lastReset: "2026-10-07 10:00:00Z", captured: "2026-10-07 17:10:00Z", elapsed: "7h 10m" }
+  };
+
+  function renderSegmentedBar(barId, percent, colorClass) {
+    const bar = document.getElementById(barId);
+    bar.innerHTML = "";
+    const totalSegments = 20;
+    const filledSegments = Math.round((percent / 100) * totalSegments);
+    for (let i = 0; i < totalSegments; i++) {
+      const seg = document.createElement("div");
+      seg.className = "segment" + (i < filledSegments ? " " + colorClass : "");
+      bar.appendChild(seg);
+    }
+  }
+
+  function setScreen(idx) {
+    currentScreen = idx;
+    document.querySelectorAll(".tab-item").forEach((el, i) => {
+      el.classList.toggle("active", i === idx);
+    });
+    document.querySelectorAll(".screen-view").forEach((el, i) => {
+      el.classList.toggle("active", i === idx);
+    });
+    document.getElementById("screen-direct").value = idx;
+  }
+
+  function cycleScreen() {
+    setScreen((currentScreen + 1) % 3);
+  }
+
+  function applyState(state) {
+    currentState = state;
+    const stateBadge = document.getElementById("label-state-badge");
+    const banner = document.getElementById("banner-alert");
+    stateBadge.className = "badge-state " + state;
+    stateBadge.textContent = state.toUpperCase().replace("_", " ");
+
+    // Reset base contents
+    renderSegmentedBar("bar-5h", baseData.quota5h.used, "fill-cyan");
+    renderSegmentedBar("bar-week", baseData.quotaWeek.used, "fill-cyan");
+
+    banner.style.display = "none";
+    banner.className = "alert-banner";
+
+    if (state === "normal") {
+      updateDOMValues(baseData.quota5h.used, baseData.quota5h.rem, baseData.quotaWeek.used, baseData.quotaWeek.rem, baseData.session.in, baseData.session.out, baseData.session.cached, baseData.session.reasoning, baseData.session.total);
+      document.getElementById("stat-src-age").textContent = "0s (Fresh)";
+      document.getElementById("stat-rcv-age").textContent = "Receive Age: 1s";
+      document.getElementById("stat-transport").textContent = "USB CDC ACM (Live)";
+    } 
+    else if (state === "source_stale") {
+      // Source stale: values are maintained, warning banner displayed
+      banner.style.display = "block";
+      banner.classList.add("warn");
+      banner.innerHTML = "⚠️ SOURCE STALE: Token event timestamp is > 5m older than capture window. Displaying last reported values.";
+      document.getElementById("stat-src-age").textContent = "384s (STALE)";
+      document.getElementById("stat-rcv-age").textContent = "Receive Age: 2s";
+    }
+    else if (state === "disconnected") {
+      // Receive stale / disconnected: PC link dropped, values retained as last-good
+      banner.style.display = "block";
+      banner.classList.add("warn");
+      banner.innerHTML = "🔌 LINK DISCONNECTED: USB Serial link timed out. Retaining last-good snapshot from 17:10:00Z.";
+      document.getElementById("stat-src-age").textContent = "610s (Old)";
+      document.getElementById("stat-rcv-age").textContent = "Receive Age: 580s (DROP)";
+      document.getElementById("stat-transport").textContent = "OFFLINE (Retrying)";
+      document.getElementById("stat-last-good").textContent = "Active Retention";
+    }
+    else if (state === "unknown") {
+      // Unknown / null values
+      banner.style.display = "block";
+      banner.classList.add("info");
+      banner.innerHTML = "❓ MISSING METADATA: Rate limit and session fields reported null/unknown from source.";
+      updateDOMValues("--", "--", "--", "--", "--", "--", "--", "--", "--");
+      renderSegmentedBar("bar-5h", 0, "fill-cyan");
+      renderSegmentedBar("bar-week", 0, "fill-cyan");
+      document.getElementById("stat-src-age").textContent = "Unknown";
+    }
+    else if (state === "error") {
+      // Error with last-good retain
+      banner.style.display = "block";
+      banner.innerHTML = "🛑 ERROR 0x7E: Host agent parse exception. Fallback to LAST-GOOD cache.";
+      document.getElementById("stat-transport").textContent = "ERROR (Last-Good)";
+    }
+    else if (state === "waiting") {
+      banner.style.display = "block";
+      banner.classList.add("info");
+      banner.innerHTML = "⏳ INITIALIZING: Waiting for first cdm/1 telemetry packet over USB...";
+      updateDOMValues("...", "...", "...", "...", "...", "...", "...", "...", "...");
+      renderSegmentedBar("bar-5h", 0, "fill-cyan");
+      renderSegmentedBar("bar-week", 0, "fill-cyan");
+      document.getElementById("stat-transport").textContent = "WAITING SYNC";
+    }
+    else if (state === "recovery") {
+      banner.style.display = "block";
+      banner.classList.add("info");
+      banner.innerHTML = "🔄 LINK RESTORED: CRC validated, refreshing telemetry cache...";
+      updateDOMValues(baseData.quota5h.used, baseData.quota5h.rem, baseData.quotaWeek.used, baseData.quotaWeek.rem, baseData.session.in, baseData.session.out, baseData.session.cached, baseData.session.reasoning, baseData.session.total);
+      document.getElementById("stat-transport").textContent = "USB CDC RECONNECTED";
+    }
+  }
+
+  function updateDOMValues(q5u, q5r, qWu, qWr, sIn, sOut, sCached, sReason, sTot) {
+    document.getElementById("quota-5h-used").innerHTML = q5u + "<span>% USED</span>";
+    document.getElementById("quota-5h-rem").textContent = q5r + (q5r !== "--" && q5r !== "..." ? "%" : "");
+    document.getElementById("quota-week-used").innerHTML = qWu + "<span>% USED</span>";
+    document.getElementById("quota-week-rem").textContent = qWr + (qWr !== "--" && qWr !== "..." ? "%" : "");
+    
+    document.getElementById("sess-in").textContent = sIn;
+    document.getElementById("sess-out").textContent = sOut;
+    document.getElementById("sess-cached").textContent = sCached;
+    document.getElementById("sess-reason").textContent = sReason;
+    document.getElementById("sess-total").textContent = sTot;
+  }
+
+  // Initialize
+  renderSegmentedBar("bar-5h", baseData.quota5h.used, "fill-cyan");
+  renderSegmentedBar("bar-week", baseData.quotaWeek.used, "fill-cyan");
+</script>
+
+</body>
+</html>

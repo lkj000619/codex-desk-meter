@@ -10,8 +10,8 @@
 |---|---|---|
 | 별도 Orca worktree·입력 보존 | 완료 | 실제 branch 생성, 57개 입력 바이트/hash 일치, 과거 제품 제거는 새 checkout에만 적용 |
 | 사용자 범위·역할 확정 | 완료 | Sol/Flash/Luna, GUI는 AGY Gemini 3개+Codex CLI gpt-6.1-sol 3개, 세션 토큰+quota 확인 |
-| 역할별 기술 검토·DAG | 예정 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
-| LCD UX/UI·OpenDesign | 예정 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
+| 역할별 기술 검토·DAG | 진행 중 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
+| LCD UX/UI·OpenDesign | 진행 중: Gemini 3개 제출, Sol 6.1 작성 중 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
 | PC 프로그램 구현 | 예정 | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
 | firmware·통합 | 예정 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
 | 독립 검증·수정 | 예정 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
@@ -27,9 +27,12 @@
 - [x] Orca branch/worktree·Run 생성, 동결 입력 57개 바이트 검증
 - [x] 역할별 파일 소유권과 재개 절차 작성
 - [x] OpenDesign pinned 원본 설치·검토 완료
-- [ ] AGY Gemini GUI 후보 3개 Task/Dispatch 시작·실효 모델 확인
-- [ ] Codex CLI gpt-6.1-sol GUI 후보 3개 Task/Dispatch 시작·실효 모델 확인
-- [ ] Luna의 요구·검증 검토 시작·보고서 수락
+- [x] AGY Gemini GUI 후보 3개 Task/Dispatch 시작·실효 모델 확인
+- [x] Codex CLI gpt-6.1-sol GUI 후보 3개 Task/Dispatch 시작·실효 모델 확인
+- [x] OpenDesign viewer 원본 hash 확인·AGY 준비 보고 수락
+- [x] AGY Gemini 후보 3개·handoff 제출 수락 (독립 GUI 검증은 별도)
+- [x] Luna의 요구·검증 검토 시작
+- [ ] Luna의 요구·검증 보고서 수락
 - [ ] GUI 후보 6개 자체/독립 검증·사용자 비교 화면 제시
 - [ ] 사용자 선택과 구현 인터페이스 확정
 - [ ] PC·firmware 구현 및 host 통합 검증

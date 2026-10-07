@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Candidate B - Swiss Studio Meter (820x320 LCD)</title>
+<style>
+  /* Reset & Host Container Styling (Outside LCD) */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background-color: #1a1a1e;
+    color: #e4e4e7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    min-height: 100vh;
+  }
+  header {
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #f4f4f5;
+  }
+  .preview-note {
+    font-size: 12px;
+    color: #a1a1aa;
+    margin-top: 4px;
+  }
+
+  /* Preview Controls (Outside LCD Screen) */
+  .preview-toolbar {
+    background: #27272a;
+    border: 1px solid #3f3f46;
+    border-radius: 8px;
+    padding: 10px 18px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+  .preview-toolbar label {
+    font-weight: 600;
+    color: #f4f4f5;
+  }
+  .preview-toolbar select, .preview-toolbar button {
+    background: #18181b;
+    color: #e4e4e7;
+    border: 1px solid #52525b;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .btn-boot {
+    background: #0284c7 !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    border: 1px solid #0369a1 !important;
+  }
+
+  /* Physical LCD Bezel Frame */
+  .lcd-bezel {
+    background: #27272a;
+    border: 3px solid #52525b;
+    border-radius: 8px;
+    padding: 14px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+    position: relative;
+  }
+  .lcd-bezel::before {
+    content: "SWISS STUDIO METER · 820×320 IPS DISPLAY · ST7701";
+    position: absolute;
+    top: 3px;
+    left: 18px;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: #71717a;
+    font-family: monospace;
+    font-weight: bold;
+  }
+
+  /* Exact 820x320 LCD Active Area (Warm Paper Minimalist Theme) */
+  #lcd-screen {
+    width: 820px;
+    height: 320px;
+    background-color: #f5f4ef; /* Warm Cream Paper */
+    color: #18181b; /* Deep Charcoal */
+    overflow: hidden;
+    position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #d4d4d8;
+  }
+
+  /* Top Navigation Bar (32px) */
+  .top-bar {
+    height: 32px;
+    background: #eae8e1;
+    border-bottom: 2px solid #18181b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    flex-shrink: 0;
+  }
+  .brand-tag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot-indicator {
+    width: 7px;
+    height: 7px;
+    background: #18181b;
+    border-radius: 50%;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 16px;
+  }
+  .nav-tab {
+    color: #71717a;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+  .nav-tab.active {
+    color: #18181b;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+  }
+  .state-pill {
+    padding: 2px 8px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    border: 1px solid #18181b;
+    background: #ffffff;
+    text-transform: uppercase;
+  }
+  .state-pill.warn { background: #fef08a; }
+  .state-pill.error { background: #fecaca; }
+
+  /* Screen Views (264px) */
+  .screen-view {
+    height: 264px;
+    display: none;
+    position: relative;
+  }
+  .screen-view.active {
+    display: flex;
+  }
+
+  /* Bottom Bar (24px) */
+  .bottom-bar {
+    height: 24px;
+    background: #eae8e1;
+    border-top: 1px solid #d4d4d8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    font-size: 10px;
+    color: #71717a;
+    font-family: monospace;
+    flex-shrink: 0;
+  }
+
+  /* SCREEN 1: USAGE (Swiss Asymmetric Two-Column Grid) */
+  #view-usage {
+    width: 100%;
+    display: none;
+  }
+  #view-usage.active {
+    display: flex;
+  }
+
+  /* Column 1: Quota Windows (430px) */
+  .col-quota {
+    width: 430px;
+    border-right: 2px solid #18181b;
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .quota-card-primary {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .eyebrow-label {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #52525b;
+  }
+  .quota-hero-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .big-stat {
+    font-size: 52px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    color: #18181b;
+  }
+  .big-stat span {
+    font-size: 18px;
+    font-weight: 600;
+    margin-left: 2px;
+  }
+  .stat-detail-box {
+    text-align: right;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+  .stat-detail-box strong {
+    font-size: 13px;
+    color: #09090b;
+  }
+
+  /* Solid Linear Progress Bar */
+  .meter-track {
+    height: 12px;
+    background: #e4e2d8;
+    border: 1px solid #18181b;
+    position: relative;
+    margin-top: 4px;
+  }
+  .meter-fill {
+    height: 100%;
+    background: #18181b;
+  }
+
+  .quota-secondary {
+    border-top: 1px solid #d4d4d8;
+    padding-top: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+
+  /* Column 2: Session Telemetry Ledger (390px) */
+  .col-session {
+    flex: 1;
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .session-headline-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid #18181b;
+    padding-bottom: 6px;
+  }
+  .session-total-display {
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    font-family: monospace;
+    color: #18181b;
+  }
+  .session-table {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .table-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed #d4d4d8;
+  }
+  .table-key {
+    color: #52525b;
+    font-weight: 500;
+  }
+  .table-val {
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .session-disclaimer {
+    background: #eae8e1;
+    border-left: 3px solid #18181b;
+    padding: 6px 10px;
+    font-size: 9px;
+    color: #52525b;
+    line-height: 1.35;
+  }
+
+  /* SCREEN 2: GLOBAL RESET */
+  #view-global {
+    width: 100%;
+    padding: 20px 28px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .global-title-row {
+    border-bottom: 2px solid #18181b;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .global-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+  }
+  .time-hero {
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    color: #18181b;
+  }
+  .time-hero-sub {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #71717a;
+    margin-top: 6px;
+  }
+  .global-details-card {
+    background: #ffffff;
+    border: 1px solid #18181b;
+    padding: 14px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 340px;
+  }
+  .detail-line {
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* SCREEN 3: STATUS */
+  #view-status {
+    width: 100%;
+    padding: 18px 24px;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .status-row-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .status-box {
+    background: #ffffff;
+    border: 1px solid #18181b;
+    padding: 10px;
+  }
+  .status-box-title {
+    font-size: 10px;
+    font-weight: 700;
+    color: #71717a;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .status-box-val {
+    font-size: 15px;
+    font-weight: 800;
+    font-family: monospace;
+  }
+  .log-console {
+    background: #eae8e1;
+    border: 1px solid #18181b;
+    padding: 8px 12px;
+    font-family: monospace;
+    font-size: 11px;
+    height: 95px;
+    line-height: 1.5;
+    color: #27272a;
+    overflow-y: auto;
+  }
+
+  /* Notification banner inside screen */
+  .notice-strip {
+    background: #18181b;
+    color: #f5f4ef;
+    padding: 4px 14px;
+    font-size: 10px;
+    font-weight: 700;
+    display: none;
+    letter-spacing: 0.04em;
+  }
+
+  /* Embedded Specs Footnote */
+  .handoff-summary {
+    max-width: 860px;
+    margin-top: 24px;
+    background: #27272a;
+    border: 1px solid #3f3f46;
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #d4d4d8;
+  }
+  .handoff-summary h3 {
+    color: #f4f4f5;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .tag-badge {
+    display: inline-block;
+    background: #18181b;
+    color: #fafafa;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 11px;
+    margin-right: 4px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Candidate B: Swiss Studio Meter</h1>
+  <div class="preview-note">ESP32-S3 ST7701 820×320 IPS | Warm Paper & High-Contrast Typography</div>
+</header>
+
+<!-- Preview Control Bar (Outside LCD) -->
+<div class="preview-toolbar">
+  <button id="btn-boot-cycle" class="btn-boot" onclick="cycleScreen()">🔘 PRESS BOOT [GPIO0] (Cycle Screen)</button>
+  
+  <div>
+    <label for="state-selector">Simulate State: </label>
+    <select id="state-selector" onchange="applyState(this.value)">
+      <option value="normal">Normal (Live Synthetic Feed)</option>
+      <option value="source_stale">Source Stale (> 5m observation gap)</option>
+      <option value="disconnected">Disconnected / Receive Stale (USB offline)</option>
+      <option value="unknown">Unknown / Null (Missing parameters)</option>
+      <option value="error">Error / Last-Good Retained</option>
+      <option value="waiting">Waiting Initial (Syncing)</option>
+      <option value="recovery">Recovery (Restoring stream)</option>
+    </select>
+  </div>
+
+  <div>
+    <label for="screen-direct">Screen: </label>
+    <select id="screen-direct" onchange="setScreen(parseInt(this.value))">
+      <option value="0">1. Usage (Quota & Session)</option>
+      <option value="1">2. Global Reset (codex-resets)</option>
+      <option value="2">3. Hardware & Transport Status</option>
+    </select>
+  </div>
+</div>
+
+<!-- Physical LCD Display Housing (820x320) -->
+<div class="lcd-bezel">
+  <div id="lcd-screen">
+    
+    <!-- Top System Header (32px) -->
+    <div class="top-bar">
+      <div class="brand-tag">
+        <span class="dot-indicator"></span>
+        <span>CODEX DESK METER · STUDIO EDITION</span>
+      </div>
+      <div class="nav-tabs">
+        <span id="nav-0" class="nav-tab active">1. Usage</span>
+        <span id="nav-1" class="nav-tab">2. Global Reset</span>
+        <span id="nav-2" class="nav-tab">3. Hardware</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span id="pill-state" class="state-pill">NORMAL</span>
+        <span id="clock-display" style="font-family:monospace; font-size:10px;">17:10:00Z</span>
+      </div>
+    </div>
+
+    <!-- Alert / Degraded Banner -->
+    <div id="notice-strip" class="notice-strip"></div>
+
+    <!-- VIEW 1: USAGE (Swiss Asymmetric Two-Column Grid) -->
+    <div id="view-usage" class="screen-view active">
+      
+      <!-- Left Column: Quota Windows (430px) -->
+      <div class="col-quota">
+        <div class="quota-card-primary">
+          <div class="eyebrow-label">Primary Rolling Window (5 Hours)</div>
+          <div class="quota-hero-row">
+            <div class="big-stat" id="quota-5h-val">42<span>%</span></div>
+            <div class="stat-detail-box">
+              <div>USED QUOTA</div>
+              <div>REMAINING: <strong id="quota-5h-rem">58%</strong></div>
+              <div>RESETS: <strong id="quota-5h-rst">18:20Z (70m)</strong></div>
+            </div>
+          </div>
+          <!-- Clean solid bar -->
+          <div class="meter-track">
+            <div class="meter-fill" id="bar-5h-fill" style="width: 42%;"></div>
+          </div>
+        </div>
+
+        <!-- Weekly Quota Section -->
+        <div class="quota-secondary">
+          <div>
+            <div class="eyebrow-label" style="font-size:9px;">Weekly Limit (10080m)</div>
+            <div style="font-size: 20px; font-weight: 800; font-family:monospace;" id="quota-wk-val">18% USED</div>
+          </div>
+          <div style="text-align: right; font-size: 10px; color:#52525b;">
+            <div>REM: <strong style="color:#18181b;" id="quota-wk-rem">82%</strong></div>
+            <div id="quota-wk-rst">RESET: OCT 12 17:10Z</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Session Telemetry Ledger (390px) -->
+      <div class="col-session">
+        <div>
+          <div class="session-headline-row">
+            <div class="eyebrow-label">Session Telemetry</div>
+            <div style="font-size:10px; font-family:monospace; color:#71717a;">OBS: 17:10:00Z</div>
+          </div>
+          
+          <div style="margin-top: 6px; display:flex; justify-content:space-between; align-items:baseline;">
+            <span style="font-size: 11px; font-weight: 700;">TOTAL TOKENS</span>
+            <span class="session-total-display" id="sess-total">141,200</span>
+          </div>
+
+          <div class="session-table">
+            <div class="table-row">
+              <span class="table-key">Prompt Input Tokens</span>
+              <span class="table-val" id="sess-in">124,800</span>
+            </div>
+            <div class="table-row">
+              <span class="table-key">Completion Output Tokens</span>
+              <span class="table-val" id="sess-out">16,400</span>
+            </div>
+            <div class="table-row">
+              <span class="table-key">— of which Cached Input</span>
+              <span class="table-val" style="color:#0284c7;" id="sess-cached">89,600</span>
+            </div>
+            <div class="table-row">
+              <span class="table-key">— of which Reasoning</span>
+              <span class="table-val" style="color:#7c3aed;" id="sess-reason">2,300</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="session-disclaimer">
+          Note: Session telemetry is unconstrained local process volume. Session percentage and remaining tokens are mathematically undefined.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- VIEW 2: GLOBAL RESET -->
+    <div id="view-global" class="screen-view">
+      <div class="global-title-row">
+        <div>
+          <span class="eyebrow-label">CLUSTER METRIC</span>
+          <h2 style="font-size:16px; font-weight:800;">Global Codex System Reset</h2>
+        </div>
+        <div style="font-family:monospace; font-size:11px; color:#52525b;">
+          SOURCE: CODEX-RESETS.COM
+        </div>
+      </div>
+
+      <div class="global-content">
+        <div>
+          <div class="time-hero" id="global-elapsed">7h 10m</div>
+          <div class="time-hero-sub">Elapsed Since Last Global Event</div>
+        </div>
+
+        <div class="global-details-card">
+          <div class="detail-line">
+            <span style="color:#71717a;">Last Cluster Reset:</span>
+            <strong style="font-family:monospace;" id="global-last">2026-10-07 10:00:00Z</strong>
+          </div>
+          <div class="detail-line">
+            <span style="color:#71717a;">Captured Timestamp:</span>
+            <span style="font-family:monospace;">2026-10-07 17:10:00Z</span>
+          </div>
+          <div class="detail-line">
+            <span style="color:#71717a;">Window Scope:</span>
+            <span>Worldwide Service Cadence</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size:10px; color:#71717a; border-top:1px solid #d4d4d8; padding-top:6px;">
+        * Independent from local personal rolling quota. Tracks OpenAI / Codex platform-level tier refresh.
+      </div>
+    </div>
+
+    <!-- VIEW 3: HARDWARE / STATUS -->
+    <div id="view-status" class="screen-view">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:2px solid #18181b; padding-bottom:6px;">
+        <span class="eyebrow-label">System Diagnostics</span>
+        <span style="font-size:11px; font-family:monospace;">ST7701 RGB565 · 820×320</span>
+      </div>
+
+      <div class="status-row-grid">
+        <div class="status-box">
+          <div class="status-box-title">Transport Link</div>
+          <div class="status-box-val" id="stat-link">USB CDC OK</div>
+        </div>
+        <div class="status-box">
+          <div class="status-box-title">Source Age</div>
+          <div class="status-box-val" id="stat-src-age">0s Fresh</div>
+        </div>
+        <div class="status-box">
+          <div class="status-box-title">Receive Age</div>
+          <div class="status-box-val" id="stat-rcv-age">1s Nominal</div>
+        </div>
+        <div class="status-box">
+          <div class="status-box-title">Last-Good Cache</div>
+          <div class="status-box-val" id="stat-cache">Valid 17:10Z</div>
+        </div>
+      </div>
+
+      <div class="log-console" id="log-text">
+        [SYS] Boot mode: Normal (GPIO0 high)<br>
+        [CDM] USB serial enumerated, packet framing verified<br>
+        [CDM] Synthetic snapshot ingested: 5h quota 42%, session total 141,200<br>
+        [DISP] Framebuffer 524,800 bytes allocated in PSRAM (80MHz Octal)
+      </div>
+    </div>
+
+    <!-- Bottom Metadata Bar (24px) -->
+    <div class="bottom-bar">
+      <span>SYNTHETIC TELEMETRY · NO PRIVATE LOGS COMMITTED</span>
+      <span>CYCLE VIEW: PRESS BOOT BUTTON</span>
+    </div>
+
+  </div>
+</div>
+
+<!-- Implementation & Hardware Handoff Specs -->
+<div class="handoff-summary">
+  <h3>Candidate B: Implementation & Embedded Handoff Notes</h3>
+  <p><strong>Design Intent:</strong> Swiss Studio Meter — Uncompromising clarity, editorial typography, stark contrasts, and calm readability. Ideal for an architect or designer desk workspace where glare is controlled and calm legibility is paramount.</p>
+  <p style="margin-top:6px;">
+    <span class="tag-badge">RGB565 Palette</span> Warm Cream BG: <code>#f5f4ef</code> (0xF7BE), Deep Ink Charcoal: <code>#18181b</code> (0x18C3), Warm Header Bar: <code>#eae8e1</code> (0xEF7C), Accent Blue: <code>#0284c7</code> (0x0438), Border Gray: <code>#d4d4d8</code> (0xD6BA).
+  </p>
+  <p style="margin-top:6px;">
+    <span class="tag-badge">Font Strategy</span> Giant Stat: 52px (36×52 raster font, numbers 0-9 + % only: 11 glyphs = 2.5KB), Subheads: 18px-20px (14×20 font, 3KB), Labels & Ledger: 11px-12px (8×12 standard ASCII font ROM).
+  </p>
+  <p style="margin-top:6px;">
+    <span class="tag-badge">Rendering & Memory</span> Asymmetric two-column division: Column 1 (430×264) updates primarily on quota tick (once every 1-5 mins); Column 2 (390×264) updates on session tokens. Clean separation minimizes flicker on non-buffered ST7701 lines.
+  </p>
+</div>
+
+<script>
+  let currentScreen = 0;
+  const baseData = {
+    quota5h: { used: 42, rem: 58, rst: "18:20Z (70m)" },
+    quotaWk: { used: 18, rem: 82, rst: "OCT 12 17:10Z" },
+    session: { in: "124,800", out: "16,400", cached: "89,600", reason: "2,300", total: "141,200" },
+    global: { elapsed: "7h 10m", last: "2026-10-07 10:00:00Z" }
+  };
+
+  function setScreen(idx) {
+    currentScreen = idx;
+    document.querySelectorAll(".nav-tab").forEach((el, i) => {
+      el.classList.toggle("active", i === idx);
+    });
+    document.querySelectorAll(".screen-view").forEach((el, i) => {
+      el.classList.toggle("active", i === idx);
+    });
+    document.getElementById("screen-direct").value = idx;
+  }
+
+  function cycleScreen() {
+    setScreen((currentScreen + 1) % 3);
+  }
+
+  function applyState(state) {
+    const pill = document.getElementById("pill-state");
+    const strip = document.getElementById("notice-strip");
+    pill.className = "state-pill";
+    pill.textContent = state.toUpperCase().replace("_", " ");
+    strip.style.display = "none";
+
+    if (state === "normal") {
+      updateValues(baseData.quota5h.used, baseData.quota5h.rem, baseData.quotaWk.used, baseData.quotaWk.rem, baseData.session.in, baseData.session.out, baseData.session.cached, baseData.session.reason, baseData.session.total);
+      document.getElementById("bar-5h-fill").style.width = baseData.quota5h.used + "%";
+      document.getElementById("stat-link").textContent = "USB CDC OK";
+      document.getElementById("stat-src-age").textContent = "0s Fresh";
+      document.getElementById("stat-rcv-age").textContent = "1s Nominal";
+    }
+    else if (state === "source_stale") {
+      pill.classList.add("warn");
+      strip.style.display = "block";
+      strip.textContent = "SOURCE STALE: TOKEN TIMESTAMP > 5M AGO. MAINTAINING OBSERVED DATA.";
+      document.getElementById("stat-src-age").textContent = "384s (Stale)";
+    }
+    else if (state === "disconnected") {
+      pill.classList.add("error");
+      strip.style.display = "block";
+      strip.textContent = "DISCONNECTED: USB LINK TIMEOUT. LAST-GOOD VALUES PRESERVED.";
+      document.getElementById("stat-link").textContent = "LINK DOWN";
+      document.getElementById("stat-rcv-age").textContent = "580s Timeout";
+    }
+    else if (state === "unknown") {
+      strip.style.display = "block";
+      strip.textContent = "UNKNOWN: UPSTREAM FIELDS ARE NULL OR MISSING.";
+      updateValues("--", "--", "--", "--", "--", "--", "--", "--", "--");
+      document.getElementById("bar-5h-fill").style.width = "0%";
+      document.getElementById("stat-src-age").textContent = "Unknown";
+    }
+    else if (state === "error") {
+      pill.classList.add("error");
+      strip.style.display = "block";
+      strip.textContent = "PARSE ERROR: FRAMING CHECKSUM MISMATCH. RETAINING LAST-GOOD STATE.";
+      document.getElementById("stat-link").textContent = "CRC ERROR";
+    }
+    else if (state === "waiting") {
+      strip.style.display = "block";
+      strip.textContent = "WAITING: ESTABLISHING USB CDM/1 COMMUNICATION...";
+      updateValues("...", "...", "...", "...", "...", "...", "...", "...", "...");
+      document.getElementById("bar-5h-fill").style.width = "0%";
+      document.getElementById("stat-link").textContent = "WAITING";
+    }
+    else if (state === "recovery") {
+      strip.style.display = "block";
+      strip.textContent = "RECOVERING: PACKET SYNC RESTORED. FRESH DATA APPLIED.";
+      updateValues(baseData.quota5h.used, baseData.quota5h.rem, baseData.quotaWk.used, baseData.quotaWk.rem, baseData.session.in, baseData.session.out, baseData.session.cached, baseData.session.reason, baseData.session.total);
+      document.getElementById("bar-5h-fill").style.width = baseData.quota5h.used + "%";
+      document.getElementById("stat-link").textContent = "RECONNECTED";
+    }
+  }
+
+  function updateValues(q5u, q5r, qWu, qWr, sIn, sOut, sCached, sReason, sTot) {
+    document.getElementById("quota-5h-val").innerHTML = q5u + "<span>%</span>";
+    document.getElementById("quota-5h-rem").textContent = q5r + (q5r !== "--" && q5r !== "..." ? "%" : "");
+    document.getElementById("quota-wk-val").textContent = qWu + (qWu !== "--" && qWu !== "..." ? "% USED" : "");
+    document.getElementById("quota-wk-rem").textContent = qWr + (qWr !== "--" && qWr !== "..." ? "%" : "");
+
+    document.getElementById("sess-in").textContent = sIn;
+    document.getElementById("sess-out").textContent = sOut;
+    document.getElementById("sess-cached").textContent = sCached;
+    document.getElementById("sess-reason").textContent = sReason;
+    document.getElementById("sess-total").textContent = sTot;
+  }
+</script>
+
+</body>
+</html>
