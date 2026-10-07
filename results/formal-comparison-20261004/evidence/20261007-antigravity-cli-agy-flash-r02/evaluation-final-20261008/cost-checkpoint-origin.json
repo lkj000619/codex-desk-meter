@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-10-07T15:53:50.597416+00:00",
+  "checkpoint": "results/formal-comparison-20261004/comparison-checkpoint-17.md",
+  "scope": "Checkpoint17 is the17 terminal attempts before final optical review. No additional call or cost change. Final RM is dated separately; historical cost inputs are not rewritten.",
+  "input_snapshot_directory": "results/formal-comparison-20261004/evidence/20261007-antigravity-cli-agy-flash-r02/cost-checkpoint-17-20261007",
+  "input_inventory_sha256": "f4a366d18400c097ca588250b72e409422524dc1db946becee7de35f08dd1e43",
+  "checkpoint_original_path": "results/formal-comparison-20261004/evidence/20261007-antigravity-cli-agy-flash-r02/cost-checkpoint-17-20261007/checkpoint-original.md",
+  "checkpoint_original_sha256": "8d261604206b3376c4c157c28c7ba1034703579df008fa61a7ff18b6cd6cb41e",
+  "checkpoint_repository_lf_sha256": "60a7546640db5bd6b25fea521e217cef81db6df632fd31d14b0b0c67cbdc287e",
+  "token_measurement_coverage": "16/17",
+  "known_normalized_tokens": 62535521,
+  "total_normalized_tokens": null
+}

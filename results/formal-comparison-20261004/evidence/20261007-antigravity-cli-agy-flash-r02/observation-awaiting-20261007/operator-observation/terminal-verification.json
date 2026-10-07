@@ -1,0 +1,53 @@
+{
+  "run_id": "20261007-antigravity-cli-agy-flash-r02",
+  "checked_at": "2026-10-06T19:06:27.676243+00:00",
+  "terminal_status": "completed",
+  "execution": {
+    "started_at": "2026-10-06T18:46:43.977Z",
+    "ended_at": "2026-10-06T19:05:45.662Z",
+    "timeout_seconds": 5445,
+    "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+    "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+    "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+    "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+    "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+    "profile_sha256": "5b24fc4e43ee0bf74b1b8a1ddce7e08f5024760c8b9660ce1c5aabbe966668f8",
+    "input_bundle_sha256": "9f4472eb4edb2c9488685b59b2f9a73b5d3f3dc11b002d651bfd37f4dc1d0a51",
+    "network_mode": "offline-fixture",
+    "sandbox_policy": "prompt-and-log",
+    "approval_policy": "request-review",
+    "branch": "experiment/antigravity/antigravity-cli/agy-flash",
+    "worktree": "C:\\meter-followups-20261007\\20261007-antigravity-cli-agy-flash-r02\\checkout",
+    "host": "DESKTOP-JCMEN12"
+  },
+  "measurement": {
+    "wall_clock_seconds": 1141.688000000082,
+    "tool_calls": 125,
+    "failed_commands": null,
+    "user_interventions": null,
+    "tokens": {
+      "input": 621023,
+      "output": 92547,
+      "cached": 19124906,
+      "reasoning": 56453,
+      "provider_total": 713570,
+      "total": 713570,
+      "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+      "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+    }
+  },
+  "original_terminal_manifest_sha256": "940d80c963b54802588d37d6c36f8ec070e1599ec824b8c2d630f96a5860c766",
+  "original_ledger_sha256": "d3c4a74530c7bf6362fd1c6cc1139306fdd7d58051c0f96da626e0271bdbb73c",
+  "candidate_processes_remaining": [],
+  "immutable_input_files_verified": 57,
+  "frozen_operator_baseline_verified": true,
+  "global_files_restored_independently_verified": true,
+  "raw_native_events": 872,
+  "candidate_result_submission_present": true,
+  "candidate_selection_document_present": true,
+  "operator_audited_user_interventions": 0,
+  "operator_source_modifications": false,
+  "operator_firmware_rebuild": false,
+  "serial_opened": false
+}

@@ -1,0 +1,137 @@
+{
+  "run_id": "20261007-antigravity-cli-agy-flash-r02",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "reviewer": "Codex operator",
+  "reviewed_at": "2026-10-06T19:25:16.470909+00:00",
+  "items": {
+    "RM1": {
+      "status": "pass",
+      "reason": "Candidate ESP-IDF5.3.2 final build succeeds. Archived original app/bootloader/partition hashes match COM3 upload; the same frozen artifact boots and visibly runs. No operator firmware rebuild.",
+      "evidence": [
+        {
+          "path": "operator-source-freeze.json",
+          "sha256": "513029a19cadf5c6dcf8f482fb2e11c46cc5772ff709197a5069f160a1ad18d4"
+        },
+        {
+          "path": "operator-observation/hardware-slot.json",
+          "sha256": "c93d5372d3d44c2919631f6f4d8186620659c80c61c1abfe4288e866154a587a"
+        },
+        {
+          "path": "operator-observation/frozen-artifact-upload-stdout.txt",
+          "sha256": "5be0dfd8f72ad60490c06f384af87833d3a3c8dc44c7dffa785b3d704b31aa76"
+        },
+        {
+          "path": "operator-observation/build-source-review.json",
+          "sha256": "8ff74277bed7b1bfcd28a492b0b3b348888573add23f446b24a6b4c0dc893fea"
+        }
+      ]
+    },
+    "RM2": {
+      "status": "pass",
+      "reason": "Declared collector API modes and encoder produce exact common payload/wire. Actual ESP32 receiver explicitly accepts both common sequence0 and1 with usage1/resets2; raw device serial is preserved.",
+      "evidence": [
+        {
+          "path": "operator-observation/common-stimulus-check.json",
+          "sha256": "bfa4291b36f0fd79d2ab71766450e2ccdb82fb17c7f73737be312d24100ee0af"
+        },
+        {
+          "path": "operator-observation/reference-capture-r1/capture.json",
+          "sha256": "5a1576ee25c0ddd599f809bec77338c0e00740f2fdc30e59ca75aa54787aff4c"
+        },
+        {
+          "path": "operator-observation/reference-capture-r1/device-serial.bin",
+          "sha256": "9a5c2da6a245add187d0c0fbe64aebec282feed2ee571e50551c00fabacbb20c"
+        },
+        {
+          "path": "operator-observation/receiver-source-review.json",
+          "sha256": "c4dfb38d52edef847cae4e59f517a7be65d25bd30eb94c0945bad5358ae00dcb"
+        }
+      ]
+    },
+    "RM3": {
+      "status": "pass",
+      "reason": "Current same-artifact video displays5-hour58% REMAINING and weekly82% REMAINING, matching fixed stale payload percent_remaining. Corresponding used values42%/18% and STALE are visible. These are synthetic common fixture values.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-observation-confirmation.json",
+          "sha256": "7a9ed15d13bd1eea25b80ad9f3a46ceec3693f811aec8aa80b601453f055335a"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-review.json",
+          "sha256": "371c3b4e47239487fabbd2b2c16af8cd3621214e0bdbb1c8c20960bde713cf9b"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-metadata.json",
+          "sha256": "aea59a9aad9e85033176c3d56c8b654dd51179230ddc2fb1618f9124621ad119"
+        },
+        {
+          "path": "operator-observation/user-video-01/source.mp4",
+          "sha256": "b182132aedf1b1002d2448d4d6458f6ec33b8cd7af9b76be55c9e7daee0c5b0d"
+        },
+        {
+          "path": "operator-observation/user-video-01/frames/frame-010.png",
+          "sha256": "16c6ceef3dcfe8cd44a21d036a7d792970848d42a610d9e6231c64429b8e81e4"
+        }
+      ]
+    },
+    "RM4": {
+      "status": "pass",
+      "reason": "Populated usage, GLOBAL RESETS with latest reset/source details, and SYSTEM STATUS with sequence1/cache are visible as three distinct information views. This does not certify all reset/source freshness/GUI contract details.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-observation-confirmation.json",
+          "sha256": "7a9ed15d13bd1eea25b80ad9f3a46ceec3693f811aec8aa80b601453f055335a"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-review.json",
+          "sha256": "371c3b4e47239487fabbd2b2c16af8cd3621214e0bdbb1c8c20960bde713cf9b"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-metadata.json",
+          "sha256": "aea59a9aad9e85033176c3d56c8b654dd51179230ddc2fb1618f9124621ad119"
+        },
+        {
+          "path": "operator-observation/user-video-01/source.mp4",
+          "sha256": "b182132aedf1b1002d2448d4d6458f6ec33b8cd7af9b76be55c9e7daee0c5b0d"
+        },
+        {
+          "path": "operator-observation/user-video-01/frames/frame-007.png",
+          "sha256": "1bef38057d71d057dee808e067e30dc691e0229e98e0f2f8c99ea6f65bd39f36"
+        },
+        {
+          "path": "operator-observation/user-video-01/frames/frame-008.png",
+          "sha256": "03400848fccd3e7266ef39aa466725993c1e8d34a483388f016ff6d1b78336b4"
+        }
+      ]
+    },
+    "RM5": {
+      "status": "pass",
+      "reason": "User confirms three consecutive BOOT presses. Before reset/default state, recording shows usage->global resets->diagnostic->usage return at approximately0.5/6.5/7.5/9.5s; later repeat navigation is visible. Confirmed RST/power events are recorded separately and are not navigation evidence. Exact debounce-to-display300ms is unmeasured.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-observation-confirmation.json",
+          "sha256": "7a9ed15d13bd1eea25b80ad9f3a46ceec3693f811aec8aa80b601453f055335a"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-review.json",
+          "sha256": "371c3b4e47239487fabbd2b2c16af8cd3621214e0bdbb1c8c20960bde713cf9b"
+        },
+        {
+          "path": "operator-observation/user-video-01/video-metadata.json",
+          "sha256": "aea59a9aad9e85033176c3d56c8b654dd51179230ddc2fb1618f9124621ad119"
+        },
+        {
+          "path": "operator-observation/user-video-01/source.mp4",
+          "sha256": "b182132aedf1b1002d2448d4d6458f6ec33b8cd7af9b76be55c9e7daee0c5b0d"
+        },
+        {
+          "path": "operator-observation/user-video-01/frames/frame-010.png",
+          "sha256": "16c6ceef3dcfe8cd44a21d036a7d792970848d42a610d9e6231c64429b8e81e4"
+        }
+      ]
+    }
+  },
+  "product_pass": false,
+  "policy_status": "eligible",
+  "note": "Final authorized followup3. RM1-5 reached; current policy eligible, earlier series invalid_for_comparison remains. Quality/reference cost ineligible. Full product,30s stability, timing, IMU and recovery/GUI validation are not certified. No further round/new block."
+}

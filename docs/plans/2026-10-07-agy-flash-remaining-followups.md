@@ -2,7 +2,7 @@
 
 목표: 자기 직전 동결 구현에서 공통 데이터 수신·가독 화면·BOOT 탐색을 보완하고 실제 보드로 RM1~RM5를 평가한다.
 
-상태: 준비·후속2 평가/독립 복원 완료. 마지막 후속3 `20261007-antigravity-cli-agy-flash-r02` 구현 실행 중. 원본 조건과 기존 실패·비용을 유지한다.
+상태: 2026-10-08 허용된후속2/3·최종 영상/RM·588파일 독립 복원 완료. 마지막 RM1~RM5 pass로 series 종료, 잔여4,303.593초·남은 회차0·추가 실행 없음. 전체 제품 합격은 미확정.
 
 - 기존 series: `20261005-antigravity-cli-agy-flash-r01`, 최초 1회·후속 1회 평가 완료.
 - 시작 원본: `94018f1785a590e1514ef1b5145c40f0c03ffca3`.
@@ -28,3 +28,15 @@
 2026-10-07 AGY Flash 마지막 후속3 실행 중. 후속2는265.500초·213,498 token 뒤 git log 권한 거부로 종료됐고 제품 수정·새 펌웨어·최종 제출이 없어 RM1 fail/RM2~RM5 not_run이다. 거부 즉시 종료 규칙을 지켜 이번 정책 eligible, 과거 series invalid는 유지한다. 388개 파일의 독립 복원·원본/비용/source 검증을 완료했다. 자기 직전 source36개와 공통 입력57개를 유지해 마지막 후속3을 시작했다. 잔여5,445.281초 중 runner 한도5,445초, 추가 회차는0이다. 전체 시작17회·종료16회, 비용 coverage15/16·알려진61,821,951 token·전체 합계 미상. 독립 series 종료4/15이며 보드는 Luna 마지막 원본을 유지한다. 현재 구현·정책·RM는 종료 후 평가한다.
 
 [후속2 독립 감사](../../results/formal-comparison-20261004/evidence/20261007-antigravity-cli-agy-flash-r01/evaluation-final-20261007/restore-audit.json) · [마지막 후속3 시작](../../results/formal-comparison-20261004/evidence/20261007-antigravity-cli-agy-flash-r02/launch-20261007/native-start-observation.json).
+
+## 2026-10-08 완료 조건 검증
+
+2026-10-08 최종 보관·문서 갱신 완료. 10월7일 AGY Flash 마지막 후속3은1,141.688초·713,570 token에 구현·제출을 마쳤고, 같은 동결 펌웨어가 COM3에서 공통 frame0·1을 수락했다. 62.87초 영상과 BOOT 연속3회 확인으로58%·82% 및 사용량→글로벌 리셋→진단→사용량 복귀를 관측해 RM1~RM5 모두 pass, reference 도달로 series를 종료했다. RESET·전원 재연결은 사용자 수동 조작이며 자동 재부팅으로 단정하지 않는다. 자동 회전/흔들기·연속30초 안정성·정밀 응답 시간·전체 오류/복구·GUI 검증은 미완료라 product_pass false다. 최종588파일 독립 복원과 원본 source40개/artifact25개·영상·정책·비용·RM 연결을 검증했다. 이번 정책 eligible, 과거 후속1의 series invalid와 품질/reference 비용 제외는 유지한다. 잔여4,303.593초(71분43.593초)·남은 회차0으로 추가 호출은 없다. 최초5회+후속12회=전체17회 종료, 비용 coverage16/17·알려진62,535,521 token·전체 합계 미상이다. 첫 블록5개 모델 series 종료5/15로 전체3블록 비교는 미완료이며 다음 블록은 시작하지 않았다.
+
+[최종 RM](../../results/formal-comparison-20261004/evidence/20261007-antigravity-cli-agy-flash-r02/evaluation-final-20261008/reference-review.json) · [최종 독립 복원](../../results/formal-comparison-20261004/evidence/20261007-antigravity-cli-agy-flash-r02/evaluation-final-20261008/restore-audit.json) · [series 종료](../../results/formal-comparison-20261004/evidence/20261007-antigravity-cli-agy-flash-r02/evaluation-final-20261008/operator-observation/operator-series-completion.json) · [영상 판독](../../results/formal-comparison-20261004/evidence/20261007-antigravity-cli-agy-flash-r02/evaluation-final-20261008/operator-observation/user-video-01/video-review.json)
+
+- [x] 허용된 후속2/3 각각 한 번 실행·terminal 원본과 비용 보존.
+- [x] 과거 부적격과 후속2 권한 거부 실패를 보존하고 자기 원본/입력57개 유지.
+- [x] 마지막 원본 artifact 업로드·실제 frame0/1 수락·현재 영상/BOOT 확인.
+- [x] RM 한 번 적용·series 종료·588파일 독립 복원·현재 상태 연결.
+- [x] 미측정30초/응답 시간/IMU/전체 제품 범위를 합격으로 확대하지 않음.

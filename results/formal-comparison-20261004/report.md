@@ -1,7 +1,7 @@
 # 정식 동일 조건 비교 실행 기록
 
-상태: 2026-10-07 AGY Flash 마지막 후속3 실행 중. 후속2는265.500초·213,498 token 뒤 git log 권한 거부로 종료됐고 제품 수정·새 펌웨어·최종 제출이 없어 RM1 fail/RM2~RM5 not_run이다. 거부 즉시 종료 규칙을 지켜 이번 정책 eligible, 과거 series invalid는 유지한다. 388개 파일의 독립 복원·원본/비용/source 검증을 완료했다. 자기 직전 source36개와 공통 입력57개를 유지해 마지막 후속3을 시작했다. 잔여5,445.281초 중 runner 한도5,445초, 추가 회차는0이다. 전체 시작17회·종료16회, 비용 coverage15/16·알려진61,821,951 token·전체 합계 미상. 독립 series 종료4/15이며 보드는 Luna 마지막 원본을 유지한다. 현재 구현·정책·RM는 종료 후 평가한다.
-독립 series 종료4/15이며 전체 비교는 미완료다. 아래 기록은 각 당시 관측이며 최신 상태는 위 상태와 마지막 갱신을 따른다.
+상태: 2026-10-08 최종 보관·문서 갱신 완료. 10월7일 AGY Flash 마지막 후속3은1,141.688초·713,570 token에 구현·제출을 마쳤고, 같은 동결 펌웨어가 COM3에서 공통 frame0·1을 수락했다. 62.87초 영상과 BOOT 연속3회 확인으로58%·82% 및 사용량→글로벌 리셋→진단→사용량 복귀를 관측해 RM1~RM5 모두 pass, reference 도달로 series를 종료했다. RESET·전원 재연결은 사용자 수동 조작이며 자동 재부팅으로 단정하지 않는다. 자동 회전/흔들기·연속30초 안정성·정밀 응답 시간·전체 오류/복구·GUI 검증은 미완료라 product_pass false다. 최종588파일 독립 복원과 원본 source40개/artifact25개·영상·정책·비용·RM 연결을 검증했다. 이번 정책 eligible, 과거 후속1의 series invalid와 품질/reference 비용 제외는 유지한다. 잔여4,303.593초(71분43.593초)·남은 회차0으로 추가 호출은 없다. 최초5회+후속12회=전체17회 종료, 비용 coverage16/17·알려진62,535,521 token·전체 합계 미상이다. 첫 블록5개 모델 series 종료5/15로 전체3블록 비교는 미완료이며 다음 블록은 시작하지 않았다.
+독립 series 종료5/15(첫 블록5개 완료)이며 전체 비교는 미완료다. 아래 기록은 각 당시 관측이며 최신 상태는 위 상태와 마지막 갱신을 따른다.
 준비 당시의 0회 기록과 동결 tag는 보존한다.
 
 원본 계약은 [운영 계약](../../docs/experiments/comparison-operating-contract.md),
@@ -948,3 +948,9 @@ Timeout4,213초는 이 호출을 포함한 누적 잔여다. 후속2회차 시�
 2026-10-07 AGY Flash 마지막 후속3 실행 중. 후속2는265.500초·213,498 token 뒤 git log 권한 거부로 종료됐고 제품 수정·새 펌웨어·최종 제출이 없어 RM1 fail/RM2~RM5 not_run이다. 거부 즉시 종료 규칙을 지켜 이번 정책 eligible, 과거 series invalid는 유지한다. 388개 파일의 독립 복원·원본/비용/source 검증을 완료했다. 자기 직전 source36개와 공통 입력57개를 유지해 마지막 후속3을 시작했다. 잔여5,445.281초 중 runner 한도5,445초, 추가 회차는0이다. 전체 시작17회·종료16회, 비용 coverage15/16·알려진61,821,951 token·전체 합계 미상. 독립 series 종료4/15이며 보드는 Luna 마지막 원본을 유지한다. 현재 구현·정책·RM는 종료 후 평가한다.
 
 [후속2 독립 감사](evidence/20261007-antigravity-cli-agy-flash-r01/evaluation-final-20261007/restore-audit.json) · [후속3 native 시작](evidence/20261007-antigravity-cli-agy-flash-r02/launch-20261007/native-start-observation.json) · [종료16회 비용](comparison-checkpoint-16.md).
+
+## 2026-10-08 Flash 마지막 후속3 최종 평가·종료
+
+2026-10-08 최종 보관·문서 갱신 완료. 10월7일 AGY Flash 마지막 후속3은1,141.688초·713,570 token에 구현·제출을 마쳤고, 같은 동결 펌웨어가 COM3에서 공통 frame0·1을 수락했다. 62.87초 영상과 BOOT 연속3회 확인으로58%·82% 및 사용량→글로벌 리셋→진단→사용량 복귀를 관측해 RM1~RM5 모두 pass, reference 도달로 series를 종료했다. RESET·전원 재연결은 사용자 수동 조작이며 자동 재부팅으로 단정하지 않는다. 자동 회전/흔들기·연속30초 안정성·정밀 응답 시간·전체 오류/복구·GUI 검증은 미완료라 product_pass false다. 최종588파일 독립 복원과 원본 source40개/artifact25개·영상·정책·비용·RM 연결을 검증했다. 이번 정책 eligible, 과거 후속1의 series invalid와 품질/reference 비용 제외는 유지한다. 잔여4,303.593초(71분43.593초)·남은 회차0으로 추가 호출은 없다. 최초5회+후속12회=전체17회 종료, 비용 coverage16/17·알려진62,535,521 token·전체 합계 미상이다. 첫 블록5개 모델 series 종료5/15로 전체3블록 비교는 미완료이며 다음 블록은 시작하지 않았다.
+
+[최종 RM](evidence/20261007-antigravity-cli-agy-flash-r02/evaluation-final-20261008/reference-review.json) · [독립 복원](evidence/20261007-antigravity-cli-agy-flash-r02/evaluation-final-20261008/restore-audit.json) · [series 종료](evidence/20261007-antigravity-cli-agy-flash-r02/evaluation-final-20261008/operator-observation/operator-series-completion.json) · [비용17 원본 연결](evidence/20261007-antigravity-cli-agy-flash-r02/evaluation-final-20261008/cost-checkpoint-origin.json). 비용17은 최종 광학 판정 전17개 terminal 원본으로 보존하며 시간/token 변화는 없다. 글로벌 화면의 FRESH 표시와 오래된 captured 시각은 [전체 제품 관측 제한](evidence/20261007-antigravity-cli-agy-flash-r02/evaluation-final-20261008/operator-observation/product-observation-scope.json)에 별도로 남긴다. RM 화면 존재 판정을 전체 source-age 정확성으로 확대하지 않는다.

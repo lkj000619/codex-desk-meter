@@ -1,0 +1,37 @@
+{
+  "run_id": "20261007-antigravity-cli-agy-flash-r02",
+  "implementation_commit": "9e5a01b51cce581acda2495df402e6aa3d3f63be",
+  "reference_frames_sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+  "candidate_encoder_checks": [
+    {
+      "sequence": 0,
+      "matches_common_wire": true,
+      "sha256": "46d2381c3a9e7fcef740cfa6dc8ef34061bdf31d3143ea8dd8b69fedbdb1955d"
+    },
+    {
+      "sequence": 1,
+      "matches_common_wire": true,
+      "sha256": "46b51f55404dbb8ace1b7aa4b548eb33689372663238715897e2a8ad56530df1"
+    }
+  ],
+  "actual_collector_api_modes": {
+    "default": {
+      "status": "built",
+      "frame_sha256": "46d2381c3a9e7fcef740cfa6dc8ef34061bdf31d3143ea8dd8b69fedbdb1955d",
+      "matches_common_payload": true,
+      "matches_common_wire": true,
+      "usage_entries": 1,
+      "reset_entries": 2
+    },
+    "legacy": {
+      "status": "built",
+      "frame_sha256": "46d2381c3a9e7fcef740cfa6dc8ef34061bdf31d3143ea8dd8b69fedbdb1955d",
+      "matches_common_payload": true,
+      "matches_common_wire": true,
+      "usage_entries": 1,
+      "reset_entries": 2
+    }
+  },
+  "collector_source_sha256": "fd43188a304f493bcb7921e5814de6ebe1434740eb5d43446bd1f3f16a3f48f0",
+  "scope": "Unmodified candidate default and declared legacy modes at fixed reference UTC. Do not substitute encoder-only match for actual collector match or physical receipt."
+}

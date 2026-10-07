@@ -1,0 +1,14 @@
+Internal ctest changing into directory: C:/meter-host-evaluations-20261007/agy-flash-followup03
+Test project C:/meter-host-evaluations-20261007/agy-flash-followup03
+    Start 1: test_meter_parser
+1/4 Test #1: test_meter_parser ................   Passed    0.06 sec
+    Start 2: test_meter_state
+2/4 Test #2: test_meter_state .................   Passed    0.05 sec
+    Start 3: test_feature_imu
+3/4 Test #3: test_feature_imu .................   Passed    0.04 sec
+    Start 4: test_gui_regression
+4/4 Test #4: test_gui_regression ..............   Passed    0.06 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   0.23 sec

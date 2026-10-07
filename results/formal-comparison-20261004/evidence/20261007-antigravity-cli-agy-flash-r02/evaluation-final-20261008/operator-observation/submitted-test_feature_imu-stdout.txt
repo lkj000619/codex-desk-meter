@@ -1,0 +1,3 @@
+test_imu_orientation_and_debounce passed
+test_imu_shake_detection passed
+ALL FEATURE_IMU TESTS PASSED!

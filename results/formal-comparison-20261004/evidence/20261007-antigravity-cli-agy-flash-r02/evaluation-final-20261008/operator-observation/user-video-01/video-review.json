@@ -1,0 +1,43 @@
+{
+  "run_id": "20261007-antigravity-cli-agy-flash-r02",
+  "round": 3,
+  "reviewed_at": "2026-10-06T19:25:16.470909+00:00",
+  "reviewer": "Codex operator",
+  "video_sha256": "b182132aedf1b1002d2448d4d6458f6ec33b8cd7af9b76be55c9e7daee0c5b0d",
+  "duration_seconds": 62.87,
+  "contact_sheets_reviewed": 6,
+  "one_second_sample_frames_reviewed": 63,
+  "individual_readable_frames_reviewed": [
+    3,
+    7,
+    8,
+    10,
+    21,
+    29,
+    34,
+    51
+  ],
+  "lcd_output_present": true,
+  "normal_readable_screen_observed": true,
+  "required_usage_values_observed": true,
+  "three_information_views_observed": true,
+  "boot_navigation_observed": true,
+  "observed": "At0.5-5.5s the dashboard shows5-hour58% REMAINING and weekly82% REMAINING with STALE. At6.5s GLOBAL RESETS shows a populated latest reset and source details;7.5-8.5s SYSTEM STATUS shows sequence1, cached snapshot1/resets2;9.5s returns to the populated dashboard. Later samples show repeated navigation. The data remains present in sampled views through31.5s during physical movement/rotation. At32.5s and40.5s dark samples are followed by WAITING FOR USB DATA; user confirms both manual RESET and power cycling, without exact event timestamps. At47.5-51.5s reset/default/empty diagnostic/dashboard pages remain navigable. After the late power reconnection the waiting screen returns.",
+  "boot_press_count_user_reported": 3,
+  "boot_cycle_samples": {
+    "usage": 0.5,
+    "global_resets": 6.5,
+    "diagnostic": 7.5,
+    "usage_return": 9.5
+  },
+  "manual_reset_user_confirmed": true,
+  "power_cycle_user_confirmed": true,
+  "exact_manipulation_times": null,
+  "automatic_restart_conclusion": "Not established. Manual RESET and power cycling are confirmed; dark/waiting samples alone are not counted as automatic crashes.",
+  "continuous_30_seconds_verified": false,
+  "precise_input_display_latency": "not_measured",
+  "orientation_feature_status": "unverified",
+  "orientation_observation": "User physically rotates the board. Sampled UI remains in its0-degree layout, including inverted/vertical physical positions; a calibrated stable0/180 automatic flip/debounce/return or shake test is not established.",
+  "product_pass": false,
+  "scope": "RM display/navigation confirmed. One-second samples with movement/glare and manual resets do not certify flicker-free30-second continuity, precise300ms/2s timing, full error/recovery/provider matrix, autonomous IMU feature or full GUI scoring."
+}

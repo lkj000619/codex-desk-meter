@@ -1,0 +1,15 @@
+{
+  "run_id": "20261007-antigravity-cli-agy-flash-r02",
+  "recorded_at": "2026-10-06T19:25:16.470909+00:00",
+  "product_pass": false,
+  "C2_continuous_30s": "not_certified",
+  "C8_300ms": "not_measured",
+  "I4_2s": "not_measured",
+  "F9_IMU_auto_flip_and_shake": "not_verified",
+  "powered_USB_disconnect_recovery": "not_run",
+  "full_provider_error_recovery_matrix": "not_run",
+  "formal_GUI_scores": "not_scored",
+  "global_source_freshness": "Video global page says FRESH while captured source timestamp is old relative to the fixed reference time. Complete source-age/status conformance is not certified; preserve this observation separately from RM4 screen presence.",
+  "reset_and_power_cycle_data_loss": "After user RESET/power cycle, WAITING/default/cache0 are visible. No operator data retransmission follows; this observation does not test a powered link-only disconnect or establish automatic reboot.",
+  "reference_match_does_not_imply_full_product_acceptance": true
+}

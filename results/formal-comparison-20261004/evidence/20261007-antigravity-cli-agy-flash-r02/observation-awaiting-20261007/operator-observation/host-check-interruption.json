@@ -1,0 +1,7 @@
+{
+  "run_id": "20261007-antigravity-cli-agy-flash-r02",
+  "reason": "Operator shell had not activated ESP-IDF tool PATH; cmake executable lookup failed after six successful submitted checks. Candidate/source/artifacts unchanged. Continuation supplies the existing tool PATH and resumes remaining checks only.",
+  "model_calls": 0,
+  "firmware_rebuild": false,
+  "repeated_submitted_checks": false
+}

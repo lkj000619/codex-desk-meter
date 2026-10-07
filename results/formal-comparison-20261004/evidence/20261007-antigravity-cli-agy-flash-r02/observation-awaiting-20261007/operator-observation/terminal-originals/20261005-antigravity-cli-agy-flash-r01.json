@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "comparison_id": "20261005-antigravity-cli-agy-flash-r01",
+  "state": "active",
+  "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "input_bundle_sha256": "9f4472eb4edb2c9488685b59b2f9a73b5d3f3dc11b002d651bfd37f4dc1d0a51",
+  "profile_sha256": "5b24fc4e43ee0bf74b1b8a1ddce7e08f5024760c8b9660ce1c5aabbe966668f8",
+  "limits": {
+    "initial_seconds": 7200,
+    "remediation_seconds": 7200,
+    "remediation_rounds": 3
+  },
+  "reference_inputs": "C:\\meter-runs-20261005\\ledgers\\20261005-antigravity-cli-agy-flash-r01-reference\\reference-inputs.json",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "common_task_sha256": "5e2a2e5edee059bd876f565754308e5447379bad04166fd3ea69a69ff15860f9",
+  "common_task_run_id": "20261005-antigravity-cli-agy-flash-r01",
+  "runs": [
+    {
+      "run_id": "20261005-antigravity-cli-agy-flash-r01",
+      "directory": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01",
+      "round": 0,
+      "starting_commit": "69da8cfc2c1e882b2d1f57f9898b87ad8cd4c573",
+      "status": "environment_failed",
+      "reserved_seconds": 7200,
+      "elapsed_seconds": 762.813000000082,
+      "reference_status": "fail",
+      "reviewed": true,
+      "implementation_commit": "29e1d7af54a8c9c879e36192ec4ed689e5bbf82d",
+      "feedback_sha256": null,
+      "tokens": {
+        "input": 1232914,
+        "output": 120044,
+        "cached": 18738962,
+        "reasoning": 46801,
+        "provider_total": 1352958,
+        "total": 1352958,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+      },
+      "terminal_manifest_sha256": "c41ee83fecbdd890547f777d5d562b320675cdf4b4e5d8b6331e3e29b0f13961",
+      "source_bundle_sha256": "e69e3fd73856e6a8e768605fdeabf23739870d143139c059a7859644cc65c8fe",
+      "reference_review_sha256": "b80ea56365a499ed1d7743d09b24290b5658f16b599f174596c8985d8be2e737"
+    },
+    {
+      "run_id": "20261005-antigravity-cli-agy-flash-r02",
+      "directory": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-flash-r02",
+      "round": 1,
+      "starting_commit": "29e1d7af54a8c9c879e36192ec4ed689e5bbf82d",
+      "status": "completed",
+      "reserved_seconds": 7200,
+      "elapsed_seconds": 1489.219000000041,
+      "reference_status": "fail",
+      "reviewed": true,
+      "implementation_commit": "94018f1785a590e1514ef1b5145c40f0c03ffca3",
+      "feedback_sha256": "4719a827092290ea56cb3b91fed973b8bf9178d3892adc8d227334fe97787e10",
+      "tokens": {
+        "input": 1472560,
+        "output": 140404,
+        "cached": 22864333,
+        "reasoning": 90823,
+        "provider_total": 1612964,
+        "total": 1612964,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+      },
+      "terminal_manifest_sha256": "54ee10e9988cb39a07de64bc8528895c9a2b8f0b6693c301ed42019a1c8f1062",
+      "source_bundle_sha256": "24eb9eeb9f5f7f97bc32e73134c8128e66ba6f4a5694da19573827e2b63e7898",
+      "reference_review_sha256": "cbc54349a5029f2bf01ba96d7331bbe53efe9d4621ff9ad9a1152c026cd7576e"
+    },
+    {
+      "run_id": "20261007-antigravity-cli-agy-flash-r01",
+      "directory": "C:\\meter-followups-20261007\\20261007-antigravity-cli-agy-flash-r01",
+      "round": 2,
+      "starting_commit": "94018f1785a590e1514ef1b5145c40f0c03ffca3",
+      "status": "environment_failed",
+      "reserved_seconds": 5710,
+      "elapsed_seconds": 265.5,
+      "reference_status": "fail",
+      "reviewed": true,
+      "implementation_commit": "b57439702d2d3776b67b2e1baab106807aa33621",
+      "feedback_sha256": "353d4f5140cf44a01c0dd6cbbe6270a20cffcfddc0b120b56b233ef8112a071b",
+      "tokens": {
+        "input": 192961,
+        "output": 20537,
+        "cached": 2189416,
+        "reasoning": 16769,
+        "provider_total": 213498,
+        "total": 213498,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+      },
+      "terminal_manifest_sha256": "ac622b4f8291e0f8bbe6b4e2c8219f5a0daba2f7e5081e9db951c22e6973b51a",
+      "source_bundle_sha256": "5d4e9f5dfa3d09a285ce40a7487c8df16bc8f8ff0db3cbb2efdc17d7aeaa945b",
+      "reference_review_sha256": "59b4a1144070d38d65e4d68a73a9f3abc07f62266bd08df8bc737b4c4673813c"
+    },
+    {
+      "run_id": "20261007-antigravity-cli-agy-flash-r02",
+      "directory": "C:\\meter-followups-20261007\\20261007-antigravity-cli-agy-flash-r02",
+      "round": 3,
+      "starting_commit": "b57439702d2d3776b67b2e1baab106807aa33621",
+      "status": "completed",
+      "reserved_seconds": 5445,
+      "elapsed_seconds": 1141.688000000082,
+      "reference_status": "not_run",
+      "reviewed": false,
+      "implementation_commit": null,
+      "feedback_sha256": "fae68250b036fbc786350103779b2a4f9c5c89f1ca5123b37d19e0415e051722",
+      "tokens": {
+        "input": 621023,
+        "output": 92547,
+        "cached": 19124906,
+        "reasoning": 56453,
+        "provider_total": 713570,
+        "total": 713570,
+        "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+        "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+      },
+      "terminal_manifest_sha256": "940d80c963b54802588d37d6c36f8ec070e1599ec824b8c2d630f96a5860c766"
+    }
+  ]
+}

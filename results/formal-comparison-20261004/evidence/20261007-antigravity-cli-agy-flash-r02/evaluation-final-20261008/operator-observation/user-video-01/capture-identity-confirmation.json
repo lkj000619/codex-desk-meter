@@ -1,0 +1,18 @@
+{
+  "run_id": "20261007-antigravity-cli-agy-flash-r02",
+  "recorded_at": "2026-10-06T19:25:16.470909+00:00",
+  "video_sha256": "b182132aedf1b1002d2448d4d6458f6ec33b8cd7af9b76be55c9e7daee0c5b0d",
+  "implementation_commit": "9e5a01b51cce581acda2495df402e6aa3d3f63be",
+  "artifact_sha256": "d7dabfe0e29f9d9d774ef0cc150edd2a5a1c912c07d3a15be2712f5ca6d76f77",
+  "upload_completed_at": "2026-10-06T19:12:41.077307+00:00",
+  "observation_question_item_id": "[\"request_user_input_async\",\"call_4dbb5a47e395407cbaf433b6d716443c\",0]",
+  "user_answer_original": "\"C:\\Users\\이광진\\Documents\\카카오톡 받은 파일\\KakaoTalk_20261007_041523508.mp4\" boot 연속 3회 눌렸고 reset 버튼도 누르고 전원도 뺐다가 꽂고, lcd 회전도 되는지 확인함",
+  "identity_basis": "Direct reply to the current Flash final followup3 observation question. File saved after the04:12KST upload. Exact camera capture UTC is unknown.",
+  "boot_short_press_count_reported": 3,
+  "user_manual_reset": true,
+  "user_power_cycle": true,
+  "physical_rotation_attempted": true,
+  "exact_button_and_power_event_times": null,
+  "automatic_reboot_observed": null,
+  "scope": "Current final followup3 only; earlier Flash/Luna videos are not substituted."
+}

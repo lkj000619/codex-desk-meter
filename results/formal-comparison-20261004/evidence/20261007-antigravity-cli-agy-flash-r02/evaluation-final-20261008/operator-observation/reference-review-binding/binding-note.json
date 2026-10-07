@@ -1,0 +1,6 @@
+{
+  "run_id": "20261007-antigravity-cli-agy-flash-r02",
+  "original_terminal_manifest_sha256": "940d80c963b54802588d37d6c36f8ec070e1599ec824b8c2d630f96a5860c766",
+  "pre_review_operator_metadata_sha256": "8556c1472491c257bad020ddfbf9579e5bfaa653649af6a11c82dbe9cdc904f6",
+  "scope": "Apply frozen review once with exact preserved terminal bytes, then reattach post-run operator evidence. Source, execution and713570 normalized tokens remain unchanged."
+}

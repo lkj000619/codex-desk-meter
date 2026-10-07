@@ -1,0 +1,25 @@
+{
+  "status": "eligible",
+  "reviewer": "Codex operator",
+  "user_interventions": 0,
+  "reason": "All125 native calls and shell bodies inspected. No confirmed scope or shell-composition violation; own source edits, current-checkout CTest/build paths and fixed manufacturer reads only. Current run eligible; earlier Flash followup1 invalid_for_comparison remains and series quality/reference-cost remains ineligible.",
+  "intervention_review": "No operator product repair, hardware access or feedback during candidate. Global original bytes restored after native child exit; raw intervention null remains unchanged.",
+  "evidence": [
+    {
+      "path": "operator-observation/native-tool-review.json",
+      "sha256": "becdac391729f7a7b8ebf0942e6523455cf6b06ab7e8868f3890f8a8de2a60ec"
+    },
+    {
+      "path": "operator-observation/build-source-review.json",
+      "sha256": "8ff74277bed7b1bfcd28a492b0b3b348888573add23f446b24a6b4c0dc893fea"
+    },
+    {
+      "path": "operator-observation/policy-audit-procedure/commands.json",
+      "sha256": "3e6cd4313aec0cc61806c1545eeb80aa1362458cc0e6bca01d0d7db7f6b84df3"
+    },
+    {
+      "path": "operator-observation/policy-audit-procedure/findings.json",
+      "sha256": "b423bb45501e0fa49d3b77e635f800a29f1fdcf5a58e00c7e04a7ff7833045f2"
+    }
+  ]
+}

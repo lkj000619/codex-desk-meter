@@ -1,0 +1,17 @@
+[1/17] Building C object CMakeFiles/meter_core.dir/components/meter_core/src/meter_crc.c.obj
+[2/17] Building C object CMakeFiles/meter_core.dir/components/meter_core/src/meter_state.c.obj
+[3/17] Building C object CMakeFiles/meter_core.dir/components/meter_core/src/feature_imu.c.obj
+[4/17] Building C object CMakeFiles/meter_core.dir/components/meter_core/src/meter_parser.c.obj
+[5/17] Building C object CMakeFiles/test_feature_imu.dir/tests/test_feature_imu.c.obj
+[6/17] Building C object CMakeFiles/test_meter_state.dir/tests/test_meter_state.c.obj
+[7/17] Building C object CMakeFiles/meter_core.dir/components/meter_core/src/meter_gui.c.obj
+[8/17] Building C object CMakeFiles/test_meter_parser.dir/tests/test_meter_parser.c.obj
+[9/17] Building C object CMakeFiles/test_gui_regression.dir/tests/test_gui_regression.c.obj
+[10/17] Building C object CMakeFiles/meter_legacy_adapter.dir/tests/meter_legacy_adapter.c.obj
+[11/17] Building C object CMakeFiles/meter_core.dir/C_/Espressif/v5.3.2/esp-idf/components/json/cJSON/cJSON.c.obj
+[12/17] Linking C static library libmeter_core.a
+[13/17] Linking C executable test_meter_parser.exe
+[14/17] Linking C executable test_meter_state.exe
+[15/17] Linking C executable test_feature_imu.exe
+[16/17] Linking C executable test_gui_regression.exe
+[17/17] Linking C executable meter_legacy_adapter.exe

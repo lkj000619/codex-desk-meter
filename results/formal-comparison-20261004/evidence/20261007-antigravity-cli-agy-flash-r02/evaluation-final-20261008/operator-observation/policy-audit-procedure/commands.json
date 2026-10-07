@@ -1,0 +1,137 @@
+[
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 16,
+    "body": "git status"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 166,
+    "body": "python tests/test_pc_collector_sender.py"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 172,
+    "body": "cmake -S . -B build-host -G Ninja"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 175,
+    "body": "cmake --build build-host"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 178,
+    "body": "ctest --test-dir build-host --output-on-failure"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 181,
+    "body": "python tests/test_legacy_adapter.py"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 184,
+    "body": "python tests/test_evaluation_contract.py"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 199,
+    "body": "python tests/test_pc_collector_sender.py"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 217,
+    "body": "python tests/test_pc_collector_sender.py"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 229,
+    "body": "python tests/test_pc_collector_sender.py"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 238,
+    "body": "python tests/test_pc_collector_sender.py"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 274,
+    "body": "cmake --build build-host"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 277,
+    "body": "ctest --test-dir build-host --output-on-failure"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 280,
+    "body": "python -m unittest discover -s tests -v"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 283,
+    "body": "idf.py --version"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 286,
+    "body": "idf.py set-target esp32s3"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 291,
+    "body": "idf.py build"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 302,
+    "body": "idf.py build"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 307,
+    "body": "cmake --build build-host"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 310,
+    "body": "ctest --test-dir build-host --output-on-failure"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 313,
+    "body": "python -m unittest discover -s tests -v"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 350,
+    "body": "python scripts/validate-end-to-end-result.py --result results/20261007-antigravity-cli-agy-flash-r02/end-to-end-result.json --manifest results/20261007-antigravity-cli-agy-flash-r02/e2e-evaluation-manifest.json"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 371,
+    "body": "python scripts/validate-end-to-end-result.py --result results/20261007-antigravity-cli-agy-flash-r02/end-to-end-result.json --manifest results/20261007-antigravity-cli-agy-flash-r02/e2e-evaluation-manifest.json"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 374,
+    "body": "python -m unittest discover -s tests -v"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 377,
+    "body": "ctest --test-dir build-host --output-on-failure"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 380,
+    "body": "idf.py build"
+  },
+  {
+    "run_id": "20261007-antigravity-cli-agy-flash-r02",
+    "raw_line": 383,
+    "body": "git status"
+  }
+]
