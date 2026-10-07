@@ -69,7 +69,9 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
 - Gemini GUI `task_b4a978f1fe36` / `ctx_7cc34b44b75e`는 3개 후보·handoff 제출 수락 완료다.
   `worker-release` 결과는 `retained/external_terminal`, processAction=none이다.
   제출 완료와 독립 검증 통과를 구분한다.
-- Sol 6.1 GUI `task_871ad3d94f9f` / `ctx_43a32c7bf49d`는 작성 중이다.
+- Sol 6.1 GUI `task_871ad3d94f9f` / `ctx_43a32c7bf49d`는 02:37 KST 제출 수락 완료다.
+  `node docs/design/lcd/sol61/check.mjs`를 coordinator가 재실행해 3개 모두 통과했다.
+  `worker-release` 결과는 `retained/external_terminal`, processAction=none이다.
 - Luna 계약 검토 `task_c4c03e6d2c02` / `ctx_85d922e4b68d`는 진행 중이다.
   인터페이스 질문 `msg_1a0585d74a22`는 답변 `msg_5d56c1876c49`로 해결했으며 설계에 반영했다.
 - GUI 독립 검증·비교 화면 `task_c0ecb13ae179`는 위 두 GUI와 Luna 보고 수락에 의존한다.

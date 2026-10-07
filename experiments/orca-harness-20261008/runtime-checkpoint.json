@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-07T17:34:42.7898451Z",
+    "observed_at":  "2026-10-07T17:38:51.7203610Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -19,18 +19,18 @@
                       "completed_at":  "2026-10-07T17:19:31.019Z"
                   },
                   {
+                      "id":  "task_871ad3d94f9f",
+                      "title":  "Codex Sol 6.1 three LCD GUI candidates D E F",
+                      "status":  "completed",
+                      "deps":  "[\"task_1a7eaeade56c\"]",
+                      "completed_at":  "2026-10-07T17:37:53.275Z"
+                  },
+                  {
                       "id":  "task_b4a978f1fe36",
                       "title":  "AGY Gemini three LCD GUI candidates A B C",
                       "status":  "completed",
                       "deps":  "[\"task_1a7eaeade56c\"]",
                       "completed_at":  "2026-10-07T17:29:03.044Z"
-                  },
-                  {
-                      "id":  "task_871ad3d94f9f",
-                      "title":  "Codex Sol 6.1 three LCD GUI candidates D E F",
-                      "status":  "dispatched",
-                      "deps":  "[\"task_1a7eaeade56c\"]",
-                      "completed_at":  null
                   },
                   {
                       "id":  "task_c0ecb13ae179",
@@ -65,11 +65,11 @@
                         "task_id":  "task_871ad3d94f9f",
                         "dispatch_id":  "ctx_43a32c7bf49d",
                         "terminal_handle":  "term_6be2e33f-de19-49ee-851d-54cc709c4938",
-                        "state":  "ready",
-                        "dispatch_status":  "dispatched",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791394326202,
+                                         "observedAt":  1791394678163,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -108,7 +108,7 @@
                         "dispatch_status":  "dispatched",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791394456952,
+                                         "observedAt":  1791394695985,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {

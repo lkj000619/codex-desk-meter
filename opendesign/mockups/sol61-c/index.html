@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D · Signal Board · LCD exploration</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; padding: 40px 24px; background: #252525; color: #eeeeee; font-family: "Courier New", monospace; }
+main { width: 868px; margin: auto; }
+h1 { font-size: 24px; margin: 6px 0 12px; font-weight: 700; }
+.intro { max-width: 820px; line-height: 1.55; font-size: 14px; color: #cccccc; }
+.eyebrow { font-size: 12px; letter-spacing: 2px; color: #cccccc; }
+.controls { display: flex; gap: 12px; align-items: end; flex-wrap: wrap; margin: 24px 0 16px; }
+.controls label { display: grid; gap: 6px; font-size: 12px; }
+button, select { min-height: 44px; border: 1px solid #aaaaaa; border-radius: 0; padding: 8px 12px; background: #eeeeee; color: #171717; font: 14px "Courier New", monospace; cursor: pointer; }
+button:disabled { opacity: .45; cursor: default; }
+button:focus-visible, select:focus-visible { outline: 3px solid #ffffff; outline-offset: 3px; }
+.boot { background: #93dcc9; font-weight: 700; }
+.frame { padding: 24px; background: #141414; border: 1px solid #555555; }
+#lcd { --bg: #101010; --fg: #efefef; --muted: #adaead; --accent: #94d7c5; --rule: #5a595a; --warn: #f7c66b; --error: #f78a84; width: 820px; height: 320px; position: relative; overflow: hidden; background: var(--bg); color: var(--fg); font-family: "Courier New", monospace; font-variant-numeric: tabular-nums; }
+#lcd[data-state="source-stale"], #lcd[data-state="disconnected"] { --accent: var(--warn); }
+#lcd[data-state="error"] { --accent: var(--error); }
+.screen-head { height: 44px; padding: 10px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--rule); font-size: 16px; font-weight: 700; }
+.state { color: var(--accent); font-size: 16px; }
+.content { position: absolute; top: 44px; left: 20px; width: 780px; height: 230px; }
+.screen-foot { line-height: 16px; position: absolute; top: 280px; left: 20px; width: 780px; height: 32px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--rule); font-size: 14px; color: var(--muted); }
+.label { font-size: 16px; font-weight: 700; letter-spacing: .3px; }
+.muted { color: var(--muted); }
+.accent { color: var(--accent); }
+.small { font-size: 14px; line-height: 20px; }
+.number { line-height: 1; font-weight: 700; letter-spacing: -3px; }
+.bar { height: 10px; background: var(--rule); margin: 8px 0 10px; }
+.bar span { display: block; height: 100%; background: var(--accent); }
+.bar.unknown { background: transparent; border: 1px dashed var(--muted); }
+.pair { height: 100%; display: grid; grid-template-columns: 472px 288px; gap: 20px; }
+.quotas { padding-top: 8px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.quota { position: relative; height: 222px; }
+.quota > .label:first-child { position: absolute; top: 0; }
+.quota > .small { position: absolute; top: 21px; }
+.quota .number { position: absolute; top: 44px; font-size: 64px; margin: 0; color: var(--accent); }
+.quota .unit { font-size: 20px; letter-spacing: 0; }
+.quota > .label:nth-child(4) { position: absolute; top: 109px; }
+.quota > .bar { position: absolute; top: 134px; width: 100%; margin: 0; }
+.quota .used { position: absolute; top: 151px; margin: 0; font-size: 16px; }
+.quota .reset { position: absolute; top: 179px; margin: 0; }
+.session { border-left: 1px solid var(--rule); padding: 8px 0 0 20px; }
+.session .number { font-size: 34px; margin: 6px 0 2px; letter-spacing: -1px; }
+.session dl { display: grid; grid-template-columns: 1fr auto; gap: 0 8px; margin: 4px 0; font-size: 16px; line-height: 18px; }
+dt, dd { margin: 0; }
+.global { display: grid; grid-template-columns: 420px 340px; gap: 20px; padding-top: 20px; }
+.global .number { font-size: 80px; margin: 24px 0 12px; }
+.global .time { font-size: 28px; font-weight: 700; margin: 12px 0 4px; }
+.global .source { border-top: 1px solid var(--rule); margin-top: 18px; padding-top: 12px; font-size: 18px; }
+.status { padding-top: 12px; }
+.status-summary { font-size: 20px; margin-bottom: 8px; color: var(--accent); font-weight: 700; }
+.status-grid { display: grid; grid-template-columns: 130px 1fr 104px 96px 160px; font-size: 14px; line-height: 24px; }
+.status-row { display: contents; }
+.status-row span { padding: 2px 0; border-bottom: 1px solid var(--rule); }
+.status-grid .table-head { color: var(--muted); font-size: 12px; }
+.status-detail { margin-top: 10px; font-size: 14px; line-height: 20px; }
+.notes { max-width: 820px; font-size: 13px; line-height: 1.6; color: #cccccc; margin: 16px 24px 0; }
+#result { min-height: 20px; font-size: 13px; color: #cccccc; margin: 12px 0; }
+@media (max-width: 916px) { body { padding: 20px 12px; } main { margin: 0; } }
+
+/* F: indexed focus window above a full-width independent session strip. */
+#lcd { --bg: #191819; --fg: #efefe6; --muted: #bdbeb5; --accent: #e6c67b; --rule: #6b6963; --warn: #f7ce84; --error: #f79a94; }
+.atlas { display: grid; grid-template-columns: 188px 572px; grid-template-rows: 156px 68px; gap: 6px 20px; height: 230px; }
+.window-rail { padding-top: 7px; border-right: 1px solid var(--rule); }
+.window-rail > .label { font-size: 14px; line-height: 16px; margin-bottom: 5px; }
+.rail-item { font-size: 12px; line-height: 17px; padding-left: 8px; }
+.rail-item.selected { background: var(--accent); color: var(--bg); font-weight: 700; }
+.window-rail > .small { margin-top: 3px; font-size: 12px; line-height: 15px; }
+.focused { padding-top: 8px; }
+.focused .quota { height: 148px; }
+.focused .quota > .label:first-child { top: 0; font-size: 18px; }
+.focused .quota > .small { top: 0; right: 0; font-size: 14px; }
+.focused .quota .number { top: 24px; font-size: 96px; }
+.focused .quota .unit { font-size: 32px; }
+.focused .quota > .label:nth-child(4) { top: 122px; font-size: 18px; }
+.focused .quota > .bar { left: 280px; top: 55px; width: 292px; }
+.focused .quota .used { top: 26px; left: 280px; font-size: 20px; }
+.focused .quota .reset { top: 79px; left: 280px; font-size: 16px; line-height: 24px; }
+.atlas .session { grid-column: 1 / -1; position: relative; padding: 0; border-left: 0; border-top: 1px solid var(--rule); }
+.atlas .session > .label { position: absolute; top: 5px; left: 0; font-size: 14px; }
+.atlas .session .number { position: absolute; top: 22px; left: 0; font-size: 28px; margin: 0; }
+.atlas .session > .small:nth-child(3) { position: absolute; top: 50px; left: 0; font-size: 12px; line-height: 16px; }
+.atlas .session dl { position: absolute; top: 5px; left: 208px; width: 228px; font-size: 14px; line-height: 14px; margin: 0; }
+.atlas .session > .small:nth-child(5) { position: absolute; top: 5px; left: 464px; }
+.atlas .session > .small:last-child { position: absolute; top: 27px; left: 464px; line-height: 18px; }
+.global { grid-template-columns: 480px 280px; gap: 20px; }
+.global .number { font-size: 88px; margin-top: 28px; }
+.global > div:last-child { border-left: 1px solid var(--rule); padding-left: 20px; }
+.global .time { font-size: 24px; }
+.global .source { font-size: 16px; }
+.status-summary { text-transform: uppercase; font-size: 22px; }
+</style>
+</head>
+<body data-candidate="c">
+<main>
+<div class="eyebrow">LCD EXPLORATION · F / SOL61-C</div>
+<h1>Window Atlas</h1>
+<p class="intro">One window at a time. A large account percentage occupies the center, an indexed window rail makes selection explicit, and session telemetry runs across the bottom. A focused instrument with a quiet amber accent.</p>
+<div class="controls" aria-label="Preview controls outside the LCD">
+<label>Scenario<select id="scenario">
+<option value="normal">Normal</option><option value="source-stale">Source stale / receive fresh</option><option value="disconnected">Receive stale / disconnected</option><option value="unknown">Unknown / null</option><option value="error">Quota error / last-good</option><option value="waiting">Initial WAITING</option><option value="recovery">Recovery / same sample replay</option><option value="last-known">Global: no new record / last-known</option>
+</select></label>
+<label>List<select id="list-mode"><option value="common">Common two windows</option><option value="long">Navigation stress / six IDs</option></select></label>
+<button class="boot" id="boot" type="button">BOOT · next screen</button>
+<button id="previous" type="button">Previous windows</button><button id="next" type="button">BOOT hold · next windows</button>
+</div>
+<div id="result" aria-live="polite"></div>
+<div class="frame"><section id="lcd" aria-label="820 by 320 LCD preview" aria-live="polite"></section></div>
+<p class="notes">SYNTHETIC DATA ONLY · Fixed reference: 2026-10-07 17:10:00 UTC / 08 Oct 02:10 KST.<br>Each scenario is an isolated test, not a live timeline. Source timestamps are never replaced by receive time. BOOT cycles Usage → Global reset → Status. Window buttons emulate a held BOOT; the LCD has no touch targets. ArrowRight also cycles screens when focus is outside a control.<br>Stress IDs repeat the common metrics solely to exercise paging. No extra usage is inferred or added. Native HTML / CSS / JavaScript; works offline at file://. Preview font is a local surrogate; see the hardware handoff.</p>
+</main>
+<script>
+"use strict";
+const candidate = document.body.dataset.candidate;
+const PAGE_SIZE = candidate === "c" ? 1 : 2;
+const SAMPLE = Object.freeze({
+  reference: "2026-10-07T17:10:00Z", observed: "2026-10-07T17:10:00Z",
+  windows: [
+    { id: "primary", duration: 300, used: 42, reset: "2026-10-07T18:20:00Z" },
+    { id: "secondary", duration: 10080, used: 18, reset: "2026-10-12T17:10:00Z" }
+  ],
+  session: { input: 124800, output: 16400, cached: 89600, reasoning: 2300, sourceTotal: 141200 },
+  global: { source: "codex-resets.com", latest: "2026-10-07T10:00:00Z", captured: "2026-10-07T17:10:00Z" }
+});
+let screen = 0, windowPage = 0;
+const titles = ["USAGE", "GLOBAL RESET", "STATUS"];
+const badges = { normal: "AVAILABLE", "source-stale": "SOURCE STALE", disconnected: "DISCONNECTED / STALE", unknown: "UNKNOWN", error: "QUOTA ERROR / LAST GOOD", waiting: "WAITING", recovery: "RECOVERED / REPLAY", "last-known": "LAST-KNOWN RESET" };
+const byId = id => document.getElementById(id);
+const escapeText = value => String(value).replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[char]));
+const fmt = value => value === null ? "--" : value.toLocaleString("en-US");
+const age = (now, timestamp) => timestamp === null ? null : Math.max(0, Math.floor((Date.parse(now) - Date.parse(timestamp)) / 1000));
+const ageText = seconds => seconds === null ? "--" : seconds + "s";
+function timeText(timestamp, zone = "KST") {
+  if (timestamp === null) return "--";
+  const date = new Date(Date.parse(timestamp) + (zone === "KST" ? 9 * 3600000 : 0));
+  const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  const pad = value => String(value).padStart(2, "0");
+  return pad(date.getUTCDate()) + " " + months[date.getUTCMonth()] + " " + pad(date.getUTCHours()) + ":" + pad(date.getUTCMinutes()) + " " + zone;
+}
+function durationText(minutes) { return minutes % 60 === 0 ? minutes / 60 + "h window" : minutes + "m window"; }
+function getView(state, listMode) {
+  const missing = state === "unknown" || state === "waiting";
+  const observed = state === "waiting" ? null : state === "source-stale" ? "2026-10-07T17:04:59Z" : SAMPLE.observed;
+  const now = state === "disconnected" ? "2026-10-07T17:15:01Z" : state === "error" ? "2026-10-07T17:11:00Z" : SAMPLE.reference;
+  const received = state === "waiting" ? null : SAMPLE.reference;
+  const windows = (listMode === "long" ? Array.from({ length: 6 }, (_, i) => ({ ...SAMPLE.windows[i % 2], id: "stress-" + (i + 1) })) : SAMPLE.windows).map(window => ({ ...window, used: missing ? null : window.used, reset: missing ? null : window.reset }));
+  const session = Object.fromEntries(Object.entries(SAMPLE.session).map(([key, value]) => [key, missing ? null : value]));
+  const latest = missing || state === "last-known" ? null : SAMPLE.global.latest;
+  const lastKnown = state === "last-known" ? SAMPLE.global.latest : null;
+  return { state, now, observed, received, sourceAge: age(now, observed), receiveAge: age(now, received), windows, session, latest, lastKnown, captured: observed, missing, lastGood: missing ? null : observed };
+}
+function quotaMarkup(window, view) {
+  const remaining = window.used === null ? null : 100 - window.used;
+  const resetAge = window.reset === null ? null : Math.floor((Date.parse(window.reset) - Date.parse(view.now)) / 60000);
+  return `<div class="quota"><div class="label">${durationText(window.duration)}</div><div class="small muted">Codex account / ${escapeText(window.id)}</div><div class="number">${fmt(remaining)}<span class="unit">%</span></div><div class="label">remaining</div><div class="bar ${remaining === null ? "unknown" : ""}"><span style="width:${remaining === null ? 0 : remaining}%"></span></div><div class="used">${fmt(window.used)}% used</div><div class="reset small">Reset ${timeText(window.reset)}<br><span class="muted">${resetAge === null ? "Schedule unknown" : resetAge < 0 ? "Expired / requery" : "in " + resetAge + "m / personal"}</span></div></div>`;
+}
+function sessionMarkup(view) {
+  const session = view.session;
+  const total = session.input === null || session.output === null ? null : session.input + session.output;
+  return `<div class="session"><div class="label">SESSION TOKENS</div><div class="number">${fmt(total)}</div><div class="small muted">input + output / tokens</div><dl><dt>Input</dt><dd>${fmt(session.input)}</dd><dt>Output</dt><dd>${fmt(session.output)}</dd><dt>Cached *</dt><dd>${fmt(session.cached)}</dd><dt>Reasoning *</dt><dd>${fmt(session.reasoning)}</dd></dl><div class="small">Source total ${fmt(session.sourceTotal)}</div><div class="small muted">* Included subsets<br>Limit / remaining / % unknown</div></div>`;
+}
+function usageMarkup(view) {
+  const start = windowPage * PAGE_SIZE, selected = view.windows.slice(start, start + PAGE_SIZE);
+  const quota = selected.map(window => quotaMarkup(window, view)).join("");
+  if (candidate === "b") return `<div class="ledger">${sessionMarkup(view)}<div class="quotas">${quota}</div></div>`;
+  if (candidate === "c") return `<div class="atlas"><div class="window-rail"><div class="label">ACCOUNT QUOTA</div>${view.windows.map((window, i) => `<div class="rail-item ${i === start ? "selected" : ""}">${i + 1}. ${durationText(window.duration)}</div>`).join("")}<div class="small muted">${start + 1}/${view.windows.length} / hold: next</div></div><div class="focused">${quota}</div>${sessionMarkup(view)}</div>`;
+  return `<div class="pair"><div class="quotas">${quota}</div>${sessionMarkup(view)}</div>`;
+}
+function globalMarkup(view) {
+  const reset = view.latest || view.lastKnown;
+  const seconds = age(view.now, reset);
+  const elapsed = seconds === null ? "--" : Math.floor(seconds / 3600) + "h " + Math.floor(seconds % 3600 / 60) + "m";
+  return `<div class="global"><div><div class="label">${view.lastKnown ? "SINCE LAST-KNOWN RESET" : "SINCE LATEST GLOBAL RESET"}</div><div class="number accent">${elapsed}</div><div class="small muted">${reset === null ? "No reset record / awaiting source" : "Observed elapsed / not a forecast"}</div></div><div><div class="label">${view.lastKnown ? "LAST KNOWN" : "LATEST OBSERVED RESET"}</div><div class="time">${timeText(reset).replace(" KST", "")}</div><div class="small muted">KST / ${timeText(reset, "UTC")}</div><div class="source">codex-resets.com</div><div class="small">Captured ${timeText(view.captured)}<br><span class="muted">Source ${ageText(view.sourceAge)} / receive ${ageText(view.receiveAge)}</span></div></div></div>`;
+}
+function statusMarkup(view) {
+  const sourceStatus = view.state === "waiting" ? "WAITING" : view.state === "unknown" ? "UNKNOWN" : view.sourceAge >= 300 ? "STALE" : "AVAILABLE";
+  const quotaStatus = view.state === "error" ? "ERROR / LAST GOOD" : sourceStatus;
+  const rows = [["Account", "app-server / rateLimits", quotaStatus], ["Session", "token_count metadata", sourceStatus], ["Global", "codex-resets.com", view.state === "last-known" ? "LAST KNOWN" : sourceStatus]];
+  return `<div class="status"><div class="status-summary">${badges[view.state]}</div><div class="status-grid"><span class="table-head">SCOPE</span><span class="table-head">SOURCE</span><span class="table-head">SRC AGE</span><span class="table-head">RX AGE</span><span class="table-head">STATE</span>${rows.map(row => `<div class="status-row"><span>${row[0]}</span><span>${row[1]}</span><span>${ageText(view.sourceAge)}</span><span>${ageText(view.receiveAge)}</span><span class="accent">${row[2]}</span></div>`).join("")}</div><div class="status-detail">Observed / captured ${timeText(view.observed, "UTC")}<br>Last good ${timeText(view.lastGood, "UTC")} / received ${timeText(view.received, "UTC")}<br>${view.state === "error" ? "Quota HTTP 500 / saved quota retained; session + global kept" : view.state === "disconnected" ? "USB disconnected / saved values retained / retry on PC" : view.state === "source-stale" ? "Fresh receive cannot clear an old source / age >= 300s" : view.state === "waiting" ? "No validated frame / values and timestamps unknown" : view.state === "recovery" ? "Valid sample replay / error cleared / no new capture invented" : "PC refresh collects / BOOT navigates / no device ACK implied"}</div></div>`;
+}
+function render() {
+  const view = getView(byId("scenario").value, byId("list-mode").value);
+  const pages = Math.ceil(view.windows.length / PAGE_SIZE);
+  windowPage %= pages;
+  const lcd = byId("lcd"); lcd.dataset.state = view.state; lcd.dataset.screen = titles[screen];
+  const start = windowPage * PAGE_SIZE;
+  const pageText = screen === 0 ? `Windows ${start + 1}-${Math.min(start + PAGE_SIZE, view.windows.length)}/${view.windows.length}` : "BOOT: next screen";
+  const foot = screen === 0 ? `Quota app-server / Session token_count | Obs ${timeText(view.observed)}<br>Source age ${ageText(view.sourceAge)} / receive age ${ageText(view.receiveAge)} / ${view.missing ? "no values" : view.state === "error" || view.state === "disconnected" ? "last-good retained" : "separate scopes"}` : screen === 1 ? `Global source only / captured ${timeText(view.captured)}` : `Source and receive stale at >=300s / now ${timeText(view.now, "UTC")}`;
+  lcd.innerHTML = `<header class="screen-head"><span>CODEX / ${titles[screen]}</span><span class="state">${badges[view.state]}</span></header><div class="content">${[usageMarkup, globalMarkup, statusMarkup][screen](view)}</div><footer class="screen-foot"><span>${foot}</span><span>${screen + 1}/3</span></footer>`;
+  byId("previous").disabled = screen !== 0 || pages < 2;
+  byId("next").disabled = screen !== 0 || pages < 2;
+  byId("result").textContent = titles[screen] + " · " + pageText + " · source " + ageText(view.sourceAge) + " · receive " + ageText(view.receiveAge);
+}
+function boot() { screen = (screen + 1) % 3; render(); }
+byId("boot").addEventListener("click", boot);
+byId("scenario").addEventListener("change", render);
+byId("list-mode").addEventListener("change", () => { windowPage = 0; render(); });
+byId("previous").addEventListener("click", () => { const pages = Math.ceil(getView(byId("scenario").value, byId("list-mode").value).windows.length / PAGE_SIZE); windowPage = (windowPage + pages - 1) % pages; render(); });
+byId("next").addEventListener("click", () => { windowPage++; render(); });
+document.addEventListener("keydown", event => { if (event.key === "ArrowRight" && !["SELECT", "BUTTON", "INPUT", "TEXTAREA"].includes(event.target.tagName)) { event.preventDefault(); boot(); } });
+render();
+</script>
+</body>
+</html>
