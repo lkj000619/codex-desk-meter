@@ -1,80 +1,16 @@
 # 문서 지도
 
-문서를 후보 입력·운영/평가·과거 기록으로 구분한다. 모든 MD를 읽는 절차는 없다.
-한 요구사항을 여러 문서에서 정의하지 않는다. 제품 동작의 원본은 제품 계약과 JSON schema,
-새 비교 운영 규칙의 원본은 운영 계약이다. 문서/schema가 충돌하면 결함으로 기록한다.
-
-## 디렉터리 역할
-
-| 디렉터리 | 보관하는 내용 |
+| 용도 | 원본 |
 |---|---|
-| `decisions/` | 채택 범위·근거가 있는 ADR |
-| `hardware/` | 공통 보드 사실·제조사 source·bring-up 자료 |
-| `experiments/` | 운영·평가 계약과 현재 준비 상태, `evidence/`의 원본 관측 |
-| `plans/` | 앞으로 할 작업·의존 순서·완료 조건. 채택 규칙과 실행 승인은 별도 원본을 참조 |
-| `design/` | 구현 인터페이스·상태·증거 연결 설계. 제품·운영 규칙의 원본을 참조 |
-| `overview/` | 관측 시점이 표시된 HTML 탐색 자료 |
-| `archive/` | 날짜·대상·원본 판정을 보존한 과거 문서 |
+| 새 협업 범위·역할·기존 과제와 다른 조건 | [협업 설계](design/2026-10-08-orca-harness.md) |
+| 목표·작업 상태·완료 조건 | [계획](plans/2026-10-08-orca-harness.md) |
+| 현재 실행·미해결 조건 | [준비 상태](experiments/next-comparison-readiness.md) |
+| 토큰 세션 만료·초기화 후 재개 | [재개 절차](experiments/orca-harness-resume.md) 및 계획의 체크리스트 |
+| 기존 제품 동작 C/I/F·wire·stale·화면·시험 | [동결 제품 계약](PRODUCT_CONTRACT.md) 및 연결 schema |
+| 보드 핀·극성·SDK·허용 제조사 source | [동결 보드 자료](hardware/version-2-capabilities.md) |
+| 보존 입력·SHA-256 | [입력 목록](../experiments/orca-harness-20261008/frozen-inputs.json) |
+| Orca Run·worktree·사용자 확정 사항 | [실험 식별자](../experiments/orca-harness-20261008/context.json) |
 
-계획은 도구 이름과 독립된 `plans/`에 둔다. 새 문서의 저장 위치와 이동 시 참조 갱신은
-[프로젝트 지침](../AGENTS.md)을 따른다. 계획을 읽는 것만으로 남은 작업 전체의 실행을 시작하지 않는다.
-
-## 후보 입력: 필수 MD 3개
-
-| 순서 | 문서 | 역할 |
-|---|---|---|
-| 1 | [실행 과제](../experiments/prompts/version-2-agent-task.md) | 목표·범위·실행·제출 |
-| 2 | [제품 계약](PRODUCT_CONTRACT.md) | C/I/F·데이터·wire·화면·시험 |
-| 3 | [보드 자료](hardware/version-2-capabilities.md) | 핀·극성·설정·제조사 source |
-
-[파일 allowlist](../experiments/config/agent-inputs.json)는 schema/fixture/예제/필요 도구를
-정확한 경로로 고정한다. runner가 만든 `.benchmark-inputs/`는 식별자·평가 manifest 사본·
-목록/hash다. 운영 profile·receipt·계측은 후보 checkout 밖에서 관리한다.
-main에 문서가 존재한다는 이유로 후보에게 읽도록 제공하지 않는다.
-
-## 운영자·평가자
-
-| 용도 | 문서 |
-|---|---|
-| 다음 실험 준비·잔여 조건 | [준비 상태](experiments/next-comparison-readiness.md) |
-| 다음 비교 모델·설정 | [2026-10-03 프로필](../experiments/config/next-profiles-20261003/README.md) · [GPT-6 갱신 계획](plans/2026-10-03-gpt6-comparison-profiles.md) |
-| 실행 준비의 실제 검증·동결 | [준비 계획](plans/2026-10-02-experiment-launch-preparation.md) · [준비 보고서](../results/experiment-preparation-20261002/report.md) |
-| 새 운영 규칙 | [운영 계약](experiments/comparison-operating-contract.md) |
-| Codex 기능 도달 판정 | [RM 목록](experiments/reference-match-matrix.md) |
-| 수정 작업·의존 순서 | [계획](plans/2026-10-02-experiment-contract-remediation.md) |
-| 문서 품질 검토 후속 보완 | [보완 계획](plans/2026-10-02-documentation-remediation.md) · [검토 원본](../results/documentation-assessment-20261002/review.md) |
-| 평가 baseline·배점·일정 후속 정비 | [정비 계획](plans/2026-10-03-evaluation-baseline-remediation.md) · [재검토](../results/documentation-review-20261003/report.md) |
-| 실험 실행 경계·hook·제한 검토 | [실행 경계 보고서](../results/experiment-execution-review-20261003/report.md) |
-| 정식 비교 시작 선행 작업·실행 결과 | [선행 작업 계획](plans/2026-10-03-formal-comparison-launch-prerequisites.md) · [실행 준비 보완](../results/experiment-launch-preparation-20261004/report.md) |
-| 비교 도구 명령·증거 형식 | [도구 안내](experiments/comparison-tooling.md) · [구현 계획](plans/2026-10-02-comparison-tooling.md) · [설계](design/2026-10-02-comparison-tooling.md) |
-| 문제와 근거 | [세 에이전트 평가](experiments/architecture-review-20261002.md) |
-| GUI/F 평가·host seam | [기능 평가](experiments/feature-comparison.md) · [평가 도구](experiments/evaluation-contract.md) |
-| host oracle의 범위 | [pipeline 도구 안내](experiments/host-device-pipeline-contract.md) |
-| 접근·보존·게시 | [접근 정책](experiments/isolation-policy.md) · [운영 관리](experiments/benchmark-management.md) |
-| 환경·명령·profile | [개발 환경](DEVELOPMENT_ENVIRONMENT.md) · [실행 가이드](experiments/agent-run-commands.md) · [profile 안내](../experiments/config/runner-profiles/README.md) |
-| 목표·결정 | [프로젝트 목적](PROJECT_PURPOSE.md) · [ADR](decisions/) |
-
-reference 도달과 `product_pass`는 별도 판정이다. 후보 실패도 첫 결과로 보존한다.
-운영자 자료를 후보에게 전부 읽히거나, 이전 구현·실험 결과를 공통 입력에 넣지 않는다.
-후속 피드백은 자신의 직전 결과에 대한 고정 요구·관측·근거·남은 예산만 제공한다.
-
-## 과거 기록
-
-- [2026-09-29 비교 방향 전환](experiments/reference-comparison-20260929.md).
-- [archive](archive/): 날짜별 검토·launch·진단·과거 제안 17개를 이동했다.
-  [문서 검토](archive/reviews/DOCUMENTATION_REVIEW.md)와
-  [당시 작업 체크리스트](archive/reviews/DOCUMENTATION_REVIEW_CHECKLIST.md)는 현재 준비 상태가 아니다.
-- 2026-10-02에는 과거 구현 계획 2개를 `archive/plans/`로 보관했다:
-  [2026-09-13 E2E 계약 계획](archive/plans/2026-09-13-e2e-contract-implementation-plan.md) ·
-  [2026-09-13 host pipeline 계획](archive/plans/2026-09-13-host-device-pipeline-implementation-plan.md).
-  원문과 당시 검증 기록을 보존하며 현재 작업은 `plans/`와 새 비교 준비 상태를 따른다.
-- [기존 단회 프로토콜](experiments/agent-experiment-protocol.md)·
-  [기존 gate](experiments/benchmark-readiness.md)는 해당 historical cohort에만 적용한다.
-- [원본 evidence](experiments/evidence/)는 파일/hash 보존을 위해 경로·내용을 유지한다.
-  evidence가 참조하는 [AGY launch 검토](experiments/agy-launch-review-20260925.md)·
-  [초기 preflight](experiments/preflight-evidence-20260918.md)도 기존 경로에 남겼다.
-- [보드 bring-up](hardware/version-2-bring-up.md)·[제조사 재현](hardware/waveshare-manufacturer-example.md),
-  [HTML overview](overview/index.html), [결과 인덱스](../results/README.md)는 관측 시점·대상을 확인한다.
-
-archive를 포함한 과거 기록의 `현재`·`승인`·`남은 작업`은 해당 시점의 표현이다.
-이전 commit/tag의 동결 파일은 Git 이력에서 복구하며 새 입력 조건을 과거 실행에 소급하지 않는다.
+`docs/PRODUCT_CONTRACT.md`와 57개 원본 입력은 수정하지 않는다. 이번 실험의 live 수집과
+협업 실행 변경은 협업 설계가 소유한다. 구현 보고서와 검증 보고서는 각각 실제 역할 작업에
+연결하며, 브라우저 시안·host 시험·실물 동작을 별도 근거로 남긴다.

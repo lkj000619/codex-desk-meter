@@ -1,6 +1,0 @@
-{
-  "status": "blocked",
-  "exit_code": 1,
-  "reason": "BLOCKED: replace profile placeholders and unresolved settings with operator-verified values",
-  "run_id_reserved": false
-}

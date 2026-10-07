@@ -1,1 +1,0 @@
-2026-10-04T07:22:04.924574Z ERROR codex_core::tools::router: error=apply_patch verification failed: invalid patch: multiple operations target C:\meter-preflight-20261004\codex-sol-r1\workspace\probe-output.txt

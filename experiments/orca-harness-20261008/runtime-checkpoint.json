@@ -1,0 +1,156 @@
+{
+    "observed_at":  "2026-10-07T17:18:52.4693962Z",
+    "run_id":  "run_c968c43361da",
+    "frozen_inputs_verified":  57,
+    "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
+    "tasks":  [
+                  {
+                      "id":  "task_c4c03e6d2c02",
+                      "title":  "Luna independent contract and resume review",
+                      "status":  "dispatched",
+                      "deps":  "[]",
+                      "completed_at":  null
+                  },
+                  {
+                      "id":  "task_1a7eaeade56c",
+                      "title":  "AGY prepare pinned OpenDesign viewer",
+                      "status":  "dispatched",
+                      "deps":  "[]",
+                      "completed_at":  null
+                  },
+                  {
+                      "id":  "task_871ad3d94f9f",
+                      "title":  "Codex Sol 6.1 three LCD GUI candidates D E F",
+                      "status":  "pending",
+                      "deps":  "[\"task_1a7eaeade56c\"]",
+                      "completed_at":  null
+                  },
+                  {
+                      "id":  "task_b4a978f1fe36",
+                      "title":  "AGY Gemini three LCD GUI candidates A B C",
+                      "status":  "pending",
+                      "deps":  "[\"task_1a7eaeade56c\"]",
+                      "completed_at":  null
+                  }
+              ],
+    "workers":  [
+                    {
+                        "task_id":  "task_c4c03e6d2c02",
+                        "dispatch_id":  "ctx_85d922e4b68d",
+                        "terminal_handle":  "term_5a5f6147-6087-4bd6-af81-a1a434563ab8",
+                        "state":  "ready",
+                        "dispatch_status":  "dispatched",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791393531473,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_1a7eaeade56c",
+                        "dispatch_id":  "ctx_3827dfbe5be1",
+                        "terminal_handle":  "term_e3aa089b-ee56-4870-83b4-17e9ea8cf3d0",
+                        "state":  "ready",
+                        "dispatch_status":  "dispatched",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791393529188,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_1a7eaeade56c",
+                        "dispatch_id":  "ctx_2ce61a69a39f",
+                        "terminal_handle":  "term_af0c3dea-6259-4a96-a02f-02e8d51fecbc",
+                        "state":  "abandoned",
+                        "dispatch_status":  "failed",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791393394091,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_c4c03e6d2c02",
+                        "dispatch_id":  "ctx_955a29e03ab9",
+                        "terminal_handle":  "term_b5f3acae-aacb-45eb-8e84-a5277f73bc19",
+                        "state":  "abandoned",
+                        "dispatch_status":  "failed",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791393399041,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_1a7eaeade56c",
+                        "dispatch_id":  "ctx_7ae3adbf40bc",
+                        "terminal_handle":  "term_ac468590-c3e3-4ae9-a084-4f0eda0a92fb",
+                        "state":  "failed",
+                        "dispatch_status":  "failed",
+                        "liveness":  {
+                                         "verdict":  "exited",
+                                         "source":  "resource_release"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "released",
+                        "release_state":  "released"
+                    },
+                    {
+                        "task_id":  "task_c4c03e6d2c02",
+                        "dispatch_id":  "ctx_9b5d85444929",
+                        "terminal_handle":  "term_4df9ccb2-eed4-4f39-ae84-5d745c0d4609",
+                        "state":  "stopped",
+                        "dispatch_status":  "failed",
+                        "liveness":  {
+                                         "verdict":  "exited",
+                                         "source":  "resource_release"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "released",
+                        "release_state":  "released"
+                    }
+                ]
+}

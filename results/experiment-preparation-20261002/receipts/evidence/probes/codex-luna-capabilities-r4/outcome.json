@@ -1,8 +1,0 @@
-{
-  "exit_code": 0,
-  "timeout": false,
-  "elapsed_seconds": 223.78143525123596,
-  "stdout_sha256": "cf5070eef585796d3dc98aa40fd7b47689bad75709ca0dde4328908efaacb27c",
-  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "product_execution": false
-}

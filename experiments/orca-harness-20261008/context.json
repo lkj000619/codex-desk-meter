@@ -1,0 +1,26 @@
+{
+  "cohort": "orca-harness-20261008",
+  "run_id": "run_c968c43361da",
+  "coordinator_handle": "term_c1752a58-5861-435e-ab3a-c99caaa61b14",
+  "worktree_id": "ce5556c0-b87c-4c5f-9bac-6e1fa3f0faf2::C:/Users/이광진/orca/workspaces/codex-desk-meter/experiment-orca-harness-20261008",
+  "branch": "lkj000619/experiment-orca-harness-20261008",
+  "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "time_budget_seconds": null,
+  "time_budget_reason": "User explicitly requested no separate limit.",
+  "setup_policy": "skip",
+  "setup_reason": "Repository hook is pnpm install; this fresh Python/ESP-IDF input has no Node package.json.",
+  "start_code": "fresh-frozen-inputs",
+  "pc_live_scope": ["selected-session-token-counts", "account-quota-windows-and-resets"],
+  "ui_requested_models": ["gemini-3.8-flash-medium", "gpt-6.1-sol"],
+  "ui_candidate_count_per_model": 3,
+  "ui_selection": null,
+  "ui_model_status": "User requested AGY Gemini and Codex CLI Sol 6.1, three GUI candidates each; no OpenCode login needed.",
+  "frozen_input_count": 57,
+  "auto_approvals": {
+    "authorization": "User explicitly requested unattended approvals on 2026-10-08.",
+    "antigravity_flag": "--dangerously-skip-permissions",
+    "codex_flag": "--dangerously-bypass-approvals-and-sandbox",
+    "shell": "powershell.exe"
+  },
+  "comparison_status": "separate-expanded-cohort-not-original-comparison-repeat"
+}

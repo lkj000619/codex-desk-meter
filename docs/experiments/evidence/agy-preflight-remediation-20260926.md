@@ -1,5 +1,0 @@
-# New baseline preflight ? 2026-09-26
-
-Baseline b299d5a7f65ac9eb0d8d025eb3f8ddcac3281055 (benchmark-v2-baseline-20260926). Clean ASCII clone C:/Espressif/benchmark-baseline-20260926. Full hardware-required preflight exit 0, zero failures/warnings, IDF 5.3.2, 94 tests passed, historical and E2E/matrix examples valid. This is host harness validation, not candidate firmware validation.
-
-New policy SHA f68a674753ef7f393bdb724317e653184e3190821eedf205f5ce10db812825fc was applied by the frozen wrapper around a no-model Python verification call. verify_scoped_environment returned settings SHA 044cf9d247a4a9a557ebbee3ee667aadd5a981b160e5943f560db3c0f6dc3345, child exit 0, originals restored. AGY version 1.2.11. Exact command rule matching is a pilot observation. Prior IDF build evidence remains applicable: same toolchain and no product implementation yet. Network/fixture, prompt scope and activity logging remain unchanged; new runner counts ERROR and rejects denied_actions/stderr soft denial. New explicit-prompt adapter is profile-hash bound. User requested this next execution after remediation. Reviewed by Codex maintainer on 2026-09-26 KST.

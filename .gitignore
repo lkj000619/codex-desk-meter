@@ -32,6 +32,8 @@ results/codex-reference-upload-20261001/user-video-01/*.stderr.txt
 skills-lock.json
 __pycache__/
 *.py[cod]
+experiments/orca-harness-20261008/runtime-checkpoint.json.previous
+experiments/orca-harness-20261008/runtime-checkpoint.json.tmp
 
 # Local experiment scratch output (reviewed results remain under results/)
 logs/
