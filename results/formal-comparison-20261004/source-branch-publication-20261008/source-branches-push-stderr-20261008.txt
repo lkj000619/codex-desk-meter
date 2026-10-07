@@ -1,0 +1,22 @@
+To https://github.com/lkj000619/codex-desk-meter.git
+ * [new branch]      experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r01 -> experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r01
+ * [new branch]      experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r02 -> experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r02
+ * [new branch]      experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r01 -> experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r01
+ * [new branch]      experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r02 -> experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r02
+ * [new branch]      experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r01 -> experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r01
+ * [new branch]      experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r02 -> experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r02
+ * [new branch]      experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r01 -> experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r01
+ * [new branch]      experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r02 -> experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r02
+ * [new branch]      experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r03 -> experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r03
+ * [new branch]      experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r04 -> experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r04
+ * [new branch]      experiment/formal-comparison-20261004/20261005-codex-cli-gpt-6-sol-r01 -> experiment/formal-comparison-20261004/20261005-codex-cli-gpt-6-sol-r01
+ * [new branch]      experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r01 -> experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r01
+ * [new branch]      experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r02 -> experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r02
+ * [new branch]      experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r01 -> experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r01
+ * [new branch]      experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r02 -> experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r02
+ * [new branch]      experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r03 -> experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r03
+ * [new branch]      experiment/formal-comparison-20261004/20261007-codex-cli-gpt-6-luna-r01 -> experiment/formal-comparison-20261004/20261007-codex-cli-gpt-6-luna-r01
+ * [new branch]      experiment/20260911T030200Z-codex-pilot -> experiment/20260911T030200Z-codex-pilot
+ * [new branch]      experiment/antigravity/cli/gemini-3-8-flash-high -> experiment/antigravity/cli/gemini-3-8-flash-high
+ * [new branch]      experiment/opencode/cli/muse-spark-1-3-contributor-free -> experiment/opencode/cli/muse-spark-1-3-contributor-free
+ * [new branch]      lkj000619/codex-reference-20260929 -> lkj000619/codex-reference-20260929

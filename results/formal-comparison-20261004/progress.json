@@ -517,7 +517,7 @@
     },
     "final_package_manifest_sha256": "c8b261c586d2419a0d5c6a4467a5ddec6b503373eb22c11360cbbdb73b7d0238"
   },
-  "checked_at": "2026-10-07T15:53:50.597416+00:00",
+  "checked_at": "2026-10-07T16:12:08.628709+00:00",
   "state": "agy_flash_series_closed_reference_reached",
   "current_run": "20261007-antigravity-cli-agy-flash-r02",
   "current_directory": "C:\\meter-followups-20261007\\20261007-antigravity-cli-agy-flash-r02",
@@ -697,5 +697,16 @@
     "final_snapshot": "results/formal-comparison-20261004/evidence/20261007-antigravity-cli-agy-flash-r02/evaluation-final-20261008"
   },
   "first_block_closed": true,
-  "formal_comparison_complete": false
+  "formal_comparison_complete": false,
+  "source_branch_publication": {
+    "verified_at": "2026-10-07T16:09:24.674072+00:00",
+    "formal_source_branches": 17,
+    "existing_pilot_preparation_reference_branches": 4,
+    "remote_sha_verified": 21,
+    "status": "pushed_and_remote_verified",
+    "inventory": "results/formal-comparison-20261004/branch-publication-20261008.json",
+    "index": "results/formal-comparison-20261004/branch-publication-20261008.md",
+    "original_frozen_commits_preserved": true,
+    "new_product_experiments_started": false
+  }
 }

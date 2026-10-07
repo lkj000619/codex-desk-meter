@@ -1,0 +1,315 @@
+{
+  "recorded_at": "2026-10-07T16:07:50.785520+00:00",
+  "status": "pushed_and_remote_verified",
+  "repository": "https://github.com/lkj000619/codex-desk-meter.git",
+  "bare_publisher": "C:\\meter-followups-20261007\\source-branches-publication-20261008.git",
+  "formal_branch_count": 17,
+  "existing_branch_count": 4,
+  "formal_branches": [
+    {
+      "run_id": "20261004-opencode-cli-opencode-muse-r01",
+      "comparison_id": "20261004-opencode-cli-opencode-muse-r01",
+      "round": 0,
+      "execution_status": "completed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r01",
+      "commit": "e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db",
+      "bundle": "C:\\meter-runs-20261004\\20261004-opencode-cli-opencode-muse-r01\\comparison-source.bundle",
+      "bundle_sha256": "39ba5298c2b09e89a7b86e32eabd14308ef6c5526e5ca1f33f860fa9a52edb8c"
+    },
+    {
+      "run_id": "20261004-opencode-cli-opencode-muse-r02",
+      "comparison_id": "20261004-opencode-cli-opencode-muse-r01",
+      "round": 1,
+      "execution_status": "timeout",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r02",
+      "commit": "354c6475345cb521c92f92e3dce448b0dc5ef58b",
+      "bundle": "C:\\meter-followups-20261004\\20261004-opencode-cli-opencode-muse-r02\\comparison-source.bundle",
+      "bundle_sha256": "458d2acaf2b66c2a8bbfdad9c5d6449a9259f131c5493fb618e13a456315e06c"
+    },
+    {
+      "run_id": "20261005-antigravity-cli-agy-flash-r01",
+      "comparison_id": "20261005-antigravity-cli-agy-flash-r01",
+      "round": 0,
+      "execution_status": "environment_failed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r01",
+      "commit": "29e1d7af54a8c9c879e36192ec4ed689e5bbf82d",
+      "bundle": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-flash-r01\\comparison-source.bundle",
+      "bundle_sha256": "e69e3fd73856e6a8e768605fdeabf23739870d143139c059a7859644cc65c8fe"
+    },
+    {
+      "run_id": "20261005-antigravity-cli-agy-flash-r02",
+      "comparison_id": "20261005-antigravity-cli-agy-flash-r01",
+      "round": 1,
+      "execution_status": "completed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r02",
+      "commit": "94018f1785a590e1514ef1b5145c40f0c03ffca3",
+      "bundle": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-flash-r02\\comparison-source.bundle",
+      "bundle_sha256": "24eb9eeb9f5f7f97bc32e73134c8128e66ba6f4a5694da19573827e2b63e7898"
+    },
+    {
+      "run_id": "20261007-antigravity-cli-agy-flash-r01",
+      "comparison_id": "20261005-antigravity-cli-agy-flash-r01",
+      "round": 2,
+      "execution_status": "environment_failed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r01",
+      "commit": "b57439702d2d3776b67b2e1baab106807aa33621",
+      "bundle": "C:\\meter-followups-20261007\\20261007-antigravity-cli-agy-flash-r01\\comparison-source.bundle",
+      "bundle_sha256": "5d4e9f5dfa3d09a285ce40a7487c8df16bc8f8ff0db3cbb2efdc17d7aeaa945b"
+    },
+    {
+      "run_id": "20261007-antigravity-cli-agy-flash-r02",
+      "comparison_id": "20261005-antigravity-cli-agy-flash-r01",
+      "round": 3,
+      "execution_status": "completed",
+      "reference_status": "pass",
+      "branch": "experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r02",
+      "commit": "9e5a01b51cce581acda2495df402e6aa3d3f63be",
+      "bundle": "C:\\meter-followups-20261007\\20261007-antigravity-cli-agy-flash-r02\\comparison-source.bundle",
+      "bundle_sha256": "3a396944ff10451a97329fc9e2f1899424fba47a7b4a0d68d86d6f7f2b9bf342"
+    },
+    {
+      "run_id": "20261005-antigravity-cli-agy-pro-r01",
+      "comparison_id": "20261005-antigravity-cli-agy-pro-r01",
+      "round": 0,
+      "execution_status": "environment_failed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r01",
+      "commit": "ba5609db6fbf6392166586e50341c6e14a26112f",
+      "bundle": "C:\\meter-runs-20261005\\20261005-antigravity-cli-agy-pro-r01\\comparison-source.bundle",
+      "bundle_sha256": "c9049f03487ed5e4488968113e131ae2d34c101afd79f5edddca802e636318f4"
+    },
+    {
+      "run_id": "20261005-antigravity-cli-agy-pro-r02",
+      "comparison_id": "20261005-antigravity-cli-agy-pro-r01",
+      "round": 1,
+      "execution_status": "environment_failed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r02",
+      "commit": "5e1b658783da67995f4330ed1fafa98b842270cc",
+      "bundle": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r02\\comparison-source.bundle",
+      "bundle_sha256": "52689a4066fa1518c64beae717c52ffcf7853b4c283d6b7e87fd916237053ed7"
+    },
+    {
+      "run_id": "20261005-antigravity-cli-agy-pro-r03",
+      "comparison_id": "20261005-antigravity-cli-agy-pro-r01",
+      "round": 2,
+      "execution_status": "environment_failed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r03",
+      "commit": "8059dbf481d7a394a985d8757b0b331fc625b40a",
+      "bundle": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r03\\comparison-source.bundle",
+      "bundle_sha256": "7df75bd8463a16ecddbb1dceb4e8d5c95b7cb208a1472893de4236173d081908"
+    },
+    {
+      "run_id": "20261005-antigravity-cli-agy-pro-r04",
+      "comparison_id": "20261005-antigravity-cli-agy-pro-r01",
+      "round": 3,
+      "execution_status": "environment_failed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r04",
+      "commit": "ef6aa727fa3539454708f223d965a1cb40197a56",
+      "bundle": "C:\\meter-followups-20261005\\20261005-antigravity-cli-agy-pro-r04\\comparison-source.bundle",
+      "bundle_sha256": "679b9bc02978632c2a3ded675b667d4576992e83b42dfb4d57476582647bb8dc"
+    },
+    {
+      "run_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "comparison_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "round": 0,
+      "execution_status": "completed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261005-codex-cli-gpt-6-sol-r01",
+      "commit": "2257fffaa5316773d08fe3353356112c7002159d",
+      "bundle": "C:\\meter-runs-20261005\\20261005-codex-cli-gpt-6-sol-r01\\comparison-source.bundle",
+      "bundle_sha256": "3ddf10dc4d61468fab9a578403e10de4cad6e85bee85d933bd82ac6b59397cea"
+    },
+    {
+      "run_id": "20261006-codex-cli-gpt-6-sol-r01",
+      "comparison_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "round": 1,
+      "execution_status": "completed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r01",
+      "commit": "3a09f26f2f375f4f45bebb79eb5902667a3ccb1a",
+      "bundle": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-sol-r01\\comparison-source.bundle",
+      "bundle_sha256": "e20dcd192c07b8afa9f0688db9380872e10233738a482c6d167d14e058c0115b"
+    },
+    {
+      "run_id": "20261006-codex-cli-gpt-6-sol-r02",
+      "comparison_id": "20261005-codex-cli-gpt-6-sol-r01",
+      "round": 2,
+      "execution_status": "completed",
+      "reference_status": "pass",
+      "branch": "experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r02",
+      "commit": "09ecdaf1645511033b4efda40bb2a9e3b96ae8f7",
+      "bundle": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-sol-r02\\comparison-source.bundle",
+      "bundle_sha256": "d5a696cd35e4c875ac710004f9b7d59355e27d4c0a77815de0d1fbcc82fb76d6"
+    },
+    {
+      "run_id": "20261006-codex-cli-gpt-6-luna-r01",
+      "comparison_id": "20261006-codex-cli-gpt-6-luna-r01",
+      "round": 0,
+      "execution_status": "completed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r01",
+      "commit": "c0d5d61160664923e0494302fae180089d02d247",
+      "bundle": "C:\\meter-runs-20261006\\20261006-codex-cli-gpt-6-luna-r01\\comparison-source.bundle",
+      "bundle_sha256": "cfdfb6d451e3b98e4fefa13840fe2a0d1e719dfdf94723e64f5fa9b96d7e3136"
+    },
+    {
+      "run_id": "20261006-codex-cli-gpt-6-luna-r02",
+      "comparison_id": "20261006-codex-cli-gpt-6-luna-r01",
+      "round": 1,
+      "execution_status": "completed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r02",
+      "commit": "e68356829715793dc31dd188bc2a9f528f6fcbd2",
+      "bundle": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r02\\comparison-source.bundle",
+      "bundle_sha256": "6f063bef5bf1e92f6220c10fd4b955d9082c9846b0b8607ca98db0af7be9a2e4"
+    },
+    {
+      "run_id": "20261006-codex-cli-gpt-6-luna-r03",
+      "comparison_id": "20261006-codex-cli-gpt-6-luna-r01",
+      "round": 2,
+      "execution_status": "environment_failed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r03",
+      "commit": "91f7de60328b7db9a9d04acef60ac45eafb3685a",
+      "bundle": "C:\\meter-followups-20261006\\20261006-codex-cli-gpt-6-luna-r03\\comparison-source.bundle",
+      "bundle_sha256": "62341247662a07411f7883aba2b85e9edaddd1b30f4c3b32788c32d0f91c9298"
+    },
+    {
+      "run_id": "20261007-codex-cli-gpt-6-luna-r01",
+      "comparison_id": "20261006-codex-cli-gpt-6-luna-r01",
+      "round": 3,
+      "execution_status": "completed",
+      "reference_status": "fail",
+      "branch": "experiment/formal-comparison-20261004/20261007-codex-cli-gpt-6-luna-r01",
+      "commit": "88b2bbc61047242afb22f272c419b3a57d30bb49",
+      "bundle": "C:\\meter-followups-20261007\\20261007-codex-cli-gpt-6-luna-r01\\comparison-source.bundle",
+      "bundle_sha256": "b94cb15488aeb8c2f24e523cf67a58732fe9f51b7e682f1ad60b670608c90061"
+    }
+  ],
+  "existing_branches": [
+    {
+      "branch": "experiment/20260911T030200Z-codex-pilot",
+      "commit": "abed99c4bdded2366a719fdc7f7e8a49e60570ac",
+      "scope": "Existing pilot/preparation/reference branch; not an additional formal attempt."
+    },
+    {
+      "branch": "experiment/antigravity/cli/gemini-3-8-flash-high",
+      "commit": "499e39b1f93b4c862dc3a5fe93c12bca63e287e2",
+      "scope": "Existing pilot/preparation/reference branch; not an additional formal attempt."
+    },
+    {
+      "branch": "experiment/opencode/cli/muse-spark-1-3-contributor-free",
+      "commit": "c1be78678148834844b990f3a2f57c568d40987d",
+      "scope": "Existing pilot/preparation/reference branch; not an additional formal attempt."
+    },
+    {
+      "branch": "lkj000619/codex-reference-20260929",
+      "commit": "7923f960fc9cc96fd576ab71f36f3d6500cc8190",
+      "scope": "Existing pilot/preparation/reference branch; not an additional formal attempt."
+    }
+  ],
+  "ledger_hashes": {
+    "C:\\meter-runs-20261004\\ledgers\\20261004-opencode-cli-opencode-muse-r01.json": "661f79235430dffa5af69b7bc551facd678c4742c8583a785cf9c4971c460fda",
+    "C:\\meter-runs-20261005\\ledgers\\20261005-antigravity-cli-agy-flash-r01.json": "347c4f1a1f907a166f9de8ebb82c99fd91cb2d96f58477b25626723e440979a2",
+    "C:\\meter-runs-20261005\\ledgers\\20261005-antigravity-cli-agy-pro-r01.json": "27288a6237d8b9fcb532fe152365f3ece8850fbbca3a9ea75fcae72b296c1e9c",
+    "C:\\meter-runs-20261005\\ledgers\\20261005-codex-cli-gpt-6-sol-r01.json": "dc6390d33600569a66822e23b69a3bd63fe26508cf72c7648346b1a1e33af40d",
+    "C:\\meter-runs-20261006\\ledgers\\20261006-codex-cli-gpt-6-luna-r01.json": "8152de15ec15a8f070aa7764904ffbd01424e2af5b371159c23ffc87c818bc3d"
+  },
+  "original_remote_heads": {
+    "refs/heads/docs/verification-20260916": "8a34fbc7530e30992ede1d8500515f6e4323d978",
+    "refs/heads/main": "681be5315f2b9c3c0e4083527c3ebc38f75b65d6",
+    "refs/heads/main-2": "c0ba9e2d812b5e193784418ff993af454019d3c7",
+    "refs/heads/prepare/formal-comparison-20261004": "be53df6160abf2502d77c2078d57a8ac8927a034"
+  },
+  "source_commits_rewritten": false,
+  "candidate_checkouts_modified": false,
+  "new_product_experiments_started": false,
+  "largest_blobs": [
+    [
+      10981518,
+      ".benchmark-inputs/feedback-evidence/000-user-lcd-photo-01.png"
+    ],
+    [
+      5817072,
+      "firmware/build/build.ninja"
+    ],
+    [
+      5800542,
+      "firmware/build/build.ninja"
+    ],
+    [
+      5777739,
+      "build/build.ninja"
+    ],
+    [
+      5703199,
+      "build/build.ninja"
+    ]
+  ],
+  "push_command": [
+    "git",
+    "-c",
+    "core.longpaths=true",
+    "push",
+    "--atomic",
+    "origin",
+    "refs/heads/experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r01:refs/heads/experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r01",
+    "refs/heads/experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r02:refs/heads/experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r02",
+    "refs/heads/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r01:refs/heads/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r01",
+    "refs/heads/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r02:refs/heads/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r02",
+    "refs/heads/experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r01:refs/heads/experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r01",
+    "refs/heads/experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r02:refs/heads/experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r02",
+    "refs/heads/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r01:refs/heads/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r01",
+    "refs/heads/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r02:refs/heads/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r02",
+    "refs/heads/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r03:refs/heads/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r03",
+    "refs/heads/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r04:refs/heads/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r04",
+    "refs/heads/experiment/formal-comparison-20261004/20261005-codex-cli-gpt-6-sol-r01:refs/heads/experiment/formal-comparison-20261004/20261005-codex-cli-gpt-6-sol-r01",
+    "refs/heads/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r01:refs/heads/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r01",
+    "refs/heads/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r02:refs/heads/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r02",
+    "refs/heads/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r01:refs/heads/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r01",
+    "refs/heads/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r02:refs/heads/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r02",
+    "refs/heads/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r03:refs/heads/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r03",
+    "refs/heads/experiment/formal-comparison-20261004/20261007-codex-cli-gpt-6-luna-r01:refs/heads/experiment/formal-comparison-20261004/20261007-codex-cli-gpt-6-luna-r01",
+    "refs/heads/experiment/20260911T030200Z-codex-pilot:refs/heads/experiment/20260911T030200Z-codex-pilot",
+    "refs/heads/experiment/antigravity/cli/gemini-3-8-flash-high:refs/heads/experiment/antigravity/cli/gemini-3-8-flash-high",
+    "refs/heads/experiment/opencode/cli/muse-spark-1-3-contributor-free:refs/heads/experiment/opencode/cli/muse-spark-1-3-contributor-free",
+    "refs/heads/lkj000619/codex-reference-20260929:refs/heads/lkj000619/codex-reference-20260929"
+  ],
+  "push_exit_code": 0,
+  "push_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "push_stderr_sha256": "31bd693a0c758526dda68a14c6077da06733996d266701a36465690f8b6b21a7",
+  "verified_at": "2026-10-07T16:09:24.674072+00:00",
+  "verified_remote_heads": {
+    "experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r01": "e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db",
+    "experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r02": "354c6475345cb521c92f92e3dce448b0dc5ef58b",
+    "experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r01": "29e1d7af54a8c9c879e36192ec4ed689e5bbf82d",
+    "experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r02": "94018f1785a590e1514ef1b5145c40f0c03ffca3",
+    "experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r01": "b57439702d2d3776b67b2e1baab106807aa33621",
+    "experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r02": "9e5a01b51cce581acda2495df402e6aa3d3f63be",
+    "experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r01": "ba5609db6fbf6392166586e50341c6e14a26112f",
+    "experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r02": "5e1b658783da67995f4330ed1fafa98b842270cc",
+    "experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r03": "8059dbf481d7a394a985d8757b0b331fc625b40a",
+    "experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r04": "ef6aa727fa3539454708f223d965a1cb40197a56",
+    "experiment/formal-comparison-20261004/20261005-codex-cli-gpt-6-sol-r01": "2257fffaa5316773d08fe3353356112c7002159d",
+    "experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r01": "3a09f26f2f375f4f45bebb79eb5902667a3ccb1a",
+    "experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r02": "09ecdaf1645511033b4efda40bb2a9e3b96ae8f7",
+    "experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r01": "c0d5d61160664923e0494302fae180089d02d247",
+    "experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r02": "e68356829715793dc31dd188bc2a9f528f6fcbd2",
+    "experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r03": "91f7de60328b7db9a9d04acef60ac45eafb3685a",
+    "experiment/formal-comparison-20261004/20261007-codex-cli-gpt-6-luna-r01": "88b2bbc61047242afb22f272c419b3a57d30bb49",
+    "experiment/20260911T030200Z-codex-pilot": "abed99c4bdded2366a719fdc7f7e8a49e60570ac",
+    "experiment/antigravity/cli/gemini-3-8-flash-high": "499e39b1f93b4c862dc3a5fe93c12bca63e287e2",
+    "experiment/opencode/cli/muse-spark-1-3-contributor-free": "c1be78678148834844b990f3a2f57c568d40987d",
+    "lkj000619/codex-reference-20260929": "7923f960fc9cc96fd576ab71f36f3d6500cc8190"
+  },
+  "original_remote_refs_preserved": true,
+  "original_ledgers_and_bundles_preserved": true
+}
