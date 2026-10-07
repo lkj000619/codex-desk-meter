@@ -14,7 +14,36 @@
   "ui_requested_models": ["gemini-3.8-flash-medium", "gpt-6.1-sol"],
   "ui_candidate_count_per_model": 3,
   "ui_selection": null,
+  "preview_server": {
+    "url": "http://localhost:8289/opendesign/",
+    "bind": "127.0.0.1",
+    "launcher_pid": 37732,
+    "listener_pid": 37036,
+    "owner": "coordinator",
+    "verified_workspace": "Context endpoint matches this Run and branch; viewer returns HTTP 200.",
+    "resume_rule": "Probe the listener and served context again; never infer current liveness from these stored PIDs."
+  },
   "ui_model_status": "User requested AGY Gemini and Codex CLI Sol 6.1, three GUI candidates each; no OpenCode login needed.",
+  "ui_effective_launches": [
+    {
+      "task_id": "task_b4a978f1fe36",
+      "dispatch_id": "ctx_7cc34b44b75e",
+      "cli": "agy",
+      "cli_version": "1.3.1",
+      "model": "gemini-3.8-flash-medium",
+      "model_evidence": "Actual argv and CLI header; native hook model field was null.",
+      "auto_approval_flag_verified": "--dangerously-skip-permissions"
+    },
+    {
+      "task_id": "task_871ad3d94f9f",
+      "dispatch_id": "ctx_43a32c7bf49d",
+      "cli": "codex",
+      "cli_version": "0.159.2",
+      "model": "gpt-6.1-sol",
+      "model_evidence": "Actual argv, CLI header and native hook model field.",
+      "auto_approval_flag_verified": "--dangerously-bypass-approvals-and-sandbox"
+    }
+  ],
   "frozen_input_count": 57,
   "auto_approvals": {
     "authorization": "User explicitly requested unattended approvals on 2026-10-08.",

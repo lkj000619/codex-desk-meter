@@ -3,6 +3,7 @@
 - 문서 역할과 원본은 [문서 지도](docs/DOCUMENTATION_MAP.md)를 따른다. 계획은 `docs/plans/`, 설계는 `docs/design/`에 작성한다.
 - 이번 범위·역할·완료 조건은 [협업 설계](docs/design/2026-10-08-orca-harness.md)를 먼저 읽는다. 동결 과제의 독립 실행·120분·질문 금지·fixture 전용 규칙은 이번 사용자 지시로 대체되며, 제품 의미·하드웨어 사실·원본 입력은 보존한다.
 - 실행은 실제 Orca Run/Task/Dispatch로 조율한다. 주입된 worker preamble의 질문·메일 확인·heartbeat·worker_done 명령을 따른다. 다른 하네스의 하위 에이전트로 대체하지 않는다.
+- worker의 tool 실행에서 inbox를 읽을 때 `check --terminal <자신의 terminal handle> --json`을 사용한다. worker의 check/ack에는 `--run`과 `--from`을 붙이지 않는다. Run은 active Dispatch로 결정된다. 질문 timeout은 미응답 증거가 아니며 같은 질문의 thread와 coordinator 문서 결정을 확인한다.
 - 자신의 Task에 지정된 파일만 수정한다. 원본 57개 입력과 다른 역할 파일의 변경은 coordinator에게 요청한다. Git commit·branch 전환·push는 coordinator만 수행한다.
 - 새 checkout의 입력과 이번 팀이 만든 결과, 지정 SDK·제조사 raw source만 읽는다. 다른 worktree·과거 제품·Git history·운영자 자료를 검색하지 않는다.
 - PC 수집기는 자신의 프로그램 실행 중 허용된 Codex token metadata만 읽는다. 개발·시험에는 비식별 synthetic 입력을 사용한다. 사용자 대화·인증 파일·전체 세션 로그를 출력·복사·커밋하지 않는다. 실계정 시험은 coordinator가 수행한다.

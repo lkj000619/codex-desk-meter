@@ -72,8 +72,13 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
 - Sol 6.1 GUI `task_871ad3d94f9f` / `ctx_43a32c7bf49d`는 02:37 KST 제출 수락 완료다.
   `node docs/design/lcd/sol61/check.mjs`를 coordinator가 재실행해 3개 모두 통과했다.
   `worker-release` 결과는 `retained/external_terminal`, processAction=none이다.
-- Luna 계약 검토 `task_c4c03e6d2c02` / `ctx_85d922e4b68d`는 진행 중이다.
+- Luna 계약 검토 `task_c4c03e6d2c02`는 `ctx_a4f395e58ecc`로 같은 Task·같은 실제 Luna에 재연결했다.
   인터페이스 질문 `msg_1a0585d74a22`는 답변 `msg_5d56c1876c49`로 해결했으며 설계에 반영했다.
+  이전 `ctx_85d922e4b68d`의 최종 turn은 보고서를 마쳤지만 coordinator가 잘못 안내한 worker
+  `check --run` 때문에 `consumer_fenced` 후 worker_done 없이 끝났다. 최종 transcript와 native
+  미제출 상태를 확인해 이전 attempt를 abandon하고 retry-of로 복구했다. 프로세스 종료나 파일
+  삭제는 없었다. worker check/ack는 `--terminal <자신의 handle> --json`만 사용하며 `--run`을
+  붙이지 않는다. 기존 완성 보고서를 다시 작성하지 않고 제출 절차만 마무리한다.
 - GUI 독립 검증·비교 화면 `task_c0ecb13ae179`는 위 두 GUI와 Luna 보고 수락에 의존한다.
   6개가 준비되면 이 Task를 dispatch하고, 검증/필요 수정 후 사용자 선택을 받는다.
 
@@ -90,4 +95,6 @@ PowerShell에서 같은 agent/model을 시작해 기존 Task에 retry-of로 연�
 AGY GUI의 실효 CLI는 1.3.1, Gemini 3.8 Flash Medium이며 모델은 argv/header로 확인했다.
 Codex CLI는 0.159.2이며 Sol 6.1/Luna는 실제 header와 native hook에서 확인했다.
 coordinator가 CLI를 설치하거나 업데이트한 것은 아니다. 버전 차이는 실행 기록으로 보존한다.
+preview는 coordinator가 Python stdlib로 127.0.0.1:8289에 시작했다. HTTP 200 및 context의
+Run/branch 일치로 새 checkout을 확인했다. 현재 PID는 context에 있으나 재개 시 다시 확인한다.
 제품 구현·COM3 업로드는 아직 시작하지 않았다. 사용자에게 필요한 다음 결정은 6개 GUI 중 선택이다.
