@@ -76,6 +76,13 @@ header를 확인했다. 입력이 draft에 남은 것을 worker-read로 확인�
 현재 native 상태·mail을 다시 확인하고, GUI 브라우저 검증·비교 화면 제출을 기다린다.
 preview server는 127.0.0.1:8289에 다시 시작했고 served context의 Run/branch가 일치했다.
 
+22:45 KST 추가 관측: 같은 GUI Dispatch의 native heartbeat와 작업 transcript를 확인했다.
+`opendesign/screenshots/`에 A–F 정상 화면의 820×320 PNG 6개가 저장됐고,
+`opendesign/manifest.json`은 실제 시안 6개를 열도록 갱신됐다. 이 파일 존재는 제출·합격을
+뜻하지 않는다. worker checkpoint의 현재 retry 절부터 이어서 상태·BOOT·목록 탐색·브라우저
+geometry 검증과 비교 화면·보고서 제출을 기다린다. 이전 정상 화면 캡처를 다시 만들 필요는 없다.
+사용자 선택은 아직 없으며 PC·firmware 구현과 COM 접근은 시작하지 않았다.
+
 아래는 중단 직전 이력이다. 위 재개 상태와 native checkpoint를 우선한다.
 
 2026-10-08 02:31 KST 체크포인트:
