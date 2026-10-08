@@ -52,6 +52,12 @@
       "auto_approval_flag_verified": "--dangerously-bypass-approvals-and-sandbox"
     }
   ],
+  "implementation_tasks": {
+    "pc": {"task_id": "task_fa0b12bd6fda", "dispatch_id": "ctx_e7bb307f023b", "terminal": "term_d3b622cf-1791-4afc-a013-2cf7482bb57d"},
+    "selected_b_correction": {"task_id": "task_f61c79e5c906", "dispatch_id": "ctx_4a4ef944e55c", "terminal": "term_e76b560d-95f1-4b6a-a240-c467ccc8e837"},
+    "selected_b_review": {"task_id": "task_0d62e820abfa", "start_after": "Accepted selected B correction; reuse the proven Luna terminal if still live."},
+    "firmware": {"task_id": "task_b1214421a314", "additional_coordinator_gate": "Do not start until selected B independent review is accepted, even if native Task is ready."}
+  },
   "frozen_input_count": 57,
   "auto_approvals": {
     "authorization": "User explicitly requested unattended approvals on 2026-10-08.",

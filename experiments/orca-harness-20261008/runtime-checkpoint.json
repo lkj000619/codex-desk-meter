@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-08T14:08:05.0780643Z",
+    "observed_at":  "2026-10-08T14:12:33.0836477Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -42,28 +42,62 @@
                   {
                       "id":  "task_fa0b12bd6fda",
                       "title":  "Implement PC session token and account quota collector",
+                      "status":  "completed",
+                      "deps":  "[]",
+                      "completed_at":  "2026-10-08T14:11:58.493Z"
+                  },
+                  {
+                      "id":  "task_f61c79e5c906",
+                      "title":  "Correct selected B GUI semantics and dynamic window navigation",
                       "status":  "dispatched",
                       "deps":  "[]",
                       "completed_at":  null
                   },
                   {
-                      "id":  "task_f61c79e5c906",
-                      "title":  "Correct selected B GUI semantics and dynamic window navigation",
-                      "status":  "ready",
-                      "deps":  "[]",
+                      "id":  "task_b1214421a314",
+                      "title":  "Build ESP32-S3 firmware with selected B GUI and real receiver",
+                      "status":  "pending",
+                      "deps":  "[\"task_f61c79e5c906\"]",
+                      "completed_at":  null
+                  },
+                  {
+                      "id":  "task_0d62e820abfa",
+                      "title":  "Verify corrected selected B and preserve initial GUI evidence",
+                      "status":  "pending",
+                      "deps":  "[\"task_f61c79e5c906\"]",
                       "completed_at":  null
                   }
               ],
     "workers":  [
                     {
-                        "task_id":  "task_fa0b12bd6fda",
-                        "dispatch_id":  "ctx_e7bb307f023b",
-                        "terminal_handle":  "term_d3b622cf-1791-4afc-a013-2cf7482bb57d",
+                        "task_id":  "task_f61c79e5c906",
+                        "dispatch_id":  "ctx_4a4ef944e55c",
+                        "terminal_handle":  "term_e76b560d-95f1-4b6a-a240-c467ccc8e837",
                         "state":  "ready",
                         "dispatch_status":  "dispatched",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791468482385,
+                                         "observedAt":  1791468719909,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_fa0b12bd6fda",
+                        "dispatch_id":  "ctx_e7bb307f023b",
+                        "terminal_handle":  "term_d3b622cf-1791-4afc-a013-2cf7482bb57d",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791468729227,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {

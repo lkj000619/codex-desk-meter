@@ -67,9 +67,15 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
 - PC 구현 `task_fa0b12bd6fda` / `ctx_e7bb307f023b`는 AGY terminal
   `term_d3b622cf-1791-4afc-a013-2cf7482bb57d`에서 실제 working 확인했다.
   CLI 1.3.1 / Gemini 3.8 Flash Medium header, 자동 승인 launch를 확인했다.
-- B 보완 `task_f61c79e5c906`은 준비 상태다. 전용 AGY terminal
-  `term_e76b560d-95f1-4b6a-a240-c467ccc8e837`은 같은 모델 header와 tui-idle을 확인했지만
-  아직 Task를 주입하지 않았다. 최초 GUI 검토 worker_done 수락·원본 artifact commit 후 시작한다.
+- 최초 시안·GUI 검토·사용자 B 선택은 `bc27607`에 보존했다.
+- B 보완 `task_f61c79e5c906` / `ctx_4a4ef944e55c`는 AGY terminal
+  `term_e76b560d-95f1-4b6a-a240-c467ccc8e837`에서 실제 turn_start=observed로 시작했다.
+  동일 모델 header·tui-idle·자동 승인 launch를 확인했다. B 파일만 보완하며 최초 PNG는 보존한다.
+- B 독립 재검증 `task_0d62e820abfa`는 B 보완 수락을 기다린다. 실제 Luna terminal
+  `term_079881f4-f92c-464b-a856-21274157b8c1`이 아직 live이면 재사용하며, stale handle은 쓰지 않는다.
+- firmware `task_b1214421a314`는 native로 B 보완에 의존한다. CLI는 기존 Task의 deps 변경을
+  제공하지 않아 **독립 B 재검증 수락**을 추가 coordinator gate로 기록했다. native ready만 보고
+  자동 시작하지 않는다. 이 gate가 확인된 후 승인 모델 `gpt-6-sol`과 자동 승인 옵션으로 시작한다.
 - GUI review `ctx_35a7c601f1d6`는 `msg_ac9ec8fd93a3`로 제출 수락됐다.
   coordinator가 static checker를 재실행하고 57개 입력 hash를 검증했다. `worker-release` 결과는
   retained/external_terminal, processAction=none이며 Delivery `delivery_21ea752253d3`를 ack했다.
