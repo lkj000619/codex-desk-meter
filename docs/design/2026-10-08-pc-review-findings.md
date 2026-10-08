@@ -23,3 +23,19 @@ coordinator는 테스트 13개를 재실행했고 모두 통과했다. 다음 �
 
 PC 보완 수락 후 실제 C receiver와의 통합 검증, coordinator의 owner-only live 수집·장치
 전송과 사용자 LCD 관측이 남는다. unit test 통과나 제출 메시지는 제품 합격 근거를 대신하지 않는다.
+
+## 첫 보완 제출 후 확인
+
+`task_3963de21ddd1` / `ctx_221ff3735dae`는 `msg_3c2b06ec7025`로 제출됐다.
+coordinator의 25개 시험 재실행도 통과했다. native event·관측 시각·quota map·실행 중 state 유실에
+대한 수정은 추가 시험으로 연결됐으나, 전체 PC 역할 완료 조건은 아직 충족하지 않았다.
+
+- watch에 수동 입력 처리 경로가 없고, 실패 후 `time.sleep(interval)`로 최대 60초 기다린다.
+  5초 이내 수동 전송·연결 복구 조건을 만족하지 않는다.
+- RPC helper가 여전히 blocking `stdout.readline()`을 직접 호출해 실제 timeout이 없다.
+- gather는 session 오류에서 전체를 중단하며 provider별 last-good cache가 없다.
+  `collect`의 출력 의미 검증과 fixture provenance를 선택하는 경로도 빠져 있다.
+- state 초기화는 기존 파일을 덮어쓰며, 생성 파일 방식의 lock은 비정상 종료 후 남는다.
+
+이 항목은 작은 단위 시험 개수를 늘리는 것으로 해결되지 않는다. 실제 production watch/RPC/cache
+경로를 fake stream·transport로 호출하는 시험을 추가하고, 독립 통합 검증 전에 처리한다.

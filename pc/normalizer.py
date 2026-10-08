@@ -34,18 +34,21 @@ def build_session_telemetry_snapshot(
     source_kind: str = "local_runtime",
     reference_time: str | None = None,
 ) -> dict[str, Any]:
-    """Convert SessionTokenState into a valid session_telemetry UsageSnapshot."""
+    """Convert SessionTokenState into a valid session_telemetry UsageSnapshot.
+
+    Preserves integer token counts directly as ints (not gratuitous floats).
+    """
     observed = session.observed_at or reference_time or datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     snap_id = sanitize_snapshot_id(f"session-{session.session_id}")
 
     # Channels: input, output, cached_input, reasoning_output, source_total, normalized_total
     channels_def = [
-        ("input", "Input tokens", session.input_tokens),
-        ("output", "Output tokens", session.output_tokens),
-        ("cached_input", "Cached input", session.cached_input_tokens),
-        ("reasoning_output", "Reasoning output", session.reasoning_output_tokens),
-        ("source_total", "Source total", session.source_total_tokens),
-        ("normalized_total", "Normalized total", session.normalized_total_tokens),
+        ("input", "Input tokens", int(session.input_tokens)),
+        ("output", "Output tokens", int(session.output_tokens)),
+        ("cached_input", "Cached input", int(session.cached_input_tokens)),
+        ("reasoning_output", "Reasoning output", int(session.reasoning_output_tokens)),
+        ("source_total", "Source total", int(session.source_total_tokens)),
+        ("normalized_total", "Normalized total", int(session.normalized_total_tokens)),
     ]
 
     windows = []
@@ -54,7 +57,7 @@ def build_session_telemetry_snapshot(
             {
                 "window_id": wid,
                 "label": label,
-                "used_units": float(units),
+                "used_units": units,  # Integer counts preserved
                 "remaining_units": None,
                 "limit_units": None,
                 "unit": "token",
@@ -161,16 +164,30 @@ def build_account_quota_snapshot(
 
 
 def normalize_global_reset(raw: dict[str, Any]) -> dict[str, Any]:
-    """Normalize global reset dictionary to cdm-frame globalReset schema."""
-    source = raw.get("source") or raw.get("provider") or "codex-resets.com"
+    """Normalize global reset dictionary to cdm-frame globalReset schema.
+
+    Preserves source/captured_at and maps legacy last_reset_at -> latest_reset_at without inventing values.
+    """
+    if not isinstance(raw, dict):
+        raise ValueError("Global reset must be a dictionary")
+
+    source = raw.get("source") or raw.get("provider")
+    if not source:
+        raise ValueError("Global reset missing source/provider")
+
     captured_at = raw.get("captured_at") or raw.get("fetched_at")
-    latest_reset_at = raw.get("latest_reset_at") or raw.get("last_reset_at")
+    if not captured_at:
+        raise ValueError("Global reset missing captured_at/fetched_at")
+
+    latest_reset_at = raw.get("latest_reset_at")
+    if latest_reset_at is None and "last_reset_at" in raw:
+        latest_reset_at = raw.get("last_reset_at")
 
     return {
         "schema_version": 1,
         "source": str(source),
-        "captured_at": captured_at,
-        "latest_reset_at": latest_reset_at,
+        "captured_at": str(captured_at),
+        "latest_reset_at": str(latest_reset_at) if latest_reset_at else None,
         "forecast_24h_percent": raw.get("forecast_24h_percent"),
         "forecast_48h_percent": raw.get("forecast_48h_percent"),
         "forecast_is_schedule": False,

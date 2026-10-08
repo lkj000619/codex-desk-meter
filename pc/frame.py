@@ -7,6 +7,7 @@ import hashlib
 import json
 import re
 import zlib
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -92,9 +93,37 @@ def schema_validate(value: Any, schema_filename: str, error_code: str = "SCHEMA_
         fail(error_code, f"{schema_filename}:{location}: {first_err.message}")
 
 
-def semantic_validate_snapshot(snapshot: dict[str, Any]) -> None:
+def parse_rfc3339(ts_str: str) -> datetime:
+    try:
+        dt = datetime.fromisoformat(ts_str.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            fail("TIMESTAMP_NO_TZ", f"timestamp {ts_str} missing timezone")
+        return dt.astimezone(timezone.utc)
+    except Exception as exc:
+        fail("INVALID_TIMESTAMP_FORMAT", f"{ts_str}: {exc}")
+    raise AssertionError("unreachable")
+
+
+def semantic_validate_snapshot(snapshot: dict[str, Any], reference_time: str | None = None) -> None:
     """Strict semantic validation extending JSON schema constraints."""
     schema_validate(snapshot, "usage-snapshot.schema.json", "SNAPSHOT_SCHEMA_INVALID")
+
+    # Time checks vs reference_time
+    ref_dt = None
+    if reference_time:
+        ref_dt = parse_rfc3339(reference_time)
+
+    obs_str = snapshot.get("observed_at")
+    if obs_str and ref_dt:
+        obs_dt = parse_rfc3339(obs_str)
+        if obs_dt > ref_dt:
+            fail("SEMANTIC_FUTURE_TIMESTAMP", f"observed_at {obs_str} is in future of reference {reference_time}")
+
+    lg_str = snapshot.get("last_good_at")
+    if lg_str and ref_dt:
+        lg_dt = parse_rfc3339(lg_str)
+        if lg_dt > ref_dt:
+            fail("SEMANTIC_FUTURE_TIMESTAMP", f"last_good_at {lg_str} is in future of reference {reference_time}")
 
     status = snapshot.get("status")
     # P2 rule: available source must have non-null agent_id and host_id
@@ -107,15 +136,50 @@ def semantic_validate_snapshot(snapshot: dict[str, Any]) -> None:
     metric_kind = snapshot.get("metric_kind")
     windows = snapshot.get("windows", [])
     if metric_kind == "session_telemetry":
-        # Cohort interface rule: channels must have null quota fields
-        allowed_channels = {"input", "output", "cached_input", "reasoning_output", "source_total", "normalized_total"}
+        # Required unique session channels
+        required_channels = {"input", "output", "cached_input", "reasoning_output", "source_total", "normalized_total"}
+        seen_channels = set()
+        channel_units = {}
+
         for win in windows:
             wid = win.get("window_id")
-            if wid not in allowed_channels:
+            if wid not in required_channels:
                 fail("SEMANTIC_UNKNOWN_SESSION_CHANNEL", f"unrecognized session telemetry channel {wid!r}")
+            if wid in seen_channels:
+                fail("SEMANTIC_DUPLICATE_SESSION_CHANNEL", f"duplicate session telemetry channel {wid!r}")
+            seen_channels.add(wid)
+
+            units = win.get("used_units")
+            channel_units[wid] = units
+
             for null_field in ("remaining_units", "limit_units", "percent_used", "percent_remaining", "resets_at"):
                 if win.get(null_field) is not None:
                     fail("SEMANTIC_SESSION_FIELD_NOT_NULL", f"session telemetry window {wid} must have {null_field} null")
+
+        # Invariant checks for session channels
+        if seen_channels == required_channels:
+            in_t = channel_units.get("input") or 0
+            out_t = channel_units.get("output") or 0
+            cached_t = channel_units.get("cached_input") or 0
+            reason_t = channel_units.get("reasoning_output") or 0
+            norm_t = channel_units.get("normalized_total") or 0
+
+            if cached_t > in_t:
+                fail("SEMANTIC_CACHE_EXCEEDS_INPUT", f"cached_input ({cached_t}) > input ({in_t})")
+            if reason_t > out_t:
+                fail("SEMANTIC_REASONING_EXCEEDS_OUTPUT", f"reasoning_output ({reason_t}) > output ({out_t})")
+            if norm_t != (in_t + out_t):
+                fail("SEMANTIC_NORMALIZED_TOTAL_MISMATCH", f"normalized_total ({norm_t}) != input + output ({in_t + out_t})")
+
+    elif metric_kind == "quota_window":
+        for win in windows:
+            # Check percent relations if both present
+            p_used = win.get("percent_used")
+            p_rem = win.get("percent_remaining")
+            if p_used is not None and p_rem is not None:
+                # Sum should be approximately 100
+                if abs((p_used + p_rem) - 100.0) > 0.05:
+                    fail("SEMANTIC_PERCENT_SUM_MISMATCH", f"percent_used ({p_used}) + percent_remaining ({p_rem}) != 100")
 
 
 def unsigned_frame(frame: dict[str, Any]) -> dict[str, Any]:
@@ -133,7 +197,7 @@ def check_integrity(frame: dict[str, Any]) -> None:
         fail("CRC_MISMATCH", f"expected {expected}, got {actual}")
 
 
-def build_frame(payload: dict[str, Any], sequence: int, sent_at: str) -> dict[str, Any]:
+def build_frame(payload: dict[str, Any], sequence: int, sent_at: str, reference_time: str | None = None) -> dict[str, Any]:
     """Construct, validate and checksum a cdm/1 frame."""
     if not isinstance(payload, dict):
         fail("PAYLOAD_INVALID", "payload must be an object")
@@ -148,7 +212,7 @@ def build_frame(payload: dict[str, Any], sequence: int, sent_at: str) -> dict[st
         fail("PAYLOAD_INVALID", "payload requires usage and global_resets arrays")
 
     for snapshot in usage:
-        semantic_validate_snapshot(snapshot)
+        semantic_validate_snapshot(snapshot, reference_time=reference_time)
 
     for reset in global_resets:
         schema_validate(
@@ -177,11 +241,11 @@ def build_frame(payload: dict[str, Any], sequence: int, sent_at: str) -> dict[st
     return frame
 
 
-def encode_frame(frame: dict[str, Any]) -> bytes:
+def encode_frame(frame: dict[str, Any], reference_time: str | None = None) -> bytes:
     """Encode a validated frame into canonical UTF-8 bytes with single trailing LF, max 64KB."""
     schema_validate(frame, "cdm-frame.schema.json", "FRAME_SCHEMA_INVALID")
     for s in frame["payload"]["usage"]:
-        semantic_validate_snapshot(s)
+        semantic_validate_snapshot(s, reference_time=reference_time)
     check_integrity(frame)
 
     line = canonical_json(frame) + b"\n"
@@ -190,7 +254,7 @@ def encode_frame(frame: dict[str, Any]) -> bytes:
     return line
 
 
-def decode_frame(line: bytes | bytearray | str) -> dict[str, Any]:
+def decode_frame(line: bytes | bytearray | str, reference_time: str | None = None) -> dict[str, Any]:
     """Decode and strictly validate raw frame line."""
     if isinstance(line, str):
         line = line.encode("utf-8")
@@ -219,7 +283,7 @@ def decode_frame(line: bytes | bytearray | str) -> dict[str, Any]:
 
     schema_validate(frame, "cdm-frame.schema.json", "FRAME_SCHEMA_INVALID")
     for s in frame["payload"]["usage"]:
-        semantic_validate_snapshot(s)
+        semantic_validate_snapshot(s, reference_time=reference_time)
     check_integrity(frame)
 
     if raw[:-1] != canonical_json(frame):

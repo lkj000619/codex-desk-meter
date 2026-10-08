@@ -1,12 +1,13 @@
-"""Persistent sequence reservation and serial sender state machine.
+"""Persistent sequence reservation, single-sender lock, and serial sender state machine.
 
 Contract rules:
 - uint32 sequence reservation is ATOMICALLY persisted BEFORE any write.
 - A failed write consumes the sequence number.
-- State loss or corruption stops transmission immediately (fail-closed).
+- State loss or corruption stops transmission immediately (fail-closed, never re-creates).
+- Single-sender locking per device alias.
 - Reconnection attempts at most once per second.
 - Transmit within 5s of available port.
-- Host write receipt is not device ACK.
+- Host write receipt is not device ACK (labeled "HOST WRITE").
 """
 
 from __future__ import annotations
@@ -24,6 +25,10 @@ from pc.frame import MAX_SEQUENCE, build_frame, encode_frame, fail
 
 class SenderStateError(ValueError):
     """Sender sequence or state error."""
+
+
+class SenderLockError(IOError):
+    """Single sender lock error."""
 
 
 @dataclass
@@ -59,9 +64,13 @@ class StateStore:
     def __init__(self, state_file: Path):
         self.state_file = state_file
 
-    def load(self, device_alias: str) -> DeviceSequenceState | None:
+    def exists(self) -> bool:
+        return self.state_file.exists()
+
+    def load(self, device_alias: str) -> DeviceSequenceState:
+        """Load state strictly; if missing or corrupt, raises SenderStateError."""
         if not self.state_file.exists():
-            return None
+            raise SenderStateError(f"STATE_LOST: state file {self.state_file} does not exist")
         try:
             raw = self.state_file.read_text(encoding="utf-8")
             data = json.loads(raw)
@@ -71,6 +80,8 @@ class StateStore:
                     f"STATE_ALIAS_MISMATCH: store has alias {state.device_alias!r}, expected {device_alias!r}"
                 )
             return state
+        except SenderStateError:
+            raise
         except Exception as exc:
             raise SenderStateError(f"STATE_CORRUPT: cannot load state: {exc}") from exc
 
@@ -104,10 +115,47 @@ class StateStore:
         return state
 
 
+class DeviceLock:
+    """File-based single-sender lock for a device alias."""
+
+    def __init__(self, lock_file: Path):
+        self.lock_file = lock_file
+        self._fd: int | None = None
+
+    def acquire(self) -> None:
+        self.lock_file.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            # Atomic exclusive creation
+            self._fd = os.open(str(self.lock_file), os.O_CREAT | os.O_EXCL | os.O_RDWR)
+            pid = str(os.getpid()).encode("utf-8")
+            os.write(self._fd, pid)
+        except FileExistsError:
+            raise SenderLockError(f"Device lock already held: {self.lock_file}")
+
+    def release(self) -> None:
+        if self._fd is not None:
+            try:
+                os.close(self._fd)
+            except Exception:
+                pass
+            self._fd = None
+        if self.lock_file.exists():
+            try:
+                self.lock_file.unlink()
+            except Exception:
+                pass
+
+
 class SerialSink(Protocol):
     """Abstract serial or loopback interface."""
 
     def write(self, data: bytes) -> int:
+        ...
+
+    def flush(self) -> None:
+        ...
+
+    def close(self) -> None:
         ...
 
 
@@ -124,8 +172,43 @@ class LoopbackSink:
         self.written_frames.append(bytes(data))
         return len(data)
 
+    def flush(self) -> None:
+        pass
+
     def close(self) -> None:
         self.closed = True
+
+
+class WindowsSerialSink:
+    """Standard serial sink for real COM ports using pyserial when invoked by operator."""
+
+    def __init__(self, port: str, baudrate: int = 115200, timeout: float = 2.0):
+        try:
+            import serial
+        except ImportError:
+            raise IOError("pyserial is not installed")
+
+        self.serial = serial.Serial(
+            port=port,
+            baudrate=baudrate,
+            bytesize=serial.EIGHTBITS,
+            parity=serial.PARITY_NONE,
+            stopbits=serial.STOPBITS_ONE,
+            xonxoff=False,
+            rtscts=False,
+            dsrdtr=False,
+            timeout=timeout,
+            write_timeout=timeout,
+        )
+
+    def write(self, data: bytes) -> int:
+        return self.serial.write(data)
+
+    def flush(self) -> None:
+        self.serial.flush()
+
+    def close(self) -> None:
+        self.serial.close()
 
 
 @dataclass
@@ -145,7 +228,7 @@ class CdmSender:
         self,
         device_alias: str,
         state_store: StateStore,
-        auto_initialize: bool = False,
+        lock_dir: Path | None = None,
         sink_factory: Callable[[], SerialSink] | None = None,
     ):
         self.device_alias = device_alias
@@ -153,31 +236,41 @@ class CdmSender:
         self.sink_factory = sink_factory
         self.last_connect_time = 0.0
 
-        # Check existing state
+        # Acquire lock if lock_dir is given
+        self._lock = None
+        if lock_dir:
+            lock_path = lock_dir / f"{device_alias}.lock"
+            self._lock = DeviceLock(lock_path)
+            self._lock.acquire()
+
+        # Check existing state strictly; must NOT auto-init or recreate
         self._state = self.state_store.load(device_alias)
-        if self._state is None:
-            if auto_initialize:
-                self._state = self.state_store.initialize_new(device_alias, initial_sequence=0)
-            else:
-                raise SenderStateError(
-                    f"STATE_UNINITIALIZED: No state found for {device_alias}. Explicit confirmation required."
-                )
+
+    def close(self) -> None:
+        if self._lock:
+            self._lock.release()
+            self._lock = None
 
     @property
     def current_sequence(self) -> int:
-        return self._state.next_sequence
+        # Always verify state store is intact
+        persisted = self.state_store.load(self.device_alias)
+        return persisted.next_sequence
 
     def reserve_next_sequence(self) -> int:
         """Atomically reserve and persist the next sequence number BEFORE write."""
-        seq_to_use = self._state.next_sequence
+        # 1. Re-read from disk to detect any runtime state deletion or external tampering
+        persisted = self.state_store.load(self.device_alias)
+        seq_to_use = persisted.next_sequence
 
-        # Calculate next sequence with 32-bit wrap-around
+        # 2. Increment with 32-bit wrap-around
         next_seq = (seq_to_use + 1) & MAX_SEQUENCE
-        self._state.next_sequence = next_seq
-        self._state.updated_at = time.time()
+        persisted.next_sequence = next_seq
+        persisted.updated_at = time.time()
 
-        # Atomic persist BEFORE return
-        self.state_store.save_atomic(self._state)
+        # 3. Save atomically BEFORE return
+        self.state_store.save_atomic(persisted)
+        self._state = persisted
         return seq_to_use
 
     def transmit_payload(
@@ -185,15 +278,37 @@ class CdmSender:
         payload: dict[str, Any],
         sent_at: str,
         sink: SerialSink | None = None,
+        reference_time: str | None = None,
     ) -> SendOutcome:
         """Reserve sequence, construct frame, and write to sink. Failed write consumes sequence."""
-        # 1. Reserve sequence atomically FIRST
-        seq = self.reserve_next_sequence()
+        # Check that state store still exists before reserving
+        if not self.state_store.exists():
+            return SendOutcome(
+                success=False,
+                sequence_used=-1,
+                bytes_sent=0,
+                frame={},
+                error_code="STATE_LOST",
+                error_message="Sender state was lost/deleted during runtime",
+            )
+
+        # 1. Reserve sequence atomically FIRST (will fail-closed if state file was deleted/corrupted)
+        try:
+            seq = self.reserve_next_sequence()
+        except SenderStateError as exc:
+            return SendOutcome(
+                success=False,
+                sequence_used=-1,
+                bytes_sent=0,
+                frame={},
+                error_code="STATE_FAILURE",
+                error_message=str(exc),
+            )
 
         # 2. Build and encode frame
         try:
-            frame = build_frame(payload, sequence=seq, sent_at=sent_at)
-            raw_bytes = encode_frame(frame)
+            frame = build_frame(payload, sequence=seq, sent_at=sent_at, reference_time=reference_time)
+            raw_bytes = encode_frame(frame, reference_time=reference_time)
         except Exception as exc:
             return SendOutcome(
                 success=False,
@@ -222,6 +337,7 @@ class CdmSender:
         # 4. Write
         try:
             written = target_sink.write(raw_bytes)
+            target_sink.flush()
             if written != len(raw_bytes):
                 return SendOutcome(
                     success=False,
@@ -238,7 +354,7 @@ class CdmSender:
                 frame=frame,
             )
         except Exception as exc:
-            # Note: Sequence is already consumed as required by contract
+            # Sequence is consumed as required by contract
             return SendOutcome(
                 success=False,
                 sequence_used=seq,
