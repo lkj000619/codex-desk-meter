@@ -62,6 +62,22 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
 
 ## 현재 다음 행동
 
+2026-10-08 22:32 KST 재개: coordinator는 `term_ce8a35be-a6e6-4508-aba9-5c5400b95a21`,
+runtime은 `711c48c3-d114-4035-9ff7-3748588b6783`이다. 원래 coordinator/런타임을 현재로 가정하지 않는다.
+GUI의 이전 `ctx_28254a047a7d`는 native 재시작 복구에서 `terminal_missing`으로 failed/revoked되었다.
+대상 worktree terminal 목록과 기존 Luna 프로세스가 없는 것도 확인했다. 기존 6개 시안·handoff,
+요구 검토 보고서는 보존되었고 frozen hash 57개가 일치했다. 이전 GUI attempt는 시작 checkpoint만
+남겼으며 비교 화면/스크린샷/검증 보고는 작성하지 못했다.
+
+재시작이 Task를 ready로 복구한 반면 최신 Dispatch는 failed여서 첫 retry-of preflight가 거부됐다.
+coordinator가 이 같은 Task의 상태를 실제 실패에 맞춘 뒤 retry-of로 `ctx_35a7c601f1d6`에 연결했다.
+새 terminal `term_079881f4-f92c-464b-a856-21274157b8c1`의 Codex 0.159.2 / GPT-6-Luna / YOLO
+header를 확인했다. 입력이 draft에 남은 것을 worker-read로 확인해 Enter만 한 번 보냈다.
+현재 native 상태·mail을 다시 확인하고, GUI 브라우저 검증·비교 화면 제출을 기다린다.
+preview server는 127.0.0.1:8289에 다시 시작했고 served context의 Run/branch가 일치했다.
+
+아래는 중단 직전 이력이다. 위 재개 상태와 native checkpoint를 우선한다.
+
 2026-10-08 02:31 KST 체크포인트:
 
 - OpenDesign 준비 `task_1a7eaeade56c` / `ctx_3827dfbe5be1`는 수락 완료다.

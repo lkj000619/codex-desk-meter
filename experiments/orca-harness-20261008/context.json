@@ -2,6 +2,8 @@
   "cohort": "orca-harness-20261008",
   "run_id": "run_c968c43361da",
   "coordinator_handle": "term_c1752a58-5861-435e-ab3a-c99caaa61b14",
+  "resumed_coordinator_handle": "term_ce8a35be-a6e6-4508-aba9-5c5400b95a21",
+  "resumed_runtime_id": "711c48c3-d114-4035-9ff7-3748588b6783",
   "worktree_id": "ce5556c0-b87c-4c5f-9bac-6e1fa3f0faf2::C:/Users/이광진/orca/workspaces/codex-desk-meter/experiment-orca-harness-20261008",
   "branch": "lkj000619/experiment-orca-harness-20261008",
   "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
@@ -17,8 +19,8 @@
   "preview_server": {
     "url": "http://localhost:8289/opendesign/",
     "bind": "127.0.0.1",
-    "launcher_pid": 37732,
-    "listener_pid": 37036,
+    "launcher_pid": 31708,
+    "listener_pid": 27572,
     "owner": "coordinator",
     "verified_workspace": "Context endpoint matches this Run and branch; viewer returns HTTP 200.",
     "resume_rule": "Probe the listener and served context again; never infer current liveness from these stored PIDs."

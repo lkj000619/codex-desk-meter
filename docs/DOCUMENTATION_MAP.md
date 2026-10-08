@@ -10,6 +10,9 @@
 | 보드 핀·극성·SDK·허용 제조사 source | [동결 보드 자료](hardware/version-2-capabilities.md) |
 | 보존 입력·SHA-256 | [입력 목록](../experiments/orca-harness-20261008/frozen-inputs.json) |
 | Orca Run·worktree·사용자 확정 사항 | [실험 식별자](../experiments/orca-harness-20261008/context.json) |
+| Gemini GUI 후보 A/B/C·LCD 구현 인계 | [Gemini handoff](design/lcd/gemini/handoff.md) |
+| Codex Sol 6.1 GUI 후보 D/E/F·LCD 구현 인계 | [Sol 6.1 handoff](design/lcd/sol61/handoff.md) |
+| 독립 요구·인터페이스 검토와 합격 기준 | [Luna 검토](agent-runs/orca-luna/requirements-review.md) |
 
 `docs/PRODUCT_CONTRACT.md`와 57개 원본 입력은 수정하지 않는다. 이번 실험의 live 수집과
 협업 실행 변경은 협업 설계가 소유한다. 구현 보고서와 검증 보고서는 각각 실제 역할 작업에
