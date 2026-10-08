@@ -11,10 +11,10 @@
 | 별도 Orca worktree·입력 보존 | 완료 | 실제 branch 생성, 57개 입력 바이트/hash 일치, 과거 제품 제거는 새 checkout에만 적용 |
 | 사용자 범위·역할 확정 | 완료 | Sol/Flash/Luna, GUI는 AGY Gemini 3개+Codex CLI gpt-6.1-sol 3개, 세션 토큰+quota 확인 |
 | 역할별 기술 검토·DAG | 초기 요구·인터페이스 보고 수락 완료 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
-| LCD UX/UI·OpenDesign | B 보완 제출 후 Luna 독립 재검증 중 (`ctx_c9524d9d2327`) | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
-| PC 프로그램 구현 | 최초 초안 제출·13개 시험 재실행 통과, 핵심 누락 재현 후 AGY 보완 중 (`task_3963de21ddd1`) | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
-| firmware·통합 | Task `task_b1214421a314` 준비; B 독립 재검증 수락 후 시작 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
-| 독립 검증·수정 | 예정 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
+| LCD UX/UI·OpenDesign | B 첫 독립 재검증 FAIL 보존 (`3929925`); 실제 JS 캐시 수정 `task_57d8de5426b5` 진행 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
+| PC 프로그램 구현 | runtime 보완 제출 보존 (`7264e76`); 32개 시험 중 Windows 종료 시험 1개 실패·오류 aging/privacy 결함 보완 `task_c6f6d8f00810` | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
+| firmware·통합 | Task `task_b1214421a314` native blocked; B 독립 재검증 PASS 후 ready로 변경·시작 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
+| 독립 검증·수정 | `task_4d49e747c570` native blocked; 최신 PC 보완 검증과 firmware 제출 후 시작 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
 | 업로드·owner-only live·실물 관측 | 예정 | 동결 binary/hash·COM3 수신·LCD/BOOT·30초·단절/복구·지연 근거 |
 | 결과·실행 정리 | 예정 | 판정·미측정·실효 모델·시간/token coverage·질문·실패 기록, worker 소유권 정리 |
 
@@ -37,10 +37,13 @@
 - [x] GUI 독립 브라우저 검증·비교 화면 Task 시작
 - [x] GUI 후보 6개 브라우저 검토·보고 수락·사용자 비교 화면 제시 (발견 결함은 선택 B 보완으로 연결)
 - [x] 사용자 선택(B · Swiss Studio Meter)과 구현 인터페이스 확정
-- [ ] 선택 B의 last-good·두 토큰 합계·가변 quota 목록 보완 (`task_f61c79e5c906`)
-- [ ] 선택 B 독립 재검증 (`task_0d62e820abfa`); firmware 시작의 추가 coordinator gate
+- [x] 선택 B 첫 보완 제출·독립 재검증 FAIL 원본 보존: Unknown/Waiting 전환 시 last-good 유실
+- [ ] 선택 B 실제 JS 회귀 검사와 캐시 수정 (`task_57d8de5426b5` / `ctx_fa13d9a20591`)
+- [ ] 같은 선택 B 검증 Task `task_0d62e820abfa`를 failed `ctx_c9524d9d2327`의 retry-of로 재검증; PASS가 firmware 시작 gate
 - [x] PC 수집기 구현 Task/Dispatch 시작 (`ctx_e7bb307f023b`); 완료·검증은 별도
 - [x] PC 최초 제출 보존·실제 native event/시각/quota/state 유실 결함 재현 및 보완 연결 (`ctx_221ff3735dae`)
+- [x] PC runtime 보완 제출 `ctx_4308689007a9` 보존·worker release/Delivery ack; 제출과 실제 품질 판정 구분
+- [ ] PC 오류 aging·경로 비노출·source별 캐시·초기화·실제 Windows crash 시험 보완 (`task_c6f6d8f00810`)
 - [ ] PC·firmware 구현 및 host 통합 검증
 - [ ] 독립 결함 수정·제품 commit/binary 동결
 - [ ] COM3 업로드·fixture/live·사용자 실물 관측

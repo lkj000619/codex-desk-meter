@@ -39,3 +39,29 @@ coordinator의 25개 시험 재실행도 통과했다. native event·관측 시�
 
 이 항목은 작은 단위 시험 개수를 늘리는 것으로 해결되지 않는다. 실제 production watch/RPC/cache
 경로를 fake stream·transport로 호출하는 시험을 추가하고, 독립 통합 검증 전에 처리한다.
+
+## Runtime 보완 제출 후 실제 재검증 (2026-10-08 23:50 KST)
+
+`task_2b005e480abd` / `ctx_4308689007a9`의 제출은 `7264e76`에 보존했다.
+수동 입력 scheduler, bounded RPC, source cache와 OS lock이 추가됐지만, coordinator가
+ESP-IDF Python venv에서 실제 32개 시험을 재실행한 결과 Windows lock-owner crash 후
+재취득 시험 1개가 실패했다. venv launcher와 실제 잠금 소유 프로세스를 구분해 원인과
+정리 방식을 검증해야 한다. 제출자의 32개 PASS는 coordinator 검증 결과와 구분한다.
+
+`SharedCollectionState.collect_all`을 직접 호출한 synthetic 재현에서, 정상 session
+관측 후 파일을 지우고 source age가 정확히 300초인 reference로 다시 호출하면 기존 값과
+관측 시각은 보존되지만 `stale=false`로 남고 `error_reason`에 전체 로컬 경로가 포함됐다.
+동결 multi-provider/personal/global fixture를 실제 collect→build_frame으로 전달한 경로는
+유효했으나, 실패 경로의 source identity·미존재 파일·여러 entry 캐시·cold error는 추가 수정 대상이다.
+
+`task_c6f6d8f00810` / `ctx_b3dca8602ce8`에서 같은 PC 담당 역할이 아래를 보완한다.
+
+- 오류에도 원본 관측 시각을 기준으로 300초 stale 처리하고 wire 오류에 개인 경로를 넣지 않음.
+- 선택한 session이 바뀌면 이전 session 캐시를 잘못 귀속시키지 않고, provider별 캐시를 보존함.
+- 선택한 personal/global 파일이 없어져도 조용히 생략하지 않고 기존값·정확한 오류를 유지함.
+- cold error의 metric/provenance와 global capture unknown을 보존함.
+- receiver-empty 확인·활성 sender 충돌·load 실패 후 잠금 해제·안전한 alias·영속 필드 검증.
+- 실제 Windows 잠금 소유 프로세스를 종료하는 시험과 필요한 production 경로 회귀 검사.
+
+PC 최신 수정 검증과 firmware build가 끝나기 전 통합 검증 Task는 native blocked로 유지한다.
+COM·실계정·LCD·24시간 안정성은 아직 시험하지 않았다.

@@ -64,6 +64,26 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
 
 2026-10-08 사용자 B 선택 후 다음 단계:
 
+23:50 KST 현재 상태 (아래 이전 기록보다 우선):
+
+- B 첫 독립 재검증은 `ctx_c9524d9d2327` / `msg_f5a7f8569dcd`의 accepted FAIL이다.
+  원본 보고·새 캡처·비교 화면은 `3929925`에 보존했다. release/Delivery ack 완료.
+  Gemini 수정 Task `task_57d8de5426b5`의 첫 시작 `ctx_3981f6fc50c1`은 기존 terminal의
+  agent_readiness timeout으로 native failed, 입력 미전달이었다. exact process 변경 오류도
+  확인해 같은 Task를 새 AGY terminal `term_ec83b425-2b30-4717-9ed0-48be7014e29e`와
+  `ctx_fa13d9a20591`로 retry-of했다. 실제 작업/read 및 native live 확인; 파일 중복 작성자는 없다.
+  제출 뒤 B 검증 Task `task_0d62e820abfa`를 `--retry-of ctx_c9524d9d2327`로 재개한다.
+  앞선 coordinator reply는 이전 FAIL을 마무리하라는 답변이므로 새 검증 판정으로 오해하지 않는다.
+- PC `task_2b005e480abd` / `ctx_4308689007a9`의 runtime 보완 제출은 accepted 성공,
+  release/ack 완료이고 `7264e76`에 보존했다. 실제 coordinator 재검증은 32개 중 Windows
+  lock-owner crash 시험 1개 실패다. cached error 300초 stale=false와 wire 경로 노출도 재현했다.
+  source별 캐시·privacy·미존재 파일·초기화·실제 Windows crash 검증을 `task_c6f6d8f00810`에서
+  보완한다. 이전 제출의 32개 PASS 주장만으로 검증 완료하지 않는다.
+- firmware `task_b1214421a314`, 통합 검증 `task_4d49e747c570`는 native blocked다.
+  B 실제 JS/브라우저 검증 PASS 후 firmware ready·dispatch, 최신 PC 보완 확인과 firmware
+  실제 idf build 후 통합 검증 ready·dispatch한다. Task deps 편집은 CLI가 지원하지 않으므로
+  blocked 상태와 이 명시적 추가 gate를 함께 사용한다. COM/live/제품 완료는 아직 아니다.
+
 23:20 KST 현재 단계가 아래 초기 wave 상태보다 우선한다:
 
 - PC 최초 제출 `msg_7524372e819c` 수락·외부 terminal release/Delivery ack 완료.

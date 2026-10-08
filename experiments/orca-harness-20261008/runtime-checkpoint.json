@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-08T14:22:55.2709208Z",
+    "observed_at":  "2026-10-08T14:50:17.8136292Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -56,20 +56,48 @@
                   {
                       "id":  "task_b1214421a314",
                       "title":  "Build ESP32-S3 firmware with selected B GUI and real receiver",
-                      "status":  "ready",
+                      "status":  "blocked",
                       "deps":  "[\"task_f61c79e5c906\"]",
                       "completed_at":  null
                   },
                   {
                       "id":  "task_0d62e820abfa",
                       "title":  "Verify corrected selected B and preserve initial GUI evidence",
-                      "status":  "dispatched",
+                      "status":  "failed",
                       "deps":  "[\"task_f61c79e5c906\"]",
-                      "completed_at":  null
+                      "completed_at":  "2026-10-08T14:36:42.630Z"
                   },
                   {
                       "id":  "task_3963de21ddd1",
                       "title":  "Complete PC collector native format, real transport and recovery",
+                      "status":  "completed",
+                      "deps":  "[]",
+                      "completed_at":  "2026-10-08T14:25:21.247Z"
+                  },
+                  {
+                      "id":  "task_4d49e747c570",
+                      "title":  "Verify actual PC-to-C firmware integration and product requirements",
+                      "status":  "blocked",
+                      "deps":  "[\"task_3963de21ddd1\",\"task_b1214421a314\"]",
+                      "completed_at":  null
+                  },
+                  {
+                      "id":  "task_2b005e480abd",
+                      "title":  "Finish PC watch scheduler, bounded RPC and per-source cache",
+                      "status":  "completed",
+                      "deps":  "[]",
+                      "completed_at":  "2026-10-08T14:41:23.549Z"
+                  },
+                  {
+                      "id":  "task_57d8de5426b5",
+                      "title":  "Selected B cache transition and actual JS regression correction",
+                      "status":  "dispatched",
+                      "deps":  "[]",
+                      "completed_at":  null
+                  },
+                  {
+                      "id":  "task_c6f6d8f00810",
+                      "title":  "PC preserve source identity privacy and Windows crash verification",
                       "status":  "dispatched",
                       "deps":  "[]",
                       "completed_at":  null
@@ -77,15 +105,93 @@
               ],
     "workers":  [
                     {
-                        "task_id":  "task_3963de21ddd1",
-                        "dispatch_id":  "ctx_221ff3735dae",
-                        "terminal_handle":  "term_d3b622cf-1791-4afc-a013-2cf7482bb57d",
+                        "task_id":  "task_c6f6d8f00810",
+                        "dispatch_id":  "ctx_b3dca8602ce8",
+                        "terminal_handle":  "term_39c072ad-cf9b-4974-84a0-baa02d99974f",
                         "state":  "ready",
                         "dispatch_status":  "dispatched",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791469361980,
+                                         "observedAt":  1791471017510,
                                          "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_57d8de5426b5",
+                        "dispatch_id":  "ctx_fa13d9a20591",
+                        "terminal_handle":  "term_ec83b425-2b30-4717-9ed0-48be7014e29e",
+                        "state":  "ready",
+                        "dispatch_status":  "dispatched",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791471015895,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_57d8de5426b5",
+                        "dispatch_id":  "ctx_3981f6fc50c1",
+                        "terminal_handle":  "term_e76b560d-95f1-4b6a-a240-c467ccc8e837",
+                        "state":  "failed",
+                        "dispatch_status":  "failed",
+                        "liveness":  {
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  null,
+                        "release_state":  null
+                    },
+                    {
+                        "task_id":  "task_2b005e480abd",
+                        "dispatch_id":  "ctx_4308689007a9",
+                        "terminal_handle":  "term_d3b622cf-1791-4afc-a013-2cf7482bb57d",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791470499633,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_3963de21ddd1",
+                        "dispatch_id":  "ctx_221ff3735dae",
+                        "terminal_handle":  "term_d3b622cf-1791-4afc-a013-2cf7482bb57d",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
+                        "liveness":  {
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
@@ -100,11 +206,11 @@
                         "task_id":  "task_0d62e820abfa",
                         "dispatch_id":  "ctx_c9524d9d2327",
                         "terminal_handle":  "term_079881f4-f92c-464b-a856-21274157b8c1",
-                        "state":  "ready",
-                        "dispatch_status":  "dispatched",
+                        "state":  "failed",
+                        "dispatch_status":  "failed",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791469342756,
+                                         "observedAt":  1791470211515,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -123,9 +229,9 @@
                         "state":  "succeeded",
                         "dispatch_status":  "completed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791468941100,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "stale_status",
+                                         "observedAt":  1791468941100
                                      },
                         "next_action":  {
                                             "kind":  "none",
