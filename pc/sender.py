@@ -1,12 +1,11 @@
-"""Persistent sequence reservation, single-sender lock, and serial sender state machine.
+"""Persistent sequence reservation, OS-level single-sender lock, and serial sender state machine.
 
 Contract rules:
 - uint32 sequence reservation is ATOMICALLY persisted BEFORE any write.
 - A failed write consumes the sequence number.
 - State loss or corruption stops transmission immediately (fail-closed, never re-creates).
-- Single-sender locking per device alias.
-- Reconnection attempts at most once per second.
-- Transmit within 5s of available port.
+- Single-sender locking per device alias using OS-held locks (msvcrt / fcntl) released on process exit/crash.
+- initialize_new refuses silent overwrite if an existing state is present without explicit confirmed replacement.
 - Host write receipt is not device ACK (labeled "HOST WRITE").
 """
 
@@ -14,6 +13,7 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 import tempfile
 import time
 from dataclasses import dataclass
@@ -104,8 +104,23 @@ class StateStore:
                 os.remove(temp_name)
             raise SenderStateError(f"STATE_PERSIST_FAILED: {exc}") from exc
 
-    def initialize_new(self, device_alias: str, initial_sequence: int = 0) -> DeviceSequenceState:
-        """Explicit confirmed initialization for new receiver."""
+    def initialize_new(
+        self,
+        device_alias: str,
+        initial_sequence: int = 0,
+        confirmed_overwrite: bool = False,
+    ) -> DeviceSequenceState:
+        """Explicit confirmed initialization for new receiver. Refuses silent overwrite."""
+        if not isinstance(device_alias, str) or not device_alias.strip():
+            raise SenderStateError("Invalid device alias")
+        if not isinstance(initial_sequence, int) or isinstance(initial_sequence, bool) or not (0 <= initial_sequence <= MAX_SEQUENCE):
+            raise SenderStateError(f"Initial sequence must be uint32 in [0, {MAX_SEQUENCE}]")
+
+        if self.state_file.exists() and not confirmed_overwrite:
+            raise SenderStateError(
+                f"STATE_ALREADY_EXISTS: State file {self.state_file} already exists. Refusing silent overwrite without confirmed replacement."
+            )
+
         state = DeviceSequenceState(
             device_alias=device_alias,
             next_sequence=initial_sequence,
@@ -116,7 +131,7 @@ class StateStore:
 
 
 class DeviceLock:
-    """File-based single-sender lock for a device alias."""
+    """OS-level single-sender lock released automatically on process death/crash."""
 
     def __init__(self, lock_file: Path):
         self.lock_file = lock_file
@@ -125,25 +140,47 @@ class DeviceLock:
     def acquire(self) -> None:
         self.lock_file.parent.mkdir(parents=True, exist_ok=True)
         try:
-            # Atomic exclusive creation
-            self._fd = os.open(str(self.lock_file), os.O_CREAT | os.O_EXCL | os.O_RDWR)
-            pid = str(os.getpid()).encode("utf-8")
-            os.write(self._fd, pid)
-        except FileExistsError:
-            raise SenderLockError(f"Device lock already held: {self.lock_file}")
+            self._fd = os.open(str(self.lock_file), os.O_CREAT | os.O_RDWR)
+        except Exception as exc:
+            raise SenderLockError(f"Cannot open lock file: {exc}")
+
+        if sys.platform == "win32":
+            import msvcrt
+            try:
+                # Lock 1 byte non-blocking
+                msvcrt.locking(self._fd, msvcrt.LK_NBLCK, 1)
+            except OSError as exc:
+                os.close(self._fd)
+                self._fd = None
+                raise SenderLockError(f"Device lock already held by another process: {self.lock_file}") from exc
+        else:
+            import fcntl
+            try:
+                fcntl.flock(self._fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except OSError as exc:
+                os.close(self._fd)
+                self._fd = None
+                raise SenderLockError(f"Device lock already held by another process: {self.lock_file}") from exc
 
     def release(self) -> None:
         if self._fd is not None:
             try:
+                if sys.platform == "win32":
+                    import msvcrt
+                    try:
+                        msvcrt.locking(self._fd, msvcrt.LK_UNLCK, 1)
+                    except Exception:
+                        pass
+                else:
+                    import fcntl
+                    try:
+                        fcntl.flock(self._fd, fcntl.LOCK_UN)
+                    except Exception:
+                        pass
                 os.close(self._fd)
             except Exception:
                 pass
             self._fd = None
-        if self.lock_file.exists():
-            try:
-                self.lock_file.unlink()
-            except Exception:
-                pass
 
 
 class SerialSink(Protocol):
@@ -236,14 +273,12 @@ class CdmSender:
         self.sink_factory = sink_factory
         self.last_connect_time = 0.0
 
-        # Acquire lock if lock_dir is given
         self._lock = None
         if lock_dir:
             lock_path = lock_dir / f"{device_alias}.lock"
             self._lock = DeviceLock(lock_path)
             self._lock.acquire()
 
-        # Check existing state strictly; must NOT auto-init or recreate
         self._state = self.state_store.load(device_alias)
 
     def close(self) -> None:
@@ -253,22 +288,18 @@ class CdmSender:
 
     @property
     def current_sequence(self) -> int:
-        # Always verify state store is intact
         persisted = self.state_store.load(self.device_alias)
         return persisted.next_sequence
 
     def reserve_next_sequence(self) -> int:
         """Atomically reserve and persist the next sequence number BEFORE write."""
-        # 1. Re-read from disk to detect any runtime state deletion or external tampering
         persisted = self.state_store.load(self.device_alias)
         seq_to_use = persisted.next_sequence
 
-        # 2. Increment with 32-bit wrap-around
         next_seq = (seq_to_use + 1) & MAX_SEQUENCE
         persisted.next_sequence = next_seq
         persisted.updated_at = time.time()
 
-        # 3. Save atomically BEFORE return
         self.state_store.save_atomic(persisted)
         self._state = persisted
         return seq_to_use
@@ -281,7 +312,6 @@ class CdmSender:
         reference_time: str | None = None,
     ) -> SendOutcome:
         """Reserve sequence, construct frame, and write to sink. Failed write consumes sequence."""
-        # Check that state store still exists before reserving
         if not self.state_store.exists():
             return SendOutcome(
                 success=False,
@@ -292,7 +322,6 @@ class CdmSender:
                 error_message="Sender state was lost/deleted during runtime",
             )
 
-        # 1. Reserve sequence atomically FIRST (will fail-closed if state file was deleted/corrupted)
         try:
             seq = self.reserve_next_sequence()
         except SenderStateError as exc:
@@ -305,7 +334,6 @@ class CdmSender:
                 error_message=str(exc),
             )
 
-        # 2. Build and encode frame
         try:
             frame = build_frame(payload, sequence=seq, sent_at=sent_at, reference_time=reference_time)
             raw_bytes = encode_frame(frame, reference_time=reference_time)
@@ -319,7 +347,6 @@ class CdmSender:
                 error_message=str(exc),
             )
 
-        # 3. Determine sink
         target_sink = sink
         if target_sink is None and self.sink_factory:
             target_sink = self.sink_factory()
@@ -334,7 +361,6 @@ class CdmSender:
                 error_message="No serial sink provided or available",
             )
 
-        # 4. Write
         try:
             written = target_sink.write(raw_bytes)
             target_sink.flush()
@@ -354,7 +380,6 @@ class CdmSender:
                 frame=frame,
             )
         except Exception as exc:
-            # Sequence is consumed as required by contract
             return SendOutcome(
                 success=False,
                 sequence_used=seq,
