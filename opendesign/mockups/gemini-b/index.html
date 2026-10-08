@@ -484,16 +484,21 @@
 <!-- Preview Control Bar (Outside LCD) -->
 <div class="preview-toolbar">
   <button id="btn-boot-cycle" class="btn-boot" onclick="cycleScreen()">🔘 PRESS BOOT [GPIO0] (Cycle Screen)</button>
-  
+
   <div>
     <label for="state-selector">Simulate State:
       <select id="state-selector" onchange="applyState(this.value)">
         <option value="normal">Normal (Live Synthetic Feed)</option>
-        <option value="source_stale">Source Stale (> 5m observation gap)</option>
-        <option value="disconnected">Disconnected / Receive Stale (USB offline)</option>
-        <option value="unknown">Unknown / Null (Missing parameters)</option>
-        <option value="error">Error / Last-Good Retained</option>
-        <option value="waiting">Waiting Initial (Syncing)</option>
+        <option value="source_stale">Source Stale (>= 300s observation gap, default 301s)</option>
+        <option value="source_stale_299">Source Age 299s (Boundary: Available / Fresh)</option>
+        <option value="source_stale_300">Source Age 300s (Boundary: Stale Threshold)</option>
+        <option value="source_stale_301">Source Age 301s (Boundary: Stale)</option>
+        <option value="disconnected">Disconnected / Receive Stale (Retains Cache)</option>
+        <option value="cold_disconnected">Cold Disconnected (No Cache / Cold Start)</option>
+        <option value="unknown">Unknown / Null (Missing parameters, retains cache internally)</option>
+        <option value="error">Error / Checksum Fault (Retains Cache)</option>
+        <option value="cold_error">Cold Error (No Cache / Cold Start)</option>
+        <option value="waiting">Waiting Initial (Syncing, retains cache internally)</option>
         <option value="recovery">Recovery (Restoring stream)</option>
       </select>
     </label>
@@ -527,7 +532,7 @@
 <!-- Physical LCD Display Housing (820x320) -->
 <div class="lcd-bezel">
   <div id="lcd-screen">
-    
+
     <!-- Top System Header (32px) -->
     <div class="top-bar">
       <div class="brand-tag">
@@ -550,7 +555,7 @@
 
     <!-- VIEW 1: USAGE (Swiss Asymmetric Two-Column Grid) -->
     <div id="view-usage" class="screen-view active">
-      
+
       <!-- Left Column: Quota Windows (430px) -->
       <div class="col-quota">
         <div class="quota-header-row">
@@ -594,7 +599,7 @@
             <div class="eyebrow-label">Session Telemetry</div>
             <div style="font-size:9.5px; font-family:monospace; color:#71717a;" id="session-obs-time">OBS: 17:10:00Z</div>
           </div>
-          
+
           <div style="margin-top: 4px; display:flex; justify-content:space-between; align-items:baseline;">
             <span style="font-size: 10.5px; font-weight: 700;">TOTAL TOKENS (IN+OUT)</span>
             <span class="session-total-display" id="sess-total">141,200</span>
@@ -855,8 +860,8 @@
       statCache.textContent = "VALID 17:10Z";
       document.getElementById("clock-display").textContent = "17:10:00Z";
     }
-    else if (state === "source_stale") {
-      // Source age >= 300s (e.g. 301s), receive age 0s fresh
+    else if (state === "source_stale" || state === "source_stale_301") {
+      // Source age >= 300s (301s boundary: Stale), receive age 0s fresh
       pill.classList.add("warn");
       strip.style.display = "block";
       strip.textContent = "SOURCE STALE: TOKEN OBSERVATION GAP >= 300S (SRC 301S / RCV 0S). PRESERVING OBSERVED DATA.";
@@ -877,12 +882,54 @@
       statRcvAge.textContent = "0s Fresh";
       statCache.textContent = "VALID 17:04Z";
     }
+    else if (state === "source_stale_299") {
+      // Source age 299s boundary: Fresh / Available (< 300s threshold, no warning banner)
+      strip.style.display = "none";
+
+      renderCurrentWindows("normal");
+      updateSessionValues(
+        baseData.session.in,
+        baseData.session.out,
+        baseData.session.cached,
+        baseData.session.reason,
+        baseData.session.total,
+        baseData.session.sourceTotal,
+        "OBS: 17:05:01Z"
+      );
+
+      statLink.textContent = "USB CDC OK";
+      statSrcAge.textContent = "299s (Available)";
+      statRcvAge.textContent = "0s Fresh";
+      statCache.textContent = "VALID 17:05Z";
+    }
+    else if (state === "source_stale_300") {
+      // Source age 300s boundary: Stale threshold reached (>= 300s)
+      pill.classList.add("warn");
+      strip.style.display = "block";
+      strip.textContent = "SOURCE STALE: TOKEN OBSERVATION GAP >= 300S (SRC 300S / RCV 0S). PRESERVING OBSERVED DATA.";
+
+      renderCurrentWindows("normal");
+      updateSessionValues(
+        baseData.session.in,
+        baseData.session.out,
+        baseData.session.cached,
+        baseData.session.reason,
+        baseData.session.total,
+        baseData.session.sourceTotal,
+        "OBS: 17:05:00Z"
+      );
+
+      statLink.textContent = "USB CDC OK";
+      statSrcAge.textContent = "300s (Stale)";
+      statRcvAge.textContent = "0s Fresh";
+      statCache.textContent = "VALID 17:05Z";
+    }
     else if (state === "disconnected") {
       pill.classList.add("error");
       strip.style.display = "block";
 
       if (lastGoodCache.hasCache) {
-        // True cache retained with original observed timestamp; no fake fresh timestamp!
+        // True cache retained with original observed timestamp (OBS 17:10:00Z); no fake fresh timestamp!
         strip.textContent = "DISCONNECTED: USB LINK DOWN. LAST-GOOD VALUES PRESERVED (OBS " + lastGoodCache.observedTime + ").";
         renderCurrentWindows("retained");
         updateSessionValues(
@@ -895,35 +942,46 @@
           "OBS: " + lastGoodCache.observedTime
         );
         statCache.textContent = "LAST-GOOD RETAINED";
+        statSrcAge.textContent = "301s";
       } else {
-        // No cache available!
+        // No cache available (cold disconnected)
         strip.textContent = "DISCONNECTED: USB LINK DOWN. NO PRIOR CACHE AVAILABLE.";
         renderBlankValues();
         statCache.textContent = "NO CACHE";
+        statSrcAge.textContent = "Unknown";
       }
 
       statLink.textContent = "LINK DOWN";
-      statSrcAge.textContent = lastGoodCache.hasCache ? "301s" : "Unknown";
       statRcvAge.textContent = "301s (Timeout)";
+    }
+    else if (state === "cold_disconnected") {
+      pill.classList.add("error");
+      strip.style.display = "block";
+      strip.textContent = "DISCONNECTED: USB LINK DOWN. NO PRIOR CACHE AVAILABLE (COLD START).";
+      renderBlankValues();
+
+      statLink.textContent = "LINK DOWN";
+      statSrcAge.textContent = "Unknown";
+      statRcvAge.textContent = "301s (Timeout)";
+      statCache.textContent = "NO CACHE";
     }
     else if (state === "unknown") {
       strip.style.display = "block";
-      strip.textContent = "UNKNOWN / NULL: UPSTREAM FIELDS MISSING. CACHE INVALIDATED.";
-      // Unknown wipes out cache
-      lastGoodCache.hasCache = false;
+      strip.textContent = "UNKNOWN / NULL: UPSTREAM FIELDS MISSING. RENDERING PLACEHOLDERS.";
+      // F1 Fix: Unknown renders placeholders but preserves lastGoodCache internally!
       renderBlankValues();
 
       statLink.textContent = "USB CDC OK";
       statSrcAge.textContent = "Unknown";
       statRcvAge.textContent = "0s Nominal";
-      statCache.textContent = "NO CACHE (NULL)";
+      statCache.textContent = lastGoodCache.hasCache ? "CACHED (HIDDEN)" : "NO CACHE (NULL)";
     }
     else if (state === "error") {
       pill.classList.add("error");
       strip.style.display = "block";
 
       if (lastGoodCache.hasCache) {
-        // Deterministic cache semantics: retain previous good values and original observation time
+        // Deterministic cache semantics: retain previous good values and original observation time (OBS 17:10:00Z)
         strip.textContent = "ERROR: CHECKSUM FAULT. RETAINING LAST-GOOD STATE (OBS " + lastGoodCache.observedTime + ").";
         renderCurrentWindows("retained");
         updateSessionValues(
@@ -938,7 +996,7 @@
         statCache.textContent = "LAST-GOOD RETAINED";
         statSrcAge.textContent = "60s";
       } else {
-        // Crucial F1 fix: If entering Error after Unknown (no cache), do NOT pretend last-good is retained!
+        // Explicit cold/un-cached error
         strip.textContent = "ERROR: CHECKSUM FAULT. NO PRIOR CACHE AVAILABLE TO RETAIN.";
         renderBlankValues();
         statCache.textContent = "NO CACHE";
@@ -948,16 +1006,27 @@
       statLink.textContent = "CRC ERROR";
       statRcvAge.textContent = "60s Stale";
     }
+    else if (state === "cold_error") {
+      pill.classList.add("error");
+      strip.style.display = "block";
+      strip.textContent = "ERROR: CHECKSUM FAULT. NO PRIOR CACHE AVAILABLE (COLD START).";
+      renderBlankValues();
+
+      statLink.textContent = "CRC ERROR";
+      statSrcAge.textContent = "Unknown";
+      statRcvAge.textContent = "60s Stale";
+      statCache.textContent = "NO CACHE";
+    }
     else if (state === "waiting") {
       strip.style.display = "block";
       strip.textContent = "WAITING: INITIALIZING / ESTABLISHING CDM-1 PROTOCOL...";
-      lastGoodCache.hasCache = false;
+      // F1 Fix: Waiting renders waiting values but preserves lastGoodCache internally!
       renderWaitingValues();
 
       statLink.textContent = "WAITING";
       statSrcAge.textContent = "--";
       statRcvAge.textContent = "--";
-      statCache.textContent = "NO CACHE";
+      statCache.textContent = lastGoodCache.hasCache ? "CACHED (INITIALIZING)" : "NO CACHE";
     }
     else if (state === "recovery") {
       strip.style.display = "block";
@@ -996,7 +1065,7 @@
     const w1 = windows[startIdx];
     const w2 = windows[startIdx + 1];
 
-    document.getElementById("quota-page-badge").textContent = 
+    document.getElementById("quota-page-badge").textContent =
       `WIN ${startIdx + 1}-${Math.min(startIdx + 2, windows.length)} / ${windows.length}`;
 
     if (mode === "blank") {
