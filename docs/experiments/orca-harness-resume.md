@@ -64,6 +64,20 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
 
 2026-10-08 사용자 B 선택 후 다음 단계:
 
+2026-10-09 00:09 KST:
+
+- B 캐시 수정은 `msg_fcb3c39c988d`로 제출 수락·release/ack됐고 `a3aeebb`에 보존했다.
+  coordinator의 actual JS Node VM 회귀 검사 및 shared static 검사도 통과했다.
+  Luna 검증 Task `task_0d62e820abfa`는 같은 terminal에서 `--retry-of ctx_c9524d9d2327`를
+  사용해 `ctx_fbf6b4c142f4`로 재개했고 native turnStart=observed다. 완료까지 기다린다.
+  첫 FAIL은 `3929925`의 원본 판정이며 새 retry에서 날짜·근거를 붙여 정정한다.
+- firmware core는 `task_b1214421a314` / `ctx_d5c857a3d228`의 실제 Sol 6 working/live다.
+  terminal `term_e949afe5-d263-4f89-950b-3cca8cc9520f`에서 custom argv, YOLO header와
+  native model을 확인했다. paste가 draft에 남아 Enter만 한 번 전송했으며 중복 Dispatch는 없다.
+  `docs/agent-runs/orca-sol/checkpoint.md`에 실제 다음 작업을 기록했다. 최종 GUI gate는 유지한다.
+- PC `ctx_b3dca8602ce8`는 구현 단계 heartbeat를 보냈다. 아직 제출·검증되지 않았으므로
+  파일 변경만으로 완료하지 않는다. 통합 검증 Task는 native blocked다.
+
 2026-10-09 00:02 KST 순서 조정 (아래 시작 차단 기록보다 우선):
 
 - Sol core는 사용자 선택 B 및 확정된 C/wire/보드 계약에 따라 병행 구현한다.

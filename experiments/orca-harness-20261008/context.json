@@ -79,27 +79,28 @@
     },
     "selected_b_review": {
       "task_id": "task_0d62e820abfa",
-      "dispatch_id": "ctx_c9524d9d2327",
+      "dispatch_id": "ctx_fbf6b4c142f4",
       "terminal": "term_079881f4-f92c-464b-a856-21274157b8c1",
-      "status": "Accepted FAIL; preserve original; retry same Task after cache fix with --retry-of ctx_c9524d9d2327."
+      "status": "running same-Task retry; native turnStart observed",
+      "first_failed_dispatch": "ctx_c9524d9d2327"
     },
     "firmware": {
       "task_id": "task_b1214421a314",
       "additional_coordinator_gate": "Core may proceed in parallel; final selected-B GUI integration and worker_done require independent B PASS. No COM until host integration and artifact freeze.",
-      "status": "core dispatched; input accepted, actual working evidence pending",
+      "status": "core running; native provider codex model gpt-6-sol working/live verified",
       "dispatch_id": "ctx_d5c857a3d228",
       "terminal": "term_e949afe5-d263-4f89-950b-3cca8cc9520f",
       "model": "gpt-6-sol",
       "cli_version": "0.159.2",
       "approval_flag": "--dangerously-bypass-approvals-and-sandbox",
-      "model_evidence": "Actual new CLI header GPT-6-Sol xhigh, YOLO; requested custom argv. Native model status still to observe."
+      "model_evidence": "Actual CLI header GPT-6-Sol xhigh / YOLO and native fleet provider codex/model gpt-6-sol. Draft paste observed; Enter sent exactly once; no task duplicate."
     },
     "selected_b_cache_fix": {
       "task_id": "task_57d8de5426b5",
       "dispatch_id": "ctx_fa13d9a20591",
       "terminal": "term_ec83b425-2b30-4717-9ed0-48be7014e29e",
       "failed_start": "ctx_3981f6fc50c1",
-      "status": "running; actual work observed after same-Task retry of readiness failure"
+      "status": "submitted accepted msg_fcb3c39c988d; root actual JS regression and static check pass; frozen at a3aeebb"
     },
     "integration_review": {
       "task_id": "task_4d49e747c570",

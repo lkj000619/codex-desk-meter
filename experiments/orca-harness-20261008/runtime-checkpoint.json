@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-08T15:03:13.6444260Z",
+    "observed_at":  "2026-10-08T15:10:51.5858673Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -63,9 +63,9 @@
                   {
                       "id":  "task_0d62e820abfa",
                       "title":  "Verify corrected selected B and preserve initial GUI evidence",
-                      "status":  "failed",
+                      "status":  "dispatched",
                       "deps":  "[\"task_f61c79e5c906\"]",
-                      "completed_at":  "2026-10-08T14:36:42.630Z"
+                      "completed_at":  null
                   },
                   {
                       "id":  "task_3963de21ddd1",
@@ -91,9 +91,9 @@
                   {
                       "id":  "task_57d8de5426b5",
                       "title":  "Selected B cache transition and actual JS regression correction",
-                      "status":  "dispatched",
+                      "status":  "completed",
                       "deps":  "[]",
-                      "completed_at":  null
+                      "completed_at":  "2026-10-08T15:07:11.268Z"
                   },
                   {
                       "id":  "task_c6f6d8f00810",
@@ -105,14 +105,35 @@
               ],
     "workers":  [
                     {
+                        "task_id":  "task_0d62e820abfa",
+                        "dispatch_id":  "ctx_fbf6b4c142f4",
+                        "terminal_handle":  "term_079881f4-f92c-464b-a856-21274157b8c1",
+                        "state":  "ready",
+                        "dispatch_status":  "dispatched",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791472251110,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
                         "task_id":  "task_b1214421a314",
                         "dispatch_id":  "ctx_d5c857a3d228",
                         "terminal_handle":  "term_e949afe5-d263-4f89-950b-3cca8cc9520f",
                         "state":  "ready",
                         "dispatch_status":  "dispatched",
                         "liveness":  {
-                                         "verdict":  "unverifiable",
-                                         "reason":  "missing_status"
+                                         "verdict":  "live",
+                                         "observedAt":  1791472248160,
+                                         "source":  "agent_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
@@ -131,7 +152,7 @@
                         "dispatch_status":  "dispatched",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791471790812,
+                                         "observedAt":  1791472243291,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -147,11 +168,11 @@
                         "task_id":  "task_57d8de5426b5",
                         "dispatch_id":  "ctx_fa13d9a20591",
                         "terminal_handle":  "term_ec83b425-2b30-4717-9ed0-48be7014e29e",
-                        "state":  "ready",
-                        "dispatch_status":  "dispatched",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791471788517,
+                                         "observedAt":  1791472045636,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -228,9 +249,8 @@
                         "state":  "failed",
                         "dispatch_status":  "failed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791470211515,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
