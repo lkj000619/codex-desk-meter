@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-08T14:12:33.0836477Z",
+    "observed_at":  "2026-10-08T14:22:55.2709208Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -49,35 +49,82 @@
                   {
                       "id":  "task_f61c79e5c906",
                       "title":  "Correct selected B GUI semantics and dynamic window navigation",
-                      "status":  "dispatched",
+                      "status":  "completed",
                       "deps":  "[]",
-                      "completed_at":  null
+                      "completed_at":  "2026-10-08T14:15:25.975Z"
                   },
                   {
                       "id":  "task_b1214421a314",
                       "title":  "Build ESP32-S3 firmware with selected B GUI and real receiver",
-                      "status":  "pending",
+                      "status":  "ready",
                       "deps":  "[\"task_f61c79e5c906\"]",
                       "completed_at":  null
                   },
                   {
                       "id":  "task_0d62e820abfa",
                       "title":  "Verify corrected selected B and preserve initial GUI evidence",
-                      "status":  "pending",
+                      "status":  "dispatched",
                       "deps":  "[\"task_f61c79e5c906\"]",
+                      "completed_at":  null
+                  },
+                  {
+                      "id":  "task_3963de21ddd1",
+                      "title":  "Complete PC collector native format, real transport and recovery",
+                      "status":  "dispatched",
+                      "deps":  "[]",
                       "completed_at":  null
                   }
               ],
     "workers":  [
                     {
-                        "task_id":  "task_f61c79e5c906",
-                        "dispatch_id":  "ctx_4a4ef944e55c",
-                        "terminal_handle":  "term_e76b560d-95f1-4b6a-a240-c467ccc8e837",
+                        "task_id":  "task_3963de21ddd1",
+                        "dispatch_id":  "ctx_221ff3735dae",
+                        "terminal_handle":  "term_d3b622cf-1791-4afc-a013-2cf7482bb57d",
                         "state":  "ready",
                         "dispatch_status":  "dispatched",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791468719909,
+                                         "observedAt":  1791469361980,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_0d62e820abfa",
+                        "dispatch_id":  "ctx_c9524d9d2327",
+                        "terminal_handle":  "term_079881f4-f92c-464b-a856-21274157b8c1",
+                        "state":  "ready",
+                        "dispatch_status":  "dispatched",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791469342756,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_f61c79e5c906",
+                        "dispatch_id":  "ctx_4a4ef944e55c",
+                        "terminal_handle":  "term_e76b560d-95f1-4b6a-a240-c467ccc8e837",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791468941100,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -96,9 +143,8 @@
                         "state":  "succeeded",
                         "dispatch_status":  "completed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791468729227,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
@@ -116,9 +162,8 @@
                         "state":  "succeeded",
                         "dispatch_status":  "completed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791468327214,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",

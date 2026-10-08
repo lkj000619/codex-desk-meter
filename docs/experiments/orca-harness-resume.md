@@ -64,6 +64,22 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
 
 2026-10-08 사용자 B 선택 후 다음 단계:
 
+23:20 KST 현재 단계가 아래 초기 wave 상태보다 우선한다:
+
+- PC 최초 제출 `msg_7524372e819c` 수락·외부 terminal release/Delivery ack 완료.
+  테스트 13개는 coordinator 재실행에서도 통과했으나 실제 native event가 0으로 읽히는 등의
+  결함을 synthetic probe로 재현했다. 원본 초안·B 최초 보완은 `86286c5`에 보존했다.
+  현재 PC는 같은 AGY terminal의 `task_3963de21ddd1` / `ctx_221ff3735dae`에서 보완 중이다.
+- B 보완 제출 `msg_dfc7bc18e0f1` 수락·release/ack 후 Luna를 같은 live terminal에서
+  `task_0d62e820abfa` / `ctx_c9524d9d2327`로 재사용했다. 실제 turn_start를 확인했다.
+  B의 자체 regression은 문자열/독립 Python 모형만 검사하므로 실제 JS/browser 동작을 검증한다.
+  root가 관련 지시 `msg_3e58562a264f`를 보냈으며 현재 B 재검증을 기다린다.
+- firmware의 추가 coordinator gate(독립 B 재검증 수락)는 유지한다. PC 최초 Task가 완료됐다는
+  이유로 PC 보완이나 품질 검증을 건너뛰지 않는다. 구현 Task의 native 성공은 제출 상태이며
+  C/I/F 제품 합격과 구분한다. live account·COM·LCD 증거는 아직 없다.
+
+아래는 단계별 실행 이력이다.
+
 - PC 구현 `task_fa0b12bd6fda` / `ctx_e7bb307f023b`는 AGY terminal
   `term_d3b622cf-1791-4afc-a013-2cf7482bb57d`에서 실제 working 확인했다.
   CLI 1.3.1 / Gemini 3.8 Flash Medium header, 자동 승인 launch를 확인했다.

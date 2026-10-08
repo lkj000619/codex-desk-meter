@@ -11,8 +11,8 @@
 | 별도 Orca worktree·입력 보존 | 완료 | 실제 branch 생성, 57개 입력 바이트/hash 일치, 과거 제품 제거는 새 checkout에만 적용 |
 | 사용자 범위·역할 확정 | 완료 | Sol/Flash/Luna, GUI는 AGY Gemini 3개+Codex CLI gpt-6.1-sol 3개, 세션 토큰+quota 확인 |
 | 역할별 기술 검토·DAG | 초기 요구·인터페이스 보고 수락 완료 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
-| LCD UX/UI·OpenDesign | 최초 검토·B 선택 완료; 선택 B 보완 실행 중 (`ctx_4a4ef944e55c`) | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
-| PC 프로그램 구현 | AGY Flash 실행 중 (`task_fa0b12bd6fda`) | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
+| LCD UX/UI·OpenDesign | B 보완 제출 후 Luna 독립 재검증 중 (`ctx_c9524d9d2327`) | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
+| PC 프로그램 구현 | 최초 초안 제출·13개 시험 재실행 통과, 핵심 누락 재현 후 AGY 보완 중 (`task_3963de21ddd1`) | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
 | firmware·통합 | Task `task_b1214421a314` 준비; B 독립 재검증 수락 후 시작 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
 | 독립 검증·수정 | 예정 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
 | 업로드·owner-only live·실물 관측 | 예정 | 동결 binary/hash·COM3 수신·LCD/BOOT·30초·단절/복구·지연 근거 |
@@ -40,6 +40,7 @@
 - [ ] 선택 B의 last-good·두 토큰 합계·가변 quota 목록 보완 (`task_f61c79e5c906`)
 - [ ] 선택 B 독립 재검증 (`task_0d62e820abfa`); firmware 시작의 추가 coordinator gate
 - [x] PC 수집기 구현 Task/Dispatch 시작 (`ctx_e7bb307f023b`); 완료·검증은 별도
+- [x] PC 최초 제출 보존·실제 native event/시각/quota/state 유실 결함 재현 및 보완 연결 (`ctx_221ff3735dae`)
 - [ ] PC·firmware 구현 및 host 통합 검증
 - [ ] 독립 결함 수정·제품 commit/binary 동결
 - [ ] COM3 업로드·fixture/live·사용자 실물 관측
