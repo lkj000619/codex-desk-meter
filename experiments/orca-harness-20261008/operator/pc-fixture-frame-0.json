@@ -1,0 +1,11 @@
+{
+  "provenance": "synthetic/frozen fixtures through actual production pc.state.collect_all -> pc.frame.build_frame/encode_frame",
+  "reference_time": "2026-09-11T00:00:00Z",
+  "sequence": 0,
+  "bytes": 3279,
+  "sha256": "a077100ec2382f9f077644b998db57928fe94e50f7622e2f456b5cf3ed77ed24",
+  "usage_count": 4,
+  "personal_percent_numeric_type": "float",
+  "source": "current submitted PC code, latest correction still in progress; this is interface evidence only",
+  "hardware": "not_run"
+}
