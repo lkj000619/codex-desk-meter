@@ -26,7 +26,7 @@
     "name": "Swiss Studio Meter",
     "candidate_path": "opendesign/mockups/gemini-b/index.html",
     "confirmed_by": "Actual user answer on 2026-10-08, not the preselected option.",
-    "implementation_gate": "Correct B review findings and verify selected handoff before firmware GUI integration."
+    "implementation_gate": "Selected B correction and independent PASS required before final firmware GUI integration; independent core work may proceed."
   },
   "preview_server": {
     "url": "http://localhost:8289/opendesign/",
@@ -85,8 +85,14 @@
     },
     "firmware": {
       "task_id": "task_b1214421a314",
-      "additional_coordinator_gate": "Do not start until selected B independent review is accepted, even if native Task is ready.",
-      "status": "native blocked; no COM/firmware work started"
+      "additional_coordinator_gate": "Core may proceed in parallel; final selected-B GUI integration and worker_done require independent B PASS. No COM until host integration and artifact freeze.",
+      "status": "core dispatched; input accepted, actual working evidence pending",
+      "dispatch_id": "ctx_d5c857a3d228",
+      "terminal": "term_e949afe5-d263-4f89-950b-3cca8cc9520f",
+      "model": "gpt-6-sol",
+      "cli_version": "0.159.2",
+      "approval_flag": "--dangerously-bypass-approvals-and-sandbox",
+      "model_evidence": "Actual new CLI header GPT-6-Sol xhigh, YOLO; requested custom argv. Native model status still to observe."
     },
     "selected_b_cache_fix": {
       "task_id": "task_57d8de5426b5",

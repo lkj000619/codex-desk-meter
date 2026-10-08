@@ -64,6 +64,15 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
 
 2026-10-08 사용자 B 선택 후 다음 단계:
 
+2026-10-09 00:02 KST 순서 조정 (아래 시작 차단 기록보다 우선):
+
+- Sol core는 사용자 선택 B 및 확정된 C/wire/보드 계약에 따라 병행 구현한다.
+  `task_b1214421a314`를 ready로 바꿨다. B 독립 PASS 전에는 GUI 최종 통합·worker_done을
+  보류한다. native 통합 검증 Task `task_4d49e747c570`는 계속 blocked이며 B PASS,
+  최신 PC 보완 검증, 실제 firmware build 세 조건을 확인하고 시작한다.
+  선택·의미가 확정된 core 작업을 prototype 캐시 결함 때문에 함께 기다릴 필요가 없어
+  조율자가 실행 순서를 조정했다. 제품 합격·동결·업로드의 검증 조건은 유지한다.
+
 23:50 KST 현재 상태 (아래 이전 기록보다 우선):
 
 - B 첫 독립 재검증은 `ctx_c9524d9d2327` / `msg_f5a7f8569dcd`의 accepted FAIL이다.

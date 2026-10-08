@@ -13,13 +13,18 @@
 | 역할별 기술 검토·DAG | 초기 요구·인터페이스 보고 수락 완료 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
 | LCD UX/UI·OpenDesign | B 첫 독립 재검증 FAIL 보존 (`3929925`); 실제 JS 캐시 수정 `task_57d8de5426b5` 진행 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
 | PC 프로그램 구현 | runtime 보완 제출 보존 (`7264e76`); 32개 시험 중 Windows 종료 시험 1개 실패·오류 aging/privacy 결함 보완 `task_c6f6d8f00810` | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
-| firmware·통합 | Task `task_b1214421a314` native blocked; B 독립 재검증 PASS 후 ready로 변경·시작 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
+| firmware·통합 | Task `task_b1214421a314` core 구현 준비; B PASS 전에는 GUI 최종 통합·제출 보류 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
 | 독립 검증·수정 | `task_4d49e747c570` native blocked; 최신 PC 보완 검증과 firmware 제출 후 시작 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
 | 업로드·owner-only live·실물 관측 | 예정 | 동결 binary/hash·COM3 수신·LCD/BOOT·30초·단절/복구·지연 근거 |
 | 결과·실행 정리 | 예정 | 판정·미측정·실효 모델·시간/token coverage·질문·실패 기록, worker 소유권 정리 |
 
 인터페이스와 사용자의 B 선택은 설계·context에 기록됐다. PC 구현은 병행 진행하며,
 펌웨어 GUI는 선택 B의 결함 보완·검증된 handoff를 받은 뒤 dispatch한다.
+
+2026-10-09 00:02 KST 실행 순서 조정: 사용자 B 선택과 데이터 의미는 이미 확정됐다.
+B의 남은 결함은 prototype의 캐시 전환과 회귀 검사이며 보드 초기화·C 수신기 구현과 독립적이다.
+Sol의 core 작업은 병행 시작하고, GUI 최종 통합·제출·통합 검증은 B 독립 PASS 이후에만 수행한다.
+이 조정은 제품 합격 gate를 완화하지 않는다. 이전의 전체 firmware 시작 차단 기록은 당시 상태다.
 
 ## 재개 체크리스트
 

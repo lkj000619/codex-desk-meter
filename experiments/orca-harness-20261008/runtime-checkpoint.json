@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-08T14:50:17.8136292Z",
+    "observed_at":  "2026-10-08T15:03:13.6444260Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -56,7 +56,7 @@
                   {
                       "id":  "task_b1214421a314",
                       "title":  "Build ESP32-S3 firmware with selected B GUI and real receiver",
-                      "status":  "blocked",
+                      "status":  "dispatched",
                       "deps":  "[\"task_f61c79e5c906\"]",
                       "completed_at":  null
                   },
@@ -105,6 +105,25 @@
               ],
     "workers":  [
                     {
+                        "task_id":  "task_b1214421a314",
+                        "dispatch_id":  "ctx_d5c857a3d228",
+                        "terminal_handle":  "term_e949afe5-d263-4f89-950b-3cca8cc9520f",
+                        "state":  "ready",
+                        "dispatch_status":  "dispatched",
+                        "liveness":  {
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
                         "task_id":  "task_c6f6d8f00810",
                         "dispatch_id":  "ctx_b3dca8602ce8",
                         "terminal_handle":  "term_39c072ad-cf9b-4974-84a0-baa02d99974f",
@@ -112,7 +131,7 @@
                         "dispatch_status":  "dispatched",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791471017510,
+                                         "observedAt":  1791471790812,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -132,7 +151,7 @@
                         "dispatch_status":  "dispatched",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791471015895,
+                                         "observedAt":  1791471788517,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
