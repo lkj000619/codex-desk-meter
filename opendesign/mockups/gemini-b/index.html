@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gemini Candidate B - Swiss Studio Meter (820x320 LCD)</title>
+<title>B · Swiss Studio Meter (Gemini) · 820x320 LCD</title>
 <style>
   /* Reset & Host Container Styling (Outside LCD) */
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -41,7 +41,7 @@
     padding: 10px 18px;
     margin-bottom: 20px;
     display: flex;
-    gap: 16px;
+    gap: 14px;
     align-items: center;
     flex-wrap: wrap;
     font-size: 13px;
@@ -49,6 +49,10 @@
   .preview-toolbar label {
     font-weight: 600;
     color: #f4f4f5;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
   .preview-toolbar select, .preview-toolbar button {
     background: #18181b;
@@ -58,6 +62,10 @@
     border-radius: 4px;
     font-size: 12px;
     cursor: pointer;
+  }
+  .preview-toolbar button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
   }
   .btn-boot {
     background: #0284c7 !important;
@@ -194,15 +202,27 @@
   .col-quota {
     width: 430px;
     border-right: 2px solid #18181b;
-    padding: 14px 18px;
+    padding: 10px 18px 8px 18px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
+  .quota-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2px;
+  }
+  .quota-page-indicator {
+    font-size: 10px;
+    font-weight: 700;
+    font-family: monospace;
+    color: #52525b;
+  }
   .quota-card-primary {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
   }
   .eyebrow-label {
     font-size: 10px;
@@ -217,7 +237,7 @@
     justify-content: space-between;
   }
   .big-stat {
-    font-size: 52px;
+    font-size: 46px;
     font-weight: 800;
     letter-spacing: -0.04em;
     line-height: 0.9;
@@ -230,21 +250,25 @@
   }
   .stat-detail-box {
     text-align: right;
-    font-size: 11px;
-    line-height: 1.4;
+    font-size: 10px;
+    line-height: 1.35;
   }
   .stat-detail-box strong {
-    font-size: 13px;
+    font-size: 12px;
     color: #09090b;
   }
 
   /* Solid Linear Progress Bar */
   .meter-track {
-    height: 12px;
+    height: 10px;
     background: #e4e2d8;
     border: 1px solid #18181b;
     position: relative;
-    margin-top: 4px;
+    margin-top: 3px;
+  }
+  .meter-track.unknown {
+    background: transparent;
+    border: 1px dashed #71717a;
   }
   .meter-fill {
     height: 100%;
@@ -253,7 +277,7 @@
 
   .quota-secondary {
     border-top: 1px solid #d4d4d8;
-    padding-top: 10px;
+    padding-top: 6px;
     display: flex;
     align-items: baseline;
     justify-content: space-between;
@@ -262,7 +286,7 @@
   /* Column 2: Session Telemetry Ledger (390px) */
   .col-session {
     flex: 1;
-    padding: 14px 18px;
+    padding: 10px 18px 8px 18px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -272,10 +296,10 @@
     justify-content: space-between;
     align-items: baseline;
     border-bottom: 1px solid #18181b;
-    padding-bottom: 6px;
+    padding-bottom: 4px;
   }
   .session-total-display {
-    font-size: 26px;
+    font-size: 22px;
     font-weight: 800;
     letter-spacing: -0.02em;
     font-family: monospace;
@@ -284,16 +308,22 @@
   .session-table {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 8px;
+    gap: 4px;
+    margin-top: 4px;
   }
   .table-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 12px;
-    padding-bottom: 4px;
+    font-size: 11px;
+    padding-bottom: 2px;
     border-bottom: 1px dashed #d4d4d8;
+  }
+  .table-row.source-total-row {
+    border-bottom: 1px solid #18181b;
+    padding-top: 2px;
+    margin-top: 2px;
+    font-weight: 700;
   }
   .table-key {
     color: #52525b;
@@ -302,15 +332,15 @@
   .table-val {
     font-family: monospace;
     font-weight: 700;
-    font-size: 13px;
+    font-size: 12px;
   }
   .session-disclaimer {
     background: #eae8e1;
     border-left: 3px solid #18181b;
-    padding: 6px 10px;
-    font-size: 9px;
+    padding: 4px 8px;
+    font-size: 8.5px;
     color: #52525b;
-    line-height: 1.35;
+    line-height: 1.3;
   }
 
   /* SCREEN 2: GLOBAL RESET */
@@ -366,29 +396,29 @@
   /* SCREEN 3: STATUS */
   #view-status {
     width: 100%;
-    padding: 18px 24px;
+    padding: 14px 20px;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
   .status-row-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    gap: 8px;
   }
   .status-box {
     background: #ffffff;
     border: 1px solid #18181b;
-    padding: 10px;
+    padding: 8px 10px;
   }
   .status-box-title {
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
     color: #71717a;
     text-transform: uppercase;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
   .status-box-val {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 800;
     font-family: monospace;
   }
@@ -397,9 +427,9 @@
     border: 1px solid #18181b;
     padding: 8px 12px;
     font-family: monospace;
-    font-size: 11px;
-    height: 95px;
-    line-height: 1.5;
+    font-size: 10.5px;
+    height: 105px;
+    line-height: 1.45;
     color: #27272a;
     overflow-y: auto;
   }
@@ -408,8 +438,8 @@
   .notice-strip {
     background: #18181b;
     color: #f5f4ef;
-    padding: 4px 14px;
-    font-size: 10px;
+    padding: 3px 14px;
+    font-size: 9.5px;
     font-weight: 700;
     display: none;
     letter-spacing: 0.04em;
@@ -447,7 +477,7 @@
 <body>
 
 <header>
-  <h1>Candidate B: Swiss Studio Meter</h1>
+  <h1>B · Swiss Studio Meter (Gemini)</h1>
   <div class="preview-note">ESP32-S3 ST7701 820×320 IPS | Warm Paper & High-Contrast Typography</div>
 </header>
 
@@ -456,25 +486,41 @@
   <button id="btn-boot-cycle" class="btn-boot" onclick="cycleScreen()">🔘 PRESS BOOT [GPIO0] (Cycle Screen)</button>
   
   <div>
-    <label for="state-selector">Simulate State: </label>
-    <select id="state-selector" onchange="applyState(this.value)">
-      <option value="normal">Normal (Live Synthetic Feed)</option>
-      <option value="source_stale">Source Stale (> 5m observation gap)</option>
-      <option value="disconnected">Disconnected / Receive Stale (USB offline)</option>
-      <option value="unknown">Unknown / Null (Missing parameters)</option>
-      <option value="error">Error / Last-Good Retained</option>
-      <option value="waiting">Waiting Initial (Syncing)</option>
-      <option value="recovery">Recovery (Restoring stream)</option>
-    </select>
+    <label for="state-selector">Simulate State:
+      <select id="state-selector" onchange="applyState(this.value)">
+        <option value="normal">Normal (Live Synthetic Feed)</option>
+        <option value="source_stale">Source Stale (> 5m observation gap)</option>
+        <option value="disconnected">Disconnected / Receive Stale (USB offline)</option>
+        <option value="unknown">Unknown / Null (Missing parameters)</option>
+        <option value="error">Error / Last-Good Retained</option>
+        <option value="waiting">Waiting Initial (Syncing)</option>
+        <option value="recovery">Recovery (Restoring stream)</option>
+      </select>
+    </label>
   </div>
 
   <div>
-    <label for="screen-direct">Screen: </label>
-    <select id="screen-direct" onchange="setScreen(parseInt(this.value))">
-      <option value="0">1. Usage (Quota & Session)</option>
-      <option value="1">2. Global Reset (codex-resets)</option>
-      <option value="2">3. Hardware & Transport Status</option>
-    </select>
+    <label for="list-mode">Windows:
+      <select id="list-mode" onchange="onListModeChange(this.value)">
+        <option value="common">Common 2 Windows</option>
+        <option value="long">Long List (6 Windows Stress)</option>
+      </select>
+    </label>
+  </div>
+
+  <div style="display:flex; gap:6px;">
+    <button id="btn-prev-page" onclick="prevWindowPage()" title="Held BOOT previous window page">◂ Prev Win</button>
+    <button id="btn-next-page" onclick="nextWindowPage()" title="Held BOOT next window page">Next Win ▸</button>
+  </div>
+
+  <div>
+    <label for="screen-direct">Screen:
+      <select id="screen-direct" onchange="setScreen(parseInt(this.value))">
+        <option value="0">1. Usage (Quota & Session)</option>
+        <option value="1">2. Global Reset (codex-resets)</option>
+        <option value="2">3. Hardware & Transport Status</option>
+      </select>
+    </label>
   </div>
 </div>
 
@@ -507,29 +553,34 @@
       
       <!-- Left Column: Quota Windows (430px) -->
       <div class="col-quota">
+        <div class="quota-header-row">
+          <span class="eyebrow-label" id="quota-section-title">ACCOUNT QUOTA WINDOWS</span>
+          <span class="quota-page-indicator" id="quota-page-badge">WIN 1-2 / 2</span>
+        </div>
+
         <div class="quota-card-primary">
-          <div class="eyebrow-label">Primary Rolling Window (5 Hours)</div>
+          <div class="eyebrow-label" id="quota-primary-label">Primary Rolling Window (5h)</div>
           <div class="quota-hero-row">
             <div class="big-stat" id="quota-5h-val">42<span>%</span></div>
             <div class="stat-detail-box">
-              <div>USED QUOTA</div>
+              <div id="quota-5h-tag">USED QUOTA</div>
               <div>REMAINING: <strong id="quota-5h-rem">58%</strong></div>
               <div>RESETS: <strong id="quota-5h-rst">18:20Z (70m)</strong></div>
             </div>
           </div>
           <!-- Clean solid bar -->
-          <div class="meter-track">
+          <div class="meter-track" id="bar-5h-track">
             <div class="meter-fill" id="bar-5h-fill" style="width: 42%;"></div>
           </div>
         </div>
 
-        <!-- Weekly Quota Section -->
+        <!-- Secondary Quota Section -->
         <div class="quota-secondary">
           <div>
-            <div class="eyebrow-label" style="font-size:9px;">Weekly Limit (10080m)</div>
-            <div style="font-size: 20px; font-weight: 800; font-family:monospace;" id="quota-wk-val">18% USED</div>
+            <div class="eyebrow-label" style="font-size:9px;" id="quota-secondary-label">Weekly Limit (10080m)</div>
+            <div style="font-size: 18px; font-weight: 800; font-family:monospace;" id="quota-wk-val">18% USED</div>
           </div>
-          <div style="text-align: right; font-size: 10px; color:#52525b;">
+          <div style="text-align: right; font-size: 9.5px; color:#52525b;">
             <div>REM: <strong style="color:#18181b;" id="quota-wk-rem">82%</strong></div>
             <div id="quota-wk-rst">RESET: OCT 12 17:10Z</div>
           </div>
@@ -541,11 +592,11 @@
         <div>
           <div class="session-headline-row">
             <div class="eyebrow-label">Session Telemetry</div>
-            <div style="font-size:10px; font-family:monospace; color:#71717a;">OBS: 17:10:00Z</div>
+            <div style="font-size:9.5px; font-family:monospace; color:#71717a;" id="session-obs-time">OBS: 17:10:00Z</div>
           </div>
           
-          <div style="margin-top: 6px; display:flex; justify-content:space-between; align-items:baseline;">
-            <span style="font-size: 11px; font-weight: 700;">TOTAL TOKENS</span>
+          <div style="margin-top: 4px; display:flex; justify-content:space-between; align-items:baseline;">
+            <span style="font-size: 10.5px; font-weight: 700;">TOTAL TOKENS (IN+OUT)</span>
             <span class="session-total-display" id="sess-total">141,200</span>
           </div>
 
@@ -559,18 +610,22 @@
               <span class="table-val" id="sess-out">16,400</span>
             </div>
             <div class="table-row">
-              <span class="table-key">— of which Cached Input</span>
+              <span class="table-key">— of which Cached Input *</span>
               <span class="table-val" style="color:#0284c7;" id="sess-cached">89,600</span>
             </div>
             <div class="table-row">
-              <span class="table-key">— of which Reasoning</span>
+              <span class="table-key">— of which Reasoning *</span>
               <span class="table-val" style="color:#7c3aed;" id="sess-reason">2,300</span>
+            </div>
+            <div class="table-row source-total-row">
+              <span class="table-key">Source Total Reported</span>
+              <span class="table-val" id="sess-src-total">141,200</span>
             </div>
           </div>
         </div>
 
         <div class="session-disclaimer">
-          Note: Session telemetry is unconstrained local process volume. Session percentage and remaining tokens are mathematically undefined.
+          * Included subsets: cached in input, reasoning in output. Session limits, remaining tokens, and % are unknown. Account quota is tracked separately.
         </div>
       </div>
 
@@ -601,7 +656,7 @@
           </div>
           <div class="detail-line">
             <span style="color:#71717a;">Captured Timestamp:</span>
-            <span style="font-family:monospace;">2026-10-07 17:10:00Z</span>
+            <span style="font-family:monospace;" id="global-captured">2026-10-07 17:10:00Z</span>
           </div>
           <div class="detail-line">
             <span style="color:#71717a;">Window Scope:</span>
@@ -633,11 +688,11 @@
         </div>
         <div class="status-box">
           <div class="status-box-title">Receive Age</div>
-          <div class="status-box-val" id="stat-rcv-age">1s Nominal</div>
+          <div class="status-box-val" id="stat-rcv-age">0s Nominal</div>
         </div>
         <div class="status-box">
           <div class="status-box-title">Last-Good Cache</div>
-          <div class="status-box-val" id="stat-cache">Valid 17:10Z</div>
+          <div class="status-box-val" id="stat-cache">VALID 17:10Z</div>
         </div>
       </div>
 
@@ -651,8 +706,8 @@
 
     <!-- Bottom Metadata Bar (24px) -->
     <div class="bottom-bar">
-      <span>SYNTHETIC TELEMETRY · NO PRIVATE LOGS COMMITTED</span>
-      <span>CYCLE VIEW: PRESS BOOT BUTTON</span>
+      <span id="bottom-left-tag">SYNTHETIC TELEMETRY · NO PRIVATE LOGS COMMITTED</span>
+      <span id="bottom-right-tag">CYCLE VIEW: PRESS BOOT BUTTON</span>
     </div>
 
   </div>
@@ -666,21 +721,68 @@
     <span class="tag-badge">RGB565 Palette</span> Warm Cream BG: <code>#f5f4ef</code> (0xF7BE), Deep Ink Charcoal: <code>#18181b</code> (0x18C3), Warm Header Bar: <code>#eae8e1</code> (0xEF7C), Accent Blue: <code>#0284c7</code> (0x0438), Border Gray: <code>#d4d4d8</code> (0xD6BA).
   </p>
   <p style="margin-top:6px;">
-    <span class="tag-badge">Font Strategy</span> Giant Stat: 52px (36×52 raster font, numbers 0-9 + % only: 11 glyphs = 2.5KB), Subheads: 18px-20px (14×20 font, 3KB), Labels & Ledger: 11px-12px (8×12 standard ASCII font ROM).
+    <span class="tag-badge">Font Strategy</span> Giant Stat: 46px (34×46 raster font, numbers 0-9 + % only: 11 glyphs = 2.2KB), Subheads: 18px-20px (14×20 font, 3KB), Labels & Ledger: 11px-12px (8×12 standard ASCII font ROM).
   </p>
   <p style="margin-top:6px;">
     <span class="tag-badge">Rendering & Memory</span> Asymmetric two-column division: Column 1 (430×264) updates primarily on quota tick (once every 1-5 mins); Column 2 (390×264) updates on session tokens. Clean separation minimizes flicker on non-buffered ST7701 lines.
+  </p>
+  <p style="margin-top:6px;">
+    <span class="tag-badge">Measurements & Limits</span> Dirty rect 171KB DMA transfer rate and 60fps are unmeasured engineering estimates (`not_run` on hardware). Real ST7701 RGB interface refresh rate and DMA bandwidth must be profiled on ESP32-S3 hardware.
   </p>
 </div>
 
 <script>
   let currentScreen = 0;
+  let currentWindowPage = 0;
+  const WINDOWS_PER_PAGE = 2;
+
+  // Exact common synthetic reference sample (must remain unchanged for normal)
   const baseData = {
-    quota5h: { used: 42, rem: 58, rst: "18:20Z (70m)" },
-    quotaWk: { used: 18, rem: 82, rst: "OCT 12 17:10Z" },
-    session: { in: "124,800", out: "16,400", cached: "89,600", reason: "2,300", total: "141,200" },
-    global: { elapsed: "7h 10m", last: "2026-10-07 10:00:00Z" }
+    reference: "2026-10-07T17:10:00Z",
+    observed: "2026-10-07T17:10:00Z",
+    received: "2026-10-07T17:10:00Z",
+    windows: [
+      { id: "primary-18000s", label: "Primary Rolling Window (5 Hours)", duration: 300, used: 42, rem: 58, rst: "18:20Z (70m)" },
+      { id: "secondary-604800s", label: "Weekly Limit (10080m)", duration: 10080, used: 18, rem: 82, rst: "OCT 12 17:10Z" }
+    ],
+    session: {
+      in: "124,800",
+      out: "16,400",
+      cached: "89,600",
+      reason: "2,300",
+      total: "141,200", // input + output
+      sourceTotal: "141,200" // separately labeled source_total
+    },
+    global: {
+      elapsed: "7h 10m",
+      last: "2026-10-07 10:00:00Z",
+      captured: "2026-10-07 17:10:00Z"
+    }
   };
+
+  // Stress test windows dataset (6 variable provider/quota windows)
+  const stressWindows = [
+    { id: "primary-18000s", label: "Primary Rolling Window (5 Hours)", duration: 300, used: 42, rem: 58, rst: "18:20Z (70m)" },
+    { id: "secondary-604800s", label: "Weekly Account Limit (7 Days)", duration: 10080, used: 18, rem: 82, rst: "OCT 12 17:10Z" },
+    { id: "stress-hourly-3600s", label: "Short Burst Window (60m)", duration: 60, used: 75, rem: 25, rst: "17:45Z (35m)" },
+    { id: "stress-daily-86400s", label: "Daily Rate Ceiling (24h)", duration: 1440, used: 31, rem: 69, rst: "OCT 08 00:00Z" },
+    { id: "stress-team-1200m", label: "Team Shared Pool (20h)", duration: 1200, used: 88, rem: 12, rst: "19:00Z (110m)" },
+    { id: "stress-monthly-43200m", label: "Monthly Account Quota (30 Days)", duration: 43200, used: 9, rem: 91, rst: "NOV 01 00:00Z" }
+  ];
+
+  // Cached state tracker to enforce deterministic transition semantics (F1)
+  let lastGoodCache = {
+    hasCache: true,
+    observedTime: "17:10:00Z",
+    windows: JSON.parse(JSON.stringify(baseData.windows)),
+    session: JSON.parse(JSON.stringify(baseData.session)),
+    global: JSON.parse(JSON.stringify(baseData.global))
+  };
+
+  function getActiveWindows() {
+    const listMode = document.getElementById("list-mode").value;
+    return listMode === "long" ? stressWindows : baseData.windows;
+  }
 
   function setScreen(idx) {
     currentScreen = idx;
@@ -697,6 +799,25 @@
     setScreen((currentScreen + 1) % 3);
   }
 
+  function onListModeChange(mode) {
+    currentWindowPage = 0;
+    applyState(document.getElementById("state-selector").value);
+  }
+
+  function prevWindowPage() {
+    const windows = getActiveWindows();
+    const totalPages = Math.ceil(windows.length / WINDOWS_PER_PAGE);
+    currentWindowPage = (currentWindowPage - 1 + totalPages) % totalPages;
+    renderCurrentWindows(document.getElementById("state-selector").value);
+  }
+
+  function nextWindowPage() {
+    const windows = getActiveWindows();
+    const totalPages = Math.ceil(windows.length / WINDOWS_PER_PAGE);
+    currentWindowPage = (currentWindowPage + 1) % totalPages;
+    renderCurrentWindows(document.getElementById("state-selector").value);
+  }
+
   function applyState(state) {
     const pill = document.getElementById("pill-state");
     const strip = document.getElementById("notice-strip");
@@ -704,66 +825,250 @@
     pill.textContent = state.toUpperCase().replace("_", " ");
     strip.style.display = "none";
 
+    const statLink = document.getElementById("stat-link");
+    const statSrcAge = document.getElementById("stat-src-age");
+    const statRcvAge = document.getElementById("stat-rcv-age");
+    const statCache = document.getElementById("stat-cache");
+
     if (state === "normal") {
-      updateValues(baseData.quota5h.used, baseData.quota5h.rem, baseData.quotaWk.used, baseData.quotaWk.rem, baseData.session.in, baseData.session.out, baseData.session.cached, baseData.session.reason, baseData.session.total);
-      document.getElementById("bar-5h-fill").style.width = baseData.quota5h.used + "%";
-      document.getElementById("stat-link").textContent = "USB CDC OK";
-      document.getElementById("stat-src-age").textContent = "0s Fresh";
-      document.getElementById("stat-rcv-age").textContent = "1s Nominal";
+      // Re-arm cache with exact common sample
+      lastGoodCache.hasCache = true;
+      lastGoodCache.observedTime = "17:10:00Z";
+      lastGoodCache.windows = JSON.parse(JSON.stringify(baseData.windows));
+      lastGoodCache.session = JSON.parse(JSON.stringify(baseData.session));
+      lastGoodCache.global = JSON.parse(JSON.stringify(baseData.global));
+
+      renderCurrentWindows("normal");
+      updateSessionValues(
+        baseData.session.in,
+        baseData.session.out,
+        baseData.session.cached,
+        baseData.session.reason,
+        baseData.session.total,
+        baseData.session.sourceTotal,
+        "OBS: 17:10:00Z"
+      );
+
+      statLink.textContent = "USB CDC OK";
+      statSrcAge.textContent = "0s Fresh";
+      statRcvAge.textContent = "0s Nominal";
+      statCache.textContent = "VALID 17:10Z";
+      document.getElementById("clock-display").textContent = "17:10:00Z";
     }
     else if (state === "source_stale") {
+      // Source age >= 300s (e.g. 301s), receive age 0s fresh
       pill.classList.add("warn");
       strip.style.display = "block";
-      strip.textContent = "SOURCE STALE: TOKEN TIMESTAMP > 5M AGO. MAINTAINING OBSERVED DATA.";
-      document.getElementById("stat-src-age").textContent = "384s (Stale)";
+      strip.textContent = "SOURCE STALE: TOKEN OBSERVATION GAP >= 300S (SRC 301S / RCV 0S). PRESERVING OBSERVED DATA.";
+
+      renderCurrentWindows("normal");
+      updateSessionValues(
+        baseData.session.in,
+        baseData.session.out,
+        baseData.session.cached,
+        baseData.session.reason,
+        baseData.session.total,
+        baseData.session.sourceTotal,
+        "OBS: 17:04:59Z"
+      );
+
+      statLink.textContent = "USB CDC OK";
+      statSrcAge.textContent = "301s (Stale)";
+      statRcvAge.textContent = "0s Fresh";
+      statCache.textContent = "VALID 17:04Z";
     }
     else if (state === "disconnected") {
       pill.classList.add("error");
       strip.style.display = "block";
-      strip.textContent = "DISCONNECTED: USB LINK TIMEOUT. LAST-GOOD VALUES PRESERVED.";
-      document.getElementById("stat-link").textContent = "LINK DOWN";
-      document.getElementById("stat-rcv-age").textContent = "580s Timeout";
+
+      if (lastGoodCache.hasCache) {
+        // True cache retained with original observed timestamp; no fake fresh timestamp!
+        strip.textContent = "DISCONNECTED: USB LINK DOWN. LAST-GOOD VALUES PRESERVED (OBS " + lastGoodCache.observedTime + ").";
+        renderCurrentWindows("retained");
+        updateSessionValues(
+          lastGoodCache.session.in,
+          lastGoodCache.session.out,
+          lastGoodCache.session.cached,
+          lastGoodCache.session.reason,
+          lastGoodCache.session.total,
+          lastGoodCache.session.sourceTotal,
+          "OBS: " + lastGoodCache.observedTime
+        );
+        statCache.textContent = "LAST-GOOD RETAINED";
+      } else {
+        // No cache available!
+        strip.textContent = "DISCONNECTED: USB LINK DOWN. NO PRIOR CACHE AVAILABLE.";
+        renderBlankValues();
+        statCache.textContent = "NO CACHE";
+      }
+
+      statLink.textContent = "LINK DOWN";
+      statSrcAge.textContent = lastGoodCache.hasCache ? "301s" : "Unknown";
+      statRcvAge.textContent = "301s (Timeout)";
     }
     else if (state === "unknown") {
       strip.style.display = "block";
-      strip.textContent = "UNKNOWN: UPSTREAM FIELDS ARE NULL OR MISSING.";
-      updateValues("--", "--", "--", "--", "--", "--", "--", "--", "--");
-      document.getElementById("bar-5h-fill").style.width = "0%";
-      document.getElementById("stat-src-age").textContent = "Unknown";
+      strip.textContent = "UNKNOWN / NULL: UPSTREAM FIELDS MISSING. CACHE INVALIDATED.";
+      // Unknown wipes out cache
+      lastGoodCache.hasCache = false;
+      renderBlankValues();
+
+      statLink.textContent = "USB CDC OK";
+      statSrcAge.textContent = "Unknown";
+      statRcvAge.textContent = "0s Nominal";
+      statCache.textContent = "NO CACHE (NULL)";
     }
     else if (state === "error") {
       pill.classList.add("error");
       strip.style.display = "block";
-      strip.textContent = "PARSE ERROR: FRAMING CHECKSUM MISMATCH. RETAINING LAST-GOOD STATE.";
-      document.getElementById("stat-link").textContent = "CRC ERROR";
+
+      if (lastGoodCache.hasCache) {
+        // Deterministic cache semantics: retain previous good values and original observation time
+        strip.textContent = "ERROR: CHECKSUM FAULT. RETAINING LAST-GOOD STATE (OBS " + lastGoodCache.observedTime + ").";
+        renderCurrentWindows("retained");
+        updateSessionValues(
+          lastGoodCache.session.in,
+          lastGoodCache.session.out,
+          lastGoodCache.session.cached,
+          lastGoodCache.session.reason,
+          lastGoodCache.session.total,
+          lastGoodCache.session.sourceTotal,
+          "OBS: " + lastGoodCache.observedTime
+        );
+        statCache.textContent = "LAST-GOOD RETAINED";
+        statSrcAge.textContent = "60s";
+      } else {
+        // Crucial F1 fix: If entering Error after Unknown (no cache), do NOT pretend last-good is retained!
+        strip.textContent = "ERROR: CHECKSUM FAULT. NO PRIOR CACHE AVAILABLE TO RETAIN.";
+        renderBlankValues();
+        statCache.textContent = "NO CACHE";
+        statSrcAge.textContent = "Unknown";
+      }
+
+      statLink.textContent = "CRC ERROR";
+      statRcvAge.textContent = "60s Stale";
     }
     else if (state === "waiting") {
       strip.style.display = "block";
-      strip.textContent = "WAITING: ESTABLISHING USB CDM/1 COMMUNICATION...";
-      updateValues("...", "...", "...", "...", "...", "...", "...", "...", "...");
-      document.getElementById("bar-5h-fill").style.width = "0%";
-      document.getElementById("stat-link").textContent = "WAITING";
+      strip.textContent = "WAITING: INITIALIZING / ESTABLISHING CDM-1 PROTOCOL...";
+      lastGoodCache.hasCache = false;
+      renderWaitingValues();
+
+      statLink.textContent = "WAITING";
+      statSrcAge.textContent = "--";
+      statRcvAge.textContent = "--";
+      statCache.textContent = "NO CACHE";
     }
     else if (state === "recovery") {
       strip.style.display = "block";
-      strip.textContent = "RECOVERING: PACKET SYNC RESTORED. FRESH DATA APPLIED.";
-      updateValues(baseData.quota5h.used, baseData.quota5h.rem, baseData.quotaWk.used, baseData.quotaWk.rem, baseData.session.in, baseData.session.out, baseData.session.cached, baseData.session.reason, baseData.session.total);
-      document.getElementById("bar-5h-fill").style.width = baseData.quota5h.used + "%";
-      document.getElementById("stat-link").textContent = "RECONNECTED";
+      strip.textContent = "RECOVERY: CDM-1 FRAMING RESTORED. REPLAYING VALID SAMPLE.";
+      // Restore valid sample
+      lastGoodCache.hasCache = true;
+      lastGoodCache.observedTime = "17:10:00Z";
+      lastGoodCache.windows = JSON.parse(JSON.stringify(baseData.windows));
+      lastGoodCache.session = JSON.parse(JSON.stringify(baseData.session));
+      lastGoodCache.global = JSON.parse(JSON.stringify(baseData.global));
+
+      renderCurrentWindows("normal");
+      updateSessionValues(
+        baseData.session.in,
+        baseData.session.out,
+        baseData.session.cached,
+        baseData.session.reason,
+        baseData.session.total,
+        baseData.session.sourceTotal,
+        "OBS: 17:10:00Z"
+      );
+
+      statLink.textContent = "RECONNECTED";
+      statSrcAge.textContent = "0s Fresh";
+      statRcvAge.textContent = "0s Nominal";
+      statCache.textContent = "VALID 17:10Z";
     }
   }
 
-  function updateValues(q5u, q5r, qWu, qWr, sIn, sOut, sCached, sReason, sTot) {
-    document.getElementById("quota-5h-val").innerHTML = q5u + "<span>%</span>";
-    document.getElementById("quota-5h-rem").textContent = q5r + (q5r !== "--" && q5r !== "..." ? "%" : "");
-    document.getElementById("quota-wk-val").textContent = qWu + (qWu !== "--" && qWu !== "..." ? "% USED" : "");
-    document.getElementById("quota-wk-rem").textContent = qWr + (qWr !== "--" && qWr !== "..." ? "%" : "");
+  function renderCurrentWindows(mode) {
+    const windows = getActiveWindows();
+    const totalPages = Math.ceil(windows.length / WINDOWS_PER_PAGE);
+    if (currentWindowPage >= totalPages) currentWindowPage = 0;
 
+    const startIdx = currentWindowPage * WINDOWS_PER_PAGE;
+    const w1 = windows[startIdx];
+    const w2 = windows[startIdx + 1];
+
+    document.getElementById("quota-page-badge").textContent = 
+      `WIN ${startIdx + 1}-${Math.min(startIdx + 2, windows.length)} / ${windows.length}`;
+
+    if (mode === "blank") {
+      document.getElementById("quota-primary-label").textContent = w1 ? w1.label : "Quota Window";
+      document.getElementById("quota-5h-val").innerHTML = "--<span>%</span>";
+      document.getElementById("quota-5h-rem").textContent = "--";
+      document.getElementById("quota-5h-rst").textContent = "--";
+      document.getElementById("bar-5h-fill").style.width = "0%";
+      document.getElementById("bar-5h-track").className = "meter-track unknown";
+
+      document.getElementById("quota-secondary-label").textContent = w2 ? w2.label : "Secondary Window";
+      document.getElementById("quota-wk-val").textContent = "--";
+      document.getElementById("quota-wk-rem").textContent = "--";
+      document.getElementById("quota-wk-rst").textContent = "RESET: --";
+      return;
+    }
+
+    if (mode === "waiting") {
+      document.getElementById("quota-primary-label").textContent = w1 ? w1.label : "Quota Window";
+      document.getElementById("quota-5h-val").innerHTML = "...<span>%</span>";
+      document.getElementById("quota-5h-rem").textContent = "...";
+      document.getElementById("quota-5h-rst").textContent = "...";
+      document.getElementById("bar-5h-fill").style.width = "0%";
+      document.getElementById("bar-5h-track").className = "meter-track unknown";
+
+      document.getElementById("quota-secondary-label").textContent = w2 ? w2.label : "Secondary Window";
+      document.getElementById("quota-wk-val").textContent = "...";
+      document.getElementById("quota-wk-rem").textContent = "...";
+      document.getElementById("quota-wk-rst").textContent = "RESET: ...";
+      return;
+    }
+
+    document.getElementById("bar-5h-track").className = "meter-track";
+    if (w1) {
+      document.getElementById("quota-primary-label").textContent = w1.label;
+      document.getElementById("quota-5h-val").innerHTML = w1.used + "<span>%</span>";
+      document.getElementById("quota-5h-rem").textContent = w1.rem + "%";
+      document.getElementById("quota-5h-rst").textContent = w1.rst;
+      document.getElementById("bar-5h-fill").style.width = w1.used + "%";
+    }
+
+    if (w2) {
+      document.getElementById("quota-secondary-label").textContent = w2.label;
+      document.getElementById("quota-wk-val").textContent = w2.used + "% USED";
+      document.getElementById("quota-wk-rem").textContent = w2.rem + "%";
+      document.getElementById("quota-wk-rst").textContent = "RESET: " + w2.rst;
+    } else {
+      document.getElementById("quota-secondary-label").textContent = "No secondary window";
+      document.getElementById("quota-wk-val").textContent = "--";
+      document.getElementById("quota-wk-rem").textContent = "--";
+      document.getElementById("quota-wk-rst").textContent = "RESET: N/A";
+    }
+  }
+
+  function updateSessionValues(sIn, sOut, sCached, sReason, sTot, sSrcTot, obsTime) {
     document.getElementById("sess-in").textContent = sIn;
     document.getElementById("sess-out").textContent = sOut;
     document.getElementById("sess-cached").textContent = sCached;
     document.getElementById("sess-reason").textContent = sReason;
     document.getElementById("sess-total").textContent = sTot;
+    document.getElementById("sess-src-total").textContent = sSrcTot;
+    document.getElementById("session-obs-time").textContent = obsTime;
+  }
+
+  function renderBlankValues() {
+    renderCurrentWindows("blank");
+    updateSessionValues("--", "--", "--", "--", "--", "--", "OBS: UNKNOWN");
+  }
+
+  function renderWaitingValues() {
+    renderCurrentWindows("waiting");
+    updateSessionValues("...", "...", "...", "...", "...", "...", "OBS: WAITING");
   }
 </script>
 

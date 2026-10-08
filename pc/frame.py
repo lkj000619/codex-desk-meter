@@ -1,0 +1,238 @@
+"""Canonical JSON encoding, CRC32 checksum, schema validation, and frame formatting."""
+
+from __future__ import annotations
+
+import copy
+import hashlib
+import json
+import re
+import zlib
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+SCHEMA_DIR = ROOT / "experiments" / "schema"
+PROTOCOL = "cdm/1"
+MAX_SEQUENCE = 2**32 - 1
+SEQUENCE_HALF_RANGE = 2**31
+MAX_FRAME_BYTES = 64 * 1024
+STALE_THRESHOLD_SECONDS = 300
+DEFAULT_SENT_AT = "2026-09-10T00:00:00Z"
+IDENTITY_RE = re.compile(r"^[a-z0-9][a-z0-9._-]*$")
+IDENTIFIER_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:-]*$")
+
+
+class FrameError(ValueError):
+    """Protocol / schema / frame error."""
+
+    def __init__(self, code: str, message: str):
+        self.code = code
+        self.message = message
+        super().__init__(f"{code}: {message}")
+
+
+def fail(code: str, message: str) -> None:
+    raise FrameError(code, message)
+
+
+def canonical_json(value: Any) -> bytes:
+    """Return the exact UTF-8 bytes covered by the protocol checksum."""
+    try:
+        return json.dumps(
+            value,
+            ensure_ascii=False,
+            allow_nan=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    except (TypeError, ValueError) as error:
+        fail("CANONICAL_JSON_INVALID", str(error))
+    raise AssertionError("unreachable")
+
+
+def crc32_hex(value: bytes) -> str:
+    """Return 8-character uppercase hex CRC32."""
+    return f"{zlib.crc32(value) & 0xFFFFFFFF:08X}"
+
+
+def sha256_hex(value: bytes) -> str:
+    """Return lowercase hex SHA-256."""
+    return hashlib.sha256(value).hexdigest()
+
+
+def load_json_file(path: Path) -> Any:
+    try:
+        return json.loads(path.read_text(encoding="utf-8-sig"))
+    except FileNotFoundError:
+        fail("FILE_NOT_FOUND", str(path))
+    except json.JSONDecodeError as error:
+        fail("INVALID_JSON", f"{path}: {error}")
+    raise AssertionError("unreachable")
+
+
+def schema_validate(value: Any, schema_filename: str, error_code: str = "SCHEMA_INVALID") -> None:
+    """Validate JSON object against schema in experiments/schema."""
+    try:
+        from jsonschema import Draft202012Validator, FormatChecker
+    except ImportError:
+        fail("SCHEMA_ENGINE_UNAVAILABLE", "jsonschema package is required")
+
+    schema_path = SCHEMA_DIR / schema_filename
+    schema = load_json_file(schema_path)
+    try:
+        Draft202012Validator.check_schema(schema)
+        validator = Draft202012Validator(schema, format_checker=FormatChecker())
+        errors = sorted(validator.iter_errors(value), key=lambda err: list(err.absolute_path))
+    except (TypeError, ValueError) as error:
+        fail("SCHEMA_ENGINE_ERROR", f"{schema_filename}: {error}")
+
+    if errors:
+        first_err = errors[0]
+        location = ".".join(str(p) for p in first_err.absolute_path) or "$"
+        fail(error_code, f"{schema_filename}:{location}: {first_err.message}")
+
+
+def semantic_validate_snapshot(snapshot: dict[str, Any]) -> None:
+    """Strict semantic validation extending JSON schema constraints."""
+    schema_validate(snapshot, "usage-snapshot.schema.json", "SNAPSHOT_SCHEMA_INVALID")
+
+    status = snapshot.get("status")
+    # P2 rule: available source must have non-null agent_id and host_id
+    if status == "available":
+        if snapshot.get("agent_id") is None:
+            fail("SEMANTIC_AVAILABLE_AGENT_REQUIRED", "agent_id must not be null when status is available")
+        if snapshot.get("host_id") is None:
+            fail("SEMANTIC_AVAILABLE_HOST_REQUIRED", "host_id must not be null when status is available")
+
+    metric_kind = snapshot.get("metric_kind")
+    windows = snapshot.get("windows", [])
+    if metric_kind == "session_telemetry":
+        # Cohort interface rule: channels must have null quota fields
+        allowed_channels = {"input", "output", "cached_input", "reasoning_output", "source_total", "normalized_total"}
+        for win in windows:
+            wid = win.get("window_id")
+            if wid not in allowed_channels:
+                fail("SEMANTIC_UNKNOWN_SESSION_CHANNEL", f"unrecognized session telemetry channel {wid!r}")
+            for null_field in ("remaining_units", "limit_units", "percent_used", "percent_remaining", "resets_at"):
+                if win.get(null_field) is not None:
+                    fail("SEMANTIC_SESSION_FIELD_NOT_NULL", f"session telemetry window {wid} must have {null_field} null")
+
+
+def unsigned_frame(frame: dict[str, Any]) -> dict[str, Any]:
+    unsigned = copy.deepcopy(frame)
+    unsigned.pop("integrity", None)
+    return unsigned
+
+
+def check_integrity(frame: dict[str, Any]) -> None:
+    if "integrity" not in frame or "value" not in frame["integrity"]:
+        fail("INTEGRITY_MISSING", "frame integrity value is missing")
+    actual = frame["integrity"]["value"]
+    expected = crc32_hex(canonical_json(unsigned_frame(frame)))
+    if actual != expected:
+        fail("CRC_MISMATCH", f"expected {expected}, got {actual}")
+
+
+def build_frame(payload: dict[str, Any], sequence: int, sent_at: str) -> dict[str, Any]:
+    """Construct, validate and checksum a cdm/1 frame."""
+    if not isinstance(payload, dict):
+        fail("PAYLOAD_INVALID", "payload must be an object")
+    if not isinstance(sequence, int) or isinstance(sequence, bool) or not (0 <= sequence <= MAX_SEQUENCE):
+        fail("SEQUENCE_INVALID", f"sequence must be in [0, {MAX_SEQUENCE}]")
+    if not isinstance(sent_at, str):
+        fail("TIMESTAMP_INVALID", "sent_at must be RFC3339 string")
+
+    usage = payload.get("usage")
+    global_resets = payload.get("global_resets")
+    if not isinstance(usage, list) or not isinstance(global_resets, list):
+        fail("PAYLOAD_INVALID", "payload requires usage and global_resets arrays")
+
+    for snapshot in usage:
+        semantic_validate_snapshot(snapshot)
+
+    for reset in global_resets:
+        schema_validate(
+            {
+                "protocol": PROTOCOL,
+                "sequence": 0,
+                "sent_at": DEFAULT_SENT_AT,
+                "payload": {"usage": [], "global_resets": [reset]},
+                "integrity": {"algorithm": "crc32", "value": "00000000"},
+            },
+            "cdm-frame.schema.json",
+            "FRAME_SCHEMA_INVALID",
+        )
+
+    frame = {
+        "protocol": PROTOCOL,
+        "sequence": sequence,
+        "sent_at": sent_at,
+        "payload": copy.deepcopy(payload),
+        "integrity": {"algorithm": "crc32", "value": "00000000"},
+    }
+
+    schema_validate(frame, "cdm-frame.schema.json", "FRAME_SCHEMA_INVALID")
+    frame["integrity"]["value"] = crc32_hex(canonical_json(unsigned_frame(frame)))
+    schema_validate(frame, "cdm-frame.schema.json", "FRAME_SCHEMA_INVALID")
+    return frame
+
+
+def encode_frame(frame: dict[str, Any]) -> bytes:
+    """Encode a validated frame into canonical UTF-8 bytes with single trailing LF, max 64KB."""
+    schema_validate(frame, "cdm-frame.schema.json", "FRAME_SCHEMA_INVALID")
+    for s in frame["payload"]["usage"]:
+        semantic_validate_snapshot(s)
+    check_integrity(frame)
+
+    line = canonical_json(frame) + b"\n"
+    if len(line) > MAX_FRAME_BYTES:
+        fail("FRAME_OVERSIZED", f"encoded frame is {len(line)} bytes, exceeds {MAX_FRAME_BYTES}")
+    return line
+
+
+def decode_frame(line: bytes | bytearray | str) -> dict[str, Any]:
+    """Decode and strictly validate raw frame line."""
+    if isinstance(line, str):
+        line = line.encode("utf-8")
+    raw = bytes(line)
+    if len(raw) > MAX_FRAME_BYTES:
+        fail("FRAME_OVERSIZED", f"encoded frame is {len(raw)} bytes, exceeds {MAX_FRAME_BYTES}")
+    if not raw.endswith(b"\n"):
+        fail("FRAME_TRUNCATED", "frame line must end with newline LF")
+    if raw.count(b"\n") != 1:
+        fail("FRAME_NEWLINE_INVALID", "frame line must contain exactly one newline LF")
+
+    try:
+        text = raw[:-1].decode("utf-8")
+    except UnicodeDecodeError as err:
+        fail("INVALID_UTF8", str(err))
+
+    try:
+        frame = json.loads(text)
+    except json.JSONDecodeError as err:
+        fail("MALFORMED_JSON", str(err))
+
+    if not isinstance(frame, dict):
+        fail("FRAME_SCHEMA_INVALID", "frame must be a JSON object")
+    if frame.get("protocol") != PROTOCOL:
+        fail("UNSUPPORTED_VERSION", f"unsupported protocol {frame.get('protocol')!r}")
+
+    schema_validate(frame, "cdm-frame.schema.json", "FRAME_SCHEMA_INVALID")
+    for s in frame["payload"]["usage"]:
+        semantic_validate_snapshot(s)
+    check_integrity(frame)
+
+    if raw[:-1] != canonical_json(frame):
+        fail("NON_CANONICAL_FRAME", "frame bytes do not match canonical JSON format")
+
+    return frame
+
+
+def sequence_is_newer(candidate: int, current: int) -> bool:
+    """True iff 0 < (candidate - current) mod 2^32 < 2^31."""
+    if not isinstance(candidate, int) or isinstance(candidate, bool) or not (0 <= candidate <= MAX_SEQUENCE):
+        fail("SEQUENCE_INVALID", f"candidate sequence must be uint32: {candidate}")
+    if not isinstance(current, int) or isinstance(current, bool) or not (0 <= current <= MAX_SEQUENCE):
+        fail("SEQUENCE_INVALID", f"current sequence must be uint32: {current}")
+    distance = (candidate - current) & MAX_SEQUENCE
+    return 0 < distance < SEQUENCE_HALF_RANGE
