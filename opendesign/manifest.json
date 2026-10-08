@@ -1,72 +1,70 @@
 {
-    "generated":  "2026-10-08T22:37:14.0639185+09:00",
-    "sections":  [
-                     {
-                         "id":  "mockups",
-                         "label":  "Mockups",
-                         "groups":  [
-                                        {
-                                            "slug":  "gemini-a",
-                                            "files":  [
-                                                          {
-                                                              "label":  "A · Telemetry Matrix (Gemini)",
-                                                              "path":  "mockups/gemini-a/index.html"
-                                                          }
-                                                      ]
-                                        },
-                                        {
-                                            "slug":  "gemini-b",
-                                            "files":  [
-                                                          {
-                                                              "label":  "B · Swiss Studio Meter (Gemini)",
-                                                              "path":  "mockups/gemini-b/index.html"
-                                                          }
-                                                      ]
-                                        },
-                                        {
-                                            "slug":  "gemini-c",
-                                            "files":  [
-                                                          {
-                                                              "label":  "C · Industrial Field Gauge (Gemini)",
-                                                              "path":  "mockups/gemini-c/index.html"
-                                                          }
-                                                      ]
-                                        },
-                                        {
-                                            "slug":  "sol61-a",
-                                            "files":  [
-                                                          {
-                                                              "label":  "D · Signal Board (Codex)",
-                                                              "path":  "mockups/sol61-a/index.html"
-                                                          }
-                                                      ]
-                                        },
-                                        {
-                                            "slug":  "sol61-b",
-                                            "files":  [
-                                                          {
-                                                              "label":  "E · Session Ledger (Codex)",
-                                                              "path":  "mockups/sol61-b/index.html"
-                                                          }
-                                                      ]
-                                        },
-                                        {
-                                            "slug":  "sol61-c",
-                                            "files":  [
-                                                          {
-                                                              "label":  "F · Window Atlas (Codex)",
-                                                              "path":  "mockups/sol61-c/index.html"
-                                                          }
-                                                      ]
-                                        }
-                                    ]
-                     },
-                     {
-                         "id":  "design-systems",
-                         "label":  "Design Systems",
-                         "groups":  [
-
-                                    ]
-                     }
-                 ]
+  "generated": "2026-10-08T23:34:28.215625+09:00",
+  "sections": [
+    {
+      "id": "mockups",
+      "label": "Mockups",
+      "groups": [
+        {
+          "slug": "gemini-a",
+          "files": [
+            {
+              "label": "A · Telemetry Matrix (Gemini)",
+              "path": "mockups/gemini-a/index.html"
+            }
+          ]
+        },
+        {
+          "slug": "gemini-b",
+          "files": [
+            {
+              "label": "B · Swiss Studio Meter (Gemini)",
+              "path": "mockups/gemini-b/index.html"
+            }
+          ]
+        },
+        {
+          "slug": "gemini-c",
+          "files": [
+            {
+              "label": "C · Industrial Field Gauge (Gemini)",
+              "path": "mockups/gemini-c/index.html"
+            }
+          ]
+        },
+        {
+          "slug": "sol61-a",
+          "files": [
+            {
+              "label": "D · Signal Board (Codex)",
+              "path": "mockups/sol61-a/index.html"
+            }
+          ]
+        },
+        {
+          "slug": "sol61-b",
+          "files": [
+            {
+              "label": "E · Session Ledger (Codex)",
+              "path": "mockups/sol61-b/index.html"
+            }
+          ]
+        },
+        {
+          "slug": "sol61-c",
+          "files": [
+            {
+              "label": "F · Window Atlas (Codex)",
+              "path": "mockups/sol61-c/index.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "design-systems",
+      "label": "Design Systems",
+      "groups": []
+    }
+  ]
 }

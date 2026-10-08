@@ -94,3 +94,17 @@
 - Final verification completed: `python tests/integration/design-check.py` exited 0; all six candidates, six screenshots, full-scan manifest, and comparison evidence passed. The checker reports documented design findings for fixed Gemini windows, B/C source-total labeling, and E/F copied browser titles.
 - Updated comparison rendered in the Orca browser at `http://127.0.0.1:8289/opendesign/comparison.html`: B selection and report link are visible; six images are loaded at 820x320; 19 links are present; zero external image/script/style resources were found.
 - Final remaining action: check the coordinator inbox once more, then send exactly one `worker_done` for this Dispatch.
+
+
+## Selected-B follow-up review - 2026-10-08
+
+- Current Task / Dispatch: `task_0d62e820abfa` / `ctx_c9524d9d2327` in `run_c968c43361da`; worker terminal `term_079881f4-f92c-464b-a856-21274157b8c1`.
+- Orca browser page: `c96626c2-be26-4498-b9eb-375e79cd472f`; B was reviewed at `http://127.0.0.1:8289/opendesign/mockups/gemini-b/index.html`; viewer listener was `127.0.0.1:8289` only.
+- Result: F1 FAIL. Live Normal->Unknown->Error/Disconnected and Normal->Waiting->Error lose the previously valid cache; direct Normal->Error and Normal->Disconnected retain it. The exact required correction and actual browser evidence are in `gui-b-review.md`, and escalation `msg_d8eee653314b` was sent to the coordinator.
+- F2 PASS with an in-page synthetic mismatch (`normalized=141,200`, `source_total=999,999`), included subsets, unknown session quota, and account/session separation. F3 PASS: all six windows paged over three pages with wrap; the BOOT button event cycled Usage->Global Reset->Status->Usage. F5 PASS: handoff labels frame/transfer estimates `not_run` and not guaranteed.
+- `python docs/design/lcd/gemini/regression-check.py` exited 0 but only asserts source strings and simulates a separate Python state machine; it does not execute B JavaScript. Latest `python tests/integration/design-check.py` exited 0: all six candidate checks and the full-scan manifest/gallery checks pass, with only comparative A/C/E/F findings.
+- Browser geometry: 820x320 LCD; no text ranges outside bounds across normal, stale, disconnected, unknown, error, waiting, recovery, global reset, and status. The source-stale selector exercises 301s/0s; exact 300s is not configurable. Browser resource list was empty. Smallest measured text is 8.5 CSS px; physical readability remains `not_run`.
+- Updated comparison was rendered: six initial images load at 820x320; 22 links; zero external resources; follow-up report and new selected-B screenshot both return HTTP 200. New screenshot `opendesign/screenshots/selected-b/B-swiss-studio-meter-normal.png` measures 820x320.
+- Rebuilt `opendesign/manifest.json` from a full scan: six mockup HTML files in six A-F groups and zero design-system files. Baseline/final SHA-256 values match for initial `gui-review.md` and all six initial normal screenshots.
+- Files changed: this checkpoint, `gui-b-review.md`, `opendesign/comparison.html`, `opendesign/manifest.json`, and the new selected-B screenshot. No designer B, handoff, designer regression-check, shared design-check, PC, firmware, frozen input, or initial screenshot/report file was changed.
+- Exact next action: perform the required final `orca orchestration check --terminal term_079881f4-f92c-464b-a856-21274157b8c1 --json`; then send exactly one `worker_done` with outcome `failed` for this Dispatch because selected-B F1 remains blocked.
