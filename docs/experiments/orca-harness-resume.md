@@ -62,6 +62,27 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
 
 ## 현재 다음 행동
 
+2026-10-08 사용자 B 선택 후 다음 단계:
+
+- PC 구현 `task_fa0b12bd6fda` / `ctx_e7bb307f023b`는 AGY terminal
+  `term_d3b622cf-1791-4afc-a013-2cf7482bb57d`에서 실제 working 확인했다.
+  CLI 1.3.1 / Gemini 3.8 Flash Medium header, 자동 승인 launch를 확인했다.
+- B 보완 `task_f61c79e5c906`은 준비 상태다. 전용 AGY terminal
+  `term_e76b560d-95f1-4b6a-a240-c467ccc8e837`은 같은 모델 header와 tui-idle을 확인했지만
+  아직 Task를 주입하지 않았다. 최초 GUI 검토 worker_done 수락·원본 artifact commit 후 시작한다.
+- GUI review `ctx_35a7c601f1d6`는 `msg_ac9ec8fd93a3`로 제출 수락됐다.
+  coordinator가 static checker를 재실행하고 57개 입력 hash를 검증했다. `worker-release` 결과는
+  retained/external_terminal, processAction=none이며 Delivery `delivery_21ea752253d3`를 ack했다.
+  최초 여섯 PNG·gallery·검토 보고를 commit한 뒤 B 보완을 시작한다. 보완 전 판정·증거를 덮어쓰지 않는다.
+- 비교 페이지는 `http://localhost:8289/opendesign/comparison.html`, coordinator의 preview page는
+  `d553802c-c580-460b-bf2d-fecffe71e2b6`이다. 실제 6개 PNG 로드를 확인했다.
+  root에서 browser 명령을 실행할 때 page와 실험 worktree selector를 함께 명시한다.
+  page만 명시한 snapshot은 연결 오류가 났고 두 식별자를 지정하자 정상 응답했다.
+- firmware는 B 보완 handoff 이후 시작한다. PC·firmware 완료 후 Luna 통합 검증과
+  coordinator의 live/COM 시험을 수행한다. 실물 합격·제품 완료는 아직 아니다.
+
+아래 재개 복구 이력은 보존한다. 현재 Task는 위 상태와 native runtime 조회를 우선한다.
+
 2026-10-08 22:32 KST 재개: coordinator는 `term_ce8a35be-a6e6-4508-aba9-5c5400b95a21`,
 runtime은 `711c48c3-d114-4035-9ff7-3748588b6783`이다. 원래 coordinator/런타임을 현재로 가정하지 않는다.
 GUI의 이전 `ctx_28254a047a7d`는 native 재시작 복구에서 `terminal_missing`으로 failed/revoked되었다.
@@ -82,6 +103,10 @@ preview server는 127.0.0.1:8289에 다시 시작했고 served context의 Run/br
 뜻하지 않는다. worker checkpoint의 현재 retry 절부터 이어서 상태·BOOT·목록 탐색·브라우저
 geometry 검증과 비교 화면·보고서 제출을 기다린다. 이전 정상 화면 캡처를 다시 만들 필요는 없다.
 사용자 선택은 아직 없으며 PC·firmware 구현과 COM 접근은 시작하지 않았다.
+coordinator는 실제 시안 6개가 연결된 `http://localhost:8289/opendesign/`으로 사용자에게
+A–F 선택 질문을 보냈다. 이후 실제 사용자 답변으로 **B · Swiss Studio Meter**를 선택했다.
+`context.json`과 설계에 기록했으며, 미선택 상태로 되돌리거나 다시 선택 질문을 하지 않는다.
+다음 단계는 B의 검토 결함을 Gemini 담당자에게 수정 요청하고, PC 구현을 병행 dispatch하는 것이다.
 
 아래는 중단 직전 이력이다. 위 재개 상태와 native checkpoint를 우선한다.
 

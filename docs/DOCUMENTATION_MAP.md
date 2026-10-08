@@ -13,6 +13,8 @@
 | Gemini GUI 후보 A/B/C·LCD 구현 인계 | [Gemini handoff](design/lcd/gemini/handoff.md) |
 | Codex Sol 6.1 GUI 후보 D/E/F·LCD 구현 인계 | [Sol 6.1 handoff](design/lcd/sol61/handoff.md) |
 | 독립 요구·인터페이스 검토와 합격 기준 | [Luna 검토](agent-runs/orca-luna/requirements-review.md) |
+| GUI 6개 최초 브라우저 검증·보완 결함 | [GUI 검토](agent-runs/orca-luna/gui-review.md) |
+| 실제 시안 A–F·정상 화면 증거·공통 데이터 | [비교 화면](../opendesign/comparison.html) |
 
 `docs/PRODUCT_CONTRACT.md`와 57개 원본 입력은 수정하지 않는다. 이번 실험의 live 수집과
 협업 실행 변경은 협업 설계가 소유한다. 구현 보고서와 검증 보고서는 각각 실제 역할 작업에

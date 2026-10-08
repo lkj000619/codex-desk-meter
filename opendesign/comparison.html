@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Six LCD design candidates</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { max-width: 1240px; margin: 0 auto; padding: 28px; color: #202521; background: #f5f5f1; font: 16px/1.45 system-ui, sans-serif; }
+    h1, h2, p { margin-top: 0; }
+    h1 { margin-bottom: 8px; font-size: 30px; }
+    .note { color: #4c5650; }
+    .data { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 28px; margin: 24px 0 32px; padding: 18px; border: 1px solid #c8cec8; background: #fff; }
+    .data p { margin: 0; }
+    .candidates { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    article { min-width: 0; padding: 16px; border: 1px solid #c8cec8; background: #fff; }
+    article h2 { margin-bottom: 4px; font-size: 19px; }
+    article p { min-height: 48px; margin-bottom: 12px; color: #4c5650; }
+    figure { margin: 0 0 12px; background: #161816; }
+    img { display: block; width: 100%; height: auto; }
+    .links { display: flex; flex-wrap: wrap; gap: 14px; }
+    a { color: #145d48; }
+    footer { margin-top: 28px; padding-top: 16px; border-top: 1px solid #c8cec8; color: #4c5650; }
+    @media (max-width: 760px) { body { padding: 16px; } .data, .candidates { grid-template-columns: 1fr; } article p { min-height: 0; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Six LCD design candidates</h1>
+    <p class="note">Compare the six independent 820×320 previews. All values are synthetic. B · Swiss Studio Meter is the current user-selected design for follow-up.</p>
+    <p><strong>Independent GUI review:</strong> B remains an unvalidated prototype; no product or physical LCD approval is implied. The coordinator is routing B findings F1–F3 and the unmeasured transfer estimate for correction and follow-up. D–F browser interaction checks passed; E/F title metadata cleanup is recorded in the report. <a href="../docs/agent-runs/orca-luna/gui-review.md">Read the GUI review</a>.</p>
+  </header>
+
+  <section aria-labelledby="sample-heading">
+    <h2 id="sample-heading">Common synthetic sample</h2>
+    <div class="data">
+      <p><strong>Reference / observation:</strong> 2026-10-07 17:10:00 UTC · 08 Oct 2026 02:10 KST</p>
+      <p><strong>5h account quota:</strong> 42% used · 58% remaining · 300 min · reset 2026-10-07 18:20 UTC</p>
+      <p><strong>Weekly account quota:</strong> 18% used · 82% remaining · 10,080 min · reset 2026-10-12 17:10 UTC</p>
+      <p><strong>Session tokens:</strong> input 124,800 · output 16,400 · cached input 89,600 · reasoning output 2,300</p>
+      <p><strong>Session totals:</strong> input + output = 141,200; source total = 141,200. Cached and reasoning are included subsets. Session limit, remaining and percent are unknown; session tokens are never subtracted from quota.</p>
+      <p><strong>Global reset:</strong> codex-resets.com · latest 2026-10-07 10:00 UTC · captured 17:10 UTC · elapsed 7h 10m</p>
+    </div>
+  </section>
+
+  <main class="candidates" aria-label="LCD candidate comparisons">
+    <article>
+      <h2>A · Telemetry Matrix <span class="note">(Gemini)</span></h2>
+      <p>Dense dark HUD; both quota windows and the session ledger share the screen.</p>
+      <figure><a href="screenshots/A-gemini-telemetry-matrix.png"><img src="screenshots/A-gemini-telemetry-matrix.png" width="820" height="320" alt="Candidate A normal usage screen"></a></figure>
+      <div class="links"><a href="mockups/gemini-a/index.html">Interactive preview</a><a href="screenshots/A-gemini-telemetry-matrix.png">820×320 PNG</a></div>
+    </article>
+    <article>
+      <h2>B · Swiss Studio Meter <span class="note">(Gemini)</span></h2>
+      <p>Warm editorial layout; the primary quota is large and session counts form a separate ledger.</p>
+      <figure><a href="screenshots/B-gemini-swiss-studio-meter.png"><img src="screenshots/B-gemini-swiss-studio-meter.png" width="820" height="320" alt="Candidate B normal usage screen"></a></figure>
+      <div class="links"><a href="mockups/gemini-b/index.html">Interactive preview</a><a href="screenshots/B-gemini-swiss-studio-meter.png">820×320 PNG</a></div>
+    </article>
+    <article>
+      <h2>C · Industrial Field Gauge <span class="note">(Gemini)</span></h2>
+      <p>Amber instrument framing separates the 5h quota, weekly quota and session metadata.</p>
+      <figure><a href="screenshots/C-gemini-industrial-field-gauge.png"><img src="screenshots/C-gemini-industrial-field-gauge.png" width="820" height="320" alt="Candidate C normal usage screen"></a></figure>
+      <div class="links"><a href="mockups/gemini-c/index.html">Interactive preview</a><a href="screenshots/C-gemini-industrial-field-gauge.png">820×320 PNG</a></div>
+    </article>
+    <article>
+      <h2>D · Signal Board <span class="note">(Codex)</span></h2>
+      <p>Quota-first layout with both windows beside a complete session ledger; long window lists page explicitly.</p>
+      <figure><a href="screenshots/D-sol-signal-board.png"><img src="screenshots/D-sol-signal-board.png" width="820" height="320" alt="Candidate D normal usage screen"></a></figure>
+      <div class="links"><a href="mockups/sol61-a/index.html">Interactive preview</a><a href="screenshots/D-sol-signal-board.png">820×320 PNG</a></div>
+    </article>
+    <article>
+      <h2>E · Session Ledger <span class="note">(Codex)</span></h2>
+      <p>Session-first editorial ledger with the two quota windows stacked in a compact right column.</p>
+      <figure><a href="screenshots/E-sol-session-ledger.png"><img src="screenshots/E-sol-session-ledger.png" width="820" height="320" alt="Candidate E normal usage screen"></a></figure>
+      <div class="links"><a href="mockups/sol61-b/index.html">Interactive preview</a><a href="screenshots/E-sol-session-ledger.png">820×320 PNG</a></div>
+    </article>
+    <article>
+      <h2>F · Window Atlas <span class="note">(Codex)</span></h2>
+      <p>One large quota window at a time, an indexed window rail and a full-width session strip; advancing windows uses a held-BOOT preview control.</p>
+      <figure><a href="screenshots/F-sol-window-atlas.png"><img src="screenshots/F-sol-window-atlas.png" width="820" height="320" alt="Candidate F normal usage screen"></a></figure>
+      <div class="links"><a href="mockups/sol61-c/index.html">Interactive preview</a><a href="screenshots/F-sol-window-atlas.png">820×320 PNG</a></div>
+    </article>
+  </main>
+
+  <footer>Browser previews and PNGs document design behavior only. They do not prove physical LCD readability, firmware timing, memory use, BOOT electrical behavior or device success.</footer>
+</body>
+</html>

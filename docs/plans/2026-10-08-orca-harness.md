@@ -11,15 +11,15 @@
 | 별도 Orca worktree·입력 보존 | 완료 | 실제 branch 생성, 57개 입력 바이트/hash 일치, 과거 제품 제거는 새 checkout에만 적용 |
 | 사용자 범위·역할 확정 | 완료 | Sol/Flash/Luna, GUI는 AGY Gemini 3개+Codex CLI gpt-6.1-sol 3개, 세션 토큰+quota 확인 |
 | 역할별 기술 검토·DAG | 초기 요구·인터페이스 보고 수락 완료 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
-| LCD UX/UI·OpenDesign | 두 모델 각 3개 제출 완료; 독립 검증·선택 대기 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
-| PC 프로그램 구현 | 예정 | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
+| LCD UX/UI·OpenDesign | 최초 검토 수락·6개 비교 화면 검증·B 선택 완료; 선택 B 보완 대기 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
+| PC 프로그램 구현 | AGY Flash 실행 중 (`task_fa0b12bd6fda`) | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
 | firmware·통합 | 예정 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
 | 독립 검증·수정 | 예정 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
 | 업로드·owner-only live·실물 관측 | 예정 | 동결 binary/hash·COM3 수신·LCD/BOOT·30초·단절/복구·지연 근거 |
 | 결과·실행 정리 | 예정 | 판정·미측정·실효 모델·시간/token coverage·질문·실패 기록, worker 소유권 정리 |
 
-계획을 읽는 것만으로 구현 단계를 시작하지 않는다. 현재 승인된 GUI 후보 작성·검토를 진행하고
-인터페이스·디자인 선택에 의존하는 제품 구현은 그 결정이 기록된 뒤 dispatch한다.
+인터페이스와 사용자의 B 선택은 설계·context에 기록됐다. PC 구현은 병행 진행하며,
+펌웨어 GUI는 선택 B의 결함 보완·검증된 handoff를 받은 뒤 dispatch한다.
 
 ## 재개 체크리스트
 
@@ -35,8 +35,10 @@
 - [x] Luna의 요구·검증 검토 시작
 - [x] Luna의 요구·검증 보고서 수락; 인터페이스 질문 해결·조건별 acceptance 기록
 - [x] GUI 독립 브라우저 검증·비교 화면 Task 시작
-- [ ] GUI 후보 6개 자체/독립 검증·사용자 비교 화면 제시
-- [ ] 사용자 선택과 구현 인터페이스 확정
+- [x] GUI 후보 6개 브라우저 검토·보고 수락·사용자 비교 화면 제시 (발견 결함은 선택 B 보완으로 연결)
+- [x] 사용자 선택(B · Swiss Studio Meter)과 구현 인터페이스 확정
+- [ ] 선택 B의 last-good·두 토큰 합계·가변 quota 목록 보완 (`task_f61c79e5c906`)
+- [x] PC 수집기 구현 Task/Dispatch 시작 (`ctx_e7bb307f023b`); 완료·검증은 별도
 - [ ] PC·firmware 구현 및 host 통합 검증
 - [ ] 독립 결함 수정·제품 commit/binary 동결
 - [ ] COM3 업로드·fixture/live·사용자 실물 관측

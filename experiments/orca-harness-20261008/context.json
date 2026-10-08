@@ -15,7 +15,13 @@
   "pc_live_scope": ["selected-session-token-counts", "account-quota-windows-and-resets"],
   "ui_requested_models": ["gemini-3.8-flash-medium", "gpt-6.1-sol"],
   "ui_candidate_count_per_model": 3,
-  "ui_selection": null,
+  "ui_selection": {
+    "label": "B",
+    "name": "Swiss Studio Meter",
+    "candidate_path": "opendesign/mockups/gemini-b/index.html",
+    "confirmed_by": "Actual user answer on 2026-10-08, not the preselected option.",
+    "implementation_gate": "Correct B review findings and verify selected handoff before firmware GUI integration."
+  },
   "preview_server": {
     "url": "http://localhost:8289/opendesign/",
     "bind": "127.0.0.1",
