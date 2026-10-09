@@ -12,3 +12,4 @@ typedef struct {
 void gui_render(const cdm_state *state, const gui_control *control, uint64_t mono_ms, bool temperature_known, float temperature_c);
 size_t gui_quota_count(const cdm_state *state);
 void gui_next_window_page(gui_control *control, const cdm_state *state);
+void gui_short_press(gui_control *control);

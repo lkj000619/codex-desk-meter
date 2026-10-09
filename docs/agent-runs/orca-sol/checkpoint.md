@@ -1,9 +1,10 @@
 ﻿# Firmware checkpoint
 
-- Run: `run_c968c43361da`; Task: `task_b1214421a314`; Dispatch: `ctx_d5c857a3d228`; terminal: `term_e949afe5-d263-4f89-950b-3cca8cc9520f`.
-- Phase: core C receiver/host seam verified; BSP source assembled; B final GUI gate pending.
-- Modified owned files: `firmware/` CMake/config/main/BSP/CDM/F9 modules and command table, `tests/firmware/` host adapter/build/tests, this checkpoint. No COM or Git operation.
-- Last verification: `tests/firmware/build-host.ps1` success; `python -B -X utf8 -m unittest discover -s tests/firmware -p 'test_*.py' -v` passed 7/7; frozen `scripts/evaluate-product.py` direct matrix passed 29/29.
+- Run: `run_c968c43361da`; Task: `task_b1214421a314`; Dispatch: `ctx_ce28c7cbe236`; terminal: `term_9a4ebce2-fd56-4795-b238-e480cc1dc1bb`.
+- Phase: firmware/B rendering, host verification, and ESP-IDF build complete; coordinator-only device gate remains.
+- Modified owned files this Dispatch: `firmware/main/{CMakeLists.txt,bsp.c,cdm.c,gui.c,gui.h,main.c}`, `tests/firmware/{build-host.ps1,host_main.c,test_gui.py,include/esp_err.h}`, `docs/agent-runs/orca-sol/{checkpoint.md,report.md,set-target-output.txt,build-output.txt}`. Prior owned C files remain in place. No COM or Git mutation.
+- Last verification: `tests/firmware/build-host.ps1` success; `python -B -X utf8 -m unittest discover -s tests/firmware -p 'test_*.py' -v` passed 10/10, including frozen section-5 29/29 matrix and actual B framebuffer pixel tests. `idf.py set-target esp32s3` and final `idf.py build` passed from SHA-256-identical ASCII staging of 15 owned source/config files. Logs and hashes are in `report.md`.
 - Actual PC synthetic wire interop: `experiments/orca-harness-20261008/operator/pc-fixture-frame-0.ndjson`, 3279 bytes, SHA256 `A077100EC2382F9F077644B998DB57928FE94E50F7622E2F456B5CF3ED77ED24`; production C receiver accepted sequence 0, four usage and one global. Coordinator status `msg_081d9df35a6c`.
-- Next action: complete B GUI after independent PASS, then `idf.py set-target esp32s3` / `idf.py build`, review binary/hash and report. Physical/live/COM remain not_run.
-- B first review FAIL retained; corrected design review still pending. Interface decision `msg_1a0585d74a22`/`msg_5d56c1876c49` adopted.
+- Build workaround: native checkout path contains Korean characters that the Windows GCC wrapper cannot read; ASCII staging at `C:/Espressif/tmp/cdm-sol-task_b1214421a314` and `TEMP=C:/Espressif/tmp` allowed the genuine IDF build. Ignored binary/config copies are in `firmware/.host-tools/final-build/`.
+- Next action: coordinator reviews this report and runs only coordinator-owned COM/upload/physical and live-account tests, then records the final C/I/F/G verdict. Physical/live/COM remain `not_run`; no `product_pass=true`.
+- B first review FAIL is preserved, corrected B independent PASS was accepted (`msg_05c5a2a05fbb`); interface decision `msg_1a0585d74a22`/`msg_5d56c1876c49` adopted.

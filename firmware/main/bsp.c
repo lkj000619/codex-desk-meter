@@ -78,6 +78,12 @@ void bsp_pixel(int x,int y,uint16_t color)
 void bsp_fill(int x,int y,int w,int h,uint16_t color)
 {
     if (w<=0 || h<=0) return;
-    for(int yy=y;yy<y+h;yy++) for(int xx=x;xx<x+w;xx++) bsp_pixel(xx,yy,color);
+    if (!pixels) return;
+    int left=x<0?0:x, right=x+w>820?820:x+w;
+    int top=y<0?0:y, bottom=y+h>320?320:y+h;
+    for(int xx=left;xx<right;xx++) {
+        uint16_t *column=pixels+(819-xx)*320;
+        for(int yy=top;yy<bottom;yy++) column[yy]=color;
+    }
 }
 int bsp_boot_level(void) { return gpio_get_level(GPIO_NUM_0); }

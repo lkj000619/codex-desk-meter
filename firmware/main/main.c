@@ -65,7 +65,7 @@ void app_main(void)
         if (same>=3 && stable!=raw) {
             stable=raw;
             if (!stable) { pressed_at=now; long_fired=false; }
-            else if (!long_fired && pressed_at) { control.screen=(control.screen+1)%3; dirty=true; }
+            else if (!long_fired && pressed_at) { gui_short_press(&control); dirty=true; }
         }
         if (!stable && !long_fired && pressed_at && now-pressed_at>=600) {
             xSemaphoreTake(state_mutex,portMAX_DELAY);

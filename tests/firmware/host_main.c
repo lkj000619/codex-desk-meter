@@ -3,6 +3,58 @@
 #include <string.h>
 #include "cdm.h"
 #include "legacy.h"
+#include "gui.h"
+#include "bsp.h"
+
+static uint16_t image_pixels[820*320];
+void bsp_pixel(int x,int y,uint16_t color)
+{ if (x>=0 && x<820 && y>=0 && y<320) image_pixels[y*820+x]=color; }
+void bsp_fill(int x,int y,int width,int height,uint16_t color)
+{
+    for(int yy=y;yy<y+height;yy++) for(int xx=x;xx<x+width;xx++) bsp_pixel(xx,yy,color);
+}
+int bsp_boot_level(void) { return 1; }
+esp_err_t bsp_init(void) { return 0; }
+
+static void save_ppm(const char *prefix,const char *screen,unsigned page)
+{
+    if (!prefix) return;
+    char path[512];
+    if (snprintf(path,sizeof path,"%s-%s-%u.ppm",prefix,screen,page)>=(int)sizeof path) return;
+    FILE *file=fopen(path,"wb"); if (!file) return;
+    fprintf(file,"P6\n820 320\n255\n");
+    for(size_t i=0;i<820*320;i++) {
+        uint16_t value=image_pixels[i];
+        unsigned char rgb[3]={ (unsigned char)(((value>>11)&31)*255/31),
+            (unsigned char)(((value>>5)&63)*255/63), (unsigned char)((value&31)*255/31) };
+        fwrite(rgb,1,3,file);
+    }
+    fclose(file);
+}
+
+static cJSON *render_state(const cdm_state *state,uint64_t now,const char *prefix)
+{
+    cJSON *result=cJSON_CreateObject(), *pages=cJSON_CreateArray();
+    gui_control control={.connected=true};
+    cJSON_AddNumberToObject(result,"quota_count",gui_quota_count(state));
+    unsigned count=0;
+    do {
+        gui_render(state,&control,now,false,0);
+        cJSON_AddItemToArray(pages,cJSON_CreateNumber(cdm_crc32((const unsigned char *)image_pixels,sizeof image_pixels)));
+        save_ppm(prefix,"usage",count++);
+        gui_next_window_page(&control,state);
+    } while (control.quota_page && count<1024);
+    cJSON_AddItemToObject(result,"usage_pages",pages);
+    gui_short_press(&control); gui_render(state,&control,now,false,0);
+    cJSON_AddNumberToObject(result,"global",cdm_crc32((const unsigned char *)image_pixels,sizeof image_pixels));
+    save_ppm(prefix,"global",0);
+    gui_short_press(&control); gui_render(state,&control,now,false,0);
+    cJSON_AddNumberToObject(result,"status",cdm_crc32((const unsigned char *)image_pixels,sizeof image_pixels));
+    save_ppm(prefix,"status",0);
+    gui_short_press(&control); gui_render(state,&control,now,false,0);
+    cJSON_AddBoolToObject(result,"screen_wrap",control.screen==0 && control.quota_page==0);
+    return result;
+}
 
 static char *read_input(void)
 {
@@ -61,6 +113,10 @@ static cJSON *wire_event(cdm_state *state,const cJSON *event)
     }
     cJSON_AddItemToObject(out,"usage",usage);
     cJSON_AddItemToObject(out,"global",global);
+    if (cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(event,"render"))) {
+        const cJSON *prefix=cJSON_GetObjectItemCaseSensitive(event,"ppm_prefix");
+        cJSON_AddItemToObject(out,"render",render_state(state,at,cJSON_IsString(prefix)?prefix->valuestring:NULL));
+    }
     return out;
 }
 int main(int argc,char **argv)

@@ -162,9 +162,9 @@ uint32_t cdm_crc32(const unsigned char *bytes, size_t length)
 }
 
 static bool number(const cJSON *v, double lo, double hi, bool nullable)
-{ return v && (nullable && cJSON_IsNull(v) || cJSON_IsNumber(v) && isfinite(v->valuedouble) && v->valuedouble >= lo && v->valuedouble <= hi); }
+{ return v && ((nullable && cJSON_IsNull(v)) || (cJSON_IsNumber(v) && isfinite(v->valuedouble) && v->valuedouble >= lo && v->valuedouble <= hi)); }
 static bool string(const cJSON *v, bool nullable)
-{ return v && (nullable && cJSON_IsNull(v) || cJSON_IsString(v) && v->valuestring[0]); }
+{ return v && ((nullable && cJSON_IsNull(v)) || (cJSON_IsString(v) && v->valuestring[0])); }
 static bool literal(const cJSON *v, const char *words)
 {
     if (!cJSON_IsString(v)) return false;
@@ -207,7 +207,7 @@ static bool ident(const cJSON *v, bool lower, bool nullable)
     if (nullable && cJSON_IsNull(v)) return true;
     if (!cJSON_IsString(v) || !v->valuestring[0]) return false;
     const char *p=v->valuestring;
-    if (!isalnum((unsigned char)*p) || lower && !(*p >= 'a' && *p <= 'z' || isdigit((unsigned char)*p))) return false;
+    if (!isalnum((unsigned char)*p) || (lower && !((*p >= 'a' && *p <= 'z') || isdigit((unsigned char)*p)))) return false;
     for (; *p; p++) if (!(lower ? (*p >= 'a' && *p <= 'z') : isalnum((unsigned char)*p)) &&
         !isdigit((unsigned char)*p) && *p!='.' && *p!='_' && *p!='-' && (!lower && *p!=':')) return false;
     return true;
@@ -259,7 +259,7 @@ static bool window(const cJSON *w, bool session, int64_t anchor)
     const cJSON *rs=cJSON_GetObjectItemCaseSensitive(w,"reset_status");
     if (rs && !literal(rs,"unknown|scheduled|expired")) return false;
     if (cJSON_IsString(cJSON_GetObjectItemCaseSensitive(w,"resets_at")) && rs &&
-        (literal(rs,"scheduled") && t<=anchor || literal(rs,"expired") && t>anchor)) return false;
+        ((literal(rs,"scheduled") && t<=anchor) || (literal(rs,"expired") && t>anchor))) return false;
     if (session) {
         if (!literal(cJSON_GetObjectItemCaseSensitive(w,"unit"),"token")) return false;
         const char *nulls[]={"remaining_units","limit_units","percent_used","percent_remaining","resets_at"};
@@ -331,9 +331,9 @@ static bool snapshot(const cJSON *v, int64_t anchor)
             else if (!strcmp(id,"cached_input")) cached=n; else if (!strcmp(id,"reasoning_output")) reason=n;
             else if (!strcmp(id,"normalized_total")) norm=n;
         }
-        if (cJSON_IsNumber(cached)&&cJSON_IsNumber(input)&&cached->valuedouble>input->valuedouble ||
-            cJSON_IsNumber(reason)&&cJSON_IsNumber(output)&&reason->valuedouble>output->valuedouble ||
-            cJSON_IsNumber(norm)&&cJSON_IsNumber(input)&&cJSON_IsNumber(output)&&norm->valuedouble!=input->valuedouble+output->valuedouble) return false;
+        if ((cJSON_IsNumber(cached)&&cJSON_IsNumber(input)&&cached->valuedouble>input->valuedouble) ||
+            (cJSON_IsNumber(reason)&&cJSON_IsNumber(output)&&reason->valuedouble>output->valuedouble) ||
+            (cJSON_IsNumber(norm)&&cJSON_IsNumber(input)&&cJSON_IsNumber(output)&&norm->valuedouble!=input->valuedouble+output->valuedouble)) return false;
     }
     return true;
 }
@@ -391,7 +391,7 @@ static cdm_entry *clone_entries(const cdm_entry *source,size_t count)
         copy[i].current=cJSON_Duplicate(source[i].current,1);
         if (source[i].good) copy[i].good=cJSON_Duplicate(source[i].good,1);
         copy[i].received_ms=source[i].received_ms;
-        if (!copy[i].key || !copy[i].current || source[i].good && !copy[i].good) {
+        if (!copy[i].key || !copy[i].current || (source[i].good && !copy[i].good)) {
             free_entries(copy,count); return NULL;
         }
     }
@@ -417,7 +417,8 @@ bool cdm_accept(cdm_state *s,const unsigned char *line,size_t length,uint64_t mo
         !keys(integrity,"|algorithm|value|","") || !literal(cJSON_GetObjectItemCaseSensitive(integrity,"algorithm"),"crc32") ||
         !string(cJSON_GetObjectItemCaseSensitive(integrity,"value"),false) || !keys(payload,"|usage|global_resets|","")) goto bad;
     const char *hex=cJSON_GetObjectItemCaseSensitive(integrity,"value")->valuestring;
-    if (strlen(hex)!=8) goto bad; for(int i=0;i<8;i++) if (!isxdigit((unsigned char)hex[i]) || hex[i]>='a' && hex[i]<='f') goto bad;
+    if (strlen(hex)!=8) goto bad;
+    for(int i=0;i<8;i++) if (!isxdigit((unsigned char)hex[i]) || (hex[i]>='a' && hex[i]<='f')) goto bad;
     why="FRAME_INTEGRITY";
     if (line[0]!='{' || memcmp(line+1,"\"integrity\":",12)) goto bad;
     scan start={line+13,line+length-1,0}; if (!scan_value(&start) || *start.p++!=',') goto bad;
@@ -426,7 +427,7 @@ bool cdm_accept(cdm_state *s,const unsigned char *line,size_t length,uint64_t mo
     unsigned char *unsigned_bytes=malloc(unsigned_len); if (!unsigned_bytes) { why="NO_MEMORY"; goto bad; }
     unsigned_bytes[0]='{'; memcpy(unsigned_bytes+1,start.p,unsigned_len-1);
     crc=cdm_crc32(unsigned_bytes,unsigned_len); free(unsigned_bytes);
-    char expected[9]; snprintf(expected,sizeof expected,"%08X",crc);
+    char expected[9]; snprintf(expected,sizeof expected,"%08lX",(unsigned long)crc);
     if (strcmp(hex,expected)) { why="CRC_MISMATCH"; goto bad; }
     why="FRAME_TIME";
     int64_t anchor; if (!timestamp(stamp,false,&anchor)) goto bad;
@@ -489,4 +490,4 @@ bool cdm_receive_age(const cdm_state *s,uint64_t now,uint64_t *age_s)
 { if (!s->has_frame || now<s->received_ms || !age_s) return false; *age_s=(now-s->received_ms)/1000; return true; }
 bool cdm_stale(const cdm_state *s,const cJSON *record,uint64_t now)
 { uint64_t age; return record && (cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(record,"stale")) ||
-    cdm_source_age(s,record,now,&age) && age>=300); }
+    (cdm_source_age(s,record,now,&age) && age>=300)); }
