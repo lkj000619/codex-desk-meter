@@ -1,0 +1,67 @@
+# 별도 Orca 협업 구현 실행·관측
+
+이 문서는 coordinator와 사용자가 실행할 절차다. 현재 gate는
+[준비 상태](next-comparison-readiness.md)에서 확인한다. 아직 PC 최종 수정과 독립 통합
+검증이 끝나지 않았으므로 아래 실제 전송 절차는 지금 실행하지 않는다.
+
+## 업로드 전
+
+1. 최신 PC 제출 수락·시험, Luna 독립 통합 검증·결함 처리를 완료한다.
+2. [firmware 후보 목록](../../experiments/orca-harness-20261008/operator/firmware-candidate.json)의
+   source commit·15개 source hash·app/boot/partition hash를 현재 파일과 비교한다.
+   이 목록의 `upload_permitted=false`는 최종 검증이 아직 대기 중임을 뜻한다.
+3. 현재 포트를 다시 열거하여 COM3의 Espressif USB VID `303A`/PID `1001`과 대상 보드를
+   확인한다. 예전 연결 기록만으로 포트를 선택하지 않는다.
+4. [Sol 보고](../agent-runs/orca-sol/report.md)의 **날짜별 수정 산출물**을 업로드한다.
+   현재 후보 app은 `active-usage-build/`의 SHA-256
+   `385130667ab15ca8dcc665e70fc06882b1e89535bde8d84af05fdc2b36c1ef72`이다.
+   `final-build/`에는 보존된 이전 제출이 있으므로 해당 app을 선택하지 않는다.
+5. flash 명령·파일 hash·대상 포트·시간·부팅 로그를 남긴다. 자동 rebuild가 실행됐다면
+   새 source/hash를 다시 검증한다. 완전 erase나 BOOT를 누른 채 reset은 필요하지 않다.
+
+## PC 프로그램
+
+실행 위치는 이 실험 checkout의 루트이며 진입점은 `python -m pc.cli`다.
+현재 설치 환경에서는 `C:/Espressif/user-tools/python_env/idf5.3_py3.11_env/Scripts/python.exe`에
+필요한 `jsonschema`와 `serial`이 있다. 아래 `python`은 해당 환경을 가리킨다.
+
+```powershell
+python -m pc.cli --help
+python -m pc.cli inventory --session-dir '<Codex sessions 폴더>'
+python -m pc.cli collect --session-file '<직접 선택한 session JSONL>' --live-quota
+```
+
+inventory는 세션 ID·시각·token metadata를 보여준다. 실제 시험은 명시적으로 선택한
+파일 또는 `--session-dir ... --session-id ...`를 사용한다. `--latest`는 사용자가
+최신 세션을 고르는 정책을 선택했을 때만 사용한다. 기존 Codex 로그인이 quota 읽기를
+담당하며 수집기는 auth 파일·키·cookie를 직접 읽지 않는다.
+
+처음 sender state를 만들 때는 업로드 뒤 정상 부팅으로 receiver가 비어 있음을 확인한다.
+sender의 state와 lock은 Git에서 제외되는 로컬 `artifacts/`에 둔다.
+
+```powershell
+python -m pc.cli init-device --device-alias orca-harness-com3 --confirmed-empty-receiver --state-file artifacts/orca-harness-runtime/sender-state.json --lock-dir artifacts/orca-harness-runtime/locks
+python -m pc.cli send --device-alias orca-harness-com3 --port COM3 --session-file '<직접 선택한 session JSONL>' --live-quota --state-file artifacts/orca-harness-runtime/sender-state.json --lock-dir artifacts/orca-harness-runtime/locks
+python -m pc.cli watch --device-alias orca-harness-com3 --port COM3 --session-file '<직접 선택한 session JSONL>' --live-quota --interval 60 --state-file artifacts/orca-harness-runtime/sender-state.json --lock-dir artifacts/orca-harness-runtime/locks
+```
+
+watch에서 Enter는 PC 수동 재수집, Ctrl+C는 종료다. PC 재시작·COM 재연결 시 같은 state를
+이어 사용하며 init/reset/force-overwrite로 순번을 되돌리지 않는다. state 유실·손상은
+전송 중지 사유다. `[HOST WRITE]`만으로 장치 수락을 판정하지 않는다.
+
+fixture 시험은 `--provider-fixture`, `--personal-usage`, `--global-reset`의 동결 입력을
+별도로 선택해 provenance를 보존한다. 글로벌 리셋 fixture와 실제 계정 quota의 reset은
+서로 다른 source다. 제공되지 않은 값은 unknown/null이며 0이나 현재 시각으로 채우지 않는다.
+
+## 실물 관측
+
+- 업로드 전후 파일 hash·port·시간과 실제 보드 관측을 같은 기록에 연결한다.
+- 데이터 전 Usage/Global/Status의 WAITING/default, 데이터 후 실제 숫자·단위·source·시각을 확인한다.
+- BOOT 짧게 3번으로 세 화면과 처음 화면 복귀, 600ms 이상 누르기로 모든 window page 접근을 확인한다.
+- 30초 동안 표시 유지·잘림·가독성·깜박임·꺼짐·자동 reboot를 확인한다. RST 조작은 별도로 기록한다.
+- fixture로 오류→last-good→복구, source age 299/300초와 receive age 분리, 새 frame 반영 지연을 시험한다.
+- USB 링크 단절 중 표시 유지 시험에는 별도 전원이 필요하다. 전원을 뽑은 재부팅과 링크 단절을 구분한다.
+- 실제 LCD/BOOT·지연·sensor·24시간 안정성은 측정 전까지 `not_run`이다. 브라우저·C framebuffer·host write로 대체하지 않는다.
+
+중단되면 [재개 절차](orca-harness-resume.md)를 따른다. 개인 원본 JSONL·인증 내용·전체 대화는
+Git에 넣지 않고, 필요한 source/시각/숫자 metadata와 비식별 시험 결과만 남긴다.

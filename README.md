@@ -8,6 +8,7 @@ PC에서 Codex 세션 토큰과 개인 사용한도·리셋 시각을 수집해 
 - [진행 계획](docs/plans/2026-10-08-orca-harness.md)
 - [현재 상태](docs/experiments/next-comparison-readiness.md)
 - [문서 지도](docs/DOCUMENTATION_MAP.md)
+- [검증 이후 PC 실행·업로드·실물 관측](docs/experiments/orca-harness-operator.md)
 - [GUI 6개 비교](opendesign/comparison.html) · [독립 검토](docs/agent-runs/orca-luna/gui-review.md)
 
 사용자는 **B · Swiss Studio Meter**를 선택했다. 최초 시안 검토를 보존하고 선택 B의 결함을
