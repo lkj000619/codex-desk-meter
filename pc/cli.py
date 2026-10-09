@@ -262,7 +262,7 @@ def run_watch_loop(
                 is_manual = True
                 manual_trigger_event.clear()
                 if manual_request_arrival is None:
-                    manual_request_arrival = in_flight_start if iter_in_flight else current_now
+                    manual_request_arrival = current_now
 
             is_auto = (current_now >= next_auto_deadline)
             is_port_reopened = False
@@ -294,17 +294,21 @@ def run_watch_loop(
                         next_auto_deadline += interval
 
                 # Bounded collection budget: for manual / port refresh (max 5s end-to-end),
-                # allocate bounded time to collection RPC so combined collection and bounded write stay within 5.0s.
+                # allocate bounded time to collection RPC so combined collection, cleanup, and bounded write stay within 5.0s.
                 if is_manual:
                     elapsed = max(0.0, current_now - manual_request_arrival) if manual_request_arrival is not None else 0.0
                     remaining_budget = 5.0 - elapsed
-                    # Shared serial write/drain budget is 1.0s, plus native process cleanup (up to 0.5s terminate + 0.5s kill)
-                    reserved_transport_and_cleanup = 1.5
-                    if remaining_budget <= reserved_transport_and_cleanup:
-                        # Cannot fit full RPC acquisition within deadline; use remaining budget minus serial write for explicit bounded failure
-                        collection_timeout = max(0.0, remaining_budget - 1.0)
+                    # Shared serial write/drain budget is real 1.0s, plus native process cleanup (0.5s terminate + 0.5s kill = 1.0s)
+                    reserved_serial = 1.0
+                    reserved_cleanup = 1.0
+                    total_reserved = 2.0
+                    if remaining_budget <= total_reserved:
+                        # Cannot fit native RPC + cleanup + serial drain within deadline;
+                        # do not start native RPC! Preserve truthful bounded error/last-good quota.
+                        collection_timeout = 0.0
                     else:
-                        collection_timeout = min(2.0, remaining_budget - reserved_transport_and_cleanup)
+                        available_for_rpc = remaining_budget - total_reserved
+                        collection_timeout = min(2.0, available_for_rpc)
                 elif is_port_reopened:
                     collection_timeout = 2.0
                 else:
@@ -333,6 +337,14 @@ def run_watch_loop(
                 # Stamp AFTER acquisition so new observations are never newer than the frame
                 sent_at = args.reference_time if args.reference_time else datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
+                # Remaining serial budget must be real with strict deadline safety margin
+                if is_manual and manual_request_arrival is not None:
+                    drain_now = now_fn()
+                    remaining_for_serial = 5.0 - (drain_now - manual_request_arrival) - 0.15
+                    serial_write_timeout = min(1.0, max(0.0, remaining_for_serial))
+                else:
+                    serial_write_timeout = None
+
                 active_sink = serial_sink
                 if active_sink is None and args.dry_run:
                     active_sink = LoopbackSink()
@@ -343,6 +355,7 @@ def run_watch_loop(
                         sent_at=sent_at,
                         sink=active_sink,
                         reference_time=args.reference_time,
+                        write_timeout=serial_write_timeout,
                     )
 
                     if outcome.success:
@@ -366,7 +379,7 @@ def run_watch_loop(
                 iter_in_flight = False
                 if manual_trigger_event and manual_trigger_event.is_set():
                     # A manual request arrived during this iteration!
-                    manual_request_arrival = in_flight_start
+                    manual_request_arrival = now_fn()
                 else:
                     manual_request_arrival = None
 

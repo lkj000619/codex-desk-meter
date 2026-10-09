@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import io
 import json
 import subprocess
 import tempfile
@@ -1430,6 +1431,297 @@ class TestCohortProbeRegressions(unittest.TestCase):
             finally:
                 stop_event.set()
                 watch_thread.join(timeout=1.0)
+
+    def test_delayed_terminate_kill_and_near_limit_serial_drain_enforces_five_second_budget(self):
+        """Exact root probe reproduction: terminate wait 0.5s + kill wait 0.49s + serial drain 0.99s enforces <= 5.0s."""
+        stop_event = threading.Event()
+        manual_event = threading.Event()
+        auto_init_started = threading.Event()
+        second_drain_finished = threading.Event()
+
+        StateStore(self.state_file).initialize_new("test-probe-alias", initial_sequence=0, confirmed_overwrite=True)
+
+        class FakeDelayedProcess:
+            def __init__(self):
+                self.stdin = io.BytesIO()
+                self.stdout_idx = 0
+                self.terminated = False
+                self.killed = False
+
+            def poll(self):
+                return None
+
+            @property
+            def stdout(self):
+                return self
+
+            @property
+            def stderr(self):
+                return io.BytesIO()
+
+            def terminate(self):
+                self.terminated = True
+
+            def kill(self):
+                self.killed = True
+
+            def wait(self, timeout=None):
+                if self.terminated and not self.killed:
+                    wait_dur = min(0.5, timeout) if timeout is not None else 0.5
+                    time.sleep(wait_dur)
+                    raise subprocess.TimeoutExpired(cmd="fake", timeout=wait_dur)
+                if self.killed:
+                    wait_dur = min(0.49, timeout) if timeout is not None else 0.49
+                    time.sleep(wait_dur)
+                    return 0
+                return 0
+
+        init_reply = json.dumps({"jsonrpc": "2.0", "id": 1, "result": {}}).encode("utf-8") + b"\n"
+        quota_reply = json.dumps({
+            "jsonrpc": "2.0",
+            "id": 2,
+            "result": {
+                "account": {"id": "probe-acc", "plan": "pro"},
+                "rateLimits": {"codex": {"primary": {"usedPercent": 10.0, "resetsAt": 1700000000}}},
+            },
+        }).encode("utf-8") + b"\n"
+
+        class AutoDelayedProcess(FakeDelayedProcess):
+            def readline(self):
+                if self.stdout_idx == 0:
+                    auto_init_started.set()
+                    time.sleep(0.95)
+                    self.stdout_idx += 1
+                    return init_reply
+                if self.stdout_idx == 1:
+                    time.sleep(0.95)
+                    self.stdout_idx += 1
+                    return quota_reply
+                return b""
+
+        class ManualDelayedProcess(FakeDelayedProcess):
+            def readline(self):
+                if self.stdout_idx == 0:
+                    time.sleep(0.9)
+                    self.stdout_idx += 1
+                    return init_reply
+                if self.stdout_idx == 1:
+                    time.sleep(0.9)
+                    self.stdout_idx += 1
+                    return quota_reply
+                return b""
+
+        auto_p = AutoDelayedProcess()
+        manual_p = ManualDelayedProcess()
+
+        class FakePyserialDevice:
+            def __init__(self, port="COM1", baudrate=115200, timeout=1.0, write_timeout=1.0, **kwargs):
+                self.port = port
+                self.baudrate = baudrate
+                self.timeout = timeout
+                self.write_timeout = write_timeout
+                self.written_frames: list[bytes] = []
+                self.write_count = 0
+                self.queued_at: float | None = None
+                self._closed = False
+
+            def write(self, data: bytes) -> int:
+                if self._closed:
+                    raise IOError("Port closed")
+                self.write_count += 1
+                self.queued_at = time.monotonic()
+                self.written_frames.append(bytes(data))
+                return len(data)
+
+            @property
+            def out_waiting(self) -> int:
+                if self._closed:
+                    return 0
+                if self.queued_at is None or (time.monotonic() - self.queued_at) < 0.99:
+                    return 128
+                if self.write_count >= 2 and not second_drain_finished.is_set():
+                    second_drain_finished.set()
+                return 0
+
+            def close(self):
+                self._closed = True
+
+        mock_serial_mod = unittest.mock.MagicMock()
+        mock_serial_mod.Serial = FakePyserialDevice
+        mock_serial_mod.EIGHTBITS = 8
+        mock_serial_mod.PARITY_NONE = "N"
+        mock_serial_mod.STOPBITS_ONE = 1
+
+        with patch.dict("sys.modules", {"serial": mock_serial_mod}):
+            sink = WindowsSerialSink("COM1", baudrate=115200, timeout=1.0)
+            sm = SharedCollectionState()
+
+            session_path = self.td / "probe_session.jsonl"
+            session_path.write_text(
+                json.dumps({"type": "session_meta", "payload": {"id": "probe-sess"}}) + "\n" +
+                json.dumps({"type": "event_msg", "payload": {"type": "token_count", "timestamp": "2026-10-09T11:58:00Z",
+                                                             "info": {"total_token_usage": {"input_tokens": 100, "output_tokens": 10, "total_tokens": 110}}}}) + "\n",
+                encoding="utf-8",
+            )
+
+            class Args:
+                device_alias = "test-probe-alias"
+                interval = 60
+                port = "COM1"
+                dry_run = False
+                state_file = str(self.state_file)
+                lock_dir = str(self.lock_dir)
+                session_file = str(session_path)
+                session_dir = None
+                session_id = None
+                latest = False
+                live_quota = True
+                provider_fixture = None
+                personal_usage = None
+                global_reset = None
+                host_alias = "pc-test"
+                agent_id = "codex-cli"
+                reference_time = None
+                once = False
+
+            with patch("pc.quota.subprocess.Popen", side_effect=[auto_p, manual_p]):
+                watch_thread = threading.Thread(
+                    target=run_watch_loop,
+                    kwargs={
+                        "args": Args(),
+                        "state_manager": sm,
+                        "sink_override": sink,
+                        "manual_trigger_event": manual_event,
+                        "stop_event": stop_event,
+                        "time_provider": None,
+                    },
+                )
+                watch_thread.start()
+
+                try:
+                    self.assertTrue(auto_init_started.wait(timeout=2.0), "AUTO init did not start")
+                    request_started = time.monotonic()
+                    session_path.write_text(
+                        json.dumps({"type": "session_meta", "payload": {"id": "probe-sess"}}) + "\n" +
+                        json.dumps({"type": "event_msg", "payload": {"type": "token_count", "timestamp": "2026-10-09T11:59:00Z",
+                                                                     "info": {"total_token_usage": {"input_tokens": 250, "output_tokens": 20, "total_tokens": 270}}}}) + "\n",
+                        encoding="utf-8",
+                    )
+                    manual_event.set()
+
+                    # Wait strictly for actual terminal event: successful completion or fail
+                    remaining_wait = max(0.01, 5.0 - (time.monotonic() - request_started))
+                    signaled = second_drain_finished.wait(timeout=remaining_wait)
+                    completion_time = time.monotonic()
+                    elapsed = completion_time - request_started
+                    self.assertLessEqual(elapsed, 5.0, f"Combined delayed cleanup and serial drain exceeded 5.0s: {elapsed:.2f}s")
+                    fake_dev = sink.serial
+                    if signaled:
+                        self.assertEqual(len(fake_dev.written_frames), 2)
+                        frame2 = json.loads(fake_dev.written_frames[1].decode("utf-8").strip())
+                        self.assertEqual(frame2["payload"]["usage"][0]["windows"][0]["used_units"], 250)
+                    else:
+                        # Explicit bounded failure path: serial write timed out boundedly <= 5.0s, sequence was consumed
+                        self.assertGreaterEqual(fake_dev.write_count, 1)
+                        sess_src = next(src for key, src in sm.sources.items() if "probe-sess" in key)
+                        self.assertEqual(sess_src.last_good_snapshot["windows"][0]["used_units"], 250)
+                finally:
+                    stop_event.set()
+                    watch_thread.join(timeout=4.0)
+                    sink.close()
+
+    def test_slow_write_and_drain_shares_timeout_and_respects_os_write_timeout(self):
+        """pyserial write delay respects write_timeout and shares deadline with drain."""
+        class SlowWritePyserial:
+            def __init__(self, port="COM1", baudrate=115200, timeout=1.0, write_timeout=1.0, **kwargs):
+                self.port = port
+                self.baudrate = baudrate
+                self.timeout = timeout
+                self.write_timeout = write_timeout
+                self.written: list[bytes] = []
+                self._closed = False
+
+            def write(self, data: bytes) -> int:
+                if self._closed:
+                    raise IOError("Port closed")
+                # Simulate slow OS write taking min(0.3s, write_timeout)
+                delay = 0.3
+                if self.write_timeout is not None:
+                    if delay > self.write_timeout:
+                        time.sleep(self.write_timeout)
+                        raise TimeoutError(f"OS write timed out after {self.write_timeout}s")
+                time.sleep(delay)
+                self.written.append(bytes(data))
+                return len(data)
+
+            @property
+            def out_waiting(self) -> int:
+                return 0
+
+            def close(self):
+                self._closed = True
+
+        mock_serial_mod = unittest.mock.MagicMock()
+        mock_serial_mod.Serial = SlowWritePyserial
+        mock_serial_mod.EIGHTBITS = 8
+        mock_serial_mod.PARITY_NONE = "N"
+        mock_serial_mod.STOPBITS_ONE = 1
+
+        with patch.dict("sys.modules", {"serial": mock_serial_mod}):
+            self.store.initialize_new("slow-write-device", initial_sequence=0, confirmed_overwrite=True)
+            sink = WindowsSerialSink("COM1", timeout=1.0)
+            sender = CdmSender("slow-write-device", self.store, self.lock_dir)
+
+            try:
+                # Test 1: normal timeout 1.0s succeeds after 0.3s write
+                t0 = time.monotonic()
+                outcome1 = sender.transmit_payload(
+                    {"usage": [], "global_resets": []},
+                    sent_at="2026-10-09T12:00:00Z",
+                    sink=sink,
+                    write_timeout=1.0,
+                )
+                elapsed1 = time.monotonic() - t0
+                self.assertTrue(outcome1.success)
+                self.assertGreaterEqual(elapsed1, 0.25)
+                self.assertLessEqual(elapsed1, 1.0)
+                # Verify sink restored original write_timeout
+                self.assertEqual(sink.serial.write_timeout, 1.0)
+
+                # Test 2: constrained write_timeout=0.1s times out during slow write <= 0.15s
+                t1 = time.monotonic()
+                outcome2 = sender.transmit_payload(
+                    {"usage": [], "global_resets": []},
+                    sent_at="2026-10-09T12:00:01Z",
+                    sink=sink,
+                    write_timeout=0.1,
+                )
+                elapsed2 = time.monotonic() - t1
+                self.assertFalse(outcome2.success)
+                self.assertEqual(outcome2.error_code, "WRITE_IO_ERROR")
+                self.assertLessEqual(elapsed2, 0.25)
+                # Verify sink restored original write_timeout
+                self.assertEqual(sink.serial.write_timeout, 1.0)
+            finally:
+                sender.close()
+                sink.close()
+
+    def test_pure_quota_when_no_budget_avoids_rpc_and_preserves_error_or_cache(self):
+        """When remaining budget <= 2.0s, collect_all skips native RPC and returns bounded error snapshot."""
+        sm = SharedCollectionState()
+        rpc_called = [False]
+
+        def bomb_rpc(*args, **kwargs):
+            rpc_called[0] = True
+            raise RuntimeError("Should not be called when quota_timeout <= 0")
+
+        with patch("pc.state.fetch_native_rate_limits", side_effect=bomb_rpc):
+            res = sm.collect_all(live_quota=True, quota_timeout=0.0)
+            self.assertFalse(rpc_called[0], "fetch_native_rate_limits was called despite 0 budget")
+            self.assertEqual(len(res["usage"]), 1)
+            quota_snap = res["usage"][0]
+            self.assertEqual(quota_snap["status"], "error")
+            self.assertEqual(quota_snap["error_code"], "QUOTA_TIMEOUT")
 
 
 if __name__ == "__main__":

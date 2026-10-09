@@ -237,20 +237,30 @@ class SharedCollectionState:
         if live_quota:
             src = self.get_source("quota")
             try:
-                quota_res = fetch_native_rate_limits(timeout_seconds=quota_timeout, reference_time=reference_time)
-                snap = build_account_quota_snapshot(
-                    quota_res,
-                    host_alias=host_alias,
-                    agent_id=agent_id,
-                    reference_time=reference_time,
-                )
-                semantic_validate_snapshot(snap, reference_time=reference_time)
-                snap = src.compute_stale(snap, reference_time)
-                if quota_res.error_code:
-                    self.source_errors["quota"] = quota_res.error_code
-                    usage_snapshots.append(src.update_error(quota_res.error_code, quota_res.error_reason or "", reference_time))
+                if quota_timeout is not None and quota_timeout <= 0:
+                    self.source_errors["quota"] = "QUOTA_TIMEOUT"
+                    usage_snapshots.append(
+                        src.update_error(
+                            "QUOTA_TIMEOUT",
+                            "Remaining budget exhausted before native RPC start",
+                            reference_time,
+                        )
+                    )
                 else:
-                    usage_snapshots.append(src.update_good(snap))
+                    quota_res = fetch_native_rate_limits(timeout_seconds=quota_timeout, reference_time=reference_time)
+                    snap = build_account_quota_snapshot(
+                        quota_res,
+                        host_alias=host_alias,
+                        agent_id=agent_id,
+                        reference_time=reference_time,
+                    )
+                    semantic_validate_snapshot(snap, reference_time=reference_time)
+                    snap = src.compute_stale(snap, reference_time)
+                    if quota_res.error_code:
+                        self.source_errors["quota"] = quota_res.error_code
+                        usage_snapshots.append(src.update_error(quota_res.error_code, quota_res.error_reason or "", reference_time))
+                    else:
+                        usage_snapshots.append(src.update_good(snap))
             except Exception as exc:
                 self.source_errors["quota"] = str(exc)
                 usage_snapshots.append(src.update_error("QUOTA_COLLECTION_ERROR", str(exc), reference_time))

@@ -235,7 +235,11 @@ class BoundedProcessReader:
         self._stop = True
 
 
-def cleanup_process(proc: subprocess.Popen | None, reader: BoundedProcessReader | None = None) -> None:
+def cleanup_process(
+    proc: subprocess.Popen | None,
+    reader: BoundedProcessReader | None = None,
+    timeout: float = 1.0,
+) -> None:
     if reader:
         reader.close()
     if proc:
@@ -244,15 +248,23 @@ def cleanup_process(proc: subprocess.Popen | None, reader: BoundedProcessReader 
                 proc.stdin.close()
         except Exception:
             pass
-        try:
-            proc.terminate()
-            proc.wait(timeout=0.5)
-        except Exception:
+        if timeout <= 0.0:
             try:
                 proc.kill()
-                proc.wait(timeout=0.5)
+                proc.wait(timeout=0.0)
             except Exception:
                 pass
+        else:
+            wait_timeout = min(0.5, timeout / 2.0)
+            try:
+                proc.terminate()
+                proc.wait(timeout=wait_timeout)
+            except Exception:
+                try:
+                    proc.kill()
+                    proc.wait(timeout=wait_timeout)
+                except Exception:
+                    pass
         try:
             if proc.stdout:
                 proc.stdout.close()
@@ -315,6 +327,17 @@ def fetch_native_rate_limits(
     cmd = command or ["codex", "app-server"]
     proc = None
     reader = None
+
+    if timeout_seconds <= 0:
+        now_ts = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+        return AccountQuotaResult(
+            account_id=None,
+            plan_type=None,
+            windows={},
+            observed_at=now_ts,
+            error_code="RATE_LIMIT_TIMEOUT",
+            error_reason="No budget available for native RPC",
+        )
 
     try:
         proc = subprocess.Popen(
@@ -410,4 +433,4 @@ def fetch_native_rate_limits(
             error_reason=str(exc),
         )
     finally:
-        cleanup_process(proc, reader)
+        cleanup_process(proc, reader, timeout=min(1.0, timeout_seconds))

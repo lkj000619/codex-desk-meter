@@ -268,9 +268,13 @@ class WindowsSerialSink:
         self.timeout = timeout
         self.closed = False
         self._write_start_time: float | None = None
+        self._custom_write_timeout: float | None = None
 
     @property
     def write_timeout(self) -> float:
+        custom_wt = getattr(self, "_custom_write_timeout", None)
+        if custom_wt is not None:
+            return custom_wt
         if hasattr(self.serial, "write_timeout") and self.serial.write_timeout is not None:
             try:
                 val = float(self.serial.write_timeout)
@@ -279,6 +283,15 @@ class WindowsSerialSink:
             except (TypeError, ValueError):
                 pass
         return self.timeout
+
+    @write_timeout.setter
+    def write_timeout(self, value: float | None) -> None:
+        self._custom_write_timeout = value
+        if hasattr(self.serial, "write_timeout"):
+            try:
+                self.serial.write_timeout = value
+            except Exception:
+                pass
 
     @property
     def out_waiting(self) -> int:
@@ -420,6 +433,7 @@ class CdmSender:
         sent_at: str,
         sink: SerialSink | None = None,
         reference_time: str | None = None,
+        write_timeout: float | None = None,
     ) -> SendOutcome:
         """Reserve sequence, construct frame, and write to sink. Failed write consumes sequence."""
         if not self.state_store.exists():
@@ -457,6 +471,16 @@ class CdmSender:
                 error_message=str(exc),
             )
 
+        if write_timeout is not None and write_timeout <= 0:
+            return SendOutcome(
+                success=False,
+                sequence_used=seq,
+                bytes_sent=0,
+                frame=frame,
+                error_code="WRITE_IO_ERROR",
+                error_message="Serial output queue drain deadline exhausted",
+            )
+
         target_sink = sink
         if target_sink is None and self.sink_factory:
             target_sink = self.sink_factory()
@@ -471,7 +495,13 @@ class CdmSender:
                 error_message="No serial sink provided or available",
             )
 
+        orig_wt = getattr(target_sink, "write_timeout", None)
         try:
+            if write_timeout is not None and hasattr(target_sink, "write_timeout"):
+                try:
+                    target_sink.write_timeout = write_timeout
+                except Exception:
+                    pass
             written = target_sink.write(raw_bytes)
             if written != len(raw_bytes):
                 return SendOutcome(
@@ -498,3 +528,9 @@ class CdmSender:
                 error_code="WRITE_IO_ERROR",
                 error_message=str(exc),
             )
+        finally:
+            if write_timeout is not None and hasattr(target_sink, "write_timeout") and orig_wt is not None:
+                try:
+                    target_sink.write_timeout = orig_wt
+                except Exception:
+                    pass

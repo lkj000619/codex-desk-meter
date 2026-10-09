@@ -1,44 +1,34 @@
-# Checkpoint: PC Watch Manual Request Race & Combined 5.0s Deadline Fixes (orca-flash)
+# Checkpoint: PC Manual Shared Deadline Full End-to-End Bound Fixes (orca-flash)
 
-- 일시: 2026-10-10T01:31:00+09:00
-- Task ID: `task_1b01674fbb8c`
-- Dispatch ID: `ctx_41e3573faa6e`
+- 일시: 2026-10-10T02:19:00+09:00
+- Task ID: `task_e2907fe00c34`
+- Dispatch ID: `ctx_ca714297b040`
 - 작업자 터미널: `term_3105fe45-46f8-4dce-9763-c24e2e98be09`
 - 코디네이터 터미널: `term_54a83fa0-c831-41b9-8295-ca84d361c828`
 - 담당 역할: PC 수집·전송 (`pc/`, `tests/pc/`, `docs/agent-runs/orca-flash/`)
 - 현재 상태:
-  1. **수동 요청 소비 시점 사전화 (Acquisition-Before-Consumption)**:
-     - `manual_trigger_event.clear()`를 `sm.collect_all` 시작 직전으로 이동하여 수집 시작 시점에 요청을 소비.
-     - 수집/전송/드레인 완료 후 무조건 `clear()`하던 이전 로직 및 `has_session_source` 불리언 추측 코드를 완전히 제거.
-     - 인플라이트 수집/전송 중 유입된 수동 요청은 후속 틱 신규 수집을 위해 유실 없이 100% 보존.
-  2. **MANUAL 전송 중 2차 수동 요청 보존**:
-     - 1차 수동 프레임의 쓰기/드레인 중 추가로 발생한 2차 수동 요청도 보존되어 직후 2차 신규 프레임으로 송출됨.
-  3. **인위적 클램프 없는 실시간 모노토닉 5.0초 통합 데드라인 준수 (Budget Allocation & Bounded Failure)**:
-     - 인위적으로 시간을 조작하는 `max(0.5, ...)` 클램프를 완전히 배제하고, 수동 요청 도착 시점 기준 실제 남은 시간 `remaining_budget = 5.0 - elapsed`를 엄격히 산정.
-     - 공유 시리얼 전송/드레인 예산(1.0s) 및 자식 프로세스 정리 마진(`cleanup_process` terminate 0.5s + kill 0.5s, 최대 1.0s)을 확보하기 위해 `reserved_transport_and_cleanup = 1.5s`를 차감한 `collection_timeout = min(2.0, remaining_budget - 1.5)` (남은 시간이 부족할 경우 `max(0.0, remaining_budget - 1.0)`) 할당.
-     - 악의적 경계(Test 3: AUTO RPC 1.9s + drain 0.8s = 2.7s 경과)에서 남은 시간 2.3s에 맞춰 MANUAL RPC의 타임아웃이 0.8s(초기화 0.4s)로 축소되어 0.4s에 명시적 `INITIALIZE_FAILED`로 즉시 fail-closed 처리되고 프로세스가 정리되어, 캐시된 last-good 스냅샷을 보존한 bounded error path를 거쳐 총 4.28초 (<= 5.0초)에 직렬 드레인을 완결.
+  1. **실제 최악 지연 반영 통합 예산 예약 (`total_reserved = 2.0s`) 및 인위적 클램프 제거**:
+     - 시리얼 출력 큐 드레인 예산 1.0초와 네이티브 프로세스 정리 예산 1.0초(terminate wait 0.5초 + kill wait 0.49초)를 합산한 순수 2.0초를 필수 예약 시간으로 설정.
+     - `pc/quota.py`의 `cleanup_process` 및 `fetch_native_rate_limits`에서 인위적 양수 하한 클램프(`max(0.1, ...)` 및 `max(0.01, ...)`)를 완전히 제거하고, `timeout <= 0`인 경우 대기 없이 즉시 `kill()` 및 `wait(0.0)` 처리.
+     - 수동 요청 시점 기준 실제 경과 시간을 차감한 `remaining_budget = 5.0 - elapsed` 산정 시 인위적 클램프를 완전히 배제.
+  2. **예산 소진 시 네이티브 RPC 스폰 회피 및 Bounded Error / Cache 보존 (`pc/state.py`, `pc/quota.py`)**:
+     - `remaining_budget <= 2.0s`인 경우 네이티브 RPC(`fetch_native_rate_limits`) 프로세스를 일절 시작하지 않고(`collection_timeout = 0.0`), `QUOTA_TIMEOUT` 명시적 에러 스냅샷을 생성하여 기존 last-good 스냅샷의 관측치와 필드를 그대로 보존.
+     - 외부 RPC를 스킵함으로써 불필요한 프로세스 스폰 및 1.0초에 달하는 cleanup 지연을 원천 차단하고, 로컬 세션 데이터(250 토큰 카운트)를 즉시 수집하여 신규 프레임으로 송출.
+  3. **실질적 OS 시리얼 쓰기/드레인 타임아웃 바운딩 및 실패 순번 소비 (`pc/sender.py`, `pc/cli.py`)**:
+     - `WindowsSerialSink.write_timeout` 세터가 pyserial `self.serial.write_timeout`도 동적으로 변경하도록 구현하여 느린 OS write 자체를 실질적으로 바운딩.
+     - 수동 갱신 프레임 송출 시 실제 잔여 시간에 맞춘 `serial_write_timeout = min(1.0, max(0.0, 5.0 - (drain_now - manual_request_arrival) - 0.15))`를 전달하여 엄격한 데드라인 안전 마진 적용.
+     - 잔여 드레인 예산이 고갈되거나 드레인 시간 초과 시, 순번은 사전 예약 소비(`reserve_next_sequence`)한 채 가짜 성공 로그 없이 명시적 전송 실패(`WRITE_IO_ERROR: Drain timed out`)로 안전하게 fail-closed 처리.
   4. **단위 및 회귀 테스트 검증**:
-     - `tests/pc/test_cohort_probe_regressions.py`에 신규 3건 회귀 테스트 추가 완료.
-     - `tests/pc` 내 전체 60개 단위/회귀 테스트 100% 통과 (60 tests, OK, 0 failures, 0 errors).
+     - `tests/pc/test_cohort_probe_regressions.py`에 실제 `WindowsSerialSink` + `FakeSerial` 경계를 사용한 오퍼레이터 프로브 재현 케이스(`test_delayed_terminate_kill_and_near_limit_serial_drain_enforces_five_second_budget`) 보강 (거짓 양성 분기 배제, 실제 터미널 완료 또는 명시적 bounded failure 시점 <= 5.0s 엄격 검증).
+     - slow-write 타임아웃 준수 및 복원 테스트(`test_slow_write_and_drain_shares_timeout_and_respects_os_write_timeout`) 추가.
+     - 무예산 시 RPC 스킵 케이스(`test_pure_quota_when_no_budget_avoids_rpc_and_preserves_error_or_cache`) 추가.
+     - `tests/pc` 내 전체 63개 단위/회귀 테스트 100% 통과 (63 tests, OK, 0 failures, 0 errors).
   5. **통합 테스트 및 Luna 인계 사항**:
-     - `test_second_manual_request_during_manual_write_is_not_lost`: 통과 (0.380s).
-     - `test_auto_rpc_remainder_manual_rpc_and_successful_serial_drains_share_five_second_budget`: 통과 (4.284s <= 5.0s, bounded error path).
-     - `test_pure_quota_request_after_collection_requires_fresh_native_acquisition`: 2개 프레임 송출 및 수집은 완벽 통과했으나, Luna 소유 테스트(`tests/integration/test_pc_producer_to_c.py` line 927)의 반환 스키마 접근 오타(`row["current"]` 대신 C 바이너리가 반환하는 `row["usage"][0]["current"]`)로 인한 실패 확인. Luna 소유권 규칙 준수를 위해 본 작업자는 해당 파일을 수정하지 않고 코디네이터 및 Luna에게 인계.
+     - `test_auto_rpc_remainder_manual_rpc_and_successful_serial_drains_share_five_second_budget`: 통과 (4.012s <= 5.0s).
+     - `test_second_manual_request_during_manual_write_is_not_lost`: 통과.
+     - Luna 소유 통합 테스트(`tests/integration/test_pc_producer_to_c.py` line 927)의 반환 스키마 접근 오타(`row["current"]` -> `row["usage"][0]["current"]`) 적응 사항은 유지 인계.
   6. **실물 하드웨어 제한사항**: 실제 COM 포트 통신/플래시/리셋은 수행하지 않았으며 physical/live evidence는 `not_run`, `product_pass=false`.
-
-## 세부 수정 내역
-
-1. **`pc/cli.py` (`run_watch_loop`)**:
-   - `manual_trigger_event.clear()`를 `sm.collect_all` 시작 직전으로 이동하여 수집 시작 전 사전 소비.
-   - 루프 종료부의 무조건적인 `manual_trigger_event.clear()` 제거.
-   - `has_session_source` 불리언 분기 완전 제거.
-   - `remaining_budget = 5.0 - elapsed`와 `reserved_transport_and_cleanup = 1.5`를 적용한 `collection_timeout` 정밀 계산.
-
-2. **`tests/pc/test_cohort_probe_regressions.py`**:
-   - `test_second_manual_request_during_already_manual_write_dispatches_second_frame`: MANUAL 쓰기/드레인 중 2차 수동 요청 발생 시 유실 없이 2번째 프레임이 송출됨을 검증.
-   - `test_pure_quota_request_after_collection_requires_fresh_native_acquisition`: session_file 없는 순수 쿼터 루프에서 수동 요청 시 신선한 native quota 취득 후 2번째 프레임 송출 검증.
-   - `test_real_monotonic_combined_near_limit_auto_rpc_manual_rpc_and_serial_drains_share_five_second_budget`: 실시간 모노토닉 타이밍 환경에서 수동 요청 및 드레인이 5.0초 예산 내에서 완결됨을 검증.
 
 ## 검증 결과
 `python -B -X utf8 -m unittest discover -s tests/pc -p "test_*.py" -v`:
-**60 tests run, OK, 0 failures, 0 errors**.
+**63 tests run, OK, 0 failures, 0 errors**.
