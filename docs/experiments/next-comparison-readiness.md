@@ -24,3 +24,5 @@
 2026-10-10 00:11 KST 재개: 같은 Run·branch와 입력 57개를 확인했다. 중단된 독립 검증 부분 작업은 `0f552c9`에 보존했다. 같은 review Task의 현재 Dispatch는 `ctx_125c9c02c0ed`이며 PC `5ddef63`·firmware `853ddf7`의 전체 검증을 이어간다. 기본 Codex launcher 인수 오류는 종료 확인·정리 후 모델/자동 승인 확인된 별도 터미널로 복구했다. 세 PC 결함의 독립 보고·보완·재검증 이전에는 제품 합격과 업로드를 선언하지 않는다.
 
 2026-10-10 00:29 KST: Luna의 실패 제출 `msg_e69a6fb2be99` 수락·release/ack, `117a988` 보존. coordinator도 통합 22개 중 동일한 3개 실패를 확인했다. 제한 시간 내 큐 전송 완료 또는 명확한 전송 실패 처리와 전송 중 수동 요청의 새 데이터 수집을 `task_956c1c1b77b1` / `ctx_2b9adeeceb2c`의 Flash에게 맡겼다. 새 native turnStart observed이며 코드 수정 중이다. 보완 수락 후 같은 Luna Task로 재검증하고 업로드 gate를 판단한다. COM3 열거 외 실제 장치/계정 접근은 없었다.
+
+2026-10-10 01:01 KST: Flash 제출 `msg_d704518dc1f4` 수락·release/ack, `1c8181e` 보존 및 coordinator PC 57/57 통과. 전체 manual 경쟁 조건·실제 5초 조건은 별도 검증하며 같은 Luna Task의 재시도 `ctx_08869eb488a4`가 working/live다. 정상 serial fake만 실제 queue 인터페이스에 맞추고 실패 조건은 유지한다. 독립 보고를 기다리며 업로드 gate는 닫혀 있다.

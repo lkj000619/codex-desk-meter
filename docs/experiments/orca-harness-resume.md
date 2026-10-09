@@ -60,7 +60,14 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 00:53 KST 최신 체크포인트
+## 2026-10-10 01:01 KST 최신 체크포인트
+
+- Flash `ctx_2b9adeeceb2c`의 성공 제출 `msg_d704518dc1f4`를 수락·release/ack하고 `1c8181e`에 보존했다. coordinator가 PC 시험 57개를 실제 재실행해 모두 통과했다. 역할 checkpoint도 현 식별자로 갱신됐다. 시리얼 출력 큐의 동기 대기와 AUTO 중 요청 보존은 이 제출의 범위이며, 전체 5초 조건의 독립 합격은 아니다.
+- coordinator는 MANUAL 전송 도중 들어온 두 번째 요청의 유실 가능성 및 남은 AUTO 작업과 다음 갱신을 합친 지연 검증을 계속 요구한다. 정상 큐 fake의 `out_waiting` 누락은 Luna가 자기 시험에서 적응하며 정체 큐의 실패 조건을 약화하지 않는다.
+- 같은 Luna Task `task_4d49e747c570`를 기존 실패 `ctx_125c9c02c0ed` 이후 `ctx_08869eb488a4`로 재검증한다. 실제 worker terminal은 `term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956`, native 모델 `gpt-6-luna`와 working/live를 확인했다. 최초 turnStart 미관측은 composer의 pasted draft를 확인해 Enter를 한 번 보내 복구했으며 새 Task/Run을 만들지 않았다. 지침은 `msg_b6ec41ecf6af`.
+- Flash의 과거 queued steering이 제출 뒤 별도 turn으로 실행된 것을 확인해, 끝난 Dispatch로 편집하지 말고 idle하도록 알렸다. 실제 idle 화면과 깨끗한 Git 상태를 확인했다. firmware는 `853ddf7`이며 COM·flash·live·물리는 계속 미실행이다.
+
+## 2026-10-10 00:53 KST 이전 체크포인트
 
 - 같은 Flash Task `task_956c1c1b77b1` / Dispatch `ctx_2b9adeeceb2c`는 native `working/live`, `nextAction=none`이다. 생존 신호 `msg_a02d76a7b83e`의 Delivery를 처리·ack했으며, 완료 제출은 아직 없다. 중복 worker를 시작하거나 진행 중 소스를 동결하지 않는다.
 - `pc/cli.py`, `pc/sender.py`, `tests/pc/test_cohort_probe_regressions.py`에 미제출 수정이 있다. coordinator는 실제 queue 인터페이스 누락·오류를 성공 처리하지 않을 것, AUTO뿐 아니라 MANUAL 전송 중 새 요청도 다음 수집까지 보존할 것, 진행 중 RPC와 다음 갱신을 합친 5초를 측정할 것을 `msg_de0869464ada`, `msg_fdf02892fc44`로 전달했다. enqueue는 worker가 읽었다는 근거가 아니다.

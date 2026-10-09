@@ -108,9 +108,9 @@
     },
     "integration_review": {
       "task_id": "task_4d49e747c570",
-      "status": "failed worker_done msg_e69a6fb2be99 accepted; released external retained/no process action; Delivery acknowledged; root22 tests19pass3fail; awaiting PC corrections for same-Task retry",
+      "status": "same-Task retry; reused proven Luna terminal; initial turnStart unobserved with composer draft, one Enter sent; awaiting actual turn proof",
       "additional_coordinator_gate": "Latest accepted PC and firmware stable; full synthetic integration authorized. No physical until independent findings remediated, review passes and artifact freeze.",
-      "dispatch_id": "ctx_125c9c02c0ed",
+      "dispatch_id": "ctx_08869eb488a4",
       "terminal": "term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956",
       "interrupted_dispatch": "ctx_da800c8d8bce",
       "failed_launch_dispatch": "ctx_5de0b1c708f7",
@@ -118,7 +118,10 @@
       "model": "gpt-6-luna",
       "approval_flag": "--dangerously-bypass-approvals-and-sandbox",
       "model_evidence": "Actual CIM process PID20972 and Codex0.159.2 GPT-6-Luna high/YOLO header, 2026-10-10 00:10 KST; no capability stored.",
-      "failed_review_commit": "117a988"
+      "failed_review_commit": "117a988",
+      "previous_failed_dispatch": "ctx_125c9c02c0ed",
+      "stable_pc_commit": "1c8181e",
+      "latest_guidance": "msg_b6ec41ecf6af"
     },
     "pc_wire_correction": {
       "task_id": "task_a6eebb977125",
@@ -157,7 +160,7 @@
     },
     "pc_independent_remediation": {
       "task_id": "task_956c1c1b77b1",
-      "status": "working; native turnStart observed; current accepted independent review117a988",
+      "status": "accepted succeeded msg_d704518dc1f4; released external retained/no action and Delivery acknowledged; root57/57pass; full manual race/deadline pending independent review",
       "model": "gemini-3.8-flash-medium",
       "approval_flag": "--dangerously-skip-permissions",
       "reproduction_tests": "tests/integration/test_pc_producer_to_c.py",
@@ -166,7 +169,9 @@
       "failed_start": "ctx_44dfcb3eadac",
       "terminal": "term_3105fe45-46f8-4dce-9763-c24e2e98be09",
       "cli_version": "1.3.2",
-      "model_evidence": "Actual CLI Gemini3.8FlashMedium header and CIM PID32140 with --model gemini-3.8-flash-medium --dangerously-skip-permissions"
+      "model_evidence": "Actual CLI Gemini3.8FlashMedium header and CIM PID32140 with --model gemini-3.8-flash-medium --dangerously-skip-permissions",
+      "submission_commit": "1c8181e",
+      "owner_checkpoint_current": true
     }
   },
   "frozen_input_count": 57,

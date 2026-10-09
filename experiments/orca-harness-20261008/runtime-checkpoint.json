@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-09T15:53:45.0049544Z",
+    "observed_at":  "2026-10-09T16:01:56.6049815Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -77,9 +77,9 @@
                   {
                       "id":  "task_4d49e747c570",
                       "title":  "Verify actual PC-to-C firmware integration and product requirements",
-                      "status":  "failed",
+                      "status":  "blocked",
                       "deps":  "[\"task_3963de21ddd1\",\"task_b1214421a314\"]",
-                      "completed_at":  "2026-10-09T15:26:34.445Z"
+                      "completed_at":  null
                   },
                   {
                       "id":  "task_2b005e480abd",
@@ -126,21 +126,44 @@
                   {
                       "id":  "task_956c1c1b77b1",
                       "title":  "Fix independent serial drain and in-flight manual refresh failures",
-                      "status":  "dispatched",
+                      "status":  "completed",
                       "deps":  "[]",
-                      "completed_at":  null
+                      "completed_at":  "2026-10-09T15:58:00.031Z"
                   }
               ],
     "workers":  [
                     {
+                        "task_id":  "task_4d49e747c570",
+                        "dispatch_id":  "ctx_08869eb488a4",
+                        "terminal_handle":  "term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956",
+                        "state":  "start_unknown",
+                        "dispatch_status":  "pending",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791561705425,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "inspect",
+                                            "argv":  [
+                                                         "orchestration",
+                                                         "worker-show",
+                                                         "--dispatch",
+                                                         "ctx_08869eb488a4"
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
                         "task_id":  "task_956c1c1b77b1",
                         "dispatch_id":  "ctx_2b9adeeceb2c",
                         "terminal_handle":  "term_3105fe45-46f8-4dce-9763-c24e2e98be09",
-                        "state":  "ready",
-                        "dispatch_status":  "dispatched",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791561223572,
+                                         "observedAt":  1791561564210,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -178,9 +201,8 @@
                         "state":  "failed",
                         "dispatch_status":  "failed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791559605311,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
