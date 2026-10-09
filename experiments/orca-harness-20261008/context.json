@@ -254,11 +254,26 @@
       "model": "gpt-6-sol",
       "effort": "xhigh",
       "approval_flag": "--dangerously-bypass-approvals-and-sandbox",
-      "status": "native input accepted; actual9609char draft observed and Enter sent once; working tool calls positively observed",
+      "status": "Accepted succeeded msg_cc6cd75af634; worker-release external retained/no process action, Delivery acked; root19/19 PASS and original expected red confirmed",
       "model_evidence": "Actual GPT-6-Sol xhigh/YOLO CLI0.159.2 and CIM PID3008",
       "scope": "firmware display presentation and owned regressions/build only",
       "gate": "accepted source/build, Luna independent review, then coordinator frozen upload/live and user no-flicker observation",
-      "spec_path": "tasks/lcd-flicker-sol.md"
+      "spec_path": "tasks/lcd-flicker-sol.md",
+      "submission_commit": "9bbe333",
+      "app_sha256": "953782e5486adbe9743e5b753e716892cfdfbeef25d23b1702dc1d6050078f1f",
+      "root_verification": "operator/lcd-flicker-root-regression-20261010.json"
+    },
+    "lcd_flicker_review": {
+      "task_id": "task_4386f8dbef93",
+      "dispatch_id": "ctx_1ab7525e89ae",
+      "terminal": "term_b6cd0335-ea67-4926-8229-b50602b3fb97",
+      "model": "gpt-6-luna",
+      "effort": "high",
+      "approval_flag": "--dangerously-bypass-approvals-and-sandbox",
+      "status": "Native input accepted but turn_start_unobserved; actual8903char draft observed; Enter sent once and Reading task guidance positively observed",
+      "tested_source_commit": "9bbe333",
+      "spec_path": "tasks/lcd-flicker-luna.md",
+      "guidance": "msg_4ffd0a1970ea"
     }
   },
   "frozen_input_count": 57,
@@ -291,13 +306,13 @@
     "esp32_usb_port": "COM3",
     "vid": "303A",
     "pid": "1001",
-    "scope": "COM3 actual ESP32-S3rev0.2 esptool flash+hash proof, user initial LCD proof, production fixture/live host write and active watch; post-data device acceptance pending",
+    "scope": "Original candidate real LCD/CRC confirmed; new presentation correction frozen source; independent review pending before new upload",
     "firmware_manifest_hashes_verified": 19,
-    "upload_permitted": true
+    "upload_permitted": false
   },
   "operator_execution": {
-    "updated_at": "2026-10-09T23:14:07.454179+00:00",
-    "phase": "user_video_confirms_live_CRC_VALID_but_LCD_flicker_fails_stability; firmware_owner_investigating",
+    "updated_at": "2026-10-09T23:37:11.846487+00:00",
+    "phase": "LCD_flicker_source_frozen_9bbe333_independent_Luna_review_working",
     "host_candidate_commit": "7ccbb24",
     "host_candidate_tag": "orca-harness-20261010-host-candidate",
     "flash_evidence": "operator/flash-host-candidate-20261010.json",
@@ -317,9 +332,10 @@
     "device_ack": "no wireACK; LCD FRAME/CRC VALID physically confirmed for at least one live frame",
     "product_pass": false,
     "pending": [
-      "post-data LCD numbers and CRC acceptance",
+      "corrected firmware independent review and upload",
+      "corrected physical no-flicker30s",
       "BOOT short3 and hold600ms navigation",
-      "no RESET uninterrupted30s",
+      "long token exponent clipping separate finding",
       "physical reaction latency",
       "error/link recovery on hardware",
       "sensor calibration/plausibility",

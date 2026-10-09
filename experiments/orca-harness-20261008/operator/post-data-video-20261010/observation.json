@@ -14,35 +14,42 @@
   "user_report": "LCD continuously flashes/blinks; user requests correction",
   "visual_findings": "Actual decoded video frames404 and494 show large white partial-clears covering header/left content while right-hand numbers remain, distinct from manualRST/backlight darkness. Rounded-time seek screenshots may pick the adjacent already-redrawn frame.",
   "physical_stability": "reported failure; do not mark30s PASS",
-  "source_code_observation": "main gui_render every1000ms; gui_render starts full PAPER fill; bsp writes sole RGB framebuffer; hypothesis not yet final diagnosis",
+  "source_code_observation": "Original scan-visible writes reproduced in compiled production BSP; accepted two-frame presentation correction9bbe333 awaits independent review and corrected hardware observation.",
   "frames": [
     {
-      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-00s.jpg",
-      "sha256": "1d45e213878d793f68e0d44e1058af44f80564ab4fd3ebe23dc707bdf6aa1e77"
+      "path": "artifacts/orca-harness-runtime/post-data-video/frame-00s.jpg",
+      "sha256": "1d45e213878d793f68e0d44e1058af44f80564ab4fd3ebe23dc707bdf6aa1e77",
+      "storage": "local only; identifiers may be visible; not committed"
     },
     {
-      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-12s.jpg",
-      "sha256": "c6232a75580540d214d5f146ea5349df833d991fcf1e7aa60708c731f28487a6"
+      "path": "artifacts/orca-harness-runtime/post-data-video/frame-12s.jpg",
+      "sha256": "c6232a75580540d214d5f146ea5349df833d991fcf1e7aa60708c731f28487a6",
+      "storage": "local only; identifiers may be visible; not committed"
     },
     {
-      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-15s.jpg",
-      "sha256": "890acbf59f461303180cb386eda8b3cea7e237a0b22094992cda362541238e2e"
+      "path": "artifacts/orca-harness-runtime/post-data-video/frame-15s.jpg",
+      "sha256": "890acbf59f461303180cb386eda8b3cea7e237a0b22094992cda362541238e2e",
+      "storage": "local only; identifiers may be visible; not committed"
     },
     {
-      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-18s.jpg",
-      "sha256": "064de3f3559b39a65087ab051bd1a8d2891b51528880f1bc50268204dd5e2bed"
+      "path": "artifacts/orca-harness-runtime/post-data-video/frame-18s.jpg",
+      "sha256": "064de3f3559b39a65087ab051bd1a8d2891b51528880f1bc50268204dd5e2bed",
+      "storage": "local only; identifiers may be visible; not committed"
     },
     {
-      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-24s.jpg",
-      "sha256": "cc3626ca80493258124c87371641f4ffaee0a6ba2f7e562caef2f965a9b09938"
+      "path": "artifacts/orca-harness-runtime/post-data-video/frame-24s.jpg",
+      "sha256": "cc3626ca80493258124c87371641f4ffaee0a6ba2f7e562caef2f965a9b09938",
+      "storage": "local only; identifiers may be visible; not committed"
     },
     {
-      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-39s.jpg",
-      "sha256": "f769b2288ca5287787bce617777936c843460e2ac998e4bea7e8fe571102cc35"
+      "path": "artifacts/orca-harness-runtime/post-data-video/frame-39s.jpg",
+      "sha256": "f769b2288ca5287787bce617777936c843460e2ac998e4bea7e8fe571102cc35",
+      "storage": "local only; identifiers may be visible; not committed"
     },
     {
-      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-42s.jpg",
-      "sha256": "be22dd33d817b34becd192afb110806ce3cee04dd008f19230405273e628ca3d"
+      "path": "artifacts/orca-harness-runtime/post-data-video/frame-42s.jpg",
+      "sha256": "be22dd33d817b34becd192afb110806ce3cee04dd008f19230405273e628ca3d",
+      "storage": "local only; identifiers may be visible; not committed"
     }
   ],
   "reviewed_at": "2026-10-09T23:19:55.872084+00:00",
@@ -64,7 +71,7 @@
     "chip_temperature_celsius": 36.5
   },
   "additional_display_finding": "Long scientific token strings appear exponent-clipped on some rows; record for review separately from requested flicker correction",
-  "image_privacy": "Original post-data frames contain LCD source identifiers. Kept local only; do not stage JPGs. Tracked record contains only sanitized numeric/status metadata.",
+  "image_privacy": "All original post-data frames moved to Git-ignored local artifacts after Sol settlement; tracked record preserves only sanitized metadata/hashes.",
   "flicker_inspection_frames": [
     {
       "frame_index": 404,

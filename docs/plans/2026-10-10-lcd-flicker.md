@@ -4,10 +4,10 @@
 
 | 작업 | 상태 | 완료 조건 |
 |---|---|---|
-| 사용자 영상·기존 갱신 경로 관측 | 진행 | 원본 hash·시점별 frame, 정상/지워짐 구간 및 데이터/CRC 판독 기록 |
-| Sol의 원인 재현·좁은 firmware 수정 | 대기 | 실제 표시 경로의 재현/회귀 검사, SDK에 맞는 완료된 frame 표시, 최소 source 변경 |
-| 실제 host 검사·ESP-IDF build | 대기 | 기존 firmware/통합 회귀 및 새 검사 통과, source/staging/binary hash |
-| Luna 독립 표시 경로 검증 | 대기 | front buffer 쓰기·표시 완료/동기화·오류 경로와 B/BOOT/stale 회귀 확인, 근거와 한계 명시 |
+| 사용자 영상·기존 갱신 경로 관측 | 완료 | 원본 hash·정확한 frame404/494의 부분 지워짐·실제 숫자/CRC 기록. 식별자가 보이는 이미지는 Git 제외 로컬 보존 |
+| Sol의 원인 재현·좁은 firmware 수정 | 완료 | `9bbe333`: 원래 production BSP의 표시 중 pixel 변경 재현; 별도 버퍼 완성 후 두 bounce 경계로 교체 |
+| 실제 host 검사·ESP-IDF build | 완료 | 원래 코드의 의도된 재현 실패, 수정 firmware19/19·선택 세션1/1, SDK build·source15/15·artifact4 hash 일치 |
+| Luna 독립 표시 경로 검증 | 진행 | `task_4386f8dbef93` / `ctx_1ab7525e89ae`; front buffer 쓰기·표시 완료/동기화·오류 경로와 B/BOOT/stale 회귀 확인 |
 | coordinator 동결·재업로드·live 재개 | 대기 | 기존 watch 종료 확인 후 COM3 업로드, sender state/순번 유지, 같은 세션/계정으로 재개 |
 | 사용자 점멸/30초 관측 | 대기 | RESET 없이 표시 유지, 데이터·CRC·BOOT 탐색, 점멸 개선 실물 확인 |
 

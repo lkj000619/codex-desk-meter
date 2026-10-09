@@ -60,7 +60,14 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 08:20 KST 최신 체크포인트 — 점멸 보완 실행
+## 2026-10-10 08:37 KST 최신 체크포인트 — 점멸 수정 제출·독립 검증
+
+- Sol 성공 제출 `msg_cc6cd75af634`를 수락·release(external retained/processAction none)·Delivery ack하고 **`9bbe333`**에 동결했다. 원래 production BSP는 컴파일 후 `scanned[0] == scanned_before`에서 실패했고 수정본 **19/19**가 통과했다. source/staging **15/15**, 새 app **`953782e5486adbe9743e5b753e716892cfdfbeef25d23b1702dc1d6050078f1f`** 등 artifact4 hash를 coordinator가 재확인했다. [재현/회귀 근거](../../experiments/orca-harness-20261008/operator/lcd-flicker-root-regression-20261010.json).
+- 같은 Run의 독립 검증 **`task_4386f8dbef93` / `ctx_1ab7525e89ae`**, 기존 Luna terminal **`term_b6cd0335-ea67-4926-8229-b50602b3fb97`**가 진행 중이다. native turn_start_unobserved 이후 실제8903char paste draft를 확인하고 Enter를 정확히 한 번 보냈으며 `Reading task guidance`를 관측했다. timeout을 종료로 취급하거나 중복 worker를 시작하지 않는다. 원본 host tag는 보존했다.
+- **보드는 여전히 08:01 원본 app385130…**, PC watch `term_cead0ee8-aa83-41f3-93c6-c151d8cea13e`가 계속 유일한 COM3 writer다. 아직 수정본을 업로드하지 않았다. 독립 PASS 후 watch 실제 종료 → 새 candidate/tag/hash → COM3 업로드 → 같은 state/세션의 watch 재개 → RESET 없는 30초 점멸·BOOT 관측을 진행한다. sender state 재초기화 금지.
+- 식별자가 보이는 후속 frame7개는 Git 제외 `artifacts/orca-harness-runtime/post-data-video/`로 옮기고 hash·관측 JSON의 경로를 함께 갱신했다. 긴 토큰의 지수부 잘림은 별도 미해결 사항이다. `product_pass=false`.
+
+## 2026-10-10 08:20 KST 당시 체크포인트 — 점멸 보완 실행
 
 - 사용자 새 영상 `KakaoTalk_20261010_081307245.mp4`로 live 숫자·Status FRAME/CRC **VALID**를 확인했다. 5시간 31%·주간68%는 영상 시점 값이다. 반복적인 흰색 지워짐/점멸이 보고되어 무점멸/30초 안정성은 합격하지 않았다. 초기 영상13초 검은 화면의 직접 RST와 구분한다.
 - 같은 Run의 새 firmware 후속 **`task_63d11f3c24cb` / `ctx_2363ff345723`**, terminal **`term_e1bc5a22-2975-4c7e-a9c1-82097648f0e6`**에서 실제 GPT-6-Sol xhigh/YOLO0.159.2·PID3008을 확인했다. native input accepted 뒤 실제9609char paste draft를 보고 Enter를 정확히 한 번 보냈고 도구 실행/영상 검토가 관측됐다. [Task 범위](../../experiments/orca-harness-20261008/tasks/lcd-flicker-sol.md)와 [계획](../plans/2026-10-10-lcd-flicker.md)을 따른다. 제출 완료 전 중복 worker를 시작하지 않는다.
