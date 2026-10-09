@@ -286,12 +286,9 @@ class WindowsSerialSink:
 
     @write_timeout.setter
     def write_timeout(self, value: float | None) -> None:
-        self._custom_write_timeout = value
         if hasattr(self.serial, "write_timeout"):
-            try:
-                self.serial.write_timeout = value
-            except Exception:
-                pass
+            self.serial.write_timeout = value
+        self._custom_write_timeout = value
 
     @property
     def out_waiting(self) -> int:
@@ -498,10 +495,7 @@ class CdmSender:
         orig_wt = getattr(target_sink, "write_timeout", None)
         try:
             if write_timeout is not None and hasattr(target_sink, "write_timeout"):
-                try:
-                    target_sink.write_timeout = write_timeout
-                except Exception:
-                    pass
+                target_sink.write_timeout = write_timeout
             written = target_sink.write(raw_bytes)
             if written != len(raw_bytes):
                 return SendOutcome(

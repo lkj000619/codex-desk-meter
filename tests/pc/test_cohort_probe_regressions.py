@@ -1437,7 +1437,19 @@ class TestCohortProbeRegressions(unittest.TestCase):
         stop_event = threading.Event()
         manual_event = threading.Event()
         auto_init_started = threading.Event()
-        second_drain_finished = threading.Event()
+        second_terminal_event = threading.Event()
+        second_record: dict[str, Any] = {"outcome": None, "completion_time": None}
+        orig_transmit = CdmSender.transmit_payload
+        transmit_calls = [0]
+
+        def transmit_wrapper(self_sender, *args, **kwargs):
+            outcome = orig_transmit(self_sender, *args, **kwargs)
+            transmit_calls[0] += 1
+            if transmit_calls[0] == 2:
+                second_record["completion_time"] = time.monotonic()
+                second_record["outcome"] = outcome
+                second_terminal_event.set()
+            return outcome
 
         StateStore(self.state_file).initialize_new("test-probe-alias", initial_sequence=0, confirmed_overwrite=True)
 
@@ -1536,11 +1548,9 @@ class TestCohortProbeRegressions(unittest.TestCase):
             @property
             def out_waiting(self) -> int:
                 if self._closed:
-                    return 0
+                    raise IOError("Port closed")
                 if self.queued_at is None or (time.monotonic() - self.queued_at) < 0.99:
                     return 128
-                if self.write_count >= 2 and not second_drain_finished.is_set():
-                    second_drain_finished.set()
                 return 0
 
             def close(self):
@@ -1552,7 +1562,9 @@ class TestCohortProbeRegressions(unittest.TestCase):
         mock_serial_mod.PARITY_NONE = "N"
         mock_serial_mod.STOPBITS_ONE = 1
 
-        with patch.dict("sys.modules", {"serial": mock_serial_mod}):
+        with patch.dict("sys.modules", {"serial": mock_serial_mod}), patch.object(
+            CdmSender, "transmit_payload", transmit_wrapper
+        ):
             sink = WindowsSerialSink("COM1", baudrate=115200, timeout=1.0)
             sm = SharedCollectionState()
 
@@ -1611,17 +1623,25 @@ class TestCohortProbeRegressions(unittest.TestCase):
 
                     # Wait strictly for actual terminal event: successful completion or fail
                     remaining_wait = max(0.01, 5.0 - (time.monotonic() - request_started))
-                    signaled = second_drain_finished.wait(timeout=remaining_wait)
-                    completion_time = time.monotonic()
+                    signaled = second_terminal_event.wait(timeout=remaining_wait)
+                    completion_time = (
+                        second_record["completion_time"]
+                        if signaled and second_record["completion_time"] is not None
+                        else time.monotonic()
+                    )
                     elapsed = completion_time - request_started
+                    self.assertTrue(signaled, f"Second iteration did not terminate within remaining 5s budget: elapsed {elapsed:.2f}s")
                     self.assertLessEqual(elapsed, 5.0, f"Combined delayed cleanup and serial drain exceeded 5.0s: {elapsed:.2f}s")
                     fake_dev = sink.serial
-                    if signaled:
+                    second_outcome = second_record["outcome"]
+                    if second_outcome and second_outcome.success:
                         self.assertEqual(len(fake_dev.written_frames), 2)
                         frame2 = json.loads(fake_dev.written_frames[1].decode("utf-8").strip())
                         self.assertEqual(frame2["payload"]["usage"][0]["windows"][0]["used_units"], 250)
                     else:
                         # Explicit bounded failure path: serial write timed out boundedly <= 5.0s, sequence was consumed
+                        self.assertIsNotNone(second_outcome)
+                        self.assertEqual(second_outcome.error_code, "WRITE_IO_ERROR")
                         self.assertGreaterEqual(fake_dev.write_count, 1)
                         sess_src = next(src for key, src in sm.sources.items() if "probe-sess" in key)
                         self.assertEqual(sess_src.last_good_snapshot["windows"][0]["used_units"], 250)
@@ -1629,6 +1649,69 @@ class TestCohortProbeRegressions(unittest.TestCase):
                     stop_event.set()
                     watch_thread.join(timeout=4.0)
                     sink.close()
+
+    def test_rejecting_os_write_timeout_setter_fails_before_write_and_consumes_seq(self):
+        """Rejecting actual OS write_timeout setter causes WRITE_IO_ERROR before write, consumes sequence, sends 0 bytes."""
+        StateStore(self.state_file).initialize_new("test-reject-alias", initial_sequence=5, confirmed_overwrite=True)
+        store = StateStore(self.state_file)
+        sender = CdmSender("test-reject-alias", store, lock_dir=self.lock_dir)
+
+        class RejectingSerial:
+            def __init__(self):
+                self._wt = 1.0
+                self.write_called = False
+                self.closed = False
+
+            @property
+            def write_timeout(self):
+                return self._wt
+
+            @write_timeout.setter
+            def write_timeout(self, val):
+                raise OSError("Simulated OS serial write_timeout enforcement failure")
+
+            def write(self, data: bytes) -> int:
+                self.write_called = True
+                return len(data)
+
+            @property
+            def out_waiting(self) -> int:
+                return 0
+
+            def flush(self):
+                pass
+
+            def close(self):
+                self.closed = True
+
+        mock_serial_mod = unittest.mock.MagicMock()
+        mock_serial_mod.Serial = lambda *args, **kwargs: RejectingSerial()
+        mock_serial_mod.EIGHTBITS = 8
+        mock_serial_mod.PARITY_NONE = "N"
+        mock_serial_mod.STOPBITS_ONE = 1
+
+        with patch.dict("sys.modules", {"serial": mock_serial_mod}):
+            sink = WindowsSerialSink("COM1", baudrate=115200, timeout=1.0)
+            try:
+                payload = {"usage": [], "global_resets": []}
+                outcome = sender.transmit_payload(
+                    payload,
+                    sent_at="2026-10-09T12:00:00Z",
+                    sink=sink,
+                    write_timeout=0.5,
+                )
+                self.assertFalse(outcome.success)
+                self.assertEqual(outcome.error_code, "WRITE_IO_ERROR")
+                self.assertIn("Simulated OS serial write_timeout enforcement failure", outcome.error_message)
+                self.assertEqual(outcome.bytes_sent, 0)
+                self.assertEqual(outcome.sequence_used, 5)
+                # Sequence was reserved/consumed
+                self.assertEqual(sender.current_sequence, 6)
+                # No write was performed after enforcement failure
+                self.assertFalse(sink.serial.write_called)
+            finally:
+                sink.close()
+                sender.close()
 
     def test_slow_write_and_drain_shares_timeout_and_respects_os_write_timeout(self):
         """pyserial write delay respects write_timeout and shares deadline with drain."""

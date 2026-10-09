@@ -1,0 +1,286 @@
+{
+  "usage": [],
+  "global_resets": []
+}
+[2026-10-09T22:45:47.796057Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=2311B
+[2026-10-09T22:45:48.897079Z] Send failed: WRITE_IO_ERROR: Serial output queue drain timed out with 128 bytes remaining in output queue
+[2026-10-09T22:45:50.256918Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=169B
+[2026-10-09T12:00:00Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=781B
+[2026-10-09T12:00:00Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=781B
+[2026-10-09T22:45:50.733346Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=833B
+[2026-10-09T22:45:51.217797Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=833B
+[2026-10-09T12:00:00Z] Iteration 1 [MANUAL] [HOST WRITE] seq=0, size=1844B
+[2026-10-09T12:00:00Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=1844B
+[2026-10-09T22:45:52.516640Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=169B
+[2026-10-09T22:45:52.618664Z] Iteration 2 [AUTO] [HOST WRITE] seq=1, size=169B
+[2026-10-09T22:45:52.684708Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=169B
+[2026-10-09T22:45:52.733915Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=169B
+[2026-10-09T12:00:00Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=751B
+[2026-10-09T12:00:00Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=751B
+[2026-10-09T22:45:52.979547Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=169B
+[2026-10-09T22:45:53.051416Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=169B
+[2026-10-09T12:00:00Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=2256B
+[2026-10-09T12:00:00Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=2259B
+[2026-10-09T22:45:53.365502Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=169B
+[2026-10-09T22:45:53.438559Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=169B
+[2026-10-09T22:45:53.532301Z] Iteration 3 [AUTO] [HOST WRITE] seq=2, size=169B
+{
+  "usage": [
+    {
+      "schema_version": 1,
+      "snapshot_id": "error-session_dir_sessions_unknown",
+      "provider_id": "codex",
+      "agent_id": "codex-cli",
+      "host_id": "pc-collector",
+      "model_id": null,
+      "account_profile_id": null,
+      "source_kind": "local_runtime",
+      "metric_kind": "session_telemetry",
+      "unit": "token",
+      "status": "error",
+      "observed_at": null,
+      "windows": [],
+      "stale": false,
+      "last_good_at": null,
+      "error_code": "SESSION_COLLECTION_ERROR",
+      "error_reason": "Either --session-id or --latest required"
+    }
+  ],
+  "global_resets": []
+}
+{
+  "usage": [
+    {
+      "schema_version": 1,
+      "snapshot_id": "session-s1",
+      "provider_id": "codex",
+      "agent_id": "codex-cli",
+      "host_id": "pc-collector",
+      "model_id": null,
+      "account_profile_id": null,
+      "source_kind": "local_runtime",
+      "metric_kind": "session_telemetry",
+      "unit": "token",
+      "status": "stale",
+      "observed_at": "2026-10-08T12:00:00Z",
+      "windows": [
+        {
+          "window_id": "input",
+          "label": "Input tokens",
+          "used_units": 10,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "output",
+          "label": "Output tokens",
+          "used_units": 20,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "cached_input",
+          "label": "Cached input",
+          "used_units": null,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "reasoning_output",
+          "label": "Reasoning output",
+          "used_units": null,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "source_total",
+          "label": "Source total",
+          "used_units": 30,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "normalized_total",
+          "label": "Normalized total",
+          "used_units": 30,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        }
+      ],
+      "stale": true,
+      "last_good_at": "2026-10-08T12:00:00Z",
+      "error_code": "SOURCE_TIMEOUT",
+      "error_reason": "Source age 125154.1s exceeded threshold"
+    }
+  ],
+  "global_resets": []
+}
+{
+  "usage": [
+    {
+      "schema_version": 1,
+      "snapshot_id": "session-s1",
+      "provider_id": "codex",
+      "agent_id": "codex-cli",
+      "host_id": "pc-collector",
+      "model_id": null,
+      "account_profile_id": null,
+      "source_kind": "local_runtime",
+      "metric_kind": "session_telemetry",
+      "unit": "token",
+      "status": "stale",
+      "observed_at": "2026-10-08T12:00:00Z",
+      "windows": [
+        {
+          "window_id": "input",
+          "label": "Input tokens",
+          "used_units": 10,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "output",
+          "label": "Output tokens",
+          "used_units": 20,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "cached_input",
+          "label": "Cached input",
+          "used_units": null,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "reasoning_output",
+          "label": "Reasoning output",
+          "used_units": null,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "source_total",
+          "label": "Source total",
+          "used_units": 30,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "normalized_total",
+          "label": "Normalized total",
+          "used_units": 30,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        }
+      ],
+      "stale": true,
+      "last_good_at": "2026-10-08T12:00:00Z",
+      "error_code": "SOURCE_TIMEOUT",
+      "error_reason": "Source age 125154.1s exceeded threshold"
+    }
+  ],
+  "global_resets": []
+}
+{
+  "usage": [
+    {
+      "schema_version": 1,
+      "snapshot_id": "error-session_dir_sessions_non-existent",
+      "provider_id": "codex",
+      "agent_id": "codex-cli",
+      "host_id": "pc-collector",
+      "model_id": null,
+      "account_profile_id": null,
+      "source_kind": "local_runtime",
+      "metric_kind": "session_telemetry",
+      "unit": "token",
+      "status": "error",
+      "observed_at": null,
+      "windows": [],
+      "stale": false,
+      "last_good_at": null,
+      "error_code": "SESSION_COLLECTION_ERROR",
+      "error_reason": "Session ID 'non-existent' not found in session dir"
+    }
+  ],
+  "global_resets": []
+}
+Device state initialized for alias 'dev-guard' with initial sequence 0 at C:/Users/\uc774\uad11\uc9c4/AppData/Local/Temp/tmpv4yq6ste/seq-state.json
+Starting watch loop (interval: 30s). Press Enter for manual refresh, Ctrl+C to exit.
+[2026-10-09T22:45:55.062229Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=169B
+[2026-10-09T22:45:55.163311Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=169B
+
+Transmission failed: WRITE_IO_ERROR: Serial output queue drain timed out with 128 bytes remaining in output queue
+Global reset source error: Global reset file not found: non_existent_global.json
+Global reset source error: Global reset file not found: non_existent_global.json
+Global reset source error: Global reset file not found: global_reset.json
+Global reset source error: Global reset file not found: missing_reset.json
+Global reset source error: Global reset file not found: valid_reset.json
+Error: Initialization requires either --confirmed-empty-receiver (for fresh uninitialized meter) or --force-overwrite (for intentional sequence replacement). Refusing unconfirmed initialization.
+Error: Either --port or explicit --dry-run is required. Refusing implicit loopback.
+Error: Either --port or explicit --dry-run is required. Refusing implicit loopback.
+----------------------------------------------------------------------
+Ran 64 tests in 10.898s
+
+OK

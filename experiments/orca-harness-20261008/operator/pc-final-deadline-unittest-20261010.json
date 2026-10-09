@@ -1,0 +1,26 @@
+{
+  "scope": "coordinator verification after accepted worker_done msg_c1e14cc550e2; no physical product pass",
+  "task_id": "task_d7aa5e059e8d",
+  "dispatch_id": "ctx_a7d558d25511",
+  "command": [
+    "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/pc",
+    "-q"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 11.061999999918044,
+  "source_hashes": {
+    "pc/cli.py": "e55cf7acfa52b776d56e31a5e4b55ecaa0bebc65fed1c3ac11e8cf055bc646b6",
+    "pc/sender.py": "863d20579879d7b7fc6cef65a14f41911a09ab7f2ed7b5909a045daeb5fe46dc",
+    "tests/pc/test_cohort_probe_regressions.py": "8632efcee71a62f840634a2089e222fe0609858053d66369c7470238e00fc859"
+  },
+  "unchanged_during_run": true,
+  "output": "operator/pc-final-deadline-unittest-20261010.txt"
+}

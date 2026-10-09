@@ -379,7 +379,7 @@ def run_watch_loop(
                 iter_in_flight = False
                 if manual_trigger_event and manual_trigger_event.is_set():
                     # A manual request arrived during this iteration!
-                    manual_request_arrival = now_fn()
+                    manual_request_arrival = in_flight_start
                 else:
                     manual_request_arrival = None
 
