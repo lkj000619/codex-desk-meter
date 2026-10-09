@@ -60,7 +60,14 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 01:27 KST 최신 체크포인트
+## 2026-10-10 01:43 KST 최신 체크포인트
+
+- Flash의 `ctx_41e3573faa6e` 성공 제출 `msg_617eb8c04968`을 수락·release/ack하고 `5d16e97`에 보존했다. coordinator의 실제 PC 시험은 60/60 통과다. producer-to-C 모듈은 18개 중 17개 통과·Luna 소유 시험의 `row["current"]` 접근 오류 1개이며, 전체 integration suite 26개와 구분한다.
+- 전체 제한의 추가 검사는 [종료·전송 경계 근거](../../experiments/orca-harness-20261008/operator/pc-shared-budget-cleanup-probe.json)에 기록했다. 실제 RPC/WindowsSerialSink 경로에서 허용된 terminate wait 0.5초·kill wait 0.49초·queue drain 0.99초를 적용하면 수동 요청부터 마지막 drain까지 **6.125초**로 실패한다. 개별 timeout 통과가 전체 5초를 보장하지 않는다. 최초 probe의 잘못된 `_serial` 속성은 별도 setup-error 기록이며 제품 결함 근거로 사용하지 않는다.
+- 좁은 추가 작업 `task_e2907fe00c34`를 같은 proven Flash terminal에 배정했다. 남은 예산이 없으면 새 RPC를 시작하지 않고, 종료·전송의 실제 남은 시간과 truthful quota error/last-good를 유지하도록 요구했다. 다른 역할 파일은 수정하지 않는다.
+- 다음은 이 보완의 실제 제출·검증·보존 후 같은 Luna review Task의 재검증이다. Luna는 자기 통합 시험의 반환 구조 오류를 수정하되 fresh quota/C 수락 검사를 유지한다. `853ddf7` firmware는 그대로이며 업로드·실계정·실물은 계속 미실행이다.
+
+## 2026-10-10 01:27 KST 이전 체크포인트
 
 - Flash `task_1b01674fbb8c` / `ctx_41e3573faa6e`는 계속 실제 working/live다. `pc/cli.py`와 담당 회귀 시험의 미제출 편집이 있으며, 기존 Event 소비를 수집 앞으로 옮기고 전송 후 clear·quota-only 병합 추정을 제거했다. 이 편집을 완료·제품 합격으로 동결하지 않는다.
 - 현재 예산 편집의 `max(0.5, 5-elapsed)` 및 `max(0.2, remaining-0.9)`는 deadline이 지난 뒤에도 시간을 주며, 실제 serial 1초·RPC 종료의 최대 1초를 충분히 예약하지 않는다. coordinator가 `msg_ea2bcf4508bd`로 이 구체적인 검증·보완을 전달했다. 짧은 RPC timeout으로 cached/error quota를 보내는 결과와 정상 새 quota 취득을 구분하도록 요구했다.

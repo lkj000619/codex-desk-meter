@@ -1,5 +1,7 @@
 # 현재 준비 상태 — 별도 Orca 협업 실험
 
+2026-10-10 01:43 KST 최신 상태: Flash60 제출 `msg_617eb8c04968`을 수락·release/ack하고 `5d16e97`에 보존했다. coordinator PC 60/60 통과, producer-to-C 모듈은 18개 중 17개 통과·시험 반환 구조 오류 1개다. 허용된 RPC 종료 wait와 실제 queue drain을 모두 적용한 [추가 경계 검사](../../experiments/orca-harness-20261008/operator/pc-shared-budget-cleanup-probe.json)에서 전체 6.125초로 실패했다. `task_e2907fe00c34`의 좁은 PC 보완 후 같은 Luna Task로 최종 재검증한다. 업로드 gate는 닫혀 있으며 firmware `853ddf7`, COM/live/실물 미실행 상태를 유지한다. 아래 날짜별 기록은 당시 상태다.
+
 2026-10-09 18:02 KST 재개. 기존 단독 비교의 최초 블록은 기존 브랜치에서 종료되어 보존된다.
 이 문서는 새 브랜치의 협업 확장 실험만 관리한다.
 

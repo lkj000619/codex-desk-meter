@@ -1,0 +1,17 @@
+{
+  "recorded_at": "2026-10-09T16:41:37.607174+00:00",
+  "scope": "synthetic operator probe; no real COM, account, session, firmware edits",
+  "production_source_sha256": "97ac16c32caaccbcd871bcc7dd559aee76e3bf3422c246be906b8f3ab5706be1",
+  "test": "test_auto_rpc_remainder_manual_rpc_and_successful_serial_drains_share_five_second_budget",
+  "boundary": {
+    "terminate_wait_seconds": 0.5,
+    "kill_wait_seconds": 0.49,
+    "serial_queue_drain_seconds": 0.99
+  },
+  "tests_run": 1,
+  "failures": 1,
+  "errors": 0,
+  "wall_seconds": 6.3280000002123415,
+  "output": "test_auto_rpc_remainder_manual_rpc_and_successful_serial_drains_share_five_second_budget (tests.integration.test_pc_producer_to_c.PCProducerToCTests.test_auto_rpc_remainder_manual_rpc_and_successful_serial_drains_share_five_second_budget) ... [2026-10-09T16:41:31.294897+00:00] Port FAKE opened successfully.\n[2026-10-09T16:41:34.291414Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=2576B\n[2026-10-09T16:41:36.401572Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=2633B\nFAIL\n\n======================================================================\nFAIL: test_auto_rpc_remainder_manual_rpc_and_successful_serial_drains_share_five_second_budget (tests.integration.test_pc_producer_to_c.PCProducerToCTests.test_auto_rpc_remainder_manual_rpc_and_successful_serial_drains_share_five_second_budget)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\이광진\\orca\\workspaces\\codex-desk-meter\\experiment-orca-harness-20261008\\tests\\integration\\test_pc_producer_to_c.py\", line 1221, in test_auto_rpc_remainder_manual_rpc_and_successful_serial_drains_share_five_second_budget\n    self.assertLessEqual(\nAssertionError: 6.125 not less than or equal to 5.0 : AUTO RPC remainder + MANUAL RPC + successful serial drains took 6.12s\n\n----------------------------------------------------------------------\nRan 1 test in 6.323s\n\nFAILED (failures=1)\n",
+  "product_pass": false
+}
