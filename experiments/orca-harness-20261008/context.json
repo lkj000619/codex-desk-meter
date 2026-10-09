@@ -153,6 +153,14 @@
       "review_message": "msg_5e1fc2e1c18a",
       "original_submission_commit": "b6ec3d5",
       "final_gate": "Latest corrected firmware submission/build/hash and independent review required before COM."
+    },
+    "pc_independent_remediation": {
+      "task_id": "task_956c1c1b77b1",
+      "status": "planned ready; no writer launched until current independent review settles",
+      "model": "gemini-3.8-flash-medium",
+      "approval_flag": "--dangerously-skip-permissions",
+      "reproduction_tests": "tests/integration/test_pc_producer_to_c.py",
+      "gate": "Accepted PC corrections, meaningful production regressions and same independent review Task retry before upload"
     }
   },
   "frozen_input_count": 57,

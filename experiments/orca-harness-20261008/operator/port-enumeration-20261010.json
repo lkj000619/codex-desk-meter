@@ -1,0 +1,20 @@
+{
+  "observed_at": "2026-10-09T15:18:11.888267+00:00",
+  "method": "serial.tools.list_ports.comports; enumeration only",
+  "ports": [
+    {
+      "port": "COM1",
+      "vid": null,
+      "pid": null
+    },
+    {
+      "port": "COM3",
+      "vid": 12346,
+      "pid": 4097
+    }
+  ],
+  "port_opened": false,
+  "flash_performed": false,
+  "target_chip_verified": false,
+  "resume_rule": "Re-enumerate and verify target before upload; USB VID/PID alone does not prove firmware or chip identity."
+}
