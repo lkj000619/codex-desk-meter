@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-09T16:01:56.6049815Z",
+    "observed_at":  "2026-10-09T16:06:56.1560639Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -129,6 +129,13 @@
                       "status":  "completed",
                       "deps":  "[]",
                       "completed_at":  "2026-10-09T15:58:00.031Z"
+                  },
+                  {
+                      "id":  "task_1b01674fbb8c",
+                      "title":  "Preserve subsequent manual requests and bound combined refresh",
+                      "status":  "ready",
+                      "deps":  "[]",
+                      "completed_at":  null
                   }
               ],
     "workers":  [
@@ -140,7 +147,7 @@
                         "dispatch_status":  "pending",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791561705425,
+                                         "observedAt":  1791562008919,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {

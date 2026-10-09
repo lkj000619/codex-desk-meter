@@ -60,7 +60,14 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 01:01 KST 최신 체크포인트
+## 2026-10-10 01:06 KST 최신 체크포인트
+
+- Luna `ctx_08869eb488a4`의 escalation `msg_978c602977cc`를 처리·ack했다. 실제 MANUAL 전송 중 두 번째 요청을 넣으면 새 값의 후속 frame이 없음을 재현했다. 시리얼 bounded failure/닫힘·정상 drain·AUTO 중 fresh 재수집의 빠른 경로는 각각 통과했다.
+- Flash 후속 `task_1b01674fbb8c`를 등록했지만 아직 dispatch하지 않았다. PC `1c8181e`를 현재 독립 시험에 안정되게 유지하고 Luna의 최종 제출 수락 뒤 같은 proven Flash terminal에서 진행한다. 최소 보완은 현재 Event를 수집 전에 소비하고 이후 요청을 보존하는 경계 수정 및 전체 지연 예산이다.
+- Luna에게 허용된 개별 지연을 합치면 5초를 넘는지 실제 RPC·queue로 추가 검증하도록 `msg_4ba9059e3485`를 보냈고, 후속 작업 등록·제출 순서는 `msg_6cfb90a129d2`로 전달했다. 0.7초 AUTO+0.2초 MANUAL+0.03초 drain 통과는 제한 근처 검증을 대신하지 않는다.
+- 다음은 Luna의 실제 최종 verdict/시험 수락·보존, 예정된 Flash 후속 시작, 같은 독립 Task 재검증이다. 업로드·실계정·실물은 계속 미실행이며 기존 실패 근거는 보존한다.
+
+## 2026-10-10 01:01 KST 이전 체크포인트
 
 - Flash `ctx_2b9adeeceb2c`의 성공 제출 `msg_d704518dc1f4`를 수락·release/ack하고 `1c8181e`에 보존했다. coordinator가 PC 시험 57개를 실제 재실행해 모두 통과했다. 역할 checkpoint도 현 식별자로 갱신됐다. 시리얼 출력 큐의 동기 대기와 AUTO 중 요청 보존은 이 제출의 범위이며, 전체 5초 조건의 독립 합격은 아니다.
 - coordinator는 MANUAL 전송 도중 들어온 두 번째 요청의 유실 가능성 및 남은 AUTO 작업과 다음 갱신을 합친 지연 검증을 계속 요구한다. 정상 큐 fake의 `out_waiting` 누락은 Luna가 자기 시험에서 적응하며 정체 큐의 실패 조건을 약화하지 않는다.

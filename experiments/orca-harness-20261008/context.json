@@ -172,6 +172,17 @@
       "model_evidence": "Actual CLI Gemini3.8FlashMedium header and CIM PID32140 with --model gemini-3.8-flash-medium --dangerously-skip-permissions",
       "submission_commit": "1c8181e",
       "owner_checkpoint_current": true
+    },
+    "pc_manual_followup": {
+      "task_id": "task_1b01674fbb8c",
+      "status": "planned, not dispatched; await ctx088 settled report to keep PC1c8181e stable",
+      "model": "gemini-3.8-flash-medium",
+      "terminal": "term_3105fe45-46f8-4dce-9763-c24e2e98be09",
+      "source_commit": "1c8181e",
+      "finding_message": "msg_978c602977cc",
+      "timing_guidance": "msg_4ba9059e3485",
+      "coordinator_response": "msg_6cfb90a129d2",
+      "gate": "accepted independent report, PC-only correction and same review retry before COM"
     }
   },
   "frozen_input_count": 57,
