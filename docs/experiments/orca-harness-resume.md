@@ -60,7 +60,14 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 01:14 KST 최신 체크포인트
+## 2026-10-10 01:27 KST 최신 체크포인트
+
+- Flash `task_1b01674fbb8c` / `ctx_41e3573faa6e`는 계속 실제 working/live다. `pc/cli.py`와 담당 회귀 시험의 미제출 편집이 있으며, 기존 Event 소비를 수집 앞으로 옮기고 전송 후 clear·quota-only 병합 추정을 제거했다. 이 편집을 완료·제품 합격으로 동결하지 않는다.
+- 현재 예산 편집의 `max(0.5, 5-elapsed)` 및 `max(0.2, remaining-0.9)`는 deadline이 지난 뒤에도 시간을 주며, 실제 serial 1초·RPC 종료의 최대 1초를 충분히 예약하지 않는다. coordinator가 `msg_ea2bcf4508bd`로 이 구체적인 검증·보완을 전달했다. 짧은 RPC timeout으로 cached/error quota를 보내는 결과와 정상 새 quota 취득을 구분하도록 요구했다.
+- 담당자는 이전에 남아 있던 정확한 synthetic test job `task-198`를 자기 task manager로 정리했다. 이후 root의 해당 unittest 명령을 한정한 process 열거에서도 일치한 실행이 없었다. broad process kill은 하지 않았다.
+- Flash 역할 checkpoint는 아직 이전 `ctx_2b9adeeceb2c` 제출 상태다. 이 재개 문서와 context의 현재 식별자를 사용하고, 완료 제출 이전까지 미제출 source를 삭제·초기화·다른 writer에게 맡기지 않는다. 다음은 현 수정과 실제 회귀 결과의 native 수락 후 같은 Luna Task 재검증이다.
+
+## 2026-10-10 01:14 KST 이전 체크포인트
 
 - Luna `ctx_08869eb488a4`의 escalation `msg_dcf123b5555a`와 실패 제출 `msg_a690f4aef171`을 수락·release/ack, `9721f71`에 보존했다. coordinator도 실제 통합 26개를 17.111초 동안 재실행해 23개 통과·같은 3개 실패를 확인했다. 단계별 제한 내 지연의 합이 실제 5.562초였고, MANUAL 중 두 번째 요청 및 quota 취득 후 요청은 각 한 frame만 보냈다.
 - 예정된 Flash `task_1b01674fbb8c` / `ctx_41e3573faa6e`를 같은 proven terminal `term_3105fe45-46f8-4dce-9763-c24e2e98be09`에 dispatch했다. native start receipt는 turnStart 미관측이지만 실제 화면에서 새 Task·생각·메일 조회·코드 검토와 working/live를 확인했다. draft/종료 증거가 없으므로 Enter 재전송·중복 dispatch·abandon하지 않는다.

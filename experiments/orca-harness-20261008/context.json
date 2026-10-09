@@ -186,10 +186,12 @@
       "coordinator_response": "msg_6cfb90a129d2",
       "gate": "accepted independent report, PC-only correction and same review retry before COM",
       "dispatch_id": "ctx_41e3573faa6e",
-      "latest_guidance": "msg_5d973ec48caf",
+      "latest_guidance": "msg_ea2bcf4508bd",
       "source_review_commit": "9721f71",
       "cli_version": "1.3.2",
-      "model_evidence": "Actual rendered Gemini3.8Flash medium header on same proven PID32140 YOLO terminal"
+      "model_evidence": "Actual rendered Gemini3.8Flash medium header on same proven PID32140 YOLO terminal",
+      "progress_checked_at": "2026-10-09T16:27:01Z",
+      "progress": "active unsubmitted cli and owned tests edits; request consume boundary moved before collection; combined cleanup/write deadline review pending; previous synthetic test job stopped by owner; role checkpoint still old, use coordinator resume/context"
     }
   },
   "frozen_input_count": 57,
