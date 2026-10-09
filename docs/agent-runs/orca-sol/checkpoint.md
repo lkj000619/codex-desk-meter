@@ -8,3 +8,12 @@
 - Build workaround: native checkout path contains Korean characters that the Windows GCC wrapper cannot read; ASCII staging at `C:/Espressif/tmp/cdm-sol-task_b1214421a314` and `TEMP=C:/Espressif/tmp` allowed the genuine IDF build. Ignored binary/config copies are in `firmware/.host-tools/final-build/`.
 - Next action: coordinator reviews this report and runs only coordinator-owned COM/upload/physical and live-account tests, then records the final C/I/F/G verdict. Physical/live/COM remain `not_run`; no `product_pass=true`.
 - B first review FAIL is preserved, corrected B independent PASS was accepted (`msg_05c5a2a05fbb`); interface decision `msg_1a0585d74a22`/`msg_5d56c1876c49` adopted.
+
+## 2026-10-09 active usage correction — start
+
+- Run: `run_c968c43361da`; Task: `task_e44125e18973`; Dispatch: `ctx_5f9f6d8e9d11`; terminal: `term_9a4ebce2-fd56-4795-b238-e480cc1dc1bb`.
+- Phase: active-list/scoped cache correction implemented; host and independent selected-session regression and incremental ESP-IDF build pass.
+- Owned files changed this Dispatch: `firmware/main/cdm.c`, `tests/firmware/test_active_usage.py`, `docs/agent-runs/orca-sol/{checkpoint.md,report.md,build-active-usage-output.txt}`. The prior accepted report and binary hashes above remain historical evidence; new ignored build artifacts are in `firmware/.host-tools/active-usage-build/`.
+- Last verified result: baseline new tests failed 5/6 and Luna's selected-session test failed with `[A,B]`; after the C fix, `tests/firmware/build-host.ps1` succeeded, all **18/18** owned host tests passed including frozen 29/29, and read-only `tests/integration/test_cdm_session_selection.py` passed **1/1**. The coordinator answered source identity question `msg_dcf696e2444b` with `msg_53a856f75cc5`: exact full scoped ID first, and non-session changed-ID cache carry only for exactly one prior and one active matching context; session ID must match.
+- Last build result: genuine incremental ESP-IDF v5.3.2 `idf.py build` passed; 15/15 owned source/config files match ASCII staging SHA-256. New `cdm.c` SHA-256 `33899E302733A685B78F7171B87CC7827D4E2B34D8ADE0A82F0290C6D16B9C1C`; new app binary 307,680 bytes, SHA-256 `385130667AB15CA8DCC665E70FC06882B1E89535BDE8D84AF05FDC2B36C1EF72`; exact commands and other artifact hashes are appended to `report.md`.
+- Exact next action: final inbox check and native worker_done, then coordinator reviews the corrected build and performs coordinator-only COM/upload/physical and live-account tests. Physical/live/COM remain `not_run`; no `product_pass=true`.

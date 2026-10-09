@@ -367,41 +367,42 @@ void cdm_free(cdm_state *s)
 }
 bool cdm_newer(uint32_t current,uint32_t candidate)
 { uint32_t delta=candidate-current; return delta>0 && delta<0x80000000u; }
-static bool merge(cdm_entry **list,size_t *count,const cJSON *record,const char *key,bool good,uint64_t now)
+static bool same_field(const cJSON *a,const cJSON *b,const char *name)
 {
-    cdm_entry *entry=NULL;
-    for(size_t i=0;i<*count;i++) if (!strcmp((*list)[i].key,key)) { entry=&(*list)[i]; break; }
-    if (!entry) {
-        cdm_entry *more=realloc(*list,(*count+1)*sizeof **list); if (!more) return false;
-        *list=more; entry=&more[(*count)++]; memset(entry,0,sizeof *entry);
-        entry->key=malloc(strlen(key)+1); if (!entry->key) return false; strcpy(entry->key,key);
-    }
-    cJSON *copy=cJSON_Duplicate(record,1); if (!copy) return false;
-    cJSON_Delete(entry->current); entry->current=copy; entry->received_ms=now;
-    if (good) { copy=cJSON_Duplicate(record,1); if (!copy) return false; cJSON_Delete(entry->good); entry->good=copy; }
+    a=cJSON_GetObjectItemCaseSensitive(a,name);
+    b=cJSON_GetObjectItemCaseSensitive(b,name);
+    return (cJSON_IsNull(a) && cJSON_IsNull(b)) ||
+        (cJSON_IsString(a) && cJSON_IsString(b) && !strcmp(a->valuestring,b->valuestring));
+}
+static bool same_usage_scope(const cJSON *a,const cJSON *b,bool include_snapshot)
+{
+    const char *fields[]={"provider_id","agent_id","host_id","model_id",
+        "account_profile_id","source_kind","metric_kind"};
+    if (include_snapshot && !same_field(a,b,"snapshot_id")) return false;
+    for(size_t i=0;i<sizeof fields/sizeof fields[0];i++)
+        if (!same_field(a,b,fields[i])) return false;
     return true;
 }
-static cdm_entry *clone_entries(const cdm_entry *source,size_t count)
+static bool append_entry(cdm_entry **list,size_t *count,const cJSON *record,const char *key,
+                         const cdm_entry *previous,bool good,uint64_t now)
 {
-    if (!count) return NULL;
-    cdm_entry *copy=calloc(count,sizeof *copy); if (!copy) return NULL;
-    for(size_t i=0;i<count;i++) {
-        copy[i].key=malloc(strlen(source[i].key)+1);
-        if (copy[i].key) strcpy(copy[i].key,source[i].key);
-        copy[i].current=cJSON_Duplicate(source[i].current,1);
-        if (source[i].good) copy[i].good=cJSON_Duplicate(source[i].good,1);
-        copy[i].received_ms=source[i].received_ms;
-        if (!copy[i].key || !copy[i].current || (source[i].good && !copy[i].good)) {
-            free_entries(copy,count); return NULL;
-        }
-    }
-    return copy;
+    cdm_entry *more=realloc(*list,(*count+1)*sizeof **list);
+    if (!more) return false;
+    *list=more;
+    cdm_entry *entry=&more[(*count)++]; memset(entry,0,sizeof *entry);
+    entry->key=malloc(strlen(key)+1);
+    if (entry->key) strcpy(entry->key,key);
+    entry->current=cJSON_Duplicate(record,1);
+    const cJSON *last_good=good?record:previous?previous->good:NULL;
+    if (last_good) entry->good=cJSON_Duplicate(last_good,1);
+    entry->received_ms=now;
+    return entry->key && entry->current && (!last_good || entry->good);
 }
 bool cdm_accept(cdm_state *s,const unsigned char *line,size_t length,uint64_t mono_ms)
 {
     const char *why="FRAME_BYTES"; cJSON *frame=NULL;
     cdm_entry *next_usage=NULL,*next_global=NULL;
-    size_t next_usage_count=s->usage_count,next_global_count=s->global_count;
+    size_t next_usage_count=0,next_global_count=0;
     if (!line || !length || length>CDM_MAX_FRAME || line[length-1]!='\n' ||
         memchr(line,'\n',length-1) || memchr(line,'\r',length) || memchr(line,0,length) ||
         !utf8(line,length-1)) goto bad;
@@ -437,8 +438,8 @@ bool cdm_accept(cdm_state *s,const unsigned char *line,size_t length,uint64_t mo
     why="SNAPSHOT_INVALID";
     for(cJSON *v=usage->child;v;v=v->next) {
         if (!snapshot(v,anchor)) goto bad;
-        const char *id=cJSON_GetObjectItemCaseSensitive(v,"snapshot_id")->valuestring;
-        for(cJSON *p=usage->child;p!=v;p=p->next) if (!strcmp(id,cJSON_GetObjectItemCaseSensitive(p,"snapshot_id")->valuestring)) goto bad;
+        for(cJSON *p=usage->child;p!=v;p=p->next)
+            if (same_usage_scope(v,p,true)) { why="SNAPSHOT_DUPLICATE"; goto bad; }
     }
     why="GLOBAL_INVALID";
     for(cJSON *v=global->child;v;v=v->next) {
@@ -449,21 +450,31 @@ bool cdm_accept(cdm_state *s,const unsigned char *line,size_t length,uint64_t mo
     uint32_t candidate=(uint32_t)seq->valuedouble;
     if (s->has_sequence && !cdm_newer(s->sequence,candidate)) { why="SEQUENCE_OLD"; goto bad; }
     why="NO_MEMORY";
-    next_usage=clone_entries(s->usage,s->usage_count);
-    if (s->usage_count && !next_usage) goto bad;
-    next_global=clone_entries(s->global,s->global_count);
-    if (s->global_count && !next_global) goto bad;
     for(cJSON *v=usage->child;v;v=v->next) {
         const char *key=cJSON_GetObjectItemCaseSensitive(v,"snapshot_id")->valuestring;
         bool good=literal(cJSON_GetObjectItemCaseSensitive(v,"status"),"available") && !cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(v,"stale"));
-        if (!merge(&next_usage,&next_usage_count,v,key,good,mono_ms)) goto bad;
+        const cdm_entry *previous=NULL;
+        for(size_t i=0;i<s->usage_count;i++)
+            if (same_usage_scope(v,s->usage[i].current,true)) { previous=&s->usage[i]; break; }
+        if (!previous && !good && !literal(cJSON_GetObjectItemCaseSensitive(v,"metric_kind"),"session_telemetry")) {
+            const cdm_entry *only_prior=NULL;
+            size_t prior_count=0,current_count=0;
+            for(size_t i=0;i<s->usage_count;i++) if (same_usage_scope(v,s->usage[i].current,false)) {
+                only_prior=&s->usage[i]; prior_count++;
+            }
+            for(cJSON *p=usage->child;p;p=p->next) if (same_usage_scope(v,p,false)) current_count++;
+            if (prior_count==1 && current_count==1) previous=only_prior;
+        }
+        if (!append_entry(&next_usage,&next_usage_count,v,key,previous,good,mono_ms)) goto bad;
     }
     for(cJSON *v=global->child;v;v=v->next) {
         const char *key=cJSON_GetObjectItemCaseSensitive(v,"source")->valuestring;
         bool good=!cJSON_IsTrue(cJSON_GetObjectItemCaseSensitive(v,"stale")) &&
             cJSON_IsNull(cJSON_GetObjectItemCaseSensitive(v,"error_code")) &&
             cJSON_IsString(cJSON_GetObjectItemCaseSensitive(v,"latest_reset_at"));
-        if (!merge(&next_global,&next_global_count,v,key,good,mono_ms)) goto bad;
+        const cdm_entry *previous=NULL;
+        for(size_t i=0;i<s->global_count;i++) if (!strcmp(key,s->global[i].key)) { previous=&s->global[i]; break; }
+        if (!append_entry(&next_global,&next_global_count,v,key,previous,good,mono_ms)) goto bad;
     }
     free_entries(s->usage,s->usage_count); free_entries(s->global,s->global_count);
     s->usage=next_usage; s->usage_count=next_usage_count;

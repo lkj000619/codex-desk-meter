@@ -70,3 +70,39 @@ Coordinator-only upload/observation procedure:
 4. Observe the powered LCD for ≥30 s, inspect clipping/readability/rotation/backlight polarity and GPIO0 transitions, then press RST as a reset-only action. For USB disconnect, provide independent board power before removing the serial link; record continued display and valid recovery. Validate internal temperature or `UNKNOWN` fallback. Keep real-account collection under coordinator control.
 
 The physical product verdict remains `not_run`; no whole-product pass is claimed.
+
+## 2026-10-09 correction: current active usage and scoped identity
+
+Run `run_c968c43361da` · Task `task_e44125e18973` · Dispatch `ctx_5f9f6d8e9d11` · worker terminal `term_9a4ebce2-fd56-4795-b238-e480cc1dc1bb`. This section amends the receiver result above; the accepted initial build commands and hashes remain as historical evidence.
+
+The PC frame is the complete current active source collection. The receiver now stages an empty next usage/global list, builds it from the validated frame, and swaps it atomically only after all records pass. A selected session A followed by selected session B therefore displays only B; repeated changing observation IDs do not retain inactive history. A rejected frame leaves the active list, cached values, timestamps, and receiver sequence unchanged.
+
+Usage identity is provider, agent, host, model, account profile, source kind, metric kind, and `snapshot_id` together. Distinct contexts may share a snapshot ID; an exact duplicate of this full scoped identity fails explicitly with `SNAPSHOT_DUPLICATE`. Exact scoped ID matching takes precedence for cache carry. A session never inherits another session's cache. For a non-session error/unknown with a changed observation ID, last-good carries only if exactly one prior and exactly one current record share its complete source context; ambiguous unmatched records remain cold/unknown. Original observation timestamps remain attached to the carried good value, and a later good record recovers independently.
+
+Verification used the actual linked production C parser/cache and existing host adapter. `tests/firmware/build-host.ps1` succeeded; `python -B -X utf8 -m unittest discover -s tests/firmware -p 'test_*.py' -v` passed **18/18**, including the existing frozen section-5 evaluator's **29/29** cases and the new active-list/scoped-identity regressions. The read-only independent `python -B -X utf8 -m unittest discover -s tests/integration -p 'test_cdm_session_selection.py' -v` passed **1/1** after previously exposing the `[A,B]` defect. New cases cover A→B current selection, same ID across provider/metric contexts, true scoped duplicate atomic rejection, 20 changing observation IDs without list growth, single-source changed-ID error/unknown carry and recovery, ambiguous same-context non-inheritance, same-session last-good, and cross-context cache isolation.
+
+The **incremental** ESP-IDF v5.3.2 `idf.py build` succeeded after replacing only staged `main/cdm.c`. All **15** owned firmware source/config files were SHA-256 identical to the ASCII SDK staging tree at build time. The exact build invocation, with output captured in [build-active-usage-output.txt](build-active-usage-output.txt), was:
+
+```powershell
+$env:PYTHONIOENCODING='utf-8'
+$env:PYTHONUTF8='1'
+$env:IDF_TOOLS_PATH='C:/Espressif/user-tools'
+. 'C:/Espressif/v5.3.2/esp-idf/export.ps1' | Out-Null
+$env:TEMP='C:/Espressif/tmp'
+$env:TMP='C:/Espressif/tmp'
+$env:IDF_CCACHE_ENABLE='0'
+Set-Location 'C:/Espressif/tmp/cdm-sol-task_b1214421a314'
+python 'C:/Espressif/v5.3.2/esp-idf/tools/idf.py' build *> 'C:/Users/이광진/orca/workspaces/codex-desk-meter/experiment-orca-harness-20261008/docs/agent-runs/orca-sol/build-active-usage-output.txt'
+```
+
+| New file | Bytes | SHA-256 |
+|---|---:|---|
+| `firmware/main/cdm.c` | 27,653 | `33899E302733A685B78F7171B87CC7827D4E2B34D8ADE0A82F0290C6D16B9C1C` |
+| `tests/firmware/test_active_usage.py` | 6,735 | `13EB80DC31A30D1522E9D4FB0E0FED792CB746915451CAD2F2FA4455E7D20C33` |
+| `build-active-usage-output.txt` | 4,638 | `91D7EFFDB9099AD01B943295ED31DFFA94675B533B0B71CA089CF059EA79514D` |
+| `firmware/.host-tools/active-usage-build/codex_desk_meter.bin` | 307,680 | `385130667AB15CA8DCC665E70FC06882B1E89535BDE8D84AF05FDC2B36C1EF72` |
+| `firmware/.host-tools/active-usage-build/bootloader.bin` | 21,504 | `F4C5160D0777EBDA11EDAC881853B211300323E5CF8F96EEEDA5314D731D02AB` |
+| `firmware/.host-tools/active-usage-build/partition-table.bin` | 3,072 | `7F00B6C042A89B15B0CAC534F82ED988CAF29278FF5700B0C511EB1B5BB7C820` |
+| `firmware/.host-tools/active-usage-build/sdkconfig` | 70,020 | `46788F1C30A51868DA7C66C41DEF9045514FAAF393BC68EC0D6F05DF4DACA452` |
+
+The new application image occupies `0x4b1e0` bytes of the `0x100000` byte app partition, leaving 71% free. Coordinator-only next action: review the corrected source and new binary, then perform upload, serial/GUI observation, BOOT operation, synthetic device fault/recovery and live-account gates under the operator procedure above. For its upload step, verify and use the **new** three binary hashes in this correction table; the three binary hashes in the original section identify the superseded historical build. Physical, live, and COM evidence remain `not_run`; no `product_pass=true` is claimed.
