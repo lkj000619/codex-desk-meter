@@ -20,3 +20,5 @@
 
 [설계](../design/2026-10-08-orca-harness.md) · [계획](../plans/2026-10-08-orca-harness.md)
 · [세션 중단 후 재개](orca-harness-resume.md)
+
+2026-10-10 00:11 KST 재개: 같은 Run·branch와 입력 57개를 확인했다. 중단된 독립 검증 부분 작업은 `0f552c9`에 보존했다. 같은 review Task의 현재 Dispatch는 `ctx_125c9c02c0ed`이며 PC `5ddef63`·firmware `853ddf7`의 전체 검증을 이어간다. 기본 Codex launcher 인수 오류는 종료 확인·정리 후 모델/자동 승인 확인된 별도 터미널로 복구했다. 세 PC 결함의 독립 보고·보완·재검증 이전에는 제품 합격과 업로드를 선언하지 않는다.

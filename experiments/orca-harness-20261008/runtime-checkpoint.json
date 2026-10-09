@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-09T10:11:53.5371754Z",
+    "observed_at":  "2026-10-09T15:11:53.5929124Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -77,7 +77,7 @@
                   {
                       "id":  "task_4d49e747c570",
                       "title":  "Verify actual PC-to-C firmware integration and product requirements",
-                      "status":  "blocked",
+                      "status":  "dispatched",
                       "deps":  "[\"task_3963de21ddd1\",\"task_b1214421a314\"]",
                       "completed_at":  null
                   },
@@ -126,15 +126,56 @@
               ],
     "workers":  [
                     {
+                        "task_id":  "task_4d49e747c570",
+                        "dispatch_id":  "ctx_125c9c02c0ed",
+                        "terminal_handle":  "term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956",
+                        "state":  "ready",
+                        "dispatch_status":  "dispatched",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791558708777,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_4d49e747c570",
+                        "dispatch_id":  "ctx_5de0b1c708f7",
+                        "terminal_handle":  "term_5b009719-0f21-49b6-8282-135fe6fa9caa",
+                        "state":  "stopped",
+                        "dispatch_status":  "failed",
+                        "liveness":  {
+                                         "verdict":  "exited",
+                                         "source":  "worker_stop"
+                                     },
+                        "next_action":  {
+                                            "kind":  "release",
+                                            "argv":  [
+                                                         "orchestration",
+                                                         "worker-release",
+                                                         "--dispatch",
+                                                         "ctx_5de0b1c708f7"
+                                                     ]
+                                        },
+                        "resource_state":  "owned",
+                        "release_state":  "not_requested"
+                    },
+                    {
                         "task_id":  "task_2425d0e52884",
                         "dispatch_id":  "ctx_cbb151521cd0",
                         "terminal_handle":  "term_57af52b9-738e-44cc-beb8-4d2204a41b46",
                         "state":  "succeeded",
                         "dispatch_status":  "completed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791540452444,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
@@ -153,8 +194,7 @@
                         "dispatch_status":  "completed",
                         "liveness":  {
                                          "verdict":  "unverifiable",
-                                         "reason":  "stale_status",
-                                         "observedAt":  1791538671802
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
@@ -169,20 +209,16 @@
                         "task_id":  "task_4d49e747c570",
                         "dispatch_id":  "ctx_da800c8d8bce",
                         "terminal_handle":  "term_1a2fcc8b-6402-4851-ba15-d27061517be1",
-                        "state":  "start_unknown",
-                        "dispatch_status":  "pending",
+                        "state":  "abandoned",
+                        "dispatch_status":  "failed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791540646056,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
-                                            "kind":  "inspect",
+                                            "kind":  "none",
                                             "argv":  [
-                                                         "orchestration",
-                                                         "worker-show",
-                                                         "--dispatch",
-                                                         "ctx_da800c8d8bce"
+
                                                      ]
                                         },
                         "resource_state":  "external",

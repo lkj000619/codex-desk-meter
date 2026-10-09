@@ -60,7 +60,15 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-09 19:10 KST 최신 체크포인트
+## 2026-10-10 00:11 KST 최신 체크포인트
+
+- 5시간 세션 중단 후 같은 Run을 새 coordinator `term_54a83fa0-c831-41b9-8295-ca84d361c828`에 연결했다. runtime은 `b85e3007-613f-450b-ab06-8a60f76fa6e5`다. 입력 57개 hash·branch·JSON 검증 통과.
+- Luna의 미제출 report·시험 4개·checkpoint를 `0f552c9`에 부분 작업으로 보존했다. AST 검증은 통과했으며 검증 완료를 의미하지 않는다. 안정된 구현은 PC `5ddef63`와 firmware `853ddf7`이다.
+- 이전 review Dispatch `ctx_da800c8d8bce`는 재시작 복구에서 `failed/terminal_missing`, Task는 `ready`였다. 이 조합에서는 `--retry-of`가 거절되어 동일 ready Task를 시작했다. 새 기본 launcher `ctx_5de0b1c708f7`는 Codex 인수 `'-m'` 오류 후 shell로 복귀한 것을 확인하고 `worker-stop`으로 정리했다.
+- 모델·YOLO·실제 argv를 확인한 전용 PowerShell terminal `term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956`에서 같은 Task `task_4d49e747c570` / 새 Dispatch `ctx_125c9c02c0ed`를 시작했다. draft paste를 확인하고 Enter만 한 번 보냈다. 복구 범위·세 결함·시험·명시적 실패 보고 지침은 `msg_31c11629e00b`다.
+- 다음은 독립 전체 시험·보고의 native 수락, 해당 결함의 PC 역할 보완, 같은 review Task 재검증이다. COM·실계정·LCD 관측은 계속 `not_run`이며 upload gate는 열지 않았다.
+
+## 2026-10-09 19:10 KST 이전 체크포인트
 
 - PC deadline `task_2425d0e52884` / `ctx_cbb151521cd0` 완료 `msg_abbf6fa3f33e` 수락·release/ack, 소스 `5ddef63`·coordinator 53/53 시험 통과. AGY owner는 idle이며 새 작업을 하고 있지 않다.
 - 추가 검증은 실패: flush 예외를 성공 처리, stalled flush daemon 3개가 남음, write 중 manual event가 재수집 없이 사라짐. 비식별 production-path 근거는 `operator/pc-post-deadline-probe.json`.

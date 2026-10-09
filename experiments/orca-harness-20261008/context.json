@@ -2,8 +2,8 @@
   "cohort": "orca-harness-20261008",
   "run_id": "run_c968c43361da",
   "coordinator_handle": "term_c1752a58-5861-435e-ab3a-c99caaa61b14",
-  "resumed_coordinator_handle": "term_b616990b-a6c9-4d5e-90c2-47af89701a69",
-  "resumed_runtime_id": "01fe54dc-9231-41a3-8a2d-557f0c610d63",
+  "resumed_coordinator_handle": "term_54a83fa0-c831-41b9-8295-ca84d361c828",
+  "resumed_runtime_id": "b85e3007-613f-450b-ab06-8a60f76fa6e5",
   "worktree_id": "ce5556c0-b87c-4c5f-9bac-6e1fa3f0faf2::C:/Users/이광진/orca/workspaces/codex-desk-meter/experiment-orca-harness-20261008",
   "branch": "lkj000619/experiment-orca-harness-20261008",
   "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
@@ -108,10 +108,16 @@
     },
     "integration_review": {
       "task_id": "task_4d49e747c570",
-      "status": "working/live; full stable PC5ddef63 to firmware853ddf7 review authorized msg_bf54f604138a; root confirmed three current PC blockers",
+      "status": "same Task resumed after terminal_missing; failed default argv launch stopped; custom model/bypass/header verified; draft Enter once; report pending",
       "additional_coordinator_gate": "Latest accepted PC and firmware stable; full synthetic integration authorized. No physical until independent findings remediated, review passes and artifact freeze.",
-      "dispatch_id": "ctx_da800c8d8bce",
-      "terminal": "term_1a2fcc8b-6402-4851-ba15-d27061517be1"
+      "dispatch_id": "ctx_125c9c02c0ed",
+      "terminal": "term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956",
+      "interrupted_dispatch": "ctx_da800c8d8bce",
+      "failed_launch_dispatch": "ctx_5de0b1c708f7",
+      "partial_evidence_commit": "0f552c9",
+      "model": "gpt-6-luna",
+      "approval_flag": "--dangerously-bypass-approvals-and-sandbox",
+      "model_evidence": "Actual CIM process PID20972 and Codex0.159.2 GPT-6-Luna high/YOLO header, 2026-10-10 00:10 KST; no capability stored."
     },
     "pc_wire_correction": {
       "task_id": "task_a6eebb977125",
@@ -162,6 +168,11 @@
       "runtime_id": "711c48c3-d114-4035-9ff7-3748588b6783",
       "coordinator_handle": "term_ce8a35be-a6e6-4508-aba9-5c5400b95a21",
       "reason": "5h session interruption and Orca restart, 2026-10-09"
+    },
+    {
+      "runtime_id": "01fe54dc-9231-41a3-8a2d-557f0c610d63",
+      "coordinator_handle": "term_b616990b-a6c9-4d5e-90c2-47af89701a69",
+      "reason": "5h interruption and Orca restart, 2026-10-10; preserve prior generation"
     }
   ]
 }
