@@ -4,6 +4,8 @@
 
 후속 08:13 영상에서 실제 수치와 **FRAME/CRC VALID**를 확인했다. 적어도 한 live frame의 장치 수락은 실물로 확인됐으며 촬영 당시 5시간 31%/잔여69%, 주간 68%/잔여32%였다. 사용자가 지속적인 점멸을 보고했고 화면 일부가 흰색으로 지워지는 장면도 보여 **화면 안정성은 보완 필요**다. 새로운 `task_63d11f3c24cb` / `ctx_2363ff345723`에서 기존 Sol 모델이 표시 경로를 조사·수정한다. 원래 host 합격과 tag는 보존하며 물리 PASS로 소급하지 않는다. [후속 영상의 비식별 관측](../../experiments/orca-harness-20261008/operator/post-data-video-20261010/observation.json) · [점멸 보완 계획](../plans/2026-10-10-lcd-flicker.md).
 
+08:37 KST 보완: Sol의 표시 수정은 **`9bbe333`**에 보존했다. RGB가 읽는 버퍼를 직접 지우는 대신 다른 버퍼에 화면을 완성하고, SDK bounce 경계에서 교체한다. 원래 production BSP는 컴파일 후 표시 중 pixel 변경 검사에서 실패했으며 수정본의 firmware **19/19**가 통과했다. source/staging15개와 새 app `953782e5…`의 hash를 확인했다. [재현·회귀 근거](../../experiments/orca-harness-20261008/operator/lcd-flicker-root-regression-20261010.json), [별도 수정 후보](../../experiments/orca-harness-20261008/operator/firmware-flicker-candidate.json). 독립 Luna `task_4386f8dbef93` / `ctx_1ab7525e89ae`가 검증 중이며, **수정본의 재업로드·실물 무점멸은 아직 미확인**이다. 긴 토큰 문자열의 지수부 잘림도 별도 미해결로 남긴다.
+
 branch `lkj000619/experiment-orca-harness-20261008`, Run `run_c968c43361da`, 호스트 동결 tag `orca-harness-20261010-host-candidate` (`7ccbb24`). 동결 입력 57개를 보존했고 원래 비교 브랜치 `prepare/formal-comparison-20261004`는 수정하지 않았다.
 
 ## 역할과 산출물
@@ -39,4 +41,4 @@ PC의 실제 수집은 `CODEX_THREAD_ID`가 가리키는 파일 한 개를 명�
 
 이전 독립 실패 원본은 `117a988`, `9721f71`, 이전 Flash 제출은 `e7c5b51`에 보존했다. 추가 경계 6.125초와 재개 후 5.016초 실패를 삭제하거나 소급 PASS로 바꾸지 않았다. 수동 요청 기준 시각 보존, OS timeout 설정 실패 시 쓰기 차단, 실제 SendOutcome 완료 시각 검증으로 보완했고 현재 통합에서 재확인했다.
 
-Orca 메시지 enqueue·화면의 check 실행은 처리/ack의 증거가 아니다. 실제 FIFO Delivery 처리·ack와 현재 Dispatch별 안내를 확인하고, 독립 시험이 기존 경계를 대체한 경우 해당 경계를 별도 복원했다. 세션 재시작 시 [재개 기록](orca-harness-resume.md)과 [체크리스트](../plans/2026-10-08-orca-harness.md)를 따른다. 현재 단계는 사용자 관측 대기이며 임의 reset·재업로드·sender 재초기화를 하지 않는다.
+Orca 메시지 enqueue·화면의 check 실행은 처리/ack의 증거가 아니다. 실제 FIFO Delivery 처리·ack와 현재 Dispatch별 안내를 확인하고, 독립 시험이 기존 경계를 대체한 경우 해당 경계를 별도 복원했다. 세션 재시작 시 [재개 기록](orca-harness-resume.md)과 [체크리스트](../plans/2026-10-08-orca-harness.md)를 따른다. 현재 단계는 점멸 수정의 독립 검증이며, PASS 후 coordinator가 기존 watch의 실제 종료를 확인하고 수정 후보를 업로드한다. sender state는 그대로 이어간다.
