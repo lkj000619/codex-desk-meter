@@ -61,3 +61,35 @@
 ## 4. 물리 하드웨어 검증 한계 및 상태
 - 실제 COM 포트 열기, 물리 장치 펌웨어 플래시, 하드웨어 리셋은 안전 규칙에 따라 수행하지 않음 (`COM/flash/reset calls prohibited`).
 - 물리 하드웨어 및 실계정 검증 증거는 `not_run` 상태이며, 호스트 기반 시뮬레이션 및 실제 프로덕션 C 바이너리(`cdm-host.exe --wire`) 연동 검증만 통과함 (`product_pass=false`).
+
+---
+
+## 5. 최신 승인 소스 데드라인 보정 및 OS 세터 예외 전파 (2026-10-10)
+
+- **문서화 Task/Dispatch**: `task_9becb3b414d9` / `ctx_41536de6636d` (터미널: `term_25d7d35f-8e19-4188-9442-70cfee46313c`, 코디네이터: `term_9fb88ac7-32b2-43f6-8ba2-c203ed6531bf`)
+- **최신 소스 승인 Task/Dispatch**: `task_d7aa5e059e8d` / `ctx_a7d558d25511` (완료 메시지: `msg_c1e14cc550e2`, 동결 커밋: `39e52bd`)
+
+### 5.1 해결된 잔여 결함 및 최소 완전 수정
+
+1. **진행 중 루프 종료 시 대기 중인 수동 요청 오리진 보존 (`pc/cli.py`)**:
+   - 기존 루프는 iteration 수행 도중 수동 요청 이벤트가 발생했을 때 루프 하단에서 `manual_request_arrival = now_fn()`으로 새로 갱신하여, 앞선 AUTO/MANUAL 작업 소요 시간을 지우고 5초 예산을 리셋하는 결함이 있었습니다.
+   - 보수적 기준인 `in_flight_start`를 오리진으로 설정(`manual_request_arrival = in_flight_start`)하여, 이미 진행된 소요 시간을 예산에 온전히 반영하고 5초 데드라인을 재시작하지 않도록 수정했습니다.
+2. **실제 OS write_timeout 적용 선행 및 CdmSender 예외 전파 (`pc/sender.py`)**:
+   - `WindowsSerialSink.write_timeout` 프로퍼티 세터에서 커스텀 필드 갱신 전 실제 `self.serial.write_timeout = value` 할당이 먼저 성공하도록 보장했습니다.
+   - `CdmSender.transmit_payload`에서 타임아웃 세터 실행 실패를 try-except pass로 삼키지 않고 바깥 블록으로 노출하여, `target_sink.write` 호출 이전에 명시적 `WRITE_IO_ERROR`로 전환되도록 수정했습니다. 이 경우에도 시퀀스는 정상 예약(`reserve_next_sequence`)되어 소비(`seq consumed`)되며, 전송 바이트는 0으로 보고됩니다.
+3. **지연 정리 및 시리얼 드레인 회귀 테스트 교정 (`tests/pc/test_cohort_probe_regressions.py`)**:
+   - `test_delayed_terminate_kill_and_near_limit_serial_drain_enforces_five_second_budget`에서 가짜 serial `out_waiting` 폴링 경계에서 강제로 완료 신호를 주는 방식 대신, 실제 프로덕션 `CdmSender.transmit_payload`의 종료 시점(terminal SendOutcome)과 실제 단조 시간(`monotonic time`)을 직접 관찰하는 테스트 래퍼를 도입했습니다.
+   - 잔여 시간 부족으로 인한 유한 오류(`WRITE_IO_ERROR`)를 정당한 동작으로 인정하고, 닫힌 가짜 포트에서 0을 반환하여 거짓 성공을 유발하지 않도록 `raise IOError`로 방어했습니다.
+4. **거부하는 실제 OS write_timeout 세터 음성 회귀 테스트 추가 (`tests/pc/test_cohort_probe_regressions.py`)**:
+   - `test_rejecting_os_write_timeout_setter_fails_before_write_and_consumes_seq`를 추가하여, OS 타임아웃 설정 실패 시 write 미호출, 0바이트 전송, 시퀀스 소비, `WRITE_IO_ERROR` 반환을 검증했습니다.
+
+### 5.2 최신 검증 결과 및 범위 한계
+
+- **단위 테스트 실행 명령**:
+  ```sh
+  C:/Espressif/user-tools/python_env/idf5.3_py3.11_env/Scripts/python.exe -B -X utf8 -m unittest discover -s tests/pc -q
+  ```
+- **검증 결과**: **64개 단위 테스트 전원 통과 (64 tests run, OK, 0 failures, 0 errors, 코디네이터 기준 10.898s / wall 11.062s)**.
+- **물리 하드웨어 및 독립 검토 한계**:
+  - 최신 64/64 통과는 호스트 시뮬레이션 및 단위 검증 증거(host evidence)이며, 독립된 Luna 측 검토(`ctx_6b00e6339d06`)가 진행 중입니다.
+  - 안전 지침에 따라 실제 COM 포트 통신, 펌웨어 플래싱, 하드웨어 리셋은 일절 실행하지 않았으며(`not_run`), 물리 장치 검증 통과는 미결정(`product_pass=false`) 상태를 엄격히 유지합니다.

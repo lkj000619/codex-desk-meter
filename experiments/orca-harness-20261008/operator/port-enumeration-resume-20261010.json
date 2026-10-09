@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-10-09T22:49:34.701411+00:00",
+  "scope": "read-only enumeration; no port open/reset/flash",
+  "ports": [
+    {
+      "device": "COM1",
+      "description": "\ud1b5\uc2e0 \ud3ec\ud2b8(COM1)",
+      "vid": null,
+      "pid": null
+    },
+    {
+      "device": "COM3",
+      "description": "USB \uc9c1\ub82c \uc7a5\uce58(COM3)",
+      "vid": 12346,
+      "pid": 4097
+    }
+  ]
+}

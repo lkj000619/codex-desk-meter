@@ -108,7 +108,7 @@
     },
     "integration_review": {
       "task_id": "task_4d49e747c570",
-      "status": "same failed Task retry accepted native ready/input_accepted/turnStart unsupported; actual pasted draft observed then Enter once; completion pending",
+      "status": "actual working observed after single draft Enter; current mailbox read and owned checkpoint updated; review pending",
       "additional_coordinator_gate": "Latest accepted PC and firmware stable; full synthetic integration authorized. No physical until independent findings remediated, review passes and artifact freeze.",
       "dispatch_id": "ctx_6b00e6339d06",
       "terminal": "term_b6cd0335-ea67-4926-8229-b50602b3fb97",
@@ -237,8 +237,9 @@
       "dispatch_id": "ctx_41536de6636d",
       "terminal": "term_25d7d35f-8e19-4188-9442-70cfee46313c",
       "model": "gemini-3.8-flash-medium",
-      "status": "doc-only follow-up dispatched; no PC/tests edits or retest authorized",
-      "scope": "Flash report/checkpoint dated synchronization with39e52bd/root64; independent Luna underway; physical/live remain not_run"
+      "status": "accepted succeeded msg_ba0e65c7a947; released external/processAction none and Delivery acked; only2 owned documentation paths changed",
+      "scope": "Flash report/checkpoint dated synchronization with39e52bd/root64; independent Luna underway; physical/live remain not_run",
+      "report_path": "docs/agent-runs/orca-flash/report.md"
     }
   },
   "frozen_input_count": 57,
@@ -265,5 +266,14 @@
       "coordinator_handle": "term_54a83fa0-c831-41b9-8295-ca84d361c828",
       "reason": "5h session reset and runtime restart; generation5 takeover 2026-10-10 07:37 KST"
     }
-  ]
+  ],
+  "operator_preflight": {
+    "port_enumeration": "operator/port-enumeration-resume-20261010.json",
+    "esp32_usb_port": "COM3",
+    "vid": "303A",
+    "pid": "1001",
+    "scope": "enumeration only; no COM open/chip proof/upload",
+    "firmware_manifest_hashes_verified": 19,
+    "upload_permitted": false
+  }
 }
