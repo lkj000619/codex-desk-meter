@@ -201,9 +201,12 @@
       "model": "gemini-3.8-flash-medium",
       "approval_flag": "--dangerously-skip-permissions",
       "source_commit": "5d16e97",
-      "status": "worker-start pending receipt; inspect before any duplicate/retry",
+      "status": "working/live observed on actual rendered AGY screen; native turn start unobserved, not exit; no duplicate or Enter resend",
       "reproduction": "operator/pc-shared-budget-cleanup-probe.json",
-      "gate": "actual combined5s bounded; accepted source/tests; same independent review Task retry before COM"
+      "gate": "actual combined5s bounded; accepted source/tests; same independent review Task retry before COM",
+      "dispatch_id": "ctx_ca714297b040",
+      "failed_start": "ctx_e4d716376da8",
+      "readiness_recovery": "First native attempt failed before injection at readiness. One infrastructure-only READY turn refreshed actual idle status; same Task retry then injected and actually working."
     }
   },
   "frozen_input_count": 57,
