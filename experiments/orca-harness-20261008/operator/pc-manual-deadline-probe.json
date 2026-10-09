@@ -1,0 +1,10 @@
+{
+  "kind": "synthetic-production-scheduler-probe",
+  "private_data": false,
+  "com_open": false,
+  "collection_seconds": 4.5,
+  "write_seconds": 2.0,
+  "manual_to_write_complete_seconds": 6.5,
+  "required_max_seconds": 5,
+  "returncode": 0
+}

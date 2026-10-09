@@ -91,3 +91,10 @@ coordinator가 ESP-IDF Python 3.11로 기존 PC 시험 39개를 실행해 통과
 이 결함들과 source 선택 identity·갱신 deadline 회귀 검사는 같은 PC 담당의 새 보완
 `task_a6eebb977125` / `ctx_04111d8d4601`에 맡겼다. 이전 제출은 성공적인 제출이고
 완성된 제품 합격은 아니다. frozen schema·과거 비교 판정은 변경하지 않는다.
+
+2026-10-09 18:43 KST 추가 갱신 지연 재현: production `run_watch_loop`에 synthetic
+수집 4.5초·전송 2초를 주입하면 manual 요청부터 write 완료까지 6.5초인데 종료값은 0이다.
+[재현 결과](../../experiments/orca-harness-20261008/operator/pc-manual-deadline-probe.json)를
+`msg_747a037b79f7`로 같은 PC Task에 전달했다. 자동 수집 시작 간격만 확인하는 시험으로
+수동/연결 복구의 5초 이내 전송을 입증하지 않으며 RPC·cleanup·write까지 포함해 검증한다.
+실제 포트나 개인 데이터는 사용하지 않았다.

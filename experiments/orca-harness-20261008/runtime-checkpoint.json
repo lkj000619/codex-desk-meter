@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-09T09:31:44.0912181Z",
+    "observed_at":  "2026-10-09T09:42:15.2070116Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -112,9 +112,9 @@
                   {
                       "id":  "task_e44125e18973",
                       "title":  "Correct firmware active source list and scoped cache identity",
-                      "status":  "dispatched",
+                      "status":  "completed",
                       "deps":  "[]",
-                      "completed_at":  null
+                      "completed_at":  "2026-10-09T09:37:47.963Z"
                   }
               ],
     "workers":  [
@@ -122,11 +122,11 @@
                         "task_id":  "task_e44125e18973",
                         "dispatch_id":  "ctx_5f9f6d8e9d11",
                         "terminal_handle":  "term_9a4ebce2-fd56-4795-b238-e480cc1dc1bb",
-                        "state":  "ready",
-                        "dispatch_status":  "dispatched",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791538274165,
+                                         "observedAt":  1791538671802,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -146,7 +146,7 @@
                         "dispatch_status":  "pending",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791538170615,
+                                         "observedAt":  1791538923268,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -169,7 +169,7 @@
                         "dispatch_status":  "dispatched",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791538302325,
+                                         "observedAt":  1791538932766,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
