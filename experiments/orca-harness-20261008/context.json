@@ -108,7 +108,7 @@
     },
     "integration_review": {
       "task_id": "task_4d49e747c570",
-      "status": "same planned Task started for firmware-only review; input draft observed and Enter once after turn_start_unobserved, no relaunch",
+      "status": "working/live native gpt-6-luna verified; reviewing frozen firmware first; selected session A-to-B historical cache repro submitted for assessment",
       "additional_coordinator_gate": "Review frozen firmware in parallel; final PC-to-C tests/worker_done require latest PC remediation accepted and production tests pass. No physical until final independent review and artifact freeze.",
       "dispatch_id": "ctx_da800c8d8bce",
       "terminal": "term_1a2fcc8b-6402-4851-ba15-d27061517be1"
@@ -116,7 +116,7 @@
     "pc_wire_correction": {
       "task_id": "task_a6eebb977125",
       "terminal": "term_57af52b9-738e-44cc-beb8-4d2204a41b46",
-      "status": "working/live native verified; actual AGY argv requested Gemini3.8FlashMedium with unattended approvals",
+      "status": "working/live; checkpoint claims48 tests; final accepted submission and untimed-source followups pending",
       "dispatch_id": "ctx_04111d8d4601",
       "model": "gemini-3.8-flash-medium",
       "approval_flag": "--dangerously-skip-permissions",

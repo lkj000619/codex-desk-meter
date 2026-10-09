@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-09T09:18:18.6908195Z",
+    "observed_at":  "2026-10-09T09:23:40.2529989Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -119,7 +119,7 @@
                         "dispatch_status":  "pending",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791537489451,
+                                         "observedAt":  1791537809765,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -142,7 +142,7 @@
                         "dispatch_status":  "dispatched",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791537468193,
+                                         "observedAt":  1791537817737,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {

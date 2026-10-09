@@ -60,7 +60,24 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-09 18:02 KST 재개
+## 2026-10-09 18:24 KST 최신 체크포인트
+
+- B 독립 PASS 제출 `msg_1f1335f9e59f` 수락·release/ack 완료.
+- Sol firmware 제출 `msg_00816d094c2e` 수락·release/ack, 소스 `b6ec3d5` 보존.
+  실제 C 렌더러 포함 host 10개 시험 재실행 통과, IDF build 로그·15개 staging source
+  및 app/boot/partition/sdkconfig SHA-256을 확인함. 현재 app hash는 context·Sol 보고 참고.
+- PC `task_a6eebb977125` / `ctx_04111d8d4601`가 추가 회귀 시험 48개 통과를 기록했으나
+  아직 최종 제출 수락 전. timestamp 없는 token event/cold source 오류의 null 시각
+  후속 메시지도 확인해 수정해야 함. 해당 Task가 살아 있으면 중복 agent를 만들지 않음.
+- Luna 통합 `task_4d49e747c570` / `ctx_da800c8d8bce` working/live 확인.
+  input draft를 확인해 Enter 한 번으로 시작; 처음 turn_start_unobserved는 재시도하지 않음.
+  동결 firmware 검토를 먼저 진행하며 최종 PC→C 검사·제출은 최신 PC 보완 수락 후.
+  selected session A→B에서 C가 A를 계속 남기는 재현을 `msg_11c8c6ed4c42`로 검토 요청함.
+- 실제 C 화면 픽셀 3개는 `operator/firmware-preview/`에 보존. 사진·실물 합격이 아님.
+  COM3 Espressif VID303A/PID1001을 열지 않고 열거한 상태; 아직 업로드·live 수집 없음.
+  다음 순서: PC 제출 검증 → Luna PC→C 검증/결함 수정 → binary 동결 → COM3 업로드/관측.
+
+## 2026-10-09 18:02 KST 재개 이력
 
 - 같은 Run에 새 coordinator `term_b616990b-a6c9-4d5e-90c2-47af89701a69`를 연결함.
   runtime `01fe54dc-9231-41a3-8a2d-557f0c610d63`. 이전 두 worker는 native
