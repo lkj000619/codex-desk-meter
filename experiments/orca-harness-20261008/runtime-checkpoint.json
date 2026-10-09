@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-09T09:03:03.1428865Z",
+    "observed_at":  "2026-10-09T09:18:18.6908195Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -56,9 +56,9 @@
                   {
                       "id":  "task_b1214421a314",
                       "title":  "Build ESP32-S3 firmware with selected B GUI and real receiver",
-                      "status":  "dispatched",
+                      "status":  "completed",
                       "deps":  "[\"task_f61c79e5c906\"]",
-                      "completed_at":  null
+                      "completed_at":  "2026-10-09T09:14:46.451Z"
                   },
                   {
                       "id":  "task_0d62e820abfa",
@@ -112,6 +112,29 @@
               ],
     "workers":  [
                     {
+                        "task_id":  "task_4d49e747c570",
+                        "dispatch_id":  "ctx_da800c8d8bce",
+                        "terminal_handle":  "term_1a2fcc8b-6402-4851-ba15-d27061517be1",
+                        "state":  "start_unknown",
+                        "dispatch_status":  "pending",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791537489451,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "inspect",
+                                            "argv":  [
+                                                         "orchestration",
+                                                         "worker-show",
+                                                         "--dispatch",
+                                                         "ctx_da800c8d8bce"
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
                         "task_id":  "task_a6eebb977125",
                         "dispatch_id":  "ctx_04111d8d4601",
                         "terminal_handle":  "term_57af52b9-738e-44cc-beb8-4d2204a41b46",
@@ -119,7 +142,7 @@
                         "dispatch_status":  "dispatched",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791536576406,
+                                         "observedAt":  1791537468193,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -135,11 +158,11 @@
                         "task_id":  "task_b1214421a314",
                         "dispatch_id":  "ctx_ce28c7cbe236",
                         "terminal_handle":  "term_9a4ebce2-fd56-4795-b238-e480cc1dc1bb",
-                        "state":  "ready",
-                        "dispatch_status":  "dispatched",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791536576187,
+                                         "observedAt":  1791537292233,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -158,9 +181,8 @@
                         "state":  "succeeded",
                         "dispatch_status":  "completed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791536481429,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",

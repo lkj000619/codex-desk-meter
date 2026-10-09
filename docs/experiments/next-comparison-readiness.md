@@ -12,7 +12,7 @@
 - 자동 승인: 사용자 요청대로 AGY/Codex 전용 PowerShell 터미널의 실제 argv 확인 완료
 - 실제 사용자 선택: B · Swiss Studio Meter. 첫 Luna FAIL 근거는 `3929925`에 보존. Gemini 캐시 수정·실제 JS 검사 제출은 `a3aeebb`. [B 재검토](../agent-runs/orca-luna/gui-b-review.md)의 브라우저 PASS·새 PNG를 `aac81f3`에 보존하고 같은 Task 복구 `ctx_9477f122f8d4`의 제출 `msg_1f1335f9e59f`를 수락함. B 설계 gate 통과; 실제 LCD 합격은 별도
 - PC 구현: 제출 `msg_9dc702168da7` 수락·release/ack, 코드 `14cc264` 보존. coordinator가 ESP-IDF Python 3.11에서 기존 39개 시험 통과 확인. 추가 실제 PC→C 검사에서 수집 전 sent_at 때문에 새 관측이 거절됨, cold global 오류가 스키마 위반, 3개 provider 파일 실패 시 캐시가 하나만 남는 결함을 재현함. [PC 보완 검토](../design/2026-10-08-pc-review-findings.md)와 [재현 결과](../../experiments/orca-harness-20261008/operator/pc-post-resume-probe.json)를 따라 `task_a6eebb977125` / `ctx_04111d8d4601`에서 수정함
-- firmware·통합: core·BSP·USB·F9 초안과 host 시험은 `aac81f3`에 보존. 실제 C 시험 8개 통과, LCD 초기화 후 재리셋 수정 포함. GUI는 placeholder이고 idf build 미완료. restart로 failed가 된 이전 Dispatch를 같은 Task `ctx_ce28c7cbe236`로 복구함. B native PASS 후 최종 GUI 통합·제출. 통합 검증 `task_4d49e747c570`는 native blocked이며 최신 PC 보완 검증과 실제 firmware build 후 시작함. COM 접근·업로드: 아직 수행하지 않음
+- firmware·통합: Sol 제출 `msg_00816d094c2e` 수락·release/ack, `b6ec3d5`에 보존. 실제 C 렌더러 포함 host 시험 10개 coordinator 재실행 통과, ESP-IDF target/build 로그·15개 staging source·binary hash 일치 확인. 통합 검증 `task_4d49e747c570`의 firmware 부분은 이 동결 제출에서 시작하며 PC 보완과 병행함. 최종 PC→C 통합·검증 제출·COM gate는 최신 PC 보완 수락/시험을 기다림. COM 접근·업로드: 아직 수행하지 않음
 
 [설계](../design/2026-10-08-orca-harness.md) · [계획](../plans/2026-10-08-orca-harness.md)
 · [세션 중단 후 재개](orca-harness-resume.md)

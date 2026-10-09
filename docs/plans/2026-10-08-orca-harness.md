@@ -13,8 +13,8 @@
 | 역할별 기술 검토·DAG | 초기 요구·인터페이스 보고 수락 완료 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
 | LCD UX/UI·OpenDesign | B 수정 `a3aeebb`; 독립 PASS 제출 `msg_1f1335f9e59f` 수락 완료 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
 | PC 프로그램 구현 | `14cc264` 제출·기존 39개 시험 통과; 추가 wire 세 결함 보완 `task_a6eebb977125` | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
-| firmware·통합 | core·실제 C 시험 8개 통과 `aac81f3`; 복구 `ctx_ce28c7cbe236`, GUI·idf build 남음 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
-| 독립 검증·수정 | `task_4d49e747c570` native blocked; 최신 PC 보완 검증과 firmware 제출 후 시작 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
+| firmware·통합 | Sol 제출 `b6ec3d5`·target/build·실제 C 렌더러 포함 시험 10개 통과 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
+| 독립 검증·수정 | `task_4d49e747c570` firmware 검토부터 병행 시작; 최종 PC 통합·제출은 최신 PC 보완 수락/시험 이후 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
 | 업로드·owner-only live·실물 관측 | 예정 | 동결 binary/hash·COM3 수신·LCD/BOOT·30초·단절/복구·지연 근거 |
 | 결과·실행 정리 | 예정 | 판정·미측정·실효 모델·시간/token coverage·질문·실패 기록, worker 소유권 정리 |
 
@@ -49,12 +49,17 @@ Sol의 core 작업은 병행 시작하고, GUI 최종 통합·제출·통합 검
 - [x] PC 최초 제출 보존·실제 native event/시각/quota/state 유실 결함 재현 및 보완 연결 (`ctx_221ff3735dae`)
 - [x] PC runtime 보완 제출 `ctx_4308689007a9` 보존·worker release/Delivery ack; 제출과 실제 품질 판정 구분
 - [x] PC aging·privacy·초기화·Windows crash 제출 수락 및 기존 39개 시험 (`14cc264`)
-- [ ] 추가 PC→C watch timestamp·cold global·provider별 캐시·갱신 deadline 보완 (`task_a6eebb977125`)
-- [ ] PC·firmware 구현 및 host 통합 검증
+- [ ] 추가 PC→C watch timestamp·cold global·provider별 캐시·null 관측 시각·갱신 deadline 보완 (`task_a6eebb977125`)
+- [x] firmware BSP·C receiver·선택 B GUI·F9 및 실제 ESP-IDF build (`b6ec3d5`)
+- [ ] 최신 PC 보완·host 통합 독립 검증
 - [x] firmware core `ctx_d5c857a3d228` 실제 Sol 6 working/live 시작 및 checkpoint 확인 (GUI 최종 gate는 유지)
 - [ ] 독립 결함 수정·제품 commit/binary 동결
 - [ ] COM3 업로드·fixture/live·사용자 실물 관측
 - [ ] 결과·시간/token coverage·미측정 기록, worker 소유권 정리
+
+2026-10-09 18:16 KST: 동결된 firmware 제출 검토는 PC 보완과 독립적이므로 Luna가
+이를 먼저 진행한다. 같은 통합 Task의 최종 PC→C 검증·제출과 업로드 gate는 최신 PC
+보완 수락/시험 이후다. PC 담당이 수정 중인 파일을 완성된 제출로 판정하지 않는다.
 
 각 단계의 시작/완료는 실제 Task/Dispatch와 검증 결과를 근거로 갱신한다.
 중단되면 [재개 절차](../experiments/orca-harness-resume.md)와 각 역할 checkpoint부터 읽는다.

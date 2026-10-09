@@ -31,10 +31,10 @@
   "preview_server": {
     "url": "http://localhost:8289/opendesign/",
     "bind": "127.0.0.1",
-    "launcher_pid": 31708,
-    "listener_pid": 27572,
+    "launcher_pid": 17556,
+    "listener_pid": 3512,
     "owner": "coordinator",
-    "verified_workspace": "Context endpoint matches this Run and branch; viewer returns HTTP 200.",
+    "verified_workspace": "Re-probed 2026-10-09 18:04 KST: correct Run and branch from context endpoint; viewer HTTP200; loopback-only server restarted by coordinator.",
     "resume_rule": "Probe the listener and served context again; never infer current liveness from these stored PIDs."
   },
   "ui_model_status": "User requested AGY Gemini and Codex CLI Sol 6.1, three GUI candidates each; no OpenCode login needed.",
@@ -88,14 +88,16 @@
     "firmware": {
       "task_id": "task_b1214421a314",
       "additional_coordinator_gate": "B design PASS accepted; final GUI and actual build may proceed. No COM until latest PC correction, host integration and artifact freeze.",
-      "status": "same-Task recovery of failed terminal_missing ctx_d5c857a3d228; 8 actual C host tests pass; GUI placeholder and build pending",
+      "status": "accepted succeeded msg_00816d094c2e preserved b6ec3d5; 10 actual C/renderer tests rerun OK; 15 staging sources and four artifact hashes match; released external retained/processAction none",
       "dispatch_id": "ctx_ce28c7cbe236",
       "terminal": "term_9a4ebce2-fd56-4795-b238-e480cc1dc1bb",
       "model": "gpt-6-sol",
       "cli_version": "0.159.2",
       "approval_flag": "--dangerously-bypass-approvals-and-sandbox",
       "model_evidence": "Actual CLI header GPT-6-Sol xhigh / YOLO and native fleet provider codex/model gpt-6-sol. Draft paste observed; Enter sent exactly once; no task duplicate.",
-      "interrupted_dispatch": "ctx_d5c857a3d228"
+      "interrupted_dispatch": "ctx_d5c857a3d228",
+      "build_report": "docs/agent-runs/orca-sol/report.md",
+      "app_sha256": "1ae614e892f86e785025745b2e8f643718008060f3b99b4db9cefeb77a9d01c8"
     },
     "selected_b_cache_fix": {
       "task_id": "task_57d8de5426b5",
@@ -106,14 +108,19 @@
     },
     "integration_review": {
       "task_id": "task_4d49e747c570",
-      "status": "native blocked",
-      "additional_coordinator_gate": "Latest PC correction production tests and firmware actual build must pass; native dependencies name older PC submission."
+      "status": "same planned Task started for firmware-only review; input draft observed and Enter once after turn_start_unobserved, no relaunch",
+      "additional_coordinator_gate": "Review frozen firmware in parallel; final PC-to-C tests/worker_done require latest PC remediation accepted and production tests pass. No physical until final independent review and artifact freeze.",
+      "dispatch_id": "ctx_da800c8d8bce",
+      "terminal": "term_1a2fcc8b-6402-4851-ba15-d27061517be1"
     },
     "pc_wire_correction": {
       "task_id": "task_a6eebb977125",
       "terminal": "term_57af52b9-738e-44cc-beb8-4d2204a41b46",
       "status": "working/live native verified; actual AGY argv requested Gemini3.8FlashMedium with unattended approvals",
-      "dispatch_id": "ctx_04111d8d4601"
+      "dispatch_id": "ctx_04111d8d4601",
+      "model": "gemini-3.8-flash-medium",
+      "approval_flag": "--dangerously-skip-permissions",
+      "model_evidence": "Actual CIM argv and bounded redacted worker CLI footer Gemini3.8FlashMedium; native model field null."
     }
   },
   "frozen_input_count": 57,

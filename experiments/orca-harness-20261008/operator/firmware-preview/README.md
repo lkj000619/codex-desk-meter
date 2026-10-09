@@ -1,0 +1,1 @@
+Actual production C gui_render framebuffer outputs, generated from firmware host GUI test normal synthetic case at commit b6ec3d5. These are logical 820x320 pixels, not a photograph or physical LCD observation. Source: tests/firmware/.build/gui-1-{usage,global,status}-0.ppm. All inputs synthetic; no live account/session values.

@@ -93,6 +93,13 @@ unknown이며 5시간/주간으로 추정하지 않는다. available source의 `
 정확한 입력 경로 종류는 로컬 provenance에 구분한다. synthetic 입력은 `fixture`다.
 이 결정은 이번 cohort에만 적용하며 동결 입력은 변경하지 않는다.
 
+2026-10-09 cold global 오류 처리: 동결 GlobalResetSnapshot의 `captured_at`은
+non-null이므로 아직 관측한 적 없는 source의 실패를 null capture record로 전송할 수 없다.
+이때 관측하지 않은 global record는 wire에서 생략하고 PC 로컬 진단과 명령 실패 상태에
+원인을 남긴다. 장치는 global 데이터 없음으로 표시하며 이 경로의 구체적 source 오류는
+PC에서 확인한다. warm 실패는 원래 capture와 마지막 정상값을 유지하고 error/stale을
+표시한다. 성공적인 capture 시각을 만들거나 동결 schema를 확장하지 않는다.
+
 ## LCD 디자인과 하드웨어
 
 실제 LCD는 820×320 가로다. quota와 세션 token을 구분해 한눈에 읽고, 글로벌 리셋·상태를

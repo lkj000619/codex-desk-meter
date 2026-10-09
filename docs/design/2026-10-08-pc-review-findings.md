@@ -82,6 +82,12 @@ coordinator가 ESP-IDF Python 3.11로 기존 PC 시험 39개를 실행해 통과
 - 세 provider를 담은 동결 fixture를 읽은 뒤 파일이 사라지면 세 캐시 중 google 하나만
   남는다. 파일 캐시 하나 대신 각 원본 source record를 보존해야 한다.
 
-이 세 결함과 source 선택 identity·갱신 deadline 회귀 검사는 같은 PC 담당의 새 보완
+추가 synthetic native token event에 timestamp가 없는데 input=10/output=2를 전달하면
+`reference_time=2026-10-09T09:00:00Z`가 원본 `observed_at`·`last_good_at`으로
+복사되고 available이 됐다. nullable source 시각은 unknown/null 또는 명확한 오류로
+보존해야 한다. cold source 오류에도 관측하지 않은 시각을 성공적 관측으로 만들지 않는다.
+이 재현과 지시는 `msg_49d4ac2f5863` / `msg_edcd93ae1205`로 같은 담당에게 전달했다.
+
+이 결함들과 source 선택 identity·갱신 deadline 회귀 검사는 같은 PC 담당의 새 보완
 `task_a6eebb977125` / `ctx_04111d8d4601`에 맡겼다. 이전 제출은 성공적인 제출이고
 완성된 제품 합격은 아니다. frozen schema·과거 비교 판정은 변경하지 않는다.

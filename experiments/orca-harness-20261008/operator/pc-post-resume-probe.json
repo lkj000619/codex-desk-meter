@@ -31,5 +31,31 @@
     "source_newer_than_frame": true,
     "C_accepted": false,
     "C_error": "SNAPSHOT_INVALID"
+  },
+  "untimed_token_event": {
+    "native_input": {
+      "type": "event_msg",
+      "payload": {
+        "type": "token_count",
+        "info": {
+          "total_token_usage": {
+            "input_tokens": 10,
+            "output_tokens": 2
+          }
+        }
+      }
+    },
+    "reference_time": "2026-10-09T09:00:00Z",
+    "actual_result": {
+      "status": "available",
+      "observed_at": "2026-10-09T09:00:00Z",
+      "last_good_at": "2026-10-09T09:00:00Z",
+      "error_code": null
+    },
+    "scope": "source has no observed timestamp; current/reference fallback incorrectly manufactures one",
+    "routed_messages": [
+      "msg_49d4ac2f5863",
+      "msg_edcd93ae1205"
+    ]
   }
 }
