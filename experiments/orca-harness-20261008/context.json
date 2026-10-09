@@ -108,7 +108,7 @@
     },
     "integration_review": {
       "task_id": "task_4d49e747c570",
-      "status": "actual working observed after single draft Enter; current mailbox read and owned checkpoint updated; review pending",
+      "status": "working; preliminary26 pass covered forced exhausted-budget variant, not original positive-budget case. Current owner explicitly acknowledged steering and is restoring two-RPC case separately with original sender terminal timing; final report pending.",
       "additional_coordinator_gate": "Latest accepted PC and firmware stable; full synthetic integration authorized. No physical until independent findings remediated, review passes and artifact freeze.",
       "dispatch_id": "ctx_6b00e6339d06",
       "terminal": "term_b6cd0335-ea67-4926-8229-b50602b3fb97",
@@ -121,10 +121,15 @@
       "failed_review_commit": "9721f71",
       "previous_failed_dispatch": "ctx_08869eb488a4",
       "stable_pc_commit": "39e52bd",
-      "latest_guidance": "msg_ee7d02348853",
+      "latest_guidance": "msg_ff5946d45961",
       "prior_failed_review_commit": "117a988",
       "finding_message": "msg_dcf123b5555a",
-      "readiness": "Fresh model-proven terminal after runtime restart, TUI idle observed; prior failed review evidence preserved."
+      "readiness": "Fresh model-proven terminal after runtime restart, TUI idle observed; prior failed review evidence preserved.",
+      "boundary_decision": {
+        "question": "msg_9aed418caff9",
+        "answer": "msg_28753c519e1a",
+        "scope": "existing .8s drain case retains2 realistic RPC fakes; actual remaining budget decides start or skip; preserve truthful bounded timeout, last-good observation, freshlocal250, actualC and terminal<=5s. Do not force exhausted budget or inject fake Popen StopIteration. Separate delayed cleanup/no-budget PC cases remain valid."
+      }
     },
     "pc_wire_correction": {
       "task_id": "task_a6eebb977125",

@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-09T22:47:38.3327521Z",
+    "observed_at":  "2026-10-09T22:57:58.0857695Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -154,9 +154,9 @@
                   {
                       "id":  "task_9becb3b414d9",
                       "title":  "Synchronize Flash report and resume checkpoint only",
-                      "status":  "dispatched",
+                      "status":  "completed",
                       "deps":  "[]",
-                      "completed_at":  null
+                      "completed_at":  "2026-10-09T22:48:22.180Z"
                   }
               ],
     "workers":  [
@@ -164,11 +164,11 @@
                         "task_id":  "task_9becb3b414d9",
                         "dispatch_id":  "ctx_41536de6636d",
                         "terminal_handle":  "term_25d7d35f-8e19-4188-9442-70cfee46313c",
-                        "state":  "ready",
-                        "dispatch_status":  "dispatched",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791586041226,
+                                         "observedAt":  1791586111409,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -188,7 +188,7 @@
                         "dispatch_status":  "dispatched",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791586056801,
+                                         "observedAt":  1791586672189,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
