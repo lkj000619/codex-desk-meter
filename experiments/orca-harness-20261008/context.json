@@ -127,7 +127,10 @@
       "dispatch_id": "ctx_5f9f6d8e9d11",
       "terminal": "term_9a4ebce2-fd56-4795-b238-e480cc1dc1bb",
       "model": "gpt-6-sol",
-      "status": "native turnStart observed; root and Luna active-session/source identity defect correction",
+      "status": "accepted succeeded msg_49bca57172a2; released external retained/processAction none and Delivery acknowledged; stable commit 853ddf7; root actual C18 and selected-session1 tests pass",
+      "submission_commit": "853ddf7",
+      "app_sha256": "385130667ab15ca8dcc665e70fc06882b1e89535bde8d84af05fdc2b36c1ef72",
+      "artifact_directory": "firmware/.host-tools/active-usage-build",
       "review_message": "msg_5e1fc2e1c18a",
       "original_submission_commit": "b6ec3d5",
       "final_gate": "Latest corrected firmware submission/build/hash and independent review required before COM."

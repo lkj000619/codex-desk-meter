@@ -19,6 +19,7 @@
 | PC 최초 구현 제출 (제품 합격과 구분) | [AGY 보고](agent-runs/orca-flash/report.md) |
 | PC 최초 구현 검토·재현 결함·보완 연결 | [PC 보완 검토](design/2026-10-08-pc-review-findings.md) |
 | ESP32 firmware 구현·실제 build·hash·물리 시험 절차 | [Sol 보고](agent-runs/orca-sol/report.md) |
+| 현재 PC→실제 C 통합·독립 검증·미측정 범위 | [Luna 제품 검토](agent-runs/orca-luna/product-review.md) |
 
 `docs/PRODUCT_CONTRACT.md`와 57개 원본 입력은 수정하지 않는다. 이번 실험의 live 수집과
 협업 실행 변경은 협업 설계가 소유한다. 구현 보고서와 검증 보고서는 각각 실제 역할 작업에

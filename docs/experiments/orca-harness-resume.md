@@ -60,7 +60,14 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-09 18:24 KST 최신 체크포인트
+## 2026-10-09 18:41 KST 최신 체크포인트
+
+- 수정 firmware `task_e44125e18973` / `ctx_5f9f6d8e9d11`의 `msg_49bca57172a2` 수락·release/ack 완료, commit `853ddf7`.
+- coordinator host rebuild 후 C 시험 18/18와 Luna 세션 전환 1/1 통과. 실제 15개 staging source 일치와 새 산출물 4개 hash 확인. 새 app은 `firmware/.host-tools/active-usage-build/codex_desk_meter.bin`, SHA-256 `385130667ab15ca8dcc665e70fc06882b1e89535bde8d84af05fdc2b36c1ef72`; 예전 `final-build/` app을 업로드하지 않는다.
+- Luna `ctx_da800c8d8bce`에 안정된 수정 firmware 검토 허용 (`msg_c938fa62dd22`). PC `ctx_04111d8d4601`은 working/live이며 최종 완료 수락 전이다. PC 완료 수락·시험·commit 후 Luna에 최신 producer readiness를 전달한다.
+- COM 열기·업로드·reset·실계정 수집은 아직 수행하지 않았다. 다음은 PC 제출 확인과 독립 통합 검증이며, 그 후 현재 COM3 식별·새 binary 동결·업로드·실물 관측으로 진행한다.
+
+## 2026-10-09 18:24 KST 이전 체크포인트
 
 18:30 후속: Luna가 실제 C/framebuffer로 활성 세션 A→B 교체 실패를 확정
 (`msg_5e1fc2e1c18a`, `tests/integration/test_cdm_session_selection.py`).

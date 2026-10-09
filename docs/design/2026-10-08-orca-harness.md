@@ -114,6 +114,13 @@ error/unknown은 이전 정상값·원래 시각을 보존한다. 누락된 sour
 계속 표시하지 않는다. 이는 이번 cohort의 producer/consumer 명확화이며 과거 평가와
 동결 원본을 정정하지 않는다.
 
+추가 cache 결정 (`msg_dcf696e2444b` 질문): 모든 record는 완전한 source 맥락과
+snapshot ID가 같은 기존값을 우선 사용한다. session telemetry는 같은 session ID만
+허용한다. quota 등 non-session의 관측 ID가 바뀐 경우, 같은 완전한 source 맥락이 이전
+목록과 현재 활성 목록에서 각각 하나일 때만 이전 정상 관측을 유지할 수 있다. 같은 맥락의
+record가 여러 개면 정확한 ID 일치 없이는 cold/unknown으로 두고 추정해서 귀속시키지
+않는다. 같은 맥락에서도 서로 다른 ID의 현재 record는 각각 유지하며 임의로 합치지 않는다.
+
 ## LCD 디자인과 하드웨어
 
 실제 LCD는 820×320 가로다. quota와 세션 token을 구분해 한눈에 읽고, 글로벌 리셋·상태를
