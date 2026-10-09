@@ -25,8 +25,9 @@ import time
 import unittest
 from datetime import datetime, timezone
 from pathlib import Path
+from unittest.mock import patch
 
-from pc.cli import cmd_collect, run_watch_loop
+from pc.cli import cmd_collect, cmd_send, run_watch_loop
 from pc.frame import (
     FrameError,
     build_frame,
@@ -34,7 +35,8 @@ from pc.frame import (
     encode_frame,
     validate_envelope_time_invariant,
 )
-from pc.sender import CdmSender, LoopbackSink, StateStore
+from pc.quota import AccountQuotaResult
+from pc.sender import CdmSender, LoopbackSink, StateStore, WindowsSerialSink
 from pc.state import SharedCollectionState
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -802,6 +804,347 @@ class TestCohortProbeRegressions(unittest.TestCase):
 
         stop_event.set()
         watch_thread.join(timeout=1.0)
+
+    def test_windows_serial_sink_synchronous_bounded_drain_and_error_propagation(self):
+        """WindowsSerialSink bounded drain handles delay, times out on stall, propagates query error, and leaks no worker threads."""
+        initial_threads = threading.active_count()
+
+        class FakePort:
+            def __init__(self, write_timeout=0.1):
+                self.write_timeout = write_timeout
+                self.closed = False
+                self.queue_bytes = 0
+                self.query_fails = False
+
+            @property
+            def out_waiting(self):
+                if self.query_fails:
+                    raise OSError("COM port query fault")
+                return self.queue_bytes
+
+            def write(self, data):
+                self.queue_bytes = len(data)
+                return len(data)
+
+            def flush(self):
+                pass
+
+            def close(self):
+                self.closed = True
+
+        fake_port = FakePort(write_timeout=0.08)
+        sink = WindowsSerialSink.__new__(WindowsSerialSink)
+        sink.serial = fake_port
+        sink.timeout = 0.08
+        sink.closed = False
+        sink._write_start_time = None
+
+        # 1. Normal delayed drain (drains quickly)
+        sink.write(b"quick")
+        fake_port.queue_bytes = 0
+        sink.flush()  # Must succeed without error
+
+        # 2. Stalled queue drain (never drains within timeout)
+        sink.write(b"stall")
+        fake_port.queue_bytes = 64
+        t0 = time.monotonic()
+        with self.assertRaises(TimeoutError):
+            sink.flush()
+        elapsed = time.monotonic() - t0
+        self.assertLess(elapsed, 0.5, f"Drain timeout took too long: {elapsed:.2f}s")
+
+        # 3. Queue query error propagation
+        sink.write(b"error")
+        fake_port.query_fails = True
+        with self.assertRaises(IOError) as ctx:
+            sink.flush()
+        self.assertIn("Serial output queue query failed", str(ctx.exception))
+
+        # 4. Verify no background worker threads were spawned
+        self.assertEqual(threading.active_count(), initial_threads, "Background thread leaked during flush")
+
+        # 5. Closed sink rejects write and flush
+        sink.close()
+        self.assertTrue(fake_port.closed)
+        with self.assertRaises(IOError):
+            sink.write(b"after_close")
+        with self.assertRaises(IOError):
+            sink.flush()
+
+    def test_cmd_send_drain_timeout_consumes_reserved_sequence_and_closes_wrapper(self):
+        """CLI cmd_send consumes sequence on drain timeout, closes transport, and returns exit code 1."""
+        state_file = self.state_file
+        StateStore(state_file).initialize_new("probe-drain-dev", initial_sequence=10, confirmed_overwrite=True)
+
+        class StalledSerial:
+            def __init__(self, **kwargs):
+                self.write_timeout = 0.1
+                self.closed = False
+
+            @property
+            def out_waiting(self):
+                return 128  # Always stalled
+
+            def write(self, data):
+                return len(data)
+
+            def flush(self):
+                pass
+
+            def close(self):
+                self.closed = True
+
+        stalled_instance = []
+        def fake_serial_ctor(**kwargs):
+            inst = StalledSerial(**kwargs)
+            stalled_instance.append(inst)
+            return inst
+
+        fake_mod = type("FakeSerialModule", (), {
+            "Serial": fake_serial_ctor,
+            "EIGHTBITS": 8,
+            "PARITY_NONE": "N",
+            "STOPBITS_ONE": 1,
+            "SerialTimeoutException": TimeoutError,
+        })
+
+        args = argparse.Namespace(
+            device_alias="probe-drain-dev",
+            port="COM99",
+            dry_run=False,
+            state_file=str(state_file),
+            lock_dir=str(self.lock_dir),
+            session_file=None,
+            session_dir=None,
+            session_id=None,
+            latest=False,
+            live_quota=False,
+            provider_fixture=None,
+            personal_usage=None,
+            global_reset=None,
+            host_alias="pc-test",
+            agent_id="codex-cli",
+            reference_time="2026-10-09T12:00:00Z",
+            output=None,
+        )
+
+        with patch.dict("sys.modules", {"serial": fake_mod}):
+            rc = cmd_send(args)
+
+        self.assertEqual(rc, 1, "cmd_send must return 1 on stalled output queue drain")
+        self.assertTrue(len(stalled_instance) == 1 and stalled_instance[0].closed, "Serial wrapper was not closed on failure")
+        persisted = StateStore(state_file).load("probe-drain-dev")
+        self.assertEqual(persisted.next_sequence, 11, "Sequence must be consumed even if drain failed")
+
+    def test_watch_manual_arrival_during_inflight_write_dispatches_fresh_collection_frame(self):
+        """Manual trigger arriving during in-flight write does not clear with old frame; dispatches fresh second frame within 5s."""
+        clock = FakeClock(start_time=500.0)
+        stop_event = threading.Event()
+        manual_event = threading.Event()
+        write_started = threading.Event()
+        write_release = threading.Event()
+        StateStore(self.state_file).initialize_new("test-inflight-alias", initial_sequence=0, confirmed_overwrite=True)
+
+        class GatedSink(LoopbackSink):
+            def write(self, data: bytes) -> int:
+                if len(self.written_frames) == 0:
+                    write_started.set()
+                    write_release.wait(timeout=2.0)
+                return super().write(data)
+
+        sink = GatedSink()
+
+        class DynamicStateManager(SharedCollectionState):
+            def __init__(self):
+                super().__init__()
+                self.collection_count = 0
+
+            def collect_all(self, *a, **kw):
+                self.collection_count += 1
+                token_val = 100 if self.collection_count == 1 else 999
+                return {
+                    "usage": [{
+                        "schema_version": 1,
+                        "snapshot_id": f"dyn-snap-{self.collection_count}",
+                        "provider_id": "codex",
+                        "agent_id": "codex-cli",
+                        "host_id": "pc-test",
+                        "model_id": None,
+                        "account_profile_id": None,
+                        "source_kind": "local_runtime",
+                        "metric_kind": "session_telemetry",
+                        "unit": "token",
+                        "status": "available",
+                        "observed_at": "2026-10-09T12:00:00Z",
+                        "windows": [{"window_id": "input", "label": "In", "used_units": token_val,
+                                     "remaining_units": None, "limit_units": None, "unit": "token",
+                                     "percent_used": None, "percent_remaining": None, "resets_at": None,
+                                     "reset_status": "unknown"}],
+                        "stale": False,
+                        "last_good_at": "2026-10-09T12:00:00Z",
+                        "error_code": None,
+                        "error_reason": None,
+                    }],
+                    "global_resets": [],
+                }
+
+        sm = DynamicStateManager()
+
+        class Args:
+            device_alias = "test-inflight-alias"
+            interval = 60
+            port = None
+            dry_run = True
+            state_file = str(self.state_file)
+            lock_dir = str(self.lock_dir)
+            session_file = None
+            session_dir = None
+            session_id = None
+            latest = False
+            live_quota = False
+            provider_fixture = None
+            personal_usage = None
+            global_reset = None
+            host_alias = "pc-test"
+            agent_id = "codex-cli"
+            reference_time = "2026-10-09T12:00:00Z"
+            once = False
+
+        watch_thread = threading.Thread(
+            target=run_watch_loop,
+            kwargs={
+                "args": Args(),
+                "state_manager": sm,
+                "sink_override": sink,
+                "manual_trigger_event": manual_event,
+                "stop_event": stop_event,
+                "time_provider": clock,
+            },
+        )
+        watch_thread.start()
+
+        self.assertTrue(write_started.wait(timeout=2.0), "Initial automatic write did not start")
+        manual_trigger_time = clock.now()
+        manual_event.set()
+        write_release.set()
+
+        for _ in range(50):
+            if len(sink.written_frames) >= 2:
+                break
+            time.sleep(0.02)
+
+        self.assertEqual(len(sink.written_frames), 2, "Second frame was not dispatched for manual event arriving during write")
+        frame2 = json.loads(sink.written_frames[1])
+        used_input = frame2["payload"]["usage"][0]["windows"][0]["used_units"]
+        self.assertEqual(used_input, 999, "Second frame must contain fresh post-request collection data")
+        self.assertLessEqual(clock.now() - manual_trigger_time, 5.0, "Manual refresh exceeded 5.0s budget")
+
+        stop_event.set()
+        watch_thread.join(timeout=1.0)
+
+    def test_watch_manual_event_during_auto_quota_collection_recollects_changed_session(self):
+        """When session data changes and manual trigger occurs during AUTO quota collection, the old frame must not coalesce; dispatches fresh second frame."""
+        clock = FakeClock(start_time=600.0)
+        stop_event = threading.Event()
+        manual_event = threading.Event()
+        quota_collecting = threading.Event()
+        quota_release = threading.Event()
+
+        session_path = Path(self.temp_dir.name) / "auto-quota-race-session.jsonl"
+        session_path.write_text(
+            json.dumps({"type": "session_meta", "payload": {"id": "race-sess"}}) + "\n" +
+            json.dumps({"type": "event_msg", "payload": {"type": "token_count", "timestamp": "2026-10-09T11:59:00Z",
+                                                         "info": {"total_token_usage": {"input_tokens": 50, "output_tokens": 10, "total_tokens": 60}}}}) + "\n",
+            encoding="utf-8",
+        )
+
+        StateStore(self.state_file).initialize_new("test-quota-race-alias", initial_sequence=0, confirmed_overwrite=True)
+        sink = LoopbackSink()
+
+        quota_calls = [0]
+        def fake_quota(*args, **kwargs):
+            quota_calls[0] += 1
+            if quota_calls[0] == 1:
+                quota_collecting.set()
+                quota_release.wait(timeout=2.0)
+            return AccountQuotaResult(
+                account_id="test",
+                plan_type="pro",
+                windows=[],
+                observed_at="2026-10-09T11:59:00Z",
+                source_kind="local_runtime",
+                error_code=None,
+                error_reason=None,
+            )
+
+        sm = SharedCollectionState()
+
+        class Args:
+            device_alias = "test-quota-race-alias"
+            interval = 60
+            port = None
+            dry_run = True
+            state_file = str(self.state_file)
+            lock_dir = str(self.lock_dir)
+            session_file = str(session_path)
+            session_dir = None
+            session_id = None
+            latest = False
+            live_quota = True
+            provider_fixture = None
+            personal_usage = None
+            global_reset = None
+            host_alias = "pc-test"
+            agent_id = "codex-cli"
+            reference_time = "2026-10-09T12:00:00Z"
+            once = False
+
+        with patch("pc.state.fetch_native_rate_limits", side_effect=fake_quota):
+            watch_thread = threading.Thread(
+                target=run_watch_loop,
+                kwargs={
+                    "args": Args(),
+                    "state_manager": sm,
+                    "sink_override": sink,
+                    "manual_trigger_event": manual_event,
+                    "stop_event": stop_event,
+                    "time_provider": clock,
+                },
+            )
+            watch_thread.start()
+
+            try:
+                # Wait for AUTO collection to reach quota collection (after session file was already read)
+                self.assertTrue(quota_collecting.wait(timeout=2.0), "AUTO collection did not reach quota phase")
+
+                # Now update session file with fresh tokens (500) and fire manual trigger while quota is collecting
+                session_path.write_text(
+                    json.dumps({"type": "session_meta", "payload": {"id": "race-sess"}}) + "\n" +
+                    json.dumps({"type": "event_msg", "payload": {"type": "token_count", "timestamp": "2026-10-09T11:59:30Z",
+                                                                 "info": {"total_token_usage": {"input_tokens": 500, "output_tokens": 20, "total_tokens": 520}}}}) + "\n",
+                    encoding="utf-8",
+                )
+                manual_time = clock.now()
+                manual_event.set()
+                quota_release.set()
+
+                for _ in range(50):
+                    if len(sink.written_frames) >= 2:
+                        break
+                    time.sleep(0.02)
+
+                self.assertEqual(len(sink.written_frames), 2, "Second frame was not dispatched for manual event arriving during quota collection")
+                frame1 = json.loads(sink.written_frames[0])
+                frame2 = json.loads(sink.written_frames[1])
+
+                # Frame 1 is the in-flight AUTO frame with pre-request 50 tokens
+                self.assertEqual(frame1["payload"]["usage"][0]["windows"][0]["used_units"], 50)
+                # Frame 2 is the post-request MANUAL frame with fresh 500 tokens
+                self.assertEqual(frame2["payload"]["usage"][0]["windows"][0]["used_units"], 500)
+                self.assertLessEqual(clock.now() - manual_time, 5.0, "Manual refresh exceeded 5.0s budget")
+            finally:
+                stop_event.set()
+                watch_thread.join(timeout=1.0)
 
 
 if __name__ == "__main__":

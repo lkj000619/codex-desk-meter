@@ -227,6 +227,10 @@ class LoopbackSink:
         self.written_frames: list[bytes] = []
         self.closed = False
 
+    @property
+    def out_waiting(self) -> int:
+        return 0
+
     def write(self, data: bytes) -> int:
         if self.closed:
             raise IOError("Port closed")
@@ -243,7 +247,7 @@ class LoopbackSink:
 class WindowsSerialSink:
     """Standard serial sink for real COM ports using pyserial when invoked by operator."""
 
-    def __init__(self, port: str, baudrate: int = 115200, timeout: float = 1.5):
+    def __init__(self, port: str, baudrate: int = 115200, timeout: float = 1.0):
         try:
             import serial
         except ImportError:
@@ -261,32 +265,91 @@ class WindowsSerialSink:
             timeout=timeout,
             write_timeout=timeout,
         )
+        self.timeout = timeout
+        self.closed = False
+        self._write_start_time: float | None = None
+
+    @property
+    def write_timeout(self) -> float:
+        if hasattr(self.serial, "write_timeout") and self.serial.write_timeout is not None:
+            try:
+                val = float(self.serial.write_timeout)
+                if val > 0:
+                    return val
+            except (TypeError, ValueError):
+                pass
+        return self.timeout
+
+    @property
+    def out_waiting(self) -> int:
+        if self.closed:
+            return 0
+        try:
+            has_queue = hasattr(self.serial, "out_waiting")
+        except Exception as exc:
+            raise IOError(f"Serial output queue query failed: {exc}") from exc
+        if not has_queue:
+            raise IOError("Serial transport does not provide output-queue out_waiting interface")
+        try:
+            raw_q = self.serial.out_waiting
+            return raw_q() if callable(raw_q) else int(raw_q)
+        except Exception as exc:
+            raise IOError(f"Serial output queue query failed: {exc}") from exc
 
     def write(self, data: bytes) -> int:
-        return self.serial.write(data)
+        if self.closed:
+            raise IOError("Serial port is closed")
+        self._write_start_time = time.monotonic()
+        try:
+            return self.serial.write(data)
+        except Exception:
+            self._write_start_time = None
+            raise
 
     def flush(self) -> None:
-        """Bounded flush: pyserial flush() on Windows can block indefinitely if TX queue stalls."""
-        import threading
-        flush_done = threading.Event()
+        """Synchronous bounded drain: pyserial flush() on Windows blocks indefinitely if TX queue stalls."""
+        if self.closed:
+            raise IOError("Serial port is closed")
 
-        def do_flush():
+        try:
+            has_queue = hasattr(self.serial, "out_waiting")
+        except Exception as exc:
+            raise IOError(f"Serial output queue query failed: {exc}") from exc
+
+        if not has_queue:
+            raise IOError("Serial transport does not provide output-queue out_waiting interface")
+
+        write_start = self._write_start_time
+        self._write_start_time = None
+
+        timeout_budget = self.write_timeout
+        if write_start is not None:
+            deadline = write_start + timeout_budget
+        else:
+            deadline = time.monotonic() + timeout_budget
+
+        while True:
             try:
-                self.serial.flush()
-            except Exception:
-                pass
-            finally:
-                flush_done.set()
+                raw_q = self.serial.out_waiting
+                q = raw_q() if callable(raw_q) else int(raw_q)
+            except Exception as exc:
+                raise IOError(f"Serial output queue query failed: {exc}") from exc
 
-        t = threading.Thread(target=do_flush, daemon=True)
-        t.start()
-        # Bound flush to configured write timeout (e.g. 1.5s)
-        if not flush_done.wait(timeout=self.serial.write_timeout or 1.5):
-            # Timed out waiting for TX queue to drain
-            pass
+            if q == 0:
+                break
+            if time.monotonic() >= deadline:
+                raise TimeoutError(
+                    f"Serial output queue drain timed out with {q} bytes remaining in output queue"
+                )
+            time.sleep(0.005)
 
     def close(self) -> None:
-        self.serial.close()
+        self.closed = True
+        self._write_start_time = None
+        try:
+            self.serial.close()
+        except Exception:
+            pass
 
 
 @dataclass
@@ -410,7 +473,6 @@ class CdmSender:
 
         try:
             written = target_sink.write(raw_bytes)
-            target_sink.flush()
             if written != len(raw_bytes):
                 return SendOutcome(
                     success=False,
@@ -420,6 +482,7 @@ class CdmSender:
                     error_code="PARTIAL_WRITE",
                     error_message=f"Wrote {written}/{len(raw_bytes)} bytes",
                 )
+            target_sink.flush()
             return SendOutcome(
                 success=True,
                 sequence_used=seq,
@@ -430,7 +493,7 @@ class CdmSender:
             return SendOutcome(
                 success=False,
                 sequence_used=seq,
-                bytes_sent=0,
+                bytes_sent=written if "written" in locals() else 0,
                 frame=frame,
                 error_code="WRITE_IO_ERROR",
                 error_message=str(exc),
