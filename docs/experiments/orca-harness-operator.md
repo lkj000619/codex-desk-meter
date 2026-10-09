@@ -1,15 +1,21 @@
 # 별도 Orca 협업 구현 실행·관측
 
 이 문서는 coordinator와 사용자가 실행할 절차다. 현재 gate는
-[준비 상태](next-comparison-readiness.md)에서 확인한다. 아직 PC 최종 수정과 독립 통합
-검증이 끝나지 않았으므로 아래 실제 전송 절차는 지금 실행하지 않는다.
+[준비 상태](next-comparison-readiness.md)에서 확인한다. 2026-10-10 host 검증 후 `7ccbb24` 후보를
+08:01 COM3에 업로드했다. 사용자의 밝은 Usage/WAITING 확인 후 sender state를 처음 생성했고,
+08:08 fixture·08:09 실데이터 전송을 완료했다. 08:10부터 60초 watch가 COM3를 소유한다.
+**현재 init-device를 다시 실행하거나 별도 send/serial monitor를 동시에 열지 않는다.**
+초기 영상의 검은 화면은 사용자가 직접 RST를 눌렀다고 확인했다. 후속 실데이터 영상에서 숫자와
+FRAME/CRC VALID를 확인했으나 반복 점멸이 보고되어 firmware 보완 중이다. 새 업로드는 보완된
+source/build·독립 검증 뒤 기존 watch 종료를 확인하고 수행한다. BOOT·무점멸/30초 관측은
+아직 합격하지 않았다. 이후 상태는 [결과](orca-harness-results.md)와 [재개](orca-harness-resume.md)가 소유한다.
 
 ## 업로드 전
 
 1. 최신 PC 제출 수락·시험, Luna 독립 통합 검증·결함 처리를 완료한다.
 2. [firmware 후보 목록](../../experiments/orca-harness-20261008/operator/firmware-candidate.json)의
    source commit·15개 source hash·app/boot/partition hash를 현재 파일과 비교한다.
-   이 목록의 `upload_permitted=false`는 최종 검증이 아직 대기 중임을 뜻한다.
+   이 목록의 `upload_permitted=false`이면 업로드하지 않는다. 원래 host 통과 때 true였고 업로드 후 실물 점멸 보완 gate가 닫혔다. 실제 업로드 기록은 별도다.
 3. 현재 포트를 다시 열거하여 COM3의 Espressif USB VID `303A`/PID `1001`과 대상 보드를
    확인한다. 예전 연결 기록만으로 포트를 선택하지 않는다.
 4. [Sol 보고](../agent-runs/orca-sol/report.md)의 **날짜별 수정 산출물**을 업로드한다.
@@ -20,7 +26,7 @@
    새 source/hash를 다시 검증한다. 완전 erase나 BOOT를 누른 채 reset은 필요하지 않다.
 
 위 gate를 통과한 뒤 사용할 명령은 아래와 같다. 설치된 `esptool` 4.12.0의 help와
-후보 manifest의 주소·설정으로 확인했으며, 이 문서 작성만으로 실행하지 않았다.
+후보 manifest의 주소·설정으로 확인했다. 2026-10-10 08:01 실제 실행·hash 검증 기록이 있다.
 `python`은 아래 PC 절차의 ESP-IDF Python 환경이다. 현재 대상이 COM3임을 다시 확인한다.
 
 ```powershell

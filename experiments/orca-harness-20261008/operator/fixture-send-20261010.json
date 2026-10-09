@@ -1,0 +1,19 @@
+{
+  "mode": "frozen_provider_fixture",
+  "started_at": "2026-10-09T23:08:54.031094+00:00",
+  "completed_at": "2026-10-09T23:08:54.378074+00:00",
+  "elapsed_seconds": 0.344,
+  "port": "COM3",
+  "device_alias": "orca-harness-com3",
+  "next_sequence_before": 0,
+  "next_sequence_after": 1,
+  "exit_code": 0,
+  "stdout": "[HOST WRITE] Transmitted frame to COM3: seq=0, bytes=832 (host write receipt, not device ACK)\n",
+  "stderr": "",
+  "fixture": "experiments/fixtures/providers/codex-percent-window.json",
+  "reference_time": "actual wall clock; old fixture correctly STALE",
+  "expected_quota_used_percent": 20,
+  "expected_quota_remaining_percent": 80,
+  "device_ack": "not_available; LCD observation required",
+  "receiver_reset": false
+}

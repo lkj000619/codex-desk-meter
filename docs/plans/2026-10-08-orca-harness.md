@@ -1,6 +1,10 @@
 # Orca 협업 구현 계획
 
-2026-10-10 07:39 KST 재개: Flash 제출 `e7c5b51`은 보존했으나 coordinator PC 63개 중 1개 실패(5.016초)와 남은 시각·OS timeout 문제로 완료 조건 미충족이다. 좁은 후속 `task_d7aa5e059e8d` / `ctx_a7d558d25511` 실행 중. 수정 수락·같은 Luna Task 재검증 후 동결/업로드로 진행한다. 현재 업로드·live·실물은 미실행이며 체크박스를 완료로 바꾸지 않는다.
+2026-10-10 08:20 KST 추가: 사용자 후속 영상에서 실데이터와 FRAME/CRC VALID 확인. 반복 점멸은 보완 필요하여 [별도 점멸 계획](2026-10-10-lcd-flicker.md)과 기존 Sol 모델의 후속 Task를 시작했다. 아래 host 완료는 보존하고 실물 제품 PASS는 선언하지 않는다.
+
+2026-10-10 08:13 KST 현재: 최종 PC 64/64·독립 통합 27/27 통과 및 역할 작업 정리 완료. `7ccbb24` host 후보를 COM3에 업로드했고, 초기 LCD 관측 후 fixture·실제 세션/quota 전송과 60초 watch를 실행했다. **전송 후 사용자 LCD/CRC·BOOT·30초 관측 대기**이며 `product_pass=false`다. 새 기능·재업로드·sender 재초기화 없이 관측을 이어간다.
+
+2026-10-10 07:39 KST 당시 재개: Flash 제출 `e7c5b51`은 보존했으나 coordinator PC 63개 중 1개 실패(5.016초)와 남은 시각·OS timeout 문제로 완료 조건 미충족이었다. 좁은 후속 `task_d7aa5e059e8d` / `ctx_a7d558d25511`을 실행하고 수정 수락·같은 Luna Task 재검증 후 동결/업로드로 진행했다. 당시 업로드·live·실물은 미실행이었다.
 
 목표: 별도 브랜치에서 동결 입력으로 새 구현, LCD UX/UI 디자인과 실제 PC Codex 세션·quota
 수집을 연결하고 역할별 실행·품질·비용을 재현 가능한 근거로 기록한다.
@@ -14,11 +18,11 @@
 | 사용자 범위·역할 확정 | 완료 | Sol/Flash/Luna, GUI는 AGY Gemini 3개+Codex CLI gpt-6.1-sol 3개, 세션 토큰+quota 확인 |
 | 역할별 기술 검토·DAG | 초기 요구·인터페이스 보고 수락 완료 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
 | LCD UX/UI·OpenDesign | B 수정 `a3aeebb`; 독립 PASS 제출 `msg_1f1335f9e59f` 수락 완료 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
-| PC 프로그램 구현 | 최종 시각·OS 제한 수정 `39e52bd` 수락; coordinator PC 64/64 통과, 독립 통합 검증 진행 중 | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
+| PC 프로그램 구현 | `39e52bd` 수락; coordinator PC 64/64·최종 독립 통합 PASS; 실제 수집·전송/watch 실행 | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
 | firmware·통합 | 활성 source 수정 제출 `853ddf7` 수락; coordinator 실제 C 시험 18개·선택 세션 통합 1개 통과 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
-| 독립 검증·수정 | 독립 FAIL `9721f71` 및 후속 경계 FAIL 보존; PC 64/64 이후 같은 Luna Task 재시도 `ctx_6b00e6339d06` | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
-| 업로드·owner-only live·실물 관측 | 예정 | 동결 binary/hash·COM3 수신·LCD/BOOT·30초·단절/복구·지연 근거 |
-| 결과·실행 정리 | 예정 | 판정·미측정·실효 모델·시간/token coverage·질문·실패 기록, worker 소유권 정리 |
+| 독립 검증·수정 | 같은 Luna Task `ctx_6b00e6339d06` PASS 수락·release/ack; root 통합 27/27; 이전 FAIL 보존 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
+| 업로드·owner-only live·실물 관측 | COM3 업로드·수집・전송・watch 및 초기 LCD 확인 완료; 전송 후 실제 값/BOOT·30초 대기 | 동결 binary/hash·COM3 수신·LCD/BOOT·30초·단절/복구·지연 근거 |
+| 결과·실행 정리 | 역할별 source/evidence·host 결과·미측정 범위 문서화, worker 소유권 정리 완료; 실물 후속 기록 진행 | 판정·미측정·실효 모델·시간/token coverage·질문·실패 기록, worker 소유권 정리 |
 
 인터페이스와 사용자의 B 선택은 설계·context에 기록됐다. PC 구현은 병행 진행하며,
 펌웨어 GUI 최종 통합·제출은 선택 B의 결함 보완·독립 검증을 받은 뒤 수행한다.
@@ -52,14 +56,17 @@ Sol의 core 작업은 병행 시작하고, GUI 최종 통합·제출·통합 검
 - [x] PC runtime 보완 제출 `ctx_4308689007a9` 보존·worker release/Delivery ack; 제출과 실제 품질 판정 구분
 - [x] PC aging·privacy·초기화·Windows crash 제출 수락 및 기존 39개 시험 (`14cc264`)
 - [x] 추가 PC→C watch timestamp·cold global·provider별 캐시·null 관측 시각 보완 (`task_a6eebb977125`, `0e39f0d`); 50개 시험 coordinator 재실행 통과
-- [ ] 수집·RPC cleanup·write/drain을 포함한 5초 수동/연결 복구 전송 (`5d16e97`의 요청 경합 수정 보존; 실제 cleanup/drain 경계 6.125초 실패를 `task_e2907fe00c34`에서 보완 후 같은 Luna Task 재검증)
+- [x] 수집·RPC cleanup·write/drain을 포함한 5초 수동/연결 복구 **host 경계** 검증 (`39e52bd`, 독립 `6f52105`; 원래 두 RPC와 무예산 경계 별도 보존, 이전 6.125초/5.016초 FAIL 원본 유지)
 - [x] firmware BSP·C receiver·선택 B GUI·F9 및 실제 ESP-IDF build (`b6ec3d5`)
 - [x] 독립 검토의 firmware 활성 세션·scoped source identity 수정 및 새 build (`task_e44125e18973`, `853ddf7`); 최종 독립 검증은 별도
-- [ ] 최신 PC 보완·host 통합 독립 검증
+- [x] 최신 PC 보완·host 통합 독립 검증 (PC 64/64, 통합 27/27)
 - [x] firmware core `ctx_d5c857a3d228` 실제 Sol 6 working/live 시작 및 checkpoint 확인 (GUI 최종 gate는 유지)
-- [ ] 독립 결함 수정·제품 commit/binary 동결
-- [ ] COM3 업로드·fixture/live·사용자 실물 관측
-- [ ] 결과·시간/token coverage·미측정 기록, worker 소유권 정리
+- [x] 독립 결함 수정·host 후보 commit/binary 동결 (`orca-harness-20261010-host-candidate`, `7ccbb24`)
+- [x] COM3 업로드·fixture/live host 전송・60초 watch・초기 사용자 LCD 관측
+- [ ] 전송 후 LCD 숫자・FRAME/CRC 수락・BOOT 3회/길게・RESET 없는 30초 유지
+- [ ] 실물 반영 지연・오류/복구・센서 타당성・분리 전원 링크 단절・24시간 안정성
+- [x] host 결과·시간/token coverage unknown·미측정 기록, 역할 worker 소유권 정리
+- [ ] 실물 최종 관측을 반영한 제품 판정・실행 정리
 
 2026-10-09 18:16 KST: 동결된 firmware 제출 검토는 PC 보완과 독립적이므로 Luna가
 이를 먼저 진행한다. 같은 통합 Task의 최종 PC→C 검증·제출과 업로드 gate는 최신 PC

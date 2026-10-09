@@ -1,0 +1,133 @@
+{
+  "started_at": "2026-10-09T23:03:31.567355+00:00",
+  "completed_at": "2026-10-09T23:03:33.675325+00:00",
+  "scope": "real readonly explicitly selected coordinator session token metadata + native account rateLimits read; no raw JSONL/auth/conversation copied",
+  "selection": "CODEX_THREAD_ID resolved exactly1 filename; no latest policy",
+  "command_sanitized": "python -B -X utf8 -m pc.cli collect --session-file <explicit-current-session> --live-quota --host-alias orca-owner --output artifacts/orca-harness-runtime/live-collection.json",
+  "exit_code": 0,
+  "wall_seconds": 2.109999999869615,
+  "local_private_metadata_output": "artifacts/orca-harness-runtime/live-collection.json (Git ignored)",
+  "usage": [
+    {
+      "provider_id": "codex",
+      "source_kind": "local_runtime",
+      "metric_kind": "session_telemetry",
+      "status": "available",
+      "observed_at": "2026-10-09T23:02:53.693Z",
+      "last_good_at": "2026-10-09T23:02:53.693Z",
+      "error_code": null,
+      "windows": [
+        {
+          "window_id": "input",
+          "label": "Input tokens",
+          "used_units": 299235239,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "output",
+          "label": "Output tokens",
+          "used_units": 1808865,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "cached_input",
+          "label": "Cached input",
+          "used_units": 288358272,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "reasoning_output",
+          "label": "Reasoning output",
+          "used_units": 732094,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "source_total",
+          "label": "Source total",
+          "used_units": 301044104,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        },
+        {
+          "window_id": "normalized_total",
+          "label": "Normalized total",
+          "used_units": 301044104,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "token",
+          "percent_used": null,
+          "percent_remaining": null,
+          "resets_at": null,
+          "reset_status": "unknown"
+        }
+      ]
+    },
+    {
+      "provider_id": "codex",
+      "source_kind": "local_runtime",
+      "metric_kind": "quota_window",
+      "status": "available",
+      "observed_at": "2026-10-09T23:03:33.244883Z",
+      "last_good_at": "2026-10-09T23:03:33.244883Z",
+      "error_code": null,
+      "windows": [
+        {
+          "window_id": "primary-18000s",
+          "label": "5h limit",
+          "used_units": null,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "percent",
+          "percent_used": 24.0,
+          "percent_remaining": 76.0,
+          "resets_at": "2026-10-10T03:36:59Z",
+          "reset_status": "scheduled"
+        },
+        {
+          "window_id": "secondary-604800s",
+          "label": "168h limit",
+          "used_units": null,
+          "remaining_units": null,
+          "limit_units": null,
+          "unit": "percent",
+          "percent_used": 67.0,
+          "percent_remaining": 33.0,
+          "resets_at": "2026-10-14T14:14:02Z",
+          "reset_status": "scheduled"
+        }
+      ]
+    }
+  ],
+  "device_send": "not_run_pending_boot_observation",
+  "physical_display": "awaiting_user",
+  "product_pass": false
+}

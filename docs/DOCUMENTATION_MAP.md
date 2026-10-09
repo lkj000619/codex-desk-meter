@@ -21,6 +21,8 @@
 | ESP32 firmware 구현·실제 build·hash·물리 시험 절차 | [Sol 보고](agent-runs/orca-sol/report.md) |
 | 현재 PC→실제 C 통합·독립 검증·미측정 범위 | [Luna 제품 검토](agent-runs/orca-luna/product-review.md) |
 | 검증 이후 PC 실행·업로드·실물 관측 순서 | [운영 절차](experiments/orca-harness-operator.md) |
+| 협업 결과·역할별 근거·실제 수집/업로드·미측정 범위 | [협업 결과](experiments/orca-harness-results.md) |
+| 실물 반복 점멸의 원인 재현·firmware 보완·재검증 | [점멸 보완 계획](plans/2026-10-10-lcd-flicker.md) |
 
 `docs/PRODUCT_CONTRACT.md`와 57개 원본 입력은 수정하지 않는다. 이번 실험의 live 수집과
 협업 실행 변경은 협업 설계가 소유한다. 구현 보고서와 검증 보고서는 각각 실제 역할 작업에

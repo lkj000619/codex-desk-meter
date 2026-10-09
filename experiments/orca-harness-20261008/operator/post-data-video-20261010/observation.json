@@ -1,0 +1,68 @@
+{
+  "observed_at": "2026-10-09T23:16:39.135716+00:00",
+  "source_filename": "KakaoTalk_20261010_081307245.mp4",
+  "source_bytes": 21384751,
+  "source_sha256": "f0df98720c0ad929f886003fe27c96f1e2960d95a3028a6ef4803e03fb947cc2",
+  "source_last_modified_utc": "2026-10-09T23:13:17.490149+00:00",
+  "duration_seconds": 45.33,
+  "resolution": [
+    1080,
+    1920
+  ],
+  "firmware": "host candidate7ccbb24/app385130667ab15ca8dcc665e70fc06882b1e89535bde8d84af05fdc2b36c1ef72",
+  "capture_scope": "post live-send/watch started; exact screen values being reviewed",
+  "user_report": "LCD continuously flashes/blinks; user requests correction",
+  "visual_findings": "Data-filled Usage and Status visible; large blank/partially cleared white regions recur in contact-sheet at about12s/15s; exact cause requires firmware presentation investigation",
+  "physical_stability": "reported failure; do not mark30s PASS",
+  "source_code_observation": "main gui_render every1000ms; gui_render starts full PAPER fill; bsp writes sole RGB framebuffer; hypothesis not yet final diagnosis",
+  "frames": [
+    {
+      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-00s.jpg",
+      "sha256": "1d45e213878d793f68e0d44e1058af44f80564ab4fd3ebe23dc707bdf6aa1e77"
+    },
+    {
+      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-12s.jpg",
+      "sha256": "c6232a75580540d214d5f146ea5349df833d991fcf1e7aa60708c731f28487a6"
+    },
+    {
+      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-15s.jpg",
+      "sha256": "890acbf59f461303180cb386eda8b3cea7e237a0b22094992cda362541238e2e"
+    },
+    {
+      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-18s.jpg",
+      "sha256": "064de3f3559b39a65087ab051bd1a8d2891b51528880f1bc50268204dd5e2bed"
+    },
+    {
+      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-24s.jpg",
+      "sha256": "cc3626ca80493258124c87371641f4ffaee0a6ba2f7e562caef2f965a9b09938"
+    },
+    {
+      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-39s.jpg",
+      "sha256": "f769b2288ca5287787bce617777936c843460e2ac998e4bea7e8fe571102cc35"
+    },
+    {
+      "path": "experiments/orca-harness-20261008/operator/post-data-video-20261010/frame-42s.jpg",
+      "sha256": "be22dd33d817b34becd192afb110806ce3cee04dd008f19230405273e628ca3d"
+    }
+  ],
+  "reviewed_at": "2026-10-09T23:19:55.872084+00:00",
+  "frame_crc": "VALID visibly observed at39s",
+  "device_acceptance": "confirmed for at least one live frame by physical LCD CRC VALID; not per-sequence ACK",
+  "visible_quota": {
+    "five_hour_used_percent": 31,
+    "five_hour_remaining_percent": 69,
+    "week_used_percent": 68,
+    "week_remaining_percent": 32,
+    "scope": "values visible in this video; observation-time only"
+  },
+  "visible_status": {
+    "usb_link": "CONNECTED",
+    "receive_age_seconds": 10,
+    "source_age_seconds": 44,
+    "original_observation": "2026-10-09T23:11:54.714Z",
+    "frame_crc": "VALID",
+    "chip_temperature_celsius": 36.5
+  },
+  "additional_display_finding": "Long scientific token strings appear exponent-clipped on some rows; record for review separately from requested flicker correction",
+  "image_privacy": "Original post-data frames contain LCD source identifiers. Kept local only; do not stage JPGs. Tracked record contains only sanitized numeric/status metadata."
+}

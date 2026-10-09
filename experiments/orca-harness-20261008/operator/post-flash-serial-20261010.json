@@ -1,0 +1,10 @@
+{
+  "started_at": "2026-10-09T23:02:10.916223+00:00",
+  "port": "COM3",
+  "scope": "read-only post-flash serial capture, DTR/RTS false, no software reset or data sent",
+  "bytes_received": 0,
+  "output": "operator/post-flash-serial-20261010.txt",
+  "boot_log_observed": false,
+  "physical_display": "awaiting_user",
+  "product_pass": false
+}

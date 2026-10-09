@@ -1,5 +1,11 @@
 # 현재 준비 상태 — 별도 Orca 협업 실험
 
+2026-10-10 08:20 KST 최신 상태: 새 영상에서 실제 숫자와 FRAME/CRC **VALID** 확인. 반복적인 LCD 점멸은 보완 필요이며 Sol `task_63d11f3c24cb` / `ctx_2363ff345723`가 같은 Run에서 원인 재현·firmware 수정을 진행한다. PC watch의 60초 실데이터 전송은 유지한다. 새 업로드 gate는 수정/build·Luna 검증 이후 열며 기존 sender state/순번을 보존한다. **무점멸/30초·제품 전체 PASS는 아직 아니다.** [점멸 계획](../plans/2026-10-10-lcd-flicker.md) · [재개](orca-harness-resume.md). 아래는 당시 상태다.
+
+2026-10-10 08:13 KST 최신 상태: PC 64/64·최종 독립 통합 27/27 및 host 동결 `7ccbb24` 완료. **08:01 COM3 업로드, 사용자 초기 LCD 확인, sender 최초 생성, 08:08 fixture seq0·08:09 실제 세션/quota seq1 전송 완료**. 08:10부터 별도 Orca 터미널 watch가 COM3를 소유하고 같은 state로 60초 자동 갱신한다. 08:03 영상의 Usage/Global/Status 표시와 직접 RST에 따른 재부팅을 기록했다. **현재 전송 후 LCD 값·FRAME/CRC·BOOT·RESET 없는 30초 유지 관측 대기**다. init/reset/두 번째 sender를 실행하지 않는다. device acceptance·지연·센서 타당성·장시간 판정은 미측정이며 product_pass=false다. [결과](orca-harness-results.md) · [재개](orca-harness-resume.md). 아래 날짜별 기록은 당시 상태다.
+
+2026-10-10 08:05 KST 당시 상태: PC 64/64·최종 독립 통합 27/27 완료, coordinator 통합 재실행 27/27 통과. `orca-harness-20261010-host-candidate` (`7ccbb24`)에 동결하고 **08:01 COM3 업로드·쓰기 검증 완료**, **08:03 실제 세션 토큰·native quota 수집 성공**. USB 부팅 로그는 0바이트로 미확인되어 사용자 LCD 초기 상태·BOOT 관측을 기다렸다. sender state 생성·fixture/실데이터 전송은 아직 하지 않았던 시점이다.
+
 2026-10-10 07:47 KST 최신 상태: 남은 PC 시각·OS 제한 문제 수정 제출 `msg_c1e14cc550e2`를 `39e52bd`에 보존·release/ack했다. coordinator 최종 소스 PC **64/64 통과(10.898초)**. 같은 Luna 독립 Task 재시도 `ctx_6b00e6339d06`에서 전체 PC→C 검증을 시작했고, Flash는 보고서·checkpoint만 동기화한다. firmware 소스·산출물 hash 19개 일치. 독립 합격 전 업로드 gate는 닫혀 있고 COM/live/실물은 계속 미실행이다. 아래 날짜별 기록은 당시 상태다.
 
 2026-10-10 07:39 KST 최신 상태: 이전 Flash 제출 `msg_2729ab88db05`를 `e7c5b51`에 보존·release/ack했다. 재개 후 coordinator PC 63개 중 1개 실패(전체 경계 5.016초), 요청 시각 회귀·OS 제한 설정 실패 무시도 확인했다. 새 좁은 수정 `task_d7aa5e059e8d` / `ctx_a7d558d25511`이 실제 AGY Flash에서 실행 중이다. 이후 같은 Luna 독립 Task를 재시도한다. 선택 B·firmware `853ddf7`은 보존하며 업로드·live·실물 gate는 닫혀 있다. [재개 기록](orca-harness-resume.md)이 현재 terminal·generation·다음 작업의 원본이다. 아래 날짜별 기록은 당시 상태다.

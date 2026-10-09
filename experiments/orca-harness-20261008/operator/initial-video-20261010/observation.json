@@ -1,0 +1,76 @@
+{
+  "observed_at": "2026-10-09T23:11:42.621003+00:00",
+  "source_filename": "KakaoTalk_20261010_080349019.mp4",
+  "source_bytes": 15639436,
+  "source_sha256": "63791aeff81b584a0a9eb41709e14c96563f215b7ce735b66ffc72a1d28a09b3",
+  "source_last_modified_utc": "2026-10-09T23:03:53.551444+00:00",
+  "video_duration_seconds": 31.59,
+  "video_resolution": [
+    1920,
+    1080
+  ],
+  "extractor": "existing external ffmpeg 7.1; no new dependency",
+  "extractor_sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+  "firmware_app_sha256": "385130667ab15ca8dcc665e70fc06882b1e89535bde8d84af05fdc2b36c1ef72",
+  "capture_scope": "initial no-data firmware; video precedes fixture/live send",
+  "user_confirmation": "Bright screen and Usage/WAITING visible",
+  "observations": {
+    "bright_initial_display": "confirmed by video and user",
+    "usage_waiting": "WAITING / NO CACHE and SESSION TELEMETRY WAITING visible",
+    "global_default": "GLOBAL CODEX RESET / DEFAULT / NO CACHE visible",
+    "status_screen": {
+      "usb_link": "CONNECTED",
+      "receive_age": "UNKNOWN",
+      "source_age": "UNKNOWN",
+      "original_observation": "--",
+      "frame_crc": "WAITING",
+      "chip_temperature_celsius": 36.5,
+      "temperature_scope": "physical displayed value observed; sensor accuracy/plausibility calibration not tested"
+    },
+    "navigation": "Usage/Global/Status/Usage changes visible; exact BOOT presses pending user fact confirmation",
+    "brief_black_screen": "near 13s followed by Usage/WAITING; user confirmed direct RESET(RST) press",
+    "orientation": "landscape readable before physical board rotation; rotation alone is not firmware autorotation proof",
+    "uninterrupted_30s": "not established; intervening black-screen cause unresolved",
+    "post_data_acceptance": "not established; this video predates any data transmission"
+  },
+  "frames": [
+    {
+      "path": "experiments/orca-harness-20261008/operator/initial-video-20261010/frame-04s.jpg",
+      "sha256": "8626aabd107e75e8fab006b38eed96068b6ee23fba6b6720984615a47e76e312"
+    },
+    {
+      "path": "experiments/orca-harness-20261008/operator/initial-video-20261010/frame-08s.jpg",
+      "sha256": "58adf6815aa3614b080da072afe3ffcdc8f639eab8defa7767ce4f4f097f2ae1"
+    },
+    {
+      "path": "experiments/orca-harness-20261008/operator/initial-video-20261010/frame-09s.jpg",
+      "sha256": "7ee13d3d0f0eb090abf8c6b0103d993cf4d3a9c53d46792f6aa544a97729930b"
+    },
+    {
+      "path": "experiments/orca-harness-20261008/operator/initial-video-20261010/frame-12s.jpg",
+      "sha256": "f81cca410f67f6e7f7fefd557b575a6c5ab006c5d52a01cdbb8a2fa3ad6aaed7"
+    },
+    {
+      "path": "experiments/orca-harness-20261008/operator/initial-video-20261010/frame-13s.jpg",
+      "sha256": "7a2c028fa742759a631ad6194306462cc40f253390e384028a069c5fa8085708"
+    },
+    {
+      "path": "experiments/orca-harness-20261008/operator/initial-video-20261010/frame-14s.jpg",
+      "sha256": "37f40d779cbb264867f3df1ab5b7fce3ee594e0b62a8f982f242ef04399c169c"
+    },
+    {
+      "path": "experiments/orca-harness-20261008/operator/initial-video-20261010/frame-18s.jpg",
+      "sha256": "9caab5cfff2d80711561515d7c4c0d93c98c6b0cd20a7eb7cc7db15dc79dd9ae"
+    },
+    {
+      "path": "experiments/orca-harness-20261008/operator/initial-video-20261010/frame-30s.jpg",
+      "sha256": "44ddab04d9698492a560dd88c5e8f96f06be2711dccb0eb178f312848ce86d7b"
+    }
+  ],
+  "user_followup": {
+    "received_at": "2026-10-09T23:14:07.454179+00:00",
+    "reset_fact": "User directly confirmed Reset(rst) press",
+    "scope": "manual reset classification only; exact BOOT presses still unconfirmed",
+    "automatic_reboot_verdict": "not attributed to automatic reboot; not an uninterrupted30s stability test"
+  }
+}

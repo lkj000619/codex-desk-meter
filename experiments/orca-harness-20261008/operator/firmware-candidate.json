@@ -2,12 +2,12 @@
   "run_id": "run_c968c43361da",
   "firmware_submission_commit": "853ddf7",
   "validated_at": "2026-10-09T23:00:50.309868+00:00",
-  "status": "independent_and_coordinator_host_pass_frozen_for_hardware_observation",
-  "upload_permitted": true,
+  "status": "preserved_host_candidate_with_user_reported_LCD_flicker_defect",
+  "upload_permitted": false,
   "host_firmware_tests": 18,
   "selected_session_test": 1,
-  "physical_status": "not_run",
-  "live_account_status": "not_run",
+  "physical_status": "initial_and_live_data_CRC_VALID_confirmed; repeated_LCD_flicker_reported_failure; BOOT_hold_and_no_flicker30s_not_passed",
+  "live_account_status": "real metadata and native quota available; physical LCD live values and CRC VALID confirmed; watch running",
   "staging_sources": [
     {
       "path": "firmware/CMakeLists.txt",
@@ -107,5 +107,11 @@
   "independent_message": "msg_29b4e5191818",
   "root_pc_tests": 64,
   "root_integration_tests": 27,
-  "product_pass": false
+  "product_pass": false,
+  "operator_observation_updated_at": "2026-10-09T23:19:55.873593+00:00",
+  "flash_evidence": "operator/flash-host-candidate-20261010.json",
+  "initial_lcd_evidence": "operator/initial-video-20261010/observation.json",
+  "live_watch_evidence": "operator/live-watch-20261010.json",
+  "upload_gate_reason": "Original candidate already flashed. New repeated flash defect is under firmware correction; no new upload until corrected artifact review. Preserve original host tag.",
+  "post_data_video_evidence": "operator/post-data-video-20261010/observation.json"
 }

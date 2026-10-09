@@ -246,6 +246,19 @@
       "status": "accepted succeeded msg_ba0e65c7a947; released external/processAction none and Delivery acked; only2 owned documentation paths changed",
       "scope": "Flash report/checkpoint dated synchronization with39e52bd/root64; independent Luna underway; physical/live remain not_run",
       "report_path": "docs/agent-runs/orca-flash/report.md"
+    },
+    "lcd_flicker_correction": {
+      "task_id": "task_63d11f3c24cb",
+      "dispatch_id": "ctx_2363ff345723",
+      "terminal": "term_e1bc5a22-2975-4c7e-a9c1-82097648f0e6",
+      "model": "gpt-6-sol",
+      "effort": "xhigh",
+      "approval_flag": "--dangerously-bypass-approvals-and-sandbox",
+      "status": "native input accepted; actual9609char draft observed and Enter sent once; working tool calls positively observed",
+      "model_evidence": "Actual GPT-6-Sol xhigh/YOLO CLI0.159.2 and CIM PID3008",
+      "scope": "firmware display presentation and owned regressions/build only",
+      "gate": "accepted source/build, Luna independent review, then coordinator frozen upload/live and user no-flicker observation",
+      "spec_path": "tasks/lcd-flicker-sol.md"
     }
   },
   "frozen_input_count": 57,
@@ -278,8 +291,41 @@
     "esp32_usb_port": "COM3",
     "vid": "303A",
     "pid": "1001",
-    "scope": "enumeration only; no COM open/chip proof/upload",
+    "scope": "COM3 actual ESP32-S3rev0.2 esptool flash+hash proof, user initial LCD proof, production fixture/live host write and active watch; post-data device acceptance pending",
     "firmware_manifest_hashes_verified": 19,
-    "upload_permitted": false
+    "upload_permitted": true
+  },
+  "operator_execution": {
+    "updated_at": "2026-10-09T23:14:07.454179+00:00",
+    "phase": "user_video_confirms_live_CRC_VALID_but_LCD_flicker_fails_stability; firmware_owner_investigating",
+    "host_candidate_commit": "7ccbb24",
+    "host_candidate_tag": "orca-harness-20261010-host-candidate",
+    "flash_evidence": "operator/flash-host-candidate-20261010.json",
+    "initial_lcd_evidence": "operator/initial-video-20261010/observation.json",
+    "initial_reset": "user confirmed direct RST press",
+    "sender_state_initialized": true,
+    "sender_state_file": "artifacts/orca-harness-runtime/sender-state.json",
+    "sender_lock_dir": "artifacts/orca-harness-runtime/locks",
+    "fixture_host_write_evidence": "operator/fixture-send-20261010.json",
+    "live_collection_evidence": "operator/live-collection-metadata-20261010.json",
+    "live_host_write_evidence": "operator/live-send-20261010.json",
+    "live_watch_evidence": "operator/live-watch-20261010.json",
+    "live_watch_terminal": "term_cead0ee8-aa83-41f3-93c6-c151d8cea13e",
+    "live_watch_interval_seconds": 60,
+    "resume_selection_record": "artifacts/orca-harness-runtime/selected-session.json (Git ignored; keep exact selection)",
+    "port_owner": "single live-watch program; do not concurrently open serial monitor/send/init",
+    "device_ack": "no wireACK; LCD FRAME/CRC VALID physically confirmed for at least one live frame",
+    "product_pass": false,
+    "pending": [
+      "post-data LCD numbers and CRC acceptance",
+      "BOOT short3 and hold600ms navigation",
+      "no RESET uninterrupted30s",
+      "physical reaction latency",
+      "error/link recovery on hardware",
+      "sensor calibration/plausibility",
+      "24h endurance"
+    ],
+    "post_data_video_evidence": "operator/post-data-video-20261010/observation.json",
+    "lcd_stability": "user reported repeated flashes; correction required"
   }
 }

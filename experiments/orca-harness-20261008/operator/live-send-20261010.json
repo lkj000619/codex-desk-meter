@@ -1,0 +1,16 @@
+{
+  "mode": "explicit_current_codex_thread_and_native_account_quota",
+  "session_selection": "CODEX_THREAD_ID exact one matching JSONL; no latest fallback; private path omitted",
+  "started_at": "2026-10-09T23:09:19.548832+00:00",
+  "completed_at": "2026-10-09T23:09:21.497281+00:00",
+  "elapsed_seconds": 1.953,
+  "port": "COM3",
+  "next_sequence_before": 1,
+  "next_sequence_after": 2,
+  "exit_code": 0,
+  "stdout": "[HOST WRITE] Transmitted frame to COM3: seq=1, bytes=2844 (host write receipt, not device ACK)\n",
+  "stderr": "",
+  "device_ack": "not_available; LCD observation required",
+  "receiver_reset": false,
+  "token_scope": "cumulative selected conversation; not cohort cost or 5h tokens"
+}

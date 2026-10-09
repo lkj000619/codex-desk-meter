@@ -60,7 +60,30 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 07:47 KST 최신 체크포인트
+## 2026-10-10 08:20 KST 최신 체크포인트 — 점멸 보완 실행
+
+- 사용자 새 영상 `KakaoTalk_20261010_081307245.mp4`로 live 숫자·Status FRAME/CRC **VALID**를 확인했다. 5시간 31%·주간68%는 영상 시점 값이다. 반복적인 흰색 지워짐/점멸이 보고되어 무점멸/30초 안정성은 합격하지 않았다. 초기 영상13초 검은 화면의 직접 RST와 구분한다.
+- 같은 Run의 새 firmware 후속 **`task_63d11f3c24cb` / `ctx_2363ff345723`**, terminal **`term_e1bc5a22-2975-4c7e-a9c1-82097648f0e6`**에서 실제 GPT-6-Sol xhigh/YOLO0.159.2·PID3008을 확인했다. native input accepted 뒤 실제9609char paste draft를 보고 Enter를 정확히 한 번 보냈고 도구 실행/영상 검토가 관측됐다. [Task 범위](../../experiments/orca-harness-20261008/tasks/lcd-flicker-sol.md)와 [계획](../plans/2026-10-10-lcd-flicker.md)을 따른다. 제출 완료 전 중복 worker를 시작하지 않는다.
+- PC watch `term_cead0ee8-aa83-41f3-93c6-c151d8cea13e`는 계속 같은 state·명시적 세션으로 COM3를 소유한다. Sol은 COM/실계정/PC 코드에 접근하지 않는다. 재업로드 직전에 coordinator가 이 watch 종료를 실제 확인하고, 새 firmware 동결/검증 후 같은 sender state로 재개한다. receiver가 리셋돼도 기존 sender 순번을 되돌릴 필요가 없다.
+- 후속 영상 원본 및 source 식별자가 보이는 frame은 로컬 자료다. Git에는 [비식별 관측](../../experiments/orca-harness-20261008/operator/post-data-video-20261010/observation.json)만 포함한다. 다음은 Sol의 원인 재현·수정/build 제출 → Luna 독립 검증 → 새 binary/tag → COM3 업로드/live → 사용자 무점멸 확인이다. 긴 토큰 표기에서 지수부 잘림도 발견됐으며 별도 검토 기록으로 남겼다. `product_pass=false`; 이전 host/초기 물리 근거는 보존한다.
+
+## 2026-10-10 08:13 KST 당시 체크포인트
+
+- host 후보 `7ccbb24`와 역할별 제출은 그대로다. 08:01 업로드 후 사용자 밝은 Usage/WAITING 확인 및 08:03 영상으로 초기 표시를 확인했다. Usage/Global/Status/Usage 전환이 보이며 Status는 CONNECTED, FRAME/CRC WAITING, 칩 온도 36.5 C였다. 약 13초의 검은 화면은 사용자 **직접 RST 조작**으로 확인했다. 초기 영상은 전송 후 숫자·장치 수락·RESET 없는 30초 유지의 근거가 아니다.
+- 정상 초기/빈 receiver 확인 뒤 sender state를 **처음 생성 완료**. `artifacts/orca-harness-runtime/sender-state.json`와 `locks/`를 계속 사용한다. 08:08:54 fixture **seq0/832B**, 08:09:21 실제 선택 세션·native quota **seq1/2,844B** host write 성공. [fixture](../../experiments/orca-harness-20261008/operator/fixture-send-20261010.json) · [실제 전송](../../experiments/orca-harness-20261008/operator/live-send-20261010.json). 장치 ACK로 해석하지 않는다.
+- 08:10부터 일반 PC 프로그램 watch가 Orca 터미널 **`term_cead0ee8-aa83-41f3-93c6-c151d8cea13e`**에서 COM3를 소유하고 60초마다 전송한다. 08:11 관측 시 seq2/seq3 전송과 `next_sequence=4`를 확인했으며 이후 순번은 계속 증가한다. [실행 기록](../../experiments/orca-harness-20261008/operator/live-watch-20261010.json). Python venv launcher PID39532 → 실제 interpreter PID28704는 같은 한 sender의 부모/자식이다. 실행 여부는 다시 확인한다.
+- **init-device/reset/force-overwrite 또는 두 번째 watch/send를 실행하지 않는다.** 먼저 `orca terminal read --terminal term_cead0ee8-aa83-41f3-93c6-c151d8cea13e --json`과 실제 프로세스를 확인한다. handle이 stale이면 같은 제목·worktree의 새 목록을 확인한다. 실행 중이면 그대로 유지한다. 이전 writer가 실제 종료됐을 때만 같은 state·선택 파일로 watch를 재시작한다. 선택 파일은 Git에서 제외된 `artifacts/orca-harness-runtime/selected-session.json`의 `session_file`이며 임의 latest/새 역할 세션으로 바꾸지 않는다.
+- 사용자에게 전송 후 LCD 숫자·FRAME/CRC·BOOT 3회/600ms 이상·RESET 없는 30초 유지 관측을 요청했다. 답변 대기 중에는 데이터 표시 PASS를 선언하거나 후보 코드를 바꾸지 않는다. 토큰 source의 원본 이벤트가 오래되면 STALE가 정상이며 새 quota 관측과 별도다. 다음은 해당 관측 기록과 필요 시 실제 결함을 담당 모델에 전달하는 것이다. `product_pass=false`; 지연·센서 타당성·단절/복구·24시간 시험은 미측정이다.
+
+## 2026-10-10 08:05 KST 당시 체크포인트
+
+- 같은 독립 Task `ctx_6b00e6339d06`의 성공 제출 `msg_29b4e5191818`을 수락·release/ack했다. 최종 통합 27/27·PC 64/64·firmware 18/18·B 실행 검증 PASS이며 coordinator도 최종 통합 **27/27, 16.022초**를 확인했다. 원래 두 RPC 경계는 별도 복원했고 양수/무예산 경계를 모두 보존했다. 검증 제출 `6f52105`, host 후보 tag **`orca-harness-20261010-host-candidate` / `7ccbb24`**. 역할 작업은 모두 settled이며 reclaimable 0개다.
+- **08:01 KST COM3 업로드 완료**. Espressif VID303A/PID1001과 실제 ESP32-S3 rev0.2를 확인했고 세 이미지의 쓰기 hash 검증이 통과했다. app SHA `385130667ab15ca8dcc665e70fc06882b1e89535bde8d84af05fdc2b36c1ef72`. [업로드 원본](../../experiments/orca-harness-20261008/operator/flash-host-candidate-20261010.txt)과 [기록](../../experiments/orca-harness-20261008/operator/flash-host-candidate-20261010.json)을 보존했다. `--after hard_reset` 이후 추가 reset/재업로드는 하지 않았다.
+- 업로드 후 USB 읽기에는 **0바이트**, 정상 부팅 로그 미확인이다. LCD 초기 Usage/WAITING 화면·BOOT 전환을 사용자에게 요청했다. **sender state 아직 미생성, fixture/실데이터 전송 아직 미실행**. 사용자 정상 부팅/빈 수신 관측 확인 후 처음 state를 만들고 전송한다. sender 초기화와 데이터 전송이 완료됐다고 추정하지 않는다.
+- **08:03 KST 실제 PC 수집 성공**. 현재 coordinator 세션을 환경 ID에 해당하는 파일 한 개로 명시적으로 선택했고, 토큰 metadata와 native 계정 5시간/168시간 quota·reset이 available로 수집됐다. [비식별 metadata](../../experiments/orca-harness-20261008/operator/live-collection-metadata-20261010.json). 원본 JSONL/auth/대화는 보관하지 않았다. 실제 source ID가 있는 수집 결과는 `artifacts/orca-harness-runtime/live-collection.json`에 있고 Git에서 제외된다. 전체 대화 누적 토큰은 이번 협업 cohort 비용이 아니다.
+- 다음 작업은 사용자의 초기 LCD 관측 → 처음 sender state 생성 → fixture/실데이터 전송 → 데이터 표시·BOOT·30초 관측이다. [결과 문서](orca-harness-results.md)와 [운영 절차](orca-harness-operator.md)를 따른다. `product_pass=false`, 실물·device acceptance·장시간 시험 미측정. 원래 비교 브랜치는 clean 상태를 확인했다.
+
+## 2026-10-10 07:47 KST 당시 체크포인트
 
 - Flash의 좁은 PC 보완 `task_d7aa5e059e8d` / `ctx_a7d558d25511` 성공 제출 `msg_c1e14cc550e2`를 수락·release/ack하고 `39e52bd`에 보존했다. coordinator가 같은 최종 소스에서 실제 PC **64/64 통과, 10.898초**, 실행 중 hash 불변을 확인했다. [명령·hash](../../experiments/orca-harness-20261008/operator/pc-final-deadline-unittest-20261010.json) 및 [원본 시험 출력](../../experiments/orca-harness-20261008/operator/pc-final-deadline-unittest-20261010.txt)을 보존했다. 이전 63개 제출/5.016초 FAIL은 당시 근거다.
 - 현재 Luna 독립 검증은 같은 `task_4d49e747c570`의 실패 `ctx_08869eb488a4`에서 재시도한 **`ctx_6b00e6339d06`**, 새 terminal **`term_b6cd0335-ea67-4926-8229-b50602b3fb97`**이다. 실제 GPT-6-Luna high/YOLO·argv를 확인했다. native start는 input accepted이며 실제 붙여넣기 draft를 확인하고 Enter를 정확히 한 번 보냈다. 제출 완료는 아직 미확인이다. 최신 PC·시험 구조 적응 안내는 `msg_ee7d02348853`이다.

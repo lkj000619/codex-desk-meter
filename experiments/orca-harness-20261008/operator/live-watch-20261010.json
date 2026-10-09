@@ -1,0 +1,27 @@
+{
+  "observed_at": "2026-10-09T23:11:42.951123+00:00",
+  "runtime_id": "4f9b9ae1-762e-456d-b06a-8c1a5039841c",
+  "terminal_handle": "term_cead0ee8-aa83-41f3-93c6-c151d8cea13e",
+  "status": "running",
+  "title": "Desk Meter live collector (COM3)",
+  "interval_seconds": 60,
+  "port": "COM3",
+  "session_selection": "explicit pinned original current coordinator thread; private selector in ignored artifacts/selected-session.json",
+  "state_file": "artifacts/orca-harness-runtime/sender-state.json",
+  "lock_dir": "artifacts/orca-harness-runtime/locks",
+  "next_sequence_observed": 4,
+  "console_tail": [
+    "Starting watch loop (interval: 60s). Press Enter for manual refresh, Ctrl+C to exit.",
+    "[2026-10-09T23:10:27.178616+00:00] Port COM3 opened successfully.",
+    "[2026-10-09T23:10:28.936724Z] Iteration 1 [AUTO] [HOST WRITE] seq=2, size=2844B",
+    "[2026-10-09T23:11:28.672509Z] Iteration 2 [AUTO] [HOST WRITE] seq=3, size=2844B"
+  ],
+  "device_ack": "not_available; physical post-data observation pending",
+  "resume_rule": "Verify native terminal and process before creating another sender. Preserve current state, never re-init. Restart only after prior writer confirmed stopped.",
+  "process_chain_observed": {
+    "venv_launcher_pid": 39532,
+    "actual_interpreter_pid": 28704,
+    "actual_interpreter_parent_pid": 39532,
+    "scope": "one watch with launcher/child process chain; reverify before any restart"
+  }
+}
