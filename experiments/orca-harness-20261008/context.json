@@ -123,7 +123,8 @@
       "stable_pc_commit": "1c8181e",
       "latest_guidance": "msg_b6ec41ecf6af",
       "prior_failed_review_commit": "117a988",
-      "finding_message": "msg_dcf123b5555a"
+      "finding_message": "msg_dcf123b5555a",
+      "readiness": "Infrastructure-only READY observed 2026-10-10 02:00 KST. No review restart until stable PC acceptance; prior failed Task/Dispatch remain authoritative history."
     },
     "pc_wire_correction": {
       "task_id": "task_a6eebb977125",
@@ -207,10 +208,12 @@
       "dispatch_id": "ctx_ca714297b040",
       "failed_start": "ctx_e4d716376da8",
       "readiness_recovery": "First native attempt failed before injection at readiness. One infrastructure-only READY turn refreshed actual idle status; same Task retry then injected and actually working.",
-      "latest_guidance": "msg_4a43321c6f95",
+      "latest_guidance": "msg_cac974b23c55",
       "harness_guidance": "msg_5f6da12db779",
-      "progress_checked_at": "2026-10-09T16:55:40Z",
-      "progress": "Actual active edits in four PC source files and owned regression test; test clock fixed, new delayed cleanup/drain regression still being debugged; owner checkpoint still previous submission; no completion accepted"
+      "progress_checked_at": "2026-10-09T17:13:57.072352+00:00",
+      "progress": "Actual working/live, no accepted completion. Native mailbox read through msg_1c0ed87e7d0d observed; actual WindowsSerialSink and OS timeout/cleanup edits, new regressions still being debugged. Latest guidance requires actual SendOutcome terminal event and fail-closed setter enforcement. Four PC source files plus owned tests and two role reports unsubmitted.",
+      "os_enforcement_guidance": "msg_646688de48b6",
+      "owner_checkpoint_current": true
     }
   },
   "frozen_input_count": 57,

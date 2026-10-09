@@ -60,7 +60,15 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 01:56 KST 최신 체크포인트
+## 2026-10-10 02:14 KST 최신 체크포인트
+
+- 현재 PC 보완은 계속 `task_e2907fe00c34` / `ctx_ca714297b040` 실제 working/live다. Flash가 자신의 checkpoint를 현재 식별자로 갱신했다. `pc/` 네 파일·담당 회귀 시험·Flash 보고서 두 파일은 모두 미제출 편집이다. 코드가 존재하거나 보고서가 작성됐다는 사실만으로 완료 처리하지 않는다.
+- 담당자는 native mailbox에서 `msg_1c0ed87e7d0d`까지 읽고 실제 WindowsSerialSink 회귀와 OS timeout 설정, 양수 최소값 없는 cleanup을 보완했다. 새 시험의 실패를 정비하고 있으며, 독립 제출은 아직 없다.
+- 최신 지침 `msg_646688de48b6`는 OS timeout 설정 실패를 삼키지 않고 쓰기 전에 명확한 오류로 끝내는 것이다. `msg_cac974b23c55`는 큐의 zero 이벤트만 기다리지 않고 실제 SendOutcome의 성공/실패 및 종료 시각을 관측하도록 요구한다. 둘의 반영과 최종 실제 시험을 확인한다. 5초/1초 조건을 늘리거나 시험의 대기 종료를 제품 성공으로 처리하지 않는다.
+- Luna terminal은 파일 수정 없는 READY 응답을 확인했다. PC 제출이 안정된 뒤 같은 review Task를 `ctx_08869eb488a4`에서 retry하며, 최신 source·시험의 정당한 반환 구조/예산 소진 가정 정비를 native 메시지로 전달한다. 현재 Luna를 실행 중인 review로 취급하지 않는다.
+- 안정된 PC `5d16e97`, firmware `853ddf7`, 원본 57개와 6.125초 실패 근거는 보존한다. COM/live/실물은 미실행이다.
+
+## 2026-10-10 01:56 KST 이전 체크포인트
 
 - 현재 Flash는 `task_e2907fe00c34` / `ctx_ca714297b040`, terminal `term_3105fe45-46f8-4dce-9763-c24e2e98be09`에서 실제 working/live다. 첫 attempt `ctx_e4d716376da8`는 입력 주입 전 readiness 실패였고, 파일 수정 없는 READY 확인으로 상태를 갱신한 후 같은 Task를 재시도했다. 현재 native turnStart 미관측은 종료 증거가 아니며 실제 Task 수신·편집·시험을 확인했다.
 - 미제출 수정은 `pc/cli.py`, `pc/quota.py`, `pc/sender.py`, `pc/state.py`, 담당 회귀 시험이다. 전체 reservation 2초, 예산 부족 시 quota 조회 생략·오류/last-good, 남은 전송 시간 적용을 구현 중이다. 시험용 시계 호출 정비 후 새 회귀 시험의 실패를 처리하고 있으며, 성공 제출이나 최종 합격으로 취급하지 않는다.
