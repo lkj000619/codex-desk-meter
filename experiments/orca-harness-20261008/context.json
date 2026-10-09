@@ -108,23 +108,23 @@
     },
     "integration_review": {
       "task_id": "task_4d49e747c570",
-      "status": "failed msg_a690f4aef171 accepted, released external retained/no action and Delivery acknowledged; root26 tests23pass3fail in17.111s, combined5.562s",
+      "status": "same failed Task retry accepted native ready/input_accepted/turnStart unsupported; actual pasted draft observed then Enter once; completion pending",
       "additional_coordinator_gate": "Latest accepted PC and firmware stable; full synthetic integration authorized. No physical until independent findings remediated, review passes and artifact freeze.",
-      "dispatch_id": "ctx_08869eb488a4",
-      "terminal": "term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956",
+      "dispatch_id": "ctx_6b00e6339d06",
+      "terminal": "term_b6cd0335-ea67-4926-8229-b50602b3fb97",
       "interrupted_dispatch": "ctx_da800c8d8bce",
       "failed_launch_dispatch": "ctx_5de0b1c708f7",
       "partial_evidence_commit": "0f552c9",
       "model": "gpt-6-luna",
       "approval_flag": "--dangerously-bypass-approvals-and-sandbox",
-      "model_evidence": "Actual CIM process PID20972 and Codex0.159.2 GPT-6-Luna high/YOLO header, 2026-10-10 00:10 KST; no capability stored.",
+      "model_evidence": "Actual Codex0.159.2 GPT-6-Luna high/YOLO header and CIM PID29828 exact --model gpt-6-luna -c model_reasoning_effort=high --dangerously-bypass-approvals-and-sandbox.",
       "failed_review_commit": "9721f71",
-      "previous_failed_dispatch": "ctx_125c9c02c0ed",
-      "stable_pc_commit": "1c8181e",
-      "latest_guidance": "msg_b6ec41ecf6af",
+      "previous_failed_dispatch": "ctx_08869eb488a4",
+      "stable_pc_commit": "39e52bd",
+      "latest_guidance": "msg_ee7d02348853",
       "prior_failed_review_commit": "117a988",
       "finding_message": "msg_dcf123b5555a",
-      "readiness": "Infrastructure-only READY observed 2026-10-10 02:00 KST. No review restart until stable PC acceptance; prior failed Task/Dispatch remain authoritative history."
+      "readiness": "Fresh model-proven terminal after runtime restart, TUI idle observed; prior failed review evidence preserved."
     },
     "pc_wire_correction": {
       "task_id": "task_a6eebb977125",
@@ -224,9 +224,21 @@
       "model": "gemini-3.8-flash-medium",
       "approval_flag": "--dangerously-skip-permissions",
       "source_commit": "e7c5b51",
-      "status": "actual working; accepted heartbeat msg_d9c793f3700c; native start ready/input_accepted/turnStart unsupported",
+      "status": "accepted succeeded msg_c1e14cc550e2; released external/no processAction and Delivery acked; root64/64 OK10.898s stable source",
       "model_evidence": "Actual Gemini3.8Flash medium CLI footer and CIM PID13820 argv; old runtime role handles absent, new exact terminal.",
-      "gate": "pending request origin preserved, actual OS timeout failure stops before write, actual terminal outcome5s regression; PC pass then same Luna Task retry before COM"
+      "gate": "pending request origin preserved, actual OS timeout failure stops before write, actual terminal outcome5s regression; PC pass then same Luna Task retry before COM",
+      "submission_commit": "39e52bd",
+      "root_verification": "operator/pc-final-deadline-unittest-20261010.json",
+      "latest_guidance": "msg_3ca1c43d86f8",
+      "ack_guidance": "msg_3be5c916cfc1"
+    },
+    "pc_checkpoint_sync": {
+      "task_id": "task_9becb3b414d9",
+      "dispatch_id": "ctx_41536de6636d",
+      "terminal": "term_25d7d35f-8e19-4188-9442-70cfee46313c",
+      "model": "gemini-3.8-flash-medium",
+      "status": "doc-only follow-up dispatched; no PC/tests edits or retest authorized",
+      "scope": "Flash report/checkpoint dated synchronization with39e52bd/root64; independent Luna underway; physical/live remain not_run"
     }
   },
   "frozen_input_count": 57,

@@ -1,5 +1,7 @@
 # 현재 준비 상태 — 별도 Orca 협업 실험
 
+2026-10-10 07:47 KST 최신 상태: 남은 PC 시각·OS 제한 문제 수정 제출 `msg_c1e14cc550e2`를 `39e52bd`에 보존·release/ack했다. coordinator 최종 소스 PC **64/64 통과(10.898초)**. 같은 Luna 독립 Task 재시도 `ctx_6b00e6339d06`에서 전체 PC→C 검증을 시작했고, Flash는 보고서·checkpoint만 동기화한다. firmware 소스·산출물 hash 19개 일치. 독립 합격 전 업로드 gate는 닫혀 있고 COM/live/실물은 계속 미실행이다. 아래 날짜별 기록은 당시 상태다.
+
 2026-10-10 07:39 KST 최신 상태: 이전 Flash 제출 `msg_2729ab88db05`를 `e7c5b51`에 보존·release/ack했다. 재개 후 coordinator PC 63개 중 1개 실패(전체 경계 5.016초), 요청 시각 회귀·OS 제한 설정 실패 무시도 확인했다. 새 좁은 수정 `task_d7aa5e059e8d` / `ctx_a7d558d25511`이 실제 AGY Flash에서 실행 중이다. 이후 같은 Luna 독립 Task를 재시도한다. 선택 B·firmware `853ddf7`은 보존하며 업로드·live·실물 gate는 닫혀 있다. [재개 기록](orca-harness-resume.md)이 현재 terminal·generation·다음 작업의 원본이다. 아래 날짜별 기록은 당시 상태다.
 
 2026-10-10 01:43 KST 최신 상태: Flash60 제출 `msg_617eb8c04968`을 수락·release/ack하고 `5d16e97`에 보존했다. coordinator PC 60/60 통과, producer-to-C 모듈은 18개 중 17개 통과·시험 반환 구조 오류 1개다. 허용된 RPC 종료 wait와 실제 queue drain을 모두 적용한 [추가 경계 검사](../../experiments/orca-harness-20261008/operator/pc-shared-budget-cleanup-probe.json)에서 전체 6.125초로 실패했다. `task_e2907fe00c34`의 좁은 PC 보완 후 같은 Luna Task로 최종 재검증한다. 업로드 gate는 닫혀 있으며 firmware `853ddf7`, COM/live/실물 미실행 상태를 유지한다. 아래 날짜별 기록은 당시 상태다.

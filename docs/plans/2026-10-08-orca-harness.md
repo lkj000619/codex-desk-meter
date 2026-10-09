@@ -14,9 +14,9 @@
 | 사용자 범위·역할 확정 | 완료 | Sol/Flash/Luna, GUI는 AGY Gemini 3개+Codex CLI gpt-6.1-sol 3개, 세션 토큰+quota 확인 |
 | 역할별 기술 검토·DAG | 초기 요구·인터페이스 보고 수락 완료 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
 | LCD UX/UI·OpenDesign | B 수정 `a3aeebb`; 독립 PASS 제출 `msg_1f1335f9e59f` 수락 완료 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
-| PC 프로그램 구현 | 수동 요청 소비·보존 수정 `5d16e97` 수락·PC 60/60 통과; 종료·전송을 합친 5초 경계는 추가 보완 중 | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
+| PC 프로그램 구현 | 최종 시각·OS 제한 수정 `39e52bd` 수락; coordinator PC 64/64 통과, 독립 통합 검증 진행 중 | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
 | firmware·통합 | 활성 source 수정 제출 `853ddf7` 수락; coordinator 실제 C 시험 18개·선택 세션 통합 1개 통과 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
-| 독립 검증·수정 | 독립 FAIL `9721f71` 보존; Flash60 제출 수락 후 coordinator 실제 경계 6.125초 실패, `task_e2907fe00c34` 보완 배정 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
+| 독립 검증·수정 | 독립 FAIL `9721f71` 및 후속 경계 FAIL 보존; PC 64/64 이후 같은 Luna Task 재시도 `ctx_6b00e6339d06` | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
 | 업로드·owner-only live·실물 관측 | 예정 | 동결 binary/hash·COM3 수신·LCD/BOOT·30초·단절/복구·지연 근거 |
 | 결과·실행 정리 | 예정 | 판정·미측정·실효 모델·시간/token coverage·질문·실패 기록, worker 소유권 정리 |
 

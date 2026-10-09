@@ -60,7 +60,14 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 07:39 KST 최신 체크포인트
+## 2026-10-10 07:47 KST 최신 체크포인트
+
+- Flash의 좁은 PC 보완 `task_d7aa5e059e8d` / `ctx_a7d558d25511` 성공 제출 `msg_c1e14cc550e2`를 수락·release/ack하고 `39e52bd`에 보존했다. coordinator가 같은 최종 소스에서 실제 PC **64/64 통과, 10.898초**, 실행 중 hash 불변을 확인했다. [명령·hash](../../experiments/orca-harness-20261008/operator/pc-final-deadline-unittest-20261010.json) 및 [원본 시험 출력](../../experiments/orca-harness-20261008/operator/pc-final-deadline-unittest-20261010.txt)을 보존했다. 이전 63개 제출/5.016초 FAIL은 당시 근거다.
+- 현재 Luna 독립 검증은 같은 `task_4d49e747c570`의 실패 `ctx_08869eb488a4`에서 재시도한 **`ctx_6b00e6339d06`**, 새 terminal **`term_b6cd0335-ea67-4926-8229-b50602b3fb97`**이다. 실제 GPT-6-Luna high/YOLO·argv를 확인했다. native start는 input accepted이며 실제 붙여넣기 draft를 확인하고 Enter를 정확히 한 번 보냈다. 제출 완료는 아직 미확인이다. 최신 PC·시험 구조 적응 안내는 `msg_ee7d02348853`이다.
+- Flash 보고서·checkpoint가 이전 제출을 가리키므로 별도 **문서만** 동기화하는 `task_9becb3b414d9` / `ctx_41536de6636d`를 같은 Flash terminal에 배정했다. PC·시험 소스와 재시험은 이 Task 범위가 아니다. Luna와 파일 소유권이 겹치지 않는다.
+- 다음은 독립 통합 결과 수락 및 필요한 coordinator 재실행 → source/binary 동결 → COM3 확인·업로드·live·사용자 실물 관측이다. firmware 15개 소스·4개 산출물 hash 일치 확인. 현재 업로드 gate는 계속 닫혀 있고 COM/live/실물은 `not_run`이다.
+
+## 2026-10-10 07:39 KST 당시 체크포인트
 
 - 세션·Orca 재시작 후 같은 Run을 generation 5에 연결했다. 현재 runtime은 `4f9b9ae1-762e-456d-b06a-8c1a5039841c`, coordinator는 `term_9fb88ac7-32b2-43f6-8ba2-c203ed6531bf`다. 이전 역할 terminal은 현재 목록에 없으며 이전 handle로 입력을 재전송하지 않는다.
 - Flash `task_e2907fe00c34` / `ctx_ca714297b040`의 성공 제출 `msg_2729ab88db05`는 runtime 수락을 확인하고 `e7c5b51`에 보존했다. release는 external terminal 보존/processAction none이며, 새 generation의 Delivery `delivery_c5442ce72768`를 ack했다. 이전 generation Delivery의 ack는 `consumer_fenced`로 거부되어 새 Delivery를 확인했다. 제출 완료와 제품 합격은 별개다.
