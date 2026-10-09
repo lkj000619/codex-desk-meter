@@ -60,7 +60,15 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 01:06 KST 최신 체크포인트
+## 2026-10-10 01:14 KST 최신 체크포인트
+
+- Luna `ctx_08869eb488a4`의 escalation `msg_dcf123b5555a`와 실패 제출 `msg_a690f4aef171`을 수락·release/ack, `9721f71`에 보존했다. coordinator도 실제 통합 26개를 17.111초 동안 재실행해 23개 통과·같은 3개 실패를 확인했다. 단계별 제한 내 지연의 합이 실제 5.562초였고, MANUAL 중 두 번째 요청 및 quota 취득 후 요청은 각 한 frame만 보냈다.
+- 예정된 Flash `task_1b01674fbb8c` / `ctx_41e3573faa6e`를 같은 proven terminal `term_3105fe45-46f8-4dce-9763-c24e2e98be09`에 dispatch했다. native start receipt는 turnStart 미관측이지만 실제 화면에서 새 Task·생각·메일 조회·코드 검토와 working/live를 확인했다. draft/종료 증거가 없으므로 Enter 재전송·중복 dispatch·abandon하지 않는다.
+- 현재 지침은 `msg_5d973ec48caf`다. 요청을 새 수집 전에 소비하고 이후 요청을 보존하며, 이전 coalescing-only unit 가정은 선택적 extra fresh frame을 허용하도록 담당자가 정비한다. 전체 RPC 종료와 실제 queue drain을 포함한 5초 및 정상 quota 취득을 검증한다. 다른 역할 시험·제품 원본은 변경하지 않는다.
+- AGY 화면에는 이전 attempt의 00:49:44 synthetic unittest job 하나가 남아 실행 중으로 보였다. 담당자에게 자기 task manager로 정확한 job의 상태 확인·정리와 threaded test의 finally/stop/join을 요구했다. root가 다른 프로세스를 종료하지 않았다.
+- 다음은 현재 Flash 보완 수락·시험·보존, 같은 Luna Task 재검증 후 upload gate 판단이다. stable PC `1c8181e`, firmware `853ddf7`, physical/live/COM는 계속 미실행이다.
+
+## 2026-10-10 01:06 KST 이전 체크포인트
 
 - Luna `ctx_08869eb488a4`의 escalation `msg_978c602977cc`를 처리·ack했다. 실제 MANUAL 전송 중 두 번째 요청을 넣으면 새 값의 후속 frame이 없음을 재현했다. 시리얼 bounded failure/닫힘·정상 drain·AUTO 중 fresh 재수집의 빠른 경로는 각각 통과했다.
 - Flash 후속 `task_1b01674fbb8c`를 등록했지만 아직 dispatch하지 않았다. PC `1c8181e`를 현재 독립 시험에 안정되게 유지하고 Luna의 최종 제출 수락 뒤 같은 proven Flash terminal에서 진행한다. 최소 보완은 현재 Event를 수집 전에 소비하고 이후 요청을 보존하는 경계 수정 및 전체 지연 예산이다.

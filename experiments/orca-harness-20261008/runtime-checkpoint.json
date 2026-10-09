@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-09T16:06:56.1560639Z",
+    "observed_at":  "2026-10-09T16:15:38.5375416Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -77,9 +77,9 @@
                   {
                       "id":  "task_4d49e747c570",
                       "title":  "Verify actual PC-to-C firmware integration and product requirements",
-                      "status":  "blocked",
+                      "status":  "failed",
                       "deps":  "[\"task_3963de21ddd1\",\"task_b1214421a314\"]",
-                      "completed_at":  null
+                      "completed_at":  "2026-10-09T16:10:15.016Z"
                   },
                   {
                       "id":  "task_2b005e480abd",
@@ -133,21 +133,21 @@
                   {
                       "id":  "task_1b01674fbb8c",
                       "title":  "Preserve subsequent manual requests and bound combined refresh",
-                      "status":  "ready",
+                      "status":  "blocked",
                       "deps":  "[]",
                       "completed_at":  null
                   }
               ],
     "workers":  [
                     {
-                        "task_id":  "task_4d49e747c570",
-                        "dispatch_id":  "ctx_08869eb488a4",
-                        "terminal_handle":  "term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956",
+                        "task_id":  "task_1b01674fbb8c",
+                        "dispatch_id":  "ctx_41e3573faa6e",
+                        "terminal_handle":  "term_3105fe45-46f8-4dce-9763-c24e2e98be09",
                         "state":  "start_unknown",
                         "dispatch_status":  "pending",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791562008919,
+                                         "observedAt":  1791562499364,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -156,7 +156,27 @@
                                                          "orchestration",
                                                          "worker-show",
                                                          "--dispatch",
-                                                         "ctx_08869eb488a4"
+                                                         "ctx_41e3573faa6e"
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_4d49e747c570",
+                        "dispatch_id":  "ctx_08869eb488a4",
+                        "terminal_handle":  "term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956",
+                        "state":  "failed",
+                        "dispatch_status":  "failed",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791562220699,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
                                                      ]
                                         },
                         "resource_state":  "external",
@@ -169,9 +189,8 @@
                         "state":  "succeeded",
                         "dispatch_status":  "completed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791561564210,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
