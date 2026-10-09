@@ -51,6 +51,7 @@ Sol의 core 작업은 병행 시작하고, GUI 최종 통합·제출·통합 검
 - [x] PC aging·privacy·초기화·Windows crash 제출 수락 및 기존 39개 시험 (`14cc264`)
 - [ ] 추가 PC→C watch timestamp·cold global·provider별 캐시·null 관측 시각·갱신 deadline 보완 (`task_a6eebb977125`)
 - [x] firmware BSP·C receiver·선택 B GUI·F9 및 실제 ESP-IDF build (`b6ec3d5`)
+- [ ] 독립 검토의 firmware 활성 세션·scoped source identity 수정 및 새 build (`task_e44125e18973`)
 - [ ] 최신 PC 보완·host 통합 독립 검증
 - [x] firmware core `ctx_d5c857a3d228` 실제 Sol 6 working/live 시작 및 checkpoint 확인 (GUI 최종 gate는 유지)
 - [ ] 독립 결함 수정·제품 commit/binary 동결

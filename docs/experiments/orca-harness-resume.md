@@ -62,6 +62,12 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
 
 ## 2026-10-09 18:24 KST 최신 체크포인트
 
+18:30 후속: Luna가 실제 C/framebuffer로 활성 세션 A→B 교체 실패를 확정
+(`msg_5e1fc2e1c18a`, `tests/integration/test_cdm_session_selection.py`).
+Sol 보완 `task_e44125e18973` / `ctx_5f9f6d8e9d11`가 native turnStart observed로 시작됨.
+이제 최종 PC 보완과 수정 firmware의 새 build/독립 검증이 모두 완료돼야 업로드한다.
+기존 `b6ec3d5` build·hash·픽셀은 원본 제출 evidence로 보존한다.
+
 - B 독립 PASS 제출 `msg_1f1335f9e59f` 수락·release/ack 완료.
 - Sol firmware 제출 `msg_00816d094c2e` 수락·release/ack, 소스 `b6ec3d5` 보존.
   실제 C 렌더러 포함 host 10개 시험 재실행 통과, IDF build 로그·15개 staging source

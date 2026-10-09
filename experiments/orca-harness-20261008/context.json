@@ -121,6 +121,16 @@
       "model": "gemini-3.8-flash-medium",
       "approval_flag": "--dangerously-skip-permissions",
       "model_evidence": "Actual CIM argv and bounded redacted worker CLI footer Gemini3.8FlashMedium; native model field null."
+    },
+    "firmware_source_correction": {
+      "task_id": "task_e44125e18973",
+      "dispatch_id": "ctx_5f9f6d8e9d11",
+      "terminal": "term_9a4ebce2-fd56-4795-b238-e480cc1dc1bb",
+      "model": "gpt-6-sol",
+      "status": "native turnStart observed; root and Luna active-session/source identity defect correction",
+      "review_message": "msg_5e1fc2e1c18a",
+      "original_submission_commit": "b6ec3d5",
+      "final_gate": "Latest corrected firmware submission/build/hash and independent review required before COM."
     }
   },
   "frozen_input_count": 57,

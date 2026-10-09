@@ -100,6 +100,20 @@ non-null이므로 아직 관측한 적 없는 source의 실패를 null capture r
 PC에서 확인한다. warm 실패는 원래 capture와 마지막 정상값을 유지하고 error/stale을
 표시한다. 성공적인 capture 시각을 만들거나 동결 schema를 확장하지 않는다.
 
+2026-10-09 source identity·현재 선택 결정 (`msg_5a40c36159d4` 질문): 동결 schema는
+`snapshot_id` 문법만 제한하며 전체 provider/metric 간 전역 고유성을 정하지 않는다.
+서로 다른 provider·agent·host·model·account·source kind·metric 맥락의 동일 ID를
+한 source로 합치거나 그 이유만으로 frame을 거절하지 않는다. 같은 완전한 source 맥락의
+중복 record는 모호한 입력으로 거절할 수 있다. session ID는 앞서 정한 snapshot 식별자에
+보존해 다른 세션의 값·캐시를 귀속시키지 않는다.
+
+이번 PC collector는 갱신마다 현재 요청한 source 목록 전체를 보낸다. usage 배열은
+과거 세션의 증분 이력이 아니다. 사용자가 A 대신 B를 선택하면 LCD의 활성 목록은 B로
+바뀌고, 관측 ID 변경으로 화면 목록·메모리가 무한히 늘지 않아야 한다. 같은 활성 source의
+error/unknown은 이전 정상값·원래 시각을 보존한다. 누락된 source를 과거 선택 목록으로
+계속 표시하지 않는다. 이는 이번 cohort의 producer/consumer 명확화이며 과거 평가와
+동결 원본을 정정하지 않는다.
+
 ## LCD 디자인과 하드웨어
 
 실제 LCD는 820×320 가로다. quota와 세션 token을 구분해 한눈에 읽고, 글로벌 리셋·상태를
