@@ -2,8 +2,8 @@
   "cohort": "orca-harness-20261008",
   "run_id": "run_c968c43361da",
   "coordinator_handle": "term_c1752a58-5861-435e-ab3a-c99caaa61b14",
-  "resumed_coordinator_handle": "term_54a83fa0-c831-41b9-8295-ca84d361c828",
-  "resumed_runtime_id": "b85e3007-613f-450b-ab06-8a60f76fa6e5",
+  "resumed_coordinator_handle": "term_9fb88ac7-32b2-43f6-8ba2-c203ed6531bf",
+  "resumed_runtime_id": "4f9b9ae1-762e-456d-b06a-8c1a5039841c",
   "worktree_id": "ce5556c0-b87c-4c5f-9bac-6e1fa3f0faf2::C:/Users/이광진/orca/workspaces/codex-desk-meter/experiment-orca-harness-20261008",
   "branch": "lkj000619/experiment-orca-harness-20261008",
   "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
@@ -202,7 +202,7 @@
       "model": "gemini-3.8-flash-medium",
       "approval_flag": "--dangerously-skip-permissions",
       "source_commit": "5d16e97",
-      "status": "working/live observed on actual rendered AGY screen; native turn start unobserved, not exit; no duplicate or Enter resend",
+      "status": "accepted succeeded msg_2729ab88db05, preserved e7c5b51; released external/processAction none and new generation Delivery acked; product gate fails root63=62pass1fail in14.201s, combined5.016s",
       "reproduction": "operator/pc-shared-budget-cleanup-probe.json",
       "gate": "actual combined5s bounded; accepted source/tests; same independent review Task retry before COM",
       "dispatch_id": "ctx_ca714297b040",
@@ -211,9 +211,22 @@
       "latest_guidance": "msg_cac974b23c55",
       "harness_guidance": "msg_5f6da12db779",
       "progress_checked_at": "2026-10-09T17:13:57.072352+00:00",
-      "progress": "Actual working/live, no accepted completion. Native mailbox read through msg_1c0ed87e7d0d observed; actual WindowsSerialSink and OS timeout/cleanup edits, new regressions still being debugged. Latest guidance requires actual SendOutcome terminal event and fail-closed setter enforcement. Four PC source files plus owned tests and two role reports unsubmitted.",
+      "progress": "Submission settled. Prior inferred follow-up consumption was not proven; readonly worker peek had8 pending messages. Current source resets pending request origin and swallows OS timeout enforcement failure.",
       "os_enforcement_guidance": "msg_646688de48b6",
-      "owner_checkpoint_current": true
+      "owner_checkpoint_current": true,
+      "submission_commit": "e7c5b51",
+      "post_submission_probe": "operator/pc-resume-counter-review-20261010.json"
+    },
+    "pc_final_deadline_correction": {
+      "task_id": "task_d7aa5e059e8d",
+      "dispatch_id": "ctx_a7d558d25511",
+      "terminal": "term_25d7d35f-8e19-4188-9442-70cfee46313c",
+      "model": "gemini-3.8-flash-medium",
+      "approval_flag": "--dangerously-skip-permissions",
+      "source_commit": "e7c5b51",
+      "status": "actual working; accepted heartbeat msg_d9c793f3700c; native start ready/input_accepted/turnStart unsupported",
+      "model_evidence": "Actual Gemini3.8Flash medium CLI footer and CIM PID13820 argv; old runtime role handles absent, new exact terminal.",
+      "gate": "pending request origin preserved, actual OS timeout failure stops before write, actual terminal outcome5s regression; PC pass then same Luna Task retry before COM"
     }
   },
   "frozen_input_count": 57,
@@ -234,6 +247,11 @@
       "runtime_id": "01fe54dc-9231-41a3-8a2d-557f0c610d63",
       "coordinator_handle": "term_b616990b-a6c9-4d5e-90c2-47af89701a69",
       "reason": "5h interruption and Orca restart, 2026-10-10; preserve prior generation"
+    },
+    {
+      "runtime_id": "b85e3007-613f-450b-ab06-8a60f76fa6e5",
+      "coordinator_handle": "term_54a83fa0-c831-41b9-8295-ca84d361c828",
+      "reason": "5h session reset and runtime restart; generation5 takeover 2026-10-10 07:37 KST"
     }
   ]
 }

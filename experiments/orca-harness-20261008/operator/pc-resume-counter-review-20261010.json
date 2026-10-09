@@ -1,0 +1,35 @@
+{
+  "scope": "coordinator counter-review of accepted Flash submission; not product acceptance",
+  "source_commit": "e7c5b51",
+  "observed_at": "2026-10-09T22:37:16Z",
+  "command": "C:/Espressif/user-tools/python_env/idf5.3_py3.11_env/Scripts/python.exe -B -X utf8 -m unittest discover -s tests/pc -q",
+  "tests_run": 63,
+  "passed": 62,
+  "failures": 1,
+  "suite_elapsed_seconds": 14.201,
+  "exit_code": 1,
+  "failure": {
+    "test": "test_delayed_terminate_kill_and_near_limit_serial_drain_enforces_five_second_budget",
+    "line": 1617,
+    "elapsed_seconds": 5.016000000061467,
+    "limit_seconds": 5.0,
+    "message": "Combined delayed cleanup and serial drain exceeded5.0s"
+  },
+  "source_findings": [
+    "cli pending manual_request_arrival resets to now_fn after previous pipeline, forgetting remainder since request",
+    "WindowsSerialSink custom timeout updated before actual OS setter and setter exceptions swallowed",
+    "CdmSender initial enforcement failure swallowed before write",
+    "near-limit test completion event observes queuezero only instead of actual SendOutcome"
+  ],
+  "source_sha256": {
+    "pc/cli.py": "7bbb6d98b943d06b330cf1988c845c96b39da7b9363a5ae7a095b7ad4ebdbba8",
+    "pc/quota.py": "ee836d1386ddaa0d15657d47399cc51be32fd3f573ff2f4118346b9f4df2d64d",
+    "pc/sender.py": "b9c735662e5f66e26b9e1565e11af340cb7f778fa4504b43c17c2887484f79c9",
+    "pc/state.py": "54cc7aef055c079fd05833c537db41b7bea64228204ec06838aafac3eea5b689",
+    "tests/pc/test_cohort_probe_regressions.py": "78f2559719822a59e0599463863321665cc0f28ac64d0dfe5e06008af8e4323b"
+  },
+  "evidence_limit": "Observed original ordinary unittest output/counts/traceback; full console output was not saved. This record preserves its relevant result without claiming a rerun. Earlier active-writer63green used different cli source.",
+  "physical_live": "not_run",
+  "next_task": "task_d7aa5e059e8d",
+  "source_hash_basis": "Immutable accepted commit e7c5b51; later active owner edits excluded."
+}

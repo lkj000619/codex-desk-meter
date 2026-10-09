@@ -60,7 +60,17 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 02:14 KST 최신 체크포인트
+## 2026-10-10 07:39 KST 최신 체크포인트
+
+- 세션·Orca 재시작 후 같은 Run을 generation 5에 연결했다. 현재 runtime은 `4f9b9ae1-762e-456d-b06a-8c1a5039841c`, coordinator는 `term_9fb88ac7-32b2-43f6-8ba2-c203ed6531bf`다. 이전 역할 terminal은 현재 목록에 없으며 이전 handle로 입력을 재전송하지 않는다.
+- Flash `task_e2907fe00c34` / `ctx_ca714297b040`의 성공 제출 `msg_2729ab88db05`는 runtime 수락을 확인하고 `e7c5b51`에 보존했다. release는 external terminal 보존/processAction none이며, 새 generation의 Delivery `delivery_c5442ce72768`를 ack했다. 이전 generation Delivery의 ack는 `consumer_fenced`로 거부되어 새 Delivery를 확인했다. 제출 완료와 제품 합격은 별개다.
+- coordinator가 최종 제출에서 실제 PC 63개를 실행한 결과 62개 통과·1개 실패, 14.201초다. 지연된 cleanup와 serial drain 시험의 실제 전체 시간이 5.016초로 5초를 초과했다. 코드에는 pending 요청 시각을 이전 작업 종료 뒤로 옮기는 회귀와 OS timeout setter 실패를 무시하는 경로도 남아 있다. [재개 검증 기록](../../experiments/orca-harness-20261008/operator/pc-resume-counter-review-20261010.json)을 따른다.
+- 이전 02:14 기록의 메일 확인 추정은 읽기·처리의 증거가 아니다. 02:20경 readonly peek에 안내 8개가 미처리 상태로 남았고 중요한 안내가 최종 코드에 반영되지 않았다. 성공 enqueue/화면의 check 명령만으로 읽음·ack를 단정하지 않는다. 이전 판정 원본은 보존한다.
+- 남은 좁은 수정은 새 `task_d7aa5e059e8d` / `ctx_a7d558d25511`에 모두 명시해 dispatch했다. 실제 모델·자동 승인 argv를 확인한 새 AGY terminal `term_25d7d35f-8e19-4188-9442-70cfee46313c`에서 작업 중이다. 수정 범위는 시각 복원, OS 제한 설정 실패 전송 차단, 실제 SendOutcome 완료 시각을 검증하는 시험이다. coordinator는 PC/역할 시험을 대신 수정하지 않는다.
+- 다음 순서: Flash 제출 수락 및 실제 PC 시험 → 같은 Luna Task `task_4d49e747c570`의 실패 attempt `ctx_08869eb488a4` 재시도(새 Luna terminal 필요) → 독립 통합 PASS → binary/source 동결 → COM3 확인·업로드·live·사용자 관측. Luna 소유 시험의 row accessor 및 잔여 budget=0일 때 RPC 시작 가정만 정정하고 실제 5초·신선 데이터 판정은 유지한다.
+- firmware `853ddf7`과 선택 B는 유지한다. COM 열기·업로드·실계정 수집·실물 관측은 이번 협업 실험에서 계속 `not_run`, `upload_permitted=false`다.
+
+## 2026-10-10 02:14 KST 당시 체크포인트
 
 - 현재 PC 보완은 계속 `task_e2907fe00c34` / `ctx_ca714297b040` 실제 working/live다. Flash가 자신의 checkpoint를 현재 식별자로 갱신했다. `pc/` 네 파일·담당 회귀 시험·Flash 보고서 두 파일은 모두 미제출 편집이다. 코드가 존재하거나 보고서가 작성됐다는 사실만으로 완료 처리하지 않는다.
 - 담당자는 native mailbox에서 `msg_1c0ed87e7d0d`까지 읽고 실제 WindowsSerialSink 회귀와 OS timeout 설정, 양수 최소값 없는 cleanup을 보완했다. 새 시험의 실패를 정비하고 있으며, 독립 제출은 아직 없다.
