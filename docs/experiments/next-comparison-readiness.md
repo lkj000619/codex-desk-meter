@@ -16,6 +16,7 @@
 - 2026-10-09 18:30 KST 독립 firmware 결함: Luna `msg_5e1fc2e1c18a`에서 실제 C/framebuffer로 세션 A→B 선택 후 A가 기본 화면에 남음을 재현함. 전역 snapshot ID 제한·현재 source 목록 처리도 보완 범위. `task_e44125e18973` / `ctx_5f9f6d8e9d11`를 Sol에게 맡겨 수정·새 C 시험·build/hash를 진행함. 기존 성공 build는 보존하며 최종 업로드는 수정 제출의 독립 검증 이후
 - 2026-10-09 18:41 KST 수정 firmware 제출 `msg_49bca57172a2` 수락·release/ack, `853ddf7` 보존. coordinator가 actual C 시험 18개와 Luna 세션 전환 시험 1개를 재실행해 통과했고, 실제 staging source 15개와 새 app/boot/partition/sdkconfig hash를 확인함. 새 app SHA-256은 `385130667ab15ca8dcc665e70fc06882b1e89535bde8d84af05fdc2b36c1ef72`. Luna에게 수정 제출 검토를 허용함. PC `ctx_04111d8d4601`은 working/live이며 수락된 완료가 없어 최종 통합·COM gate는 계속 대기함
 - 2026-10-09 18:54 KST PC 제출 `msg_be047076a883` 수락·`0e39f0d` 보존, coordinator 실제 50개 시험 통과. wire·cache·누락 관측 시각은 보완됐으나 6.5초 manual 지연은 제출에 미포함이다. 같은 AGY terminal을 `task_2425d0e52884` / `ctx_cbb151521cd0`에 즉시 재사용했고 native turnStart observed다. 최종 통합 검증은 이 좁은 5초 deadline 수정의 제출을 기다린다. 업로드·실계정·실물 시험은 계속 `not_run`
+- 2026-10-09 19:10 KST PC deadline 제출 `msg_abbf6fa3f33e` 수락·release/ack, commit `5ddef63`, coordinator 53개 시험 통과. 추가 실제 sink/scheduler probe에서 flush 예외의 성공 처리·blocked thread 3개·write 중 수동 요청 유실을 확인함. [PC 보완 검토](../design/2026-10-08-pc-review-findings.md)에 보존했다. PC owner는 idle이며 Luna의 현재 Task에 안정된 최신 PC→C 전체 시험을 허용했다. 알려진 결함을 독립 재현·정리 후 보완/재검증한다. 제품·deadline 합격은 아니며 COM/실계정/실물은 계속 미실행
 
 [설계](../design/2026-10-08-orca-harness.md) · [계획](../plans/2026-10-08-orca-harness.md)
 · [세션 중단 후 재개](orca-harness-resume.md)

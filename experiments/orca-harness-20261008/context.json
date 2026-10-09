@@ -108,8 +108,8 @@
     },
     "integration_review": {
       "task_id": "task_4d49e747c570",
-      "status": "working/live native gpt-6-luna verified; reviewing frozen firmware first; selected session A-to-B historical cache repro submitted for assessment",
-      "additional_coordinator_gate": "Review frozen firmware in parallel; final PC-to-C tests/worker_done require latest PC remediation accepted and production tests pass. No physical until final independent review and artifact freeze.",
+      "status": "working/live; full stable PC5ddef63 to firmware853ddf7 review authorized msg_bf54f604138a; root confirmed three current PC blockers",
+      "additional_coordinator_gate": "Latest accepted PC and firmware stable; full synthetic integration authorized. No physical until independent findings remediated, review passes and artifact freeze.",
       "dispatch_id": "ctx_da800c8d8bce",
       "terminal": "term_1a2fcc8b-6402-4851-ba15-d27061517be1"
     },
@@ -129,7 +129,9 @@
       "terminal": "term_57af52b9-738e-44cc-beb8-4d2204a41b46",
       "model": "gemini-3.8-flash-medium",
       "approval_flag": "--dangerously-skip-permissions",
-      "status": "native turnStart observed; fixes manual/port refresh deadline including collection/RPC cleanup/write",
+      "status": "accepted succeeded msg_abbf6fa3f33e at5ddef63; root53tests pass; released external retained/processAction none and Delivery acknowledged; actual flush/scheduler probes fail, not product approval",
+      "submission_commit": "5ddef63",
+      "post_submission_probe": "operator/pc-post-deadline-probe.json",
       "reproduction": "operator/pc-manual-deadline-probe.json",
       "final_gate": "Accepted corrected PC/tests then independent current producer-to-C verification before COM."
     },

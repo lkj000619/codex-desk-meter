@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-09T09:55:38.6059496Z",
+    "observed_at":  "2026-10-09T10:11:53.5371754Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -119,9 +119,9 @@
                   {
                       "id":  "task_2425d0e52884",
                       "title":  "PC bounded manual and reconnect dispatch",
-                      "status":  "dispatched",
+                      "status":  "completed",
                       "deps":  "[]",
-                      "completed_at":  null
+                      "completed_at":  "2026-10-09T10:07:20.771Z"
                   }
               ],
     "workers":  [
@@ -129,11 +129,11 @@
                         "task_id":  "task_2425d0e52884",
                         "dispatch_id":  "ctx_cbb151521cd0",
                         "terminal_handle":  "term_57af52b9-738e-44cc-beb8-4d2204a41b46",
-                        "state":  "ready",
-                        "dispatch_status":  "dispatched",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791539737454,
+                                         "observedAt":  1791540452444,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
@@ -152,9 +152,9 @@
                         "state":  "succeeded",
                         "dispatch_status":  "completed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791538671802,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "stale_status",
+                                         "observedAt":  1791538671802
                                      },
                         "next_action":  {
                                             "kind":  "none",
@@ -173,7 +173,7 @@
                         "dispatch_status":  "pending",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791539730032,
+                                         "observedAt":  1791540646056,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {

@@ -12,9 +12,9 @@
 | 사용자 범위·역할 확정 | 완료 | Sol/Flash/Luna, GUI는 AGY Gemini 3개+Codex CLI gpt-6.1-sol 3개, 세션 토큰+quota 확인 |
 | 역할별 기술 검토·DAG | 초기 요구·인터페이스 보고 수락 완료 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
 | LCD UX/UI·OpenDesign | B 수정 `a3aeebb`; 독립 PASS 제출 `msg_1f1335f9e59f` 수락 완료 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
-| PC 프로그램 구현 | 추가 wire/source 제출 `0e39f0d` 수락·coordinator 50개 시험 통과; 5초 갱신 지연은 `task_2425d0e52884`에서 보완 | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
+| PC 프로그램 구현 | deadline 제출 `5ddef63` 수락·53개 시험 통과; 실제 flush 오류·thread 유실·manual 요청 유실은 독립 검증 후 보완 | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
 | firmware·통합 | 활성 source 수정 제출 `853ddf7` 수락; coordinator 실제 C 시험 18개·선택 세션 통합 1개 통과 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
-| 독립 검증·수정 | `task_4d49e747c570` firmware 검토부터 병행 시작; 최종 PC 통합·제출은 최신 PC 보완 수락/시험 이후 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
+| 독립 검증·수정 | 안정된 `5ddef63` PC·`853ddf7` firmware의 전체 검증 허용; 알려진 PC 세 결함 포함 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
 | 업로드·owner-only live·실물 관측 | 예정 | 동결 binary/hash·COM3 수신·LCD/BOOT·30초·단절/복구·지연 근거 |
 | 결과·실행 정리 | 예정 | 판정·미측정·실효 모델·시간/token coverage·질문·실패 기록, worker 소유권 정리 |
 

@@ -107,3 +107,16 @@ production `WindowsSerialSink.flush`에 synthetic queued bytes를 주입하니 t
 `msg_01db9aee6090`으로 진행 중인 좁은 deadline Task `task_2425d0e52884`에 전달했다.
 자동 수집/쓰기가 진행 중일 때 들어오는 수동 요청도 요청 발생 시각부터 측정한다.
 PC 50개 시험의 성공과 전체 갱신 지연의 합격은 구분한다.
+
+2026-10-09 19:10 KST 좁은 deadline 제출 `msg_abbf6fa3f33e`를 `5ddef63`에 보존했고
+coordinator가 PC 53개 시험을 재실행해 통과했다. 추가 production-path 확인
+([결과](../../experiments/orca-harness-20261008/operator/pc-post-deadline-probe.json))은 실패했다.
+
+- `flush()` 예외가 background 함수에서 무시돼 sender가 `success=true`를 반환한다.
+- stalled flush가 timeout돼도 성공으로 반환하며 3회 호출 후 blocked daemon thread 3개가 남는다.
+- write 도중 발생한 수동 event를 전송 뒤 지워, 요청 전에 끝난 수집을 수동 갱신으로 처리한다.
+
+이 제출은 수락된 산출물이지 deadline/product 합격이 아니다. owner를 release/idle로 두고
+Luna의 같은 독립 Task에 안정된 `5ddef63` PC와 `853ddf7` firmware의 전체 검증을 허용했다
+(`msg_bf54f604138a`). 독립 재현·전체 결함 목록 후 같은 PC 담당에게 구체적으로 보완하고
+수정본을 다시 검증한다. COM·live·실물 gate는 계속 닫혀 있다.

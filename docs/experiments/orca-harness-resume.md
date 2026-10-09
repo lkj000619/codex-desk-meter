@@ -60,7 +60,14 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-09 18:54 KST 최신 체크포인트
+## 2026-10-09 19:10 KST 최신 체크포인트
+
+- PC deadline `task_2425d0e52884` / `ctx_cbb151521cd0` 완료 `msg_abbf6fa3f33e` 수락·release/ack, 소스 `5ddef63`·coordinator 53/53 시험 통과. AGY owner는 idle이며 새 작업을 하고 있지 않다.
+- 추가 검증은 실패: flush 예외를 성공 처리, stalled flush daemon 3개가 남음, write 중 manual event가 재수집 없이 사라짐. 비식별 production-path 근거는 `operator/pc-post-deadline-probe.json`.
+- Luna `task_4d49e747c570` / `ctx_da800c8d8bce`에 전체 최신 PC→C 검증을 허용했다 (`msg_bf54f604138a`). 현재 안정된 PC `5ddef63`와 firmware `853ddf7`를 검증하고 독립 결함 목록을 기다린다. root가 PC 파일을 직접 수정하거나 동시에 새 owner를 시작하지 않는다.
+- 다음은 독립 보고의 결함을 같은 PC 역할에 보완하고 같은 review Task를 재검증하는 것이다. source/binary hash와 물리 gate는 보존한다. COM·live·LCD는 아직 `not_run`.
+
+## 2026-10-09 18:54 KST 이전 체크포인트
 
 - PC `task_a6eebb977125` / `ctx_04111d8d4601` 완료 `msg_be047076a883` 수락, commit `0e39f0d`·coordinator 50/50 시험 통과. accepted submission은 source/wire 수정이며 5초 갱신 지연 합격은 아니다.
 - 같은 proven AGY terminal `term_57af52b9-738e-44cc-beb8-4d2204a41b46`을 새 좁은 Task `task_2425d0e52884` / `ctx_cbb151521cd0`에 즉시 재사용함. native input/turnStart observed이며 이전 완료 Delivery ack 완료. 수집·RPC cleanup·write를 포함한 manual/port 전송 deadline을 수정한다. 중복 editor를 시작하지 않는다.

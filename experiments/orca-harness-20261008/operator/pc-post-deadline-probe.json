@@ -1,0 +1,19 @@
+{
+  "private_data": false,
+  "com_open": false,
+  "flush_error": {
+    "success": true,
+    "error_code": null,
+    "sequence": 0
+  },
+  "stalled_flush": {
+    "all_success": true,
+    "blocked_threads": 3,
+    "active_calls": 3
+  },
+  "manual_during_write": {
+    "collection_calls": 1,
+    "manual_event_cleared": true,
+    "collection_completed_before_request": true
+  }
+}
