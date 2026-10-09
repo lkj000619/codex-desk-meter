@@ -1,5 +1,7 @@
 # 별도 Orca 협업 구현 실행·관측
 
+2026-10-10 08:49 KST: **점멸 수정본은 08:48에 COM3 업로드 완료**. [현재 수정 후보](../../experiments/orca-harness-20261008/operator/firmware-flicker-candidate.json), [쓰기 검증](../../experiments/orca-harness-20261008/operator/flash-lcd-flicker-20261010.json). 원래 watch의 정상 종료·프로세스 종료를 확인하고 **`term_dcac760e-42fa-42f9-afa6-1da904d96d49`**에서 같은 세션/state로 seq40부터 60초 watch를 재개했다. 현재 단계는 RESET 없는 30초 점멸/CRC/BOOT 관측이며 재업로드·sender 초기화를 반복하지 않는다. 아래 최초 운영 기록은 당시 근거다.
+
 이 문서는 coordinator와 사용자가 실행할 절차다. 현재 gate는
 [준비 상태](next-comparison-readiness.md)에서 확인한다. 2026-10-10 host 검증 후 `7ccbb24` 후보를
 08:01 COM3에 업로드했다. 사용자의 밝은 Usage/WAITING 확인 후 sender state를 처음 생성했고,
@@ -13,14 +15,14 @@ source/build·독립 검증 뒤 기존 watch 종료를 확인하고 수행한다
 ## 업로드 전
 
 1. 최신 PC 제출 수락·시험, Luna 독립 통합 검증·결함 처리를 완료한다.
-2. [firmware 후보 목록](../../experiments/orca-harness-20261008/operator/firmware-candidate.json)의
+2. [현재 수정 후보 목록](../../experiments/orca-harness-20261008/operator/firmware-flicker-candidate.json)의
    source commit·15개 source hash·app/boot/partition hash를 현재 파일과 비교한다.
-   이 목록의 `upload_permitted=false`이면 업로드하지 않는다. 원래 host 통과 때 true였고 업로드 후 실물 점멸 보완 gate가 닫혔다. 실제 업로드 기록은 별도다.
+   이 목록의 `upload_permitted=false`이면 업로드하지 않는다. 수정본은 이미 업로드되어 현재 false다. [원래 후보](../../experiments/orca-harness-20261008/operator/firmware-candidate.json)와 최초 업로드는 보존된 과거 근거다.
 3. 현재 포트를 다시 열거하여 COM3의 Espressif USB VID `303A`/PID `1001`과 대상 보드를
    확인한다. 예전 연결 기록만으로 포트를 선택하지 않는다.
 4. [Sol 보고](../agent-runs/orca-sol/report.md)의 **날짜별 수정 산출물**을 업로드한다.
-   현재 후보 app은 `active-usage-build/`의 SHA-256
-   `385130667ab15ca8dcc665e70fc06882b1e89535bde8d84af05fdc2b36c1ef72`이다.
+   현재 후보 app은 `lcd-flicker-build/`의 SHA-256
+   `953782e5486adbe9743e5b753e716892cfdfbeef25d23b1702dc1d6050078f1f`이다.
    `final-build/`에는 보존된 이전 제출이 있으므로 해당 app을 선택하지 않는다.
 5. flash 명령·파일 hash·대상 포트·시간·부팅 로그를 남긴다. 자동 rebuild가 실행됐다면
    새 source/hash를 다시 검증한다. 완전 erase나 BOOT를 누른 채 reset은 필요하지 않다.
@@ -30,12 +32,11 @@ source/build·독립 검증 뒤 기존 watch 종료를 확인하고 수행한다
 `python`은 아래 PC 절차의 ESP-IDF Python 환경이다. 현재 대상이 COM3임을 다시 확인한다.
 
 ```powershell
-python -m esptool --chip esp32s3 --port COM3 --baud 460800 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_freq 80m --flash_size 16MB 0x0 firmware/.host-tools/active-usage-build/bootloader.bin 0x8000 firmware/.host-tools/active-usage-build/partition-table.bin 0x10000 firmware/.host-tools/active-usage-build/codex_desk_meter.bin
+python -m esptool --chip esp32s3 --port COM3 --baud 460800 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_freq 80m --flash_size 16MB 0x0 firmware/.host-tools/lcd-flicker-build/bootloader.bin 0x8000 firmware/.host-tools/lcd-flicker-build/partition-table.bin 0x10000 firmware/.host-tools/lcd-flicker-build/codex_desk_meter.bin
 ```
 
 후보 app을 자동으로 다시 build하는 명령이 아니므로 검사한 binary를 그대로 올린다.
-기존 sender state를 초기화하는 명령과 구분하고, 새 업로드로 receiver가 비어 있다는
-근거가 있을 때만 최초 state를 만든다.
+기존 sender state를 초기화하는 명령과 구분한다. receiver가 비어 있어도 기존 sender state가 있으면 그대로 이어간다. 최초 state 생성은 해당 장치에서 state를 한 번도 만든 적이 없을 때만 수행한다.
 
 ## PC 프로그램
 

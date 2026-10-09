@@ -1,5 +1,7 @@
 # Orca 협업 구현 계획
 
+2026-10-10 08:49 KST 추가: 점멸 표시 수정 `9bbe333`·Luna 독립 PASS를 새 tag `orca-harness-20261010-lcd-flicker-candidate` (`8fe1f9f`)로 동결하고 **08:48 COM3 재업로드·쓰기 검증 완료**. 같은 세션/state의 watch를 seq40부터 재개했다. [점멸 보완 계획](2026-10-10-lcd-flicker.md)의 코드/검증/업로드는 완료, 수정 후 사용자 무점멸·CRC·BOOT·30초 관측은 대기다. 기존 최초 host/관측은 보존하며 `product_pass=false`다.
+
 2026-10-10 08:20 KST 추가: 사용자 후속 영상에서 실데이터와 FRAME/CRC VALID 확인. 반복 점멸은 보완 필요하여 [별도 점멸 계획](2026-10-10-lcd-flicker.md)과 기존 Sol 모델의 후속 Task를 시작했다. 아래 host 완료는 보존하고 실물 제품 PASS는 선언하지 않는다.
 
 2026-10-10 08:13 KST 현재: 최종 PC 64/64·독립 통합 27/27 통과 및 역할 작업 정리 완료. `7ccbb24` host 후보를 COM3에 업로드했고, 초기 LCD 관측 후 fixture·실제 세션/quota 전송과 60초 watch를 실행했다. **전송 후 사용자 LCD/CRC·BOOT·30초 관측 대기**이며 `product_pass=false`다. 새 기능·재업로드·sender 재초기화 없이 관측을 이어간다.

@@ -7,9 +7,11 @@
 | 사용자 영상·기존 갱신 경로 관측 | 완료 | 원본 hash·정확한 frame404/494의 부분 지워짐·실제 숫자/CRC 기록. 식별자가 보이는 이미지는 Git 제외 로컬 보존 |
 | Sol의 원인 재현·좁은 firmware 수정 | 완료 | `9bbe333`: 원래 production BSP의 표시 중 pixel 변경 재현; 별도 버퍼 완성 후 두 bounce 경계로 교체 |
 | 실제 host 검사·ESP-IDF build | 완료 | 원래 코드의 의도된 재현 실패, 수정 firmware19/19·선택 세션1/1, SDK build·source15/15·artifact4 hash 일치 |
-| Luna 독립 표시 경로 검증 | 진행 | `task_4386f8dbef93` / `ctx_1ab7525e89ae`; front buffer 쓰기·표시 완료/동기화·오류 경로와 B/BOOT/stale 회귀 확인 |
-| coordinator 동결·재업로드·live 재개 | 대기 | 기존 watch 종료 확인 후 COM3 업로드, sender state/순번 유지, 같은 세션/계정으로 재개 |
+| Luna 독립 표시 경로 검증 | 완료 | `msg_999781af4044` PASS: firmware19/19·producer/선택21/21·독립 표시1/1, SDK/source/artifact 확인; release/ack 완료 |
+| coordinator 동결·재업로드·live 재개 | 완료 | tag `orca-harness-20261010-lcd-flicker-candidate` / `8fe1f9f`; 08:48 COM3 세 이미지 쓰기 hash 통과, 기존 writer 종료 후 같은 state/세션 seq40부터 watch 재개 |
 | 사용자 점멸/30초 관측 | 대기 | RESET 없이 표시 유지, 데이터·CRC·BOOT 탐색, 점멸 개선 실물 확인 |
+
+2026-10-10 08:49 KST: [독립 검증](../agent-runs/orca-luna/lcd-flicker-review.md), [업로드](../../experiments/orca-harness-20261008/operator/flash-lcd-flicker-20261010.json), [live 재개](../../experiments/orca-harness-20261008/operator/live-watch-lcd-flicker-20261010.json)를 보존했다. 사용자에게 수정 후 관측을 요청했다. 긴 토큰 지수부 잘림은 이번 표시 교체 수정과 별도이며 미해결이다.
 
 역할: firmware/자체 시험/보고는 기존 Codex `gpt-6-sol`, 독립 검증은 `gpt-6-luna`, coordinator는 지정 영상 관측·문서·Git·COM·실계정만 담당한다. PC 코드·동결 입력 57개·기존 판정은 바꾸지 않는다. 자동 승인 옵션은 기존 사용자 요청을 유지한다.
 

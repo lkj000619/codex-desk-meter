@@ -1,0 +1,81 @@
+{
+  "started_at": "2026-10-09T23:48:09.272369+00:00",
+  "completed_at": "2026-10-09T23:48:17.920847+00:00",
+  "command": [
+    "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+    "-B",
+    "-m",
+    "esptool",
+    "--chip",
+    "esp32s3",
+    "--port",
+    "COM3",
+    "--baud",
+    "460800",
+    "--before",
+    "default_reset",
+    "--after",
+    "hard_reset",
+    "write_flash",
+    "--flash_mode",
+    "dio",
+    "--flash_freq",
+    "80m",
+    "--flash_size",
+    "16MB",
+    "0x0",
+    "firmware/.host-tools/lcd-flicker-build/bootloader.bin",
+    "0x8000",
+    "firmware/.host-tools/lcd-flicker-build/partition-table.bin",
+    "0x10000",
+    "firmware/.host-tools/lcd-flicker-build/codex_desk_meter.bin"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 8.648,
+  "ports_before": [
+    {
+      "device": "COM1",
+      "vid": null,
+      "pid": null
+    },
+    {
+      "device": "COM3",
+      "vid": 12346,
+      "pid": 4097
+    }
+  ],
+  "source_tag": "orca-harness-20261010-lcd-flicker-candidate",
+  "source_commit": "8fe1f9ff5f7ce77b0c792be90a16ad153999e6a5",
+  "firmware_submission_commit": "9bbe333",
+  "artifacts": [
+    {
+      "path": "firmware/.host-tools/lcd-flicker-build/bootloader.bin",
+      "flash_offset": "0x0",
+      "bytes": 21504,
+      "sha256": "f4c5160d0777ebda11edac881853b211300323e5cf8f96eeeda5314d731d02ab"
+    },
+    {
+      "path": "firmware/.host-tools/lcd-flicker-build/partition-table.bin",
+      "flash_offset": "0x8000",
+      "bytes": 3072,
+      "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+    },
+    {
+      "path": "firmware/.host-tools/lcd-flicker-build/codex_desk_meter.bin",
+      "flash_offset": "0x10000",
+      "bytes": 308672,
+      "sha256": "953782e5486adbe9743e5b753e716892cfdfbeef25d23b1702dc1d6050078f1f"
+    },
+    {
+      "path": "firmware/.host-tools/lcd-flicker-build/sdkconfig",
+      "flash_offset": null,
+      "bytes": 70020,
+      "sha256": "46788f1c30a51868da7c66c41def9045514faaf393bc68ec0d6f05df4daca452"
+    }
+  ],
+  "output": "operator/flash-lcd-flicker-20261010.txt",
+  "old_watch_exit": "Watch stopped by user; PID39532/28704 absent",
+  "sender_next_sequence_preserved": 40,
+  "physical_display": "awaiting corrected observation",
+  "product_pass": false
+}

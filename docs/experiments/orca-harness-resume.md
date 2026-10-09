@@ -60,7 +60,15 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 08:37 KST 최신 체크포인트 — 점멸 수정 제출·독립 검증
+## 2026-10-10 08:49 KST 최신 체크포인트 — 수정본 업로드·실물 관측 대기
+
+- Sol 수정 `9bbe333`과 Luna 성공 제출 `msg_999781af4044`를 수락·release/ack했다. 독립 firmware19/19·producer/선택21/21·표시1/1 PASS, coordinator도 새 표시 검사1/1(1.115초)을 확인했다. [독립 보고](../agent-runs/orca-luna/lcd-flicker-review.md). 새 동결 tag **`orca-harness-20261010-lcd-flicker-candidate` / `8fe1f9f`**이며 원래 tag7ccbb24는 보존했다.
+- **08:48:09–08:48:17 KST COM3 업로드 완료**, 실제 ESP32-S3 rev0.2·세 이미지 쓰기 hash 검증 통과. 새 app **`953782e5486adbe9743e5b753e716892cfdfbeef25d23b1702dc1d6050078f1f`**. [새 후보](../../experiments/orca-harness-20261008/operator/firmware-flicker-candidate.json), [업로드 기록](../../experiments/orca-harness-20261008/operator/flash-lcd-flicker-20261010.json). 수정 후 실물 점멸/CRC/BOOT는 아직 미확인이다.
+- 원래 watch를 Ctrl+C로 정상 종료하고 `Watch stopped by user`·PID39532/28704의 실제 종료를 확인했다. **새 watch terminal `term_dcac760e-42fa-42f9-afa6-1da904d96d49`**에서 08:48:38 **seq40/2844B** 전송 성공, 이후 60초 갱신. 실제 Python launcher36488→interpreter27236은 한 sender의 부모/자식이다. [재개 기록](../../experiments/orca-harness-20261008/operator/live-watch-lcd-flicker-20261010.json). 저장된 PID로 현재 실행을 단정하지 않는다.
+- **sender state·명시적 세션 선택을 그대로 유지했고 재초기화하지 않았다.** 같은 `artifacts/orca-harness-runtime/sender-state.json`, `locks/`, `selected-session.json`을 사용한다. 오래된 terminal cead…는 종료된 프로그램 기록이며 새 handle을 확인한다. 재개 시 새 watch/실제 프로세스/포트 소유권부터 확인하고 두 번째 writer·reset/init를 시작하지 않는다.
+- 사용자에게 **RESET 없이 30초 점멸, 숫자/CRC, BOOT 짧게3회와600ms 유지** 관측을 요청했다. 다음은 해당 응답/영상의 원본 hash·시점별 실제 판독 기록이다. 관측 전에 수정이 실물에서 성공했다고 판정하지 않는다. 긴 토큰 지수부 잘림·반영 지연·단절/복구·센서 타당성·24시간은 미해결/미측정이며 `product_pass=false`.
+
+## 2026-10-10 08:37 KST 당시 체크포인트 — 점멸 수정 제출·독립 검증
 
 - Sol 성공 제출 `msg_cc6cd75af634`를 수락·release(external retained/processAction none)·Delivery ack하고 **`9bbe333`**에 동결했다. 원래 production BSP는 컴파일 후 `scanned[0] == scanned_before`에서 실패했고 수정본 **19/19**가 통과했다. source/staging **15/15**, 새 app **`953782e5486adbe9743e5b753e716892cfdfbeef25d23b1702dc1d6050078f1f`** 등 artifact4 hash를 coordinator가 재확인했다. [재현/회귀 근거](../../experiments/orca-harness-20261008/operator/lcd-flicker-root-regression-20261010.json).
 - 같은 Run의 독립 검증 **`task_4386f8dbef93` / `ctx_1ab7525e89ae`**, 기존 Luna terminal **`term_b6cd0335-ea67-4926-8229-b50602b3fb97`**가 진행 중이다. native turn_start_unobserved 이후 실제8903char paste draft를 확인하고 Enter를 정확히 한 번 보냈으며 `Reading task guidance`를 관측했다. timeout을 종료로 취급하거나 중복 worker를 시작하지 않는다. 원본 host tag는 보존했다.

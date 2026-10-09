@@ -1,0 +1,22 @@
+{
+  "observed_at": "2026-10-09T23:48:56.173419+00:00",
+  "terminal_handle": "term_dcac760e-42fa-42f9-afa6-1da904d96d49",
+  "previous_terminal_handle": "term_cead0ee8-aa83-41f3-93c6-c151d8cea13e",
+  "port": "COM3",
+  "interval_seconds": 60,
+  "state_file": "artifacts/orca-harness-runtime/sender-state.json",
+  "lock_dir": "artifacts/orca-harness-runtime/locks",
+  "selected_session": "same explicitly pinned selection; path Git ignored",
+  "state_reinitialized": false,
+  "resume_sequence": 40,
+  "next_sequence_observed": 41,
+  "safe_terminal_evidence": [
+    "Starting watch loop (interval: 60s). Press Enter for manual refresh, Ctrl+C to exit.",
+    "[2026-10-09T23:48:37.342429+00:00] Port COM3 opened successfully.",
+    "[2026-10-09T23:48:38.943587Z] Iteration 1 [AUTO] [HOST WRITE] seq=40, size=2844B"
+  ],
+  "firmware_tag": "orca-harness-20261010-lcd-flicker-candidate",
+  "firmware_app_sha256": "953782e5486adbe9743e5b753e716892cfdfbeef25d23b1702dc1d6050078f1f",
+  "device_ack": "host write only; corrected physical CRC and no flicker pending",
+  "product_pass": false
+}

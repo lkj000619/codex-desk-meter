@@ -270,10 +270,11 @@
       "model": "gpt-6-luna",
       "effort": "high",
       "approval_flag": "--dangerously-bypass-approvals-and-sandbox",
-      "status": "Native input accepted but turn_start_unobserved; actual8903char draft observed; Enter sent once and Reading task guidance positively observed",
+      "status": "Accepted native succeeded msg_999781af4044, external retained/no process action and Delivery acked; independent19 firmware,21 producer/selection,1 presentation PASS",
       "tested_source_commit": "9bbe333",
       "spec_path": "tasks/lcd-flicker-luna.md",
-      "guidance": "msg_4ffd0a1970ea"
+      "guidance": "msg_4ffd0a1970ea",
+      "report_path": "docs/agent-runs/orca-luna/lcd-flicker-review.md"
     }
   },
   "frozen_input_count": 57,
@@ -311,8 +312,8 @@
     "upload_permitted": false
   },
   "operator_execution": {
-    "updated_at": "2026-10-09T23:37:11.846487+00:00",
-    "phase": "LCD_flicker_source_frozen_9bbe333_independent_Luna_review_working",
+    "updated_at": "2026-10-09T23:48:56.173419+00:00",
+    "phase": "LCD_correction_uploaded_live_watch_resumed_physical_flicker_observation_pending",
     "host_candidate_commit": "7ccbb24",
     "host_candidate_tag": "orca-harness-20261010-host-candidate",
     "flash_evidence": "operator/flash-host-candidate-20261010.json",
@@ -324,15 +325,14 @@
     "fixture_host_write_evidence": "operator/fixture-send-20261010.json",
     "live_collection_evidence": "operator/live-collection-metadata-20261010.json",
     "live_host_write_evidence": "operator/live-send-20261010.json",
-    "live_watch_evidence": "operator/live-watch-20261010.json",
-    "live_watch_terminal": "term_cead0ee8-aa83-41f3-93c6-c151d8cea13e",
+    "live_watch_evidence": "operator/live-watch-lcd-flicker-20261010.json",
+    "live_watch_terminal": "term_dcac760e-42fa-42f9-afa6-1da904d96d49",
     "live_watch_interval_seconds": 60,
     "resume_selection_record": "artifacts/orca-harness-runtime/selected-session.json (Git ignored; keep exact selection)",
-    "port_owner": "single live-watch program; do not concurrently open serial monitor/send/init",
+    "port_owner": "single resumed live-watch program",
     "device_ack": "no wireACK; LCD FRAME/CRC VALID physically confirmed for at least one live frame",
     "product_pass": false,
     "pending": [
-      "corrected firmware independent review and upload",
       "corrected physical no-flicker30s",
       "BOOT short3 and hold600ms navigation",
       "long token exponent clipping separate finding",
@@ -342,6 +342,11 @@
       "24h endurance"
     ],
     "post_data_video_evidence": "operator/post-data-video-20261010/observation.json",
-    "lcd_stability": "user reported repeated flashes; correction required"
+    "lcd_stability": "correction host PASS; corrected physical stability not_run",
+    "live_watch_status": "successful seq40 write; single writer resumed same state/selection",
+    "flicker_candidate_tag": "orca-harness-20261010-lcd-flicker-candidate",
+    "flicker_manifest": "operator/firmware-flicker-candidate.json",
+    "flicker_flash_evidence": "operator/flash-lcd-flicker-20261010.json",
+    "flicker_candidate_commit": "8fe1f9ff5f7ce77b0c792be90a16ad153999e6a5"
   }
 }

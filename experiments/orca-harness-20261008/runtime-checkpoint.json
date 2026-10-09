@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-09T23:37:13.7675495Z",
+    "observed_at":  "2026-10-09T23:51:05.7321388Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -168,9 +168,9 @@
                   {
                       "id":  "task_4386f8dbef93",
                       "title":  "Luna: independent LCD presentation review",
-                      "status":  "blocked",
+                      "status":  "completed",
                       "deps":  "[\"task_63d11f3c24cb\"]",
-                      "completed_at":  null
+                      "completed_at":  "2026-10-09T23:47:15.247Z"
                   }
               ],
     "workers":  [
@@ -178,20 +178,17 @@
                         "task_id":  "task_4386f8dbef93",
                         "dispatch_id":  "ctx_1ab7525e89ae",
                         "terminal_handle":  "term_b6cd0335-ea67-4926-8229-b50602b3fb97",
-                        "state":  "start_unknown",
-                        "dispatch_status":  "pending",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791589020872,
+                                         "observedAt":  1791589638341,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {
-                                            "kind":  "inspect",
+                                            "kind":  "none",
                                             "argv":  [
-                                                         "orchestration",
-                                                         "worker-show",
-                                                         "--dispatch",
-                                                         "ctx_1ab7525e89ae"
+
                                                      ]
                                         },
                         "resource_state":  "external",

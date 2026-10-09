@@ -1,6 +1,8 @@
 # Orca 역할 협업 실험 결과
 
-2026-10-10 후속 관측 반영: **구현·호스트 검증·COM3 업로드·초기 LCD·실제 숫자/CRC 수락 확인 완료, 반복적인 LCD 점멸 보완 진행 중**. fixture/실데이터 전송 후 60초 watch를 유지한다. `product_pass=false`이며 무점멸·BOOT 조작·30초 유지·반영 지연·센서 타당성·24시간 안정성은 아직 합격하지 않았다.
+2026-10-10 08:49 KST: **LCD 점멸 수정·독립 host 검증·COM3 재업로드·live 재개 완료, 수정 후 실물 관측 대기**. 표시 중 버퍼를 직접 지우는 경로를 수정했고, 60초 watch는 같은 세션과 sender 순번을 이어간다. `product_pass=false`이며 무점멸·BOOT 조작·30초 유지·반영 지연·센서 타당성·24시간 안정성은 아직 합격하지 않았다.
+
+수정본 독립 **firmware19/19·producer/선택21/21·표시1/1 PASS**를 수락·release/ack하고 새 tag **`orca-harness-20261010-lcd-flicker-candidate` (`8fe1f9f`)**에 동결했다. 08:48 COM3에서 실제 ESP32-S3와 세 이미지 쓰기 hash 검증을 확인했으며 app은 `953782e5486adbe9743e5b753e716892cfdfbeef25d23b1702dc1d6050078f1f`다. 기존 watch가 정상 종료된 뒤 새 terminal `term_dcac760e-42fa-42f9-afa6-1da904d96d49`에서 **seq40** 전송을 확인했다. [독립 보고](../agent-runs/orca-luna/lcd-flicker-review.md), [수정본 업로드](../../experiments/orca-harness-20261008/operator/flash-lcd-flicker-20261010.json), [live 재개](../../experiments/orca-harness-20261008/operator/live-watch-lcd-flicker-20261010.json). HOST WRITE와 수정 후 실물 CRC·무점멸을 구분하며 새 관측을 요청했다. 아래는 단계별 당시 근거다.
 
 후속 08:13 영상에서 실제 수치와 **FRAME/CRC VALID**를 확인했다. 적어도 한 live frame의 장치 수락은 실물로 확인됐으며 촬영 당시 5시간 31%/잔여69%, 주간 68%/잔여32%였다. 사용자가 지속적인 점멸을 보고했고 화면 일부가 흰색으로 지워지는 장면도 보여 **화면 안정성은 보완 필요**다. 새로운 `task_63d11f3c24cb` / `ctx_2363ff345723`에서 기존 Sol 모델이 표시 경로를 조사·수정한다. 원래 host 합격과 tag는 보존하며 물리 PASS로 소급하지 않는다. [후속 영상의 비식별 관측](../../experiments/orca-harness-20261008/operator/post-data-video-20261010/observation.json) · [점멸 보완 계획](../plans/2026-10-10-lcd-flicker.md).
 
@@ -41,4 +43,4 @@ PC의 실제 수집은 `CODEX_THREAD_ID`가 가리키는 파일 한 개를 명�
 
 이전 독립 실패 원본은 `117a988`, `9721f71`, 이전 Flash 제출은 `e7c5b51`에 보존했다. 추가 경계 6.125초와 재개 후 5.016초 실패를 삭제하거나 소급 PASS로 바꾸지 않았다. 수동 요청 기준 시각 보존, OS timeout 설정 실패 시 쓰기 차단, 실제 SendOutcome 완료 시각 검증으로 보완했고 현재 통합에서 재확인했다.
 
-Orca 메시지 enqueue·화면의 check 실행은 처리/ack의 증거가 아니다. 실제 FIFO Delivery 처리·ack와 현재 Dispatch별 안내를 확인하고, 독립 시험이 기존 경계를 대체한 경우 해당 경계를 별도 복원했다. 세션 재시작 시 [재개 기록](orca-harness-resume.md)과 [체크리스트](../plans/2026-10-08-orca-harness.md)를 따른다. 현재 단계는 점멸 수정의 독립 검증이며, PASS 후 coordinator가 기존 watch의 실제 종료를 확인하고 수정 후보를 업로드한다. sender state는 그대로 이어간다.
+Orca 메시지 enqueue·화면의 check 실행은 처리/ack의 증거가 아니다. 실제 FIFO Delivery 처리·ack와 현재 Dispatch별 안내를 확인하고, 독립 시험이 기존 경계를 대체한 경우 해당 경계를 별도 복원했다. 세션 재시작 시 [재개 기록](orca-harness-resume.md)과 [체크리스트](../plans/2026-10-08-orca-harness.md)를 따른다. 현재는 수정본 업로드 후 사용자 실물 관측 대기다. 같은 sender state로 이미 갱신 중이므로 초기화·두 번째 writer·임의 재업로드를 반복하지 않는다.
