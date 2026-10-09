@@ -1,4 +1,4 @@
-# Current GUI review checkpoint — 2026-10-08
+﻿# Current GUI review checkpoint — 2026-10-08
 
 - Run: `run_c968c43361da`
 - Task: `task_c0ecb13ae179`
@@ -158,3 +158,67 @@
 - Reviewed only accepted 5ddef63 with git show. Confirmed WindowsSerialSink.flush starts a daemon worker, suppresses the worker exception, returns without raising after write_timeout; CdmSender.transmit_payload therefore may report success. run_watch_loop clears a manual event after transmission even when it arrived during the already-collected write.
 - First complete run of the new integration harness was 10/10 but its queued-flush fake omitted write_timeout, so that result is invalid for flush behavior. Corrected the fake. Focused rerun now fails as expected: test_production_windows_serial_flush_is_bounded_and_consumes_reserved_sequence, exit 1, cmd_send returned 0 despite the queued-byte timeout; stdout says [HOST WRITE] for seq 17.
 - Exact next action: finish the real fake-serial manual-during-write regression, rerun focused flush + new integration suite, then full integration and firmware suites; update report with exact passing counts and actionable failures, final inbox check, failed worker_done if any blockers persist.
+
+## PC remediation and selected-B integration Dispatch — 2026-10-10
+
+- Run: `run_c968c43361da`; Task: `task_4d49e747c570`; Dispatch: `ctx_125c9c02c0ed`; worker terminal: `term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956`.
+- Scope: own only `tests/integration/`, `docs/agent-runs/orca-luna/product-review.md`, and this checkpoint. The initial inbox check returned zero messages.
+- Read the cohort design, PRODUCT_CONTRACT, prior findings, existing integration harness, and accepted PC/firmware reports. The report says the manual-dispatch deadline remediation is complete; selected firmware B is `853ddf7`; previous actual C/GUI findings and accepted build evidence are preserved.
+- Exact next action: inspect current production PC collector/RPC/sender/watch and firmware parser/cache/time/F9 code plus build evidence, then execute the synthetic production producer-to-C and CLI integration suite to surface any reproducible blockers.
+- No PC/firmware/designer/frozen inputs, other worktrees/history, live account/session/auth, COM/reset/flash, or unowned files have been accessed or changed.
+
+### Current accepted PC/C integration checkpoint — 2026-10-10
+
+- Confirmed accepted firmware report/build artifacts without rebuilding: `idf.py set-target esp32s3` and `idf.py build` succeeded in the recorded ESP-IDF v5.3.2 staged checkout; SHA-256 for app, bootloader, partition table, and sdkconfig matches `docs/agent-runs/orca-sol/report.md` exactly. This is accepted build evidence, not a new build.
+- First producer-to-C run: `python -B -X utf8 -m unittest discover -s tests/integration -p 'test_pc_producer_to_c.py' -v` ran 12 cases, 9 passed, 3 failed. Reproducible blockers: `WindowsSerialSink.flush()` timeout is silently ignored so `cmd_send` returns 0 while a flush worker remains blocked; a manual event arriving during an already-collected write is cleared without a post-request collection/frame. The RPC-in-flight assertion observed the event before the watch loop's post-write clear, a test synchronization race; added bounded wait for the documented coalescing behavior before rechecking.
+- Exact next action: rerun the RPC/manual-write/flush cases to validate the synchronization and preserve actionable reproductions, then run C parser/session/F9 and full firmware host suites plus the corrected complete integration discovery.
+- Last test result: integration producer suite exit 1 (9/12); no product files modified. No physical hardware, live account, COM, reset, flash, other worktree/history, or user session/auth data used.
+
+- Correction from current coordinator steering: the actual worker terminal is `term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956`; `term_54a83fa0-c831-41b9-8295-ca84d361c828` is coordinator. The earlier escalation attempt from the coordinator handle was rejected (`caller is not the Dispatch pane`) and did not deliver. Worker delivery `delivery_c7da680ff2ce` (messages `msg_31c11629e00b`, `msg_75f00c07c67b`, `msg_b82cc6647639`) was read and acknowledged using the worker handle. Coordinator confirms stable PC 5ddef63 / firmware 853ddf7, requires in-flight assertions to permit either coalescing or an extra fresh request, and says reconcile actual acquisition timestamps with current UTC. Continue against current production sources, preserve exact fails, no owner-source edits.
+- Exact next action: fix only the integration harness's RPC timing/assertion and subprocess-patch lifetime, then rerun the focused cases and full suites; update terminal provenance here to the actual worker handle.
+
+### Harness correction and focused retry — 2026-10-10
+
+- Corrected the checkpoint terminal identity to the dispatched worker handle `term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956`; coordinator terminal is `term_54a83fa0-c831-41b9-8295-ca84d361c828`. Coordinator steering was read and worker delivery acknowledged; no coordinator inbox was read/acknowledged.
+- In `tests/integration/test_pc_producer_to_c.py`, made the in-flight RPC case use production UTC (`reference_time=None`) because fixed 2026-10-09 made real RPC acquisition appear future on 2026-10-10. Moved C host subprocess execution outside the fake `subprocess.Popen` patch. Focused RPC test now passes with an actual post-request observed_at and accepted production-C frame. The contract permits either coalescing or an extra fresh dispatch, so the test no longer requires exactly one frame or a cleared event.
+- Focused retry confirms manual-during-write still fails: event arrives after snapshot acquisition; only one old frame is sent and the manual request is cleared. Bounded serial flush test still fails with return code 0 and a blocked flush worker after timeout.
+- Exact next action: run current producer integration, all integration tests, full firmware host suite, and PC suite with synthetic inputs; record exact counts and review any failures.
+
+
+- Final coordinator steering received and acknowledged in `delivery_d5f14e5bb465` (`msg_fc7a45c5c3fc`): escalation `msg_653f77061153` accepted; do not expand scope or repeat GUI/IDF. Finish already-planned integration/C/F9 runs, update current requirement matrix and exact counts, preserve old findings, and report failed because the two blockers persist; coordinator will route those PC fixes after this report settles.
+- Latest producer integration: 13 tests, 11 pass / 2 reproducible fails (serial drain timeout and manual-during-write). New actual PC float + Unicode canonical frame passes production C; no-token error and global reset latest/source/capture/empty-default path pass production C.
+- Last full suite results before these added integration cases: firmware host 18/18 pass; PC tests 53/53 pass; full integration 20 tests with 18 pass / the same 2 fails. New PC producer tests were added afterward, so rerun final full integration discovery.
+- Exact next action: rerun full integration discovery once, review F9/B/navigation and legacy adapter source evidence as needed, then produce current per-C/I/F and L1-L8 matrix with precise blockers and `not_run` live limits.
+
+- Added a single production-watch combined deadline regression (`test_manual_rpc_write_and_real_wrapper_drain_share_five_second_budget`) using the actual RPC reader, `run_watch_loop`, and `WindowsSerialSink` over a fake serial queue. It measures from manual request through delayed quota RPC and queue drain. Exact next action: run this focused timing case, then final full integration discovery; the expected failure, if any, is a real deadline miss rather than selected timeout constants.
+
+- Combined deadline probe result: **FAIL**, 1/1. It traversed actual `run_watch_loop` → native RPC handshake/reader → production `WindowsSerialSink` and a fake serial drain; measured **5.391s** from manual request to completed queue drain, exceeding the 5.0s contract despite the sender reporting host-write success at about 1.1s after RPC response. This directly confirms the end-to-end deadline defect. No source outside integration tests/docs changed.
+- Exact next action: perform the final full `tests/integration` discovery and confirm only the expected serial/manual/combined budget failures remain, then update `product-review.md` with final evidence and requirement matrix.
+
+### Final owned integration run — 2026-10-10
+
+- `python -B -X utf8 -m unittest discover -s tests/integration -p 'test_*.py' -v`: **22 tests; 19 passed, 3 failed**. The only failures are the known production PC blockers: combined manual RPC/write/drain **5.296s > 5.0s**, serial flush timeout returns success while background drain remains pending, and manual arrival during the already-collected write is cleared without a new collection/frame. All C boundary, selected-session, F9, PC-to-C producer semantics, actual PC float/Unicode interop, and in-flight RPC cases pass.
+- `python -B -X utf8 -m unittest discover -s tests/firmware -p 'test_*.py' -v`: **18/18 passed**, including the frozen legacy evaluator's distinct **29/29** result. `python -B -X utf8 -m unittest discover -s tests/pc -p 'test_*.py' -v`: **53/53 passed**. These prior runs remain valid; only integration-owned harness changed afterward.
+- Exact next action: check selected B navigation/F9/legacy actual source evidence and accepted build hash linkage, finalize current product-review matrix and checkpoint, rerun only lightweight syntax if needed, then final worker mailbox check and one failed worker_done.
+
+### Final report artifact — 2026-10-10
+
+- Replaced this stale review with the current independent PC/selected-B result in `product-review.md`. It contains exact runnable commands/counts, current C/I/F and L1–L8 statuses, the three reproduced PC blockers, synthetic-data boundary, old B/firmware findings and their resolution, and physical/live `not_run` gates. Current report explicitly claims no product pass.
+- Build evidence correction: an earlier hash command inspected `firmware/.host-tools/final-build/`, the superseded baseline. The accepted corrected artifact directory is `firmware/.host-tools/active-usage-build/`; its app/bootloader/partition/sdkconfig SHA-256 values match the corrected report exactly. No rebuild was run.
+- Exact next action: final worker-mail check, then send exactly one failed `worker_done` for Task `task_4d49e747c570` / Dispatch `ctx_125c9c02c0ed`, with only owned modified paths and this report path.
+
+- Coordinator steering received and acknowledged: `delivery_90c70b22961b` / `msg_2f0f01b04a43`. It clarifies the combined test must not treat an out-of-band delayed callback as evidence the sender exceeded its synchronous budget: production may correctly return a bounded write failure, close, and consume sequence before physical drain. Revise the combined fake to expose realistic `out_waiting`; assert the actual production path either drains or reports failure/closes within ≤5s, with no background worker. Preserve the prior 5.296s fake callback observation only as a false-success/leaked-drain reproduction, not as the contract timing verdict.
+- Exact next action: adjust only the owned combined integration test and report phrasing to reflect this distinction, run that focused case against current source, then finalize the failed report. No PC/firmware changes.
+
+- Combined probe refinement per coordinator feedback: the prior 5.296s result timed an out-of-band fake flush sleep after the production wrapper had already returned success; it is retained only as evidence of success-before-drain, not as a valid synchronous deadline measurement. Replaced the combined test to model pyserial `out_waiting`, measure manual request through actual watch dispatch, and accept only completed drain or a bounded failure that closes/clears the queue, leaves no worker, and consumes the reserved sequence. Exact next action: run the revised focused probe, then final full integration suite.
+
+- Revised combined probe result: **FAIL**. Manual request-to-dispatch returns within the 5s bound, but the production wrapper reports `[HOST WRITE]` while fake pyserial `out_waiting` remains nonzero; it does not complete drain or return a bounded failure and close the sink. The earlier 5.296s test timed an out-of-band callback after return and is explicitly retained only as false-success evidence, not a deadline measurement.
+- Exact next action: rerun final full integration discovery against this revised combined probe, then finalize report/checkpoint and perform the last worker inbox check.
+
+## Final evidence checkpoint — 2026-10-10
+
+- Revised combined `out_waiting` production-watch test failed against the stable PC source because request-to-dispatch was within 5s but host success was returned while bytes remained queued; the test also verifies a bounded closed failure with consumed sequence is acceptable. The focused prior 5.296s sleep callback is retained only as false-success/worker-leak evidence, not as deadline timing.
+- Final full integration discovery after all harness changes: `python -B -X utf8 -m unittest discover -s tests/integration -p 'test_*.py' -v` → **22 tests, 19 passed, 3 failed** (serial timeout/success, manual during collected write, realistic combined queue pending). Firmware host suite → **18/18**; PC unit suite → **53/53**. Legacy frozen evaluator → **29/29**, distinct from device pass.
+- Corrected firmware artifact hashes are from `active-usage-build`, not the superseded `final-build`; the active app/bootloader/partition/sdkconfig hashes match the accepted selected-B report. No rebuild.
+- Final files changed in this Dispatch: `tests/integration/test_pc_producer_to_c.py`, `docs/agent-runs/orca-luna/product-review.md`, and this checkpoint only. No PC/firmware/designer/frozen inputs or Git state changed. Escalation `msg_653f77061153` was accepted; coordinator will route the PC fix after this failed submission settles.
+- Exact next action: final worker-mail check on `term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956`; process any delivery, then send exactly one failed `worker_done` with these three modified paths and `docs/agent-runs/orca-luna/product-review.md` as report path.

@@ -1,78 +1,78 @@
-# Independent PC and selected-B firmware review
+﻿# Independent PC remediation and selected-B firmware review
 
-Run `run_c968c43361da` · Task `task_4d49e747c570` · Dispatch `ctx_da800c8d8bce` · worker terminal `term_1a2fcc8b-6402-4851-ba15-d27061517be1`.
+Run `run_c968c43361da` · Task `task_4d49e747c570` · Dispatch `ctx_125c9c02c0ed` · worker `term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956`.
 
-## Status
+## Verdict
 
-**PC integration is pending the latest accepted PC submission. Firmware `853ddf7` is accepted and under independent verification; no product pass is claimed.** The coordinator said the PC remediation in `task_a6eebb977125` is still active. I have not inspected or tested that actively changing PC submission.
+**Failed independent review: PC manual dispatch/serial drain blockers remain.** Synthetic producer-to-C, C receiver/cache/GUI, selected-B, F9 and accepted build evidence pass within their host boundaries. No `product_pass=true` is claimed. All test inputs were metadata-only synthetic data; no account/session/auth files, COM device, reset, flash or other worktree/history was used.
 
-The initial accepted firmware baseline was `b6ec3d5`; its failing production-C integration evidence is preserved below. Corrected firmware `853ddf7` is accepted and stable for independent review. Each frame carries the complete current active usage list: a frame containing only B replaces an earlier A-only list, while distinct records in the same frame coexist. Therefore the original B-only selection assertion remains valid. Cache identity is the full scoped source identity plus `snapshot_id`; changed-ID last-good can carry only for one old and one current non-session record with identical complete source context; ambiguous matches stay cold/unknown; duplicate full scoped identities may be rejected.
+## Commands and results
 
-## Commands and evidence
-
-| Command / source | Result | Scope |
+| Command/evidence | Result | What it establishes |
 |---|---|---|
-| `python -m unittest discover -s tests/integration -p 'test_cdm_session_selection.py' -v` | **Exit 1** against the existing host executable from accepted `b6ec3d5`. Synthetic canonical frames selecting A then B were both accepted; cache contained `['selected-session-A', 'selected-session-B']`; A→B Usage-page CRC `1525439880` differed from B-only CRC `2620002129`. | Actual linked C receiver/renderer through `tests/firmware/.build/cdm-host.exe`; no PC source or user data. The test predates the clarified complete-active-list rule and is not a final assertion of desired cache contents. |
-| `python -B -X utf8 -m unittest discover -s tests/firmware -p 'test_*.py' -v` | **PASS, 18/18** (independent rerun). | Production C host receiver/cache/renderer suite; frozen legacy evaluator passes **29/29** through its separate adapter. Neither result is device proof. |
-| `python -B -X utf8 -m unittest discover -s tests/integration -p 'test_cdm_session_selection.py' -v` | **PASS, 1/1** (independent rerun). | Actual linked production C receiver/renderer; the B-only assertion is valid because each frame is the full active set. |
-| `python -B -X utf8 -m unittest discover -s tests/integration -p 'test_cdm_receiver_boundaries.py' -v` | **PASS, 3/3**. | Production C rejects bad protocol, extra properties, invalid schema/duplicate scoped identity, CRC, noncanonical JSON, truncated, CRLF, extra-LF, invalid UTF-8 and oversized frames atomically; accepts float percentages and Unicode labels; preserves sequence/cache over a stale frame and silent gap. |
-| `python -B -X utf8 -m unittest discover -s tests/integration -p 'test_*.py' -v` | **PASS, 8/8** (latest complete integration discovery). | Includes C parser/cache/sequence and session-selection pixel checks plus actual F9 C module tests with a fake driver. PC producer/CLI integration remains pending. |
-| `python -B -X utf8 -m unittest discover -s tests/integration -p 'test_f9_temp.py' -v` | **PASS, 4/4**. | Compiles actual `firmware/main/f9_temp.c` with an ephemeral fake IDF sensor API; install/enable/read errors yield unknown, enable failure uninstalls, null pointer is rejected, and a supplied value is returned without substitution. |
-| Incremental `idf.py build` | Corrected build succeeded with ESP-IDF **v5.3.2**; I independently matched the app hash `385130667AB15CA8DCC665E70FC06882B1E89535BDE8D84AF05FDC2B36C1EF72` and related artifacts to the correction report. | Accepted corrected build; no rebuild is planned absent a new concern. Log: [build-active-usage-output.txt](../orca-sol/build-active-usage-output.txt). |
+| `python -B -X utf8 -m unittest discover -s tests/integration -p 'test_*.py' -v` | **FAIL, 22 tests: 19 passed, 3 failed** | PC production gather/normalization/raw canonical bytes into the linked production C receiver, receiver boundary/cache/session-selection tests, and actual F9 module. Failures are the three PC blockers below. |
+| `python -B -X utf8 -m unittest discover -s tests/firmware -p 'test_*.py' -v` | **PASS, 18/18** | Production C receiver/cache/time and B renderer host tests; includes the distinct frozen `scripts/evaluate-product.py` legacy seam result **29/29**, not device acceptance. |
+| `python -B -X utf8 -m unittest discover -s tests/pc -p 'test_*.py' -v` | **PASS, 53/53** | PC unit/remediation tests; does not override the failing production CLI + actual C integration tests. |
+| `python -B -X utf8 -m unittest tests.integration.test_pc_producer_to_c.PCProducerToCTests.test_manual_rpc_write_and_real_wrapper_drain_share_five_second_budget -v` | **FAIL** | Actual `run_watch_loop` → bounded native RPC → production `WindowsSerialSink` with fake pyserial `out_waiting`. Manual dispatch returns within 5s but reports host success while bytes remain queued; it neither completes drain nor reports a bounded failure/closed sink. |
+| Accepted ESP-IDF build logs and hashes | **PASS, not rebuilt** | The corrected selected-B build in `firmware/.host-tools/active-usage-build/` matches the accepted report: app `385130667AB15CA8DCC665E70FC06882B1E89535BDE8D84AF05FDC2B36C1EF72`, bootloader `F4C5160D0777EBDA11EDAC881853B211300323E5CF8F96EEEDA5314D731D02AB`, partition `7F00B6C042A89B15B0CAC534F82ED988CAF29278FF5700B0C511EB1B5BB7C820`, sdkconfig `46788F1C30A51868DA7C66C41DEF9045514FAAF393BC68EC0D6F05DF4DACA452`. `idf.py set-target esp32s3` and `idf.py build` succeeded with IDF v5.3.2 in the recorded ASCII staging checkout; see [Sol build report](../orca-sol/report.md) and [build log](../orca-sol/build-active-usage-output.txt). |
 
-The focused test is `tests/integration/test_cdm_session_selection.py`; it builds only metadata-only canonical frames and feeds them to the actual C host adapter. It does not use a Python reimplementation of the C cache. The original baseline failure is retained separately from the corrected firmware result.
+The production integration suite adds these pass checks: native nested token event/session identity; malformed, missing, boolean, negative, fractional, and invalid subset counts; original token timestamp despite later unrelated events; explicit multi-session selection; normalized versus provider totals; quota `rateLimitsByLimitId` windows, exact durations and unknown duration; account quota vs session scope; source stale ages 0/299/300 with fresh C receive age; future timestamp rejection; provider failure/last-good/recovery; global latest/source/captured time/last-known/default; RPC initialize → initialized → read order and bounded timeout cleanup; CLI reservation before write, wrap, corrupt/missing state, contention and refusal to auto-initialize; automatic/manual independence and reconnect throttling; and actual PC float + Unicode canonical bytes accepted by C.
 
-## Requirement status at this checkpoint
+### Reproducible PC blockers
 
-### C / I / F
+1. `test_production_windows_serial_flush_is_bounded_and_consumes_reserved_sequence`: fake serial holds queued bytes past `write_timeout`; `cmd_send` returns **0** while the production flush worker remains blocked. The reserved sequence is consumed, but the host reports success without completed drain. The wrapper also suppresses flush exceptions.
+2. `test_watch_manual_event_during_write_collects_new_session_before_clearing`: a manual event arrives after the loop collected its snapshot and while it is writing. The loop clears that event after transmitting the pre-request snapshot; there is one frame and no post-request collection/sequence.
+3. `test_manual_rpc_write_and_real_wrapper_drain_share_five_second_budget`: the realistic pyserial `out_waiting` probe confirms manual request-to-dispatch stays within 5s, but the wrapper reports host success while the queue remains pending. This is not completed drain evidence and is not an acceptable bounded failure. The earlier 5.296s run only timed an out-of-band fake sleep and is retained in the checkpoint as false-success evidence, not a valid deadline measurement.
 
-| IDs | Status | Evidence and remaining boundary |
+These findings were sent to the coordinator in escalation `msg_653f77061153`; the coordinator accepted them and will route the PC fix after this failed review settles. No PC or firmware source was edited.
+
+## C / I / F acceptance
+
+| ID | Status | Evidence / remaining boundary |
 |---|---|---|
-| C1 | **PASS on accepted corrected build** | ESP-IDF v5.3.2 incremental build succeeded. I independently matched the app, bootloader, partition table, sdkconfig, `cdm.c`, active-usage test, and build-log SHA-256 values to the dated Sol report. |
-| C2 | **not_run** | No physical LCD observation, 30-second run, or readability/clipping evidence from a board. |
-| C3 | **host-only partial; current end-to-end pending** | Baseline host report covers quota/session rendering and paging. Current accepted PC frames have not been tested through corrected C and GUI. |
-| C4 | **corrected host renderer pass; PC global producer pending; physical not_run** | Host checks cover latest reset and elapsed-time rendering; current PC global-reset producer has not yet been joined to C. |
-| C5 | **corrected host renderer pass; physical not_run** | Host checks cover last-known reset and default fallback when reset data is absent; no board observation. |
-| C6 | **corrected host renderer pass; PC global producer pending; physical not_run** | Host checks preserve source and captured-time labels; current PC global-reset source integration remains pending. |
-| C7 | **corrected host receiver/renderer pass; producer integration pending** | Independent corrected suite passes per-source failure/recovery and source/receive-age coverage. Corrected PC producer is not yet available. |
-| C8 | **host navigation pass; refresh/timing partly pending; physical not_run** | Host tests cover screen/page navigation. Coordinator's synthetic prior-PC scheduler probe measured 4.5s collection + 2s write = 6.5s after a manual request, returned rc 0, and exceeded the 5s limit; this is routed to the active PC owner. Actual BOOT electrical behavior and ≤2s LCD response remain unmeasured. |
-| I1 | **pending latest accepted PC submission** | Fixture collector source/time/unit/error provenance and privacy behavior await independent synthetic producer-to-C integration. |
-| I2 | **pending latest accepted PC submission** | Provider normalization and separation of distinct global sources await independent synthetic producer-to-C integration. |
-| I3 | **host wire checks pass; device not_run** | Production C parser/sequence checks pass; PC sender and device ACK integration remain pending. |
-| I4 | **corrected host tests pass; physical not_run** | Independent receiver/cache suite and A→B selection pixel test pass against linked production C; device behavior remains `not_run`. |
-| F1 | **pending latest accepted PC submission** | Collector behavior, native token events, explicit session selection, and per-source cache/error recovery await current PC-to-C evidence. |
-| F2 | **pending latest accepted PC submission** | Normalized/source totals, included subsets, window normalization and account/session scope await producer-to-C verification. |
-| F3 | **host wire checks pass; device not_run** | Production C rejection/sequence checks pass; PC sender and device ACK integration remain pending. |
-| F4 | **corrected host tests pass; physical not_run** | Production C cache replacement/last-good behavior and selected-session pixel regression pass; no board observation. |
-| F5 | **host-renderer pass; physical not_run** | Corrected host pixel checks pass; physical panel readability and timing remain `not_run`. |
-| F6 | **pending latest accepted PC submission** | Input/refresh behavior, including automatic/manual dispatch, reconnect, and the five-second bound, awaits the accepted deadline remediation and real fake-process/transport integration. |
-| F7 | **host-renderer pass; PC global producer pending** | Host behavior for latest/last-known/default reset data passes; global source/captured-time producer integration remains pending. |
-| F8 | **baseline build evidence; physical not_run** | Artifact hashes were checked. No latency/power/board evidence; no `product_pass=true`. |
-| F9 | **host fake-driver tests pass; physical not_run** | Design/report lists exactly three candidates and one isolated internal-temperature implementation. New host tests execute the actual F9 C module for install/enable/read failure and success; device sensor plausibility and `UNKNOWN` on real hardware remain not_run. |
+| C1 | **PASS (accepted build)** | Corrected 853ddf7 report/log and active-usage artifact hashes independently matched. No repeat build. |
+| C2 | **not_run** | No physical panel 30-second run, readability/clipping or orientation check. |
+| C3 | **PASS (host)** | Synthetic PC quota/session production output reaches C; B host renderer covers dynamic windows and pages. Physical display remains not_run. |
+| C4 | **PASS (host)** | PC global reset source/latest/captured record reaches C; host renderer exercises elapsed time. Actual source/live display remains not_run. |
+| C5 | **PASS (host)** | Last-known and empty/default reset paths covered in C/renderer tests. Physical fallback not_run. |
+| C6 | **PASS (host)** | Source and captured time survive PC normalization and C cache. Physical label/readability not_run. |
+| C7 | **PASS (host)** | C malformed/stale/error handling preserves last-good and recovers; PC per-source failure/recovery passes. Network/device endurance not_run. |
+| C8 | **BLOCKED / not_run** | Host auto/manual/reconnect basics pass, but manual-during-write fails and the realistic fake `out_waiting` path reports success while bytes remain queued; bounded complete-or-fail behavior is therefore blocked. BOOT/RST electrical behavior and ≤2s device redraw not_run. |
+| I1 | **PASS (synthetic)** | Source/time/unit/error and privacy checks use only synthetic metadata. |
+| I2 | **PASS (synthetic)** | Session, account quota, provider fixtures and global records stay separately scoped. |
+| I3 | **BLOCKED / not_run** | Canonical raw PC bytes, C parser and sequence checks pass; production flush falsely reports success. Physical serial/receiver evidence not_run. |
+| I4 | **PASS (host) / not_run device** | Actual C receiver/cache/time and renderer host tests pass; no board observation. |
+| F1 | **PASS (host)** | Nested token/session metadata, explicit selection and provider error recovery pass; manual-write dispatch has the separate F6 blocker. |
+| F2 | **PASS (host)** | Source total differs safely from normalized input+output; cached/reasoning subcounts and quota windows/scope verified. |
+| F3 | **BLOCKED / not_run** | C wire acceptance and rejection pass; PC serial drain fails. No device transport/ACK (none is defined) was tested. |
+| F4 | **PASS (host) / not_run device** | C receiver/cache/session replacement/last-good tests pass. |
+| F5 | **PASS (host) / not_run device** | Selected-B framebuffer/paging/three screens pass host pixels; panel timing/readability not_run. |
+| F6 | **FAIL** | Manual arriving during an already-collected write is discarded; exact RPC-to-drain measurement is 5.296s. Reconnect attempts are ≤1/s and fake-port dispatch is ≤5s in the passing isolated test. |
+| F7 | **PASS (host)** | Global latest, last-known/captured source and empty/default paths are covered. Live source accuracy not_run. |
+| F8 | **PASS (build/host) / not_run device** | Accepted IDF build/hash and host suite pass; no on-device timing, power, or 30-second evidence. |
+| F9 | **PASS (host) / not_run device** | Exactly three candidates are documented; only internal chip temperature is selected and isolated in `f9_temp.c`. Four tests compile/execute the real module with a fake IDF sensor API for install/enable/read failures and success without a substituted constant. Real sensor plausibility remains not_run. |
 
-### Live requirements L1–L8
+## Live L1–L8
 
-| ID | Status | Evidence / blocker |
+| ID | Status | Evidence / remaining boundary |
 |---|---|---|
-| L1 explicit session selection | **firmware PASS; PC selection pending** | Independent A-only→B-only production-C regression passes. Accepted C tests cover same-frame coexisting scoped records, replacement, duplicate rejection, unique last-good inheritance, ambiguity/no-inheritance and same-session recovery. Current PC explicit selection remains pending. |
-| L2 cumulative token events | **pending current PC evidence** | No accepted PC submission available for synthetic nested native token events, session identity, partial/restart/replace handling. |
-| L3 token channels | **pending producer-to-C integration** | Existing renderer report distinguishes normalized and source totals; independent PC output verification of channel IDs, subset inclusion and nullable quota fields remains. |
-| L4 account quota scope | **pending synthetic PC integration** | No live account/auth calls were made. Need current synthetic evidence for account-scoped quota and independent session scope. |
-| L5 variable windows | **pending producer-to-C integration** | Baseline renderer report says all windows page; current PC rateLimitsByLimitId durations/unknown windows and exact IDs/labels are not yet verified end to end. |
-| L6 total/subset semantics | **host-renderer partial** | Baseline render has separate normalized/source totals and included cache/reasoning labels. Current production PC output and C pixels are not joined. |
-| L7 timestamps/ages | **C receive-age/source-age boundaries PASS; producer path pending** | Independent C suite checks source/receive age separation, anchoring and 0/299/300 stale boundaries. Original token event timestamps, future PC timestamps, fresh receive with stale source, and original timestamp retention need current PC→C evidence. |
-| L8 privacy | **PASS for this review** | Test inputs are synthetic metadata. No real account/session/auth files, session bodies, COM, reset, flash, or other worktree/history were used. |
+| L1 session selection | **PASS (host)** | Explicit PC selection plus A→B replacement and B-only framebuffer against production C. |
+| L2 cumulative token events | **PASS (host)** | Native nested event replaces cumulative counts; no double-sum; unrelated later events do not replace the token timestamp. |
+| L3 token channels | **PASS (host)** | Input/output/cache/reasoning/source/normalized channels preserve units and subset meaning through C. |
+| L4 account quota scope | **PASS (host)** | Account profile quota remains separate from session telemetry. |
+| L5 variable windows | **PASS (host)** | `rateLimitsByLimitId`, exact duration IDs/labels and unknown duration stay distinct; renderer pages all windows. |
+| L6 total/subset semantics | **PASS (host)** | Original total and input+output differ in the fixture; cache/reasoning remain included subsets. |
+| L7 timestamp and age | **PASS (host)** | Original event time, future rejection, source ages 0/299/300 and independent fresh receive age are covered. |
+| L8 privacy | **PASS for this review** | All local test data is synthetic metadata; no real account/session/auth data was read or emitted. |
 
-## Remaining PC integration after acceptance
+## Prior actual findings retained and resolution
 
-The accepted C host suite and new integration tests cover parser/cache/pixel/F9 behavior. After the coordinator confirms the accepted PC submission, test that version's production gather and normalization output and feed its canonical raw `cdm/1` bytes into the same accepted C receiver. Include actual native nested token event shapes and invalid numeric forms; explicit multi-session selection; original token timestamps and unrelated events; future times; source vs receive ages and 0/299/300 stale; normalized/source totals and included subsets; all rateLimitsByLimitId windows/durations/unknowns, account/session scope; and per-provider failure, last-good, recovery and exact current-frame contents. Use only synthetic fixtures and process/transport doubles.
+- The first selected-B firmware baseline had an actual production-C A→B defect: active usage retained A and B and its framebuffer differed from B-only. Accepted correction 853ddf7 builds the complete active list atomically; `test_cdm_session_selection.py` passes against linked production C and compares actual rendered pixels.
+- The first browser B review found cache loss after Normal→Unknown/Waiting→Error or Disconnected. The dated corrected-B rerun records those paths, empty-cache behavior, 299/300/301 stale boundaries, paging, BOOT event and 820×320 geometry as passing. See [B review](gui-b-review.md); physical readability remains not_run.
+- PC remediation previously fixed token stamping, cold global omission, multi-entry provider retention, session-path cache isolation, and bounded RPC/scheduler cases; current producer-to-C integration reproduces their synthetic semantics. The two serial/manual races and the combined deadline miss are new independent blockers and supersede no historical evidence.
 
-Also verify the real CLI serial path with only fake transport/processes: initialize/initialized/read RPC order and bounded timeout cleanup; independent manual/automatic refresh; full manual-request-to-write deadline including collection/RPC cleanup; reconnect rate/availability/manual dispatch; reserve-before-write persistent sequence including wrap/corrupt/missing state; single-sender contention; and no auto-init bypass. The coordinator's prior-PC synthetic manual probe was 6.5s (4.5s collection + 2s write), exceeding the 5s limit despite rc 0; this is routed to the active PC owner and needs retesting after acceptance. Actual COM, account/auth, reset/flash, physical C2/C8, electrical BOOT/GPIO0, panel timing and sensor readings remain coordinator-owned or `not_run`.
+## Remaining gates
 
-Current blocker: the coordinator has not yet sent readiness for the latest accepted PC submission. The known manual-dispatch deadline failure is in the active PC remediation. No test result here establishes complete product approval.
+Coordinator-owned: route/fix the three PC deadline failures and rerun this same integration Task; actual COM send/reconnect and receiver observation; flash/upload and hardware C2/C8, BOOT/RST/GPIO0 electrical behavior, 30-second display, ≤2s accepted-frame redraw, physical clipping/readability, sensor plausibility, live-account and 24-hour stability. Until then the physical/live gates remain **not_run** and the product is not approved.
 
-## PC integration harness prepared — 2026-10-09
 
-Added [test_pc_producer_to_c.py](../../../tests/integration/test_pc_producer_to_c.py) under the owned integration scope. It uses only synthetic session JSONL, quota dictionaries, provider/reset fixtures, fake app-server streams, a fake serial sink, temporary sequence files, and the linked production C receiver. Cases cover native nested token events and identity; invalid count types/ranges and subset rules; normalized/source totals; explicit/latest selection; original timestamps and 0/299/300-second source staleness against fresh C receive age; all account quota window IDs/durations including unknown duration; account/session scope; provider error/last-good/recovery; global reset source/captured time and last-known; RPC initialize/initialized/read order and bounded timeout cleanup; CLI fake-serial sequence reservation/wrap and fail-closed missing/corrupt state; no implicit initialization and sender contention.
-
-This harness has **not been run**: the coordinator authorized read-only review of accepted PC commit `0e39f0d` and test preparation, but final producer and CLI execution waits for the deadline remediation to be accepted. Its current basic watch cases do not satisfy the deadline test: the coordinator directed that a manual event arrive during a slow automatic initialize/read and write, that timing begin at the event, and that tests use the production bounded RPC and serial transport paths. The coordinator also reported that Windows `Serial.flush()` can wait for queued bytes beyond the configured `write_timeout`; this is routed to the active PC owner and is not independently verified here. A fake-transport test now exercises the real `cmd_send` and `WindowsSerialSink` wrapper with bytes held in the queue for four seconds; after acceptance it must demonstrate bounded failure, cleanup, and consumed sequence. Also cover manual arrival during automatic RPC/write, last-good cache after native timeout, independent scheduling, reconnect throttling and availability dispatch. The harness is still unrun, so none of these checks is acceptance evidence. No PC or firmware source was edited, and no actual provider call, session/account data, COM device, reset, or flash was used.

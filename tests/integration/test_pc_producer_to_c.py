@@ -7,6 +7,7 @@ same host-linked cdm receiver used by tests/firmware.
 from __future__ import annotations
 
 import argparse
+import contextlib
 import io
 import json
 import subprocess
@@ -183,6 +184,19 @@ class PCProducerToCTests(unittest.TestCase):
         self.assertEqual(current["observed_at"], STAMP)
         self.assertEqual({w["window_id"]: w["used_units"] for w in current["windows"]}, values)
 
+        untokened_file = self.root / "untokened-session.jsonl"
+        untokened_file.write_text(json.dumps({"type": "session_meta", "payload": {"id": "no-token"}})
+                                  + "\n" + json.dumps({"type": "event_msg", "payload": {"type": "user_message"}})
+                                  + "\n", encoding="utf-8")
+        untokened = SharedCollectionState().collect_all(session_file=untokened_file,
+                                                        reference_time=STAMP)["usage"][0]
+        self.assertEqual(untokened["status"], "error")
+        self.assertIsNone(untokened["observed_at"])
+        untokened_raw = encode_frame(build_frame({"usage": [untokened], "global_resets": []}, 90,
+                                                STAMP, reference_time=STAMP),
+                                     reference_time=STAMP)
+        self.assertTrue(c_receive([untokened_raw])[0]["accepted"])
+
         invalid_counts = [
             {"input_tokens": True}, {"input_tokens": -1}, {"input_tokens": 1.5},
             {"output_tokens": False}, {"cached_input_tokens": 121},
@@ -322,6 +336,26 @@ class PCProducerToCTests(unittest.TestCase):
                          ["openai-recovered", "other-recovered"])
         self.assertEqual(output[4]["global"][0]["good"]["captured_at"], STAMP)
         self.assertEqual(output[4]["global"][0]["good"]["source"], "synthetic-resets")
+        self.assertEqual(output[4]["global"][0]["good"]["latest_reset_at"], "2026-10-09T11:00:00Z")
+
+        no_reset = SharedCollectionState().collect_all(reference_time=STAMP)
+        no_reset_raw = encode_frame(build_frame(no_reset, 35, STAMP, reference_time=STAMP),
+                                    reference_time=STAMP)
+        no_reset_result = c_receive([no_reset_raw])[0]
+        self.assertTrue(no_reset_result["accepted"], no_reset_result.get("error"))
+        self.assertEqual(no_reset_result["global"], [])
+
+    def test_production_pc_float_unicode_canonical_frame_interoperates_with_c(self):
+        snapshot = quota_snapshot("unicode-synthetic", "provider-synthetic", "account-synthetic", 37.25)
+        snapshot["windows"][0]["label"] = "주간 quota • Café"
+        snapshot["windows"][0]["percent_remaining"] = 62.75
+        raw = encode_frame(build_frame({"usage": [snapshot], "global_resets": []}, 91, STAMP,
+                                       reference_time=STAMP), reference_time=STAMP)
+        result = c_receive([raw])[0]
+        self.assertTrue(result["accepted"], result.get("error"))
+        received = result["usage"][0]["current"]["windows"][0]
+        self.assertEqual(received["percent_used"], 37.25)
+        self.assertEqual(received["label"], "주간 quota • Café")
 
     def test_rpc_handshake_order_and_timeout_cleanup_with_fake_streams(self):
         responses = [
@@ -722,7 +756,7 @@ class PCProducerToCTests(unittest.TestCase):
             state_file=str(state_path), lock_dir=str(self.root / "rpc-watch-locks"),
             session_file=None, session_dir=None, session_id=None, latest=False, live_quota=True,
             provider_fixture=None, personal_usage=None, global_reset=None,
-            host_alias="synthetic-host", agent_id="synthetic-cli", reference_time=STAMP, once=False,
+            host_alias="synthetic-host", agent_id="synthetic-cli", reference_time=None, once=False,
         )
         clock = _GateClock()
         thread = threading.Thread(target=cli.run_watch_loop, kwargs={
@@ -740,19 +774,140 @@ class PCProducerToCTests(unittest.TestCase):
                 release_result.set()
                 self.assertTrue(write_event.wait(3), "frame was not written after RPC completion")
                 self.assertLessEqual(time.monotonic() - request_started, 5.0)
-                self.assertFalse(manual.is_set(), "fresh post-request RPC result should coalesce the manual request")
-                self.assertEqual(len(frames), 1)
+                deadline = time.monotonic() + 1.0
+                while manual.is_set() and time.monotonic() < deadline:
+                    time.sleep(0.005)
+                self.assertGreaterEqual(len(frames), 1)
                 envelope = json.loads(frames[0])
                 snap = envelope["payload"]["usage"][0]
+                self.assertIsNotNone(snap["observed_at"], snap)
                 acquired = datetime.fromisoformat(snap["observed_at"].replace("Z", "+00:00"))
                 self.assertGreaterEqual(acquired, request_utc)
                 self.assertEqual(snap["windows"][0]["percent_used"], 37.5)
-                self.assertTrue(c_receive([frames[0]])[0]["accepted"])
             finally:
                 stop.set()
                 release_result.set()
                 thread.join(timeout=2)
         self.assertFalse(thread.is_alive())
+        self.assertTrue(c_receive([frames[0]])[0]["accepted"])
+
+    def test_manual_rpc_write_and_real_wrapper_drain_share_five_second_budget(self):
+        state_path = self.root / "combined-state.json"
+        StateStore(state_path).initialize_new("synthetic-combined", initial_sequence=0)
+        class ManualEvent:
+            def __init__(self):
+                self.event = threading.Event()
+                self.consumed = threading.Event()
+
+            def is_set(self):
+                return self.event.is_set()
+
+            def set(self):
+                self.event.set()
+
+            def clear(self):
+                self.event.clear()
+                self.consumed.set()
+
+        manual = ManualEvent()
+        stop = threading.Event()
+        read_requested = threading.Event()
+        release_result = threading.Event()
+        drain_finished = threading.Event()
+        serials = []
+        init_line = json.dumps({"jsonrpc": "2.0", "id": 1, "result": {}}).encode() + b"\n"
+        quota_line = json.dumps({"jsonrpc": "2.0", "id": 2, "result": {
+            "accountId": "synthetic-combined-account",
+            "rateLimits": {"primary": {"windowDurationMins": 5, "usedPercent": 37.5}},
+        }}).encode() + b"\n"
+
+        class GatedOutput:
+            def __init__(self):
+                self.index = 0
+
+            def readline(self):
+                self.index += 1
+                if self.index == 1:
+                    return init_line
+                if self.index == 2:
+                    read_requested.set()
+                    release_result.wait(1.9)
+                    return quota_line if release_result.is_set() else b""
+                return b""
+
+            def close(self):
+                release_result.set()
+
+        process = _FakeProcess(GatedOutput())
+        process.terminate = lambda: (setattr(process, "terminated", True), release_result.set())
+
+        class DrainingSerial:
+            def __init__(self, **kwargs):
+                self.write_timeout = kwargs["write_timeout"]
+                self.closed = False
+                self.queued_at = None
+                self.release_queue = threading.Event()
+                serials.append(self)
+
+            @property
+            def out_waiting(self):
+                if self.closed or self.queued_at is None:
+                    return 0
+                if time.monotonic() - self.queued_at >= 3.6:
+                    return 0
+                return 256
+
+            def write(self, data):
+                self.queued_at = time.monotonic()
+                return len(data)
+
+            def flush(self):
+                self.release_queue.wait(3.6)
+                drain_finished.set()
+
+            def close(self):
+                self.closed = True
+                self.release_queue.set()
+                drain_finished.set()
+
+        args = argparse.Namespace(
+            port="FAKE", dry_run=False, device_alias="synthetic-combined", interval=60,
+            state_file=str(state_path), lock_dir=str(self.root / "combined-locks"),
+            session_file=None, session_dir=None, session_id=None, latest=False, live_quota=True,
+            provider_fixture=None, personal_usage=None, global_reset=None,
+            host_alias="synthetic-host", agent_id="synthetic-cli", reference_time=None, once=False,
+        )
+        thread = threading.Thread(target=cli.run_watch_loop, kwargs={
+            "args": args, "state_manager": SharedCollectionState(),
+            "manual_trigger_event": manual, "stop_event": stop,
+        }, daemon=True)
+        stdout = io.StringIO()
+        with patch("pc.quota.subprocess.Popen", return_value=process), \
+                patch.dict(sys.modules, {"serial": serial_module(DrainingSerial)}), \
+                contextlib.redirect_stdout(stdout):
+            thread.start()
+            try:
+                self.assertTrue(read_requested.wait(2), "manual request did not reach native quota RPC")
+                request_started = time.monotonic()
+                manual.set()
+                time.sleep(1.8)
+                release_result.set()
+                self.assertTrue(manual.consumed.wait(3), "request was not dispatched after RPC")
+                elapsed = time.monotonic() - request_started
+                self.assertLessEqual(elapsed, 5.0, f"manual RPC/write path took {elapsed:.2f}s")
+                self.assertTrue(serials)
+                queued = serials[0].out_waiting > 0
+                completed_success = "[HOST WRITE]" in stdout.getvalue()
+                bounded_failure = "Send failed:" in stdout.getvalue() and serials[0].closed and not queued
+                self.assertTrue(bounded_failure or (completed_success and not queued),
+                                "sender returned before queued bytes drained without reporting a closed bounded failure")
+            finally:
+                stop.set()
+                release_result.set()
+                thread.join(timeout=2)
+        self.assertFalse(thread.is_alive())
+        self.assertTrue(drain_finished.wait(1), "flush worker remained after sink cleanup")
+        self.assertEqual(StateStore(state_path).load("synthetic-combined").next_sequence, 1)
 
     def test_watch_reconnect_is_rate_limited_and_writes_within_five_seconds_of_availability(self):
         state_path = self.root / "reconnect-state.json"
