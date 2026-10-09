@@ -1,9 +1,9 @@
 {
   "run_id": "run_c968c43361da",
   "firmware_submission_commit": "853ddf7",
-  "validated_at": "2026-10-09T09:49:56.250719+00:00",
-  "status": "candidate_hashes_verified_final_integration_pending",
-  "upload_permitted": false,
+  "validated_at": "2026-10-09T23:00:50.309868+00:00",
+  "status": "independent_and_coordinator_host_pass_frozen_for_hardware_observation",
+  "upload_permitted": true,
   "host_firmware_tests": 18,
   "selected_session_test": 1,
   "physical_status": "not_run",
@@ -100,5 +100,12 @@
     "flash_mode": "dio",
     "flash_size": "16MB",
     "flash_freq": "80m"
-  }
+  },
+  "pc_submission_commit": "39e52bd",
+  "integration_submission_commit": "6f521056d85e2d0fe0aeb902198405f14f140461",
+  "host_freeze_tag": "orca-harness-20261010-host-candidate",
+  "independent_message": "msg_29b4e5191818",
+  "root_pc_tests": 64,
+  "root_integration_tests": 27,
+  "product_pass": false
 }
