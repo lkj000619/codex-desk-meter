@@ -57,10 +57,18 @@
 ### 2.8 Cold Source Error 타임스탬프 경계 준수 (`pc/state.py`)
 - **수정 내용**: `CollectionSourceState.update_error`의 콜드 경로(이전 성공 스냅샷 부재 시)에서 성공적인 관측이 없었으므로 `observed_at: None`, `last_good_at: None`을 유지(스키마 nullable 허용)하여 C 수신기에 스키마 준수 에러 스냅샷 전송.
 
+### 2.9 수동 갱신 및 포트 가용 시 5초 데드라인 예산 분할 (`pc/cli.py`, `pc/state.py`, `pc/quota.py`, `pc/sender.py`)
+- **결함 원인**: 코디네이터 재현 `operator/pc-manual-deadline-probe.json`에서 발견되었듯이, 수집 단계 4.5s와 시리얼 write 2.0s가 순차 실행되어 수동 디스패치 완료에 6.5s가 소요됨으로써 동결 계약(`PRODUCT_CONTRACT` 3, 4절)의 최대 5.0s 데드라인을 위반하던 결함.
+- **수정 내용**:
+  - `SharedCollectionState.collect_all`에 `quota_timeout` 파라미터를 추가하여 수동 갱신(`is_manual`) 및 포트 재개방(`is_port_reopened`) 디스패치 시 수집 RPC 예산을 2.5s로 엄격히 제한.
+  - `WindowsSerialSink`의 기본 write 타임아웃을 1.5s로 설정하여, 수집(<=2.5s) + 직렬화 및 전송(<=1.5s) 합계가 4.0s~5.0s 내에 완결되도록 예산 분할.
+  - 느린 소스나 RPC 타임아웃 발생 시에도 기존 last-good 스냅샷을 `stale=True, status="error"`로 안전하게 보존하며 정상 소스에 영향을 주지 않음.
+  - 자동 주기(<=60s)는 작업 소요 시간을 온전히 포함하며 수동 갱신에 의해 데드라인이 연기되지 않음.
+
 ## 3. 검증 결과
 
 `C:/Espressif/user-tools/python_env/idf5.3_py3.11_env/Scripts/python.exe -B -X utf8 -m unittest discover -s tests/pc` 실행 결과:
-**총 50개 테스트 전체 통과 (OK, 0 failures, 0 errors)**:
+**총 53개 테스트 전체 통과 (OK, 0 failures, 0 errors)**:
 1. `test_cumulative_token_count_not_double_summed`
 2. `test_partial_line_and_truncation_handling`
 3. `test_differing_source_total_and_normalized_total`
@@ -111,6 +119,9 @@
 48. `test_watch_manual_trigger_does_not_move_automatic_deadline` (수동 갱신 시 자동 데드라인 불변 검증)
 49. `test_untimed_token_event_routes_to_error_with_null_observed_at` (타임스탬프 없는 토큰 이벤트 관측 날조 방지 및 null 에러 스냅샷 C 수신 검증)
 50. `test_cold_source_error_has_null_timestamps` (콜드 소스 에러 null 타임스탬프 스키마 및 C 수신 검증)
+51. `test_watch_manual_deadline_bounded_under_slow_source_and_write` (수동 갱신 시 느린 소스/write에서도 5.0s 데드라인 완결 검증)
+52. `test_port_reopened_deadline_bounded_under_slow_source` (포트 가용 시 신규 순번 전송 5.0s 완결 검증)
+53. `test_watch_manual_arrival_during_in_flight_automatic_collection` (진행 중인 자동 수집 도중 수동 요청 유입 시 coalesce로 5.0s 완결 검증)
 
 ## 4. 운영자 CLI 재현 절차
 

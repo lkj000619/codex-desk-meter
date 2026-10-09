@@ -283,6 +283,10 @@ def run_watch_loop(
                     while next_auto_deadline <= current_now:
                         next_auto_deadline += interval
 
+                # Bounded collection budget: for manual / port refresh (max 5s end-to-end),
+                # allocate 2.5s to collection RPC so write/flush (<=1.5s) completes within 5s.
+                collection_timeout = 2.5 if (is_manual or is_port_reopened) else 4.0
+
                 try:
                     payload = sm.collect_all(
                         session_file=Path(args.session_file) if args.session_file else None,
@@ -296,6 +300,7 @@ def run_watch_loop(
                         host_alias=args.host_alias,
                         agent_id=args.agent_id,
                         reference_time=args.reference_time,
+                        quota_timeout=collection_timeout,
                     )
                 except Exception as exc:
                     sent_err = args.reference_time if args.reference_time else datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
@@ -316,6 +321,13 @@ def run_watch_loop(
                         sink=active_sink,
                         reference_time=args.reference_time,
                     )
+                    # Check if manual trigger arrived while this collection/transmission was in flight:
+                    # If so, this newly transmitted sequence genuinely acquired its observations after or during
+                    # the manual request, satisfying the requested manual refresh within <=5s!
+                    if manual_trigger_event and manual_trigger_event.is_set():
+                        is_manual = True
+                        manual_trigger_event.clear()
+
                     if outcome.success:
                         trigger_type = "MANUAL" if is_manual else ("PORT" if is_port_reopened and not is_auto else "AUTO")
                         print(

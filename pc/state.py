@@ -150,6 +150,7 @@ class SharedCollectionState:
         host_alias: str = "pc-collector",
         agent_id: str = "codex-cli",
         reference_time: str | None = None,
+        quota_timeout: float = 4.0,
     ) -> dict[str, Any]:
         self.source_errors.clear()
         usage_snapshots = []
@@ -236,7 +237,7 @@ class SharedCollectionState:
         if live_quota:
             src = self.get_source("quota")
             try:
-                quota_res = fetch_native_rate_limits(reference_time=reference_time)
+                quota_res = fetch_native_rate_limits(timeout_seconds=quota_timeout, reference_time=reference_time)
                 snap = build_account_quota_snapshot(
                     quota_res,
                     host_alias=host_alias,

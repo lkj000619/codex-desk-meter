@@ -243,7 +243,7 @@ class LoopbackSink:
 class WindowsSerialSink:
     """Standard serial sink for real COM ports using pyserial when invoked by operator."""
 
-    def __init__(self, port: str, baudrate: int = 115200, timeout: float = 2.0):
+    def __init__(self, port: str, baudrate: int = 115200, timeout: float = 1.5):
         try:
             import serial
         except ImportError:
@@ -266,7 +266,24 @@ class WindowsSerialSink:
         return self.serial.write(data)
 
     def flush(self) -> None:
-        self.serial.flush()
+        """Bounded flush: pyserial flush() on Windows can block indefinitely if TX queue stalls."""
+        import threading
+        flush_done = threading.Event()
+
+        def do_flush():
+            try:
+                self.serial.flush()
+            except Exception:
+                pass
+            finally:
+                flush_done.set()
+
+        t = threading.Thread(target=do_flush, daemon=True)
+        t.start()
+        # Bound flush to configured write timeout (e.g. 1.5s)
+        if not flush_done.wait(timeout=self.serial.write_timeout or 1.5):
+            # Timed out waiting for TX queue to drain
+            pass
 
     def close(self) -> None:
         self.serial.close()

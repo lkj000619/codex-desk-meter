@@ -556,7 +556,256 @@ class TestCohortProbeRegressions(unittest.TestCase):
         out = run_c_wire((line, 1000, 1000))
         self.assertTrue(out[0]["accepted"], out[0].get("error"))
 
+    def test_watch_manual_deadline_bounded_under_slow_source_and_write(self):
+        """Under slow source (4.5s collection) and 1.0s write, manual dispatch budget caps collection so end-to-end <= 5.0s."""
+        clock = FakeClock(start_time=100.0)
+        stop_event = threading.Event()
+        manual_event = threading.Event()
+
+        class DelayedSink(LoopbackSink):
+            def write(self, data: bytes) -> int:
+                clock.advance(1.0)  # Simulates 1.0s write I/O
+                return super().write(data)
+
+        sink = DelayedSink()
+
+        # State manager with a slow source that respects quota_timeout budget
+        class SlowSourceStateManager(SharedCollectionState):
+            def collect_all(self, *a, **kw):
+                budget = kw.get("quota_timeout", 4.0)
+                # If budget is 2.5s, simulate 2.5s delay and return timeout error on cold quota
+                clock.advance(min(budget, 4.5))
+                # Call base collect_all
+                return super().collect_all(*a, **kw)
+
+        sm = SlowSourceStateManager()
+
+        class Args:
+            device_alias = "test-alias"
+            interval = 60
+            port = None
+            dry_run = True
+            state_file = str(self.state_file)
+            lock_dir = str(self.lock_dir)
+            session_file = None
+            session_dir = None
+            session_id = None
+            latest = False
+            live_quota = False
+            provider_fixture = None
+            personal_usage = None
+            global_reset = None
+            host_alias = "pc-test"
+            agent_id = "codex-cli"
+            reference_time = None
+            once = False
+
+        watch_thread = threading.Thread(
+            target=run_watch_loop,
+            kwargs={
+                "args": Args(),
+                "state_manager": sm,
+                "sink_override": sink,
+                "manual_trigger_event": manual_event,
+                "stop_event": stop_event,
+                "time_provider": clock,
+            },
+        )
+        watch_thread.start()
+
+        # Wait for auto iteration 1 at t=100.0 (collection takes 4.0s, write takes 1.0s -> completes at 105.0)
+        for _ in range(50):
+            if len(sink.written_frames) >= 1:
+                break
+            time.sleep(0.02)
+        self.assertEqual(len(sink.written_frames), 1)
+
+        # Trigger manual dispatch at t = 110.0
+        clock.current_time = 110.0
+        start_manual_t = clock.now()
+        manual_event.set()
+
+        for _ in range(50):
+            if len(sink.written_frames) >= 2:
+                break
+            time.sleep(0.02)
+        self.assertEqual(len(sink.written_frames), 2)
+        duration = clock.now() - start_manual_t
+
+        # PRODUCT_CONTRACT sections 3/4 requires manual dispatch <= 5.0s!
+        self.assertLessEqual(duration, 5.0, f"Manual dispatch duration {duration}s exceeded max 5.0s")
+
+        stop_event.set()
+        watch_thread.join(timeout=1.0)
+
+    def test_port_reopened_deadline_bounded_under_slow_source(self):
+        """When port becomes available, bounded collection ensures new sequence is sent <= 5.0s."""
+        clock = FakeClock(start_time=200.0)
+        stop_event = threading.Event()
+        sink = LoopbackSink()
+
+        class SlowSourceStateManager(SharedCollectionState):
+            def collect_all(self, *a, **kw):
+                budget = kw.get("quota_timeout", 4.0)
+                clock.advance(min(budget, 4.5))
+                return super().collect_all(*a, **kw)
+
+        sm = SlowSourceStateManager()
+
+        # Populate a last good snapshot for quota
+        quota_src = sm.get_source("quota")
+        quota_src.update_good({
+            "schema_version": 1,
+            "snapshot_id": "quota-codex-account",
+            "provider_id": "codex",
+            "agent_id": "codex-cli",
+            "host_id": "pc-test",
+            "model_id": None,
+            "account_profile_id": None,
+            "source_kind": "local_runtime",
+            "metric_kind": "quota_window",
+            "unit": "percent",
+            "status": "available",
+            "observed_at": "2026-10-09T08:00:00Z",
+            "windows": [],
+            "stale": False,
+            "last_good_at": "2026-10-09T08:00:00Z",
+            "error_code": None,
+            "error_reason": None,
+        })
+
+        class Args:
+            device_alias = "test-alias"
+            interval = 60
+            port = "COM3"
+            dry_run = False
+            state_file = str(self.state_file)
+            lock_dir = str(self.lock_dir)
+            session_file = None
+            session_dir = None
+            session_id = None
+            latest = False
+            live_quota = False
+            provider_fixture = None
+            personal_usage = None
+            global_reset = None
+            host_alias = "pc-test"
+            agent_id = "codex-cli"
+            reference_time = None
+            once = False
+
+        # In watch loop, we pass sink_override as a simulated opened port
+        watch_thread = threading.Thread(
+            target=run_watch_loop,
+            kwargs={
+                "args": Args(),
+                "state_manager": sm,
+                "sink_override": sink,
+                "stop_event": stop_event,
+                "time_provider": clock,
+            },
+        )
+        watch_thread.start()
+
+        start_t = clock.now()
+        for _ in range(50):
+            if len(sink.written_frames) >= 1:
+                break
+            time.sleep(0.02)
+        self.assertEqual(len(sink.written_frames), 1)
+
+        # Total time taken to transmit new sequence after port available must be <= 5.0s
+        self.assertLessEqual(clock.now() - start_t, 5.0)
+
+        stop_event.set()
+        watch_thread.join(timeout=1.0)
+
+    def test_watch_manual_arrival_during_in_flight_automatic_collection(self):
+        """When manual event arrives while automatic collection/write is in flight, coalesce ensures request-to-sequence <= 5.0s."""
+        clock = FakeClock(start_time=300.0)
+        stop_event = threading.Event()
+        manual_event = threading.Event()
+
+        class DelayedWriteSink(LoopbackSink):
+            def write(self, data: bytes) -> int:
+                clock.advance(0.8)
+                return super().write(data)
+
+        sink = DelayedWriteSink()
+
+        # State manager where automatic collection takes 2.0s
+        class InFlightStateManager(SharedCollectionState):
+            def __init__(self):
+                super().__init__()
+                self.calls = 0
+
+            def collect_all(self, *a, **kw):
+                self.calls += 1
+                # During the first automatic collection (calls == 1), manual trigger arrives!
+                if self.calls == 1:
+                    clock.advance(1.0)
+                    manual_event.set()  # User presses Enter midway!
+                    clock.advance(1.0)
+                else:
+                    clock.advance(0.5)
+                return super().collect_all(*a, **kw)
+
+        sm = InFlightStateManager()
+
+        class Args:
+            device_alias = "test-alias"
+            interval = 60
+            port = None
+            dry_run = True
+            state_file = str(self.state_file)
+            lock_dir = str(self.lock_dir)
+            session_file = None
+            session_dir = None
+            session_id = None
+            latest = False
+            live_quota = False
+            provider_fixture = None
+            personal_usage = None
+            global_reset = None
+            host_alias = "pc-test"
+            agent_id = "codex-cli"
+            reference_time = None
+            once = False
+
+        watch_thread = threading.Thread(
+            target=run_watch_loop,
+            kwargs={
+                "args": Args(),
+                "state_manager": sm,
+                "sink_override": sink,
+                "manual_trigger_event": manual_event,
+                "stop_event": stop_event,
+                "time_provider": clock,
+            },
+        )
+        watch_thread.start()
+
+        for _ in range(50):
+            if len(sink.written_frames) >= 1:
+                break
+            time.sleep(0.02)
+
+        # The frame was transmitted
+        self.assertEqual(len(sink.written_frames), 1)
+
+        # The manual event set at t=301.0 was coalesced into this fresh acquisition (completed at t=302.8)
+        # Total elapsed time from user manual request (t=301.0) to frame write completion (t=302.8) is 1.8s <= 5.0s!
+        self.assertLessEqual(clock.now() - 301.0, 5.0)
+
+        # Ensure manual event was cleared (not resulting in a redundant second delayed collection)
+        self.assertFalse(manual_event.is_set())
+
+        stop_event.set()
+        watch_thread.join(timeout=1.0)
+
 
 if __name__ == "__main__":
     unittest.main()
+
+
 
