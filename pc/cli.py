@@ -247,6 +247,9 @@ def run_watch_loop(
     last_reopen_time = 0.0
     next_auto_deadline = now_fn()
     iteration = 0
+    manual_request_arrival: float | None = None
+    iter_in_flight: bool = False
+    in_flight_start: float = now_fn()
 
     try:
         while True:
@@ -257,6 +260,9 @@ def run_watch_loop(
             is_manual = False
             if manual_trigger_event and manual_trigger_event.is_set():
                 is_manual = True
+                manual_trigger_event.clear()
+                if manual_request_arrival is None:
+                    manual_request_arrival = in_flight_start if iter_in_flight else current_now
 
             is_auto = (current_now >= next_auto_deadline)
             is_port_reopened = False
@@ -279,6 +285,9 @@ def run_watch_loop(
 
             if should_send:
                 iteration += 1
+                iter_in_flight = True
+                in_flight_start = current_now
+
                 # Automatic <=60s must include collection/write duration; manual/port must not move auto deadline
                 if is_auto:
                     while next_auto_deadline <= current_now:
@@ -286,7 +295,20 @@ def run_watch_loop(
 
                 # Bounded collection budget: for manual / port refresh (max 5s end-to-end),
                 # allocate bounded time to collection RPC so combined collection and bounded write stay within 5.0s.
-                collection_timeout = 2.0 if (is_manual or is_port_reopened) else 2.5
+                if is_manual:
+                    elapsed = max(0.0, current_now - manual_request_arrival) if manual_request_arrival is not None else 0.0
+                    remaining_budget = 5.0 - elapsed
+                    # Shared serial write/drain budget is 1.0s, plus native process cleanup (up to 0.5s terminate + 0.5s kill)
+                    reserved_transport_and_cleanup = 1.5
+                    if remaining_budget <= reserved_transport_and_cleanup:
+                        # Cannot fit full RPC acquisition within deadline; use remaining budget minus serial write for explicit bounded failure
+                        collection_timeout = max(0.0, remaining_budget - 1.0)
+                    else:
+                        collection_timeout = min(2.0, remaining_budget - reserved_transport_and_cleanup)
+                elif is_port_reopened:
+                    collection_timeout = 2.0
+                else:
+                    collection_timeout = 2.5
 
                 try:
                     payload = sm.collect_all(
@@ -307,15 +329,6 @@ def run_watch_loop(
                     sent_err = args.reference_time if args.reference_time else datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
                     print(f"[{sent_err}] Iteration {iteration} collection failed: {exc}")
                     payload = {"usage": [], "global_resets": []}
-
-                # If manual trigger arrived while collection was in flight:
-                # If session sources exist, session metadata was read prior to the request,
-                # so this frame cannot represent post-request collection; keep request pending for fresh iteration.
-                # Only if there is no session source (pure quota) was all data acquired post-request.
-                has_session_source = bool(args.session_file or args.session_dir or args.session_id or args.latest)
-                if manual_trigger_event and manual_trigger_event.is_set():
-                    if not has_session_source:
-                        is_manual = True
 
                 # Stamp AFTER acquisition so new observations are never newer than the frame
                 sent_at = args.reference_time if args.reference_time else datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
@@ -350,8 +363,12 @@ def run_watch_loop(
                                 pass
                             serial_sink = None
 
-                    if is_manual and manual_trigger_event:
-                        manual_trigger_event.clear()
+                iter_in_flight = False
+                if manual_trigger_event and manual_trigger_event.is_set():
+                    # A manual request arrived during this iteration!
+                    manual_request_arrival = in_flight_start
+                else:
+                    manual_request_arrival = None
 
             if args.once:
                 break

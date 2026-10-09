@@ -35,7 +35,7 @@ from pc.frame import (
     encode_frame,
     validate_envelope_time_invariant,
 )
-from pc.quota import AccountQuotaResult
+from pc.quota import AccountQuotaResult, RateLimitWindow
 from pc.sender import CdmSender, LoopbackSink, StateStore, WindowsSerialSink
 from pc.state import SharedCollectionState
 
@@ -1142,6 +1142,291 @@ class TestCohortProbeRegressions(unittest.TestCase):
                 # Frame 2 is the post-request MANUAL frame with fresh 500 tokens
                 self.assertEqual(frame2["payload"]["usage"][0]["windows"][0]["used_units"], 500)
                 self.assertLessEqual(clock.now() - manual_time, 5.0, "Manual refresh exceeded 5.0s budget")
+            finally:
+                stop_event.set()
+                watch_thread.join(timeout=1.0)
+
+    def test_second_manual_request_during_already_manual_write_dispatches_second_frame(self):
+        """A second manual trigger arriving while an earlier manual frame is draining/writing is preserved."""
+        session_path = self.td / "sessions/second_manual_session.jsonl"
+        session_path.parent.mkdir(parents=True, exist_ok=True)
+        session_path.write_text(
+            json.dumps({"type": "session_meta", "payload": {"id": "sec-sess"}}) + "\n" +
+            json.dumps({"type": "event_msg", "payload": {"type": "token_count", "timestamp": "2026-10-09T11:58:00Z",
+                                                         "info": {"total_token_usage": {"input_tokens": 100, "output_tokens": 10, "total_tokens": 110}}}}) + "\n",
+            encoding="utf-8",
+        )
+
+        clock = FakeClock(start_time=100.0)
+        stop_event = threading.Event()
+        manual_event = threading.Event()
+
+        StateStore(self.state_file).initialize_new("test-sec-alias", initial_sequence=0, confirmed_overwrite=True)
+
+        class HookedSink(LoopbackSink):
+            def __init__(self):
+                super().__init__()
+                self.first_written = threading.Event()
+
+            def write(self, data: bytes) -> int:
+                ret = super().write(data)
+                if len(self.written_frames) == 1:
+                    # Fire second manual request during the first manual frame's write/drain
+                    session_path.write_text(
+                        json.dumps({"type": "session_meta", "payload": {"id": "sec-sess"}}) + "\n" +
+                        json.dumps({"type": "event_msg", "payload": {"type": "token_count", "timestamp": "2026-10-09T11:59:00Z",
+                                                                     "info": {"total_token_usage": {"input_tokens": 200, "output_tokens": 20, "total_tokens": 220}}}}) + "\n",
+                        encoding="utf-8",
+                    )
+                    manual_event.set()
+                    self.first_written.set()
+                return ret
+
+        hooked_sink = HookedSink()
+        sm = SharedCollectionState()
+
+        class Args:
+            device_alias = "test-sec-alias"
+            interval = 60
+            port = None
+            dry_run = True
+            state_file = str(self.state_file)
+            lock_dir = str(self.lock_dir)
+            session_file = str(session_path)
+            session_dir = None
+            session_id = None
+            latest = False
+            live_quota = False
+            provider_fixture = None
+            personal_usage = None
+            global_reset = None
+            host_alias = "pc-test"
+            agent_id = "codex-cli"
+            reference_time = "2026-10-09T12:00:00Z"
+            once = False
+
+        # Set first manual trigger before loop starts
+        manual_event.set()
+
+        watch_thread = threading.Thread(
+            target=run_watch_loop,
+            kwargs={
+                "args": Args(),
+                "state_manager": sm,
+                "sink_override": hooked_sink,
+                "manual_trigger_event": manual_event,
+                "stop_event": stop_event,
+                "time_provider": clock,
+            },
+        )
+        watch_thread.start()
+
+        try:
+            self.assertTrue(hooked_sink.first_written.wait(timeout=2.0), "First manual write never happened")
+            for _ in range(50):
+                if len(hooked_sink.written_frames) >= 2:
+                    break
+                time.sleep(0.02)
+
+            self.assertEqual(len(hooked_sink.written_frames), 2, "Second manual write was lost or dropped")
+            frame1 = json.loads(hooked_sink.written_frames[0])
+            frame2 = json.loads(hooked_sink.written_frames[1])
+            self.assertEqual(frame1["payload"]["usage"][0]["windows"][0]["used_units"], 100)
+            self.assertEqual(frame2["payload"]["usage"][0]["windows"][0]["used_units"], 200)
+        finally:
+            stop_event.set()
+            watch_thread.join(timeout=1.0)
+
+    def test_pure_quota_request_after_collection_requires_fresh_native_acquisition(self):
+        """Pure-quota watch loop without session files performs fresh acquisition on manual event."""
+        clock = FakeClock(start_time=100.0)
+        stop_event = threading.Event()
+        manual_event = threading.Event()
+
+        StateStore(self.state_file).initialize_new("test-quota-pure-alias", initial_sequence=0, confirmed_overwrite=True)
+        sink = LoopbackSink()
+
+        quota_calls = [0]
+        def fake_quota(*args, **kwargs):
+            quota_calls[0] += 1
+            pct = 15.0 if quota_calls[0] == 1 else 35.0
+            return AccountQuotaResult(
+                account_id="pure-test",
+                plan_type="pro",
+                windows={
+                    "daily": RateLimitWindow(
+                        duration_seconds=86400,
+                        duration_label="24h limit",
+                        used_percent=pct,
+                        percent_remaining=100.0 - pct,
+                        resets_at=None,
+                        reset_status="unknown",
+                    )
+                },
+                observed_at="2026-10-09T11:59:00Z",
+                source_kind="local_runtime",
+                error_code=None,
+                error_reason=None,
+            )
+
+        sm = SharedCollectionState()
+
+        class Args:
+            device_alias = "test-quota-pure-alias"
+            interval = 60
+            port = None
+            dry_run = True
+            state_file = str(self.state_file)
+            lock_dir = str(self.lock_dir)
+            session_file = None
+            session_dir = None
+            session_id = None
+            latest = False
+            live_quota = True
+            provider_fixture = None
+            personal_usage = None
+            global_reset = None
+            host_alias = "pc-test"
+            agent_id = "codex-cli"
+            reference_time = "2026-10-09T12:00:00Z"
+            once = False
+
+        with patch("pc.state.fetch_native_rate_limits", side_effect=fake_quota):
+            watch_thread = threading.Thread(
+                target=run_watch_loop,
+                kwargs={
+                    "args": Args(),
+                    "state_manager": sm,
+                    "sink_override": sink,
+                    "manual_trigger_event": manual_event,
+                    "stop_event": stop_event,
+                    "time_provider": clock,
+                },
+            )
+            watch_thread.start()
+
+            try:
+                # Wait for first AUTO frame
+                for _ in range(50):
+                    if len(sink.written_frames) >= 1:
+                        break
+                    time.sleep(0.02)
+                self.assertEqual(len(sink.written_frames), 1)
+
+                # Fire manual request
+                manual_event.set()
+
+                # Wait for second frame
+                for _ in range(50):
+                    if len(sink.written_frames) >= 2:
+                        break
+                    time.sleep(0.02)
+
+                self.assertEqual(len(sink.written_frames), 2, "Second frame for pure-quota manual request not dispatched")
+                self.assertEqual(quota_calls[0], 2, "Fresh native acquisition was not called for pure-quota manual request")
+                frame1 = json.loads(sink.written_frames[0])
+                frame2 = json.loads(sink.written_frames[1])
+                self.assertEqual(frame1["payload"]["usage"][0]["windows"][0]["percent_used"], 15.0)
+                self.assertEqual(frame2["payload"]["usage"][0]["windows"][0]["percent_used"], 35.0)
+            finally:
+                stop_event.set()
+                watch_thread.join(timeout=1.0)
+
+    def test_real_monotonic_combined_near_limit_auto_rpc_manual_rpc_and_serial_drains_share_five_second_budget(self):
+        """Real monotonic time verification: near-limit auto, manual RPC, and drains enforce <= 5.0s total."""
+        stop_event = threading.Event()
+        manual_event = threading.Event()
+
+        StateStore(self.state_file).initialize_new("test-mono-budget-alias", initial_sequence=0, confirmed_overwrite=True)
+
+        class DrainingSink(LoopbackSink):
+            def write(self, data: bytes) -> int:
+                time.sleep(0.1)
+                return super().write(data)
+
+        sink = DrainingSink()
+        rpc_calls = [0]
+
+        def slow_rpc(*args, **kwargs):
+            rpc_calls[0] += 1
+            time.sleep(0.2)
+            return AccountQuotaResult(
+                account_id="budget-test",
+                plan_type="pro",
+                windows={
+                    "daily": RateLimitWindow(
+                        duration_seconds=86400,
+                        duration_label="24h limit",
+                        used_percent=50.0,
+                        percent_remaining=50.0,
+                        resets_at=None,
+                        reset_status="unknown",
+                    )
+                },
+                observed_at="2026-10-09T11:59:00Z",
+                source_kind="local_runtime",
+                error_code=None,
+                error_reason=None,
+            )
+
+        sm = SharedCollectionState()
+
+        class Args:
+            device_alias = "test-mono-budget-alias"
+            interval = 60
+            port = None
+            dry_run = True
+            state_file = str(self.state_file)
+            lock_dir = str(self.lock_dir)
+            session_file = None
+            session_dir = None
+            session_id = None
+            latest = False
+            live_quota = True
+            provider_fixture = None
+            personal_usage = None
+            global_reset = None
+            host_alias = "pc-test"
+            agent_id = "codex-cli"
+            reference_time = None
+            once = False
+
+        start_time = time.monotonic()
+        with patch("pc.state.fetch_native_rate_limits", side_effect=slow_rpc):
+            watch_thread = threading.Thread(
+                target=run_watch_loop,
+                kwargs={
+                    "args": Args(),
+                    "state_manager": sm,
+                    "sink_override": sink,
+                    "manual_trigger_event": manual_event,
+                    "stop_event": stop_event,
+                    "time_provider": None,
+                },
+            )
+            watch_thread.start()
+
+            try:
+                # Wait for first AUTO frame
+                for _ in range(50):
+                    if len(sink.written_frames) >= 1:
+                        break
+                    time.sleep(0.02)
+                self.assertEqual(len(sink.written_frames), 1)
+
+                # Fire manual request
+                req_time = time.monotonic()
+                manual_event.set()
+
+                # Wait for second frame
+                for _ in range(50):
+                    if len(sink.written_frames) >= 2:
+                        break
+                    time.sleep(0.02)
+
+                total_elapsed = time.monotonic() - req_time
+                self.assertEqual(len(sink.written_frames), 2)
+                self.assertLessEqual(total_elapsed, 5.0, f"Combined manual collection and drain exceeded 5.0s budget: {total_elapsed:.2f}s")
             finally:
                 stop_event.set()
                 watch_thread.join(timeout=1.0)
