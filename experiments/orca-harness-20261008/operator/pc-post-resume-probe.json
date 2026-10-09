@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-09",
+  "scope": "synthetic production PC-to-C checks; no COM or private data",
+  "base_commit": "14cc264",
+  "pc_tests": {
+    "passed": 39
+  },
+  "firmware_host_tests": {
+    "passed": 8
+  },
+  "cold_global": {
+    "error": "FRAME_SCHEMA_INVALID",
+    "captured_at": null
+  },
+  "provider_file_failure": {
+    "initial_count": 3,
+    "retained_count": 1,
+    "initial_providers": [
+      "openai",
+      "anthropic",
+      "google"
+    ],
+    "retained_providers": [
+      "google"
+    ]
+  },
+  "watch_fresh_source": {
+    "pc_exit": 0,
+    "sent_at": "2026-10-09T08:58:41.144393Z",
+    "observed_at": "2026-10-09T08:58:41.174611Z",
+    "source_newer_than_frame": true,
+    "C_accepted": false,
+    "C_error": "SNAPSHOT_INVALID"
+  }
+}

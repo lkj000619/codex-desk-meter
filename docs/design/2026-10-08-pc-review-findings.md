@@ -65,3 +65,23 @@ ESP-IDF Python venv에서 실제 32개 시험을 재실행한 결과 Windows loc
 
 PC 최신 수정 검증과 firmware build가 끝나기 전 통합 검증 Task는 native blocked로 유지한다.
 COM·실계정·LCD·24시간 안정성은 아직 시험하지 않았다.
+
+## 2026-10-09 재개 후 실제 wire 확인
+
+`task_c6f6d8f00810` 제출 `msg_9dc702168da7`를 수락하고 `14cc264`에 보존했다.
+coordinator가 ESP-IDF Python 3.11로 기존 PC 시험 39개를 실행해 통과했다.
+실제 C host build와 8개 시험도 통과했다. 이 결과는 아래 추가 결함을 검사하지 않았다.
+
+[재현 결과](../../experiments/orca-harness-20261008/operator/pc-post-resume-probe.json):
+
+- 실제 watch는 수집 전에 `sent_at`을 기록한다. 30ms 뒤 수집된 관측으로 만든 실제
+  PC frame을 production C receiver에 전달하니 `SNAPSHOT_INVALID`로 거절됐다.
+- cold global 파일 오류는 `captured_at=null`을 만들고 `build_frame`에서
+  `FRAME_SCHEMA_INVALID`가 된다. 동결 schema는 non-null capture를 요구한다.
+  관측하지 않은 global record는 wire에서 생략하고 로컬 실패를 명확히 기록해야 한다.
+- 세 provider를 담은 동결 fixture를 읽은 뒤 파일이 사라지면 세 캐시 중 google 하나만
+  남는다. 파일 캐시 하나 대신 각 원본 source record를 보존해야 한다.
+
+이 세 결함과 source 선택 identity·갱신 deadline 회귀 검사는 같은 PC 담당의 새 보완
+`task_a6eebb977125` / `ctx_04111d8d4601`에 맡겼다. 이전 제출은 성공적인 제출이고
+완성된 제품 합격은 아니다. frozen schema·과거 비교 판정은 변경하지 않는다.

@@ -2,8 +2,8 @@
   "cohort": "orca-harness-20261008",
   "run_id": "run_c968c43361da",
   "coordinator_handle": "term_c1752a58-5861-435e-ab3a-c99caaa61b14",
-  "resumed_coordinator_handle": "term_ce8a35be-a6e6-4508-aba9-5c5400b95a21",
-  "resumed_runtime_id": "711c48c3-d114-4035-9ff7-3748588b6783",
+  "resumed_coordinator_handle": "term_b616990b-a6c9-4d5e-90c2-47af89701a69",
+  "resumed_runtime_id": "01fe54dc-9231-41a3-8a2d-557f0c610d63",
   "worktree_id": "ce5556c0-b87c-4c5f-9bac-6e1fa3f0faf2::C:/Users/이광진/orca/workspaces/codex-desk-meter/experiment-orca-harness-20261008",
   "branch": "lkj000619/experiment-orca-harness-20261008",
   "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
@@ -65,7 +65,7 @@
       "terminal": "term_39c072ad-cf9b-4974-84a0-baa02d99974f",
       "initial_submission_task": "task_fa0b12bd6fda",
       "initial_submission_dispatch": "ctx_e7bb307f023b",
-      "review": "32 actual tests: one Windows crash test error; cached error stale=false and wire path leakage reproduced. Source identity/privacy/initialization correction active.",
+      "review": "Accepted msg_9dc702168da7 preserved 14cc264; 39 existing tests pass. Three actual production interop failures in operator/pc-post-resume-probe.json routed to task_a6eebb977125.",
       "first_remediation_task": "task_3963de21ddd1",
       "first_remediation_dispatch": "ctx_221ff3735dae",
       "runtime_submission_task": "task_2b005e480abd",
@@ -79,21 +79,23 @@
     },
     "selected_b_review": {
       "task_id": "task_0d62e820abfa",
-      "dispatch_id": "ctx_fbf6b4c142f4",
-      "terminal": "term_079881f4-f92c-464b-a856-21274157b8c1",
-      "status": "running same-Task retry; native turnStart observed",
-      "first_failed_dispatch": "ctx_c9524d9d2327"
+      "dispatch_id": "ctx_9477f122f8d4",
+      "terminal": "term_1a2fcc8b-6402-4851-ba15-d27061517be1",
+      "status": "accepted PASS msg_1f1335f9e59f; released external retained/processAction none; Delivery acknowledged; design approval only",
+      "first_failed_dispatch": "ctx_c9524d9d2327",
+      "interrupted_dispatch": "ctx_fbf6b4c142f4"
     },
     "firmware": {
       "task_id": "task_b1214421a314",
-      "additional_coordinator_gate": "Core may proceed in parallel; final selected-B GUI integration and worker_done require independent B PASS. No COM until host integration and artifact freeze.",
-      "status": "core running; native provider codex model gpt-6-sol working/live verified",
-      "dispatch_id": "ctx_d5c857a3d228",
-      "terminal": "term_e949afe5-d263-4f89-950b-3cca8cc9520f",
+      "additional_coordinator_gate": "B design PASS accepted; final GUI and actual build may proceed. No COM until latest PC correction, host integration and artifact freeze.",
+      "status": "same-Task recovery of failed terminal_missing ctx_d5c857a3d228; 8 actual C host tests pass; GUI placeholder and build pending",
+      "dispatch_id": "ctx_ce28c7cbe236",
+      "terminal": "term_9a4ebce2-fd56-4795-b238-e480cc1dc1bb",
       "model": "gpt-6-sol",
       "cli_version": "0.159.2",
       "approval_flag": "--dangerously-bypass-approvals-and-sandbox",
-      "model_evidence": "Actual CLI header GPT-6-Sol xhigh / YOLO and native fleet provider codex/model gpt-6-sol. Draft paste observed; Enter sent exactly once; no task duplicate."
+      "model_evidence": "Actual CLI header GPT-6-Sol xhigh / YOLO and native fleet provider codex/model gpt-6-sol. Draft paste observed; Enter sent exactly once; no task duplicate.",
+      "interrupted_dispatch": "ctx_d5c857a3d228"
     },
     "selected_b_cache_fix": {
       "task_id": "task_57d8de5426b5",
@@ -106,6 +108,12 @@
       "task_id": "task_4d49e747c570",
       "status": "native blocked",
       "additional_coordinator_gate": "Latest PC correction production tests and firmware actual build must pass; native dependencies name older PC submission."
+    },
+    "pc_wire_correction": {
+      "task_id": "task_a6eebb977125",
+      "terminal": "term_57af52b9-738e-44cc-beb8-4d2204a41b46",
+      "status": "working/live native verified; actual AGY argv requested Gemini3.8FlashMedium with unattended approvals",
+      "dispatch_id": "ctx_04111d8d4601"
     }
   },
   "frozen_input_count": 57,
@@ -115,5 +123,12 @@
     "codex_flag": "--dangerously-bypass-approvals-and-sandbox",
     "shell": "powershell.exe"
   },
-  "comparison_status": "separate-expanded-cohort-not-original-comparison-repeat"
+  "comparison_status": "separate-expanded-cohort-not-original-comparison-repeat",
+  "coordinator_recovery_history": [
+    {
+      "runtime_id": "711c48c3-d114-4035-9ff7-3748588b6783",
+      "coordinator_handle": "term_ce8a35be-a6e6-4508-aba9-5c5400b95a21",
+      "reason": "5h session interruption and Orca restart, 2026-10-09"
+    }
+  ]
 }

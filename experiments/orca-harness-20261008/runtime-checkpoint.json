@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-08T15:10:51.5858673Z",
+    "observed_at":  "2026-10-09T09:03:03.1428865Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -63,9 +63,9 @@
                   {
                       "id":  "task_0d62e820abfa",
                       "title":  "Verify corrected selected B and preserve initial GUI evidence",
-                      "status":  "dispatched",
+                      "status":  "completed",
                       "deps":  "[\"task_f61c79e5c906\"]",
-                      "completed_at":  null
+                      "completed_at":  "2026-10-09T09:01:11.098Z"
                   },
                   {
                       "id":  "task_3963de21ddd1",
@@ -98,6 +98,13 @@
                   {
                       "id":  "task_c6f6d8f00810",
                       "title":  "PC preserve source identity privacy and Windows crash verification",
+                      "status":  "completed",
+                      "deps":  "[]",
+                      "completed_at":  "2026-10-08T15:24:07.225Z"
+                  },
+                  {
+                      "id":  "task_a6eebb977125",
+                      "title":  "Fix PC watch timestamp and per-source wire failures",
                       "status":  "dispatched",
                       "deps":  "[]",
                       "completed_at":  null
@@ -105,15 +112,74 @@
               ],
     "workers":  [
                     {
-                        "task_id":  "task_0d62e820abfa",
-                        "dispatch_id":  "ctx_fbf6b4c142f4",
-                        "terminal_handle":  "term_079881f4-f92c-464b-a856-21274157b8c1",
+                        "task_id":  "task_a6eebb977125",
+                        "dispatch_id":  "ctx_04111d8d4601",
+                        "terminal_handle":  "term_57af52b9-738e-44cc-beb8-4d2204a41b46",
                         "state":  "ready",
                         "dispatch_status":  "dispatched",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791472251110,
+                                         "observedAt":  1791536576406,
                                          "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_b1214421a314",
+                        "dispatch_id":  "ctx_ce28c7cbe236",
+                        "terminal_handle":  "term_9a4ebce2-fd56-4795-b238-e480cc1dc1bb",
+                        "state":  "ready",
+                        "dispatch_status":  "dispatched",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791536576187,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_0d62e820abfa",
+                        "dispatch_id":  "ctx_9477f122f8d4",
+                        "terminal_handle":  "term_1a2fcc8b-6402-4851-ba15-d27061517be1",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791536481429,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_0d62e820abfa",
+                        "dispatch_id":  "ctx_fbf6b4c142f4",
+                        "terminal_handle":  "term_079881f4-f92c-464b-a856-21274157b8c1",
+                        "state":  "abandoned",
+                        "dispatch_status":  "failed",
+                        "liveness":  {
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
@@ -128,12 +194,11 @@
                         "task_id":  "task_b1214421a314",
                         "dispatch_id":  "ctx_d5c857a3d228",
                         "terminal_handle":  "term_e949afe5-d263-4f89-950b-3cca8cc9520f",
-                        "state":  "ready",
-                        "dispatch_status":  "dispatched",
+                        "state":  "abandoned",
+                        "dispatch_status":  "failed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791472248160,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
@@ -148,12 +213,11 @@
                         "task_id":  "task_c6f6d8f00810",
                         "dispatch_id":  "ctx_b3dca8602ce8",
                         "terminal_handle":  "term_39c072ad-cf9b-4974-84a0-baa02d99974f",
-                        "state":  "ready",
-                        "dispatch_status":  "dispatched",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791472243291,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
@@ -171,9 +235,8 @@
                         "state":  "succeeded",
                         "dispatch_status":  "completed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791472045636,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
@@ -210,9 +273,8 @@
                         "state":  "succeeded",
                         "dispatch_status":  "completed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791470499633,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
@@ -269,8 +331,7 @@
                         "dispatch_status":  "completed",
                         "liveness":  {
                                          "verdict":  "unverifiable",
-                                         "reason":  "stale_status",
-                                         "observedAt":  1791468941100
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",

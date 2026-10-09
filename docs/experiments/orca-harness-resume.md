@@ -60,7 +60,23 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 현재 다음 행동
+## 2026-10-09 18:02 KST 재개
+
+- 같은 Run에 새 coordinator `term_b616990b-a6c9-4d5e-90c2-47af89701a69`를 연결함.
+  runtime `01fe54dc-9231-41a3-8a2d-557f0c610d63`. 이전 두 worker는 native
+  `failed / abandoned / terminal_missing`; timeout만으로 재시도한 것이 아님.
+- PC 제출 `msg_9dc702168da7` 처리·release/Delivery ack. `14cc264` 보존,
+  기존 39개 시험 통과. 추가 실제 wire의 세 결함은 `operator/pc-post-resume-probe.json`에
+  기록하고 `task_a6eebb977125` / `ctx_04111d8d4601`에 연결함.
+- B 브라우저 PASS·새 PNG와 미완성 firmware core는 `aac81f3` 보존.
+  B 같은 Task 복구는 `ctx_9477f122f8d4`; firmware는 `ctx_ce28c7cbe236`.
+  실제 입력 draft를 확인하고 각 Codex 터미널에 Enter를 한 번만 보냄.
+  native working/live와 Sol/Luna 실효 모델, AGY working/live를 확인함.
+- 남은 순서: B native 제출 → Sol 최종 GUI·idf build → 최신 PC 보완 시험 →
+  기존 통합 검증 Task. artifact 동결과 통합 검증 전 COM 접근하지 않음.
+  예전 PID·port·browser page는 현재 실행 증거가 아님.
+
+## 이전 다음 행동 기록
 
 2026-10-08 사용자 B 선택 후 다음 단계:
 

@@ -14,7 +14,7 @@
 | Codex Sol 6.1 GUI 후보 D/E/F·LCD 구현 인계 | [Sol 6.1 handoff](design/lcd/sol61/handoff.md) |
 | 독립 요구·인터페이스 검토와 합격 기준 | [Luna 검토](agent-runs/orca-luna/requirements-review.md) |
 | GUI 6개 최초 브라우저 검증·보완 결함 | [GUI 검토](agent-runs/orca-luna/gui-review.md) |
-| 선택 B 첫 보완의 독립 검증·캐시 FAIL 근거 | [B 재검토](agent-runs/orca-luna/gui-b-review.md) |
+| 선택 B 독립 검증·첫 FAIL 및 날짜별 수정 후 PASS | [B 재검토](agent-runs/orca-luna/gui-b-review.md) |
 | 실제 시안 A–F·정상 화면 증거·공통 데이터 | [비교 화면](../opendesign/comparison.html) |
 | PC 최초 구현 제출 (제품 합격과 구분) | [AGY 보고](agent-runs/orca-flash/report.md) |
 | PC 최초 구현 검토·재현 결함·보완 연결 | [PC 보완 검토](design/2026-10-08-pc-review-findings.md) |

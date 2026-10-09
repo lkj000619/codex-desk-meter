@@ -11,9 +11,9 @@
 | 별도 Orca worktree·입력 보존 | 완료 | 실제 branch 생성, 57개 입력 바이트/hash 일치, 과거 제품 제거는 새 checkout에만 적용 |
 | 사용자 범위·역할 확정 | 완료 | Sol/Flash/Luna, GUI는 AGY Gemini 3개+Codex CLI gpt-6.1-sol 3개, 세션 토큰+quota 확인 |
 | 역할별 기술 검토·DAG | 초기 요구·인터페이스 보고 수락 완료 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
-| LCD UX/UI·OpenDesign | B 캐시 수정 제출·실제 JS 재실행 통과 (`a3aeebb`); Luna retry `ctx_fbf6b4c142f4` 브라우저 재검증 중 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
-| PC 프로그램 구현 | runtime 보완 제출 보존 (`7264e76`); 32개 시험 중 Windows 종료 시험 1개 실패·오류 aging/privacy 결함 보완 `task_c6f6d8f00810` | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
-| firmware·통합 | Task `task_b1214421a314` core 구현 준비; B PASS 전에는 GUI 최종 통합·제출 보류 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
+| LCD UX/UI·OpenDesign | B 수정 `a3aeebb`; 독립 PASS 제출 `msg_1f1335f9e59f` 수락 완료 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
+| PC 프로그램 구현 | `14cc264` 제출·기존 39개 시험 통과; 추가 wire 세 결함 보완 `task_a6eebb977125` | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
+| firmware·통합 | core·실제 C 시험 8개 통과 `aac81f3`; 복구 `ctx_ce28c7cbe236`, GUI·idf build 남음 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
 | 독립 검증·수정 | `task_4d49e747c570` native blocked; 최신 PC 보완 검증과 firmware 제출 후 시작 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
 | 업로드·owner-only live·실물 관측 | 예정 | 동결 binary/hash·COM3 수신·LCD/BOOT·30초·단절/복구·지연 근거 |
 | 결과·실행 정리 | 예정 | 판정·미측정·실효 모델·시간/token coverage·질문·실패 기록, worker 소유권 정리 |
@@ -44,11 +44,12 @@ Sol의 core 작업은 병행 시작하고, GUI 최종 통합·제출·통합 검
 - [x] 사용자 선택(B · Swiss Studio Meter)과 구현 인터페이스 확정
 - [x] 선택 B 첫 보완 제출·독립 재검증 FAIL 원본 보존: Unknown/Waiting 전환 시 last-good 유실
 - [x] 선택 B 실제 JS 회귀 검사와 캐시 수정 제출 수락·coordinator 검사 통과 (`a3aeebb`)
-- [ ] 같은 선택 B 검증 Task `task_0d62e820abfa`를 `ctx_fbf6b4c142f4`로 retry-of 재검증; PASS가 firmware GUI 최종 통합·제출 gate
+- [x] 같은 선택 B Task 복구 `ctx_9477f122f8d4`; 독립 PASS native 제출 수락·release/ack
 - [x] PC 수집기 구현 Task/Dispatch 시작 (`ctx_e7bb307f023b`); 완료·검증은 별도
 - [x] PC 최초 제출 보존·실제 native event/시각/quota/state 유실 결함 재현 및 보완 연결 (`ctx_221ff3735dae`)
 - [x] PC runtime 보완 제출 `ctx_4308689007a9` 보존·worker release/Delivery ack; 제출과 실제 품질 판정 구분
-- [ ] PC 오류 aging·경로 비노출·source별 캐시·초기화·실제 Windows crash 시험 보완 (`task_c6f6d8f00810`)
+- [x] PC aging·privacy·초기화·Windows crash 제출 수락 및 기존 39개 시험 (`14cc264`)
+- [ ] 추가 PC→C watch timestamp·cold global·provider별 캐시·갱신 deadline 보완 (`task_a6eebb977125`)
 - [ ] PC·firmware 구현 및 host 통합 검증
 - [x] firmware core `ctx_d5c857a3d228` 실제 Sol 6 working/live 시작 및 checkpoint 확인 (GUI 최종 gate는 유지)
 - [ ] 독립 결함 수정·제품 commit/binary 동결
