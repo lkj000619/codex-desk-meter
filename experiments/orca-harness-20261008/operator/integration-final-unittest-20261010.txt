@@ -1,0 +1,68 @@
+[2026-10-09T22:59:06.083978+00:00] Port FAKE opened successfully.
+[2026-10-09T22:59:08.006808Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=2583B
+[2026-10-09T22:59:09.040042Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=2640B
+[2026-10-09T22:59:10.081102+00:00] Port FAKE opened successfully.
+[2026-10-09T22:59:12.503800Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=2576B
+[2026-10-09T22:59:13.413634Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=2605B
+[2026-10-09T22:59:14.443646+00:00] Port FAKE opened successfully.
+[2026-10-09T22:59:15.175915Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=2567B
+[2026-10-09T22:59:15.516456Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=2541B
+[HOST WRITE] Transmitted frame to FAKE: seq=4294967295, bytes=1873 (host write receipt, not device ACK)
+[HOST WRITE] Transmitted frame to FAKE: seq=8, bytes=1865 (host write receipt, not device ACK)
+[2026-10-09T22:59:18.907074+00:00] Port FAKE opened successfully.
+[2026-10-09T22:59:18.918188Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=831B
+[2026-10-09T22:59:19.001867Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=831B
+[2026-10-09T22:59:19.258151+00:00] Port FAKE opened successfully.
+[2026-10-09T22:59:19.269727Z] Iteration 1 [MANUAL] [HOST WRITE] seq=0, size=1920B
+[2026-10-09T22:59:19.358536Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=1894B
+[2026-10-09T22:59:19.552236+00:00] Port FAKE opened successfully.
+[2026-10-09T22:59:19.563814Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=825B
+[2026-10-09T22:59:20.658946Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=908B
+[2026-10-09T22:59:20.758918+00:00] Port FAKE opened successfully.
+[2026-10-09T12:00:00Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=1865B
+[2026-10-09T12:00:00Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=1868B
+[2026-10-09T22:59:20.971605+00:00] Port FAKE opened successfully.
+[2026-10-09T12:00:00Z] Iteration 1 [AUTO] [HOST WRITE] seq=0, size=162B
+[2026-10-09T12:00:00Z] Iteration 2 [MANUAL] [HOST WRITE] seq=1, size=162B
+[2026-10-09T12:00:00Z] Iteration 3 [AUTO] [HOST WRITE] seq=2, size=162B
+Port FAKE open failed: synthetic port unavailable
+Port FAKE open failed: synthetic port unavailable
+[2026-10-09T22:59:21.277247+00:00] Port FAKE opened successfully.
+[2026-10-09T12:00:00Z] Iteration 2 [PORT] [HOST WRITE] seq=0, size=162B
+
+test_accepts_fractional_quota_and_unicode_canonical_label (test_cdm_receiver_boundaries.ReceiverBoundaryTests.test_accepts_fractional_quota_and_unicode_canonical_label) ... ok
+test_rejects_bad_frames_atomically_and_accepts_next_sequence (test_cdm_receiver_boundaries.ReceiverBoundaryTests.test_rejects_bad_frames_atomically_and_accepts_next_sequence) ... ok
+test_sequence_survives_stale_frame_and_silent_disconnect_gap (test_cdm_receiver_boundaries.ReceiverBoundaryTests.test_sequence_survives_stale_frame_and_silent_disconnect_gap) ... ok
+test_switch_replaces_active_session_and_default_pixels (test_cdm_session_selection.SelectedSessionTests.test_switch_replaces_active_session_and_default_pixels) ... ok
+test_enable_failure_uninstalls_and_reports_unavailable (test_f9_temp.F9TemperatureTests.test_enable_failure_uninstalls_and_reports_unavailable) ... ok
+test_install_failure_reports_unavailable_without_enable (test_f9_temp.F9TemperatureTests.test_install_failure_reports_unavailable_without_enable) ... ok
+test_read_failure_preserves_output_and_reports_unknown (test_f9_temp.F9TemperatureTests.test_read_failure_preserves_output_and_reports_unknown) ... ok
+test_success_returns_sensor_value_without_constant_substitution (test_f9_temp.F9TemperatureTests.test_success_returns_sensor_value_without_constant_substitution) ... ok
+test_account_quota_windows_scope_and_session_coexistence (test_pc_producer_to_c.PCProducerToCTests.test_account_quota_windows_scope_and_session_coexistence) ... ok
+test_auto_and_manual_rpc_plus_successful_drains_finish_sender_within_five_seconds (test_pc_producer_to_c.PCProducerToCTests.test_auto_and_manual_rpc_plus_successful_drains_finish_sender_within_five_seconds) ... ok
+test_auto_rpc_remainder_skips_manual_rpc_and_successful_drains_fit_five_seconds (test_pc_producer_to_c.PCProducerToCTests.test_auto_rpc_remainder_skips_manual_rpc_and_successful_drains_fit_five_seconds) ... ok
+test_auto_rpc_then_post_request_manual_collection_write_and_drain_within_five_seconds (test_pc_producer_to_c.PCProducerToCTests.test_auto_rpc_then_post_request_manual_collection_write_and_drain_within_five_seconds) ... ok
+test_cli_fake_serial_reserves_before_write_wraps_and_fails_closed (test_pc_producer_to_c.PCProducerToCTests.test_cli_fake_serial_reserves_before_write_wraps_and_fails_closed) ... ok
+test_cli_refuses_implicit_state_initialization_and_sender_contention (test_pc_producer_to_c.PCProducerToCTests.test_cli_refuses_implicit_state_initialization_and_sender_contention) ... Sender initialization error: STATE_LOST: state file C:\Users\이광진\AppData\Local\Temp\tmp8dqe5le2\absent-state.json does not exist
+Sender initialization error: Device lock already held by another process: C:\Users\이광진\AppData\Local\Temp\tmp8dqe5le2\locks\synthetic-meter.lock
+ok
+test_explicit_session_selection_source_timestamp_and_0_299_300_stale (test_pc_producer_to_c.PCProducerToCTests.test_explicit_session_selection_source_timestamp_and_0_299_300_stale) ... ok
+test_native_nested_token_event_and_invalid_counts_reach_c_as_valid_error_frames (test_pc_producer_to_c.PCProducerToCTests.test_native_nested_token_event_and_invalid_counts_reach_c_as_valid_error_frames) ... ok
+test_production_pc_float_unicode_canonical_frame_interoperates_with_c (test_pc_producer_to_c.PCProducerToCTests.test_production_pc_float_unicode_canonical_frame_interoperates_with_c) ... ok
+test_production_windows_serial_flush_is_bounded_and_consumes_reserved_sequence (test_pc_producer_to_c.PCProducerToCTests.test_production_windows_serial_flush_is_bounded_and_consumes_reserved_sequence) ... Transmission failed: WRITE_IO_ERROR: Serial output queue drain timed out with 128 bytes remaining in output queue
+ok
+test_production_windows_serial_success_waits_for_queue_drain (test_pc_producer_to_c.PCProducerToCTests.test_production_windows_serial_success_waits_for_queue_drain) ... ok
+test_provider_recovery_and_global_reset_last_known_reach_c (test_pc_producer_to_c.PCProducerToCTests.test_provider_recovery_and_global_reset_last_known_reach_c) ... Global reset source error: Global reset file not found: reset.json
+ok
+test_pure_quota_request_after_collection_requires_fresh_native_acquisition (test_pc_producer_to_c.PCProducerToCTests.test_pure_quota_request_after_collection_requires_fresh_native_acquisition) ... ok
+test_rpc_handshake_order_and_timeout_cleanup_with_fake_streams (test_pc_producer_to_c.PCProducerToCTests.test_rpc_handshake_order_and_timeout_cleanup_with_fake_streams) ... ok
+test_second_manual_request_during_manual_write_is_not_lost (test_pc_producer_to_c.PCProducerToCTests.test_second_manual_request_during_manual_write_is_not_lost) ... ok
+test_watch_manual_event_during_native_rpc_uses_result_acquired_after_request (test_pc_producer_to_c.PCProducerToCTests.test_watch_manual_event_during_native_rpc_uses_result_acquired_after_request) ... ok
+test_watch_manual_event_during_write_collects_new_session_before_clearing (test_pc_producer_to_c.PCProducerToCTests.test_watch_manual_event_during_write_collects_new_session_before_clearing) ... ok
+test_watch_manual_refresh_is_independent_of_automatic_deadline_and_bounded (test_pc_producer_to_c.PCProducerToCTests.test_watch_manual_refresh_is_independent_of_automatic_deadline_and_bounded) ... ok
+test_watch_reconnect_is_rate_limited_and_writes_within_five_seconds_of_availability (test_pc_producer_to_c.PCProducerToCTests.test_watch_reconnect_is_rate_limited_and_writes_within_five_seconds_of_availability) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 16.022s
+
+OK

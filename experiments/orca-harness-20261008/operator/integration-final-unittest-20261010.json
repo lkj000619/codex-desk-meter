@@ -1,0 +1,32 @@
+{
+  "scope": "coordinator final actual PC-to-C integration verification; hardware/live not_run",
+  "task_id": "task_4d49e747c570",
+  "dispatch_id": "ctx_6b00e6339d06",
+  "accepted_message": "msg_29b4e5191818",
+  "command": [
+    "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests/integration",
+    "-p",
+    "test_*.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 16.20300000021234,
+  "source_hashes": {
+    "pc/cli.py": "e55cf7acfa52b776d56e31a5e4b55ecaa0bebc65fed1c3ac11e8cf055bc646b6",
+    "pc/quota.py": "ee836d1386ddaa0d15657d47399cc51be32fd3f573ff2f4118346b9f4df2d64d",
+    "pc/sender.py": "863d20579879d7b7fc6cef65a14f41911a09ab7f2ed7b5909a045daeb5fe46dc",
+    "pc/state.py": "54cc7aef055c079fd05833c537db41b7bea64228204ec06838aafac3eea5b689",
+    "tests/integration/test_pc_producer_to_c.py": "22bfdaba31b5ecccc251e0de28a8f01d007647f2edee30207cc5e3d430d6f46e",
+    "firmware/main/cdm.c": "33899e302733a685b78f7171b87cc7827d4e2b34d8ade0a82f0290c6d16b9c1c"
+  },
+  "unchanged_during_run": true,
+  "output": "operator/integration-final-unittest-20261010.txt"
+}

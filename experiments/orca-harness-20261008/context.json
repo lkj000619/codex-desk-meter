@@ -108,7 +108,7 @@
     },
     "integration_review": {
       "task_id": "task_4d49e747c570",
-      "status": "working; preliminary26 pass covered forced exhausted-budget variant, not original positive-budget case. Current owner explicitly acknowledged steering and is restoring two-RPC case separately with original sender terminal timing; final report pending.",
+      "status": "accepted succeeded msg_29b4e5191818; released external/processAction none and Delivery acked; independent27/27, PC64/64, firmware18/18 plus B regression; root integration27/27 OK16.022s stable source",
       "additional_coordinator_gate": "Latest accepted PC and firmware stable; full synthetic integration authorized. No physical until independent findings remediated, review passes and artifact freeze.",
       "dispatch_id": "ctx_6b00e6339d06",
       "terminal": "term_b6cd0335-ea67-4926-8229-b50602b3fb97",
@@ -129,7 +129,8 @@
         "question": "msg_9aed418caff9",
         "answer": "msg_28753c519e1a",
         "scope": "existing .8s drain case retains2 realistic RPC fakes; actual remaining budget decides start or skip; preserve truthful bounded timeout, last-good observation, freshlocal250, actualC and terminal<=5s. Do not force exhausted budget or inject fake Popen StopIteration. Separate delayed cleanup/no-budget PC cases remain valid."
-      }
+      },
+      "root_verification": "operator/integration-final-unittest-20261010.json"
     },
     "pc_wire_correction": {
       "task_id": "task_a6eebb977125",

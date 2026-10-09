@@ -924,7 +924,7 @@ class PCProducerToCTests(unittest.TestCase):
         self.assertTrue(all(proc.terminated and proc.waited and proc.stdin.closed for proc in processes))
         rows = c_receive(frames)
         self.assertTrue(all(row["accepted"] for row in rows), [row.get("error") for row in rows])
-        percentages = [row["current"]["windows"][0]["percent_used"] for row in rows]
+        percentages = [row["usage"][0]["current"]["windows"][0]["percent_used"] for row in rows]
         self.assertEqual(percentages, [17.0, 29.0])
 
     def test_auto_rpc_then_post_request_manual_collection_write_and_drain_within_five_seconds(self):
@@ -1123,7 +1123,7 @@ class PCProducerToCTests(unittest.TestCase):
                        if row["current"]["metric_kind"] == "session_telemetry")
         self.assertEqual(next(w["used_units"] for w in current["windows"] if w["window_id"] == "input"), 250)
 
-    def test_auto_rpc_remainder_manual_rpc_and_successful_serial_drains_share_five_second_budget(self):
+    def test_auto_rpc_remainder_skips_manual_rpc_and_successful_drains_fit_five_seconds(self):
         state_path = self.root / "boundary-state.json"
         StateStore(state_path).initialize_new("synthetic-boundary", initial_sequence=0)
         session_file = self.root / "boundary-session.jsonl"
@@ -1132,7 +1132,6 @@ class PCProducerToCTests(unittest.TestCase):
         manual = threading.Event()
         stop = threading.Event()
         auto_init_started = threading.Event()
-        manual_init_started = threading.Event()
         second_drain_finished = threading.Event()
         processes = []
         frames = []
@@ -1141,6 +1140,128 @@ class PCProducerToCTests(unittest.TestCase):
         def rpc_process(pct, init_delay, read_delay, init_started):
             quota_line = json.dumps({"jsonrpc": "2.0", "id": 2, "result": {
                 "accountId": "synthetic-boundary-account",
+                "rateLimits": {"primary": {"windowDurationMins": 5, "usedPercent": pct}},
+            }}).encode() + b"\n"
+
+            class Output:
+                def __init__(self):
+                    self.index = 0
+
+                def readline(self):
+                    self.index += 1
+                    if self.index == 1:
+                        init_started.set()
+                        time.sleep(init_delay)
+                        return init_line
+                    if self.index == 2:
+                        time.sleep(read_delay)
+                        return quota_line
+                    return b""
+
+                def close(self):
+                    pass
+
+            proc = _FakeProcess(Output())
+            processes.append(proc)
+            return proc
+
+        auto_proc = rpc_process(10.0, 0.95, 0.95, auto_init_started)
+
+        def bounded_terminate_wait(timeout=None):
+            time.sleep(min(0.5, timeout if timeout is not None else 0.5))
+            auto_proc.waited = True
+            return 0
+
+        auto_proc.wait = bounded_terminate_wait
+        class DrainingSerial:
+            def __init__(self, **kwargs):
+                self.write_timeout = kwargs["write_timeout"]
+                self.queued_at = None
+                self.closed = False
+                self.write_index = 0
+
+            @property
+            def out_waiting(self):
+                if self.queued_at is None or time.monotonic() - self.queued_at < 0.8:
+                    return 128
+                if self.write_index >= 2:
+                    second_drain_finished.set()
+                return 0
+
+            def write(self, raw):
+                self.write_index += 1
+                self.queued_at = time.monotonic()
+                frames.append(bytes(raw))
+                return len(raw)
+
+            def close(self):
+                self.closed = True
+
+        args = argparse.Namespace(
+            port="FAKE", dry_run=False, device_alias="synthetic-boundary", interval=60,
+            state_file=str(state_path), lock_dir=str(self.root / "boundary-locks"),
+            session_file=str(session_file), session_dir=None, session_id=None, latest=False,
+            live_quota=True, provider_fixture=None, personal_usage=None, global_reset=None,
+            host_alias="synthetic-host", agent_id="synthetic-cli", reference_time=None, once=False,
+        )
+        thread = threading.Thread(target=cli.run_watch_loop, kwargs={
+            "args": args, "state_manager": SharedCollectionState(),
+            "manual_trigger_event": manual, "stop_event": stop,
+        }, daemon=True)
+        request_started = None
+        with patch("pc.quota.subprocess.Popen", side_effect=[auto_proc]), \
+                patch.dict(sys.modules, {"serial": serial_module(DrainingSerial)}):
+            thread.start()
+            try:
+                self.assertTrue(auto_init_started.wait(2), "AUTO initialize did not start")
+                request_started = time.monotonic()
+                manual.set()
+                write_session(session_file, "synthetic-boundary-session",
+                              datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+                              input_tokens=250, output_tokens=40, total_tokens=777)
+                self.assertTrue(second_drain_finished.wait(5), "MANUAL serial bytes did not drain")
+                elapsed = time.monotonic() - request_started
+                self.assertLessEqual(
+                    elapsed, 5.0,
+                    f"AUTO RPC remainder + MANUAL RPC + successful serial drains took {elapsed:.2f}s",
+                )
+            finally:
+                stop.set()
+                thread.join(timeout=2)
+        self.assertFalse(thread.is_alive())
+        self.assertEqual(len(processes), 1, "exhausted manual budget must not start another native RPC")
+        self.assertTrue(all(proc.terminated and proc.waited and proc.stdin.closed for proc in processes))
+        rows = c_receive(frames)
+        self.assertEqual(len(rows), 2)
+        self.assertTrue(all(row["accepted"] for row in rows), [row.get("error") for row in rows])
+        quota = next(row["current"] for row in rows[1]["usage"]
+                     if row["current"]["metric_kind"] == "quota_window")
+        self.assertEqual(quota["status"], "error")
+        self.assertEqual(quota["error_code"], "QUOTA_TIMEOUT")
+        self.assertEqual(quota["windows"][0]["percent_used"], 10.0)
+        current = next(row["current"] for row in rows[1]["usage"]
+                       if row["current"]["metric_kind"] == "session_telemetry")
+        self.assertEqual(next(w["used_units"] for w in current["windows"] if w["window_id"] == "input"), 250)
+
+    def test_auto_and_manual_rpc_plus_successful_drains_finish_sender_within_five_seconds(self):
+        state_path = self.root / "two-rpc-boundary-state.json"
+        StateStore(state_path).initialize_new("synthetic-two-rpc-boundary", initial_sequence=0)
+        session_file = self.root / "two-rpc-boundary-session.jsonl"
+        write_session(session_file, "synthetic-two-rpc-boundary-session", STAMP,
+                      input_tokens=40, output_tokens=10, total_tokens=50)
+        manual = threading.Event()
+        stop = threading.Event()
+        auto_init_started = threading.Event()
+        manual_init_started = threading.Event()
+        second_drain_finished = threading.Event()
+        processes = []
+        frames = []
+        sender_outcomes = []
+        init_line = json.dumps({"jsonrpc": "2.0", "id": 1, "result": {}}).encode() + b"\n"
+
+        def rpc_process(pct, init_delay, read_delay, init_started):
+            quota_line = json.dumps({"jsonrpc": "2.0", "id": 2, "result": {
+                "accountId": "synthetic-two-rpc-account",
                 "rateLimits": {"primary": {"windowDurationMins": 5, "usedPercent": pct}},
             }}).encode() + b"\n"
 
@@ -1194,8 +1315,8 @@ class PCProducerToCTests(unittest.TestCase):
                 self.closed = True
 
         args = argparse.Namespace(
-            port="FAKE", dry_run=False, device_alias="synthetic-boundary", interval=60,
-            state_file=str(state_path), lock_dir=str(self.root / "boundary-locks"),
+            port="FAKE", dry_run=False, device_alias="synthetic-two-rpc-boundary", interval=60,
+            state_file=str(state_path), lock_dir=str(self.root / "two-rpc-boundary-locks"),
             session_file=str(session_file), session_dir=None, session_id=None, latest=False,
             live_quota=True, provider_fixture=None, personal_usage=None, global_reset=None,
             host_alias="synthetic-host", agent_id="synthetic-cli", reference_time=None, once=False,
@@ -1204,32 +1325,46 @@ class PCProducerToCTests(unittest.TestCase):
             "args": args, "state_manager": SharedCollectionState(),
             "manual_trigger_event": manual, "stop_event": stop,
         }, daemon=True)
-        request_started = None
+        original_transmit = CdmSender.transmit_payload
+
+        def observe_sender_terminal(sender, *args, **kwargs):
+            outcome = original_transmit(sender, *args, **kwargs)
+            sender_outcomes.append((time.monotonic(), outcome))
+            return outcome
+
         with patch("pc.quota.subprocess.Popen", side_effect=[auto_proc, manual_proc]), \
+                patch.object(CdmSender, "transmit_payload", observe_sender_terminal), \
                 patch.dict(sys.modules, {"serial": serial_module(DrainingSerial)}):
             thread.start()
             try:
                 self.assertTrue(auto_init_started.wait(2), "AUTO initialize did not start")
                 request_started = time.monotonic()
                 manual.set()
-                write_session(session_file, "synthetic-boundary-session",
+                write_session(session_file, "synthetic-two-rpc-boundary-session",
                               datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
                               input_tokens=250, output_tokens=40, total_tokens=777)
-                self.assertTrue(manual_init_started.wait(5), "post-request MANUAL RPC did not start")
-                self.assertTrue(second_drain_finished.wait(5), "MANUAL serial bytes did not drain")
-                elapsed = time.monotonic() - request_started
-                self.assertLessEqual(
-                    elapsed, 5.0,
-                    f"AUTO RPC remainder + MANUAL RPC + successful serial drains took {elapsed:.2f}s",
-                )
+                self.assertTrue(manual_init_started.wait(5), "bounded MANUAL RPC did not start")
+                self.assertTrue(second_drain_finished.wait(5), "MANUAL queue did not drain")
+                deadline = time.monotonic() + 0.5
+                while len(sender_outcomes) < 2 and time.monotonic() < deadline:
+                    time.sleep(0.001)
+                self.assertEqual(len(sender_outcomes), 2, "production sender did not return both outcomes")
+                self.assertLessEqual(sender_outcomes[-1][0] - request_started, 5.0,
+                                     "manual request through production SendOutcome exceeded 5s")
+                self.assertTrue(sender_outcomes[-1][1].success, sender_outcomes[-1][1])
             finally:
                 stop.set()
                 thread.join(timeout=2)
         self.assertFalse(thread.is_alive())
+        self.assertEqual(len(processes), 2)
         self.assertTrue(all(proc.terminated and proc.waited and proc.stdin.closed for proc in processes))
         rows = c_receive(frames)
         self.assertEqual(len(rows), 2)
         self.assertTrue(all(row["accepted"] for row in rows), [row.get("error") for row in rows])
+        quota = next(row["current"] for row in rows[1]["usage"]
+                     if row["current"]["metric_kind"] == "quota_window")
+        self.assertEqual(quota["status"], "error")
+        self.assertEqual(quota["windows"][0]["percent_used"], 10.0)
         current = next(row["current"] for row in rows[1]["usage"]
                        if row["current"]["metric_kind"] == "session_telemetry")
         self.assertEqual(next(w["used_units"] for w in current["windows"] if w["window_id"] == "input"), 250)
