@@ -98,3 +98,12 @@ coordinator가 ESP-IDF Python 3.11로 기존 PC 시험 39개를 실행해 통과
 `msg_747a037b79f7`로 같은 PC Task에 전달했다. 자동 수집 시작 간격만 확인하는 시험으로
 수동/연결 복구의 5초 이내 전송을 입증하지 않으며 RPC·cleanup·write까지 포함해 검증한다.
 실제 포트나 개인 데이터는 사용하지 않았다.
+
+2026-10-09 19:06 KST Windows 실제 경로 확인: 설치된 `serial.serialwin32.Serial.flush`
+구현은 `out_waiting`이 남는 동안 50ms sleep을 반복하며 `write_timeout`을 적용하지 않는다.
+production `WindowsSerialSink.flush`에 synthetic queued bytes를 주입하니 timeout 1.5초
+설정에도 인위적으로 큐가 비워진 4.05초 뒤에야 반환했다.
+[재현 결과](../../experiments/orca-harness-20261008/operator/pc-windows-flush-probe.json)를
+`msg_01db9aee6090`으로 진행 중인 좁은 deadline Task `task_2425d0e52884`에 전달했다.
+자동 수집/쓰기가 진행 중일 때 들어오는 수동 요청도 요청 발생 시각부터 측정한다.
+PC 50개 시험의 성공과 전체 갱신 지연의 합격은 구분한다.

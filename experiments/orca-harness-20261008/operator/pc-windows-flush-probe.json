@@ -1,0 +1,8 @@
+{
+  "scope": "production WindowsSerialSink.flush -> installed pyserial Windows flush with synthetic queued bytes",
+  "com_open": false,
+  "private_data": false,
+  "configured_write_timeout_seconds": 1.5,
+  "flush_elapsed_seconds": 4.05,
+  "result": "returns_only_when_queue_artificially_drains_no_deadline"
+}
