@@ -38,3 +38,28 @@ Route minor cleanup with this follow-up: `opendesign/mockups/gemini-b/index.html
 No COM, real account session, auth file, account RPC, frozen input, other worktree, Git history, or device was accessed. Physical LCD readability, GPIO0 operation, transfer rate, frame rate, and power remain `not_run`.
 
 The initial six-candidate review remains at [gui-review.md](gui-review.md). The original and follow-up screenshots are linked from [comparison.html](../../../opendesign/comparison.html).
+
+## Corrected-B retry — 2026-10-09
+
+- Task / Dispatch: `task_0d62e820abfa` / `ctx_fbf6b4c142f4` in `run_c968c43361da`.
+- Dependency: the Gemini correction was submitted before this retry. The first 2026-10-08 F1 failure above remains as historical evidence; this section records the independent post-correction result.
+- Result: **PASS for the selected B browser/design checks.** This is not product or physical LCD approval.
+
+| Original finding | Retry result | Current evidence |
+|---|---|---|
+| F1 — last-good cache and state paths | **PASS** | On the actual B page, Normal → Unknown → Error and Normal → Waiting → Error retain the internal cache and restore input `124,800`, output `16,400`, totals `141,200`, and original `OBS: 17:10:00Z`. Normal → Unknown → Disconnected restores the same values and timestamp, with source age `301s` and receive age `301s (Timeout)`. Recovery restores the valid sample. The cold Error/Disconnected controls render `NO CACHE` and `--`; I also set an empty cache object in page memory and exercised the generic Error/Disconnected branches, which both displayed `NO CACHE`, `--`, and `OBS: UNKNOWN`. This memory-only setup was restored to Normal afterward. The designer check asserts the explicit cold-state displays after cached scenarios; the live empty-cache run supplies the separate conditional-path evidence. |
+| F2 — normalized/source total, subsets, and quota separation | **PASS** | In the live page, an in-memory synthetic `sourceTotal` of `999,999` left `TOTAL TOKENS (IN+OUT)` at `141,200` and showed `999,999` under `Source Total Reported`. Cached input and reasoning are labeled included subsets; session limit, remaining, and percent are unknown, while account quota is separately labeled. No absolute session quota is shown. |
+| F3 — variable windows and BOOT | **PASS** | Long-list pages exposed all six windows as `WIN 1-2 / 6`, `3-4 / 6`, and `5-6 / 6`, including `60m`, `24h`, `20h`, and `30 Days`; next and previous controls wrapped correctly. Clicking the actual preview BOOT button while long-list mode remained selected cycled screen indices `1 → 2 → 0`. |
+| F5 — transfer/performance claims | **PASS, hardware not_run** | Handoff §6.4 calls the 171KB transfer and 60fps unmeasured estimates, marks hardware measurements `not_run`, and makes no guaranteed frame-rate claim. |
+
+### Browser and regression evidence
+
+- Orca loaded corrected B from `http://127.0.0.1:8289/opendesign/mockups/gemini-b/index.html`; the server listener was `127.0.0.1:8289`. The LCD element measured exactly `820×320` CSS px at devicePixelRatio 1, with default screen Usage. Normal labels separate `ACCOUNT QUOTA WINDOWS` from `SESSION TELEMETRY`, label the source total and observation time, and identify token units by row. Global Reset shows `SOURCE: CODEX-RESETS.COM`, reset `2026-10-07 10:00:00Z`, captured `2026-10-07 17:10:00Z`, elapsed `7h 10m`, and worldwide scope; Status shows separate Source Age and Receive Age labels.
+- Source-age checks showed `299s (Available)` / `0s Fresh` / observation `17:05:01Z`, `300s (Stale)` / `0s Fresh` / `17:05:00Z`, and `301s (Stale)` / `0s Fresh` / `17:04:59Z`. Warning display was hidden at 299 and visible at 300/301. Receive-disconnect behavior was also checked at source/receive ages `301s` / `301s (Timeout)`.
+- Text-range bounds were checked in all three screens for 11 states (33 state/screen combinations): normal, unknown, waiting, error, disconnected, both cold states, 299/300/301 stale boundaries, and recovery. No text range exceeded the `820×320` LCD; the smallest measured text was `8.5 CSS px`. This is geometry evidence, not physical-distance readability.
+- The actual page resource list contained no external URLs. A separate `820×320` normal-state crop of the corrected page is [B-swiss-studio-meter-normal-2026-10-09.png](../../../opendesign/screenshots/selected-b/B-swiss-studio-meter-normal-2026-10-09.png); the earlier follow-up image and six initial PNGs were preserved.
+- `python docs/design/lcd/gemini/regression-check.py` exited 0. It now extracts and executes B's inline JavaScript in a Node VM with a simulated DOM and asserts cache transitions, cold-state display, F2 common totals, F3 paging/BOOT, and 299/300/301 boundaries.
+- `python tests/integration/design-check.py` exited 0. Its remaining findings concern comparison-only A/C fixed windows, C's missing source-total label, and E/F copied titles; no change to the shared checker was needed.
+- The manifest was rebuilt by scanning the existing mockup and design-system directories: six mockup HTML files across A–F and zero design-system files. The original `gui-review.md` and six initial normal PNGs remain unchanged.
+
+Physical LCD readability, GPIO0 behavior, transfer rate, frame rate, and power remain `not_run`; no COM, live account/session, auth, account RPC, PC/firmware, frozen-input, other-worktree, or Git operation was performed in this review.
