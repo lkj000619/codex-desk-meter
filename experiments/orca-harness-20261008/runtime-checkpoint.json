@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-09T15:11:53.5929124Z",
+    "observed_at":  "2026-10-09T15:30:10.1185566Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -77,9 +77,9 @@
                   {
                       "id":  "task_4d49e747c570",
                       "title":  "Verify actual PC-to-C firmware integration and product requirements",
-                      "status":  "dispatched",
+                      "status":  "failed",
                       "deps":  "[\"task_3963de21ddd1\",\"task_b1214421a314\"]",
-                      "completed_at":  null
+                      "completed_at":  "2026-10-09T15:26:34.445Z"
                   },
                   {
                       "id":  "task_2b005e480abd",
@@ -122,18 +122,64 @@
                       "status":  "completed",
                       "deps":  "[]",
                       "completed_at":  "2026-10-09T10:07:20.771Z"
+                  },
+                  {
+                      "id":  "task_956c1c1b77b1",
+                      "title":  "Fix independent serial drain and in-flight manual refresh failures",
+                      "status":  "dispatched",
+                      "deps":  "[]",
+                      "completed_at":  null
                   }
               ],
     "workers":  [
                     {
-                        "task_id":  "task_4d49e747c570",
-                        "dispatch_id":  "ctx_125c9c02c0ed",
-                        "terminal_handle":  "term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956",
+                        "task_id":  "task_956c1c1b77b1",
+                        "dispatch_id":  "ctx_2b9adeeceb2c",
+                        "terminal_handle":  "term_3105fe45-46f8-4dce-9763-c24e2e98be09",
                         "state":  "ready",
                         "dispatch_status":  "dispatched",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791558708777,
+                                         "observedAt":  1791559800833,
+                                         "source":  "agent_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
+                    {
+                        "task_id":  "task_956c1c1b77b1",
+                        "dispatch_id":  "ctx_44dfcb3eadac",
+                        "terminal_handle":  "term_3105fe45-46f8-4dce-9763-c24e2e98be09",
+                        "state":  "failed",
+                        "dispatch_status":  "failed",
+                        "liveness":  {
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  null,
+                        "release_state":  null
+                    },
+                    {
+                        "task_id":  "task_4d49e747c570",
+                        "dispatch_id":  "ctx_125c9c02c0ed",
+                        "terminal_handle":  "term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956",
+                        "state":  "failed",
+                        "dispatch_status":  "failed",
+                        "liveness":  {
+                                         "verdict":  "live",
+                                         "observedAt":  1791559605311,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {

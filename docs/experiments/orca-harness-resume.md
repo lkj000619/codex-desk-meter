@@ -60,7 +60,14 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 00:11 KST 최신 체크포인트
+## 2026-10-10 00:29 KST 최신 체크포인트
+
+- Luna `ctx_125c9c02c0ed` 실패 제출 `msg_e69a6fb2be99` 수락·release/ack 완료, `117a988`에 보존했다. coordinator가 최신 독립 통합 22개를 재실행해 같은 19개 통과·3개 실패를 확인했다. 펌웨어 18개·PC 기존 53개 통과는 독립 보고의 별도 결과다.
+- 세 실패는 queued bytes가 남는데 성공으로 반환, 전송 중 manual 요청 유실, 제한 시간 내 큐 전송 완료/명확한 실패 처리 미구현이다. 예전 5.296초 fake callback 관측은 background drain/false success 근거이며 동기 반환 지연의 합격/실패 수치로 사용하지 않는다.
+- 새 좁은 PC 보완 Task `task_956c1c1b77b1` / 현재 Dispatch `ctx_2b9adeeceb2c`가 AGY Flash에서 실제 turnStart observed로 시작됐다. terminal `term_3105fe45-46f8-4dce-9763-c24e2e98be09`, CLI 1.3.2, 실제 Gemini 3.8 Flash Medium·자동 승인 argv 확인. 최초 `ctx_44dfcb3eadac`는 startup 안내 화면의 readiness timeout이며 안내 화면을 닫은 뒤 같은 Task에서 재시도했다. 별도 PC writer를 시작하지 않는다.
+- 다음은 Flash의 실제 보완 제출 수락·시험·보존, 그 뒤 같은 Luna Task를 `ctx_125c9c02c0ed` 이후 attempt로 재검증하는 것이다. review의 외부 터미널은 native release가 retained/no-action으로 처리했으며 닫힘으로 기록하지 않는다. 현재 COM3 USB VID/PID 열거만 했고 실제 COM·flash·live는 미실행이다.
+
+## 2026-10-10 00:11 KST 이전 체크포인트
 
 - 5시간 세션 중단 후 같은 Run을 새 coordinator `term_54a83fa0-c831-41b9-8295-ca84d361c828`에 연결했다. runtime은 `b85e3007-613f-450b-ab06-8a60f76fa6e5`다. 입력 57개 hash·branch·JSON 검증 통과.
 - Luna의 미제출 report·시험 4개·checkpoint를 `0f552c9`에 부분 작업으로 보존했다. AST 검증은 통과했으며 검증 완료를 의미하지 않는다. 안정된 구현은 PC `5ddef63`와 firmware `853ddf7`이다.
