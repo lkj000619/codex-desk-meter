@@ -31,6 +31,14 @@ class SenderLockError(IOError):
     """Single sender lock error."""
 
 
+def _validate_safe_alias(alias: str) -> None:
+    if not isinstance(alias, str) or not alias.strip():
+        raise SenderStateError("STATE_CORRUPT: device_alias must be a non-empty string")
+    p = Path(alias)
+    if p.name != alias or ".." in alias or "/" in alias or "\\" in alias:
+        raise SenderStateError(f"STATE_CORRUPT: device_alias {alias!r} contains unsafe path components")
+
+
 @dataclass
 class DeviceSequenceState:
     device_alias: str
@@ -53,9 +61,16 @@ class DeviceSequenceState:
         ts = data.get("updated_at")
         if not isinstance(alias, str) or not isinstance(seq, int) or isinstance(seq, bool):
             raise SenderStateError("STATE_CORRUPT: invalid fields in state")
+        _validate_safe_alias(alias)
         if not (0 <= seq <= MAX_SEQUENCE):
             raise SenderStateError(f"STATE_CORRUPT: sequence out of uint32 bounds: {seq}")
-        return cls(device_alias=alias, next_sequence=seq, updated_at=float(ts or 0.0))
+        if ts is None or not isinstance(ts, (int, float)) or isinstance(ts, bool):
+            raise SenderStateError("STATE_CORRUPT: updated_at must be numeric")
+        import math
+        f_ts = float(ts)
+        if math.isnan(f_ts) or math.isinf(f_ts) or f_ts < 0.0:
+            raise SenderStateError(f"STATE_CORRUPT: updated_at {f_ts} must be finite non-negative number")
+        return cls(device_alias=alias, next_sequence=seq, updated_at=f_ts)
 
 
 class StateStore:
@@ -109,25 +124,34 @@ class StateStore:
         device_alias: str,
         initial_sequence: int = 0,
         confirmed_overwrite: bool = False,
+        lock_dir: Path | None = None,
     ) -> DeviceSequenceState:
         """Explicit confirmed initialization for new receiver. Refuses silent overwrite."""
-        if not isinstance(device_alias, str) or not device_alias.strip():
-            raise SenderStateError("Invalid device alias")
+        _validate_safe_alias(device_alias)
         if not isinstance(initial_sequence, int) or isinstance(initial_sequence, bool) or not (0 <= initial_sequence <= MAX_SEQUENCE):
             raise SenderStateError(f"Initial sequence must be uint32 in [0, {MAX_SEQUENCE}]")
 
-        if self.state_file.exists() and not confirmed_overwrite:
-            raise SenderStateError(
-                f"STATE_ALREADY_EXISTS: State file {self.state_file} already exists. Refusing silent overwrite without confirmed replacement."
-            )
+        lock = None
+        if lock_dir:
+            lock = DeviceLock(lock_dir / f"{device_alias}.lock")
+            lock.acquire()
 
-        state = DeviceSequenceState(
-            device_alias=device_alias,
-            next_sequence=initial_sequence,
-            updated_at=time.time(),
-        )
-        self.save_atomic(state)
-        return state
+        try:
+            if self.state_file.exists() and not confirmed_overwrite:
+                raise SenderStateError(
+                    f"STATE_ALREADY_EXISTS: State file {self.state_file} already exists. Refusing silent overwrite without confirmed replacement."
+                )
+
+            state = DeviceSequenceState(
+                device_alias=device_alias,
+                next_sequence=initial_sequence,
+                updated_at=time.time(),
+            )
+            self.save_atomic(state)
+            return state
+        finally:
+            if lock:
+                lock.release()
 
 
 class DeviceLock:
@@ -279,7 +303,13 @@ class CdmSender:
             self._lock = DeviceLock(lock_path)
             self._lock.acquire()
 
-        self._state = self.state_store.load(device_alias)
+        try:
+            self._state = self.state_store.load(device_alias)
+        except Exception:
+            if self._lock:
+                self._lock.release()
+                self._lock = None
+            raise
 
     def close(self) -> None:
         if self._lock:

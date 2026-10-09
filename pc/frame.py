@@ -160,13 +160,13 @@ def semantic_validate_snapshot(snapshot: dict[str, Any], reference_time: str | N
         if seen_channels == required_channels:
             in_t = channel_units.get("input") or 0
             out_t = channel_units.get("output") or 0
-            cached_t = channel_units.get("cached_input") or 0
-            reason_t = channel_units.get("reasoning_output") or 0
+            cached_t = channel_units.get("cached_input")
+            reason_t = channel_units.get("reasoning_output")
             norm_t = channel_units.get("normalized_total") or 0
 
-            if cached_t > in_t:
+            if cached_t is not None and cached_t > in_t:
                 fail("SEMANTIC_CACHE_EXCEEDS_INPUT", f"cached_input ({cached_t}) > input ({in_t})")
-            if reason_t > out_t:
+            if reason_t is not None and reason_t > out_t:
                 fail("SEMANTIC_REASONING_EXCEEDS_OUTPUT", f"reasoning_output ({reason_t}) > output ({out_t})")
             if norm_t != (in_t + out_t):
                 fail("SEMANTIC_NORMALIZED_TOTAL_MISMATCH", f"normalized_total ({norm_t}) != input + output ({in_t + out_t})")

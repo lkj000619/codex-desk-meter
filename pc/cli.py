@@ -63,15 +63,26 @@ def cmd_inventory(args: argparse.Namespace) -> int:
 
 
 def cmd_init_device(args: argparse.Namespace) -> int:
+    # Require explicit confirmed empty receiver or force overwrite
+    if not args.confirmed_empty_receiver and not args.force_overwrite:
+        print(
+            "Error: Initialization requires either --confirmed-empty-receiver (for fresh uninitialized meter) "
+            "or --force-overwrite (for intentional sequence replacement). Refusing unconfirmed initialization.",
+            file=sys.stderr,
+        )
+        return 1
+
     state_path = Path(args.state_file) if args.state_file else get_default_state_path()
+    lock_dir = Path(args.lock_dir) if args.lock_dir else get_default_lock_dir()
     store = StateStore(state_path)
     try:
         store.initialize_new(
             args.device_alias,
             initial_sequence=args.initial_sequence,
             confirmed_overwrite=args.force_overwrite,
+            lock_dir=lock_dir,
         )
-    except SenderStateError as exc:
+    except (SenderStateError, SenderLockError) as exc:
         print(f"Device init failed: {exc}", file=sys.stderr)
         return 1
 
@@ -372,8 +383,10 @@ def main(argv: list[str] | None = None) -> int:
     init_p = subparsers.add_parser("init-device", help="Initialize sequence state for a device alias")
     init_p.add_argument("--device-alias", required=True, help="Stable identifier for the desk meter device")
     init_p.add_argument("--initial-sequence", type=int, default=0, help="Initial sequence number (default 0)")
+    init_p.add_argument("--confirmed-empty-receiver", action="store_true", help="Confirmation that the device receiver is uninitialized/empty")
     init_p.add_argument("--force-overwrite", action="store_true", help="Explicit confirmation to replace existing state")
     init_p.add_argument("--state-file", default=None, help="Path to state file")
+    init_p.add_argument("--lock-dir", default=None, help="Path to lock directory")
     init_p.set_defaults(func=cmd_init_device)
 
     # collect

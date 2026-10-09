@@ -33,9 +33,9 @@ class SessionTokenState:
     observed_at: str | None = None
     input_tokens: int = 0
     output_tokens: int = 0
-    cached_input_tokens: int = 0
-    reasoning_output_tokens: int = 0
-    source_total_tokens: int = 0
+    cached_input_tokens: int | None = None
+    reasoning_output_tokens: int | None = None
+    source_total_tokens: int | None = None
     normalized_total_tokens: int = 0
     event_count: int = 0
     source_path: str | None = None
@@ -55,43 +55,42 @@ class SessionTokenState:
         }
 
 
-def _validate_and_extract_counts(usage_dict: dict[str, Any]) -> tuple[int, int, int, int, int] | None:
+def _validate_and_extract_counts(usage_dict: dict[str, Any]) -> tuple[int, int, int | None, int | None, int | None] | None:
     """Validate token counts are nonnegative integers, and cached <= input, reasoning <= output."""
     try:
         in_tok = usage_dict.get("input_tokens")
         if in_tok is None:
             return None
         out_tok = usage_dict.get("output_tokens", 0)
-        cached_tok = usage_dict.get("cached_input_tokens", 0)
-        reasoning_tok = usage_dict.get("reasoning_output_tokens", 0)
+        cached_tok = usage_dict.get("cached_input_tokens")
+        reasoning_tok = usage_dict.get("reasoning_output_tokens")
         source_tot = usage_dict.get("total_tokens")
-        if source_tot is None:
-            source_tot = in_tok + out_tok
 
         # Check types
         if isinstance(in_tok, bool) or not isinstance(in_tok, int) or in_tok < 0:
             return None
         if isinstance(out_tok, bool) or not isinstance(out_tok, int) or out_tok < 0:
             return None
-        if isinstance(cached_tok, bool) or not isinstance(cached_tok, int) or cached_tok < 0:
-            return None
-        if isinstance(reasoning_tok, bool) or not isinstance(reasoning_tok, int) or reasoning_tok < 0:
-            return None
-        if isinstance(source_tot, bool) or not isinstance(source_tot, int) or source_tot < 0:
-            return None
-
-        # Invariant checks
-        if cached_tok > in_tok:
-            return None
-        if reasoning_tok > out_tok:
-            return None
+        if cached_tok is not None:
+            if isinstance(cached_tok, bool) or not isinstance(cached_tok, int) or cached_tok < 0:
+                return None
+            if cached_tok > in_tok:
+                return None
+        if reasoning_tok is not None:
+            if isinstance(reasoning_tok, bool) or not isinstance(reasoning_tok, int) or reasoning_tok < 0:
+                return None
+            if reasoning_tok > out_tok:
+                return None
+        if source_tot is not None:
+            if isinstance(source_tot, bool) or not isinstance(source_tot, int) or source_tot < 0:
+                return None
 
         return in_tok, out_tok, cached_tok, reasoning_tok, source_tot
     except Exception:
         return None
 
 
-def extract_token_usage_from_entry(entry: dict[str, Any]) -> tuple[tuple[int, int, int, int, int], str | None] | None:
+def extract_token_usage_from_entry(entry: dict[str, Any]) -> tuple[tuple[int, int, int | None, int | None, int | None], str | None] | None:
     """Extract validated token counts and token observation timestamp from an entry.
 
     Supports:

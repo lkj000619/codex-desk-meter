@@ -45,9 +45,9 @@ def build_session_telemetry_snapshot(
     channels_def = [
         ("input", "Input tokens", int(session.input_tokens)),
         ("output", "Output tokens", int(session.output_tokens)),
-        ("cached_input", "Cached input", int(session.cached_input_tokens)),
-        ("reasoning_output", "Reasoning output", int(session.reasoning_output_tokens)),
-        ("source_total", "Source total", int(session.source_total_tokens)),
+        ("cached_input", "Cached input", int(session.cached_input_tokens) if session.cached_input_tokens is not None else None),
+        ("reasoning_output", "Reasoning output", int(session.reasoning_output_tokens) if session.reasoning_output_tokens is not None else None),
+        ("source_total", "Source total", int(session.source_total_tokens) if session.source_total_tokens is not None else None),
         ("normalized_total", "Normalized total", int(session.normalized_total_tokens)),
     ]
 
