@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-09T16:45:50.6130862Z",
+    "observed_at":  "2026-10-09T16:56:11.9114741Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -154,7 +154,7 @@
                         "dispatch_status":  "pending",
                         "liveness":  {
                                          "verdict":  "live",
-                                         "observedAt":  1791564344618,
+                                         "observedAt":  1791564969046,
                                          "source":  "agent_status"
                                      },
                         "next_action":  {

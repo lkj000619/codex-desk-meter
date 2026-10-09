@@ -206,7 +206,11 @@
       "gate": "actual combined5s bounded; accepted source/tests; same independent review Task retry before COM",
       "dispatch_id": "ctx_ca714297b040",
       "failed_start": "ctx_e4d716376da8",
-      "readiness_recovery": "First native attempt failed before injection at readiness. One infrastructure-only READY turn refreshed actual idle status; same Task retry then injected and actually working."
+      "readiness_recovery": "First native attempt failed before injection at readiness. One infrastructure-only READY turn refreshed actual idle status; same Task retry then injected and actually working.",
+      "latest_guidance": "msg_4a43321c6f95",
+      "harness_guidance": "msg_5f6da12db779",
+      "progress_checked_at": "2026-10-09T16:55:40Z",
+      "progress": "Actual active edits in four PC source files and owned regression test; test clock fixed, new delayed cleanup/drain regression still being debugged; owner checkpoint still previous submission; no completion accepted"
     }
   },
   "frozen_input_count": 57,
