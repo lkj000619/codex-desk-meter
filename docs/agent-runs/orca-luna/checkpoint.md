@@ -133,3 +133,28 @@
 - The initial `gui-review.md` and six normal PNGs remain untouched. No designer, PC, firmware, frozen input, comparison, manifest, or test file changed in this recovery Dispatch; only this checkpoint is updated. Physical LCD readability and hardware behavior remain `not_run`.
 - Last verification: `python docs/design/lcd/gemini/regression-check.py` exit 0; `python tests/integration/design-check.py` exit 0; corrected PNG dimensions 820×320.
 - Exact next action: perform the final `orca orchestration check --terminal term_1a2fcc8b-6402-4851-ba15-d27061517be1 --json`; process and acknowledge any delivered messages, then send exactly one `worker_done` with outcome `succeeded` for this Task / Dispatch.
+
+## Serial flush boundary follow-up — 2026-10-09
+
+- Current Task / Dispatch: `task_4d49e747c570` / `ctx_da800c8d8bce`; Run `run_c968c43361da`; worker terminal `term_1a2fcc8b-6402-4851-ba15-d27061517be1`.
+- Coordinator status `msg_d9f96b383c67` / delivery `delivery_8c5943fd2820` was processed and acknowledged. Coordinator reports the production Windows serial wrapper's `flush()` may outlast `write_timeout` while queued bytes drain or stall; it routed that finding to the active deadline-only PC owner. I did not inspect the out-of-scope `operator/pc-windows-flush-probe.json`.
+- Updated `product-review.md`: after accepted readiness, test actual production serial wrapper with a fake serial transport for queued-byte delay/stall, bounded completion/timeout cleanup, sequence reservation, manual event during automatic RPC/write, and source last-good retention after native timeout. The current fake-sink checks remain non-acceptance evidence.
+- Exact last test: none after the previous AST-only syntax check; no PC product code was imported or executed.
+- Exact next action: wait for the latest accepted PC deadline submission; then inspect only that accepted snapshot, add fake `serial.Serial` transport cases that exercise production `WindowsSerialSink.write/flush`, and run the full synthetic producer/CLI->production-C matrix.
+
+- Added a synthetic fake-serial regression through the real `cmd_send` and production `WindowsSerialSink` wrapper: the fake transport leaves bytes queued for four seconds even though the configured write timeout is shorter; expected behavior is bounded failure, serial close, and consumed reserved sequence. This test is intentionally unrun against active PC source until deadline remediation acceptance.
+- Syntax AST check exited 0. Immediate inbox check `e7ff76ba-23e9-4e4d-87b9-9f97456240b5` returned no messages.
+- Exact last validation: `python -B -c "import ast; from pathlib import Path; ast.parse(Path('tests/integration/test_pc_producer_to_c.py').read_text(encoding='utf-8')); print('syntax ok')"` = syntax ok.
+- Exact next action: after the accepted deadline Task arrives, check whether its serial timeout seam matches this fake transport; adapt the case if needed, then add actual bounded RPC/write latency and last-good timeout cases and run all tests.
+
+- Updated `product-review.md` to reflect that the production-wrapper queued-byte timeout test is authored but unrun.
+- Immediate inbox check `2deb1054-1004-4589-8760-10c1125da9c4` returned no messages.
+- Exact last validation remains AST syntax parse = `syntax ok`; exact next action remains inspect only the accepted deadline-only snapshot after coordinator readiness, then adapt and execute the RPC/serial/manual/cache integration cases.
+
+## PC53 accepted review started — 2026-10-09
+
+- Current Task / Dispatch: task_4d49e747c570 / ctx_da800c8d8bce; Run run_c968c43361da; worker terminal term_1a2fcc8b-6402-4851-ba15-d27061517be1.
+- Coordinator msg_bf54f604138a and follow-up msg_a9b830d95286 were processed; the latter delivery delivery_16fdaaf91a58 was acknowledged. Stable PC commit 5ddef63 and firmware 853ddf7 are approved for independent tests. Coordinator directs immediate testing/reporting and explicit failed outcome if blockers remain; UI quota low.
+- Reviewed only accepted 5ddef63 with git show. Confirmed WindowsSerialSink.flush starts a daemon worker, suppresses the worker exception, returns without raising after write_timeout; CdmSender.transmit_payload therefore may report success. run_watch_loop clears a manual event after transmission even when it arrived during the already-collected write.
+- First complete run of the new integration harness was 10/10 but its queued-flush fake omitted write_timeout, so that result is invalid for flush behavior. Corrected the fake. Focused rerun now fails as expected: test_production_windows_serial_flush_is_bounded_and_consumes_reserved_sequence, exit 1, cmd_send returned 0 despite the queued-byte timeout; stdout says [HOST WRITE] for seq 17.
+- Exact next action: finish the real fake-serial manual-during-write regression, rerun focused flush + new integration suite, then full integration and firmware suites; update report with exact passing counts and actionable failures, final inbox check, failed worker_done if any blockers persist.
