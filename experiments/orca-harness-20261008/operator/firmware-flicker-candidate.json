@@ -2,11 +2,11 @@
   "run_id": "run_c968c43361da",
   "firmware_submission_commit": "9bbe333",
   "validated_at": "2026-10-09T23:37:42.116792+00:00",
-  "status": "flicker_correction_source_frozen_independent_review_pending",
-  "upload_permitted": false,
+  "status": "independent_host_PASS_correction_candidate",
+  "upload_permitted": true,
   "host_firmware_tests": 19,
-  "host_freeze_tag": null,
-  "independent_message": null,
+  "host_freeze_tag": "orca-harness-20261010-lcd-flicker-candidate",
+  "independent_message": "msg_999781af4044",
   "physical_status": "corrected firmware not flashed; original data accepted but recurring flicker observed",
   "product_pass": false,
   "previous_candidate": "operator/firmware-candidate.json",
@@ -14,7 +14,7 @@
   "flicker_task": "task_63d11f3c24cb",
   "review_task": "task_4386f8dbef93",
   "review_dispatch": "ctx_1ab7525e89ae",
-  "upload_gate_reason": "Await independent review of frozen source and sole watch shutdown before COM3 flash.",
+  "upload_gate_reason": "Native independent succeeded report accepted/released/acked; source/artifacts verified. Stop sole live watch before opening COM3; preserve sender state.",
   "staging_sources": [
     {
       "path": "firmware/CMakeLists.txt",
@@ -111,5 +111,16 @@
   "build_log": "docs/agent-runs/orca-sol/lcd-flicker-build-output.txt",
   "pc_submission_commit": "39e52bd",
   "pc_source_changed": false,
-  "sender_reinitialization_permitted": false
+  "sender_reinitialization_permitted": false,
+  "independent_report": "docs/agent-runs/orca-luna/lcd-flicker-review.md",
+  "independent_checks": {
+    "firmware": 19,
+    "producer_to_C_and_selection": 21,
+    "presentation": 1
+  },
+  "coordinator_presentation_retest": {
+    "tests": 1,
+    "result": "PASS",
+    "elapsed_seconds": 1.115
+  }
 }
