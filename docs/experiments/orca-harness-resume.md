@@ -60,7 +60,14 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 00:29 KST 최신 체크포인트
+## 2026-10-10 00:53 KST 최신 체크포인트
+
+- 같은 Flash Task `task_956c1c1b77b1` / Dispatch `ctx_2b9adeeceb2c`는 native `working/live`, `nextAction=none`이다. 생존 신호 `msg_a02d76a7b83e`의 Delivery를 처리·ack했으며, 완료 제출은 아직 없다. 중복 worker를 시작하거나 진행 중 소스를 동결하지 않는다.
+- `pc/cli.py`, `pc/sender.py`, `tests/pc/test_cohort_probe_regressions.py`에 미제출 수정이 있다. coordinator는 실제 queue 인터페이스 누락·오류를 성공 처리하지 않을 것, AUTO뿐 아니라 MANUAL 전송 중 새 요청도 다음 수집까지 보존할 것, 진행 중 RPC와 다음 갱신을 합친 5초를 측정할 것을 `msg_de0869464ada`, `msg_fdf02892fc44`로 전달했다. enqueue는 worker가 읽었다는 근거가 아니다.
+- Flash 역할 checkpoint는 아직 이전 53개 시험 제출을 가리킨다. 현 Task의 완료/시험 상태로 읽지 않으며 worker에게 현재 식별자·편집·시험 진행 기록을 요청했다. coordinator의 이 기록과 context가 재개 원본이다. 직접 터미널에 이미 보낸 steering은 queued 상태였으므로 같은 입력을 재전송하지 않는다.
+- 입력 57개 hash·branch·context/manifest 검증을 다시 통과했다. upload gate는 계속 닫혀 있고 COM3 열거 외 COM/flash/실계정/실물 관측은 미실행이다. 다음은 현재 Flash 제출 수락·시험·보존 후 같은 Luna Task 재검증이다.
+
+## 2026-10-10 00:29 KST 이전 체크포인트
 
 - Luna `ctx_125c9c02c0ed` 실패 제출 `msg_e69a6fb2be99` 수락·release/ack 완료, `117a988`에 보존했다. coordinator가 최신 독립 통합 22개를 재실행해 같은 19개 통과·3개 실패를 확인했다. 펌웨어 18개·PC 기존 53개 통과는 독립 보고의 별도 결과다.
 - 세 실패는 queued bytes가 남는데 성공으로 반환, 전송 중 manual 요청 유실, 제한 시간 내 큐 전송 완료/명확한 실패 처리 미구현이다. 예전 5.296초 fake callback 관측은 background drain/false success 근거이며 동기 반환 지연의 합격/실패 수치로 사용하지 않는다.
