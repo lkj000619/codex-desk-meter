@@ -19,6 +19,18 @@
 5. flash 명령·파일 hash·대상 포트·시간·부팅 로그를 남긴다. 자동 rebuild가 실행됐다면
    새 source/hash를 다시 검증한다. 완전 erase나 BOOT를 누른 채 reset은 필요하지 않다.
 
+위 gate를 통과한 뒤 사용할 명령은 아래와 같다. 설치된 `esptool` 4.12.0의 help와
+후보 manifest의 주소·설정으로 확인했으며, 이 문서 작성만으로 실행하지 않았다.
+`python`은 아래 PC 절차의 ESP-IDF Python 환경이다. 현재 대상이 COM3임을 다시 확인한다.
+
+```powershell
+python -m esptool --chip esp32s3 --port COM3 --baud 460800 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_freq 80m --flash_size 16MB 0x0 firmware/.host-tools/active-usage-build/bootloader.bin 0x8000 firmware/.host-tools/active-usage-build/partition-table.bin 0x10000 firmware/.host-tools/active-usage-build/codex_desk_meter.bin
+```
+
+후보 app을 자동으로 다시 build하는 명령이 아니므로 검사한 binary를 그대로 올린다.
+기존 sender state를 초기화하는 명령과 구분하고, 새 업로드로 receiver가 비어 있다는
+근거가 있을 때만 최초 state를 만든다.
+
 ## PC 프로그램
 
 실행 위치는 이 실험 checkout의 루트이며 진입점은 `python -m pc.cli`다.
