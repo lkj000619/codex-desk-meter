@@ -108,7 +108,7 @@
     },
     "integration_review": {
       "task_id": "task_4d49e747c570",
-      "status": "same-Task retry; reused proven Luna terminal; initial turnStart unobserved with composer draft, one Enter sent; awaiting actual turn proof",
+      "status": "same-Task retry ctx088 working/live, actual native model gpt-6-luna; initial worker start_unknown/draft recovered with exactly one Enter; not retrying live worker",
       "additional_coordinator_gate": "Latest accepted PC and firmware stable; full synthetic integration authorized. No physical until independent findings remediated, review passes and artifact freeze.",
       "dispatch_id": "ctx_08869eb488a4",
       "terminal": "term_a4d53c0e-9eb2-4cae-b3ac-8a32bbb83956",
