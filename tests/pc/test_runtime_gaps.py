@@ -367,11 +367,12 @@ class TestProductionGapsRemediation(unittest.TestCase):
         self.assertEqual(len(res_b["usage"][0]["windows"]), 0)
 
     def test_missing_personal_usage_and_global_reset_routed_to_error(self):
-        """Missing personal-usage and global-reset files must route to error, not be silently omitted."""
+        """Cold global error omits wire record and reports locally; warm error retains true capture."""
         sm = SharedCollectionState()
         missing_usage = self.td / "missing_usage.json"
         missing_reset = self.td / "missing_reset.json"
 
+        # Cold failure: omitted on wire, reported locally in source_errors
         res = sm.collect_all(
             personal_usage_fixture=missing_usage,
             global_reset_file=missing_reset,
@@ -381,9 +382,33 @@ class TestProductionGapsRemediation(unittest.TestCase):
         self.assertEqual(res["usage"][0]["status"], "error")
         self.assertEqual(res["usage"][0]["error_code"], "PERSONAL_USAGE_FIXTURE_ERROR")
 
-        self.assertEqual(len(res["global_resets"]), 1)
-        self.assertEqual(res["global_resets"][0]["error_code"], "GLOBAL_RESET_ERROR")
-        self.assertIsNone(res["global_resets"][0]["captured_at"])
+        # Unobserved cold global record is omitted from wire to avoid schema violation
+        self.assertEqual(len(res["global_resets"]), 0)
+        self.assertTrue(any("global_reset" in k for k in sm.source_errors))
+
+        # Warm failure: retains true captured_at from previous valid capture
+        valid_reset = self.td / "valid_reset.json"
+        valid_reset.write_text(
+            json.dumps({
+                "source": "codex-resets.com",
+                "captured_at": "2026-10-08T11:00:00Z",
+                "latest_reset_at": "2026-10-08T10:00:00Z",
+                "forecast_24h_percent": 10.0,
+                "forecast_48h_percent": 20.0,
+            }),
+            encoding="utf-8",
+        )
+        res_warm_ok = sm.collect_all(global_reset_file=valid_reset, reference_time="2026-10-08T11:00:00Z")
+        self.assertEqual(len(res_warm_ok["global_resets"]), 1)
+        self.assertEqual(res_warm_ok["global_resets"][0]["captured_at"], "2026-10-08T11:00:00Z")
+
+        # Now corrupt/delete valid_reset
+        valid_reset.unlink()
+        res_warm_err = sm.collect_all(global_reset_file=valid_reset, reference_time="2026-10-08T11:00:00Z")
+        self.assertEqual(len(res_warm_err["global_resets"]), 1)
+        self.assertEqual(res_warm_err["global_resets"][0]["error_code"], "GLOBAL_RESET_ERROR")
+        self.assertEqual(res_warm_err["global_resets"][0]["captured_at"], "2026-10-08T11:00:00Z")  # True capture retained!
+        self.assertTrue(res_warm_err["global_resets"][0]["stale"])
 
     def test_absent_optional_counts_remain_null(self):
         """Optional session token counts (cached, reasoning, source_total) must be null when absent."""

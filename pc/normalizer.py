@@ -38,7 +38,7 @@ def build_session_telemetry_snapshot(
 
     Preserves integer token counts directly as ints (not gratuitous floats).
     """
-    observed = session.observed_at or reference_time or datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    observed = session.observed_at
     snap_id = sanitize_snapshot_id(f"session-{session.session_id}")
 
     # Channels: input, output, cached_input, reasoning_output, source_total, normalized_total

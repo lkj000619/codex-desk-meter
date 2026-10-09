@@ -120,7 +120,11 @@ def cmd_collect(args: argparse.Namespace, state_manager: SharedCollectionState |
         return 1
 
     # Check if collection encountered errors on the requested targets
-    has_errors = any(snap.get("status") == "error" for snap in payload.get("usage", []))
+    has_errors = (
+        any(snap.get("status") == "error" for snap in payload.get("usage", []))
+        or any(r.get("error_code") is not None for r in payload.get("global_resets", []))
+        or bool(sm.source_errors)
+    )
 
     output_text = json.dumps(payload, indent=2, ensure_ascii=True)
     if args.output:
@@ -170,7 +174,7 @@ def cmd_send(args: argparse.Namespace, state_manager: SharedCollectionState | No
         sender.close()
         return 1
 
-    sent_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+    sent_at = args.reference_time if args.reference_time else datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
     try:
         if args.dry_run:
@@ -239,7 +243,7 @@ def run_watch_loop(
     # Connection and scheduling state
     serial_sink = sink_override
     last_reopen_time = 0.0
-    last_auto_send_time = -1000.0
+    next_auto_deadline = now_fn()
     iteration = 0
 
     try:
@@ -253,7 +257,8 @@ def run_watch_loop(
                 is_manual = True
                 manual_trigger_event.clear()
 
-            should_send = is_manual or (current_now - last_auto_send_time >= interval)
+            is_auto = (current_now >= next_auto_deadline)
+            is_port_reopened = False
 
             # Manage persistent serial connection if real port specified and not dry-run
             if args.port and not args.dry_run and sink_override is None:
@@ -265,13 +270,18 @@ def run_watch_loop(
                             serial_sink = WindowsSerialSink(port=args.port, baudrate=115200)
                             print(f"[{datetime.now(timezone.utc).isoformat()}] Port {args.port} opened successfully.")
                             # Transmit within 5s of available port
-                            should_send = True
+                            is_port_reopened = True
                         except Exception as exc:
                             print(f"Port {args.port} open failed: {exc}")
 
+            should_send = is_manual or is_auto or is_port_reopened
+
             if should_send:
                 iteration += 1
-                sent_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+                # Automatic <=60s must include collection/write duration; manual/port must not move auto deadline
+                if is_auto:
+                    while next_auto_deadline <= current_now:
+                        next_auto_deadline += interval
 
                 try:
                     payload = sm.collect_all(
@@ -288,8 +298,12 @@ def run_watch_loop(
                         reference_time=args.reference_time,
                     )
                 except Exception as exc:
-                    print(f"[{sent_at}] Iteration {iteration} collection failed: {exc}")
+                    sent_err = args.reference_time if args.reference_time else datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
+                    print(f"[{sent_err}] Iteration {iteration} collection failed: {exc}")
                     payload = {"usage": [], "global_resets": []}
+
+                # Stamp AFTER acquisition so new observations are never newer than the frame
+                sent_at = args.reference_time if args.reference_time else datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
                 active_sink = serial_sink
                 if active_sink is None and args.dry_run:
@@ -303,7 +317,7 @@ def run_watch_loop(
                         reference_time=args.reference_time,
                     )
                     if outcome.success:
-                        trigger_type = "MANUAL" if is_manual else "AUTO"
+                        trigger_type = "MANUAL" if is_manual else ("PORT" if is_port_reopened and not is_auto else "AUTO")
                         print(
                             f"[{sent_at}] Iteration {iteration} [{trigger_type}] [HOST WRITE] seq={outcome.sequence_used}, size={outcome.bytes_sent}B"
                         )
@@ -319,8 +333,6 @@ def run_watch_loop(
                             except Exception:
                                 pass
                             serial_sink = None
-
-                last_auto_send_time = now_fn()
 
             if args.once:
                 break

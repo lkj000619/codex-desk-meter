@@ -13,6 +13,7 @@ from pc.normalizer import (
     build_account_quota_snapshot,
     build_session_telemetry_snapshot,
     normalize_global_reset,
+    sanitize_snapshot_id,
 )
 from pc.quota import fetch_native_rate_limits
 from pc.session import (
@@ -27,12 +28,13 @@ from pc.session import (
 def _sanitize_wire_reason(reason: str | None) -> str | None:
     if not reason:
         return reason
-    # Strip absolute paths or local path specifics (e.g. C:\... or /Users/...)
     import re
-    # Replace Windows paths (C:\... or similar)
-    cleaned = re.sub(r"[a-zA-Z]:\\[^\s:;,]+", "<local_path>", reason)
+    # Replace Windows drive paths (C:\... or C:/...)
+    cleaned = re.sub(r"[a-zA-Z]:[/\\][^\s:;,]+", "<local_path>", reason)
+    # Replace UNC paths (\\...)
+    cleaned = re.sub(r"\\\\[^\s:;,]+", "<local_path>", cleaned)
     # Replace Unix paths (/...)
-    cleaned = re.sub(r"/(?:[a-zA-Z0-9_\-\.]+/)+[a-zA-Z0-9_\-\.]+", "<local_path>", cleaned)
+    cleaned = re.sub(r"/(?:[a-zA-Z0-9_\-\.]+/)+[a-zA-Z0-9_\-\.]*", "<local_path>", cleaned)
     return cleaned
 
 
@@ -72,14 +74,13 @@ class CollectionSourceState:
             return err_snap
 
         # If no prior good snapshot, create minimal error snapshot
-        ref_dt = parse_rfc3339(reference_time) if reference_time else datetime.now(timezone.utc)
-        now_ts = ref_dt.isoformat().replace("+00:00", "Z")
-        metric_kind = "session_telemetry" if self.source_id.startswith("session") else "quota_window"
+        metric_kind = "session_telemetry" if "session" in self.source_id else "quota_window"
         unit = "token" if metric_kind == "session_telemetry" else "unknown"
-        safe_reason = _sanitize_wire_reason(error_reason)
+        raw_key = self.source_id.split(":")[-1] if ":" in self.source_id else self.source_id
+        safe_key = sanitize_snapshot_id(raw_key)
         return {
             "schema_version": 1,
-            "snapshot_id": f"error-{self.source_id}",
+            "snapshot_id": f"error-{safe_key}",
             "provider_id": "codex",
             "agent_id": "codex-cli",
             "host_id": "pc-collector",
@@ -89,7 +90,7 @@ class CollectionSourceState:
             "metric_kind": metric_kind,
             "unit": unit,
             "status": "error",
-            "observed_at": now_ts,
+            "observed_at": None,
             "windows": [],
             "stale": False,
             "last_good_at": None,
@@ -114,7 +115,6 @@ class CollectionSourceState:
                 snap["error_code"] = snap.get("error_code") or "SOURCE_TIMEOUT"
                 snap["error_reason"] = snap.get("error_reason") or f"Source age {age_seconds:.1f}s exceeded threshold"
             elif snap.get("status") == "error":
-                # Stale error
                 snap["stale"] = True
         else:
             snap["stale"] = False
@@ -127,7 +127,10 @@ class SharedCollectionState:
 
     def __init__(self):
         self.sources: dict[str, CollectionSourceState] = {}
-        self.global_reset_last_good: dict[str, Any] | None = None
+        self.global_reset_caches: dict[str, dict[str, Any]] = {}
+        self.provider_file_entries: dict[str, list[str]] = {}
+        self.source_errors: dict[str, str] = {}
+        self.session_file_sources: dict[str, str] = {}
 
     def get_source(self, source_id: str) -> CollectionSourceState:
         if source_id not in self.sources:
@@ -148,23 +151,50 @@ class SharedCollectionState:
         agent_id: str = "codex-cli",
         reference_time: str | None = None,
     ) -> dict[str, Any]:
+        self.source_errors.clear()
         usage_snapshots = []
         global_resets = []
 
         # 1. Session Telemetry Collection (Isolated)
         if session_file or session_dir:
-            # Isolate source state by selection target identity to prevent cross-contamination
-            target_key = f"session_{session_file.name}" if session_file else f"session_dir_{session_id or ('latest' if use_latest else 'unknown')}"
-            src = self.get_source(target_key)
-            try:
-                selected_session = None
-                if session_file:
+            if session_file:
+                path_ctx = session_file.resolve().as_posix()
+                try:
                     if not session_file.exists():
                         raise SessionError(f"Session file not found: {session_file.name}")
                     selected_session = parse_session_file(session_file)
                     if not selected_session:
                         raise SessionError(f"No valid token metadata in {session_file.name}")
-                elif session_dir:
+                    if selected_session.observed_at is None:
+                        raise SessionError(f"Untimed session token observation in {session_file.name}")
+
+                    sess_key = f"session_file:{path_ctx}:{selected_session.session_id}"
+                    self.session_file_sources[path_ctx] = sess_key
+                    src = self.get_source(sess_key)
+
+                    snap = build_session_telemetry_snapshot(
+                        selected_session,
+                        host_alias=host_alias,
+                        agent_id=agent_id,
+                        reference_time=reference_time,
+                    )
+                    semantic_validate_snapshot(snap, reference_time=reference_time)
+                    snap = src.compute_stale(snap, reference_time)
+                    usage_snapshots.append(src.update_good(snap))
+                except Exception as exc:
+                    self.source_errors[f"session_file:{path_ctx}"] = str(exc)
+                    prior_key = self.session_file_sources.get(path_ctx)
+                    if prior_key and prior_key in self.sources:
+                        src = self.sources[prior_key]
+                    else:
+                        safe_name = sanitize_snapshot_id(session_file.name)
+                        src = self.get_source(f"session_file:{path_ctx}:session_{safe_name}")
+                    err_snap = src.update_error("SESSION_COLLECTION_ERROR", str(exc), reference_time=reference_time)
+                    usage_snapshots.append(err_snap)
+
+            elif session_dir:
+                path_ctx = session_dir.resolve().as_posix()
+                try:
                     if not session_dir.exists():
                         raise SessionError(f"Session dir not found: {session_dir.name}")
                     sessions = scan_sessions_directory(session_dir)
@@ -179,7 +209,12 @@ class SharedCollectionState:
                     else:
                         raise SessionError("Either --session-id or --latest required")
 
-                if selected_session:
+                    if selected_session.observed_at is None:
+                        raise SessionError(f"Untimed session token observation for {selected_session.session_id}")
+
+                    sess_key = f"session_dir:{path_ctx}:{selected_session.session_id}"
+                    src = self.get_source(sess_key)
+
                     snap = build_session_telemetry_snapshot(
                         selected_session,
                         host_alias=host_alias,
@@ -189,9 +224,13 @@ class SharedCollectionState:
                     semantic_validate_snapshot(snap, reference_time=reference_time)
                     snap = src.compute_stale(snap, reference_time)
                     usage_snapshots.append(src.update_good(snap))
-            except Exception as exc:
-                err_snap = src.update_error("SESSION_COLLECTION_ERROR", str(exc), reference_time=reference_time)
-                usage_snapshots.append(err_snap)
+                except Exception as exc:
+                    self.source_errors[f"session_dir:{path_ctx}"] = str(exc)
+                    target_ident = session_id or ("latest" if use_latest else "unknown")
+                    safe_ident = sanitize_snapshot_id(f"session_dir_{session_dir.name}_{target_ident}")
+                    src = self.get_source(f"session_dir:{path_ctx}:{safe_ident}")
+                    err_snap = src.update_error("SESSION_COLLECTION_ERROR", str(exc), reference_time=reference_time)
+                    usage_snapshots.append(err_snap)
 
         # 2. Account Quota Collection (Isolated)
         if live_quota:
@@ -207,36 +246,63 @@ class SharedCollectionState:
                 semantic_validate_snapshot(snap, reference_time=reference_time)
                 snap = src.compute_stale(snap, reference_time)
                 if quota_res.error_code:
+                    self.source_errors["quota"] = quota_res.error_code
                     usage_snapshots.append(src.update_error(quota_res.error_code, quota_res.error_reason or "", reference_time))
                 else:
                     usage_snapshots.append(src.update_good(snap))
             except Exception as exc:
+                self.source_errors["quota"] = str(exc)
                 usage_snapshots.append(src.update_error("QUOTA_COLLECTION_ERROR", str(exc), reference_time))
 
-        # 3. Provider Fixtures (Preserves existing shapes and fixture provenance)
+        # 3. Provider Fixtures (Preserves shapes, isolates malformed entry, retains all on file failure)
         if provider_fixtures:
             for fix_path in provider_fixtures:
-                src = self.get_source(f"fixture_{fix_path.resolve().as_posix()}")
+                fix_path_key = fix_path.resolve().as_posix()
                 try:
+                    if not fix_path.exists():
+                        raise FileNotFoundError(f"Fixture file not found: {fix_path.name}")
                     data = json.loads(fix_path.read_text(encoding="utf-8-sig"))
                     entries = data if isinstance(data, list) else [data]
-                    for entry in entries:
-                        # Ensure fixture source_kind is set
-                        entry["source_kind"] = "fixture"
-                        semantic_validate_snapshot(entry, reference_time=reference_time)
-                        entry = src.compute_stale(entry, reference_time)
-                        usage_snapshots.append(src.update_good(entry))
-                except Exception as exc:
-                    usage_snapshots.append(src.update_error("FIXTURE_LOAD_ERROR", str(exc), reference_time))
+                    current_entry_ids = []
+                    for idx, entry in enumerate(entries):
+                        if not isinstance(entry, dict):
+                            continue
+                        entry_key = entry.get("snapshot_id") or f"{entry.get('provider_id')}_{entry.get('account_profile_id') or idx}"
+                        src_id = f"fixture:{fix_path_key}:{entry_key}"
+                        current_entry_ids.append(src_id)
+                        src = self.get_source(src_id)
+                        try:
+                            entry["source_kind"] = "fixture"
+                            semantic_validate_snapshot(entry, reference_time=reference_time)
+                            entry = src.compute_stale(entry, reference_time)
+                            usage_snapshots.append(src.update_good(entry))
+                        except Exception as entry_exc:
+                            self.source_errors[src_id] = str(entry_exc)
+                            err_snap = src.update_error("FIXTURE_ENTRY_ERROR", str(entry_exc), reference_time)
+                            usage_snapshots.append(err_snap)
+                    self.provider_file_entries[fix_path_key] = current_entry_ids
+                except Exception as file_exc:
+                    self.source_errors[f"fixture_file:{fix_path_key}"] = str(file_exc)
+                    saved_ids = self.provider_file_entries.get(fix_path_key, [])
+                    if saved_ids:
+                        for src_id in saved_ids:
+                            src = self.get_source(src_id)
+                            err_snap = src.update_error("FIXTURE_LOAD_ERROR", str(file_exc), reference_time)
+                            usage_snapshots.append(err_snap)
+                    else:
+                        safe_name = sanitize_snapshot_id(fix_path.name)
+                        src = self.get_source(f"fixture:{fix_path_key}:{safe_name}")
+                        err_snap = src.update_error("FIXTURE_LOAD_ERROR", str(file_exc), reference_time)
+                        usage_snapshots.append(err_snap)
 
         # 4. Personal Usage Fixture (experiments/fixtures/personal-usage.json format)
         if personal_usage_fixture:
-            src = self.get_source("personal_usage_fixture")
+            path_key = personal_usage_fixture.resolve().as_posix()
+            src = self.get_source(f"personal_usage:{path_key}")
             try:
                 if not personal_usage_fixture.exists():
                     raise FileNotFoundError(f"Personal usage fixture not found: {personal_usage_fixture.name}")
                 data = json.loads(personal_usage_fixture.read_text(encoding="utf-8-sig"))
-                # Map personal usage format to UsageSnapshot
                 captured_at = data.get("captured_at")
                 windows = []
                 for w in data.get("windows", []):
@@ -277,10 +343,12 @@ class SharedCollectionState:
                 snap = src.compute_stale(snap, reference_time)
                 usage_snapshots.append(src.update_good(snap))
             except Exception as exc:
+                self.source_errors[f"personal_usage:{path_key}"] = str(exc)
                 usage_snapshots.append(src.update_error("PERSONAL_USAGE_FIXTURE_ERROR", str(exc), reference_time))
 
-        # 5. Global Reset Collection (Preserves source & captured_at strictly)
+        # 5. Global Reset Collection (Preserves source & captured_at strictly, omits cold error on wire)
         if global_reset_file:
+            path_key = global_reset_file.resolve().as_posix()
             try:
                 if not global_reset_file.exists():
                     raise FileNotFoundError(f"Global reset file not found: {global_reset_file.name}")
@@ -288,35 +356,25 @@ class SharedCollectionState:
                 norm_reset = normalize_global_reset(raw_reset)
                 if not norm_reset.get("captured_at"):
                     raise ValueError("Missing captured_at in global reset")
-                # Age freshness against reference_time
                 cap_dt = parse_rfc3339(norm_reset["captured_at"])
                 ref_dt = parse_rfc3339(reference_time) if reference_time else datetime.now(timezone.utc)
                 age_seconds = (ref_dt - cap_dt).total_seconds()
                 if age_seconds >= STALE_THRESHOLD_SECONDS:
                     norm_reset["stale"] = True
-                self.global_reset_last_good = copy.deepcopy(norm_reset)
+                self.global_reset_caches[path_key] = copy.deepcopy(norm_reset)
                 global_resets.append(norm_reset)
             except Exception as exc:
-                if self.global_reset_last_good:
-                    retained = copy.deepcopy(self.global_reset_last_good)
+                self.source_errors[f"global_reset:{path_key}"] = str(exc)
+                import sys
+                print(f"Global reset source error: {exc}", file=sys.stderr)
+                if path_key in self.global_reset_caches:
+                    retained = copy.deepcopy(self.global_reset_caches[path_key])
                     retained["stale"] = True
                     retained["error_code"] = "GLOBAL_RESET_ERROR"
                     global_resets.append(retained)
                 else:
-                    # Cold failure: do NOT manufacture successful capture time or fake fresh timestamp
-                    global_resets.append(
-                        {
-                            "schema_version": 1,
-                            "source": "codex-resets.com",
-                            "captured_at": None,
-                            "latest_reset_at": None,
-                            "forecast_24h_percent": None,
-                            "forecast_48h_percent": None,
-                            "forecast_is_schedule": False,
-                            "stale": True,
-                            "error_code": "GLOBAL_RESET_ERROR",
-                        }
-                    )
+                    # Cold error: omit unobserved global record on wire to avoid captured_at=null schema violation
+                    pass
 
         return {
             "usage": usage_snapshots,

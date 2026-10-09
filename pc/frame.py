@@ -197,6 +197,45 @@ def check_integrity(frame: dict[str, Any]) -> None:
         fail("CRC_MISMATCH", f"expected {expected}, got {actual}")
 
 
+def validate_envelope_time_invariant(payload: dict[str, Any], sent_at: str) -> None:
+    """Validate that observations, last goods, and resets do not violate frame envelope time."""
+    sent_dt = parse_rfc3339(sent_at)
+    usage = payload.get("usage", [])
+    for snapshot in usage:
+        obs_str = snapshot.get("observed_at")
+        if obs_str:
+            obs_dt = parse_rfc3339(obs_str)
+            if obs_dt > sent_dt:
+                fail("SNAPSHOT_INVALID", f"snapshot {snapshot.get('snapshot_id')} observed_at {obs_str} is in future of sent_at {sent_at}")
+        lg_str = snapshot.get("last_good_at")
+        if lg_str:
+            lg_dt = parse_rfc3339(lg_str)
+            if lg_dt > sent_dt:
+                fail("SNAPSHOT_INVALID", f"snapshot {snapshot.get('snapshot_id')} last_good_at {lg_str} is in future of sent_at {sent_at}")
+        for win in snapshot.get("windows", []):
+            rst_str = win.get("resets_at")
+            rs = win.get("reset_status")
+            if rst_str and rs:
+                rst_dt = parse_rfc3339(rst_str)
+                if rs == "scheduled" and rst_dt <= sent_dt:
+                    fail("SNAPSHOT_INVALID", f"scheduled window {win.get('window_id')} resets_at {rst_str} <= sent_at {sent_at}")
+                elif rs == "expired" and rst_dt > sent_dt:
+                    fail("SNAPSHOT_INVALID", f"expired window {win.get('window_id')} resets_at {rst_str} > sent_at {sent_at}")
+
+    global_resets = payload.get("global_resets", [])
+    for reset in global_resets:
+        cap_str = reset.get("captured_at")
+        if cap_str:
+            cap_dt = parse_rfc3339(cap_str)
+            if cap_dt > sent_dt:
+                fail("GLOBAL_INVALID", f"global reset captured_at {cap_str} is in future of sent_at {sent_at}")
+        latest_reset_str = reset.get("latest_reset_at")
+        if latest_reset_str:
+            lr_dt = parse_rfc3339(latest_reset_str)
+            if lr_dt > sent_dt:
+                fail("GLOBAL_INVALID", f"global reset latest_reset_at {latest_reset_str} is in future of sent_at {sent_at}")
+
+
 def build_frame(payload: dict[str, Any], sequence: int, sent_at: str, reference_time: str | None = None) -> dict[str, Any]:
     """Construct, validate and checksum a cdm/1 frame."""
     if not isinstance(payload, dict):
@@ -210,6 +249,8 @@ def build_frame(payload: dict[str, Any], sequence: int, sent_at: str, reference_
     global_resets = payload.get("global_resets")
     if not isinstance(usage, list) or not isinstance(global_resets, list):
         fail("PAYLOAD_INVALID", "payload requires usage and global_resets arrays")
+
+    validate_envelope_time_invariant(payload, sent_at)
 
     for snapshot in usage:
         semantic_validate_snapshot(snapshot, reference_time=reference_time)
@@ -282,6 +323,7 @@ def decode_frame(line: bytes | bytearray | str, reference_time: str | None = Non
         fail("UNSUPPORTED_VERSION", f"unsupported protocol {frame.get('protocol')!r}")
 
     schema_validate(frame, "cdm-frame.schema.json", "FRAME_SCHEMA_INVALID")
+    validate_envelope_time_invariant(frame["payload"], frame["sent_at"])
     for s in frame["payload"]["usage"]:
         semantic_validate_snapshot(s, reference_time=reference_time)
     check_integrity(frame)
