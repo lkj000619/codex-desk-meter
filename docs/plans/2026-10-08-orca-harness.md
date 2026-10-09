@@ -12,7 +12,7 @@
 | 사용자 범위·역할 확정 | 완료 | Sol/Flash/Luna, GUI는 AGY Gemini 3개+Codex CLI gpt-6.1-sol 3개, 세션 토큰+quota 확인 |
 | 역할별 기술 검토·DAG | 초기 요구·인터페이스 보고 수락 완료 | 실제 Task/Dispatch·실효 모델 기록, 인터페이스/하드웨어/시험 보고서 |
 | LCD UX/UI·OpenDesign | B 수정 `a3aeebb`; 독립 PASS 제출 `msg_1f1335f9e59f` 수락 완료 | pinned skills, 820×320 정상/오류/unknown/stale·BOOT 시안, 사용자 선택·LCD handoff |
-| PC 프로그램 구현 | `14cc264` 제출·기존 39개 시험 통과; 추가 wire 세 결함 보완 `task_a6eebb977125` | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
+| PC 프로그램 구현 | 추가 wire/source 제출 `0e39f0d` 수락·coordinator 50개 시험 통과; 5초 갱신 지연은 `task_2425d0e52884`에서 보완 | 실제 metadata 수집·quota RPC·fixture·정규화·영속 sender·자동/수동 갱신 자체 시험 |
 | firmware·통합 | 활성 source 수정 제출 `853ddf7` 수락; coordinator 실제 C 시험 18개·선택 세션 통합 1개 통과 | BSP·receiver/cache·GUI·선택 F9, 실제 C seam 시험·idf build |
 | 독립 검증·수정 | `task_4d49e747c570` firmware 검토부터 병행 시작; 최종 PC 통합·제출은 최신 PC 보완 수락/시험 이후 | Luna의 결함 처리, 계약·경계·실패→last-good→복구 통합 검증 |
 | 업로드·owner-only live·실물 관측 | 예정 | 동결 binary/hash·COM3 수신·LCD/BOOT·30초·단절/복구·지연 근거 |
@@ -49,7 +49,8 @@ Sol의 core 작업은 병행 시작하고, GUI 최종 통합·제출·통합 검
 - [x] PC 최초 제출 보존·실제 native event/시각/quota/state 유실 결함 재현 및 보완 연결 (`ctx_221ff3735dae`)
 - [x] PC runtime 보완 제출 `ctx_4308689007a9` 보존·worker release/Delivery ack; 제출과 실제 품질 판정 구분
 - [x] PC aging·privacy·초기화·Windows crash 제출 수락 및 기존 39개 시험 (`14cc264`)
-- [ ] 추가 PC→C watch timestamp·cold global·provider별 캐시·null 관측 시각·갱신 deadline 보완 (`task_a6eebb977125`)
+- [x] 추가 PC→C watch timestamp·cold global·provider별 캐시·null 관측 시각 보완 (`task_a6eebb977125`, `0e39f0d`); 50개 시험 coordinator 재실행 통과
+- [ ] 수집·RPC cleanup·write를 포함한 5초 수동/연결 복구 전송 (`task_2425d0e52884` / `ctx_cbb151521cd0`)
 - [x] firmware BSP·C receiver·선택 B GUI·F9 및 실제 ESP-IDF build (`b6ec3d5`)
 - [x] 독립 검토의 firmware 활성 세션·scoped source identity 수정 및 새 build (`task_e44125e18973`, `853ddf7`); 최종 독립 검증은 별도
 - [ ] 최신 PC 보완·host 통합 독립 검증

@@ -60,7 +60,14 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-09 18:41 KST 최신 체크포인트
+## 2026-10-09 18:54 KST 최신 체크포인트
+
+- PC `task_a6eebb977125` / `ctx_04111d8d4601` 완료 `msg_be047076a883` 수락, commit `0e39f0d`·coordinator 50/50 시험 통과. accepted submission은 source/wire 수정이며 5초 갱신 지연 합격은 아니다.
+- 같은 proven AGY terminal `term_57af52b9-738e-44cc-beb8-4d2204a41b46`을 새 좁은 Task `task_2425d0e52884` / `ctx_cbb151521cd0`에 즉시 재사용함. native input/turnStart observed이며 이전 완료 Delivery ack 완료. 수집·RPC cleanup·write를 포함한 manual/port 전송 deadline을 수정한다. 중복 editor를 시작하지 않는다.
+- Luna `ctx_da800c8d8bce`에 PC 안정된 commit과 남은 timing gate를 전달함 (`msg_4a5722f52a4e`). 최종 working-tree producer 시험·제출은 새 PC 보완 수락 후다. firmware `853ddf7`은 안정된 수정본으로 독립 검증 중이다.
+- source/hash/flash 주소 후보 목록은 `operator/firmware-candidate.json`, 실제 운영 순서는 [운영 절차](orca-harness-operator.md). 후보 목록은 아직 `upload_permitted=false`이며 COM·live·LCD는 `not_run`이다.
+
+## 2026-10-09 18:41 KST 이전 체크포인트
 
 - 수정 firmware `task_e44125e18973` / `ctx_5f9f6d8e9d11`의 `msg_49bca57172a2` 수락·release/ack 완료, commit `853ddf7`.
 - coordinator host rebuild 후 C 시험 18/18와 Luna 세션 전환 1/1 통과. 실제 15개 staging source 일치와 새 산출물 4개 hash 확인. 새 app은 `firmware/.host-tools/active-usage-build/codex_desk_meter.bin`, SHA-256 `385130667ab15ca8dcc665e70fc06882b1e89535bde8d84af05fdc2b36c1ef72`; 예전 `final-build/` app을 업로드하지 않는다.

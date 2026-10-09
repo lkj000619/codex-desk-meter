@@ -116,11 +116,22 @@
     "pc_wire_correction": {
       "task_id": "task_a6eebb977125",
       "terminal": "term_57af52b9-738e-44cc-beb8-4d2204a41b46",
-      "status": "working/live; checkpoint claims48 tests; final accepted submission and untimed-source followups pending",
+      "status": "accepted succeeded msg_be047076a883 at0e39f0d; root50 tests pass; terminal immediately reused for deadline-only Task; prior Delivery acknowledged",
+      "submission_commit": "0e39f0d",
       "dispatch_id": "ctx_04111d8d4601",
       "model": "gemini-3.8-flash-medium",
       "approval_flag": "--dangerously-skip-permissions",
       "model_evidence": "Actual CIM argv and bounded redacted worker CLI footer Gemini3.8FlashMedium; native model field null."
+    },
+    "pc_deadline_correction": {
+      "task_id": "task_2425d0e52884",
+      "dispatch_id": "ctx_cbb151521cd0",
+      "terminal": "term_57af52b9-738e-44cc-beb8-4d2204a41b46",
+      "model": "gemini-3.8-flash-medium",
+      "approval_flag": "--dangerously-skip-permissions",
+      "status": "native turnStart observed; fixes manual/port refresh deadline including collection/RPC cleanup/write",
+      "reproduction": "operator/pc-manual-deadline-probe.json",
+      "final_gate": "Accepted corrected PC/tests then independent current producer-to-C verification before COM."
     },
     "firmware_source_correction": {
       "task_id": "task_e44125e18973",
