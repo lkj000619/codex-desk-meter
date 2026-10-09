@@ -1,0 +1,72 @@
+{
+  "scope": "Orca fresh cohort LCD presentation correction; original expected red is evidence, not correction failure",
+  "source_hashes": {
+    "CMakeLists.txt": "9e9534402359bab131f26dcf0d246c9e23ddcd8699aa0e5e9dab634e195020d7",
+    "sdkconfig.defaults": "a232b9341461c95ddc0c18084a77459013b4c236ddcd6beee3108ff175b2ffb8",
+    "main/bsp.c": "8a820f95aa58db42d3c559901918419b8a11712e1d9f4a01f10cb085a890ceee",
+    "main/bsp.h": "b80339ef1f22cac176d67f3073bd5d1d96e9275f9e1242fe1df05c694786fab2",
+    "main/cdm.c": "33899e302733a685b78f7171b87cc7827d4e2b34d8ade0a82f0290c6d16b9c1c",
+    "main/cdm.h": "7c900f68af9b75d85e8cd4e8e2d9e22f2e582bab5de2bf3a6b75f1f9d9ada8c6",
+    "main/CMakeLists.txt": "af58e3ae2c42cc4e17ca4016464f48b31a90dbe7d21974c7a4740b3a78e14256",
+    "main/f9_temp.c": "43f760751e10633a132249ab87ad86e63a11dac97fe2d661b3ed1e31dd6e7812",
+    "main/f9_temp.h": "645edda639a3876506fe9d00b1cd5de82435ba14de2b22c4c8c4d8255aab3b92",
+    "main/gui.c": "3d0e2b6db2f425d419dfb6346fba909c477e24b944ecf3c56ac3568bf172e975",
+    "main/gui.h": "0781e73ddc3bada616e334d0308eab0477c76b33e7797e8d0688ca52a8494780",
+    "main/legacy.c": "d652633aedda1f755dc7190a2104db361b97eafb144fc68922d6682d7b89479c",
+    "main/legacy.h": "efb69ca3856a50bcf423792805b19999d53c4d919b91dc93fc6daf610e0ed441",
+    "main/main.c": "4e1612983701b8951c06ba43a8a8132c725a30a5bafdaae1cee00040cee812e1",
+    "main/st7701_commands.inc": "af9c061384023d46ba85d9530a96630ae8680776d747ed73e2844dcccf513b1c"
+  },
+  "artifact_hashes": {
+    "codex_desk_meter.bin": "953782e5486adbe9743e5b753e716892cfdfbeef25d23b1702dc1d6050078f1f",
+    "bootloader.bin": "f4c5160d0777ebda11edac881853b211300323e5cf8f96eeeda5314d731d02ab",
+    "partition-table.bin": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "sdkconfig": "46788f1c30a51868da7c66c41def9045514faaf393bc68ec0d6f05df4daca452"
+  },
+  "checks": [
+    {
+      "label": "original_scan_mutation_expected_red",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/firmware",
+        "-p",
+        "test_presentation.py",
+        "-v"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 0.532,
+      "stdout": "",
+      "stderr": "test_only_a_completed_frame_becomes_scanned (test_presentation.PresentationTests.test_only_a_completed_frame_becomes_scanned) ... FAIL\n\n======================================================================\nFAIL: test_only_a_completed_frame_becomes_scanned (test_presentation.PresentationTests.test_only_a_completed_frame_becomes_scanned)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\이광진\\orca\\workspaces\\codex-desk-meter\\experiment-orca-harness-20261008\\tests\\firmware\\test_presentation.py\", line 33, in test_only_a_completed_frame_becomes_scanned\n    self.assertEqual(run.returncode, 0, run.stdout + run.stderr)\nAssertionError: 3 != 0 : presentation assertion line 74: scanned[0] == scanned_before\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.425s\n\nFAILED (failures=1)\n"
+    },
+    {
+      "label": "corrected_firmware_regression",
+      "argv": [
+        "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests/firmware",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.002,
+      "stdout": "",
+      "stderr": "test_ambiguous_non_session_context_never_guesses_good (test_active_usage.ActiveUsageTests.test_ambiguous_non_session_context_never_guesses_good) ... ok\ntest_changing_observation_ids_does_not_accumulate_history (test_active_usage.ActiveUsageTests.test_changing_observation_ids_does_not_accumulate_history) ... ok\ntest_equal_id_new_context_does_not_inherit_another_sources_cache (test_active_usage.ActiveUsageTests.test_equal_id_new_context_does_not_inherit_another_sources_cache) ... ok\ntest_full_scope_duplicate_rejects_without_changing_current_state (test_active_usage.ActiveUsageTests.test_full_scope_duplicate_rejects_without_changing_current_state) ... ok\ntest_same_session_cache_survives_unknown_error_then_recovers (test_active_usage.ActiveUsageTests.test_same_session_cache_survives_unknown_error_then_recovers) ... ok\ntest_same_snapshot_id_in_distinct_scopes_coexists (test_active_usage.ActiveUsageTests.test_same_snapshot_id_in_distinct_scopes_coexists) ... ok\ntest_selected_session_replaces_previous_active_session (test_active_usage.ActiveUsageTests.test_selected_session_replaces_previous_active_session) ... ok\ntest_single_non_session_source_keeps_good_across_observation_id_change (test_active_usage.ActiveUsageTests.test_single_non_session_source_keeps_good_across_observation_id_change) ... ok\ntest_constructor_initializes_and_releases_command_io_before_rgb_init (test_bsp_order.BspOrderTests.test_constructor_initializes_and_releases_command_io_before_rgb_init) ... ok\ntest_actual_pc_synthetic_wire_sample (test_cdm.ReceiverTests.test_actual_pc_synthetic_wire_sample) ... ok\ntest_corruption_does_not_change_cache_or_sequence (test_cdm.ReceiverTests.test_corruption_does_not_change_cache_or_sequence) ... ok\ntest_last_good_independent_adapter_failure_and_recovery (test_cdm.ReceiverTests.test_last_good_independent_adapter_failure_and_recovery) ... ok\ntest_semantic_invalidity_preserves_good (test_cdm.ReceiverTests.test_semantic_invalidity_preserves_good) ... ok\ntest_sequence_wrap_duplicate_backwards_half_range_persistence (test_cdm.ReceiverTests.test_sequence_wrap_duplicate_backwards_half_range_persistence) ... ok\ntest_source_age_is_separate_from_receive_age_and_anchor (test_cdm.ReceiverTests.test_source_age_is_separate_from_receive_age_and_anchor) ... ok\ntest_pages_screen_wrap_and_source_separation (test_gui.GuiTests.test_pages_screen_wrap_and_source_separation) ... ok\ntest_waiting_unknown_error_last_good_and_global_fallback (test_gui.GuiTests.test_waiting_unknown_error_last_good_and_global_fallback) ... ok\ntest_all_frozen_cases (test_legacy.LegacySeamTests.test_all_frozen_cases) ... ok\ntest_only_a_completed_frame_becomes_scanned (test_presentation.PresentationTests.test_only_a_completed_frame_becomes_scanned) ... ok\n\n----------------------------------------------------------------------\nRan 19 tests in 3.869s\n\nOK\n"
+    }
+  ],
+  "physical_flicker_fixed": "not_run",
+  "product_pass": false
+}

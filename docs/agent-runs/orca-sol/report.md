@@ -106,3 +106,82 @@ python 'C:/Espressif/v5.3.2/esp-idf/tools/idf.py' build *> 'C:/Users/이광진/o
 | `firmware/.host-tools/active-usage-build/sdkconfig` | 70,020 | `46788F1C30A51868DA7C66C41DEF9045514FAAF393BC68EC0D6F05DF4DACA452` |
 
 The new application image occupies `0x4b1e0` bytes of the `0x100000` byte app partition, leaving 71% free. Coordinator-only next action: review the corrected source and new binary, then perform upload, serial/GUI observation, BOOT operation, synthetic device fault/recovery and live-account gates under the operator procedure above. For its upload step, verify and use the **new** three binary hashes in this correction table; the three binary hashes in the original section identify the superseded historical build. Physical, live, and COM evidence remain `not_run`; no `product_pass=true` is claimed.
+
+## 2026-10-10 correction: RGB scan-visible partial clears
+
+Run `run_c968c43361da` · Task `task_63d11f3c24cb` · Dispatch `ctx_2363ff345723` · worker terminal `term_e1bc5a22-2975-4c7e-a9c1-82097648f0e6`. This section supersedes the firmware app binary in the previous section only; prior verdicts and artifacts remain historical evidence. Coordinator deliveries `delivery_1d40dbac398e` and `delivery_899c2bcf9bbf` were read and acknowledged before this submission.
+
+### Observation, cause, and boundary
+
+The sanitized post-data observation records repeated flashes/white partial clears with populated Usage and Status frames. At least one live frame reached the device: Status physically showed `FRAME / CRC VALID`, `CONNECTED`, receive age 10 s and source age 44 s; the Usage view showed 31% and 68% used in its two quota windows. This does not establish uninterrupted display stability. The earlier 13-second black interval was the user's manual RST, not this recurring defect. Long scientific token strings also appear clipped; this is a separate display finding, not changed here. No original video/JPG or visible source identifier is included in this report.
+
+The initial hypothesis was that the renderer exposes its intermediate full-screen PAPER clear to scanout. The production path established it: `main.c` calls `gui_render` on dirty state or every 1000 ms; `gui_render` starts with a full PAPER fill; original `bsp.c` used `num_fbs=1` and `bsp_fill`/`bsp_pixel` wrote directly to the RGB frame pointer. In the installed ESP-IDF v5.3.2 `components/esp_lcd/rgb/esp_lcd_panel_rgb.c`, `lcd_rgb_panel_fill_bounce_buffer` copies chunks from `fbs[bb_fb_index]` while the panel runs; the last chunk updates `bb_fb_index=cur_fb_index` and invokes `on_bounce_frame_finish`. `rgb_panel_draw_bitmap` selects `cur_fb_index` when passed one of its own framebuffer pointers. The manufacturer ST7701 wrapper keeps RGB's `draw_bitmap` method and the existing GPIO0 multiplex sequence. These facts explain how an in-progress clear can become visible without any receiver failure. They establish a firmware race and a host reproduction, not physical proof that every reported flash has this cause.
+
+The fix keeps the 320×820 physical / 820×320 logical mapping and 10×320 bounce buffers. RGB now allocates two 524,800-byte PSRAM frames. The GUI draws into the frame the bounce copier does not use; `bsp_present()` selects that completed frame through `esp_lcd_panel_draw_bitmap(0,0,320,820,...)` and waits for two `on_bounce_frame_finish` notifications after draining an old notification. Two wraps cover a completion already in progress across the submit call before reusing the former front buffer. Each wait is bounded at 200 ms; draw submission or wait failure disables active-low backlight, prevents further pixel writes, returns an error, and `app_main` aborts. The framebuffer getter receives a trailing `NULL` because this installed SDK implementation advances its variadic argument after returning the last pointer. The periodic redraw, stale/receive age, temperature, BOOT navigation, quota/token contents, receiver/cache, and ST7701/CS handoff remain on their prior paths. This adds one frame (524,800 bytes) of PSRAM and no package or graphics framework.
+
+### Red/green regression and host checks
+
+The coordinator supplied the exact original accepted BSP as the sole approved extra read, `artifacts/orca-harness-runtime/flicker-baseline-bsp.c`, SHA-256 `2D3D21445DCF31EB51EE20544B512DF19C0399B64BA734F0E25F4B946940B3BE`. The host test compiles the actual BSP body with fake SDK declarations; the baseline-only `bsp_present` shim is unreachable because the scan-integrity assertion runs first. The fake RGB driver leaves the scanned frame visible during clear/redraw, can delay adoption until a second boundary, and can stop boundaries for the timeout case. Exact baseline command and observed red result:
+
+```powershell
+$env:CDM_PRESENTATION_BASELINE_BSP='artifacts/orca-harness-runtime/flicker-baseline-bsp.c'
+& 'C:/Espressif/user-tools/python_env/idf5.3_py3.11_env/Scripts/python.exe' -B -X utf8 -m unittest discover -s tests/firmware -p 'test_presentation.py' -v
+Remove-Item Env:CDM_PRESENTATION_BASELINE_BSP
+```
+
+The BSP compiled; the test failed with harness exit **3** at `presentation assertion line 74: scanned[0] == scanned_before`. The original `bsp_pixel` had changed the pixel being scanned before a frame was complete. With the environment variable absent, the same assertion and subsequent old-front ordering, two-boundary handoff, and fail-dark timeout checks passed. The final fixed `bsp.c` hash is `8A820F95AA58DB42D3C559901918419B8A11712E1D9F4A01F10CB085A890CEEE`. The test does not emulate LCD timing, DMA underrun, electrical conditions, or the camera; physical flicker remains unverified.
+
+Final host commands and results:
+
+```powershell
+& 'tests/firmware/build-host.ps1'  # exit 0
+& 'C:/Espressif/user-tools/python_env/idf5.3_py3.11_env/Scripts/python.exe' -B -X utf8 -m unittest discover -s tests/firmware -p 'test_*.py' -v  # 19/19
+& 'C:/Espressif/user-tools/python_env/idf5.3_py3.11_env/Scripts/python.exe' -B -X utf8 -m unittest discover -s tests/integration -p 'test_cdm_session_selection.py' -v  # 1/1
+```
+
+The 19 owned tests include all prior 18 and their frozen 29/29 matrix. The selected-session integration test exercised the actual producer-to-C receiver/GUI path; this display change did not alter it. `git diff --check` passed for the tracked owned changes. The new test hashes are `presentation_sdk.h` `48F1AEC737A806F85464E5FD05394167791904B3BCBC26DE1201FBD5B899BF72`, `presentation_host.c` `B968967C023163B4DD8F014096CDCEFE86419C9BA225177BCDD3E63893790ACA`, and `test_presentation.py` `5D6EC9DA3302558A9EDD6B66F371A21D200038DA6033C024614A8F6D7FFDDEC4`.
+
+### Genuine ESP-IDF build and reproducibility
+
+The checkout has a non-ASCII path, so the real ESP-IDF build ran in `C:/Espressif/tmp/cdm-sol-task_b1214421a314` using installed ESP-IDF `C:/Espressif/v5.3.2/esp-idf` and its Python `C:/Espressif/user-tools/python_env/idf5.3_py3.11_env/Scripts/python.exe`. Only `main/bsp.c`, `main/bsp.h`, and `main/main.c` were recopied into this existing staging tree; all **15/15** source/config files below matched the checkout SHA-256 immediately before and after the build. `sdkconfig` is the generated staged config and its copy is listed separately below.
+
+| Staged relative source/config | SHA-256 |
+|---|---|
+| `CMakeLists.txt` | `9E9534402359BAB131F26DCF0D246C9E23DDCD8699AA0E5E9DAB634E195020D7` |
+| `sdkconfig.defaults` | `A232B9341461C95DDC0C18084A77459013B4C236DDCD6BEEE3108FF175B2FFB8` |
+| `main/CMakeLists.txt` | `AF58E3AE2C42CC4E17CA4016464F48B31A90DBE7D21974C7A4740B3A78E14256` |
+| `main/bsp.c` | `8A820F95AA58DB42D3C559901918419B8A11712E1D9F4A01F10CB085A890CEEE` |
+| `main/bsp.h` | `B80339EF1F22CAC176D67F3073BD5D1D96E9275F9E1242FE1DF05C694786FAB2` |
+| `main/cdm.c` | `33899E302733A685B78F7171B87CC7827D4E2B34D8ADE0A82F0290C6D16B9C1C` |
+| `main/cdm.h` | `7C900F68AF9B75D85E8CD4E8E2D9E22F2E582BAB5DE2BF3A6B75F1F9D9ADA8C6` |
+| `main/f9_temp.c` | `43F760751E10633A132249AB87AD86E63A11DAC97FE2D661B3ED1E31DD6E7812` |
+| `main/f9_temp.h` | `645EDDA639A3876506FE9D00B1CD5DE82435BA14DE2B22C4C8C4D8255AAB3B92` |
+| `main/gui.c` | `3D0E2B6DB2F425D419DFB6346FBA909C477E24B944ECF3C56AC3568BF172E975` |
+| `main/gui.h` | `0781E73DDC3BADA616E334D0308EAB0477C76B33E7797E8D0688CA52A8494780` |
+| `main/legacy.c` | `D652633AEDDA1F755DC7190A2104DB361B97EAFB144FC68922D6682D7B89479C` |
+| `main/legacy.h` | `EFB69CA3856A50BCF423792805B19999D53C4D919B91DC93FC6DAF610E0ED441` |
+| `main/main.c` | `4E1612983701B8951C06BA43A8A8132C725A30A5BAFDAAE1CEE00040CEE812E1` |
+| `main/st7701_commands.inc` | `AF9C061384023D46BA85D9530A96630AE8680776D747ED73E2844DCCCF513B1C` |
+
+Exact successful build invocation (exit 0), with complete output in [lcd-flicker-build-output.txt](lcd-flicker-build-output.txt), SHA-256 `5967CC3A615EF58DC6A6A86C0C914882D50FBD4AF5E1208A2A18CAE910A771A0`:
+
+```powershell
+$env:PYTHONIOENCODING='utf-8'
+$env:PYTHONUTF8='1'
+$env:IDF_TOOLS_PATH='C:/Espressif/user-tools'
+. 'C:/Espressif/v5.3.2/esp-idf/export.ps1' | Out-Null
+$env:TEMP='C:/Espressif/tmp'
+$env:TMP='C:/Espressif/tmp'
+$env:IDF_CCACHE_ENABLE='0'
+Set-Location 'C:/Espressif/tmp/cdm-sol-task_b1214421a314'
+& 'C:/Espressif/user-tools/python_env/idf5.3_py3.11_env/Scripts/python.exe' -B -X utf8 'C:/Espressif/v5.3.2/esp-idf/tools/idf.py' build *> 'C:/Users/이광진/orca/workspaces/codex-desk-meter/experiment-orca-harness-20261008/docs/agent-runs/orca-sol/lcd-flicker-build-output.txt'
+```
+
+| Copy in ignored `firmware/.host-tools/lcd-flicker-build/` | Flash address | Bytes | SHA-256 |
+|---|---:|---:|---|
+| `codex_desk_meter.bin` | `0x10000` | 308,672 | `953782E5486ADBE9743E5B753E716892CFDFBEEF25D23B1702DC1D6050078F1F` |
+| `bootloader.bin` | `0x0` | 21,504 | `F4C5160D0777EBDA11EDAC881853B211300323E5CF8F96EEEDA5314D731D02AB` |
+| `partition-table.bin` | `0x8000` | 3,072 | `7F00B6C042A89B15B0CAC534F82ED988CAF29278FF5700B0C511EB1B5BB7C820` |
+| `sdkconfig` | — | 70,020 | `46788F1C30A51868DA7C66C41DEF9045514FAAF393BC68EC0D6F05DF4DACA452` |
+
+All four copies match the staged build files. The app size is `0x4b5c0` in a `0x100000` app partition, with `0xb4a40` (71%) free. The generated config still selects ESP32-S3, 16 MB flash, Octal 8 MB PSRAM at 80 MHz, PSRAM malloc, and USB Serial/JTAG console; `CONFIG_LCD_RGB_ISR_IRAM_SAFE` is unset. No prior `active-usage-build` artifact was modified. The coordinator and Luna should inspect the new source/build before any coordinator-owned COM flash and real 30-second video/BOOT/stale check. COM, upload, and corrected-board flicker observation are `not_run`; `product_pass` remains false.

@@ -79,6 +79,7 @@ void app_main(void)
             float temperature=0; bool known=f9_temp_read(&temperature);
             xSemaphoreTake(state_mutex,portMAX_DELAY);
             gui_render(&state,&control,now,known,temperature);
+            ESP_ERROR_CHECK(bsp_present());
             dirty=false;
             xSemaphoreGive(state_mutex);
             last_draw=now;

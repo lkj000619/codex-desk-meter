@@ -12,7 +12,7 @@
   "firmware": "host candidate7ccbb24/app385130667ab15ca8dcc665e70fc06882b1e89535bde8d84af05fdc2b36c1ef72",
   "capture_scope": "post live-send/watch started; exact screen values being reviewed",
   "user_report": "LCD continuously flashes/blinks; user requests correction",
-  "visual_findings": "Data-filled Usage and Status visible; large blank/partially cleared white regions recur in contact-sheet at about12s/15s; exact cause requires firmware presentation investigation",
+  "visual_findings": "Actual decoded video frames404 and494 show large white partial-clears covering header/left content while right-hand numbers remain, distinct from manualRST/backlight darkness. Rounded-time seek screenshots may pick the adjacent already-redrawn frame.",
   "physical_stability": "reported failure; do not mark30s PASS",
   "source_code_observation": "main gui_render every1000ms; gui_render starts full PAPER fill; bsp writes sole RGB framebuffer; hypothesis not yet final diagnosis",
   "frames": [
@@ -64,5 +64,22 @@
     "chip_temperature_celsius": 36.5
   },
   "additional_display_finding": "Long scientific token strings appear exponent-clipped on some rows; record for review separately from requested flicker correction",
-  "image_privacy": "Original post-data frames contain LCD source identifiers. Kept local only; do not stage JPGs. Tracked record contains only sanitized numeric/status metadata."
+  "image_privacy": "Original post-data frames contain LCD source identifiers. Kept local only; do not stage JPGs. Tracked record contains only sanitized numeric/status metadata.",
+  "flicker_inspection_frames": [
+    {
+      "frame_index": 404,
+      "nominal_time_seconds": 13.466666666666667,
+      "path": "artifacts/orca-harness-runtime/post-data-video/selected-01.jpg",
+      "sha256": "9ec045e28691796765ac95d1f0ce26ac75c31502f21d0d1f611d3906b7d8d688",
+      "storage": "local only; identifiers may be visible; not committed"
+    },
+    {
+      "frame_index": 494,
+      "nominal_time_seconds": 16.466666666666665,
+      "path": "artifacts/orca-harness-runtime/post-data-video/selected-02.jpg",
+      "sha256": "0bde145fc793648976f6834729ccd6424315b61ad810cb223101b9e91d73bea3",
+      "storage": "local only; identifiers may be visible; not committed"
+    }
+  ],
+  "inspection_command": "existing ffmpeg -i <user video> -vf select=eq(n,404)+eq(n,494),transpose=2 -fps_mode passthrough -frames:v2 (rotation for reading; source frames preserved)"
 }

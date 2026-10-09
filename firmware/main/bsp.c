@@ -1,4 +1,7 @@
 #include "bsp.h"
+#ifdef CDM_PRESENTATION_TEST
+#include "presentation_sdk.h"
+#else
 #include "driver/gpio.h"
 #include "esp_lcd_panel_ops.h"
 #include "esp_lcd_panel_io_additions.h"
@@ -7,11 +10,26 @@
 #include "esp_heap_caps.h"
 #include "esp_memory_utils.h"
 #include "esp_check.h"
+#include "esp_attr.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/semphr.h"
+#endif
 
 #include "st7701_commands.inc"
 
 static uint16_t *pixels;
+static uint16_t *framebuffers[2];
 static esp_lcd_panel_handle_t panel;
+static SemaphoreHandle_t frame_boundary;
+
+static bool IRAM_ATTR bounce_frame_finished(esp_lcd_panel_handle_t handle,
+                                             const esp_lcd_rgb_panel_event_data_t *event,
+                                             void *context)
+{
+    BaseType_t woken=pdFALSE;
+    xSemaphoreGiveFromISR((SemaphoreHandle_t)context,&woken);
+    return woken==pdTRUE;
+}
 
 esp_err_t bsp_init(void)
 {
@@ -32,7 +50,7 @@ esp_err_t bsp_init(void)
 
     esp_lcd_rgb_panel_config_t rgb={
         .clk_src=LCD_CLK_SRC_DEFAULT, .psram_trans_align=64,
-        .bounce_buffer_size_px=10*320, .num_fbs=1,
+        .bounce_buffer_size_px=10*320, .num_fbs=2,
         .data_width=16, .bits_per_pixel=16,
         .de_gpio_num=40, .pclk_gpio_num=41, .vsync_gpio_num=39, .hsync_gpio_num=38,
         .disp_gpio_num=-1,
@@ -59,14 +77,44 @@ esp_err_t bsp_init(void)
     ESP_RETURN_ON_ERROR(esp_lcd_new_panel_st7701(io,&config,&panel),"bsp","ST7701");
     // Multiplex constructor already reset/programmed ST7701 and deleted command IO.
     ESP_RETURN_ON_ERROR(esp_lcd_panel_init(panel),"bsp","RGB init");
-    ESP_RETURN_ON_ERROR(esp_lcd_rgb_panel_get_frame_buffer(panel,1,(void **)&pixels),"bsp","framebuffer");
-    if (!pixels || !esp_ptr_external_ram(pixels)) return ESP_ERR_NO_MEM;
-    for (int i=0;i<320*820;i++) pixels[i]=0xF7BE;
+    ESP_RETURN_ON_ERROR(esp_lcd_rgb_panel_get_frame_buffer(panel,2,(void **)&framebuffers[0],
+                                                            (void **)&framebuffers[1],NULL),"bsp","framebuffers");
+    if (!framebuffers[0] || !framebuffers[1] ||
+        !esp_ptr_external_ram(framebuffers[0]) || !esp_ptr_external_ram(framebuffers[1])) return ESP_ERR_NO_MEM;
+    frame_boundary=xSemaphoreCreateBinary();
+    if (!frame_boundary) return ESP_ERR_NO_MEM;
+    esp_lcd_rgb_panel_event_callbacks_t callbacks={.on_bounce_frame_finish=bounce_frame_finished};
+    ESP_RETURN_ON_ERROR(esp_lcd_rgb_panel_register_event_callbacks(panel,&callbacks,frame_boundary),"bsp","frame callback");
+    for (int b=0;b<2;b++) for (int i=0;i<320*820;i++) framebuffers[b][i]=0xF7BE;
+    pixels=framebuffers[1];
     // ST7701 command IO has been deleted with CS inactive; RGB no longer uses GPIO0.
     ESP_RETURN_ON_ERROR(gpio_set_level(GPIO_NUM_0,1),"bsp","CS idle");
     ESP_RETURN_ON_ERROR(gpio_set_direction(GPIO_NUM_0,GPIO_MODE_INPUT),"bsp","BOOT input");
     ESP_RETURN_ON_ERROR(gpio_set_pull_mode(GPIO_NUM_0,GPIO_PULLUP_ONLY),"bsp","BOOT pullup");
     ESP_RETURN_ON_ERROR(gpio_set_level(GPIO_NUM_6,0),"bsp","backlight on");
+    return ESP_OK;
+}
+
+esp_err_t bsp_present(void)
+{
+    if (!pixels || !frame_boundary) return ESP_ERR_INVALID_STATE;
+    esp_err_t error=esp_lcd_panel_draw_bitmap(panel,0,0,320,820,pixels);
+    if (error==ESP_OK) {
+        // Drain any old notification, then span two wraps so a concurrent pre-submit ISR cannot release the old front.
+        (void)xSemaphoreTake(frame_boundary,0);
+        for (int i=0;i<2;i++) {
+            if (xSemaphoreTake(frame_boundary,pdMS_TO_TICKS(200))!=pdTRUE) {
+                error=ESP_ERR_TIMEOUT;
+                break;
+            }
+        }
+    }
+    if (error!=ESP_OK) {
+        pixels=NULL;
+        gpio_set_level(GPIO_NUM_6,1);
+        return error;
+    }
+    pixels=pixels==framebuffers[0]?framebuffers[1]:framebuffers[0];
     return ESP_OK;
 }
 
