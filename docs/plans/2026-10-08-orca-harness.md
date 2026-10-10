@@ -1,6 +1,6 @@
 # Orca 협업 구현 계획
 
-**2026-10-10 16:22 KST:** 점멸 직접 관측 완료, 숫자 보완 source `7d20952`/build/자체20개·root GUI3개 검사 완료, Luna 독립 검증 진행 중. [숫자 계획](2026-10-10-lcd-numeric-readability.md)이 현재 후속을 소유한다. 새 후보 업로드·실물/지연/장시간은 미완료이며 아래 대기는 당시 상태다.
+**2026-10-10 16:46 KST:** 점멸 직접 관측 완료, 숫자 보완 source `7d20952`/build/자체20개·root GUI3개 검사 완료. Luna 독립 검사·scoped host PASS 보고서 작성은 완료했지만 최종 제출 수락을 기다린다. Task26개 중25개 완료. [숫자 계획](2026-10-10-lcd-numeric-readability.md)이 현재 후속을 소유한다. 새 후보 업로드·실물/지연/장시간은 미완료이며 아래 대기는 당시 상태다.
 
 2026-10-10 후속 관측: 이전 업로드·BOOT 화면 전환·수동 RST 사실을 사용자 응답과 영상으로 기록했다. [관측](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json)의 수치 갱신/CRC VALID는 확인, 반복 점멸 직접 확인 대기, 긴 토큰 숫자 잘림 FAIL이다。 [숫자 보완 계획](2026-10-10-lcd-numeric-readability.md)에 따라 같은 역할의 새 Task를 진행한다. 아래 완료는 당시 host/업로드 범위이며 전체 제품 합격은 아니다.
 

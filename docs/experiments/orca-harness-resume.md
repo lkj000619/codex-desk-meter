@@ -1,6 +1,6 @@
 # 세션 중단 후 재개
 
-**2026-10-10 16:22 KST 재개 기준:** Sol 숫자 Task completed, source `7d20952`, succeeded `msg_8aa6b9b04c59` release/ack 완료. 실제 Luna `gpt-6-luna` 자동 승인 terminal `term_96185057-8182-4dca-9f01-a113c1fc0a10`에서 `task_5b1435a8c3c1` / `ctx_93b9c8f7189f`가 독립 검증 중이다. **같은 Dispatch를 조회/대기하며 중복 reviewer를 시작하지 않는다.** 새 [숫자 후보](../../experiments/orca-harness-20261008/operator/firmware-numeric-candidate.json)의 독립 gate는 false이며 아직 미업로드. 기존 sole watch/state 유지. 반복 점멸 직접 확인은 완료했다. 다음은 accepted Luna 제출→동결→writer 정상 종료→업로드/같은 state 재개→새 숫자 실물 관측이다.
+**2026-10-10 16:46 KST 재개 기준:** Sol 숫자 Task completed, source `7d20952`, succeeded `msg_8aa6b9b04c59` release/ack 완료. 실제 Luna `gpt-6-luna` 자동 승인 terminal `term_96185057-8182-4dca-9f01-a113c1fc0a10`의 `task_5b1435a8c3c1` / `ctx_93b9c8f7189f`는 검사·scoped host PASS 보고서 작성 후 최종 `worker_done` 제출 대기다. 숫자2/2·firmware20/20·presentation1/1·producer/selection20/20 및 source15/artifact4 대조 완료. **같은 Dispatch를 조회/대기하며 중복 reviewer를 시작하지 않는다.** CLI 프로세스는 존재하고 fleet `missing_status`·화면 출력 정체는 종료 증거가 아니다. 제출 마무리 메시지 `msg_6eacea776a68`를 이미 전달했으므로 반복 송신하지 않는다. 새 [숫자 후보](../../experiments/orca-harness-20261008/operator/firmware-numeric-candidate.json)의 독립 gate는 false이며 아직 미업로드. 기존 sole watch/state 유지. 반복 점멸 직접 확인은 완료했다. 다음은 accepted Luna 제출→동결→writer 정상 종료→업로드/같은 state 재개→새 숫자 실물 관측이다.
 
 2026-10-10 최신 답변 반영: **반복 점멸 소멸 직접 확인 완료**. 새 Sol 숫자 Task `task_2ae3cb0fe949` / `ctx_6fb4838726ea`의 실제 작업을 확인했다. 이미 확인한 점멸 질문/수정을 반복하지 않고, 숫자 제출/build→Luna 검증→업로드/관측을 이어간다. 현재 lifecycle는 context/native 조회가 원본이며 아래 ‘직접 확인 대기’는 응답 전이다.
 

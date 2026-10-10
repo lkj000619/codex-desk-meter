@@ -17,11 +17,13 @@
 | 이전 영상·RESET/BOOT 사실 기록 | coordinator | 완료 | 영상 hash·상대 촬영 시점·수동 RESET·잘림을 비식별 기록, 원본 이미지는 Git 제외 |
 | 실제 C 숫자 표시 재현→수정→시험 | Codex gpt-6-sol | 완료 | 원래 production GUI에서314238800 잘림 의도된 실패; 수정 firmware20/20, root GUI3/3 PASS |
 | ESP-IDF 빌드·source/artifact 제출 | Sol | 완료 | SDK5.3.2 genuine build, 별도 `firmware/.host-tools/numeric-readability-build/` 결과 및15개 source/4개 artifact SHA 일치. 기존 flicker-build 보존 |
-| 독립 검증 | Codex gpt-6-luna | 진행 | Task `task_5b1435a8c3c1` / Dispatch `ctx_93b9c8f7189f`, terminal `term_96185057-8182-4dca-9f01-a113c1fc0a10`. `tests/integration/` 및 자신의 보고서만 수정. 실제 C의 숫자 전체/단위/경계, 기존 표시 교체 검사와 producer/selection 회귀 통과 |
+| 독립 검증 | Codex gpt-6-luna | 검사·보고서 작성 완료, 최종 제출 대기 | Task `task_5b1435a8c3c1` / Dispatch `ctx_93b9c8f7189f`, terminal `term_96185057-8182-4dca-9f01-a113c1fc0a10`. 숫자 pixel2/2·firmware20/20·presentation1/1·producer/selection20/20, source15/artifact4 대조 PASS. `worker_done`은 아직 미수락; 기존 작업에서 checkpoint·최종 inbox·완료 제출만 남음 |
 | coordinator 동결·COM3 업로드·관측 | coordinator | 준비 | accepted worker_done·검증·hash 일치 후 새 tag. 기존 sole watch 정상 종료 확인→업로드→같은 state/세션 재개→새 실물 숫자/점멸 관측 |
 
 실행: 사용자 지정 실제 Orca Run `run_c968c43361da`의 새 Task/Dispatch로 진행한다. Sol만 `firmware/`, `tests/firmware/`, `docs/agent-runs/orca-sol/`을 수정한다. Luna는 구현 파일을 수정하지 않는다. Git·COM·실계정은 coordinator만 소유한다. Codex 자동 승인 옵션은 기존 사용자 지시를 유지한다. 과거 source/tag·입력57개·개인 로그는 변경/커밋하지 않는다.
 
 리뷰 초점: 큰 정수의 정확한 자리수, 과학 표기 지수/단위의 보존, quota 접두사를 제외한 공간, null의 `--` 유지, 배율 변경이 글자 높이·주변 label/경계를 침범하지 않는지 확인한다. 숫자 pixel 전체를 검증하며 문자열 길이만 시험해 실제 그리기 결함을 놓치지 않는다.
+
+2026-10-10 숫자 후속 범위의 시험 수 명확화: 현재 unittest loader는 selected-session 1개, producer-to-C 19개, 합계 **20개**를 열거한다. 이번 검증 보고의20/20이 실제 실행 수이며 Task가 이전 보고에서 가져온21이라는 표기는 이번 suite의 개수로 사용하지 않는다. 수를 맞추기 위한 시험 추가/재실행은 필요하지 않다. 이 명확화는 현재 숫자 후속에만 적용하며 이전 원본 판정·evidence를 덮어쓰지 않는다. coordinator 메시지 `msg_8197337d2963`로 동일 내용을 전달했다.
 
 중단 시 [재개 절차](../experiments/orca-harness-resume.md)와 context의 이 Task 상태를 확인한다. 오래된 task24 완료만으로 후속 완료를 단정하지 않는다. live writer·sender state를 초기화하거나 두 번째 sender를 실행하지 않는다. host PASS와 실물 PASS는 분리한다.

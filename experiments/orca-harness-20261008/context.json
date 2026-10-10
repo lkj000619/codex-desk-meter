@@ -295,7 +295,7 @@
     },
     "lcd_numeric_review": {
       "task_id": "task_5b1435a8c3c1",
-      "status": "working confirmed by actual CLI tool reads; native missing_status is not exit",
+      "status": "host PASS report created and source/artifact audit complete; authoritative worker_done pending; live CLI still thinking, no exit evidence",
       "depends_on": "task_2ae3cb0fe949",
       "spec_path": "tasks/lcd-numeric-luna.md",
       "model": "gpt-6-luna",
@@ -305,7 +305,19 @@
       "model_evidence": "actual CIM argv gpt-6-luna; TUI checked before dispatch",
       "cli_version": "0.159.2",
       "dispatch_id": "ctx_93b9c8f7189f",
-      "source_commit": "7d20952"
+      "source_commit": "7d20952",
+      "observed_at": "2026-10-10T07:47:04.915422+00:00",
+      "report_path": "docs/agent-runs/orca-luna/numeric-readability-review.md",
+      "actual_check_counts": {
+        "firmware": 20,
+        "numeric_pixels": 2,
+        "presentation": 1,
+        "producer_and_selection": 20
+      },
+      "followup_messages": [
+        "msg_8197337d2963",
+        "msg_6eacea776a68"
+      ]
     }
   },
   "frozen_input_count": 57,
@@ -348,8 +360,8 @@
     "upload_permitted": false
   },
   "operator_execution": {
-    "updated_at": "2026-10-10T07:07:18.056278+00:00",
-    "phase": "numeric_readability_luna_review_running_live_watch_preserved",
+    "updated_at": "2026-10-10T07:47:04.915422+00:00",
+    "phase": "numeric_checks_passed_authoritative_review_completion_pending_keep_live_watch",
     "host_candidate_commit": "7ccbb24",
     "host_candidate_tag": "orca-harness-20261010-host-candidate",
     "flash_evidence": "operator/flash-host-candidate-20261010.json",
@@ -384,13 +396,14 @@
     "flicker_flash_evidence": "operator/flash-lcd-flicker-20261010.json",
     "flicker_candidate_commit": "8fe1f9ff5f7ce77b0c792be90a16ad153999e6a5",
     "previous_live_watch_terminal": "term_dcac760e-42fa-42f9-afa6-1da904d96d49",
-    "sender_next_sequence_observed": 47,
+    "sender_next_sequence_observed": 102,
     "resume_evidence": "operator/live-watch-resume-20261010.json",
     "post_flicker_observation": "operator/post-flicker-observation-20261010.json",
     "physical_boot_navigation": "User confirmed BOOT; Usage-Global-Status-Usage observed; exact latency/count unmeasured",
     "physical_reset": "User confirms manual RST causing WAITING; not automatic reboot",
-    "numeric_readability": "FAIL: total/row exponent truncated; new Sol then Luna task planned",
-    "numeric_manifest": "operator/firmware-numeric-candidate.json"
+    "numeric_readability": "Prior flashed firmware FAIL; corrected source/build and independent host report PASS, authoritative completion and new upload/physical evidence pending",
+    "numeric_manifest": "operator/firmware-numeric-candidate.json",
+    "sender_state_observed_at": "2026-10-10T07:47:04.915422+00:00"
   },
   "consumer_generation": 6
 }

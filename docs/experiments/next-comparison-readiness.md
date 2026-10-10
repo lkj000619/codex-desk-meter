@@ -1,6 +1,6 @@
 # 현재 준비 상태 — 별도 Orca 협업 실험
 
-**2026-10-10 16:22 KST 현재:** 반복 점멸 소멸을 사용자에게 확인했다. 숫자 수정 `7d20952`·firmware20/20·SDK build·root GUI3/3·source15/artifact4 hash 확인 완료. Luna `task_5b1435a8c3c1` / `ctx_93b9c8f7189f`의 독립 검증 진행 중이다. [숫자 후보](../../experiments/orca-harness-20261008/operator/firmware-numeric-candidate.json)는 아직 미업로드, 현 COM3 sole watch/state/세션 유지, `product_pass=false`. 아래는 당시 이력이다.
+**2026-10-10 16:46 KST 현재:** 반복 점멸 소멸을 사용자에게 확인했다. 숫자 수정 `7d20952`·firmware20/20·SDK build·root GUI3/3·source15/artifact4 hash 확인 완료. Luna는 숫자 pixel2/2·firmware20/20·presentation1/1·producer/selection20/20 및 source/artifact 대조를 통과하고 scoped host PASS 보고서를 작성했다. 다만 `task_5b1435a8c3c1` / `ctx_93b9c8f7189f`의 authoritative `worker_done`은 아직 없으며 같은 작업의 제출을 기다린다. Task26개 중25개 완료. [숫자 후보](../../experiments/orca-harness-20261008/operator/firmware-numeric-candidate.json)는 아직 미업로드, 현 COM3 sole watch/state/세션 유지, `product_pass=false`. 아래는 당시 이력이다.
 
 2026-10-10 추가 사용자 확인: **반복 점멸이 사라짐**. [실물 기록](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json)에 직접 응답을 반영하여 점멸 보완의 해당 실물 관측을 완료했다. 현재 작업은 Sol `task_2ae3cb0fe949` / `ctx_6fb4838726ea`의 숫자 잘림 수정이며 이후 Luna 검증→새 후보 업로드/관측이다. 아래 직접 점멸 확인 대기는 응답 전 상태다.
 

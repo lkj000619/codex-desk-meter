@@ -1,6 +1,6 @@
 # Orca 역할 협업 실험 결과
 
-**2026-10-10 16:22 KST 현재:** 기존 점멸은 직접 관측 범위에서 해결 확인했고 숫자 잘림은 Sol `7d20952`에서 수정했다. 자체 firmware20/20·SDK build, root GUI3/3·source15/artifact4 hash 확인 완료. Luna의 독립 숫자/회귀 검증은 진행 중이며 새 숫자 후보의 업로드/실물은 미실행이다. 전체 제품은 `product_pass=false`. [현재 계획](../plans/2026-10-10-lcd-numeric-readability.md). 아래 원본 판정은 각각 당시 범위다.
+**2026-10-10 16:46 KST 현재:** 기존 점멸은 직접 관측 범위에서 해결 확인했고 숫자 잘림은 Sol `7d20952`에서 수정했다. 자체 firmware20/20·SDK build, root GUI3/3·source15/artifact4 hash 확인 완료. Luna는 독립 숫자2/2·firmware20/20·presentation1/1·producer/selection20/20과 hash 대조를 통과해 scoped host PASS 보고서를 작성했다. 최종 `worker_done` 수락은 아직이며 새 숫자 후보의 업로드/실물은 미실행이다. 전체 제품은 `product_pass=false`. [현재 계획](../plans/2026-10-10-lcd-numeric-readability.md). 아래 원본 판정은 각각 당시 범위다.
 
 2026-10-10 후속 직접 관측 답변: **‘반복 점멸이 사라짐’**. 기존 수정의 반복 점멸 개선은 사용자 관측·샘플 영상 범위에서 실물 확인했다. 화면 갱신 중 흰색 부분 지워짐과 사용자의 수동 RST를 구분했다. 숫자 잘림 FAIL 및 제품 전체 미측정 항목은 그대로이며 아래 직접 답변 대기는 응답 전 기록이다.
 

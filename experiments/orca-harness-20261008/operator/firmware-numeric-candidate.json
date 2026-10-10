@@ -1,7 +1,7 @@
 {
   "run_id": "run_c968c43361da",
-  "status": "source_build_accepted_independent_review_running",
-  "validated_at": "2026-10-10T07:21:27.538193+00:00",
+  "status": "source_build_accepted_independent_host_checks_passed_final_submission_pending",
+  "validated_at": "2026-10-10T07:47:04.915422+00:00",
   "firmware_submission_commit": "7d20952",
   "firmware_task": "task_2ae3cb0fe949",
   "firmware_dispatch": "ctx_6fb4838726ea",
@@ -118,5 +118,13 @@
   },
   "pc_source_changed": false,
   "sender_reinitialization_permitted": false,
-  "upload_gate_reason": "Await accepted Luna independent review and a frozen tag; no flash while current COM3 watch owns port."
+  "upload_gate_reason": "Await accepted Luna independent review and a frozen tag; no flash while current COM3 watch owns port.",
+  "independent_host_checks": {
+    "numeric_pixels": 2,
+    "firmware": 20,
+    "presentation": 1,
+    "producer_and_selection": 20,
+    "report_status": "written; no authoritative worker_done accepted"
+  },
+  "independent_report_accepted": false
 }
