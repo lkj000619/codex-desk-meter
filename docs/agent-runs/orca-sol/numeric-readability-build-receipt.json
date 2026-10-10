@@ -1,0 +1,140 @@
+﻿{
+    "runId":  "run_c968c43361da",
+    "taskId":  "task_2ae3cb0fe949",
+    "dispatchId":  "ctx_6fb4838726ea",
+    "sdkPath":  "C:/Espressif/v5.3.2/esp-idf",
+    "sdkVersion":  "5.3.2",
+    "stageRoot":  "C:/Espressif/tmp/cdm-sol-task_b1214421a314",
+    "sourceRoot":  "C:\\Users\\이광진\\orca\\workspaces\\codex-desk-meter\\experiment-orca-harness-20261008\\firmware",
+    "buildCommand":  "python.exe -B -X utf8 C:/Espressif/v5.3.2/esp-idf/tools/idf.py build",
+    "buildExitCode":  0,
+    "buildLog":  "numeric-readability-build-output.txt",
+    "buildLogSha256":  "5BD87A30E3BC33BEC929457B5B8F02DF27EC90B2EB55FB40AE9FFBA16D759A3D",
+    "sourceCount":  15,
+    "sources":  [
+                    {
+                        "path":  "CMakeLists.txt",
+                        "sha256":  "9E9534402359BAB131F26DCF0D246C9E23DDCD8699AA0E5E9DAB634E195020D7",
+                        "stagedSha256":  "9E9534402359BAB131F26DCF0D246C9E23DDCD8699AA0E5E9DAB634E195020D7"
+                    },
+                    {
+                        "path":  "sdkconfig.defaults",
+                        "sha256":  "A232B9341461C95DDC0C18084A77459013B4C236DDCD6BEEE3108FF175B2FFB8",
+                        "stagedSha256":  "A232B9341461C95DDC0C18084A77459013B4C236DDCD6BEEE3108FF175B2FFB8"
+                    },
+                    {
+                        "path":  "main/CMakeLists.txt",
+                        "sha256":  "AF58E3AE2C42CC4E17CA4016464F48B31A90DBE7D21974C7A4740B3A78E14256",
+                        "stagedSha256":  "AF58E3AE2C42CC4E17CA4016464F48B31A90DBE7D21974C7A4740B3A78E14256"
+                    },
+                    {
+                        "path":  "main/bsp.c",
+                        "sha256":  "8A820F95AA58DB42D3C559901918419B8A11712E1D9F4A01F10CB085A890CEEE",
+                        "stagedSha256":  "8A820F95AA58DB42D3C559901918419B8A11712E1D9F4A01F10CB085A890CEEE"
+                    },
+                    {
+                        "path":  "main/bsp.h",
+                        "sha256":  "B80339EF1F22CAC176D67F3073BD5D1D96E9275F9E1242FE1DF05C694786FAB2",
+                        "stagedSha256":  "B80339EF1F22CAC176D67F3073BD5D1D96E9275F9E1242FE1DF05C694786FAB2"
+                    },
+                    {
+                        "path":  "main/cdm.c",
+                        "sha256":  "33899E302733A685B78F7171B87CC7827D4E2B34D8ADE0A82F0290C6D16B9C1C",
+                        "stagedSha256":  "33899E302733A685B78F7171B87CC7827D4E2B34D8ADE0A82F0290C6D16B9C1C"
+                    },
+                    {
+                        "path":  "main/cdm.h",
+                        "sha256":  "7C900F68AF9B75D85E8CD4E8E2D9E22F2E582BAB5DE2BF3A6B75F1F9D9ADA8C6",
+                        "stagedSha256":  "7C900F68AF9B75D85E8CD4E8E2D9E22F2E582BAB5DE2BF3A6B75F1F9D9ADA8C6"
+                    },
+                    {
+                        "path":  "main/f9_temp.c",
+                        "sha256":  "43F760751E10633A132249AB87AD86E63A11DAC97FE2D661B3ED1E31DD6E7812",
+                        "stagedSha256":  "43F760751E10633A132249AB87AD86E63A11DAC97FE2D661B3ED1E31DD6E7812"
+                    },
+                    {
+                        "path":  "main/f9_temp.h",
+                        "sha256":  "645EDDA639A3876506FE9D00B1CD5DE82435BA14DE2B22C4C8C4D8255AAB3B92",
+                        "stagedSha256":  "645EDDA639A3876506FE9D00B1CD5DE82435BA14DE2B22C4C8C4D8255AAB3B92"
+                    },
+                    {
+                        "path":  "main/gui.c",
+                        "sha256":  "9F299CE8BE4B5E92272FE0CEF51BD404F7E4E2F9543C00BA306423A8B21FEFCF",
+                        "stagedSha256":  "9F299CE8BE4B5E92272FE0CEF51BD404F7E4E2F9543C00BA306423A8B21FEFCF"
+                    },
+                    {
+                        "path":  "main/gui.h",
+                        "sha256":  "0781E73DDC3BADA616E334D0308EAB0477C76B33E7797E8D0688CA52A8494780",
+                        "stagedSha256":  "0781E73DDC3BADA616E334D0308EAB0477C76B33E7797E8D0688CA52A8494780"
+                    },
+                    {
+                        "path":  "main/legacy.c",
+                        "sha256":  "D652633AEDDA1F755DC7190A2104DB361B97EAFB144FC68922D6682D7B89479C",
+                        "stagedSha256":  "D652633AEDDA1F755DC7190A2104DB361B97EAFB144FC68922D6682D7B89479C"
+                    },
+                    {
+                        "path":  "main/legacy.h",
+                        "sha256":  "EFB69CA3856A50BCF423792805B19999D53C4D919B91DC93FC6DAF610E0ED441",
+                        "stagedSha256":  "EFB69CA3856A50BCF423792805B19999D53C4D919B91DC93FC6DAF610E0ED441"
+                    },
+                    {
+                        "path":  "main/main.c",
+                        "sha256":  "4E1612983701B8951C06BA43A8A8132C725A30A5BAFDAAE1CEE00040CEE812E1",
+                        "stagedSha256":  "4E1612983701B8951C06BA43A8A8132C725A30A5BAFDAAE1CEE00040CEE812E1"
+                    },
+                    {
+                        "path":  "main/st7701_commands.inc",
+                        "sha256":  "AF9C061384023D46BA85D9530A96630AE8680776D747ED73E2844DCCCF513B1C",
+                        "stagedSha256":  "AF9C061384023D46BA85D9530A96630AE8680776D747ED73E2844DCCCF513B1C"
+                    }
+                ],
+    "artifactCount":  4,
+    "artifacts":  [
+                      {
+                          "path":  "bootloader.bin",
+                          "stagePath":  "build/bootloader/bootloader.bin",
+                          "flashOffset":  "0x0",
+                          "bytes":  21504,
+                          "sha256":  "F4C5160D0777EBDA11EDAC881853B211300323E5CF8F96EEEDA5314D731D02AB",
+                          "stagedSha256":  "F4C5160D0777EBDA11EDAC881853B211300323E5CF8F96EEEDA5314D731D02AB"
+                      },
+                      {
+                          "path":  "partition-table.bin",
+                          "stagePath":  "build/partition_table/partition-table.bin",
+                          "flashOffset":  "0x8000",
+                          "bytes":  3072,
+                          "sha256":  "7F00B6C042A89B15B0CAC534F82ED988CAF29278FF5700B0C511EB1B5BB7C820",
+                          "stagedSha256":  "7F00B6C042A89B15B0CAC534F82ED988CAF29278FF5700B0C511EB1B5BB7C820"
+                      },
+                      {
+                          "path":  "codex_desk_meter.bin",
+                          "stagePath":  "build/codex_desk_meter.bin",
+                          "flashOffset":  "0x10000",
+                          "bytes":  308992,
+                          "sha256":  "953152B03EAC7E56CD696CCD37C9F1F182E5DC8C378854DE2296BB10121CD0E2",
+                          "stagedSha256":  "953152B03EAC7E56CD696CCD37C9F1F182E5DC8C378854DE2296BB10121CD0E2"
+                      },
+                      {
+                          "path":  "sdkconfig",
+                          "stagePath":  "sdkconfig",
+                          "flashOffset":  null,
+                          "bytes":  70020,
+                          "sha256":  "46788F1C30A51868DA7C66C41DEF9045514FAAF393BC68EC0D6F05DF4DACA452",
+                          "stagedSha256":  "46788F1C30A51868DA7C66C41DEF9045514FAAF393BC68EC0D6F05DF4DACA452"
+                      }
+                  ],
+    "appPartitionBytes":  1048576,
+    "appUsedBytes":  308992,
+    "appFreeBytes":  739584,
+    "settings":  {
+                     "target":  "esp32s3",
+                     "flash":  "16MB",
+                     "psram":  "Octal 8MB at 80MHz",
+                     "psramMalloc":  true,
+                     "console":  "USB Serial/JTAG",
+                     "lcdRgbIsrIramSafe":  false
+                 },
+    "hostTests":  "20/20",
+    "hardware":  "not_run",
+    "liveAccount":  "not_run"
+}

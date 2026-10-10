@@ -1,6 +1,7 @@
 #include "gui.h"
 #include "bsp.h"
 #include <ctype.h>
+#include <math.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -60,8 +61,20 @@ static const char *string(const cJSON *v)
 static const char *or_dash(const char *v) { return v?v:"--"; }
 static bool value_is(const cJSON *v,const char *name,const char *word)
 { const char *s=string(field(v,name)); return s && !strcmp(s,word); }
-static void number(const cJSON *v,char *out,size_t size,const char *unit)
-{ if (cJSON_IsNumber(v)) snprintf(out,size,"%.7g%s",v->valuedouble,unit); else snprintf(out,size,"--"); }
+static int number(const cJSON *v,char *out,size_t size,const char *unit,const char *prefix,int width,int scale)
+{
+    int len;
+    if (cJSON_IsNumber(v) && isfinite(v->valuedouble)) {
+        double value=v->valuedouble;
+        len=value==floor(value)?snprintf(out,size,"%s%.0f%s",prefix,value,unit):width/6+1;
+        if (len<0 || len>width/6 || len>=(int)size)
+            len=snprintf(out,size,"%s%.7g%s",prefix,value,unit);
+    } else len=snprintf(out,size,"%s--",prefix);
+    if (len<0 || len>width/6 || len>=(int)size)
+        len=snprintf(out,size,"%s--",prefix);
+    while (scale>1 && len>width/(6*scale)) scale--;
+    return scale;
+}
 static void time_text(const char *value,char *out,size_t size)
 { snprintf(out,size,"%s",value?value:"--"); }
 static void rule(int x,int y,int w) { bsp_fill(x,y,w,1,RULE); }
@@ -131,12 +144,13 @@ static void quota_card(const cdm_state *state,size_t index,int y,uint64_t now)
     draw_text(18,y,390,2,INK,line);
     snprintf(line,sizeof line,"ID %s  %s%s",or_dash(string(field(w,"window_id"))),or_dash(string(field(w,"unit"))),old?" LAST GOOD":"");
     draw_text(18,y+18,390,1,MUTED,line);
-    number(field(w,"percent_used"),used,sizeof used,"%");
-    if (!strcmp(used,"--")) number(field(w,"used_units"),used,sizeof used,"");
-    number(field(w,"percent_remaining"),remaining,sizeof remaining,"%");
-    if (!strcmp(remaining,"--")) number(field(w,"remaining_units"),remaining,sizeof remaining,"");
-    draw_text(18,y+34,170,3,INK,used);
-    snprintf(line,sizeof line,"USED / REM %s",remaining); draw_text(190,y+39,215,2,INK,line);
+    const cJSON *percent_used=field(w,"percent_used"),*percent_remaining=field(w,"percent_remaining");
+    int used_scale=number(cJSON_IsNumber(percent_used)?percent_used:field(w,"used_units"),used,sizeof used,
+                          cJSON_IsNumber(percent_used)?"%":"","",170,3);
+    int remaining_scale=number(cJSON_IsNumber(percent_remaining)?percent_remaining:field(w,"remaining_units"),
+                               remaining,sizeof remaining,cJSON_IsNumber(percent_remaining)?"%":"","USED / REM ",215,2);
+    draw_text(18,y+34,170,used_scale,INK,used);
+    draw_text(190,y+39,215,remaining_scale,INK,remaining);
     bsp_fill(18,y+63,386,5,RULE);
     const cJSON *percent=field(w,"percent_used");
     if (cJSON_IsNumber(percent)) bsp_fill(18,y+63,(int)(percent->valuedouble*3.86),5,INK);
@@ -148,8 +162,8 @@ static void quota_card(const cdm_state *state,size_t index,int y,uint64_t now)
 }
 static void session_row(int y,const char *label,const cJSON *v,uint16_t color)
 {
-    char value[32]; number(v,value,sizeof value,"");
-    draw_text(440,y,240,2,color,label); draw_text(680,y,125,2,color,value); rule(440,y+18,363);
+    char value[32]; int scale=number(v,value,sizeof value,"","",125,2);
+    draw_text(440,y,240,2,color,label); draw_text(680,y,125,scale,color,value); rule(440,y+18,363);
 }
 static void usage_screen(const cdm_state *state,const gui_control *control,uint64_t now)
 {
@@ -166,8 +180,8 @@ static void usage_screen(const cdm_state *state,const gui_control *control,uint6
     if (!r) { draw_text(440,100,360,3,MUTED,state->has_frame?"NO SESSION":"WAITING"); return; }
     snprintf(line,sizeof line,"%s %u/%u%s",or_dash(string(field(r,"snapshot_id"))),(unsigned)(page%s+1),(unsigned)s,old?" LAST GOOD":"");
     draw_text(440,72,363,1,MUTED,line);
-    char total[32]; number(channel(r,"normalized_total"),total,sizeof total,"");
-    draw_text(440,90,218,2,INK,"TOTAL IN+OUT"); draw_text(643,86,160,3,INK,total);
+    char total[32]; int total_scale=number(channel(r,"normalized_total"),total,sizeof total,"","",160,3);
+    draw_text(440,90,218,2,INK,"TOTAL IN+OUT"); draw_text(643,86,160,total_scale,INK,total);
     session_row(119,"INPUT",channel(r,"input"),INK);
     session_row(144,"OUTPUT",channel(r,"output"),INK);
     session_row(169,"CACHED INPUT*",channel(r,"cached_input"),BLUE);
