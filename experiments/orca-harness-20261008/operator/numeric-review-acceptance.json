@@ -1,0 +1,37 @@
+{
+  "run_id": "run_c968c43361da",
+  "task_id": "task_5b1435a8c3c1",
+  "dispatch_id": "ctx_93b9c8f7189f",
+  "message_id": "msg_79be3c78e790",
+  "delivery_id": "delivery_d12e34a7c772",
+  "outcome": "succeeded",
+  "native_dispatch_status": "completed",
+  "completed_at": "2026-10-10T07:58:31.340Z",
+  "accepted_at": "2026-10-10T08:00:34.133224+00:00",
+  "release_state": "retained",
+  "release_reason": "external_terminal",
+  "release_process_action": "none",
+  "delivery_acknowledged": true,
+  "submission_commit": "460fb49",
+  "coordinator_retest": {
+    "tests": 2,
+    "test_seconds": 21.977,
+    "wall_seconds": 22.087,
+    "exit_code": 0
+  },
+  "files": [
+    {
+      "path": "tests/integration/test_lcd_numeric_readability.py",
+      "sha256": "a90e461647a41ba7d45a4f76f9f48beddfbc349b8851f5724a51cb93dc4b0b20"
+    },
+    {
+      "path": "docs/agent-runs/orca-luna/numeric-readability-review.md",
+      "sha256": "d6f2b519222f6b58cda8578c53420b68749fc0e839746f3b0b1a4db156cca1fe"
+    },
+    {
+      "path": "docs/agent-runs/orca-luna/checkpoint.md",
+      "sha256": "83367aa48a597032046da34197b0a9b9504e5c540a42784bec87c1ae1927eded"
+    }
+  ],
+  "product_pass": false
+}

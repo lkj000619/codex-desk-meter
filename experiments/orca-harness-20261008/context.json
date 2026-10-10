@@ -295,7 +295,7 @@
     },
     "lcd_numeric_review": {
       "task_id": "task_5b1435a8c3c1",
-      "status": "host PASS report created and source/artifact audit complete; authoritative worker_done pending; live CLI still thinking, no exit evidence",
+      "status": "completed; accepted native succeeded msg_79be3c78e790; release/ack recorded",
       "depends_on": "task_2ae3cb0fe949",
       "spec_path": "tasks/lcd-numeric-luna.md",
       "model": "gpt-6-luna",
@@ -306,7 +306,7 @@
       "cli_version": "0.159.2",
       "dispatch_id": "ctx_93b9c8f7189f",
       "source_commit": "7d20952",
-      "observed_at": "2026-10-10T07:47:04.915422+00:00",
+      "observed_at": "2026-10-10T08:00:34.133224+00:00",
       "report_path": "docs/agent-runs/orca-luna/numeric-readability-review.md",
       "actual_check_counts": {
         "firmware": 20,
@@ -317,7 +317,16 @@
       "followup_messages": [
         "msg_8197337d2963",
         "msg_6eacea776a68"
-      ]
+      ],
+      "submission_commit": "460fb49",
+      "accepted_submission_message": "msg_79be3c78e790",
+      "acceptance": "operator/numeric-review-acceptance.json",
+      "coordinator_retest": {
+        "tests": 2,
+        "test_seconds": 21.977,
+        "wall_seconds": 22.087,
+        "exit_code": 0
+      }
     }
   },
   "frozen_input_count": 57,
@@ -360,8 +369,8 @@
     "upload_permitted": false
   },
   "operator_execution": {
-    "updated_at": "2026-10-10T07:47:04.915422+00:00",
-    "phase": "numeric_checks_passed_authoritative_review_completion_pending_keep_live_watch",
+    "updated_at": "2026-10-10T08:00:34.133224+00:00",
+    "phase": "numeric_candidate_host_frozen_upload_pending",
     "host_candidate_commit": "7ccbb24",
     "host_candidate_tag": "orca-harness-20261010-host-candidate",
     "flash_evidence": "operator/flash-host-candidate-20261010.json",
@@ -396,14 +405,16 @@
     "flicker_flash_evidence": "operator/flash-lcd-flicker-20261010.json",
     "flicker_candidate_commit": "8fe1f9ff5f7ce77b0c792be90a16ad153999e6a5",
     "previous_live_watch_terminal": "term_dcac760e-42fa-42f9-afa6-1da904d96d49",
-    "sender_next_sequence_observed": 102,
+    "sender_next_sequence_observed": 115,
     "resume_evidence": "operator/live-watch-resume-20261010.json",
     "post_flicker_observation": "operator/post-flicker-observation-20261010.json",
     "physical_boot_navigation": "User confirmed BOOT; Usage-Global-Status-Usage observed; exact latency/count unmeasured",
     "physical_reset": "User confirms manual RST causing WAITING; not automatic reboot",
-    "numeric_readability": "Prior flashed firmware FAIL; corrected source/build and independent host report PASS, authoritative completion and new upload/physical evidence pending",
+    "numeric_readability": "Independent host PASS accepted; prior flashed firmware numeric FAIL; new candidate physical not_run",
     "numeric_manifest": "operator/firmware-numeric-candidate.json",
-    "sender_state_observed_at": "2026-10-10T07:47:04.915422+00:00"
+    "sender_state_observed_at": "2026-10-10T07:47:04.915422+00:00",
+    "numeric_candidate_tag": "orca-harness-20261010-numeric-candidate",
+    "numeric_review_acceptance": "operator/numeric-review-acceptance.json"
   },
   "consumer_generation": 6
 }

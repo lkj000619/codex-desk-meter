@@ -1,7 +1,7 @@
 {
   "run_id": "run_c968c43361da",
-  "status": "source_build_accepted_independent_host_checks_passed_final_submission_pending",
-  "validated_at": "2026-10-10T07:47:04.915422+00:00",
+  "status": "host_candidate_accepted_and_frozen_upload_pending",
+  "validated_at": "2026-10-10T08:00:34.133224+00:00",
   "firmware_submission_commit": "7d20952",
   "firmware_task": "task_2ae3cb0fe949",
   "firmware_dispatch": "ctx_6fb4838726ea",
@@ -14,8 +14,8 @@
     "seconds": 2.134,
     "result": "PASS"
   },
-  "host_freeze_tag": null,
-  "upload_permitted": false,
+  "host_freeze_tag": "orca-harness-20261010-numeric-candidate",
+  "upload_permitted": true,
   "physical_status": "not_run for this unflashed numeric candidate",
   "product_pass": false,
   "previous_candidate": "operator/firmware-flicker-candidate.json",
@@ -118,13 +118,22 @@
   },
   "pc_source_changed": false,
   "sender_reinitialization_permitted": false,
-  "upload_gate_reason": "Await accepted Luna independent review and a frozen tag; no flash while current COM3 watch owns port.",
+  "upload_gate_reason": "Accepted independent review and coordinator pixel2 retest; upload only frozen tag after sole COM3 watch exits and port is free",
   "independent_host_checks": {
     "numeric_pixels": 2,
     "firmware": 20,
     "presentation": 1,
     "producer_and_selection": 20,
-    "report_status": "written; no authoritative worker_done accepted"
+    "report_status": "accepted authoritative worker_done; scoped host PASS"
   },
-  "independent_report_accepted": false
+  "independent_report_accepted": true,
+  "independent_submission_message": "msg_79be3c78e790",
+  "independent_submission_commit": "460fb49",
+  "independent_acceptance": "operator/numeric-review-acceptance.json",
+  "root_numeric_pixels": {
+    "tests": 2,
+    "test_seconds": 21.977,
+    "wall_seconds": 22.087,
+    "exit_code": 0
+  }
 }

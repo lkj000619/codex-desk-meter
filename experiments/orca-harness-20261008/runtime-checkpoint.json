@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-10T07:45:06.7071711Z",
+    "observed_at":  "2026-10-10T08:00:34.9985070Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -182,9 +182,9 @@
                   {
                       "id":  "task_5b1435a8c3c1",
                       "title":  "Luna LCD numeric readability review",
-                      "status":  "dispatched",
+                      "status":  "completed",
                       "deps":  "[\"task_2ae3cb0fe949\"]",
-                      "completed_at":  null
+                      "completed_at":  "2026-10-10T07:58:31.340Z"
                   }
               ],
     "workers":  [
@@ -192,8 +192,8 @@
                         "task_id":  "task_5b1435a8c3c1",
                         "dispatch_id":  "ctx_93b9c8f7189f",
                         "terminal_handle":  "term_96185057-8182-4dca-9f01-a113c1fc0a10",
-                        "state":  "ready",
-                        "dispatch_status":  "dispatched",
+                        "state":  "succeeded",
+                        "dispatch_status":  "completed",
                         "liveness":  {
                                          "verdict":  "unverifiable",
                                          "reason":  "missing_status"
