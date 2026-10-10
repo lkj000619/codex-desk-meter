@@ -1,0 +1,39 @@
+{
+  "run_id": "run_c968c43361da",
+  "recorded_on": "2026-10-10",
+  "source": {
+    "filename": "KakaoTalk_20261010_085153511.mp4",
+    "sha256": "8f08eb4127e8513a2d3dcb79d8fbd55cef7255abdd0d92cc12d7f3b5524af97e",
+    "bytes": 39187027,
+    "duration_seconds": 97.43,
+    "recording_time": null,
+    "recording_time_rule": "Filename and transfer mtime are not authoritative capture timestamps. User attributes footage to the previous upload; relative yesterday wording is preserved without inventing an absolute date."
+  },
+  "candidate": {
+    "tag": "orca-harness-20261010-lcd-flicker-candidate",
+    "commit": "8fe1f9f",
+    "app_sha256": "953782e5486adbe9743e5b753e716892cfdfbeef25d23b1702dc1d6050078f1f",
+    "flash_evidence": "operator/flash-lcd-flicker-20261010.json",
+    "attribution": "User confirms prior upload; displayed ORIGINAL OBS 2026-10-09T23:49:35.464Z is consistent with the prior live watch. Not footage of the 15:52 watch recovery; that recovery performed no flash."
+  },
+  "user_confirmation": {
+    "verbatim": "어제 업로드 한 결과임. waiting의 경우 reset 버튼을 눌렸음. 화면 전환 때 누른 버튼이  boot 맞고",
+    "waiting_caused_by_manual_reset": true,
+    "screen_navigation_button": "BOOT",
+    "exact_press_count_and_duration": null
+  },
+  "observations": [
+    {"interval_seconds": [0, 62], "finding": "Readable landscape Usage, Global and Status pages; data remains visible across sampled frames before manual RST. No prior white partial-clear pattern seen in the inspected samples.", "scope": "Sampled stills and contact sheets, not exhaustive full-frame flicker analysis."},
+    {"interval_seconds": [8, 14], "finding": "Usage to Global(DEFAULT / NO CACHE) to Status to Usage navigation; button attribution confirmed as BOOT.", "verdict": "observed", "physical_latency_ms": null},
+    {"at_seconds": 10, "finding": "Status USB CONNECTED, FRAME / CRC VALID, chip temperature 36.5 C, receive age16s/source age19s, original observation timestamp visible.", "sensor_accuracy_verified": false},
+    {"interval_seconds": [0, 60], "finding": "5h quota used97%/remaining3% changes to used98%/remaining2%; 168h quota used78%/remaining22%. Token row values also update.", "accepted_frame_to_LCD_latency_ms": null},
+    {"at_seconds": 60, "finding": "TOTAL IN+OUT displays 3.142388 without the exponent; INPUT, CACHED INPUT and SOURCE TOTAL lose final exponent digits.", "verdict": "FAIL_numeric_readability", "cause": "%.7g strings exceed draw_text character limits: TOTAL160px/scale3 permits8 characters, rows125px/scale2 permit10."},
+    {"interval_seconds": [63, 70], "finding": "Black/exposure transition followed by WAITING / NO CACHE. User confirms manual RESET.", "verdict": "manual_reset_not_automatic_reboot"}
+  ],
+  "flicker_verdict": "sampled_improvement_observed_user_direct_confirmation_pending",
+  "long_press_pagination": "not_verified_physically; two quota windows and one session occupy one Usage page, so unchanged display on long BOOT is not a failure",
+  "local_visual_evidence": "artifacts/orca-harness-runtime/post-flicker-video-20261010/ (Git-ignored; images can contain real source identifiers)",
+  "unmeasured": ["exhaustive video-frame flicker", "physical BOOT300ms latency", "accepted frame2s display latency", "multi-page long-BOOT navigation", "link loss/recovery with independent power", "temperature calibration", "24h endurance"],
+  "product_pass": false,
+  "next_owner": "Codex Sol firmware numeric rendering; Codex Luna independent regression review"
+}

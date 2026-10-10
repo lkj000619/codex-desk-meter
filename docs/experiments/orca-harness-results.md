@@ -1,5 +1,9 @@
 # Orca 역할 협업 실험 결과
 
+2026-10-10 수정본 실물 관측 추가: [97.43초 영상](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json)에서 BOOT 화면 순환·수치 갱신·FRAME/CRC VALID를 확인했다. 약63~70초의 검은 화면→WAITING은 사용자가 직접 RST를 누른 결과이며 자동 재부팅 실패로 판정하지 않는다. 파일명/전송 mtime로 촬영 일시를 확정하지 않고 ‘어제 업로드 한 결과’라는 사용자 귀속을 보존했다. 검사한 샘플에서는 이전 흰색 부분 지워짐이 없고 반복 점멸 소멸은 직접 확인 대기다. TOTAL의 `3.142388` 및 각 행의 지수부 잘림은 가독성 FAIL로 기록했다. [별도 숫자 보완](../plans/2026-10-10-lcd-numeric-readability.md)을 진행하며 300ms/2초 지연·긴 BOOT 다중 페이지·센서 검교정·24시간은 미측정, `product_pass=false`다. 아래 기존 판정은 당시 원본이다.
+
+2026-10-10 15:52 KST 재개: Run generation6에서 기존 Task24개 completed·cleanup 미결0개와 source/artifact/입력 hash를 확인했다. Orca 재시작으로 종료된 PC watch는 사용자 USB 재연결 뒤 **같은 세션·state의 seq46부터 60초 갱신을 복구**했다. [live 복구](../../experiments/orca-harness-20261008/operator/live-watch-resume-20261010.json). 이번 재개에 새 firmware 업로드·리셋·소스 변경은 없으며 **수정 후 실물 점멸/CRC/BOOT/30초 관측은 여전히 대기**다. `product_pass=false`; 아래는 단계별 당시 검증과 관측이다.
+
 2026-10-10 08:49 KST: **LCD 점멸 수정·독립 host 검증·COM3 재업로드·live 재개 완료, 수정 후 실물 관측 대기**. 표시 중 버퍼를 직접 지우는 경로를 수정했고, 60초 watch는 같은 세션과 sender 순번을 이어간다. `product_pass=false`이며 무점멸·BOOT 조작·30초 유지·반영 지연·센서 타당성·24시간 안정성은 아직 합격하지 않았다.
 
 수정본 독립 **firmware19/19·producer/선택21/21·표시1/1 PASS**를 수락·release/ack하고 새 tag **`orca-harness-20261010-lcd-flicker-candidate` (`8fe1f9f`)**에 동결했다. 08:48 COM3에서 실제 ESP32-S3와 세 이미지 쓰기 hash 검증을 확인했으며 app은 `953782e5486adbe9743e5b753e716892cfdfbeef25d23b1702dc1d6050078f1f`다. 기존 watch가 정상 종료된 뒤 새 terminal `term_dcac760e-42fa-42f9-afa6-1da904d96d49`에서 **seq40** 전송을 확인했다. [독립 보고](../agent-runs/orca-luna/lcd-flicker-review.md), [수정본 업로드](../../experiments/orca-harness-20261008/operator/flash-lcd-flicker-20261010.json), [live 재개](../../experiments/orca-harness-20261008/operator/live-watch-lcd-flicker-20261010.json). HOST WRITE와 수정 후 실물 CRC·무점멸을 구분하며 새 관측을 요청했다. 아래는 단계별 당시 근거다.

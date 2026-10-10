@@ -1,5 +1,9 @@
 # LCD 주기적 점멸 보완
 
+2026-10-10 수정본 영상 추가: [영상/사용자 응답](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json)에서 실물 BOOT 순환·수치 갱신·CRC VALID를 확인했다. 약63초 뒤 WAITING은 직접 RST에 따른 것이며 자동 재부팅 실패가 아니다. 검사한 샘플에는 이전 흰색 부분 지워짐이 없으나 반복 점멸 소멸은 직접 관측 답변 대기다. 긴 숫자 잘림은 [별도 보완](2026-10-10-lcd-numeric-readability.md)으로 연결한다. 아래 08:49/15:52의 대기는 당시 상태다.
+
+2026-10-10 15:52 KST 재개: 기존 수정·검증·08:48 업로드는 보존했다. source15/artifact4/입력57 hash·Task24개 완료를 확인했고, 사용자의 COM3 연결 뒤 같은 state/세션의 seq46부터 60초 watch를 복구했다. [복구 기록](../../experiments/orca-harness-20261008/operator/live-watch-resume-20261010.json). 새 flash/reset/init는 하지 않았다. 남은 사용자 점멸/30초·CRC·BOOT 관측을 다시 요청했다.
+
 목표: 사용자 08:13 실데이터 영상에서 관측된 반복적인 화면 지워짐/점멸을 없애고, 선택 B·데이터 의미·BOOT 탐색·stale 갱신을 보존한다. 원래 host 후보 `7ccbb24`와 초기 관측은 보존한다. 별도 새 비교 실험을 시작하지 않는다.
 
 | 작업 | 상태 | 완료 조건 |

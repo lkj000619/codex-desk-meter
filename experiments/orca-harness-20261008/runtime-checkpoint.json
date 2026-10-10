@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-09T23:51:05.7321388Z",
+    "observed_at":  "2026-10-10T07:07:19.4266662Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -181,9 +181,8 @@
                         "state":  "succeeded",
                         "dispatch_status":  "completed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791589638341,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
@@ -201,9 +200,8 @@
                         "state":  "succeeded",
                         "dispatch_status":  "completed",
                         "liveness":  {
-                                         "verdict":  "live",
-                                         "observedAt":  1791588726848,
-                                         "source":  "agent_status"
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",
@@ -222,8 +220,7 @@
                         "dispatch_status":  "completed",
                         "liveness":  {
                                          "verdict":  "unverifiable",
-                                         "reason":  "stale_status",
-                                         "observedAt":  1791586111409
+                                         "reason":  "missing_status"
                                      },
                         "next_action":  {
                                             "kind":  "none",

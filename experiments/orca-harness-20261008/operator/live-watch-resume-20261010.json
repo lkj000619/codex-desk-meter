@@ -1,0 +1,36 @@
+{
+  "observed_at": "2026-10-10T06:52:23.425878+00:00",
+  "runtime_id": "71e5f917-8c7c-489a-baee-cac92ec7ec60",
+  "run_id": "run_c968c43361da",
+  "terminal_handle": "term_5ef7b2be-8121-4f9b-be51-bbaadae18bfa",
+  "port": "COM3",
+  "interval_seconds": 60,
+  "resume_sequence": 46,
+  "next_sequence_observed": 47,
+  "safe_terminal_evidence": [
+    "Starting watch loop (interval: 60s). Press Enter for manual refresh, Ctrl+C to exit.",
+    "[2026-10-10T06:51:58.558310+00:00] Port COM3 opened successfully.",
+    "[2026-10-10T06:52:00.290019Z] Iteration 1 [AUTO] [HOST WRITE] seq=46, size=2844B"
+  ],
+  "watch_process_chain": [
+    {
+      "ProcessId": 5912,
+      "ParentProcessId": 36544,
+      "Name": "python.exe"
+    },
+    {
+      "ProcessId": 21424,
+      "ParentProcessId": 5912,
+      "Name": "python.exe"
+    }
+  ],
+  "state_file": "artifacts/orca-harness-runtime/sender-state.json",
+  "lock_dir": "artifacts/orca-harness-runtime/locks",
+  "selected_session": "same pinned selection, file exists; path local only",
+  "state_reinitialized": false,
+  "flash_or_reset_performed": false,
+  "last_recorded_firmware_tag": "orca-harness-20261010-lcd-flicker-candidate",
+  "last_recorded_flash": "operator/flash-lcd-flicker-20261010.json",
+  "device_ack": "host write only; current LCD CRC/flicker/BOOT observation required",
+  "product_pass": false
+}

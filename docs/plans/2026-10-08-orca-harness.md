@@ -1,5 +1,9 @@
 # Orca 협업 구현 계획
 
+2026-10-10 후속 관측: 이전 업로드·BOOT 화면 전환·수동 RST 사실을 사용자 응답과 영상으로 기록했다. [관측](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json)의 수치 갱신/CRC VALID는 확인, 반복 점멸 직접 확인 대기, 긴 토큰 숫자 잘림 FAIL이다。 [숫자 보완 계획](2026-10-10-lcd-numeric-readability.md)에 따라 같은 역할의 새 Task를 진행한다. 아래 완료는 당시 host/업로드 범위이며 전체 제품 합격은 아니다.
+
+2026-10-10 15:52 KST 재개: 기존 Run generation6 연결, 입력57/source15/artifact4 hash 및 Task24개 completed 확인. PC watch는 Orca 재시작으로 종료돼 있었으며 사용자 COM3 재연결 후 같은 세션/state seq46부터 복구했다. [최신 재개 기록](../experiments/orca-harness-resume.md). 구현/검증/동결/업로드 완료는 보존하고, 수정 후 실물 점멸·CRC·BOOT·30초 관측을 이어간다.
+
 2026-10-10 08:49 KST 추가: 점멸 표시 수정 `9bbe333`·Luna 독립 PASS를 새 tag `orca-harness-20261010-lcd-flicker-candidate` (`8fe1f9f`)로 동결하고 **08:48 COM3 재업로드·쓰기 검증 완료**. 같은 세션/state의 watch를 seq40부터 재개했다. [점멸 보완 계획](2026-10-10-lcd-flicker.md)의 코드/검증/업로드는 완료, 수정 후 사용자 무점멸·CRC·BOOT·30초 관측은 대기다. 기존 최초 host/관측은 보존하며 `product_pass=false`다.
 
 2026-10-10 08:20 KST 추가: 사용자 후속 영상에서 실데이터와 FRAME/CRC VALID 확인. 반복 점멸은 보완 필요하여 [별도 점멸 계획](2026-10-10-lcd-flicker.md)과 기존 Sol 모델의 후속 Task를 시작했다. 아래 host 완료는 보존하고 실물 제품 PASS는 선언하지 않는다.

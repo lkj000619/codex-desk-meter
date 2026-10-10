@@ -1,5 +1,9 @@
 # 현재 준비 상태 — 별도 Orca 협업 실험
 
+2026-10-10 후속 영상 확인: 사용자가 **이전 업로드 영상·BOOT 화면 전환·직접 RST에 따른 WAITING**임을 확인했다. 실물 Usage→Global→Status→Usage, 수치 갱신과 FRAME/CRC VALID를 기록했다. 검사한 영상 샘플에서 이전 흰색 부분 지워짐은 보이지 않지만 반복 점멸 소멸은 직접 관측 답변을 기다린다. **긴 토큰 지수부 잘림은 실제 결함**이므로 [숫자 보완 계획](../plans/2026-10-10-lcd-numeric-readability.md)에 따라 Sol 수정→Luna 독립 검증을 진행한다. [영상 근거](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json). 현 보드는 기존 점멸 수정본, sole COM3 watch/state/세션은 유지하며 새 숫자 후보 검증 전 덮어쓰지 않는다. `product_pass=false`. 아래는 날짜별 당시 상태다.
+
+2026-10-10 15:52 KST 최신 재개: **기존 Run generation6 연결·동결 source15/artifact4/입력57 hash 확인·PC watch 복구 완료**. Task24개 모두 completed, cleanup 미결0개다. USB 미연결을 확인해 사용자에게 요청했고, ‘com3 꽂았어’ 응답 뒤 COM3 VID303A/PID1001에서 같은 세션/state의 **seq46/2844B** 전송을 확인했다. 현재 terminal은 `term_5ef7b2be-8121-4f9b-be51-bbaadae18bfa`, 60초 갱신이다. 마지막 업로드는 08:48 점멸 수정본이며 이번 재개에 새 flash/reset/init를 수행하지 않았다. **수정 후 30초 무점멸/CRC/BOOT 관측 대기, 제품 전체 PASS 미확정**. [복구 근거](../../experiments/orca-harness-20261008/operator/live-watch-resume-20261010.json) · [최신 재개](orca-harness-resume.md). 아래는 당시 상태다.
+
 2026-10-10 08:49 KST 최신 상태: **점멸 수정·독립 host PASS·COM3 재업로드·같은 세션 live 재개 완료**. 수정 `9bbe333`, 새 tag `orca-harness-20261010-lcd-flicker-candidate` (`8fe1f9f`), firmware19/19·관련 통합21/21·독립 표시1/1 통과. 08:48 업로드의 세 이미지 쓰기 hash 검증 후 같은 sender state로 seq40부터 60초 watch를 재개했다. 현재 watch는 `term_dcac760e-42fa-42f9-afa6-1da904d96d49`다. **수정 후 무점멸/30초·CRC·BOOT 실물 관측 대기**, 긴 토큰 지수부 잘림 별도 미해결, `product_pass=false`. [결과](orca-harness-results.md) · [최신 재개 절차](orca-harness-resume.md). 아래는 각 날짜 당시 상태다.
 
 2026-10-10 08:20 KST 최신 상태: 새 영상에서 실제 숫자와 FRAME/CRC **VALID** 확인. 반복적인 LCD 점멸은 보완 필요이며 Sol `task_63d11f3c24cb` / `ctx_2363ff345723`가 같은 Run에서 원인 재현·firmware 수정을 진행한다. PC watch의 60초 실데이터 전송은 유지한다. 새 업로드 gate는 수정/build·Luna 검증 이후 열며 기존 sender state/순번을 보존한다. **무점멸/30초·제품 전체 PASS는 아직 아니다.** [점멸 계획](../plans/2026-10-10-lcd-flicker.md) · [재개](orca-harness-resume.md). 아래는 당시 상태다.

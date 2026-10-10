@@ -1,5 +1,7 @@
 # 세션 중단 후 재개
 
+2026-10-10 최신 후속: 이전 업로드 영상의 **수동 RST→WAITING, BOOT 탐색, 실제 값 갱신·CRC VALID**를 [비식별 관측](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json)에 기록했다. 반복 점멸 직접 확인 답변은 대기하고, [긴 숫자 보완 계획](../plans/2026-10-10-lcd-numeric-readability.md)에 따라 같은 Run에서 Sol→Luna 후속을 진행한다. **이후 새 Task 상태는 context/native에서 확인하며 아래 Task24 완료를 최신으로 간주하지 않는다.** COM3 sole watch는 `term_5ef7b2be-8121-4f9b-be51-bbaadae18bfa`, 선택/state/순번은 계속 유지한다. 새 숫자 후보가 검증되기 전 재업로드하지 않는다.
+
 사용자 요청으로 2026-10-08 작성. 토큰 세션 만료가 발생해도 같은 실험을 중복 실행하지 않고
 남은 작업을 이어간다. 문서 보존은 진행 상황 복구이며 실행 프로세스를 자동 재시작하는 기능은 아니다.
 
@@ -60,7 +62,15 @@ inbox Delivery의 모든 메시지·질문·소유권 조치를 처리한 후에
   auth/token/cookie/Dispatch capability는 Git에 넣지 않는다. 미커밋 source도 삭제하지 않는다.
 - Orca reset·전체 flash 삭제·worktree 삭제는 재개 절차에 포함하지 않는다.
 
-## 2026-10-10 08:49 KST 최신 체크포인트 — 수정본 업로드·실물 관측 대기
+## 2026-10-10 15:52 KST 최신 체크포인트 — 세션 재개·live 복구 완료
+
+- 사용자 5시간 세션 초기화 후 같은 Run을 일반 `run-use`로 다시 연결했다. Run은 `legacy=0`, coordinator **`term_8a2c4168-881a-4124-a045-95ee3cce79ef`**, generation **6**, runtime **`71e5f917-8c7c-489a-baee-cac92ec7ec60`**다. `--takeover-legacy`는 이 일반 Run에 적용되지 않아 인자 오류로 거부됐고, 해당 옵션을 제거한 정상 연결은 수락됐다. 새 Run/중복 worker를 만들지 않았다.
+- **Task24개 모두 completed, cleanup 결정이 필요한 worker0개**. 점멸 수정·독립 검증의 성공 원본, tag `orca-harness-20261010-lcd-flicker-candidate` / `8fe1f9f`, app `953782e5…`와 source15개·artifact4개·입력57개 hash를 재확인했다. 새 구현/재빌드/업로드/리셋은 하지 않았다. 기존 검증의 PASS는 당시 근거이며 수정 후 실물 무점멸은 아직 미확인이다.
+- Orca 재시작 뒤 예전 watch terminal과 실제 `pc.cli watch` 프로세스가 없었다. 첫 열거에는 COM1만 있어 사용자에게 연결을 요청했다. 사용자의 **‘com3 꽂았어’** 응답 뒤 실제 COM3 VID303A/PID1001을 확인하고 watch를 재개했다. [초기 복구 관측](../../experiments/orca-harness-20261008/operator/resume-connection-gate-20261010.json)은 연결 전 당시 근거로 보존한다.
+- **현재 PC watch terminal `term_5ef7b2be-8121-4f9b-be51-bbaadae18bfa`**, 15:52:00 KST **seq46/2844B HOST WRITE** 확인, 60초 갱신. Python launcher5912→interpreter21424는 한 sender의 부모/자식이며 현재 실행은 다시 조회한다. [실행 복구 기록](../../experiments/orca-harness-20261008/operator/live-watch-resume-20261010.json). `sender-state.json`와 `locks/`, `selected-session.json`의 명시적 선택을 보존했다. state 재생성·순번 되돌리기·새 latest 선택을 하지 않았다.
+- **다음 작업은 사용자 실물 관측**: RESET 없이 30초 점멸/숫자/Status FRAME·CRC, BOOT 짧게3회 및 Usage600ms 유지. 요청을 다시 전달했다. 관측 전 다른 펌웨어를 덮어쓰거나 두 번째 COM writer를 열지 않는다. 관측 영상/응답을 기록하고 실제 결함이 남으면 기존 담당 모델의 새 Task로 연결한다. 긴 토큰 지수부 잘림·지연·단절/복구·센서 타당성·24시간은 미해결/미측정이며 `product_pass=false`.
+
+## 2026-10-10 08:49 KST 당시 체크포인트 — 수정본 업로드·실물 관측 대기
 
 - Sol 수정 `9bbe333`과 Luna 성공 제출 `msg_999781af4044`를 수락·release/ack했다. 독립 firmware19/19·producer/선택21/21·표시1/1 PASS, coordinator도 새 표시 검사1/1(1.115초)을 확인했다. [독립 보고](../agent-runs/orca-luna/lcd-flicker-review.md). 새 동결 tag **`orca-harness-20261010-lcd-flicker-candidate` / `8fe1f9f`**이며 원래 tag7ccbb24는 보존했다.
 - **08:48:09–08:48:17 KST COM3 업로드 완료**, 실제 ESP32-S3 rev0.2·세 이미지 쓰기 hash 검증 통과. 새 app **`953782e5486adbe9743e5b753e716892cfdfbeef25d23b1702dc1d6050078f1f`**. [새 후보](../../experiments/orca-harness-20261008/operator/firmware-flicker-candidate.json), [업로드 기록](../../experiments/orca-harness-20261008/operator/flash-lcd-flicker-20261010.json). 수정 후 실물 점멸/CRC/BOOT는 아직 미확인이다.

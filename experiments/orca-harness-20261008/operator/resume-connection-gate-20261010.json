@@ -1,0 +1,32 @@
+{
+  "observed_at": "2026-10-10T06:51:21.189878+00:00",
+  "runtime_id": "71e5f917-8c7c-489a-baee-cac92ec7ec60",
+  "coordinator_handle": "term_8a2c4168-881a-4124-a045-95ee3cce79ef",
+  "run_id": "run_c968c43361da",
+  "consumer_generation": 6,
+  "completed_tasks": 24,
+  "unsettled_tasks": 0,
+  "reclaimable_workers": 0,
+  "frozen_input_hashes_verified": 57,
+  "firmware_source_hashes_verified": 15,
+  "artifact_hashes_verified": 4,
+  "preserved_firmware_tag": "orca-harness-20261010-lcd-flicker-candidate",
+  "preserved_firmware_commit": "8fe1f9ff5f7ce77b0c792be90a16ad153999e6a5",
+  "preserved_state_next_sequence": 46,
+  "pinned_selection_exists": true,
+  "raw_session_or_auth_copied": false,
+  "watch_processes_observed": 0,
+  "watch_terminals_observed": 0,
+  "ports": [
+    {
+      "device": "COM1",
+      "vid": null,
+      "pid": null
+    }
+  ],
+  "esp32_usb_port": null,
+  "flash_or_reset_performed": false,
+  "sender_reinitialized": false,
+  "gate": "await user ESP32 USB connection before starting sole watch; then request corrected LCD observation",
+  "product_pass": false
+}

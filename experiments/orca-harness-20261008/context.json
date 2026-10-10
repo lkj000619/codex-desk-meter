@@ -2,8 +2,8 @@
   "cohort": "orca-harness-20261008",
   "run_id": "run_c968c43361da",
   "coordinator_handle": "term_c1752a58-5861-435e-ab3a-c99caaa61b14",
-  "resumed_coordinator_handle": "term_9fb88ac7-32b2-43f6-8ba2-c203ed6531bf",
-  "resumed_runtime_id": "4f9b9ae1-762e-456d-b06a-8c1a5039841c",
+  "resumed_coordinator_handle": "term_8a2c4168-881a-4124-a045-95ee3cce79ef",
+  "resumed_runtime_id": "71e5f917-8c7c-489a-baee-cac92ec7ec60",
   "worktree_id": "ce5556c0-b87c-4c5f-9bac-6e1fa3f0faf2::C:/Users/이광진/orca/workspaces/codex-desk-meter/experiment-orca-harness-20261008",
   "branch": "lkj000619/experiment-orca-harness-20261008",
   "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
@@ -300,6 +300,11 @@
       "runtime_id": "b85e3007-613f-450b-ab06-8a60f76fa6e5",
       "coordinator_handle": "term_54a83fa0-c831-41b9-8295-ca84d361c828",
       "reason": "5h session reset and runtime restart; generation5 takeover 2026-10-10 07:37 KST"
+    },
+    {
+      "runtime_id": "4f9b9ae1-762e-456d-b06a-8c1a5039841c",
+      "coordinator_handle": "term_9fb88ac7-32b2-43f6-8ba2-c203ed6531bf",
+      "reason": "User 5h reset; Orca runtime restarted; generation6 rebound 2026-10-10; preserve completed tasks and frozen firmware"
     }
   ],
   "operator_preflight": {
@@ -307,13 +312,13 @@
     "esp32_usb_port": "COM3",
     "vid": "303A",
     "pid": "1001",
-    "scope": "Original candidate real LCD/CRC confirmed; new presentation correction frozen source; independent review pending before new upload",
+    "scope": "Resume source15/artifact4/frozen57 verified; ESP32 USB COM3 VID303A/PID1001 present; sole watch resumed seq46; no reflash/reset",
     "firmware_manifest_hashes_verified": 19,
     "upload_permitted": false
   },
   "operator_execution": {
-    "updated_at": "2026-10-09T23:48:56.173419+00:00",
-    "phase": "LCD_correction_uploaded_live_watch_resumed_physical_flicker_observation_pending",
+    "updated_at": "2026-10-10T07:07:18.056278+00:00",
+    "phase": "post_flicker_video_recorded_numeric_correction_preparing",
     "host_candidate_commit": "7ccbb24",
     "host_candidate_tag": "orca-harness-20261010-host-candidate",
     "flash_evidence": "operator/flash-host-candidate-20261010.json",
@@ -325,28 +330,36 @@
     "fixture_host_write_evidence": "operator/fixture-send-20261010.json",
     "live_collection_evidence": "operator/live-collection-metadata-20261010.json",
     "live_host_write_evidence": "operator/live-send-20261010.json",
-    "live_watch_evidence": "operator/live-watch-lcd-flicker-20261010.json",
-    "live_watch_terminal": "term_dcac760e-42fa-42f9-afa6-1da904d96d49",
+    "live_watch_evidence": "operator/live-watch-resume-20261010.json",
+    "live_watch_terminal": "term_5ef7b2be-8121-4f9b-be51-bbaadae18bfa",
     "live_watch_interval_seconds": 60,
     "resume_selection_record": "artifacts/orca-harness-runtime/selected-session.json (Git ignored; keep exact selection)",
-    "port_owner": "single resumed live-watch program",
+    "port_owner": "single resumed live-watch program on COM3",
     "device_ack": "no wireACK; LCD FRAME/CRC VALID physically confirmed for at least one live frame",
     "product_pass": false,
     "pending": [
-      "corrected physical no-flicker30s",
-      "BOOT short3 and hold600ms navigation",
-      "long token exponent clipping separate finding",
+      "direct repeated-flicker confirmation",
+      "numeric readability correction",
+      "physical multi-page long BOOT",
       "physical reaction latency",
       "error/link recovery on hardware",
       "sensor calibration/plausibility",
       "24h endurance"
     ],
     "post_data_video_evidence": "operator/post-data-video-20261010/observation.json",
-    "lcd_stability": "correction host PASS; corrected physical stability not_run",
-    "live_watch_status": "successful seq40 write; single writer resumed same state/selection",
+    "lcd_stability": "No previous white partial-clear seen in inspected samples; direct repeated-flicker confirmation pending",
+    "live_watch_status": "sole PC watch resumed seq46; HOST WRITE observed; sender state and selection unchanged",
     "flicker_candidate_tag": "orca-harness-20261010-lcd-flicker-candidate",
     "flicker_manifest": "operator/firmware-flicker-candidate.json",
     "flicker_flash_evidence": "operator/flash-lcd-flicker-20261010.json",
-    "flicker_candidate_commit": "8fe1f9ff5f7ce77b0c792be90a16ad153999e6a5"
-  }
+    "flicker_candidate_commit": "8fe1f9ff5f7ce77b0c792be90a16ad153999e6a5",
+    "previous_live_watch_terminal": "term_dcac760e-42fa-42f9-afa6-1da904d96d49",
+    "sender_next_sequence_observed": 47,
+    "resume_evidence": "operator/live-watch-resume-20261010.json",
+    "post_flicker_observation": "operator/post-flicker-observation-20261010.json",
+    "physical_boot_navigation": "User confirmed BOOT; Usage-Global-Status-Usage observed; exact latency/count unmeasured",
+    "physical_reset": "User confirms manual RST causing WAITING; not automatic reboot",
+    "numeric_readability": "FAIL: total/row exponent truncated; new Sol then Luna task planned"
+  },
+  "consumer_generation": 6
 }

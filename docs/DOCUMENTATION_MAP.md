@@ -25,6 +25,8 @@
 | 실물 반복 점멸의 원인 재현·firmware 보완·재검증 | [점멸 보완 계획](plans/2026-10-10-lcd-flicker.md) |
 | 점멸 수정의 독립 host 판정·SDK 경계·실물 한계 | [독립 표시 검증](agent-runs/orca-luna/lcd-flicker-review.md) |
 | 현재 점멸 수정 binary/hash·업로드 gate | [수정 후보](../experiments/orca-harness-20261008/operator/firmware-flicker-candidate.json) |
+| 점멸 수정본 실물 영상·BOOT/수동 RESET·숫자 잘림 | [후속 관측](../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json) |
+| 토큰·사용한도 숫자 잘림 보완과 후속 검증 | [숫자 표시 계획](plans/2026-10-10-lcd-numeric-readability.md) |
 
 `docs/PRODUCT_CONTRACT.md`와 57개 원본 입력은 수정하지 않는다. 이번 실험의 live 수집과
 협업 실행 변경은 협업 설계가 소유한다. 구현 보고서와 검증 보고서는 각각 실제 역할 작업에
