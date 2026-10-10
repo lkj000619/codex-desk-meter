@@ -1,5 +1,7 @@
 # LCD 주기적 점멸 보완
 
+2026-10-10 최종 직접 확인: 사용자가 **‘반복 점멸이 사라짐’**이라고 답했다. 영상 샘플·이 응답·BOOT/수동 RST 사실을 근거로 기존 반복 점멸 개선을 실물 확인했다. 아래 ‘직접 확인 대기’는 응답 전 기록이다. 긴 숫자 결함 및 다른 제품 미측정 조건은 별도로 유지하며 전체 제품 PASS는 아니다.
+
 2026-10-10 수정본 영상 추가: [영상/사용자 응답](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json)에서 실물 BOOT 순환·수치 갱신·CRC VALID를 확인했다. 약63초 뒤 WAITING은 직접 RST에 따른 것이며 자동 재부팅 실패가 아니다. 검사한 샘플에는 이전 흰색 부분 지워짐이 없으나 반복 점멸 소멸은 직접 관측 답변 대기다. 긴 숫자 잘림은 [별도 보완](2026-10-10-lcd-numeric-readability.md)으로 연결한다. 아래 08:49/15:52의 대기는 당시 상태다.
 
 2026-10-10 15:52 KST 재개: 기존 수정·검증·08:48 업로드는 보존했다. source15/artifact4/입력57 hash·Task24개 완료를 확인했고, 사용자의 COM3 연결 뒤 같은 state/세션의 seq46부터 60초 watch를 복구했다. [복구 기록](../../experiments/orca-harness-20261008/operator/live-watch-resume-20261010.json). 새 flash/reset/init는 하지 않았다. 남은 사용자 점멸/30초·CRC·BOOT 관측을 다시 요청했다.
@@ -13,7 +15,7 @@
 | 실제 host 검사·ESP-IDF build | 완료 | 원래 코드의 의도된 재현 실패, 수정 firmware19/19·선택 세션1/1, SDK build·source15/15·artifact4 hash 일치 |
 | Luna 독립 표시 경로 검증 | 완료 | `msg_999781af4044` PASS: firmware19/19·producer/선택21/21·독립 표시1/1, SDK/source/artifact 확인; release/ack 완료 |
 | coordinator 동결·재업로드·live 재개 | 완료 | tag `orca-harness-20261010-lcd-flicker-candidate` / `8fe1f9f`; 08:48 COM3 세 이미지 쓰기 hash 통과, 기존 writer 종료 후 같은 state/세션 seq40부터 watch 재개 |
-| 사용자 점멸/30초 관측 | 대기 | RESET 없이 표시 유지, 데이터·CRC·BOOT 탐색, 점멸 개선 실물 확인 |
+| 사용자 점멸/30초 관측 | 범위 내 완료 | 영상의 RST 이전 구간에서 표시·데이터/CRC·BOOT 관측, 사용자 반복 점멸 소멸 직접 확인. 계측/전 프레임 분석은 미실행 |
 
 2026-10-10 08:49 KST: [독립 검증](../agent-runs/orca-luna/lcd-flicker-review.md), [업로드](../../experiments/orca-harness-20261008/operator/flash-lcd-flicker-20261010.json), [live 재개](../../experiments/orca-harness-20261008/operator/live-watch-lcd-flicker-20261010.json)를 보존했다. 사용자에게 수정 후 관측을 요청했다. 긴 토큰 지수부 잘림은 이번 표시 교체 수정과 별도이며 미해결이다.
 

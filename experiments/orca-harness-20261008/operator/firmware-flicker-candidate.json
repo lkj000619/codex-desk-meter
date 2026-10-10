@@ -7,7 +7,7 @@
   "host_firmware_tests": 19,
   "host_freeze_tag": "orca-harness-20261010-lcd-flicker-candidate",
   "independent_message": "msg_999781af4044",
-  "physical_status": "BOOT navigation/live update/CRC VALID observed; manual RST confirmed; direct no-flicker confirmation pending; numeric clipping FAIL",
+  "physical_status": "Direct user confirmation: repeated flicker disappeared; BOOT navigation/live update/CRC VALID observed; manual RST confirmed; numeric clipping separate FAIL",
   "product_pass": false,
   "previous_candidate": "operator/firmware-candidate.json",
   "root_regression": "operator/lcd-flicker-root-regression-20261010.json",
@@ -125,5 +125,6 @@
   },
   "flash_evidence": "operator/flash-lcd-flicker-20261010.json",
   "live_watch_evidence": "operator/live-watch-resume-20261010.json",
-  "physical_observation": "operator/post-flicker-observation-20261010.json"
+  "physical_observation": "operator/post-flicker-observation-20261010.json",
+  "flicker_physical_verdict": "PASS_scoped_direct_user_observation"
 }

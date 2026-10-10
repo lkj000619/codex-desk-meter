@@ -275,6 +275,26 @@
       "spec_path": "tasks/lcd-flicker-luna.md",
       "guidance": "msg_4ffd0a1970ea",
       "report_path": "docs/agent-runs/orca-luna/lcd-flicker-review.md"
+    },
+    "lcd_numeric_correction": {
+      "task_id": "task_2ae3cb0fe949",
+      "dispatch_id": "ctx_6fb4838726ea",
+      "terminal": "term_c11b9d1c-4c32-4a5c-ac0d-1c4814fd426d",
+      "model": "gpt-6-sol",
+      "cli_version": "0.159.2",
+      "model_evidence": "actual CIM argv, TUI GPT-6-Sol xhigh and YOLO mode; native reused-terminal model fields null",
+      "auto_approval_flag_verified": "--dangerously-bypass-approvals-and-sandbox",
+      "spec_path": "tasks/lcd-numeric-sol.md",
+      "status": "working confirmed by actual CLI response/tool reads after single bare Enter; native fleet missing_status remains unverifiable",
+      "started_at": "2026-10-10T07:08:42.814539+00:00"
+    },
+    "lcd_numeric_review": {
+      "task_id": "task_5b1435a8c3c1",
+      "status": "pending",
+      "depends_on": "task_2ae3cb0fe949",
+      "spec_path": "tasks/lcd-numeric-luna.md",
+      "model": "gpt-6-luna",
+      "baseline_gui_sha256": "3d0e2b6db2f425d419dfb6346fba909c477e24b944ecf3c56ac3568bf172e975"
     }
   },
   "frozen_input_count": 57,
@@ -318,7 +338,7 @@
   },
   "operator_execution": {
     "updated_at": "2026-10-10T07:07:18.056278+00:00",
-    "phase": "post_flicker_video_recorded_numeric_correction_preparing",
+    "phase": "numeric_readability_sol_dispatched_live_watch_preserved",
     "host_candidate_commit": "7ccbb24",
     "host_candidate_tag": "orca-harness-20261010-host-candidate",
     "flash_evidence": "operator/flash-host-candidate-20261010.json",
@@ -338,7 +358,6 @@
     "device_ack": "no wireACK; LCD FRAME/CRC VALID physically confirmed for at least one live frame",
     "product_pass": false,
     "pending": [
-      "direct repeated-flicker confirmation",
       "numeric readability correction",
       "physical multi-page long BOOT",
       "physical reaction latency",
@@ -347,7 +366,7 @@
       "24h endurance"
     ],
     "post_data_video_evidence": "operator/post-data-video-20261010/observation.json",
-    "lcd_stability": "No previous white partial-clear seen in inspected samples; direct repeated-flicker confirmation pending",
+    "lcd_stability": "Repeated flicker resolved by direct user observation, corroborated inspected samples; manual RST excluded; numeric clipping still FAIL",
     "live_watch_status": "sole PC watch resumed seq46; HOST WRITE observed; sender state and selection unchanged",
     "flicker_candidate_tag": "orca-harness-20261010-lcd-flicker-candidate",
     "flicker_manifest": "operator/firmware-flicker-candidate.json",

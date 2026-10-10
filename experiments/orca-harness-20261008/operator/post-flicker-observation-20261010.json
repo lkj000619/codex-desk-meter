@@ -23,17 +23,69 @@
     "exact_press_count_and_duration": null
   },
   "observations": [
-    {"interval_seconds": [0, 62], "finding": "Readable landscape Usage, Global and Status pages; data remains visible across sampled frames before manual RST. No prior white partial-clear pattern seen in the inspected samples.", "scope": "Sampled stills and contact sheets, not exhaustive full-frame flicker analysis."},
-    {"interval_seconds": [8, 14], "finding": "Usage to Global(DEFAULT / NO CACHE) to Status to Usage navigation; button attribution confirmed as BOOT.", "verdict": "observed", "physical_latency_ms": null},
-    {"at_seconds": 10, "finding": "Status USB CONNECTED, FRAME / CRC VALID, chip temperature 36.5 C, receive age16s/source age19s, original observation timestamp visible.", "sensor_accuracy_verified": false},
-    {"interval_seconds": [0, 60], "finding": "5h quota used97%/remaining3% changes to used98%/remaining2%; 168h quota used78%/remaining22%. Token row values also update.", "accepted_frame_to_LCD_latency_ms": null},
-    {"at_seconds": 60, "finding": "TOTAL IN+OUT displays 3.142388 without the exponent; INPUT, CACHED INPUT and SOURCE TOTAL lose final exponent digits.", "verdict": "FAIL_numeric_readability", "cause": "%.7g strings exceed draw_text character limits: TOTAL160px/scale3 permits8 characters, rows125px/scale2 permit10."},
-    {"interval_seconds": [63, 70], "finding": "Black/exposure transition followed by WAITING / NO CACHE. User confirms manual RESET.", "verdict": "manual_reset_not_automatic_reboot"}
+    {
+      "interval_seconds": [
+        0,
+        62
+      ],
+      "finding": "Readable landscape Usage, Global and Status pages; data remains visible across sampled frames before manual RST. No prior white partial-clear pattern seen in the inspected samples.",
+      "scope": "Sampled stills and contact sheets, not exhaustive full-frame flicker analysis."
+    },
+    {
+      "interval_seconds": [
+        8,
+        14
+      ],
+      "finding": "Usage to Global(DEFAULT / NO CACHE) to Status to Usage navigation; button attribution confirmed as BOOT.",
+      "verdict": "observed",
+      "physical_latency_ms": null
+    },
+    {
+      "at_seconds": 10,
+      "finding": "Status USB CONNECTED, FRAME / CRC VALID, chip temperature 36.5 C, receive age16s/source age19s, original observation timestamp visible.",
+      "sensor_accuracy_verified": false
+    },
+    {
+      "interval_seconds": [
+        0,
+        60
+      ],
+      "finding": "5h quota used97%/remaining3% changes to used98%/remaining2%; 168h quota used78%/remaining22%. Token row values also update.",
+      "accepted_frame_to_LCD_latency_ms": null
+    },
+    {
+      "at_seconds": 60,
+      "finding": "TOTAL IN+OUT displays 3.142388 without the exponent; INPUT, CACHED INPUT and SOURCE TOTAL lose final exponent digits.",
+      "verdict": "FAIL_numeric_readability",
+      "cause": "%.7g strings exceed draw_text character limits: TOTAL160px/scale3 permits8 characters, rows125px/scale2 permit10."
+    },
+    {
+      "interval_seconds": [
+        63,
+        70
+      ],
+      "finding": "Black/exposure transition followed by WAITING / NO CACHE. User confirms manual RESET.",
+      "verdict": "manual_reset_not_automatic_reboot"
+    }
   ],
-  "flicker_verdict": "sampled_improvement_observed_user_direct_confirmation_pending",
+  "flicker_verdict": "PASS_scoped_user_direct_observation_and_sampled_video; exhaustive_frame_analysis_not_run",
   "long_press_pagination": "not_verified_physically; two quota windows and one session occupy one Usage page, so unchanged display on long BOOT is not a failure",
   "local_visual_evidence": "artifacts/orca-harness-runtime/post-flicker-video-20261010/ (Git-ignored; images can contain real source identifiers)",
-  "unmeasured": ["exhaustive video-frame flicker", "physical BOOT300ms latency", "accepted frame2s display latency", "multi-page long-BOOT navigation", "link loss/recovery with independent power", "temperature calibration", "24h endurance"],
+  "unmeasured": [
+    "physical BOOT300ms latency",
+    "accepted frame2s display latency",
+    "multi-page long-BOOT navigation",
+    "link loss/recovery with independent power",
+    "temperature calibration",
+    "24h endurance",
+    "instrumented flicker measurement/full-frame automated analysis"
+  ],
   "product_pass": false,
-  "next_owner": "Codex Sol firmware numeric rendering; Codex Luna independent regression review"
+  "next_owner": "Codex Sol firmware numeric rendering; Codex Luna independent regression review",
+  "user_direct_flicker_confirmation": {
+    "verbatim": "반복 점멸이 사라짐",
+    "answer": "repeated flicker disappeared",
+    "excludes_manual_reset": true,
+    "recorded_on": "2026-10-10"
+  }
 }

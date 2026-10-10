@@ -1,5 +1,7 @@
 # Orca 역할 협업 실험 결과
 
+2026-10-10 후속 직접 관측 답변: **‘반복 점멸이 사라짐’**. 기존 수정의 반복 점멸 개선은 사용자 관측·샘플 영상 범위에서 실물 확인했다. 화면 갱신 중 흰색 부분 지워짐과 사용자의 수동 RST를 구분했다. 숫자 잘림 FAIL 및 제품 전체 미측정 항목은 그대로이며 아래 직접 답변 대기는 응답 전 기록이다.
+
 2026-10-10 수정본 실물 관측 추가: [97.43초 영상](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json)에서 BOOT 화면 순환·수치 갱신·FRAME/CRC VALID를 확인했다. 약63~70초의 검은 화면→WAITING은 사용자가 직접 RST를 누른 결과이며 자동 재부팅 실패로 판정하지 않는다. 파일명/전송 mtime로 촬영 일시를 확정하지 않고 ‘어제 업로드 한 결과’라는 사용자 귀속을 보존했다. 검사한 샘플에서는 이전 흰색 부분 지워짐이 없고 반복 점멸 소멸은 직접 확인 대기다. TOTAL의 `3.142388` 및 각 행의 지수부 잘림은 가독성 FAIL로 기록했다. [별도 숫자 보완](../plans/2026-10-10-lcd-numeric-readability.md)을 진행하며 300ms/2초 지연·긴 BOOT 다중 페이지·센서 검교정·24시간은 미측정, `product_pass=false`다. 아래 기존 판정은 당시 원본이다.
 
 2026-10-10 15:52 KST 재개: Run generation6에서 기존 Task24개 completed·cleanup 미결0개와 source/artifact/입력 hash를 확인했다. Orca 재시작으로 종료된 PC watch는 사용자 USB 재연결 뒤 **같은 세션·state의 seq46부터 60초 갱신을 복구**했다. [live 복구](../../experiments/orca-harness-20261008/operator/live-watch-resume-20261010.json). 이번 재개에 새 firmware 업로드·리셋·소스 변경은 없으며 **수정 후 실물 점멸/CRC/BOOT/30초 관측은 여전히 대기**다. `product_pass=false`; 아래는 단계별 당시 검증과 관측이다.

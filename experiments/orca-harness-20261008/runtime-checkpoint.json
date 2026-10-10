@@ -1,5 +1,5 @@
 {
-    "observed_at":  "2026-10-10T07:07:19.4266662Z",
+    "observed_at":  "2026-10-10T07:11:18.6298088Z",
     "run_id":  "run_c968c43361da",
     "frozen_inputs_verified":  57,
     "snapshot_kind":  "read-only-native-runtime-observation-not-completion-authority",
@@ -171,9 +171,42 @@
                       "status":  "completed",
                       "deps":  "[\"task_63d11f3c24cb\"]",
                       "completed_at":  "2026-10-09T23:47:15.247Z"
+                  },
+                  {
+                      "id":  "task_2ae3cb0fe949",
+                      "title":  "Sol LCD numeric readability",
+                      "status":  "dispatched",
+                      "deps":  "[]",
+                      "completed_at":  null
+                  },
+                  {
+                      "id":  "task_5b1435a8c3c1",
+                      "title":  "Luna LCD numeric readability review",
+                      "status":  "pending",
+                      "deps":  "[\"task_2ae3cb0fe949\"]",
+                      "completed_at":  null
                   }
               ],
     "workers":  [
+                    {
+                        "task_id":  "task_2ae3cb0fe949",
+                        "dispatch_id":  "ctx_6fb4838726ea",
+                        "terminal_handle":  "term_c11b9d1c-4c32-4a5c-ac0d-1c4814fd426d",
+                        "state":  "ready",
+                        "dispatch_status":  "dispatched",
+                        "liveness":  {
+                                         "verdict":  "unverifiable",
+                                         "reason":  "missing_status"
+                                     },
+                        "next_action":  {
+                                            "kind":  "none",
+                                            "argv":  [
+
+                                                     ]
+                                        },
+                        "resource_state":  "external",
+                        "release_state":  "not_requested"
+                    },
                     {
                         "task_id":  "task_4386f8dbef93",
                         "dispatch_id":  "ctx_1ab7525e89ae",
