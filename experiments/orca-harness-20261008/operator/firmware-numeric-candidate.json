@@ -1,7 +1,7 @@
 {
   "run_id": "run_c968c43361da",
-  "status": "host_candidate_accepted_and_frozen_upload_pending",
-  "validated_at": "2026-10-10T08:00:34.133224+00:00",
+  "status": "uploaded_live_and_scoped_physical_numeric_flicker_pass",
+  "validated_at": "2026-10-10T08:12:02.272451+00:00",
   "firmware_submission_commit": "7d20952",
   "firmware_task": "task_2ae3cb0fe949",
   "firmware_dispatch": "ctx_6fb4838726ea",
@@ -16,7 +16,7 @@
   },
   "host_freeze_tag": "orca-harness-20261010-numeric-candidate",
   "upload_permitted": true,
-  "physical_status": "not_run for this unflashed numeric candidate",
+  "physical_status": "Scoped physical PASS: full filmed digits/percent, screen cycle, CRC VALID; user confirms no RESET and repeated flicker disappeared",
   "product_pass": false,
   "previous_candidate": "operator/firmware-flicker-candidate.json",
   "previous_flicker_user_verdict": "repeated flicker disappeared on prior flashed candidate",
@@ -135,5 +135,8 @@
     "test_seconds": 21.977,
     "wall_seconds": 22.087,
     "exit_code": 0
-  }
+  },
+  "flash_evidence": "operator/flash-numeric-candidate-20261010.json",
+  "live_watch_evidence": "operator/numeric-watch-resume-20261010.json",
+  "physical_evidence": "operator/post-numeric-observation-20261010.json"
 }

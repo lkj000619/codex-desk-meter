@@ -1,0 +1,128 @@
+{
+  "observed_at": "2026-10-10T08:11:11.531617+00:00",
+  "run_id": "run_c968c43361da",
+  "candidate_tag": "orca-harness-20261010-numeric-candidate",
+  "candidate_commit": "16b7d6656428511d1bf1912903a890308d332d3c",
+  "flash_evidence": "operator/flash-numeric-candidate-20261010.json",
+  "source": {
+    "filename": "KakaoTalk_20261010_170639971.mp4",
+    "bytes": 17187097,
+    "sha256": "6a190b40bc13247adbe7dab4cf6c19db8a9f74fa7ef3f983bd0cd17b565ce28a",
+    "duration_seconds": 35.25,
+    "probe_exit": 1,
+    "probe_exit_note": "input inspection without output; nonzero expected",
+    "ffmpeg_sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3"
+  },
+  "source_association": "User supplied this local video in reply to the new numeric candidate observation request; embedded displayed observation after flash. No capture time inferred solely from filename or file mtime.",
+  "method": {
+    "detailed_sample_seconds": [
+      0.5,
+      5,
+      10,
+      15,
+      20,
+      25,
+      30,
+      34
+    ],
+    "overview": "35 one-second samples across 35.25s clip",
+    "private_images": "artifacts/orca-harness-runtime/post-numeric-video-20261010/ (Git ignored)",
+    "full_frame_flicker_measurement": false
+  },
+  "scope_verdict": "PASS for visible numeric completeness, quota/session separation, observed screen sequence, accepted live frame and 35.25s sampled stability with direct no-RESET/no-repeated-flicker confirmation",
+  "numeric_readability": {
+    "verdict": "PASS for filmed real values",
+    "first": {
+      "normalized_total": 333631685,
+      "input": 331627085,
+      "output": 2004600,
+      "cached_input": 319775104,
+      "reasoning_output": 810056,
+      "source_total": 333631685
+    },
+    "last": {
+      "normalized_total": 333865095,
+      "input": 331857930,
+      "output": 2007165,
+      "cached_input": 320003200,
+      "reasoning_output": 811088,
+      "source_total": 333865095
+    },
+    "integer_digits": "All tested live count digits visibly complete in TOTAL and all session rows; no truncated exponent remains",
+    "semantics": "Visible normalized_total=input+output; cached_input/reasoning_output are included subsets, not added to total",
+    "scientific_extremes": "Host-tested only; not physically shown in this video"
+  },
+  "quota": {
+    "five_hour_percent_used": [
+      64,
+      65
+    ],
+    "five_hour_percent_remaining": [
+      36,
+      35
+    ],
+    "weekly_168_hour_percent_used": 88,
+    "weekly_percent_remaining": 12,
+    "percent_suffix_visible": true,
+    "separate_from_session_tokens": true
+  },
+  "navigation": {
+    "observed_sequence": [
+      "Usage",
+      "Global",
+      "Status",
+      "Usage"
+    ],
+    "samples": {
+      "Usage": [
+        0.5,
+        5,
+        20,
+        25,
+        30,
+        34
+      ],
+      "Global": [
+        10
+      ],
+      "Status": [
+        15
+      ]
+    },
+    "Global": "DEFAULT / NO CACHE; ELAPSED UNKNOWN",
+    "button_identity": "Observed page cycle consistent with BOOT navigation; user did not separately restate BOOT identity in current reply. Exact presses/duration/latency unmeasured.",
+    "latency_ms": "not measured"
+  },
+  "status": {
+    "USB_LINK": "CONNECTED",
+    "FRAME_CRC": "VALID",
+    "receive_age_seconds_at_15s": 43,
+    "source_age_seconds_at_15s": 79,
+    "CHIP_TEMPERATURE_C": 37.5,
+    "device_acceptance": "At least one live frame accepted per displayed FRAME/CRC VALID; no per-sequence ACK",
+    "temperature_calibration": "not measured"
+  },
+  "stability": {
+    "sampled_clip_seconds": 35.25,
+    "blank_or_WAITING_samples": 0,
+    "repeated_partial_white_clear": "PASS scoped: not observed in samples and user directly confirms disappeared",
+    "reset_action": "User confirms RESET not pressed in this clip",
+    "live_value_update": "Visible quota/token update between 30s and34s",
+    "scope": "35.25s clip with one-second inspection and direct no-reset/no-repeated-flicker confirmation; rapid flicker timing, button latency and 24h stability unmeasured"
+  },
+  "product_pass": false,
+  "remaining": [
+    "physical extreme/scientific values and multi-page long BOOT",
+    "reaction latency",
+    "hardware stale/error/link recovery",
+    "sensor calibration/plausibility",
+    "24h endurance"
+  ],
+  "direct_user_confirmation": {
+    "answer": "reset를 누르지않음. 반복적인 흰색. 점멸 사라짐",
+    "recorded_at": "2026-10-10T08:12:02.272451+00:00",
+    "no_manual_reset": true,
+    "repeated_white_clear_and_flicker_gone": true,
+    "BOOT_identity_separately_confirmed": false
+  }
+}

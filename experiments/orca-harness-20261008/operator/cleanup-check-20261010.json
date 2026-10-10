@@ -1,0 +1,18 @@
+{
+  "observed_at": "2026-10-10T08:12:02.272451+00:00",
+  "run_id": "run_c968c43361da",
+  "attempts": 43,
+  "pagination_complete": true,
+  "native_next_actions_pending": 0,
+  "cleanup_correction": {
+    "dispatch": "ctx_5de0b1c708f7",
+    "task": "task_4d49e747c570",
+    "pre_release_native_status": "failed/stopped; process_stopped",
+    "resource_before": "owned/not_requested; native nextAction release",
+    "release_state": "released",
+    "processAction": "none",
+    "archive_status": "unavailable",
+    "scope": "Release accounting for already stopped historical attempt; current completed review and live COM3 watcher unaffected"
+  },
+  "product_pass": false
+}

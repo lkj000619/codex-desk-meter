@@ -1,6 +1,18 @@
 # Orca 역할 협업 실험 결과
 
-**2026-10-10 16:46 KST 현재:** 기존 점멸은 직접 관측 범위에서 해결 확인했고 숫자 잘림은 Sol `7d20952`에서 수정했다. 자체 firmware20/20·SDK build, root GUI3/3·source15/artifact4 hash 확인 완료. Luna는 독립 숫자2/2·firmware20/20·presentation1/1·producer/selection20/20과 hash 대조를 통과해 scoped host PASS 보고서를 작성했다. 최종 `worker_done` 수락은 아직이며 새 숫자 후보의 업로드/실물은 미실행이다. 전체 제품은 `product_pass=false`. [현재 계획](../plans/2026-10-10-lcd-numeric-readability.md). 아래 원본 판정은 각각 당시 범위다.
+지금까지의 작업은 아래와 같다. 기존 단독 모델 비교와 분리한 새 구현이며, 이번 협업의 구현·검증 완료를 제품 전체 실물 합격으로 계산하지 않는다.
+
+| 작업 | 결과와 근거 |
+|---|---|
+| 실험 격리·역할 분담 | 별도 branch `lkj000619/experiment-orca-harness-20261008`, Orca Run `run_c968c43361da`, 동결 입력57개 보존. 실제 CLI 모델·자동 승인 옵션을 확인하고 역할별 Task/Dispatch로 진행 |
+| LCD UX/UI 시안·선택 | AGY Gemini와 Codex Sol6.1이 각3개, 총6개 820×320 시안 제출. 사용자가 B Swiss Studio Meter를 선택했고 브라우저 결함 보완·독립 디자인 검증을 거쳐 firmware에 반영 |
+| PC Codex 수집·전송 | 선택한 세션의 input/output/cached/reasoning 토큰과 native5h/weekly quota·reset 시각 수집. unknown·cache·선택·CRC frame·수동/자동 갱신·deadline 경계를 보완했으며 최종 PC64/64 및 당시 통합27/27 통과 |
+| ESP32 구현·연결 | Sol이 Usage/Global/Status, BOOT 탐색, USB frame/CRC 수신·last-good/stale/error·F9 온도 경로 구현. ESP-IDF5.3.2 실제 build와 source/artifact hash를 검증하고 COM3 실데이터 연결 |
+| 실물 점멸 보완 | 영상에서 반복 흰색 지워짐을 확인해 BSP 표시 교체를 수정·독립 검증·재업로드. 사용자가 이전 후보에서 반복 점멸 소멸을 직접 확인했고 수동 RST→WAITING과 자동 재부팅을 구분 |
+| 숫자 잘림 보완 | 큰 토큰 값의 잘린 지수 문제를 실제 C pixel로 재현·수정. Luna numeric2/2·firmware20/20·presentation1/1·producer/selection20/20 및 source15/artifact4 PASS, coordinator numeric2/2 재실행 PASS. 새 후보 17:03 업로드 후35.25초 영상·직접 응답 범위에서 전체 숫자/%·화면 순환·CRC·무점멸 확인 |
+| 중단 후 재개 안전장치 | 계획·재개 절차·context·native runtime snapshot·후보 tag·업로드/단일 writer 근거를 보존. Task26개 완료, 전송 순번·pinned 세션·locks를 유지하며 개인 세션/인증 원문은 Git 제외 |
+
+**2026-10-10 17:12 KST 현재:** **Task26개 구현·독립 검증 완료, 숫자 잘림·점멸 보완의 기본 실물 확인 완료**. 새 tag `orca-harness-20261010-numeric-candidate` (`16b7d66`), 17:03 COM3 업로드·쓰기 hash 검증, 17:04 같은 세션/state seq116부터 live 재개. [35.25초 영상·직접 응답](../../experiments/orca-harness-20261008/operator/post-numeric-observation-20261010.json)에서 전체 숫자/%, 화면 순환·CRC VALID·수치 갱신과 RESET 없는 반복 점멸 소멸을 확인했다. 지연·물리 오류복구·센서 검교정·24시간은 미측정으로 전체 제품은 `product_pass=false`. 아래 원본 판정은 각각 당시 범위다.
 
 2026-10-10 후속 직접 관측 답변: **‘반복 점멸이 사라짐’**. 기존 수정의 반복 점멸 개선은 사용자 관측·샘플 영상 범위에서 실물 확인했다. 화면 갱신 중 흰색 부분 지워짐과 사용자의 수동 RST를 구분했다. 숫자 잘림 FAIL 및 제품 전체 미측정 항목은 그대로이며 아래 직접 답변 대기는 응답 전 기록이다.
 

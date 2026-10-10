@@ -1,0 +1,71 @@
+{
+  "started_at": "2026-10-10T08:03:24.063272+00:00",
+  "completed_at": "2026-10-10T08:03:32.709650+00:00",
+  "command": [
+    "C:\\Espressif\\user-tools\\python_env\\idf5.3_py3.11_env\\Scripts\\python.exe",
+    "-B",
+    "-m",
+    "esptool",
+    "--chip",
+    "esp32s3",
+    "--port",
+    "COM3",
+    "--baud",
+    "460800",
+    "--before",
+    "default_reset",
+    "--after",
+    "hard_reset",
+    "write_flash",
+    "--flash_mode",
+    "dio",
+    "--flash_freq",
+    "80m",
+    "--flash_size",
+    "16MB",
+    "0x0",
+    "firmware/.host-tools/numeric-readability-build/bootloader.bin",
+    "0x8000",
+    "firmware/.host-tools/numeric-readability-build/partition-table.bin",
+    "0x10000",
+    "firmware/.host-tools/numeric-readability-build/codex_desk_meter.bin"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 8.657,
+  "source_tag": "orca-harness-20261010-numeric-candidate",
+  "source_commit": "16b7d6656428511d1bf1912903a890308d332d3c",
+  "firmware_submission_commit": "7d20952",
+  "independent_submission_commit": "460fb49",
+  "artifacts": [
+    {
+      "path": "firmware/.host-tools/numeric-readability-build/bootloader.bin",
+      "flash_offset": "0x0",
+      "bytes": 21504,
+      "sha256": "f4c5160d0777ebda11edac881853b211300323e5cf8f96eeeda5314d731d02ab"
+    },
+    {
+      "path": "firmware/.host-tools/numeric-readability-build/partition-table.bin",
+      "flash_offset": "0x8000",
+      "bytes": 3072,
+      "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+    },
+    {
+      "path": "firmware/.host-tools/numeric-readability-build/codex_desk_meter.bin",
+      "flash_offset": "0x10000",
+      "bytes": 308992,
+      "sha256": "953152b03eac7e56cd696ccd37c9f1f182e5dc8c378854de2296bb10121cd0e2"
+    },
+    {
+      "path": "firmware/.host-tools/numeric-readability-build/sdkconfig",
+      "flash_offset": null,
+      "bytes": 70020,
+      "sha256": "46788f1c30a51868da7c66c41def9045514faaf393bc68ec0d6f05df4daca452"
+    }
+  ],
+  "upload_preflight": "operator/numeric-upload-preflight.json",
+  "output": "operator/flash-numeric-candidate-20261010.txt",
+  "write_hash_verified_count": 3,
+  "sender_next_sequence_preserved": 116,
+  "physical_display": "awaiting new numeric candidate observation",
+  "product_pass": false
+}

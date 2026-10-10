@@ -1,6 +1,6 @@
 # 별도 Orca 협업 구현 실행·관측
 
-**2026-10-10 16:46 KST 현재:** 이전 반복 점멸은 사용자 직접 관측으로 해결 확인. 숫자 후보 source `7d20952`/build 및 Luna의 독립 검사·scoped host PASS 보고서 작성은 완료했지만 최종 `worker_done` 수락은 대기다. [새 후보](../../experiments/orca-harness-20261008/operator/firmware-numeric-candidate.json)의 upload gate는 false, 보드는 08:48 점멸 수정본이다. sole COM3 watch `term_5ef7b2be-8121-4f9b-be51-bbaadae18bfa`와 state/세션을 보존한다. 제출 수락·동결 전 추가 writer/flash는 실행하지 않는다. 아래 관측 대기는 각 시점 당시 상태다.
+**2026-10-10 17:12 KST 현재:** 숫자 후보 `orca-harness-20261010-numeric-candidate` (`16b7d66`)를 17:03 COM3에 업로드하고 세 이미지의 쓰기 hash를 검증했다. 17:04 같은 pinned 세션·state·lock의 seq116부터 기존 terminal `term_5ef7b2be-8121-4f9b-be51-bbaadae18bfa`에서 60초 watch 재개. launcher28708→interpreter26828의 한 프로그램. [업로드](../../experiments/orca-harness-20261008/operator/flash-numeric-candidate-20261010.json)·[현재 watch](../../experiments/orca-harness-20261008/operator/numeric-watch-resume-20261010.json). [실물 기록](../../experiments/orca-harness-20261008/operator/post-numeric-observation-20261010.json)은 전체 숫자/%·화면 순환·CRC VALID와 사용자 RESET 미조작·반복 점멸 소멸 확인을 보존한다. 단일 writer를 유지하며 남은 물리 지연/오류복구/센서/장시간 측정과 기본 관측의 범위를 구분한다. 아래는 당시 이력이다.
 
 2026-10-10 관측 보완: 이전 점멸 수정본의 [영상/사용자 응답](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json)을 기록했다. WAITING은 수동 RST, 화면 탐색은 BOOT였다. 현재60초 watch/state/세션은 유지한다. 다음 후보는 [숫자 잘림 보완](../plans/2026-10-10-lcd-numeric-readability.md)이며 Sol build·Luna 검증·동결 후에만 기존 sole writer의 정상 종료를 확인하고 업로드한다. 남은 점멸 직접 관측 답변과 숫자 수정 전/후 실물 자료를 각각 보존한다.
 

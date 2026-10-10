@@ -18,7 +18,7 @@
 | 실제 C 숫자 표시 재현→수정→시험 | Codex gpt-6-sol | 완료 | 원래 production GUI에서314238800 잘림 의도된 실패; 수정 firmware20/20, root GUI3/3 PASS |
 | ESP-IDF 빌드·source/artifact 제출 | Sol | 완료 | SDK5.3.2 genuine build, 별도 `firmware/.host-tools/numeric-readability-build/` 결과 및15개 source/4개 artifact SHA 일치. 기존 flicker-build 보존 |
 | 독립 검증 | Codex gpt-6-luna | 완료 | `msg_79be3c78e790` succeeded/native completed 수락·release/ack. [검토](../agent-runs/orca-luna/numeric-readability-review.md)·source commit `460fb49`. 숫자 pixel2/2·firmware20/20·presentation1/1·producer/selection20/20, source15/artifact4 대조 PASS. coordinator pixel2/2 재실행(21.977초)도 PASS |
-| coordinator 동결·COM3 업로드·관측 | coordinator | 동결 후 업로드 진행 | 새 tag `orca-harness-20261010-numeric-candidate`. 기존 sole watch 정상 종료 확인→업로드→같은 state/세션 재개→새 실물 숫자/점멸 관측. host PASS와 실물 판정은 분리 |
+| coordinator 동결·COM3 업로드·관측 | coordinator | 완료（이번 영상·직접 응답 범위） | 새 tag `orca-harness-20261010-numeric-candidate` (`16b7d66`). 17:03 COM3 업로드·세 이미지 쓰기 hash 확인, 17:04 같은 state/세션 seq116부터 sole watch 재개. [업로드](../../experiments/orca-harness-20261008/operator/flash-numeric-candidate-20261010.json)·[현재 watch](../../experiments/orca-harness-20261008/operator/numeric-watch-resume-20261010.json)·[35.25초 관측](../../experiments/orca-harness-20261008/operator/post-numeric-observation-20261010.json). 실제 큰 정수 전체/%·화면 순환·CRC VALID 확인, 사용자 RESET 미조작·반복 점멸 소멸 직접 확인. 극단/과학 표기는 host만 검증, 제품 전체 지연·오류복구·센서·24시간 미측정 |
 
 실행: 사용자 지정 실제 Orca Run `run_c968c43361da`의 새 Task/Dispatch로 진행한다. Sol만 `firmware/`, `tests/firmware/`, `docs/agent-runs/orca-sol/`을 수정한다. Luna는 구현 파일을 수정하지 않는다. Git·COM·실계정은 coordinator만 소유한다. Codex 자동 승인 옵션은 기존 사용자 지시를 유지한다. 과거 source/tag·입력57개·개인 로그는 변경/커밋하지 않는다.
 

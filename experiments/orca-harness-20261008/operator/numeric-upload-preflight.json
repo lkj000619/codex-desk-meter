@@ -1,0 +1,121 @@
+{
+  "observed_at": "2026-10-10T08:01:49.582580+00:00",
+  "port": "COM3",
+  "ports": [
+    {
+      "device": "COM1",
+      "vid": null,
+      "pid": null
+    },
+    {
+      "device": "COM3",
+      "vid": 12346,
+      "pid": 4097
+    }
+  ],
+  "old_watch_terminal": "term_5ef7b2be-8121-4f9b-be51-bbaadae18bfa",
+  "graceful_stop": "Watch stopped by user",
+  "old_launcher_pid": 5912,
+  "old_interpreter_pid": 21424,
+  "old_processes_absent": true,
+  "port_open_probe": "exclusive open succeeded and closed; no read/write; no explicit reset",
+  "sender_next_sequence": 116,
+  "sender_state_sha256": "dfaf0222a145755c4c72b06bb8957cea8eed4677af9590a16cf75fc1c1ec86b8",
+  "selection_record_sha256": "c2b34611b89b95c2b87c1d16efc7bd922999e8e3e17cd2c63913e7d5d88728e0",
+  "selection_file_exists": true,
+  "source_tag": "orca-harness-20261010-numeric-candidate",
+  "product_pass": false,
+  "source_tag_checks": [
+    {
+      "path": "firmware/CMakeLists.txt",
+      "comparison": "byte_exact",
+      "build_source_sha256": "9e9534402359bab131f26dcf0d246c9e23ddcd8699aa0e5e9dab634e195020d7",
+      "git_blob_sha256": "9e9534402359bab131f26dcf0d246c9e23ddcd8699aa0e5e9dab634e195020d7"
+    },
+    {
+      "path": "firmware/sdkconfig.defaults",
+      "comparison": "byte_exact",
+      "build_source_sha256": "a232b9341461c95ddc0c18084a77459013b4c236ddcd6beee3108ff175b2ffb8",
+      "git_blob_sha256": "a232b9341461c95ddc0c18084a77459013b4c236ddcd6beee3108ff175b2ffb8"
+    },
+    {
+      "path": "firmware/main/CMakeLists.txt",
+      "comparison": "byte_exact",
+      "build_source_sha256": "af58e3ae2c42cc4e17ca4016464f48b31a90dbe7d21974c7a4740b3a78e14256",
+      "git_blob_sha256": "af58e3ae2c42cc4e17ca4016464f48b31a90dbe7d21974c7a4740b3a78e14256"
+    },
+    {
+      "path": "firmware/main/bsp.c",
+      "comparison": "byte_exact",
+      "build_source_sha256": "8a820f95aa58db42d3c559901918419b8a11712e1d9f4a01f10cb085a890ceee",
+      "git_blob_sha256": "8a820f95aa58db42d3c559901918419b8a11712e1d9f4a01f10cb085a890ceee"
+    },
+    {
+      "path": "firmware/main/bsp.h",
+      "comparison": "byte_exact",
+      "build_source_sha256": "b80339ef1f22cac176d67f3073bd5d1d96e9275f9e1242fe1df05c694786fab2",
+      "git_blob_sha256": "b80339ef1f22cac176d67f3073bd5d1d96e9275f9e1242fe1df05c694786fab2"
+    },
+    {
+      "path": "firmware/main/cdm.c",
+      "comparison": "byte_exact",
+      "build_source_sha256": "33899e302733a685b78f7171b87cc7827d4e2b34d8ade0a82f0290c6d16b9c1c",
+      "git_blob_sha256": "33899e302733a685b78f7171b87cc7827d4e2b34d8ade0a82f0290c6d16b9c1c"
+    },
+    {
+      "path": "firmware/main/cdm.h",
+      "comparison": "byte_exact",
+      "build_source_sha256": "7c900f68af9b75d85e8cd4e8e2d9e22f2e582bab5de2bf3a6b75f1f9d9ada8c6",
+      "git_blob_sha256": "7c900f68af9b75d85e8cd4e8e2d9e22f2e582bab5de2bf3a6b75f1f9d9ada8c6"
+    },
+    {
+      "path": "firmware/main/f9_temp.c",
+      "comparison": "byte_exact",
+      "build_source_sha256": "43f760751e10633a132249ab87ad86e63a11dac97fe2d661b3ed1e31dd6e7812",
+      "git_blob_sha256": "43f760751e10633a132249ab87ad86e63a11dac97fe2d661b3ed1e31dd6e7812"
+    },
+    {
+      "path": "firmware/main/f9_temp.h",
+      "comparison": "byte_exact",
+      "build_source_sha256": "645edda639a3876506fe9d00b1cd5de82435ba14de2b22c4c8c4d8255aab3b92",
+      "git_blob_sha256": "645edda639a3876506fe9d00b1cd5de82435ba14de2b22c4c8c4d8255aab3b92"
+    },
+    {
+      "path": "firmware/main/gui.c",
+      "comparison": "byte_exact",
+      "build_source_sha256": "9f299ce8be4b5e92272fe0cef51bd404f7e4e2f9543c00ba306423a8b21fefcf",
+      "git_blob_sha256": "9f299ce8be4b5e92272fe0cef51bd404f7e4e2f9543c00ba306423a8b21fefcf"
+    },
+    {
+      "path": "firmware/main/gui.h",
+      "comparison": "byte_exact",
+      "build_source_sha256": "0781e73ddc3bada616e334d0308eab0477c76b33e7797e8d0688ca52a8494780",
+      "git_blob_sha256": "0781e73ddc3bada616e334d0308eab0477c76b33e7797e8d0688ca52a8494780"
+    },
+    {
+      "path": "firmware/main/legacy.c",
+      "comparison": "byte_exact",
+      "build_source_sha256": "d652633aedda1f755dc7190a2104db361b97eafb144fc68922d6682d7b89479c",
+      "git_blob_sha256": "d652633aedda1f755dc7190a2104db361b97eafb144fc68922d6682d7b89479c"
+    },
+    {
+      "path": "firmware/main/legacy.h",
+      "comparison": "byte_exact",
+      "build_source_sha256": "efb69ca3856a50bcf423792805b19999d53c4d919b91dc93fc6daf610e0ed441",
+      "git_blob_sha256": "efb69ca3856a50bcf423792805b19999d53c4d919b91dc93fc6daf610e0ed441"
+    },
+    {
+      "path": "firmware/main/main.c",
+      "comparison": "byte_exact",
+      "build_source_sha256": "4e1612983701b8951c06ba43a8a8132c725a30a5bafdaae1cee00040cee812e1",
+      "git_blob_sha256": "4e1612983701b8951c06ba43a8a8132c725a30a5bafdaae1cee00040cee812e1"
+    },
+    {
+      "path": "firmware/main/st7701_commands.inc",
+      "comparison": "Git text=auto eol=lf: CRLF checkout/build to LF committed blob; content identical",
+      "build_source_sha256": "af9c061384023d46ba85d9530a96630ae8680776d747ed73e2844dcccf513b1c",
+      "git_blob_sha256": "feafd7c96dae290901817f28337423bc436bb2866f1b0d40a94716f264cec67f"
+    }
+  ],
+  "initial_tag_byte_check": "Stopped before esptool invocation on st7701_commands.inc raw byte mismatch; verified only Git LF normalization. Product source/build artifacts unchanged."
+}
