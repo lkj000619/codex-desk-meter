@@ -1,0 +1,122 @@
+{
+  "run_id": "run_c968c43361da",
+  "status": "source_build_accepted_independent_review_running",
+  "validated_at": "2026-10-10T07:21:27.538193+00:00",
+  "firmware_submission_commit": "7d20952",
+  "firmware_task": "task_2ae3cb0fe949",
+  "firmware_dispatch": "ctx_6fb4838726ea",
+  "accepted_submission_message": "msg_8aa6b9b04c59",
+  "independent_task": "task_5b1435a8c3c1",
+  "independent_dispatch": "ctx_93b9c8f7189f",
+  "host_firmware_tests": 20,
+  "root_gui_tests": {
+    "tests": 3,
+    "seconds": 2.134,
+    "result": "PASS"
+  },
+  "host_freeze_tag": null,
+  "upload_permitted": false,
+  "physical_status": "not_run for this unflashed numeric candidate",
+  "product_pass": false,
+  "previous_candidate": "operator/firmware-flicker-candidate.json",
+  "previous_flicker_user_verdict": "repeated flicker disappeared on prior flashed candidate",
+  "build_receipt": "docs/agent-runs/orca-sol/numeric-readability-build-receipt.json",
+  "build_log": "docs/agent-runs/orca-sol/numeric-readability-build-output.txt",
+  "build_log_sha256": "5bd87a30e3bc33bec929457b5b8f02df27ec90b2eb55fb40ae9ffba16d759a3d",
+  "staging_sources": [
+    {
+      "path": "firmware/CMakeLists.txt",
+      "sha256": "9e9534402359bab131f26dcf0d246c9e23ddcd8699aa0e5e9dab634e195020d7"
+    },
+    {
+      "path": "firmware/sdkconfig.defaults",
+      "sha256": "a232b9341461c95ddc0c18084a77459013b4c236ddcd6beee3108ff175b2ffb8"
+    },
+    {
+      "path": "firmware/main/CMakeLists.txt",
+      "sha256": "af58e3ae2c42cc4e17ca4016464f48b31a90dbe7d21974c7a4740b3a78e14256"
+    },
+    {
+      "path": "firmware/main/bsp.c",
+      "sha256": "8a820f95aa58db42d3c559901918419b8a11712e1d9f4a01f10cb085a890ceee"
+    },
+    {
+      "path": "firmware/main/bsp.h",
+      "sha256": "b80339ef1f22cac176d67f3073bd5d1d96e9275f9e1242fe1df05c694786fab2"
+    },
+    {
+      "path": "firmware/main/cdm.c",
+      "sha256": "33899e302733a685b78f7171b87cc7827d4e2b34d8ade0a82f0290c6d16b9c1c"
+    },
+    {
+      "path": "firmware/main/cdm.h",
+      "sha256": "7c900f68af9b75d85e8cd4e8e2d9e22f2e582bab5de2bf3a6b75f1f9d9ada8c6"
+    },
+    {
+      "path": "firmware/main/f9_temp.c",
+      "sha256": "43f760751e10633a132249ab87ad86e63a11dac97fe2d661b3ed1e31dd6e7812"
+    },
+    {
+      "path": "firmware/main/f9_temp.h",
+      "sha256": "645edda639a3876506fe9d00b1cd5de82435ba14de2b22c4c8c4d8255aab3b92"
+    },
+    {
+      "path": "firmware/main/gui.c",
+      "sha256": "9f299ce8be4b5e92272fe0cef51bd404f7e4e2f9543c00ba306423a8b21fefcf"
+    },
+    {
+      "path": "firmware/main/gui.h",
+      "sha256": "0781e73ddc3bada616e334d0308eab0477c76b33e7797e8d0688ca52a8494780"
+    },
+    {
+      "path": "firmware/main/legacy.c",
+      "sha256": "d652633aedda1f755dc7190a2104db361b97eafb144fc68922d6682d7b89479c"
+    },
+    {
+      "path": "firmware/main/legacy.h",
+      "sha256": "efb69ca3856a50bcf423792805b19999d53c4d919b91dc93fc6daf610e0ed441"
+    },
+    {
+      "path": "firmware/main/main.c",
+      "sha256": "4e1612983701b8951c06ba43a8a8132c725a30a5bafdaae1cee00040cee812e1"
+    },
+    {
+      "path": "firmware/main/st7701_commands.inc",
+      "sha256": "af9c061384023d46ba85d9530a96630ae8680776d747ed73e2844dcccf513b1c"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "firmware/.host-tools/numeric-readability-build/bootloader.bin",
+      "flash_offset": "0x0",
+      "bytes": 21504,
+      "sha256": "f4c5160d0777ebda11edac881853b211300323e5cf8f96eeeda5314d731d02ab"
+    },
+    {
+      "path": "firmware/.host-tools/numeric-readability-build/partition-table.bin",
+      "flash_offset": "0x8000",
+      "bytes": 3072,
+      "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820"
+    },
+    {
+      "path": "firmware/.host-tools/numeric-readability-build/codex_desk_meter.bin",
+      "flash_offset": "0x10000",
+      "bytes": 308992,
+      "sha256": "953152b03eac7e56cd696ccd37c9f1f182e5dc8c378854de2296bb10121cd0e2"
+    },
+    {
+      "path": "firmware/.host-tools/numeric-readability-build/sdkconfig",
+      "flash_offset": null,
+      "bytes": 70020,
+      "sha256": "46788f1c30a51868da7c66c41def9045514faaf393bc68ec0d6f05df4daca452"
+    }
+  ],
+  "flash_settings": {
+    "flash_mode": "dio",
+    "flash_size": "16MB",
+    "flash_freq": "80m"
+  },
+  "pc_source_changed": false,
+  "sender_reinitialization_permitted": false,
+  "upload_gate_reason": "Await accepted Luna independent review and a frozen tag; no flash while current COM3 watch owns port."
+}

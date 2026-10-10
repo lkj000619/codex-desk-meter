@@ -1,5 +1,7 @@
 # 세션 중단 후 재개
 
+**2026-10-10 16:22 KST 재개 기준:** Sol 숫자 Task completed, source `7d20952`, succeeded `msg_8aa6b9b04c59` release/ack 완료. 실제 Luna `gpt-6-luna` 자동 승인 terminal `term_96185057-8182-4dca-9f01-a113c1fc0a10`에서 `task_5b1435a8c3c1` / `ctx_93b9c8f7189f`가 독립 검증 중이다. **같은 Dispatch를 조회/대기하며 중복 reviewer를 시작하지 않는다.** 새 [숫자 후보](../../experiments/orca-harness-20261008/operator/firmware-numeric-candidate.json)의 독립 gate는 false이며 아직 미업로드. 기존 sole watch/state 유지. 반복 점멸 직접 확인은 완료했다. 다음은 accepted Luna 제출→동결→writer 정상 종료→업로드/같은 state 재개→새 숫자 실물 관측이다.
+
 2026-10-10 최신 답변 반영: **반복 점멸 소멸 직접 확인 완료**. 새 Sol 숫자 Task `task_2ae3cb0fe949` / `ctx_6fb4838726ea`의 실제 작업을 확인했다. 이미 확인한 점멸 질문/수정을 반복하지 않고, 숫자 제출/build→Luna 검증→업로드/관측을 이어간다. 현재 lifecycle는 context/native 조회가 원본이며 아래 ‘직접 확인 대기’는 응답 전이다.
 
 2026-10-10 최신 후속: 이전 업로드 영상의 **수동 RST→WAITING, BOOT 탐색, 실제 값 갱신·CRC VALID**를 [비식별 관측](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json)에 기록했다. 반복 점멸 직접 확인 답변은 대기하고, [긴 숫자 보완 계획](../plans/2026-10-10-lcd-numeric-readability.md)에 따라 같은 Run에서 Sol→Luna 후속을 진행한다. **이후 새 Task 상태는 context/native에서 확인하며 아래 Task24 완료를 최신으로 간주하지 않는다.** COM3 sole watch는 `term_5ef7b2be-8121-4f9b-be51-bbaadae18bfa`, 선택/state/순번은 계속 유지한다. 새 숫자 후보가 검증되기 전 재업로드하지 않는다.

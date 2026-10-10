@@ -285,16 +285,27 @@
       "model_evidence": "actual CIM argv, TUI GPT-6-Sol xhigh and YOLO mode; native reused-terminal model fields null",
       "auto_approval_flag_verified": "--dangerously-bypass-approvals-and-sandbox",
       "spec_path": "tasks/lcd-numeric-sol.md",
-      "status": "working confirmed by actual CLI response/tool reads after single bare Enter; native fleet missing_status remains unverifiable",
-      "started_at": "2026-10-10T07:08:42.814539+00:00"
+      "status": "completed; accepted native succeeded msg_8aa6b9b04c59; external-terminal release/ack recorded",
+      "started_at": "2026-10-10T07:08:42.814539+00:00",
+      "submission_commit": "7d20952",
+      "report_path": "docs/agent-runs/orca-sol/numeric-readability-report.md",
+      "firmware_tests": 20,
+      "root_gui_tests": 3,
+      "app_sha256": "953152b03eac7e56cd696ccd37c9f1f182e5dc8c378854de2296bb10121cd0e2"
     },
     "lcd_numeric_review": {
       "task_id": "task_5b1435a8c3c1",
-      "status": "pending",
+      "status": "working confirmed by actual CLI tool reads; native missing_status is not exit",
       "depends_on": "task_2ae3cb0fe949",
       "spec_path": "tasks/lcd-numeric-luna.md",
       "model": "gpt-6-luna",
-      "baseline_gui_sha256": "3d0e2b6db2f425d419dfb6346fba909c477e24b944ecf3c56ac3568bf172e975"
+      "baseline_gui_sha256": "3d0e2b6db2f425d419dfb6346fba909c477e24b944ecf3c56ac3568bf172e975",
+      "terminal": "term_96185057-8182-4dca-9f01-a113c1fc0a10",
+      "auto_approval_flag_verified": "--dangerously-bypass-approvals-and-sandbox",
+      "model_evidence": "actual CIM argv gpt-6-luna; TUI checked before dispatch",
+      "cli_version": "0.159.2",
+      "dispatch_id": "ctx_93b9c8f7189f",
+      "source_commit": "7d20952"
     }
   },
   "frozen_input_count": 57,
@@ -338,7 +349,7 @@
   },
   "operator_execution": {
     "updated_at": "2026-10-10T07:07:18.056278+00:00",
-    "phase": "numeric_readability_sol_dispatched_live_watch_preserved",
+    "phase": "numeric_readability_luna_review_running_live_watch_preserved",
     "host_candidate_commit": "7ccbb24",
     "host_candidate_tag": "orca-harness-20261010-host-candidate",
     "flash_evidence": "operator/flash-host-candidate-20261010.json",
@@ -378,7 +389,8 @@
     "post_flicker_observation": "operator/post-flicker-observation-20261010.json",
     "physical_boot_navigation": "User confirmed BOOT; Usage-Global-Status-Usage observed; exact latency/count unmeasured",
     "physical_reset": "User confirms manual RST causing WAITING; not automatic reboot",
-    "numeric_readability": "FAIL: total/row exponent truncated; new Sol then Luna task planned"
+    "numeric_readability": "FAIL: total/row exponent truncated; new Sol then Luna task planned",
+    "numeric_manifest": "operator/firmware-numeric-candidate.json"
   },
   "consumer_generation": 6
 }

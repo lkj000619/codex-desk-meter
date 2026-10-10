@@ -1,5 +1,7 @@
 # 현재 준비 상태 — 별도 Orca 협업 실험
 
+**2026-10-10 16:22 KST 현재:** 반복 점멸 소멸을 사용자에게 확인했다. 숫자 수정 `7d20952`·firmware20/20·SDK build·root GUI3/3·source15/artifact4 hash 확인 완료. Luna `task_5b1435a8c3c1` / `ctx_93b9c8f7189f`의 독립 검증 진행 중이다. [숫자 후보](../../experiments/orca-harness-20261008/operator/firmware-numeric-candidate.json)는 아직 미업로드, 현 COM3 sole watch/state/세션 유지, `product_pass=false`. 아래는 당시 이력이다.
+
 2026-10-10 추가 사용자 확인: **반복 점멸이 사라짐**. [실물 기록](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json)에 직접 응답을 반영하여 점멸 보완의 해당 실물 관측을 완료했다. 현재 작업은 Sol `task_2ae3cb0fe949` / `ctx_6fb4838726ea`의 숫자 잘림 수정이며 이후 Luna 검증→새 후보 업로드/관측이다. 아래 직접 점멸 확인 대기는 응답 전 상태다.
 
 2026-10-10 후속 영상 확인: 사용자가 **이전 업로드 영상·BOOT 화면 전환·직접 RST에 따른 WAITING**임을 확인했다. 실물 Usage→Global→Status→Usage, 수치 갱신과 FRAME/CRC VALID를 기록했다. 검사한 영상 샘플에서 이전 흰색 부분 지워짐은 보이지 않지만 반복 점멸 소멸은 직접 관측 답변을 기다린다. **긴 토큰 지수부 잘림은 실제 결함**이므로 [숫자 보완 계획](../plans/2026-10-10-lcd-numeric-readability.md)에 따라 Sol 수정→Luna 독립 검증을 진행한다. [영상 근거](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json). 현 보드는 기존 점멸 수정본, sole COM3 watch/state/세션은 유지하며 새 숫자 후보 검증 전 덮어쓰지 않는다. `product_pass=false`. 아래는 날짜별 당시 상태다.

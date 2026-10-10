@@ -1,5 +1,7 @@
 # 별도 Orca 협업 구현 실행·관측
 
+**2026-10-10 16:22 KST 현재:** 이전 반복 점멸은 사용자 직접 관측으로 해결 확인. 숫자 후보 source `7d20952`/build는 완료하고 Luna 독립 검증 중이다. [새 후보](../../experiments/orca-harness-20261008/operator/firmware-numeric-candidate.json)의 upload gate는 false, 보드는 08:48 점멸 수정본이다. sole COM3 watch `term_5ef7b2be-8121-4f9b-be51-bbaadae18bfa`와 state/세션을 보존한다. 검증 전 추가 writer/flash는 실행하지 않는다. 아래 관측 대기는 각 시점 당시 상태다.
+
 2026-10-10 관측 보완: 이전 점멸 수정본의 [영상/사용자 응답](../../experiments/orca-harness-20261008/operator/post-flicker-observation-20261010.json)을 기록했다. WAITING은 수동 RST, 화면 탐색은 BOOT였다. 현재60초 watch/state/세션은 유지한다. 다음 후보는 [숫자 잘림 보완](../plans/2026-10-10-lcd-numeric-readability.md)이며 Sol build·Luna 검증·동결 후에만 기존 sole writer의 정상 종료를 확인하고 업로드한다. 남은 점멸 직접 관측 답변과 숫자 수정 전/후 실물 자료를 각각 보존한다.
 
 2026-10-10 15:52 KST 재개: 현재 COM3의 유일한 PC watch는 **`term_5ef7b2be-8121-4f9b-be51-bbaadae18bfa`**다. 기존 세션 선택/state로 seq46부터 전송을 복구했으며 새 flash/reset/init는 하지 않았다. [실행 근거](../../experiments/orca-harness-20261008/operator/live-watch-resume-20261010.json). 예전 terminal/PID는 현재 실행 근거가 아니다. 먼저 현재 watch와 OS 프로세스를 확인하고 같은 포트에 send/monitor를 중복 실행하지 않는다. 다음은 수정 후 RESET 없는 30초·CRC·BOOT 관측이다.
