@@ -1,0 +1,49 @@
+{
+  "implementation_commit": "92ef8a6c4e389cacc8d025cf71fd4b04e52efdb2",
+  "receiver_source": "main/main.c",
+  "receiver_source_sha256": "e197272634dcc5bb5a7c5475586b600546ad20708b954c21cc7c77814dbda862",
+  "app_sha256": "54789595efd2035011585b168cabbae792ff4dd682bc35876233f09dbd835ea3",
+  "elf_sha256": "14a0131bd6fecd6c2b8e32ed2153caeea9ffd8be77d91657b7dc1e84f4d44d71",
+  "checks": [
+    {
+      "capture": "reference-capture-r1",
+      "status": "captured",
+      "bytes_received": 11688,
+      "transmitted_sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+      "host_written_bytes": [
+        1543,
+        1543
+      ],
+      "accepted_sequences": [
+        0,
+        1
+      ],
+      "boot_elf_prefix_matches": true,
+      "normal_app_banner_observed": true,
+      "raw_log_sha256": "d739d037bae0804da7cea962a66f1760c7b56dd51740a8406279f6a77a243054"
+    },
+    {
+      "capture": "reference-capture-r2",
+      "status": "captured",
+      "bytes_received": 11753,
+      "transmitted_sha256": "811c399098ff8ffefc587469d49e61d30ea7c7ffa440c477d47dbe0cffabb2cd",
+      "host_written_bytes": [
+        1543,
+        1543
+      ],
+      "accepted_sequences": [
+        0,
+        1
+      ],
+      "boot_elf_prefix_matches": true,
+      "normal_app_banner_observed": true,
+      "raw_log_sha256": "d51562c454dee02bebe3fb8714b6cf258a3adc059fd027bd1cc7558555abc478"
+    }
+  ],
+  "source_log_meaning": "CDM_RX accepted=1 seq=N err=none is emitted after meter_state_receive_line accepted the frame and advanced last_sequence. Timestamp/ANSI ESP_LOGI prefixes are variable; default capture detector does not parse this format. Raw logs are reviewed separately; null generic detector fields are preserved.",
+  "source_parser_host_common_frames_accepted": true,
+  "physical_optical": "not_run",
+  "operator_source_modification": false,
+  "operator_rebuild": false,
+  "serial_closed_after_each_capture": true
+}

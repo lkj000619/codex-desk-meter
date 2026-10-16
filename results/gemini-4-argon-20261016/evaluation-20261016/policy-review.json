@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "binding": {
+    "run_id": "20261016-antigravity-cli-agy-argon-high-r01",
+    "experiment_id": "version-2-end-to-end-v1",
+    "baseline_id": "comparison-baseline-20261004",
+    "baseline_ref": "comparison-baseline-20261004",
+    "agent": {
+      "provider": "google",
+      "product": "antigravity-cli",
+      "interface": "cli",
+      "agent_version": "1.2.14",
+      "model": "gemini-4-argon-high",
+      "reasoning": "high",
+      "configuration_sha256": "beab9de910193b8479788d3f10ef17a825fab9da4e61891d72925a55e31141f0"
+    },
+    "execution": {
+      "started_at": "2026-10-16T09:04:36.026Z",
+      "ended_at": "2026-10-16T10:01:43.821Z",
+      "timeout_seconds": 7200,
+      "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+      "prompt_sha256": "292204a56b8c5edc902a27b15b6f5b6fe6a86a3e65f93c3465b12de3baf4d1cc",
+      "config_sha256": "a0cc892cce2a3f1d1f27c5206d520a36542dfd8e5b2f38a3ffb60fedbe4e7c4f",
+      "fixture_sha256": "0a2964266df53a641dda4b4e9d460e2ffe990bfb38c6d40e32556610bbe42eec",
+      "schema_sha256": "5d153999703c0b98fc78b96956888a009653572567fd32c02214f6168fb5a2d5",
+      "evaluation_criteria_sha256": "aee37998c19e7b729d582b5af39d58b209f0f17124c38801b34b8cfbe015a964",
+      "profile_sha256": "dc676155ae6fd298c88aeefcd9442fae8db9cbbd40be421adcf947a9aeee677d",
+      "input_bundle_sha256": "5cf735c96a31fec8f448ca213bab1d00ca0a045fdefabc00317f9c61d27c6fbc",
+      "network_mode": "offline-fixture",
+      "sandbox_policy": "prompt-and-log",
+      "approval_policy": "request-review",
+      "branch": "experiment/antigravity/antigravity-cli/agy-argon-high",
+      "host": "DESKTOP-JCMEN12"
+    },
+    "status": "completed",
+    "exit_code": 0,
+    "delivered_prompt_sha256": "9f9344aa281540e3304da5ef15521c7081368139915267dd552871c88f712502",
+    "local_base_commit": "1ea46955738129b85c0ff81d031898154e3be6fd",
+    "user_interventions": null,
+    "raw_evidence": {
+      "stdout.jsonl": "25a900247a839ea16854832487639ca02cd8a508cf1d508d9194308516db64dc",
+      "stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "prompt.txt": "9f9344aa281540e3304da5ef15521c7081368139915267dd552871c88f712502",
+      "profile.json": "beab9de910193b8479788d3f10ef17a825fab9da4e61891d72925a55e31141f0"
+    },
+    "raw_evidence_sha256": "98598aaf476191931b2151206e4a03cf1ba47a05a6abdf87b13479ee780314c4"
+  },
+  "reviewed_at": "2026-10-16T10:05:09.469266Z",
+  "decision": {
+    "status": "eligible",
+    "reviewer": "operator",
+    "reason": "All 203 terminal tool steps reviewed. Access was confined to the dedicated checkout and approved public ESP-IDF/vendor source roots. Writes targeted only new product source and submission files; all 57 fixed inputs remain unchanged. Commands are local listing, tool versions, approved public config search, builds, tests and validation. No Git history, other candidate, private account, browser/network, custom skill/plugin/MCP/subagent, permission bypass, serial or flash use. Build failures and missing file/tool attempts remain in raw logs; unknown command exit metrics are not inferred as zero.",
+    "user_interventions": 0,
+    "intervention_review": "No candidate prompts or implementation feedback after common task delivery; no operator source edits or rebuild. User COM3 reconnection and operator read-only port enumeration were not passed to the candidate. Post-terminal Git exclude metadata only separates generated build/cache files for source archive; original files and artifacts remain intact.",
+    "evidence": [
+      {
+        "path": "operator-observation/policy-review-notes.json",
+        "sha256": "ba62557e1ed70e3b9f24dff2984e6ba063ac0d3e165ce408e5ed74e84fbe8a21"
+      },
+      {
+        "path": "operator-observation/tool-review.json",
+        "sha256": "2c4bee53d864fd3ce5ede5fe045928600c38a52992a37c044fd3d461bf1b85e5"
+      }
+    ]
+  },
+  "review_sha256": "a352f8b503ed53f679e5c8bf8d9fa59bd357533ec53a4cab7eaab944e6bd74a9"
+}

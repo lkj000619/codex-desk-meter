@@ -1,0 +1,42 @@
+{
+  "run_id": "20261016-antigravity-cli-agy-argon-high-r01",
+  "reviewed_at": "2026-10-16T10:18:10.172153+00:00",
+  "scope": "Dated video supplement only; the pre-video reference review, package, costs and source remain preserved. Aggregate reference fail is unchanged.",
+  "supersedes_observation_scope": "RM3/RM4 optical evidence previously partial/not_run from user text only",
+  "prior_reference_review_sha256": "8ef8c2970d6185f3b30cfa18d82f41e0977e6dd04175ecd00f6a350a93862de1",
+  "video_sha256": "c9b7007de5be051afe74cc561d9845b36939a59842edd79e60345476d751dee9",
+  "items": {
+    "RM1": {
+      "status": "pass",
+      "basis": "Unchanged original build/upload/ELF-bound boot evidence."
+    },
+    "RM2": {
+      "status": "partial",
+      "basis": "Original encoder incompatibility plus accepted operator replay frames followed by firmware stack overflow/reboot."
+    },
+    "RM3": {
+      "status": "fail",
+      "basis": "Current same-artifact video has corrupted glyphs and no identifiable 58%/82% values."
+    },
+    "RM4": {
+      "status": "fail",
+      "basis": "Multiple panel/layout states change but usage/global reset/diagnostic content is not readable."
+    },
+    "RM5": {
+      "status": "not_run",
+      "basis": "BOOT/RESET action identity and counts not confirmed. Visible layout changes alone are insufficient."
+    }
+  },
+  "reference_status": "fail",
+  "product_pass": false,
+  "evidence": [
+    {
+      "path": "operator-observation/user-video-01/video-review.json",
+      "sha256": "107f3bef5c06d0b1fa8558e8f6206930e066b635b839777224064149b057baee"
+    },
+    {
+      "path": "operator-observation/user-video-01/source.mp4",
+      "sha256": "c9b7007de5be051afe74cc561d9845b36939a59842edd79e60345476d751dee9"
+    }
+  ]
+}

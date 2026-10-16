@@ -1,0 +1,13 @@
+{
+  "archive": "C:/meter-packages-20261016/argon-initial-evaluated.zip",
+  "archive_sha256": "d61ed6c879a41ca23c0d41850b6691fec79188180479248ef762f89c534942c2",
+  "archive_bytes": 291088659,
+  "package_manifest_sha256": "c29fcc65209523a445901363e0378f49b80ca8c64453725ec199d95872f44f74",
+  "files_verified": 306,
+  "scope": "Portable final evaluated package including original source bundle, build artifacts, fixed inputs, raw model stream, post-run policy/host/hardware and user report. No private global settings backups.",
+  "restore_instruction": "Extract ZIP into a new ASCII directory and run frozen scripts/package-evidence.py restore --package <extracted> --output <new-root> --expected-sha256 c29fcc65209523a445901363e0378f49b80ca8c64453725ec199d95872f44f74",
+  "archive_storage_note": "Pre-video portable ZIP is preserved outside Git because its fixed operator baseline exceeds 100 MiB. All bytes and hashes are retained locally. Latest video package is separate and independently restored.",
+  "latest_video_package": "C:\\meter-packages-20261016\\argon-initial-video-evaluated",
+  "latest_video_package_manifest_sha256": "abe71038d4a7d9b122641c299c986e6b16868f209758a79a8b2667d606d73e44",
+  "latest_video_package_files": 352
+}

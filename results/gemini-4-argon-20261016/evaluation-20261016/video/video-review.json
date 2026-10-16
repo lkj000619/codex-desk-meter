@@ -1,0 +1,38 @@
+{
+  "run_id": "20261016-antigravity-cli-agy-argon-high-r01",
+  "reviewed_at": "2026-10-16T10:18:10.172153+00:00",
+  "reviewer": "operator",
+  "video_sha256": "c9b7007de5be051afe74cc561d9845b36939a59842edd79e60345476d751dee9",
+  "duration_seconds": 31.44,
+  "one_second_sample_frames_reviewed": 31,
+  "contact_sheets_reviewed": 3,
+  "detail_frames_reviewed": [
+    5,
+    10,
+    15,
+    22,
+    26
+  ],
+  "detail_transform": "CCW90 rotation and crop for reading only; original source.mp4 and extracted full frames retained.",
+  "lcd_output_present": true,
+  "text_legibility": "fail; glyphs visibly appear as repeated square/block fragments across headers/body/footer",
+  "normal_readable_58_82_observed": false,
+  "three_readable_information_views_observed": false,
+  "view_layout_changes_observed": true,
+  "view_changes_observed_at_approx_seconds": [
+    4.5,
+    9.5,
+    14.5,
+    21.5,
+    25.5
+  ],
+  "observed": "Blue dashboard-like panel stays lit in reviewed samples. Panel/body line counts and colors change repeatedly, but nearly all letters/numbers are block-like fragments and the expected 58%/82% values cannot be identified. Camera/hand movement and partial occlusion occur early.",
+  "button_identity": "pending user confirmation; visible hand/changes alone do not establish BOOT vs RESET or exact counts",
+  "automatic_reboot_inference_from_video": false,
+  "serial_failure_separate": "Separate frozen-firmware captures explicitly log main-task stack overflow and software reboot after each frame. Exact camera/serial clock alignment is not established.",
+  "continuous_30s_valid_readable_data_verified": false,
+  "formal_GUI_scores": "not_scored",
+  "IMU_auto_rotation": "not_verified",
+  "operator_source_changes": false,
+  "candidate_model_invocations_after_initial": 0
+}

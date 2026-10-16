@@ -1,0 +1,83 @@
+{
+  "run_id": "20261016-antigravity-cli-agy-argon-high-r01",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "reviewer": "operator",
+  "reviewed_at": "2026-10-16T10:13:30.887781+00:00",
+  "items": {
+    "RM1": {
+      "status": "pass",
+      "reason": "Original frozen ESP-IDF 5.3.2 artifact built and was uploaded to the matched board. Boot app/ELF prefix matches the frozen ELF; runtime crashes after frames are recorded separately and do not imply stable product acceptance.",
+      "evidence": [
+        {
+          "path": "operator-observation/artifact-inventory.json",
+          "sha256": "81673ede55a048cff5343271873b0db548c01ace0a1d35005975ff456e63935b"
+        },
+        {
+          "path": "operator-observation/hardware-slot.json",
+          "sha256": "79e1af1ed60f9be19c5e6972606a3990f847e66eceaae765612d5b3ad62980ae"
+        },
+        {
+          "path": "operator-observation/frozen-artifact-upload-stdout.txt",
+          "sha256": "084da1339bf1bd6e559a577c76e33247172c15aaa6765f711cae2891fb0a394b"
+        },
+        {
+          "path": "operator-observation/receiver-source-review.json",
+          "sha256": "e3e215aad355e8f1c147c5ebd317b3bec60c3a189385ebbb120443de7bec1f47"
+        }
+      ]
+    },
+    "RM2": {
+      "status": "partial",
+      "reason": "Frozen common frames 0/1 are accepted by original C host receiver and actual ESP32 in both operator-replay captures. Candidate encoder rejects the same frozen payload with FORBIDDEN_GLOBAL_RESET_SOURCE, so own PC collector/sender path is not established. Each actual accepted frame is followed by main stack overflow and reboot; no continuous successful device session is claimed.",
+      "evidence": [
+        {
+          "path": "operator-observation/independent-host-checks/host-review.json",
+          "sha256": "3b3e25e50ee517f35402f99a3a32ca1e8bceb9c1266d3236da9766b1605331e4"
+        },
+        {
+          "path": "operator-observation/receiver-source-review.json",
+          "sha256": "e3e215aad355e8f1c147c5ebd317b3bec60c3a189385ebbb120443de7bec1f47"
+        },
+        {
+          "path": "operator-observation/runtime-crash-review.json",
+          "sha256": "590653cbe052102692adfbfb5f59bac0acd2403b1d3fccfe45ece74cdf97a854"
+        },
+        {
+          "path": "operator-observation/reference-capture-r1/device-serial.bin",
+          "sha256": "d739d037bae0804da7cea962a66f1760c7b56dd51740a8406279f6a77a243054"
+        },
+        {
+          "path": "operator-observation/reference-capture-r2/device-serial.bin",
+          "sha256": "d51562c454dee02bebe3fb8714b6cf258a3adc059fd027bd1cc7558555abc478"
+        }
+      ]
+    },
+    "RM3": {
+      "status": "partial",
+      "reason": "User confirms a lit screen with abnormal text/layout. Normal readable 58%/82% display is not confirmed; repeated stack overflows prevent treating transport acceptance as correct stable LCD mapping. No optical media supplied, so exact visible values and clipping are unverified.",
+      "evidence": [
+        {
+          "path": "operator-observation/user-screen-observation.json",
+          "sha256": "5376f22c8015b364c6b5c63f1f4ce5427e0e1dd7364f215081aa12462fbac359"
+        },
+        {
+          "path": "operator-observation/runtime-crash-review.json",
+          "sha256": "590653cbe052102692adfbfb5f59bac0acd2403b1d3fccfe45ece74cdf97a854"
+        }
+      ]
+    },
+    "RM4": {
+      "status": "not_run",
+      "reason": "No optical evidence identifies all usage/global-reset/diagnostic information views.",
+      "evidence": []
+    },
+    "RM5": {
+      "status": "not_run",
+      "reason": "No confirmed BOOT action sequence or optical navigation evidence. A partial serial BOOT fragment is insufficient.",
+      "evidence": []
+    }
+  },
+  "product_pass": false,
+  "policy_status": "eligible",
+  "note": "Initial run reference not reached. Preserve source, cost, raw logs, sender incompatibility and runtime failure. Followup budget remains 3 rounds/7200 seconds; no followup prepared or invoked."
+}

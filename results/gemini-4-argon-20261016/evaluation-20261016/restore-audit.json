@@ -1,0 +1,14 @@
+{
+  "run_id": "20261016-antigravity-cli-agy-argon-high-r01",
+  "implementation_commit": "92ef8a6c4e389cacc8d025cf71fd4b04e52efdb2",
+  "policy_eligible": true,
+  "policy_review_status": "eligible",
+  "policy_review_reason": "All 203 terminal tool steps reviewed. Access was confined to the dedicated checkout and approved public ESP-IDF/vendor source roots. Writes targeted only new product source and submission files; all 57 fixed inputs remain unchanged. Commands are local listing, tool versions, approved public config search, builds, tests and validation. No Git history, other candidate, private account, browser/network, custom skill/plugin/MCP/subagent, permission bypass, serial or flash use. Build failures and missing file/tool attempts remain in raw logs; unknown command exit metrics are not inferred as zero.",
+  "operator_baseline_verified": true,
+  "restored_root": "C:\\meter-restores-20261016\\argon-initial-evaluated",
+  "result_valid": true,
+  "manifest_identity_verified": true,
+  "package_manifest_sha256": "c29fcc65209523a445901363e0378f49b80ca8c64453725ec199d95872f44f74",
+  "original_checkout_used": false,
+  "files_verified": 306
+}

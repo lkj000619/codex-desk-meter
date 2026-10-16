@@ -1,0 +1,52 @@
+{
+  "run_id": "20261016-antigravity-cli-agy-argon-high-r01",
+  "recorded_at": "2026-10-16T10:14:01.267204+00:00",
+  "state": "initial_evaluated_reference_not_reached",
+  "execution_status": "completed",
+  "started_at": "2026-10-16T09:04:36.026Z",
+  "ended_at": "2026-10-16T10:01:43.821Z",
+  "wall_clock_seconds": 3427.7810000000172,
+  "tokens": {
+    "input": 753291,
+    "output": 215086,
+    "cached": 19433199,
+    "reasoning": 58188,
+    "provider_total": 968377,
+    "total": 968377,
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+    "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+  },
+  "source_commit": "92ef8a6c4e389cacc8d025cf71fd4b04e52efdb2",
+  "policy_status": "eligible",
+  "reference_status": "fail",
+  "rm_items": {
+    "RM1": "pass",
+    "RM2": "partial",
+    "RM3": "partial",
+    "RM4": "not_run",
+    "RM5": "not_run"
+  },
+  "product_pass": false,
+  "host_python_tests_passed": 5,
+  "host_c_tests_passed": 4,
+  "board_port": "COM3",
+  "board_mac": "28:84:85:B0:85:18",
+  "upload_completed": true,
+  "operator_rebuild": false,
+  "actual_common_frames_accepted": [
+    0,
+    1
+  ],
+  "common_frame_transmission_mode": "operator_replay",
+  "candidate_encoder_common_payload_status": "FORBIDDEN_GLOBAL_RESET_SOURCE",
+  "main_stack_overflows_observed": 4,
+  "user_screen_report": "on_but_text_or_layout_abnormal",
+  "optical_media_supplied": false,
+  "serial_closed": true,
+  "additional_model_calls": 0,
+  "followups_used": 0,
+  "followups_remaining": 3,
+  "followup_seconds_remaining": 7200,
+  "historical_five_model_cohort_unchanged": true,
+  "board_final_state": "Original frozen Argon firmware; rebooted after the final accepted frame. Stable populated display not confirmed."
+}

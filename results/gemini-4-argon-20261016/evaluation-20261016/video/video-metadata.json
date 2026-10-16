@@ -1,0 +1,169 @@
+{
+  "run_id": "20261016-antigravity-cli-agy-argon-high-r01",
+  "received_at": "2026-10-16T10:16:30.792276+00:00",
+  "source_path": "C:\\Users\\이광진\\Documents\\카카오톡 받은 파일\\KakaoTalk_20261016_191425049.mp4",
+  "source_sha256": "c9b7007de5be051afe74cc561d9845b36939a59842edd79e60345476d751dee9",
+  "source_bytes": 14079156,
+  "duration_seconds": 31.44,
+  "ffmpeg_sha256": "2ce797a0f88d7f067180338fb227f7b1928ea727bd9a4d7a1d022f7c52af71a3",
+  "sample_frames": [
+    {
+      "path": "frames/frame-001.png",
+      "nominal_second": 0.5,
+      "sha256": "9d8f83b0f1a60bd995c1ff337647900ad2fef91f3734c7211cad0ca4ffa52d25"
+    },
+    {
+      "path": "frames/frame-002.png",
+      "nominal_second": 1.5,
+      "sha256": "5c8f55628d336aeeb5446636c2f81406fb0193a890da5aea1b6d406eca456150"
+    },
+    {
+      "path": "frames/frame-003.png",
+      "nominal_second": 2.5,
+      "sha256": "55b36075c033f7ec31314ed5dff05d362661667f7482bfd87e94ebd7383da65f"
+    },
+    {
+      "path": "frames/frame-004.png",
+      "nominal_second": 3.5,
+      "sha256": "e9d8937eff18bc953764cba8f14144e42e7c9bd23ebfe6411551ab6b91c0691c"
+    },
+    {
+      "path": "frames/frame-005.png",
+      "nominal_second": 4.5,
+      "sha256": "646e805ef046ef5e05d3c871a4ae149089601cb5e707c05b86cb494fbf743ae3"
+    },
+    {
+      "path": "frames/frame-006.png",
+      "nominal_second": 5.5,
+      "sha256": "87baa256d995098fb04b08294debce43571c5d362fa4fbfe44b7a5d618418ac7"
+    },
+    {
+      "path": "frames/frame-007.png",
+      "nominal_second": 6.5,
+      "sha256": "5ca8158c9eca4d4bfa766b588edef9f9c458880ac4e68717bf78807b39bd6561"
+    },
+    {
+      "path": "frames/frame-008.png",
+      "nominal_second": 7.5,
+      "sha256": "0269467f9101c42e110cc4fbb7a8929eb29649810f71acca000339280306182e"
+    },
+    {
+      "path": "frames/frame-009.png",
+      "nominal_second": 8.5,
+      "sha256": "4ac3c15001de7c44fd6a2688cd986062c1fd89c7db02fda185fb21347e602c4f"
+    },
+    {
+      "path": "frames/frame-010.png",
+      "nominal_second": 9.5,
+      "sha256": "0cbb824ec0b67ff7aebdda0b58637eeaeab49ceef747a279b18930aeec502542"
+    },
+    {
+      "path": "frames/frame-011.png",
+      "nominal_second": 10.5,
+      "sha256": "8ec9a65a168bf6dd5de713d5221185d7650a33ae496bc621883f8e2ecab80037"
+    },
+    {
+      "path": "frames/frame-012.png",
+      "nominal_second": 11.5,
+      "sha256": "e1987f836046e917f07e23301e6b5ddcf34716cc789892517e3626ca15734d41"
+    },
+    {
+      "path": "frames/frame-013.png",
+      "nominal_second": 12.5,
+      "sha256": "a80251a40a62472a294bb6d5ebb701845295c271c485ebd61509aace4612ced7"
+    },
+    {
+      "path": "frames/frame-014.png",
+      "nominal_second": 13.5,
+      "sha256": "cccbe1c4519cfdfa3e0e7fb87856a50f3b8304251a5c98caa617e96e87aa2bee"
+    },
+    {
+      "path": "frames/frame-015.png",
+      "nominal_second": 14.5,
+      "sha256": "5b6a464e7ffe1cca03d28df9d419ef2a52641eff4e535cc13f998cd896f65165"
+    },
+    {
+      "path": "frames/frame-016.png",
+      "nominal_second": 15.5,
+      "sha256": "cd6975e2b2f402cf17f603aab45259a0baede7b6a72e56ea2f94342d4ec0de24"
+    },
+    {
+      "path": "frames/frame-017.png",
+      "nominal_second": 16.5,
+      "sha256": "2841d8116496f3053a1e3c9da7d99a65dcf4d4d7af9924efa4e8a3b9c83009d1"
+    },
+    {
+      "path": "frames/frame-018.png",
+      "nominal_second": 17.5,
+      "sha256": "dbd316c05b7e7d3db798612d011176b18cd92fad932e4464e5f0415c7a2b482a"
+    },
+    {
+      "path": "frames/frame-019.png",
+      "nominal_second": 18.5,
+      "sha256": "5779b34a7564ff4bd063a1b8643273ac0585558d84ba0acb45ff699e8d4f2b54"
+    },
+    {
+      "path": "frames/frame-020.png",
+      "nominal_second": 19.5,
+      "sha256": "c22533e2988c2e17e1fc010ab3d54aacbf73bbc82b1af2827530d6b205d66ca5"
+    },
+    {
+      "path": "frames/frame-021.png",
+      "nominal_second": 20.5,
+      "sha256": "8c35c46248350d972b2532b3b61c98ae15de503be91343948510bbd66baa332c"
+    },
+    {
+      "path": "frames/frame-022.png",
+      "nominal_second": 21.5,
+      "sha256": "eaafe6389e9995da75ea7773e2b4d4daa3207ae96b054ae41eed36ed85df6d68"
+    },
+    {
+      "path": "frames/frame-023.png",
+      "nominal_second": 22.5,
+      "sha256": "57ff10e5329bc0cb5ea12506668975c87813f458655155debdc10f0b9894591d"
+    },
+    {
+      "path": "frames/frame-024.png",
+      "nominal_second": 23.5,
+      "sha256": "3602059b338d6d2a51d10e104dbda9dc2ca32d32c2aa3217353fe87650dca1da"
+    },
+    {
+      "path": "frames/frame-025.png",
+      "nominal_second": 24.5,
+      "sha256": "b92aa64f9b556e8f8375bbfff87cf2ab64dd7fa53e4ee886060ee21ba75a8dc5"
+    },
+    {
+      "path": "frames/frame-026.png",
+      "nominal_second": 25.5,
+      "sha256": "4f2678703deb5ed6fd37e1a7d9b49b3c67602136aa5f2d90c64afa67e98d68b3"
+    },
+    {
+      "path": "frames/frame-027.png",
+      "nominal_second": 26.5,
+      "sha256": "148e76f54b3d3f07b143cbb133fb1f23b7bcab2a7a2467f285722ad8ad5b4c6a"
+    },
+    {
+      "path": "frames/frame-028.png",
+      "nominal_second": 27.5,
+      "sha256": "605eb8775e674887bb4c1739f586890bfc4369aae58dd8d91089820862f15f25"
+    },
+    {
+      "path": "frames/frame-029.png",
+      "nominal_second": 28.5,
+      "sha256": "fe9fb2aa7f19d7d1eff60799112c14403f36882c575c6ea26f09da7710687197"
+    },
+    {
+      "path": "frames/frame-030.png",
+      "nominal_second": 29.5,
+      "sha256": "306ba5e66f77e89bd8363b7422fe30aa86ba3445e03af47a8fb3c2f004d9500c"
+    },
+    {
+      "path": "frames/frame-031.png",
+      "nominal_second": 30.5,
+      "sha256": "7aecc6ba5ede05be52c0f1d6e78059b0796c5d2fc5476b9deb442a10cafc3555"
+    }
+  ],
+  "identity": "User provided this file in the current Argon initial firmware screen-observation conversation; exact recording time and button/reset actions are not confirmed.",
+  "operator_source_modification": false,
+  "candidate_execution_repeated": false
+}

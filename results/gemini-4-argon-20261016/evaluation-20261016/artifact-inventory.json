@@ -1,0 +1,78 @@
+{
+  "build/codex_device_meter.bin": {
+    "sha256": "54789595efd2035011585b168cabbae792ff4dd682bc35876233f09dbd835ea3",
+    "bytes": 329360
+  },
+  "build/codex_device_meter.elf": {
+    "sha256": "14a0131bd6fecd6c2b8e32ed2153caeea9ffd8be77d91657b7dc1e84f4d44d71",
+    "bytes": 4689300
+  },
+  "build/codex_device_meter.map": {
+    "sha256": "26d68ac6e48cfa34c68378d116ae5c24ee8f7a65d51564ceaf8e306e361a1a39",
+    "bytes": 3434394
+  },
+  "build/bootloader/bootloader.bin": {
+    "sha256": "7fb3ffb5b67b0f7494e325b7f66d24126a73ae6cce9415c6956b670127718af9",
+    "bytes": 21648
+  },
+  "build/bootloader/bootloader.elf": {
+    "sha256": "32a43e70921559b6098913cc7764c765f41e2eed90a75afcc77bc3bc0c243236",
+    "bytes": 534148
+  },
+  "build/bootloader/bootloader.map": {
+    "sha256": "94bca72a780bbc22003d9b1e06476148cbe19d336e35b76349d55489244e7ed8",
+    "bytes": 593840
+  },
+  "build/partition_table/partition-table.bin": {
+    "sha256": "7f00b6c042a89b15b0cac534f82ed988caf29278ff5700b0c511eb1b5bb7c820",
+    "bytes": 3072
+  },
+  "build/flash_args": {
+    "sha256": "500c75b7c787a4c1b9dd247f45c5f0f152125e4c71f67afb6bc04538252ac70d",
+    "bytes": 160
+  },
+  "build/flasher_args.json": {
+    "sha256": "f754ca0708ade33fa64010f608146ba25ea16ee18c18cac7c0ed6f81429c54a8",
+    "bytes": 953
+  },
+  "build/project_description.json": {
+    "sha256": "3059d7ce7d8fa30ebb11f4985d872171e229779da991aeb43552b043e3103ddf",
+    "bytes": 195767
+  },
+  "build/compile_commands.json": {
+    "sha256": "f712e13f15c735f1da89e44b74076875f27b18ef1bcea4d82e02beab921ab506",
+    "bytes": 4814120
+  },
+  "sdkconfig": {
+    "sha256": "05c149ae6c5ec166aa84bc267f81c17bfd43ffc87de2b8b657fd76c54aa2d18b",
+    "bytes": 69710
+  },
+  "build-host/meter-test.exe": {
+    "sha256": "02a1536fd1d40c1a5f54f8f691b2f26e89357ce49971e2151750b4bc7c23673e",
+    "bytes": 168960
+  },
+  "build-host/test_feature_imu.exe": {
+    "sha256": "51f08e9394337ddb45dfb9bc7a1c53fdf9f3d4357a4d2ff991a70ecd8730e652",
+    "bytes": 93184
+  },
+  "build-host/test_gui_regression.exe": {
+    "sha256": "a52362ad596dfe3b09d72ea2ab6091a3c3a3c01c7e9dd104d160d6336c28ee14",
+    "bytes": 167424
+  },
+  "build-host/test_meter_parser.exe": {
+    "sha256": "ad19525713c969c95421f9fb80045607f19a3f60ac94b65a8ea7f75091aff681",
+    "bytes": 131584
+  },
+  "build-host/test_meter_state.exe": {
+    "sha256": "bea752cc60e5152469f8e9b631c81fe27ab7669473d9f9c7758f2dfdc9b67cab",
+    "bytes": 154112
+  },
+  "build-host/Testing/Temporary/LastTest.log": {
+    "sha256": "b9709568ade106922737f8411f3379f89718040a0ece5623c036cac888ba128d",
+    "bytes": 2950
+  },
+  "build-host/Testing/Temporary/LastTestsFailed.log": {
+    "sha256": "d8508bb0194104bade2513bf8c7669be42fa07abb93bd6baa367c77fd70c6fd8",
+    "bytes": 23
+  }
+}

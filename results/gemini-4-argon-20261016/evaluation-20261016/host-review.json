@@ -1,0 +1,40 @@
+{
+  "original_checkout_used": false,
+  "restore_root": "C:\\meter-restores-20261016\\argon-initial-before-hardware",
+  "source_bytes_verified": 92,
+  "original_binaries_used": true,
+  "operator_source_changes": false,
+  "operator_rebuild": false,
+  "python_tests_passed": 5,
+  "original_c_tests_passed": 4,
+  "common_encoder": [
+    {
+      "sequence": 0,
+      "matches": false,
+      "error_type": "FrameValidationError",
+      "error": "FORBIDDEN_GLOBAL_RESET_SOURCE"
+    },
+    {
+      "sequence": 1,
+      "matches": false,
+      "error_type": "FrameValidationError",
+      "error": "FORBIDDEN_GLOBAL_RESET_SOURCE"
+    }
+  ],
+  "c_receiver_accepted_common_frames": true,
+  "common_frame_sequence_results": [
+    {
+      "sequence": 0,
+      "accepted": true,
+      "any_clipped": false
+    },
+    {
+      "sequence": 1,
+      "accepted": true,
+      "any_clipped": false
+    }
+  ],
+  "pipeline_claim_limit": "Candidate Python tests include frozen evaluate-product 29 cases; fixed operator 29 host-device pipeline cases were not run.",
+  "operator_attempt_correction": "Initial default registry comparison used five modern provider fixtures rather than the three frozen legacy inputs. That failed operator assumption is not a candidate failure. Direct encoding of the unmodified frozen payload was tested separately and rejects codex-reset.com with FORBIDDEN_GLOBAL_RESET_SOURCE; source was not changed.",
+  "physical_observation": "pending"
+}

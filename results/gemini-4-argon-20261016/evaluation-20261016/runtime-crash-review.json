@@ -1,0 +1,59 @@
+{
+  "run_id": "20261016-antigravity-cli-agy-argon-high-r01",
+  "reviewer": "operator",
+  "implementation_commit": "92ef8a6c4e389cacc8d025cf71fd4b04e52efdb2",
+  "elf_sha256": "14a0131bd6fecd6c2b8e32ed2153caeea9ffd8be77d91657b7dc1e84f4d44d71",
+  "captures": [
+    {
+      "capture": "reference-capture-r1",
+      "stack_overflow_count": 2,
+      "rebooting_message_count": 2,
+      "lines": [
+        "I (2471) codex_meter_main: CDM_RX accepted=1 seq=0 err=none rx_stale=0 src_stale=1",
+        "***ERROR*** A stack overflow in task main has been detected.",
+        "Backtrace: 0x40375db2:0x3fcb75f0 0x4037cb15:0x3fcb7610 0x4037da06:0x3fcb7630 0x4037ebbb:0x3fcb76b0 0x4037dacc:0x3fcb76d0 0x4037dac2:0x3fcb5a98 |<-CORRUPTED",
+        "ELF file SHA256: 14a0131bd",
+        "Rebooting...",
+        "rst:0xc (RTC_SW_CPU_RST),boot:0xb (SPI_FAST_FLASH_BOOT)",
+        "I (617) app_init: ELF file SHA256:  14a0131bd...",
+        "I (1820) codex_meter_main: Codex Device Meter v2 started (820x320 landscape on 320x820 ST7701)",
+        "I (4818) codex_meter_main: CDM_RX accepted=1 seq=1 err=none rx_stale=0 src_stale=1",
+        "***ERROR*** A stack overflow in task main has been detected.",
+        "Backtrace: 0x40375db2:0x3fcb75f0 0x4037cb15:0x3fcb7610 0x4037da06:0x3fcb7630 0x4037ebbb:0x3fcb76b0 0x4037dacc:0x3fcb76d0 0x4037dac2:0x3fcb5a98 |<-CORRUPTED",
+        "ELF file SHA256: 14a0131bd",
+        "Rebooting...",
+        "rst:0xc (RTC_SW_CPU_RST),boot:0xb (SPI_FAST_FLASH_BOOT)",
+        "I (618) app_init: ELF file SHA256:  14a0131bd...",
+        "I (1820) codex_meter_main: Codex Device Meter v2 started (820x320 landscape on 320x820 ST7701)"
+      ],
+      "raw_sha256": "d739d037bae0804da7cea962a66f1760c7b56dd51740a8406279f6a77a243054"
+    },
+    {
+      "capture": "reference-capture-r2",
+      "stack_overflow_count": 2,
+      "rebooting_message_count": 2,
+      "lines": [
+        "I (40960) codex_meter_main: BOOT screen switch -> screen=I (77249) codex_meter_main: CDM_RX accepted=1 seq=0 err=none rx_stale=0 src_stale=1",
+        "***ERROR*** A stack overflow in task main has been detected.",
+        "Backtrace: 0x40375db2:0x3fcb75f0 0x4037cb15:0x3fcb7610 0x4037da06:0x3fcb7630 0x4037ebbb:0x3fcb76b0 0x4037dacc:0x3fcb76d0 0x4037dac2:0x00000000 |<-CORRUPTED",
+        "ELF file SHA256: 14a0131bd",
+        "Rebooting...",
+        "rst:0xc (RTC_SW_CPU_RST),boot:0xb (SPI_FAST_FLASH_BOOT)",
+        "I (618) app_init: ELF file SHA256:  14a0131bd...",
+        "I (1820) codex_meter_main: Codex Device Meter v2 started (820x320 landscape on 320x820 ST7701)",
+        "I (4578) codex_meter_main: CDM_RX accepted=1 seq=1 err=none rx_stale=0 src_stale=1",
+        "***ERROR*** A stack overflow in task main has been detected.",
+        "Backtrace: 0x40375db2:0x3fcb77d0 0x4037cb15:0x3fcb77f0 0x4037da06:0x3fcb7810 0x4037ebbb:0x3fcb7890 0x4037dacc:0x3fcb78b0 0x4037dac2:0x3c050b54 |<-CORRUPTED",
+        "ELF file SHA256: 14a0131bd",
+        "Rebooting...",
+        "rst:0xc (RTC_SW_CPU_RST),boot:0xb (SPI_FAST_FLASH_BOOT)",
+        "I (617) app_init: ELF file SHA256:  14a0131bd...",
+        "I (1820) codex_meter_main: Codex Device Meter v2 started (820x320 landscape on 320x820 ST7701)"
+      ],
+      "raw_sha256": "d51562c454dee02bebe3fb8714b6cf258a3adc059fd027bd1cc7558555abc478"
+    }
+  ],
+  "finding": "Both common frames are accepted in each capture; a main-task stack overflow and software reboot follows each accepted frame. This is firmware runtime failure with matching ELF prefix, not an inference from the abnormal display alone.",
+  "specific_source_cause": "Not diagnosed or modified. No operator source edit, firmware rebuild or additional model call.",
+  "boot_navigation": "Partial unsolicited BOOT log fragment is not a verified user action or information-screen navigation result."
+}
