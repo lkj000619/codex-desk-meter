@@ -1,0 +1,102 @@
+{
+  "access_policy": "prompt-and-log",
+  "base_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "profile_sha256": "dc676155ae6fd298c88aeefcd9442fae8db9cbbd40be421adcf947a9aeee677d",
+  "infrastructure_ready": true,
+  "comparison_id": "20261016-antigravity-cli-agy-argon-high-r01",
+  "input_bundle_sha256": "5cf735c96a31fec8f448ca213bab1d00ca0a045fdefabc00317f9c61d27c6fbc",
+  "reference_inputs_sha256": "9ac8bb7b0c1c4fb5eb2a0d13009dc7a99ebdb571281862145baaa094d8345e08",
+  "checked_at": "2026-10-16T09:04:23.901902+00:00",
+  "launch_run_id": "20261016-antigravity-cli-agy-argon-high-r01",
+  "checks": {
+    "idf_build": "pass",
+    "compiler": "pass",
+    "ninja": "pass",
+    "git": "pass",
+    "temp_write": "pass",
+    "network_policy": "pass",
+    "settings_inventory": "pass",
+    "prompt_scope": "pass",
+    "activity_logging": "pass",
+    "read_isolation": "not_enforced"
+  },
+  "evidence": {
+    "preflight/agents-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "preflight/agents-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "preflight/artifacts.json": "4ea89f546c81bfd748d4d90085b07a82fe0bd8e5c6077e5e7c37cdfb5ac17d45",
+    "preflight/fixture-inventory.json": "ce0bf6eff1c2181ee861196c37791ce75e995c7baba6b79a1d1f3f91c94e5df9",
+    "preflight/invocation.json": "4250523ae22ae267eebfe4cd72a9348dab5e3ad812b839f1dd51ab4fc169ed61",
+    "preflight/mcp-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "preflight/mcp-stdout.txt": "23fc9c2e3f83bfa734cf95d4e402fb0f060745a0515e1a6f0ef0ee126fdd67be",
+    "preflight/models-stderr.txt": "53f588bc9a928f4a66908deacaca57dddc7e7ce177a0cc3586b5a501be26e1e8",
+    "preflight/models-stdout.txt": "b8ef1100468943ec66037166702b013793898730d02bcd3008ec0da5a3a70755",
+    "preflight/plugins-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "preflight/plugins-stdout.txt": "4edf25b675388fb3ae0b23a7e56bee72febae66c2678930c8d658b0f260e1494",
+    "preflight/process.json": "f29898b7c4ad841dfdb76d6c9a57ec99ed09c9869ef4a84e98d1d5c173cb6ebe",
+    "preflight/profile.json": "beab9de910193b8479788d3f10ef17a825fab9da4e61891d72925a55e31141f0",
+    "preflight/prompt.txt": "25ae2207e699ba7f420a804fe21a2acd608aab38cc6513ed7cfe5ac4b930454d",
+    "preflight/runtime.json": "ad97e111f88b2ae32cd39fa8d2fbf44c787663ace2ed5ef007f216a64d9385aa",
+    "preflight/scope-restoration.json": "d147380455b280acd3de9d5b5f1ca6f63ebf05999ed37aa5f96640a1944570c1",
+    "preflight/scope.json": "5d6b5e951a8a40a565e4b8d36dbc0f8a9a27432a0ecead77ca5524c189a7f713",
+    "preflight/stderr.txt": "4252389dc0dd043eebb313d37e8857fa3b6d278f87f1f5d22df786c2f5c11d88",
+    "preflight/stdout.jsonl": "907d299c6760556b33067a0d497da1dafdb9fca7398923af3a8a152fadce3c5a",
+    "preflight/workspace/.gitignore": "dc11e3873fd26b91edfe59e94da061ceb4c2d694ddd11c215f67fea54959d2d7",
+    "preflight/workspace/CMakeLists.txt": "0c3229c63e0133d37ca940937e34abf4ad0169c9a802488564f6ff7d1ed50c49",
+    "preflight/workspace/probe-input.txt": "cc8a2272f2201e0faa785cf52a738212b39b1284e490e7c730816e10f3593b9a",
+    "preflight/workspace/probe-output.txt": "94b6b68c7dd9fc0fead2a5dccaad0504f960b12a9a9b971b1ca1bea086a98541",
+    "preflight/workspace/sdkconfig.defaults": "2f0a6fd104f563af72ef86404fc3aa8081dcb2ee2176d7330dcdcb58bc96ad04",
+    "preflight/workspace/build-host/preparation_host.exe": "329fe360226e1c0f2d658bb9342c8d57218519c6022948371935cac965491126",
+    "preflight/workspace/build-host/Testing/Temporary/LastTest.log": "5093f8b7363866347609d0752cb1a5b147f25f5c44c32def8894ffb18d15445b",
+    "preflight/workspace/build-idf/preparation_fixture.bin": "a75c5afa9ff7b046f9585b8cdd0437562fbc063a5d1a01a9dd6fadf1bbba1416",
+    "preflight/workspace/build-idf/preparation_fixture.elf": "2079c44270d20fe496106f55a78fff9ab42c9c91c43c9f77d7463ddb72b1297b",
+    "preflight/workspace/main/CMakeLists.txt": "e2baba07124ff6c9ada37e9d86121389a8e3aae071071e259c44b5941cd6306c",
+    "preflight/workspace/main/main.c": "d02fd876a1aa2b068715c45e34a6fde441b6a0570a97d48105986333052c97ad",
+    "preflight/workspace/tests/CMakeLists.txt": "d559b19101632ed61d3f4cdcaf975d4935106827be12bb879ca1a86fdd80f163",
+    "preflight/workspace/tests/probe.py": "226569ac684b548e3d3fb45d2b73487ba53895187f1a799d5dcdb77026fc8653",
+    "preflight/workspace/tests/test.c": "0c3f20c523b3d4d4f278d769f5fe57d1125a43eec203ee2b98e8fe7db9818af3",
+    "capabilities.json": "becd557c9039468c21186b01984b12d3cf93f5025242054f3fa95e71448d2045",
+    "unittest-frozen-baseline-complete.txt": "58d1d1c8a135fd96ff4b3bbb3bb73cd4a8061ea90237501d2ab04ed1361c2b80",
+    "unittest-frozen-status.json": "c4fa9435a329270481b6b031bbcf10bb0c9f6157eef3b2c2b807387bb4b8b830",
+    "operator-verification-notes.json": "b9cf1042d56c7e9599094711383ab718ad3b2fb205963f7043b9be150b836895",
+    "hardware-enumeration-idf-python.json": "bba98d760344039be4df0d605eb96d5bc1e90fbfe47fb8ba86b4c1ff7988febd"
+  },
+  "capabilities": {
+    "read": {
+      "status": "pass",
+      "evidence": "capabilities.json"
+    },
+    "write": {
+      "status": "pass",
+      "evidence": "capabilities.json"
+    },
+    "list": {
+      "status": "pass",
+      "evidence": "capabilities.json"
+    },
+    "host_build": {
+      "status": "pass",
+      "evidence": "capabilities.json"
+    },
+    "host_test": {
+      "status": "pass",
+      "evidence": "capabilities.json"
+    },
+    "idf_build": {
+      "status": "pass",
+      "evidence": "capabilities.json"
+    },
+    "vendor_reference": {
+      "status": "pass",
+      "evidence": "capabilities.json"
+    },
+    "telemetry": {
+      "status": "pass",
+      "evidence": "capabilities.json"
+    },
+    "settings": {
+      "status": "pass",
+      "evidence": "capabilities.json"
+    }
+  },
+  "note": "Fresh Argon actual capability proof and frozen baseline regression. Separate additional series; original cohort and frozen input files preserved. USB board absent; physical evaluation remains not_run."
+}

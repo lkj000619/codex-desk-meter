@@ -1,5 +1,7 @@
 # 다음 동일 조건 비교 준비 상태
 
+2026-10-16 현재 갱신: **Gemini 4 Argon high 별도 최초 테스트 실행 중.** `lkj000619/test-gemini-4-argon-20261016`에서 실제 infrastructure 9개 capability·동결 baseline 회귀 219개 pass/1개 skip/실패 0·공통 입력 57개·새 receipt/독립 ledger를 검증했다. `20261016-antigravity-cli-agy-argon-high-r01`은 18:04:36.026 KST에 시작했으며 native PID 8696·AGY CLI 1.2.14·ESP-IDF 5.3.2·request-review·timeout 7,200초다. 제품 종료·비용·정책·RM 판정은 미정이다. USB 보드는 열거되지 않아 실물 관측은 대기한다. 기존 5개 모델·17회·5/15 series 집계는 보존하고 Argon을 소급 합산하지 않는다. [계획](../plans/2026-10-16-gemini-4-argon-test.md) · [실행 기록](../../results/gemini-4-argon-20261016/report.md) · [native 시작](../../results/gemini-4-argon-20261016/launch/native-start-observation.json).
+
 확인일: 2026-10-08. 상태: **2026-10-08 최종 보관·문서 갱신 완료. 10월7일 AGY Flash 마지막 후속3은1,141.688초·713,570 token에 구현·제출을 마쳤고, 같은 동결 펌웨어가 COM3에서 공통 frame0·1을 수락했다. 62.87초 영상과 BOOT 연속3회 확인으로58%·82% 및 사용량→글로벌 리셋→진단→사용량 복귀를 관측해 RM1~RM5 모두 pass, reference 도달로 series를 종료했다. RESET·전원 재연결은 사용자 수동 조작이며 자동 재부팅으로 단정하지 않는다. 자동 회전/흔들기·연속30초 안정성·정밀 응답 시간·전체 오류/복구·GUI 검증은 미완료라 product_pass false다. 최종588파일 독립 복원과 원본 source40개/artifact25개·영상·정책·비용·RM 연결을 검증했다. 이번 정책 eligible, 과거 후속1의 series invalid와 품질/reference 비용 제외는 유지한다. 잔여4,303.593초(71분43.593초)·남은 회차0으로 추가 호출은 없다. 최초5회+후속12회=전체17회 종료, 비용 coverage16/17·알려진62,535,521 token·전체 합계 미상이다. 첫 블록5개 모델 series 종료5/15로 전체3블록 비교는 미완료이며 다음 블록은 시작하지 않았다.**
 실제 실행 원본과 재개 상태는 [정식 실행 기록](../../results/formal-comparison-20261004/report.md)을 따른다. 준비 단계의 0회 기록은 당시 원본으로 보존한다.
 

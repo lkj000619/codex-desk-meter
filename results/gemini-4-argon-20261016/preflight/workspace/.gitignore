@@ -1,0 +1,4 @@
+build-host/
+build-idf/
+sdkconfig
+sdkconfig.old

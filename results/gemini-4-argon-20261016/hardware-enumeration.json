@@ -1,0 +1,6 @@
+{
+  "device_accessed": false,
+  "serial_opened": false,
+  "ports": null,
+  "reason": "No module named 'serial'"
+}

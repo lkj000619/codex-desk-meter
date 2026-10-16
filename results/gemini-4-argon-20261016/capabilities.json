@@ -1,0 +1,61 @@
+{
+  "reviewed_at": "2026-10-16T09:00:45.004822+00:00",
+  "reviewer": "operator",
+  "model": "gemini-4-argon-high",
+  "status": "pass",
+  "capabilities": {
+    "read": {
+      "status": "pass",
+      "evidence": "preflight/stdout.jsonl"
+    },
+    "write": {
+      "status": "pass",
+      "evidence": "preflight/stdout.jsonl"
+    },
+    "list": {
+      "status": "pass",
+      "evidence": "preflight/stdout.jsonl"
+    },
+    "host_build": {
+      "status": "pass",
+      "evidence": "preflight/stdout.jsonl"
+    },
+    "host_test": {
+      "status": "pass",
+      "evidence": "preflight/stdout.jsonl"
+    },
+    "idf_build": {
+      "status": "pass",
+      "evidence": "preflight/stdout.jsonl"
+    },
+    "vendor_reference": {
+      "status": "pass",
+      "evidence": "preflight/stdout.jsonl"
+    },
+    "telemetry": {
+      "status": "pass",
+      "evidence": "preflight/stdout.jsonl"
+    },
+    "settings": {
+      "status": "pass",
+      "evidence": "preflight/stdout.jsonl"
+    }
+  },
+  "process_seconds": 221.65599999998813,
+  "tokens": {
+    "input": 42186,
+    "output": 4803,
+    "cached": 187047,
+    "reasoning": 2489,
+    "provider_total": 46989,
+    "total": 46989,
+    "provider_total_definition": "provider_reported_total_preserved_without_recomputation",
+    "availability_note": "AGY one-shot terminal result usage; provider_total preserves raw total_tokens; total is normalized input+output; cache_read and thinking are annotations."
+  },
+  "scope_restored": true,
+  "notes": [
+    "The native public-source viewer returned metadata for complete approved SDK/vendor files; access remained within approved public roots.",
+    "Text copy normalized CRLF to LF, matching the historical probe output; normalized text equality verified. An initial operator byte-equality guard failed and was corrected without changing candidate files.",
+    "Native result text contains an early waiting sentence alongside the final report; actual completed command events and artifacts establish IDF completion."
+  ]
+}

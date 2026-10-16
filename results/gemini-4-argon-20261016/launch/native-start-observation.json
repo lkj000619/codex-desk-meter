@@ -1,0 +1,29 @@
+{
+  "observed_at": "2026-10-16T09:05:35.258942+00:00",
+  "run_id": "20261016-antigravity-cli-agy-argon-high-r01",
+  "state": "running",
+  "model": "gemini-4-argon-high",
+  "permission_mode": "request-review",
+  "conversation_id": "7d7658d2-7be8-4d99-a92d-00ff7a7c2898",
+  "started_at": "2026-10-16T09:04:36.026Z",
+  "timeout_seconds": 7200,
+  "native_processes": [
+    {
+      "Id": 8696,
+      "Path": "C:\\meter-cli-frozen-20261002\\agy-1.2.14\\agy.exe"
+    }
+  ],
+  "candidate_checkout": "C:\\meter-runs-20261016\\20261016-antigravity-cli-agy-argon-high-r01\\checkout",
+  "receipt_sha256": "5e91cbfb523d988b6d796adf6874dc052550658d67c6d3926ca54aff4751241d",
+  "native_init_sha256": "c353459c314b03f121e0ba1d56f3548e47b347f8b460997161d9301f93afeda8",
+  "manifest_at_start_sha256": "cfdb8c7b3ab416f6c8a87a0b8cb8864f62035e425033e758ecb2baea70841c3b",
+  "terminal_handle": "term_f890e4c7-90f5-4849-9c66-8c12293dce42",
+  "terminal_send_request_id": "c56e9cb4-4bdf-4420-8db0-4b025279e950",
+  "product_executions_started": 1,
+  "product_executions_completed": 0,
+  "hardware_observation": "not_run; USB board absent",
+  "policy_review": "pending_after_completion",
+  "tokens": null,
+  "tokens_note": "Running, final result usage not yet emitted.",
+  "historical_cohort_unchanged": true
+}

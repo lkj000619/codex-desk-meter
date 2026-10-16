@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.16)
+set(CMAKE_C_COMPILER "C:/Espressif/benchmark-host-tools/llvm-mingw-20260616-ucrt-x86_64/bin/clang.exe")
+project(preparation_host C)
+enable_testing()
+add_executable(preparation_host test.c)
+add_test(NAME arithmetic COMMAND preparation_host)

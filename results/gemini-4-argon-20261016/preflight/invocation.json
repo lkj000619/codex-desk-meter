@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "C:\\Espressif\\tools\\python\\python.exe",
+    "-c",
+    "import subprocess,sys; prompt=sys.stdin.buffer.read().decode(\"utf-8\"); sys.exit(subprocess.call([sys.argv[1], *sys.argv[2:], \"--print=\"+prompt], stdin=subprocess.DEVNULL))",
+    "C:\\meter-cli-frozen-20261002\\agy-1.2.14\\agy.exe",
+    "--input-format",
+    "text",
+    "--output-format",
+    "stream-json",
+    "--print-timeout",
+    "120m",
+    "--model",
+    "gemini-4-argon-high"
+  ],
+  "profile_sha256": "dc676155ae6fd298c88aeefcd9442fae8db9cbbd40be421adcf947a9aeee677d",
+  "scope": "infrastructure only",
+  "timeout_seconds": 900
+}

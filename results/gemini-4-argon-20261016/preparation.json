@@ -1,0 +1,13 @@
+{
+  "run_id": "20261016-antigravity-cli-agy-argon-high-r01",
+  "directory": "C:\\meter-runs-20261016\\20261016-antigravity-cli-agy-argon-high-r01",
+  "ledger": "C:\\meter-runs-20261016\\ledgers\\20261016-antigravity-cli-agy-argon-high-r01.json",
+  "baseline_commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+  "candidate_commit": "1ea46955738129b85c0ff81d031898154e3be6fd",
+  "profile_sha256": "dc676155ae6fd298c88aeefcd9442fae8db9cbbd40be421adcf947a9aeee677d",
+  "input_bundle_sha256": "5cf735c96a31fec8f448ca213bab1d00ca0a045fdefabc00317f9c61d27c6fbc",
+  "immutable_inputs": 57,
+  "model_calls_during_preparation": 0,
+  "historical_cohort_unchanged": true,
+  "scope": "Separate Argon series; first independent repetition only."
+}

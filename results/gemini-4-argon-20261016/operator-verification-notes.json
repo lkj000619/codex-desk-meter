@@ -1,0 +1,18 @@
+{
+  "current_branch_regression": {
+    "tests": 224,
+    "errors": 2,
+    "skipped": 1,
+    "reason": "Windows long-path failures extracting historical evidence into temporary directories; original log retained."
+  },
+  "frozen_baseline_regression": {
+    "tests": 220,
+    "passed": 219,
+    "skipped": 1,
+    "errors": 0,
+    "exit_code": 0
+  },
+  "incomplete_frozen_attempt": "PowerShell ErrorActionPreference=Stop treated a native Git diagnostic on stderr as terminating; no completed test result was claimed. Re-run captured both streams with Python subprocess and completed.",
+  "activation_attempt": "Two independent shell activations collided on the shared IDF shim; activation was subsequently performed serially. No product invocation during either failed operator check.",
+  "hardware": "IDF Python lists only COM1. No USB board, serial open, reset or flash performed."
+}

@@ -45,3 +45,6 @@ results/formal-comparison-20261004/operator-remediation-20261005/** binary
 results/formal-comparison-20261004/reservations-20261005/** binary
 results/formal-comparison-20261004/timeout-preservation-20261005/** binary
 results/formal-comparison-20261004/review-finalization-20261005/** binary
+# Argon evidence and profile hashes retain captured bytes.
+results/gemini-4-argon-20261016/** binary
+experiments/config/argon-20261016/*.json binary

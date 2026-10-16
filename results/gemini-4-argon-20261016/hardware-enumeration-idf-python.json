@@ -1,0 +1,13 @@
+{
+  "device_accessed": false,
+  "serial_opened": false,
+  "ports": [
+    {
+      "device": "COM1",
+      "description": "\ud1b5\uc2e0 \ud3ec\ud2b8(COM1)",
+      "vid": null,
+      "pid": null,
+      "hwid": "ACPI\\PNP0501\\0"
+    }
+  ]
+}
