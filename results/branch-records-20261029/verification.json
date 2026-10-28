@@ -1,0 +1,49 @@
+{
+  "checked_at": "2026-10-28T17:52:22.587004+00:00",
+  "integration_target": "2847fea90a26604df947f5207fa724b2e0c870d3",
+  "tracked_evidence_files_byte_verified": 3590,
+  "historical_tags_unchanged": 20,
+  "existing_source_branches_unchanged": true,
+  "scripts_inputs_and_agent_instructions_unchanged_from_argon": true,
+  "local_links_checked": 316,
+  "bundle": {
+    "sha256": "4d07b0efb7328443fb4332e63b2f2e5a5284563a98283e8d8f5f668fd3aa519e",
+    "verify_exit_code": 0,
+    "restored_head": "470babd565ebc7ccd0a6e44ef6f155cf91421bcb",
+    "scope": "Bundle imported in a separate bare repository sharing baseline objects; branch and four original tag objects preserved.",
+    "restored_refs_verified": 5
+  },
+  "tool_suite": {
+    "command": "python -B -m unittest discover -s scripts/tests -v",
+    "run_on": "prepare/formal-comparison-20261004 before integration; scripts identical after fast-forward",
+    "tests": 224,
+    "passed": 221,
+    "errors": 2,
+    "skipped": 1,
+    "known_preexisting_errors": [
+      "test_check_hashes_full_bundle_without_reserving_or_mutating",
+      "test_followup_carries_operator_baseline_into_independent_package"
+    ],
+    "previous_record": "results/gemini-4-argon-20261016/unittest-current-branch-path-errors.txt",
+    "log": "tool-tests.log",
+    "log_sha256": "1a576b953817dece6ae514eb4402d5efd45010dc237cfc52fc66a1acb6c3eb76",
+    "exit_code": 1
+  },
+  "contracts": [
+    {
+      "command": "python -B scripts/validate-end-to-end-result.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python -B scripts/validate-end-to-end-result.py --matrix experiments/fixtures/provider-fixture-matrix.json",
+      "exit_code": 0
+    }
+  ],
+  "not_performed": [
+    "new model calls",
+    "device upload or serial access",
+    "live account collection",
+    "independent full offline repository restore"
+  ],
+  "other_worktree_status_counts_unchanged": true
+}

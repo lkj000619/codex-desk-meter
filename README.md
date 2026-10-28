@@ -23,6 +23,10 @@ schema·fixture·예제와 필요한 host 시험 도구도 고정 목록으로 �
 
 ## 운영자가 확인할 상태
 
+2026-10-29에 브랜치 기록을 main에 정리했다. 정식 비교와 Argon 평가의 원본 이력을 포함하고,
+독립 Orca 협업은 결과 요약과 복원 가능한 Git bundle로 보관했다.
+브랜치별 처리와 검증 한계는 [반영 보고서](results/branch-records-20261029/report.md)를 따른다.
+
 [다음 비교 준비 상태](docs/experiments/next-comparison-readiness.md) →
 [운영 계약](docs/experiments/comparison-operating-contract.md) →
 [수정 계획](docs/plans/2026-10-02-experiment-contract-remediation.md) 순서로 확인한다.

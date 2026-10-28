@@ -1,7 +1,9 @@
 # 검증 결과 인덱스
 
-확인일: 2026-10-04. 새 동일 조건 비교의 정식 집계 결과는 아직 게시하지 않았다. 활성 5개 시작 준비를 완료하고 첫 OpenCode Muse 실험을 시작했다.
-[실제 실행·진행 상태](formal-comparison-20261004/report.md)를 따른다.
+확인일: 2026-10-29. [브랜치별 main 반영·Orca 원본 보관](branch-records-20261029/report.md)을 기록했다.
+정식 비교는 [첫 블록 17회 종료 기록](formal-comparison-20261004/report.md),
+추가 모델은 [Argon 종료·실물·영상 평가](gemini-4-argon-20261016/evaluation-20261016/report.md)를 따른다.
+현재 비교 준비 상태는 [운영 상태](../docs/experiments/next-comparison-readiness.md)에서 관리한다.
 아래에는 과거 관측 검토와 운영 도구의 검증 기록이 있다. 각 보고서의 날짜·대상·시험 범위를 확인한다.
 
 ## 과거 관측·비교 검토

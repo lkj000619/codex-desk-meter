@@ -1,0 +1,436 @@
+{
+  "record_date": "2026-10-29",
+  "captured_at": "2026-10-28T17:43:09.154173+00:00",
+  "original_main": "681be5315f2b9c3c0e4083527c3ebc38f75b65d6",
+  "original_prepare": "b933eacc91589c3350556399cc250cd3e2651e6e",
+  "integration_target": "2847fea90a26604df947f5207fa724b2e0c870d3",
+  "fast_forward_commits": 45,
+  "refs": [
+    {
+      "ref": "refs/heads/docs/architecture-review-20261002",
+      "commit": "d6da44a85c11bd9a4b6794048c6f3309b7fc1a40",
+      "main_only_commits": 4,
+      "branch_only_commits": 0,
+      "disposition": "included_in_main_history"
+    },
+    {
+      "ref": "refs/heads/docs/verification-20260916",
+      "commit": "8a34fbc7530e30992ede1d8500515f6e4323d978",
+      "main_only_commits": 80,
+      "branch_only_commits": 0,
+      "disposition": "included_in_main_history"
+    },
+    {
+      "ref": "refs/heads/experiment/20260911T030200Z-codex-pilot",
+      "commit": "abed99c4bdded2366a719fdc7f7e8a49e60570ac",
+      "main_only_commits": 95,
+      "branch_only_commits": 0,
+      "disposition": "included_in_main_history"
+    },
+    {
+      "ref": "refs/heads/experiment/antigravity/cli/gemini-3-8-flash-high",
+      "commit": "499e39b1f93b4c862dc3a5fe93c12bca63e287e2",
+      "main_only_commits": 94,
+      "branch_only_commits": 1,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/heads/experiment/opencode/cli/muse-spark-1-3-contributor-free",
+      "commit": "c1be78678148834844b990f3a2f57c568d40987d",
+      "main_only_commits": 89,
+      "branch_only_commits": 0,
+      "disposition": "included_in_main_history"
+    },
+    {
+      "ref": "refs/heads/lkj000619/codex-reference-20260929",
+      "commit": "7923f960fc9cc96fd576ab71f36f3d6500cc8190",
+      "main_only_commits": 49,
+      "branch_only_commits": 9,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/heads/lkj000619/experiment-orca-harness-20261008",
+      "commit": "470babd565ebc7ccd0a6e44ef6f155cf91421bcb",
+      "main_only_commits": 0,
+      "branch_only_commits": 79,
+      "disposition": "archive_in_bundle_without_merging_independent_implementation"
+    },
+    {
+      "ref": "refs/heads/lkj000619/test-gemini-4-argon-20261016",
+      "commit": "2847fea90a26604df947f5207fa724b2e0c870d3",
+      "main_only_commits": 0,
+      "branch_only_commits": 45,
+      "disposition": "included_in_main_history"
+    },
+    {
+      "ref": "refs/heads/main",
+      "commit": "681be5315f2b9c3c0e4083527c3ebc38f75b65d6",
+      "main_only_commits": 0,
+      "branch_only_commits": 0,
+      "disposition": "included_in_main_history"
+    },
+    {
+      "ref": "refs/heads/main-2",
+      "commit": "c0ba9e2d812b5e193784418ff993af454019d3c7",
+      "main_only_commits": 94,
+      "branch_only_commits": 0,
+      "disposition": "included_in_main_history"
+    },
+    {
+      "ref": "refs/heads/prepare/formal-comparison-20261004",
+      "commit": "b933eacc91589c3350556399cc250cd3e2651e6e",
+      "main_only_commits": 0,
+      "branch_only_commits": 42,
+      "disposition": "included_in_main_history"
+    },
+    {
+      "ref": "refs/remotes/origin/docs/verification-20260916",
+      "commit": "8a34fbc7530e30992ede1d8500515f6e4323d978",
+      "main_only_commits": 80,
+      "branch_only_commits": 0,
+      "disposition": "included_in_main_history"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/20260911T030200Z-codex-pilot",
+      "commit": "abed99c4bdded2366a719fdc7f7e8a49e60570ac",
+      "main_only_commits": 95,
+      "branch_only_commits": 0,
+      "disposition": "included_in_main_history"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/antigravity/cli/gemini-3-8-flash-high",
+      "commit": "499e39b1f93b4c862dc3a5fe93c12bca63e287e2",
+      "main_only_commits": 94,
+      "branch_only_commits": 1,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r01",
+      "commit": "e14689fea0cee5c0bd1e3812f7bd5dfbd122d5db",
+      "main_only_commits": 99,
+      "branch_only_commits": 2,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261004-opencode-cli-opencode-muse-r02",
+      "commit": "354c6475345cb521c92f92e3dce448b0dc5ef58b",
+      "main_only_commits": 99,
+      "branch_only_commits": 4,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r01",
+      "commit": "29e1d7af54a8c9c879e36192ec4ed689e5bbf82d",
+      "main_only_commits": 99,
+      "branch_only_commits": 2,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-flash-r02",
+      "commit": "94018f1785a590e1514ef1b5145c40f0c03ffca3",
+      "main_only_commits": 99,
+      "branch_only_commits": 4,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r01",
+      "commit": "ba5609db6fbf6392166586e50341c6e14a26112f",
+      "main_only_commits": 99,
+      "branch_only_commits": 1,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r02",
+      "commit": "5e1b658783da67995f4330ed1fafa98b842270cc",
+      "main_only_commits": 99,
+      "branch_only_commits": 3,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r03",
+      "commit": "8059dbf481d7a394a985d8757b0b331fc625b40a",
+      "main_only_commits": 99,
+      "branch_only_commits": 5,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261005-antigravity-cli-agy-pro-r04",
+      "commit": "ef6aa727fa3539454708f223d965a1cb40197a56",
+      "main_only_commits": 99,
+      "branch_only_commits": 7,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261005-codex-cli-gpt-6-sol-r01",
+      "commit": "2257fffaa5316773d08fe3353356112c7002159d",
+      "main_only_commits": 99,
+      "branch_only_commits": 2,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r01",
+      "commit": "c0d5d61160664923e0494302fae180089d02d247",
+      "main_only_commits": 99,
+      "branch_only_commits": 2,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r02",
+      "commit": "e68356829715793dc31dd188bc2a9f528f6fcbd2",
+      "main_only_commits": 99,
+      "branch_only_commits": 4,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-luna-r03",
+      "commit": "91f7de60328b7db9a9d04acef60ac45eafb3685a",
+      "main_only_commits": 99,
+      "branch_only_commits": 6,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r01",
+      "commit": "3a09f26f2f375f4f45bebb79eb5902667a3ccb1a",
+      "main_only_commits": 99,
+      "branch_only_commits": 5,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261006-codex-cli-gpt-6-sol-r02",
+      "commit": "09ecdaf1645511033b4efda40bb2a9e3b96ae8f7",
+      "main_only_commits": 99,
+      "branch_only_commits": 8,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r01",
+      "commit": "b57439702d2d3776b67b2e1baab106807aa33621",
+      "main_only_commits": 99,
+      "branch_only_commits": 6,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261007-antigravity-cli-agy-flash-r02",
+      "commit": "9e5a01b51cce581acda2495df402e6aa3d3f63be",
+      "main_only_commits": 99,
+      "branch_only_commits": 8,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/formal-comparison-20261004/20261007-codex-cli-gpt-6-luna-r01",
+      "commit": "88b2bbc61047242afb22f272c419b3a57d30bb49",
+      "main_only_commits": 99,
+      "branch_only_commits": 8,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/experiment/opencode/cli/muse-spark-1-3-contributor-free",
+      "commit": "c1be78678148834844b990f3a2f57c568d40987d",
+      "main_only_commits": 89,
+      "branch_only_commits": 0,
+      "disposition": "included_in_main_history"
+    },
+    {
+      "ref": "refs/remotes/origin/lkj000619/codex-reference-20260929",
+      "commit": "7923f960fc9cc96fd576ab71f36f3d6500cc8190",
+      "main_only_commits": 49,
+      "branch_only_commits": 9,
+      "disposition": "retain_experiment_source"
+    },
+    {
+      "ref": "refs/remotes/origin/main",
+      "commit": "681be5315f2b9c3c0e4083527c3ebc38f75b65d6",
+      "main_only_commits": 0,
+      "branch_only_commits": 0,
+      "disposition": "included_in_main_history"
+    },
+    {
+      "ref": "refs/remotes/origin/main-2",
+      "commit": "c0ba9e2d812b5e193784418ff993af454019d3c7",
+      "main_only_commits": 94,
+      "branch_only_commits": 0,
+      "disposition": "included_in_main_history"
+    },
+    {
+      "ref": "refs/remotes/origin/prepare/formal-comparison-20261004",
+      "commit": "b933eacc91589c3350556399cc250cd3e2651e6e",
+      "main_only_commits": 0,
+      "branch_only_commits": 42,
+      "disposition": "included_in_main_history"
+    }
+  ],
+  "tags": [
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260911",
+      "object": "1fb20e8ba96bd936c955e2a68bf7a8933b4394be",
+      "commit": "34a1790ffeb31d47c1ae78c78a14d7cf4e318c6f"
+    },
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260914",
+      "object": "2c3d450e63916755c8137bf05e06d88ace964b5f",
+      "commit": "1b5ce1c26a52d2dc72b6f771e575aa0e75843ce0"
+    },
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260923",
+      "object": "412ee24d8753b64bb83d4778808b574105a7b179",
+      "commit": "9ef945efd9d6c2c4b4eedca75eccc9f280b3aced"
+    },
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260925",
+      "object": "b1eb43a994837720109d65e5ae0f60f69906614f",
+      "commit": "eef278013428a79c29d6b9456018049af149ca61"
+    },
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260926",
+      "object": "b299d5a7f65ac9eb0d8d025eb3f8ddcac3281055",
+      "commit": "b299d5a7f65ac9eb0d8d025eb3f8ddcac3281055"
+    },
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260926-read-array",
+      "object": "602ad1ba0ee308c156ca6a0766be61c6b1899c34",
+      "commit": "602ad1ba0ee308c156ca6a0766be61c6b1899c34"
+    },
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260926-read-array-v2",
+      "object": "b2d265adc22c397442cf315d1397347555574553",
+      "commit": "b2d265adc22c397442cf315d1397347555574553"
+    },
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260926-windows",
+      "object": "0702c29ec8e825a8a4811ec187358902a27d0b5b",
+      "commit": "0702c29ec8e825a8a4811ec187358902a27d0b5b"
+    },
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260926-workflow",
+      "object": "602ad1ba0ee308c156ca6a0766be61c6b1899c34",
+      "commit": "602ad1ba0ee308c156ca6a0766be61c6b1899c34"
+    },
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260927-host-ready",
+      "object": "f7d43815d74305c40a5d98ec5678741a569acf0d",
+      "commit": "f7d43815d74305c40a5d98ec5678741a569acf0d"
+    },
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260927-index-ready",
+      "object": "f216dc7c3e6fef9c76de6230cd735302bf2e189e",
+      "commit": "f216dc7c3e6fef9c76de6230cd735302bf2e189e"
+    },
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260927-start-boundary",
+      "object": "4fc30b2d3a95a85a4e574262280e03ad41abdb1d",
+      "commit": "4fc30b2d3a95a85a4e574262280e03ad41abdb1d"
+    },
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260928-run-context",
+      "object": "aab0d493888f4fc0bb6eff726bfe7d93b167543c",
+      "commit": "aab0d493888f4fc0bb6eff726bfe7d93b167543c"
+    },
+    {
+      "ref": "refs/tags/benchmark-v2-baseline-20260928-test-entry",
+      "object": "7fcf9a9af3b1995f1daa0e866774ac85910b673b",
+      "commit": "7fcf9a9af3b1995f1daa0e866774ac85910b673b"
+    },
+    {
+      "ref": "refs/tags/comparison-baseline-20261004",
+      "object": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+      "commit": "272875140d1998d458e26fdb2f6deab5e5d8f7b5"
+    },
+    {
+      "ref": "refs/tags/orca-harness-20261010-host-candidate",
+      "object": "3fedcaad3a9034ac179cbafe81ba722a24ec3808",
+      "commit": "7ccbb24b93ecf50ec0c7ffa27f0fb330a278777a"
+    },
+    {
+      "ref": "refs/tags/orca-harness-20261010-lcd-flicker-candidate",
+      "object": "8fe1f9ff5f7ce77b0c792be90a16ad153999e6a5",
+      "commit": "8fe1f9ff5f7ce77b0c792be90a16ad153999e6a5"
+    },
+    {
+      "ref": "refs/tags/orca-harness-20261010-numeric-candidate",
+      "object": "16b7d6656428511d1bf1912903a890308d332d3c",
+      "commit": "16b7d6656428511d1bf1912903a890308d332d3c"
+    },
+    {
+      "ref": "refs/tags/orca-harness-20261011-snapshot",
+      "object": "c53f3748b10796adb724edaba30888d7bb99f6b3",
+      "commit": "470babd565ebc7ccd0a6e44ef6f155cf91421bcb"
+    },
+    {
+      "ref": "refs/tags/version-2-baseline-20260911",
+      "object": "e3dac8bff14886ba44e0d0d378c133d08e6bcf0c",
+      "commit": "abed99c4bdded2366a719fdc7f7e8a49e60570ac"
+    }
+  ],
+  "worktrees": [
+    {
+      "path": "C:/Users/이광진/orca/codex-desk-meter",
+      "tracked_changes": 0,
+      "untracked_entries": 2,
+      "warning": "",
+      "handling": "leave_existing_worktree_files_in_place"
+    },
+    {
+      "path": "C:/Espressif/benchmark-baseline-20260925",
+      "tracked_changes": 0,
+      "untracked_entries": 0,
+      "warning": "",
+      "handling": "leave_existing_worktree_files_in_place"
+    },
+    {
+      "path": "C:/Espressif/experiments/codex-desk-meter-20260911T030200Z-codex-pilot",
+      "tracked_changes": 1,
+      "untracked_entries": 10,
+      "warning": "",
+      "handling": "leave_existing_worktree_files_in_place"
+    },
+    {
+      "path": "C:/meter-operator-20261002",
+      "tracked_changes": 0,
+      "untracked_entries": 0,
+      "warning": "",
+      "handling": "leave_existing_worktree_files_in_place"
+    },
+    {
+      "path": "C:/meter-operator-20261004",
+      "tracked_changes": 0,
+      "untracked_entries": 0,
+      "warning": "",
+      "handling": "leave_existing_worktree_files_in_place"
+    },
+    {
+      "path": "C:/Users/이광진/orca/workspaces/codex-desk-meter/codex-reference-20260929",
+      "tracked_changes": 0,
+      "untracked_entries": 2,
+      "warning": "",
+      "handling": "leave_existing_worktree_files_in_place"
+    },
+    {
+      "path": "C:/Users/이광진/orca/workspaces/codex-desk-meter/experiment-orca-harness-20261008",
+      "tracked_changes": 0,
+      "untracked_entries": 0,
+      "warning": "",
+      "handling": "leave_existing_worktree_files_in_place"
+    },
+    {
+      "path": "C:/Users/이광진/orca/workspaces/codex-desk-meter/test-gemini-4-argon-20261016",
+      "tracked_changes": 0,
+      "untracked_entries": 0,
+      "warning": "",
+      "handling": "leave_existing_worktree_files_in_place"
+    }
+  ],
+  "harness_bundle": {
+    "path": "orca-harness.bundle",
+    "bytes": 1912295,
+    "sha256": "4d07b0efb7328443fb4332e63b2f2e5a5284563a98283e8d8f5f668fd3aa519e",
+    "prerequisite": "272875140d1998d458e26fdb2f6deab5e5d8f7b5",
+    "heads": [
+      "470babd565ebc7ccd0a6e44ef6f155cf91421bcb refs/heads/lkj000619/experiment-orca-harness-20261008",
+      "3fedcaad3a9034ac179cbafe81ba722a24ec3808 refs/tags/orca-harness-20261010-host-candidate",
+      "8fe1f9ff5f7ce77b0c792be90a16ad153999e6a5 refs/tags/orca-harness-20261010-lcd-flicker-candidate",
+      "16b7d6656428511d1bf1912903a890308d332d3c refs/tags/orca-harness-20261010-numeric-candidate",
+      "c53f3748b10796adb724edaba30888d7bb99f6b3 refs/tags/orca-harness-20261011-snapshot"
+    ],
+    "note": "Incremental bundle; prerequisite and its history remain in main. Ignored private runtime data and uncommitted worktree files are outside the bundle."
+  }
+}

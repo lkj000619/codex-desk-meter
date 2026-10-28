@@ -37,6 +37,7 @@ main에 문서가 존재한다는 이유로 후보에게 읽도록 제공하지 
 | 용도 | 문서 |
 |---|---|
 | 다음 실험 준비·잔여 조건 | [준비 상태](experiments/next-comparison-readiness.md) |
+| 2026-10-29 브랜치별 main 반영·Orca 원본 복원 | [반영 보고서](../results/branch-records-20261029/report.md) · [브랜치 목록](../results/branch-records-20261029/branch-inventory.json) · [작업 계획](plans/2026-10-29-main-records-consolidation.md) |
 | Gemini 4 Argon 별도 최초 테스트 | [실행 계획](plans/2026-10-16-gemini-4-argon-test.md) · [시작 원본](../results/gemini-4-argon-20261016/report.md) · [종료·실물·영상 평가](../results/gemini-4-argon-20261016/evaluation-20261016/report.md) |
 | 다음 비교 모델·설정 | [2026-10-03 프로필](../experiments/config/next-profiles-20261003/README.md) · [GPT-6 갱신 계획](plans/2026-10-03-gpt6-comparison-profiles.md) |
 | 2026-10-02 실행 준비의 원본 검증·동결 | [당시 준비 계획](plans/2026-10-02-experiment-launch-preparation.md) · [당시 준비 보고서](../results/experiment-preparation-20261002/report.md) |

@@ -48,3 +48,6 @@ results/formal-comparison-20261004/review-finalization-20261005/** binary
 # Argon evidence and profile hashes retain captured bytes.
 results/gemini-4-argon-20261016/** binary
 experiments/config/argon-20261016/*.json binary
+# Branch archives and test logs retain their captured bytes.
+results/branch-records-20261029/*.bundle binary
+results/branch-records-20261029/*.log binary
